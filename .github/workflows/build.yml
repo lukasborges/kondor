@@ -8,16 +8,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
+    # Ubuntu 24.04 tem Qt 6.4, e o projeto exige 6.5+; usamos Fedora (Qt 6.11).
+    container: fedora:latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake ninja-build g++ \
-            qt6-base-dev qt6-declarative-dev qt6-webengine-dev qt6-tools-dev
+          dnf -y install cmake ninja-build gcc-c++ make git nodejs \
+            qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel \
+            kf6-kirigami kf6-qqc2-desktop-style
+
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Configure
         run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release

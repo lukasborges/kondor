@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Kondor
+GenericName=Web Browser
+Comment=A lightweight Qt/KDE web browser
+Exec=kondor
+Icon=kondor
+Categories=Network;WebBrowser;
+Terminal=false
+StartupNotify=true
+StartupWMClass=kondor
+MimeType=x-scheme-handler/http;x-scheme-handler/https;
+Keywords=browser;web;internet;

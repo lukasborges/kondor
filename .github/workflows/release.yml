@@ -1,0 +1,65 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    container: fedora:latest
+
+    steps:
+      - name: Install dependencies
+        run: |
+          dnf -y install cmake ninja-build gcc-c++ make file wget git nodejs gh \
+            qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel \
+            kf6-kirigami kf6-qqc2-desktop-style fuse-libs
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+
+      - name: Build
+        run: cmake --build build --parallel
+
+      - name: Install into AppDir
+        run: DESTDIR="$PWD/AppDir" cmake --install build
+
+      - name: Prepare AppDir
+        run: |
+          cp packaging/kondor.desktop AppDir/
+          cp packaging/kondor.png AppDir/
+          # Extras do QtWebEngine (caminhos do Fedora)
+          mkdir -p AppDir/usr/lib64/qt6/libexec
+          cp /usr/lib64/qt6/libexec/QtWebEngineProcess AppDir/usr/lib64/qt6/libexec/ 2>/dev/null || true
+          cp -r /usr/share/qt6/resources AppDir/usr/share/qt6/ 2>/dev/null || true
+          cp -r /usr/share/qt6/translations AppDir/usr/share/qt6/ 2>/dev/null || true
+
+      - name: Download AppImage tools
+        run: |
+          wget -q -c "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage" -O linuxdeploy
+          wget -q -c "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage" -O linuxdeploy-plugin-qt
+          chmod +x linuxdeploy linuxdeploy-plugin-qt
+
+      - name: Create AppImage
+        env:
+          QML_SOURCES_PATHS: "${{ github.workspace }}/qml"
+          APPIMAGE_EXTRACT_AND_RUN: "1"
+        run: |
+          export PATH="/usr/lib64/qt6/bin:$PATH"
+          ./linuxdeploy --appdir AppDir --plugin qt --output appimage
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" Kondor-*.AppImage \
+            --title "Kondor $GITHUB_REF_NAME" \
+            --generate-notes

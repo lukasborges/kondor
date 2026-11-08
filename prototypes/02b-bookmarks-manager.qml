@@ -1,4 +1,4 @@
-// #2 Bookmarks — janela "Gerenciar favoritos" (Ctrl+Shift+O): pastas à esquerda, itens à direita.
+// #2 Bookmarks — "Manage Bookmarks" window (Ctrl+Shift+O): folders on the left, items on the right.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -17,14 +17,14 @@ Rectangle {
             Layout.fillWidth: true
             RowLayout {
                 anchors.fill: parent
-                ToolButton { text: "Nova pasta"; icon.name: "folder-new" }
-                ToolButton { text: "Renomear"; icon.name: "edit-rename" }
-                ToolButton { text: "Excluir"; icon.name: "edit-delete" }
+                ToolButton { text: "New Folder"; icon.name: "folder-new" }
+                ToolButton { text: "Rename"; icon.name: "edit-rename" }
+                ToolButton { text: "Delete"; icon.name: "edit-delete" }
                 ToolButton { icon.name: "go-up"; display: AbstractButton.IconOnly }
                 ToolButton { icon.name: "go-down"; display: AbstractButton.IconOnly }
                 Item { Layout.fillWidth: true }
-                ToolButton { text: "Importar de HTML…"; icon.name: "document-import" }
-                TextField { placeholderText: "Pesquisar favoritos…"; Layout.preferredWidth: 200 }
+                ToolButton { text: "Import from HTML…"; icon.name: "document-import" }
+                TextField { placeholderText: "Search bookmarks…"; Layout.preferredWidth: 200 }
             }
         }
 
@@ -39,8 +39,8 @@ Rectangle {
                 ListView {
                     currentIndex: 0
                     model: [
-                        { t: "Barra de favoritos", d: 0 }, { t: "Notícias", d: 1 }, { t: "Desenvolvimento", d: 1 },
-                        { t: "Outros favoritos", d: 0 }, { t: "Importados", d: 0 }, { t: "Firefox", d: 1 }
+                        { t: "Bookmarks Toolbar", d: 0 }, { t: "News", d: 1 }, { t: "Development", d: 1 },
+                        { t: "Other Bookmarks", d: 0 }, { t: "Imported", d: 0 }, { t: "Firefox", d: 1 }
                     ]
                     delegate: ItemDelegate {
                         required property var modelData
@@ -59,7 +59,7 @@ Rectangle {
                 background: Rectangle { color: Kirigami.Theme.backgroundColor }
                 ListView {
                     model: [
-                        { t: "Notícias", u: "", f: true }, { t: "Desenvolvimento", u: "", f: true },
+                        { t: "News", u: "", f: true }, { t: "Development", u: "", f: true },
                         { t: "KDE", u: "https://kde.org/" }, { t: "Planet KDE", u: "https://planet.kde.org/" },
                         { t: "Qt Docs", u: "https://doc.qt.io/qt-6/" }, { t: "KDE Human Interface Guidelines", u: "https://develop.kde.org/hig/" }
                     ]

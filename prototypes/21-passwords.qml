@@ -1,4 +1,4 @@
-// #21 Password manager — pergunta para salvar a senha (InlineMessage) e chave na barra de endereço.
+// #21 Password manager — save-password prompt (InlineMessage) and key icon in the address bar.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -7,7 +7,7 @@ import "common"
 
 BrowserFrame {
     address: "https://invent.kde.org/users/sign_in"
-    tabs: [{ title: "Entrar · GitLab KDE", icon: "kde" }]
+    tabs: [{ title: "Sign in · KDE GitLab", icon: "kde" }]
     addressLeft: [
         ToolButton { icon.name: "security-high"; display: AbstractButton.IconOnly; flat: true; implicitWidth: 28; implicitHeight: 28 }
     ]
@@ -21,11 +21,11 @@ BrowserFrame {
             visible: true
             type: Kirigami.MessageType.Information
             icon.name: "dialog-password"
-            text: "Salvar a senha de <b>maria</b> para <b>invent.kde.org</b> na carteira do KDE?"
+            text: "Save the password for <b>maria</b> on <b>invent.kde.org</b> in KWallet?"
             actions: [
-                Kirigami.Action { text: "Salvar"; icon.name: "document-save" },
-                Kirigami.Action { text: "Agora não"; icon.name: "dialog-cancel" },
-                Kirigami.Action { text: "Nunca para este site"; icon.name: "edit-delete" }
+                Kirigami.Action { text: "Save"; icon.name: "document-save" },
+                Kirigami.Action { text: "Not Now"; icon.name: "dialog-cancel" },
+                Kirigami.Action { text: "Never for This Site"; icon.name: "edit-delete" }
             ]
         }
     ]
@@ -37,15 +37,15 @@ BrowserFrame {
             width: 340
             spacing: 12
             Kirigami.Icon { source: "kde"; Layout.preferredWidth: 56; Layout.preferredHeight: 56; Layout.alignment: Qt.AlignHCenter }
-            Text { text: "Entrar no GitLab KDE"; font.pixelSize: 22; font.bold: true; color: "#232629"; Layout.alignment: Qt.AlignHCenter }
-            Text { text: "Usuário"; color: "#31363b" }
+            Text { text: "Sign in to KDE GitLab"; font.pixelSize: 22; font.bold: true; color: "#232629"; Layout.alignment: Qt.AlignHCenter }
+            Text { text: "Username"; color: "#31363b" }
             Rectangle { Layout.fillWidth: true; height: 34; radius: 4; border.color: "#bdc3c7"; color: "#fcfcfc"
                 Text { anchors.verticalCenter: parent.verticalCenter; x: 10; text: "maria"; color: "#232629" } }
-            Text { text: "Senha"; color: "#31363b" }
+            Text { text: "Password"; color: "#31363b" }
             Rectangle { Layout.fillWidth: true; height: 34; radius: 4; border.color: "#bdc3c7"; color: "#fcfcfc"
                 Text { anchors.verticalCenter: parent.verticalCenter; x: 10; text: "••••••••••"; color: "#232629" } }
             Rectangle { Layout.fillWidth: true; height: 36; radius: 4; color: "#3daee9"
-                Text { anchors.centerIn: parent; text: "Entrar"; color: "white"; font.bold: true } }
+                Text { anchors.centerIn: parent; text: "Sign in"; color: "white"; font.bold: true } }
         }
     }
 }

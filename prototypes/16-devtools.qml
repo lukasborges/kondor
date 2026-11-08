@@ -1,5 +1,5 @@
-// #16 Developer tools — DevTools encaixado embaixo da página (SplitView vertical).
-// A parte de baixo é o próprio Chromium DevTools (aqui só uma imitação visual).
+// #16 Developer tools — DevTools docked below the page (vertical SplitView).
+// The bottom part is Chromium DevTools itself (only a visual imitation here).
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts

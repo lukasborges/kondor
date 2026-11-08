@@ -1,4 +1,4 @@
-// #4 Download manager — botão na barra (com progresso) e popup com a lista de downloads.
+// #4 Download manager — toolbar button (with progress) and popup listing the downloads.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -32,10 +32,10 @@ BrowserFrame {
             spacing: 0
             Repeater {
                 model: [
-                    { n: "Fedora-KDE-Live-x86_64-43.iso", m: "application-x-cd-image", p: 0.42, s: "1,1 GB de 2,6 GB — 18,4 MB/s — 1 min restante", st: "run" },
-                    { n: "relatorio-anual.pdf", m: "application-pdf", p: 1, s: "Concluído — 2,3 MB", st: "done" },
-                    { n: "kondor-0.1.5.tar.gz", m: "application-x-compressed-tar", p: 0.65, s: "Pausado — 3,4 MB de 5,2 MB", st: "paused" },
-                    { n: "imagem.png", m: "image-png", p: 0.1, s: "Cancelado", st: "cancel" }
+                    { n: "Fedora-KDE-Live-x86_64-43.iso", m: "application-x-cd-image", p: 0.42, s: "1.1 GB of 2.6 GB — 18.4 MB/s — 1 min left", st: "run" },
+                    { n: "relatorio-anual.pdf", m: "application-pdf", p: 1, s: "Completed — 2.3 MB", st: "done" },
+                    { n: "kondor-0.1.5.tar.gz", m: "application-x-compressed-tar", p: 0.65, s: "Paused — 3.4 MB of 5.2 MB", st: "paused" },
+                    { n: "imagem.png", m: "image-png", p: 0.1, s: "Canceled", st: "cancel" }
                 ]
                 delegate: ItemDelegate {
                     required property var modelData
@@ -71,9 +71,9 @@ BrowserFrame {
             RowLayout {
                 Layout.fillWidth: true
                 Layout.margins: Kirigami.Units.smallSpacing
-                Button { text: "Abrir pasta de downloads"; icon.name: "folder-download"; flat: true }
+                Button { text: "Open Downloads Folder"; icon.name: "folder-download"; flat: true }
                 Item { Layout.fillWidth: true }
-                Button { text: "Limpar concluídos"; icon.name: "edit-clear-history"; flat: true }
+                Button { text: "Clear Finished"; icon.name: "edit-clear-history"; flat: true }
             }
         }
     }

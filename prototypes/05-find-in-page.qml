@@ -1,4 +1,4 @@
-// #5 Find in page — barra de busca (InlineBar) entre o cabeçalho e a página.
+// #5 Find in page — find bar (InlineBar) between the header and the page.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -7,10 +7,10 @@ import "common"
 
 BrowserFrame {
     address: "https://pt.wikipedia.org/wiki/KDE"
-    tabs: [{ title: "KDE – Wikipédia, a enciclopédia livre", icon: "internet-web-browser" }]
+    tabs: [{ title: "KDE – Wikipedia, the free encyclopedia", icon: "internet-web-browser" }]
 
     belowHeader: [
-        // InlineBar: faixa com cores de View e separadores finos.
+        // InlineBar: strip with View colors and thin separators.
         Rectangle {
             Layout.fillWidth: true
             implicitHeight: findRow.implicitHeight + 2 * Kirigami.Units.smallSpacing
@@ -29,15 +29,15 @@ BrowserFrame {
                 TextField {
                     Layout.preferredWidth: 280
                     text: "Plasma"
-                    placeholderText: "Localizar na página"
+                    placeholderText: "Find in page"
                     focus: true
                 }
-                ToolButton { icon.name: "go-up"; display: AbstractButton.IconOnly; ToolTip.text: "Anterior (Shift+F3)" }
-                ToolButton { icon.name: "go-down"; display: AbstractButton.IconOnly; ToolTip.text: "Próximo (F3)" }
-                Label { text: "3 de 12"; color: Kirigami.Theme.disabledTextColor; Layout.leftMargin: 6 }
-                CheckBox { text: "Diferenciar maiúsculas"; Layout.leftMargin: 12 }
+                ToolButton { icon.name: "go-up"; display: AbstractButton.IconOnly; ToolTip.text: "Previous (Shift+F3)" }
+                ToolButton { icon.name: "go-down"; display: AbstractButton.IconOnly; ToolTip.text: "Next (F3)" }
+                Label { text: "3 of 12"; color: Kirigami.Theme.disabledTextColor; Layout.leftMargin: 6 }
+                CheckBox { text: "Match case"; Layout.leftMargin: 12 }
                 Item { Layout.fillWidth: true }
-                ToolButton { icon.name: "window-close"; display: AbstractButton.IconOnly; ToolTip.text: "Fechar (Esc)" }
+                ToolButton { icon.name: "window-close"; display: AbstractButton.IconOnly; ToolTip.text: "Close (Esc)" }
             }
         }
     ]
@@ -45,8 +45,8 @@ BrowserFrame {
     FakePage {
         heading: "KDE <mark>Plasma</mark>"
         paragraphs: [
-            "O <mark>Plasma</mark> é o ambiente de trabalho desenvolvido pela comunidade KDE. Ele é leve, rápido e totalmente configurável, do painel aos atalhos de teclado.",
-            "Com o <cur>Plasma</cur> 6, toda a pilha foi portada para o Qt 6 e para o KDE Frameworks 6, trazendo Wayland como sessão padrão, HDR e melhorias de acessibilidade."
+            "<mark>Plasma</mark> is the desktop environment made by the KDE community. It is light, fast and fully configurable, from panels to keyboard shortcuts.",
+            "With <cur>Plasma</cur> 6, the whole stack moved to Qt 6 and KDE Frameworks 6, bringing Wayland as the default session, HDR and accessibility improvements."
         ]
     }
 }

@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
-"""Renderiza os protótipos QML (prototypes/*.qml) em PNG com o estilo Breeze real.
+"""Render the QML prototypes (prototypes/*.qml) to PNG with the real Breeze style.
 
-Uso:
-    python3 prototypes/render.py            # todos
-    python3 prototypes/render.py 05-find     # só os que contêm "05-find" no nome
+Usage:
+    python3 prototypes/render.py            # all
+    python3 prototypes/render.py 05-find     # only files whose name contains "05-find"
 
-Requer: python3-pyqt6 (mesma versão de Qt do sistema), kf6-kirigami,
-kf6-qqc2-desktop-style, plasma-integration e breeze-icon-theme.
-Os PNGs vão para prototypes/screenshots/.
+Requires: python3-pyqt6 (built against the system Qt), kf6-kirigami,
+kf6-qqc2-desktop-style, plasma-integration and breeze-icon-theme.
+PNGs are written to prototypes/screenshots/.
 """
 import os
 import sys
 from pathlib import Path
 
 os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
-os.environ.setdefault("QT_QPA_PLATFORMTHEME", "kde")          # ícones/cores do Plasma
+os.environ.setdefault("QT_QPA_PLATFORMTHEME", "kde")          # Plasma icons and colors
 os.environ.setdefault("QT_QUICK_CONTROLS_STYLE", "org.kde.desktop")
 os.environ.setdefault("QT_QUICK_BACKEND", "software")
 
@@ -50,7 +50,7 @@ def main():
             failed += 1
             continue
         view.show()
-        wait(900)   # popups/menus abrem em Component.onCompleted
+        wait(900)   # popups/menus open in Component.onCompleted
         img = view.grabWindow()
         dest = OUT / (qml.stem + ".png")
         img.save(str(dest))

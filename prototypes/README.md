@@ -36,7 +36,7 @@ Tips when editing:
 | #3 Settings page | `03-settings.qml` |
 | #4 Download manager | `04-downloads.qml` |
 | #5 Find in page | `05-find-in-page.qml` |
-| #6 Session restore | `00-main-menu.qml` ("Reabrir aba fechada"), `03-settings.qml` ("Ao iniciar") |
+| #6 Session restore | `00-main-menu.qml` ("Reopen Closed Tab"), `03-settings.qml` ("On Startup") |
 | #7 Site permissions | `07-permissions.qml`, `07b-site-permissions-dialog.qml` |
 | #8 Fullscreen | `08-fullscreen.qml` |
 | #9 Security indicator / certificate errors | `09-security-indicator.qml`, `09b-certificate-error.qml` |

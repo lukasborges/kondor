@@ -1,19 +1,19 @@
-// Página web falsa (genérica) para preencher a área de conteúdo dos protótipos.
-// heading/paragraphs aceitam rich text: <mark>palavra</mark> vira destaque de busca
-// e <cur>palavra</cur> o destaque da ocorrência atual.
+// Generic fake web page used as content in the prototypes.
+// heading/paragraphs accept rich text: <mark>word</mark> renders a search highlight
+// and <cur>word</cur> the current match highlight.
 import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 Rectangle {
     id: page
-    property string heading: "Plasma 6: o desktop da comunidade KDE"
+    property string heading: "Plasma 6: the KDE community desktop"
     property var paragraphs: [
-        "O Plasma é o ambiente de trabalho desenvolvido pela comunidade KDE. Ele é leve, rápido e totalmente configurável, do painel aos atalhos de teclado.",
-        "Com o Plasma 6, toda a pilha foi portada para o Qt 6 e para o KDE Frameworks 6, trazendo Wayland como sessão padrão, HDR e melhorias de acessibilidade."
+        "Plasma is the desktop environment made by the KDE community. It is light, fast and fully configurable, from panels to keyboard shortcuts.",
+        "With Plasma 6, the whole stack moved to Qt 6 and KDE Frameworks 6, bringing Wayland as the default session, HDR and accessibility improvements."
     ]
     property var paragraphsAfter: [
-        "Aplicativos como Dolphin, Konsole, Kate e Okular seguem as mesmas diretrizes de interface (HIG) e o tema Breeze, criando uma experiência consistente."
+        "Apps like Dolphin, Konsole, Kate and Okular follow the same Human Interface Guidelines and the Breeze theme, for a consistent experience."
     ]
     property bool showHero: true
     anchors.fill: parent
@@ -36,7 +36,7 @@ Rectangle {
             spacing: 28
             Kirigami.Icon { source: "kde"; width: 28; height: 28; anchors.verticalCenter: parent.verticalCenter }
             Repeater {
-                model: ["Produtos", "Comunidade", "Doar", "Notícias"]
+                model: ["Products", "Community", "Donate", "News"]
                 Text { text: modelData; color: "#fcfcfc"; font.pixelSize: 14; anchors.verticalCenter: parent.verticalCenter }
             }
         }

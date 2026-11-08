@@ -1,5 +1,5 @@
-// #14 Multiple windows — janela privada: ícone de navegação privada na barra de abas,
-// todas as abas privadas e uma página de nova aba explicando o modo.
+// #14 Multiple windows — private window: private browsing icon in the tab bar,
+// every tab private and a new-tab page explaining the mode.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -8,7 +8,7 @@ import "common"
 
 BrowserFrame {
     privateWindow: true
-    tabs: [{ title: "Nova aba privada", private: true }, { title: "Pesquisa — DuckDuckGo", private: true }]
+    tabs: [{ title: "New Private Tab", private: true }, { title: "Search — DuckDuckGo", private: true }]
     address: ""
     Rectangle {
         anchors.fill: parent
@@ -20,19 +20,19 @@ BrowserFrame {
             width: 520
             spacing: Kirigami.Units.largeSpacing * 2
             Kirigami.Icon { source: "view-private"; Layout.preferredWidth: 96; Layout.preferredHeight: 96; Layout.alignment: Qt.AlignHCenter }
-            Kirigami.Heading { level: 1; text: "Navegação privada"; Layout.alignment: Qt.AlignHCenter }
+            Kirigami.Heading { level: 1; text: "Private Browsing"; Layout.alignment: Qt.AlignHCenter }
             Label {
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
                 horizontalAlignment: Text.AlignHCenter
-                text: "O Kondor não guarda histórico, cookies, dados de formulários nem permissões desta janela. Tudo é apagado quando você fecha a janela."
+                text: "Kondor does not keep history, cookies, form data or permissions from this window. Everything is erased when you close it."
             }
             Label {
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
                 horizontalAlignment: Text.AlignHCenter
                 color: Kirigami.Theme.disabledTextColor
-                text: "Downloads e favoritos que você criar continuam salvos. Seu provedor e os sites ainda podem ver sua atividade."
+                text: "Downloads and bookmarks you create are kept. Your provider and the sites you visit can still see your activity."
             }
         }
     }

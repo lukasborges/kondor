@@ -1,4 +1,4 @@
-// #2 Bookmarks — estrela na barra de endereço, popup de edição (Ctrl+D) e barra de favoritos.
+// #2 Bookmarks — star in the address bar, edit popup (Ctrl+D) and bookmarks toolbar.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -9,7 +9,7 @@ BrowserFrame {
     id: frame
     addressRight: [
         ToolButton {
-            icon.name: "rating"             // já favoritado (vazio: "rating-unrated")
+            icon.name: "rating"             // bookmarked (not bookmarked: "rating-unrated")
             icon.width: 16; icon.height: 16
             display: AbstractButton.IconOnly
             flat: true
@@ -17,7 +17,7 @@ BrowserFrame {
         }
     ]
     belowHeader: [
-        // Barra de favoritos (Ctrl+Shift+B)
+        // Bookmarks toolbar (Ctrl+Shift+B)
         ToolBar {
             Layout.fillWidth: true
             Kirigami.Theme.colorSet: Kirigami.Theme.Window
@@ -28,8 +28,8 @@ BrowserFrame {
                 Repeater {
                     model: [
                         { t: "KDE", i: "kde" }, { t: "Planet KDE", i: "internet-web-browser" },
-                        { t: "Qt Docs", i: "internet-web-browser" }, { t: "Notícias", i: "folder" },
-                        { t: "Desenvolvimento", i: "folder" }
+                        { t: "Qt Docs", i: "internet-web-browser" }, { t: "News", i: "folder" },
+                        { t: "Development", i: "folder" }
                     ]
                     ToolButton {
                         text: modelData.t
@@ -53,17 +53,17 @@ BrowserFrame {
         Component.onCompleted: open()
         contentItem: ColumnLayout {
             spacing: Kirigami.Units.largeSpacing
-            Kirigami.Heading { level: 4; text: "Página adicionada aos favoritos" }
+            Kirigami.Heading { level: 4; text: "Page bookmarked" }
             Kirigami.FormLayout {
                 Layout.fillWidth: true
-                TextField { Kirigami.FormData.label: "Nome:"; text: "KDE Community"; Layout.fillWidth: true }
-                ComboBox { Kirigami.FormData.label: "Pasta:"; model: ["Barra de favoritos", "Outros favoritos", "Notícias"]; Layout.fillWidth: true }
+                TextField { Kirigami.FormData.label: "Name:"; text: "KDE Community"; Layout.fillWidth: true }
+                ComboBox { Kirigami.FormData.label: "Folder:"; model: ["Bookmarks Toolbar", "Other Bookmarks", "News"]; Layout.fillWidth: true }
             }
             RowLayout {
                 Layout.fillWidth: true
-                Button { text: "Remover"; icon.name: "edit-delete" }
+                Button { text: "Remove"; icon.name: "edit-delete" }
                 Item { Layout.fillWidth: true }
-                Button { text: "Concluído"; icon.name: "dialog-ok-apply"; highlighted: true }
+                Button { text: "Done"; icon.name: "dialog-ok-apply"; highlighted: true }
             }
         }
     }

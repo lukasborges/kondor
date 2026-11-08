@@ -1,4 +1,4 @@
-// #24 Per-site zoom — indicador "125%" na barra de endereço (clique redefine para 100%).
+// #24 Per-site zoom — "125%" indicator in the address bar (click resets to 100%).
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -17,7 +17,7 @@ BrowserFrame {
             display: AbstractButton.TextBesideIcon
             flat: true
             implicitHeight: 28
-            ToolTip.text: "Redefinir zoom (Ctrl+0)"
+            ToolTip.text: "Reset Zoom (Ctrl+0)"
         }
     ]
     Item {

@@ -1,4 +1,4 @@
-// #8 Fullscreen — vídeo em tela cheia (sem abas/barra) com o aviso "Pressione Esc".
+// #8 Fullscreen — full-screen video (no tabs/toolbar) with the "press Esc" hint.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -19,7 +19,7 @@ BrowserFrame {
             }
             Kirigami.Icon { anchors.centerIn: parent; source: "media-playback-start"; width: 96; height: 96; opacity: 0.8 }
         }
-        // Barra do player (desenhada pelo site)
+        // Player controls (drawn by the website)
         Rectangle {
             anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
             height: 46
@@ -30,7 +30,7 @@ BrowserFrame {
         }
     }
 
-    // Aviso transitório (3 s) no topo
+    // Transient hint (3 s) at the top
     Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         y: 24
@@ -46,7 +46,7 @@ BrowserFrame {
             anchors.centerIn: parent
             spacing: Kirigami.Units.largeSpacing
             Kirigami.Icon { source: "view-fullscreen"; Layout.preferredWidth: 22; Layout.preferredHeight: 22 }
-            Label { text: "<b>youtube.com</b> está em tela cheia — pressione <b>Esc</b> para sair"; color: Kirigami.Theme.textColor }
+            Label { text: "<b>youtube.com</b> is now full screen — press <b>Esc</b> to exit"; color: Kirigami.Theme.textColor }
         }
     }
 }

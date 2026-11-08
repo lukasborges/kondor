@@ -1,4 +1,4 @@
-// #9 Security indicator — cadeado na barra de endereço e popup de informações do site.
+// #9 Security indicator — padlock in the address bar and site information popup.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -27,24 +27,24 @@ BrowserFrame {
                 ColumnLayout {
                     spacing: 0
                     Kirigami.Heading { level: 4; text: "kde.org" }
-                    Label { text: "A conexão com este site é segura"; color: Kirigami.Theme.positiveTextColor }
+                    Label { text: "Connection is secure"; color: Kirigami.Theme.positiveTextColor }
                 }
             }
             Label {
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
                 color: Kirigami.Theme.disabledTextColor
-                text: "Certificado emitido por Let's Encrypt (R11), válido até 12/02/2027."
+                text: "Certificate issued by Let's Encrypt (R11), valid until Feb 12, 2027."
             }
             Kirigami.Separator { Layout.fillWidth: true }
-            Label { text: "Permissões deste site"; font.bold: true }
+            Label { text: "Permissions for this site"; font.bold: true }
             RowLayout {
                 Kirigami.Icon { source: "preferences-desktop-notification"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
-                Label { text: "Notificações"; Layout.fillWidth: true }
-                Label { text: "Permitido"; color: Kirigami.Theme.positiveTextColor }
+                Label { text: "Notifications"; Layout.fillWidth: true }
+                Label { text: "Allowed"; color: Kirigami.Theme.positiveTextColor }
                 ToolButton { icon.name: "edit-undo"; display: AbstractButton.IconOnly }
             }
-            Button { text: "Limpar cookies e dados do site"; icon.name: "edit-clear"; flat: true }
+            Button { text: "Clear Cookies and Site Data"; icon.name: "edit-clear"; flat: true }
         }
     }
 }

@@ -95,8 +95,11 @@ mention the difference in the PR.
   `Kirigami.Theme`/`palette` (never hardcoded colors); icons via `icon.name` with **Breeze icon
   names** (`bookmark-new`, `edit-find`, `document-save`, `security-high`, …); tooltips with
   `ToolTip.delay: 600` like the existing buttons; follow KDE HIG wording (Title Case for menu items).
-- **Strings**: every user-visible string in `qsTr()`. Until issue #19 is done the UI language is
-  Portuguese; after #19, source strings are English. Follow whatever the current code uses.
+- **Language: English everywhere.** UI source strings, code comments, docs, commit messages, PR
+  descriptions and test names are written in English. Every user-visible string goes in `qsTr()`;
+  translations (pt_BR first) are added through `.ts` files (issue #19), never by writing another
+  language in the source. Some existing code still has Portuguese strings/comments: do not copy that
+  style — #19 converts them; when you touch such a line anyway, convert it to English.
 - **Shortcuts**: `Shortcut { sequence(s): …; onActivated: … }` in `Main.qml`; use standard
   `StandardKey` where one exists (e.g. `StandardKey.Find`). Update the shortcut table in `README.md`.
 - **Dependencies**: prefer Qt modules already used. A new Qt module or KDE library must also be added

@@ -1,4 +1,4 @@
-// #7 Site permissions — pedido de câmera e microfone (Kirigami.InlineMessage no topo da página).
+// #7 Site permissions — camera and microphone request (Kirigami.InlineMessage at the top of the page).
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -18,10 +18,10 @@ BrowserFrame {
             visible: true
             type: Kirigami.MessageType.Information
             icon.name: "camera-web"
-            text: "<b>meet.jit.si</b> quer usar sua <b>câmera</b> e seu <b>microfone</b>."
+            text: "<b>meet.jit.si</b> wants to use your <b>camera</b> and <b>microphone</b>."
             actions: [
-                Kirigami.Action { text: "Permitir"; icon.name: "dialog-ok-apply" },
-                Kirigami.Action { text: "Bloquear"; icon.name: "dialog-cancel" }
+                Kirigami.Action { text: "Allow"; icon.name: "dialog-ok-apply" },
+                Kirigami.Action { text: "Block"; icon.name: "dialog-cancel" }
             ]
         }
     ]
@@ -32,7 +32,7 @@ BrowserFrame {
             anchors.centerIn: parent
             spacing: 18
             Kirigami.Icon { source: "camera-web"; width: 96; height: 96; anchors.horizontalCenter: parent.horizontalCenter; opacity: 0.6 }
-            Text { text: "Aguardando acesso à câmera…"; color: "#eff0f1"; font.pixelSize: 18; anchors.horizontalCenter: parent.horizontalCenter }
+            Text { text: "Waiting for camera access…"; color: "#eff0f1"; font.pixelSize: 18; anchors.horizontalCenter: parent.horizontalCenter }
         }
     }
 }

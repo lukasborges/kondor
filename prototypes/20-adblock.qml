@@ -1,4 +1,4 @@
-// #20 Ad and tracker blocking — botão com contador na barra de endereço e popup por site.
+// #20 Ad and tracker blocking — button with counter in the address bar and per-site popup.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -7,8 +7,8 @@ import "common"
 
 BrowserFrame {
     id: frame
-    address: "https://noticias.example.com/tecnologia/kde-plasma-6"
-    tabs: [{ title: "Plasma 6 chega com Wayland por padrão", icon: "internet-web-browser" }]
+    address: "https://news.example.com/tech/kde-plasma-6"
+    tabs: [{ title: "Plasma 6 ships with Wayland by default", icon: "internet-web-browser" }]
     addressLeft: [
         ToolButton { icon.name: "security-high"; display: AbstractButton.IconOnly; flat: true; implicitWidth: 28; implicitHeight: 28 }
     ]
@@ -27,7 +27,7 @@ BrowserFrame {
             }
         }
     ]
-    FakePage { heading: "Plasma 6 chega com Wayland por padrão" }
+    FakePage { heading: "Plasma 6 ships with Wayland by default" }
 
     Popup {
         popupType: Popup.Item
@@ -43,17 +43,17 @@ BrowserFrame {
                 Kirigami.Icon { source: "view-filter"; Layout.preferredWidth: 32; Layout.preferredHeight: 32 }
                 ColumnLayout {
                     spacing: 0
-                    Kirigami.Heading { level: 4; text: "27 itens bloqueados" }
-                    Label { text: "noticias.example.com"; color: Kirigami.Theme.disabledTextColor }
+                    Kirigami.Heading { level: 4; text: "27 items blocked" }
+                    Label { text: "news.example.com"; color: Kirigami.Theme.disabledTextColor }
                 }
             }
-            Label { text: "19 anúncios · 8 rastreadores"; color: Kirigami.Theme.disabledTextColor }
+            Label { text: "19 ads · 8 trackers"; color: Kirigami.Theme.disabledTextColor }
             Kirigami.Separator { Layout.fillWidth: true }
-            Switch { text: "Bloqueio ativo neste site"; checked: true }
+            Switch { text: "Blocking enabled on this site"; checked: true }
             RowLayout {
                 Layout.fillWidth: true
-                Label { text: "Listas atualizadas hoje, 09:12"; font: Kirigami.Theme.smallFont; color: Kirigami.Theme.disabledTextColor; Layout.fillWidth: true }
-                Button { text: "Atualizar"; icon.name: "view-refresh"; flat: true }
+                Label { text: "Lists updated today, 09:12"; font: Kirigami.Theme.smallFont; color: Kirigami.Theme.disabledTextColor; Layout.fillWidth: true }
+                Button { text: "Update"; icon.name: "view-refresh"; flat: true }
             }
         }
     }

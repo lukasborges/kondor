@@ -1,4 +1,4 @@
-// #11 Address bar suggestions — completar inline ("kd" → "kde.org") e lista de sugestões.
+// #11 Address bar suggestions — inline completion ("kd" → "kde.org") and suggestion list.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -23,12 +23,12 @@ BrowserFrame {
             spacing: 0
             Repeater {
                 model: [
-                    { i: "edit-find", t: "Pesquisar «kd» no DuckDuckGo", u: "", sel: false },
+                    { i: "edit-find", t: "Search DuckDuckGo for “kd”", u: "", sel: false },
                     { i: "bookmarks", t: "KDE Community", u: "https://kde.org/", sel: true },
                     { i: "bookmarks", t: "KDE Human Interface Guidelines", u: "https://develop.kde.org/hig/", sel: false },
-                    { i: "view-history", t: "KDE Plasma 6.5 — Notas da versão", u: "https://kde.org/announcements/plasma/6/6.5.0/", sel: false },
+                    { i: "view-history", t: "KDE Plasma 6.5 — Release notes", u: "https://kde.org/announcements/plasma/6/6.5.0/", sel: false },
                     { i: "view-history", t: "KDE Applications", u: "https://apps.kde.org/", sel: false },
-                    { i: "view-history", t: "kdenlive — editor de vídeo", u: "https://kdenlive.org/", sel: false },
+                    { i: "view-history", t: "kdenlive — video editor", u: "https://kdenlive.org/", sel: false },
                     { i: "edit-find", t: "kde connect", u: "", sel: false },
                     { i: "edit-find", t: "kde plasma 6", u: "", sel: false }
                 ]

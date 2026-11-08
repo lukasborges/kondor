@@ -1,4 +1,4 @@
-// #7 Site permissions — diálogo "Permissões de sites" (lista por site, com revogar).
+// #7 Site permissions — "Site Permissions" dialog (grouped by site, with revoke).
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -14,14 +14,14 @@ Rectangle {
         anchors.margins: Kirigami.Units.largeSpacing
         spacing: Kirigami.Units.largeSpacing
 
-        Kirigami.Heading { level: 3; text: "Permissões de sites" }
+        Kirigami.Heading { level: 3; text: "Site Permissions" }
         Label {
             Layout.fillWidth: true
             wrapMode: Text.WordWrap
             color: Kirigami.Theme.disabledTextColor
-            text: "Decisões lembradas para sites visitados em abas normais. Abas privadas nunca guardam permissões."
+            text: "Decisions remembered for sites visited in normal tabs. Private tabs never keep permissions."
         }
-        TextField { Layout.fillWidth: true; placeholderText: "Filtrar por site…" }
+        TextField { Layout.fillWidth: true; placeholderText: "Filter by site…" }
 
         Frame {
             Layout.fillWidth: true
@@ -35,10 +35,10 @@ Rectangle {
                 section.property: "site"
                 section.delegate: Kirigami.ListSectionHeader { required property string section; width: ListView.view.width; text: section }
                 model: ListModel {
-                    ListElement { site: "meet.jit.si"; perm: "Câmera"; ic: "camera-web"; granted: true }
-                    ListElement { site: "meet.jit.si"; perm: "Microfone"; ic: "audio-input-microphone"; granted: true }
-                    ListElement { site: "maps.example.com"; perm: "Localização"; ic: "mark-location"; granted: true }
-                    ListElement { site: "news.example.com"; perm: "Notificações"; ic: "preferences-desktop-notification"; granted: false }
+                    ListElement { site: "meet.jit.si"; perm: "Camera"; ic: "camera-web"; granted: true }
+                    ListElement { site: "meet.jit.si"; perm: "Microphone"; ic: "audio-input-microphone"; granted: true }
+                    ListElement { site: "maps.example.com"; perm: "Location"; ic: "mark-location"; granted: true }
+                    ListElement { site: "news.example.com"; perm: "Notifications"; ic: "preferences-desktop-notification"; granted: false }
                 }
                 delegate: ItemDelegate {
                     required property string perm
@@ -50,10 +50,10 @@ Rectangle {
                         Kirigami.Icon { source: ic; Layout.preferredWidth: 22; Layout.preferredHeight: 22 }
                         Label { text: perm; Layout.fillWidth: true }
                         Label {
-                            text: granted ? "Permitido" : "Bloqueado"
+                            text: granted ? "Allowed" : "Blocked"
                             color: granted ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.negativeTextColor
                         }
-                        Button { text: "Revogar"; icon.name: "edit-undo"; flat: true }
+                        Button { text: "Revoke"; icon.name: "edit-undo"; flat: true }
                     }
                 }
             }

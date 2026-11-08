@@ -1,5 +1,5 @@
-// Moldura estática que imita a janela do Kondor (qml/Main.qml) para os protótipos.
-// Não tem lógica: só layout, cores do tema (Kirigami.Theme) e ícones Breeze.
+// Static frame that mimics Kondor's window (qml/Main.qml) for the prototypes.
+// No logic: only layout, theme colors (Kirigami.Theme) and Breeze icons.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -8,10 +8,10 @@ import org.kde.kirigami as Kirigami
 Rectangle {
     id: frame
 
-    // Abas: [{title, icon, private, pinned, loading}]
+    // Tabs: [{title, icon, private, pinned, loading}]
     property var tabs: [
         { title: "KDE Community", icon: "kde" },
-        { title: "Wikipedia, a enciclopédia livre", icon: "internet-web-browser" }
+        { title: "Wikipedia, the free encyclopedia", icon: "internet-web-browser" }
     ]
     property int currentTab: 0
     property string address: "https://kde.org/"
@@ -19,14 +19,14 @@ Rectangle {
     property bool privateWindow: false
     property bool showHeader: true
 
-    // Itens extras dentro da barra de endereço (à esquerda / à direita).
+    // Extra items inside the address bar (left / right).
     property alias addressLeft: leftSlot.data
     property alias addressRight: rightSlot.data
-    // Botões extras na barra de ferramentas, antes do menu.
+    // Extra toolbar buttons, before the menu button.
     property alias toolbarExtras: extrasSlot.data
-    // Faixa logo abaixo do cabeçalho (barra de favoritos, InlineBar…).
+    // Strip right below the header (bookmarks toolbar, InlineBar…).
     property alias belowHeader: belowSlot.data
-    // Conteúdo da página (por padrão, uma página falsa).
+    // Page content (a fake page by default).
     default property alias page: pageSlot.data
     readonly property alias addressField: addressBar
     readonly property alias menuButton: menuButton
@@ -39,7 +39,7 @@ Rectangle {
         anchors.fill: parent
         spacing: 0
 
-        // ── Barra de abas ───────────────────────────────────────────────
+        // ── Tab bar ─────────────────────────────────────────────────────
         Rectangle {
             visible: frame.showHeader
             Layout.fillWidth: true
@@ -74,7 +74,7 @@ Rectangle {
                             icon.name: modelData.private ? "view-private" : (modelData.icon || "text-html")
                             icon.width: 16
                             icon.height: 16
-                            // O estilo Breeze desenharia o texto de novo; o contentItem abaixo cuida disso.
+                            // The Breeze style would draw the text again; the contentItem below handles it.
                             text: ""
                             contentItem: RowLayout {
                                 spacing: 6
@@ -128,7 +128,7 @@ Rectangle {
             }
         }
 
-        // ── Barra de navegação ──────────────────────────────────────────
+        // ── Navigation toolbar ──────────────────────────────────────────
         ToolBar {
             visible: frame.showHeader
             Layout.fillWidth: true
@@ -189,7 +189,7 @@ Rectangle {
             spacing: 0
         }
 
-        // ── Página ───────────────────────────────────────────────────────
+        // ── Page ─────────────────────────────────────────────────────────
         Item {
             id: pageSlot
             Layout.fillWidth: true

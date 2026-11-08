@@ -1,5 +1,5 @@
-// #3 Settings — janela "Configurar o Kondor" (Ctrl+,): páginas à esquerda, Kirigami.FormLayout à direita.
-// Mudanças aplicam na hora (sem OK/Aplicar), como nos apps KDE.
+// #3 Settings — "Configure Kondor" window (Ctrl+,): pages on the left, Kirigami.FormLayout on the right.
+// Changes apply immediately (no OK/Apply), like KDE apps.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -14,7 +14,7 @@ Rectangle {
         anchors.fill: parent
         spacing: 0
 
-        // Lista de páginas (como o KConfigDialog / System Settings)
+        // Page list (like KConfigDialog / System Settings)
         ScrollView {
             Layout.preferredWidth: 200
             Layout.fillHeight: true
@@ -23,9 +23,9 @@ Rectangle {
             background: Rectangle { color: Kirigami.Theme.backgroundColor }
             ListView {
                 model: [
-                    { t: "Geral", i: "go-home" }, { t: "Pesquisa", i: "edit-find" }, { t: "Downloads", i: "download" },
-                    { t: "Privacidade", i: "security-high" }, { t: "Senhas", i: "dialog-password" },
-                    { t: "Ortografia", i: "tools-check-spelling" }
+                    { t: "General", i: "go-home" }, { t: "Search", i: "edit-find" }, { t: "Downloads", i: "download" },
+                    { t: "Privacy", i: "security-high" }, { t: "Passwords", i: "dialog-password" },
+                    { t: "Spelling", i: "tools-check-spelling" }
                 ]
                 delegate: ItemDelegate {
                     required property var modelData
@@ -48,23 +48,23 @@ Rectangle {
             Kirigami.FormLayout {
                 Layout.fillWidth: true
 
-                Kirigami.Separator { Kirigami.FormData.isSection: true; Kirigami.FormData.label: "Ao iniciar" }
-                RadioButton { Kirigami.FormData.label: "Abrir:"; text: "A página inicial"; checked: true }
-                RadioButton { text: "As abas da sessão anterior" }
+                Kirigami.Separator { Kirigami.FormData.isSection: true; Kirigami.FormData.label: "On Startup" }
+                RadioButton { Kirigami.FormData.label: "Open:"; text: "The home page"; checked: true }
+                RadioButton { text: "The tabs from the previous session" }
 
-                Kirigami.Separator { Kirigami.FormData.isSection: true; Kirigami.FormData.label: "Página inicial" }
+                Kirigami.Separator { Kirigami.FormData.isSection: true; Kirigami.FormData.label: "Home Page" }
                 RowLayout {
-                    Kirigami.FormData.label: "Endereço:"
+                    Kirigami.FormData.label: "Address:"
                     TextField { text: "https://duckduckgo.com"; Layout.preferredWidth: 280 }
-                    Button { text: "Usar página atual"; icon.name: "go-home" }
+                    Button { text: "Use Current Page"; icon.name: "go-home" }
                 }
 
-                Kirigami.Separator { Kirigami.FormData.isSection: true; Kirigami.FormData.label: "Pesquisa" }
-                ComboBox { Kirigami.FormData.label: "Mecanismo:"; model: ["DuckDuckGo", "Google", "Startpage", "Brave Search", "Personalizado…"]; Layout.preferredWidth: 280 }
-                CheckBox { Kirigami.FormData.label: "Sugestões:"; text: "Mostrar sugestões do mecanismo de pesquisa" }
+                Kirigami.Separator { Kirigami.FormData.isSection: true; Kirigami.FormData.label: "Search" }
+                ComboBox { Kirigami.FormData.label: "Engine:"; model: ["DuckDuckGo", "Google", "Startpage", "Brave Search", "Custom…"]; Layout.preferredWidth: 280 }
+                CheckBox { Kirigami.FormData.label: "Suggestions:"; text: "Show search engine suggestions" }
 
-                Kirigami.Separator { Kirigami.FormData.isSection: true; Kirigami.FormData.label: "Aparência" }
-                CheckBox { Kirigami.FormData.label: "Barras:"; text: "Mostrar barra de favoritos"; checked: true }
+                Kirigami.Separator { Kirigami.FormData.isSection: true; Kirigami.FormData.label: "Appearance" }
+                CheckBox { Kirigami.FormData.label: "Toolbars:"; text: "Show bookmarks toolbar"; checked: true }
             }
             Item { Layout.fillHeight: true }
         }

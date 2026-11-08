@@ -68,7 +68,7 @@ records the decision in the spec.
 
 `scripts/dev-loop.sh` runs this role without a human in the loop. Every 3 minutes it refreshes a
 loop-owned worktree at `origin/main` (`~/.local/share/kondor-dev-loop/control`), regenerates the
-queue and, when there is a `developer` row, runs `opencode run --standalone --auto --model deepseek/deepseek-v4-pro` (override with
+queue and, when there is a `developer` row, runs `opencode run --standalone --auto --model deepseek/deepseek-flash` (override with
 `KONDOR_MODEL`) from that worktree with a prompt for that one issue. If a run ends with the issue still in `to-dev` twice in
 a row, the loop pauses that issue and sends a desktop notification.
 

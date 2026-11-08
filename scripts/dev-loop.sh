@@ -16,7 +16,7 @@
 #   KONDOR_INTERVAL      seconds between checks (default: 180)
 #   KONDOR_MAX_NO_PROGRESS  developer runs on the same issue without leaving `to-dev` before pausing (default: 2)
 #   KONDOR_OPENCODE      opencode binary (default: opencode in PATH, else ~/.opencode/bin/opencode)
-#   KONDOR_MODEL         model for the developer (default: deepseek/deepseek-v4-pro; see `opencode models`)
+#   KONDOR_MODEL         model for the developer (default: deepseek/deepseek-flash; see `opencode models`)
 #
 # Everything is wrapped in main() so bash parses the whole file before running it: the service
 # runs this script from the control worktree, which is updated to origin/main while it runs.
@@ -32,7 +32,7 @@ main() {
   local interval="${KONDOR_INTERVAL:-180}"
   local max_no_progress="${KONDOR_MAX_NO_PROGRESS:-2}"
   local opencode="${KONDOR_OPENCODE:-$(command -v opencode || echo "$HOME/.opencode/bin/opencode")}"
-  local model="${KONDOR_MODEL:-deepseek/deepseek-v4-pro}"
+  local model="${KONDOR_MODEL:-deepseek/deepseek-flash}"
   local log="$state/dev-loop.log"
   mkdir -p "$state"
 

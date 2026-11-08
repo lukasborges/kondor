@@ -1,10 +1,10 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
-
-pragma ComponentBehavior: Bound
 
 // "History" window (Ctrl+H): search, grouped by day, context menu.
 // Created on demand in Main.qml. Visuals follow the 01-history.qml prototype.
@@ -38,6 +38,13 @@ ApplicationWindow {
         root.tabModel.addTab(false, url)
     }
 
+    // Applies a pending search immediately, so Enter never opens a stale result.
+    function openFirstResult() {
+        searchDebounce.stop()
+        HistoryManager.model.filter = searchField.text
+        root.openInNewTab(HistoryManager.model.urlAt(0))
+    }
+
     // Copies via a hidden TextEdit (the simple way to reach the clipboard in QML).
     TextEdit {
         id: clipboardHelper
@@ -68,6 +75,20 @@ ApplicationWindow {
                     Layout.fillWidth: true
                     placeholderText: qsTr("Search history…")
                     onTextChanged: searchDebounce.restart()
+
+                    Keys.onDownPressed: function(event) {
+                        listView.currentIndex = 0
+                        listView.forceActiveFocus()
+                        event.accepted = true
+                    }
+                    Keys.onReturnPressed: function(event) {
+                        root.openFirstResult()
+                        event.accepted = true
+                    }
+                    Keys.onEnterPressed: function(event) {
+                        root.openFirstResult()
+                        event.accepted = true
+                    }
                 }
 
                 ToolButton {
@@ -104,12 +125,14 @@ ApplicationWindow {
 
                 delegate: ItemDelegate {
                     id: entry
+                    required property int index
                     required property int id
                     required property string url
                     required property string title
                     required property string time
 
                     width: ListView.view.width
+                    highlighted: ListView.isCurrentItem
 
                     contentItem: RowLayout {
                         spacing: Kirigami.Units.largeSpacing
@@ -158,6 +181,8 @@ ApplicationWindow {
                                 entryMenu.popup(entry, mouse.x, mouse.y)
                                 return
                             }
+                            listView.currentIndex = entry.index
+                            listView.forceActiveFocus()
                             // Qt.styleHints is typed QObject* in the QML global
                             // object, but returns a QStyleHints at runtime.
                             // qmllint disable missing-property

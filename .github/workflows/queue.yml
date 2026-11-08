@@ -1,0 +1,38 @@
+name: Update queue
+
+# Publishes the work queue (scripts/update-queue.sh) in the run summary whenever the
+# roadmap state changes. It never commits: agents regenerate docs/QUEUE.md locally.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/specs/**'
+      - 'scripts/update-queue.sh'
+  issues:
+    types: [opened, labeled, unlabeled, closed, reopened]
+  pull_request:
+    types: [opened, reopened, ready_for_review, converted_to_draft, closed, edited]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+concurrency:
+  group: queue
+  cancel-in-progress: true
+
+jobs:
+  queue:
+    runs-on: ubuntu-latest
+    steps:
+      # Always read specs from the default branch, also for pull_request events.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Publish queue in the run summary
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash scripts/update-queue.sh --stdout >> "$GITHUB_STEP_SUMMARY"

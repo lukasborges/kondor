@@ -3,6 +3,11 @@
 Read this file before working on any issue of the **Kondor Roadmap**
 (<https://github.com/users/lukasborges/projects/1>). Every issue assumes the rules below.
 
+Two agents work on the roadmap: the **architect** (`docs/agents/architect.md` — specs,
+prototypes, answers, reviews, merges) and the **developer** (`docs/agents/developer.md` —
+implementation; DeepSeek via opencode, which loads that file through `opencode.json`). They talk
+only through GitHub (labels, issue/PR comments, PR reviews); see "Agent workflow" at the end.
+
 ## What Kondor is
 
 A small web browser written in **C++17 + Qt 6 (Qt Quick / QML + Qt WebEngine)** that must look and
@@ -78,7 +83,7 @@ exactly as described here; later issues reuse it. Do not create parallel alterna
 
 `prototypes/` holds a static QML mockup for every issue with UI, rendered with the real Breeze
 style into `prototypes/screenshots/*.png` (see `prototypes/README.md` for the issue → file table).
-When an issue has a prototype, **the implementation must match it**: same controls, Kirigami
+When an issue has a prototype (linked from its spec), **the implementation must match it**: same controls, Kirigami
 components, icon names, wording and placement. Copy structure from the prototype's QML, but never
 import files from `prototypes/` in the app. If the spec and the prototype disagree, the spec wins;
 mention the difference in the PR.
@@ -108,13 +113,48 @@ mention the difference in the PR.
   "Prepare AppDir" step of `release.yml`.
 - **No placeholders**: do not leave `TODO` stubs for things the issue asks for.
 
-## Workflow for each issue
+## Agent workflow
 
-1. Branch from `main`: `feature/<issue-number>-<short-slug>` (e.g. `feature/5-find-in-page`).
-2. Implement exactly the issue's scope ("Out of scope" sections are binding).
-3. Build without new warnings in your files; run the offscreen smoke test; do the issue's
-   "Manual test" checklist.
-4. Update `README.md` (Features → Implemented, shortcut table) when user-visible behavior changes.
-5. Commit messages **in English**, Conventional Commits style (`feat: add find in page`,
+- **Specs** live in `docs/specs/<NNNN>-<slug>.md` (one per issue, source of truth, edited only by
+  the architect). The issue body is a summary with a link; decisions go in the spec's
+  "Decisions" table.
+- **State** lives in one label per issue: `to-spec` (architect writes the spec) → `to-dev`
+  (developer implements or addresses review) → `in-review` (architect reviews the PR) → closed
+  when the architect merges the PR (`Closes #N`). `question` is added on top of the state when the
+  developer needs an answer; the architect removes it after answering.
+- **Queue**: `scripts/update-queue.sh` writes `docs/QUEUE.md` (git-ignored) from that state; each
+  agent regenerates it and takes the topmost row for its role. The "Update queue" workflow shows
+  the same table in its run summary.
+- **One issue at a time**: only one issue is in `to-dev`/`in-review`; the architect promotes the
+  next one following the roadmap order below.
+- **Conversation** happens only on GitHub: questions and answers as issue/PR comments, reviews as
+  PR reviews with inline comments. Never use files in the repository to talk.
+- **Working copies**: each agent uses its own git worktree; the developer works on
+  `feature/<issue-number>-<short-slug>` branches cut from current `origin/main`, the architect on
+  `main`.
+
+### Developer delivery checklist
+
+1. Implement exactly the spec ("Out of scope" is binding) and match the prototype.
+2. Build without new warnings in your files; run the offscreen smoke test; do the spec's
+   "Manual test".
+3. Update `README.md` (Features → Implemented, shortcut table) when user-visible behavior changes.
+4. Commit messages **in English**, Conventional Commits style (`feat: add find in page`,
    `fix: …`, `chore: …`, `docs: …`), **without `Co-Authored-By` or any other attribution trailer**.
-6. Open a PR whose description says `Closes #<issue-number>` and lists how it was tested.
+5. Open a PR using `.github/pull_request_template.md` (body says `Closes #<issue-number>`), then
+   switch the issue label to `in-review`.
+
+### Roadmap order
+
+Promoted to `to-dev` one at a time by the architect (dependencies first: shared blocks, then
+privacy fixes, then features):
+
+1. #1 Browsing history (creates **Database**) · 2. #3 Settings page (creates **Settings**) ·
+3. #5 Find in page (creates **InlineBar**) · 4. #4 Download manager (creates **Notifier**) ·
+5. #12 Tab management (fixes the private-tab link bug) · 6. #19 Translations (English source +
+pt_BR) · 7. #26 Automated tests · 8. #10 Default browser · 9. #6 Session restore ·
+10. #2 Bookmarks · 11. #7 Site permissions · 12. #9 Security indicator · 13. #8 Fullscreen ·
+14. #18 Crashed page · 15. #13 Page context menu · 16. #11 Address bar suggestions ·
+17. #14 Multiple windows · 18. #15 Single instance · 19. #16 Developer tools ·
+20. #17 Print and save as PDF · 21. #24 Per-site zoom · 22. #23 Spell checking ·
+23. #22 Reader mode · 24. #20 Ad and tracker blocking · 25. #21 Passwords · 26. #25 Flatpak

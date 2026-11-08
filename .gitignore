@@ -25,3 +25,6 @@ Makefile
 .idea/
 *.swp
 .DS_Store
+
+# Work queue: generated locally by scripts/update-queue.sh
+docs/QUEUE.md

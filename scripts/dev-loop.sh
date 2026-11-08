@@ -136,6 +136,8 @@ Environment=KONDOR_REPO=$repo
 Environment=KONDOR_CONTROL_DIR=$control
 Environment=KONDOR_STATE_DIR=$state
 Environment=KONDOR_MODEL=$model
+ExecStartPre=/usr/bin/git -C $repo fetch -q origin
+ExecStartPre=/usr/bin/git -C $control checkout -q --force --detach origin/main
 ExecStart=/bin/bash $control/scripts/dev-loop.sh
 Restart=on-failure
 RestartSec=60

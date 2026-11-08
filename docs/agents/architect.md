@@ -92,3 +92,29 @@ screenshot. The developer's implementation must match it visually.
 - English everywhere (specs, comments, commits).
 - Conventional Commits for your own commits (`docs: add spec for #5`), no attribution trailers.
 - Direct and specific. No placeholders, no TODO stubs.
+
+## Automatic mode
+
+`scripts/architect-loop.sh` runs this role unattended, next to the developer loop
+(`scripts/dev-loop.sh`). Every 3 minutes it refreshes a loop-owned worktree at `origin/main`
+(`~/.local/share/kondor-architect-loop/control`), regenerates the queue and runs Claude Code
+headless (`claude -p --permission-mode auto`) for exactly one step when:
+
+- an issue is `in-review` → review the PR; approve + squash-merge (or only approve with
+  `KONDOR_ARCH_MERGE=0`), else request changes and switch to `to-dev`;
+- an issue has `question` → answer, record the decision in the spec, remove the label;
+- an issue is `to-spec` → write the spec/prototype, switch to `to-dev`;
+- nothing is in flight → promote the next "Roadmap order" issue to `to-dev`.
+
+`--permission-mode auto` keeps Claude Code's safety classifier in front of every action: if it
+blocks something (for example a merge), the step makes no progress, and after two attempts the loop
+pauses that step and sends a desktop notification.
+
+```bash
+scripts/architect-loop.sh --dry-run      # show what would run now
+scripts/architect-loop.sh --install      # install + start the systemd user service
+tail -f ~/.local/state/kondor-architect-loop/architect-loop.log   # loop log; run-*.log per Claude run
+scripts/architect-loop.sh --resume <N|promote>                   # unpause a step
+systemctl --user stop kondor-architect-loop
+scripts/architect-loop.sh --uninstall
+```

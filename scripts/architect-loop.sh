@@ -17,7 +17,7 @@
 #   KONDOR_ARCH_INTERVAL  seconds between checks (default: 180)
 #   KONDOR_ARCH_MAX_NO_PROGRESS  runs on the same step without progress before pausing (default: 2)
 #   KONDOR_ARCH_MODEL     Claude model (default: Claude Code's default)
-#   KONDOR_ARCH_MERGE     1 = merge approved PRs automatically (default), 0 = approve and leave the merge to a human
+#   KONDOR_ARCH_MERGE     0 = approve and leave the merge to a human (default), 1 = merge approved PRs automatically
 #   KONDOR_CLAUDE         claude binary (default: claude in PATH, else ~/.local/bin/claude)
 #
 # Permissions: runs with `--permission-mode auto`, so every action still goes through Claude
@@ -35,7 +35,7 @@ main() {
   local interval="${KONDOR_ARCH_INTERVAL:-180}"
   local max_no_progress="${KONDOR_ARCH_MAX_NO_PROGRESS:-2}"
   local model="${KONDOR_ARCH_MODEL:-}"
-  local merge="${KONDOR_ARCH_MERGE:-1}"
+  local merge="${KONDOR_ARCH_MERGE:-0}"
   local claude="${KONDOR_CLAUDE:-$(command -v claude || echo "$HOME/.local/bin/claude")}"
   local log="$state/architect-loop.log"
   mkdir -p "$state"
@@ -72,7 +72,7 @@ main() {
     if [[ "$merge" == 1 ]]; then
       merge_rule="If it passes, approve it (gh pr review --approve), squash-merge it (gh pr merge --squash --delete-branch), then promote the next issue of the roadmap order to to-dev (see step for promotion below)."
     else
-      merge_rule="If it passes, approve it (gh pr review --approve) and stop: a human merges it."
+      merge_rule="If it passes, approve it (gh pr review --approve), comment on issue #$n that it is approved and waiting for the maintainer to merge, and stop: a human merges it (the next issue is promoted after the merge)."
     fi
     common="You are the architect agent of this repository, running unattended. Follow docs/agents/architect.md and AGENTS.md (read them from origin/main) strictly. Never edit src/ or qml/, never push to the developer's branches. For any change to docs/specs, prototypes or other architect-owned files, create your own git worktree from origin/main outside the current directory, commit there (English, Conventional Commits, no attribution trailers) and push to main. The current directory is the loop's read-only control checkout. Record every decision on GitHub (issue/PR comments or reviews). Stop after this one step and print a short report."
     case "$st" in
@@ -167,6 +167,7 @@ Environment=PATH=$HOME/.local/bin:$HOME/.opencode/bin:/usr/local/bin:/usr/bin:/b
 Environment=KONDOR_REPO=$repo
 Environment=KONDOR_ARCH_CONTROL=$control
 Environment=KONDOR_ARCH_STATE=$state
+Environment=KONDOR_ARCH_MERGE=$merge
 ExecStartPre=/usr/bin/git -C $repo fetch -q origin
 ExecStartPre=/usr/bin/git -C $control checkout -q --force --detach origin/main
 ExecStart=/bin/bash $control/scripts/architect-loop.sh

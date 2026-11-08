@@ -100,8 +100,9 @@ screenshot. The developer's implementation must match it visually.
 (`~/.local/share/kondor-architect-loop/control`), regenerates the queue and runs Claude Code
 headless (`claude -p --permission-mode auto`) for exactly one step when:
 
-- an issue is `in-review` → review the PR; approve + squash-merge (or only approve with
-  `KONDOR_ARCH_MERGE=0`), else request changes and switch to `to-dev`;
+- an issue is `in-review` → review the PR; approve it and leave the merge to the maintainer
+  (`KONDOR_ARCH_MERGE=0`, the default — merging without a human is blocked by the safety
+  classifier anyway), else request changes and switch to `to-dev`;
 - an issue has `question` → answer, record the decision in the spec, remove the label;
 - an issue is `to-spec` → write the spec/prototype, switch to `to-dev`;
 - nothing is in flight → promote the next "Roadmap order" issue to `to-dev`.

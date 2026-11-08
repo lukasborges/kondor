@@ -18,7 +18,8 @@ jobs:
         run: |
           dnf -y install cmake ninja-build gcc-c++ make file wget git nodejs gh \
             qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel \
-            kf6-kirigami kf6-qqc2-desktop-style fuse-libs
+            kf6-kirigami kf6-qqc2-desktop-style fuse-libs \
+            plasma-integration plasma-breeze-qt6 qt6-qtsvg
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -52,6 +53,17 @@ jobs:
           cp /usr/lib64/qt6/plugins/platforms/libqwayland.so AppDir/usr/plugins/platforms/ 2>/dev/null || true
           cp -r /usr/lib64/qt6/plugins/wayland-* AppDir/usr/plugins/ 2>/dev/null || true
 
+          # Integração com o Plasma. O qt.conf do AppImage só enxerga os plugins de dentro dele,
+          # então sem estes o app abre com o estilo Fusion e sem ícones:
+          #  - tema de plataforma do KDE (tema de ícones, cores e fontes do usuário)
+          #  - estilo Breeze (o org.kde.desktop desenha os controles via QStyle)
+          #  - plataforma desktop do Kirigami e motor de ícones SVG
+          for p in platformthemes/KDEPlasmaPlatformTheme6.so styles/breeze6.so \
+                   kf6/kirigami/platform/org.kde.desktop.so iconengines/libqsvgicon.so; do
+            mkdir -p "AppDir/usr/plugins/$(dirname "$p")"
+            cp "/usr/lib64/qt6/plugins/$p" "AppDir/usr/plugins/$p"
+          done
+
       - name: Download AppImage tools
         run: |
           wget -q -c "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage" -O linuxdeploy
@@ -65,7 +77,13 @@ jobs:
           NO_STRIP: "1"
         run: |
           export PATH="/usr/lib64/qt6/bin:$PATH"
-          ./linuxdeploy --appdir AppDir --plugin qt --output appimage
+          # --deploy-deps-only: traz as bibliotecas (KF6 etc.) dos plugins copiados à mão
+          ./linuxdeploy --appdir AppDir --plugin qt \
+            --deploy-deps-only AppDir/usr/plugins/platformthemes \
+            --deploy-deps-only AppDir/usr/plugins/styles \
+            --deploy-deps-only AppDir/usr/plugins/kf6 \
+            --deploy-deps-only AppDir/usr/plugins/iconengines \
+            --output appimage
 
       - name: Publish release
         env:

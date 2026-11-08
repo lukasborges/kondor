@@ -1,0 +1,27 @@
+# Build
+build/
+build-*/
+cmake-build-*/
+
+# CMake / Qt
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.user
+.qmlls.ini
+.qt/
+
+# Compiled
+*.o
+*.obj
+*.so
+*.a
+*.dylib
+*.exe
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store

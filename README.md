@@ -1,0 +1,93 @@
+# Kondor
+
+A native **Qt 6** browser (Qt Quick + Qt WebEngine) with the **KDE/Breeze** look and feel.
+
+> Personal/experimental project. **Not an official KDE project.**
+
+![Kondor screenshot](assets/screenshot.png)
+
+## Status
+
+A working prototype with the core functionality in place: it actually browses, with tabs, a private mode and keyboard shortcuts. Everyday features such as bookmarks, history and settings are still missing.
+
+## Features
+
+### Implemented
+
+- **Real tabs** with `Qt WebEngine` (one `WebEngineView` per tab, preserving state when switching)
+- **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches DuckDuckGo)
+- **Navigation**: back, forward, reload/stop, home
+- **Private mode**: off-the-record tabs, isolated from the persistent profile
+- **Basic downloads** (saved to `~/Downloads`)
+- **Menu** and **keyboard shortcuts**
+- **KDE look** via the `org.kde.desktop` (QQC2) style, with a `Fusion` fallback
+- **Semantic colors** (`Kirigami.Theme`/`palette`): follows the system color scheme
+
+## Stack
+
+- **Qt 6.5+** (tested with **6.11.2**): `Core`, `Gui`, `Qml`, `Quick`, `QuickControls2`, `WebEngineQuick`
+- **Qt Quick Controls 2** with the **`org.kde.desktop`** (Breeze) style
+- **Kirigami** for theming (`Kirigami.Theme`)
+- **C++17** + **CMake 3.21+**
+- C++ backend exposed to QML (`QML_ELEMENT` / `QML_SINGLETON`)
+
+## Requirements
+
+- Qt 6.5+ with the modules above (**including Qt WebEngine**)
+- The **`org.kde.desktop`** (QQC2 Desktop Style) and **Kirigami** packages available at runtime
+- A C++17-capable compiler and CMake 3.21+
+
+On **Fedora** (the original development environment):
+
+```bash
+sudo dnf install cmake gcc-c++ \
+    qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel \
+    kf6-qqc2-desktop-style kf6-kirigami
+```
+
+> Package names vary across distributions. What matters is having Qt 6 with
+> WebEngine plus KDE's `qqc2-desktop-style`/Kirigami.
+
+## Build and run
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+./build/kondor
+```
+
+## Project structure
+
+```
+CMakeLists.txt
+src/
+  main.cpp            startup (WebEngine, KDE style, QML engine)
+  profilemanager.*    persistent/private profiles, address/search resolution, downloads
+  tab.*               per-tab state (title, URL, icon, loading, history)
+  tabmodel.*          tab model (QAbstractListModel)
+qml/
+  Main.qml            window, tab bar, navigation bar, menu, shortcuts
+  WebViewTab.qml      WebEngineView + bridge to the Tab object
+```
+
+## Keyboard shortcuts
+
+| Shortcut | Action |
+| --- | --- |
+| `Ctrl+T` | New tab |
+| `Ctrl+Shift+N` | New private tab |
+| `Ctrl+W` | Close tab (quits the app if it is the last one) |
+| `Ctrl+L` | Focus the address bar |
+| `Ctrl+R` / `F5` | Reload |
+| `Alt+←` / `Alt+→` | Back / forward |
+| `Ctrl++` / `Ctrl+-` | Zoom in / out |
+| `Ctrl+0` | Reset zoom |
+
+## Notes
+
+- The `org.kde.desktop` style is applied in `main.cpp`; if it cannot be found, it falls back to `Fusion`.
+- Colors come from the theme, so changing the KDE color scheme will not break the layout.
+
+## License
+
+Licensed under the **GNU General Public License v3.0 or later** (GPL-3.0-or-later). See [LICENSE](LICENSE).

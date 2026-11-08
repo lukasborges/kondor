@@ -158,9 +158,17 @@ EOF
       exec 9>"$state/lock"
       flock -n 9 || { log "another loop is running; exiting"; exit 0; }
       log "loop started (every ${interval}s, model $model, repo $repo, control $control)"
+      local self="${BASH_SOURCE[0]}" self_sum
+      self_sum="$(sha1sum "$self" | cut -d' ' -f1)"
       while true; do
         step 0
         sleep "$interval"
+        # Self-update between runs: ensure_control may have moved this file to a newer main.
+        ensure_control || true
+        if [[ "$(sha1sum "$self" | cut -d' ' -f1)" != "$self_sum" ]]; then
+          log "dev-loop.sh changed on main; restarting with the new version"
+          exec bash "$self"
+        fi
       done ;;
     *) sed -n '2,20p' "${BASH_SOURCE[0]}"; exit 2 ;;
   esac

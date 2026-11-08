@@ -13,7 +13,11 @@ Item {
         anchors.fill: parent
         profile: root.tab.profile
 
-        onTitleChanged: root.tab.setTitle(title)
+        onTitleChanged: {
+            root.tab.setTitle(title)
+            if (!root.tab.isPrivate)
+                HistoryManager.updateTitle(webView.url, title)
+        }
         onUrlChanged: root.tab.setUrl(url)
         onIconChanged: root.tab.setIconUrl(icon)
         onLoadProgressChanged: root.tab.setProgress(loadProgress)
@@ -22,6 +26,11 @@ Item {
             root.tab.setLoading(loadRequest.status === WebEngineLoadingInfo.LoadStartedStatus)
             root.tab.setCanGoBack(webView.canGoBack)
             root.tab.setCanGoForward(webView.canGoForward)
+
+            // Record the visit in history, for persistent tabs only.
+            if (loadRequest.status === WebEngineLoadingInfo.LoadSucceededStatus
+                    && !root.tab.isPrivate)
+                HistoryManager.addVisit(webView.url, webView.title)
         }
 
         onCanGoBackChanged: root.tab.setCanGoBack(canGoBack)

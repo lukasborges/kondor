@@ -1,0 +1,41 @@
+#pragma once
+
+#include <QObject>
+#include <QUrl>
+#include <QtQmlIntegration/qqmlintegration.h>
+
+#include "historymodel.h"
+
+class QQmlEngine;
+class QJSEngine;
+
+// QML singleton `HistoryManager`: writes, queries and clears the browsing
+// history of the persistent profile (the privacy barrier lives in QML, which
+// never calls this for private tabs).
+class HistoryManager : public QObject
+{
+    Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
+
+    Q_PROPERTY(HistoryModel *model READ model CONSTANT)
+
+public:
+    static HistoryManager *instance();
+    static HistoryManager *create(QQmlEngine *engine, QJSEngine *jsEngine);
+
+    Q_INVOKABLE void addVisit(const QUrl &url, const QString &title);
+    Q_INVOKABLE void updateTitle(const QUrl &url, const QString &title);
+    Q_INVOKABLE void removeEntry(qint64 id);
+    Q_INVOKABLE void clearAll();
+    Q_INVOKABLE void clearSince(qint64 msecsSinceEpoch);
+
+    HistoryModel *model() const;
+
+private:
+    explicit HistoryManager(QObject *parent = nullptr);
+
+    static bool isTracked(const QUrl &url);
+
+    HistoryModel *m_model = nullptr;
+};

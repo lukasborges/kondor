@@ -16,6 +16,7 @@
 #   KONDOR_INTERVAL      seconds between checks (default: 180)
 #   KONDOR_MAX_NO_PROGRESS  developer runs on the same issue without leaving `to-dev` before pausing (default: 2)
 #   KONDOR_OPENCODE      opencode binary (default: opencode in PATH, else ~/.opencode/bin/opencode)
+#   KONDOR_MODEL         model for the developer (default: deepseek/deepseek-v4-pro; see `opencode models`)
 #
 # Everything is wrapped in main() so bash parses the whole file before running it: the service
 # runs this script from the control worktree, which is updated to origin/main while it runs.
@@ -31,6 +32,7 @@ main() {
   local interval="${KONDOR_INTERVAL:-180}"
   local max_no_progress="${KONDOR_MAX_NO_PROGRESS:-2}"
   local opencode="${KONDOR_OPENCODE:-$(command -v opencode || echo "$HOME/.opencode/bin/opencode")}"
+  local model="${KONDOR_MODEL:-deepseek/deepseek-v4-pro}"
   local log="$state/dev-loop.log"
   mkdir -p "$state"
 
@@ -96,8 +98,8 @@ EOF
     fi
 
     local run_log="$state/run-$n-$(date +%Y%m%d-%H%M%S).log"
-    log "running developer on #$n (log: $run_log)"
-    (cd "$control" && "$opencode" run --standalone --auto --title "Kondor developer #$n" "$(prompt_for "$n")") \
+    log "running developer on #$n with $model (log: $run_log)"
+    (cd "$control" && "$opencode" run --standalone --auto --model "$model" --title "Kondor developer #$n" "$(prompt_for "$n")") \
       >"$run_log" 2>&1
     local rc=$?
     ensure_control || return 0
@@ -133,6 +135,7 @@ Environment=PATH=$HOME/.opencode/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/b
 Environment=KONDOR_REPO=$repo
 Environment=KONDOR_CONTROL_DIR=$control
 Environment=KONDOR_STATE_DIR=$state
+Environment=KONDOR_MODEL=$model
 ExecStart=/bin/bash $control/scripts/dev-loop.sh
 Restart=on-failure
 RestartSec=60
@@ -154,7 +157,7 @@ EOF
     "")
       exec 9>"$state/lock"
       flock -n 9 || { log "another loop is running; exiting"; exit 0; }
-      log "loop started (every ${interval}s, repo $repo, control $control)"
+      log "loop started (every ${interval}s, model $model, repo $repo, control $control)"
       while true; do
         step 0
         sleep "$interval"

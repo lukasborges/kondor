@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="packaging/kondor.png" width="128" alt="Kondor logo">
+</p>
+
 # Kondor
 
 A native **Qt 6** browser (Qt Quick + Qt WebEngine) with the **KDE/Breeze** look and feel.

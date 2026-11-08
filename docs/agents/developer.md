@@ -63,3 +63,24 @@ records the decision in the spec.
 - Leave TODO stubs for things the spec asks for, or copy Portuguese strings/comments from old code
   (English everywhere; translations go through `.ts` files).
 - Write anything from a private tab to disk.
+
+## Automatic mode
+
+`scripts/dev-loop.sh` runs this role without a human in the loop. Every 3 minutes it refreshes a
+loop-owned worktree at `origin/main` (`~/.local/share/kondor-dev-loop/control`), regenerates the
+queue and, when there is a `developer` row, runs `opencode run --standalone --auto` from that
+worktree with a prompt for that one issue. If a run ends with the issue still in `to-dev` twice in
+a row, the loop pauses that issue and sends a desktop notification.
+
+```bash
+scripts/dev-loop.sh --dry-run      # show what would run now
+scripts/dev-loop.sh --install      # install + start the systemd user service
+journalctl --user -u kondor-dev-loop -f            # follow it
+tail -f ~/.local/state/kondor-dev-loop/dev-loop.log   # loop log; run-<N>-*.log per opencode run
+scripts/dev-loop.sh --resume <N>   # unpause an issue
+systemctl --user stop kondor-dev-loop              # stop (start again with start)
+scripts/dev-loop.sh --uninstall    # remove the service
+```
+
+`--auto` approves every permission that is not explicitly denied (including `git push` and `gh`
+commands); keep the "You never" rules above in mind when reviewing what it did.

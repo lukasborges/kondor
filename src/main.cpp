@@ -1,4 +1,5 @@
 #include <QGuiApplication>
+#include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
@@ -26,6 +27,10 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
     QCoreApplication::setApplicationName(QStringLiteral("Kondor"));
+
+    // Identidade do app: nome do .desktop (usado pelo Wayland/KWin) e ícone da janela.
+    QGuiApplication::setDesktopFileName(QStringLiteral("kondor"));
+    QGuiApplication::setWindowIcon(QIcon(QStringLiteral(":/packaging/kondor.png")));
 
     // Visual do KDE (Breeze) aplicado via estilo desktop do Qt Quick Controls 2.
     QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));

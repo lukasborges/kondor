@@ -19,6 +19,11 @@ void Tab::setTitle(const QString &title)
 
 void Tab::setUrl(const QUrl &url)
 {
+    // about:blank is what showNewTabPage() loads, so the native page stays on
+    // screen; any other non-empty URL means the tab shows a real page again.
+    if (!url.isEmpty() && url != QUrl(QStringLiteral("about:blank")))
+        setNewTabPage(false);
+
     if (m_url == url)
         return;
     m_url = url;
@@ -82,9 +87,31 @@ void Tab::setPinned(bool pinned)
     emit pinnedChanged();
 }
 
+void Tab::setNewTabPage(bool newTabPage)
+{
+    if (m_newTabPage == newTabPage)
+        return;
+    m_newTabPage = newTabPage;
+    emit newTabPageChanged();
+}
+
 void Tab::navigateTo(const QUrl &url)
 {
+    // An empty URL means the New Tab page, which no caller navigates to.
+    if (url.isEmpty())
+        return;
+    setNewTabPage(false);
     emit navigationRequested(url);
+}
+
+void Tab::showNewTabPage()
+{
+    // Already there: loading about:blank again would add a useless entry to the
+    // page history and make Back stay on the same blank page.
+    if (m_newTabPage)
+        return;
+    setNewTabPage(true);
+    emit newTabPageRequested();
 }
 
 void Tab::goBack()

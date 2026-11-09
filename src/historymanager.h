@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QUrl>
+#include <QVariantList>
 #include <QtQmlIntegration/qqmlintegration.h>
 
 #include "historymodel.h"
@@ -29,6 +30,10 @@ public:
     Q_INVOKABLE void removeEntry(qint64 id);
     Q_INVOKABLE void clearAll();
     Q_INVOKABLE void clearSince(qint64 msecsSinceEpoch);
+    // Up to `limit` hosts visited in the last 90 days, most visited first:
+    // each entry is {url, title, host}, one tile per host. Never called for
+    // private tabs (the privacy barrier lives in QML).
+    Q_INVOKABLE QVariantList topSites(int limit) const;
 
     HistoryModel *model() const;
 

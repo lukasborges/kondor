@@ -14,8 +14,13 @@ ApplicationWindow {
     visible: true
     title: {
         const t = tabs.currentTab
-        return (t && t.title.length) ? t.title + " — " + Qt.application.displayName
-                                     : Qt.application.displayName
+        if (!t)
+            return Qt.application.displayName
+        if (t.newTabPage)
+            return (t.isPrivate ? qsTr("New Private Tab") : qsTr("New Tab"))
+                   + " — " + Qt.application.displayName
+        return (t.title.length) ? t.title + " — " + Qt.application.displayName
+                                : Qt.application.displayName
     }
 
     TabModel {
@@ -75,6 +80,35 @@ ApplicationWindow {
         tabs.setCurrentIndex((tabs.currentIndex + delta + tabs.count) % tabs.count)
     }
 
+    // Every "new tab" entry point goes through here: open the tab and focus the
+    // address bar. Deferred like the Ctrl+F fix, so the page cannot take the
+    // focus back while the shortcut key event is still being handled.
+    function openNewTab(isPrivate) {
+        tabs.addTab(isPrivate)
+        // syncFromTab() leaves the field alone while it has focus, so clear it
+        // here: a New Tab page has no address to show.
+        addressBar.text = ""
+        Qt.callLater(function() {
+            addressBar.forceActiveFocus()
+            addressBar.selectAll()
+        })
+    }
+
+    // True when the scene point is on the empty part of the tab bar, not on a
+    // tab or on the new-tab button.
+    function emptyTabBarAt(sceneX, sceneY) {
+        const buttonPoint = newTabButton.mapFromItem(null, sceneX, sceneY)
+        if (buttonPoint.x >= 0 && buttonPoint.x <= newTabButton.width
+                && buttonPoint.y >= 0 && buttonPoint.y <= newTabButton.height)
+            return false
+        if (tabBar.contentItem) {
+            const point = tabBar.contentItem.mapFromItem(null, sceneX, sceneY)
+            if (point.x <= tabBar.contentItem.contentWidth)
+                return false
+        }
+        return true
+    }
+
     function moveCurrentTab(delta) {
         const from = tabs.currentIndex
         const tab = tabs.currentTab
@@ -102,6 +136,7 @@ ApplicationWindow {
         id: tabContextMenu
         tabModel: tabs
         targetWindow: window
+        onNewTabRequested: window.openNewTab(false)
     }
 
     // FileDialog hands a file:// URL to QML; downloads need a local path.
@@ -151,7 +186,7 @@ ApplicationWindow {
     // time) and open the edit popup.
     function openBookmarkEditor() {
         const tab = tabs.currentTab
-        if (!tab || tab.url.toString().length === 0)
+        if (!tab || tab.newTabPage || tab.url.toString().length === 0)
             return
 
         let id = BookmarkManager.bookmarkIdFor(tab.url)
@@ -217,8 +252,11 @@ ApplicationWindow {
             tabs.addTab(StartupArgs.startupPrivate, StartupArgs.startupUrls[i])
         // "kondor --private" (desktop action "New Private Window") still needs
         // its private tab when there is no URL and a session was restored.
+        // The fallback tab loads the home page; a blank home page means the New
+        // Tab page, which is also what a private tab shows.
         if (tabs.count === 0 || (StartupArgs.startupPrivate && StartupArgs.startupUrls.length === 0))
-            tabs.addTab(StartupArgs.startupPrivate)
+            tabs.addTab(StartupArgs.startupPrivate,
+                        StartupArgs.startupPrivate ? "" : Settings.homePage)
     }
 
     header: ColumnLayout {
@@ -308,7 +346,7 @@ ApplicationWindow {
                     ToolTip.visible: hovered
                     ToolTip.text: qsTr("New Tab")
                     ToolTip.delay: 600
-                    onClicked: tabs.addTab(false)
+                    onClicked: window.openNewTab(false)
                 }
 
                 Item { Layout.fillWidth: true }
@@ -326,26 +364,23 @@ ApplicationWindow {
                 color: Kirigami.Theme.highlightColor
             }
 
-            // Double-click on the empty part of the tab bar opens a new tab.
+            // Double-click (or middle click) on the empty part of the tab bar
+            // opens a new tab.
             TapHandler {
                 acceptedButtons: Qt.LeftButton
-                function contains(item, sceneX, sceneY) {
-                    const point = item.mapFromItem(null, sceneX, sceneY)
-                    return point.x >= 0 && point.x <= item.width
-                        && point.y >= 0 && point.y <= item.height
-                }
                 onDoubleTapped: function(eventPoint) {
-                    if (contains(newTabButton, eventPoint.scenePosition.x, eventPoint.scenePosition.y))
-                        return
-                    if (tabBar.contentItem) {
-                        const point = tabBar.contentItem.mapFromItem(null,
-                                                                     eventPoint.scenePosition.x,
-                                                                     eventPoint.scenePosition.y)
-                        // Only the empty area after the last tab counts.
-                        if (point.x <= tabBar.contentItem.contentWidth)
-                            return
-                    }
-                    tabs.addTab(false)
+                    if (window.emptyTabBarAt(eventPoint.scenePosition.x,
+                                             eventPoint.scenePosition.y))
+                        window.openNewTab(false)
+                }
+            }
+
+            TapHandler {
+                acceptedButtons: Qt.MiddleButton
+                onTapped: function(eventPoint) {
+                    if (window.emptyTabBarAt(eventPoint.scenePosition.x,
+                                             eventPoint.scenePosition.y))
+                        window.openNewTab(false)
                 }
             }
         }
@@ -392,6 +427,7 @@ ApplicationWindow {
                 ToolButton {
                     display: AbstractButton.IconOnly
                     icon.name: (tabs.currentTab && tabs.currentTab.loading) ? "process-stop" : "view-refresh"
+                    enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
                     ToolTip.visible: hovered
                     ToolTip.text: (tabs.currentTab && tabs.currentTab.loading) ? qsTr("Stop") : qsTr("Reload")
                     ToolTip.delay: 600
@@ -412,7 +448,11 @@ ApplicationWindow {
                     ToolTip.text: qsTr("Home")
                     ToolTip.delay: 600
                     onClicked: {
-                        if (tabs.currentTab)
+                        if (!tabs.currentTab)
+                            return
+                        if (Settings.homePage.trim().length === 0)
+                            tabs.currentTab.showNewTabPage()
+                        else
                             tabs.currentTab.navigateTo(ProfileManager.resolveAddress(""))
                     }
                 }
@@ -430,7 +470,8 @@ ApplicationWindow {
                         if (activeFocus)
                             return
                         const t = tabs.currentTab
-                        text = t ? t.url.toString() : ""
+                        // The New Tab page has no address of its own.
+                        text = (t && !t.newTabPage) ? t.url.toString() : ""
                     }
 
                     onAccepted: {
@@ -457,6 +498,7 @@ ApplicationWindow {
                         ToolButton {
                             id: bookmarkButton
                             visible: tabs.currentTab && tabs.currentTab.url.toString().length > 0
+                            enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
                             display: AbstractButton.IconOnly
                             icon.name: window.pageBookmarked ? "bookmarks" : "bookmark-new"
                             icon.width: 16
@@ -522,12 +564,12 @@ ApplicationWindow {
                         MenuItem {
                             text: qsTr("New Tab")
                             icon.name: "tab-new"
-                            onTriggered: tabs.addTab(false)
+                            onTriggered: window.openNewTab(false)
                         }
                         MenuItem {
                             text: qsTr("New Private Tab")
                             icon.name: "view-private"
-                            onTriggered: tabs.addTab(true)
+                            onTriggered: window.openNewTab(true)
                         }
                         MenuItem {
                             text: qsTr("Reopen Closed Tab")
@@ -545,12 +587,14 @@ ApplicationWindow {
                         MenuItem {
                             text: qsTr("Find in Page…")
                             icon.name: "edit-find"
+                            enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
                             onTriggered: findBar.open()
                         }
                         MenuSeparator {}
                         MenuItem {
                             text: qsTr("Zoom In")
                             icon.name: "zoom-in"
+                            enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
                             onTriggered: {
                                 if (tabs.currentTab)
                                     tabs.currentTab.zoomIn()
@@ -559,6 +603,7 @@ ApplicationWindow {
                         MenuItem {
                             text: qsTr("Zoom Out")
                             icon.name: "zoom-out"
+                            enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
                             onTriggered: {
                                 if (tabs.currentTab)
                                     tabs.currentTab.zoomOut()
@@ -567,6 +612,7 @@ ApplicationWindow {
                         MenuItem {
                             text: qsTr("Actual Size")
                             icon.name: "zoom-original"
+                            enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
                             onTriggered: {
                                 if (tabs.currentTab)
                                     tabs.currentTab.resetZoom()
@@ -785,11 +831,11 @@ ApplicationWindow {
     // ── Shortcuts ───────────────────────────────────────────────────────
     Shortcut {
         sequence: "Ctrl+T"
-        onActivated: tabs.addTab(false)
+        onActivated: window.openNewTab(false)
     }
     Shortcut {
         sequence: "Ctrl+Shift+N"
-        onActivated: tabs.addTab(true)
+        onActivated: window.openNewTab(true)
     }
     Shortcut {
         sequence: "Ctrl+W"
@@ -881,7 +927,7 @@ ApplicationWindow {
     Shortcut {
         sequences: ["F5", "Ctrl+R"]
         onActivated: {
-            if (tabs.currentTab)
+            if (tabs.currentTab && !tabs.currentTab.newTabPage)
                 tabs.currentTab.reload()
         }
     }
@@ -902,26 +948,27 @@ ApplicationWindow {
     Shortcut {
         sequences: ["Ctrl++", "Ctrl+="]
         onActivated: {
-            if (tabs.currentTab)
+            if (tabs.currentTab && !tabs.currentTab.newTabPage)
                 tabs.currentTab.zoomIn()
         }
     }
     Shortcut {
         sequences: ["Ctrl+-"]
         onActivated: {
-            if (tabs.currentTab)
+            if (tabs.currentTab && !tabs.currentTab.newTabPage)
                 tabs.currentTab.zoomOut()
         }
     }
     Shortcut {
         sequence: "Ctrl+0"
         onActivated: {
-            if (tabs.currentTab)
+            if (tabs.currentTab && !tabs.currentTab.newTabPage)
                 tabs.currentTab.resetZoom()
         }
     }
     Shortcut {
         sequences: [StandardKey.Find]
+        enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
         onActivated: findBar.open()
     }
     Shortcut {
@@ -953,6 +1000,9 @@ ApplicationWindow {
     Connections {
         target: tabs.currentTab
         function onUrlChanged() {
+            addressBar.syncFromTab()
+        }
+        function onNewTabPageChanged() {
             addressBar.syncFromTab()
         }
     }

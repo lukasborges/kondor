@@ -1,4 +1,5 @@
 #include <QGuiApplication>
+#include <QSignalSpy>
 #include <QStandardPaths>
 #include <QTest>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
@@ -21,6 +22,12 @@ private slots:
     void privateTabUsesAnotherProfile();
     void reopenClosedTabRestoresPosition();
     void privateTabsAreNotReopened();
+    void tabsStartOnNewTabPage();
+    void emptyNavigationDoesNothing();
+    void navigateLeavesNewTabPage();
+    void showNewTabPageRestoresIt();
+    void aboutBlankKeepsNewTabPage();
+    void closedNewTabPageIsNotRemembered();
 };
 
 void TestTabModel::startsEmpty()
@@ -165,6 +172,63 @@ void TestTabModel::privateTabsAreNotReopened()
 
     model.reopenClosedTab();
     QCOMPARE(model.count(), 1);
+}
+
+void TestTabModel::tabsStartOnNewTabPage()
+{
+    TabModel model;
+    Tab *tab = model.addTab();
+    QVERIFY(tab->newTabPage());
+    QVERIFY(tab->url().isEmpty());
+}
+
+void TestTabModel::emptyNavigationDoesNothing()
+{
+    TabModel model;
+    Tab *tab = model.addTab();
+    QSignalSpy navigationSpy(tab, &Tab::navigationRequested);
+
+    tab->navigateTo(QUrl());
+    QCOMPARE(navigationSpy.count(), 0);
+    QVERIFY(tab->newTabPage());
+}
+
+void TestTabModel::navigateLeavesNewTabPage()
+{
+    TabModel model;
+    Tab *tab = model.addTab();
+    tab->navigateTo(QUrl(QStringLiteral("https://a.example")));
+    QVERIFY(!tab->newTabPage());
+}
+
+void TestTabModel::showNewTabPageRestoresIt()
+{
+    TabModel model;
+    Tab *tab = model.addTab(false, QUrl(QStringLiteral("https://a.example")));
+    QVERIFY(!tab->newTabPage());
+
+    QSignalSpy pageSpy(tab, &Tab::newTabPageRequested);
+    tab->showNewTabPage();
+    QVERIFY(tab->newTabPage());
+    QCOMPARE(pageSpy.count(), 1);
+}
+
+void TestTabModel::aboutBlankKeepsNewTabPage()
+{
+    TabModel model;
+    Tab *tab = model.addTab();
+    // showNewTabPage() loads about:blank; the native page stays on screen.
+    tab->setUrl(QUrl(QStringLiteral("about:blank")));
+    QVERIFY(tab->newTabPage());
+}
+
+void TestTabModel::closedNewTabPageIsNotRemembered()
+{
+    TabModel model;
+    model.addTab(false, QUrl(QStringLiteral("https://a.example")));
+    model.addTab();
+    model.closeTab(1);
+    QVERIFY(!model.canReopenClosedTab());
 }
 
 int main(int argc, char *argv[])

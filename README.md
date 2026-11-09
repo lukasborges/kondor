@@ -21,11 +21,12 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Real tabs** with `Qt WebEngine` (one `WebEngineView` per tab, preserving state when switching)
 - **Tab management**: favicons and a loading indicator, drag to reorder, middle-click to close, pinned tabs, a tab context menu (reload, duplicate, pin, close others and tabs to the right), keyboard switching and overflow handling (tabs shrink, then the bar scrolls)
 - **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches with the configured engine); local hosts use `http://`, public hosts `https://`
+- **New Tab page**: new tabs show Kondor's own page with a search field and the eight sites visited most in the last 90 days (favicons, open in a new tab or private tab, remove a site); private tabs get a private variant without top sites. The home page is only used by the first tab at startup and by the Home button, and a blank home page (the default) means the New Tab page
 - **Navigation**: back, forward, reload/stop, home
 - **Private mode**: off-the-record tabs, isolated from the persistent profile
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
 - **Bookmarks**: star button in the address bar (Ctrl+D) with a name/folder editor, a bookmarks toolbar (Ctrl+Shift+B), a Bookmarks menu, and a manager window (Ctrl+Shift+O) with folders, rename, delete, reordering and import of Firefox/Chrome HTML exports
-- **Settings** (Ctrl+,): home page, search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit), applied immediately and stored in `~/.config/KDE/Kondor.conf`
+- **Settings** (Ctrl+,): home page (blank means the New Tab page), New Tab page options (top sites), search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit), applied immediately and stored in `~/.config/KDE/Kondor.conf`
 - **Session restore**: optionally reopen the tabs from the previous session on startup (settings → On Startup); private tabs are never saved. Ctrl+Shift+T reopens the last closed normal tabs, up to 20
 - **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
 - **Download manager**: downloads show live progress, speed and size in a toolbar popup; pause, resume, cancel, open the file or show it in its folder, desktop notification on completion/failure, optional "ask where to save", and a confirmation before quitting with active downloads
@@ -115,13 +116,14 @@ src/
 qml/
   Main.qml            window, tab bar, navigation bar, menu, shortcuts
   WebViewTab.qml      WebEngineView + bridge to the Tab object
+  NewTabPage.qml      New Tab page (logo, search field, top sites)
   TabButtonDelegate.qml  one tab button (favicon, title, close, drag, pinned)
   TabContextMenu.qml  context menu for a tab in the tab bar
   InlineBar.qml       shared strip between the header and the page content
   FindBar.qml         find bar (Ctrl+F)
   DownloadsPopup.qml  download list popup with progress and actions
   HistoryWindow.qml   browsing history window (search, grouped by day, clear)
-  SettingsWindow.qml  settings window (home page, search, downloads, privacy)
+  SettingsWindow.qml  settings window (home page, new tabs, search, downloads, privacy)
   BookmarksBar.qml    bookmarks toolbar under the navigation bar
   BookmarkMenu.qml    folder menu (bar folders and the main menu submenu)
   BookmarksWindow.qml bookmark manager window (folders, reorder, import)

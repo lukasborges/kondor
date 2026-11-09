@@ -22,7 +22,9 @@ TabButton {
     readonly property int pinnedTabWidth: 36
     readonly property int minimumTabWidth: 90
     readonly property int maximumTabWidth: 220
-    readonly property string fullTitle: tab.title.length ? tab.title : qsTr("New Tab")
+    readonly property string fullTitle: tab.newTabPage
+        ? (tab.isPrivate ? qsTr("New Private Tab") : qsTr("New Tab"))
+        : (tab.title.length ? tab.title : qsTr("New Tab"))
 
     // Unpinned tabs share the room left by the pinned ones. They shrink down
     // to the minimum and the tab bar starts scrolling after that.
@@ -63,7 +65,9 @@ TabButton {
                 visible: !control.tab.loading
                 source: control.tab.isPrivate
                     ? "view-private"
-                    : (control.tab.iconUrl.toString().length ? control.tab.iconUrl.toString() : "text-html")
+                    : control.tab.newTabPage
+                        ? "tab-new"
+                        : (control.tab.iconUrl.toString().length ? control.tab.iconUrl.toString() : "text-html")
             }
 
             BusyIndicator {

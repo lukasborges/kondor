@@ -11,6 +11,8 @@ constexpr auto kDownloadDirectory = "Downloads/Directory";
 constexpr auto kAskWhereToSave = "Downloads/AskWhereToSave";
 constexpr auto kStartupBehavior = "General/Startup";
 constexpr auto kShowBookmarksBar = "UI/ShowBookmarksBar";
+constexpr auto kShowTopSites = "NewTab/ShowTopSites";
+constexpr auto kHiddenTopSites = "NewTab/HiddenTopSites";
 constexpr auto kClearDataOnExit = "Privacy/ClearOnExit";
 constexpr auto kBlockThirdPartyCookies = "Privacy/BlockThirdPartyCookies";
 }
@@ -31,8 +33,7 @@ Settings *Settings::create(QQmlEngine *engine, QJSEngine *jsEngine)
 Settings::Settings(QObject *parent)
     : QObject(parent)
     , m_settings(QStringLiteral("KDE"), QStringLiteral("Kondor"))
-    , m_homePage(m_settings.value(QLatin1String(kHomePage),
-                                  QStringLiteral("https://duckduckgo.com")).toString())
+    , m_homePage(m_settings.value(QLatin1String(kHomePage)).toString())
     , m_searchEngine(m_settings.value(QLatin1String(kSearchEngine),
                                       QStringLiteral("duckduckgo")).toString())
     , m_customSearchUrl(m_settings.value(QLatin1String(kCustomSearchUrl)).toString())
@@ -43,6 +44,8 @@ Settings::Settings(QObject *parent)
     , m_startupBehavior(m_settings.value(QLatin1String(kStartupBehavior),
                                          QStringLiteral("homepage")).toString())
     , m_showBookmarksBar(m_settings.value(QLatin1String(kShowBookmarksBar), false).toBool())
+    , m_showTopSites(m_settings.value(QLatin1String(kShowTopSites), true).toBool())
+    , m_hiddenTopSites(m_settings.value(QLatin1String(kHiddenTopSites)).toStringList())
     , m_clearDataOnExit(m_settings.value(QLatin1String(kClearDataOnExit), false).toBool())
     , m_blockThirdPartyCookies(m_settings.value(QLatin1String(kBlockThirdPartyCookies),
                                                 false).toBool())
@@ -151,6 +154,26 @@ void Settings::setShowBookmarksBar(bool showBookmarksBar)
     m_settings.setValue(QLatin1String(kShowBookmarksBar), m_showBookmarksBar);
     m_settings.sync();
     emit showBookmarksBarChanged();
+}
+
+void Settings::setShowTopSites(bool showTopSites)
+{
+    if (m_showTopSites == showTopSites)
+        return;
+    m_showTopSites = showTopSites;
+    m_settings.setValue(QLatin1String(kShowTopSites), m_showTopSites);
+    m_settings.sync();
+    emit showTopSitesChanged();
+}
+
+void Settings::setHiddenTopSites(const QStringList &hiddenTopSites)
+{
+    if (m_hiddenTopSites == hiddenTopSites)
+        return;
+    m_hiddenTopSites = hiddenTopSites;
+    m_settings.setValue(QLatin1String(kHiddenTopSites), m_hiddenTopSites);
+    m_settings.sync();
+    emit hiddenTopSitesChanged();
 }
 
 void Settings::setClearDataOnExit(bool clearDataOnExit)

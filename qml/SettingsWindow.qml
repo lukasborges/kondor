@@ -104,13 +104,22 @@ ApplicationWindow {
 
                         RowLayout {
                             Kirigami.FormData.label: qsTr("Address:")
+                            Layout.fillWidth: true
 
                             TextField {
                                 id: homeField
                                 Layout.preferredWidth: Kirigami.Units.gridUnit * 20
+                                Layout.minimumWidth: Kirigami.Units.gridUnit * 8
+                                Layout.fillWidth: true
                                 text: Settings.homePage
-                                placeholderText: "https://duckduckgo.com"
+                                placeholderText: qsTr("New Tab page")
                                 onEditingFinished: {
+                                    // A blank field means the New Tab page.
+                                    if (text.trim().length === 0) {
+                                        Settings.homePage = ""
+                                        text = ""
+                                        return
+                                    }
                                     // Normalize "example.com" into "https://example.com".
                                     Settings.homePage = ProfileManager.resolveAddress(text).toString()
                                     text = Settings.homePage
@@ -131,6 +140,35 @@ ApplicationWindow {
                                     homeField.text = Settings.homePage
                                 }
                             }
+
+                            Button {
+                                text: qsTr("Use New Tab Page")
+                                icon.name: "tab-new"
+                                enabled: Settings.homePage.length > 0
+                                onClicked: {
+                                    Settings.homePage = ""
+                                    homeField.text = ""
+                                }
+                            }
+                        }
+
+                        Kirigami.Separator {
+                            Kirigami.FormData.isSection: true
+                            Kirigami.FormData.label: qsTr("New Tabs")
+                        }
+
+                        CheckBox {
+                            Kirigami.FormData.label: qsTr("New Tab page:")
+                            text: qsTr("Show top sites")
+                            checked: Settings.showTopSites
+                            onToggled: Settings.showTopSites = checked
+                        }
+
+                        Button {
+                            text: qsTr("Restore Removed Sites")
+                            icon.name: "edit-undo"
+                            enabled: Settings.hiddenTopSites.length > 0
+                            onClicked: Settings.hiddenTopSites = []
                         }
                     }
 

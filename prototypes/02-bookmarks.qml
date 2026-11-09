@@ -9,7 +9,7 @@ BrowserFrame {
     id: frame
     addressRight: [
         ToolButton {
-            icon.name: "rating"             // bookmarked (not bookmarked: "rating-unrated")
+            icon.name: "bookmarks-bookmarked" // bookmarked, filled (not bookmarked: "bookmarks", outline)
             icon.width: 16; icon.height: 16
             display: AbstractButton.IconOnly
             flat: true
@@ -27,8 +27,8 @@ BrowserFrame {
                 spacing: 2
                 Repeater {
                     model: [
-                        { t: "KDE", i: "kde" }, { t: "Planet KDE", i: "internet-web-browser" },
-                        { t: "Qt Docs", i: "internet-web-browser" }, { t: "News", i: "folder" },
+                        { t: "KDE", i: "kde" }, { t: "Planet KDE", i: "globe" },
+                        { t: "Qt Docs", i: "globe" }, { t: "News", i: "folder" },
                         { t: "Development", i: "folder" }
                     ]
                     ToolButton {

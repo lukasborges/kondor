@@ -57,7 +57,25 @@ qt_add_qml_module(kondor
 )
 
 qt_add_translations(kondor
-    TS_FILES i18n/kondor_pt_BR.ts
+    TS_FILES
+        i18n/kondor_ca.ts
+        i18n/kondor_cs.ts
+        i18n/kondor_de.ts
+        i18n/kondor_es.ts
+        i18n/kondor_fr.ts
+        i18n/kondor_it.ts
+        i18n/kondor_ja.ts
+        i18n/kondor_ko.ts
+        i18n/kondor_nl.ts
+        i18n/kondor_pl.ts
+        i18n/kondor_pt_BR.ts
+        i18n/kondor_pt_PT.ts
+        i18n/kondor_ru.ts
+        i18n/kondor_sv.ts
+        i18n/kondor_tr.ts
+        i18n/kondor_uk.ts
+        i18n/kondor_zh_CN.ts
+        i18n/kondor_zh_TW.ts
     RESOURCE_PREFIX /i18n
     LUPDATE_OPTIONS -no-obsolete)
 

@@ -30,7 +30,7 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Menu** and **keyboard shortcuts**
 - **KDE look** via the `org.kde.desktop` (QQC2) style, with a `Fusion` fallback
 - **Semantic colors** (`Kirigami.Theme`/`palette`): follows the system color scheme
-- **Translations**: English source strings with a Brazilian Portuguese translation, selected by the system locale
+- **Translations**: English source strings with translations for the main KDE languages, selected by the system locale
 
 ## Stack
 
@@ -118,15 +118,22 @@ qml/
 ## Translations
 
 English is the source language; every user-visible string is wrapped in `qsTr()`.
-Brazilian Portuguese ships in `i18n/kondor_pt_BR.ts`, and the compiled `.qm` files are
-embedded in the binary under `:/i18n`. Kondor Browser loads the translation that matches the
-system locale at startup (and Qt's own translations for dialogs and context menus).
+Kondor Browser ships translations for Catalan, Czech, Dutch, French, German, Italian,
+Japanese, Korean, Polish, Portuguese (Brazil and Portugal), Russian, Spanish, Swedish,
+Turkish, Ukrainian, and Chinese (Simplified and Traditional), in `i18n/kondor_<lang>.ts`.
+The compiled `.qm` files are embedded in the binary under `:/i18n`. Kondor Browser loads
+the translation that matches the system locale at startup (and Qt's own translations for
+dialogs and context menus).
 
 - **Update the `.ts` files** after changing strings: `cmake --build build --target update_translations`.
   This runs `lupdate` with `-no-obsolete` and writes the result to `i18n/`.
 - **Add a language**: create `i18n/kondor_<lang>.ts` (the `update_translations` target creates it
   if it is listed in `TS_FILES`), add it to `TS_FILES` in `CMakeLists.txt`, and translate the
   messages with Qt Linguist (`linguist-qt6 i18n/kondor_<lang>.ts`).
+- **Keep them complete**: a PR that adds or changes a user-visible string updates every
+  `i18n/*.ts` file. The "Check translations" CI step runs `update_translations`, fails when the
+  result differs from the committed files, and reports any `unfinished`, empty, or
+  placeholder-mismatched message.
 
 ## Notes
 

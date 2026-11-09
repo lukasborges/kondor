@@ -110,9 +110,12 @@ mention the difference in the PR.
   `ToolTip.delay: 600` like the existing buttons; follow KDE HIG wording (Title Case for menu items).
 - **Language: English everywhere.** UI source strings, code comments, docs, commit messages, PR
   descriptions and test names are written in English. Every user-visible string goes in `qsTr()`;
-  translations (pt_BR first) are added through `.ts` files (issue #19), never by writing another
-  language in the source. Some existing code still has Portuguese strings/comments: do not copy that
-  style — #19 converts them; when you touch such a line anyway, convert it to English.
+  translations live only in the `i18n/kondor_<lang>.ts` files (issues #19 and #34), never as another
+  language in the source.
+- **Translations stay complete**: a PR that adds or changes a user-visible string runs
+  `cmake --build build --target update_translations` and translates the new messages in **every**
+  `i18n/*.ts` file, with no `unfinished` messages and every plural form filled. Use KDE's usual
+  terminology for each language. CI fails otherwise (from #34 on).
 - **Shortcuts**: `Shortcut { sequence(s): …; onActivated: … }` in `Main.qml`; use standard
   `StandardKey` where one exists (e.g. `StandardKey.Find`). Update the shortcut table in `README.md`.
 - **Dependencies**: prefer Qt modules already used. A new Qt module or KDE library must also be added
@@ -174,9 +177,10 @@ first: shared blocks, then privacy fixes, then features):
 1. #1 Browsing history (creates **Database**) · 2. #3 Settings page (creates **Settings**) ·
 3. #5 Find in page (creates **InlineBar**) · 4. #4 Download manager (creates **Notifier**) ·
 5. #12 Tab management (fixes the private-tab link bug) · 6. #19 Translations (English source +
-pt_BR) · 7. #26 Automated tests · 8. #10 Default browser · 9. #6 Session restore ·
-10. #2 Bookmarks · 11. #7 Site permissions · 12. #9 Security indicator · 13. #8 Fullscreen ·
-14. #18 Crashed page · 15. #13 Page context menu · 16. #11 Address bar suggestions ·
-17. #14 Multiple windows · 18. #15 Single instance · 19. #16 Developer tools ·
-20. #17 Print and save as PDF · 21. #24 Per-site zoom · 22. #23 Spell checking ·
-23. #22 Reader mode · 24. #20 Ad and tracker blocking · 25. #21 Passwords · 26. #25 Flatpak
+pt_BR) · 7. #34 Translations for the main KDE languages · 8. #26 Automated tests ·
+9. #10 Default browser · 10. #6 Session restore · 11. #2 Bookmarks · 12. #7 Site permissions ·
+13. #9 Security indicator · 14. #8 Fullscreen · 15. #18 Crashed page · 16. #13 Page context menu ·
+17. #11 Address bar suggestions · 18. #14 Multiple windows · 19. #15 Single instance ·
+20. #16 Developer tools · 21. #17 Print and save as PDF · 22. #24 Per-site zoom ·
+23. #23 Spell checking · 24. #22 Reader mode · 25. #20 Ad and tracker blocking · 26. #21 Passwords ·
+27. #25 Flatpak

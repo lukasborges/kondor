@@ -72,4 +72,8 @@ No UI for this issue, so there is no prototype.
 
 ## Decisions
 
-_None yet._ Answers to developer questions (`question` label) are recorded here as `| Question | Decision |` rows.
+| Question | Decision |
+| --- | --- |
+| `tst_tabmodel` cannot link with only `tabmodel.cpp`, `tab.cpp`, `profilemanager.cpp` and `addressresolver.cpp`, because `ProfileManager` uses the Settings, DownloadManager and HistoryManager singletons. | Accepted in PR #39: the test also compiles `settings.cpp`, `downloadmanager.cpp`, `notifier.cpp`, `historymanager.cpp`, `historymodel.cpp` and `database.cpp`, and links `Qt6::DBus`, `Qt6::Sql`, `Qt6::Gui` and `Qt6::Quick`. |
+| Where may the TabModel suite write its persistent profile? | Only under Qt's test paths: `main()` calls `QStandardPaths::setTestModeEnabled(true)` before creating the application (PR #39). |
+| Loopback range for `http://` | All of `127.0.0.0/8`, not only `127.0.0.1` (PR #39). |

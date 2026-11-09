@@ -53,6 +53,10 @@ jobs:
           cp /usr/lib64/qt6/plugins/platforms/libqwayland.so AppDir/usr/plugins/platforms/ 2>/dev/null || true
           cp -r /usr/lib64/qt6/plugins/wayland-* AppDir/usr/plugins/ 2>/dev/null || true
 
+          # SQLite driver (history): the AppImage cannot see the system plugin.
+          mkdir -p AppDir/usr/plugins/sqldrivers
+          cp /usr/lib64/qt6/plugins/sqldrivers/libqsqlite.so AppDir/usr/plugins/sqldrivers/
+
           # Integração com o Plasma. O qt.conf do AppImage só enxerga os plugins de dentro dele,
           # então sem estes o app abre com o estilo Fusion e sem ícones:
           #  - tema de plataforma do KDE (tema de ícones, cores e fontes do usuário)
@@ -83,6 +87,7 @@ jobs:
             --deploy-deps-only AppDir/usr/plugins/styles \
             --deploy-deps-only AppDir/usr/plugins/kf6 \
             --deploy-deps-only AppDir/usr/plugins/iconengines \
+            --deploy-deps-only AppDir/usr/plugins/sqldrivers \
             --output appimage
 
       - name: Publish release

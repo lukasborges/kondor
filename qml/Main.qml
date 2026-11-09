@@ -36,6 +36,12 @@ ApplicationWindow {
         tabs.closeTabObject(t)
     }
 
+    function openHistory() {
+        if (!historyWindow)
+            historyWindow = historyWindowComponent.createObject(window)
+        historyWindow.showWindow()
+    }
+
     Component.onCompleted: {
         if (tabs.count === 0)
             tabs.addTab(false)
@@ -306,6 +312,12 @@ ApplicationWindow {
                         }
                         MenuSeparator {}
                         MenuItem {
+                            text: qsTr("History")
+                            icon.name: "view-history"
+                            onTriggered: window.openHistory()
+                        }
+                        MenuSeparator {}
+                        MenuItem {
                             text: qsTr("Sobre o Kondor")
                             icon.name: "help-about"
                         }
@@ -331,6 +343,16 @@ ApplicationWindow {
         }
     }
 
+    // ── History window (created on demand) ──────────────────────────────
+    property var historyWindow: null
+
+    Component {
+        id: historyWindowComponent
+        HistoryWindow {
+            tabModel: tabs
+        }
+    }
+
     // ── Atalhos ─────────────────────────────────────────────────────────
     Shortcut {
         sequence: "Ctrl+T"
@@ -350,6 +372,10 @@ ApplicationWindow {
             addressBar.forceActiveFocus()
             addressBar.selectAll()
         }
+    }
+    Shortcut {
+        sequence: "Ctrl+H"
+        onActivated: window.openHistory()
     }
     Shortcut {
         sequences: ["F5", "Ctrl+R"]

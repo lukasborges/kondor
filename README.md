@@ -12,7 +12,7 @@ A native **Qt 6** browser (Qt Quick + Qt WebEngine) with the **KDE/Breeze** look
 
 ## Status
 
-A working prototype with the core functionality in place: it actually browses, with tabs, a private mode and keyboard shortcuts. Everyday features such as bookmarks, history and settings are still missing.
+A working prototype with the core functionality in place: it actually browses, with tabs, a private mode, browsing history and keyboard shortcuts. Everyday features such as bookmarks and settings are still missing.
 
 ## Features
 
@@ -22,6 +22,7 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches DuckDuckGo)
 - **Navigation**: back, forward, reload/stop, home
 - **Private mode**: off-the-record tabs, isolated from the persistent profile
+- **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
 - **Basic downloads** (saved to `~/Downloads`)
 - **Menu** and **keyboard shortcuts**
 - **KDE look** via the `org.kde.desktop` (QQC2) style, with a `Fusion` fallback
@@ -29,7 +30,7 @@ A working prototype with the core functionality in place: it actually browses, w
 
 ## Stack
 
-- **Qt 6.5+** (tested with **6.11.2**): `Core`, `Gui`, `Qml`, `Quick`, `QuickControls2`, `WebEngineQuick`
+- **Qt 6.5+** (tested with **6.11.2**): `Core`, `Gui`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebEngineQuick`
 - **Qt Quick Controls 2** with the **`org.kde.desktop`** (Breeze) style
 - **Kirigami** for theming (`Kirigami.Theme`)
 - **C++17** + **CMake 3.21+**
@@ -69,9 +70,13 @@ src/
   profilemanager.*    persistent/private profiles, address/search resolution, downloads
   tab.*               per-tab state (title, URL, icon, loading, history)
   tabmodel.*          tab model (QAbstractListModel)
+  database.*          SQLite storage (schema + migrations)
+  historymanager.*    QML singleton: write/query/clear browsing history
+  historymodel.*      history list model (QAbstractListModel)
 qml/
   Main.qml            window, tab bar, navigation bar, menu, shortcuts
   WebViewTab.qml      WebEngineView + bridge to the Tab object
+  HistoryWindow.qml   browsing history window (search, grouped by day, clear)
 ```
 
 ## Keyboard shortcuts
@@ -81,6 +86,7 @@ qml/
 | `Ctrl+T` | New tab |
 | `Ctrl+Shift+N` | New private tab |
 | `Ctrl+W` | Close tab (quits the app if it is the last one) |
+| `Ctrl+H` | Browsing history |
 | `Ctrl+L` | Focus the address bar |
 | `Ctrl+R` / `F5` | Reload |
 | `Alt+←` / `Alt+→` | Back / forward |

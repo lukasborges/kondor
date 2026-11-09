@@ -225,7 +225,7 @@
 <context>
     <name>Kondor</name>
     <message>
-        <location filename="../src/main.cpp" line="52"/>
+        <location filename="../src/main.cpp" line="90"/>
         <source>Kondor Browser</source>
         <extracomment>Application display name: translate &quot;Browser&quot;, keep &quot;Kondor&quot;</extracomment>
         <translation>Kondor-Browser</translation>
@@ -245,100 +245,100 @@
         <translation>Downloads laufen noch. Trotzdem beenden?</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="214"/>
-        <location filename="../qml/Main.qml" line="399"/>
+        <location filename="../qml/Main.qml" line="218"/>
+        <location filename="../qml/Main.qml" line="403"/>
         <source>New Tab</source>
         <translation>Neuer Tab</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="276"/>
+        <location filename="../qml/Main.qml" line="280"/>
         <source>Back</source>
         <translation>Zurück</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="289"/>
+        <location filename="../qml/Main.qml" line="293"/>
         <source>Forward</source>
         <translation>Vorwärts</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="301"/>
+        <location filename="../qml/Main.qml" line="305"/>
         <source>Stop</source>
         <translation>Stopp</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="301"/>
+        <location filename="../qml/Main.qml" line="305"/>
         <source>Reload</source>
         <translation>Neu laden</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="317"/>
+        <location filename="../qml/Main.qml" line="321"/>
         <source>Home</source>
         <translation>Startseite</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="330"/>
+        <location filename="../qml/Main.qml" line="334"/>
         <source>Search or enter address</source>
         <translation>Adresse suchen oder eingeben</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="362"/>
+        <location filename="../qml/Main.qml" line="366"/>
         <source>Downloads</source>
         <translation>Downloads</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="391"/>
+        <location filename="../qml/Main.qml" line="395"/>
         <source>Menu</source>
         <translation>Menü</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="404"/>
+        <location filename="../qml/Main.qml" line="408"/>
         <source>New Private Tab</source>
         <translation>Neuer privater Tab</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="410"/>
+        <location filename="../qml/Main.qml" line="414"/>
         <source>Close Tab</source>
         <translation>Tab schließen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="416"/>
+        <location filename="../qml/Main.qml" line="420"/>
         <source>Find in Page…</source>
         <translation>In Seite suchen…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="422"/>
+        <location filename="../qml/Main.qml" line="426"/>
         <source>Zoom In</source>
         <translation>Vergrößern</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="430"/>
+        <location filename="../qml/Main.qml" line="434"/>
         <source>Zoom Out</source>
         <translation>Verkleinern</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="438"/>
+        <location filename="../qml/Main.qml" line="442"/>
         <source>Actual Size</source>
         <translation>Tatsächliche Größe</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="447"/>
+        <location filename="../qml/Main.qml" line="451"/>
         <source>History</source>
         <translation>Verlauf</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="454"/>
+        <location filename="../qml/Main.qml" line="458"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 einrichten…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="461"/>
+        <location filename="../qml/Main.qml" line="465"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Über %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="521"/>
+        <location filename="../qml/Main.qml" line="525"/>
         <source>Save File</source>
         <translation>Datei speichern</translation>
     </message>

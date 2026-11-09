@@ -225,7 +225,7 @@
 <context>
     <name>Kondor</name>
     <message>
-        <location filename="../src/main.cpp" line="52"/>
+        <location filename="../src/main.cpp" line="90"/>
         <source>Kondor Browser</source>
         <extracomment>Application display name: translate &quot;Browser&quot;, keep &quot;Kondor&quot;</extracomment>
         <translation>Kondor 浏览器</translation>
@@ -245,100 +245,100 @@
         <translation>仍有下载正在进行。仍要退出吗？</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="214"/>
-        <location filename="../qml/Main.qml" line="399"/>
+        <location filename="../qml/Main.qml" line="218"/>
+        <location filename="../qml/Main.qml" line="403"/>
         <source>New Tab</source>
         <translation>新建标签页</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="276"/>
+        <location filename="../qml/Main.qml" line="280"/>
         <source>Back</source>
         <translation>后退</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="289"/>
+        <location filename="../qml/Main.qml" line="293"/>
         <source>Forward</source>
         <translation>前进</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="301"/>
+        <location filename="../qml/Main.qml" line="305"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="301"/>
+        <location filename="../qml/Main.qml" line="305"/>
         <source>Reload</source>
         <translation>重新加载</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="317"/>
+        <location filename="../qml/Main.qml" line="321"/>
         <source>Home</source>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="330"/>
+        <location filename="../qml/Main.qml" line="334"/>
         <source>Search or enter address</source>
         <translation>搜索或输入地址</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="362"/>
+        <location filename="../qml/Main.qml" line="366"/>
         <source>Downloads</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="391"/>
+        <location filename="../qml/Main.qml" line="395"/>
         <source>Menu</source>
         <translation>菜单</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="404"/>
+        <location filename="../qml/Main.qml" line="408"/>
         <source>New Private Tab</source>
         <translation>新建隐私标签页</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="410"/>
+        <location filename="../qml/Main.qml" line="414"/>
         <source>Close Tab</source>
         <translation>关闭标签页</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="416"/>
+        <location filename="../qml/Main.qml" line="420"/>
         <source>Find in Page…</source>
         <translation>在页面中查找…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="422"/>
+        <location filename="../qml/Main.qml" line="426"/>
         <source>Zoom In</source>
         <translation>放大</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="430"/>
+        <location filename="../qml/Main.qml" line="434"/>
         <source>Zoom Out</source>
         <translation>缩小</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="438"/>
+        <location filename="../qml/Main.qml" line="442"/>
         <source>Actual Size</source>
         <translation>实际大小</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="447"/>
+        <location filename="../qml/Main.qml" line="451"/>
         <source>History</source>
         <translation>历史记录</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="454"/>
+        <location filename="../qml/Main.qml" line="458"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>设置 %1…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="461"/>
+        <location filename="../qml/Main.qml" line="465"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>关于 %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="521"/>
+        <location filename="../qml/Main.qml" line="525"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>

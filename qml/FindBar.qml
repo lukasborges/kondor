@@ -22,9 +22,18 @@ InlineBar {
 
     function open() {
         visible = true
+        runSearch()
+        // The web page takes the focus back while the shortcut key event is
+        // still being handled, so focus the field only after that event has
+        // been processed.
+        Qt.callLater(focusSearchField)
+    }
+
+    function focusSearchField() {
+        if (!visible)
+            return
         searchField.forceActiveFocus()
         searchField.selectAll()
-        runSearch()
     }
 
     function close() {
@@ -33,6 +42,8 @@ InlineBar {
             tab.setFindResult(0, 0)
         }
         visible = false
+        if (tab)
+            tab.focusPage()
     }
 
     function findNext() {

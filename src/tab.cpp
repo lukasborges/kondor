@@ -131,3 +131,8 @@ void Tab::stopFind()
 {
     emit stopFindRequested();
 }
+
+void Tab::focusPage()
+{
+    emit focusPageRequested();
+}

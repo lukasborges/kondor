@@ -62,6 +62,7 @@ public:
     Q_INVOKABLE void resetZoom();
     Q_INVOKABLE void find(const QString &text, bool backward, bool caseSensitive);
     Q_INVOKABLE void stopFind();
+    Q_INVOKABLE void focusPage();
 
 signals:
     void titleChanged();
@@ -84,6 +85,7 @@ signals:
     void resetZoomRequested();
     void findRequested(const QString &text, bool backward, bool caseSensitive);
     void stopFindRequested();
+    void focusPageRequested();
 
 private:
     QString m_title;

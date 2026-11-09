@@ -70,6 +70,7 @@ Item {
             webView.findText(text, flags)
         }
         function onStopFindRequested() { webView.findText("") }
+        function onFocusPageRequested() { webView.forceActiveFocus() }
     }
 
     Component.onCompleted: {

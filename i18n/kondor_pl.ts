@@ -237,7 +237,7 @@
         <location filename="../qml/Main.qml" line="39"/>
         <source>Quit %1</source>
         <extracomment>%1 is the application name</extracomment>
-        <translation>Zakończ %1</translation>
+        <translation>Zakończ program %1</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="40"/>
@@ -329,7 +329,7 @@
         <location filename="../qml/Main.qml" line="454"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
-        <translation>Skonfiguruj %1…</translation>
+        <translation>Skonfiguruj program %1…</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="461"/>

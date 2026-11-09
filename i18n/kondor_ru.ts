@@ -237,7 +237,7 @@
         <location filename="../qml/Main.qml" line="39"/>
         <source>Quit %1</source>
         <extracomment>%1 is the application name</extracomment>
-        <translation>Выйти из %1</translation>
+        <translation>Выход из программы %1</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="40"/>

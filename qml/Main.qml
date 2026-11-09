@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Dialogs
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
@@ -20,6 +21,28 @@ ApplicationWindow {
         id: tabs
     }
 
+    // Set once the user confirms quitting with downloads still running, so the
+    // confirmation is not asked again on the retried close.
+    property bool quitConfirmed: false
+
+    onClosing: function(close) {
+        if (DownloadManager.hasActiveDownloads && !window.quitConfirmed) {
+            close.accepted = false
+            quitDialog.open()
+        }
+    }
+
+    MessageDialog {
+        id: quitDialog
+        title: qsTr("Quit Kondor")
+        text: qsTr("Downloads are still in progress. Quit anyway?")
+        buttons: MessageDialog.Yes | MessageDialog.No
+        onAccepted: {
+            window.quitConfirmed = true
+            window.close()
+        }
+    }
+
     function closeTabAt(idx) {
         if (tabs.count <= 1) {
             window.close()
@@ -34,6 +57,14 @@ ApplicationWindow {
             return
         }
         tabs.closeTabObject(t)
+    }
+
+    // FileDialog hands a file:// URL to QML; downloads need a local path.
+    function localPath(url) {
+        let path = url.toString()
+        if (path.startsWith("file://"))
+            path = path.slice(7)
+        return decodeURIComponent(path)
     }
 
     function openHistory() {
@@ -264,6 +295,36 @@ ApplicationWindow {
                 }
 
                 ToolButton {
+                    id: downloadsButton
+                    visible: DownloadManager.model.count > 0
+                    display: AbstractButton.IconOnly
+                    icon.name: "download"
+                    ToolTip.visible: hovered
+                    ToolTip.text: qsTr("Downloads")
+                    ToolTip.delay: 600
+                    onClicked: downloadsPopup.opened ? downloadsPopup.close() : downloadsPopup.open()
+
+                    ProgressBar {
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            bottom: parent.bottom
+                            margins: 4
+                        }
+                        height: 2
+                        visible: DownloadManager.hasActiveDownloads
+                        value: DownloadManager.activeProgress >= 0 ? DownloadManager.activeProgress : 0
+                        indeterminate: DownloadManager.activeProgress < 0
+                    }
+
+                    DownloadsPopup {
+                        id: downloadsPopup
+                        x: downloadsButton.width - width
+                        y: downloadsButton.height
+                    }
+                }
+
+                ToolButton {
                     id: menuButton
                     display: AbstractButton.IconOnly
                     icon.name: "application-menu"
@@ -390,6 +451,58 @@ ApplicationWindow {
         id: settingsWindowComponent
         SettingsWindow {
             tabModel: tabs
+        }
+    }
+
+    // ── Save dialog for "Ask where to save each file" ───────────────────
+    FileDialog {
+        id: saveFileDialog
+        title: qsTr("Save File")
+        fileMode: FileDialog.SaveFile
+        property var pendingDownload: null
+
+        onAccepted: {
+            if (!pendingDownload)
+                return
+            const path = window.localPath(selectedFile)
+            const slash = path.lastIndexOf("/")
+            if (slash > 0) {
+                pendingDownload.downloadDirectory = path.slice(0, slash)
+                pendingDownload.downloadFileName = path.slice(slash + 1)
+            }
+            pendingDownload.accept()
+            pendingDownload = null
+        }
+
+        onRejected: {
+            if (pendingDownload)
+                pendingDownload.cancel()
+            pendingDownload = null
+        }
+    }
+
+    Connections {
+        target: DownloadManager
+
+        function onSaveLocationRequested(request, suggestedFile) {
+            saveFileDialog.pendingDownload = request
+            saveFileDialog.currentFile = suggestedFile
+            saveFileDialog.open()
+        }
+
+        function onDownloadStarted() {
+            downloadsPopup.open()
+        }
+    }
+
+    Connections {
+        target: DownloadManager.model
+
+        function onCountChanged() {
+            // The button (and so the popup's anchor) disappears when the list
+            // becomes empty; do not leave the popup floating around.
+            if (DownloadManager.model.count === 0)
+                downloadsPopup.close()
         }
     }
 

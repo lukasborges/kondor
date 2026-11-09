@@ -25,14 +25,14 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
 - **Settings** (Ctrl+,): home page, search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit), applied immediately and stored in `~/.config/KDE/Kondor.conf`
 - **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
-- **Basic downloads** (saved to the configured folder)
+- **Download manager**: downloads show live progress, speed and size in a toolbar popup; pause, resume, cancel, open the file or show it in its folder, desktop notification on completion/failure, optional "ask where to save", and a confirmation before quitting with active downloads
 - **Menu** and **keyboard shortcuts**
 - **KDE look** via the `org.kde.desktop` (QQC2) style, with a `Fusion` fallback
 - **Semantic colors** (`Kirigami.Theme`/`palette`): follows the system color scheme
 
 ## Stack
 
-- **Qt 6.5+** (tested with **6.11.2**): `Core`, `Gui`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebEngineQuick`
+- **Qt 6.5+** (tested with **6.11.2**): `Core`, `DBus`, `Gui`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebEngineQuick`
 - **Qt Quick Controls 2** with the **`org.kde.desktop`** (Breeze) style
 - **Kirigami** for theming (`Kirigami.Theme`)
 - **C++17** + **CMake 3.21+**
@@ -69,18 +69,21 @@ cmake --build build
 CMakeLists.txt
 src/
   main.cpp            startup (WebEngine, KDE style, QML engine)
-  profilemanager.*    persistent/private profiles, address/search resolution, downloads
+  profilemanager.*    persistent/private profiles, address/search resolution
   settings.*          QML singleton: user settings persisted with QSettings
   tab.*               per-tab state (title, URL, icon, loading, history)
   tabmodel.*          tab model (QAbstractListModel)
   database.*          SQLite storage (schema + migrations)
   historymanager.*    QML singleton: write/query/clear browsing history
   historymodel.*      history list model (QAbstractListModel)
+  downloadmanager.*   QML singleton: downloads list model, actions and notifications
+  notifier.*          QML singleton: desktop notifications over D-Bus
 qml/
   Main.qml            window, tab bar, navigation bar, menu, shortcuts
   WebViewTab.qml      WebEngineView + bridge to the Tab object
   InlineBar.qml       shared strip between the header and the page content
   FindBar.qml         find bar (Ctrl+F)
+  DownloadsPopup.qml  download list popup with progress and actions
   HistoryWindow.qml   browsing history window (search, grouped by day, clear)
   SettingsWindow.qml  settings window (home page, search, downloads, privacy)
 ```

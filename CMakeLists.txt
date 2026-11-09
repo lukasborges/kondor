@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS
     Core
+    DBus
     Gui
     Qml
     Quick
@@ -30,6 +31,7 @@ qt_add_qml_module(kondor
         qml/FindBar.qml
         qml/HistoryWindow.qml
         qml/SettingsWindow.qml
+        qml/DownloadsPopup.qml
     SOURCES
         src/tab.h
         src/tab.cpp
@@ -45,6 +47,10 @@ qt_add_qml_module(kondor
         src/historymanager.cpp
         src/historymodel.h
         src/historymodel.cpp
+        src/downloadmanager.h
+        src/downloadmanager.cpp
+        src/notifier.h
+        src/notifier.cpp
 )
 
 qt_add_resources(kondor "app_icon"
@@ -60,6 +66,7 @@ target_include_directories(kondor PRIVATE
 
 target_link_libraries(kondor PRIVATE
     Qt6::Core
+    Qt6::DBus
     Qt6::Gui
     Qt6::Qml
     Qt6::Quick

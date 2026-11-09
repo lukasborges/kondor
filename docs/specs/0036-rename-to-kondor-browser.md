@@ -58,7 +58,15 @@ Other places use "Kondor" as an identifier and **must not change**:
 6. **AppImage file name.** linuxdeploy builds the output name from the desktop `Name`, which would become `Kondor_Browser-x86_64.AppImage` and break `gh release create … Kondor-*.AppImage`.
    - In `release.yml` "Create AppImage", set `LDAI_OUTPUT: Kondor-x86_64.AppImage` (and `OUTPUT` with the same value, for older plugin versions), so the file name stays the same.
    - Change the release title to `"Kondor Browser $GITHUB_REF_NAME"`.
-7. **Docs:** README title and description say "Kondor Browser". Keep `kondor` in commands and paths.
+7. **README.md** uses the new name wherever it refers to the app:
+   - the title `# Kondor Browser`;
+   - the logo and screenshot `alt` texts ("Kondor Browser logo", "Kondor Browser screenshot");
+   - the opening description;
+   - prose such as "Kondor loads the translation…" → "Kondor Browser loads…";
+   - the shortcut table ("Configure Kondor Browser (settings)");
+   - the release/AppImage section.
+
+   Keep `kondor` wherever it is an identifier: commands (`./build/kondor`), paths (`~/.config/KDE/Kondor.conf`, `kondor.desktop`) and file names (`Kondor-x86_64.AppImage`). Also update `AGENTS.md`'s first line ("Kondor is…" → "Kondor Browser is…"), which the architect owns. Mention in the PR that it needs the architect, and do not edit it yourself.
 
 ## Acceptance criteria
 
@@ -76,6 +84,7 @@ Other places use "Kondor" as an identifier and **must not change**:
   - "Histórico — Navegador Kondor".
 - [ ] The application launcher shows "Kondor Browser" (or "Navegador Kondor" in pt_BR). Settings, history, cookies and the default-browser association from a previous version are still there: same config file `~/.config/KDE/Kondor.conf` and same data directory.
 - [ ] No user-visible "Kondor" string is left without "Browser", except the user-agent token.
+- [ ] `README.md` says "Kondor Browser" in its title, image alt texts, description and prose. `kondor` remains only in commands, paths and file names.
 - [ ] The release workflow still produces `Kondor-x86_64.AppImage`. Check it with a local linuxdeploy run or by reading the plugin's documented variable, and say which in the PR.
 
 ## Manual test
@@ -104,4 +113,5 @@ No new UI, so there is no prototype. Only the text changes.
 
 | Question | Decision |
 | --- | --- |
+| README too? | Yes (maintainer): title, alt texts, description, prose and the shortcut table use "Kondor Browser"; commands/paths/file names keep `kondor`. |
 | Display name only, or identifiers too? | Display name only (maintainer's request: "Kondor Browser", translated per language, e.g. "Navegador Kondor"). Identifiers stay so existing settings and associations survive. |

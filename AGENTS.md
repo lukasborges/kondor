@@ -8,9 +8,9 @@ prototypes, answers, reviews, merges) and the **developer** (`docs/agents/develo
 implementation; DeepSeek via opencode, which loads that file through `opencode.json`). They talk
 only through GitHub (labels, issue/PR comments, PR reviews); see "Agent workflow" at the end.
 
-## What Kondor is
+## What Kondor Browser is
 
-A small web browser written in **C++17 + Qt 6 (Qt Quick / QML + Qt WebEngine)** that must look and
+Kondor Browser is a small web browser written in **C++17 + Qt 6 (Qt Quick / QML + Qt WebEngine)** that must look and
 behave like a native **KDE Plasma** app (Breeze style, Breeze icons, system color scheme).
 
 - Minimum Qt: **6.5** (`find_package(Qt6 6.5 …)`), developed and tested on **Qt 6.11.2 / Fedora**.

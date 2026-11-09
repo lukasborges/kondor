@@ -56,14 +56,14 @@ jobs:
                           failed = True
                           continue
                       forms = (translation.findall("numerusform")
-                               if translation.get("numerus") == "yes" else [translation])
+                               if message.get("numerus") == "yes" else [translation])
                       texts = [(form.text or "").strip() for form in forms]
                       if translation.get("type") == "unfinished" or not texts or any(not text for text in texts):
                           print(f"::error file={path}::{context_name}: unfinished or empty translation for {source!r}")
                           failed = True
                           continue
-                      expected = sorted(re.findall(r"%\d+|%n", source))
-                      actual = sorted(re.findall(r"%\d+|%n", " ".join(texts)))
+                      expected = sorted(set(re.findall(r"%\d+|%n", source)))
+                      actual = sorted(set(re.findall(r"%\d+|%n", " ".join(texts))))
                       if expected != actual:
                           print(f"::error file={path}::{context_name}: placeholders differ for {source!r}: expected {expected}, got {actual}")
                           failed = True

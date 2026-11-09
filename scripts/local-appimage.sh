@@ -114,8 +114,14 @@ main() {
         --deploy-deps-only "$appdir/usr/plugins/styles" \
         --deploy-deps-only "$appdir/usr/plugins/kf6" \
         --deploy-deps-only "$appdir/usr/plugins/iconengines" \
-        --deploy-deps-only "$appdir/usr/plugins/sqldrivers" \
+        --deploy-deps-only "$appdir/usr/plugins/sqldrivers" &&
+      # The Qt plugin deploys libp11-kit again despite --exclude-library: drop it, then package.
+      # NSS loads the system p11-kit-proxy.so (a symlink to libp11-kit); a second, bundled copy
+      # crashes in its destructor when the app quits.
+      rm -f "$appdir"/usr/lib/libp11-kit.so* &&
+      "$cache/tools/linuxdeploy" --appdir "$appdir" --exclude-library "libp11-kit.so*" \
         --output appimage) || return 1
+    [[ ! -e "$appdir/usr/lib/libp11-kit.so.0" ]] || return 1
     [[ -s "$out/Kondor-x86_64.AppImage" ]]
   }
 

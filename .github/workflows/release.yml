@@ -94,8 +94,11 @@ jobs:
             --deploy-deps-only AppDir/usr/plugins/styles \
             --deploy-deps-only AppDir/usr/plugins/kf6 \
             --deploy-deps-only AppDir/usr/plugins/iconengines \
-            --deploy-deps-only AppDir/usr/plugins/sqldrivers \
-            --output appimage
+            --deploy-deps-only AppDir/usr/plugins/sqldrivers
+          # The Qt plugin deploys libp11-kit again despite --exclude-library: drop it, then package.
+          rm -f AppDir/usr/lib/libp11-kit.so*
+          ./linuxdeploy --appdir AppDir --exclude-library "libp11-kit.so*" --output appimage
+          test ! -e AppDir/usr/lib/libp11-kit.so.0
 
       - name: Publish release
         env:

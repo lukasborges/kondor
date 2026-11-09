@@ -43,6 +43,7 @@ qt_add_executable(tst_tabmodel
     ../src/historymanager.cpp
     ../src/historymodel.cpp
     ../src/database.cpp
+    ../src/faviconstore.cpp
 )
 
 target_include_directories(tst_tabmodel PRIVATE
@@ -94,6 +95,7 @@ qt_add_executable(tst_topsites
     ../src/historymanager.cpp
     ../src/historymodel.cpp
     ../src/database.cpp
+    ../src/faviconstore.cpp
     ../src/settings.cpp
 )
 
@@ -103,9 +105,35 @@ target_include_directories(tst_topsites PRIVATE
 
 target_link_libraries(tst_topsites PRIVATE
     Qt6::Core
+    Qt6::Gui
     Qt6::Qml
+    Qt6::Quick
     Qt6::Sql
     Qt6::Test
 )
 
 add_test(NAME tst_topsites COMMAND tst_topsites)
+
+qt_add_executable(tst_faviconstore
+    tst_faviconstore.cpp
+    ../src/faviconstore.cpp
+    ../src/historymanager.cpp
+    ../src/historymodel.cpp
+    ../src/database.cpp
+    ../src/settings.cpp
+)
+
+target_include_directories(tst_faviconstore PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_faviconstore PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::Sql
+    Qt6::Test
+)
+
+add_test(NAME tst_faviconstore COMMAND tst_faviconstore)

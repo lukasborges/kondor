@@ -6,15 +6,40 @@
 #include <QLibraryInfo>
 #include <QLocale>
 #include <QQmlApplicationEngine>
+#include <QQuickImageProvider>
 #include <QQuickStyle>
 #include <QTranslator>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
+#include "faviconstore.h"
 #include "settings.h"
 #include "startupargs.h"
 #include "startupurl.h"
 
 #include <cstdio>
+
+namespace {
+// Serves Kondor's own favicons: `image://kondor-favicon/<page URL>` resolves
+// the stored icon for the URL's host (Qt WebEngine's `image://favicon/` only
+// knows icon URLs of open views, never page URLs).
+class FaviconImageProvider : public QQuickImageProvider
+{
+public:
+    FaviconImageProvider()
+        : QQuickImageProvider(QQuickImageProvider::Image)
+    {
+    }
+
+    QImage requestImage(const QString &id, QSize *size, const QSize &requestedSize) override
+    {
+        Q_UNUSED(requestedSize)
+        const QImage image = FaviconStore::instance()->imageForHost(QUrl(id).host());
+        if (size && !image.isNull())
+            *size = image.size();
+        return image;
+    }
+};
+}
 
 int main(int argc, char *argv[])
 {
@@ -95,6 +120,7 @@ int main(int argc, char *argv[])
         QQuickStyle::setStyle(QStringLiteral("Fusion"));
 
     QQmlApplicationEngine engine;
+    engine.addImageProvider(QStringLiteral("kondor-favicon"), new FaviconImageProvider);
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreationFailed,
         &app, []() { QCoreApplication::exit(1); },

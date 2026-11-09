@@ -500,14 +500,14 @@ ApplicationWindow {
                             visible: tabs.currentTab && tabs.currentTab.url.toString().length > 0
                             enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
                             display: AbstractButton.IconOnly
-                            icon.name: window.pageBookmarked ? "bookmarks" : "bookmark-new"
+                            icon.name: window.pageBookmarked ? "bookmarks-bookmarked" : "bookmarks"
                             icon.width: 16
                             icon.height: 16
                             flat: true
                             implicitWidth: 28
                             implicitHeight: 28
                             ToolTip.visible: hovered
-                            ToolTip.text: qsTr("Bookmark This Page")
+                            ToolTip.text: window.pageBookmarked ? qsTr("Edit This Bookmark") : qsTr("Bookmark This Page")
                             ToolTip.delay: 600
                             onClicked: {
                                 if (bookmarkPopup.opened)

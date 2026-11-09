@@ -65,6 +65,13 @@ ToolBar {
                         Layout.preferredHeight: 16
                     }
 
+                    SiteIcon {
+                        visible: !barButton.isFolder
+                        pageUrl: barButton.url
+                        Layout.preferredWidth: 16
+                        Layout.preferredHeight: 16
+                    }
+
                     Label {
                         Layout.maximumWidth: Kirigami.Units.gridUnit * 14
                         text: barButton.title.length ? barButton.title : barButton.url

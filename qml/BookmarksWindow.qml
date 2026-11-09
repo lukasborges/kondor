@@ -300,7 +300,15 @@ ApplicationWindow {
                             spacing: Kirigami.Units.largeSpacing
 
                             Kirigami.Icon {
-                                source: itemEntry.isFolder ? "folder" : "internet-web-browser"
+                                visible: itemEntry.isFolder
+                                source: "folder"
+                                Layout.preferredWidth: 22
+                                Layout.preferredHeight: 22
+                            }
+
+                            SiteIcon {
+                                visible: !itemEntry.isFolder
+                                pageUrl: itemEntry.url
                                 Layout.preferredWidth: 22
                                 Layout.preferredHeight: 22
                             }

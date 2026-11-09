@@ -86,7 +86,10 @@ jobs:
         run: |
           export PATH="/usr/lib64/qt6/bin:$PATH"
           # --deploy-deps-only: brings the libraries (KF6 etc.) of the hand-copied plugins
+          # libp11-kit stays the system one: NSS loads the system p11-kit-proxy.so (a symlink to
+          # libp11-kit), and a second bundled copy crashes in its destructor when the app quits.
           ./linuxdeploy --appdir AppDir --plugin qt \
+            --exclude-library "libp11-kit.so*" \
             --deploy-deps-only AppDir/usr/plugins/platformthemes \
             --deploy-deps-only AppDir/usr/plugins/styles \
             --deploy-deps-only AppDir/usr/plugins/kf6 \

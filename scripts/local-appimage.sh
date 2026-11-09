@@ -109,6 +109,7 @@ main() {
     (cd "$out" && PATH="$cache/tools:/usr/lib64/qt6/bin:$PATH" QML_SOURCES_PATHS="$control/qml" \
       APPIMAGE_EXTRACT_AND_RUN=1 NO_STRIP=1 LDAI_OUTPUT=Kondor-x86_64.AppImage OUTPUT=Kondor-x86_64.AppImage \
       "$cache/tools/linuxdeploy" --appdir "$appdir" --plugin qt \
+        --exclude-library "libp11-kit.so*" \
         --deploy-deps-only "$appdir/usr/plugins/platformthemes" \
         --deploy-deps-only "$appdir/usr/plugins/styles" \
         --deploy-deps-only "$appdir/usr/plugins/kf6" \

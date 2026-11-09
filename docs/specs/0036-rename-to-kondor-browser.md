@@ -66,7 +66,7 @@ Other places use "Kondor" as an identifier and **must not change**:
    - the shortcut table ("Configure Kondor Browser (settings)");
    - the release/AppImage section.
 
-   Keep `kondor` wherever it is an identifier: commands (`./build/kondor`), paths (`~/.config/KDE/Kondor.conf`, `kondor.desktop`) and file names (`Kondor-x86_64.AppImage`). Also update `AGENTS.md`'s first line ("Kondor is…" → "Kondor Browser is…"), which the architect owns. Mention in the PR that it needs the architect, and do not edit it yourself.
+   Keep `kondor` wherever it is an identifier: commands (`./build/kondor`), paths (`~/.config/KDE/Kondor.conf`, `kondor.desktop`) and file names (`Kondor-x86_64.AppImage`). `AGENTS.md` is already updated by the architect; do not edit it.
 
 ## Acceptance criteria
 

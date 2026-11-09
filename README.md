@@ -20,7 +20,7 @@ A working prototype with the core functionality in place: it actually browses, w
 
 - **Real tabs** with `Qt WebEngine` (one `WebEngineView` per tab, preserving state when switching)
 - **Tab management**: favicons and a loading indicator, drag to reorder, middle-click to close, pinned tabs, a tab context menu (reload, duplicate, pin, close others and tabs to the right), keyboard switching and overflow handling (tabs shrink, then the bar scrolls)
-- **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches with the configured engine)
+- **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches with the configured engine); local hosts use `http://`, public hosts `https://`
 - **Navigation**: back, forward, reload/stop, home
 - **Private mode**: off-the-record tabs, isolated from the persistent profile
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
@@ -65,6 +65,17 @@ cmake --build build
 ./build/kondor
 ```
 
+### Tests
+
+The non-UI logic has Qt Test suites (`tst_addressresolver`, `tst_tabmodel`):
+
+```bash
+cmake --build build
+ctest --test-dir build --output-on-failure
+```
+
+Pass `-DBUILD_TESTING=OFF` to configure without building them.
+
 ## Project structure
 
 ```
@@ -72,6 +83,7 @@ CMakeLists.txt
 src/
   main.cpp            startup (WebEngine, KDE style, QML engine)
   profilemanager.*    persistent/private profiles, address/search resolution
+  addressresolver.*   pure address/search resolution (unit tested)
   settings.*          QML singleton: user settings persisted with QSettings
   tab.*               per-tab state (title, URL, icon, loading, history)
   tabmodel.*          tab model (QAbstractListModel)

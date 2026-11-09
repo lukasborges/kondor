@@ -1,5 +1,6 @@
 #include "profilemanager.h"
 
+#include "addressresolver.h"
 #include "downloadmanager.h"
 #include "historymanager.h"
 #include "settings.h"
@@ -129,24 +130,5 @@ QString ProfileManager::homePage() const
 
 QUrl ProfileManager::resolveAddress(const QString &text) const
 {
-    const QString input = text.trimmed();
-    if (input.isEmpty())
-        return QUrl(homePage());
-
-    if (input.contains(QLatin1String("://"))
-        || input.startsWith(QLatin1String("about:"))
-        || input.startsWith(QLatin1String("data:"))) {
-        return QUrl::fromUserInput(input);
-    }
-
-    // IP, localhost or domain with a TLD -> assume https.
-    static const QRegularExpression hostRe(QStringLiteral(
-        R"(^(([0-9]{1,3}\.){3}[0-9]{1,3}|localhost|[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,})(:\d+)?(/.*)?$)"));
-    if (hostRe.match(input).hasMatch())
-        return QUrl(QStringLiteral("https://") + input);
-
-    // Otherwise search with the configured engine.
-    QString url = Settings::instance()->searchUrlTemplate();
-    url.replace(QLatin1String("%1"), QString::fromUtf8(QUrl::toPercentEncoding(input)));
-    return QUrl(url);
+    return ::resolveAddress(text, QUrl(homePage()), Settings::instance()->searchUrlTemplate());
 }

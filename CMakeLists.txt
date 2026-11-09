@@ -22,6 +22,8 @@ qt_add_executable(kondor
     src/main.cpp
 )
 
+option(BUILD_TESTING "Build tests" ON)
+
 qt_add_qml_module(kondor
     URI Kondor
     VERSION 1.0
@@ -36,6 +38,8 @@ qt_add_qml_module(kondor
         qml/SettingsWindow.qml
         qml/DownloadsPopup.qml
     SOURCES
+        src/addressresolver.h
+        src/addressresolver.cpp
         src/tab.h
         src/tab.cpp
         src/tabmodel.h
@@ -100,6 +104,12 @@ target_link_libraries(kondor PRIVATE
     Qt6::Sql
     Qt6::WebEngineQuick
 )
+
+if(BUILD_TESTING)
+    enable_testing()
+    find_package(Qt6 REQUIRED COMPONENTS Test)
+    add_subdirectory(tests)
+endif()
 
 install(TARGETS kondor
     BUNDLE DESTINATION .

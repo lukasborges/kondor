@@ -46,6 +46,10 @@ qt_add_qml_module(kondor
         src/tabmodel.cpp
         src/profilemanager.h
         src/profilemanager.cpp
+        src/startupargs.h
+        src/startupargs.cpp
+        src/startupurl.h
+        src/startupurl.cpp
         src/settings.h
         src/settings.cpp
         src/database.h
@@ -88,6 +92,10 @@ qt_add_resources(kondor "app_icon"
     FILES
         packaging/kondor.png
         packaging/kondor.svg
+)
+
+target_compile_definitions(kondor PRIVATE
+    PROJECT_VERSION="${PROJECT_VERSION}"
 )
 
 target_include_directories(kondor PRIVATE

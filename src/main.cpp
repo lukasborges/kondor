@@ -1,3 +1,6 @@
+#include <QCommandLineOption>
+#include <QCommandLineParser>
+#include <QDir>
 #include <QGuiApplication>
 #include <QIcon>
 #include <QLibraryInfo>
@@ -6,6 +9,10 @@
 #include <QQuickStyle>
 #include <QTranslator>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
+
+#include "settings.h"
+#include "startupargs.h"
+#include "startupurl.h"
 
 #include <cstdio>
 
@@ -30,6 +37,37 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
     QCoreApplication::setApplicationName(QStringLiteral("Kondor"));
+    QCoreApplication::setApplicationVersion(QStringLiteral(PROJECT_VERSION));
+
+    QCommandLineParser parser;
+    parser.setApplicationDescription(QStringLiteral("Kondor web browser"));
+    parser.addHelpOption();
+    parser.addVersionOption();
+    const QCommandLineOption privateOption(QStringLiteral("private"),
+                                           QStringLiteral("open URLs in a private tab"));
+    parser.addOption(privateOption);
+    parser.addPositionalArgument(QStringLiteral("urls"),
+                                 QStringLiteral("URLs or files to open"),
+                                 QStringLiteral("[urls...]"));
+    parser.process(app);
+
+    // Resolve the arguments before the QML engine loads so Main.qml can open
+    // them instead of the home page.
+    Settings *settings = Settings::instance();
+    QList<QUrl> startupUrls;
+    const QStringList arguments = parser.positionalArguments();
+    startupUrls.reserve(arguments.size());
+    for (const QString &argument : arguments) {
+        const QUrl url = startupUrlForArgument(argument, QDir::currentPath(),
+                                               QUrl(settings->homePage()),
+                                               settings->searchUrlTemplate());
+        if (!url.isEmpty())
+            startupUrls.append(url);
+    }
+
+    StartupArgs *startupArgs = StartupArgs::instance();
+    startupArgs->setStartupUrls(startupUrls);
+    startupArgs->setStartupPrivate(parser.isSet(privateOption));
 
     // App identity: the .desktop name (used by Wayland/KWin) and the window icon.
     QGuiApplication::setDesktopFileName(QStringLiteral("kondor"));

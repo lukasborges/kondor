@@ -27,6 +27,16 @@ ApplicationWindow {
     property var selectedItemId: -1
     property string filter: ""
 
+    // Drag and drop state: the item being dragged out of the right-hand list
+    // (-1 when idle), the folder row highlighted as a drop target and the
+    // insertion row shown as a line (0..count, -1 when none).
+    property var draggedId: -1
+    property bool draggedIsFolder: false
+    property var dropFolderId: -1
+    property int dropPosition: -1
+    // Model that currently carries `filter`, so it can be cleared on switch.
+    property var filteredModel: null
+
     onSelectedFolderIdChanged: root.selectedItemId = -1
 
     // Rebuilt whenever a bookmark write bumps the revision.
@@ -40,7 +50,13 @@ ApplicationWindow {
         return revision >= 0 ? BookmarkManager.modelForFolder(root.selectedFolderId) : null
     }
 
+    // The current model keeps the search term; the previous one is cleared so
+    // a stale filter can never make another folder (the bookmarks toolbar
+    // shares its model) show the wrong rows.
     onItemModelChanged: {
+        if (root.filteredModel && root.filteredModel !== root.itemModel)
+            root.filteredModel.filter = ""
+        root.filteredModel = root.itemModel
         if (root.itemModel)
             root.itemModel.filter = root.filter
     }
@@ -108,6 +124,186 @@ ApplicationWindow {
 
     function actionIsFolder() {
         return root.hasItemSelection() ? root.currentItemInfo().isFolder : true
+    }
+
+    // ── Drag and drop and "Move To" helpers ────────────────────────────
+
+    // A folder can never be dropped into itself or one of its descendants.
+    function canMoveInto(itemId, isFolder, folderId) {
+        if (itemId <= 0 || folderId <= 0)
+            return false
+        if (folderId === itemId)
+            return false
+        return !isFolder || !root.isInSubtree(folderId, itemId)
+    }
+
+    function canDropInto(folderId) {
+        return root.canMoveInto(root.draggedId, root.draggedIsFolder, folderId)
+    }
+
+    // The folders property is a depth-first flat list, so a subtree is every
+    // following row with a greater depth.
+    function isInSubtree(folderId, ancestorId) {
+        const folders = root.folders
+        let ancestorDepth = -1
+        for (let i = 0; i < folders.length; ++i) {
+            const folder = folders[i]
+            if (ancestorDepth < 0) {
+                if (folder.id !== ancestorId)
+                    continue
+                if (folder.id === folderId)
+                    return true
+                ancestorDepth = folder.depth
+                continue
+            }
+            if (folder.depth <= ancestorDepth)
+                return false
+            if (folder.id === folderId)
+                return true
+        }
+        return false
+    }
+
+    function beginDrag(id, isFolder, scenePos) {
+        root.draggedId = id
+        root.draggedIsFolder = isFolder
+        root.clearDropTarget()
+        // The drag source is a single proxy item: a row inside a view cannot
+        // follow the pointer, so the window-level proxy carries the drag.
+        dragProxy.Drag.active = true
+        root.moveDragProxy(scenePos)
+    }
+
+    // Keeps the proxy under the pointer, so every DropArea sees real drag
+    // positions (the left tree included).
+    function moveDragProxy(scenePos) {
+        const pos = dragProxy.parent.mapFromItem(null, scenePos)
+        dragProxy.x = pos.x - dragProxy.Drag.hotSpot.x
+        dragProxy.y = pos.y - dragProxy.Drag.hotSpot.y
+    }
+
+    // Ends the gesture with a real drop at the last position. Turning
+    // Drag.active off without Drag.drop() cancels the drag instead.
+    function finishDrag() {
+        if (dragProxy.Drag.active)
+            dragProxy.Drag.drop()
+        dragProxy.Drag.active = false
+        root.endDrag()
+    }
+
+    function endDrag() {
+        root.draggedId = -1
+        root.draggedIsFolder = false
+        root.clearDropTarget()
+    }
+
+    function clearDropTarget() {
+        root.dropFolderId = -1
+        root.dropPosition = -1
+    }
+
+    // Moves to the end of `folderId`. The selected folder stays selected; a
+    // moved item that left the current list is no longer the action target.
+    function moveInto(id, isFolder, folderId) {
+        if (!root.canMoveInto(id, isFolder, folderId))
+            return
+        BookmarkManager.move(id, folderId, BookmarkManager.childCount(folderId))
+        if (root.selectedItemId === id && folderId !== root.selectedFolderId)
+            root.selectedItemId = -1
+    }
+
+    // `position` is the gap between visible rows (0..count) in the current
+    // folder. Moving down shifts by one because the dragged row is removed
+    // before it is inserted again.
+    function moveToPosition(id, position) {
+        if (position < 0 || !root.itemModel)
+            return
+        const current = root.itemModel.rowOf(id)
+        const target = current >= 0 && current < position ? position - 1 : position
+        BookmarkManager.move(id, root.selectedFolderId, target)
+    }
+
+    // Decides what is under the pointer in the right-hand list: a folder to
+    // move into (its middle band) or a gap to insert into (the top and bottom
+    // bands of every row, by half).
+    function updateItemDrop(y) {
+        if (root.draggedId <= 0 || !root.itemModel) {
+            root.clearDropTarget()
+            return
+        }
+        const count = itemList.count
+        let hovered = -1
+        let ratio = 0
+        for (let i = 0; i < count; ++i) {
+            const row = itemList.itemAtIndex(i)
+            if (!row)
+                continue
+            const top = row.y - itemList.contentY
+            if (y >= top && y < top + row.height) {
+                hovered = i
+                ratio = (y - top) / row.height
+                break
+            }
+        }
+        if (hovered < 0) {
+            // Empty space below the last row: append to the current folder.
+            root.dropFolderId = -1
+            root.dropPosition = root.filter.length === 0 ? count : -1
+            return
+        }
+        const id = root.itemModel.idAt(hovered)
+        if (id <= 0 || id === root.draggedId) {
+            root.clearDropTarget()
+            return
+        }
+        if (root.itemModel.isFolderAt(hovered) && ratio >= 0.25 && ratio < 0.75
+                && root.canDropInto(id)) {
+            root.dropFolderId = id
+            root.dropPosition = -1
+            return
+        }
+        // Reordering by visible rows only makes sense without a search filter.
+        if (root.filter.length > 0) {
+            root.clearDropTarget()
+            return
+        }
+        root.dropFolderId = -1
+        root.dropPosition = hovered + (ratio >= 0.5 ? 1 : 0)
+    }
+
+    function dropIndicatorY() {
+        if (root.dropPosition < 0)
+            return -1
+        if (root.dropPosition < itemList.count) {
+            const row = itemList.itemAtIndex(root.dropPosition)
+            if (row)
+                return Math.max(0, Math.min(itemList.height - 2, row.y - itemList.contentY))
+        }
+        const count = itemList.count
+        if (count > 0) {
+            const last = itemList.itemAtIndex(count - 1)
+            if (last) {
+                return Math.max(0, Math.min(itemList.height - 2,
+                                               last.y + last.height - itemList.contentY - 1))
+            }
+        }
+        return 0
+    }
+
+    // Folders offered by "Move To": everything except the item's own folder
+    // and, for a folder, its subtree.
+    function moveToTargets(itemId, parentId, isFolder) {
+        const folders = root.folders
+        const targets = []
+        for (let i = 0; i < folders.length; ++i) {
+            const folder = folders[i]
+            if (folder.id === parentId)
+                continue
+            if (!root.canMoveInto(itemId, isFolder, folder.id))
+                continue
+            targets.push(folder)
+        }
+        return targets
     }
 
     function moveSelected(delta) {
@@ -248,6 +444,8 @@ ApplicationWindow {
 
                         width: ListView.view.width
                         highlighted: folderEntry.modelData.id === root.selectedFolderId
+                                     || (folderDrop.containsDrag
+                                         && root.canDropInto(folderEntry.modelData.id))
                         icon.name: "folder"
                         text: folderEntry.modelData.title
                         leftPadding: 10 + folderEntry.modelData.depth * 18
@@ -258,121 +456,201 @@ ApplicationWindow {
                             root.selectedItemId = -1
                             root.selectedFolderId = folderEntry.modelData.id
                         }
+
+                        DropArea {
+                            id: folderDrop
+                            anchors.fill: parent
+                            keys: ["kondor/bookmark"]
+
+                            onDropped: function(drop) {
+                                root.moveInto(root.draggedId, root.draggedIsFolder,
+                                              folderEntry.modelData.id)
+                                root.endDrag()
+                            }
+                        }
                     }
                 }
             }
 
-            ScrollView {
-                Kirigami.Theme.colorSet: Kirigami.Theme.View
-                Kirigami.Theme.inherit: false
-                background: Rectangle { color: Kirigami.Theme.backgroundColor }
+            Item {
+                SplitView.fillWidth: true
 
-                ListView {
-                    id: itemList
-                    clip: true
-                    model: root.itemModel
-                    focus: true
+                ScrollView {
+                    id: itemScroll
+                    anchors.fill: parent
+                    Kirigami.Theme.colorSet: Kirigami.Theme.View
+                    Kirigami.Theme.inherit: false
+                    background: Rectangle { color: Kirigami.Theme.backgroundColor }
 
-                    Keys.onReturnPressed: root.openCurrentItem()
-                    Keys.onEnterPressed: root.openCurrentItem()
+                    ListView {
+                        id: itemList
+                        clip: true
+                        model: root.itemModel
+                        focus: true
 
-                    // Arrow keys move currentIndex; mirror that into the
-                    // explicit selection so the highlight and the actions
-                    // target the same row.
-                    onCurrentIndexChanged: {
-                        if (itemList.activeFocus && root.itemModel && itemList.currentIndex >= 0)
-                            root.selectedItemId = root.itemModel.idAt(itemList.currentIndex)
-                    }
+                        Keys.onReturnPressed: root.openCurrentItem()
+                        Keys.onEnterPressed: root.openCurrentItem()
 
-                    delegate: ItemDelegate {
-                        id: itemEntry
+                        // Arrow keys move currentIndex; mirror that into the
+                        // explicit selection so the highlight and the actions
+                        // target the same row.
+                        onCurrentIndexChanged: {
+                            if (itemList.activeFocus && root.itemModel && itemList.currentIndex >= 0)
+                                root.selectedItemId = root.itemModel.idAt(itemList.currentIndex)
+                        }
 
-                        required property int index
-                        required property int id
-                        required property string title
-                        required property string url
-                        required property bool isFolder
+                        delegate: ItemDelegate {
+                            id: itemEntry
 
-                        width: ListView.view.width
-                        highlighted: itemEntry.id === root.selectedItemId
+                            required property int index
+                            required property int id
+                            required property var parentId
+                            required property string title
+                            required property string url
+                            required property bool isFolder
 
-                        contentItem: RowLayout {
-                            spacing: Kirigami.Units.largeSpacing
+                            width: ListView.view.width
+                            highlighted: itemEntry.id === root.selectedItemId
+                                         || itemEntry.id === root.dropFolderId
 
-                            Kirigami.Icon {
-                                visible: itemEntry.isFolder
-                                source: "folder"
-                                Layout.preferredWidth: 22
-                                Layout.preferredHeight: 22
-                            }
+                            contentItem: RowLayout {
+                                spacing: Kirigami.Units.largeSpacing
 
-                            SiteIcon {
-                                visible: !itemEntry.isFolder
-                                pageUrl: itemEntry.url
-                                Layout.preferredWidth: 22
-                                Layout.preferredHeight: 22
-                            }
-
-                            ColumnLayout {
-                                Layout.fillWidth: true
-                                spacing: 0
-
-                                Label {
-                                    Layout.fillWidth: true
-                                    text: itemEntry.title.length ? itemEntry.title : itemEntry.url
-                                    elide: Text.ElideRight
-                                    font.bold: true
+                                Kirigami.Icon {
+                                    visible: itemEntry.isFolder
+                                    source: "folder"
+                                    Layout.preferredWidth: 22
+                                    Layout.preferredHeight: 22
                                 }
 
-                                Label {
+                                SiteIcon {
                                     visible: !itemEntry.isFolder
+                                    pageUrl: itemEntry.url
+                                    Layout.preferredWidth: 22
+                                    Layout.preferredHeight: 22
+                                }
+
+                                ColumnLayout {
                                     Layout.fillWidth: true
-                                    text: itemEntry.url
-                                    elide: Text.ElideRight
-                                    color: itemEntry.highlighted
-                                           ? Kirigami.Theme.highlightedTextColor
-                                           : Kirigami.Theme.disabledTextColor
-                                    font: Kirigami.Theme.smallFont
-                                }
-                            }
-                        }
+                                    spacing: 0
 
-                        MouseArea {
-                            anchors.fill: parent
-                            acceptedButtons: Qt.LeftButton | Qt.MiddleButton
-
-                            onDoubleClicked: function(mouse) {
-                                if (mouse.button === Qt.LeftButton)
-                                    root.openCurrentItem()
-                            }
-                            onClicked: function(mouse) {
-                                itemList.currentIndex = itemEntry.index
-                                itemList.forceActiveFocus()
-                                if (itemEntry.isFolder) {
-                                    if (mouse.button === Qt.LeftButton) {
-                                        root.selectedItemId = -1
-                                        root.selectedFolderId = itemEntry.id
+                                    Label {
+                                        Layout.fillWidth: true
+                                        text: itemEntry.title.length ? itemEntry.title : itemEntry.url
+                                        elide: Text.ElideRight
+                                        font.bold: true
                                     }
-                                    return
+
+                                    Label {
+                                        visible: !itemEntry.isFolder
+                                        Layout.fillWidth: true
+                                        text: itemEntry.url
+                                        elide: Text.ElideRight
+                                        color: itemEntry.highlighted
+                                               ? Kirigami.Theme.highlightedTextColor
+                                               : Kirigami.Theme.disabledTextColor
+                                        font: Kirigami.Theme.smallFont
+                                    }
                                 }
-                                root.selectedItemId = itemEntry.id
-                                if (mouse.button === Qt.MiddleButton) {
-                                    root.openBookmark(itemEntry.url, true)
-                                    return
+                            }
+
+                            DragHandler {
+                                id: dragHandler
+                                // Only track the gesture: the window-level
+                                // proxy follows the pointer, the row stays.
+                                target: null
+
+                                onActiveChanged: {
+                                    if (active) {
+                                        root.beginDrag(itemEntry.id, itemEntry.isFolder,
+                                                       centroid.scenePosition)
+                                    } else {
+                                        root.finishDrag()
+                                    }
                                 }
-                                if (BookmarkManager.ctrlPressed()) {
-                                    root.openBookmark(itemEntry.url, true)
-                                    return
+                                onCentroidChanged: {
+                                    if (active)
+                                        root.moveDragProxy(centroid.scenePosition)
                                 }
-                                // Qt.styleHints is typed QObject* in the QML
-                                // global object, but returns a QStyleHints at
-                                // runtime.
-                                // qmllint disable missing-property
-                                if (Qt.styleHints.singleClickActivation)
-                                    root.openBookmark(itemEntry.url, false)
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
+
+                                onDoubleClicked: function(mouse) {
+                                    if (mouse.button === Qt.LeftButton)
+                                        root.openCurrentItem()
+                                }
+                                onClicked: function(mouse) {
+                                    itemList.currentIndex = itemEntry.index
+                                    itemList.forceActiveFocus()
+                                    if (mouse.button === Qt.RightButton) {
+                                        root.selectedItemId = itemEntry.id
+                                        itemContextMenu.targetId = itemEntry.id
+                                        itemContextMenu.targetParentId = itemEntry.parentId
+                                        itemContextMenu.targetIsFolder = itemEntry.isFolder
+                                        itemContextMenu.popup()
+                                        return
+                                    }
+                                    if (itemEntry.isFolder) {
+                                        if (mouse.button === Qt.LeftButton) {
+                                            root.selectedItemId = -1
+                                            root.selectedFolderId = itemEntry.id
+                                        }
+                                        return
+                                    }
+                                    root.selectedItemId = itemEntry.id
+                                    if (mouse.button === Qt.MiddleButton) {
+                                        root.openBookmark(itemEntry.url, true)
+                                        return
+                                    }
+                                    if (BookmarkManager.ctrlPressed()) {
+                                        root.openBookmark(itemEntry.url, true)
+                                        return
+                                    }
+                                    // Qt.styleHints is typed QObject* in the QML
+                                    // global object, but returns a QStyleHints at
+                                    // runtime.
+                                    // qmllint disable missing-property
+                                    if (Qt.styleHints.singleClickActivation)
+                                        root.openBookmark(itemEntry.url, false)
+                                }
                             }
                         }
                     }
+                }
+
+                DropArea {
+                    id: itemDrop
+                    anchors.fill: itemScroll
+                    keys: ["kondor/bookmark"]
+
+                    onEntered: function(drag) {
+                        root.updateItemDrop(drag.y)
+                    }
+                    onPositionChanged: function(drag) {
+                        root.updateItemDrop(drag.y)
+                    }
+                    onExited: root.clearDropTarget()
+                    onDropped: function(drop) {
+                        root.updateItemDrop(drop.y)
+                        if (root.dropFolderId > 0)
+                            root.moveInto(root.draggedId, root.draggedIsFolder, root.dropFolderId)
+                        else if (root.dropPosition >= 0)
+                            root.moveToPosition(root.draggedId, root.dropPosition)
+                        root.endDrag()
+                    }
+                }
+
+                Rectangle {
+                    id: dropIndicator
+                    visible: root.dropPosition >= 0
+                    width: itemScroll.width
+                    height: 2
+                    color: Kirigami.Theme.highlightColor
+                    y: root.dropIndicatorY()
+                    z: 2
                 }
             }
         }
@@ -382,6 +660,56 @@ ApplicationWindow {
         id: searchTimer
         interval: 200
         onTriggered: root.filter = searchField.text
+    }
+
+    // Drag source that follows the pointer while a row's DragHandler is
+    // active. Keeping it at window level (instead of the row itself) makes
+    // the drag reach every DropArea, including the folder tree.
+    Item {
+        id: dragProxy
+        width: 1
+        height: 1
+        visible: false
+        z: 1000
+        Drag.keys: ["kondor/bookmark"]
+        Drag.hotSpot: Qt.point(0, 0)
+    }
+
+    // Right-click menu of the right-hand list: "Move To" is a submenu with
+    // every valid folder, indented like the tree.
+    Menu {
+        id: itemContextMenu
+
+        property var targetId: -1
+        property var targetParentId: -1
+        property bool targetIsFolder: false
+
+        Menu {
+            id: moveToMenu
+            title: qsTr("Move To")
+            icon.name: "folder-move"
+
+            Instantiator {
+                model: root.moveToTargets(itemContextMenu.targetId,
+                                          itemContextMenu.targetParentId,
+                                          itemContextMenu.targetIsFolder)
+                delegate: MenuItem {
+                    required property var modelData
+
+                    text: modelData.title
+                    leftPadding: Kirigami.Units.largeSpacing * 2 + modelData.depth * 18
+                    onTriggered: root.moveInto(itemContextMenu.targetId,
+                                               itemContextMenu.targetIsFolder,
+                                               modelData.id)
+                }
+                onObjectAdded: function(index, object) {
+                    moveToMenu.insertItem(index, object)
+                }
+                onObjectRemoved: function(index, object) {
+                    moveToMenu.removeItem(object)
+                }
+            }
+        }
     }
 
     Dialog {

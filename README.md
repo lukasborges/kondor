@@ -25,7 +25,7 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Navigation**: back, forward, reload/stop, home
 - **Private mode**: off-the-record tabs, isolated from the persistent profile
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
-- **Bookmarks**: star button in the address bar (Ctrl+D) with a name/folder editor, a bookmarks toolbar (Ctrl+Shift+B), a Bookmarks menu, and a manager window (Ctrl+Shift+O) with folders, rename, delete, reordering and import of Firefox/Chrome HTML exports
+- **Bookmarks**: star button in the address bar (Ctrl+D) with a name/folder editor, a bookmarks toolbar (Ctrl+Shift+B), a Bookmarks menu, and a manager window (Ctrl+Shift+O) with folders, rename, delete, reordering, drag and drop between folders, a "Move To" menu and import of Firefox/Chrome HTML exports
 - **Settings** (Ctrl+,): home page (blank means the New Tab page), New Tab page options (top sites), search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit), applied immediately and stored in `~/.config/KDE/Kondor.conf`
 - **Session restore**: optionally reopen the tabs from the previous session on startup (settings → On Startup); private tabs are never saved. Ctrl+Shift+T reopens the last closed normal tabs, up to 20
 - **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
@@ -127,7 +127,7 @@ qml/
   SettingsWindow.qml  settings window (home page, new tabs, search, downloads, privacy)
   BookmarksBar.qml    bookmarks toolbar under the navigation bar
   BookmarkMenu.qml    folder menu (bar folders and the main menu submenu)
-  BookmarksWindow.qml bookmark manager window (folders, reorder, import)
+  BookmarksWindow.qml bookmark manager window (folders, reorder, drag and drop, import)
   SiteIcon.qml        favicon with a fallback icon (toolbar, manager, New Tab page)
 ```
 

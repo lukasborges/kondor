@@ -57,11 +57,16 @@ Comment[tr]=Qt/KDE için hafif bir web tarayıcısı
 Comment[uk]=Легкий веб-браузер для Qt/KDE
 Comment[zh_CN]=适用于 Qt/KDE 的轻量级网页浏览器
 Comment[zh_TW]=適用於 Qt/KDE 的輕量級網頁瀏覽器
-Exec=kondor
+Exec=kondor %U
 Icon=kondor
 Categories=Network;WebBrowser;
 Terminal=false
 StartupNotify=true
 StartupWMClass=kondor
-MimeType=x-scheme-handler/http;x-scheme-handler/https;
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
 Keywords=browser;web;internet;
+Actions=new-private-window;
+
+[Desktop Action new-private-window]
+Name=New Private Window
+Exec=kondor --private

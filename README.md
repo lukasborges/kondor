@@ -27,6 +27,7 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Settings** (Ctrl+,): home page, search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit), applied immediately and stored in `~/.config/KDE/Kondor.conf`
 - **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
 - **Download manager**: downloads show live progress, speed and size in a toolbar popup; pause, resume, cancel, open the file or show it in its folder, desktop notification on completion/failure, optional "ask where to save", and a confirmation before quitting with active downloads
+- **Command line**: `kondor URL…` opens the given URLs or local files in tabs (`--private` for a private tab), and the app registers as a web browser so it can be the system default
 - **Menu** and **keyboard shortcuts**
 - **KDE look** via the `org.kde.desktop` (QQC2) style, with a `Fusion` fallback
 - **Semantic colors** (`Kirigami.Theme`/`palette`): follows the system color scheme
@@ -76,14 +77,28 @@ ctest --test-dir build --output-on-failure
 
 Pass `-DBUILD_TESTING=OFF` to configure without building them.
 
+## Set as default browser
+
+Install Kondor (or use the AppImage), then open **System Settings → Default Applications → Web
+browser** and choose **Kondor Browser**. From a terminal the same is done with:
+
+```bash
+xdg-settings set default-web-browser kondor.desktop
+```
+
+Kondor then opens links clicked in other applications. The desktop entry also provides a
+**New Private Window** action (`kondor --private`).
+
 ## Project structure
 
 ```
 CMakeLists.txt
 src/
-  main.cpp            startup (WebEngine, KDE style, QML engine)
+  main.cpp            startup (command line, WebEngine, KDE style, QML engine)
   profilemanager.*    persistent/private profiles, address/search resolution
   addressresolver.*   pure address/search resolution (unit tested)
+  startupargs.*       QML singleton: command-line URLs and private mode
+  startupurl.*        command-line argument to URL conversion (unit tested)
   settings.*          QML singleton: user settings persisted with QSettings
   tab.*               per-tab state (title, URL, icon, loading, history)
   tabmodel.*          tab model (QAbstractListModel)

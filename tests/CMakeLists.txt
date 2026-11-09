@@ -14,6 +14,23 @@ target_link_libraries(tst_addressresolver PRIVATE
 
 add_test(NAME tst_addressresolver COMMAND tst_addressresolver)
 
+qt_add_executable(tst_startupurl
+    tst_startupurl.cpp
+    ../src/startupurl.cpp
+    ../src/addressresolver.cpp
+)
+
+target_include_directories(tst_startupurl PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_startupurl PRIVATE
+    Qt6::Core
+    Qt6::Test
+)
+
+add_test(NAME tst_startupurl COMMAND tst_startupurl)
+
 qt_add_executable(tst_tabmodel
     tst_tabmodel.cpp
     ../src/tabmodel.cpp

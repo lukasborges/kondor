@@ -122,8 +122,12 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        if (tabs.count === 0)
-            tabs.addTab(false)
+        if (StartupArgs.startupUrls.length > 0) {
+            for (let i = 0; i < StartupArgs.startupUrls.length; ++i)
+                tabs.addTab(StartupArgs.startupPrivate, StartupArgs.startupUrls[i])
+        } else if (tabs.count === 0) {
+            tabs.addTab(StartupArgs.startupPrivate)
+        }
     }
 
     header: ColumnLayout {

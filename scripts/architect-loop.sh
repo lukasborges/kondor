@@ -75,7 +75,7 @@ main() {
     else
       merge_rule="If it passes, approve it (gh pr review --approve; if GitHub refuses because the same account opened the PR, submit a comment review that starts with \"Verdict: APPROVE\"), add the label approved to issue #$n (keep in-review), comment on issue #$n that it is approved and waiting for the maintainer to merge, and stop: a human merges it (the next issue is promoted after the merge)."
     fi
-    common="You are the architect agent of this repository, running unattended. Follow docs/agents/architect.md and AGENTS.md (read them from origin/main) strictly. Never edit src/ or qml/, never push to the developer's branches. For any change to docs/specs, prototypes or other architect-owned files, create your own git worktree from origin/main outside the current directory, commit there (English, Conventional Commits, no attribution trailers) and push to main. The current directory is the loop's read-only control checkout. Record every decision on GitHub (issue/PR comments or reviews). Stop after this one step and print a short report."
+    common="You are the architect agent of this repository, running unattended. Follow docs/agents/architect.md and AGENTS.md (read them from origin/main) strictly. Never edit src/ or qml/, never push to the developer's branches. For any change to docs/specs, prototypes or other architect-owned files, create your own git worktree from origin/main outside the current directory, commit there (English, Conventional Commits, no attribution trailers) and push to main. The current directory is the loop's read-only control checkout. Record every decision on GitHub (issue/PR comments or reviews). Every issue you create must be put on the project board with scripts/board.sh <N>. Stop after this one step and print a short report."
     case "$st" in
       in-review) cat <<EOF
 $common
@@ -83,7 +83,7 @@ $common
 Step: review the open PR for issue #$n (gh pr list --search "Closes #$n"). If issue #$n already has the label approved, skip the review and only do the CI check and merge part below. Use the review checklist in docs/agents/architect.md: build the PR head in a separate worktree, run the offscreen smoke test, the spec's manual test where possible (always with temporary XDG_CONFIG_HOME, XDG_DATA_HOME and XDG_CACHE_HOME as in AGENTS.md, never the maintainer's real profile) and ctest if tests exist; check the spec (docs/specs/$(printf '%04d' "$n")-*.md, or the issue body for a bug issue) acceptance criteria and out of scope, AGENTS.md conventions, private-tab privacy and visual parity with the prototype. Post the review as a PR review with concrete file:line comments.
 $merge_rule
 If it does not pass, submit "request changes" (gh pr review --request-changes; or a comment review starting with \"Verdict: REQUEST CHANGES\" if GitHub refuses), remove the approved label if present and switch issue #$n from in-review to to-dev.
-Promotion: if the queue is now empty, add the label to-dev to the oldest open issue labeled bug that has no state label or, if there is none, to the next issue of AGENTS.md "Roadmap order" that is still open and not yet started, with a short issue comment saying it is now the current issue.
+Promotion: if the queue is now empty, add the label to-dev to the oldest open issue labeled bug that has no state label or, if there is none, to the next issue of AGENTS.md "Roadmap order" that is still open and not yet started, with a short issue comment saying it is now the current issue, and run scripts/board.sh <that issue> "In Progress" to update the project board.
 EOF
       ;;
       question) cat <<EOF
@@ -101,7 +101,7 @@ EOF
       promote) cat <<EOF
 $common
 
-Step: nothing is in flight (no issue is to-spec, to-dev or in-review). Promote the oldest open issue labeled bug that has no state label or, if there is none, the next issue of AGENTS.md "Roadmap order" that is still open and has no state label: add the label to-dev and post a short comment on it saying it is now the current issue and linking its spec (a bug issue is its own spec). Do nothing else.
+Step: nothing is in flight (no issue is to-spec, to-dev or in-review). Promote the oldest open issue labeled bug that has no state label or, if there is none, the next issue of AGENTS.md "Roadmap order" that is still open and has no state label: add the label to-dev, post a short comment on it saying it is now the current issue and linking its spec (a bug issue is its own spec), and run scripts/board.sh <that issue> "In Progress" to update the project board. Do nothing else.
 EOF
       ;;
     esac

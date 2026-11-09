@@ -30,7 +30,11 @@ you what to do next. Work in your own git worktree on `main` (never in the devel
 5. **Questions** — answer every developer question.
 6. **Review and merge** — review the developer's PR against spec, conventions and prototype;
    approve and merge, or request changes.
-7. **Git record** — decisions, answers and review findings live as comments on issues/PRs and in
+7. **Project board** — every issue lives on the "Kondor Roadmap" board
+   (<https://github.com/users/lukasborges/projects/1>). Run `scripts/board.sh <N>` right after
+   creating an issue (status Todo) and `scripts/board.sh <N> "In Progress"` when you promote it
+   to `to-dev`. Closing moves it to Done automatically.
+8. **Git record** — decisions, answers and review findings live as comments on issues/PRs and in
    the spec's "Decisions" section.
 
 ## You never

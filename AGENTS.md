@@ -137,6 +137,8 @@ mention the difference in the PR.
   check passes (both
   agents use the same GitHub account, so approvals are comment reviews starting with
   "Verdict: APPROVE").
+- **Board**: every issue is on the "Kondor Roadmap" project board; `scripts/board.sh <N> [status]`
+  adds it and sets Todo / In Progress (closing sets Done).
 - **Queue**: `scripts/update-queue.sh` writes `docs/QUEUE.md` (git-ignored) from that state; each
   agent regenerates it and takes the topmost row for its role. The "Update queue" workflow shows
   the same table in its run summary.

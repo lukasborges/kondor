@@ -70,4 +70,8 @@ Visual target — match it (controls, Kirigami components, icon names, wording, 
 
 ## Decisions
 
-_None yet._ Answers to developer questions (`question` label) are recorded here as `| Question | Decision |` rows.
+| Question | Decision |
+| --- | --- |
+| Should "Close Other Tabs" also close pinned tabs? | No. Pinned tabs are kept, like "Close Tabs to the Right" (accepted in the PR #31 review). |
+| Does "Duplicate Tab" keep the pinned state? | Yes. The duplicate is pinned too, so the pinned group stays at the start of the model (PR #31). |
+| From a private tab, does "New Tab" in the tab context menu open a private tab? | No. It opens a normal tab, like `Ctrl+T`. Links opened *from* a private tab still keep its profile (PR #31). |

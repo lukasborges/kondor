@@ -36,8 +36,8 @@
     </message>
     <message>
         <location filename="../qml/BookmarksWindow.qml" line="156"/>
-        <location filename="../qml/BookmarksWindow.qml" line="382"/>
-        <location filename="../qml/BookmarksWindow.qml" line="392"/>
+        <location filename="../qml/BookmarksWindow.qml" line="389"/>
+        <location filename="../qml/BookmarksWindow.qml" line="399"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>Nouveau dossier</translation>
@@ -73,37 +73,37 @@
         <translation>Rechercher des marque-pages…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="410"/>
+        <location filename="../qml/BookmarksWindow.qml" line="417"/>
         <source>Rename Folder</source>
         <translation>Renommer le dossier</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="410"/>
+        <location filename="../qml/BookmarksWindow.qml" line="417"/>
         <source>Rename Bookmark</source>
         <translation>Renommer le marque-page</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="436"/>
+        <location filename="../qml/BookmarksWindow.qml" line="443"/>
         <source>Delete Folder</source>
         <translation>Supprimer le dossier</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="436"/>
+        <location filename="../qml/BookmarksWindow.qml" line="443"/>
         <source>Delete Bookmark</source>
         <translation>Supprimer le marque-page</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="438"/>
+        <location filename="../qml/BookmarksWindow.qml" line="445"/>
         <source>Delete this folder and everything in it?</source>
         <translation>Supprimer ce dossier et tout son contenu ?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="439"/>
+        <location filename="../qml/BookmarksWindow.qml" line="446"/>
         <source>Delete this bookmark?</source>
         <translation>Supprimer ce marque-page ?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="460"/>
+        <location filename="../qml/BookmarksWindow.qml" line="467"/>
         <source>Import Bookmarks</source>
         <translation>Importer des marque-pages</translation>
     </message>
@@ -332,7 +332,7 @@
 <context>
     <name>Kondor</name>
     <message>
-        <location filename="../src/main.cpp" line="90"/>
+        <location filename="../src/main.cpp" line="115"/>
         <source>Kondor Browser</source>
         <extracomment>Application display name: translate &quot;Browser&quot;, keep &quot;Kondor&quot;</extracomment>
         <translation>Navigateur Kondor</translation>

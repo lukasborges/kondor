@@ -1,6 +1,7 @@
 #include "historymanager.h"
 
 #include "database.h"
+#include "faviconstore.h"
 #include "historymodel.h"
 #include "settings.h"
 
@@ -133,8 +134,11 @@ void HistoryManager::clearAll()
     if (!db->isValid())
         return;
     QSqlQuery query(db->handle());
-    if (query.exec(QStringLiteral("DELETE FROM history")))
+    if (query.exec(QStringLiteral("DELETE FROM history"))) {
         m_model->refresh();
+        // Stored hosts reveal visited sites, so they go with the history.
+        FaviconStore::instance()->clearAll();
+    }
 }
 
 void HistoryManager::clearSince(qint64 msecsSinceEpoch)
@@ -145,8 +149,10 @@ void HistoryManager::clearSince(qint64 msecsSinceEpoch)
     QSqlQuery query(db->handle());
     query.prepare(QStringLiteral("DELETE FROM history WHERE visited_at >= ?"));
     query.addBindValue(msecsSinceEpoch);
-    if (query.exec())
+    if (query.exec()) {
         m_model->refresh();
+        FaviconStore::instance()->clearSince(msecsSinceEpoch);
+    }
 }
 
 QVariantList HistoryManager::topSites(int limit) const

@@ -10,7 +10,7 @@
 
 namespace {
 // Schema version. Each migration bumps `PRAGMA user_version` by 1.
-constexpr int kSchemaVersion = 2;
+constexpr int kSchemaVersion = 3;
 }
 
 Database *Database::instance()
@@ -132,6 +132,16 @@ void Database::migrate()
                 ok = ok && insert.exec();
             }
         }
+    }
+
+    if (current < 3) {
+        // One favicon per host, filled by normal tabs only (FaviconStore).
+        ok = ok && query.exec(QStringLiteral(
+            "CREATE TABLE IF NOT EXISTS favicons ("
+            "  host TEXT PRIMARY KEY,"
+            "  image BLOB NOT NULL,"
+            "  updated_at INTEGER NOT NULL"
+            ")"));
     }
 
     if (!ok) {

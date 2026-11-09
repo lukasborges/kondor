@@ -19,7 +19,13 @@ Item {
                 HistoryManager.updateTitle(webView.url, title)
         }
         onUrlChanged: root.tab.setUrl(url)
-        onIconChanged: root.tab.setIconUrl(icon)
+        onIconChanged: {
+            root.tab.setIconUrl(icon)
+            // Only normal tabs persist a favicon: nothing from a private tab
+            // may be written to disk.
+            if (!root.tab.isPrivate && icon.toString() !== "")
+                FaviconStore.store(webView.url, icon)
+        }
         onLoadProgressChanged: root.tab.setProgress(loadProgress)
 
         onLoadingChanged: function(loadRequest) {

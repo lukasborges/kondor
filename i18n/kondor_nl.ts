@@ -36,8 +36,8 @@
     </message>
     <message>
         <location filename="../qml/BookmarksWindow.qml" line="156"/>
-        <location filename="../qml/BookmarksWindow.qml" line="382"/>
-        <location filename="../qml/BookmarksWindow.qml" line="392"/>
+        <location filename="../qml/BookmarksWindow.qml" line="389"/>
+        <location filename="../qml/BookmarksWindow.qml" line="399"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>Nieuwe map</translation>
@@ -73,37 +73,37 @@
         <translation>Bladwijzers zoeken…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="410"/>
+        <location filename="../qml/BookmarksWindow.qml" line="417"/>
         <source>Rename Folder</source>
         <translation>Mapnaam wijzigen</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="410"/>
+        <location filename="../qml/BookmarksWindow.qml" line="417"/>
         <source>Rename Bookmark</source>
         <translation>Bladwijzernaam wijzigen</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="436"/>
+        <location filename="../qml/BookmarksWindow.qml" line="443"/>
         <source>Delete Folder</source>
         <translation>Map verwijderen</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="436"/>
+        <location filename="../qml/BookmarksWindow.qml" line="443"/>
         <source>Delete Bookmark</source>
         <translation>Bladwijzer verwijderen</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="438"/>
+        <location filename="../qml/BookmarksWindow.qml" line="445"/>
         <source>Delete this folder and everything in it?</source>
         <translation>Deze map en alles erin verwijderen?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="439"/>
+        <location filename="../qml/BookmarksWindow.qml" line="446"/>
         <source>Delete this bookmark?</source>
         <translation>Deze bladwijzer verwijderen?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="460"/>
+        <location filename="../qml/BookmarksWindow.qml" line="467"/>
         <source>Import Bookmarks</source>
         <translation>Bladwijzers importeren</translation>
     </message>
@@ -332,7 +332,7 @@
 <context>
     <name>Kondor</name>
     <message>
-        <location filename="../src/main.cpp" line="90"/>
+        <location filename="../src/main.cpp" line="115"/>
         <source>Kondor Browser</source>
         <extracomment>Application display name: translate &quot;Browser&quot;, keep &quot;Kondor&quot;</extracomment>
         <translation>Kondor-browser</translation>

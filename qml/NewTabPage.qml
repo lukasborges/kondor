@@ -159,11 +159,11 @@ Rectangle {
                             color: Kirigami.Theme.alternateBackgroundColor
                             border.color: Qt.alpha(Kirigami.Theme.textColor, 0.15)
 
-                            Kirigami.Icon {
+                            SiteIcon {
                                 anchors.centerIn: parent
                                 width: Kirigami.Units.iconSizes.medium
                                 height: width
-                                source: "image://favicon/" + tile.modelData.url
+                                pageUrl: tile.modelData.url
                                 fallback: "internet-web-browser"
                             }
                         }

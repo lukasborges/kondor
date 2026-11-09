@@ -41,6 +41,7 @@ qt_add_qml_module(kondor
         qml/BookmarksBar.qml
         qml/BookmarkMenu.qml
         qml/BookmarksWindow.qml
+        qml/SiteIcon.qml
     SOURCES
         src/addressresolver.h
         src/addressresolver.cpp
@@ -72,6 +73,8 @@ qt_add_qml_module(kondor
         src/bookmarkmanager.cpp
         src/bookmarkmodel.h
         src/bookmarkmodel.cpp
+        src/faviconstore.h
+        src/faviconstore.cpp
 )
 
 qt_add_translations(kondor

@@ -111,6 +111,7 @@ src/
   historymodel.*      history list model (QAbstractListModel)
   bookmarkmanager.*   QML singleton: bookmark tree, folders, HTML import
   bookmarkmodel.*     one folder's items as a list model (QAbstractListModel)
+  faviconstore.*      QML singleton: one favicon per host (table `favicons`), filled by normal tabs only
   downloadmanager.*   QML singleton: downloads list model, actions and notifications
   notifier.*          QML singleton: desktop notifications over D-Bus
 qml/
@@ -127,6 +128,7 @@ qml/
   BookmarksBar.qml    bookmarks toolbar under the navigation bar
   BookmarkMenu.qml    folder menu (bar folders and the main menu submenu)
   BookmarksWindow.qml bookmark manager window (folders, reorder, import)
+  SiteIcon.qml        favicon with a fallback icon (toolbar, manager, New Tab page)
 ```
 
 ## Keyboard shortcuts

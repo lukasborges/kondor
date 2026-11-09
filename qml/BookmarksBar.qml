@@ -59,8 +59,15 @@ ToolBar {
                     spacing: Kirigami.Units.smallSpacing
 
                     Kirigami.Icon {
-                        source: barButton.isFolder ? "folder" : "image://favicon/" + barButton.url
-                        fallback: "globe"
+                        visible: barButton.isFolder
+                        source: "folder"
+                        Layout.preferredWidth: 16
+                        Layout.preferredHeight: 16
+                    }
+
+                    SiteIcon {
+                        visible: !barButton.isFolder
+                        pageUrl: barButton.url
                         Layout.preferredWidth: 16
                         Layout.preferredHeight: 16
                     }

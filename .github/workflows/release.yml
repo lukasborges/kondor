@@ -38,18 +38,18 @@ jobs:
           cp packaging/kondor.desktop AppDir/
           cp packaging/kondor.png AppDir/
 
-          # QtWebEngine (fallback; o plugin-qt costuma copiar sozinho)
+          # QtWebEngine (fallback; the Qt plugin usually copies it by itself)
           mkdir -p AppDir/usr/libexec
           cp /usr/lib64/qt6/libexec/QtWebEngineProcess AppDir/usr/libexec/ 2>/dev/null || true
           cp -r /usr/share/qt6/resources AppDir/usr/share/qt6/ 2>/dev/null || true
           cp -r /usr/share/qt6/translations AppDir/usr/share/qt6/ 2>/dev/null || true
 
-          # Estilo QQC2 do KDE (é setado no C++, então o scanner de QML não pega)
+          # KDE QQC2 style (set from C++, so the QML scanner does not pick it up)
           mkdir -p AppDir/usr/qml/org/kde AppDir/usr/plugins/platforms
           cp -r /usr/lib64/qt6/qml/org/kde/desktop AppDir/usr/qml/org/kde/
           cp -r /usr/lib64/qt6/qml/org/kde/qqc2desktopstyle AppDir/usr/qml/org/kde/
 
-          # Suporte a Wayland
+          # Wayland support
           cp /usr/lib64/qt6/plugins/platforms/libqwayland.so AppDir/usr/plugins/platforms/ 2>/dev/null || true
           cp -r /usr/lib64/qt6/plugins/wayland-* AppDir/usr/plugins/ 2>/dev/null || true
 
@@ -57,11 +57,11 @@ jobs:
           mkdir -p AppDir/usr/plugins/sqldrivers
           cp /usr/lib64/qt6/plugins/sqldrivers/libqsqlite.so AppDir/usr/plugins/sqldrivers/
 
-          # Integração com o Plasma. O qt.conf do AppImage só enxerga os plugins de dentro dele,
-          # então sem estes o app abre com o estilo Fusion e sem ícones:
-          #  - tema de plataforma do KDE (tema de ícones, cores e fontes do usuário)
-          #  - estilo Breeze (o org.kde.desktop desenha os controles via QStyle)
-          #  - plataforma desktop do Kirigami e motor de ícones SVG
+          # Plasma integration. The AppImage's qt.conf only sees the plugins inside it,
+          # so without these the app starts with the Fusion style and no icons:
+          #  - KDE platform theme (the user's icon theme, colors and fonts)
+          #  - Breeze style (org.kde.desktop draws the controls via QStyle)
+          #  - Kirigami desktop platform and SVG icon engine
           for p in platformthemes/KDEPlasmaPlatformTheme6.so styles/breeze6.so \
                    kf6/kirigami/platform/org.kde.desktop.so iconengines/libqsvgicon.so; do
             mkdir -p "AppDir/usr/plugins/$(dirname "$p")"
@@ -81,7 +81,7 @@ jobs:
           NO_STRIP: "1"
         run: |
           export PATH="/usr/lib64/qt6/bin:$PATH"
-          # --deploy-deps-only: traz as bibliotecas (KF6 etc.) dos plugins copiados à mão
+          # --deploy-deps-only: brings the libraries (KF6 etc.) of the hand-copied plugins
           ./linuxdeploy --appdir AppDir --plugin qt \
             --deploy-deps-only AppDir/usr/plugins/platformthemes \
             --deploy-deps-only AppDir/usr/plugins/styles \

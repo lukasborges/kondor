@@ -30,10 +30,11 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Menu** and **keyboard shortcuts**
 - **KDE look** via the `org.kde.desktop` (QQC2) style, with a `Fusion` fallback
 - **Semantic colors** (`Kirigami.Theme`/`palette`): follows the system color scheme
+- **Translations**: English source strings with a Brazilian Portuguese translation, selected by the system locale
 
 ## Stack
 
-- **Qt 6.5+** (tested with **6.11.2**): `Core`, `DBus`, `Gui`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebEngineQuick`
+- **Qt 6.5+** (tested with **6.11.2**): `Core`, `DBus`, `Gui`, `LinguistTools`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebEngineQuick`
 - **Qt Quick Controls 2** with the **`org.kde.desktop`** (Breeze) style
 - **Kirigami** for theming (`Kirigami.Theme`)
 - **C++17** + **CMake 3.21+**
@@ -49,7 +50,7 @@ On **Fedora** (the original development environment):
 
 ```bash
 sudo dnf install cmake gcc-c++ \
-    qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel \
+    qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel \
     kf6-qqc2-desktop-style kf6-kirigami
 ```
 
@@ -113,6 +114,19 @@ qml/
 | `Alt+←` / `Alt+→` | Back / forward |
 | `Ctrl++` / `Ctrl+-` | Zoom in / out |
 | `Ctrl+0` | Reset zoom |
+
+## Translations
+
+English is the source language; every user-visible string is wrapped in `qsTr()`.
+Brazilian Portuguese ships in `i18n/kondor_pt_BR.ts`, and the compiled `.qm` files are
+embedded in the binary under `:/i18n`. Kondor loads the translation that matches the
+system locale at startup (and Qt's own translations for dialogs and context menus).
+
+- **Update the `.ts` files** after changing strings: `cmake --build build --target update_translations`.
+  This runs `lupdate` with `-no-obsolete` and writes the result to `i18n/`.
+- **Add a language**: create `i18n/kondor_<lang>.ts` (the `update_translations` target creates it
+  if it is listed in `TS_FILES`), add it to `TS_FILES` in `CMakeLists.txt`, and translate the
+  messages with Qt Linguist (`linguist-qt6 i18n/kondor_<lang>.ts`).
 
 ## Notes
 

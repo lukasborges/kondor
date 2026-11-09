@@ -8,6 +8,7 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
     Core
     DBus
     Gui
+    LinguistTools
     Qml
     Quick
     QuickControls2
@@ -55,6 +56,11 @@ qt_add_qml_module(kondor
         src/notifier.cpp
 )
 
+qt_add_translations(kondor
+    TS_FILES i18n/kondor_pt_BR.ts
+    RESOURCE_PREFIX /i18n
+    LUPDATE_OPTIONS -no-obsolete)
+
 qt_add_resources(kondor "app_icon"
     PREFIX "/"
     FILES
@@ -82,7 +88,7 @@ install(TARGETS kondor
     RUNTIME DESTINATION bin
 )
 
-# Ícone e entrada de menu (.desktop)
+# Icon and menu entry (.desktop)
 install(FILES packaging/kondor.desktop DESTINATION share/applications)
 install(FILES packaging/kondor.png DESTINATION share/icons/hicolor/256x256/apps)
 install(FILES packaging/kondor.svg DESTINATION share/icons/hicolor/scalable/apps)

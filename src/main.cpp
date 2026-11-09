@@ -1,3 +1,4 @@
+#include <QApplication>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QDir>
@@ -58,7 +59,16 @@ int main(int argc, char *argv[])
     // Must happen before loading anything from WebEngine in QML.
     QtWebEngineQuick::initialize();
 
-    QGuiApplication app(argc, argv);
+    // Inside an AppImage, let the system's xdg-desktop-portal-kde draw the
+    // native KDE file dialogs, so KIO workers never have to be bundled.
+    if (qEnvironmentVariableIsSet("APPIMAGE")
+        && !qEnvironmentVariableIsSet("PLASMA_INTEGRATION_USE_PORTAL")) {
+        qputenv("PLASMA_INTEGRATION_USE_PORTAL", "1");
+    }
+
+    // QApplication (not QGuiApplication): the KDE platform theme only provides
+    // its native file dialogs to a QApplication.
+    QApplication app(argc, argv);
 
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
     QCoreApplication::setApplicationName(QStringLiteral("Kondor"));

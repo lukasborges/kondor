@@ -38,7 +38,7 @@ A working prototype with the core functionality in place: it actually browses, w
 
 ## Stack
 
-- **Qt 6.5+** (tested with **6.11.2**): `Core`, `DBus`, `Gui`, `LinguistTools`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebEngineQuick`
+- **Qt 6.5+** (tested with **6.11.2**): `Core`, `DBus`, `Gui`, `LinguistTools`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebEngineQuick`, `Widgets`
 - **Qt Quick Controls 2** with the **`org.kde.desktop`** (Breeze) style
 - **Kirigami** for theming (`Kirigami.Theme`)
 - **C++17** + **CMake 3.21+**

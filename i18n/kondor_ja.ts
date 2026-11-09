@@ -35,75 +35,80 @@
         <translation>ブックマークを管理</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="156"/>
-        <location filename="../qml/BookmarksWindow.qml" line="389"/>
-        <location filename="../qml/BookmarksWindow.qml" line="399"/>
+        <location filename="../qml/BookmarksWindow.qml" line="331"/>
+        <location filename="../qml/BookmarksWindow.qml" line="688"/>
+        <location filename="../qml/BookmarksWindow.qml" line="698"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>新しいフォルダー</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="161"/>
+        <location filename="../qml/BookmarksWindow.qml" line="336"/>
         <source>Rename</source>
         <translation>名前を変更</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="175"/>
+        <location filename="../qml/BookmarksWindow.qml" line="350"/>
         <source>Delete</source>
         <translation>削除</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="192"/>
+        <location filename="../qml/BookmarksWindow.qml" line="367"/>
         <source>Move Up</source>
         <translation>上へ移動</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="203"/>
+        <location filename="../qml/BookmarksWindow.qml" line="378"/>
         <source>Move Down</source>
         <translation>下へ移動</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="214"/>
+        <location filename="../qml/BookmarksWindow.qml" line="389"/>
         <source>Import from HTML…</source>
         <translation>HTML からインポート…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="222"/>
+        <location filename="../qml/BookmarksWindow.qml" line="397"/>
         <source>Search bookmarks…</source>
         <translation>ブックマークを検索…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="417"/>
+        <location filename="../qml/BookmarksWindow.qml" line="660"/>
+        <source>Move To</source>
+        <translation>移動先</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="716"/>
         <source>Rename Folder</source>
         <translation>フォルダー名を変更</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="417"/>
+        <location filename="../qml/BookmarksWindow.qml" line="716"/>
         <source>Rename Bookmark</source>
         <translation>ブックマーク名を変更</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="443"/>
+        <location filename="../qml/BookmarksWindow.qml" line="742"/>
         <source>Delete Folder</source>
         <translation>フォルダーを削除</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="443"/>
+        <location filename="../qml/BookmarksWindow.qml" line="742"/>
         <source>Delete Bookmark</source>
         <translation>ブックマークを削除</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="445"/>
+        <location filename="../qml/BookmarksWindow.qml" line="744"/>
         <source>Delete this folder and everything in it?</source>
         <translation>このフォルダーと中身をすべて削除しますか？</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="446"/>
+        <location filename="../qml/BookmarksWindow.qml" line="745"/>
         <source>Delete this bookmark?</source>
         <translation>このブックマークを削除しますか？</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="467"/>
+        <location filename="../qml/BookmarksWindow.qml" line="766"/>
         <source>Import Bookmarks</source>
         <translation>ブックマークをインポート</translation>
     </message>

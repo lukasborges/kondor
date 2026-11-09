@@ -19,6 +19,9 @@ private slots:
     void rootFolders();
     void addAndFindBookmarks();
     void moveBetweenFolders();
+    void moveIntoAnotherFolderAtEnd();
+    void refuseMovingFolderIntoChild();
+    void modelFollowsSelectedFolder();
     void removeFolderCascades();
     void importNetscapeHtml();
 };
@@ -98,6 +101,69 @@ void TestBookmarks::moveBetweenFolders()
     manager->move(folder, folder, 0);
     QCOMPARE(manager->bookmark(folder).value(QStringLiteral("parentId")).toLongLong(),
              manager->otherFolderId());
+}
+
+void TestBookmarks::moveIntoAnotherFolderAtEnd()
+{
+    BookmarkManager *manager = BookmarkManager::instance();
+    const qint64 target = manager->addFolder(QStringLiteral("Move target"),
+                                             manager->otherFolderId());
+    QVERIFY(target > 0);
+    const qint64 first = manager->addBookmark(QUrl(QStringLiteral("https://bookmarks.example/end-a")),
+                                              QStringLiteral("End A"), target);
+    QVERIFY(first > 0);
+
+    const qint64 source = manager->addFolder(QStringLiteral("Move source"),
+                                             manager->otherFolderId());
+    QVERIFY(source > 0);
+    const qint64 moved = manager->addBookmark(QUrl(QStringLiteral("https://bookmarks.example/end-b")),
+                                              QStringLiteral("End B"), source);
+    QVERIFY(moved > 0);
+
+    // The drag and drop and "Move To" code appends at the current child count.
+    manager->move(moved, target, manager->childCount(target));
+    QCOMPARE(manager->bookmark(moved).value(QStringLiteral("parentId")).toLongLong(), target);
+    QCOMPARE(manager->bookmark(moved).value(QStringLiteral("position")).toInt(), 1);
+    QCOMPARE(manager->childCount(source), 0);
+
+    // The target folder's model shows the new order.
+    BookmarkModel *model = manager->modelForFolder(target);
+    QCOMPARE(model->rowOf(first), 0);
+    QCOMPARE(model->rowOf(moved), 1);
+}
+
+void TestBookmarks::refuseMovingFolderIntoChild()
+{
+    BookmarkManager *manager = BookmarkManager::instance();
+    const qint64 parent = manager->addFolder(QStringLiteral("Cycle parent"),
+                                             manager->otherFolderId());
+    QVERIFY(parent > 0);
+    const qint64 child = manager->addFolder(QStringLiteral("Cycle child"), parent);
+    QVERIFY(child > 0);
+    const qint64 grandchild = manager->addFolder(QStringLiteral("Cycle grandchild"), child);
+    QVERIFY(grandchild > 0);
+
+    // Moving a folder into its own subtree would detach it: refused.
+    manager->move(parent, grandchild, 0);
+    QCOMPARE(manager->bookmark(parent).value(QStringLiteral("parentId")).toLongLong(),
+             manager->otherFolderId());
+    QCOMPARE(manager->bookmark(child).value(QStringLiteral("parentId")).toLongLong(), parent);
+    QCOMPARE(manager->bookmark(grandchild).value(QStringLiteral("parentId")).toLongLong(), child);
+}
+
+void TestBookmarks::modelFollowsSelectedFolder()
+{
+    BookmarkManager *manager = BookmarkManager::instance();
+    const qint64 folder = manager->addFolder(QStringLiteral("Model folder"),
+                                             manager->toolbarFolderId());
+    QVERIFY(folder > 0);
+
+    // Every folder gets its own model, so the manager's right-hand list
+    // always shows the selected folder (never the toolbar's rows).
+    QVERIFY(manager->modelForFolder(folder) != manager->toolbarModel());
+    QCOMPARE(manager->modelForFolder(folder)->folderId(), folder);
+    QCOMPARE(manager->modelForFolder(folder)->rowCount(), 0);
+    QCOMPARE(manager->modelForFolder(manager->toolbarFolderId()), manager->toolbarModel());
 }
 
 void TestBookmarks::removeFolderCascades()

@@ -35,75 +35,80 @@
         <translation>Lesezeichen verwalten</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="156"/>
-        <location filename="../qml/BookmarksWindow.qml" line="389"/>
-        <location filename="../qml/BookmarksWindow.qml" line="399"/>
+        <location filename="../qml/BookmarksWindow.qml" line="331"/>
+        <location filename="../qml/BookmarksWindow.qml" line="688"/>
+        <location filename="../qml/BookmarksWindow.qml" line="698"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>Neuer Ordner</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="161"/>
+        <location filename="../qml/BookmarksWindow.qml" line="336"/>
         <source>Rename</source>
         <translation>Umbenennen</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="175"/>
+        <location filename="../qml/BookmarksWindow.qml" line="350"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="192"/>
+        <location filename="../qml/BookmarksWindow.qml" line="367"/>
         <source>Move Up</source>
         <translation>Nach oben</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="203"/>
+        <location filename="../qml/BookmarksWindow.qml" line="378"/>
         <source>Move Down</source>
         <translation>Nach unten</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="214"/>
+        <location filename="../qml/BookmarksWindow.qml" line="389"/>
         <source>Import from HTML…</source>
         <translation>Aus HTML importieren…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="222"/>
+        <location filename="../qml/BookmarksWindow.qml" line="397"/>
         <source>Search bookmarks…</source>
         <translation>Lesezeichen durchsuchen…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="417"/>
+        <location filename="../qml/BookmarksWindow.qml" line="660"/>
+        <source>Move To</source>
+        <translation>Verschieben nach</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="716"/>
         <source>Rename Folder</source>
         <translation>Ordner umbenennen</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="417"/>
+        <location filename="../qml/BookmarksWindow.qml" line="716"/>
         <source>Rename Bookmark</source>
         <translation>Lesezeichen umbenennen</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="443"/>
+        <location filename="../qml/BookmarksWindow.qml" line="742"/>
         <source>Delete Folder</source>
         <translation>Ordner löschen</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="443"/>
+        <location filename="../qml/BookmarksWindow.qml" line="742"/>
         <source>Delete Bookmark</source>
         <translation>Lesezeichen löschen</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="445"/>
+        <location filename="../qml/BookmarksWindow.qml" line="744"/>
         <source>Delete this folder and everything in it?</source>
         <translation>Diesen Ordner und seinen gesamten Inhalt löschen?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="446"/>
+        <location filename="../qml/BookmarksWindow.qml" line="745"/>
         <source>Delete this bookmark?</source>
         <translation>Dieses Lesezeichen löschen?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="467"/>
+        <location filename="../qml/BookmarksWindow.qml" line="766"/>
         <source>Import Bookmarks</source>
         <translation>Lesezeichen importieren</translation>
     </message>

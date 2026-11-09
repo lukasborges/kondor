@@ -122,7 +122,8 @@ mention the difference in the PR.
   (developer implements or addresses review) → `in-review` (architect reviews the PR) → closed
   when the architect merges the PR (`Closes #N`). `question` is added on top of the state when the
   developer needs an answer; the architect removes it after answering. `approved` is added on top
-  of `in-review` when the architect approves a PR that waits for the maintainer's merge (both
+  of `in-review` when the architect approves a PR; the architect squash-merges it once its build
+  check passes (both
   agents use the same GitHub account, so approvals are comment reviews starting with
   "Verdict: APPROVE").
 - **Queue**: `scripts/update-queue.sh` writes `docs/QUEUE.md` (git-ignored) from that state; each

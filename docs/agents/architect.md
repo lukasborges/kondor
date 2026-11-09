@@ -100,14 +100,17 @@ screenshot. The developer's implementation must match it visually.
 (`~/.local/share/kondor-architect-loop/control`), regenerates the queue and runs Claude Code
 headless (`claude -p --permission-mode auto`) for exactly one step when:
 
-- an issue is `in-review` → review the PR; approve it, add the `approved` label and leave the
-  merge to the maintainer (`KONDOR_ARCH_MERGE=0`, the default — merging without a human is blocked by the safety
-  classifier anyway), else request changes and switch to `to-dev`;
+- an issue is `in-review` → review the PR; if it passes, approve it, add `approved` and squash-merge
+  it once the `build` check is green (the maintainer decided the architect merges;
+  `KONDOR_ARCH_AUTOMERGE=0` leaves the merge to a human), then promote the next issue; otherwise
+  request changes and switch to `to-dev`;
 - an issue has `question` → answer, record the decision in the spec, remove the label;
 - an issue is `to-spec` → write the spec/prototype, switch to `to-dev`;
 - nothing is in flight → promote the next "Roadmap order" issue to `to-dev`.
 
-`--permission-mode auto` keeps Claude Code's safety classifier in front of every action: if it
+`--permission-mode auto` keeps Claude Code's safety classifier in front of every action. Merging
+needs the maintainer's own allow rule `Bash(gh pr merge:*)` in `~/.claude/settings.json`; without it
+the architect only approves and asks for the merge on the issue. if it
 blocks something (for example a merge), the step makes no progress, and after two attempts the loop
 pauses that step and sends a desktop notification.
 

@@ -17,7 +17,8 @@
 #   KONDOR_ARCH_INTERVAL  seconds between checks (default: 180)
 #   KONDOR_ARCH_MAX_NO_PROGRESS  runs on the same step without progress before pausing (default: 2)
 #   KONDOR_ARCH_MODEL     Claude model (default: Claude Code's default)
-#   KONDOR_ARCH_MERGE     0 = approve and leave the merge to a human (default), 1 = merge approved PRs automatically
+#   KONDOR_ARCH_AUTOMERGE 1 = the architect squash-merges approved PRs whose build passed (default, the
+#                         maintainer's decision), 0 = approve, add `approved` and leave the merge to a human
 #   KONDOR_CLAUDE         claude binary (default: claude in PATH, else ~/.local/bin/claude)
 #
 # Permissions: runs with `--permission-mode auto`, so every action still goes through Claude
@@ -35,7 +36,7 @@ main() {
   local interval="${KONDOR_ARCH_INTERVAL:-180}"
   local max_no_progress="${KONDOR_ARCH_MAX_NO_PROGRESS:-2}"
   local model="${KONDOR_ARCH_MODEL:-}"
-  local merge="${KONDOR_ARCH_MERGE:-0}"
+  local merge="${KONDOR_ARCH_AUTOMERGE:-1}"
   local claude="${KONDOR_CLAUDE:-$(command -v claude || echo "$HOME/.local/bin/claude")}"
   local log="$state/architect-loop.log"
   mkdir -p "$state"
@@ -70,7 +71,7 @@ main() {
   prompt_for() {
     local n="$1" st="$2" common merge_rule
     if [[ "$merge" == 1 ]]; then
-      merge_rule="If it passes, approve it (gh pr review --approve), squash-merge it (gh pr merge --squash --delete-branch), then promote the next issue of the roadmap order to to-dev (see step for promotion below)."
+      merge_rule="If it passes, approve it (gh pr review --approve; if GitHub refuses because the same account opened the PR, submit a comment review that starts with \"Verdict: APPROVE\") and add the label approved to issue #$n. Then check CI with gh pr checks <PR> --repo lukasborges/kondor: the build check must pass (ignore the queue check). If it passed, merge with exactly: gh pr merge <PR> --repo lukasborges/kondor --squash (the maintainer decided that the architect merges approved PRs), and promote the next issue of the roadmap order to to-dev (see promotion below). If the build is still running, stop: the next run merges it. If the build failed, request changes instead. If the merge command is refused by a permission check, comment on issue #$n that the PR is approved and needs the maintainer to merge it, and stop."
     else
       merge_rule="If it passes, approve it (gh pr review --approve; if GitHub refuses because the same account opened the PR, submit a comment review that starts with \"Verdict: APPROVE\"), add the label approved to issue #$n (keep in-review), comment on issue #$n that it is approved and waiting for the maintainer to merge, and stop: a human merges it (the next issue is promoted after the merge)."
     fi
@@ -79,7 +80,7 @@ main() {
       in-review) cat <<EOF
 $common
 
-Step: review the open PR for issue #$n (gh pr list --search "Closes #$n"). Use the review checklist in docs/agents/architect.md: build the PR head in a separate worktree, run the offscreen smoke test, the spec's manual test where possible and ctest if tests exist; check the spec (docs/specs/$(printf '%04d' "$n")-*.md) acceptance criteria and out of scope, AGENTS.md conventions, private-tab privacy and visual parity with the prototype. Post the review as a PR review with concrete file:line comments.
+Step: review the open PR for issue #$n (gh pr list --search "Closes #$n"). If issue #$n already has the label approved, skip the review and only do the CI check and merge part below. Use the review checklist in docs/agents/architect.md: build the PR head in a separate worktree, run the offscreen smoke test, the spec's manual test where possible and ctest if tests exist; check the spec (docs/specs/$(printf '%04d' "$n")-*.md) acceptance criteria and out of scope, AGENTS.md conventions, private-tab privacy and visual parity with the prototype. Post the review as a PR review with concrete file:line comments.
 $merge_rule
 If it does not pass, submit "request changes" (gh pr review --request-changes; or a comment review starting with \"Verdict: REQUEST CHANGES\" if GitHub refuses), remove the approved label if present and switch issue #$n from in-review to to-dev.
 Promotion: if the queue is now empty, add the label to-dev to the next issue of AGENTS.md "Roadmap order" that is still open and not yet started, with a short issue comment saying it is now the current issue.
@@ -167,7 +168,7 @@ Environment=PATH=$HOME/.local/bin:$HOME/.opencode/bin:/usr/local/bin:/usr/bin:/b
 Environment=KONDOR_REPO=$repo
 Environment=KONDOR_ARCH_CONTROL=$control
 Environment=KONDOR_ARCH_STATE=$state
-Environment=KONDOR_ARCH_MERGE=$merge
+Environment=KONDOR_ARCH_AUTOMERGE=$merge
 ExecStartPre=/usr/bin/git -C $repo fetch -q origin
 ExecStartPre=/usr/bin/git -C $control checkout -q --force --detach origin/main
 ExecStart=/bin/bash $control/scripts/architect-loop.sh

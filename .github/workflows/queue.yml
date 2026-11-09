@@ -21,7 +21,7 @@ permissions:
 
 concurrency:
   group: queue
-  cancel-in-progress: true
+  cancel-in-progress: false   # cancelled runs show up as failed checks on PRs
 
 jobs:
   queue:

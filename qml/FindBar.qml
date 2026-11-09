@@ -13,6 +13,13 @@ InlineBar {
 
     visible: false
 
+    // Esc closes the bar without stealing the key from the web page: only
+    // events already routed inside the bar (field, buttons) reach this handler.
+    Keys.onEscapePressed: function(event) {
+        event.accepted = true
+        root.close()
+    }
+
     function open() {
         visible = true
         searchField.forceActiveFocus()
@@ -40,6 +47,8 @@ InlineBar {
         if (!tab)
             return
         if (searchField.text.length === 0) {
+            // Clearing the field must also drop the highlights left on the page.
+            tab.stopFind()
             tab.setFindResult(0, 0)
             return
         }
@@ -55,14 +64,11 @@ InlineBar {
     }
 
     // A new page in the same tab starts a fresh search: clear the counter while
-    // it loads and look again once the content is ready.
+    // it loads and look again once the content is ready. Same-document
+    // navigations (for example a table-of-contents anchor) do not load, so the
+    // previous results stay valid there.
     Connections {
         target: root.tab
-
-        function onUrlChanged() {
-            if (root.visible)
-                root.tab.setFindResult(0, 0)
-        }
 
         function onLoadingChanged() {
             if (!root.visible)

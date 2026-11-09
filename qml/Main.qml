@@ -477,11 +477,6 @@ ApplicationWindow {
         enabled: findBar.visible
         onActivated: findBar.findPrevious()
     }
-    Shortcut {
-        sequence: "Esc"
-        enabled: findBar.visible
-        onActivated: findBar.close()
-    }
 
     Connections {
         target: tabs

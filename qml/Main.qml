@@ -14,7 +14,8 @@ ApplicationWindow {
     visible: true
     title: {
         const t = tabs.currentTab
-        return (t && t.title.length) ? t.title + " — Kondor" : qsTr("Kondor")
+        return (t && t.title.length) ? t.title + " — " + Qt.application.displayName
+                                     : Qt.application.displayName
     }
 
     TabModel {
@@ -34,7 +35,8 @@ ApplicationWindow {
 
     MessageDialog {
         id: quitDialog
-        title: qsTr("Quit Kondor")
+        //: %1 is the application name
+        title: qsTr("Quit %1").arg(Qt.application.displayName)
         text: qsTr("Downloads are still in progress. Quit anyway?")
         buttons: MessageDialog.Yes | MessageDialog.No
         onAccepted: {
@@ -448,13 +450,15 @@ ApplicationWindow {
                         }
                         MenuSeparator {}
                         MenuItem {
-                            text: qsTr("Configure Kondor…")
+                            //: %1 is the application name
+                            text: qsTr("Configure %1…").arg(Qt.application.displayName)
                             icon.name: "configure"
                             onTriggered: window.openSettings()
                         }
                         MenuSeparator {}
                         MenuItem {
-                            text: qsTr("About Kondor")
+                            //: %1 is the application name
+                            text: qsTr("About %1").arg(Qt.application.displayName)
                             icon.name: "help-about"
                         }
                     }

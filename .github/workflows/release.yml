@@ -79,6 +79,10 @@ jobs:
           QML_SOURCES_PATHS: "${{ github.workspace }}/qml"
           APPIMAGE_EXTRACT_AND_RUN: "1"
           NO_STRIP: "1"
+          # linuxdeploy names the AppImage after the desktop Name ("Kondor Browser"),
+          # so pin the file name to keep the release asset stable.
+          LDAI_OUTPUT: Kondor-x86_64.AppImage
+          OUTPUT: Kondor-x86_64.AppImage
         run: |
           export PATH="/usr/lib64/qt6/bin:$PATH"
           # --deploy-deps-only: brings the libraries (KF6 etc.) of the hand-copied plugins
@@ -96,5 +100,5 @@ jobs:
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           gh release create "$GITHUB_REF_NAME" Kondor-*.AppImage \
-            --title "Kondor $GITHUB_REF_NAME" \
+            --title "Kondor Browser $GITHUB_REF_NAME" \
             --generate-notes

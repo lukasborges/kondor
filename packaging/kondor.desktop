@@ -1,8 +1,11 @@
 [Desktop Entry]
 Type=Application
-Name=Kondor
+Name=Kondor Browser
+Name[pt_BR]=Navegador Kondor
 GenericName=Web Browser
+GenericName[pt_BR]=Navegador web
 Comment=A lightweight Qt/KDE web browser
+Comment[pt_BR]=Um navegador web leve para Qt/KDE
 Exec=kondor
 Icon=kondor
 Categories=Network;WebBrowser;

@@ -72,7 +72,7 @@ main() {
     if [[ "$merge" == 1 ]]; then
       merge_rule="If it passes, approve it (gh pr review --approve), squash-merge it (gh pr merge --squash --delete-branch), then promote the next issue of the roadmap order to to-dev (see step for promotion below)."
     else
-      merge_rule="If it passes, approve it (gh pr review --approve), comment on issue #$n that it is approved and waiting for the maintainer to merge, and stop: a human merges it (the next issue is promoted after the merge)."
+      merge_rule="If it passes, approve it (gh pr review --approve; if GitHub refuses because the same account opened the PR, submit a comment review that starts with \"Verdict: APPROVE\"), add the label approved to issue #$n (keep in-review), comment on issue #$n that it is approved and waiting for the maintainer to merge, and stop: a human merges it (the next issue is promoted after the merge)."
     fi
     common="You are the architect agent of this repository, running unattended. Follow docs/agents/architect.md and AGENTS.md (read them from origin/main) strictly. Never edit src/ or qml/, never push to the developer's branches. For any change to docs/specs, prototypes or other architect-owned files, create your own git worktree from origin/main outside the current directory, commit there (English, Conventional Commits, no attribution trailers) and push to main. The current directory is the loop's read-only control checkout. Record every decision on GitHub (issue/PR comments or reviews). Stop after this one step and print a short report."
     case "$st" in
@@ -81,7 +81,7 @@ $common
 
 Step: review the open PR for issue #$n (gh pr list --search "Closes #$n"). Use the review checklist in docs/agents/architect.md: build the PR head in a separate worktree, run the offscreen smoke test, the spec's manual test where possible and ctest if tests exist; check the spec (docs/specs/$(printf '%04d' "$n")-*.md) acceptance criteria and out of scope, AGENTS.md conventions, private-tab privacy and visual parity with the prototype. Post the review as a PR review with concrete file:line comments.
 $merge_rule
-If it does not pass, submit "request changes" (gh pr review --request-changes) and switch issue #$n from in-review to to-dev.
+If it does not pass, submit "request changes" (gh pr review --request-changes; or a comment review starting with \"Verdict: REQUEST CHANGES\" if GitHub refuses), remove the approved label if present and switch issue #$n from in-review to to-dev.
 Promotion: if the queue is now empty, add the label to-dev to the next issue of AGENTS.md "Roadmap order" that is still open and not yet started, with a short issue comment saying it is now the current issue.
 EOF
       ;;

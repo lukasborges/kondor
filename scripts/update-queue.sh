@@ -42,6 +42,11 @@ while IFS=$'\t' read -r n title labels; do
   state="$(tr ',' '\n' <<<"$labels" | grep -xE 'to-spec|to-dev|in-review' | head -1 || true)"
   [[ -n "$state" ]] || continue
 
+  if [[ "$state" == "in-review" ]] && tr ',' '\n' <<<"$labels" | grep -qx 'approved'; then
+    printf '| #%s %s | in-review | Merge %s (approved by the architect) | maintainer |\n' "$n" "$title" "$(pr_ref "$n")" >> "$waiting"
+    continue
+  fi
+
   if tr ',' '\n' <<<"$labels" | grep -qx 'question'; then
     ref="$(pr_ref "$n")"
     [[ "$ref" == "—" ]] && ref="the issue"
@@ -84,7 +89,7 @@ to-spec ──► to-dev ──► in-review ──► closed (merged PR with "C
 ```
 
 `question` is orthogonal to the state: it moves the row to **Waiting** until the architect
-answers and removes it. Only the architect promotes backlog issues to `to-dev`, one at a time.
+answers and removes it. `approved` (with `in-review`) moves it to **Waiting** for the maintainer's merge. Only the architect promotes backlog issues to `to-dev`, one at a time.
 
 ## Ready (take the topmost row for your role)
 

@@ -41,6 +41,7 @@ Tips when editing:
 | #8 Fullscreen | `08-fullscreen.qml` |
 | #9 Security indicator / certificate errors | `09-security-indicator.qml`, `09b-certificate-error.qml` |
 | #11 Address bar suggestions | `11-address-suggestions.qml` |
+| #44 Address bar: visit or search | `44-address-visit-or-search.qml` |
 | #12 Tab management | `12-tab-management.qml` |
 | #13 Page context menu | `13-page-context-menu.qml` |
 | #14 Multiple windows | `14-private-window.qml`, `00-main-menu.qml` |

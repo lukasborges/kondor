@@ -23,12 +23,12 @@ BrowserFrame {
             spacing: 0
             Repeater {
                 model: [
-                    { i: "edit-find", t: "Search DuckDuckGo for “kd”", u: "", sel: false },
-                    { i: "bookmarks", t: "KDE Community", u: "https://kde.org/", sel: true },
+                    { i: "globe", t: "https://kde.org", u: "", s: "Visit", sel: true },
+                    { i: "edit-find", t: "kde.org", u: "", s: "Search with DuckDuckGo", sel: false },
+                    { i: "bookmarks", t: "KDE Community", u: "https://kde.org/", sel: false },
                     { i: "bookmarks", t: "KDE Human Interface Guidelines", u: "https://develop.kde.org/hig/", sel: false },
                     { i: "view-history", t: "KDE Plasma 6.5 — Release notes", u: "https://kde.org/announcements/plasma/6/6.5.0/", sel: false },
                     { i: "view-history", t: "KDE Applications", u: "https://apps.kde.org/", sel: false },
-                    { i: "view-history", t: "kdenlive — video editor", u: "https://kdenlive.org/", sel: false },
                     { i: "edit-find", t: "kde connect", u: "", sel: false },
                     { i: "edit-find", t: "kde plasma 6", u: "", sel: false }
                 ]
@@ -47,7 +47,13 @@ BrowserFrame {
                             elide: Text.ElideRight
                             Layout.fillWidth: true
                         }
-                        Item { visible: modelData.u === ""; Layout.fillWidth: true }
+                        Label {
+                            visible: modelData.u === "" && modelData.s !== undefined
+                            text: "— " + (modelData.s || "")
+                            color: highlighted ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.disabledTextColor
+                            Layout.fillWidth: true
+                        }
+                        Item { visible: modelData.u === "" && modelData.s === undefined; Layout.fillWidth: true }
                     }
                 }
             }

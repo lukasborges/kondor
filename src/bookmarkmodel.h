@@ -43,6 +43,9 @@ public:
     Q_INVOKABLE QString urlAt(int row) const;
     Q_INVOKABLE qint64 idAt(int row) const;
     Q_INVOKABLE bool isFolderAt(int row) const;
+    // Row of the item with this id in the current (possibly filtered) list,
+    // or -1.
+    Q_INVOKABLE int rowOf(qint64 id) const;
 
 public slots:
     void refresh();

@@ -103,6 +103,15 @@ bool BookmarkModel::isFolderAt(int row) const
     return m_entries.at(row).isFolder;
 }
 
+int BookmarkModel::rowOf(qint64 id) const
+{
+    for (int row = 0; row < m_entries.size(); ++row) {
+        if (m_entries.at(row).id == id)
+            return row;
+    }
+    return -1;
+}
+
 void BookmarkModel::refresh()
 {
     Database *db = Database::instance();

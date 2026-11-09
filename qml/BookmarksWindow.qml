@@ -20,7 +20,14 @@ ApplicationWindow {
     required property TabModel tabModel
 
     property var selectedFolderId: BookmarkManager.otherFolderId()
+    // Row picked in the right-hand list (0 means "none"); the toolbar actions
+    // then apply to that item instead of the selected folder. Tracked
+    // explicitly because a ListView sets currentIndex to 0 as soon as its
+    // model has items, which must not count as a user selection.
+    property var selectedItemId: -1
     property string filter: ""
+
+    onSelectedFolderIdChanged: root.selectedItemId = -1
 
     // Rebuilt whenever a bookmark write bumps the revision.
     property var folders: {
@@ -76,18 +83,21 @@ ApplicationWindow {
         }
     }
 
-    // True when the right-hand list has a current row: the toolbar actions
-    // then apply to that bookmark/folder instead of the selected folder.
+    // True when the user picked a row in the right-hand list: the toolbar
+    // actions then apply to that bookmark/folder instead of the folder
+    // selected in the tree. Reads the revision so the actions are
+    // re-evaluated after writes (for example when the picked item is gone).
     function hasItemSelection() {
-        return root.itemModel && itemList.currentIndex >= 0
+        const revision = BookmarkManager.revision
+        if (revision < 0 || !(root.selectedItemId > 0))
+            return false
+        return BookmarkManager.bookmark(root.selectedItemId).id > 0
     }
 
     function currentItemInfo() {
         if (!root.hasItemSelection())
             return {}
-        const revision = BookmarkManager.revision
-        return revision >= 0 ? BookmarkManager.bookmark(root.itemModel.idAt(itemList.currentIndex))
-                             : {}
+        return BookmarkManager.bookmark(root.selectedItemId)
     }
 
     // The item the toolbar actions apply to: the row of the right-hand list
@@ -101,23 +111,32 @@ ApplicationWindow {
     }
 
     function moveSelected(delta) {
+        // Up/Down follow the visible rows, which only match the stored order
+        // while no search filter is applied.
+        if (root.filter.length > 0)
+            return
         const info = root.actionTarget()
         if (!info.id || info.special)
             return
         const parentId = root.hasItemSelection() ? root.selectedFolderId : info.parentId
-        BookmarkManager.move(info.id, parentId, info.position + delta)
-        if (root.hasItemSelection())
-            itemList.currentIndex =
-                Math.max(0, Math.min(info.position + delta, root.itemModel.count - 1))
+        const movedId = info.id
+        BookmarkManager.move(movedId, parentId, info.position + delta)
+        if (!root.hasItemSelection())
+            return
+        // Keep the moved bookmark as the current row after the model reset.
+        const row = root.itemModel ? root.itemModel.rowOf(movedId) : -1
+        if (row >= 0)
+            itemList.currentIndex = row
     }
 
     function openCurrentItem() {
-        if (!root.itemModel || itemList.currentIndex < 0)
+        const info = root.currentItemInfo()
+        if (!info.id)
             return
-        if (root.itemModel.isFolderAt(itemList.currentIndex))
-            root.selectedFolderId = root.itemModel.idAt(itemList.currentIndex)
+        if (info.isFolder)
+            root.selectedFolderId = info.id
         else
-            root.openBookmark(root.itemModel.urlAt(itemList.currentIndex))
+            root.openBookmark(info.url)
     }
 
     ColumnLayout {
@@ -172,7 +191,8 @@ ApplicationWindow {
                     ToolTip.visible: hovered
                     ToolTip.text: qsTr("Move Up")
                     ToolTip.delay: 600
-                    enabled: (root.hasItemSelection() || !root.selectedInfo().special)
+                    enabled: root.filter.length === 0
+                             && (root.hasItemSelection() || !root.selectedInfo().special)
                              && root.actionTarget().id > 0
                     onClicked: root.moveSelected(-1)
                 }
@@ -182,7 +202,8 @@ ApplicationWindow {
                     ToolTip.visible: hovered
                     ToolTip.text: qsTr("Move Down")
                     ToolTip.delay: 600
-                    enabled: (root.hasItemSelection() || !root.selectedInfo().special)
+                    enabled: root.filter.length === 0
+                             && (root.hasItemSelection() || !root.selectedInfo().special)
                              && root.actionTarget().id > 0
                     onClicked: root.moveSelected(1)
                 }
@@ -231,7 +252,12 @@ ApplicationWindow {
                         text: folderEntry.modelData.title
                         leftPadding: 10 + folderEntry.modelData.depth * 18
 
-                        onClicked: root.selectedFolderId = folderEntry.modelData.id
+                        onClicked: {
+                            // Clear even when the same folder is clicked again,
+                            // so the actions always go back to the folder.
+                            root.selectedItemId = -1
+                            root.selectedFolderId = folderEntry.modelData.id
+                        }
                     }
                 }
             }
@@ -250,6 +276,14 @@ ApplicationWindow {
                     Keys.onReturnPressed: root.openCurrentItem()
                     Keys.onEnterPressed: root.openCurrentItem()
 
+                    // Arrow keys move currentIndex; mirror that into the
+                    // explicit selection so the highlight and the actions
+                    // target the same row.
+                    onCurrentIndexChanged: {
+                        if (itemList.activeFocus && root.itemModel && itemList.currentIndex >= 0)
+                            root.selectedItemId = root.itemModel.idAt(itemList.currentIndex)
+                    }
+
                     delegate: ItemDelegate {
                         id: itemEntry
 
@@ -260,7 +294,7 @@ ApplicationWindow {
                         required property bool isFolder
 
                         width: ListView.view.width
-                        highlighted: ListView.isCurrentItem
+                        highlighted: itemEntry.id === root.selectedItemId
 
                         contentItem: RowLayout {
                             spacing: Kirigami.Units.largeSpacing
@@ -307,10 +341,13 @@ ApplicationWindow {
                                 itemList.currentIndex = itemEntry.index
                                 itemList.forceActiveFocus()
                                 if (itemEntry.isFolder) {
-                                    if (mouse.button === Qt.LeftButton)
+                                    if (mouse.button === Qt.LeftButton) {
+                                        root.selectedItemId = -1
                                         root.selectedFolderId = itemEntry.id
+                                    }
                                     return
                                 }
+                                root.selectedItemId = itemEntry.id
                                 if (mouse.button === Qt.MiddleButton) {
                                     root.openBookmark(itemEntry.url, true)
                                     return
@@ -404,10 +441,15 @@ ApplicationWindow {
             const info = BookmarkManager.bookmark(deleteDialog.targetId)
             if (!info.id)
                 return
+            const fromItemList = root.hasItemSelection() && root.selectedItemId === info.id
             BookmarkManager.remove(info.id)
-            // Deleting the selected folder moves the selection to its parent.
-            if (!deleteDialog.targetIsFolder)
+            if (!info.isFolder || fromItemList) {
+                // The picked row is gone; actions go back to the tree folder.
+                root.selectedItemId = -1
                 return
+            }
+            // Deleting the folder selected in the tree moves the selection to
+            // its parent.
             root.selectedFolderId = info.parentId > 0 ? info.parentId : BookmarkManager.otherFolderId()
         }
     }

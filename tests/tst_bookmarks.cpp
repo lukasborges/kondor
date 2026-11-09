@@ -86,6 +86,14 @@ void TestBookmarks::moveBetweenFolders()
     QCOMPARE(contents.size(), 2);
     QCOMPARE(contents.first().toMap().value(QStringLiteral("id")).toLongLong(), second);
 
+    // The model reports the moved bookmark's row, which the manager window
+    // uses to keep the selection on it.
+    BookmarkModel *model = manager->modelForFolder(folder);
+    QCOMPARE(model->rowOf(second), 0);
+    QCOMPARE(model->idAt(0), second);
+    QCOMPARE(model->rowOf(id), 1);
+    QCOMPARE(model->rowOf(999999), -1);
+
     // A folder cannot be moved into itself.
     manager->move(folder, folder, 0);
     QCOMPARE(manager->bookmark(folder).value(QStringLiteral("parentId")).toLongLong(),

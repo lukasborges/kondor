@@ -26,6 +26,8 @@ qt_add_qml_module(kondor
     QML_FILES
         qml/Main.qml
         qml/WebViewTab.qml
+        qml/InlineBar.qml
+        qml/FindBar.qml
         qml/HistoryWindow.qml
         qml/SettingsWindow.qml
     SOURCES

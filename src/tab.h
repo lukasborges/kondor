@@ -20,6 +20,8 @@ class Tab : public QObject
     Q_PROPERTY(bool canGoForward READ canGoForward NOTIFY canGoForwardChanged)
     Q_PROPERTY(QQuickWebEngineProfile *profile READ profile CONSTANT)
     Q_PROPERTY(bool isPrivate READ isPrivate CONSTANT)
+    Q_PROPERTY(int findMatches READ findMatches NOTIFY findResultChanged)
+    Q_PROPERTY(int findActiveMatch READ findActiveMatch NOTIFY findResultChanged)
 
 public:
     explicit Tab(QQuickWebEngineProfile *profile, QObject *parent = nullptr);
@@ -33,6 +35,8 @@ public:
     bool canGoForward() const { return m_canGoForward; }
     QQuickWebEngineProfile *profile() const { return m_profile; }
     bool isPrivate() const { return m_isPrivate; }
+    int findMatches() const { return m_findMatches; }
+    int findActiveMatch() const { return m_findActiveMatch; }
 
     // Chamadas vindas do WebEngineView (QML) para sincronizar o estado.
     Q_INVOKABLE void setTitle(const QString &title);
@@ -42,6 +46,7 @@ public:
     Q_INVOKABLE void setLoading(bool loading);
     Q_INVOKABLE void setCanGoBack(bool canGoBack);
     Q_INVOKABLE void setCanGoForward(bool canGoForward);
+    Q_INVOKABLE void setFindResult(int matches, int activeMatch);
 
     // Comandos vindos da interface; viram sinais consumidos pelo WebEngineView.
     Q_INVOKABLE void navigateTo(const QUrl &url);
@@ -52,6 +57,8 @@ public:
     Q_INVOKABLE void zoomIn();
     Q_INVOKABLE void zoomOut();
     Q_INVOKABLE void resetZoom();
+    Q_INVOKABLE void find(const QString &text, bool backward, bool caseSensitive);
+    Q_INVOKABLE void stopFind();
 
 signals:
     void titleChanged();
@@ -61,6 +68,7 @@ signals:
     void loadingChanged();
     void canGoBackChanged();
     void canGoForwardChanged();
+    void findResultChanged();
 
     void navigationRequested(const QUrl &url);
     void backRequested();
@@ -70,6 +78,8 @@ signals:
     void zoomInRequested();
     void zoomOutRequested();
     void resetZoomRequested();
+    void findRequested(const QString &text, bool backward, bool caseSensitive);
+    void stopFindRequested();
 
 private:
     QString m_title;
@@ -81,4 +91,6 @@ private:
     bool m_canGoForward = false;
     QQuickWebEngineProfile *m_profile = nullptr;
     bool m_isPrivate = false;
+    int m_findMatches = 0;
+    int m_findActiveMatch = 0;
 };

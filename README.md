@@ -24,6 +24,7 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Private mode**: off-the-record tabs, isolated from the persistent profile
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
 - **Settings** (Ctrl+,): home page, search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit), applied immediately and stored in `~/.config/KDE/Kondor.conf`
+- **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
 - **Basic downloads** (saved to the configured folder)
 - **Menu** and **keyboard shortcuts**
 - **KDE look** via the `org.kde.desktop` (QQC2) style, with a `Fusion` fallback
@@ -78,6 +79,8 @@ src/
 qml/
   Main.qml            window, tab bar, navigation bar, menu, shortcuts
   WebViewTab.qml      WebEngineView + bridge to the Tab object
+  InlineBar.qml       shared strip between the header and the page content
+  FindBar.qml         find bar (Ctrl+F)
   HistoryWindow.qml   browsing history window (search, grouped by day, clear)
   SettingsWindow.qml  settings window (home page, search, downloads, privacy)
 ```
@@ -92,6 +95,9 @@ qml/
 | `Ctrl+H` | Browsing history |
 | `Ctrl+,` / `Ctrl+Shift+,` | Configure Kondor (settings) |
 | `Ctrl+L` | Focus the address bar |
+| `Ctrl+F` | Find in page |
+| `F3` / `Shift+F3` | Next / previous match (find bar open) |
+| `Esc` | Close the find bar |
 | `Ctrl+R` / `F5` | Reload |
 | `Alt+←` / `Alt+→` | Back / forward |
 | `Ctrl++` / `Ctrl+-` | Zoom in / out |

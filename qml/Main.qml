@@ -124,6 +124,91 @@ ApplicationWindow {
         settingsWindow.showWindow()
     }
 
+    function openBookmarks() {
+        if (!bookmarksWindow)
+            bookmarksWindow = bookmarksWindowComponent.createObject(window)
+        bookmarksWindow.showWindow()
+    }
+
+    // Normal click navigates the current tab; middle/Ctrl+click opens a
+    // background tab (in a private profile when the current tab is private).
+    function openBookmark(url, background) {
+        if (!url)
+            return
+        const tab = tabs.currentTab
+        if (!tab) {
+            tabs.addTab(false, url)
+        } else if (background) {
+            const profile = tab.isPrivate ? ProfileManager.createPrivateProfile()
+                                          : ProfileManager.defaultProfile()
+            tabs.addTabWithProfile(profile, url, true)
+        } else {
+            tab.navigateTo(url)
+        }
+    }
+
+    // Star button and Ctrl+D: add the page to "Other Bookmarks" (the first
+    // time) and open the edit popup.
+    function openBookmarkEditor() {
+        const tab = tabs.currentTab
+        if (!tab || tab.url.toString().length === 0)
+            return
+
+        let id = BookmarkManager.bookmarkIdFor(tab.url)
+        let added = false
+        if (id <= 0) {
+            id = BookmarkManager.addBookmark(tab.url, tab.title, BookmarkManager.otherFolderId())
+            if (id <= 0)
+                return
+            added = true
+        }
+
+        const info = BookmarkManager.bookmark(id)
+        bookmarkPopup.editingId = id
+        bookmarkPopup.justAdded = added
+        bookmarkTitleField.text = info.title
+        bookmarkFolderBox.model = BookmarkManager.folders
+        let index = 0
+        const folders = bookmarkFolderBox.model
+        for (let i = 0; i < folders.length; ++i) {
+            if (folders[i].id === info.parentId) {
+                index = i
+                break
+            }
+        }
+        bookmarkFolderBox.currentIndex = index
+        bookmarkPopup.open()
+    }
+
+    function saveBookmark() {
+        if (bookmarkPopup.editingId <= 0)
+            return
+        const title = bookmarkTitleField.text.trim()
+        if (title.length > 0)
+            BookmarkManager.rename(bookmarkPopup.editingId, title)
+        const folders = bookmarkFolderBox.model
+        const index = bookmarkFolderBox.currentIndex
+        if (index >= 0 && index < folders.length) {
+            const info = BookmarkManager.bookmark(bookmarkPopup.editingId)
+            if (info.parentId !== folders[index].id)
+                BookmarkManager.move(bookmarkPopup.editingId, folders[index].id, -1)
+        }
+        bookmarkPopup.close()
+    }
+
+    function removeBookmark() {
+        if (bookmarkPopup.editingId > 0)
+            BookmarkManager.remove(bookmarkPopup.editingId)
+        bookmarkPopup.close()
+    }
+
+    readonly property bool pageBookmarked: {
+        const revision = BookmarkManager.revision
+        const tab = tabs.currentTab
+        return revision >= 0 && tab !== null && tab.url.toString().length > 0
+            && BookmarkManager.isBookmarked(tab.url)
+    }
+
     Component.onCompleted: {
         SessionManager.watch(tabs)
         if (Settings.startupBehavior === "restore")
@@ -339,6 +424,7 @@ ApplicationWindow {
                     Layout.rightMargin: 8
                     placeholderText: qsTr("Search or enter address")
                     selectByMouse: true
+                    rightPadding: bookmarkButton.visible ? bookmarkButton.width + 10 : 8
 
                     function syncFromTab() {
                         if (activeFocus)
@@ -361,6 +447,34 @@ ApplicationWindow {
                     }
 
                     Component.onCompleted: syncFromTab()
+
+                    Row {
+                        id: bookmarkSlot
+                        anchors.right: parent.right
+                        anchors.rightMargin: 3
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        ToolButton {
+                            id: bookmarkButton
+                            visible: tabs.currentTab && tabs.currentTab.url.toString().length > 0
+                            display: AbstractButton.IconOnly
+                            icon.name: window.pageBookmarked ? "bookmarks" : "bookmark-new"
+                            icon.width: 16
+                            icon.height: 16
+                            flat: true
+                            implicitWidth: 28
+                            implicitHeight: 28
+                            ToolTip.visible: hovered
+                            ToolTip.text: qsTr("Bookmark This Page")
+                            ToolTip.delay: 600
+                            onClicked: {
+                                if (bookmarkPopup.opened)
+                                    bookmarkPopup.close()
+                                else
+                                    window.openBookmarkEditor()
+                            }
+                        }
+                    }
                 }
 
                 ToolButton {
@@ -459,6 +573,17 @@ ApplicationWindow {
                             }
                         }
                         MenuSeparator {}
+                        BookmarkMenu {
+                            title: qsTr("Bookmarks")
+                            icon.name: "bookmarks"
+                            showCommands: true
+                            folderId: BookmarkManager.toolbarFolderId()
+                            onBookmarkActivated: function(url, background) {
+                                window.openBookmark(url, background)
+                            }
+                            onBookmarkThisPageRequested: window.openBookmarkEditor()
+                            onManageBookmarksRequested: window.openBookmarks()
+                        }
                         MenuItem {
                             text: qsTr("History")
                             icon.name: "view-history"
@@ -480,6 +605,12 @@ ApplicationWindow {
                     }
                 }
             }
+        }
+
+        // ── Bookmarks bar ────────────────────────────────────────────────
+        BookmarksBar {
+            Layout.fillWidth: true
+            tabModel: tabs
         }
     }
 
@@ -528,6 +659,74 @@ ApplicationWindow {
         id: settingsWindowComponent
         SettingsWindow {
             tabModel: tabs
+        }
+    }
+
+    // ── Bookmarks manager (created on demand) ───────────────────────────
+    property var bookmarksWindow: null
+
+    Component {
+        id: bookmarksWindowComponent
+        BookmarksWindow {
+            tabModel: tabs
+        }
+    }
+
+    // ── Star button popup: name and folder of the current page ──────────
+    Popup {
+        id: bookmarkPopup
+        parent: bookmarkButton
+        x: bookmarkButton.width - width
+        y: bookmarkButton.height
+        width: Kirigami.Units.gridUnit * 20
+        padding: Kirigami.Units.largeSpacing
+
+        property var editingId: -1
+        property bool justAdded: false
+
+        contentItem: ColumnLayout {
+            spacing: Kirigami.Units.largeSpacing
+
+            Kirigami.Heading {
+                level: 4
+                text: bookmarkPopup.justAdded ? qsTr("Page bookmarked") : qsTr("Edit Bookmark")
+            }
+
+            Kirigami.FormLayout {
+                Layout.fillWidth: true
+
+                TextField {
+                    id: bookmarkTitleField
+                    Kirigami.FormData.label: qsTr("Name:")
+                    Layout.fillWidth: true
+                }
+
+                ComboBox {
+                    id: bookmarkFolderBox
+                    Kirigami.FormData.label: qsTr("Folder:")
+                    Layout.fillWidth: true
+                    textRole: "title"
+                }
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+
+                Button {
+                    text: qsTr("Remove")
+                    icon.name: "edit-delete"
+                    onClicked: window.removeBookmark()
+                }
+
+                Item { Layout.fillWidth: true }
+
+                Button {
+                    text: qsTr("Done")
+                    icon.name: "dialog-ok-apply"
+                    highlighted: true
+                    onClicked: window.saveBookmark()
+                }
+            }
         }
     }
 
@@ -662,6 +861,18 @@ ApplicationWindow {
     Shortcut {
         sequence: "Ctrl+H"
         onActivated: window.openHistory()
+    }
+    Shortcut {
+        sequence: "Ctrl+D"
+        onActivated: window.openBookmarkEditor()
+    }
+    Shortcut {
+        sequence: "Ctrl+Shift+B"
+        onActivated: Settings.showBookmarksBar = !Settings.showBookmarksBar
+    }
+    Shortcut {
+        sequence: "Ctrl+Shift+O"
+        onActivated: window.openBookmarks()
     }
     Shortcut {
         sequences: [StandardKey.Preferences, "Ctrl+,"]

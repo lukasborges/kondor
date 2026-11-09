@@ -2,6 +2,113 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de" sourcelanguage="en">
 <context>
+    <name>BookmarkManager</name>
+    <message>
+        <location filename="../src/bookmarkmanager.cpp" line="372"/>
+        <source>New Folder</source>
+        <translation>Neuer Ordner</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarkMenu</name>
+    <message>
+        <location filename="../qml/BookmarkMenu.qml" line="70"/>
+        <source>Bookmark This Page</source>
+        <translation>Diese Seite als Lesezeichen speichern</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarkMenu.qml" line="76"/>
+        <source>Manage Bookmarks…</source>
+        <translation>Lesezeichen verwalten…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarkMenu.qml" line="83"/>
+        <source>Show Bookmarks Toolbar</source>
+        <translation>Lesezeichenleiste anzeigen</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksWindow</name>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="17"/>
+        <source>Manage Bookmarks</source>
+        <translation>Lesezeichen verwalten</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="156"/>
+        <location filename="../qml/BookmarksWindow.qml" line="381"/>
+        <location filename="../qml/BookmarksWindow.qml" line="391"/>
+        <source>New Folder</source>
+        <extracomment>Default name of a new bookmark folder</extracomment>
+        <translation>Neuer Ordner</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="161"/>
+        <source>Rename</source>
+        <translation>Umbenennen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="175"/>
+        <source>Delete</source>
+        <translation>Löschen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="192"/>
+        <source>Move Up</source>
+        <translation>Nach oben</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="203"/>
+        <source>Move Down</source>
+        <translation>Nach unten</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="214"/>
+        <source>Import from HTML…</source>
+        <translation>Aus HTML importieren…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="222"/>
+        <source>Search bookmarks…</source>
+        <translation>Lesezeichen durchsuchen…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="409"/>
+        <source>Rename Folder</source>
+        <translation>Ordner umbenennen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="409"/>
+        <source>Rename Bookmark</source>
+        <translation>Lesezeichen umbenennen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="435"/>
+        <source>Delete Folder</source>
+        <translation>Ordner löschen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="435"/>
+        <source>Delete Bookmark</source>
+        <translation>Lesezeichen löschen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="437"/>
+        <source>Delete this folder and everything in it?</source>
+        <translation>Diesen Ordner und seinen gesamten Inhalt löschen?</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="438"/>
+        <source>Delete this bookmark?</source>
+        <translation>Dieses Lesezeichen löschen?</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="459"/>
+        <source>Import Bookmarks</source>
+        <translation>Lesezeichen importieren</translation>
+    </message>
+</context>
+<context>
     <name>DownloadManager</name>
     <message>
         <location filename="../src/downloadmanager.cpp" line="377"/>
@@ -245,105 +352,145 @@
         <translation>Downloads laufen noch. Trotzdem beenden?</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="224"/>
-        <location filename="../qml/Main.qml" line="409"/>
+        <location filename="../qml/Main.qml" line="309"/>
+        <location filename="../qml/Main.qml" line="523"/>
         <source>New Tab</source>
         <translation>Neuer Tab</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="286"/>
+        <location filename="../qml/Main.qml" line="371"/>
         <source>Back</source>
         <translation>Zurück</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="299"/>
+        <location filename="../qml/Main.qml" line="384"/>
         <source>Forward</source>
         <translation>Vorwärts</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="311"/>
+        <location filename="../qml/Main.qml" line="396"/>
         <source>Stop</source>
         <translation>Stopp</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="311"/>
+        <location filename="../qml/Main.qml" line="396"/>
         <source>Reload</source>
         <translation>Neu laden</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="327"/>
+        <location filename="../qml/Main.qml" line="412"/>
         <source>Home</source>
         <translation>Startseite</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="340"/>
+        <location filename="../qml/Main.qml" line="425"/>
         <source>Search or enter address</source>
         <translation>Adresse suchen oder eingeben</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="372"/>
+        <location filename="../qml/Main.qml" line="468"/>
+        <source>Bookmark This Page</source>
+        <translation>Diese Seite als Lesezeichen speichern</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="486"/>
         <source>Downloads</source>
         <translation>Downloads</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="401"/>
+        <location filename="../qml/Main.qml" line="515"/>
         <source>Menu</source>
         <translation>Menü</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="414"/>
+        <location filename="../qml/Main.qml" line="528"/>
         <source>New Private Tab</source>
         <translation>Neuer privater Tab</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="419"/>
+        <location filename="../qml/Main.qml" line="533"/>
         <source>Reopen Closed Tab</source>
         <translation>Geschlossenen Tab wieder öffnen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="426"/>
+        <location filename="../qml/Main.qml" line="540"/>
         <source>Close Tab</source>
         <translation>Tab schließen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="432"/>
+        <location filename="../qml/Main.qml" line="546"/>
         <source>Find in Page…</source>
         <translation>In Seite suchen…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="438"/>
+        <location filename="../qml/Main.qml" line="552"/>
         <source>Zoom In</source>
         <translation>Vergrößern</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="446"/>
+        <location filename="../qml/Main.qml" line="560"/>
         <source>Zoom Out</source>
         <translation>Verkleinern</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="454"/>
+        <location filename="../qml/Main.qml" line="568"/>
         <source>Actual Size</source>
         <translation>Tatsächliche Größe</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="463"/>
+        <location filename="../qml/Main.qml" line="577"/>
+        <source>Bookmarks</source>
+        <translation>Lesezeichen</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="588"/>
         <source>History</source>
         <translation>Verlauf</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="470"/>
+        <location filename="../qml/Main.qml" line="595"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 einrichten…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="477"/>
+        <location filename="../qml/Main.qml" line="602"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Über %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="537"/>
+        <location filename="../qml/Main.qml" line="692"/>
+        <source>Page bookmarked</source>
+        <translation>Seite als Lesezeichen gespeichert</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="692"/>
+        <source>Edit Bookmark</source>
+        <translation>Lesezeichen bearbeiten</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="700"/>
+        <source>Name:</source>
+        <translation>Name:</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="706"/>
+        <source>Folder:</source>
+        <translation>Ordner:</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="716"/>
+        <source>Remove</source>
+        <translation>Entfernen</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="724"/>
+        <source>Done</source>
+        <translation>Fertig</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="736"/>
         <source>Save File</source>
         <translation>Datei speichern</translation>
     </message>

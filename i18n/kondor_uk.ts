@@ -2,6 +2,113 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="uk" sourcelanguage="en">
 <context>
+    <name>BookmarkManager</name>
+    <message>
+        <location filename="../src/bookmarkmanager.cpp" line="372"/>
+        <source>New Folder</source>
+        <translation>Новий каталог</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarkMenu</name>
+    <message>
+        <location filename="../qml/BookmarkMenu.qml" line="70"/>
+        <source>Bookmark This Page</source>
+        <translation>Додати цю сторінку до закладок</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarkMenu.qml" line="76"/>
+        <source>Manage Bookmarks…</source>
+        <translation>Керувати закладками…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarkMenu.qml" line="83"/>
+        <source>Show Bookmarks Toolbar</source>
+        <translation>Показувати панель закладок</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksWindow</name>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="17"/>
+        <source>Manage Bookmarks</source>
+        <translation>Керувати закладками</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="156"/>
+        <location filename="../qml/BookmarksWindow.qml" line="381"/>
+        <location filename="../qml/BookmarksWindow.qml" line="391"/>
+        <source>New Folder</source>
+        <extracomment>Default name of a new bookmark folder</extracomment>
+        <translation>Новий каталог</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="161"/>
+        <source>Rename</source>
+        <translation>Перейменувати</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="175"/>
+        <source>Delete</source>
+        <translation>Видалити</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="192"/>
+        <source>Move Up</source>
+        <translation>Вгору</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="203"/>
+        <source>Move Down</source>
+        <translation>Вниз</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="214"/>
+        <source>Import from HTML…</source>
+        <translation>Імпортувати з HTML…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="222"/>
+        <source>Search bookmarks…</source>
+        <translation>Пошук закладок…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="409"/>
+        <source>Rename Folder</source>
+        <translation>Перейменувати каталог</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="409"/>
+        <source>Rename Bookmark</source>
+        <translation>Перейменувати закладку</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="435"/>
+        <source>Delete Folder</source>
+        <translation>Видалити каталог</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="435"/>
+        <source>Delete Bookmark</source>
+        <translation>Видалити закладку</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="437"/>
+        <source>Delete this folder and everything in it?</source>
+        <translation>Видалити цей каталог та все його вміст?</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="438"/>
+        <source>Delete this bookmark?</source>
+        <translation>Видалити цю закладку?</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="459"/>
+        <source>Import Bookmarks</source>
+        <translation>Імпортувати закладки</translation>
+    </message>
+</context>
+<context>
     <name>DownloadManager</name>
     <message>
         <location filename="../src/downloadmanager.cpp" line="377"/>
@@ -245,105 +352,145 @@
         <translation>Завантаження ще не завершено. Все одно вийти?</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="224"/>
-        <location filename="../qml/Main.qml" line="409"/>
+        <location filename="../qml/Main.qml" line="309"/>
+        <location filename="../qml/Main.qml" line="523"/>
         <source>New Tab</source>
         <translation>Нова вкладка</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="286"/>
+        <location filename="../qml/Main.qml" line="371"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="299"/>
+        <location filename="../qml/Main.qml" line="384"/>
         <source>Forward</source>
         <translation>Вперед</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="311"/>
+        <location filename="../qml/Main.qml" line="396"/>
         <source>Stop</source>
         <translation>Зупинити</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="311"/>
+        <location filename="../qml/Main.qml" line="396"/>
         <source>Reload</source>
         <translation>Перезавантажити</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="327"/>
+        <location filename="../qml/Main.qml" line="412"/>
         <source>Home</source>
         <translation>Домівка</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="340"/>
+        <location filename="../qml/Main.qml" line="425"/>
         <source>Search or enter address</source>
         <translation>Пошук або введення адреси</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="372"/>
+        <location filename="../qml/Main.qml" line="468"/>
+        <source>Bookmark This Page</source>
+        <translation>Додати цю сторінку до закладок</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="486"/>
         <source>Downloads</source>
         <translation>Завантажене</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="401"/>
+        <location filename="../qml/Main.qml" line="515"/>
         <source>Menu</source>
         <translation>Меню</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="414"/>
+        <location filename="../qml/Main.qml" line="528"/>
         <source>New Private Tab</source>
         <translation>Нова приватна вкладка</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="419"/>
+        <location filename="../qml/Main.qml" line="533"/>
         <source>Reopen Closed Tab</source>
         <translation>Повторно відкрити закриту вкладку</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="426"/>
+        <location filename="../qml/Main.qml" line="540"/>
         <source>Close Tab</source>
         <translation>Закрити вкладку</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="432"/>
+        <location filename="../qml/Main.qml" line="546"/>
         <source>Find in Page…</source>
         <translation>Знайти на сторінці…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="438"/>
+        <location filename="../qml/Main.qml" line="552"/>
         <source>Zoom In</source>
         <translation>Збільшити</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="446"/>
+        <location filename="../qml/Main.qml" line="560"/>
         <source>Zoom Out</source>
         <translation>Зменшити</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="454"/>
+        <location filename="../qml/Main.qml" line="568"/>
         <source>Actual Size</source>
         <translation>Звичайний розмір</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="463"/>
+        <location filename="../qml/Main.qml" line="577"/>
+        <source>Bookmarks</source>
+        <translation>Закладки</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="588"/>
         <source>History</source>
         <translation>Журнал</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="470"/>
+        <location filename="../qml/Main.qml" line="595"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Налаштувати %1…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="477"/>
+        <location filename="../qml/Main.qml" line="602"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Про %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="537"/>
+        <location filename="../qml/Main.qml" line="692"/>
+        <source>Page bookmarked</source>
+        <translation>Сторінку додано до закладок</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="692"/>
+        <source>Edit Bookmark</source>
+        <translation>Редагувати закладку</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="700"/>
+        <source>Name:</source>
+        <translation>Назва:</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="706"/>
+        <source>Folder:</source>
+        <translation>Каталог:</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="716"/>
+        <source>Remove</source>
+        <translation>Вилучити</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="724"/>
+        <source>Done</source>
+        <translation>Готово</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="736"/>
         <source>Save File</source>
         <translation>Зберегти файл</translation>
     </message>

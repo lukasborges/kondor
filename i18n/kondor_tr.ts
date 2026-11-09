@@ -2,6 +2,113 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="tr" sourcelanguage="en">
 <context>
+    <name>BookmarkManager</name>
+    <message>
+        <location filename="../src/bookmarkmanager.cpp" line="372"/>
+        <source>New Folder</source>
+        <translation>Yeni klasör</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarkMenu</name>
+    <message>
+        <location filename="../qml/BookmarkMenu.qml" line="70"/>
+        <source>Bookmark This Page</source>
+        <translation>Bu sayfayı yer imlerine ekle</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarkMenu.qml" line="76"/>
+        <source>Manage Bookmarks…</source>
+        <translation>Yer imlerini yönet…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarkMenu.qml" line="83"/>
+        <source>Show Bookmarks Toolbar</source>
+        <translation>Yer imi araç çubuğunu göster</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksWindow</name>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="17"/>
+        <source>Manage Bookmarks</source>
+        <translation>Yer imlerini yönet</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="156"/>
+        <location filename="../qml/BookmarksWindow.qml" line="381"/>
+        <location filename="../qml/BookmarksWindow.qml" line="391"/>
+        <source>New Folder</source>
+        <extracomment>Default name of a new bookmark folder</extracomment>
+        <translation>Yeni klasör</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="161"/>
+        <source>Rename</source>
+        <translation>Yeniden adlandır</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="175"/>
+        <source>Delete</source>
+        <translation>Sil</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="192"/>
+        <source>Move Up</source>
+        <translation>Yukarı taşı</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="203"/>
+        <source>Move Down</source>
+        <translation>Aşağı taşı</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="214"/>
+        <source>Import from HTML…</source>
+        <translation>HTML&apos;den içe aktar…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="222"/>
+        <source>Search bookmarks…</source>
+        <translation>Yer imlerinde ara…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="409"/>
+        <source>Rename Folder</source>
+        <translation>Klasörü yeniden adlandır</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="409"/>
+        <source>Rename Bookmark</source>
+        <translation>Yer imini yeniden adlandır</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="435"/>
+        <source>Delete Folder</source>
+        <translation>Klasörü sil</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="435"/>
+        <source>Delete Bookmark</source>
+        <translation>Yer imini sil</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="437"/>
+        <source>Delete this folder and everything in it?</source>
+        <translation>Bu klasör ve içindeki her şey silinsin mi?</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="438"/>
+        <source>Delete this bookmark?</source>
+        <translation>Bu yer imi silinsin mi?</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="459"/>
+        <source>Import Bookmarks</source>
+        <translation>Yer imlerini içe aktar</translation>
+    </message>
+</context>
+<context>
     <name>DownloadManager</name>
     <message>
         <location filename="../src/downloadmanager.cpp" line="377"/>
@@ -245,105 +352,145 @@
         <translation>İndirmeler hâlâ sürüyor. Yine de çıkılsın mı?</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="224"/>
-        <location filename="../qml/Main.qml" line="409"/>
+        <location filename="../qml/Main.qml" line="309"/>
+        <location filename="../qml/Main.qml" line="523"/>
         <source>New Tab</source>
         <translation>Yeni sekme</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="286"/>
+        <location filename="../qml/Main.qml" line="371"/>
         <source>Back</source>
         <translation>Geri</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="299"/>
+        <location filename="../qml/Main.qml" line="384"/>
         <source>Forward</source>
         <translation>İleri</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="311"/>
+        <location filename="../qml/Main.qml" line="396"/>
         <source>Stop</source>
         <translation>Durdur</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="311"/>
+        <location filename="../qml/Main.qml" line="396"/>
         <source>Reload</source>
         <translation>Yeniden yükle</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="327"/>
+        <location filename="../qml/Main.qml" line="412"/>
         <source>Home</source>
         <translation>Başlangıç</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="340"/>
+        <location filename="../qml/Main.qml" line="425"/>
         <source>Search or enter address</source>
         <translation>Arayın veya bir adres girin</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="372"/>
+        <location filename="../qml/Main.qml" line="468"/>
+        <source>Bookmark This Page</source>
+        <translation>Bu sayfayı yer imlerine ekle</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="486"/>
         <source>Downloads</source>
         <translation>İndirilenler</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="401"/>
+        <location filename="../qml/Main.qml" line="515"/>
         <source>Menu</source>
         <translation>Menü</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="414"/>
+        <location filename="../qml/Main.qml" line="528"/>
         <source>New Private Tab</source>
         <translation>Yeni gizli sekme</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="419"/>
+        <location filename="../qml/Main.qml" line="533"/>
         <source>Reopen Closed Tab</source>
         <translation>Kapatılan sekmeyi yeniden aç</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="426"/>
+        <location filename="../qml/Main.qml" line="540"/>
         <source>Close Tab</source>
         <translation>Sekmeyi kapat</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="432"/>
+        <location filename="../qml/Main.qml" line="546"/>
         <source>Find in Page…</source>
         <translation>Sayfada bul…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="438"/>
+        <location filename="../qml/Main.qml" line="552"/>
         <source>Zoom In</source>
         <translation>Yakınlaştır</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="446"/>
+        <location filename="../qml/Main.qml" line="560"/>
         <source>Zoom Out</source>
         <translation>Uzaklaştır</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="454"/>
+        <location filename="../qml/Main.qml" line="568"/>
         <source>Actual Size</source>
         <translation>Gerçek boyut</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="463"/>
+        <location filename="../qml/Main.qml" line="577"/>
+        <source>Bookmarks</source>
+        <translation>Yer imleri</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="588"/>
         <source>History</source>
         <translation>Geçmiş</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="470"/>
+        <location filename="../qml/Main.qml" line="595"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 ayarları…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="477"/>
+        <location filename="../qml/Main.qml" line="602"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 hakkında</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="537"/>
+        <location filename="../qml/Main.qml" line="692"/>
+        <source>Page bookmarked</source>
+        <translation>Sayfa yer imlerine eklendi</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="692"/>
+        <source>Edit Bookmark</source>
+        <translation>Yer imini düzenle</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="700"/>
+        <source>Name:</source>
+        <translation>Ad:</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="706"/>
+        <source>Folder:</source>
+        <translation>Klasör:</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="716"/>
+        <source>Remove</source>
+        <translation>Kaldır</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="724"/>
+        <source>Done</source>
+        <translation>Bitti</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="736"/>
         <source>Save File</source>
         <translation>Dosyayı kaydet</translation>
     </message>

@@ -29,6 +29,9 @@ jobs:
 
       - name: Check translations
         run: |
+          # The container job runs as root on a workspace owned by another user,
+          # so git needs the checkout marked as safe before diffing it.
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           cmake --build build --target update_translations
           if ! git diff --exit-code -- i18n/; then
             echo "::error::i18n/*.ts are stale; run update_translations and commit the result"

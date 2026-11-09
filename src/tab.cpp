@@ -74,6 +74,14 @@ void Tab::setFindResult(int matches, int activeMatch)
     emit findResultChanged();
 }
 
+void Tab::setPinned(bool pinned)
+{
+    if (m_pinned == pinned)
+        return;
+    m_pinned = pinned;
+    emit pinnedChanged();
+}
+
 void Tab::navigateTo(const QUrl &url)
 {
     emit navigationRequested(url);

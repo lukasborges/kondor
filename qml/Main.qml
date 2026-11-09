@@ -59,6 +59,46 @@ ApplicationWindow {
         tabs.closeTabObject(t)
     }
 
+    function activateTabAt(index) {
+        if (index >= 0 && index < tabs.count)
+            tabs.setCurrentIndex(index)
+    }
+
+    function stepTab(delta) {
+        if (tabs.count < 2)
+            return
+        tabs.setCurrentIndex((tabs.currentIndex + delta + tabs.count) % tabs.count)
+    }
+
+    function moveCurrentTab(delta) {
+        const from = tabs.currentIndex
+        const tab = tabs.currentTab
+        if (!tab || from < 0)
+            return
+        const to = from + delta
+        if (to < 0 || to >= tabs.count)
+            return
+        // Pinned and unpinned tabs stay in their own groups.
+        if (tab.pinned ? to >= tabs.pinnedCount : to < tabs.pinnedCount)
+            return
+        tabs.moveTab(from, to)
+    }
+
+    function openTabContextMenu(tab, scenePosition) {
+        tabContextMenu.tab = tab
+        tabContextMenu.tabIndex = tabs.indexOfTab(tab)
+        const point = contentItem.mapFromItem(null, scenePosition.x, scenePosition.y)
+        tabContextMenu.x = point.x
+        tabContextMenu.y = point.y
+        tabContextMenu.open()
+    }
+
+    TabContextMenu {
+        id: tabContextMenu
+        tabModel: tabs
+        targetWindow: window
+    }
+
     // FileDialog hands a file:// URL to QML; downloads need a local path.
     function localPath(url) {
         let path = url.toString()
@@ -87,7 +127,7 @@ ApplicationWindow {
     header: ColumnLayout {
         spacing: 0
 
-        // ── Barra de abas (nativa do estilo KDE) ─────────────────────────
+        // ── Tab bar ──────────────────────────────────────────────────────
         Rectangle {
             Layout.fillWidth: true
             implicitHeight: tabBar.implicitHeight
@@ -96,11 +136,21 @@ ApplicationWindow {
             color: Kirigami.Theme.backgroundColor
 
             RowLayout {
+                id: tabBarRow
                 anchors.fill: parent
                 spacing: 0
 
                 TabBar {
                     id: tabBar
+                    // Let the bar shrink when the tabs no longer fit; after the
+                    // minimum width the internal ListView scrolls.
+                    Layout.minimumWidth: 0
+                    // Room left for the tabs once the new-tab button is placed.
+                    readonly property real tabsAreaWidth: Math.max(90, tabBarRow.width - newTabButton.implicitWidth - 10)
+                    Layout.maximumWidth: tabsAreaWidth
+                    // Index a dragged tab would land on; drives the drop indicator.
+                    property int dropTargetIndex: -1
+
                     currentIndex: tabs.currentIndex
                     background: null
 
@@ -109,70 +159,41 @@ ApplicationWindow {
                             tabs.setCurrentIndex(currentIndex)
                     }
 
+                    Component.onCompleted: {
+                        // Let the internal ListView flick when the tabs overflow.
+                        if (contentItem)
+                            contentItem.interactive = true
+                    }
+
                     Repeater {
                         model: tabs
 
-                        delegate: TabButton {
-                            id: tabButton
-                            required property Tab tab
+                        delegate: TabButtonDelegate {
+                            tabModel: tabs
+                            tabBarItem: tabBar
+                            targetWindow: window
+                            tabCount: tabs.count
+                            pinnedCount: tabs.pinnedCount
+                            tabsAreaWidth: tabBar.tabsAreaWidth
+                        }
+                    }
 
-                            readonly property string fullTitle: tab.title.length ? tab.title : qsTr("Nova aba")
-                            property string elidedTitle: fullTitle
+                    // A mouse wheel over the tab bar scrolls it horizontally.
+                    WheelHandler {
+                        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+                        onWheel: function(event) {
+                            const view = tabBar.contentItem
+                            if (!view)
+                                return
+                            const maximum = Math.max(0, view.contentWidth - view.width)
+                            if (maximum <= 0)
+                                return
 
-                            // Largura limitada: não cresce junto com o título.
-                            width: Math.min(220, Math.max(130, Math.ceil(fullMetrics.advanceWidth) + 62))
-                            text: elidedTitle
-
-                            TextMetrics {
-                                id: fullMetrics
-                                font: Kirigami.Theme.defaultFont
-                                text: tabButton.fullTitle
-                            }
-
-                            TextMetrics {
-                                id: measure
-                                font: Kirigami.Theme.defaultFont
-                            }
-
-                            function updateElided() {
-                                var maxW = width - 70
-                                measure.text = fullTitle
-                                if (measure.advanceWidth <= maxW) {
-                                    elidedTitle = fullTitle
-                                    return
-                                }
-                                var s = fullTitle
-                                while (s.length > 0) {
-                                    s = s.slice(0, -1)
-                                    measure.text = s + "\u2026"
-                                    if (measure.advanceWidth <= maxW) {
-                                        elidedTitle = s + "\u2026"
-                                        return
-                                    }
-                                }
-                                elidedTitle = "\u2026"
-                            }
-
-                            onFullTitleChanged: updateElided()
-                            onWidthChanged: updateElided()
-                            Component.onCompleted: updateElided()
-
-                            ToolButton {
-                                anchors.right: parent.right
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.rightMargin: 4
-                                width: 20
-                                height: 20
-                                flat: true
-                                display: AbstractButton.IconOnly
-                                icon.name: "window-close-symbolic"
-                                icon.width: 14
-                                icon.height: 14
-                                ToolTip.visible: hovered
-                                ToolTip.text: qsTr("Fechar aba")
-                                ToolTip.delay: 600
-                                onClicked: window.closeTabFor(tabButton.tab)
-                            }
+                            const delta = event.pixelDelta.x !== 0 ? event.pixelDelta.x
+                                : event.pixelDelta.y !== 0 ? -event.pixelDelta.y
+                                : event.angleDelta.x !== 0 ? event.angleDelta.x
+                                : -event.angleDelta.y
+                            view.contentX = Math.max(0, Math.min(maximum, view.contentX + delta))
                         }
                     }
                 }
@@ -182,6 +203,7 @@ ApplicationWindow {
                     id: newTabButton
                     Layout.alignment: Qt.AlignVCenter
                     Layout.leftMargin: 2
+                    Layout.minimumWidth: implicitWidth
                     display: AbstractButton.IconOnly
                     icon.name: "tab-new"
                     icon.width: 16
@@ -193,6 +215,41 @@ ApplicationWindow {
                 }
 
                 Item { Layout.fillWidth: true }
+            }
+
+            // Where a dragged tab will land.
+            Rectangle {
+                readonly property Item targetItem: tabBar.dropTargetIndex >= 0 && tabBar.contentItem
+                    ? tabBar.itemAt(tabBar.dropTargetIndex) : null
+                visible: targetItem !== null
+                x: tabBar.x + (targetItem ? targetItem.x - tabBar.contentItem.contentX : 0)
+                y: tabBar.y
+                width: 2
+                height: tabBar.height
+                color: Kirigami.Theme.highlightColor
+            }
+
+            // Double-click on the empty part of the tab bar opens a new tab.
+            TapHandler {
+                acceptedButtons: Qt.LeftButton
+                function contains(item, sceneX, sceneY) {
+                    const point = item.mapFromItem(null, sceneX, sceneY)
+                    return point.x >= 0 && point.x <= item.width
+                        && point.y >= 0 && point.y <= item.height
+                }
+                onDoubleTapped: function(eventPoint) {
+                    if (contains(newTabButton, eventPoint.scenePosition.x, eventPoint.scenePosition.y))
+                        return
+                    if (tabBar.contentItem) {
+                        const point = tabBar.contentItem.mapFromItem(null,
+                                                                     eventPoint.scenePosition.x,
+                                                                     eventPoint.scenePosition.y)
+                        // Only the empty area after the last tab counts.
+                        if (point.x <= tabBar.contentItem.contentWidth)
+                            return
+                    }
+                    tabs.addTab(false)
+                }
             }
         }
 
@@ -520,6 +577,58 @@ ApplicationWindow {
         onActivated: window.closeTabAt(tabs.currentIndex)
     }
     Shortcut {
+        sequences: ["Ctrl+Tab", "Ctrl+PgDown"]
+        onActivated: window.stepTab(1)
+    }
+    Shortcut {
+        sequences: ["Ctrl+Shift+Tab", "Ctrl+PgUp"]
+        onActivated: window.stepTab(-1)
+    }
+    Shortcut {
+        sequence: "Ctrl+1"
+        onActivated: window.activateTabAt(0)
+    }
+    Shortcut {
+        sequence: "Ctrl+2"
+        onActivated: window.activateTabAt(1)
+    }
+    Shortcut {
+        sequence: "Ctrl+3"
+        onActivated: window.activateTabAt(2)
+    }
+    Shortcut {
+        sequence: "Ctrl+4"
+        onActivated: window.activateTabAt(3)
+    }
+    Shortcut {
+        sequence: "Ctrl+5"
+        onActivated: window.activateTabAt(4)
+    }
+    Shortcut {
+        sequence: "Ctrl+6"
+        onActivated: window.activateTabAt(5)
+    }
+    Shortcut {
+        sequence: "Ctrl+7"
+        onActivated: window.activateTabAt(6)
+    }
+    Shortcut {
+        sequence: "Ctrl+8"
+        onActivated: window.activateTabAt(7)
+    }
+    Shortcut {
+        sequence: "Ctrl+9"
+        onActivated: window.activateTabAt(tabs.count - 1)
+    }
+    Shortcut {
+        sequence: "Ctrl+Shift+PgUp"
+        onActivated: window.moveCurrentTab(-1)
+    }
+    Shortcut {
+        sequence: "Ctrl+Shift+PgDown"
+        onActivated: window.moveCurrentTab(1)
+    }
+    Shortcut {
         sequence: "Ctrl+L"
         onActivated: {
             addressBar.forceActiveFocus()
@@ -596,6 +705,10 @@ ApplicationWindow {
         function onCurrentIndexChanged() {
             if (tabBar.currentIndex !== tabs.currentIndex)
                 tabBar.currentIndex = tabs.currentIndex
+            // Keep the current tab visible when the tab bar overflows.
+            if (tabs.currentIndex >= 0 && tabBar.contentItem) {
+                tabBar.contentItem.positionViewAtIndex(tabs.currentIndex, ListView.Contain)
+            }
         }
         function onCurrentTabChanged() {
             addressBar.syncFromTab()

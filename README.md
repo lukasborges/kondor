@@ -19,6 +19,7 @@ A working prototype with the core functionality in place: it actually browses, w
 ### Implemented
 
 - **Real tabs** with `Qt WebEngine` (one `WebEngineView` per tab, preserving state when switching)
+- **Tab management**: favicons and a loading indicator, drag to reorder, middle-click to close, pinned tabs, a tab context menu (reload, duplicate, pin, close others and tabs to the right), keyboard switching and overflow handling (tabs shrink, then the bar scrolls)
 - **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches with the configured engine)
 - **Navigation**: back, forward, reload/stop, home
 - **Private mode**: off-the-record tabs, isolated from the persistent profile
@@ -81,6 +82,8 @@ src/
 qml/
   Main.qml            window, tab bar, navigation bar, menu, shortcuts
   WebViewTab.qml      WebEngineView + bridge to the Tab object
+  TabButtonDelegate.qml  one tab button (favicon, title, close, drag, pinned)
+  TabContextMenu.qml  context menu for a tab in the tab bar
   InlineBar.qml       shared strip between the header and the page content
   FindBar.qml         find bar (Ctrl+F)
   DownloadsPopup.qml  download list popup with progress and actions
@@ -95,6 +98,11 @@ qml/
 | `Ctrl+T` | New tab |
 | `Ctrl+Shift+N` | New private tab |
 | `Ctrl+W` | Close tab (quits the app if it is the last one) |
+| `Ctrl+Tab` / `Ctrl+PgDown` | Next tab |
+| `Ctrl+Shift+Tab` / `Ctrl+PgUp` | Previous tab |
+| `Ctrl+1` … `Ctrl+8` | Go to tab N |
+| `Ctrl+9` | Go to the last tab |
+| `Ctrl+Shift+PgUp` / `Ctrl+Shift+PgDown` | Move the current tab left / right |
 | `Ctrl+H` | Browsing history |
 | `Ctrl+,` / `Ctrl+Shift+,` | Configure Kondor (settings) |
 | `Ctrl+L` | Focus the address bar |

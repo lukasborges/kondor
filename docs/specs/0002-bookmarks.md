@@ -34,7 +34,7 @@ No bookmarks. Address bar is the `TextField { id: addressBar }` in `qml/Main.qml
    - Signal `bookmarksChanged()` emitted after every write; models refresh on it.
 3. **Star button** inside the address bar (`addressBar.rightPadding` + a `ToolButton` anchored right inside it): `icon.name` = `bookmarks-bookmarked` (filled) when bookmarked, else `bookmarks` (outline); tooltip "Edit This Bookmark" when bookmarked, else "Bookmark This Page" (changed by bug #45); hidden when `tabs.currentTab.url` is empty. Clicking it when not bookmarked adds to "Other Bookmarks" and opens an edit `Popup` (title field, folder `ComboBox`, "Remove" and "Done" buttons); when already bookmarked it opens the same popup.
 4. **Ctrl+D** shortcut = click on the star.
-5. **Bookmarks bar** (`qml/BookmarksBar.qml`): a thin `ToolBar` under the navigation bar, `Repeater` over `BookmarkManager.toolbarModel`, flat `ToolButton`s (icon `folder` for folders → open a `Menu` with the folder content, recursively one level is enough; otherwise the page favicon (`Kirigami.Icon`, 16 px, `source: "image://favicon/" + url`, `fallback: "globe"`) beside the `text`, with a `ToolTip` showing the URL; changed by bug #45). Visibility controlled by `Settings.showBookmarksBar` (default `false`) and toggled with **Ctrl+Shift+B** and a checkable menu item.
+5. **Bookmarks bar** (`qml/BookmarksBar.qml`): a thin `ToolBar` under the navigation bar, `Repeater` over `BookmarkManager.toolbarModel`, flat `ToolButton`s (icon `folder` for folders → open a `Menu` with the folder content, recursively one level is enough; otherwise the page favicon (16 px `SiteIcon` from Kondor's `FaviconStore`, `globe` as fallback; see bug #45) beside the `text`, with a `ToolTip` showing the URL; changed by bug #45). Visibility controlled by `Settings.showBookmarksBar` (default `false`) and toggled with **Ctrl+Shift+B** and a checkable menu item.
 6. **Bookmarks menu** in `mainMenu`: a sub-`Menu` "Bookmarks" with "Bookmark This Page" (Ctrl+D), "Manage Bookmarks…" (Ctrl+Shift+O), "Show Bookmarks Toolbar", then the items of the toolbar folder.
 7. **Manager window** `qml/BookmarksWindow.qml`: left `ListView` of folders, right `ListView` of items in the selected folder, buttons "New Folder", "Rename", "Delete", drag-and-drop or up/down buttons to reorder, and "Import from HTML…" using `FileDialog` (`QtQuick.Dialogs`, `nameFilters: ["HTML (*.html *.htm)"]`).
 8. Middle-click or Ctrl+click on any bookmark opens it in a background tab; normal click navigates the current tab.
@@ -59,7 +59,7 @@ Bookmark 3 pages into different folders, restart, open them from the bar and the
 
 ## Out of scope
 
-Sync, a separate favicon cache (use the WebEngine `image://favicon/` provider, `globe` as fallback), JSON import from Chrome profiles, keyword bookmarks.
+Sync, favicons fetched over the network for sites never visited (favicons come from `FaviconStore`, bug #45), JSON import from Chrome profiles, keyword bookmarks.
 
 ## Dependencies
 
@@ -81,4 +81,5 @@ Visual target — match it (controls, Kirigami components, icon names, wording, 
 
 | Question | Decision |
 | --- | --- |
-| Which icons show the bookmark state, and do toolbar bookmarks get an icon? (maintainer feedback, bug #45) | Filled `bookmarks-bookmarked` / outline `bookmarks`, tooltip "Edit This Bookmark" when bookmarked; toolbar and manager rows show the WebEngine favicon with `globe` as fallback. |
+| Which icons show the bookmark state, and do toolbar bookmarks get an icon? (maintainer feedback, bug #45) | Filled `bookmarks-bookmarked` / outline `bookmarks`, tooltip "Edit This Bookmark" when bookmarked; toolbar and manager rows show the site favicon with `globe` as fallback. |
+| How are bookmark favicons looked up? (review of PR #50, bug #45) | Not with `image://favicon/<page URL>`: Qt WebEngine's provider only resolves icon URLs of open views. Normal tabs store their favicon per host in the `favicons` table (`FaviconStore`, schema v3), shown through `image://kondor-favicon/` in `SiteIcon.qml`; private tabs never store. |

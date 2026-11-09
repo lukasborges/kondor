@@ -86,6 +86,7 @@ exactly as described here; later issues reuse it. Do not create parallel alterna
 | **Database** | `src/database.{h,cpp}` | `Database::instance()` opens one SQLite file at `QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/kondor.sqlite"` with `QSqlDatabase` (driver `QSQLITE`, connection name `kondor`). Schema versioning with `PRAGMA user_version` and a `migrate()` step per version. Add `Sql` to `find_package(Qt6 …)` and `Qt6::Sql` to `target_link_libraries`. Defined in issue #1. |
 | **Notifications** | `src/notifier.{h,cpp}` | QML singleton `Notifier` with `Q_INVOKABLE void notify(const QString &title, const QString &body, const QString &iconName)`, implemented with `QDBusInterface` on `org.freedesktop.Notifications` (`Notify` method, app name `Kondor`, `app_icon` = `kondor`). Add `DBus` to Qt components and `Qt6::DBus`. Defined in issue #4. |
 | **Inline page bar** | `qml/InlineBar.qml` | A bar shown between the toolbar and the page (for find, permission prompts, crash notices): `Kirigami.InlineMessage`-like look, uses `Kirigami.Theme` colors. Defined in issue #5. |
+| **Favicons** | `src/faviconstore.{h,cpp}`, `qml/SiteIcon.qml` | QML singleton `FaviconStore` keeps one favicon per host in the `favicons` table of **Database** (filled only from normal tabs); `image://kondor-favicon/<page URL>` serves it and `SiteIcon` shows it with a fallback icon. Qt's `image://favicon/` only resolves icon URLs of open views, never page URLs. Defined in bug #45. |
 
 ## UI prototypes (visual target)
 

@@ -64,8 +64,8 @@ and blank is the new default. Private tabs show a private variant without top si
    - Grid: `GridLayout` with `columns: Math.max(1, Math.min(4, Math.floor(width / (gridUnit * 8))))`,
      one `ItemDelegate` per site (`gridUnit * 7` wide) with a `gridUnit * 3.5` rounded
      `Rectangle` (`Kirigami.Theme.alternateBackgroundColor`, 1 px border from the text color at 15%)
-     holding a `Kirigami.Icon` (`iconSizes.medium`, `source: "image://favicon/" + url`,
-     `fallback: "internet-web-browser"`), and the host as an elided `Label` below.
+     holding a `SiteIcon` (`iconSizes.medium`, `fallback: "internet-web-browser"`; favicons from
+     `FaviconStore`, see bug #45), and the host as an elided `Label` below.
      `ToolTip` (`delay: 600`) shows title and URL.
    - Click → `tab.navigateTo(url)`. Middle click or Ctrl+click → new background tab
      (`tabModel.addTabWithProfile(tab.profile, url, true)`).
@@ -183,3 +183,4 @@ Visual target — match it (controls, Kirigami components, icon names, wording, 
 | Native QML page or an HTML page on a custom scheme? | Native QML overlay in `WebViewTab.qml` (Breeze look, `Kirigami.Theme` colors). The `about:blank` load in `showNewTabPage()` keeps Back working. |
 | What does the home page setting control now? | Only the first tab at startup and the Home button. Blank (the new default) means the New Tab page. |
 | Which shortcut opens the private New Tab page? (PR #48) | Ctrl+Shift+N, the existing documented shortcut; Ctrl+Shift+P stays reserved for "New Private Window" (#14). |
+| Why do top-site tiles show no favicon? (bug #45) | `image://favicon/<page URL>` never resolves on Qt 6.11; tiles use `SiteIcon` backed by `FaviconStore` (fixed with bug #45). |

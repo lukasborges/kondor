@@ -9,7 +9,7 @@ class Tab : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
-    QML_UNCREATABLE("Abas são criadas pelo TabModel")
+    QML_UNCREATABLE("Tabs are created by TabModel")
 
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
     Q_PROPERTY(QUrl url READ url NOTIFY urlChanged)
@@ -40,7 +40,7 @@ public:
     int findMatches() const { return m_findMatches; }
     int findActiveMatch() const { return m_findActiveMatch; }
 
-    // Chamadas vindas do WebEngineView (QML) para sincronizar o estado.
+    // Calls coming from the WebEngineView (QML) to synchronize the state.
     Q_INVOKABLE void setTitle(const QString &title);
     Q_INVOKABLE void setUrl(const QUrl &url);
     Q_INVOKABLE void setIconUrl(const QUrl &iconUrl);
@@ -51,7 +51,7 @@ public:
     Q_INVOKABLE void setFindResult(int matches, int activeMatch);
     void setPinned(bool pinned);
 
-    // Comandos vindos da interface; viram sinais consumidos pelo WebEngineView.
+    // Commands coming from the UI; they become signals consumed by the WebEngineView.
     Q_INVOKABLE void navigateTo(const QUrl &url);
     Q_INVOKABLE void goBack();
     Q_INVOKABLE void goForward();

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
-  <!-- Kondor — globo com chifres e engrenagem, no estilo Breeze (KDE HIG, grade 48px, margem de 4px). Só paths e gradientes lineares. -->
+  <!-- Kondor: globe with horns and a gear, in Breeze style (KDE HIG, 48px grid, 4px margin). Only paths and linear gradients. -->
   <defs>
     <linearGradient id="globe" x1="0" y1="10" x2="0" y2="42" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3daee9"/><stop offset="1" stop-color="#1d78b5"/></linearGradient>
     <linearGradient id="land" x1="0" y1="10" x2="0" y2="42" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#c4e9fb"/><stop offset="1" stop-color="#8acbee"/></linearGradient>

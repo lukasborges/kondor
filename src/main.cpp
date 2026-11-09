@@ -1,15 +1,18 @@
 #include <QGuiApplication>
 #include <QIcon>
+#include <QLibraryInfo>
+#include <QLocale>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
+#include <QTranslator>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
 #include <cstdio>
 
 int main(int argc, char *argv[])
 {
-    // Garante que warnings/erros do Qt apareçam mesmo que o qtlogging.ini
-    // do sistema silencie a categoria de debug.
+    // Make sure Qt warnings and errors are printed even when the system's
+    // qtlogging.ini silences the debug category.
     qInstallMessageHandler([](QtMsgType type, const QMessageLogContext &, const QString &msg) {
         if (type == QtDebugMsg || type == QtInfoMsg)
             return;
@@ -17,10 +20,10 @@ int main(int argc, char *argv[])
         std::fflush(stderr);
     });
 
-    // Requerido pelo QtWebEngine para compartilhar contexto com o Qt Quick.
+    // Required by QtWebEngine to share the context with Qt Quick.
     QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
 
-    // Precisa acontecer antes de carregar qualquer coisa do WebEngine no QML.
+    // Must happen before loading anything from WebEngine in QML.
     QtWebEngineQuick::initialize();
 
     QGuiApplication app(argc, argv);
@@ -28,11 +31,22 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
     QCoreApplication::setApplicationName(QStringLiteral("Kondor"));
 
-    // Identidade do app: nome do .desktop (usado pelo Wayland/KWin) e ícone da janela.
+    // App identity: the .desktop name (used by Wayland/KWin) and the window icon.
     QGuiApplication::setDesktopFileName(QStringLiteral("kondor"));
     QGuiApplication::setWindowIcon(QIcon(QStringLiteral(":/packaging/kondor.png")));
 
-    // Visual do KDE (Breeze) aplicado via estilo desktop do Qt Quick Controls 2.
+    // Kondor's own strings; the .qm files are embedded under :/i18n.
+    QTranslator appTranslator;
+    if (appTranslator.load(QLocale(), QStringLiteral("kondor"), QStringLiteral("_"), QStringLiteral(":/i18n")))
+        app.installTranslator(&appTranslator);
+
+    // Qt's own strings (dialogs, standard context menus).
+    QTranslator qtTranslator;
+    if (qtTranslator.load(QLocale(), QStringLiteral("qt"), QStringLiteral("_"),
+                          QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
+        app.installTranslator(&qtTranslator);
+
+    // KDE (Breeze) look applied through the Qt Quick Controls 2 desktop style.
     QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
     if (QQuickStyle::name() != QLatin1String("org.kde.desktop"))
         QQuickStyle::setStyle(QStringLiteral("Fusion"));

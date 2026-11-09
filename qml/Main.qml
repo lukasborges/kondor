@@ -198,7 +198,7 @@ ApplicationWindow {
                     }
                 }
 
-                // Botão de nova aba, logo depois da última aba.
+                // New-tab button, right after the last tab.
                 ToolButton {
                     id: newTabButton
                     Layout.alignment: Qt.AlignVCenter
@@ -209,7 +209,7 @@ ApplicationWindow {
                     icon.width: 16
                     icon.height: 16
                     ToolTip.visible: hovered
-                    ToolTip.text: qsTr("Nova aba")
+                    ToolTip.text: qsTr("New Tab")
                     ToolTip.delay: 600
                     onClicked: tabs.addTab(false)
                 }
@@ -253,10 +253,10 @@ ApplicationWindow {
             }
         }
 
-        // ── Barra de navegação ───────────────────────────────────────────
+        // ── Navigation bar ───────────────────────────────────────────────
         ToolBar {
             Layout.fillWidth: true
-            // Mesma cor da aba ativa / fundo da janela.
+            // Same color as the active tab / window background.
             Kirigami.Theme.colorSet: Kirigami.Theme.Window
             Kirigami.Theme.inherit: false
 
@@ -271,7 +271,7 @@ ApplicationWindow {
                     icon.name: "go-previous"
                     enabled: tabs.currentTab ? tabs.currentTab.canGoBack : false
                     ToolTip.visible: hovered
-                    ToolTip.text: qsTr("Voltar")
+                    ToolTip.text: qsTr("Back")
                     ToolTip.delay: 600
                     onClicked: {
                         if (tabs.currentTab)
@@ -284,7 +284,7 @@ ApplicationWindow {
                     icon.name: "go-next"
                     enabled: tabs.currentTab ? tabs.currentTab.canGoForward : false
                     ToolTip.visible: hovered
-                    ToolTip.text: qsTr("Avançar")
+                    ToolTip.text: qsTr("Forward")
                     ToolTip.delay: 600
                     onClicked: {
                         if (tabs.currentTab)
@@ -296,7 +296,7 @@ ApplicationWindow {
                     display: AbstractButton.IconOnly
                     icon.name: (tabs.currentTab && tabs.currentTab.loading) ? "process-stop" : "view-refresh"
                     ToolTip.visible: hovered
-                    ToolTip.text: (tabs.currentTab && tabs.currentTab.loading) ? qsTr("Parar") : qsTr("Recarregar")
+                    ToolTip.text: (tabs.currentTab && tabs.currentTab.loading) ? qsTr("Stop") : qsTr("Reload")
                     ToolTip.delay: 600
                     onClicked: {
                         if (!tabs.currentTab)
@@ -312,7 +312,7 @@ ApplicationWindow {
                     display: AbstractButton.IconOnly
                     icon.name: "go-home"
                     ToolTip.visible: hovered
-                    ToolTip.text: qsTr("Página inicial")
+                    ToolTip.text: qsTr("Home")
                     ToolTip.delay: 600
                     onClicked: {
                         if (tabs.currentTab)
@@ -325,7 +325,7 @@ ApplicationWindow {
                     Layout.fillWidth: true
                     Layout.leftMargin: 8
                     Layout.rightMargin: 8
-                    placeholderText: qsTr("Pesquisar ou digitar um endereço")
+                    placeholderText: qsTr("Search or enter address")
                     selectByMouse: true
 
                     function syncFromTab() {
@@ -394,18 +394,18 @@ ApplicationWindow {
                         id: mainMenu
 
                         MenuItem {
-                            text: qsTr("Nova aba")
+                            text: qsTr("New Tab")
                             icon.name: "tab-new"
                             onTriggered: tabs.addTab(false)
                         }
                         MenuItem {
-                            text: qsTr("Nova aba privada")
+                            text: qsTr("New Private Tab")
                             icon.name: "view-private"
                             onTriggered: tabs.addTab(true)
                         }
                         MenuSeparator {}
                         MenuItem {
-                            text: qsTr("Fechar aba")
+                            text: qsTr("Close Tab")
                             icon.name: "window-close"
                             onTriggered: window.closeTabAt(tabs.currentIndex)
                         }
@@ -417,7 +417,7 @@ ApplicationWindow {
                         }
                         MenuSeparator {}
                         MenuItem {
-                            text: qsTr("Ampliar")
+                            text: qsTr("Zoom In")
                             icon.name: "zoom-in"
                             onTriggered: {
                                 if (tabs.currentTab)
@@ -425,7 +425,7 @@ ApplicationWindow {
                             }
                         }
                         MenuItem {
-                            text: qsTr("Reduzir")
+                            text: qsTr("Zoom Out")
                             icon.name: "zoom-out"
                             onTriggered: {
                                 if (tabs.currentTab)
@@ -433,7 +433,7 @@ ApplicationWindow {
                             }
                         }
                         MenuItem {
-                            text: qsTr("Tamanho normal")
+                            text: qsTr("Actual Size")
                             icon.name: "zoom-original"
                             onTriggered: {
                                 if (tabs.currentTab)
@@ -454,7 +454,7 @@ ApplicationWindow {
                         }
                         MenuSeparator {}
                         MenuItem {
-                            text: qsTr("Sobre o Kondor")
+                            text: qsTr("About Kondor")
                             icon.name: "help-about"
                         }
                     }
@@ -463,7 +463,7 @@ ApplicationWindow {
         }
     }
 
-    // ── Área de conteúdo: uma WebEngineView por aba ─────────────────────
+    // ── Content area: one WebEngineView per tab ─────────────────────────
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
@@ -563,7 +563,7 @@ ApplicationWindow {
         }
     }
 
-    // ── Atalhos ─────────────────────────────────────────────────────────
+    // ── Shortcuts ───────────────────────────────────────────────────────
     Shortcut {
         sequence: "Ctrl+T"
         onActivated: tabs.addTab(false)

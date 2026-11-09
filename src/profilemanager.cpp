@@ -5,6 +5,7 @@
 #include "settings.h"
 
 #include <QCoreApplication>
+#include <QLocale>
 #include <QQuickWebEngineDownloadRequest>
 #include <QRegularExpression>
 #include <QWebEngineCookieStore>
@@ -88,6 +89,9 @@ void ProfileManager::setupProfile(QQuickWebEngineProfile *profile)
     static const QRegularExpression qtWebEngineToken(QStringLiteral("QtWebEngine/[^ ]+"));
     userAgent.replace(qtWebEngineToken, QStringLiteral("Kondor/0.1"));
     profile->setHttpUserAgent(userAgent);
+
+    // Sites get content in the user's language.
+    profile->setHttpAcceptLanguage(QLocale().bcp47Name());
 
     profile->setDownloadPath(Settings::instance()->downloadDirectory());
 

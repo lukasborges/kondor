@@ -64,21 +64,51 @@ ApplicationWindow {
         if (!url)
             return
         const tab = root.tabModel.currentTab
-        if (background) {
+        if (!tab) {
+            root.tabModel.addTab(false, url)
+        } else if (background) {
             // A new tab keeps the current mode: private stays private.
-            const profile = tab && tab.isPrivate ? ProfileManager.createPrivateProfile()
-                                                 : ProfileManager.defaultProfile()
+            const profile = tab.isPrivate ? ProfileManager.createPrivateProfile()
+                                          : ProfileManager.defaultProfile()
             root.tabModel.addTabWithProfile(profile, url, true)
         } else {
-            root.tabModel.addTab(false, url)
+            tab.navigateTo(url)
         }
     }
 
+    // True when the right-hand list has a current row: the toolbar actions
+    // then apply to that bookmark/folder instead of the selected folder.
+    function hasItemSelection() {
+        return root.itemModel && itemList.currentIndex >= 0
+    }
+
+    function currentItemInfo() {
+        if (!root.hasItemSelection())
+            return {}
+        const revision = BookmarkManager.revision
+        return revision >= 0 ? BookmarkManager.bookmark(root.itemModel.idAt(itemList.currentIndex))
+                             : {}
+    }
+
+    // The item the toolbar actions apply to: the row of the right-hand list
+    // when there is one, the selected folder otherwise.
+    function actionTarget() {
+        return root.hasItemSelection() ? root.currentItemInfo() : root.selectedInfo()
+    }
+
+    function actionIsFolder() {
+        return root.hasItemSelection() ? root.currentItemInfo().isFolder : true
+    }
+
     function moveSelected(delta) {
-        const info = root.selectedInfo()
+        const info = root.actionTarget()
         if (!info.id || info.special)
             return
-        BookmarkManager.move(info.id, info.parentId, info.position + delta)
+        const parentId = root.hasItemSelection() ? root.selectedFolderId : info.parentId
+        BookmarkManager.move(info.id, parentId, info.position + delta)
+        if (root.hasItemSelection())
+            itemList.currentIndex =
+                Math.max(0, Math.min(info.position + delta, root.itemModel.count - 1))
     }
 
     function openCurrentItem() {
@@ -111,17 +141,30 @@ ApplicationWindow {
                 ToolButton {
                     text: qsTr("Rename")
                     icon.name: "edit-rename"
-                    enabled: root.selectedFolderId > 0
+                    enabled: root.hasItemSelection() || root.selectedFolderId > 0
                     onClicked: {
-                        renameDialog.folderTitle = root.selectedInfo().title
+                        const target = root.actionTarget()
+                        if (!target.id)
+                            return
+                        renameDialog.targetId = target.id
+                        renameDialog.targetIsFolder = root.actionIsFolder()
+                        renameDialog.targetTitle = target.title
                         renameDialog.open()
                     }
                 }
                 ToolButton {
                     text: qsTr("Delete")
                     icon.name: "edit-delete"
-                    enabled: root.selectedFolderId > 0 && !root.selectedInfo().special
-                    onClicked: deleteDialog.open()
+                    enabled: root.hasItemSelection()
+                             || (root.selectedFolderId > 0 && !root.selectedInfo().special)
+                    onClicked: {
+                        const target = root.actionTarget()
+                        if (!target.id)
+                            return
+                        deleteDialog.targetId = target.id
+                        deleteDialog.targetIsFolder = root.actionIsFolder()
+                        deleteDialog.open()
+                    }
                 }
                 ToolButton {
                     display: AbstractButton.IconOnly
@@ -129,7 +172,8 @@ ApplicationWindow {
                     ToolTip.visible: hovered
                     ToolTip.text: qsTr("Move Up")
                     ToolTip.delay: 600
-                    enabled: !root.selectedInfo().special
+                    enabled: (root.hasItemSelection() || !root.selectedInfo().special)
+                             && root.actionTarget().id > 0
                     onClicked: root.moveSelected(-1)
                 }
                 ToolButton {
@@ -138,7 +182,8 @@ ApplicationWindow {
                     ToolTip.visible: hovered
                     ToolTip.text: qsTr("Move Down")
                     ToolTip.delay: 600
-                    enabled: !root.selectedInfo().special
+                    enabled: (root.hasItemSelection() || !root.selectedInfo().special)
+                             && root.actionTarget().id > 0
                     onClicked: root.moveSelected(1)
                 }
 
@@ -321,14 +366,16 @@ ApplicationWindow {
 
     Dialog {
         id: renameDialog
-        property string folderTitle: ""
-        title: qsTr("Rename Folder")
+        property var targetId: -1
+        property bool targetIsFolder: true
+        property string targetTitle: ""
+        title: renameDialog.targetIsFolder ? qsTr("Rename Folder") : qsTr("Rename Bookmark")
         standardButtons: Dialog.Ok | Dialog.Cancel
         modal: true
         anchors.centerIn: parent
 
         onOpened: {
-            renameField.text = renameDialog.folderTitle
+            renameField.text = renameDialog.targetTitle
             renameField.selectAll()
             renameField.forceActiveFocus()
         }
@@ -338,19 +385,29 @@ ApplicationWindow {
             width: Kirigami.Units.gridUnit * 18
         }
 
-        onAccepted: BookmarkManager.rename(root.selectedFolderId, renameField.text)
+        onAccepted: {
+            if (renameDialog.targetId > 0)
+                BookmarkManager.rename(renameDialog.targetId, renameField.text)
+        }
     }
 
     MessageDialog {
         id: deleteDialog
-        title: qsTr("Delete Folder")
-        text: qsTr("Delete this folder and everything in it?")
+        property var targetId: -1
+        property bool targetIsFolder: true
+        title: deleteDialog.targetIsFolder ? qsTr("Delete Folder") : qsTr("Delete Bookmark")
+        text: deleteDialog.targetIsFolder
+              ? qsTr("Delete this folder and everything in it?")
+              : qsTr("Delete this bookmark?")
         buttons: MessageDialog.Yes | MessageDialog.No
         onAccepted: {
-            const info = root.selectedInfo()
+            const info = BookmarkManager.bookmark(deleteDialog.targetId)
             if (!info.id)
                 return
             BookmarkManager.remove(info.id)
+            // Deleting the selected folder moves the selection to its parent.
+            if (!deleteDialog.targetIsFolder)
+                return
             root.selectedFolderId = info.parentId > 0 ? info.parentId : BookmarkManager.otherFolderId()
         }
     }

@@ -573,18 +573,16 @@ ApplicationWindow {
                             }
                         }
                         MenuSeparator {}
-                        MenuItem {
-                            text: qsTr("Bookmarks")
+                        BookmarkMenu {
+                            title: qsTr("Bookmarks")
                             icon.name: "bookmarks"
-                            BookmarkMenu {
-                                showCommands: true
-                                folderId: BookmarkManager.toolbarFolderId()
-                                onBookmarkActivated: function(url, background) {
-                                    window.openBookmark(url, background)
-                                }
-                                onBookmarkThisPageRequested: window.openBookmarkEditor()
-                                onManageBookmarksRequested: window.openBookmarks()
+                            showCommands: true
+                            folderId: BookmarkManager.toolbarFolderId()
+                            onBookmarkActivated: function(url, background) {
+                                window.openBookmark(url, background)
                             }
+                            onBookmarkThisPageRequested: window.openBookmarkEditor()
+                            onManageBookmarksRequested: window.openBookmarks()
                         }
                         MenuItem {
                             text: qsTr("History")

@@ -58,8 +58,17 @@ QString decodeEntities(QString text)
         const auto match = it.next();
         decoded += text.mid(last, match.capturedStart() - last);
         bool ok = false;
-        const uint value = match.captured(2).toUInt(&ok, match.captured(1).isEmpty() ? 10 : 16);
-        decoded += ok ? QString(QChar(value)) : match.captured(0);
+        const uint codePoint =
+            match.captured(2).toUInt(&ok, match.captured(1).isEmpty() ? 10 : 16);
+        // Reject invalid code points; QString::fromUcs4() encodes the rest as
+        // surrogate pairs, so entities above U+FFFF (e.g. emoji) survive.
+        if (!ok || codePoint == 0 || codePoint > 0x10FFFF
+            || (codePoint >= 0xD800 && codePoint <= 0xDFFF)) {
+            decoded += match.captured(0);
+        } else {
+            const char32_t value = char32_t(codePoint);
+            decoded += QString::fromUcs4(&value, 1);
+        }
         last = match.capturedEnd();
     }
     decoded += text.mid(last);
@@ -617,8 +626,10 @@ int BookmarkManager::importHtml(const QUrl &fileUrl)
         return 0;
     }
 
+    const qint64 otherId = otherFolderId();
     const qint64 importedFolder =
-        insertRow(true, QString::fromLatin1(kImportedFolderTitle), QUrl(), otherFolderId(), 0);
+        insertRow(true, QString::fromLatin1(kImportedFolderTitle), QUrl(), otherId,
+                  firstFreePosition(otherId));
     if (importedFolder <= 0) {
         db->handle().rollback();
         qDeleteAll(owned);

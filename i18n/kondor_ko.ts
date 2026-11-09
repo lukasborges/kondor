@@ -4,7 +4,7 @@
 <context>
     <name>BookmarkManager</name>
     <message>
-        <location filename="../src/bookmarkmanager.cpp" line="363"/>
+        <location filename="../src/bookmarkmanager.cpp" line="372"/>
         <source>New Folder</source>
         <translation>새 폴더</translation>
     </message>
@@ -35,60 +35,75 @@
         <translation>북마크 관리</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="94"/>
-        <location filename="../qml/BookmarksWindow.qml" line="283"/>
-        <location filename="../qml/BookmarksWindow.qml" line="293"/>
+        <location filename="../qml/BookmarksWindow.qml" line="137"/>
+        <location filename="../qml/BookmarksWindow.qml" line="344"/>
+        <location filename="../qml/BookmarksWindow.qml" line="354"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>새 폴더</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="99"/>
+        <location filename="../qml/BookmarksWindow.qml" line="142"/>
         <source>Rename</source>
         <translation>이름 바꾸기</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="108"/>
+        <location filename="../qml/BookmarksWindow.qml" line="156"/>
         <source>Delete</source>
         <translation>삭제</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="117"/>
+        <location filename="../qml/BookmarksWindow.qml" line="173"/>
         <source>Move Up</source>
         <translation>위로 이동</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="126"/>
+        <location filename="../qml/BookmarksWindow.qml" line="183"/>
         <source>Move Down</source>
         <translation>아래로 이동</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="135"/>
+        <location filename="../qml/BookmarksWindow.qml" line="193"/>
         <source>Import from HTML…</source>
         <translation>HTML에서 가져오기…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="143"/>
+        <location filename="../qml/BookmarksWindow.qml" line="201"/>
         <source>Search bookmarks…</source>
         <translation>북마크 검색…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="309"/>
+        <location filename="../qml/BookmarksWindow.qml" line="372"/>
         <source>Rename Folder</source>
         <translation>폴더 이름 바꾸기</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="330"/>
+        <location filename="../qml/BookmarksWindow.qml" line="372"/>
+        <source>Rename Bookmark</source>
+        <translation>북마크 이름 바꾸기</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="398"/>
         <source>Delete Folder</source>
         <translation>폴더 삭제</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="331"/>
+        <location filename="../qml/BookmarksWindow.qml" line="398"/>
+        <source>Delete Bookmark</source>
+        <translation>북마크 삭제</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="400"/>
         <source>Delete this folder and everything in it?</source>
         <translation>이 폴더와 안의 모든 항목을 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="344"/>
+        <location filename="../qml/BookmarksWindow.qml" line="401"/>
+        <source>Delete this bookmark?</source>
+        <translation>이 북마크를 삭제하시겠습니까?</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="417"/>
         <source>Import Bookmarks</source>
         <translation>북마크 가져오기</translation>
     </message>
@@ -423,59 +438,59 @@
         <translation>실제 크기</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="578"/>
+        <location filename="../qml/Main.qml" line="577"/>
         <source>Bookmarks</source>
         <translation>북마크</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="590"/>
+        <location filename="../qml/Main.qml" line="588"/>
         <source>History</source>
         <translation>기록</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="597"/>
+        <location filename="../qml/Main.qml" line="595"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 설정…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="604"/>
+        <location filename="../qml/Main.qml" line="602"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 정보</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="694"/>
+        <location filename="../qml/Main.qml" line="692"/>
         <source>Page bookmarked</source>
         <translation>페이지를 북마크에 추가함</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="694"/>
+        <location filename="../qml/Main.qml" line="692"/>
         <source>Edit Bookmark</source>
         <translation>북마크 편집</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="702"/>
+        <location filename="../qml/Main.qml" line="700"/>
         <source>Name:</source>
         <translation>이름:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="708"/>
+        <location filename="../qml/Main.qml" line="706"/>
         <source>Folder:</source>
         <translation>폴더:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="718"/>
+        <location filename="../qml/Main.qml" line="716"/>
         <source>Remove</source>
         <translation>제거</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="727"/>
+        <location filename="../qml/Main.qml" line="724"/>
         <source>Done</source>
         <translation>완료</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="739"/>
+        <location filename="../qml/Main.qml" line="736"/>
         <source>Save File</source>
         <translation>파일 저장</translation>
     </message>

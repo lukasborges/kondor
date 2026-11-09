@@ -129,16 +129,19 @@ void TestBookmarks::importNetscapeHtml()
             <DT><A HREF="https://planet.kde.org/">Planet KDE</A>
         </DL><p>
     </DL><p>
+    <DT><A HREF="https://bookmarks.example/emoji">Emoji &#128512; &#x1F600;</A>
     <DT><A HREF="place:type=6">Unsupported</A>
 </DL><p>
 )");
     file.close();
 
     BookmarkManager *manager = BookmarkManager::instance();
+    const int otherChildrenBeforeImport = manager->childCount(manager->otherFolderId());
     const int imported = manager->importHtml(QUrl::fromLocalFile(path));
-    QCOMPARE(imported, 2);
+    QCOMPARE(imported, 3);
     QVERIFY(manager->isBookmarked(QUrl(QStringLiteral("https://kde.org/"))));
     QVERIFY(manager->isBookmarked(QUrl(QStringLiteral("https://planet.kde.org/"))));
+    QVERIFY(manager->isBookmarked(QUrl(QStringLiteral("https://bookmarks.example/emoji"))));
 
     // The import created "Imported" under "Other Bookmarks" with the tree.
     const QVariantList folders = manager->folders();
@@ -163,8 +166,24 @@ void TestBookmarks::importNetscapeHtml()
     QVERIFY(nestedFolder > 0);
     QCOMPARE(manager->bookmark(importedFolder).value(QStringLiteral("parentId")).toLongLong(),
              manager->otherFolderId());
+    // "Imported" is appended, not stacked at position 0 of "Other Bookmarks".
+    QCOMPARE(manager->bookmark(importedFolder).value(QStringLiteral("position")).toInt(),
+             otherChildrenBeforeImport);
     QCOMPARE(manager->bookmark(nestedFolder).value(QStringLiteral("parentId")).toLongLong(),
              importedToolbar);
+
+    // Numeric entities above U+FFFF are decoded into surrogate pairs.
+    bool foundEmoji = false;
+    const QVariantList importedContents = manager->folderContents(importedFolder);
+    for (const QVariant &row : importedContents) {
+        if (row.toMap().value(QStringLiteral("url")).toString()
+            == QLatin1String("https://bookmarks.example/emoji")) {
+            QCOMPARE(row.toMap().value(QStringLiteral("title")).toString(),
+                     QStringLiteral("Emoji \U0001F600 \U0001F600"));
+            foundEmoji = true;
+        }
+    }
+    QVERIFY(foundEmoji);
 }
 
 int main(int argc, char *argv[])

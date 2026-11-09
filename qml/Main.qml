@@ -293,6 +293,12 @@ ApplicationWindow {
                         }
                         MenuSeparator {}
                         MenuItem {
+                            text: qsTr("Find in Page…")
+                            icon.name: "edit-find"
+                            onTriggered: findBar.open()
+                        }
+                        MenuSeparator {}
+                        MenuItem {
                             text: qsTr("Ampliar")
                             icon.name: "zoom-in"
                             onTriggered: {
@@ -340,17 +346,29 @@ ApplicationWindow {
     }
 
     // ── Área de conteúdo: uma WebEngineView por aba ─────────────────────
-    Rectangle {
+    ColumnLayout {
         anchors.fill: parent
-        color: window.palette.base
+        spacing: 0
 
-        Repeater {
-            model: tabs
+        FindBar {
+            id: findBar
+            tab: tabs.currentTab
+            Layout.fillWidth: true
+        }
 
-            delegate: WebViewTab {
-                tabModel: tabs
-                anchors.fill: parent
-                visible: tabs.currentTab === tab
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            color: window.palette.base
+
+            Repeater {
+                model: tabs
+
+                delegate: WebViewTab {
+                    tabModel: tabs
+                    anchors.fill: parent
+                    visible: tabs.currentTab === tab
+                }
             }
         }
     }
@@ -444,6 +462,20 @@ ApplicationWindow {
             if (tabs.currentTab)
                 tabs.currentTab.resetZoom()
         }
+    }
+    Shortcut {
+        sequences: [StandardKey.Find]
+        onActivated: findBar.open()
+    }
+    Shortcut {
+        sequence: "F3"
+        enabled: findBar.visible
+        onActivated: findBar.findNext()
+    }
+    Shortcut {
+        sequence: "Shift+F3"
+        enabled: findBar.visible
+        onActivated: findBar.findPrevious()
     }
 
     Connections {

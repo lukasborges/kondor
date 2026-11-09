@@ -36,6 +36,10 @@ Item {
         onCanGoBackChanged: root.tab.setCanGoBack(canGoBack)
         onCanGoForwardChanged: root.tab.setCanGoForward(canGoForward)
 
+        onFindTextFinished: function(result) {
+            root.tab.setFindResult(result.numberOfMatches, result.activeMatch)
+        }
+
         // Link com target=_blank / window.open: abre numa aba nova.
         onNewWindowRequested: function(request) {
             root.tabModel.addTab(false, request.requestedUrl)
@@ -53,6 +57,16 @@ Item {
         function onZoomInRequested() { webView.zoomFactor = Math.min(5.0, webView.zoomFactor + 0.1) }
         function onZoomOutRequested() { webView.zoomFactor = Math.max(0.25, webView.zoomFactor - 0.1) }
         function onResetZoomRequested() { webView.zoomFactor = 1.0 }
+
+        function onFindRequested(text, backward, caseSensitive) {
+            let flags = 0
+            if (backward)
+                flags |= WebEngineView.FindBackward
+            if (caseSensitive)
+                flags |= WebEngineView.FindCaseSensitively
+            webView.findText(text, flags)
+        }
+        function onStopFindRequested() { webView.findText("") }
     }
 
     Component.onCompleted: {

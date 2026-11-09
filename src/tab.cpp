@@ -65,6 +65,15 @@ void Tab::setCanGoForward(bool canGoForward)
     emit canGoForwardChanged();
 }
 
+void Tab::setFindResult(int matches, int activeMatch)
+{
+    if (m_findMatches == matches && m_findActiveMatch == activeMatch)
+        return;
+    m_findMatches = matches;
+    m_findActiveMatch = activeMatch;
+    emit findResultChanged();
+}
+
 void Tab::navigateTo(const QUrl &url)
 {
     emit navigationRequested(url);
@@ -103,4 +112,14 @@ void Tab::zoomOut()
 void Tab::resetZoom()
 {
     emit resetZoomRequested();
+}
+
+void Tab::find(const QString &text, bool backward, bool caseSensitive)
+{
+    emit findRequested(text, backward, caseSensitive);
+}
+
+void Tab::stopFind()
+{
+    emit stopFindRequested();
 }

@@ -42,16 +42,31 @@ Issue #19 (merged in `37fa64e`) built the whole mechanism:
    - Keep the placeholders (`%1`, `%n`) and the `&` accelerators. Every message must contain the same placeholders as its source.
    - Fill in every plural form (`numerus="yes"`) that the language needs: for example 3 forms for Russian, Ukrainian, Polish and Czech, and 1 for Japanese, Korean and Chinese.
    - Leave no message `type="unfinished"` or empty. `lrelease` skips unfinished messages, which would silently show English instead.
-3. **Layout.** Longer languages (German, Dutch, Russian) must not truncate toolbar tooltips, menu items, the find bar, settings labels or the downloads panel. Fix any truncation through layout (`Layout.fillWidth`, `elide` only where text is secondary). Do not shorten source strings.
-4. **Keeping them complete (CI).** In `.github/workflows/build.yml`, after "Build", add a step "Check translations" that runs `cmake --build build --target update_translations` and then fails when either:
+3. **Application name and desktop entry.** #36 makes the display name a single message, "Kondor Browser". Translate it exactly as listed below. "Kondor" is never translated. Then:
+   - Translate the `%1` messages that contain it ("Quit %1", "About %1", …) with the grammar each language needs.
+   - Add `Name[<code>]`, `GenericName[<code>]` and `Comment[<code>]` for every language to `packaging/kondor.desktop`, and keep `desktop-file-validate` clean.
+
+   | Code | Name | Code | Name |
+   | --- | --- | --- | --- |
+   | `ca` | Navegador Kondor | `pl` | Przeglądarka Kondor |
+   | `cs` | Prohlížeč Kondor | `pt_PT` | Navegador Kondor |
+   | `de` | Kondor-Browser | `ru` | Браузер Kondor |
+   | `es` | Navegador Kondor | `sv` | Webbläsaren Kondor |
+   | `fr` | Navigateur Kondor | `tr` | Kondor Tarayıcı |
+   | `it` | Browser Kondor | `uk` | Браузер Kondor |
+   | `ja` | Kondor ブラウザー | `zh_CN` | Kondor 浏览器 |
+   | `ko` | Kondor 브라우저 | `zh_TW` | Kondor 瀏覽器 |
+   | `nl` | Kondor-browser | `pt_BR` | Navegador Kondor (done in #36) |
+4. **Layout.** Longer languages (German, Dutch, Russian) must not truncate toolbar tooltips, menu items, the find bar, settings labels or the downloads panel. Fix any truncation through layout (`Layout.fillWidth`, `elide` only where text is secondary). Do not shorten source strings.
+5. **Keeping them complete (CI).** In `.github/workflows/build.yml`, after "Build", add a step "Check translations" that runs `cmake --build build --target update_translations` and then fails when either:
    - `git diff --exit-code -- i18n/` shows a change, meaning a source string was added or changed without updating the `.ts` files; or
    - any `i18n/*.ts` contains `type="unfinished"` or an empty `<translation>` / `<numerusform>`.
 
    Print the file and source text of each offending message.
-5. **Docs.**
+6. **Docs.**
    - README "Translations": list the shipped languages and explain the CI check.
    - `AGENTS.md` already requires that new user-visible strings be translated in every `i18n/*.ts` file in the same PR. Follow it here and in every later issue.
-6. **Locale fallback.** No code change is expected: `QTranslator::load(QLocale(), …)` already tries `de_DE` → `de` and `zh_TW` → `zh_TW`. Verify it with the manual test, including `pt_PT` (which must not fall back to `pt_BR`) and `zh_TW` (which must not fall back to `zh_CN`).
+7. **Locale fallback.** No code change is expected: `QTranslator::load(QLocale(), …)` already tries `de_DE` → `de` and `zh_TW` → `zh_TW`. Verify it with the manual test, including `pt_PT` (which must not fall back to `pt_BR`) and `zh_TW` (which must not fall back to `zh_CN`).
 
 ## Acceptance criteria
 
@@ -59,6 +74,7 @@ Issue #19 (merged in `37fa64e`) built the whole mechanism:
 - [ ] With `LANG=<lang>.UTF-8` (for example `de_DE`, `fr_FR`, `ru_RU`, `ja_JP`, `zh_TW`, `pt_PT`), every menu, tooltip, bar, dialog and panel is in that language. Qt's own strings follow it as well when Qt ships that language.
 - [ ] No text is cut off in German or Russian in the main window, menu, find bar, settings, history and downloads.
 - [ ] The "Check translations" CI step passes, and fails when a `qsTr()` string is added without translations. Show that in the PR by describing a local run.
+- [ ] The application name appears as in the table in each language: window title, menu, launcher (`Name[<code>]`). `desktop-file-validate packaging/kondor.desktop` passes.
 - [ ] README lists the languages.
 
 ## Manual test
@@ -80,7 +96,7 @@ Check the wording and look for truncation. Screenshots of German and Japanese in
 
 ## Dependencies
 
-#19 (merged).
+#19 (merged) and #36 (rename to Kondor Browser), which must be merged first.
 
 ## Prototype
 
@@ -91,4 +107,5 @@ No new UI, so there is no prototype.
 | Question | Decision |
 | --- | --- |
 | Which languages? | The 17 listed above plus the existing pt_BR, chosen by the maintainer's request to cover "the main languages, like most KDE apps". RTL languages come later in their own issue. |
+| How is the app name translated? | Per the table in step 3 (maintainer: "Kondor Browser", translated per language, e.g. "Navegador Kondor"); "Kondor" itself is never translated. |
 | Who keeps them complete? | Every PR that adds or changes a user-visible string updates all `i18n/*.ts` files; the CI "Check translations" step enforces it. |

@@ -107,6 +107,19 @@ EOF
     esac
   }
 
+  # True when issue $1 has the approved label and its PR's build check has not finished yet.
+  build_pending() {
+    local n="$1" pr
+    gh issue view "$n" --repo lukasborges/kondor --json labels -q '.labels[].name' 2>/dev/null \
+      | grep -qx approved || return 1
+    pr="$(gh pr list --repo lukasborges/kondor --state open --search "Closes #$n" \
+      --json number -q '.[0].number' 2>/dev/null)"
+    [[ -n "$pr" ]] || return 1
+    gh pr view "$pr" --repo lukasborges/kondor --json statusCheckRollup \
+      -q '.statusCheckRollup[] | select(.name == "build") | .status' 2>/dev/null \
+      | grep -qvx COMPLETED
+  }
+
   step() {
     local dry="$1" next n st key count_file count run_log rc after
     ensure_control || return 0
@@ -120,6 +133,12 @@ EOF
     key="$n"
     if [[ -e "$state/paused-$key" ]]; then
       log "queue: architect step '$st' on $key is paused (scripts/architect-loop.sh --resume $key)"
+      return 0
+    fi
+    # An approved PR whose build check is still running is waiting for CI, not stuck: skip the
+    # run (and the no-progress counter) until the check finishes.
+    if [[ "$st" == "in-review" ]] && build_pending "$n"; then
+      log "queue: #$n is approved, waiting for the CI build check"
       return 0
     fi
     if [[ "$dry" == 1 ]]; then

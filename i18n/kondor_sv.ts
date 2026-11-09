@@ -35,75 +35,75 @@
         <translation>Hantera bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="137"/>
-        <location filename="../qml/BookmarksWindow.qml" line="344"/>
-        <location filename="../qml/BookmarksWindow.qml" line="354"/>
+        <location filename="../qml/BookmarksWindow.qml" line="156"/>
+        <location filename="../qml/BookmarksWindow.qml" line="381"/>
+        <location filename="../qml/BookmarksWindow.qml" line="391"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>Ny mapp</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="142"/>
+        <location filename="../qml/BookmarksWindow.qml" line="161"/>
         <source>Rename</source>
         <translation>Byt namn</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="156"/>
+        <location filename="../qml/BookmarksWindow.qml" line="175"/>
         <source>Delete</source>
         <translation>Ta bort</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="173"/>
+        <location filename="../qml/BookmarksWindow.qml" line="192"/>
         <source>Move Up</source>
         <translation>Flytta upp</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="183"/>
+        <location filename="../qml/BookmarksWindow.qml" line="203"/>
         <source>Move Down</source>
         <translation>Flytta ned</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="193"/>
+        <location filename="../qml/BookmarksWindow.qml" line="214"/>
         <source>Import from HTML…</source>
         <translation>Importera från HTML…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="201"/>
+        <location filename="../qml/BookmarksWindow.qml" line="222"/>
         <source>Search bookmarks…</source>
         <translation>Sök bokmärken…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="372"/>
+        <location filename="../qml/BookmarksWindow.qml" line="409"/>
         <source>Rename Folder</source>
         <translation>Byt namn på mapp</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="372"/>
+        <location filename="../qml/BookmarksWindow.qml" line="409"/>
         <source>Rename Bookmark</source>
         <translation>Byt namn på bokmärke</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="398"/>
+        <location filename="../qml/BookmarksWindow.qml" line="435"/>
         <source>Delete Folder</source>
         <translation>Ta bort mapp</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="398"/>
+        <location filename="../qml/BookmarksWindow.qml" line="435"/>
         <source>Delete Bookmark</source>
         <translation>Ta bort bokmärke</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="400"/>
+        <location filename="../qml/BookmarksWindow.qml" line="437"/>
         <source>Delete this folder and everything in it?</source>
         <translation>Ta bort den här mappen och allt i den?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="401"/>
+        <location filename="../qml/BookmarksWindow.qml" line="438"/>
         <source>Delete this bookmark?</source>
         <translation>Ta bort det här bokmärket?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="417"/>
+        <location filename="../qml/BookmarksWindow.qml" line="459"/>
         <source>Import Bookmarks</source>
         <translation>Importera bokmärken</translation>
     </message>

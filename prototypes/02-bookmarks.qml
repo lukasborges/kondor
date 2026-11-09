@@ -29,7 +29,7 @@ BrowserFrame {
                     model: [
                         { t: "KDE", i: "kde" }, { t: "Planet KDE", i: "globe" },
                         { t: "Qt Docs", i: "globe" }, { t: "News", i: "folder" },
-                        { t: "Development", i: "folder" }
+                        { t: "Development", i: "folder" }, { t: "Linux", i: "folder" }
                     ]
                     ToolButton {
                         text: modelData.t

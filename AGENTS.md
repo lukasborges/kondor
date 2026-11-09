@@ -182,9 +182,9 @@ first: shared blocks, then privacy fixes, then features):
 pt_BR) · 7. #36 Rename to Kondor Browser · 8. #34 Translations for the main KDE languages ·
 9. #26 Automated tests ·
 10. #10 Default browser · 11. #6 Session restore · 12. #2 Bookmarks · 13. #43 New Tab page ·
-14. #44 Address bar: visit or search · 15. #7 Site permissions · 16. #9 Security indicator ·
-17. #8 Fullscreen · 18. #18 Crashed page · 19. #13 Page context menu ·
-20. #11 Address bar suggestions · 21. #14 Multiple windows · 22. #15 Single instance ·
-23. #16 Developer tools · 24. #17 Print and save as PDF · 25. #24 Per-site zoom ·
-26. #23 Spell checking · 27. #22 Reader mode · 28. #20 Ad and tracker blocking ·
-29. #21 Passwords · 30. #25 Flatpak
+14. #44 Address bar: visit or search · 15. #47 Default bookmarks · 16. #7 Site permissions ·
+17. #9 Security indicator · 18. #8 Fullscreen · 19. #18 Crashed page · 20. #13 Page context menu ·
+21. #11 Address bar suggestions · 22. #14 Multiple windows · 23. #15 Single instance ·
+24. #16 Developer tools · 25. #17 Print and save as PDF · 26. #24 Per-site zoom ·
+27. #23 Spell checking · 28. #22 Reader mode · 29. #20 Ad and tracker blocking ·
+30. #21 Passwords · 31. #25 Flatpak

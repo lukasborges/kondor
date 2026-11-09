@@ -64,3 +64,27 @@ add_test(NAME tst_tabmodel COMMAND tst_tabmodel)
 set_tests_properties(tst_tabmodel PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
 )
+
+qt_add_executable(tst_bookmarks
+    tst_bookmarks.cpp
+    ../src/bookmarkmanager.cpp
+    ../src/bookmarkmodel.cpp
+    ../src/database.cpp
+)
+
+target_include_directories(tst_bookmarks PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_bookmarks PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Sql
+    Qt6::Test
+)
+
+add_test(NAME tst_bookmarks COMMAND tst_bookmarks)
+set_tests_properties(tst_bookmarks PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
+)

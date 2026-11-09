@@ -37,6 +37,9 @@ qt_add_qml_module(kondor
         qml/HistoryWindow.qml
         qml/SettingsWindow.qml
         qml/DownloadsPopup.qml
+        qml/BookmarksBar.qml
+        qml/BookmarkMenu.qml
+        qml/BookmarksWindow.qml
     SOURCES
         src/addressresolver.h
         src/addressresolver.cpp
@@ -64,6 +67,10 @@ qt_add_qml_module(kondor
         src/downloadmanager.cpp
         src/notifier.h
         src/notifier.cpp
+        src/bookmarkmanager.h
+        src/bookmarkmanager.cpp
+        src/bookmarkmodel.h
+        src/bookmarkmodel.cpp
 )
 
 qt_add_translations(kondor

@@ -12,7 +12,7 @@ A native **Qt 6** browser (Qt Quick + Qt WebEngine) with the **KDE/Breeze** look
 
 ## Status
 
-A working prototype with the core functionality in place: it actually browses, with tabs, a private mode, browsing history, a settings window and keyboard shortcuts. Everyday features such as bookmarks are still missing.
+A working prototype with the core functionality in place: it actually browses, with tabs, a private mode, browsing history, bookmarks, a settings window and keyboard shortcuts.
 
 ## Features
 
@@ -24,6 +24,7 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Navigation**: back, forward, reload/stop, home
 - **Private mode**: off-the-record tabs, isolated from the persistent profile
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
+- **Bookmarks**: star button in the address bar (Ctrl+D) with a name/folder editor, a bookmarks toolbar (Ctrl+Shift+B), a Bookmarks menu, and a manager window (Ctrl+Shift+O) with folders, rename, delete, reordering and import of Firefox/Chrome HTML exports
 - **Settings** (Ctrl+,): home page, search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit), applied immediately and stored in `~/.config/KDE/Kondor.conf`
 - **Session restore**: optionally reopen the tabs from the previous session on startup (settings → On Startup); private tabs are never saved. Ctrl+Shift+T reopens the last closed normal tabs, up to 20
 - **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
@@ -107,6 +108,8 @@ src/
   database.*          SQLite storage (schema + migrations)
   historymanager.*    QML singleton: write/query/clear browsing history
   historymodel.*      history list model (QAbstractListModel)
+  bookmarkmanager.*   QML singleton: bookmark tree, folders, HTML import
+  bookmarkmodel.*     one folder's items as a list model (QAbstractListModel)
   downloadmanager.*   QML singleton: downloads list model, actions and notifications
   notifier.*          QML singleton: desktop notifications over D-Bus
 qml/
@@ -119,6 +122,9 @@ qml/
   DownloadsPopup.qml  download list popup with progress and actions
   HistoryWindow.qml   browsing history window (search, grouped by day, clear)
   SettingsWindow.qml  settings window (home page, search, downloads, privacy)
+  BookmarksBar.qml    bookmarks toolbar under the navigation bar
+  BookmarkMenu.qml    folder menu (bar folders and the main menu submenu)
+  BookmarksWindow.qml bookmark manager window (folders, reorder, import)
 ```
 
 ## Keyboard shortcuts
@@ -135,6 +141,9 @@ qml/
 | `Ctrl+9` | Go to the last tab |
 | `Ctrl+Shift+PgUp` / `Ctrl+Shift+PgDown` | Move the current tab left / right |
 | `Ctrl+H` | Browsing history |
+| `Ctrl+D` | Bookmark this page (edit name and folder) |
+| `Ctrl+Shift+B` | Show or hide the bookmarks toolbar |
+| `Ctrl+Shift+O` | Manage bookmarks |
 | `Ctrl+,` / `Ctrl+Shift+,` | Configure Kondor Browser (settings) |
 | `Ctrl+L` | Focus the address bar |
 | `Ctrl+F` | Find in page |

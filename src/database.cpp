@@ -1,14 +1,16 @@
 #include "database.h"
 
 #include <QDir>
+#include <QDateTime>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QStandardPaths>
 #include <QVariant>
+#include <utility>
 
 namespace {
 // Schema version. Each migration bumps `PRAGMA user_version` by 1.
-constexpr int kSchemaVersion = 1;
+constexpr int kSchemaVersion = 2;
 }
 
 Database *Database::instance()
@@ -92,6 +94,44 @@ void Database::migrate()
             "CREATE INDEX IF NOT EXISTS history_visited_at ON history(visited_at DESC)"));
         ok = ok && query.exec(QStringLiteral(
             "CREATE INDEX IF NOT EXISTS history_url ON history(url)"));
+    }
+    if (current < 2) {
+        // Bookmarks: a tree of folders (is_folder = 1) and bookmarks
+        // (is_folder = 0). Root folders are identified by `special`
+        // ('toolbar' / 'other') and can never be removed.
+        ok = ok && query.exec(QStringLiteral(
+            "CREATE TABLE IF NOT EXISTS bookmarks ("
+            "  id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            "  parent_id INTEGER REFERENCES bookmarks(id) ON DELETE CASCADE,"
+            "  is_folder INTEGER NOT NULL DEFAULT 0,"
+            "  title TEXT NOT NULL DEFAULT '',"
+            "  url TEXT,"
+            "  position INTEGER NOT NULL DEFAULT 0,"
+            "  created_at INTEGER NOT NULL,"
+            "  special TEXT"
+            ")"));
+        ok = ok && query.exec(QStringLiteral(
+            "CREATE INDEX IF NOT EXISTS bookmarks_parent ON bookmarks(parent_id, position)"));
+
+        if (ok) {
+            const QVariant now = QDateTime::currentMSecsSinceEpoch();
+            for (const auto &root : {std::make_pair(QStringLiteral("Bookmarks Toolbar"),
+                                                    QStringLiteral("toolbar")),
+                                     std::make_pair(QStringLiteral("Other Bookmarks"),
+                                                    QStringLiteral("other"))}) {
+                QSqlQuery insert(m_db);
+                insert.prepare(QStringLiteral(
+                    "INSERT INTO bookmarks (parent_id, is_folder, title, url, position,"
+                    " created_at, special) "
+                    "SELECT NULL, 1, ?, NULL, 0, ?, ? "
+                    "WHERE NOT EXISTS (SELECT 1 FROM bookmarks WHERE special = ?)"));
+                insert.addBindValue(root.first);
+                insert.addBindValue(now);
+                insert.addBindValue(root.second);
+                insert.addBindValue(root.second);
+                ok = ok && insert.exec();
+            }
+        }
     }
 
     if (!ok) {

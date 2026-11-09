@@ -52,6 +52,8 @@ qt_add_qml_module(kondor
         src/startupurl.cpp
         src/settings.h
         src/settings.cpp
+        src/sessionmanager.h
+        src/sessionmanager.cpp
         src/database.h
         src/database.cpp
         src/historymanager.h

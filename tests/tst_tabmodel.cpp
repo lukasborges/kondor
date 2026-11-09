@@ -19,6 +19,8 @@ private slots:
     void closingAllTabsClearsCurrent();
     void setCurrentIndexIgnoresOutOfRange();
     void privateTabUsesAnotherProfile();
+    void reopenClosedTabRestoresPosition();
+    void privateTabsAreNotReopened();
 };
 
 void TestTabModel::startsEmpty()
@@ -130,6 +132,39 @@ void TestTabModel::privateTabUsesAnotherProfile()
     QVERIFY(privateTab->profile());
     QVERIFY(privateTab->profile()->isOffTheRecord());
     QVERIFY(privateTab->profile() != normal->profile());
+}
+
+void TestTabModel::reopenClosedTabRestoresPosition()
+{
+    TabModel model;
+    model.addTab(false, QUrl(QStringLiteral("https://a.example")));
+    model.addTab(false, QUrl(QStringLiteral("https://b.example")));
+    model.addTab(false, QUrl(QStringLiteral("https://c.example")));
+    QVERIFY(!model.canReopenClosedTab());
+
+    model.closeTab(1);
+    QCOMPARE(model.count(), 2);
+    QVERIFY(model.canReopenClosedTab());
+
+    model.reopenClosedTab();
+    QCOMPARE(model.count(), 3);
+    QCOMPARE(model.currentIndex(), 1);
+    QCOMPARE(model.currentTab()->url(), QUrl(QStringLiteral("https://b.example")));
+    QVERIFY(!model.canReopenClosedTab());
+}
+
+void TestTabModel::privateTabsAreNotReopened()
+{
+    TabModel model;
+    model.addTab(false, QUrl(QStringLiteral("https://a.example")));
+    model.addTab(true, QUrl(QStringLiteral("https://private.example")));
+
+    model.closeTab(1);
+    QCOMPARE(model.count(), 1);
+    QVERIFY(!model.canReopenClosedTab());
+
+    model.reopenClosedTab();
+    QCOMPARE(model.count(), 1);
 }
 
 int main(int argc, char *argv[])

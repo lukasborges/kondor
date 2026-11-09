@@ -17,6 +17,8 @@ class TabModel : public QAbstractListModel
     Q_PROPERTY(int currentIndex READ currentIndex NOTIFY currentIndexChanged)
     Q_PROPERTY(Tab *currentTab READ currentTab NOTIFY currentTabChanged)
     Q_PROPERTY(int pinnedCount READ pinnedCount NOTIFY pinnedCountChanged)
+    Q_PROPERTY(bool canReopenClosedTab READ canReopenClosedTab
+                   NOTIFY canReopenClosedTabChanged)
 
 public:
     enum Roles {
@@ -33,6 +35,7 @@ public:
     int currentIndex() const { return m_currentIndex; }
     Tab *currentTab() const;
     int pinnedCount() const;
+    bool canReopenClosedTab() const { return !m_closed.isEmpty(); }
 
     Q_INVOKABLE Tab *insertTab(int index, QQuickWebEngineProfile *profile, const QUrl &url, bool activate);
     Q_INVOKABLE Tab *addTab(bool isPrivate = false, const QUrl &initialUrl = QUrl());
@@ -40,6 +43,7 @@ public:
     Q_INVOKABLE int indexOfTab(Tab *tab) const;
     Q_INVOKABLE void closeTab(int index);
     Q_INVOKABLE void closeTabObject(Tab *tab);
+    Q_INVOKABLE void reopenClosedTab();
     Q_INVOKABLE void moveTab(int from, int to);
     Q_INVOKABLE void duplicateTab(int index);
     Q_INVOKABLE void closeOtherTabs(int index);
@@ -52,8 +56,17 @@ signals:
     void currentIndexChanged();
     void currentTabChanged();
     void pinnedCountChanged();
+    void canReopenClosedTabChanged();
 
 private:
+    struct ClosedTab {
+        QUrl url;
+        QString title;
+        int index = 0;
+    };
+
     QList<Tab *> m_tabs;
+    // Last closed normal tabs, oldest first; private tabs are never kept.
+    QList<ClosedTab> m_closed;
     int m_currentIndex = -1;
 };

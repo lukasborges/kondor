@@ -1,5 +1,6 @@
 #include "profilemanager.h"
 
+#include "downloadmanager.h"
 #include "historymanager.h"
 #include "settings.h"
 
@@ -7,7 +8,6 @@
 #include <QQuickWebEngineDownloadRequest>
 #include <QRegularExpression>
 #include <QWebEngineCookieStore>
-#include <QWebEngineDownloadRequest>
 
 #include <utility>
 
@@ -91,11 +91,11 @@ void ProfileManager::setupProfile(QQuickWebEngineProfile *profile)
 
     profile->setDownloadPath(Settings::instance()->downloadDirectory());
 
-    // Basic downloads: save to the configured folder and accept.
-    connect(profile, &QQuickWebEngineProfile::downloadRequested, this,
-            [](QWebEngineDownloadRequest *download) {
-                download->setDownloadDirectory(Settings::instance()->downloadDirectory());
-                download->accept();
+    // Downloads are owned by the shared DownloadManager; private profiles pass
+    // the flag so their entries never outlive the session.
+    connect(profile, &QQuickWebEngineProfile::downloadRequested, DownloadManager::instance(),
+            [profile](QQuickWebEngineDownloadRequest *download) {
+                DownloadManager::instance()->handleRequest(download, profile->isOffTheRecord());
             });
 }
 

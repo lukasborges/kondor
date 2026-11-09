@@ -36,8 +36,8 @@
     </message>
     <message>
         <location filename="../qml/BookmarksWindow.qml" line="156"/>
-        <location filename="../qml/BookmarksWindow.qml" line="381"/>
-        <location filename="../qml/BookmarksWindow.qml" line="391"/>
+        <location filename="../qml/BookmarksWindow.qml" line="382"/>
+        <location filename="../qml/BookmarksWindow.qml" line="392"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>새 폴더</translation>
@@ -73,37 +73,37 @@
         <translation>북마크 검색…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="409"/>
+        <location filename="../qml/BookmarksWindow.qml" line="410"/>
         <source>Rename Folder</source>
         <translation>폴더 이름 바꾸기</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="409"/>
+        <location filename="../qml/BookmarksWindow.qml" line="410"/>
         <source>Rename Bookmark</source>
         <translation>북마크 이름 바꾸기</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="435"/>
+        <location filename="../qml/BookmarksWindow.qml" line="436"/>
         <source>Delete Folder</source>
         <translation>폴더 삭제</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="435"/>
+        <location filename="../qml/BookmarksWindow.qml" line="436"/>
         <source>Delete Bookmark</source>
         <translation>북마크 삭제</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="437"/>
+        <location filename="../qml/BookmarksWindow.qml" line="438"/>
         <source>Delete this folder and everything in it?</source>
         <translation>이 폴더와 안의 모든 항목을 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="438"/>
+        <location filename="../qml/BookmarksWindow.qml" line="439"/>
         <source>Delete this bookmark?</source>
         <translation>이 북마크를 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="459"/>
+        <location filename="../qml/BookmarksWindow.qml" line="460"/>
         <source>Import Bookmarks</source>
         <translation>북마크 가져오기</translation>
     </message>
@@ -408,6 +408,11 @@
         <location filename="../qml/Main.qml" line="570"/>
         <source>New Private Tab</source>
         <translation>새 비공개 탭</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="510"/>
+        <source>Edit This Bookmark</source>
+        <translation>이 북마크 편집</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="575"/>

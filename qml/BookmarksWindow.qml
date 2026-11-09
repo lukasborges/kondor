@@ -164,10 +164,31 @@ ApplicationWindow {
         return false
     }
 
-    function beginDrag(id, isFolder) {
+    function beginDrag(id, isFolder, scenePos) {
         root.draggedId = id
         root.draggedIsFolder = isFolder
         root.clearDropTarget()
+        // The drag source is a single proxy item: a row inside a view cannot
+        // follow the pointer, so the window-level proxy carries the drag.
+        dragProxy.Drag.active = true
+        root.moveDragProxy(scenePos)
+    }
+
+    // Keeps the proxy under the pointer, so every DropArea sees real drag
+    // positions (the left tree included).
+    function moveDragProxy(scenePos) {
+        const pos = dragProxy.parent.mapFromItem(null, scenePos)
+        dragProxy.x = pos.x - dragProxy.Drag.hotSpot.x
+        dragProxy.y = pos.y - dragProxy.Drag.hotSpot.y
+    }
+
+    // Ends the gesture with a real drop at the last position. Turning
+    // Drag.active off without Drag.drop() cancels the drag instead.
+    function finishDrag() {
+        if (dragProxy.Drag.active)
+            dragProxy.Drag.drop()
+        dragProxy.Drag.active = false
+        root.endDrag()
     }
 
     function endDrag() {
@@ -533,21 +554,23 @@ ApplicationWindow {
                                 }
                             }
 
-                            Drag.active: dragHandler.active
-                            Drag.keys: ["kondor/bookmark"]
-                            Drag.source: itemEntry
-
                             DragHandler {
                                 id: dragHandler
-                                // Only track the gesture: the row itself must
-                                // stay in place while it is dragged.
+                                // Only track the gesture: the window-level
+                                // proxy follows the pointer, the row stays.
                                 target: null
 
                                 onActiveChanged: {
+                                    if (active) {
+                                        root.beginDrag(itemEntry.id, itemEntry.isFolder,
+                                                       centroid.scenePosition)
+                                    } else {
+                                        root.finishDrag()
+                                    }
+                                }
+                                onCentroidChanged: {
                                     if (active)
-                                        root.beginDrag(itemEntry.id, itemEntry.isFolder)
-                                    else
-                                        dragEndTimer.restart()
+                                        root.moveDragProxy(centroid.scenePosition)
                                 }
                             }
 
@@ -639,11 +662,17 @@ ApplicationWindow {
         onTriggered: root.filter = searchField.text
     }
 
-    // Clears the drag state after the drop event had a chance to use it.
-    Timer {
-        id: dragEndTimer
-        interval: 0
-        onTriggered: root.endDrag()
+    // Drag source that follows the pointer while a row's DragHandler is
+    // active. Keeping it at window level (instead of the row itself) makes
+    // the drag reach every DropArea, including the folder tree.
+    Item {
+        id: dragProxy
+        width: 1
+        height: 1
+        visible: false
+        z: 1000
+        Drag.keys: ["kondor/bookmark"]
+        Drag.hotSpot: Qt.point(0, 0)
     }
 
     // Right-click menu of the right-hand list: "Move To" is a submenu with

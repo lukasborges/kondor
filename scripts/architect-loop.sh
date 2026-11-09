@@ -14,7 +14,7 @@
 #   KONDOR_REPO           main checkout (default: the repository this script belongs to)
 #   KONDOR_ARCH_CONTROL   loop-owned worktree kept at origin/main (default: ~/.local/share/kondor-architect-loop/control)
 #   KONDOR_ARCH_STATE     lock, log, counters and pause flags (default: ~/.local/state/kondor-architect-loop)
-#   KONDOR_ARCH_INTERVAL  seconds between checks (default: 180)
+#   KONDOR_ARCH_INTERVAL  seconds between checks (default: 60)
 #   KONDOR_ARCH_MAX_NO_PROGRESS  runs on the same step without progress before pausing (default: 2)
 #   KONDOR_ARCH_MODEL     Claude model (default: Claude Code's default)
 #   KONDOR_ARCH_AUTOMERGE 1 = the architect squash-merges approved PRs whose build passed (default, the
@@ -33,7 +33,7 @@ main() {
   repo="${KONDOR_REPO:-$(dirname "$(git -C "$script_dir" rev-parse --path-format=absolute --git-common-dir)")}"
   local control="${KONDOR_ARCH_CONTROL:-$HOME/.local/share/kondor-architect-loop/control}"
   local state="${KONDOR_ARCH_STATE:-$HOME/.local/state/kondor-architect-loop}"
-  local interval="${KONDOR_ARCH_INTERVAL:-180}"
+  local interval="${KONDOR_ARCH_INTERVAL:-60}"
   local max_no_progress="${KONDOR_ARCH_MAX_NO_PROGRESS:-2}"
   local model="${KONDOR_ARCH_MODEL:-}"
   local merge="${KONDOR_ARCH_AUTOMERGE:-1}"

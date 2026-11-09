@@ -13,7 +13,7 @@
 #   KONDOR_REPO          main checkout (default: the repository this script belongs to)
 #   KONDOR_CONTROL_DIR   loop-owned worktree kept at origin/main (default: ~/.local/share/kondor-dev-loop/control)
 #   KONDOR_STATE_DIR     lock, log, counters and pause flags (default: ~/.local/state/kondor-dev-loop)
-#   KONDOR_INTERVAL      seconds between checks (default: 180)
+#   KONDOR_INTERVAL      seconds between checks (default: 60)
 #   KONDOR_MAX_NO_PROGRESS  developer runs on the same issue without leaving `to-dev` before pausing (default: 2)
 #   KONDOR_OPENCODE      opencode binary (default: opencode in PATH, else ~/.opencode/bin/opencode)
 #   KONDOR_MODEL         model for the developer (default: deepseek/deepseek-flash; see `opencode models`)
@@ -29,7 +29,7 @@ main() {
   repo="${KONDOR_REPO:-$(dirname "$(git -C "$script_dir" rev-parse --path-format=absolute --git-common-dir)")}"
   local control="${KONDOR_CONTROL_DIR:-$HOME/.local/share/kondor-dev-loop/control}"
   local state="${KONDOR_STATE_DIR:-$HOME/.local/state/kondor-dev-loop}"
-  local interval="${KONDOR_INTERVAL:-180}"
+  local interval="${KONDOR_INTERVAL:-60}"
   local max_no_progress="${KONDOR_MAX_NO_PROGRESS:-2}"
   local opencode="${KONDOR_OPENCODE:-$(command -v opencode || echo "$HOME/.opencode/bin/opencode")}"
   local model="${KONDOR_MODEL:-deepseek/deepseek-flash}"

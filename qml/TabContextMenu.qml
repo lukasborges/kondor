@@ -11,10 +11,14 @@ Menu {
     property TabModel tabModel: null
     property var targetWindow: null
 
+    // Every "new tab" entry point goes through the window, which also focuses
+    // the address bar.
+    signal newTabRequested()
+
     MenuItem {
         text: qsTr("New Tab")
         icon.name: "tab-new"
-        onTriggered: menu.tabModel.addTab(false)
+        onTriggered: menu.newTabRequested()
     }
     MenuSeparator {}
     MenuItem {

@@ -341,158 +341,204 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../qml/Main.qml" line="42"/>
+        <location filename="../qml/Main.qml" line="47"/>
         <source>Quit %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>退出 %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="43"/>
+        <location filename="../qml/Main.qml" line="48"/>
         <source>Downloads are still in progress. Quit anyway?</source>
         <translation>仍有下载正在进行。仍要退出吗？</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="309"/>
-        <location filename="../qml/Main.qml" line="523"/>
+        <location filename="../qml/Main.qml" line="20"/>
+        <location filename="../qml/Main.qml" line="347"/>
+        <location filename="../qml/Main.qml" line="565"/>
         <source>New Tab</source>
         <translation>新建标签页</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="371"/>
+        <location filename="../qml/Main.qml" line="406"/>
         <source>Back</source>
         <translation>后退</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="384"/>
+        <location filename="../qml/Main.qml" line="419"/>
         <source>Forward</source>
         <translation>前进</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="396"/>
+        <location filename="../qml/Main.qml" line="432"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="396"/>
+        <location filename="../qml/Main.qml" line="432"/>
         <source>Reload</source>
         <translation>重新加载</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="412"/>
+        <location filename="../qml/Main.qml" line="448"/>
         <source>Home</source>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="425"/>
+        <location filename="../qml/Main.qml" line="465"/>
         <source>Search or enter address</source>
         <translation>搜索或输入地址</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="468"/>
+        <location filename="../qml/Main.qml" line="510"/>
         <source>Bookmark This Page</source>
         <translation>将此页加入书签</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="486"/>
+        <location filename="../qml/Main.qml" line="528"/>
         <source>Downloads</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="515"/>
+        <location filename="../qml/Main.qml" line="557"/>
         <source>Menu</source>
         <translation>菜单</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="528"/>
+        <location filename="../qml/Main.qml" line="20"/>
+        <location filename="../qml/Main.qml" line="570"/>
         <source>New Private Tab</source>
         <translation>新建隐私标签页</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="533"/>
+        <location filename="../qml/Main.qml" line="575"/>
         <source>Reopen Closed Tab</source>
         <translation>重新打开关闭的标签页</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="540"/>
+        <location filename="../qml/Main.qml" line="582"/>
         <source>Close Tab</source>
         <translation>关闭标签页</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="546"/>
+        <location filename="../qml/Main.qml" line="588"/>
         <source>Find in Page…</source>
         <translation>在页面中查找…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="552"/>
+        <location filename="../qml/Main.qml" line="595"/>
         <source>Zoom In</source>
         <translation>放大</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="560"/>
+        <location filename="../qml/Main.qml" line="604"/>
         <source>Zoom Out</source>
         <translation>缩小</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="568"/>
+        <location filename="../qml/Main.qml" line="613"/>
         <source>Actual Size</source>
         <translation>实际大小</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="577"/>
+        <location filename="../qml/Main.qml" line="623"/>
         <source>Bookmarks</source>
         <translation>书签</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="588"/>
+        <location filename="../qml/Main.qml" line="634"/>
         <source>History</source>
         <translation>历史记录</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="595"/>
+        <location filename="../qml/Main.qml" line="641"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>设置 %1…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="602"/>
+        <location filename="../qml/Main.qml" line="648"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>关于 %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="692"/>
+        <location filename="../qml/Main.qml" line="738"/>
         <source>Page bookmarked</source>
         <translation>页面已加入书签</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="692"/>
+        <location filename="../qml/Main.qml" line="738"/>
         <source>Edit Bookmark</source>
         <translation>编辑书签</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="700"/>
+        <location filename="../qml/Main.qml" line="746"/>
         <source>Name:</source>
         <translation>名称：</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="706"/>
+        <location filename="../qml/Main.qml" line="752"/>
         <source>Folder:</source>
         <translation>文件夹：</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="716"/>
+        <location filename="../qml/Main.qml" line="762"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="724"/>
+        <location filename="../qml/Main.qml" line="770"/>
         <source>Done</source>
         <translation>完成</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="736"/>
+        <location filename="../qml/Main.qml" line="782"/>
         <source>Save File</source>
         <translation>保存文件</translation>
+    </message>
+</context>
+<context>
+    <name>NewTabPage</name>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="111"/>
+        <source>Private Tab</source>
+        <translation>隐私标签页</translation>
+    </message>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="119"/>
+        <source>Search or enter address</source>
+        <translation>搜索或输入地址</translation>
+    </message>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="215"/>
+        <source>The sites you visit most will appear here.</source>
+        <translation>您最常访问的网站将显示在这里。</translation>
+    </message>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="224"/>
+        <source>%1 does not keep the history, cookies, form data or permissions of this tab. Everything is erased when you close it.</source>
+        <extracomment>%1 is the application name</extracomment>
+        <translation>%1 不会保留此标签页的历史记录、Cookie、表单数据或权限。关闭标签页时所有内容都会被清除。</translation>
+    </message>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="233"/>
+        <source>Downloads and bookmarks you create are kept. Your provider and the sites you visit can still see your activity.</source>
+        <translation>您创建的下载和书签会保留。您的网络服务提供商和您访问的网站仍可看到您的活动。</translation>
+    </message>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="242"/>
+        <source>Open in New Tab</source>
+        <translation>在新标签页中打开</translation>
+    </message>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="250"/>
+        <source>Open in New Private Tab</source>
+        <translation>在新隐私标签页中打开</translation>
+    </message>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="259"/>
+        <source>Remove from Top Sites</source>
+        <translation>从常用网站中移除</translation>
     </message>
 </context>
 <context>
@@ -510,19 +556,19 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="57"/>
-        <location filename="../qml/SettingsWindow.qml" line="157"/>
+        <location filename="../qml/SettingsWindow.qml" line="195"/>
         <source>Search</source>
         <translation>搜索</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="58"/>
-        <location filename="../qml/SettingsWindow.qml" line="224"/>
+        <location filename="../qml/SettingsWindow.qml" line="262"/>
         <source>Downloads</source>
         <translation>下载</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="283"/>
+        <location filename="../qml/SettingsWindow.qml" line="321"/>
         <source>Privacy</source>
         <translation>隐私</translation>
     </message>
@@ -557,87 +603,117 @@
         <translation>地址：</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="121"/>
+        <location filename="../qml/SettingsWindow.qml" line="115"/>
+        <source>New Tab page</source>
+        <translation>新建标签页</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="130"/>
         <source>Use Current Page</source>
         <translation>使用当前页面</translation>
     </message>
     <message>
+        <location filename="../qml/SettingsWindow.qml" line="145"/>
+        <source>Use New Tab Page</source>
+        <translation>使用新建标签页</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="157"/>
+        <source>New Tabs</source>
+        <translation>新建标签页</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="161"/>
+        <source>New Tab page:</source>
+        <translation>新建标签页：</translation>
+    </message>
+    <message>
         <location filename="../qml/SettingsWindow.qml" line="162"/>
+        <source>Show top sites</source>
+        <translation>显示常用网站</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="168"/>
+        <source>Restore Removed Sites</source>
+        <translation>恢复已移除的网站</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="200"/>
         <source>Engine:</source>
         <translation>搜索引擎：</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="169"/>
+        <location filename="../qml/SettingsWindow.qml" line="207"/>
         <source>Custom…</source>
         <translation>自定义…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="182"/>
+        <location filename="../qml/SettingsWindow.qml" line="220"/>
         <source>Custom URL:</source>
         <translation>自定义 URL：</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="201"/>
+        <location filename="../qml/SettingsWindow.qml" line="239"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>URL 必须包含“%1”来代表搜索词的位置。</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="228"/>
+        <location filename="../qml/SettingsWindow.qml" line="266"/>
         <source>Folder:</source>
         <translation>文件夹：</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="239"/>
+        <location filename="../qml/SettingsWindow.qml" line="277"/>
         <source>Choose…</source>
         <translation>选择…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="246"/>
+        <location filename="../qml/SettingsWindow.qml" line="284"/>
         <source>Saving:</source>
         <translation>保存：</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="247"/>
+        <location filename="../qml/SettingsWindow.qml" line="285"/>
         <source>Ask where to save each file</source>
         <translation>每次保存文件时询问位置</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="259"/>
+        <location filename="../qml/SettingsWindow.qml" line="297"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>所选文件夹已不存在。下载内容将保存到 %1。</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="287"/>
+        <location filename="../qml/SettingsWindow.qml" line="325"/>
         <source>Cookies:</source>
         <translation>Cookie：</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="288"/>
+        <location filename="../qml/SettingsWindow.qml" line="326"/>
         <source>Block third-party cookies</source>
         <translation>阻止第三方 Cookie</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="294"/>
+        <location filename="../qml/SettingsWindow.qml" line="332"/>
         <source>On Exit:</source>
         <translation>退出时：</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="295"/>
+        <location filename="../qml/SettingsWindow.qml" line="333"/>
         <source>Clear cookies, cache and history</source>
         <translation>清除 Cookie、缓存和历史记录</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="301"/>
+        <location filename="../qml/SettingsWindow.qml" line="339"/>
         <source>Data:</source>
         <translation>数据：</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="302"/>
+        <location filename="../qml/SettingsWindow.qml" line="340"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>立即清除 Cookie 和缓存</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="316"/>
+        <location filename="../qml/SettingsWindow.qml" line="354"/>
         <source>Choose Download Folder</source>
         <translation>选择下载文件夹</translation>
     </message>
@@ -645,12 +721,18 @@
 <context>
     <name>TabButtonDelegate</name>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="25"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="26"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="27"/>
         <source>New Tab</source>
         <translation>新建标签页</translation>
     </message>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="95"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="26"/>
+        <source>New Private Tab</source>
+        <translation>新建隐私标签页</translation>
+    </message>
+    <message>
+        <location filename="../qml/TabButtonDelegate.qml" line="99"/>
         <source>Close Tab</source>
         <translation>关闭标签页</translation>
     </message>
@@ -658,42 +740,42 @@
 <context>
     <name>TabContextMenu</name>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="15"/>
+        <location filename="../qml/TabContextMenu.qml" line="19"/>
         <source>New Tab</source>
         <translation>新建标签页</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="21"/>
+        <location filename="../qml/TabContextMenu.qml" line="25"/>
         <source>Reload</source>
         <translation>重新加载</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="30"/>
+        <location filename="../qml/TabContextMenu.qml" line="34"/>
         <source>Duplicate Tab</source>
         <translation>复制标签页</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="36"/>
+        <location filename="../qml/TabContextMenu.qml" line="40"/>
         <source>Unpin Tab</source>
         <translation>取消固定标签页</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="36"/>
+        <location filename="../qml/TabContextMenu.qml" line="40"/>
         <source>Pin Tab</source>
         <translation>固定标签页</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="43"/>
+        <location filename="../qml/TabContextMenu.qml" line="47"/>
         <source>Close Tab</source>
         <translation>关闭标签页</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="49"/>
+        <location filename="../qml/TabContextMenu.qml" line="53"/>
         <source>Close Other Tabs</source>
         <translation>关闭其他标签页</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="55"/>
+        <location filename="../qml/TabContextMenu.qml" line="59"/>
         <source>Close Tabs to the Right</source>
         <translation>关闭右侧标签页</translation>
     </message>

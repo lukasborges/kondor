@@ -59,8 +59,9 @@ Tab *TabModel::insertTab(int index, QQuickWebEngineProfile *profile, const QUrl 
     index = qBound(0, index, int(m_tabs.size()));
 
     auto *tab = new Tab(profile, this);
-    const QUrl targetUrl = url.isEmpty() ? QUrl(profiles->homePage()) : url;
-    tab->setUrl(targetUrl);
+    // An empty URL means the New Tab page; the home page is only used by the
+    // first tab at startup and by the Home button.
+    tab->setUrl(url);
 
     beginInsertRows(QModelIndex(), index, index);
     m_tabs.insert(index, tab);
@@ -110,7 +111,8 @@ void TabModel::closeTab(int index)
         return;
 
     Tab *closing = m_tabs.at(index);
-    if (!closing->isPrivate()) {
+    // A New Tab page has no page to reopen.
+    if (!closing->isPrivate() && !closing->newTabPage()) {
         m_closed.append({closing->url(), closing->title(), index});
         while (m_closed.size() > kMaxClosedTabs)
             m_closed.removeFirst();

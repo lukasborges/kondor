@@ -49,10 +49,20 @@ Item {
         }
     }
 
+    // Shown above the WebEngineView while the tab is on the New Tab page.
+    NewTabPage {
+        anchors.fill: parent
+        visible: root.tab.newTabPage
+        tab: root.tab
+        tabModel: root.tabModel
+    }
+
     Connections {
         target: root.tab
 
         function onNavigationRequested(url) { webView.url = url }
+        // Back must return to the page that was on screen before.
+        function onNewTabPageRequested() { webView.url = "about:blank" }
         function onBackRequested() { if (webView.canGoBack) webView.goBack() }
         function onForwardRequested() { if (webView.canGoForward) webView.goForward() }
         function onReloadRequested() { webView.reload() }

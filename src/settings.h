@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QSettings>
+#include <QStringList>
 #include <QtQmlIntegration/qqmlintegration.h>
 
 class QQmlEngine;
@@ -31,6 +32,10 @@ class Settings : public QObject
                    NOTIFY startupBehaviorChanged)
     Q_PROPERTY(bool showBookmarksBar READ showBookmarksBar WRITE setShowBookmarksBar
                    NOTIFY showBookmarksBarChanged)
+    Q_PROPERTY(bool showTopSites READ showTopSites WRITE setShowTopSites
+                   NOTIFY showTopSitesChanged)
+    Q_PROPERTY(QStringList hiddenTopSites READ hiddenTopSites WRITE setHiddenTopSites
+                   NOTIFY hiddenTopSitesChanged)
     Q_PROPERTY(bool clearDataOnExit READ clearDataOnExit WRITE setClearDataOnExit
                    NOTIFY clearDataOnExitChanged)
     Q_PROPERTY(bool blockThirdPartyCookies READ blockThirdPartyCookies
@@ -49,6 +54,8 @@ public:
     bool askWhereToSave() const { return m_askWhereToSave; }
     QString startupBehavior() const { return m_startupBehavior; }
     bool showBookmarksBar() const { return m_showBookmarksBar; }
+    bool showTopSites() const { return m_showTopSites; }
+    QStringList hiddenTopSites() const { return m_hiddenTopSites; }
     bool clearDataOnExit() const { return m_clearDataOnExit; }
     bool blockThirdPartyCookies() const { return m_blockThirdPartyCookies; }
 
@@ -59,6 +66,8 @@ public:
     void setAskWhereToSave(bool askWhereToSave);
     void setStartupBehavior(const QString &startupBehavior);
     void setShowBookmarksBar(bool showBookmarksBar);
+    void setShowTopSites(bool showTopSites);
+    void setHiddenTopSites(const QStringList &hiddenTopSites);
     void setClearDataOnExit(bool clearDataOnExit);
     void setBlockThirdPartyCookies(bool blockThirdPartyCookies);
 
@@ -79,6 +88,8 @@ signals:
     void askWhereToSaveChanged();
     void startupBehaviorChanged();
     void showBookmarksBarChanged();
+    void showTopSitesChanged();
+    void hiddenTopSitesChanged();
     void clearDataOnExitChanged();
     void blockThirdPartyCookiesChanged();
 
@@ -93,6 +104,8 @@ private:
     bool m_askWhereToSave = false;
     QString m_startupBehavior;
     bool m_showBookmarksBar = false;
+    bool m_showTopSites = true;
+    QStringList m_hiddenTopSites;
     bool m_clearDataOnExit = false;
     bool m_blockThirdPartyCookies = false;
 };

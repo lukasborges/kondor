@@ -341,158 +341,204 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../qml/Main.qml" line="42"/>
+        <location filename="../qml/Main.qml" line="47"/>
         <source>Quit %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Sair do %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="43"/>
+        <location filename="../qml/Main.qml" line="48"/>
         <source>Downloads are still in progress. Quit anyway?</source>
         <translation>Downloads ainda estão em andamento. Sair mesmo assim?</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="309"/>
-        <location filename="../qml/Main.qml" line="523"/>
+        <location filename="../qml/Main.qml" line="20"/>
+        <location filename="../qml/Main.qml" line="347"/>
+        <location filename="../qml/Main.qml" line="565"/>
         <source>New Tab</source>
         <translation>Nova aba</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="371"/>
+        <location filename="../qml/Main.qml" line="406"/>
         <source>Back</source>
         <translation>Voltar</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="384"/>
+        <location filename="../qml/Main.qml" line="419"/>
         <source>Forward</source>
         <translation>Avançar</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="396"/>
+        <location filename="../qml/Main.qml" line="432"/>
         <source>Stop</source>
         <translation>Parar</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="396"/>
+        <location filename="../qml/Main.qml" line="432"/>
         <source>Reload</source>
         <translation>Recarregar</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="412"/>
+        <location filename="../qml/Main.qml" line="448"/>
         <source>Home</source>
         <translation>Página inicial</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="425"/>
+        <location filename="../qml/Main.qml" line="465"/>
         <source>Search or enter address</source>
         <translation>Pesquisar ou digitar um endereço</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="468"/>
+        <location filename="../qml/Main.qml" line="510"/>
         <source>Bookmark This Page</source>
         <translation>Adicionar esta página aos favoritos</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="486"/>
+        <location filename="../qml/Main.qml" line="528"/>
         <source>Downloads</source>
         <translation>Downloads</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="515"/>
+        <location filename="../qml/Main.qml" line="557"/>
         <source>Menu</source>
         <translation>Menu</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="528"/>
+        <location filename="../qml/Main.qml" line="20"/>
+        <location filename="../qml/Main.qml" line="570"/>
         <source>New Private Tab</source>
         <translation>Nova aba privada</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="533"/>
+        <location filename="../qml/Main.qml" line="575"/>
         <source>Reopen Closed Tab</source>
         <translation>Reabrir aba fechada</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="540"/>
+        <location filename="../qml/Main.qml" line="582"/>
         <source>Close Tab</source>
         <translation>Fechar aba</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="546"/>
+        <location filename="../qml/Main.qml" line="588"/>
         <source>Find in Page…</source>
         <translation>Localizar na página…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="552"/>
+        <location filename="../qml/Main.qml" line="595"/>
         <source>Zoom In</source>
         <translation>Ampliar</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="560"/>
+        <location filename="../qml/Main.qml" line="604"/>
         <source>Zoom Out</source>
         <translation>Reduzir</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="568"/>
+        <location filename="../qml/Main.qml" line="613"/>
         <source>Actual Size</source>
         <translation>Tamanho normal</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="577"/>
+        <location filename="../qml/Main.qml" line="623"/>
         <source>Bookmarks</source>
         <translation>Favoritos</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="588"/>
+        <location filename="../qml/Main.qml" line="634"/>
         <source>History</source>
         <translation>Histórico</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="595"/>
+        <location filename="../qml/Main.qml" line="641"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Configurar o %1…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="602"/>
+        <location filename="../qml/Main.qml" line="648"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Sobre o %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="692"/>
+        <location filename="../qml/Main.qml" line="738"/>
         <source>Page bookmarked</source>
         <translation>Página adicionada aos favoritos</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="692"/>
+        <location filename="../qml/Main.qml" line="738"/>
         <source>Edit Bookmark</source>
         <translation>Editar favorito</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="700"/>
+        <location filename="../qml/Main.qml" line="746"/>
         <source>Name:</source>
         <translation>Nome:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="706"/>
+        <location filename="../qml/Main.qml" line="752"/>
         <source>Folder:</source>
         <translation>Pasta:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="716"/>
+        <location filename="../qml/Main.qml" line="762"/>
         <source>Remove</source>
         <translation>Remover</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="724"/>
+        <location filename="../qml/Main.qml" line="770"/>
         <source>Done</source>
         <translation>Concluir</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="736"/>
+        <location filename="../qml/Main.qml" line="782"/>
         <source>Save File</source>
         <translation>Salvar arquivo</translation>
+    </message>
+</context>
+<context>
+    <name>NewTabPage</name>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="111"/>
+        <source>Private Tab</source>
+        <translation>Aba privada</translation>
+    </message>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="119"/>
+        <source>Search or enter address</source>
+        <translation>Pesquisar ou digitar um endereço</translation>
+    </message>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="215"/>
+        <source>The sites you visit most will appear here.</source>
+        <translation>Os sites que você mais visita aparecerão aqui.</translation>
+    </message>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="224"/>
+        <source>%1 does not keep the history, cookies, form data or permissions of this tab. Everything is erased when you close it.</source>
+        <extracomment>%1 is the application name</extracomment>
+        <translation>O %1 não guarda o histórico, os cookies, os dados de formulários nem as permissões desta aba. Tudo é apagado quando ela é fechada.</translation>
+    </message>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="233"/>
+        <source>Downloads and bookmarks you create are kept. Your provider and the sites you visit can still see your activity.</source>
+        <translation>Downloads e favoritos que você criar são mantidos. Seu provedor e os sites que você visita ainda podem ver sua atividade.</translation>
+    </message>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="242"/>
+        <source>Open in New Tab</source>
+        <translation>Abrir em nova aba</translation>
+    </message>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="250"/>
+        <source>Open in New Private Tab</source>
+        <translation>Abrir em nova aba privada</translation>
+    </message>
+    <message>
+        <location filename="../qml/NewTabPage.qml" line="259"/>
+        <source>Remove from Top Sites</source>
+        <translation>Remover dos sites mais visitados</translation>
     </message>
 </context>
 <context>
@@ -510,19 +556,19 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="57"/>
-        <location filename="../qml/SettingsWindow.qml" line="157"/>
+        <location filename="../qml/SettingsWindow.qml" line="195"/>
         <source>Search</source>
         <translation>Pesquisa</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="58"/>
-        <location filename="../qml/SettingsWindow.qml" line="224"/>
+        <location filename="../qml/SettingsWindow.qml" line="262"/>
         <source>Downloads</source>
         <translation>Downloads</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="283"/>
+        <location filename="../qml/SettingsWindow.qml" line="321"/>
         <source>Privacy</source>
         <translation>Privacidade</translation>
     </message>
@@ -557,87 +603,117 @@
         <translation>Endereço:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="121"/>
+        <location filename="../qml/SettingsWindow.qml" line="115"/>
+        <source>New Tab page</source>
+        <translation>Página de nova aba</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="130"/>
         <source>Use Current Page</source>
         <translation>Usar página atual</translation>
     </message>
     <message>
+        <location filename="../qml/SettingsWindow.qml" line="145"/>
+        <source>Use New Tab Page</source>
+        <translation>Usar a página de nova aba</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="157"/>
+        <source>New Tabs</source>
+        <translation>Novas abas</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="161"/>
+        <source>New Tab page:</source>
+        <translation>Página de nova aba:</translation>
+    </message>
+    <message>
         <location filename="../qml/SettingsWindow.qml" line="162"/>
+        <source>Show top sites</source>
+        <translation>Mostrar os sites mais visitados</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="168"/>
+        <source>Restore Removed Sites</source>
+        <translation>Restaurar sites removidos</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="200"/>
         <source>Engine:</source>
         <translation>Mecanismo:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="169"/>
+        <location filename="../qml/SettingsWindow.qml" line="207"/>
         <source>Custom…</source>
         <translation>Personalizado…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="182"/>
+        <location filename="../qml/SettingsWindow.qml" line="220"/>
         <source>Custom URL:</source>
         <translation>URL personalizada:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="201"/>
+        <location filename="../qml/SettingsWindow.qml" line="239"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>A URL deve conter “%1” onde vão os termos de pesquisa.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="228"/>
+        <location filename="../qml/SettingsWindow.qml" line="266"/>
         <source>Folder:</source>
         <translation>Pasta:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="239"/>
+        <location filename="../qml/SettingsWindow.qml" line="277"/>
         <source>Choose…</source>
         <translation>Escolher…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="246"/>
+        <location filename="../qml/SettingsWindow.qml" line="284"/>
         <source>Saving:</source>
         <translation>Salvamento:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="247"/>
+        <location filename="../qml/SettingsWindow.qml" line="285"/>
         <source>Ask where to save each file</source>
         <translation>Perguntar onde salvar cada arquivo</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="259"/>
+        <location filename="../qml/SettingsWindow.qml" line="297"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>A pasta selecionada não existe mais. Os downloads são salvos em %1.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="287"/>
+        <location filename="../qml/SettingsWindow.qml" line="325"/>
         <source>Cookies:</source>
         <translation>Cookies:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="288"/>
+        <location filename="../qml/SettingsWindow.qml" line="326"/>
         <source>Block third-party cookies</source>
         <translation>Bloquear cookies de terceiros</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="294"/>
+        <location filename="../qml/SettingsWindow.qml" line="332"/>
         <source>On Exit:</source>
         <translation>Ao sair:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="295"/>
+        <location filename="../qml/SettingsWindow.qml" line="333"/>
         <source>Clear cookies, cache and history</source>
         <translation>Limpar cookies, cache e histórico</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="301"/>
+        <location filename="../qml/SettingsWindow.qml" line="339"/>
         <source>Data:</source>
         <translation>Dados:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="302"/>
+        <location filename="../qml/SettingsWindow.qml" line="340"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Limpar cookies e cache agora</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="316"/>
+        <location filename="../qml/SettingsWindow.qml" line="354"/>
         <source>Choose Download Folder</source>
         <translation>Escolher pasta de downloads</translation>
     </message>
@@ -645,12 +721,18 @@
 <context>
     <name>TabButtonDelegate</name>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="25"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="26"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="27"/>
         <source>New Tab</source>
         <translation>Nova aba</translation>
     </message>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="95"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="26"/>
+        <source>New Private Tab</source>
+        <translation>Nova aba privada</translation>
+    </message>
+    <message>
+        <location filename="../qml/TabButtonDelegate.qml" line="99"/>
         <source>Close Tab</source>
         <translation>Fechar aba</translation>
     </message>
@@ -658,42 +740,42 @@
 <context>
     <name>TabContextMenu</name>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="15"/>
+        <location filename="../qml/TabContextMenu.qml" line="19"/>
         <source>New Tab</source>
         <translation>Nova aba</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="21"/>
+        <location filename="../qml/TabContextMenu.qml" line="25"/>
         <source>Reload</source>
         <translation>Recarregar</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="30"/>
+        <location filename="../qml/TabContextMenu.qml" line="34"/>
         <source>Duplicate Tab</source>
         <translation>Duplicar aba</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="36"/>
+        <location filename="../qml/TabContextMenu.qml" line="40"/>
         <source>Unpin Tab</source>
         <translation>Desafixar aba</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="36"/>
+        <location filename="../qml/TabContextMenu.qml" line="40"/>
         <source>Pin Tab</source>
         <translation>Fixar aba</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="43"/>
+        <location filename="../qml/TabContextMenu.qml" line="47"/>
         <source>Close Tab</source>
         <translation>Fechar aba</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="49"/>
+        <location filename="../qml/TabContextMenu.qml" line="53"/>
         <source>Close Other Tabs</source>
         <translation>Fechar outras abas</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="55"/>
+        <location filename="../qml/TabContextMenu.qml" line="59"/>
         <source>Close Tabs to the Right</source>
         <translation>Fechar abas à direita</translation>
     </message>

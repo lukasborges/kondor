@@ -23,6 +23,7 @@ class Tab : public QObject
     Q_PROPERTY(bool pinned READ pinned NOTIFY pinnedChanged)
     Q_PROPERTY(int findMatches READ findMatches NOTIFY findResultChanged)
     Q_PROPERTY(int findActiveMatch READ findActiveMatch NOTIFY findResultChanged)
+    Q_PROPERTY(bool newTabPage READ newTabPage NOTIFY newTabPageChanged)
 
 public:
     explicit Tab(QQuickWebEngineProfile *profile, QObject *parent = nullptr);
@@ -39,6 +40,7 @@ public:
     bool pinned() const { return m_pinned; }
     int findMatches() const { return m_findMatches; }
     int findActiveMatch() const { return m_findActiveMatch; }
+    bool newTabPage() const { return m_newTabPage; }
 
     // Calls coming from the WebEngineView (QML) to synchronize the state.
     Q_INVOKABLE void setTitle(const QString &title);
@@ -53,6 +55,7 @@ public:
 
     // Commands coming from the UI; they become signals consumed by the WebEngineView.
     Q_INVOKABLE void navigateTo(const QUrl &url);
+    Q_INVOKABLE void showNewTabPage();
     Q_INVOKABLE void goBack();
     Q_INVOKABLE void goForward();
     Q_INVOKABLE void reload();
@@ -74,8 +77,10 @@ signals:
     void canGoForwardChanged();
     void findResultChanged();
     void pinnedChanged();
+    void newTabPageChanged();
 
     void navigationRequested(const QUrl &url);
+    void newTabPageRequested();
     void backRequested();
     void forwardRequested();
     void reloadRequested();
@@ -88,6 +93,8 @@ signals:
     void focusPageRequested();
 
 private:
+    void setNewTabPage(bool newTabPage);
+
     QString m_title;
     QUrl m_url;
     QUrl m_iconUrl;
@@ -100,4 +107,6 @@ private:
     bool m_pinned = false;
     int m_findMatches = 0;
     int m_findActiveMatch = 0;
+    // A tab without a real URL starts on the New Tab page.
+    bool m_newTabPage = true;
 };

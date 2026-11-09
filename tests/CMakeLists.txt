@@ -88,3 +88,24 @@ add_test(NAME tst_bookmarks COMMAND tst_bookmarks)
 set_tests_properties(tst_bookmarks PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
 )
+
+qt_add_executable(tst_topsites
+    tst_topsites.cpp
+    ../src/historymanager.cpp
+    ../src/historymodel.cpp
+    ../src/database.cpp
+    ../src/settings.cpp
+)
+
+target_include_directories(tst_topsites PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_topsites PRIVATE
+    Qt6::Core
+    Qt6::Qml
+    Qt6::Sql
+    Qt6::Test
+)
+
+add_test(NAME tst_topsites COMMAND tst_topsites)

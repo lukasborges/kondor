@@ -17,6 +17,8 @@
 namespace {
 constexpr int kSessionVersion = 1;
 constexpr int kAutosaveDelayMs = 2000;
+// Session marker for a tab on the New Tab page (it has no real URL).
+constexpr auto kNewTabPageUrl = "about:newtab";
 } // namespace
 
 SessionManager *SessionManager::instance()
@@ -114,7 +116,10 @@ void SessionManager::saveNow()
             continue;
 
         QJsonObject entry;
-        entry.insert(QStringLiteral("url"), tab->url().toString());
+        if (tab->newTabPage())
+            entry.insert(QStringLiteral("url"), QStringLiteral("about:newtab"));
+        else
+            entry.insert(QStringLiteral("url"), tab->url().toString());
         entry.insert(QStringLiteral("title"), tab->title());
         if (row == m_model->currentIndex())
             currentIndex = int(tabs.size());
@@ -166,8 +171,10 @@ bool SessionManager::restore(TabModel *model)
     int restored = 0;
     for (const QJsonValue &value : tabs) {
         const QJsonObject entry = value.toObject();
-        const QUrl url(entry.value(QStringLiteral("url")).toString());
-        if (url.isEmpty())
+        const QString urlString = entry.value(QStringLiteral("url")).toString();
+        const bool newTabPage = urlString == QLatin1String(kNewTabPageUrl);
+        const QUrl url = newTabPage ? QUrl() : QUrl(urlString);
+        if (!newTabPage && url.isEmpty())
             continue;
 
         Tab *tab = model->addTab(false, url);

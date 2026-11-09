@@ -12,18 +12,19 @@ A native **Qt 6** browser (Qt Quick + Qt WebEngine) with the **KDE/Breeze** look
 
 ## Status
 
-A working prototype with the core functionality in place: it actually browses, with tabs, a private mode, browsing history and keyboard shortcuts. Everyday features such as bookmarks and settings are still missing.
+A working prototype with the core functionality in place: it actually browses, with tabs, a private mode, browsing history, a settings window and keyboard shortcuts. Everyday features such as bookmarks are still missing.
 
 ## Features
 
 ### Implemented
 
 - **Real tabs** with `Qt WebEngine` (one `WebEngineView` per tab, preserving state when switching)
-- **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches DuckDuckGo)
+- **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches with the configured engine)
 - **Navigation**: back, forward, reload/stop, home
 - **Private mode**: off-the-record tabs, isolated from the persistent profile
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
-- **Basic downloads** (saved to `~/Downloads`)
+- **Settings** (Ctrl+,): home page, search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit), applied immediately and stored in `~/.config/KDE/Kondor.conf`
+- **Basic downloads** (saved to the configured folder)
 - **Menu** and **keyboard shortcuts**
 - **KDE look** via the `org.kde.desktop` (QQC2) style, with a `Fusion` fallback
 - **Semantic colors** (`Kirigami.Theme`/`palette`): follows the system color scheme
@@ -68,6 +69,7 @@ CMakeLists.txt
 src/
   main.cpp            startup (WebEngine, KDE style, QML engine)
   profilemanager.*    persistent/private profiles, address/search resolution, downloads
+  settings.*          QML singleton: user settings persisted with QSettings
   tab.*               per-tab state (title, URL, icon, loading, history)
   tabmodel.*          tab model (QAbstractListModel)
   database.*          SQLite storage (schema + migrations)
@@ -77,6 +79,7 @@ qml/
   Main.qml            window, tab bar, navigation bar, menu, shortcuts
   WebViewTab.qml      WebEngineView + bridge to the Tab object
   HistoryWindow.qml   browsing history window (search, grouped by day, clear)
+  SettingsWindow.qml  settings window (home page, search, downloads, privacy)
 ```
 
 ## Keyboard shortcuts
@@ -87,6 +90,7 @@ qml/
 | `Ctrl+Shift+N` | New private tab |
 | `Ctrl+W` | Close tab (quits the app if it is the last one) |
 | `Ctrl+H` | Browsing history |
+| `Ctrl+,` | Configure Kondor (settings) |
 | `Ctrl+L` | Focus the address bar |
 | `Ctrl+R` / `F5` | Reload |
 | `Alt+←` / `Alt+→` | Back / forward |

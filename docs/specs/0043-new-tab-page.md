@@ -83,7 +83,7 @@ and blank is the new default. Private tabs show a private variant without top si
 6. **Opening new tabs.** Add `function openNewTab(isPrivate)` to `Main.qml`: `tabs.addTab(isPrivate)`,
    then focus and select the address field (deferred with `Qt.callLater`, as the Ctrl+F fix in #32
    does). Use it for every "new tab" entry point: the `+` button, double/middle click on the empty
-   tab bar, File/menu "New Tab" and "New Private Tab", Ctrl+T, Ctrl+Shift+P and the tab context
+   tab bar, File/menu "New Tab" and "New Private Tab", Ctrl+T, Ctrl+Shift+N and the tab context
    menu (`TabContextMenu.qml` emits `newTabRequested()` instead of calling the model).
 7. **Home page = first tab only.**
    - Startup with `startupBehavior == "homepage"` and no command-line URL: one tab with
@@ -145,7 +145,7 @@ Use an isolated profile (temporary `XDG_*` dirs, see `AGENTS.md`).
 4. Settings → home page `https://kde.org`. Restart: the first tab loads kde.org; Ctrl+T still shows
    the New Tab page. "Use New Tab Page", restart: the New Tab page again.
 5. On a site, press Home with a blank home page: the New Tab page shows; press Back: the site again.
-6. Ctrl+Shift+P: the private variant, without top sites.
+6. Ctrl+Shift+N: the private variant, without top sites.
 7. Startup "restore" with two New Tab pages and one site open, restart: all three come back.
 
 ## Out of scope
@@ -182,3 +182,4 @@ Visual target — match it (controls, Kirigami components, icon names, wording, 
 | --- | --- |
 | Native QML page or an HTML page on a custom scheme? | Native QML overlay in `WebViewTab.qml` (Breeze look, `Kirigami.Theme` colors). The `about:blank` load in `showNewTabPage()` keeps Back working. |
 | What does the home page setting control now? | Only the first tab at startup and the Home button. Blank (the new default) means the New Tab page. |
+| Which shortcut opens the private New Tab page? (PR #48) | Ctrl+Shift+N, the existing documented shortcut; Ctrl+Shift+P stays reserved for "New Private Window" (#14). |

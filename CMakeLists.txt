@@ -14,6 +14,7 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
     QuickControls2
     Sql
     WebEngineQuick
+    Widgets
 )
 
 qt_standard_project_setup(REQUIRES 6.5)
@@ -124,6 +125,7 @@ target_link_libraries(kondor PRIVATE
     Qt6::QuickControls2
     Qt6::Sql
     Qt6::WebEngineQuick
+    Qt6::Widgets
 )
 
 if(BUILD_TESTING)

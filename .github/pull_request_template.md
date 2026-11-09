@@ -13,7 +13,7 @@ Spec: `docs/specs/<NNNN>-<slug>.md`
 ## How it was tested
 
 - [ ] Clean build, no new warnings in changed files
-- [ ] `QT_QPA_PLATFORM=offscreen timeout 15 ./build/kondor` shows no QML errors
+- [ ] Offscreen smoke test (`AGENTS.md`, isolated `XDG_*` dirs) shows no QML errors
 - [ ] Spec "Manual test" done (describe results below)
 - [ ] `ctest --test-dir build` passes (once tests exist)
 

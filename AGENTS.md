@@ -30,8 +30,16 @@ cmake --build build --parallel
 Smoke test without a display (useful in CI or for agents):
 
 ```bash
-QT_QPA_PLATFORM=offscreen timeout 15 ./build/kondor
+export KONDOR_TEST_HOME="$(mktemp -d)"
+XDG_CONFIG_HOME="$KONDOR_TEST_HOME/config" XDG_DATA_HOME="$KONDOR_TEST_HOME/data" \
+XDG_CACHE_HOME="$KONDOR_TEST_HOME/cache" QT_QPA_PLATFORM=offscreen timeout 15 ./build/kondor
 ```
+
+**Never run the app you are testing on the maintainer's real profile.** Every agent run (smoke
+test, manual test, review) sets `XDG_CONFIG_HOME`, `XDG_DATA_HOME` and `XDG_CACHE_HOME` to a
+temporary directory as above, so settings (`~/.config/KDE/Kondor.conf`), history, downloads and
+the web profile of the person using Kondor are never touched. Point test downloads to that
+temporary directory too.
 
 It must not print QML errors (`ReferenceError`, `TypeError`, `Cannot assign…`, `is not a type`).
 Fedora build dependencies are listed in `README.md` and in `.github/workflows/build.yml`.

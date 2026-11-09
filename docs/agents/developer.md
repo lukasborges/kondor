@@ -36,7 +36,7 @@ git -C ../kondor-<N> fetch origin && git -C ../kondor-<N> rebase origin/main   #
 **`to-dev`, no PR yet** — implement the spec:
 1. Implement exactly the spec; "Out of scope" is binding. Match the prototype visually.
 2. Build (`cmake -S . -B build && cmake --build build --parallel`), no new warnings; run
-   `QT_QPA_PLATFORM=offscreen timeout 15 ./build/kondor` without QML errors; do the spec's
+   the offscreen smoke test from `AGENTS.md` (isolated `XDG_*` dirs, never the real profile) without QML errors; do the spec's
    "Manual test"; run `ctest --test-dir build` once tests exist.
 3. Commit (English, Conventional Commits, **no attribution trailers**), push the branch, open a
    PR whose body follows `.github/pull_request_template.md` (`gh pr create --title "<type>: <summary>" --body-file <filled template>`), including `Closes #<N>`.

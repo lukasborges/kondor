@@ -61,9 +61,9 @@ main() {
 You are the developer agent of this repository. Follow docs/agents/developer.md and AGENTS.md
 (read them from origin/main). The work queue assigns issue #$n to the developer; work only on it.
 
-1. git fetch origin. Read the spec docs/specs/$(printf '%04d' "$n")-*.md from origin/main, its
-   prototype, and every comment on issue #$n and on its PR (gh issue view $n --comments; gh pr list --search "Closes #$n").
-2. If a branch for this issue already exists (git branch --list 'feature/$n-*'; git worktree list),
+1. git fetch origin. Read the spec docs/specs/$(printf '%04d' "$n")-*.md from origin/main and its
+   prototype (if issue #$n is labeled bug, its body is the spec instead), and every comment on issue #$n and on its PR (gh issue view $n --comments; gh pr list --search "Closes #$n").
+2. If a branch for this issue already exists (git branch --list 'feature/$n-*' 'fix/$n-*'; git worktree list),
    continue it in the worktree where it is checked out. Otherwise create a new worktree from
    origin/main as described in docs/agents/developer.md. Never commit in the current directory
    (it is the loop's read-only control checkout).

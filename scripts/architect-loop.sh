@@ -80,16 +80,16 @@ main() {
       in-review) cat <<EOF
 $common
 
-Step: review the open PR for issue #$n (gh pr list --search "Closes #$n"). If issue #$n already has the label approved, skip the review and only do the CI check and merge part below. Use the review checklist in docs/agents/architect.md: build the PR head in a separate worktree, run the offscreen smoke test, the spec's manual test where possible and ctest if tests exist; check the spec (docs/specs/$(printf '%04d' "$n")-*.md) acceptance criteria and out of scope, AGENTS.md conventions, private-tab privacy and visual parity with the prototype. Post the review as a PR review with concrete file:line comments.
+Step: review the open PR for issue #$n (gh pr list --search "Closes #$n"). If issue #$n already has the label approved, skip the review and only do the CI check and merge part below. Use the review checklist in docs/agents/architect.md: build the PR head in a separate worktree, run the offscreen smoke test, the spec's manual test where possible and ctest if tests exist; check the spec (docs/specs/$(printf '%04d' "$n")-*.md, or the issue body for a bug issue) acceptance criteria and out of scope, AGENTS.md conventions, private-tab privacy and visual parity with the prototype. Post the review as a PR review with concrete file:line comments.
 $merge_rule
 If it does not pass, submit "request changes" (gh pr review --request-changes; or a comment review starting with \"Verdict: REQUEST CHANGES\" if GitHub refuses), remove the approved label if present and switch issue #$n from in-review to to-dev.
-Promotion: if the queue is now empty, add the label to-dev to the next issue of AGENTS.md "Roadmap order" that is still open and not yet started, with a short issue comment saying it is now the current issue.
+Promotion: if the queue is now empty, add the label to-dev to the oldest open issue labeled bug that has no state label or, if there is none, to the next issue of AGENTS.md "Roadmap order" that is still open and not yet started, with a short issue comment saying it is now the current issue.
 EOF
       ;;
       question) cat <<EOF
 $common
 
-Step: issue #$n has the question label. Find the developer's "**Question:**" comment (on the PR for #$n if there is one, otherwise on the issue), answer it in that thread, add a | Question | Decision | row to the "Decisions" table of docs/specs/$(printf '%04d' "$n")-*.md (commit and push to main), then remove the question label from issue #$n (keep its state label).
+Step: issue #$n has the question label. Find the developer's "**Question:**" comment (on the PR for #$n if there is one, otherwise on the issue), answer it in that thread, add a | Question | Decision | row to the "Decisions" table of docs/specs/$(printf '%04d' "$n")-*.md (commit and push to main; for a bug issue, which has no spec file, the answer comment is the record), then remove the question label from issue #$n (keep its state label).
 EOF
       ;;
       to-spec) cat <<EOF
@@ -101,7 +101,7 @@ EOF
       promote) cat <<EOF
 $common
 
-Step: nothing is in flight (no issue is to-spec, to-dev or in-review). Promote the next issue of AGENTS.md "Roadmap order" that is still open and has no state label: add the label to-dev and post a short comment on it saying it is now the current issue and linking its spec. Do nothing else.
+Step: nothing is in flight (no issue is to-spec, to-dev or in-review). Promote the oldest open issue labeled bug that has no state label or, if there is none, the next issue of AGENTS.md "Roadmap order" that is still open and has no state label: add the label to-dev and post a short comment on it saying it is now the current issue and linking its spec (a bug issue is its own spec). Do nothing else.
 EOF
       ;;
     esac

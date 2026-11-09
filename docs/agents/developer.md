@@ -27,7 +27,7 @@ comment on the issue and on its PR.
 Use your own git worktree per issue, never the architect's checkout and never `main` directly:
 
 ```bash
-git worktree add ../kondor-<N> -b feature/<N>-<slug> origin/main      # first time
+git worktree add ../kondor-<N> -b feature/<N>-<slug> origin/main      # first time (fix/<N>-<slug> for a bug)
 git -C ../kondor-<N> fetch origin && git -C ../kondor-<N> rebase origin/main   # later
 ```
 
@@ -66,7 +66,7 @@ records the decision in the spec.
 
 ## Automatic mode
 
-`scripts/dev-loop.sh` runs this role without a human in the loop. Every 3 minutes it refreshes a
+`scripts/dev-loop.sh` runs this role without a human in the loop. Every minute it refreshes a
 loop-owned worktree at `origin/main` (`~/.local/share/kondor-dev-loop/control`), regenerates the
 queue and, when there is a `developer` row, runs `opencode run --standalone --auto --model deepseek/deepseek-flash` (override with
 `KONDOR_MODEL`) from that worktree with a prompt for that one issue. If a run ends with the issue still in `to-dev` twice in

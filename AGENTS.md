@@ -116,8 +116,8 @@ mention the difference in the PR.
 ## Agent workflow
 
 - **Specs** live in `docs/specs/<NNNN>-<slug>.md` (one per issue, source of truth, edited only by
-  the architect). The issue body is a summary with a link; decisions go in the spec's
-  "Decisions" table.
+  the architect); a `bug` issue is specified by its own body instead (see "Defects"). The issue
+  body is a summary with a link; decisions go in the spec's "Decisions" table.
 - **State** lives in one label per issue: `to-spec` (architect writes the spec) → `to-dev`
   (developer implements or addresses review) → `in-review` (architect reviews the PR) → closed
   when the architect merges the PR (`Closes #N`). `question` is added on top of the state when the
@@ -148,10 +148,20 @@ mention the difference in the PR.
 5. Open a PR using `.github/pull_request_template.md` (body says `Closes #<issue-number>`), then
    switch the issue label to `in-review`.
 
+### Defects
+
+Defects found in delivered features go into the backlog as their own issues, labeled `bug` (one
+defect per issue). A bug issue has no file in `docs/specs/`: **its body is the spec**, with the
+sections *Steps to reproduce*, *Expected*, *Actual*, *Acceptance criteria* and, when known,
+*Cause*. Decisions about a bug are recorded as issue comments. The developer works on a
+`fix/<issue-number>-<short-slug>` branch and commits with `fix: …`. Bugs follow the same labels
+and one-at-a-time rule as features, but **open bugs are promoted before the next roadmap issue**
+(oldest bug first), since they break features that are already delivered.
+
 ### Roadmap order
 
-Promoted to `to-dev` one at a time by the architect (dependencies first: shared blocks, then
-privacy fixes, then features):
+Promoted to `to-dev` one at a time by the architect, after any open `bug` issue (dependencies
+first: shared blocks, then privacy fixes, then features):
 
 1. #1 Browsing history (creates **Database**) · 2. #3 Settings page (creates **Settings**) ·
 3. #5 Find in page (creates **InlineBar**) · 4. #4 Download manager (creates **Notifier**) ·

@@ -20,12 +20,17 @@ you what to do next. Work in your own git worktree on `main` (never in the devel
    zero-padded to 4 digits). It is the source of truth; the issue body only summarizes and links it.
 2. **Prototype** — for issues with UI, the static QML mockup under `prototypes/`, rendered to
    `prototypes/screenshots/*.png` (see `prototypes/README.md`).
-3. **Roadmap order** — you promote backlog issues to `to-dev`, **one at a time**, in the order
-   listed in `AGENTS.md` → "Roadmap order" (adjust it when dependencies change).
-4. **Questions** — answer every developer question.
-5. **Review and merge** — review the developer's PR against spec, conventions and prototype;
+3. **Roadmap order** — you promote backlog issues to `to-dev`, **one at a time**: first any open
+   `bug` issue (oldest first), then the order listed in `AGENTS.md` → "Roadmap order" (adjust it
+   when dependencies change).
+4. **Defects** — when you find a defect in a delivered feature (or the maintainer reports one),
+   file it as a `bug` issue whose body is its spec (see `AGENTS.md` → "Defects"): reproduce it
+   first, and write concrete steps, expected and actual behavior, acceptance criteria and the
+   cause when you know it. Do not fix it yourself.
+5. **Questions** — answer every developer question.
+6. **Review and merge** — review the developer's PR against spec, conventions and prototype;
    approve and merge, or request changes.
-6. **Git record** — decisions, answers and review findings live as comments on issues/PRs and in
+7. **Git record** — decisions, answers and review findings live as comments on issues/PRs and in
    the spec's "Decisions" section.
 
 ## You never
@@ -45,9 +50,10 @@ Act only on queue rows assigned to `architect`:
 - `question` → answer in the thread where it was asked (PR or issue), add a row to the spec's
   "Decisions" table (commit it), then remove `question` (keep the state label).
 - `in-review` → review the PR (see below). Approve → squash-merge it (the `Closes #N` closes the
-  issue) → promote the next issue of the roadmap order to `to-dev`. Changes needed → submit a
+  issue) → promote the next issue (open bugs first, then the roadmap order) to `to-dev`. Changes needed → submit a
   "request changes" review and swap the label to `to-dev`.
-- Queue empty and nothing in review → promote the next roadmap issue to `to-dev`.
+- Queue empty and nothing in review → promote the oldest open `bug` issue, or else the next
+  roadmap issue, to `to-dev`.
 
 ## Spec template
 
@@ -96,7 +102,7 @@ screenshot. The developer's implementation must match it visually.
 ## Automatic mode
 
 `scripts/architect-loop.sh` runs this role unattended, next to the developer loop
-(`scripts/dev-loop.sh`). Every 3 minutes it refreshes a loop-owned worktree at `origin/main`
+(`scripts/dev-loop.sh`). Every minute it refreshes a loop-owned worktree at `origin/main`
 (`~/.local/share/kondor-architect-loop/control`), regenerates the queue and runs Claude Code
 headless (`claude -p --permission-mode auto`) for exactly one step when:
 
@@ -106,7 +112,8 @@ headless (`claude -p --permission-mode auto`) for exactly one step when:
   request changes and switch to `to-dev`;
 - an issue has `question` → answer, record the decision in the spec, remove the label;
 - an issue is `to-spec` → write the spec/prototype, switch to `to-dev`;
-- nothing is in flight → promote the next "Roadmap order" issue to `to-dev`.
+- nothing is in flight → promote the oldest open `bug` issue, or else the next "Roadmap order"
+  issue, to `to-dev`.
 
 `--permission-mode auto` keeps Claude Code's safety classifier in front of every action. Merging
 needs the maintainer's own allow rule `Bash(gh pr merge:*)` in `~/.claude/settings.json`; without it

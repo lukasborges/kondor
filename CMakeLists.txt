@@ -27,6 +27,7 @@ qt_add_qml_module(kondor
         qml/Main.qml
         qml/WebViewTab.qml
         qml/HistoryWindow.qml
+        qml/SettingsWindow.qml
     SOURCES
         src/tab.h
         src/tab.cpp
@@ -34,6 +35,8 @@ qt_add_qml_module(kondor
         src/tabmodel.cpp
         src/profilemanager.h
         src/profilemanager.cpp
+        src/settings.h
+        src/settings.cpp
         src/database.h
         src/database.cpp
         src/historymanager.h

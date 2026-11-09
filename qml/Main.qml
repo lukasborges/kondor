@@ -42,6 +42,12 @@ ApplicationWindow {
         historyWindow.showWindow()
     }
 
+    function openSettings() {
+        if (!settingsWindow)
+            settingsWindow = settingsWindowComponent.createObject(window)
+        settingsWindow.showWindow()
+    }
+
     Component.onCompleted: {
         if (tabs.count === 0)
             tabs.addTab(false)
@@ -318,6 +324,12 @@ ApplicationWindow {
                         }
                         MenuSeparator {}
                         MenuItem {
+                            text: qsTr("Configure Kondor…")
+                            icon.name: "configure"
+                            onTriggered: window.openSettings()
+                        }
+                        MenuSeparator {}
+                        MenuItem {
                             text: qsTr("Sobre o Kondor")
                             icon.name: "help-about"
                         }
@@ -353,6 +365,16 @@ ApplicationWindow {
         }
     }
 
+    // ── Settings window (created on demand) ─────────────────────────────
+    property var settingsWindow: null
+
+    Component {
+        id: settingsWindowComponent
+        SettingsWindow {
+            tabModel: tabs
+        }
+    }
+
     // ── Atalhos ─────────────────────────────────────────────────────────
     Shortcut {
         sequence: "Ctrl+T"
@@ -376,6 +398,10 @@ ApplicationWindow {
     Shortcut {
         sequence: "Ctrl+H"
         onActivated: window.openHistory()
+    }
+    Shortcut {
+        sequences: [StandardKey.Preferences, "Ctrl+,"]
+        onActivated: window.openSettings()
     }
     Shortcut {
         sequences: ["F5", "Ctrl+R"]

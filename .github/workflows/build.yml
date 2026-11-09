@@ -27,6 +27,49 @@ jobs:
       - name: Build
         run: cmake --build build --parallel
 
+      - name: Check translations
+        run: |
+          # The container job runs as root on a workspace owned by another user,
+          # so git needs the checkout marked as safe before diffing it.
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          cmake --build build --target update_translations
+          if ! git diff --exit-code -- i18n/; then
+            echo "::error::i18n/*.ts are stale; run update_translations and commit the result"
+            exit 1
+          fi
+          python3 - <<'PY'
+          import glob
+          import re
+          import sys
+          import xml.etree.ElementTree as ET
+
+          failed = False
+          for path in sorted(glob.glob("i18n/*.ts")):
+              tree = ET.parse(path)
+              for context in tree.getroot():
+                  context_name = context.findtext("name")
+                  for message in context.findall("message"):
+                      source = message.findtext("source") or ""
+                      translation = message.find("translation")
+                      if translation is None:
+                          print(f"::error file={path}::{context_name}: missing translation for {source!r}")
+                          failed = True
+                          continue
+                      forms = (translation.findall("numerusform")
+                               if message.get("numerus") == "yes" else [translation])
+                      texts = [(form.text or "").strip() for form in forms]
+                      if translation.get("type") == "unfinished" or not texts or any(not text for text in texts):
+                          print(f"::error file={path}::{context_name}: unfinished or empty translation for {source!r}")
+                          failed = True
+                          continue
+                      expected = sorted(set(re.findall(r"%\d+|%n", source)))
+                      actual = sorted(set(re.findall(r"%\d+|%n", " ".join(texts))))
+                      if expected != actual:
+                          print(f"::error file={path}::{context_name}: placeholders differ for {source!r}: expected {expected}, got {actual}")
+                          failed = True
+          sys.exit(1 if failed else 0)
+          PY
+
       - name: Upload binary
         uses: actions/upload-artifact@v4
         with:

@@ -2,6 +2,7 @@
 
 #include <QDBusConnection>
 #include <QDBusInterface>
+#include <QGuiApplication>
 #include <QStringList>
 #include <QVariantMap>
 
@@ -34,8 +35,8 @@ void Notifier::notify(const QString &title, const QString &body, const QString &
 
     const QString icon = iconName.isEmpty() ? QStringLiteral("kondor") : iconName;
     notifications.call(QStringLiteral("Notify"),
-                       QStringLiteral("Kondor"), // app_name
-                       0u,                        // replaces_id
+                       QGuiApplication::applicationDisplayName(), // app_name
+                       0u,                                        // replaces_id
                        icon,                      // app_icon
                        title,                     // summary
                        body,                      // body

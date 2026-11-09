@@ -12,7 +12,8 @@ ApplicationWindow {
     id: root
     width: 700
     height: 600
-    title: qsTr("History — Kondor")
+    //: %1 is the application name
+    title: qsTr("History — %1").arg(Qt.application.displayName)
     visible: false
 
     required property TabModel tabModel

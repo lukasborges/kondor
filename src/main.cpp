@@ -46,6 +46,11 @@ int main(int argc, char *argv[])
                           QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
         app.installTranslator(&qtTranslator);
 
+    // User-visible name of the app, read by QML as Qt.application.displayName.
+    //: Application display name: translate "Browser", keep "Kondor"
+    QGuiApplication::setApplicationDisplayName(
+        QCoreApplication::translate("Kondor", "Kondor Browser"));
+
     // KDE (Breeze) look applied through the Qt Quick Controls 2 desktop style.
     QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
     if (QQuickStyle::name() != QLatin1String("org.kde.desktop"))

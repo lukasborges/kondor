@@ -7,7 +7,7 @@ import QtQuick.Dialogs
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// "Configure Kondor" window (Ctrl+,). Pages in a TabBar, one Kirigami.FormLayout
+// "Configure" window (Ctrl+,). Pages in a TabBar, one Kirigami.FormLayout
 // each. Changes apply immediately, like KDE apps.
 ApplicationWindow {
     id: root
@@ -15,7 +15,8 @@ ApplicationWindow {
     height: 520
     minimumWidth: 560
     minimumHeight: 420
-    title: qsTr("Configure — Kondor")
+    //: %1 is the application name
+    title: qsTr("Configure — %1").arg(Qt.application.displayName)
     visible: false
 
     required property TabModel tabModel

@@ -1,14 +1,14 @@
 <p align="center">
-  <img src="packaging/kondor.png" width="128" alt="Kondor logo">
+  <img src="packaging/kondor.png" width="128" alt="Kondor Browser logo">
 </p>
 
-# Kondor
+# Kondor Browser
 
 A native **Qt 6** browser (Qt Quick + Qt WebEngine) with the **KDE/Breeze** look and feel.
 
 > Personal/experimental project. **Not an official KDE project.**
 
-![Kondor screenshot](assets/screenshot.png)
+![Kondor Browser screenshot](assets/screenshot.png)
 
 ## Status
 
@@ -105,7 +105,7 @@ qml/
 | `Ctrl+9` | Go to the last tab |
 | `Ctrl+Shift+PgUp` / `Ctrl+Shift+PgDown` | Move the current tab left / right |
 | `Ctrl+H` | Browsing history |
-| `Ctrl+,` / `Ctrl+Shift+,` | Configure Kondor (settings) |
+| `Ctrl+,` / `Ctrl+Shift+,` | Configure Kondor Browser (settings) |
 | `Ctrl+L` | Focus the address bar |
 | `Ctrl+F` | Find in page |
 | `F3` / `Shift+F3` | Next / previous match (find bar open) |
@@ -119,7 +119,7 @@ qml/
 
 English is the source language; every user-visible string is wrapped in `qsTr()`.
 Brazilian Portuguese ships in `i18n/kondor_pt_BR.ts`, and the compiled `.qm` files are
-embedded in the binary under `:/i18n`. Kondor loads the translation that matches the
+embedded in the binary under `:/i18n`. Kondor Browser loads the translation that matches the
 system locale at startup (and Qt's own translations for dialogs and context menus).
 
 - **Update the `.ts` files** after changing strings: `cmake --build build --target update_translations`.

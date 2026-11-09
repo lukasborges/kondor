@@ -181,9 +181,9 @@ first: shared blocks, then privacy fixes, then features):
 5. #12 Tab management (fixes the private-tab link bug) · 6. #19 Translations (English source +
 pt_BR) · 7. #36 Rename to Kondor Browser · 8. #34 Translations for the main KDE languages ·
 9. #26 Automated tests ·
-10. #10 Default browser · 11. #6 Session restore · 12. #2 Bookmarks · 13. #7 Site permissions ·
-14. #9 Security indicator · 15. #8 Fullscreen · 16. #18 Crashed page · 17. #13 Page context menu ·
-18. #11 Address bar suggestions · 19. #14 Multiple windows · 20. #15 Single instance ·
-21. #16 Developer tools · 22. #17 Print and save as PDF · 23. #24 Per-site zoom ·
-24. #23 Spell checking · 25. #22 Reader mode · 26. #20 Ad and tracker blocking · 27. #21 Passwords ·
-28. #25 Flatpak
+10. #10 Default browser · 11. #6 Session restore · 12. #2 Bookmarks · 13. #43 New Tab page ·
+14. #7 Site permissions · 15. #9 Security indicator · 16. #8 Fullscreen · 17. #18 Crashed page ·
+18. #13 Page context menu · 19. #11 Address bar suggestions · 20. #14 Multiple windows ·
+21. #15 Single instance · 22. #16 Developer tools · 23. #17 Print and save as PDF ·
+24. #24 Per-site zoom · 25. #23 Spell checking · 26. #22 Reader mode ·
+27. #20 Ad and tracker blocking · 28. #21 Passwords · 29. #25 Flatpak

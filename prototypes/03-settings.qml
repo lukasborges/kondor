@@ -55,9 +55,14 @@ Rectangle {
                 Kirigami.Separator { Kirigami.FormData.isSection: true; Kirigami.FormData.label: "Home Page" }
                 RowLayout {
                     Kirigami.FormData.label: "Address:"
-                    TextField { text: "https://duckduckgo.com"; Layout.preferredWidth: 280 }
+                    TextField { placeholderText: "New Tab page"; Layout.preferredWidth: 280 }
                     Button { text: "Use Current Page"; icon.name: "go-home" }
+                    Button { text: "Use New Tab Page"; icon.name: "tab-new"; enabled: false }
                 }
+
+                Kirigami.Separator { Kirigami.FormData.isSection: true; Kirigami.FormData.label: "New Tabs" }
+                CheckBox { Kirigami.FormData.label: "New Tab page:"; text: "Show top sites"; checked: true }
+                Button { text: "Restore Removed Sites"; icon.name: "edit-undo" }
 
                 Kirigami.Separator { Kirigami.FormData.isSection: true; Kirigami.FormData.label: "Search" }
                 ComboBox { Kirigami.FormData.label: "Engine:"; model: ["DuckDuckGo", "Google", "Startpage", "Brave Search", "Custom…"]; Layout.preferredWidth: 280 }

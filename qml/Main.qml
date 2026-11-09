@@ -27,6 +27,9 @@ ApplicationWindow {
     property bool quitConfirmed: false
 
     onClosing: function(close) {
+        // Save while the tabs still exist: closing the last tab closes the
+        // window before TabModel removes it.
+        SessionManager.save(tabs)
         if (DownloadManager.hasActiveDownloads && !window.quitConfirmed) {
             close.accepted = false
             quitDialog.open()
@@ -122,12 +125,15 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        if (StartupArgs.startupUrls.length > 0) {
-            for (let i = 0; i < StartupArgs.startupUrls.length; ++i)
-                tabs.addTab(StartupArgs.startupPrivate, StartupArgs.startupUrls[i])
-        } else if (tabs.count === 0) {
+        SessionManager.watch(tabs)
+        if (Settings.startupBehavior === "restore")
+            SessionManager.restore(tabs)
+        for (let i = 0; i < StartupArgs.startupUrls.length; ++i)
+            tabs.addTab(StartupArgs.startupPrivate, StartupArgs.startupUrls[i])
+        // "kondor --private" (desktop action "New Private Window") still needs
+        // its private tab when there is no URL and a session was restored.
+        if (tabs.count === 0 || (StartupArgs.startupPrivate && StartupArgs.startupUrls.length === 0))
             tabs.addTab(StartupArgs.startupPrivate)
-        }
     }
 
     header: ColumnLayout {
@@ -409,6 +415,12 @@ ApplicationWindow {
                             icon.name: "view-private"
                             onTriggered: tabs.addTab(true)
                         }
+                        MenuItem {
+                            text: qsTr("Reopen Closed Tab")
+                            icon.name: "edit-undo"
+                            enabled: tabs.canReopenClosedTab
+                            onTriggered: tabs.reopenClosedTab()
+                        }
                         MenuSeparator {}
                         MenuItem {
                             text: qsTr("Close Tab")
@@ -583,6 +595,10 @@ ApplicationWindow {
     Shortcut {
         sequence: "Ctrl+W"
         onActivated: window.closeTabAt(tabs.currentIndex)
+    }
+    Shortcut {
+        sequence: "Ctrl+Shift+T"
+        onActivated: tabs.reopenClosedTab()
     }
     Shortcut {
         sequences: ["Ctrl+Tab", "Ctrl+PgDown"]

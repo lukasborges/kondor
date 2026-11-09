@@ -5,6 +5,10 @@
 
 #include <QQuickWebEngineProfile>
 
+namespace {
+constexpr int kMaxClosedTabs = 20;
+} // namespace
+
 TabModel::TabModel(QObject *parent)
     : QAbstractListModel(parent)
 {
@@ -105,6 +109,15 @@ void TabModel::closeTab(int index)
     if (index < 0 || index >= m_tabs.size())
         return;
 
+    Tab *closing = m_tabs.at(index);
+    if (!closing->isPrivate()) {
+        m_closed.append({closing->url(), closing->title(), index});
+        while (m_closed.size() > kMaxClosedTabs)
+            m_closed.removeFirst();
+        if (m_closed.size() == 1)
+            emit canReopenClosedTabChanged();
+    }
+
     beginRemoveRows(QModelIndex(), index, index);
     Tab *tab = m_tabs.takeAt(index);
     endRemoveRows();
@@ -133,6 +146,23 @@ void TabModel::closeTabObject(Tab *tab)
     const int idx = m_tabs.indexOf(tab);
     if (idx >= 0)
         closeTab(idx);
+}
+
+void TabModel::reopenClosedTab()
+{
+    if (m_closed.isEmpty())
+        return;
+
+    const ClosedTab closed = m_closed.takeLast();
+
+    // A reopened tab is never pinned, so it cannot land inside the pinned group.
+    const int index = qBound(pinnedCount(), closed.index, int(m_tabs.size()));
+    Tab *tab = insertTab(index, ProfileManager::instance()->defaultProfile(), closed.url, true);
+    if (tab && !closed.title.isEmpty())
+        tab->setTitle(closed.title);
+
+    if (m_closed.isEmpty())
+        emit canReopenClosedTabChanged();
 }
 
 void TabModel::moveTab(int from, int to)

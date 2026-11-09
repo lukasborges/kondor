@@ -25,6 +25,7 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Private mode**: off-the-record tabs, isolated from the persistent profile
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
 - **Settings** (Ctrl+,): home page, search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit), applied immediately and stored in `~/.config/KDE/Kondor.conf`
+- **Session restore**: optionally reopen the tabs from the previous session on startup (settings → On Startup); private tabs are never saved. Ctrl+Shift+T reopens the last closed normal tabs, up to 20
 - **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
 - **Download manager**: downloads show live progress, speed and size in a toolbar popup; pause, resume, cancel, open the file or show it in its folder, desktop notification on completion/failure, optional "ask where to save", and a confirmation before quitting with active downloads
 - **Command line**: `kondor URL…` opens the given URLs or local files in tabs (`--private` for a private tab), and the app registers as a web browser so it can be the system default
@@ -100,6 +101,7 @@ src/
   startupargs.*       QML singleton: command-line URLs and private mode
   startupurl.*        command-line argument to URL conversion (unit tested)
   settings.*          QML singleton: user settings persisted with QSettings
+  sessionmanager.*    QML singleton: save/restore the normal tabs of a session
   tab.*               per-tab state (title, URL, icon, loading, history)
   tabmodel.*          tab model (QAbstractListModel)
   database.*          SQLite storage (schema + migrations)
@@ -126,6 +128,7 @@ qml/
 | `Ctrl+T` | New tab |
 | `Ctrl+Shift+N` | New private tab |
 | `Ctrl+W` | Close tab (quits the app if it is the last one) |
+| `Ctrl+Shift+T` | Reopen closed tab |
 | `Ctrl+Tab` / `Ctrl+PgDown` | Next tab |
 | `Ctrl+Shift+Tab` / `Ctrl+PgUp` | Previous tab |
 | `Ctrl+1` … `Ctrl+8` | Go to tab N |

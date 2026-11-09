@@ -222,6 +222,7 @@ EOF
 Description=Check for merged Kondor PRs every 2 minutes
 
 [Timer]
+OnActiveSec=30s
 OnBootSec=2min
 OnUnitInactiveSec=2min
 

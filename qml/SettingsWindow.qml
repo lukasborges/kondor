@@ -27,6 +27,9 @@ ApplicationWindow {
     }
 
     function showWindow() {
+        // The folder may have been deleted (or recreated) since the window was
+        // last shown; re-read it before displaying the warning.
+        Settings.refreshDownloadDirectory()
         root.visible = true
         root.raise()
         root.requestActivate()
@@ -250,7 +253,7 @@ ApplicationWindow {
                         Layout.fillWidth: true
                         Layout.leftMargin: Kirigami.Units.gridUnit * 2
                         Layout.rightMargin: Kirigami.Units.gridUnit * 2
-                        visible: !Settings.downloadDirectoryValid()
+                        visible: !Settings.downloadDirectoryValid
                         type: Kirigami.MessageType.Warning
                         text: qsTr("The selected folder no longer exists. Downloads are saved to %1.")
                                   .arg(Settings.downloadDirectory)

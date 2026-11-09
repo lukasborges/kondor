@@ -90,7 +90,7 @@ qml/
 | `Ctrl+Shift+N` | New private tab |
 | `Ctrl+W` | Close tab (quits the app if it is the last one) |
 | `Ctrl+H` | Browsing history |
-| `Ctrl+,` | Configure Kondor (settings) |
+| `Ctrl+,` / `Ctrl+Shift+,` | Configure Kondor (settings) |
 | `Ctrl+L` | Focus the address bar |
 | `Ctrl+R` / `F5` | Reload |
 | `Alt+←` / `Alt+→` | Back / forward |

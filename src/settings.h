@@ -23,6 +23,8 @@ class Settings : public QObject
                    NOTIFY customSearchUrlChanged)
     Q_PROPERTY(QString downloadDirectory READ downloadDirectory WRITE setDownloadDirectory
                    NOTIFY downloadDirectoryChanged)
+    Q_PROPERTY(bool downloadDirectoryValid READ downloadDirectoryValid
+                   NOTIFY downloadDirectoryChanged)
     Q_PROPERTY(bool askWhereToSave READ askWhereToSave WRITE setAskWhereToSave
                    NOTIFY askWhereToSaveChanged)
     Q_PROPERTY(QString startupBehavior READ startupBehavior WRITE setStartupBehavior
@@ -63,7 +65,11 @@ public:
     // URL template for the selected engine, with %1 where the query goes.
     Q_INVOKABLE QString searchUrlTemplate() const;
     // False when the configured download folder is missing, so the UI can warn.
-    Q_INVOKABLE bool downloadDirectoryValid() const;
+    bool downloadDirectoryValid() const;
+    // Re-emits downloadDirectoryChanged so the UI re-reads the folder and its
+    // validity; call it when a window is shown, since the folder may have been
+    // deleted while the app was running.
+    Q_INVOKABLE void refreshDownloadDirectory();
 
 signals:
     void homePageChanged();

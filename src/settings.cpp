@@ -61,6 +61,11 @@ bool Settings::downloadDirectoryValid() const
     return QFileInfo(m_downloadDirectory).isDir();
 }
 
+void Settings::refreshDownloadDirectory()
+{
+    emit downloadDirectoryChanged();
+}
+
 QString Settings::searchUrlTemplate() const
 {
     if (m_searchEngine == QLatin1String("google"))

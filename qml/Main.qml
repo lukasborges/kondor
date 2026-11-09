@@ -400,7 +400,7 @@ ApplicationWindow {
         onActivated: window.openHistory()
     }
     Shortcut {
-        sequence: StandardKey.Preferences
+        sequences: [StandardKey.Preferences, "Ctrl+,"]
         onActivated: window.openSettings()
     }
     Shortcut {

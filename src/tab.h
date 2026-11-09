@@ -20,6 +20,7 @@ class Tab : public QObject
     Q_PROPERTY(bool canGoForward READ canGoForward NOTIFY canGoForwardChanged)
     Q_PROPERTY(QQuickWebEngineProfile *profile READ profile CONSTANT)
     Q_PROPERTY(bool isPrivate READ isPrivate CONSTANT)
+    Q_PROPERTY(bool pinned READ pinned NOTIFY pinnedChanged)
     Q_PROPERTY(int findMatches READ findMatches NOTIFY findResultChanged)
     Q_PROPERTY(int findActiveMatch READ findActiveMatch NOTIFY findResultChanged)
 
@@ -35,6 +36,7 @@ public:
     bool canGoForward() const { return m_canGoForward; }
     QQuickWebEngineProfile *profile() const { return m_profile; }
     bool isPrivate() const { return m_isPrivate; }
+    bool pinned() const { return m_pinned; }
     int findMatches() const { return m_findMatches; }
     int findActiveMatch() const { return m_findActiveMatch; }
 
@@ -47,6 +49,7 @@ public:
     Q_INVOKABLE void setCanGoBack(bool canGoBack);
     Q_INVOKABLE void setCanGoForward(bool canGoForward);
     Q_INVOKABLE void setFindResult(int matches, int activeMatch);
+    void setPinned(bool pinned);
 
     // Comandos vindos da interface; viram sinais consumidos pelo WebEngineView.
     Q_INVOKABLE void navigateTo(const QUrl &url);
@@ -69,6 +72,7 @@ signals:
     void canGoBackChanged();
     void canGoForwardChanged();
     void findResultChanged();
+    void pinnedChanged();
 
     void navigationRequested(const QUrl &url);
     void backRequested();
@@ -91,6 +95,7 @@ private:
     bool m_canGoForward = false;
     QQuickWebEngineProfile *m_profile = nullptr;
     bool m_isPrivate = false;
+    bool m_pinned = false;
     int m_findMatches = 0;
     int m_findActiveMatch = 0;
 };

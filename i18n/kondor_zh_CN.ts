@@ -690,19 +690,19 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="404"/>
+        <location filename="../qml/SettingsWindow.qml" line="337"/>
         <source>Startup</source>
         <translation>启动</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="429"/>
+        <location filename="../qml/SettingsWindow.qml" line="428"/>
         <source>On startup:</source>
         <translation>启动时：</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="456"/>
+        <location filename="../qml/SettingsWindow.qml" line="455"/>
         <source>Home page:</source>
         <translation>主页：</translation>
     </message>
@@ -713,7 +713,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="562"/>
+        <location filename="../qml/SettingsWindow.qml" line="558"/>
         <source>Search engine:</source>
         <translation>搜索引擎：</translation>
     </message>
@@ -724,7 +724,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="632"/>
+        <location filename="../qml/SettingsWindow.qml" line="625"/>
         <source>Save files to:</source>
         <translation>保存文件到：</translation>
     </message>
@@ -734,146 +734,146 @@
         <translation>隐私</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="457"/>
+        <location filename="../qml/SettingsWindow.qml" line="456"/>
         <source>New Tab page</source>
         <translation>新建标签页</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="476"/>
+        <location filename="../qml/SettingsWindow.qml" line="475"/>
         <source>Use Current Page</source>
         <translation>使用当前页面</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="489"/>
+        <location filename="../qml/SettingsWindow.qml" line="488"/>
         <source>Use New Tab Page</source>
         <translation>使用新建标签页</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="405"/>
+        <location filename="../qml/SettingsWindow.qml" line="338"/>
         <source>New Tabs</source>
         <translation>新建标签页</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="708"/>
+        <location filename="../qml/SettingsWindow.qml" line="698"/>
         <source>On exit:</source>
         <translation>退出时：</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="720"/>
+        <location filename="../qml/SettingsWindow.qml" line="712"/>
         <source>Browsing data:</source>
         <translation>浏览数据：</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="277"/>
+        <location filename="../qml/SettingsWindow.qml" line="279"/>
         <source>Search…</source>
         <translation>搜索…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="362"/>
+        <location filename="../qml/SettingsWindow.qml" line="374"/>
         <source>Defaults</source>
         <translation>默认值</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="371"/>
+        <location filename="../qml/SettingsWindow.qml" line="383"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="378"/>
+        <location filename="../qml/SettingsWindow.qml" line="390"/>
         <source>Apply</source>
         <translation>应用</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="385"/>
+        <location filename="../qml/SettingsWindow.qml" line="397"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="430"/>
+        <location filename="../qml/SettingsWindow.qml" line="429"/>
         <source>Open the home page</source>
         <translation>打开主页</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="442"/>
+        <location filename="../qml/SettingsWindow.qml" line="441"/>
         <source>Open the tabs from last time</source>
         <translation>打开上次的标签页</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="517"/>
+        <location filename="../qml/SettingsWindow.qml" line="515"/>
         <source>New Tab page:</source>
         <translation>新建标签页：</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="518"/>
+        <location filename="../qml/SettingsWindow.qml" line="516"/>
         <source>Show top sites</source>
         <translation>显示常用网站</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="529"/>
+        <location filename="../qml/SettingsWindow.qml" line="527"/>
         <source>Restore Removed Sites</source>
         <translation>恢复已移除的网站</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="569"/>
+        <location filename="../qml/SettingsWindow.qml" line="565"/>
         <source>Custom…</source>
         <translation>自定义…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="584"/>
+        <location filename="../qml/SettingsWindow.qml" line="580"/>
         <source>Custom URL:</source>
         <translation>自定义 URL：</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="606"/>
+        <location filename="../qml/SettingsWindow.qml" line="600"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>URL 必须包含“%1”来代表搜索词的位置。</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="642"/>
+        <location filename="../qml/SettingsWindow.qml" line="635"/>
         <source>Choose…</source>
         <translation>选择…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="650"/>
+        <location filename="../qml/SettingsWindow.qml" line="643"/>
         <source>Ask where to save each file</source>
         <translation>每次保存文件时询问位置</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="667"/>
+        <location filename="../qml/SettingsWindow.qml" line="658"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>所选文件夹已不存在。下载内容将保存到 %1。</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="695"/>
+        <location filename="../qml/SettingsWindow.qml" line="685"/>
         <source>Cookies:</source>
         <translation>Cookie：</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="696"/>
+        <location filename="../qml/SettingsWindow.qml" line="686"/>
         <source>Block third-party cookies</source>
         <translation>阻止第三方 Cookie</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="709"/>
+        <location filename="../qml/SettingsWindow.qml" line="699"/>
         <source>Clear cookies, cache and history</source>
         <translation>清除 Cookie、缓存和历史记录</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="721"/>
+        <location filename="../qml/SettingsWindow.qml" line="713"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>立即清除 Cookie 和缓存</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="734"/>
+        <location filename="../qml/SettingsWindow.qml" line="726"/>
         <source>Choose Download Folder</source>
         <translation>选择下载文件夹</translation>
     </message>

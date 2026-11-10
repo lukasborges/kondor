@@ -690,19 +690,19 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="404"/>
+        <location filename="../qml/SettingsWindow.qml" line="337"/>
         <source>Startup</source>
         <translation>Start</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="429"/>
+        <location filename="../qml/SettingsWindow.qml" line="428"/>
         <source>On startup:</source>
         <translation>Beim Start:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="456"/>
+        <location filename="../qml/SettingsWindow.qml" line="455"/>
         <source>Home page:</source>
         <translation>Startseite:</translation>
     </message>
@@ -713,7 +713,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="562"/>
+        <location filename="../qml/SettingsWindow.qml" line="558"/>
         <source>Search engine:</source>
         <translation>Suchmaschine:</translation>
     </message>
@@ -724,7 +724,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="632"/>
+        <location filename="../qml/SettingsWindow.qml" line="625"/>
         <source>Save files to:</source>
         <translation>Dateien speichern in:</translation>
     </message>
@@ -734,146 +734,146 @@
         <translation>Privatsphäre</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="457"/>
+        <location filename="../qml/SettingsWindow.qml" line="456"/>
         <source>New Tab page</source>
         <translation>Neuer Tab</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="476"/>
+        <location filename="../qml/SettingsWindow.qml" line="475"/>
         <source>Use Current Page</source>
         <translation>Aktuelle Seite verwenden</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="489"/>
+        <location filename="../qml/SettingsWindow.qml" line="488"/>
         <source>Use New Tab Page</source>
         <translation>Neuen Tab verwenden</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="405"/>
+        <location filename="../qml/SettingsWindow.qml" line="338"/>
         <source>New Tabs</source>
         <translation>Neue Tabs</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="708"/>
+        <location filename="../qml/SettingsWindow.qml" line="698"/>
         <source>On exit:</source>
         <translation>Beim Beenden:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="720"/>
+        <location filename="../qml/SettingsWindow.qml" line="712"/>
         <source>Browsing data:</source>
         <translation>Browserdaten:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="277"/>
+        <location filename="../qml/SettingsWindow.qml" line="279"/>
         <source>Search…</source>
         <translation>Suchen…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="362"/>
+        <location filename="../qml/SettingsWindow.qml" line="374"/>
         <source>Defaults</source>
         <translation>Standard</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="371"/>
+        <location filename="../qml/SettingsWindow.qml" line="383"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="378"/>
+        <location filename="../qml/SettingsWindow.qml" line="390"/>
         <source>Apply</source>
         <translation>Anwenden</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="385"/>
+        <location filename="../qml/SettingsWindow.qml" line="397"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="430"/>
+        <location filename="../qml/SettingsWindow.qml" line="429"/>
         <source>Open the home page</source>
         <translation>Startseite öffnen</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="442"/>
+        <location filename="../qml/SettingsWindow.qml" line="441"/>
         <source>Open the tabs from last time</source>
         <translation>Tabs der letzten Sitzung öffnen</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="517"/>
+        <location filename="../qml/SettingsWindow.qml" line="515"/>
         <source>New Tab page:</source>
         <translation>Neuer Tab:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="518"/>
+        <location filename="../qml/SettingsWindow.qml" line="516"/>
         <source>Show top sites</source>
         <translation>Meistbesuchte Seiten anzeigen</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="529"/>
+        <location filename="../qml/SettingsWindow.qml" line="527"/>
         <source>Restore Removed Sites</source>
         <translation>Entfernte Seiten wiederherstellen</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="569"/>
+        <location filename="../qml/SettingsWindow.qml" line="565"/>
         <source>Custom…</source>
         <translation>Benutzerdefiniert…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="584"/>
+        <location filename="../qml/SettingsWindow.qml" line="580"/>
         <source>Custom URL:</source>
         <translation>Benutzerdefinierte URL:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="606"/>
+        <location filename="../qml/SettingsWindow.qml" line="600"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>Die URL muss „%1“ an der Stelle der Suchbegriffe enthalten.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="642"/>
+        <location filename="../qml/SettingsWindow.qml" line="635"/>
         <source>Choose…</source>
         <translation>Auswählen…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="650"/>
+        <location filename="../qml/SettingsWindow.qml" line="643"/>
         <source>Ask where to save each file</source>
         <translation>Bei jeder Datei nach dem Speicherort fragen</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="667"/>
+        <location filename="../qml/SettingsWindow.qml" line="658"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>Der ausgewählte Ordner existiert nicht mehr. Downloads werden in %1 gespeichert.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="695"/>
+        <location filename="../qml/SettingsWindow.qml" line="685"/>
         <source>Cookies:</source>
         <translation>Cookies:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="696"/>
+        <location filename="../qml/SettingsWindow.qml" line="686"/>
         <source>Block third-party cookies</source>
         <translation>Cookies von Drittanbietern blockieren</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="709"/>
+        <location filename="../qml/SettingsWindow.qml" line="699"/>
         <source>Clear cookies, cache and history</source>
         <translation>Cookies, Cache und Verlauf löschen</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="721"/>
+        <location filename="../qml/SettingsWindow.qml" line="713"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Cookies und Cache jetzt löschen</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="734"/>
+        <location filename="../qml/SettingsWindow.qml" line="726"/>
         <source>Choose Download Folder</source>
         <translation>Download-Ordner auswählen</translation>
     </message>

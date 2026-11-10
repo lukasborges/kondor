@@ -690,19 +690,19 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="404"/>
+        <location filename="../qml/SettingsWindow.qml" line="337"/>
         <source>Startup</source>
         <translation>起動</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="429"/>
+        <location filename="../qml/SettingsWindow.qml" line="428"/>
         <source>On startup:</source>
         <translation>起動時:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="456"/>
+        <location filename="../qml/SettingsWindow.qml" line="455"/>
         <source>Home page:</source>
         <translation>ホームページ:</translation>
     </message>
@@ -713,7 +713,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="562"/>
+        <location filename="../qml/SettingsWindow.qml" line="558"/>
         <source>Search engine:</source>
         <translation>検索エンジン:</translation>
     </message>
@@ -724,7 +724,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="632"/>
+        <location filename="../qml/SettingsWindow.qml" line="625"/>
         <source>Save files to:</source>
         <translation>ファイルの保存先:</translation>
     </message>
@@ -734,146 +734,146 @@
         <translation>プライバシー</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="457"/>
+        <location filename="../qml/SettingsWindow.qml" line="456"/>
         <source>New Tab page</source>
         <translation>新しいタブページ</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="476"/>
+        <location filename="../qml/SettingsWindow.qml" line="475"/>
         <source>Use Current Page</source>
         <translation>現在のページを使用</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="489"/>
+        <location filename="../qml/SettingsWindow.qml" line="488"/>
         <source>Use New Tab Page</source>
         <translation>新しいタブページを使用</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="405"/>
+        <location filename="../qml/SettingsWindow.qml" line="338"/>
         <source>New Tabs</source>
         <translation>新しいタブ</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="708"/>
+        <location filename="../qml/SettingsWindow.qml" line="698"/>
         <source>On exit:</source>
         <translation>終了時:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="720"/>
+        <location filename="../qml/SettingsWindow.qml" line="712"/>
         <source>Browsing data:</source>
         <translation>閲覧データ:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="277"/>
+        <location filename="../qml/SettingsWindow.qml" line="279"/>
         <source>Search…</source>
         <translation>検索…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="362"/>
+        <location filename="../qml/SettingsWindow.qml" line="374"/>
         <source>Defaults</source>
         <translation>既定値</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="371"/>
+        <location filename="../qml/SettingsWindow.qml" line="383"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="378"/>
+        <location filename="../qml/SettingsWindow.qml" line="390"/>
         <source>Apply</source>
         <translation>適用</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="385"/>
+        <location filename="../qml/SettingsWindow.qml" line="397"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="430"/>
+        <location filename="../qml/SettingsWindow.qml" line="429"/>
         <source>Open the home page</source>
         <translation>ホームページを開く</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="442"/>
+        <location filename="../qml/SettingsWindow.qml" line="441"/>
         <source>Open the tabs from last time</source>
         <translation>前回のタブを開く</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="517"/>
+        <location filename="../qml/SettingsWindow.qml" line="515"/>
         <source>New Tab page:</source>
         <translation>新しいタブページ:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="518"/>
+        <location filename="../qml/SettingsWindow.qml" line="516"/>
         <source>Show top sites</source>
         <translation>トップサイトを表示</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="529"/>
+        <location filename="../qml/SettingsWindow.qml" line="527"/>
         <source>Restore Removed Sites</source>
         <translation>削除したサイトを復元</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="569"/>
+        <location filename="../qml/SettingsWindow.qml" line="565"/>
         <source>Custom…</source>
         <translation>カスタム…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="584"/>
+        <location filename="../qml/SettingsWindow.qml" line="580"/>
         <source>Custom URL:</source>
         <translation>カスタム URL:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="606"/>
+        <location filename="../qml/SettingsWindow.qml" line="600"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>URL には検索語が入る位置に「%1」を含める必要があります。</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="642"/>
+        <location filename="../qml/SettingsWindow.qml" line="635"/>
         <source>Choose…</source>
         <translation>選択…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="650"/>
+        <location filename="../qml/SettingsWindow.qml" line="643"/>
         <source>Ask where to save each file</source>
         <translation>ファイルごとに保存先を尋ねる</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="667"/>
+        <location filename="../qml/SettingsWindow.qml" line="658"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>選択したフォルダーは存在しません。ダウンロードは %1 に保存されます。</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="695"/>
+        <location filename="../qml/SettingsWindow.qml" line="685"/>
         <source>Cookies:</source>
         <translation>Cookie:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="696"/>
+        <location filename="../qml/SettingsWindow.qml" line="686"/>
         <source>Block third-party cookies</source>
         <translation>サードパーティ Cookie をブロック</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="709"/>
+        <location filename="../qml/SettingsWindow.qml" line="699"/>
         <source>Clear cookies, cache and history</source>
         <translation>Cookie、キャッシュ、履歴を消去</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="721"/>
+        <location filename="../qml/SettingsWindow.qml" line="713"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Cookie とキャッシュを今すぐ消去</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="734"/>
+        <location filename="../qml/SettingsWindow.qml" line="726"/>
         <source>Choose Download Folder</source>
         <translation>ダウンロードフォルダーを選択</translation>
     </message>

@@ -690,21 +690,21 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="404"/>
+        <location filename="../qml/SettingsWindow.qml" line="337"/>
         <source>Startup</source>
         <translation>Inici</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="429"/>
+        <location filename="../qml/SettingsWindow.qml" line="428"/>
         <source>On startup:</source>
         <translation>En arrencar:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="456"/>
+        <location filename="../qml/SettingsWindow.qml" line="455"/>
         <source>Home page:</source>
-        <translation>Pàgina d'inici:</translation>
+        <translation>Pàgina d&apos;inici:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="45"/>
@@ -713,7 +713,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="562"/>
+        <location filename="../qml/SettingsWindow.qml" line="558"/>
         <source>Search engine:</source>
         <translation>Motor de cerca:</translation>
     </message>
@@ -724,7 +724,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="632"/>
+        <location filename="../qml/SettingsWindow.qml" line="625"/>
         <source>Save files to:</source>
         <translation>Desa els fitxers a:</translation>
     </message>
@@ -734,146 +734,146 @@
         <translation>Privadesa</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="457"/>
+        <location filename="../qml/SettingsWindow.qml" line="456"/>
         <source>New Tab page</source>
         <translation>Pàgina de pestanya nova</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="476"/>
+        <location filename="../qml/SettingsWindow.qml" line="475"/>
         <source>Use Current Page</source>
         <translation>Utilitza la pàgina actual</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="489"/>
+        <location filename="../qml/SettingsWindow.qml" line="488"/>
         <source>Use New Tab Page</source>
         <translation>Utilitza la pàgina de pestanya nova</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="405"/>
+        <location filename="../qml/SettingsWindow.qml" line="338"/>
         <source>New Tabs</source>
         <translation>Pestanyes noves</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="708"/>
+        <location filename="../qml/SettingsWindow.qml" line="698"/>
         <source>On exit:</source>
         <translation>En sortir:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="720"/>
+        <location filename="../qml/SettingsWindow.qml" line="712"/>
         <source>Browsing data:</source>
         <translation>Dades de navegació:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="277"/>
+        <location filename="../qml/SettingsWindow.qml" line="279"/>
         <source>Search…</source>
         <translation>Cerca…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="362"/>
+        <location filename="../qml/SettingsWindow.qml" line="374"/>
         <source>Defaults</source>
         <translation>Valors predeterminats</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="371"/>
+        <location filename="../qml/SettingsWindow.qml" line="383"/>
         <source>OK</source>
-        <translation>D'acord</translation>
+        <translation>D&apos;acord</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="378"/>
+        <location filename="../qml/SettingsWindow.qml" line="390"/>
         <source>Apply</source>
         <translation>Aplica</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="385"/>
+        <location filename="../qml/SettingsWindow.qml" line="397"/>
         <source>Cancel</source>
         <translation>Cancel·la</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="430"/>
+        <location filename="../qml/SettingsWindow.qml" line="429"/>
         <source>Open the home page</source>
-        <translation>Obre la pàgina d'inici</translation>
+        <translation>Obre la pàgina d&apos;inici</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="442"/>
+        <location filename="../qml/SettingsWindow.qml" line="441"/>
         <source>Open the tabs from last time</source>
-        <translation>Obre les pestanyes de l'última vegada</translation>
+        <translation>Obre les pestanyes de l&apos;última vegada</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="517"/>
+        <location filename="../qml/SettingsWindow.qml" line="515"/>
         <source>New Tab page:</source>
         <translation>Pàgina de pestanya nova:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="518"/>
+        <location filename="../qml/SettingsWindow.qml" line="516"/>
         <source>Show top sites</source>
         <translation>Mostra els llocs principals</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="529"/>
+        <location filename="../qml/SettingsWindow.qml" line="527"/>
         <source>Restore Removed Sites</source>
         <translation>Restaura els llocs eliminats</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="569"/>
+        <location filename="../qml/SettingsWindow.qml" line="565"/>
         <source>Custom…</source>
         <translation>Personalitza…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="584"/>
+        <location filename="../qml/SettingsWindow.qml" line="580"/>
         <source>Custom URL:</source>
         <translation>URL personalitzat:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="606"/>
+        <location filename="../qml/SettingsWindow.qml" line="600"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>L&apos;URL ha de contenir «%1» on van els termes de cerca.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="642"/>
+        <location filename="../qml/SettingsWindow.qml" line="635"/>
         <source>Choose…</source>
         <translation>Tria…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="650"/>
+        <location filename="../qml/SettingsWindow.qml" line="643"/>
         <source>Ask where to save each file</source>
         <translation>Pregunta on desar cada fitxer</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="667"/>
+        <location filename="../qml/SettingsWindow.qml" line="658"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>La carpeta seleccionada ja no existeix. Les baixades es desen a %1.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="695"/>
+        <location filename="../qml/SettingsWindow.qml" line="685"/>
         <source>Cookies:</source>
         <translation>Galetes:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="696"/>
+        <location filename="../qml/SettingsWindow.qml" line="686"/>
         <source>Block third-party cookies</source>
         <translation>Bloca les galetes de tercers</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="709"/>
+        <location filename="../qml/SettingsWindow.qml" line="699"/>
         <source>Clear cookies, cache and history</source>
         <translation>Neteja les galetes, la memòria cau i l&apos;historial</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="721"/>
+        <location filename="../qml/SettingsWindow.qml" line="713"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Neteja les galetes i la memòria cau ara</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="734"/>
+        <location filename="../qml/SettingsWindow.qml" line="726"/>
         <source>Choose Download Folder</source>
         <translation>Tria la carpeta de baixades</translation>
     </message>

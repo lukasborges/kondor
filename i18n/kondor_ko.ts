@@ -845,19 +845,19 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="344"/>
+        <location filename="../qml/SettingsWindow.qml" line="371"/>
         <source>Startup</source>
         <translation>시작</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="435"/>
+        <location filename="../qml/SettingsWindow.qml" line="464"/>
         <source>On startup:</source>
         <translation>시작 시:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="462"/>
+        <location filename="../qml/SettingsWindow.qml" line="491"/>
         <source>Home page:</source>
         <translation>홈 페이지:</translation>
     </message>
@@ -868,7 +868,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="565"/>
+        <location filename="../qml/SettingsWindow.qml" line="594"/>
         <source>Search engine:</source>
         <translation>검색 엔진:</translation>
     </message>
@@ -879,7 +879,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="632"/>
+        <location filename="../qml/SettingsWindow.qml" line="661"/>
         <source>Save files to:</source>
         <translation>파일 저장 위치:</translation>
     </message>
@@ -890,157 +890,157 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="728"/>
+        <location filename="../qml/SettingsWindow.qml" line="757"/>
         <source>Site permissions:</source>
         <translation>사이트 권한:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="729"/>
+        <location filename="../qml/SettingsWindow.qml" line="758"/>
         <source>Manage Site Permissions…</source>
         <translation>사이트 권한 관리…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="463"/>
+        <location filename="../qml/SettingsWindow.qml" line="492"/>
         <source>New Tab page</source>
         <translation>새 탭 페이지</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="482"/>
+        <location filename="../qml/SettingsWindow.qml" line="511"/>
         <source>Use Current Page</source>
         <translation>현재 페이지 사용</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="495"/>
+        <location filename="../qml/SettingsWindow.qml" line="524"/>
         <source>Use New Tab Page</source>
         <translation>새 탭 페이지 사용</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="345"/>
+        <location filename="../qml/SettingsWindow.qml" line="372"/>
         <source>New Tabs</source>
         <translation>새 탭</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="705"/>
+        <location filename="../qml/SettingsWindow.qml" line="734"/>
         <source>On exit:</source>
         <translation>종료 시:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="719"/>
+        <location filename="../qml/SettingsWindow.qml" line="748"/>
         <source>Browsing data:</source>
         <translation>탐색 데이터:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="286"/>
+        <location filename="../qml/SettingsWindow.qml" line="306"/>
         <source>Search…</source>
         <translation>검색…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="381"/>
+        <location filename="../qml/SettingsWindow.qml" line="410"/>
         <source>Defaults</source>
         <translation>기본값</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="390"/>
+        <location filename="../qml/SettingsWindow.qml" line="419"/>
         <source>OK</source>
         <translation>확인</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="397"/>
+        <location filename="../qml/SettingsWindow.qml" line="426"/>
         <source>Apply</source>
         <translation>적용</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="404"/>
+        <location filename="../qml/SettingsWindow.qml" line="433"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="436"/>
+        <location filename="../qml/SettingsWindow.qml" line="465"/>
         <source>Open the home page</source>
         <translation>홈 페이지 열기</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="448"/>
+        <location filename="../qml/SettingsWindow.qml" line="477"/>
         <source>Open the tabs from last time</source>
         <translation>지난번 탭 열기</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="522"/>
+        <location filename="../qml/SettingsWindow.qml" line="551"/>
         <source>New Tab page:</source>
         <translation>새 탭 페이지:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="523"/>
+        <location filename="../qml/SettingsWindow.qml" line="552"/>
         <source>Show top sites</source>
         <translation>상위 사이트 표시</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="534"/>
+        <location filename="../qml/SettingsWindow.qml" line="563"/>
         <source>Restore Removed Sites</source>
         <translation>제거한 사이트 복원</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="572"/>
+        <location filename="../qml/SettingsWindow.qml" line="601"/>
         <source>Custom…</source>
         <translation>사용자 지정…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="587"/>
+        <location filename="../qml/SettingsWindow.qml" line="616"/>
         <source>Custom URL:</source>
         <translation>사용자 지정 URL:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="607"/>
+        <location filename="../qml/SettingsWindow.qml" line="636"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>URL에는 검색어가 들어갈 위치에 “%1”이 포함되어야 합니다.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="642"/>
+        <location filename="../qml/SettingsWindow.qml" line="671"/>
         <source>Choose…</source>
         <translation>선택…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="650"/>
+        <location filename="../qml/SettingsWindow.qml" line="679"/>
         <source>Ask where to save each file</source>
         <translation>파일마다 저장 위치 묻기</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="665"/>
+        <location filename="../qml/SettingsWindow.qml" line="694"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>선택한 폴더가 더 이상 존재하지 않습니다. 다운로드는 %1에 저장됩니다.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="692"/>
+        <location filename="../qml/SettingsWindow.qml" line="721"/>
         <source>Cookies:</source>
         <translation>쿠키:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="693"/>
+        <location filename="../qml/SettingsWindow.qml" line="722"/>
         <source>Block third-party cookies</source>
         <translation>타사 쿠키 차단</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="706"/>
+        <location filename="../qml/SettingsWindow.qml" line="735"/>
         <source>Clear cookies, cache and history</source>
         <translation>쿠키, 캐시 및 기록 지우기</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="720"/>
+        <location filename="../qml/SettingsWindow.qml" line="749"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>쿠키와 캐시 지금 지우기</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="750"/>
+        <location filename="../qml/SettingsWindow.qml" line="779"/>
         <source>Choose Download Folder</source>
         <translation>다운로드 폴더 선택</translation>
     </message>

@@ -845,19 +845,19 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="344"/>
+        <location filename="../qml/SettingsWindow.qml" line="371"/>
         <source>Startup</source>
         <translation>Запуск</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="435"/>
+        <location filename="../qml/SettingsWindow.qml" line="464"/>
         <source>On startup:</source>
         <translation>При запуске:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="462"/>
+        <location filename="../qml/SettingsWindow.qml" line="491"/>
         <source>Home page:</source>
         <translation>Домашняя страница:</translation>
     </message>
@@ -868,7 +868,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="565"/>
+        <location filename="../qml/SettingsWindow.qml" line="594"/>
         <source>Search engine:</source>
         <translation>Поисковая система:</translation>
     </message>
@@ -879,7 +879,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="632"/>
+        <location filename="../qml/SettingsWindow.qml" line="661"/>
         <source>Save files to:</source>
         <translation>Сохранять файлы в:</translation>
     </message>
@@ -890,157 +890,157 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="728"/>
+        <location filename="../qml/SettingsWindow.qml" line="757"/>
         <source>Site permissions:</source>
         <translation>Разрешения сайтов:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="729"/>
+        <location filename="../qml/SettingsWindow.qml" line="758"/>
         <source>Manage Site Permissions…</source>
         <translation>Управление разрешениями сайтов…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="463"/>
+        <location filename="../qml/SettingsWindow.qml" line="492"/>
         <source>New Tab page</source>
         <translation>Страница новой вкладки</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="482"/>
+        <location filename="../qml/SettingsWindow.qml" line="511"/>
         <source>Use Current Page</source>
         <translation>Использовать текущую страницу</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="495"/>
+        <location filename="../qml/SettingsWindow.qml" line="524"/>
         <source>Use New Tab Page</source>
         <translation>Использовать страницу новой вкладки</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="345"/>
+        <location filename="../qml/SettingsWindow.qml" line="372"/>
         <source>New Tabs</source>
         <translation>Новые вкладки</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="705"/>
+        <location filename="../qml/SettingsWindow.qml" line="734"/>
         <source>On exit:</source>
         <translation>При выходе:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="719"/>
+        <location filename="../qml/SettingsWindow.qml" line="748"/>
         <source>Browsing data:</source>
         <translation>Данные просмотра:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="286"/>
+        <location filename="../qml/SettingsWindow.qml" line="306"/>
         <source>Search…</source>
         <translation>Поиск…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="381"/>
+        <location filename="../qml/SettingsWindow.qml" line="410"/>
         <source>Defaults</source>
         <translation>По умолчанию</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="390"/>
+        <location filename="../qml/SettingsWindow.qml" line="419"/>
         <source>OK</source>
         <translation>ОК</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="397"/>
+        <location filename="../qml/SettingsWindow.qml" line="426"/>
         <source>Apply</source>
         <translation>Применить</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="404"/>
+        <location filename="../qml/SettingsWindow.qml" line="433"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="436"/>
+        <location filename="../qml/SettingsWindow.qml" line="465"/>
         <source>Open the home page</source>
         <translation>Открыть домашнюю страницу</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="448"/>
+        <location filename="../qml/SettingsWindow.qml" line="477"/>
         <source>Open the tabs from last time</source>
         <translation>Открыть вкладки предыдущего сеанса</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="522"/>
+        <location filename="../qml/SettingsWindow.qml" line="551"/>
         <source>New Tab page:</source>
         <translation>Страница новой вкладки:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="523"/>
+        <location filename="../qml/SettingsWindow.qml" line="552"/>
         <source>Show top sites</source>
         <translation>Показывать часто посещаемые сайты</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="534"/>
+        <location filename="../qml/SettingsWindow.qml" line="563"/>
         <source>Restore Removed Sites</source>
         <translation>Восстановить удалённые сайты</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="572"/>
+        <location filename="../qml/SettingsWindow.qml" line="601"/>
         <source>Custom…</source>
         <translation>Другая…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="587"/>
+        <location filename="../qml/SettingsWindow.qml" line="616"/>
         <source>Custom URL:</source>
         <translation>Свой URL:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="607"/>
+        <location filename="../qml/SettingsWindow.qml" line="636"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>URL должен содержать «%1» на месте поисковых запросов.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="642"/>
+        <location filename="../qml/SettingsWindow.qml" line="671"/>
         <source>Choose…</source>
         <translation>Выбрать…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="650"/>
+        <location filename="../qml/SettingsWindow.qml" line="679"/>
         <source>Ask where to save each file</source>
         <translation>Спрашивать, куда сохранять каждый файл</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="665"/>
+        <location filename="../qml/SettingsWindow.qml" line="694"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>Выбранная папка больше не существует. Загрузки сохраняются в %1.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="692"/>
+        <location filename="../qml/SettingsWindow.qml" line="721"/>
         <source>Cookies:</source>
         <translation>Файлы cookie:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="693"/>
+        <location filename="../qml/SettingsWindow.qml" line="722"/>
         <source>Block third-party cookies</source>
         <translation>Блокировать сторонние файлы cookie</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="706"/>
+        <location filename="../qml/SettingsWindow.qml" line="735"/>
         <source>Clear cookies, cache and history</source>
         <translation>Очищать файлы cookie, кеш и журнал</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="720"/>
+        <location filename="../qml/SettingsWindow.qml" line="749"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Очистить файлы cookie и кеш</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="750"/>
+        <location filename="../qml/SettingsWindow.qml" line="779"/>
         <source>Choose Download Folder</source>
         <translation>Выбрать папку загрузок</translation>
     </message>

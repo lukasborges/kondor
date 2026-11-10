@@ -845,19 +845,19 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="344"/>
+        <location filename="../qml/SettingsWindow.qml" line="371"/>
         <source>Startup</source>
         <translation>Start</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="435"/>
+        <location filename="../qml/SettingsWindow.qml" line="464"/>
         <source>On startup:</source>
         <translation>Vid start:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="462"/>
+        <location filename="../qml/SettingsWindow.qml" line="491"/>
         <source>Home page:</source>
         <translation>Startsida:</translation>
     </message>
@@ -868,7 +868,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="565"/>
+        <location filename="../qml/SettingsWindow.qml" line="594"/>
         <source>Search engine:</source>
         <translation>Sökmotor:</translation>
     </message>
@@ -879,7 +879,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="632"/>
+        <location filename="../qml/SettingsWindow.qml" line="661"/>
         <source>Save files to:</source>
         <translation>Spara filer i:</translation>
     </message>
@@ -890,157 +890,157 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="728"/>
+        <location filename="../qml/SettingsWindow.qml" line="757"/>
         <source>Site permissions:</source>
         <translation>Webbplatsbehörigheter:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="729"/>
+        <location filename="../qml/SettingsWindow.qml" line="758"/>
         <source>Manage Site Permissions…</source>
         <translation>Hantera webbplatsbehörigheter…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="463"/>
+        <location filename="../qml/SettingsWindow.qml" line="492"/>
         <source>New Tab page</source>
         <translation>Ny flik</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="482"/>
+        <location filename="../qml/SettingsWindow.qml" line="511"/>
         <source>Use Current Page</source>
         <translation>Använd nuvarande sida</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="495"/>
+        <location filename="../qml/SettingsWindow.qml" line="524"/>
         <source>Use New Tab Page</source>
         <translation>Använd ny flik</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="345"/>
+        <location filename="../qml/SettingsWindow.qml" line="372"/>
         <source>New Tabs</source>
         <translation>Nya flikar</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="705"/>
+        <location filename="../qml/SettingsWindow.qml" line="734"/>
         <source>On exit:</source>
         <translation>Vid avslut:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="719"/>
+        <location filename="../qml/SettingsWindow.qml" line="748"/>
         <source>Browsing data:</source>
         <translation>Webbläsardata:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="286"/>
+        <location filename="../qml/SettingsWindow.qml" line="306"/>
         <source>Search…</source>
         <translation>Sök…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="381"/>
+        <location filename="../qml/SettingsWindow.qml" line="410"/>
         <source>Defaults</source>
         <translation>Standard</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="390"/>
+        <location filename="../qml/SettingsWindow.qml" line="419"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="397"/>
+        <location filename="../qml/SettingsWindow.qml" line="426"/>
         <source>Apply</source>
         <translation>Verkställ</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="404"/>
+        <location filename="../qml/SettingsWindow.qml" line="433"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="436"/>
+        <location filename="../qml/SettingsWindow.qml" line="465"/>
         <source>Open the home page</source>
         <translation>Öppna startsidan</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="448"/>
+        <location filename="../qml/SettingsWindow.qml" line="477"/>
         <source>Open the tabs from last time</source>
         <translation>Öppna flikarna från förra gången</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="522"/>
+        <location filename="../qml/SettingsWindow.qml" line="551"/>
         <source>New Tab page:</source>
         <translation>Ny flik:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="523"/>
+        <location filename="../qml/SettingsWindow.qml" line="552"/>
         <source>Show top sites</source>
         <translation>Visa mest besökta webbplatser</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="534"/>
+        <location filename="../qml/SettingsWindow.qml" line="563"/>
         <source>Restore Removed Sites</source>
         <translation>Återställ borttagna webbplatser</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="572"/>
+        <location filename="../qml/SettingsWindow.qml" line="601"/>
         <source>Custom…</source>
         <translation>Anpassad…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="587"/>
+        <location filename="../qml/SettingsWindow.qml" line="616"/>
         <source>Custom URL:</source>
         <translation>Anpassad URL:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="607"/>
+        <location filename="../qml/SettingsWindow.qml" line="636"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>URL:en måste innehålla ”%1” där söktermerna ska stå.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="642"/>
+        <location filename="../qml/SettingsWindow.qml" line="671"/>
         <source>Choose…</source>
         <translation>Välj…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="650"/>
+        <location filename="../qml/SettingsWindow.qml" line="679"/>
         <source>Ask where to save each file</source>
         <translation>Fråga var varje fil ska sparas</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="665"/>
+        <location filename="../qml/SettingsWindow.qml" line="694"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>Den valda mappen finns inte längre. Hämtningar sparas i %1.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="692"/>
+        <location filename="../qml/SettingsWindow.qml" line="721"/>
         <source>Cookies:</source>
         <translation>Kakor:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="693"/>
+        <location filename="../qml/SettingsWindow.qml" line="722"/>
         <source>Block third-party cookies</source>
         <translation>Blockera tredjepartskakor</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="706"/>
+        <location filename="../qml/SettingsWindow.qml" line="735"/>
         <source>Clear cookies, cache and history</source>
         <translation>Rensa kakor, cache och historik</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="720"/>
+        <location filename="../qml/SettingsWindow.qml" line="749"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Rensa kakor och cache nu</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="750"/>
+        <location filename="../qml/SettingsWindow.qml" line="779"/>
         <source>Choose Download Folder</source>
         <translation>Välj hämtningsmapp</translation>
     </message>

@@ -164,7 +164,8 @@ TabButton {
             const sectionStart = pinned ? 0 : strip.tabX(control.pinnedCount)
             const sectionEnd = pinned ? strip.tabX(control.pinnedCount) : strip.stripWidth
             const width = control.width
-            let left = contentX(sceneX, sceneY) - grabOffset
+            const origin = strip.origin
+            let left = contentX(sceneX, sceneY) - origin - grabOffset
             left = Math.max(sectionStart, Math.min(sectionEnd - width, left))
 
             const own = control.tabModel.indexOfTab(control.tab)
@@ -182,7 +183,8 @@ TabButton {
                 if (control.tabBarItem && control.tabBarItem.contentItem)
                     control.tabBarItem.contentItem.forceLayout()
             }
-            control.dragShift = left - control.x
+            // A move can change the ListView's originX: read it again.
+            control.dragShift = left + strip.origin - control.x
         }
 
         onCentroidChanged: {
@@ -200,6 +202,8 @@ TabButton {
                 sceneX = centroid.scenePosition.x
                 sceneY = centroid.scenePosition.y
                 grabOffset = contentX(centroid.scenePressPosition.x, centroid.scenePressPosition.y) - control.x
+                // Starting a drag selects the dragged tab.
+                control.tabModel.setCurrentIndex(control.tabModel.indexOfTab(control.tab))
                 update()
             } else {
                 control.dragShift = 0

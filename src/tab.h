@@ -30,6 +30,8 @@ class Tab : public QObject
     Q_PROPERTY(bool newTabPage READ newTabPage NOTIFY newTabPageChanged)
     Q_PROPERTY(bool isFullScreen READ isFullScreen NOTIFY fullScreenChanged)
     Q_PROPERTY(bool devToolsOpen READ devToolsOpen NOTIFY devToolsOpenChanged)
+    Q_PROPERTY(bool readerAvailable READ readerAvailable NOTIFY readerAvailableChanged)
+    Q_PROPERTY(bool readerActive READ readerActive NOTIFY readerActiveChanged)
     Q_PROPERTY(QVariant pendingPermission READ pendingPermission NOTIFY pendingPermissionChanged)
     Q_PROPERTY(QString securityState READ securityState NOTIFY securityStateChanged)
     Q_PROPERTY(bool certificateErrorPending READ certificateErrorPending NOTIFY certificateErrorChanged)
@@ -59,6 +61,8 @@ public:
     bool newTabPage() const { return m_newTabPage; }
     bool isFullScreen() const { return m_isFullScreen; }
     bool devToolsOpen() const { return m_devToolsOpen; }
+    bool readerAvailable() const { return m_readerAvailable; }
+    bool readerActive() const { return m_readerActive; }
     QVariant pendingPermission() const;
     QString securityState() const { return m_securityState; }
     bool certificateErrorPending() const { return m_certificateErrorPending; }
@@ -102,6 +106,10 @@ public:
     Q_INVOKABLE void exitFullScreen();
     Q_INVOKABLE void setDevToolsOpen(bool open);
     Q_INVOKABLE void toggleDevTools();
+    // Reader mode: the page shows the article in a clean layout.
+    Q_INVOKABLE void setReaderAvailable(bool available);
+    Q_INVOKABLE void setReaderActive(bool active);
+    Q_INVOKABLE void toggleReaderMode();
     // Printing and saving. The commands act on the page; pdfFinished reports
     // the result of a PDF export.
     Q_INVOKABLE void printToPdf(const QString &filePath);
@@ -132,6 +140,8 @@ signals:
     void newTabPageChanged();
     void fullScreenChanged();
     void devToolsOpenChanged();
+    void readerAvailableChanged();
+    void readerActiveChanged();
     void pendingPermissionChanged();
     void securityStateChanged();
     void certificateErrorChanged();
@@ -151,6 +161,7 @@ signals:
     void focusPageRequested();
     void exitFullScreenRequested();
     void toggleDevToolsRequested();
+    void toggleReaderModeRequested();
     void printToPdfRequested(const QString &filePath);
     void printRequested();
     void savePageRequested(const QString &filePath, int format);
@@ -184,6 +195,8 @@ private:
     // Set by the page's full screen request (a video); the window follows it.
     bool m_isFullScreen = false;
     bool m_devToolsOpen = false;
+    bool m_readerAvailable = false;
+    bool m_readerActive = false;
     QList<QWebEnginePermission> m_pendingPermissions;
 
     // "secure" (https), "insecure" (http), "error" (certificate warning on

@@ -30,6 +30,8 @@ public:
                                       const QString &extension) const;
     // A fresh path for a temporary PDF; the folder is removed when Kondor quits.
     Q_INVOKABLE QString tempPdfPath();
+    // Text of a file bundled under qrc:/reader/ (Readability and the template).
+    Q_INVOKABLE QString readerResource(const QString &name) const;
     // Opens a local file with the default application.
     Q_INVOKABLE bool openFile(const QString &path);
 

@@ -242,6 +242,28 @@ void Tab::setPdfFinished(const QString &filePath, bool success)
     emit pdfFinished(filePath, success);
 }
 
+void Tab::setReaderAvailable(bool available)
+{
+    if (m_readerAvailable == available)
+        return;
+    m_readerAvailable = available;
+    emit readerAvailableChanged();
+}
+
+void Tab::setReaderActive(bool active)
+{
+    if (m_readerActive == active)
+        return;
+    m_readerActive = active;
+    emit readerActiveChanged();
+}
+
+void Tab::toggleReaderMode()
+{
+    if (m_readerAvailable || m_readerActive)
+        emit toggleReaderModeRequested();
+}
+
 void Tab::toggleDevTools()
 {
     emit toggleDevToolsRequested();

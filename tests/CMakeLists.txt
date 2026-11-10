@@ -348,3 +348,39 @@ add_test(NAME tst_sitepermissions COMMAND tst_sitepermissions)
 set_tests_properties(tst_sitepermissions PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
 )
+
+qt_add_executable(tst_sessionmanager
+    tst_sessionmanager.cpp
+    ../src/sessionmanager.cpp
+    ../src/tabmodel.cpp
+    ../src/tab.cpp
+    ../src/profilemanager.cpp
+    ../src/addressresolver.cpp
+    ../src/settings.cpp
+    ../src/downloadmanager.cpp
+    ../src/notifier.cpp
+    ../src/historymanager.cpp
+    ../src/historymodel.cpp
+    ../src/database.cpp
+    ../src/faviconstore.cpp
+)
+
+target_include_directories(tst_sessionmanager PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_sessionmanager PRIVATE
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebEngineQuick
+)
+
+add_test(NAME tst_sessionmanager COMMAND tst_sessionmanager)
+set_tests_properties(tst_sessionmanager PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)

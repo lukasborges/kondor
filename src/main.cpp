@@ -16,6 +16,7 @@
 #include "settings.h"
 #include "startupargs.h"
 #include "startupurl.h"
+#include "windowmanager.h"
 
 #include <cstdio>
 
@@ -86,8 +87,8 @@ int main(int argc, char *argv[])
                                  QStringLiteral("[urls...]"));
     parser.process(app);
 
-    // Resolve the arguments before the QML engine loads so Main.qml can open
-    // them instead of the home page.
+    // Resolve the arguments before the QML engine loads so the startup window
+    // can open them instead of the home page.
     Settings *settings = Settings::instance();
     QList<QUrl> startupUrls;
     const QStringList arguments = parser.positionalArguments();
@@ -131,12 +132,18 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     engine.addImageProvider(QStringLiteral("kondor-favicon"), new FaviconImageProvider);
-    QObject::connect(
-        &engine, &QQmlApplicationEngine::objectCreationFailed,
-        &app, []() { QCoreApplication::exit(1); },
-        Qt::QueuedConnection);
 
-    engine.loadFromModule(QStringLiteral("Kondor"), QStringLiteral("Main"));
+    // The app has no single root window: WindowManager creates them, so tabs
+    // can move between windows and Ctrl+N can open another one.
+    WindowManager *windowManager = WindowManager::instance();
+    windowManager->setEngine(&engine);
+    windowManager->openStartupWindows();
+
+    // Every startup window failed to load: without a window exec() would run
+    // forever (quitOnLastWindowClosed never fires), so fail like a QML error in
+    // the application root did before.
+    if (windowManager->windowCount() == 0)
+        return 1;
 
     return app.exec();
 }

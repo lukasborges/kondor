@@ -136,10 +136,16 @@ Item {
                 request.cancel()
         }
 
-        // A link with target=_blank / window.open opens in a new tab. The new
-        // tab keeps the opener's profile, so private stays private (and keeps
-        // its session) and background requests open in the background.
+        // A link with target=_blank / window.open opens in a new tab, unless
+        // the page asked for a new window (shift+click): then the tab gets a
+        // window of its own. The new tab or window keeps the opener's profile,
+        // so private stays private (and keeps its session) and background
+        // requests open in the background.
         onNewWindowRequested: function(request) {
+            if (request.destination === WebEngineNewWindowRequest.InNewWindow) {
+                WindowManager.newWindow(root.tab.isPrivate, [request.requestedUrl])
+                return
+            }
             const background = request.destination === WebEngineNewWindowRequest.InNewBackgroundTab
             root.tabModel.addTabWithProfile(root.tab.profile, request.requestedUrl, background)
         }

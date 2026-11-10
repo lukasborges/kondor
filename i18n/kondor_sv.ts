@@ -243,6 +243,206 @@
     </message>
 </context>
 <context>
+    <name>BrowserWindow</name>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="103"/>
+        <source>Quit %1</source>
+        <extracomment>%1 is the application name</extracomment>
+        <translation>Avsluta %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="104"/>
+        <source>Downloads are still in progress. Quit anyway?</source>
+        <translation>Hämtningar pågår fortfarande. Avsluta ändå?</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="35"/>
+        <location filename="../qml/BrowserWindow.qml" line="457"/>
+        <location filename="../qml/BrowserWindow.qml" line="894"/>
+        <source>New Tab</source>
+        <translation>Ny flik</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="516"/>
+        <source>Back</source>
+        <translation>Tillbaka</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="529"/>
+        <source>Forward</source>
+        <translation>Framåt</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="542"/>
+        <source>Stop</source>
+        <translation>Stopp</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="542"/>
+        <source>Reload</source>
+        <translation>Läs in igen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="558"/>
+        <source>Home</source>
+        <translation>Hem</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="575"/>
+        <source>Search or enter address</source>
+        <translation>Sök eller ange en adress</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="806"/>
+        <source>Bookmark This Page</source>
+        <translation>Bokmärk den här sidan</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="857"/>
+        <source>Downloads</source>
+        <translation>Hämtningar</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="886"/>
+        <source>Menu</source>
+        <translation>Meny</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="35"/>
+        <location filename="../qml/BrowserWindow.qml" line="899"/>
+        <source>New Private Tab</source>
+        <translation>Ny privat flik</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="40"/>
+        <source>Private Browsing</source>
+        <translation>Privat surfning</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="773"/>
+        <source>Not Secure</source>
+        <translation>Inte säkert</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="781"/>
+        <source>Site Information</source>
+        <translation>Webbplatsinformation</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="806"/>
+        <source>Edit This Bookmark</source>
+        <translation>Redigera detta bokmärke</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="904"/>
+        <source>New Window</source>
+        <translation>Nytt fönster</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="909"/>
+        <source>New Private Window</source>
+        <translation>Nytt privat fönster</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="914"/>
+        <source>Reopen Closed Tab</source>
+        <translation>Öppna stängd flik igen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="921"/>
+        <source>Close Tab</source>
+        <translation>Stäng flik</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="927"/>
+        <source>Find in Page…</source>
+        <translation>Sök på sidan…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="934"/>
+        <source>Zoom In</source>
+        <translation>Zooma in</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="943"/>
+        <source>Zoom Out</source>
+        <translation>Zooma ut</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="952"/>
+        <source>Actual Size</source>
+        <translation>Verklig storlek</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="962"/>
+        <source>Bookmarks</source>
+        <translation>Bokmärken</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="973"/>
+        <source>History</source>
+        <translation>Historik</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="978"/>
+        <source>Site Permissions…</source>
+        <translation>Webbplatsbehörigheter…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="985"/>
+        <source>Configure %1…</source>
+        <extracomment>%1 is the application name</extracomment>
+        <translation>Anpassa %1…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="992"/>
+        <source>About %1</source>
+        <extracomment>%1 is the application name</extracomment>
+        <translation>Om %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1046"/>
+        <source>Press Esc to exit full screen</source>
+        <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
+        <translation>Tryck på Esc för att lämna helskärm</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1116"/>
+        <source>Page bookmarked</source>
+        <translation>Sidan har bokmärkts</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1116"/>
+        <source>Edit Bookmark</source>
+        <translation>Redigera bokmärke</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1124"/>
+        <source>Name:</source>
+        <translation>Namn:</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1130"/>
+        <source>Folder:</source>
+        <translation>Mapp:</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1140"/>
+        <source>Remove</source>
+        <translation>Ta bort</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1148"/>
+        <source>Done</source>
+        <translation>Klar</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1160"/>
+        <source>Save File</source>
+        <translation>Spara fil</translation>
+    </message>
+</context>
+<context>
     <name>CertificateErrorPage</name>
     <message>
         <location filename="../qml/CertificateErrorPage.qml" line="52"/>
@@ -540,195 +740,10 @@
 <context>
     <name>Kondor</name>
     <message>
-        <location filename="../src/main.cpp" line="125"/>
+        <location filename="../src/main.cpp" line="126"/>
         <source>Kondor Browser</source>
         <extracomment>Application display name: translate &quot;Browser&quot;, keep &quot;Kondor&quot;</extracomment>
         <translation>Webbläsaren Kondor</translation>
-    </message>
-</context>
-<context>
-    <name>Main</name>
-    <message>
-        <location filename="../qml/Main.qml" line="78"/>
-        <source>Quit %1</source>
-        <extracomment>%1 is the application name</extracomment>
-        <translation>Avsluta %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="79"/>
-        <source>Downloads are still in progress. Quit anyway?</source>
-        <translation>Hämtningar pågår fortfarande. Avsluta ändå?</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="21"/>
-        <location filename="../qml/Main.qml" line="404"/>
-        <location filename="../qml/Main.qml" line="841"/>
-        <source>New Tab</source>
-        <translation>Ny flik</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="463"/>
-        <source>Back</source>
-        <translation>Tillbaka</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="476"/>
-        <source>Forward</source>
-        <translation>Framåt</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="489"/>
-        <source>Stop</source>
-        <translation>Stopp</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="489"/>
-        <source>Reload</source>
-        <translation>Läs in igen</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="505"/>
-        <source>Home</source>
-        <translation>Hem</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="522"/>
-        <source>Search or enter address</source>
-        <translation>Sök eller ange en adress</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="753"/>
-        <source>Bookmark This Page</source>
-        <translation>Bokmärk den här sidan</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="804"/>
-        <source>Downloads</source>
-        <translation>Hämtningar</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="833"/>
-        <source>Menu</source>
-        <translation>Meny</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="21"/>
-        <location filename="../qml/Main.qml" line="846"/>
-        <source>New Private Tab</source>
-        <translation>Ny privat flik</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="720"/>
-        <source>Not Secure</source>
-        <translation>Inte säkert</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="728"/>
-        <source>Site Information</source>
-        <translation>Webbplatsinformation</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="753"/>
-        <source>Edit This Bookmark</source>
-        <translation>Redigera detta bokmärke</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="851"/>
-        <source>Reopen Closed Tab</source>
-        <translation>Öppna stängd flik igen</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="858"/>
-        <source>Close Tab</source>
-        <translation>Stäng flik</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="864"/>
-        <source>Find in Page…</source>
-        <translation>Sök på sidan…</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="871"/>
-        <source>Zoom In</source>
-        <translation>Zooma in</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="880"/>
-        <source>Zoom Out</source>
-        <translation>Zooma ut</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="889"/>
-        <source>Actual Size</source>
-        <translation>Verklig storlek</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="899"/>
-        <source>Bookmarks</source>
-        <translation>Bokmärken</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="910"/>
-        <source>History</source>
-        <translation>Historik</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="915"/>
-        <source>Site Permissions…</source>
-        <translation>Webbplatsbehörigheter…</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="922"/>
-        <source>Configure %1…</source>
-        <extracomment>%1 is the application name</extracomment>
-        <translation>Anpassa %1…</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="929"/>
-        <source>About %1</source>
-        <extracomment>%1 is the application name</extracomment>
-        <translation>Om %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="983"/>
-        <source>Press Esc to exit full screen</source>
-        <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
-        <translation>Tryck på Esc för att lämna helskärm</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="1053"/>
-        <source>Page bookmarked</source>
-        <translation>Sidan har bokmärkts</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="1053"/>
-        <source>Edit Bookmark</source>
-        <translation>Redigera bokmärke</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="1061"/>
-        <source>Name:</source>
-        <translation>Namn:</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="1067"/>
-        <source>Folder:</source>
-        <translation>Mapp:</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="1077"/>
-        <source>Remove</source>
-        <translation>Ta bort</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="1085"/>
-        <source>Done</source>
-        <translation>Klar</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="1097"/>
-        <source>Save File</source>
-        <translation>Spara fil</translation>
     </message>
 </context>
 <context>
@@ -1377,42 +1392,47 @@
 <context>
     <name>TabContextMenu</name>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="19"/>
+        <location filename="../qml/TabContextMenu.qml" line="21"/>
         <source>New Tab</source>
         <translation>Ny flik</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="25"/>
+        <location filename="../qml/TabContextMenu.qml" line="27"/>
         <source>Reload</source>
         <translation>Läs in igen</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="34"/>
+        <location filename="../qml/TabContextMenu.qml" line="36"/>
         <source>Duplicate Tab</source>
         <translation>Duplicera flik</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="40"/>
+        <location filename="../qml/TabContextMenu.qml" line="42"/>
+        <source>Move Tab to New Window</source>
+        <translation>Flytta fliken till ett nytt fönster</translation>
+    </message>
+    <message>
+        <location filename="../qml/TabContextMenu.qml" line="48"/>
         <source>Unpin Tab</source>
         <translation>Lossna flik</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="40"/>
+        <location filename="../qml/TabContextMenu.qml" line="48"/>
         <source>Pin Tab</source>
         <translation>Fäst flik</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="47"/>
+        <location filename="../qml/TabContextMenu.qml" line="55"/>
         <source>Close Tab</source>
         <translation>Stäng flik</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="53"/>
+        <location filename="../qml/TabContextMenu.qml" line="61"/>
         <source>Close Other Tabs</source>
         <translation>Stäng andra flikar</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="59"/>
+        <location filename="../qml/TabContextMenu.qml" line="67"/>
         <source>Close Tabs to the Right</source>
         <translation>Stäng flikar till höger</translation>
     </message>

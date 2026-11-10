@@ -6,6 +6,8 @@ import QtQuick.Window
 import org.kde.kirigami as Kirigami
 import Kondor
 
+// One browser window. WindowManager creates them (normal and private), each
+// with its own TabModel; the main window is no longer special.
 ApplicationWindow {
     id: window
     width: 1280
@@ -13,19 +15,35 @@ ApplicationWindow {
     minimumWidth: 640
     minimumHeight: 480
     visible: true
+
+    // A private window opens every tab, including new ones, in a private
+    // profile; nothing it shows is ever written to disk.
+    property bool privateWindow: false
+
+    // Tabs to open instead of the home page: one URL per tab, an empty URL for
+    // the New Tab page. WindowManager fills them with the command-line URLs or
+    // with a restored session.
+    property var initialUrls: []
+    property var initialTitles: []
+    property int initialCurrentIndex: -1
+
     title: {
         const t = tabs.currentTab
-        if (!t)
-            return Qt.application.displayName
-        if (t.newTabPage)
-            return (t.isPrivate ? qsTr("New Private Tab") : qsTr("New Tab"))
-                   + " — " + Qt.application.displayName
-        return (t.title.length) ? t.title + " — " + Qt.application.displayName
-                                : Qt.application.displayName
+        let base = Qt.application.displayName
+        if (t) {
+            if (t.newTabPage)
+                base = (t.isPrivate ? qsTr("New Private Tab") : qsTr("New Tab"))
+                       + " — " + Qt.application.displayName
+            else if (t.title.length)
+                base = t.title + " — " + Qt.application.displayName
+        }
+        return privateWindow ? base + " — " + qsTr("Private Browsing") : base
     }
 
     TabModel {
         id: tabs
+        // A private window has only private tabs, however a tab is opened.
+        privateTabs: window.privateWindow
     }
 
     // Set once the user confirms quitting with downloads still running, so the
@@ -66,10 +84,17 @@ ApplicationWindow {
         // Save while the tabs still exist: closing the last tab closes the
         // window before TabModel removes it.
         SessionManager.save(tabs)
-        if (DownloadManager.hasActiveDownloads && !window.quitConfirmed) {
+        // Only the last window quits the app; another one closing leaves the
+        // downloads running.
+        if (WindowManager.windowCount <= 1 && DownloadManager.hasActiveDownloads
+                && !window.quitConfirmed) {
             close.accepted = false
             quitDialog.open()
+            return
         }
+        // A closed window is over: WindowManager drops it from the list and
+        // deletes it, and the app quits when the last one is gone.
+        WindowManager.closeWindow(window)
     }
 
     MessageDialog {
@@ -125,9 +150,10 @@ ApplicationWindow {
 
     // Every "new tab" entry point goes through here: open the tab and focus the
     // address bar. Deferred like the Ctrl+F fix, so the page cannot take the
-    // focus back while the shortcut key event is still being handled.
+    // focus back while the shortcut key event is still being handled. In a
+    // private window every tab is private, whatever the caller asked for.
     function openNewTab(isPrivate) {
-        tabs.addTab(isPrivate)
+        tabs.addTab(isPrivate || privateWindow)
         // syncFromTab() leaves the field alone while it has focus, so clear it
         // here: a New Tab page has no address to show.
         addressBar.text = ""
@@ -135,6 +161,17 @@ ApplicationWindow {
             addressBar.forceActiveFocus()
             addressBar.selectAll()
         })
+    }
+
+    // The live WebEngineView cannot move between windows, so the page reloads
+    // in a new window and the tab here closes.
+    function moveTabToNewWindow(tab) {
+        if (!tab)
+            return
+        const url = tab.newTabPage ? "" : tab.url.toString()
+        if (!WindowManager.newWindow(tab.isPrivate, [url]))
+            return
+        closeTabFor(tab)
     }
 
     // True when the scene point is on the empty part of the tab bar, not on a
@@ -180,6 +217,7 @@ ApplicationWindow {
         tabModel: tabs
         targetWindow: window
         onNewTabRequested: window.openNewTab(false)
+        onMoveToNewWindowRequested: window.moveTabToNewWindow(tabContextMenu.tab)
     }
 
     // FileDialog hands a file:// URL to QML; downloads need a local path.
@@ -301,17 +339,22 @@ ApplicationWindow {
 
     Component.onCompleted: {
         SessionManager.watch(tabs)
-        if (Settings.startupBehavior === "restore")
-            SessionManager.restore(tabs)
-        for (let i = 0; i < StartupArgs.startupUrls.length; ++i)
-            tabs.addTab(StartupArgs.startupPrivate, StartupArgs.startupUrls[i])
-        // "kondor --private" (desktop action "New Private Window") still needs
-        // its private tab when there is no URL and a session was restored.
-        // The fallback tab loads the home page; a blank home page means the New
-        // Tab page, which is also what a private tab shows.
-        if (tabs.count === 0 || (StartupArgs.startupPrivate && StartupArgs.startupUrls.length === 0))
-            tabs.addTab(StartupArgs.startupPrivate,
-                        StartupArgs.startupPrivate ? "" : Settings.homePage)
+        if (initialUrls.length > 0) {
+            for (let i = 0; i < initialUrls.length; ++i) {
+                const tab = tabs.addTab(privateWindow, initialUrls[i])
+                const title = i < initialTitles.length ? initialTitles[i] : ""
+                // Restored tabs show their old title until the page loads.
+                if (tab && title.length > 0 && !tab.newTabPage)
+                    tab.setTitle(title)
+            }
+            if (initialCurrentIndex >= 0 && initialCurrentIndex < tabs.count)
+                tabs.setCurrentIndex(initialCurrentIndex)
+            return
+        }
+        // A private window has nothing to show from disk, so it starts on the
+        // New Tab page; a normal one on the home page when it is set.
+        tabs.addTab(privateWindow,
+                    privateWindow || Settings.homePage.trim().length === 0 ? "" : Settings.homePage)
     }
 
     header: ColumnLayout {
@@ -331,6 +374,16 @@ ApplicationWindow {
                 id: tabBarRow
                 anchors.fill: parent
                 spacing: 0
+
+                // A private window shows the mode here, next to its tabs.
+                Kirigami.Icon {
+                    visible: window.privateWindow
+                    source: "view-private"
+                    Layout.preferredWidth: 22
+                    Layout.preferredHeight: 22
+                    Layout.leftMargin: 8
+                    Layout.rightMargin: 4
+                }
 
                 TabBar {
                     id: tabBar
@@ -848,6 +901,16 @@ ApplicationWindow {
                             onTriggered: window.openNewTab(true)
                         }
                         MenuItem {
+                            text: qsTr("New Window")
+                            icon.name: "window-new"
+                            onTriggered: WindowManager.newWindow(false)
+                        }
+                        MenuItem {
+                            text: qsTr("New Private Window")
+                            icon.name: "view-private"
+                            onTriggered: WindowManager.newWindow(true)
+                        }
+                        MenuItem {
                             text: qsTr("Reopen Closed Tab")
                             icon.name: "edit-undo"
                             enabled: tabs.canReopenClosedTab
@@ -1149,12 +1212,24 @@ ApplicationWindow {
         onActivated: window.openNewTab(false)
     }
     Shortcut {
+        sequence: "Ctrl+N"
+        onActivated: WindowManager.newWindow(false)
+    }
+    Shortcut {
+        sequence: "Ctrl+Shift+P"
+        onActivated: WindowManager.newWindow(true)
+    }
+    Shortcut {
         sequence: "Ctrl+Shift+N"
         onActivated: window.openNewTab(true)
     }
     Shortcut {
         sequence: "Ctrl+W"
         onActivated: window.closeTabAt(tabs.currentIndex)
+    }
+    Shortcut {
+        sequence: "Ctrl+Shift+W"
+        onActivated: window.close()
     }
     Shortcut {
         sequence: "Ctrl+Shift+T"

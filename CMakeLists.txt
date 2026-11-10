@@ -31,7 +31,7 @@ qt_add_qml_module(kondor
     URI Kondor
     VERSION 1.0
     QML_FILES
-        qml/Main.qml
+        qml/BrowserWindow.qml
         qml/WebViewTab.qml
         qml/PageContextMenu.qml
         qml/NewTabPage.qml
@@ -74,6 +74,8 @@ qt_add_qml_module(kondor
         src/settings.cpp
         src/sessionmanager.h
         src/sessionmanager.cpp
+        src/windowmanager.h
+        src/windowmanager.cpp
         src/database.h
         src/database.cpp
         src/historymanager.h

@@ -243,6 +243,206 @@
     </message>
 </context>
 <context>
+    <name>BrowserWindow</name>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="103"/>
+        <source>Quit %1</source>
+        <extracomment>%1 is the application name</extracomment>
+        <translation>%1 afsluiten</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="104"/>
+        <source>Downloads are still in progress. Quit anyway?</source>
+        <translation>Er zijn nog downloads bezig. Toch afsluiten?</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="35"/>
+        <location filename="../qml/BrowserWindow.qml" line="457"/>
+        <location filename="../qml/BrowserWindow.qml" line="894"/>
+        <source>New Tab</source>
+        <translation>Nieuw tabblad</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="516"/>
+        <source>Back</source>
+        <translation>Terug</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="529"/>
+        <source>Forward</source>
+        <translation>Vooruit</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="542"/>
+        <source>Stop</source>
+        <translation>Stoppen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="542"/>
+        <source>Reload</source>
+        <translation>Herladen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="558"/>
+        <source>Home</source>
+        <translation>Startpagina</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="575"/>
+        <source>Search or enter address</source>
+        <translation>Zoeken of een adres invoeren</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="806"/>
+        <source>Bookmark This Page</source>
+        <translation>Deze pagina als bladwijzer opslaan</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="857"/>
+        <source>Downloads</source>
+        <translation>Downloads</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="886"/>
+        <source>Menu</source>
+        <translation>Menu</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="35"/>
+        <location filename="../qml/BrowserWindow.qml" line="899"/>
+        <source>New Private Tab</source>
+        <translation>Nieuw privétabblad</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="40"/>
+        <source>Private Browsing</source>
+        <translation>Privénavigatie</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="773"/>
+        <source>Not Secure</source>
+        <translation>Niet veilig</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="781"/>
+        <source>Site Information</source>
+        <translation>Site-informatie</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="806"/>
+        <source>Edit This Bookmark</source>
+        <translation>Deze bladwijzer bewerken</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="904"/>
+        <source>New Window</source>
+        <translation>Nieuw venster</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="909"/>
+        <source>New Private Window</source>
+        <translation>Nieuw privévenster</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="914"/>
+        <source>Reopen Closed Tab</source>
+        <translation>Gesloten tabblad opnieuw openen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="921"/>
+        <source>Close Tab</source>
+        <translation>Tabblad sluiten</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="927"/>
+        <source>Find in Page…</source>
+        <translation>Op pagina zoeken…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="934"/>
+        <source>Zoom In</source>
+        <translation>Inzoomen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="943"/>
+        <source>Zoom Out</source>
+        <translation>Uitzoomen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="952"/>
+        <source>Actual Size</source>
+        <translation>Werkelijke grootte</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="962"/>
+        <source>Bookmarks</source>
+        <translation>Bladwijzers</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="973"/>
+        <source>History</source>
+        <translation>Geschiedenis</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="978"/>
+        <source>Site Permissions…</source>
+        <translation>Website-machtigingen…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="985"/>
+        <source>Configure %1…</source>
+        <extracomment>%1 is the application name</extracomment>
+        <translation>%1 instellen…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="992"/>
+        <source>About %1</source>
+        <extracomment>%1 is the application name</extracomment>
+        <translation>Over %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1046"/>
+        <source>Press Esc to exit full screen</source>
+        <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
+        <translation>Druk op Esc om volledig scherm te verlaten</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1116"/>
+        <source>Page bookmarked</source>
+        <translation>Pagina als bladwijzer opgeslagen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1116"/>
+        <source>Edit Bookmark</source>
+        <translation>Bladwijzer bewerken</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1124"/>
+        <source>Name:</source>
+        <translation>Naam:</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1130"/>
+        <source>Folder:</source>
+        <translation>Map:</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1140"/>
+        <source>Remove</source>
+        <translation>Verwijderen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1148"/>
+        <source>Done</source>
+        <translation>Gereed</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1160"/>
+        <source>Save File</source>
+        <translation>Bestand opslaan</translation>
+    </message>
+</context>
+<context>
     <name>CertificateErrorPage</name>
     <message>
         <location filename="../qml/CertificateErrorPage.qml" line="52"/>
@@ -540,195 +740,10 @@
 <context>
     <name>Kondor</name>
     <message>
-        <location filename="../src/main.cpp" line="125"/>
+        <location filename="../src/main.cpp" line="126"/>
         <source>Kondor Browser</source>
         <extracomment>Application display name: translate &quot;Browser&quot;, keep &quot;Kondor&quot;</extracomment>
         <translation>Kondor-browser</translation>
-    </message>
-</context>
-<context>
-    <name>Main</name>
-    <message>
-        <location filename="../qml/Main.qml" line="78"/>
-        <source>Quit %1</source>
-        <extracomment>%1 is the application name</extracomment>
-        <translation>%1 afsluiten</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="79"/>
-        <source>Downloads are still in progress. Quit anyway?</source>
-        <translation>Er zijn nog downloads bezig. Toch afsluiten?</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="21"/>
-        <location filename="../qml/Main.qml" line="404"/>
-        <location filename="../qml/Main.qml" line="841"/>
-        <source>New Tab</source>
-        <translation>Nieuw tabblad</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="463"/>
-        <source>Back</source>
-        <translation>Terug</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="476"/>
-        <source>Forward</source>
-        <translation>Vooruit</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="489"/>
-        <source>Stop</source>
-        <translation>Stoppen</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="489"/>
-        <source>Reload</source>
-        <translation>Herladen</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="505"/>
-        <source>Home</source>
-        <translation>Startpagina</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="522"/>
-        <source>Search or enter address</source>
-        <translation>Zoeken of een adres invoeren</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="753"/>
-        <source>Bookmark This Page</source>
-        <translation>Deze pagina als bladwijzer opslaan</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="804"/>
-        <source>Downloads</source>
-        <translation>Downloads</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="833"/>
-        <source>Menu</source>
-        <translation>Menu</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="21"/>
-        <location filename="../qml/Main.qml" line="846"/>
-        <source>New Private Tab</source>
-        <translation>Nieuw privétabblad</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="720"/>
-        <source>Not Secure</source>
-        <translation>Niet veilig</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="728"/>
-        <source>Site Information</source>
-        <translation>Site-informatie</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="753"/>
-        <source>Edit This Bookmark</source>
-        <translation>Deze bladwijzer bewerken</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="851"/>
-        <source>Reopen Closed Tab</source>
-        <translation>Gesloten tabblad opnieuw openen</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="858"/>
-        <source>Close Tab</source>
-        <translation>Tabblad sluiten</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="864"/>
-        <source>Find in Page…</source>
-        <translation>Op pagina zoeken…</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="871"/>
-        <source>Zoom In</source>
-        <translation>Inzoomen</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="880"/>
-        <source>Zoom Out</source>
-        <translation>Uitzoomen</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="889"/>
-        <source>Actual Size</source>
-        <translation>Werkelijke grootte</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="899"/>
-        <source>Bookmarks</source>
-        <translation>Bladwijzers</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="910"/>
-        <source>History</source>
-        <translation>Geschiedenis</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="915"/>
-        <source>Site Permissions…</source>
-        <translation>Website-machtigingen…</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="922"/>
-        <source>Configure %1…</source>
-        <extracomment>%1 is the application name</extracomment>
-        <translation>%1 instellen…</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="929"/>
-        <source>About %1</source>
-        <extracomment>%1 is the application name</extracomment>
-        <translation>Over %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="983"/>
-        <source>Press Esc to exit full screen</source>
-        <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
-        <translation>Druk op Esc om volledig scherm te verlaten</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="1053"/>
-        <source>Page bookmarked</source>
-        <translation>Pagina als bladwijzer opgeslagen</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="1053"/>
-        <source>Edit Bookmark</source>
-        <translation>Bladwijzer bewerken</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="1061"/>
-        <source>Name:</source>
-        <translation>Naam:</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="1067"/>
-        <source>Folder:</source>
-        <translation>Map:</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="1077"/>
-        <source>Remove</source>
-        <translation>Verwijderen</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="1085"/>
-        <source>Done</source>
-        <translation>Gereed</translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="1097"/>
-        <source>Save File</source>
-        <translation>Bestand opslaan</translation>
     </message>
 </context>
 <context>
@@ -1377,42 +1392,47 @@
 <context>
     <name>TabContextMenu</name>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="19"/>
+        <location filename="../qml/TabContextMenu.qml" line="21"/>
         <source>New Tab</source>
         <translation>Nieuw tabblad</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="25"/>
+        <location filename="../qml/TabContextMenu.qml" line="27"/>
         <source>Reload</source>
         <translation>Herladen</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="34"/>
+        <location filename="../qml/TabContextMenu.qml" line="36"/>
         <source>Duplicate Tab</source>
         <translation>Tabblad dupliceren</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="40"/>
+        <location filename="../qml/TabContextMenu.qml" line="42"/>
+        <source>Move Tab to New Window</source>
+        <translation>Tabblad naar nieuw venster verplaatsen</translation>
+    </message>
+    <message>
+        <location filename="../qml/TabContextMenu.qml" line="48"/>
         <source>Unpin Tab</source>
         <translation>Tabblad losmaken</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="40"/>
+        <location filename="../qml/TabContextMenu.qml" line="48"/>
         <source>Pin Tab</source>
         <translation>Tabblad vastmaken</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="47"/>
+        <location filename="../qml/TabContextMenu.qml" line="55"/>
         <source>Close Tab</source>
         <translation>Tabblad sluiten</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="53"/>
+        <location filename="../qml/TabContextMenu.qml" line="61"/>
         <source>Close Other Tabs</source>
         <translation>Andere tabbladen sluiten</translation>
     </message>
     <message>
-        <location filename="../qml/TabContextMenu.qml" line="59"/>
+        <location filename="../qml/TabContextMenu.qml" line="67"/>
         <source>Close Tabs to the Right</source>
         <translation>Tabbladen rechts sluiten</translation>
     </message>

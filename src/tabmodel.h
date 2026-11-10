@@ -19,6 +19,10 @@ class TabModel : public QAbstractListModel
     Q_PROPERTY(int pinnedCount READ pinnedCount NOTIFY pinnedCountChanged)
     Q_PROPERTY(bool canReopenClosedTab READ canReopenClosedTab
                    NOTIFY canReopenClosedTabChanged)
+    // Set for the model of a private window: every tab it creates is private,
+    // whatever profile the caller asks for.
+    Q_PROPERTY(bool privateTabs READ privateTabs WRITE setPrivateTabs
+                   NOTIFY privateTabsChanged)
 
 public:
     enum Roles {
@@ -36,6 +40,8 @@ public:
     Tab *currentTab() const;
     int pinnedCount() const;
     bool canReopenClosedTab() const { return !m_closed.isEmpty(); }
+    bool privateTabs() const { return m_privateTabs; }
+    void setPrivateTabs(bool privateTabs);
 
     Q_INVOKABLE Tab *insertTab(int index, QQuickWebEngineProfile *profile, const QUrl &url, bool activate);
     Q_INVOKABLE Tab *addTab(bool isPrivate = false, const QUrl &initialUrl = QUrl());
@@ -57,6 +63,7 @@ signals:
     void currentTabChanged();
     void pinnedCountChanged();
     void canReopenClosedTabChanged();
+    void privateTabsChanged();
 
 private:
     struct ClosedTab {
@@ -69,4 +76,5 @@ private:
     // Last closed normal tabs, oldest first; private tabs are never kept.
     QList<ClosedTab> m_closed;
     int m_currentIndex = -1;
+    bool m_privateTabs = false;
 };

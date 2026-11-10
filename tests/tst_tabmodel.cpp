@@ -4,6 +4,7 @@
 #include <QTest>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
+#include "profilemanager.h"
 #include "tab.h"
 #include "tabmodel.h"
 
@@ -20,6 +21,7 @@ private slots:
     void closingAllTabsClearsCurrent();
     void setCurrentIndexIgnoresOutOfRange();
     void privateTabUsesAnotherProfile();
+    void privateWindowKeepsEveryTabPrivate();
     void reopenClosedTabRestoresPosition();
     void privateTabsAreNotReopened();
     void tabsStartOnNewTabPage();
@@ -142,6 +144,25 @@ void TestTabModel::privateTabUsesAnotherProfile()
     QVERIFY(privateTab->profile());
     QVERIFY(privateTab->profile()->isOffTheRecord());
     QVERIFY(privateTab->profile() != normal->profile());
+}
+
+void TestTabModel::privateWindowKeepsEveryTabPrivate()
+{
+    TabModel model;
+    model.setPrivateTabs(true);
+
+    // Even a caller that asks for a normal tab, or hands in the persistent
+    // profile, gets a private tab from a private window.
+    Tab *fromAddTab = model.addTab(false);
+    Tab *fromProfile = model.addTabWithProfile(
+        ProfileManager::instance()->defaultProfile(),
+        QUrl(QStringLiteral("https://private.example")), false);
+
+    QVERIFY(fromAddTab);
+    QVERIFY(fromProfile);
+    QVERIFY(fromAddTab->isPrivate());
+    QVERIFY(fromProfile->isPrivate());
+    QVERIFY(fromProfile->profile()->isOffTheRecord());
 }
 
 void TestTabModel::reopenClosedTabRestoresPosition()

@@ -7,7 +7,7 @@ import org.kde.kirigami as Kirigami
 import Kondor
 
 // "History" window (Ctrl+H): search, grouped by day, context menu.
-// Created on demand in Main.qml. Visuals follow the 01-history.qml prototype.
+// Created on demand in BrowserWindow.qml. Visuals follow the 01-history.qml prototype.
 ApplicationWindow {
     id: root
     width: 700

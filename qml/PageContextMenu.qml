@@ -44,9 +44,10 @@ Menu {
         if (r && r.isContentEditable)
             blocks.push(editingBlock(r))
         // "Open Link in New Window" arrives with #14, "Save Page As…" and
-        // "Print…" with #17 and "Inspect Element" with #16.
+        // "Print…" with #17.
         if (blocks.length === 0)
             blocks.push(pageBlock())
+        blocks.push([{ text: qsTr("Inspect Element"), icon: "code-context", action: "inspectElement" }])
 
         // One separator between blocks, none at the start, the end or doubled.
         let previousWasSeparator = true
@@ -268,6 +269,9 @@ Menu {
             break
         case "reload":
             webView.reload()
+            break
+        case "inspectElement":
+            tab.inspectElement()
             break
         case "viewSource":
             webView.triggerWebAction(WebEngineView.ViewSource)

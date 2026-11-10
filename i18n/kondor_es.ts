@@ -389,55 +389,65 @@
         <translation>Permisos de sitios…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="992"/>
+        <location filename="../qml/BrowserWindow.qml" line="990"/>
+        <source>More Tools</source>
+        <translation>Más herramientas</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="993"/>
+        <source>Developer Tools</source>
+        <translation>Herramientas de desarrollo</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1007"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Configurar %1…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="999"/>
+        <location filename="../qml/BrowserWindow.qml" line="1014"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Acerca de %1</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1053"/>
+        <location filename="../qml/BrowserWindow.qml" line="1068"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Pulsa Esc para salir de la pantalla completa</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1123"/>
+        <location filename="../qml/BrowserWindow.qml" line="1138"/>
         <source>Page bookmarked</source>
         <translation>Página añadida a marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1123"/>
+        <location filename="../qml/BrowserWindow.qml" line="1138"/>
         <source>Edit Bookmark</source>
         <translation>Editar marcador</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1131"/>
+        <location filename="../qml/BrowserWindow.qml" line="1146"/>
         <source>Name:</source>
         <translation>Nombre:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1137"/>
+        <location filename="../qml/BrowserWindow.qml" line="1152"/>
         <source>Folder:</source>
         <translation>Carpeta:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1147"/>
+        <location filename="../qml/BrowserWindow.qml" line="1162"/>
         <source>Remove</source>
         <translation>Quitar</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1155"/>
+        <location filename="../qml/BrowserWindow.qml" line="1170"/>
         <source>Done</source>
         <translation>Hecho</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1167"/>
+        <location filename="../qml/BrowserWindow.qml" line="1182"/>
         <source>Save File</source>
         <translation>Guardar archivo</translation>
     </message>
@@ -793,130 +803,135 @@
 <context>
     <name>PageContextMenu</name>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="74"/>
+        <location filename="../qml/PageContextMenu.qml" line="50"/>
+        <source>Inspect Element</source>
+        <translation>Inspeccionar elemento</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="75"/>
         <source>Open Link in New Tab</source>
         <translation>Abrir enlace en una pestaña nueva</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="75"/>
+        <location filename="../qml/PageContextMenu.qml" line="76"/>
         <source>Open Link in New Private Tab</source>
         <translation>Abrir enlace en una pestaña privada nueva</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="77"/>
+        <location filename="../qml/PageContextMenu.qml" line="78"/>
         <source>Copy Link Address</source>
         <translation>Copiar dirección del enlace</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="78"/>
+        <location filename="../qml/PageContextMenu.qml" line="79"/>
         <source>Save Link As…</source>
         <translation>Guardar enlace como…</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="84"/>
+        <location filename="../qml/PageContextMenu.qml" line="85"/>
         <source>Open Image in New Tab</source>
         <translation>Abrir imagen en una pestaña nueva</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="85"/>
+        <location filename="../qml/PageContextMenu.qml" line="86"/>
         <source>Save Image As…</source>
         <translation>Guardar imagen como…</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="86"/>
+        <location filename="../qml/PageContextMenu.qml" line="87"/>
         <source>Copy Image</source>
         <translation>Copiar imagen</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="87"/>
+        <location filename="../qml/PageContextMenu.qml" line="88"/>
         <source>Copy Image Address</source>
         <translation>Copiar dirección de la imagen</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="93"/>
+        <location filename="../qml/PageContextMenu.qml" line="94"/>
         <source>Save Media As…</source>
         <translation>Guardar contenido multimedia como…</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="94"/>
+        <location filename="../qml/PageContextMenu.qml" line="95"/>
         <source>Copy Media Address</source>
         <translation>Copiar dirección del contenido multimedia</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="99"/>
+        <location filename="../qml/PageContextMenu.qml" line="100"/>
         <source>Show Controls</source>
         <translation>Mostrar controles</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="107"/>
+        <location filename="../qml/PageContextMenu.qml" line="108"/>
         <source>Loop</source>
         <translation>Repetir</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="121"/>
+        <location filename="../qml/PageContextMenu.qml" line="122"/>
         <source>Search %1 for “%2”</source>
         <extracomment>%1 is the search engine name, %2 the selected text</extracomment>
         <translation>Buscar “%2” en %1</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="123"/>
+        <location filename="../qml/PageContextMenu.qml" line="124"/>
         <source>Search for “%1”</source>
         <extracomment>%1 is the selected text</extracomment>
         <translation>Buscar “%1”</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="125"/>
-        <location filename="../qml/PageContextMenu.qml" line="150"/>
+        <location filename="../qml/PageContextMenu.qml" line="126"/>
+        <location filename="../qml/PageContextMenu.qml" line="151"/>
         <source>Copy</source>
         <translation>Copiar</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="143"/>
+        <location filename="../qml/PageContextMenu.qml" line="144"/>
         <source>Undo</source>
         <translation>Deshacer</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="145"/>
+        <location filename="../qml/PageContextMenu.qml" line="146"/>
         <source>Redo</source>
         <translation>Rehacer</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="148"/>
+        <location filename="../qml/PageContextMenu.qml" line="149"/>
         <source>Cut</source>
         <translation>Cortar</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="152"/>
+        <location filename="../qml/PageContextMenu.qml" line="153"/>
         <source>Paste</source>
         <translation>Pegar</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="154"/>
+        <location filename="../qml/PageContextMenu.qml" line="155"/>
         <source>Paste as Plain Text</source>
         <translation>Pegar como texto sin formato</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="156"/>
+        <location filename="../qml/PageContextMenu.qml" line="157"/>
         <source>Select All</source>
         <translation>Seleccionar todo</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="163"/>
+        <location filename="../qml/PageContextMenu.qml" line="164"/>
         <source>Back</source>
         <translation>Atrás</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="164"/>
+        <location filename="../qml/PageContextMenu.qml" line="165"/>
         <source>Forward</source>
         <translation>Avanzar</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="165"/>
+        <location filename="../qml/PageContextMenu.qml" line="166"/>
         <source>Reload</source>
         <translation>Volver a cargar</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="167"/>
+        <location filename="../qml/PageContextMenu.qml" line="168"/>
         <source>View Page Source</source>
         <translation>Ver código fuente de la página</translation>
     </message>
@@ -1440,17 +1455,17 @@
 <context>
     <name>WebViewTab</name>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="76"/>
+        <location filename="../qml/WebViewTab.qml" line="91"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>El proceso de la página terminó inesperadamente.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="77"/>
+        <location filename="../qml/WebViewTab.qml" line="92"/>
         <source>The page crashed.</source>
         <translation>La página ha fallado.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="78"/>
+        <location filename="../qml/WebViewTab.qml" line="93"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>Se ha terminado el proceso de la página (posiblemente por falta de memoria).</translation>
     </message>

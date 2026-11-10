@@ -31,6 +31,7 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Settings** (Ctrl+,): a KDE Configure window with a sidebar (searchable with Ctrl+F), page tabs and Defaults / OK / Apply / Cancel; options cover the home page (blank means the New Tab page), startup behavior, New Tab page top sites, search engine (including a custom URL and optional search suggestions in the address bar), download folder and privacy options (third-party cookies, clear data on exit, site permission management). Changes stay pending until OK or Apply, and are stored in `~/.config/KDE/Kondor.conf`
 - **About window** (Menu → About Kondor Browser): app, Qt and Chromium versions, components and authors, with a viewer for the license text; links open in a new normal tab
 - **Session restore**: optionally reopen the tabs of every window from the previous session on startup (General → Startup in the Configure window); private tabs are never saved. Ctrl+Shift+T reopens the last closed normal tabs, up to 20
+- **Developer tools** (F12 / Ctrl+Shift+I): Chromium DevTools docked below the page, per tab; "Inspect Element" in the page context menu
 - **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
 - **Full screen**: a video can take the whole screen (the toolbars hide and a hint says how to leave), while F11 toggles window full screen keeping the toolbars; leaving full screen returns the window to its previous size and state
 - **Site permissions**: camera, microphone, screen sharing, location, notifications, clipboard, pointer lock and local fonts are requested in an inline bar with **Allow** / **Block**; the decision is remembered for the site (normal tabs only) and can be reviewed or revoked in Menu → **Site Permissions…** or Settings → Privacy
@@ -170,6 +171,7 @@ qml/
 | `Ctrl+,` / `Ctrl+Shift+,` | Configure Kondor Browser (settings) |
 | `Ctrl+L` | Focus the address bar |
 | `Ctrl+F` | Find in page |
+| `F12` / `Ctrl+Shift+I` | Toggle developer tools |
 | `Ctrl+F` (Configure window) | Filter the settings pages |
 | `F3` / `Shift+F3` | Next / previous match (find bar open) |
 | `Esc` | Close the find bar; leave page full screen |

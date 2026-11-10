@@ -28,6 +28,7 @@ class Tab : public QObject
     Q_PROPERTY(int findActiveMatch READ findActiveMatch NOTIFY findResultChanged)
     Q_PROPERTY(bool newTabPage READ newTabPage NOTIFY newTabPageChanged)
     Q_PROPERTY(bool isFullScreen READ isFullScreen NOTIFY fullScreenChanged)
+    Q_PROPERTY(bool devToolsOpen READ devToolsOpen NOTIFY devToolsOpenChanged)
     Q_PROPERTY(QVariant pendingPermission READ pendingPermission NOTIFY pendingPermissionChanged)
     Q_PROPERTY(QString securityState READ securityState NOTIFY securityStateChanged)
     Q_PROPERTY(bool certificateErrorPending READ certificateErrorPending NOTIFY certificateErrorChanged)
@@ -55,6 +56,7 @@ public:
     int findActiveMatch() const { return m_findActiveMatch; }
     bool newTabPage() const { return m_newTabPage; }
     bool isFullScreen() const { return m_isFullScreen; }
+    bool devToolsOpen() const { return m_devToolsOpen; }
     QVariant pendingPermission() const;
     QString securityState() const { return m_securityState; }
     bool certificateErrorPending() const { return m_certificateErrorPending; }
@@ -95,6 +97,9 @@ public:
     Q_INVOKABLE void stopFind();
     Q_INVOKABLE void focusPage();
     Q_INVOKABLE void exitFullScreen();
+    Q_INVOKABLE void setDevToolsOpen(bool open);
+    Q_INVOKABLE void toggleDevTools();
+    Q_INVOKABLE void inspectElement();
     Q_INVOKABLE void acceptCertificateError();
     Q_INVOKABLE void rejectCertificateError();
 
@@ -116,6 +121,7 @@ signals:
     void pinnedChanged();
     void newTabPageChanged();
     void fullScreenChanged();
+    void devToolsOpenChanged();
     void pendingPermissionChanged();
     void securityStateChanged();
     void certificateErrorChanged();
@@ -134,6 +140,8 @@ signals:
     void stopFindRequested();
     void focusPageRequested();
     void exitFullScreenRequested();
+    void toggleDevToolsRequested();
+    void inspectElementRequested();
     void acceptCertificateErrorRequested();
     void rejectCertificateErrorRequested();
 
@@ -160,6 +168,7 @@ private:
     bool m_newTabPage = true;
     // Set by the page's full screen request (a video); the window follows it.
     bool m_isFullScreen = false;
+    bool m_devToolsOpen = false;
     QList<QWebEnginePermission> m_pendingPermissions;
 
     // "secure" (https), "insecure" (http), "error" (certificate warning on

@@ -77,6 +77,7 @@ private slots:
     void deletedDefaultsStayDeleted();
     void rootFolders();
     void addAndFindBookmarks();
+    void searchBookmarksFindsTitlesAndUrls();
     void moveBetweenFolders();
     void moveIntoAnotherFolderAtEnd();
     void refuseMovingFolderIntoChild();
@@ -256,6 +257,35 @@ void TestBookmarks::addAndFindBookmarks()
     const QVariantMap info = manager->bookmark(first);
     QCOMPARE(info.value(QStringLiteral("parentId")).toLongLong(), other);
     QCOMPARE(info.value(QStringLiteral("title")).toString(), QStringLiteral("Page"));
+}
+
+void TestBookmarks::searchBookmarksFindsTitlesAndUrls()
+{
+    BookmarkManager *manager = BookmarkManager::instance();
+    const qint64 folder = manager->addFolder(QStringLiteral("Search folder"),
+                                             manager->otherFolderId());
+    QVERIFY(manager->addBookmark(QUrl(QStringLiteral("https://searchable.example/")),
+                                 QStringLiteral("Searchable Site"), folder) > 0);
+    QVERIFY(manager->addBookmark(QUrl(QStringLiteral("https://other.example/unique-url")),
+                                 QStringLiteral("Other"), folder) > 0);
+
+    const QVariantList byTitle = manager->search(QStringLiteral("searchable"));
+    QCOMPARE(byTitle.size(), 1);
+    const QVariantMap entry = byTitle.at(0).toMap();
+    QCOMPARE(entry.value(QStringLiteral("type")).toString(), QStringLiteral("bookmark"));
+    QCOMPARE(entry.value(QStringLiteral("title")).toString(), QStringLiteral("Searchable Site"));
+    QCOMPARE(entry.value(QStringLiteral("url")).toString(),
+             QStringLiteral("https://searchable.example/"));
+
+    const QVariantList byUrl = manager->search(QStringLiteral("unique-url"));
+    QCOMPARE(byUrl.size(), 1);
+    QCOMPARE(byUrl.at(0).toMap().value(QStringLiteral("title")).toString(),
+             QStringLiteral("Other"));
+
+    // Folders never show up, and the limit is honoured.
+    QVERIFY(manager->search(QStringLiteral("Search folder")).isEmpty());
+    QCOMPARE(manager->search(QStringLiteral("e"), 1).size(), 1);
+    QVERIFY(manager->search(QStringLiteral("   ")).isEmpty());
 }
 
 void TestBookmarks::moveBetweenFolders()

@@ -39,6 +39,9 @@ public:
     int revision() const { return m_revision; }
 
     Q_INVOKABLE bool isBookmarked(const QUrl &url) const;
+    // Up to `limit` bookmarks whose address or title contains `text`, title
+    // matches first: each entry is {type: "bookmark", url, title}.
+    Q_INVOKABLE QVariantList search(const QString &text, int limit = 4) const;
     Q_INVOKABLE qint64 bookmarkIdFor(const QUrl &url) const;
     // Returns the new id, or -1 on failure. An invalid folder falls back to
     // "Other Bookmarks".

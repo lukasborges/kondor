@@ -222,7 +222,7 @@ ApplicationWindow {
 
     // Normal click navigates the current tab; middle/Ctrl+click opens a
     // background tab (in a private profile when the current tab is private).
-    function openBookmark(url, background) {
+    function openUrl(url, background) {
         if (!url)
             return
         const tab = tabs.currentTab
@@ -524,6 +524,17 @@ ApplicationWindow {
                     leftPadding: securityButton.visible ? securitySlot.width + 8 : 8
                     rightPadding: bookmarkButton.visible ? bookmarkButton.width + 10 : 8
 
+                    // Text as the user typed it, before selecting a row or
+                    // completing a host: Esc restores it.
+                    property string typedText: ""
+                    // Last host written by inline completion and the text it
+                    // was completed from. While the field shrinks back to that
+                    // typed text (Backspace/Delete), it must not complete
+                    // again and refill what was just deleted.
+                    property string completedHost: ""
+                    property string completedPrefix: ""
+                    property bool lastEditDeleted: false
+
                     function syncFromTab() {
                         if (activeFocus)
                             return
@@ -532,12 +543,53 @@ ApplicationWindow {
                         text = (t && !t.newTabPage) ? t.url.toString() : ""
                     }
 
+                    // "kd" becomes "kde.org" with "e.org" selected, from
+                    // the most visited matching history URL.
+                    function completeHost() {
+                        const typed = text
+                        if (lastEditDeleted || typed.length < 2)
+                            return
+                        const host = HistoryManager.hostCompletion(typed)
+                        if (host.length === 0)
+                            return
+                        text = host
+                        select(typed.length, host.length)
+                        completedHost = host
+                        completedPrefix = typed
+                    }
+
+                    function updateSuggestions() {
+                        if (!activeFocus || text.trim().length === 0) {
+                            addressSuggestions.close()
+                            SearchSuggestions.cancel()
+                            return
+                        }
+                        completeHost()
+
+                        // Rows describe what the field now shows, including an
+                        // inline completion, so the Visit row appears with it.
+                        const query = text.trim()
+                        addressSuggestions.text = query
+                        addressSuggestions.currentIndex = 0
+                        addressSuggestions.open()
+
+                        // Network suggestions are opt-in and never requested
+                        // from a private tab.
+                        const tab = tabs.currentTab
+                        if (Settings.searchSuggestions && tab && !tab.isPrivate) {
+                            SearchSuggestions.request(query)
+                        } else {
+                            SearchSuggestions.cancel()
+                            addressSuggestions.networkSuggestions = []
+                        }
+                    }
+
                     onAccepted: {
                         const t = tabs.currentTab
                         if (!t)
                             return
                         if (addressSuggestions.opened) {
-                            addressSuggestions.activate(addressSuggestions.currentIndex)
+                            addressSuggestions.activate(addressSuggestions.currentIndex, false)
                             return
                         }
                         t.navigateTo(ProfileManager.resolveAddress(text))
@@ -545,13 +597,24 @@ ApplicationWindow {
                     }
 
                     onTextEdited: {
-                        addressSuggestions.text = text
-                        if (addressSuggestions.rows.length > 0) {
-                            addressSuggestions.currentIndex = 0
-                            addressSuggestions.open()
-                        } else {
-                            addressSuggestions.close()
+                        const lower = text.toLowerCase()
+                        const hostLower = completedHost.toLowerCase()
+                        lastEditDeleted = completedHost.length > 0
+                                && text.length <= completedPrefix.length
+                                && hostLower.startsWith(lower)
+                        if (completedHost.length > 0 && !hostLower.startsWith(lower)) {
+                            completedHost = ""
+                            completedPrefix = ""
                         }
+                        typedText = text
+                        addressSuggestions.text = text
+                        suggestionsTimer.restart()
+                    }
+
+                    Timer {
+                        id: suggestionsTimer
+                        interval: 120
+                        onTriggered: addressBar.updateSuggestions()
                     }
 
                     Keys.onDownPressed: function(event) {
@@ -562,6 +625,8 @@ ApplicationWindow {
                         addressSuggestions.currentIndex =
                             Math.min(addressSuggestions.currentIndex + 1,
                                      addressSuggestions.rows.length - 1)
+                        // Show the selected address without querying again.
+                        text = addressSuggestions.rows[addressSuggestions.currentIndex].url
                         event.accepted = true
                     }
 
@@ -572,6 +637,7 @@ ApplicationWindow {
                         }
                         addressSuggestions.currentIndex =
                             Math.max(addressSuggestions.currentIndex - 1, 0)
+                        text = addressSuggestions.rows[addressSuggestions.currentIndex].url
                         event.accepted = true
                     }
 
@@ -581,15 +647,29 @@ ApplicationWindow {
                             return
                         }
                         // Only the dropdown goes away; the typed text stays.
+                        text = typedText
                         addressSuggestions.close()
+                        event.accepted = true
+                    }
+
+                    // Tab never moves through the dropdown.
+                    Keys.onTabPressed: function(event) {
+                        event.accepted = true
+                    }
+
+                    Keys.onBacktabPressed: function(event) {
                         event.accepted = true
                     }
 
                     onActiveFocusChanged: {
                         if (activeFocus) {
+                            typedText = text
+                            completedHost = ""
+                            completedPrefix = ""
                             selectAll()
                         } else {
                             addressSuggestions.close()
+                            SearchSuggestions.cancel()
                         }
                     }
 
@@ -660,11 +740,23 @@ ApplicationWindow {
                         y: addressBar.height
                         width: addressBar.width
 
-                        onNavigate: function(url) {
-                            if (tabs.currentTab)
+                        onNavigate: function(url, background) {
+                            if (background) {
+                                window.openUrl(url, true)
+                            } else if (tabs.currentTab) {
                                 tabs.currentTab.navigateTo(url)
+                            }
                             addressSuggestions.close()
                             addressBar.focus = false
+                        }
+
+                        Connections {
+                            target: SearchSuggestions
+                            function onSuggestionsReady(text, items) {
+                                // Very fast typing: drop answers for older text.
+                                if (text === addressSuggestions.text)
+                                    addressSuggestions.networkSuggestions = items
+                            }
                         }
                     }
 
@@ -782,7 +874,7 @@ ApplicationWindow {
                             showCommands: true
                             folderId: BookmarkManager.toolbarFolderId()
                             onBookmarkActivated: function(url, background) {
-                                window.openBookmark(url, background)
+                                window.openUrl(url, background)
                             }
                             onBookmarkThisPageRequested: window.openBookmarkEditor()
                             onManageBookmarksRequested: window.openBookmarks()
@@ -1204,6 +1296,7 @@ ApplicationWindow {
         }
         function onCurrentTabChanged() {
             addressSuggestions.close()
+            SearchSuggestions.cancel()
             addressBar.syncFromTab()
         }
     }

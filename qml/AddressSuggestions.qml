@@ -4,10 +4,10 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Dropdown under the address bar. When the typed text looks like an address it
-// offers visiting it (selected) and searching for the same text with the
-// configured engine. Focus stays in the field; #11 extends the row list with
-// history, bookmarks and network suggestions.
+// Dropdown under the address bar. Its rows are, in this order: visiting the
+// typed address and searching for it (#44), matching bookmarks, matching
+// history entries and the search engine's suggestions (#11). Focus stays in
+// the field: the bar owns the keyboard and inline completion.
 Popup {
     id: root
 
@@ -15,46 +15,107 @@ Popup {
     focus: false
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
 
+    // Typed text the rows are built from; programmatic changes to the address
+    // bar (selected rows, inline completion) must not rebuild them.
     property string text
     property int currentIndex: 0
+    // Search-engine suggestions that arrived for `text`; cleared on every edit.
+    property var networkSuggestions: []
 
-    // Rebuilt when the text changes: empty unless it looks like an address.
+    readonly property int maxRows: 10
+
     readonly property var rows: buildRows()
 
-    signal navigate(url url)
+    signal navigate(url url, bool background)
+
+    onTextChanged: networkSuggestions = []
 
     function buildRows() {
-        // QML url values are strings: an empty QUrl converts to "".
-        const address = String(ProfileManager.addressUrl(text))
-        if (address.length === 0)
+        const typed = text.trim()
+        if (typed.length === 0)
             return []
+
+        const rows = []
+        const seen = ({})
+
+        // #44 rows: for an address, visiting it (selected) and searching for
+        // the same text; otherwise only the search row.
+        const address = String(ProfileManager.addressUrl(typed))
+        if (address.length > 0) {
+            rows.push({
+                iconName: "globe",
+                label: address,
+                suffix: qsTr("Visit"),
+                url: address
+            })
+            seen[address] = true
+        }
 
         const engineName = Settings.searchEngineName()
         //: %1 is the search engine name
         const searchSuffix = engineName.length > 0
             ? qsTr("Search with %1").arg(engineName)
             : qsTr("Search")
+        rows.push({
+            iconName: "edit-find",
+            label: typed,
+            suffix: searchSuffix,
+            url: ProfileManager.searchUrl(typed)
+        })
 
-        return [
-            {
-                iconName: "globe",
-                label: address,
-                suffix: qsTr("Visit"),
-                url: address
-            },
-            {
+        // Bookmarks (#2) and history (#1) only ever read persistent data, so
+        // they are safe to show while a private tab is focused.
+        const bookmarks = BookmarkManager.search(typed, 4)
+        for (let i = 0; i < bookmarks.length; ++i) {
+            const bookmark = bookmarks[i]
+            const url = String(bookmark.url)
+            if (url.length === 0 || seen[url])
+                continue
+            seen[url] = true
+            rows.push({
+                iconName: "bookmarks",
+                label: String(bookmark.title).length > 0 ? String(bookmark.title) : url,
+                suffix: url,
+                url: url
+            })
+        }
+
+        const history = HistoryManager.suggest(typed, 6)
+        for (let i = 0; i < history.length; ++i) {
+            const entry = history[i]
+            const url = String(entry.url)
+            if (url.length === 0 || seen[url])
+                continue
+            seen[url] = true
+            rows.push({
+                iconName: "view-history",
+                label: String(entry.title).length > 0 ? String(entry.title) : url,
+                suffix: url,
+                url: url
+            })
+        }
+
+        // Network suggestions carry no URL of their own: activating one
+        // searches for it.
+        for (let i = 0; i < networkSuggestions.length; ++i) {
+            const suggestion = String(networkSuggestions[i])
+            if (suggestion.length === 0)
+                continue
+            rows.push({
                 iconName: "edit-find",
-                label: text.trim(),
-                suffix: searchSuffix,
-                url: ProfileManager.searchUrl(text)
-            }
-        ]
+                label: suggestion,
+                suffix: "",
+                url: ProfileManager.searchUrl(suggestion)
+            })
+        }
+
+        return rows.slice(0, maxRows)
     }
 
-    function activate(index) {
+    function activate(index, background) {
         if (index < 0 || index >= rows.length)
             return
-        navigate(rows[index].url)
+        navigate(rows[index].url, background === true)
     }
 
     onRowsChanged: {
@@ -76,7 +137,7 @@ Popup {
                 Layout.fillWidth: true
                 focusPolicy: Qt.NoFocus
                 highlighted: row.index === root.currentIndex
-                onClicked: root.activate(row.index)
+                onClicked: root.activate(row.index, false)
 
                 contentItem: RowLayout {
                     spacing: Kirigami.Units.largeSpacing
@@ -94,12 +155,25 @@ Popup {
                     }
 
                     Label {
+                        visible: row.modelData.suffix.length > 0
                         text: "— " + row.modelData.suffix
                         color: row.highlighted ? Kirigami.Theme.highlightedTextColor
                                                : Kirigami.Theme.disabledTextColor
                         elide: Text.ElideRight
                         Layout.fillWidth: true
                     }
+
+                    Item {
+                        visible: row.modelData.suffix.length === 0
+                        Layout.fillWidth: true
+                    }
+                }
+
+                // Middle click opens the row in a background tab.
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.MiddleButton
+                    onClicked: root.activate(row.index, true)
                 }
             }
         }

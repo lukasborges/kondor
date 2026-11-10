@@ -34,6 +34,14 @@ public:
     // each entry is {url, title, host}, one tile per host. Never called for
     // private tabs (the privacy barrier lives in QML).
     Q_INVOKABLE QVariantList topSites(int limit) const;
+    // Up to `limit` URLs whose address or title contains `text`, most visited
+    // first: each entry is {type: "history", url, title}. Reading is safe from
+    // a private tab; the privacy barrier only stops recording.
+    Q_INVOKABLE QVariantList suggest(const QString &text, int limit = 6) const;
+    // Host of the most visited history URL whose host starts with `text`
+    // ("kd" -> "kde.org"), for inline completion in the address bar; empty
+    // when there is no match or the text has spaces.
+    Q_INVOKABLE QString hostCompletion(const QString &text) const;
 
     HistoryModel *model() const;
 

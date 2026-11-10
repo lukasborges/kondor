@@ -41,6 +41,8 @@ class Settings : public QObject
                    NOTIFY clearDataOnExitChanged)
     Q_PROPERTY(bool blockThirdPartyCookies READ blockThirdPartyCookies
                    WRITE setBlockThirdPartyCookies NOTIFY blockThirdPartyCookiesChanged)
+    Q_PROPERTY(bool searchSuggestions READ searchSuggestions WRITE setSearchSuggestions
+                   NOTIFY searchSuggestionsChanged)
 
 public:
     static Settings *instance();
@@ -59,6 +61,7 @@ public:
     QStringList hiddenTopSites() const { return m_hiddenTopSites; }
     bool clearDataOnExit() const { return m_clearDataOnExit; }
     bool blockThirdPartyCookies() const { return m_blockThirdPartyCookies; }
+    bool searchSuggestions() const { return m_searchSuggestions; }
 
     void setHomePage(const QString &homePage);
     void setSearchEngine(const QString &searchEngine);
@@ -71,6 +74,7 @@ public:
     void setHiddenTopSites(const QStringList &hiddenTopSites);
     void setClearDataOnExit(bool clearDataOnExit);
     void setBlockThirdPartyCookies(bool blockThirdPartyCookies);
+    void setSearchSuggestions(bool searchSuggestions);
 
     // Default value of the option with this property name ("homePage",
     // "searchEngine", …). The only source of truth for defaults: the
@@ -102,6 +106,7 @@ signals:
     void hiddenTopSitesChanged();
     void clearDataOnExitChanged();
     void blockThirdPartyCookiesChanged();
+    void searchSuggestionsChanged();
 
 private:
     explicit Settings(QObject *parent = nullptr);
@@ -118,4 +123,5 @@ private:
     QStringList m_hiddenTopSites;
     bool m_clearDataOnExit = false;
     bool m_blockThirdPartyCookies = false;
+    bool m_searchSuggestions = false;
 };

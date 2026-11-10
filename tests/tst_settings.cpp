@@ -50,6 +50,8 @@ void TestSettings::defaultValue_data()
             << QStringLiteral("clearDataOnExit") << QVariant(false);
     QTest::newRow("blockThirdPartyCookies")
             << QStringLiteral("blockThirdPartyCookies") << QVariant(false);
+    QTest::newRow("searchSuggestions")
+            << QStringLiteral("searchSuggestions") << QVariant(false);
 }
 
 void TestSettings::defaultValue()
@@ -85,6 +87,8 @@ void TestSettings::freshSettingsUseDefaults()
              settings->defaultValue(QStringLiteral("clearDataOnExit")).toBool());
     QCOMPARE(settings->blockThirdPartyCookies(),
              settings->defaultValue(QStringLiteral("blockThirdPartyCookies")).toBool());
+    QCOMPARE(settings->searchSuggestions(),
+             settings->defaultValue(QStringLiteral("searchSuggestions")).toBool());
 }
 
 QTEST_MAIN(TestSettings)

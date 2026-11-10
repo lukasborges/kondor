@@ -155,6 +155,61 @@ void HistoryManager::clearSince(qint64 msecsSinceEpoch)
     }
 }
 
+QVariantList HistoryManager::suggest(const QString &text, int limit) const
+{
+    QVariantList suggestions;
+    Database *db = Database::instance();
+    const QString needle = text.trimmed();
+    if (!db->isValid() || needle.isEmpty() || limit <= 0)
+        return suggestions;
+
+    // The needle is data, not a pattern: escape LIKE's wildcards.
+    QString pattern = needle;
+    pattern.replace(QLatin1String("\\"), QLatin1String("\\\\"));
+    pattern.replace(QLatin1String("%"), QLatin1String("\\%"));
+    pattern.replace(QLatin1String("_"), QLatin1String("\\_"));
+    pattern = QLatin1Char('%') + pattern + QLatin1Char('%');
+
+    QSqlQuery query(db->handle());
+    query.prepare(QStringLiteral(
+        "SELECT url, title, COUNT(*) AS visits, MAX(visited_at) AS last"
+        " FROM history WHERE url LIKE ? ESCAPE '\\' OR title LIKE ? ESCAPE '\\'"
+        " GROUP BY url ORDER BY visits DESC, last DESC LIMIT ?"));
+    query.addBindValue(pattern);
+    query.addBindValue(pattern);
+    query.addBindValue(limit);
+    if (!query.exec())
+        return suggestions;
+
+    while (query.next()) {
+        QVariantMap entry;
+        entry.insert(QStringLiteral("type"), QStringLiteral("history"));
+        entry.insert(QStringLiteral("url"), query.value(0).toString());
+        entry.insert(QStringLiteral("title"), query.value(1).toString());
+        suggestions.append(entry);
+    }
+    return suggestions;
+}
+
+QString HistoryManager::hostCompletion(const QString &text) const
+{
+    const QString prefix = text.trimmed();
+    if (prefix.isEmpty() || prefix.contains(QLatin1Char(' ')))
+        return QString();
+
+    const QVariantList entries = suggest(prefix, 50);
+    for (const QVariant &value : entries) {
+        QString host = QUrl(value.toMap().value(QStringLiteral("url")).toString()).host();
+        if (host.startsWith(QLatin1String("www.")))
+            host.remove(0, 4);
+        if (host.length() > prefix.length()
+                && host.startsWith(prefix, Qt::CaseInsensitive)) {
+            return host;
+        }
+    }
+    return QString();
+}
+
 QVariantList HistoryManager::topSites(int limit) const
 {
     QVariantList sites;

@@ -44,7 +44,8 @@ ApplicationWindow {
         {
             title: qsTr("Search"),
             icon: "system-search",
-            keywords: [qsTr("Search engine:"), qsTr("Custom URL:")],
+            keywords: [qsTr("Search engine:"), qsTr("Custom URL:"),
+                       qsTr("Show search suggestions")],
             component: searchPage
         },
         {
@@ -122,10 +123,11 @@ ApplicationWindow {
         property bool showTopSites: false
         property bool clearDataOnExit: false
         property bool blockThirdPartyCookies: false
+        property bool searchSuggestions: false
 
         readonly property var values: [homePage, searchEngine, customSearchUrl,
             downloadDirectory, askWhereToSave, startupBehavior, showTopSites,
-            clearDataOnExit, blockThirdPartyCookies]
+            clearDataOnExit, blockThirdPartyCookies, searchSuggestions]
         onValuesChanged: root.refresh()
     }
 
@@ -139,6 +141,7 @@ ApplicationWindow {
         pending.showTopSites = Settings.showTopSites
         pending.clearDataOnExit = Settings.clearDataOnExit
         pending.blockThirdPartyCookies = Settings.blockThirdPartyCookies
+        pending.searchSuggestions = Settings.searchSuggestions
         root.refresh()
     }
 
@@ -152,6 +155,7 @@ ApplicationWindow {
                 || pending.showTopSites !== Settings.showTopSites
                 || pending.clearDataOnExit !== Settings.clearDataOnExit
                 || pending.blockThirdPartyCookies !== Settings.blockThirdPartyCookies
+                || pending.searchSuggestions !== Settings.searchSuggestions
         root.defaultsEnabled = !root.pageAtDefaults()
     }
 
@@ -164,6 +168,8 @@ ApplicationWindow {
         case 1:
             return pending.searchEngine === Settings.defaultValue("searchEngine")
                     && pending.customSearchUrl === Settings.defaultValue("customSearchUrl")
+                    && pending.searchSuggestions
+                        === Settings.defaultValue("searchSuggestions")
         case 2:
             return pending.downloadDirectory === Settings.defaultValue("downloadDirectory")
                     && pending.askWhereToSave === Settings.defaultValue("askWhereToSave")
@@ -185,6 +191,7 @@ ApplicationWindow {
         case 1:
             pending.searchEngine = Settings.defaultValue("searchEngine")
             pending.customSearchUrl = Settings.defaultValue("customSearchUrl")
+            pending.searchSuggestions = Settings.defaultValue("searchSuggestions")
             break
         case 2:
             pending.downloadDirectory = Settings.defaultValue("downloadDirectory")
@@ -217,6 +224,8 @@ ApplicationWindow {
             Settings.clearDataOnExit = pending.clearDataOnExit
         if (pending.blockThirdPartyCookies !== Settings.blockThirdPartyCookies)
             Settings.blockThirdPartyCookies = pending.blockThirdPartyCookies
+        if (pending.searchSuggestions !== Settings.searchSuggestions)
+            Settings.searchSuggestions = pending.searchSuggestions
         root.refresh()
     }
 
@@ -625,6 +634,18 @@ ApplicationWindow {
                         target: customField
                         property: "text"
                         value: pending.customSearchUrl
+                    }
+
+                    CheckBox {
+                        id: suggestionsCheck
+                        text: qsTr("Show search suggestions in the address bar")
+                        onToggled: pending.searchSuggestions = checked
+                    }
+
+                    Binding {
+                        target: suggestionsCheck
+                        property: "checked"
+                        value: pending.searchSuggestions
                     }
                 }
 

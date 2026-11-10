@@ -15,6 +15,7 @@ constexpr auto kShowTopSites = "NewTab/ShowTopSites";
 constexpr auto kHiddenTopSites = "NewTab/HiddenTopSites";
 constexpr auto kClearDataOnExit = "Privacy/ClearOnExit";
 constexpr auto kBlockThirdPartyCookies = "Privacy/BlockThirdPartyCookies";
+constexpr auto kSearchSuggestions = "Search/Suggestions";
 
 // Option property names, used by defaultValue().
 constexpr auto kHomePageName = "homePage";
@@ -28,6 +29,7 @@ constexpr auto kShowTopSitesName = "showTopSites";
 constexpr auto kHiddenTopSitesName = "hiddenTopSites";
 constexpr auto kClearDataOnExitName = "clearDataOnExit";
 constexpr auto kBlockThirdPartyCookiesName = "blockThirdPartyCookies";
+constexpr auto kSearchSuggestionsName = "searchSuggestions";
 }
 
 Settings *Settings::instance()
@@ -73,6 +75,9 @@ Settings::Settings(QObject *parent)
     , m_blockThirdPartyCookies(m_settings.value(QLatin1String(kBlockThirdPartyCookies),
                                                 defaultValue(QLatin1String(kBlockThirdPartyCookiesName)))
                                    .toBool())
+    , m_searchSuggestions(m_settings.value(QLatin1String(kSearchSuggestions),
+                                           defaultValue(QLatin1String(kSearchSuggestionsName)))
+                              .toBool())
 {
 }
 
@@ -99,6 +104,8 @@ QVariant Settings::defaultValue(const QString &name) const
     if (name == QLatin1String(kClearDataOnExitName))
         return false;
     if (name == QLatin1String(kBlockThirdPartyCookiesName))
+        return false;
+    if (name == QLatin1String(kSearchSuggestionsName))
         return false;
     return QVariant();
 }
@@ -262,4 +269,14 @@ void Settings::setBlockThirdPartyCookies(bool blockThirdPartyCookies)
     m_settings.setValue(QLatin1String(kBlockThirdPartyCookies), m_blockThirdPartyCookies);
     m_settings.sync();
     emit blockThirdPartyCookiesChanged();
+}
+
+void Settings::setSearchSuggestions(bool searchSuggestions)
+{
+    if (m_searchSuggestions == searchSuggestions)
+        return;
+    m_searchSuggestions = searchSuggestions;
+    m_settings.setValue(QLatin1String(kSearchSuggestions), m_searchSuggestions);
+    m_settings.sync();
+    emit searchSuggestionsChanged();
 }

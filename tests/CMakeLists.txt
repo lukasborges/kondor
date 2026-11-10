@@ -66,6 +66,48 @@ set_tests_properties(tst_tabmodel PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
 )
 
+qt_add_executable(tst_addresssuggestions
+    tst_addresssuggestions.cpp
+    ../src/tab.cpp
+    ../src/tabmodel.cpp
+    ../src/profilemanager.cpp
+    ../src/addressresolver.cpp
+    ../src/settings.cpp
+    ../src/downloadmanager.cpp
+    ../src/notifier.cpp
+    ../src/historymanager.cpp
+    ../src/historymodel.cpp
+    ../src/database.cpp
+    ../src/faviconstore.cpp
+    ../src/bookmarkmanager.cpp
+    ../src/bookmarkmodel.cpp
+)
+
+target_compile_definitions(tst_addresssuggestions PRIVATE
+    KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+)
+
+target_include_directories(tst_addresssuggestions PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_addresssuggestions PRIVATE
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebEngineQuick
+)
+
+add_test(NAME tst_addresssuggestions COMMAND tst_addresssuggestions)
+set_tests_properties(tst_addresssuggestions PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)
+
 qt_add_executable(tst_bookmarks
     tst_bookmarks.cpp
     ../src/bookmarkmanager.cpp

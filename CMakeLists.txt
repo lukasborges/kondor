@@ -9,6 +9,7 @@ find_package(Qt6 6.8 REQUIRED COMPONENTS
     DBus
     Gui
     LinguistTools
+    Network
     Qml
     Quick
     QuickControls2
@@ -89,6 +90,8 @@ qt_add_qml_module(kondor
         src/bookmarkmodel.cpp
         src/faviconstore.h
         src/faviconstore.cpp
+        src/searchsuggestions.h
+        src/searchsuggestions.cpp
 )
 
 qt_add_translations(kondor
@@ -139,6 +142,7 @@ target_link_libraries(kondor PRIVATE
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
+    Qt6::Network
     Qt6::Qml
     Qt6::Quick
     Qt6::QuickControls2

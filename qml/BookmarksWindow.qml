@@ -223,6 +223,31 @@ ApplicationWindow {
         BookmarkManager.move(id, root.selectedFolderId, target)
     }
 
+    // Decides which folder of the left tree is under `y` (the tree pane's
+    // drag position). A single DropArea over the whole tree is used instead of
+    // one per delegate: a delegate DropArea depends on the view's own drag
+    // delivery, which does not fire reliably with real input once the pointer
+    // leaves the right-hand list.
+    function updateFolderDrop(y) {
+        if (root.draggedId <= 0) {
+            root.dropFolderId = -1
+            return
+        }
+        const count = folderList.count
+        for (let i = 0; i < count; ++i) {
+            const row = folderList.itemAtIndex(i)
+            if (!row)
+                continue
+            const top = row.y - folderList.contentY
+            if (y >= top && y < top + row.height) {
+                const folderId = root.folders[i].id
+                root.dropFolderId = root.canDropInto(folderId) ? folderId : -1
+                return
+            }
+        }
+        root.dropFolderId = -1
+    }
+
     // Decides what is under the pointer in the right-hand list: a folder to
     // move into (its middle band) or a gap to insert into (the top and bottom
     // bands of every row, by half).
@@ -425,49 +450,69 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            ScrollView {
+            Item {
                 SplitView.preferredWidth: 240
-                Kirigami.Theme.colorSet: Kirigami.Theme.View
-                Kirigami.Theme.inherit: false
-                background: Rectangle { color: Kirigami.Theme.backgroundColor }
 
-                ListView {
-                    id: folderList
-                    clip: true
-                    model: root.folders
+                ScrollView {
+                    id: folderScroll
+                    anchors.fill: parent
+                    Kirigami.Theme.colorSet: Kirigami.Theme.View
+                    Kirigami.Theme.inherit: false
+                    background: Rectangle { color: Kirigami.Theme.backgroundColor }
 
-                    delegate: ItemDelegate {
-                        id: folderEntry
+                    ListView {
+                        id: folderList
+                        clip: true
+                        model: root.folders
+                        // A flick must never take the pointer grab from the
+                        // drag that is crossing the panes.
+                        interactive: root.draggedId < 0
 
-                        required property var modelData
-                        required property int index
+                        delegate: ItemDelegate {
+                            id: folderEntry
 
-                        width: ListView.view.width
-                        highlighted: folderEntry.modelData.id === root.selectedFolderId
-                                     || (folderDrop.containsDrag
-                                         && root.canDropInto(folderEntry.modelData.id))
-                        icon.name: "folder"
-                        text: folderEntry.modelData.title
-                        leftPadding: 10 + folderEntry.modelData.depth * 18
+                            required property var modelData
+                            required property int index
 
-                        onClicked: {
-                            // Clear even when the same folder is clicked again,
-                            // so the actions always go back to the folder.
-                            root.selectedItemId = -1
-                            root.selectedFolderId = folderEntry.modelData.id
-                        }
+                            width: ListView.view.width
+                            highlighted: folderEntry.modelData.id === root.selectedFolderId
+                                         || folderEntry.modelData.id === root.dropFolderId
+                            icon.name: "folder"
+                            text: folderEntry.modelData.title
+                            leftPadding: 10 + folderEntry.modelData.depth * 18
 
-                        DropArea {
-                            id: folderDrop
-                            anchors.fill: parent
-                            keys: ["kondor/bookmark"]
-
-                            onDropped: function(drop) {
-                                root.moveInto(root.draggedId, root.draggedIsFolder,
-                                              folderEntry.modelData.id)
-                                root.endDrag()
+                            onClicked: {
+                                // Clear even when the same folder is clicked again,
+                                // so the actions always go back to the folder.
+                                root.selectedItemId = -1
+                                root.selectedFolderId = folderEntry.modelData.id
                             }
                         }
+                    }
+                }
+
+                // Drag target for the whole tree, so the drag position is
+                // always handled at pane level (the same way as the list on the
+                // right) instead of inside a recycled delegate.
+                DropArea {
+                    id: treeDrop
+                    anchors.fill: parent
+                    keys: ["kondor/bookmark"]
+
+                    onEntered: function(drag) {
+                        root.updateFolderDrop(drag.y)
+                    }
+                    onPositionChanged: function(drag) {
+                        root.updateFolderDrop(drag.y)
+                    }
+                    onExited: root.dropFolderId = -1
+                    onDropped: function(drop) {
+                        root.updateFolderDrop(drop.y)
+                        const folderId = root.dropFolderId
+                        root.dropFolderId = -1
+                        if (folderId > 0)
+                            root.moveInto(root.draggedId, root.draggedIsFolder, folderId)
+                        root.endDrag()
                     }
                 }
             }
@@ -487,6 +532,8 @@ ApplicationWindow {
                         clip: true
                         model: root.itemModel
                         focus: true
+                        // Do not let a flick steal the grab from the row drag.
+                        interactive: root.draggedId < 0
 
                         Keys.onReturnPressed: root.openCurrentItem()
                         Keys.onEnterPressed: root.openCurrentItem()
@@ -559,6 +606,11 @@ ApplicationWindow {
                                 // Only track the gesture: the window-level
                                 // proxy follows the pointer, the row stays.
                                 target: null
+                                // Keep the grab until the button is released:
+                                // the right list's Flickable (and the tree's)
+                                // must not cancel the drag while the pointer
+                                // crosses into the other pane.
+                                grabPermissions: PointerHandler.CanTakeOverFromAnything
 
                                 onActiveChanged: {
                                     if (active) {

@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Dialogs
 import QtQuick.Layouts
 import QtQuick.Window
+import QtWebEngine
 import org.kde.kirigami as Kirigami
 import Kondor
 
@@ -226,6 +227,32 @@ ApplicationWindow {
         if (path.startsWith("file://"))
             path = path.slice(7)
         return decodeURIComponent(path)
+    }
+
+    readonly property bool canPrintOrSave: tabs.currentTab ? !tabs.currentTab.newTabPage : false
+
+    function suggestedFile(extension) {
+        const name = FileHelper.sanitizeFileName(tabs.currentTab ? tabs.currentTab.title : "")
+        return "file://" + Settings.downloadDirectory + "/" + name + extension
+    }
+
+    function saveAsPdf() {
+        if (!canPrintOrSave)
+            return
+        pdfDialog.currentFile = suggestedFile(".pdf")
+        pdfDialog.open()
+    }
+
+    function savePageAs() {
+        if (!canPrintOrSave)
+            return
+        pageDialog.currentFile = suggestedFile(".html")
+        pageDialog.open()
+    }
+
+    function printPage() {
+        if (canPrintOrSave)
+            tabs.currentTab.print()
     }
 
     function openHistory() {
@@ -936,6 +963,24 @@ ApplicationWindow {
                             enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
                             onTriggered: findBar.open()
                         }
+                        MenuItem {
+                            text: qsTr("Save Page As…")
+                            icon.name: "document-save-as"
+                            enabled: window.canPrintOrSave
+                            onTriggered: window.savePageAs()
+                        }
+                        MenuItem {
+                            text: qsTr("Save as PDF…")
+                            icon.name: "document-export"
+                            enabled: window.canPrintOrSave
+                            onTriggered: window.saveAsPdf()
+                        }
+                        MenuItem {
+                            text: qsTr("Print…")
+                            icon.name: "document-print"
+                            enabled: window.canPrintOrSave
+                            onTriggered: window.printPage()
+                        }
                         MenuSeparator {}
                         MenuItem {
                             text: qsTr("Zoom In")
@@ -1176,6 +1221,34 @@ ApplicationWindow {
         }
     }
 
+    FileDialog {
+        id: pdfDialog
+        title: qsTr("Save as PDF")
+        fileMode: FileDialog.SaveFile
+        nameFilters: [qsTr("PDF (*.pdf)")]
+        defaultSuffix: "pdf"
+        onAccepted: if (tabs.currentTab) tabs.currentTab.printToPdf(window.localPath(selectedFile))
+    }
+
+    FileDialog {
+        id: pageDialog
+        title: qsTr("Save Page As")
+        fileMode: FileDialog.SaveFile
+        nameFilters: [qsTr("Web Page, Complete (*.html)"),
+                      qsTr("Web Page, HTML Only (*.html)"),
+                      qsTr("Web Archive (*.mhtml)")]
+        defaultSuffix: selectedNameFilter.index === 2 ? "mhtml" : "html"
+        onAccepted: {
+            if (!tabs.currentTab)
+                return
+            const formats = [WebEngineDownloadRequest.CompleteHtmlSaveFormat,
+                             WebEngineDownloadRequest.SingleHtmlSaveFormat,
+                             WebEngineDownloadRequest.MimeHtmlSaveFormat]
+            tabs.currentTab.savePage(window.localPath(selectedFile),
+                                     formats[selectedNameFilter.index])
+        }
+    }
+
     // ── Save dialog for "Ask where to save each file" ───────────────────
     FileDialog {
         id: saveFileDialog
@@ -1382,6 +1455,16 @@ ApplicationWindow {
         sequences: ["F12", "Ctrl+Shift+I"]
         enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
         onActivated: tabs.currentTab.toggleDevTools()
+    }
+    Shortcut {
+        sequences: [StandardKey.Print]
+        enabled: window.canPrintOrSave
+        onActivated: window.printPage()
+    }
+    Shortcut {
+        sequences: [StandardKey.Save]
+        enabled: window.canPrintOrSave
+        onActivated: window.savePageAs()
     }
     Shortcut {
         sequences: [StandardKey.Find]

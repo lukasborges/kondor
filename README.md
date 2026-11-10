@@ -32,6 +32,7 @@ A working prototype with the core functionality in place: it actually browses, w
 - **About window** (Menu → About Kondor Browser): app, Qt and Chromium versions, components and authors, with a viewer for the license text; links open in a new normal tab
 - **Session restore**: optionally reopen the tabs of every window from the previous session on startup (General → Startup in the Configure window); private tabs are never saved. Ctrl+Shift+T reopens the last closed normal tabs, up to 20
 - **Developer tools** (F12 / Ctrl+Shift+I): Chromium DevTools docked below the page, per tab; "Inspect Element" in the page context menu
+- **Print and save** (Ctrl+P / Ctrl+S): print through the PDF viewer, "Save as PDF…", and "Save Page As…" (complete, HTML only or web archive)
 - **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
 - **Full screen**: a video can take the whole screen (the toolbars hide and a hint says how to leave), while F11 toggles window full screen keeping the toolbars; leaving full screen returns the window to its previous size and state
 - **Site permissions**: camera, microphone, screen sharing, location, notifications, clipboard, pointer lock and local fonts are requested in an inline bar with **Allow** / **Block**; the decision is remembered for the site (normal tabs only) and can be reviewed or revoked in Menu → **Site Permissions…** or Settings → Privacy
@@ -125,6 +126,7 @@ src/
   faviconstore.*      QML singleton: one favicon per host (table `favicons`), filled by normal tabs only
   downloadmanager.*   QML singleton: downloads list model, actions and notifications
   notifier.*          QML singleton: desktop notifications over D-Bus
+  filehelper.*        QML singleton: file names, temporary PDFs and opening files for print / save
   aboutinfo.*         QML singleton: read-only version and license data for the About window
 qml/
   BrowserWindow.qml   one browser window: tab bar, navigation bar, menu, shortcuts
@@ -171,6 +173,8 @@ qml/
 | `Ctrl+,` / `Ctrl+Shift+,` | Configure Kondor Browser (settings) |
 | `Ctrl+L` | Focus the address bar |
 | `Ctrl+F` | Find in page |
+| `Ctrl+P` | Print (opens a PDF in the viewer) |
+| `Ctrl+S` | Save page as… |
 | `F12` / `Ctrl+Shift+I` | Toggle developer tools |
 | `Ctrl+F` (Configure window) | Filter the settings pages |
 | `F3` / `Shift+F3` | Next / previous match (find bar open) |

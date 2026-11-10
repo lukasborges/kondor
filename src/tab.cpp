@@ -222,6 +222,26 @@ void Tab::setDevToolsOpen(bool open)
     emit devToolsOpenChanged();
 }
 
+void Tab::printToPdf(const QString &filePath)
+{
+    emit printToPdfRequested(filePath);
+}
+
+void Tab::print()
+{
+    emit printRequested();
+}
+
+void Tab::savePage(const QString &filePath, int format)
+{
+    emit savePageRequested(filePath, format);
+}
+
+void Tab::setPdfFinished(const QString &filePath, bool success)
+{
+    emit pdfFinished(filePath, success);
+}
+
 void Tab::toggleDevTools()
 {
     emit toggleDevToolsRequested();

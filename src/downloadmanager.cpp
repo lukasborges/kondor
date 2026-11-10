@@ -365,9 +365,14 @@ void DownloadManager::handleRequest(QWebEngineDownloadRequest *download, bool is
     if (!download)
         return;
 
-    download->setDownloadDirectory(Settings::instance()->downloadDirectory());
-    if (download->downloadFileName().isEmpty())
-        download->setDownloadFileName(download->suggestedFileName());
+    // "Save Page As" already chose the file in its own dialog: keep that
+    // location and do not ask again.
+    const bool isSavePage = download->isSavePageDownload();
+    if (!isSavePage) {
+        download->setDownloadDirectory(Settings::instance()->downloadDirectory());
+        if (download->downloadFileName().isEmpty())
+            download->setDownloadFileName(download->suggestedFileName());
+    }
 
     m_model->addDownload(download, isPrivate);
 
@@ -386,7 +391,7 @@ void DownloadManager::handleRequest(QWebEngineDownloadRequest *download, bool is
                 }
             });
 
-    if (Settings::instance()->askWhereToSave()) {
+    if (!isSavePage && Settings::instance()->askWhereToSave()) {
         auto *quickRequest = qobject_cast<QQuickWebEngineDownloadRequest *>(download);
         if (quickRequest) {
             const QString path = QDir(download->downloadDirectory())

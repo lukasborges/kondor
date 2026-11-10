@@ -149,90 +149,90 @@
         <translation>Gerir favoritos</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="352"/>
-        <location filename="../qml/BookmarksWindow.qml" line="717"/>
-        <location filename="../qml/BookmarksWindow.qml" line="734"/>
+        <location filename="../qml/BookmarksWindow.qml" line="377"/>
+        <location filename="../qml/BookmarksWindow.qml" line="769"/>
+        <location filename="../qml/BookmarksWindow.qml" line="786"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>Nova pasta</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="357"/>
+        <location filename="../qml/BookmarksWindow.qml" line="382"/>
         <source>Rename</source>
         <translation>Mudar o nome</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="371"/>
+        <location filename="../qml/BookmarksWindow.qml" line="396"/>
         <source>Delete</source>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="388"/>
+        <location filename="../qml/BookmarksWindow.qml" line="413"/>
         <source>Move Up</source>
         <translation>Mover para cima</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="399"/>
+        <location filename="../qml/BookmarksWindow.qml" line="424"/>
         <source>Move Down</source>
         <translation>Mover para baixo</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="410"/>
+        <location filename="../qml/BookmarksWindow.qml" line="435"/>
         <source>Import from HTML…</source>
         <translation>Importar de HTML…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="418"/>
+        <location filename="../qml/BookmarksWindow.qml" line="443"/>
         <source>Search bookmarks…</source>
         <translation>Pesquisar favoritos…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="689"/>
+        <location filename="../qml/BookmarksWindow.qml" line="741"/>
         <source>Move To</source>
         <translation>Mover para</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="728"/>
+        <location filename="../qml/BookmarksWindow.qml" line="780"/>
         <source>Name:</source>
         <translation>Nome:</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="755"/>
+        <location filename="../qml/BookmarksWindow.qml" line="807"/>
         <source>Rename Folder</source>
         <translation>Mudar o nome da pasta</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="755"/>
+        <location filename="../qml/BookmarksWindow.qml" line="807"/>
         <source>Rename Bookmark</source>
         <translation>Mudar o nome do favorito</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="770"/>
+        <location filename="../qml/BookmarksWindow.qml" line="822"/>
         <source>New name:</source>
         <translation>Novo nome:</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="798"/>
+        <location filename="../qml/BookmarksWindow.qml" line="850"/>
         <source>Delete Folder</source>
         <translation>Eliminar pasta</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="798"/>
+        <location filename="../qml/BookmarksWindow.qml" line="850"/>
         <source>Delete Bookmark</source>
         <translation>Eliminar favorito</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="800"/>
+        <location filename="../qml/BookmarksWindow.qml" line="852"/>
         <source>Delete this folder and everything in it?</source>
         <translation>Eliminar esta pasta e todo o seu conteúdo?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="801"/>
+        <location filename="../qml/BookmarksWindow.qml" line="853"/>
         <source>Delete this bookmark?</source>
         <translation>Eliminar este favorito?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="822"/>
+        <location filename="../qml/BookmarksWindow.qml" line="874"/>
         <source>Import Bookmarks</source>
         <translation>Importar favoritos</translation>
     </message>

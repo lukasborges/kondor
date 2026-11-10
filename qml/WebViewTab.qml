@@ -8,6 +8,10 @@ Item {
     required property Tab tab
     required property TabModel tabModel
 
+    // Last page position a context menu was requested at, in the view's
+    // coordinates. The Menu / Shift+F10 shortcut opens the menu there.
+    property point contextMenuPosition: Qt.point(0, 0)
+
     // Rejects the pending certificate request, if any, and drops the JS
     // reference. Returns true when there was one to answer.
     function rejectCertificateError() {
@@ -96,6 +100,15 @@ Item {
             root.tab.enqueuePermission(permission)
         }
 
+        // Right click: take over from Qt WebEngine's minimal default menu and
+        // show the full page menu at the cursor.
+        onContextMenuRequested: function(request) {
+            request.accepted = true
+            root.contextMenuPosition = Qt.point(request.position.x, request.position.y)
+            contextMenu.request = request
+            contextMenu.popupAt(root.contextMenuPosition)
+        }
+
         // A page failed the certificate check. Keep the request pending (defer)
         // so the error page can offer Back to Safety or an explicit override.
         onCertificateError: function(error) {
@@ -129,6 +142,27 @@ Item {
         onNewWindowRequested: function(request) {
             const background = request.destination === WebEngineNewWindowRequest.InNewBackgroundTab
             root.tabModel.addTabWithProfile(root.tab.profile, request.requestedUrl, background)
+        }
+    }
+
+    // Right-click menu of the page. The Menu / Shift+F10 shortcut opens the
+    // generic page menu at the last known position, or in the middle.
+    PageContextMenu {
+        id: contextMenu
+        webView: webView
+        tab: root.tab
+        tabModel: root.tabModel
+    }
+
+    Shortcut {
+        sequences: ["Menu", "Shift+F10"]
+        enabled: root.visible && webView.activeFocus
+        onActivated: {
+            contextMenu.request = null
+            const center = Qt.point(webView.width / 2, webView.height / 2)
+            const point = root.contextMenuPosition.x === 0 && root.contextMenuPosition.y === 0
+                ? center : root.contextMenuPosition
+            contextMenu.popupAt(point)
         }
     }
 
@@ -221,10 +255,13 @@ Item {
         }
     }
 
-    // Leaving the tab (switching or closing) ends its page's full screen, so
-    // the window can go back to normal instead of staying full screen.
+    // Leaving the tab (switching or closing) ends its page's full screen and
+    // closes its context menu, so the window can go back to normal.
     onVisibleChanged: {
-        if (!visible && root.tab && root.tab.isFullScreen)
+        if (visible)
+            return
+        contextMenu.close()
+        if (root.tab && root.tab.isFullScreen)
             root.tab.exitFullScreen()
     }
 

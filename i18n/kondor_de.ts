@@ -295,7 +295,7 @@
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="898"/>
+        <location filename="../qml/BrowserWindow.qml" line="1144"/>
         <source>New Tab</source>
         <translation>Neuer Tab</translation>
     </message>
@@ -346,7 +346,7 @@
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="903"/>
+        <location filename="../qml/BrowserWindow.qml" line="1150"/>
         <source>New Private Tab</source>
         <translation>Neuer privater Tab</translation>
     </message>
@@ -391,165 +391,140 @@
         <translation>Dieses Lesezeichen bearbeiten</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="908"/>
+        <location filename="../qml/BrowserWindow.qml" line="1156"/>
         <source>New Window</source>
         <translation>Neues Fenster</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="913"/>
+        <location filename="../qml/BrowserWindow.qml" line="1162"/>
         <source>New Private Window</source>
         <translation>Neues privates Fenster</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="918"/>
+        <location filename="../qml/BrowserWindow.qml" line="1168"/>
+        <source>Show All History</source>
+        <translation>Gesamten Verlauf anzeigen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1174"/>
         <source>Reopen Closed Tab</source>
         <translation>Geschlossenen Tab wieder öffnen</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="925"/>
-        <source>Close Tab</source>
-        <translation>Tab schließen</translation>
-    </message>
-    <message>
-        <location filename="../qml/BrowserWindow.qml" line="931"/>
+        <location filename="../qml/BrowserWindow.qml" line="1181"/>
         <source>Find in Page…</source>
         <translation>In Seite suchen…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="937"/>
+        <location filename="../qml/BrowserWindow.qml" line="1195"/>
         <source>Save Page As…</source>
         <translation>Seite speichern unter …</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="943"/>
+        <location filename="../qml/BrowserWindow.qml" line="1209"/>
         <source>Save as PDF…</source>
         <translation>Als PDF speichern …</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="949"/>
+        <location filename="../qml/BrowserWindow.qml" line="1188"/>
         <source>Print…</source>
         <translation>Drucken …</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="956"/>
-        <source>Zoom In</source>
-        <translation>Vergrößern</translation>
-    </message>
-    <message>
-        <location filename="../qml/BrowserWindow.qml" line="965"/>
-        <source>Zoom Out</source>
-        <translation>Verkleinern</translation>
-    </message>
-    <message>
-        <location filename="../qml/BrowserWindow.qml" line="974"/>
-        <source>Actual Size</source>
-        <translation>Tatsächliche Größe</translation>
-    </message>
-    <message>
-        <location filename="../qml/BrowserWindow.qml" line="984"/>
-        <source>Bookmarks</source>
-        <translation>Lesezeichen</translation>
-    </message>
-    <message>
-        <location filename="../qml/BrowserWindow.qml" line="995"/>
-        <source>History</source>
-        <translation>Verlauf</translation>
-    </message>
-    <message>
-        <location filename="../qml/BrowserWindow.qml" line="1000"/>
+        <location filename="../qml/BrowserWindow.qml" line="1215"/>
         <source>Site Permissions…</source>
         <translation>Website-Berechtigungen…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1005"/>
-        <source>More Tools</source>
-        <translation>Weitere Werkzeuge</translation>
-    </message>
-    <message>
-        <location filename="../qml/BrowserWindow.qml" line="1008"/>
+        <location filename="../qml/BrowserWindow.qml" line="1202"/>
         <source>Developer Tools</source>
         <translation>Entwicklerwerkzeuge</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1022"/>
+        <location filename="../qml/BrowserWindow.qml" line="1221"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 einrichten…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1029"/>
+        <location filename="../qml/BrowserWindow.qml" line="1227"/>
+        <source>Report a Bug…</source>
+        <translation>Fehler melden…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1233"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Über %1</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1083"/>
+        <location filename="../qml/BrowserWindow.qml" line="947"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Esc drücken, um den Vollbildmodus zu beenden</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1153"/>
+        <location filename="../qml/BrowserWindow.qml" line="1017"/>
         <source>Page bookmarked</source>
         <translation>Seite als Lesezeichen gespeichert</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1153"/>
+        <location filename="../qml/BrowserWindow.qml" line="1017"/>
         <source>Edit Bookmark</source>
         <translation>Lesezeichen bearbeiten</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1161"/>
+        <location filename="../qml/BrowserWindow.qml" line="1025"/>
         <source>Name:</source>
         <translation>Name:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1167"/>
+        <location filename="../qml/BrowserWindow.qml" line="1031"/>
         <source>Folder:</source>
         <translation>Ordner:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1177"/>
+        <location filename="../qml/BrowserWindow.qml" line="1041"/>
         <source>Remove</source>
         <translation>Entfernen</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1185"/>
+        <location filename="../qml/BrowserWindow.qml" line="1049"/>
         <source>Done</source>
         <translation>Fertig</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1196"/>
+        <location filename="../qml/BrowserWindow.qml" line="1060"/>
         <source>Save as PDF</source>
         <translation>Als PDF speichern</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1198"/>
+        <location filename="../qml/BrowserWindow.qml" line="1062"/>
         <source>PDF (*.pdf)</source>
         <translation>PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1205"/>
+        <location filename="../qml/BrowserWindow.qml" line="1069"/>
         <source>Save Page As</source>
         <translation>Seite speichern unter</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1207"/>
+        <location filename="../qml/BrowserWindow.qml" line="1071"/>
         <source>Web Page, Complete (*.html)</source>
         <translation>Webseite, vollständig (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1208"/>
+        <location filename="../qml/BrowserWindow.qml" line="1072"/>
         <source>Web Page, HTML Only (*.html)</source>
         <translation>Webseite, nur HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1209"/>
+        <location filename="../qml/BrowserWindow.qml" line="1073"/>
         <source>Web Archive (*.mhtml)</source>
         <translation>Webarchiv (*.mhtml)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1225"/>
+        <location filename="../qml/BrowserWindow.qml" line="1089"/>
         <source>Save File</source>
         <translation>Datei speichern</translation>
     </message>
@@ -856,6 +831,69 @@
         <source>Kondor Browser</source>
         <extracomment>Application display name: translate &quot;Browser&quot;, keep &quot;Kondor&quot;</extracomment>
         <translation>Kondor-Browser</translation>
+    </message>
+</context>
+<context>
+    <name>MainMenu</name>
+    <message>
+        <location filename="../qml/MainMenu.qml" line="28"/>
+        <source>Bookmarks</source>
+        <translation>Lesezeichen</translation>
+    </message>
+    <message>
+        <location filename="../qml/MainMenu.qml" line="45"/>
+        <source>History</source>
+        <translation>Verlauf</translation>
+    </message>
+    <message>
+        <location filename="../qml/MainMenu.qml" line="61"/>
+        <source>Recently Closed Tabs</source>
+        <translation>Kürzlich geschlossene Tabs</translation>
+    </message>
+    <message>
+        <location filename="../qml/MainMenu.qml" line="78"/>
+        <source>Today</source>
+        <translation>Heute</translation>
+    </message>
+    <message>
+        <location filename="../qml/MainMenu.qml" line="154"/>
+        <source>Zoom</source>
+        <translation>Zoom</translation>
+    </message>
+    <message>
+        <location filename="../qml/MainMenu.qml" line="163"/>
+        <source>Zoom Out (Ctrl+−)</source>
+        <translation>Verkleinern (Ctrl+−)</translation>
+    </message>
+    <message>
+        <location filename="../qml/MainMenu.qml" line="173"/>
+        <source>Reset Zoom (Ctrl+0)</source>
+        <translation>Zoom zurücksetzen (Ctrl+0)</translation>
+    </message>
+    <message>
+        <location filename="../qml/MainMenu.qml" line="183"/>
+        <source>Zoom In (Ctrl++)</source>
+        <translation>Vergrößern (Ctrl++)</translation>
+    </message>
+    <message>
+        <location filename="../qml/MainMenu.qml" line="196"/>
+        <source>Exit Full Screen (F11)</source>
+        <translation>Vollbildmodus beenden (F11)</translation>
+    </message>
+    <message>
+        <location filename="../qml/MainMenu.qml" line="197"/>
+        <source>Full Screen (F11)</source>
+        <translation>Vollbild (F11)</translation>
+    </message>
+    <message>
+        <location filename="../qml/MainMenu.qml" line="210"/>
+        <source>More Tools</source>
+        <translation>Weitere Werkzeuge</translation>
+    </message>
+    <message>
+        <location filename="../qml/MainMenu.qml" line="223"/>
+        <source>Help</source>
+        <translation>Hilfe</translation>
     </message>
 </context>
 <context>

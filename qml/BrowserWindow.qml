@@ -891,145 +891,9 @@ ApplicationWindow {
                     ToolTip.delay: 600
                     onClicked: mainMenu.open()
 
-                    Menu {
+                    MainMenu {
                         id: mainMenu
-
-                        MenuItem {
-                            text: qsTr("New Tab")
-                            icon.name: "tab-new"
-                            onTriggered: window.openNewTab(false)
-                        }
-                        MenuItem {
-                            text: qsTr("New Private Tab")
-                            icon.name: "view-private"
-                            onTriggered: window.openNewTab(true)
-                        }
-                        MenuItem {
-                            text: qsTr("New Window")
-                            icon.name: "window-new"
-                            onTriggered: WindowManager.newWindow(false)
-                        }
-                        MenuItem {
-                            text: qsTr("New Private Window")
-                            icon.name: "view-private"
-                            onTriggered: WindowManager.newWindow(true)
-                        }
-                        MenuItem {
-                            text: qsTr("Reopen Closed Tab")
-                            icon.name: "edit-undo"
-                            enabled: tabs.canReopenClosedTab
-                            onTriggered: tabs.reopenClosedTab()
-                        }
-                        MenuSeparator {}
-                        MenuItem {
-                            text: qsTr("Close Tab")
-                            icon.name: "window-close"
-                            onTriggered: window.closeTabAt(tabs.currentIndex)
-                        }
-                        MenuSeparator {}
-                        MenuItem {
-                            text: qsTr("Find in Page…")
-                            icon.name: "edit-find"
-                            enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
-                            onTriggered: findBar.open()
-                        }
-                        MenuItem {
-                            text: qsTr("Save Page As…")
-                            icon.name: "document-save-as"
-                            enabled: window.canPrintOrSave
-                            onTriggered: window.savePageAs()
-                        }
-                        MenuItem {
-                            text: qsTr("Save as PDF…")
-                            icon.name: "document-export"
-                            enabled: window.canPrintOrSave
-                            onTriggered: window.saveAsPdf()
-                        }
-                        MenuItem {
-                            text: qsTr("Print…")
-                            icon.name: "document-print"
-                            enabled: window.canPrintOrSave
-                            onTriggered: window.printPage()
-                        }
-                        MenuSeparator {}
-                        MenuItem {
-                            text: qsTr("Zoom In")
-                            icon.name: "zoom-in"
-                            enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
-                            onTriggered: {
-                                if (tabs.currentTab)
-                                    tabs.currentTab.zoomIn()
-                            }
-                        }
-                        MenuItem {
-                            text: qsTr("Zoom Out")
-                            icon.name: "zoom-out"
-                            enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
-                            onTriggered: {
-                                if (tabs.currentTab)
-                                    tabs.currentTab.zoomOut()
-                            }
-                        }
-                        MenuItem {
-                            text: qsTr("Actual Size")
-                            icon.name: "zoom-original"
-                            enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
-                            onTriggered: {
-                                if (tabs.currentTab)
-                                    tabs.currentTab.resetZoom()
-                            }
-                        }
-                        MenuSeparator {}
-                        BookmarkMenu {
-                            title: qsTr("Bookmarks")
-                            icon.name: "bookmarks"
-                            showCommands: true
-                            folderId: BookmarkManager.toolbarFolderId()
-                            onBookmarkActivated: function(url, background) {
-                                window.openUrl(url, background)
-                            }
-                            onBookmarkThisPageRequested: window.openBookmarkEditor()
-                            onManageBookmarksRequested: window.openBookmarks()
-                        }
-                        MenuItem {
-                            text: qsTr("History")
-                            icon.name: "view-history"
-                            onTriggered: window.openHistory()
-                        }
-                        MenuItem {
-                            text: qsTr("Site Permissions…")
-                            icon.name: "security-high"
-                            onTriggered: window.openSitePermissions()
-                        }
-                        Menu {
-                            title: qsTr("More Tools")
-                            icon.name: "applications-development"
-                            MenuItem {
-                                text: qsTr("Developer Tools")
-                                icon.name: "code-context"
-                                checkable: true
-                                checked: tabs.currentTab ? tabs.currentTab.devToolsOpen : false
-                                enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
-                                onTriggered: {
-                                    if (tabs.currentTab)
-                                        tabs.currentTab.toggleDevTools()
-                                }
-                            }
-                        }
-                        MenuSeparator {}
-                        MenuItem {
-                            //: %1 is the application name
-                            text: qsTr("Configure %1…").arg(Qt.application.displayName)
-                            icon.name: "configure"
-                            onTriggered: window.openSettings()
-                        }
-                        MenuSeparator {}
-                        MenuItem {
-                            //: %1 is the application name
-                            text: qsTr("About %1").arg(Qt.application.displayName)
-                            icon.name: "help-about"
-                            onTriggered: window.openAbout()
-                        }
+                        browserWindow: window
                     }
                 }
             }
@@ -1271,22 +1135,111 @@ ApplicationWindow {
         }
     }
 
+    // ── Actions ─────────────────────────────────────────────────────────
+    // One per command of the main menu that has a shortcut. The menu draws the
+    // shortcut from the action, and the action fires it while the menu is
+    // closed, so these sequences have no separate Shortcut element.
+    readonly property alias tabModel: tabs
+    readonly property Action newTabAction: Action {
+        text: qsTr("New Tab")
+        icon.name: "tab-new"
+        shortcut: "Ctrl+T"
+        onTriggered: window.openNewTab(false)
+    }
+    readonly property Action newPrivateTabAction: Action {
+        text: qsTr("New Private Tab")
+        icon.name: "view-private"
+        shortcut: "Ctrl+Shift+N"
+        onTriggered: window.openNewTab(true)
+    }
+    readonly property Action newWindowAction: Action {
+        text: qsTr("New Window")
+        icon.name: "window-new"
+        shortcut: "Ctrl+N"
+        onTriggered: WindowManager.newWindow(false)
+    }
+    readonly property Action newPrivateWindowAction: Action {
+        text: qsTr("New Private Window")
+        icon.name: "view-private"
+        shortcut: "Ctrl+Shift+P"
+        onTriggered: WindowManager.newWindow(true)
+    }
+    readonly property Action historyAction: Action {
+        text: qsTr("Show All History")
+        icon.name: "view-history"
+        shortcut: "Ctrl+H"
+        onTriggered: window.openHistory()
+    }
+    readonly property Action reopenClosedTabAction: Action {
+        text: qsTr("Reopen Closed Tab")
+        icon.name: "edit-undo"
+        shortcut: "Ctrl+Shift+T"
+        enabled: tabs.canReopenClosedTab
+        onTriggered: tabs.reopenClosedTab()
+    }
+    readonly property Action findAction: Action {
+        text: qsTr("Find in Page…")
+        icon.name: "edit-find"
+        shortcut: StandardKey.Find
+        enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
+        onTriggered: findBar.open()
+    }
+    readonly property Action printAction: Action {
+        text: qsTr("Print…")
+        icon.name: "document-print"
+        shortcut: StandardKey.Print
+        enabled: window.canPrintOrSave
+        onTriggered: window.printPage()
+    }
+    readonly property Action savePageAction: Action {
+        text: qsTr("Save Page As…")
+        icon.name: "document-save-as"
+        shortcut: StandardKey.Save
+        enabled: window.canPrintOrSave
+        onTriggered: window.savePageAs()
+    }
+    readonly property Action devToolsAction: Action {
+        text: qsTr("Developer Tools")
+        icon.name: "code-context"
+        shortcut: "F12"
+        enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
+        onTriggered: tabs.currentTab.toggleDevTools()
+    }
+    readonly property Action saveAsPdfAction: Action {
+        text: qsTr("Save as PDF…")
+        icon.name: "document-export"
+        enabled: window.canPrintOrSave
+        onTriggered: window.saveAsPdf()
+    }
+    readonly property Action sitePermissionsAction: Action {
+        text: qsTr("Site Permissions…")
+        icon.name: "security-high"
+        onTriggered: window.openSitePermissions()
+    }
+    readonly property Action settingsAction: Action {
+        //: %1 is the application name
+        text: qsTr("Configure %1…").arg(Qt.application.displayName)
+        icon.name: "configure"
+        shortcut: "Ctrl+,"
+        onTriggered: window.openSettings()
+    }
+    readonly property Action reportBugAction: Action {
+        text: qsTr("Report a Bug…")
+        icon.name: "tools-report-bug"
+        onTriggered: window.openUrl("https://github.com/lukasborges/kondor/issues", true)
+    }
+    readonly property Action aboutAction: Action {
+        //: %1 is the application name
+        text: qsTr("About %1").arg(Qt.application.displayName)
+        icon.name: "help-about"
+        onTriggered: window.openAbout()
+    }
+
     // ── Shortcuts ───────────────────────────────────────────────────────
     Shortcut {
-        sequence: "Ctrl+T"
-        onActivated: window.openNewTab(false)
-    }
-    Shortcut {
-        sequence: "Ctrl+N"
-        onActivated: WindowManager.newWindow(false)
-    }
-    Shortcut {
-        sequence: "Ctrl+Shift+P"
-        onActivated: WindowManager.newWindow(true)
-    }
-    Shortcut {
-        sequence: "Ctrl+Shift+N"
-        onActivated: window.openNewTab(true)
+        // Ctrl+Shift+, under the KDE platform theme; empty on the generic theme
+        sequences: [StandardKey.Preferences]
+        onActivated: window.openSettings()
     }
     Shortcut {
         sequence: "Ctrl+W"
@@ -1295,10 +1248,6 @@ ApplicationWindow {
     Shortcut {
         sequence: "Ctrl+Shift+W"
         onActivated: window.close()
-    }
-    Shortcut {
-        sequence: "Ctrl+Shift+T"
-        onActivated: tabs.reopenClosedTab()
     }
     Shortcut {
         sequences: ["Ctrl+Tab", "Ctrl+PgDown"]
@@ -1360,10 +1309,6 @@ ApplicationWindow {
         }
     }
     Shortcut {
-        sequence: "Ctrl+H"
-        onActivated: window.openHistory()
-    }
-    Shortcut {
         sequence: "Ctrl+D"
         onActivated: window.openBookmarkEditor()
     }
@@ -1374,10 +1319,6 @@ ApplicationWindow {
     Shortcut {
         sequence: "Ctrl+Shift+O"
         onActivated: window.openBookmarks()
-    }
-    Shortcut {
-        sequences: [StandardKey.Preferences, "Ctrl+,"]
-        onActivated: window.openSettings()
     }
     Shortcut {
         sequences: ["F5", "Ctrl+R"]
@@ -1427,24 +1368,9 @@ ApplicationWindow {
         onActivated: tabs.currentTab.toggleReaderMode()
     }
     Shortcut {
-        sequences: ["F12", "Ctrl+Shift+I"]
+        sequence: "Ctrl+Shift+I"
         enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
         onActivated: tabs.currentTab.toggleDevTools()
-    }
-    Shortcut {
-        sequences: [StandardKey.Print]
-        enabled: window.canPrintOrSave
-        onActivated: window.printPage()
-    }
-    Shortcut {
-        sequences: [StandardKey.Save]
-        enabled: window.canPrintOrSave
-        onActivated: window.savePageAs()
-    }
-    Shortcut {
-        sequences: [StandardKey.Find]
-        enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
-        onActivated: findBar.open()
     }
     Shortcut {
         sequence: "F3"

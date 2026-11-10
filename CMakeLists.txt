@@ -56,6 +56,7 @@ qt_add_qml_module(kondor
         qml/DownloadsPopup.qml
         qml/BookmarksBar.qml
         qml/BookmarkMenu.qml
+        qml/MainMenu.qml
         qml/BookmarksWindow.qml
         qml/SiteIcon.qml
         qml/AddressSuggestions.qml

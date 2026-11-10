@@ -183,6 +183,51 @@ set_tests_properties(tst_bookmarkswindow PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
 )
 
+qt_add_executable(tst_mainmenu
+    tst_mainmenu.cpp
+    ../src/bookmarkmanager.cpp
+    ../src/bookmarkmodel.cpp
+    ../src/database.cpp
+    ../src/tab.cpp
+    ../src/tabmodel.cpp
+    ../src/profilemanager.cpp
+    ../src/adblock/adblockmanager.cpp
+    ../src/adblock/adblockinterceptor.cpp
+    ../src/adblock/filterengine.cpp
+    ../src/addressresolver.cpp
+    ../src/settings.cpp
+    ../src/downloadmanager.cpp
+    ../src/notifier.cpp
+    ../src/historymanager.cpp
+    ../src/historymodel.cpp
+    ../src/faviconstore.cpp
+)
+
+target_compile_definitions(tst_mainmenu PRIVATE
+    KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+)
+
+target_include_directories(tst_mainmenu PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_mainmenu PRIVATE
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebEngineQuick
+)
+
+add_test(NAME tst_mainmenu COMMAND tst_mainmenu)
+set_tests_properties(tst_mainmenu PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)
+
 qt_add_executable(tst_topsites
     tst_topsites.cpp
     ../src/historymanager.cpp
@@ -501,6 +546,7 @@ add_test(NAME tst_zoommanager COMMAND tst_zoommanager)
 target_link_libraries(tst_tabmodel PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_addresssuggestions PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_bookmarkswindow PRIVATE Qt6::Concurrent Qt6::Network)
+target_link_libraries(tst_mainmenu PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_settingswindow PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_tabstrip PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_sitepermissions PRIVATE Qt6::Concurrent Qt6::Network)

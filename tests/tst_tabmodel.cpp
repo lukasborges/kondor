@@ -24,6 +24,9 @@ private slots:
     void privateWindowKeepsEveryTabPrivate();
     void reopenClosedTabRestoresPosition();
     void privateTabsAreNotReopened();
+    void recentlyClosedListsNewestFirst();
+    void reopenClosedTabByIndex();
+    void privateTabsAreNotInRecentlyClosed();
     void tabsStartOnNewTabPage();
     void emptyNavigationDoesNothing();
     void navigateLeavesNewTabPage();
@@ -182,6 +185,56 @@ void TestTabModel::reopenClosedTabRestoresPosition()
     QCOMPARE(model.currentIndex(), 1);
     QCOMPARE(model.currentTab()->url(), QUrl(QStringLiteral("https://b.example")));
     QVERIFY(!model.canReopenClosedTab());
+}
+
+void TestTabModel::recentlyClosedListsNewestFirst()
+{
+    TabModel model;
+    QSignalSpy spy(&model, &TabModel::recentlyClosedChanged);
+    model.addTab(false, QUrl(QStringLiteral("https://a.example")));
+    model.addTab(false, QUrl(QStringLiteral("https://b.example")));
+    model.addTab(false, QUrl(QStringLiteral("https://c.example")));
+    QVERIFY(model.recentlyClosed().isEmpty());
+
+    model.closeTab(0);
+    model.closeTab(1);
+    QCOMPARE(spy.count(), 2);
+
+    const QVariantList closed = model.recentlyClosed();
+    QCOMPARE(closed.size(), 2);
+    QCOMPARE(closed.at(0).toMap().value(QStringLiteral("url")).toUrl(),
+             QUrl(QStringLiteral("https://c.example")));
+    QCOMPARE(closed.at(1).toMap().value(QStringLiteral("url")).toUrl(),
+             QUrl(QStringLiteral("https://a.example")));
+}
+
+void TestTabModel::reopenClosedTabByIndex()
+{
+    TabModel model;
+    model.addTab(false, QUrl(QStringLiteral("https://a.example")));
+    model.addTab(false, QUrl(QStringLiteral("https://b.example")));
+    model.addTab(false, QUrl(QStringLiteral("https://c.example")));
+    model.closeTab(0);
+    model.closeTab(1);
+
+    // Index 1 is the older one (a.example); c.example stays in the list.
+    model.reopenClosedTab(1);
+    QCOMPARE(model.currentTab()->url(), QUrl(QStringLiteral("https://a.example")));
+    QCOMPARE(model.recentlyClosed().size(), 1);
+    QCOMPARE(model.recentlyClosed().at(0).toMap().value(QStringLiteral("url")).toUrl(),
+             QUrl(QStringLiteral("https://c.example")));
+
+    model.reopenClosedTab(5);
+    QCOMPARE(model.recentlyClosed().size(), 1);
+}
+
+void TestTabModel::privateTabsAreNotInRecentlyClosed()
+{
+    TabModel model;
+    model.addTab(false, QUrl(QStringLiteral("https://a.example")));
+    model.addTab(true, QUrl(QStringLiteral("https://private.example")));
+    model.closeTab(1);
+    QVERIFY(model.recentlyClosed().isEmpty());
 }
 
 void TestTabModel::privateTabsAreNotReopened()

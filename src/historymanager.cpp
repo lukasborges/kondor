@@ -5,7 +5,9 @@
 #include "historymodel.h"
 #include "settings.h"
 
+#include <QDate>
 #include <QDateTime>
+#include <QTime>
 #include <QHash>
 #include <QList>
 #include <QSqlQuery>
@@ -189,6 +191,32 @@ QVariantList HistoryManager::suggest(const QString &text, int limit) const
         suggestions.append(entry);
     }
     return suggestions;
+}
+
+QVariantList HistoryManager::recentToday(int limit) const
+{
+    QVariantList entries;
+    Database *db = Database::instance();
+    if (limit <= 0 || !db->isValid())
+        return entries;
+
+    const qint64 midnight = QDateTime(QDate::currentDate(), QTime(0, 0)).toMSecsSinceEpoch();
+    QSqlQuery query(db->handle());
+    query.prepare(QStringLiteral(
+        "SELECT url, title, MAX(visited_at) AS last FROM history WHERE visited_at >= ?"
+        " GROUP BY url ORDER BY last DESC LIMIT ?"));
+    query.addBindValue(midnight);
+    query.addBindValue(limit);
+    if (!query.exec())
+        return entries;
+
+    while (query.next()) {
+        QVariantMap entry;
+        entry.insert(QStringLiteral("url"), query.value(0).toString());
+        entry.insert(QStringLiteral("title"), query.value(1).toString());
+        entries.append(entry);
+    }
+    return entries;
 }
 
 QString HistoryManager::hostCompletion(const QString &text) const

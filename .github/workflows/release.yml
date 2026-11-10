@@ -15,11 +15,18 @@ jobs:
 
     steps:
       - name: Install dependencies
+        # Fedora mirrors sometimes stall: retry with a time limit instead of hanging the job for hours.
+        timeout-minutes: 50
         run: |
-          dnf -y install cmake ninja-build gcc-c++ make file wget git nodejs gh \
-            qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel qt6-qtwebchannel-devel \
-            kf6-kirigami kf6-qqc2-desktop-style kf6-kwallet-devel hunspell-en-US hunspell-pt-BR fuse-libs \
-            plasma-integration plasma-breeze-qt6 qt6-qtsvg
+          for attempt in 1 2 3; do
+            timeout 15m dnf -y install cmake ninja-build gcc-c++ make file wget git nodejs gh \
+                qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel qt6-qtwebchannel-devel \
+                kf6-kirigami kf6-qqc2-desktop-style kf6-kwallet-devel hunspell-en-US hunspell-pt-BR fuse-libs \
+                plasma-integration plasma-breeze-qt6 qt6-qtsvg && exit 0
+            echo "::warning::dnf install failed or timed out (attempt $attempt of 3)"
+            sleep 30
+          done
+          exit 1
 
       - name: Checkout
         uses: actions/checkout@v4

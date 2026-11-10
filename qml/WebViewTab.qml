@@ -24,6 +24,10 @@ Item {
         anchors.fill: parent
         profile: root.tab.profile
 
+        // Qt WebEngine disables page full screen by default, so a video
+        // player's button would never reach onFullScreenRequested.
+        settings.fullScreenSupportEnabled: true
+
         onTitleChanged: {
             root.tab.setTitle(title)
             if (!root.tab.isPrivate)
@@ -193,7 +197,7 @@ Item {
     // Leaving the tab (switching or closing) ends its page's full screen, so
     // the window can go back to normal instead of staying full screen.
     onVisibleChanged: {
-        if (!visible && root.tab.isFullScreen)
+        if (!visible && root.tab && root.tab.isFullScreen)
             root.tab.exitFullScreen()
     }
 

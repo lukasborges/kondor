@@ -35,9 +35,9 @@ Item {
         width: 300
 
         MenuItem { text: "New Tab"; icon.name: "tab-new"; action: Action { shortcut: "Ctrl+T" } }
-        MenuItem { text: "New Private Tab"; icon.name: "view-private"; action: Action { shortcut: "Ctrl+Shift+P" } }
+        MenuItem { text: "New Private Tab"; icon.name: "view-private"; action: Action { shortcut: "Ctrl+Shift+N" } }
         MenuItem { text: "New Window"; icon.name: "window-new"; action: Action { shortcut: "Ctrl+N" } }
-        MenuItem { text: "New Private Window"; icon.name: "view-private"; action: Action { shortcut: "Ctrl+Shift+N" } }
+        MenuItem { text: "New Private Window"; icon.name: "view-private"; action: Action { shortcut: "Ctrl+Shift+P" } }
         MenuSeparator {}
         Menu { title: "Bookmarks"; icon.name: "bookmarks"; popupType: Popup.Item }
         Menu { id: historyRow; title: "History"; icon.name: "view-history"; popupType: Popup.Item }

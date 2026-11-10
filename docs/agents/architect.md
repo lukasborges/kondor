@@ -21,7 +21,7 @@ you what to do next. Work in your own git worktree on `main` (never in the devel
 2. **Prototype** — for issues with UI, the static QML mockup under `prototypes/`, rendered to
    `prototypes/screenshots/*.png` (see `prototypes/README.md`).
 3. **Roadmap order** — you promote backlog issues to `to-dev`, **one at a time**: first any open
-   `bug` issue (oldest first), then the order listed in `AGENTS.md` → "Roadmap order" (adjust it
+   `bug` issue (highest `priority:` label first, oldest first among equals), then the order listed in `AGENTS.md` → "Roadmap order" (adjust it
    when dependencies change).
 4. **Defects** — when you find a defect in a delivered feature (or the maintainer reports one),
    file it as a `bug` issue whose body is its spec (see `AGENTS.md` → "Defects"): reproduce it
@@ -54,9 +54,10 @@ Act only on queue rows assigned to `architect`:
 - `question` → answer in the thread where it was asked (PR or issue), add a row to the spec's
   "Decisions" table (commit it), then remove `question` (keep the state label).
 - `in-review` → review the PR (see below). Approve → squash-merge it (the `Closes #N` closes the
-  issue) → promote the next issue (open bugs first, then the roadmap order) to `to-dev`. Changes needed → submit a
+  issue) → promote the next issue (open bugs first by priority, then the roadmap order) to `to-dev`. Changes needed → submit a
   "request changes" review and swap the label to `to-dev`.
-- Queue empty and nothing in review → promote the oldest open `bug` issue, or else the next
+- Queue empty and nothing in review → promote the highest-priority open `bug` issue (oldest
+  first among equals), or else the next
   roadmap issue, to `to-dev`.
 
 ## Spec template
@@ -116,7 +117,8 @@ headless (`claude -p --permission-mode auto`) for exactly one step when:
   request changes and switch to `to-dev`;
 - an issue has `question` → answer, record the decision in the spec, remove the label;
 - an issue is `to-spec` → write the spec/prototype, switch to `to-dev`;
-- nothing is in flight → promote the oldest open `bug` issue, or else the next "Roadmap order"
+- nothing is in flight → promote the highest-priority open `bug` issue (oldest first among
+  equals), or else the next "Roadmap order"
   issue, to `to-dev`.
 
 `--permission-mode auto` keeps Claude Code's safety classifier in front of every action. Merging

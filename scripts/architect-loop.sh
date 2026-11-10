@@ -83,7 +83,7 @@ $common
 Step: review the open PR for issue #$n (gh pr list --search "Closes #$n"). If issue #$n already has the label approved, skip the review and only do the CI check and merge part below. Use the review checklist in docs/agents/architect.md: build the PR head in a separate worktree, run the offscreen smoke test, the spec's manual test where possible (always with temporary XDG_CONFIG_HOME, XDG_DATA_HOME and XDG_CACHE_HOME as in AGENTS.md, never the maintainer's real profile) and ctest if tests exist; check the spec (docs/specs/$(printf '%04d' "$n")-*.md, or the issue body for a bug issue) acceptance criteria and out of scope, AGENTS.md conventions, private-tab privacy and visual parity with the prototype. Post the review as a PR review with concrete file:line comments.
 $merge_rule
 If it does not pass, submit "request changes" (gh pr review --request-changes; or a comment review starting with \"Verdict: REQUEST CHANGES\" if GitHub refuses), remove the approved label if present and switch issue #$n from in-review to to-dev.
-Promotion: if the queue is now empty, add the label to-dev to the oldest open issue labeled bug that has no state label or, if there is none, to the next issue of AGENTS.md "Roadmap order" that is still open and not yet started, with a short issue comment saying it is now the current issue, and run scripts/board.sh <that issue> "In Progress" to update the project board.
+Promotion: if the queue is now empty, add the label to-dev to the open issue labeled bug with the highest priority (priority: high, then priority: medium, then priority: low, then no priority label; oldest first among equals) that has no state label or, if there is none, to the next issue of AGENTS.md "Roadmap order" that is still open and not yet started, with a short issue comment saying it is now the current issue, and run scripts/board.sh <that issue> "In Progress" to update the project board.
 EOF
       ;;
       question) cat <<EOF
@@ -101,7 +101,7 @@ EOF
       promote) cat <<EOF
 $common
 
-Step: nothing is in flight (no issue is to-spec, to-dev or in-review). Promote the oldest open issue labeled bug that has no state label or, if there is none, the next issue of AGENTS.md "Roadmap order" that is still open and has no state label: add the label to-dev, post a short comment on it saying it is now the current issue and linking its spec (a bug issue is its own spec), and run scripts/board.sh <that issue> "In Progress" to update the project board. Do nothing else.
+Step: nothing is in flight (no issue is to-spec, to-dev or in-review). Promote the open issue labeled bug with the highest priority (priority: high, then priority: medium, then priority: low, then no priority label; oldest first among equals) that has no state label or, if there is none, the next issue of AGENTS.md "Roadmap order" that is still open and has no state label: add the label to-dev, post a short comment on it saying it is now the current issue and linking its spec (a bug issue is its own spec), and run scripts/board.sh <that issue> "In Progress" to update the project board. Do nothing else.
 EOF
       ;;
     esac

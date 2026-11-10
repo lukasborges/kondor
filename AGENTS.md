@@ -170,7 +170,8 @@ sections *Steps to reproduce*, *Expected*, *Actual*, *Acceptance criteria* and, 
 *Cause*. Decisions about a bug are recorded as issue comments. The developer works on a
 `fix/<issue-number>-<short-slug>` branch and commits with `fix: …`. Bugs follow the same labels
 and one-at-a-time rule as features, but **open bugs are promoted before the next roadmap issue**
-(oldest bug first), since they break features that are already delivered.
+(by `priority:` label — high, medium, low, none — and oldest first among equals), since they
+break features that are already delivered.
 
 ### Roadmap order
 

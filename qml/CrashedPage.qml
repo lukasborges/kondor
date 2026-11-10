@@ -67,8 +67,12 @@ Item {
                     text: qsTr("Reload")
                     icon.name: "view-refresh"
                     highlighted: true
-                    // Enter reloads right away, like the default button.
+                    // The Breeze style only activates a Button on Space, so
+                    // Return and Enter are handled explicitly: they reload right
+                    // away, like the default button.
                     focus: visible
+                    Keys.onReturnPressed: clicked()
+                    Keys.onEnterPressed: clicked()
                     onClicked: root.tab.reload()
                 }
             }

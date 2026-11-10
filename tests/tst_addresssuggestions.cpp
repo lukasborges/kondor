@@ -120,10 +120,20 @@ void TestAddressSuggestions::visitAndSearchRows()
              QStringLiteral("https://kde.org"));
     QCOMPARE(rows.at(0).toMap().value(QStringLiteral("suffix")).toString(),
              QStringLiteral("Visit"));
+    QCOMPARE(rows.at(0).toMap().value(QStringLiteral("fieldText")).toString(),
+             QStringLiteral("https://kde.org"));
     QCOMPARE(rows.at(1).toMap().value(QStringLiteral("iconName")).toString(),
              QStringLiteral("edit-find"));
     QVERIFY(rows.at(1).toMap().value(QStringLiteral("url")).toString()
                 .startsWith(QStringLiteral("https://duckduckgo.com/")));
+    // Selecting the search row shows the typed text, not the engine URL.
+    QCOMPARE(rows.at(1).toMap().value(QStringLiteral("fieldText")).toString(),
+             QStringLiteral("kde.org"));
+
+    QVariant selected;
+    QVERIFY(QMetaObject::invokeMethod(popup, "selectedText", Q_RETURN_ARG(QVariant, selected),
+                                      Q_ARG(QVariant, 1)));
+    QCOMPARE(selected.toString(), QStringLiteral("kde.org"));
 
     popup->setProperty("text", QStringLiteral("plasma"));
     const QVariantList searchOnly = rowsOf(popup);
@@ -189,6 +199,8 @@ void TestAddressSuggestions::addsBookmarksHistoryAndNetworkSuggestions()
     QCOMPARE(withSuggestions.size(), rows.size() + 2);
     const QVariantMap last = withSuggestions.last().toMap();
     QCOMPARE(last.value(QStringLiteral("label")).toString(), QStringLiteral("kde plasma 6"));
+    QCOMPARE(last.value(QStringLiteral("fieldText")).toString(),
+             QStringLiteral("kde plasma 6"));
     QCOMPARE(last.value(QStringLiteral("url")).toString(),
              ProfileManager::instance()->searchUrl(QStringLiteral("kde plasma 6")).toString());
 

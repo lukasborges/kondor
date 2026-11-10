@@ -527,12 +527,12 @@ ApplicationWindow {
                     // Text as the user typed it, before selecting a row or
                     // completing a host: Esc restores it.
                     property string typedText: ""
-                    // Last host written by inline completion and the text it
-                    // was completed from. While the field shrinks back to that
-                    // typed text (Backspace/Delete), it must not complete
-                    // again and refill what was just deleted.
-                    property string completedHost: ""
-                    property string completedPrefix: ""
+                    // Text before the current user edit. An edit that makes
+                    // the field shorter is a deletion (Backspace/Delete) and
+                    // inline completion must not refill what was just removed,
+                    // even when the removed text was pasted or typed faster
+                    // than the 120 ms debounce.
+                    property string previousText: ""
                     property bool lastEditDeleted: false
 
                     function syncFromTab() {
@@ -553,9 +553,8 @@ ApplicationWindow {
                         if (host.length === 0)
                             return
                         text = host
+                        previousText = host
                         select(typed.length, host.length)
-                        completedHost = host
-                        completedPrefix = typed
                     }
 
                     function updateSuggestions() {
@@ -603,15 +602,11 @@ ApplicationWindow {
                     }
 
                     onTextEdited: {
-                        const lower = text.toLowerCase()
-                        const hostLower = completedHost.toLowerCase()
-                        lastEditDeleted = completedHost.length > 0
-                                && text.length <= completedPrefix.length
-                                && hostLower.startsWith(lower)
-                        if (completedHost.length > 0 && !hostLower.startsWith(lower)) {
-                            completedHost = ""
-                            completedPrefix = ""
-                        }
+                        // Any edit that shrinks the field is a deletion, no
+                        // matter how the removed text got there (pasted or
+                        // typed before the debounce fired).
+                        lastEditDeleted = text.length < previousText.length
+                        previousText = text
                         typedText = text
                         // Query once the typing settles: building the rows
                         // runs the bookmark and history queries.
@@ -638,8 +633,9 @@ ApplicationWindow {
                         addressSuggestions.currentIndex =
                             Math.min(addressSuggestions.currentIndex + 1,
                                      addressSuggestions.rows.length - 1)
-                        // Show the selected address without querying again.
-                        text = addressSuggestions.rows[addressSuggestions.currentIndex].url
+                        // Show the selected row's text without querying again.
+                        text = addressSuggestions.selectedText(addressSuggestions.currentIndex)
+                        previousText = text
                         event.accepted = true
                     }
 
@@ -654,7 +650,8 @@ ApplicationWindow {
                         }
                         addressSuggestions.currentIndex =
                             Math.max(addressSuggestions.currentIndex - 1, 0)
-                        text = addressSuggestions.rows[addressSuggestions.currentIndex].url
+                        text = addressSuggestions.selectedText(addressSuggestions.currentIndex)
+                        previousText = text
                         event.accepted = true
                     }
 
@@ -669,6 +666,7 @@ ApplicationWindow {
                         }
                         // Only the dropdown goes away; the typed text stays.
                         text = typedText
+                        previousText = typedText
                         addressSuggestions.close()
                         event.accepted = true
                     }
@@ -680,8 +678,8 @@ ApplicationWindow {
                     onActiveFocusChanged: {
                         if (activeFocus) {
                             typedText = text
-                            completedHost = ""
-                            completedPrefix = ""
+                            previousText = text
+                            lastEditDeleted = false
                             selectAll()
                         } else {
                             addressSuggestions.close()

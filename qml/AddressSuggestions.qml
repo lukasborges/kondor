@@ -46,7 +46,8 @@ Popup {
                 iconName: "globe",
                 label: address,
                 suffix: qsTr("Visit"),
-                url: address
+                url: address,
+                fieldText: address
             })
             seen[address] = true
         }
@@ -60,7 +61,8 @@ Popup {
             iconName: "edit-find",
             label: typed,
             suffix: searchSuffix,
-            url: ProfileManager.searchUrl(typed)
+            url: ProfileManager.searchUrl(typed),
+            fieldText: typed
         })
 
         // Bookmarks (#2) and history (#1) only ever read persistent data, so
@@ -76,7 +78,8 @@ Popup {
                 iconName: "bookmarks",
                 label: String(bookmark.title).length > 0 ? String(bookmark.title) : url,
                 suffix: url,
-                url: url
+                url: url,
+                fieldText: url
             })
         }
 
@@ -91,7 +94,8 @@ Popup {
                 iconName: "view-history",
                 label: String(entry.title).length > 0 ? String(entry.title) : url,
                 suffix: url,
-                url: url
+                url: url,
+                fieldText: url
             })
         }
 
@@ -105,7 +109,8 @@ Popup {
                 iconName: "edit-find",
                 label: suggestion,
                 suffix: "",
-                url: ProfileManager.searchUrl(suggestion)
+                url: ProfileManager.searchUrl(suggestion),
+                fieldText: suggestion
             })
         }
 
@@ -116,6 +121,14 @@ Popup {
         if (index < 0 || index >= rows.length)
             return
         navigate(rows[index].url, background === true)
+    }
+
+    // Text the address bar shows when the row is selected with the keyboard:
+    // the typed/suggested search text rather than the engine's search URL.
+    function selectedText(index) {
+        if (index < 0 || index >= rows.length)
+            return ""
+        return String(rows[index].fieldText)
     }
 
     onRowsChanged: {

@@ -1,5 +1,7 @@
 #include <QCoreApplication>
+#include <QDate>
 #include <QDateTime>
+#include <QTime>
 #include <QSqlQuery>
 #include <QStandardPaths>
 #include <QTest>
@@ -24,6 +26,7 @@ private slots:
     void suggestSortsByVisitsAndLimit();
     void suggestEscapesWildcards();
     void hostCompletionPrefersMostVisitedHost();
+    void recentTodayExcludesYesterday();
 
 private:
     void addVisit(const QString &url, const QString &title, qint64 visitedAt);
@@ -46,6 +49,23 @@ void TestTopSites::addVisit(const QString &url, const QString &title, qint64 vis
     insert.addBindValue(title);
     insert.addBindValue(visitedAt);
     QVERIFY(insert.exec());
+}
+
+void TestTopSites::recentTodayExcludesYesterday()
+{
+    const qint64 midnight = QDateTime(QDate::currentDate(), QTime(0, 0)).toMSecsSinceEpoch();
+    addVisit(QStringLiteral("https://old.example/"), QStringLiteral("Old"), midnight - 1000);
+    addVisit(QStringLiteral("https://a.example/"), QStringLiteral("A"), midnight + 1000);
+    addVisit(QStringLiteral("https://b.example/"), QStringLiteral("B"), midnight + 2000);
+    addVisit(QStringLiteral("https://a.example/"), QStringLiteral("A"), midnight + 3000);
+
+    const QVariantList today = HistoryManager::instance()->recentToday(8);
+    QCOMPARE(today.size(), 2);
+    QCOMPARE(today.at(0).toMap().value(QStringLiteral("url")).toString(),
+             QStringLiteral("https://a.example/"));
+    QCOMPARE(today.at(1).toMap().value(QStringLiteral("url")).toString(),
+             QStringLiteral("https://b.example/"));
+    QCOMPARE(HistoryManager::instance()->recentToday(1).size(), 1);
 }
 
 void TestTopSites::groupsByHostAndSortsByVisits()

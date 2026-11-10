@@ -38,6 +38,9 @@ public:
     // first: each entry is {type: "history", url, title}. Reading is safe from
     // a private tab; the privacy barrier only stops recording.
     Q_INVOKABLE QVariantList suggest(const QString &text, int limit = 6) const;
+    // Up to `limit` pages visited since local midnight, most recent first, one
+    // row per URL: each entry is {url, title}.
+    Q_INVOKABLE QVariantList recentToday(int limit) const;
     // Host of the most visited history URL whose host starts with `text`
     // ("kd" -> "kde.org"), for inline completion in the address bar; empty
     // when there is no match or the text has spaces.

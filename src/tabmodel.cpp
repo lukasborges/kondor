@@ -123,6 +123,7 @@ void TabModel::closeTab(int index)
             m_closed.removeFirst();
         if (m_closed.size() == 1)
             emit canReopenClosedTabChanged();
+        emit recentlyClosedChanged();
     }
 
     beginRemoveRows(QModelIndex(), index, index);
@@ -155,21 +156,39 @@ void TabModel::closeTabObject(Tab *tab)
         closeTab(idx);
 }
 
+QVariantList TabModel::recentlyClosed() const
+{
+    QVariantList list;
+    for (qsizetype i = m_closed.size() - 1; i >= 0; --i) {
+        QVariantMap entry;
+        entry.insert(QStringLiteral("url"), m_closed.at(i).url);
+        entry.insert(QStringLiteral("title"), m_closed.at(i).title);
+        list.append(entry);
+    }
+    return list;
+}
+
 void TabModel::reopenClosedTab()
 {
-    if (m_closed.isEmpty())
+    reopenClosedTab(0);
+}
+
+void TabModel::reopenClosedTab(int index)
+{
+    if (index < 0 || index >= m_closed.size())
         return;
 
-    const ClosedTab closed = m_closed.takeLast();
+    const ClosedTab closed = m_closed.takeAt(m_closed.size() - 1 - index);
 
     // A reopened tab is never pinned, so it cannot land inside the pinned group.
-    const int index = qBound(pinnedCount(), closed.index, int(m_tabs.size()));
-    Tab *tab = insertTab(index, ProfileManager::instance()->defaultProfile(), closed.url, true);
+    const int row = qBound(pinnedCount(), closed.index, int(m_tabs.size()));
+    Tab *tab = insertTab(row, ProfileManager::instance()->defaultProfile(), closed.url, true);
     if (tab && !closed.title.isEmpty())
         tab->setTitle(closed.title);
 
     if (m_closed.isEmpty())
         emit canReopenClosedTabChanged();
+    emit recentlyClosedChanged();
 }
 
 void TabModel::moveTab(int from, int to)

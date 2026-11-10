@@ -11,6 +11,9 @@ private slots:
     void originOf();
     void canSaveFor_data();
     void canSaveFor();
+    void originFromInput_data();
+    void originFromInput();
+    void containsWhenClosed();
     void startsClosed();
 };
 
@@ -37,6 +40,39 @@ void TestPasswordStore::originOf()
     QFETCH(QUrl, url);
     QFETCH(QString, origin);
     QCOMPARE(PasswordStore::originOf(url), origin);
+}
+
+void TestPasswordStore::originFromInput_data()
+{
+    QTest::addColumn<QString>("text");
+    QTest::addColumn<QString>("origin");
+
+    const QString example = QStringLiteral("https://example.com");
+    QTest::newRow("bare host") << QStringLiteral("example.com") << example;
+    QTest::newRow("with path") << QStringLiteral("https://example.com/login") << example;
+    QTest::newRow("upper case, default port") << QStringLiteral("https://EXAMPLE.com:443") << example;
+    QTest::newRow("trimmed") << QStringLiteral("  example.com \n") << example;
+    QTest::newRow("host with path") << QStringLiteral("invent.kde.org/foo")
+                                    << QStringLiteral("https://invent.kde.org");
+    QTest::newRow("http refused") << QStringLiteral("http://example.com") << QString();
+    QTest::newRow("ftp refused") << QStringLiteral("ftp://example.com") << QString();
+    QTest::newRow("localhost accepted") << QStringLiteral("http://localhost:8080")
+                                        << QStringLiteral("http://localhost:8080");
+    QTest::newRow("empty") << QString() << QString();
+    QTest::newRow("blank") << QStringLiteral("   ") << QString();
+}
+
+void TestPasswordStore::originFromInput()
+{
+    QFETCH(QString, text);
+    QFETCH(QString, origin);
+    QCOMPARE(PasswordStore::originFromInput(text), origin);
+}
+
+void TestPasswordStore::containsWhenClosed()
+{
+    QVERIFY(!PasswordStore::instance()->contains(QStringLiteral("https://example.com"),
+                                                 QStringLiteral("student")));
 }
 
 void TestPasswordStore::canSaveFor_data()

@@ -58,6 +58,8 @@ StackLayout {
         savedModel.clear()
         for (const entry of list)
             savedModel.append({ site: entry.host, origin: entry.origin, username: entry.username })
+        // Nothing is selected until a login is added by hand.
+        savedList.currentIndex = -1
     }
 
     onActiveChanged: {
@@ -66,6 +68,8 @@ StackLayout {
             root.rebuild()
         } else {
             root.revealed = ({})
+            addDialog.close()
+            addDialog.clear()
         }
     }
 
@@ -79,6 +83,23 @@ StackLayout {
     }
 
     ListModel { id: savedModel }
+
+    AddPasswordDialog {
+        id: addDialog
+        parent: Overlay.overlay
+        onSaved: function(origin, username) {
+            filterField.text = ""
+            root.rebuild()
+            for (let i = 0; i < savedModel.count; ++i) {
+                const row = savedModel.get(i)
+                if (row.origin === origin && row.username === username) {
+                    savedList.currentIndex = i
+                    savedList.positionViewAtIndex(i, ListView.Contain)
+                    break
+                }
+            }
+        }
+    }
 
     MessageDialog {
         id: deleteDialog
@@ -125,12 +146,24 @@ StackLayout {
             value: root.offerToSave
         }
 
-        TextField {
-            id: filterField
+        RowLayout {
             Layout.fillWidth: true
-            enabled: !root.walletDenied
-            placeholderText: qsTr("Filter by site or username…")
-            onTextChanged: root.rebuild()
+            spacing: Kirigami.Units.smallSpacing
+
+            TextField {
+                id: filterField
+                Layout.fillWidth: true
+                enabled: !root.walletDenied
+                placeholderText: qsTr("Filter by site or username…")
+                onTextChanged: root.rebuild()
+            }
+
+            Button {
+                text: qsTr("Add Password…")
+                icon.name: "list-add"
+                enabled: !root.walletDenied
+                onClicked: addDialog.open()
+            }
         }
 
         Frame {
@@ -146,11 +179,33 @@ StackLayout {
                                   Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.2)
             }
 
+            Kirigami.PlaceholderMessage {
+                anchors.centerIn: parent
+                width: parent.width - Kirigami.Units.gridUnit * 4
+                visible: !root.walletDenied && savedModel.count === 0
+                icon.name: filterField.text.trim() !== "" ? "edit-none" : "dialog-password"
+                text: filterField.text.trim() !== ""
+                      ? qsTr("No saved passwords match “%1”").arg(filterField.text.trim())
+                      : qsTr("No saved passwords")
+                explanation: filterField.text.trim() !== ""
+                             ? ""
+                             : qsTr("Kondor offers to save a password when you log in to a site. You can also add one here.")
+                helpfulAction: filterField.text.trim() !== "" ? null : addAction
+
+                Kirigami.Action {
+                    id: addAction
+                    text: qsTr("Add Password…")
+                    icon.name: "list-add"
+                    onTriggered: addDialog.open()
+                }
+            }
+
             ListView {
                 id: savedList
                 anchors.fill: parent
                 clip: true
                 visible: !root.walletDenied
+                highlightFollowsCurrentItem: false
                 model: savedModel
                 section.property: "site"
                 section.delegate: Kirigami.ListSectionHeader {
@@ -161,6 +216,7 @@ StackLayout {
 
                 delegate: ItemDelegate {
                     id: row
+                    highlighted: ListView.isCurrentItem
                     required property string origin
                     required property string username
                     readonly property bool shown: root.isRevealed(origin, username)

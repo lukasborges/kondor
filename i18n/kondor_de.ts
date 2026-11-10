@@ -135,6 +135,49 @@
     </message>
 </context>
 <context>
+    <name>AddPasswordDialog</name>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="49"/>
+        <source>Add Password</source>
+        <translation>Passwort hinzufügen</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="70"/>
+        <source>Website:</source>
+        <translation>Website:</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="72"/>
+        <source>https://example.com</source>
+        <translation>https://example.com</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="79"/>
+        <source>Username:</source>
+        <translation>Benutzername:</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="87"/>
+        <source>Password:</source>
+        <translation>Passwort:</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="100"/>
+        <source>The password could not be saved to KWallet.</source>
+        <translation>Das Passwort konnte nicht in KWallet gespeichert werden.</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="102"/>
+        <source>Passwords can only be saved for https:// sites and localhost.</source>
+        <translation>Passwörter können nur für https://-Websites und localhost gespeichert werden.</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="103"/>
+        <source>A password for %1 on %2 is already saved. Saving replaces it.</source>
+        <translation>Ein Passwort für %1 auf %2 ist bereits gespeichert. Beim Speichern wird es ersetzt.</translation>
+    </message>
+</context>
+<context>
     <name>AddressSuggestions</name>
     <message>
         <location filename="../qml/AddressSuggestions.qml" line="58"/>
@@ -1122,62 +1165,83 @@
 <context>
     <name>PasswordsPage</name>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="87"/>
+        <location filename="../qml/PasswordsPage.qml" line="108"/>
         <source>Delete Saved Password</source>
         <translation>Gespeichertes Passwort löschen</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="88"/>
+        <location filename="../qml/PasswordsPage.qml" line="109"/>
         <source>Delete the saved password for %1 on %2?</source>
         <translation>Gespeichertes Passwort für %1 auf %2 löschen?</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="105"/>
+        <location filename="../qml/PasswordsPage.qml" line="126"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
         <translation>KWallet ist deaktiviert oder der Zugriff wurde verweigert. Passwörter können daher weder gespeichert noch eingefügt werden.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="108"/>
+        <location filename="../qml/PasswordsPage.qml" line="129"/>
         <source>Try Again</source>
         <translation>Erneut versuchen</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="118"/>
+        <location filename="../qml/PasswordsPage.qml" line="139"/>
         <source>Offer to save passwords</source>
         <translation>Anbieten, Passwörter zu speichern</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="132"/>
+        <location filename="../qml/PasswordsPage.qml" line="157"/>
         <source>Filter by site or username…</source>
         <translation>Nach Website oder Benutzername filtern …</translation>
     </message>
     <message>
+        <location filename="../qml/PasswordsPage.qml" line="162"/>
+        <location filename="../qml/PasswordsPage.qml" line="197"/>
+        <source>Add Password…</source>
+        <translation>Passwort hinzufügen …</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="188"/>
+        <source>No saved passwords match “%1”</source>
+        <translation>Keine gespeicherten Passwörter passen zu „%1“</translation>
+    </message>
+    <message>
         <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <source>No saved passwords</source>
+        <translation>Keine gespeicherten Passwörter</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="192"/>
+        <source>Kondor offers to save a password when you log in to a site. You can also add one here.</source>
+        <translation>Kondor bietet an, ein Passwort zu speichern, wenn Sie sich auf einer Website anmelden. Sie können hier auch eines hinzufügen.</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="245"/>
         <source>Hide Password</source>
         <translation>Passwort verbergen</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <location filename="../qml/PasswordsPage.qml" line="245"/>
         <source>Show Password</source>
         <translation>Passwort anzeigen</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="199"/>
+        <location filename="../qml/PasswordsPage.qml" line="255"/>
         <source>Copy Password</source>
         <translation>Passwort kopieren</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="209"/>
+        <location filename="../qml/PasswordsPage.qml" line="265"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="232"/>
+        <location filename="../qml/PasswordsPage.qml" line="288"/>
         <source>Kondor never offers to save passwords on these sites.</source>
         <translation>Kondor bietet auf diesen Websites nie an, Passwörter zu speichern.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="264"/>
+        <location filename="../qml/PasswordsPage.qml" line="320"/>
         <source>Remove</source>
         <translation>Entfernen</translation>
     </message>

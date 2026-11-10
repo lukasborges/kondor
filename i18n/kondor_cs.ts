@@ -280,22 +280,22 @@
     <message>
         <location filename="../qml/CrashedPage.qml" line="38"/>
         <source>This tab crashed</source>
-<translation>Tato karta spadla</translation>
+        <translation>Tato karta spadla</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="53"/>
         <source>Exit code: %1</source>
-<translation>Návratový kód: %1</translation>
+        <translation>Návratový kód: %1</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="61"/>
         <source>Close Tab</source>
-<translation>Zavřít kartu</translation>
+        <translation>Zavřít kartu</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="67"/>
         <source>Reload</source>
-<translation>Znovu načíst</translation>
+        <translation>Znovu načíst</translation>
     </message>
 </context>
 <context>
@@ -1281,17 +1281,17 @@
     <message>
         <location filename="../qml/WebViewTab.qml" line="72"/>
         <source>The page&apos;s process ended unexpectedly.</source>
-<translation>Proces stránky neočekávaně skončil.</translation>
+        <translation>Proces stránky neočekávaně skončil.</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="73"/>
         <source>The page crashed.</source>
-<translation>Stránka spadla.</translation>
+        <translation>Stránka spadla.</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="74"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
-<translation>Proces stránky byl ukončen (pravděpodobně kvůli nedostatku paměti).</translation>
+        <translation>Proces stránky byl ukončen (pravděpodobně kvůli nedostatku paměti).</translation>
     </message>
 </context>
 </TS>

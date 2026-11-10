@@ -280,22 +280,22 @@
     <message>
         <location filename="../qml/CrashedPage.qml" line="38"/>
         <source>This tab crashed</source>
-<translation>Ta karta uległa awarii</translation>
+        <translation>Ta karta uległa awarii</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="53"/>
         <source>Exit code: %1</source>
-<translation>Kod wyjścia: %1</translation>
+        <translation>Kod wyjścia: %1</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="61"/>
         <source>Close Tab</source>
-<translation>Zamknij kartę</translation>
+        <translation>Zamknij kartę</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="67"/>
         <source>Reload</source>
-<translation>Wczytaj ponownie</translation>
+        <translation>Wczytaj ponownie</translation>
     </message>
 </context>
 <context>
@@ -1281,17 +1281,17 @@
     <message>
         <location filename="../qml/WebViewTab.qml" line="72"/>
         <source>The page&apos;s process ended unexpectedly.</source>
-<translation>Proces strony zakończył się nieoczekiwanie.</translation>
+        <translation>Proces strony zakończył się nieoczekiwanie.</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="73"/>
         <source>The page crashed.</source>
-<translation>Strona uległa awarii.</translation>
+        <translation>Strona uległa awarii.</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="74"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
-<translation>Proces strony został zabity (prawdopodobnie z powodu braku pamięci).</translation>
+        <translation>Proces strony został zabity (prawdopodobnie z powodu braku pamięci).</translation>
     </message>
 </context>
 </TS>

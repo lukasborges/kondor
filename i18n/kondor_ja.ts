@@ -280,22 +280,22 @@
     <message>
         <location filename="../qml/CrashedPage.qml" line="38"/>
         <source>This tab crashed</source>
-<translation>このタブはクラッシュしました</translation>
+        <translation>このタブはクラッシュしました</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="53"/>
         <source>Exit code: %1</source>
-<translation>終了コード: %1</translation>
+        <translation>終了コード: %1</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="61"/>
         <source>Close Tab</source>
-<translation>タブを閉じる</translation>
+        <translation>タブを閉じる</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="67"/>
         <source>Reload</source>
-<translation>再読み込み</translation>
+        <translation>再読み込み</translation>
     </message>
 </context>
 <context>
@@ -1281,17 +1281,17 @@
     <message>
         <location filename="../qml/WebViewTab.qml" line="72"/>
         <source>The page&apos;s process ended unexpectedly.</source>
-<translation>ページのプロセスが予期せず終了しました。</translation>
+        <translation>ページのプロセスが予期せず終了しました。</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="73"/>
         <source>The page crashed.</source>
-<translation>ページがクラッシュしました。</translation>
+        <translation>ページがクラッシュしました。</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="74"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
-<translation>ページのプロセスが強制終了されました (メモリ不足の可能性があります)。</translation>
+        <translation>ページのプロセスが強制終了されました (メモリ不足の可能性があります)。</translation>
     </message>
 </context>
 </TS>

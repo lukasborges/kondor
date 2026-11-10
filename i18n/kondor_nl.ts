@@ -280,22 +280,22 @@
     <message>
         <location filename="../qml/CrashedPage.qml" line="38"/>
         <source>This tab crashed</source>
-<translation>Dit tabblad is gecrasht</translation>
+        <translation>Dit tabblad is gecrasht</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="53"/>
         <source>Exit code: %1</source>
-<translation>Afsluitcode: %1</translation>
+        <translation>Afsluitcode: %1</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="61"/>
         <source>Close Tab</source>
-<translation>Tabblad sluiten</translation>
+        <translation>Tabblad sluiten</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="67"/>
         <source>Reload</source>
-<translation>Herladen</translation>
+        <translation>Herladen</translation>
     </message>
 </context>
 <context>
@@ -1281,17 +1281,17 @@
     <message>
         <location filename="../qml/WebViewTab.qml" line="72"/>
         <source>The page&apos;s process ended unexpectedly.</source>
-<translation>Het proces van de pagina is onverwacht beëindigd.</translation>
+        <translation>Het proces van de pagina is onverwacht beëindigd.</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="73"/>
         <source>The page crashed.</source>
-<translation>De pagina is gecrasht.</translation>
+        <translation>De pagina is gecrasht.</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="74"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
-<translation>Het proces van de pagina is beëindigd (mogelijk door geheugengebrek).</translation>
+        <translation>Het proces van de pagina is beëindigd (mogelijk door geheugengebrek).</translation>
     </message>
 </context>
 </TS>

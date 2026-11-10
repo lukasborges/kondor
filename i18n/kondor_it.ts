@@ -280,22 +280,22 @@
     <message>
         <location filename="../qml/CrashedPage.qml" line="38"/>
         <source>This tab crashed</source>
-<translation>Questa scheda è andata in crash</translation>
+        <translation>Questa scheda è andata in crash</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="53"/>
         <source>Exit code: %1</source>
-<translation>Codice di uscita: %1</translation>
+        <translation>Codice di uscita: %1</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="61"/>
         <source>Close Tab</source>
-<translation>Chiudi scheda</translation>
+        <translation>Chiudi scheda</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="67"/>
         <source>Reload</source>
-<translation>Ricarica</translation>
+        <translation>Ricarica</translation>
     </message>
 </context>
 <context>
@@ -1281,17 +1281,17 @@
     <message>
         <location filename="../qml/WebViewTab.qml" line="72"/>
         <source>The page&apos;s process ended unexpectedly.</source>
-<translation>Il processo della pagina è terminato inaspettatamente.</translation>
+        <translation>Il processo della pagina è terminato inaspettatamente.</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="73"/>
         <source>The page crashed.</source>
-<translation>La pagina è andata in crash.</translation>
+        <translation>La pagina è andata in crash.</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="74"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
-<translation>Il processo della pagina è stato terminato (probabilmente per esaurimento della memoria).</translation>
+        <translation>Il processo della pagina è stato terminato (probabilmente per esaurimento della memoria).</translation>
     </message>
 </context>
 </TS>

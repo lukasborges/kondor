@@ -280,22 +280,22 @@
     <message>
         <location filename="../qml/CrashedPage.qml" line="38"/>
         <source>This tab crashed</source>
-<translation>Эта вкладка аварийно завершилась</translation>
+        <translation>Эта вкладка аварийно завершилась</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="53"/>
         <source>Exit code: %1</source>
-<translation>Код выхода: %1</translation>
+        <translation>Код выхода: %1</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="61"/>
         <source>Close Tab</source>
-<translation>Закрыть вкладку</translation>
+        <translation>Закрыть вкладку</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="67"/>
         <source>Reload</source>
-<translation>Обновить</translation>
+        <translation>Обновить</translation>
     </message>
 </context>
 <context>
@@ -1281,17 +1281,17 @@
     <message>
         <location filename="../qml/WebViewTab.qml" line="72"/>
         <source>The page&apos;s process ended unexpectedly.</source>
-<translation>Процесс страницы неожиданно завершился.</translation>
+        <translation>Процесс страницы неожиданно завершился.</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="73"/>
         <source>The page crashed.</source>
-<translation>Страница аварийно завершилась.</translation>
+        <translation>Страница аварийно завершилась.</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="74"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
-<translation>Процесс страницы был принудительно завершён (возможно, из-за нехватки памяти).</translation>
+        <translation>Процесс страницы был принудительно завершён (возможно, из-за нехватки памяти).</translation>
     </message>
 </context>
 </TS>

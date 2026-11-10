@@ -280,22 +280,22 @@
     <message>
         <location filename="../qml/CrashedPage.qml" line="38"/>
         <source>This tab crashed</source>
-<translation>此标签页已崩溃</translation>
+        <translation>此标签页已崩溃</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="53"/>
         <source>Exit code: %1</source>
-<translation>退出代码：%1</translation>
+        <translation>退出代码：%1</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="61"/>
         <source>Close Tab</source>
-<translation>关闭标签页</translation>
+        <translation>关闭标签页</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="67"/>
         <source>Reload</source>
-<translation>重新加载</translation>
+        <translation>重新加载</translation>
     </message>
 </context>
 <context>
@@ -1281,17 +1281,17 @@
     <message>
         <location filename="../qml/WebViewTab.qml" line="72"/>
         <source>The page&apos;s process ended unexpectedly.</source>
-<translation>页面进程意外结束。</translation>
+        <translation>页面进程意外结束。</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="73"/>
         <source>The page crashed.</source>
-<translation>页面已崩溃。</translation>
+        <translation>页面已崩溃。</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="74"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
-<translation>页面进程被终止（可能是内存不足）。</translation>
+        <translation>页面进程被终止（可能是内存不足）。</translation>
     </message>
 </context>
 </TS>

@@ -280,22 +280,22 @@
     <message>
         <location filename="../qml/CrashedPage.qml" line="38"/>
         <source>This tab crashed</source>
-<translation>Esta pestaña ha fallado</translation>
+        <translation>Esta pestaña ha fallado</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="53"/>
         <source>Exit code: %1</source>
-<translation>Código de salida: %1</translation>
+        <translation>Código de salida: %1</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="61"/>
         <source>Close Tab</source>
-<translation>Cerrar pestaña</translation>
+        <translation>Cerrar pestaña</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="67"/>
         <source>Reload</source>
-<translation>Volver a cargar</translation>
+        <translation>Volver a cargar</translation>
     </message>
 </context>
 <context>
@@ -1281,17 +1281,17 @@
     <message>
         <location filename="../qml/WebViewTab.qml" line="72"/>
         <source>The page&apos;s process ended unexpectedly.</source>
-<translation>El proceso de la página terminó inesperadamente.</translation>
+        <translation>El proceso de la página terminó inesperadamente.</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="73"/>
         <source>The page crashed.</source>
-<translation>La página ha fallado.</translation>
+        <translation>La página ha fallado.</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="74"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
-<translation>Se ha terminado el proceso de la página (posiblemente por falta de memoria).</translation>
+        <translation>Se ha terminado el proceso de la página (posiblemente por falta de memoria).</translation>
     </message>
 </context>
 </TS>

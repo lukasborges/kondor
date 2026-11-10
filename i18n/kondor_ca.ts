@@ -280,22 +280,22 @@
     <message>
         <location filename="../qml/CrashedPage.qml" line="38"/>
         <source>This tab crashed</source>
-<translation>Aquesta pestanya s&apos;ha penjat</translation>
+        <translation>Aquesta pestanya s&apos;ha penjat</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="53"/>
         <source>Exit code: %1</source>
-<translation>Codi de sortida: %1</translation>
+        <translation>Codi de sortida: %1</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="61"/>
         <source>Close Tab</source>
-<translation>Tanca la pestanya</translation>
+        <translation>Tanca la pestanya</translation>
     </message>
     <message>
         <location filename="../qml/CrashedPage.qml" line="67"/>
         <source>Reload</source>
-<translation>Torna a carregar</translation>
+        <translation>Torna a carregar</translation>
     </message>
 </context>
 <context>
@@ -1281,17 +1281,17 @@
     <message>
         <location filename="../qml/WebViewTab.qml" line="72"/>
         <source>The page&apos;s process ended unexpectedly.</source>
-<translation>El procés de la pàgina ha acabat inesperadament.</translation>
+        <translation>El procés de la pàgina ha acabat inesperadament.</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="73"/>
         <source>The page crashed.</source>
-<translation>La pàgina s&apos;ha penjat.</translation>
+        <translation>La pàgina s&apos;ha penjat.</translation>
     </message>
     <message>
         <location filename="../qml/WebViewTab.qml" line="74"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
-<translation>S&apos;ha finalitzat el procés de la pàgina (potser per manca de memòria).</translation>
+        <translation>S&apos;ha finalitzat el procés de la pàgina (potser per manca de memòria).</translation>
     </message>
 </context>
 </TS>

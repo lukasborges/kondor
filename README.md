@@ -57,6 +57,55 @@ Get the AppImage from the [latest release](https://github.com/lukasborges/kondor
 ### For developers
 - **Developer tools** (F12) and **view source**
 
+## Keyboard shortcuts
+
+| Shortcut | Action |
+| --- | --- |
+| `Ctrl+T` | New tab |
+| `Ctrl+Shift+N` | New private tab |
+| `Ctrl+N` | New window |
+| `Ctrl+Shift+P` | New private window |
+| `Ctrl+W` | Close tab (closes the window if it is the last one; the app quits when the last window closes) |
+| `Ctrl+Shift+W` | Close window |
+| `Ctrl+Shift+T` | Reopen closed tab |
+| `Ctrl+Tab` / `Ctrl+PgDown` | Next tab |
+| `Ctrl+Shift+Tab` / `Ctrl+PgUp` | Previous tab |
+| `Ctrl+1` … `Ctrl+8` | Go to tab N |
+| `Ctrl+9` | Go to the last tab |
+| `Ctrl+Shift+PgUp` / `Ctrl+Shift+PgDown` | Move the current tab left / right |
+| `Ctrl+H` | Browsing history |
+| `Ctrl+D` | Bookmark this page (edit name and folder) |
+| `Ctrl+Shift+B` | Show or hide the bookmarks toolbar |
+| `Ctrl+Shift+O` | Manage bookmarks |
+| `Ctrl+,` / `Ctrl+Shift+,` | Configure Kondor Browser (settings) |
+| `Ctrl+L` | Focus the address bar |
+| `Ctrl+F` | Find in page |
+| `Ctrl+P` | Print (opens a PDF in the viewer) |
+| `Ctrl+S` | Save page as… |
+| `F12` / `Ctrl+Shift+I` | Toggle developer tools |
+| `Ctrl+Alt+R` | Toggle reader mode (article pages) |
+| `Ctrl+F` (Configure window) | Filter the settings pages |
+| `F3` / `Shift+F3` | Next / previous match (find bar open) |
+| `Esc` | Close the find bar; leave page full screen |
+| `Shift+F10` / `Menu` | Open the page context menu |
+| `F11` | Toggle window full screen |
+| `Ctrl+R` / `F5` | Reload |
+| `Alt+←` / `Alt+→` | Back / forward |
+| `Ctrl++` / `Ctrl+-` | Zoom in / out |
+| `Ctrl+0` | Reset zoom (also by clicking the zoom level in the address bar) |
+
+## Set as default browser
+
+Install Kondor (or use the AppImage), then open **System Settings → Default Applications → Web
+browser** and choose **Kondor Browser**. From a terminal the same is done with:
+
+```bash
+xdg-settings set default-web-browser kondor.desktop
+```
+
+Kondor then opens links clicked in other applications. The desktop entry also provides a
+**New Private Window** action (`kondor --private`).
+
 ## Stack
 
 - **Qt 6.8+** (tested with **6.11.2**): `Core`, `DBus`, `Gui`, `LinguistTools`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebEngineCore`, `WebEngineQuick`, `Widgets`
@@ -104,55 +153,6 @@ ctest --test-dir build --output-on-failure
 ```
 
 Pass `-DBUILD_TESTING=OFF` to configure without building them.
-
-## Set as default browser
-
-Install Kondor (or use the AppImage), then open **System Settings → Default Applications → Web
-browser** and choose **Kondor Browser**. From a terminal the same is done with:
-
-```bash
-xdg-settings set default-web-browser kondor.desktop
-```
-
-Kondor then opens links clicked in other applications. The desktop entry also provides a
-**New Private Window** action (`kondor --private`).
-
-## Keyboard shortcuts
-
-| Shortcut | Action |
-| --- | --- |
-| `Ctrl+T` | New tab |
-| `Ctrl+Shift+N` | New private tab |
-| `Ctrl+N` | New window |
-| `Ctrl+Shift+P` | New private window |
-| `Ctrl+W` | Close tab (closes the window if it is the last one; the app quits when the last window closes) |
-| `Ctrl+Shift+W` | Close window |
-| `Ctrl+Shift+T` | Reopen closed tab |
-| `Ctrl+Tab` / `Ctrl+PgDown` | Next tab |
-| `Ctrl+Shift+Tab` / `Ctrl+PgUp` | Previous tab |
-| `Ctrl+1` … `Ctrl+8` | Go to tab N |
-| `Ctrl+9` | Go to the last tab |
-| `Ctrl+Shift+PgUp` / `Ctrl+Shift+PgDown` | Move the current tab left / right |
-| `Ctrl+H` | Browsing history |
-| `Ctrl+D` | Bookmark this page (edit name and folder) |
-| `Ctrl+Shift+B` | Show or hide the bookmarks toolbar |
-| `Ctrl+Shift+O` | Manage bookmarks |
-| `Ctrl+,` / `Ctrl+Shift+,` | Configure Kondor Browser (settings) |
-| `Ctrl+L` | Focus the address bar |
-| `Ctrl+F` | Find in page |
-| `Ctrl+P` | Print (opens a PDF in the viewer) |
-| `Ctrl+S` | Save page as… |
-| `F12` / `Ctrl+Shift+I` | Toggle developer tools |
-| `Ctrl+Alt+R` | Toggle reader mode (article pages) |
-| `Ctrl+F` (Configure window) | Filter the settings pages |
-| `F3` / `Shift+F3` | Next / previous match (find bar open) |
-| `Esc` | Close the find bar; leave page full screen |
-| `Shift+F10` / `Menu` | Open the page context menu |
-| `F11` | Toggle window full screen |
-| `Ctrl+R` / `F5` | Reload |
-| `Alt+←` / `Alt+→` | Back / forward |
-| `Ctrl++` / `Ctrl+-` | Zoom in / out |
-| `Ctrl+0` | Reset zoom (also by clicking the zoom level in the address bar) |
 
 ## Translations
 

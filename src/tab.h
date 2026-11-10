@@ -2,6 +2,7 @@
 
 #include <QList>
 #include <QObject>
+#include <QStringList>
 #include <QUrl>
 #include <QVariant>
 #include <QWebEnginePermission>
@@ -41,6 +42,13 @@ class Tab : public QObject
     Q_PROPERTY(bool crashed READ crashed NOTIFY crashChanged)
     Q_PROPERTY(QString crashReason READ crashReason NOTIFY crashChanged)
     Q_PROPERTY(int crashExitCode READ crashExitCode NOTIFY crashChanged)
+    // Password manager. The prompt is "" (none), "save" (offer to save the
+    // login just submitted) or "walletUnavailable" (one-time notice).
+    Q_PROPERTY(QString passwordPrompt READ passwordPrompt NOTIFY passwordPromptChanged)
+    Q_PROPERTY(QString passwordPromptUsername READ passwordPromptUsername NOTIFY passwordPromptChanged)
+    Q_PROPERTY(QString passwordPromptHost READ passwordPromptHost NOTIFY passwordPromptChanged)
+    // Usernames saved for the page's origin (never in a private tab).
+    Q_PROPERTY(QStringList passwordUsernames READ passwordUsernames NOTIFY passwordUsernamesChanged)
 
 public:
     explicit Tab(QQuickWebEngineProfile *profile, QObject *parent = nullptr);
@@ -72,6 +80,15 @@ public:
     bool crashed() const { return m_crashed; }
     QString crashReason() const { return m_crashReason; }
     int crashExitCode() const { return m_crashExitCode; }
+    QString passwordPrompt() const { return m_passwordPrompt; }
+    QString passwordPromptUsername() const { return m_passwordPromptUsername; }
+    QString passwordPromptHost() const;
+    QStringList passwordUsernames() const { return m_passwordUsernames; }
+
+    // Called by the password bridge; the password stays in this object only
+    // until the prompt is answered.
+    void offerPasswordSave(const QString &origin, const QString &username, const QString &password);
+    void showPasswordWalletNotice();
 
     // Calls coming from the WebEngineView (QML) to synchronize the state.
     Q_INVOKABLE void setTitle(const QString &title);
@@ -126,6 +143,12 @@ public:
     Q_INVOKABLE void enqueuePermission(const QWebEnginePermission &permission);
     Q_INVOKABLE void answerPermission(bool grant);
 
+    // Answers of the "save password" prompt and the key icon of the address bar.
+    Q_INVOKABLE void savePendingPassword();
+    Q_INVOKABLE void neverSavePendingPassword();
+    Q_INVOKABLE void dismissPasswordPrompt();
+    Q_INVOKABLE void fillPassword(const QString &username);
+
 signals:
     void titleChanged();
     void urlChanged();
@@ -146,6 +169,9 @@ signals:
     void securityStateChanged();
     void certificateErrorChanged();
     void crashChanged();
+    void passwordPromptChanged();
+    void passwordUsernamesChanged();
+    void fillPasswordRequested(const QString &username);
 
     void navigationRequested(const QUrl &url);
     void newTabPageRequested();
@@ -176,6 +202,8 @@ private:
     void updateSecurityState();
     void clearPendingCertificateError();
     void markCertificateOverridden();
+    void updatePasswordUsernames();
+    void clearPasswordPrompt();
 
     QString m_title;
     QUrl m_url;
@@ -212,4 +240,10 @@ private:
     bool m_crashed = false;
     QString m_crashReason;
     int m_crashExitCode = 0;
+
+    QString m_passwordPrompt;
+    QString m_passwordOrigin;
+    QString m_passwordPromptUsername;
+    QString m_pendingPassword;
+    QStringList m_passwordUsernames;
 };

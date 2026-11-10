@@ -1,5 +1,8 @@
 #include "profilemanager.h"
 
+#include <QFile>
+#include <QWebEngineScript>
+
 #include "adblock/adblockmanager.h"
 #include "addressresolver.h"
 #include "downloadmanager.h"
@@ -101,8 +104,35 @@ QQuickWebEngineProfile *ProfileManager::createPrivateProfile()
     return profile;
 }
 
+void ProfileManager::installPasswordScript(QQuickWebEngineProfile *profile)
+{
+    // Persistent profile only: private tabs never get the password script.
+    if (profile->isOffTheRecord())
+        return;
+    QFile webChannelJs(QStringLiteral(":/qtwebchannel/qwebchannel.js"));
+    QFile passwordsJs(QStringLiteral(":/scripts/passwords.js"));
+    if (!webChannelJs.open(QIODevice::ReadOnly) || !passwordsJs.open(QIODevice::ReadOnly)) {
+        qWarning("Password script resources not found: autofill is off");
+        return;
+    }
+    QWebEngineScript script;
+    script.setName(QStringLiteral("kondor-passwords"));
+    script.setSourceCode(QString::fromUtf8(webChannelJs.readAll()) + QLatin1Char('\n')
+                         + QString::fromUtf8(passwordsJs.readAll()));
+    script.setInjectionPoint(QWebEngineScript::DocumentReady);
+    script.setWorldId(QWebEngineScript::ApplicationWorld);
+    script.setRunsOnSubFrames(true);
+
+    QObject *collection = profile->property("userScripts").value<QObject *>();
+    if (!collection
+        || !QMetaObject::invokeMethod(collection, "insert", Q_ARG(QWebEngineScript, script)))
+        qWarning("Cannot install the password script: autofill is off");
+}
+
 void ProfileManager::setupProfile(QQuickWebEngineProfile *profile)
 {
+    installPasswordScript(profile);
+
     // User-Agent: keep Chromium (compatibility), but drop the "QtWebEngine"
     // token that makes some sites treat the browser as unknown.
     QString userAgent = profile->httpUserAgent();

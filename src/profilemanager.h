@@ -54,6 +54,7 @@ signals:
 private:
     explicit ProfileManager(QObject *parent = nullptr);
     void setupProfile(QQuickWebEngineProfile *profile);
+    void installPasswordScript(QQuickWebEngineProfile *profile);
     void applySpellCheckSettings(QQuickWebEngineProfile *profile);
     void applyThirdPartyCookieFilter(QQuickWebEngineProfile *profile);
 

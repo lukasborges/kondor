@@ -54,6 +54,10 @@ void TestSettings::defaultValue_data()
             << QStringLiteral("searchSuggestions") << QVariant(false);
     QTest::newRow("spellCheckEnabled")
             << QStringLiteral("spellCheckEnabled") << QVariant(true);
+    QTest::newRow("offerToSavePasswords")
+            << QStringLiteral("offerToSavePasswords") << QVariant(true);
+    QTest::newRow("passwordNeverSaveSites")
+            << QStringLiteral("passwordNeverSaveSites") << QVariant(QStringList());
     // No dictionaries in the test environment: falls back to US English.
     QTest::newRow("spellCheckLanguages")
             << QStringLiteral("spellCheckLanguages")

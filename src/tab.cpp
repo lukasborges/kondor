@@ -1,6 +1,8 @@
 #include "tab.h"
 
+#include "passwords/passwordstore.h"
 #include "profilemanager.h"
+#include "settings.h"
 
 #include <QQuickWebEngineProfile>
 
@@ -21,6 +23,9 @@ Tab::Tab(QQuickWebEngineProfile *profile, QObject *parent)
     , m_profile(profile)
     , m_isPrivate(profile && profile->isOffTheRecord())
 {
+    if (!m_isPrivate)
+        connect(PasswordStore::instance(), &PasswordStore::changed, this,
+                &Tab::updatePasswordUsernames);
 }
 
 void Tab::setTitle(const QString &title)
@@ -48,6 +53,7 @@ void Tab::setUrl(const QUrl &url)
         return;
     m_url = url;
     updateSecurityState();
+    updatePasswordUsernames();
     emit urlChanged();
 }
 
@@ -414,4 +420,86 @@ void Tab::denyPendingPermissions()
     }
     m_pendingPermissions.clear();
     emit pendingPermissionChanged();
+}
+
+QString Tab::passwordPromptHost() const
+{
+    return PasswordStore::hostOfOrigin(m_passwordOrigin);
+}
+
+void Tab::updatePasswordUsernames()
+{
+    QStringList names;
+    if (!m_isPrivate)
+        names = PasswordStore::instance()->usernames(PasswordStore::originOf(m_url));
+    if (m_passwordUsernames == names)
+        return;
+    m_passwordUsernames = names;
+    emit passwordUsernamesChanged();
+}
+
+void Tab::clearPasswordPrompt()
+{
+    m_pendingPassword.clear();
+    m_passwordOrigin.clear();
+    m_passwordPromptUsername.clear();
+    if (m_passwordPrompt.isEmpty())
+        return;
+    m_passwordPrompt.clear();
+    emit passwordPromptChanged();
+}
+
+void Tab::offerPasswordSave(const QString &origin, const QString &username, const QString &password)
+{
+    if (m_isPrivate)
+        return;
+    m_passwordPrompt = QStringLiteral("save");
+    m_passwordOrigin = origin;
+    m_passwordPromptUsername = username;
+    m_pendingPassword = password;
+    emit passwordPromptChanged();
+}
+
+void Tab::showPasswordWalletNotice()
+{
+    if (m_isPrivate)
+        return;
+    m_pendingPassword.clear();
+    m_passwordPromptUsername.clear();
+    m_passwordOrigin.clear();
+    m_passwordPrompt = QStringLiteral("walletUnavailable");
+    emit passwordPromptChanged();
+}
+
+void Tab::savePendingPassword()
+{
+    if (m_isPrivate || m_passwordPrompt != QLatin1String("save"))
+        return;
+    PasswordStore::instance()->save(m_passwordOrigin, m_passwordPromptUsername, m_pendingPassword);
+    clearPasswordPrompt();
+}
+
+void Tab::neverSavePendingPassword()
+{
+    if (m_passwordPrompt != QLatin1String("save"))
+        return;
+    Settings *settings = Settings::instance();
+    QStringList sites = settings->passwordNeverSaveSites();
+    if (!sites.contains(m_passwordOrigin)) {
+        sites.append(m_passwordOrigin);
+        settings->setPasswordNeverSaveSites(sites);
+    }
+    clearPasswordPrompt();
+}
+
+void Tab::dismissPasswordPrompt()
+{
+    clearPasswordPrompt();
+}
+
+void Tab::fillPassword(const QString &username)
+{
+    if (m_isPrivate)
+        return;
+    emit fillPasswordRequested(username);
 }

@@ -108,6 +108,8 @@ qt_add_qml_module(kondor
         src/bookmarkmodel.cpp
         src/faviconstore.h
         src/faviconstore.cpp
+        src/extensionloader.h
+        src/extensionloader.cpp
         src/searchsuggestions.h
         src/searchsuggestions.cpp
         src/zoommanager.h

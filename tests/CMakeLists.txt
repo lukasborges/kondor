@@ -606,3 +606,31 @@ add_test(NAME tst_passwordstore COMMAND tst_passwordstore)
 # No test may reach the session wallet: PasswordStore goes straight to "unavailable".
 get_property(kondor_all_tests DIRECTORY PROPERTY TESTS)
 set_property(TEST ${kondor_all_tests} APPEND PROPERTY ENVIRONMENT "KONDOR_NO_KWALLET=1")
+
+qt_add_executable(tst_extensionloader
+    tst_extensionloader.cpp
+    ../src/extensionloader.cpp
+)
+
+target_include_directories(tst_extensionloader PRIVATE
+    ../src
+)
+
+target_compile_definitions(tst_extensionloader PRIVATE
+    KONDOR_TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data"
+)
+
+target_link_libraries(tst_extensionloader PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::WebEngineCore
+    Qt6::WebEngineQuick
+    Qt6::Test
+)
+
+add_test(NAME tst_extensionloader COMMAND tst_extensionloader)
+set_tests_properties(tst_extensionloader PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)

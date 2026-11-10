@@ -58,6 +58,8 @@ StackLayout {
         savedModel.clear()
         for (const entry of list)
             savedModel.append({ site: entry.host, origin: entry.origin, username: entry.username })
+        // Nothing is selected until a login is added by hand.
+        savedList.currentIndex = -1
     }
 
     onActiveChanged: {

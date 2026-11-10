@@ -1165,83 +1165,83 @@
 <context>
     <name>PasswordsPage</name>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="106"/>
+        <location filename="../qml/PasswordsPage.qml" line="108"/>
         <source>Delete Saved Password</source>
         <translation>删除已保存的密码</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="107"/>
+        <location filename="../qml/PasswordsPage.qml" line="109"/>
         <source>Delete the saved password for %1 on %2?</source>
         <translation>要删除 %2 上 %1 的已保存密码吗?</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="124"/>
+        <location filename="../qml/PasswordsPage.qml" line="126"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
         <translation>KWallet 已禁用或访问被拒绝,因此无法保存或填充密码。</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="127"/>
+        <location filename="../qml/PasswordsPage.qml" line="129"/>
         <source>Try Again</source>
         <translation>重试</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="137"/>
+        <location filename="../qml/PasswordsPage.qml" line="139"/>
         <source>Offer to save passwords</source>
         <translation>提示保存密码</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="155"/>
+        <location filename="../qml/PasswordsPage.qml" line="157"/>
         <source>Filter by site or username…</source>
         <translation>按网站或用户名筛选…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="160"/>
-        <location filename="../qml/PasswordsPage.qml" line="195"/>
+        <location filename="../qml/PasswordsPage.qml" line="162"/>
+        <location filename="../qml/PasswordsPage.qml" line="197"/>
         <source>Add Password…</source>
         <translation>添加密码…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="186"/>
+        <location filename="../qml/PasswordsPage.qml" line="188"/>
         <source>No saved passwords match “%1”</source>
         <translation>没有与“%1”匹配的已保存密码</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="187"/>
+        <location filename="../qml/PasswordsPage.qml" line="189"/>
         <source>No saved passwords</source>
         <translation>没有已保存的密码</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="190"/>
+        <location filename="../qml/PasswordsPage.qml" line="192"/>
         <source>Kondor offers to save a password when you log in to a site. You can also add one here.</source>
         <translation>当您登录网站时，Kondor 会提示保存密码。您也可以在此处添加。</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="243"/>
+        <location filename="../qml/PasswordsPage.qml" line="245"/>
         <source>Hide Password</source>
         <translation>隐藏密码</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="243"/>
+        <location filename="../qml/PasswordsPage.qml" line="245"/>
         <source>Show Password</source>
         <translation>显示密码</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="253"/>
+        <location filename="../qml/PasswordsPage.qml" line="255"/>
         <source>Copy Password</source>
         <translation>复制密码</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="263"/>
+        <location filename="../qml/PasswordsPage.qml" line="265"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="286"/>
+        <location filename="../qml/PasswordsPage.qml" line="288"/>
         <source>Kondor never offers to save passwords on these sites.</source>
         <translation>Kondor 不会在这些网站上提示保存密码。</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="318"/>
+        <location filename="../qml/PasswordsPage.qml" line="320"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>

@@ -14,11 +14,25 @@
 #include <QSaveFile>
 #include <QStandardPaths>
 
+#include <utility>
+
 namespace {
-constexpr int kSessionVersion = 1;
+// 2 adds the "windows" array; version 1 is a single window at the root and is
+// still read, so an older session is not lost.
+constexpr int kSessionVersion = 2;
 constexpr int kAutosaveDelayMs = 2000;
 // Session marker for a tab on the New Tab page (it has no real URL).
 constexpr auto kNewTabPageUrl = "about:newtab";
+
+SessionTab tabFromJson(const QJsonObject &entry)
+{
+    SessionTab tab;
+    const QString urlString = entry.value(QStringLiteral("url")).toString();
+    if (urlString != QLatin1String(kNewTabPageUrl))
+        tab.url = QUrl(urlString);
+    tab.title = entry.value(QStringLiteral("title")).toString();
+    return tab;
+}
 } // namespace
 
 SessionManager *SessionManager::instance()
@@ -55,19 +69,24 @@ QString SessionManager::sessionFilePath()
 
 void SessionManager::watch(TabModel *model)
 {
-    if (!model || model == m_model)
+    if (!model || m_models.contains(model))
         return;
 
-    m_model = model;
+    pruneModels();
+    m_models.append(model);
 
     connect(model, &TabModel::countChanged, this, &SessionManager::scheduleSave);
     connect(model, &TabModel::currentIndexChanged, this, &SessionManager::scheduleSave);
+    connect(model, &QObject::destroyed, this, [this]() {
+        pruneModels();
+        scheduleSave();
+    });
 
     // New tabs appear through the model; follow their URL changes as well.
     connect(model, &QAbstractItemModel::rowsInserted, this,
-            [this](const QModelIndex &, int first, int last) {
-                for (int row = first; row <= last && row < m_model->count(); ++row) {
-                    Tab *tab = m_model->data(m_model->index(row), TabModel::TabRole)
+            [this, model](const QModelIndex &, int first, int last) {
+                for (int row = first; row <= last && row < model->count(); ++row) {
+                    Tab *tab = model->data(model->index(row), TabModel::TabRole)
                                    .value<Tab *>();
                     trackTab(tab);
                 }
@@ -89,10 +108,17 @@ void SessionManager::trackTab(Tab *tab)
     connect(tab, &Tab::urlChanged, this, &SessionManager::scheduleSave);
 }
 
+void SessionManager::pruneModels()
+{
+    for (int i = int(m_models.size()) - 1; i >= 0; --i) {
+        if (m_models.at(i).isNull())
+            m_models.removeAt(i);
+    }
+}
+
 void SessionManager::scheduleSave()
 {
-    if (m_model)
-        m_saveTimer.start();
+    m_saveTimer.start();
 }
 
 void SessionManager::save(TabModel *model)
@@ -105,31 +131,42 @@ void SessionManager::save(TabModel *model)
 void SessionManager::saveNow()
 {
     m_saveTimer.stop();
-    if (!m_model)
-        return;
+    pruneModels();
 
-    QJsonArray tabs;
-    int currentIndex = 0;
-    for (int row = 0; row < m_model->count(); ++row) {
-        Tab *tab = m_model->data(m_model->index(row), TabModel::TabRole).value<Tab *>();
-        if (!tab || tab->isPrivate())
+    QJsonArray windows;
+    for (const QPointer<TabModel> &model : std::as_const(m_models)) {
+        QJsonArray tabs;
+        int currentIndex = 0;
+        for (int row = 0; row < model->count(); ++row) {
+            Tab *tab = model->data(model->index(row), TabModel::TabRole).value<Tab *>();
+            if (!tab || tab->isPrivate())
+                continue;
+
+            QJsonObject entry;
+            if (tab->newTabPage())
+                entry.insert(QStringLiteral("url"), QStringLiteral("about:newtab"));
+            else
+                entry.insert(QStringLiteral("url"), tab->url().toString());
+            entry.insert(QStringLiteral("title"), tab->title());
+            if (row == model->currentIndex())
+                currentIndex = int(tabs.size());
+            tabs.append(entry);
+        }
+
+        // A private window, or one whose normal tabs are all gone, is not a
+        // window to bring back.
+        if (tabs.isEmpty())
             continue;
 
-        QJsonObject entry;
-        if (tab->newTabPage())
-            entry.insert(QStringLiteral("url"), QStringLiteral("about:newtab"));
-        else
-            entry.insert(QStringLiteral("url"), tab->url().toString());
-        entry.insert(QStringLiteral("title"), tab->title());
-        if (row == m_model->currentIndex())
-            currentIndex = int(tabs.size());
-        tabs.append(entry);
+        QJsonObject window;
+        window.insert(QStringLiteral("currentIndex"), currentIndex);
+        window.insert(QStringLiteral("tabs"), tabs);
+        windows.append(window);
     }
 
     QJsonObject root;
     root.insert(QStringLiteral("version"), kSessionVersion);
-    root.insert(QStringLiteral("currentIndex"), currentIndex);
-    root.insert(QStringLiteral("tabs"), tabs);
+    root.insert(QStringLiteral("windows"), windows);
 
     QSaveFile file(sessionFilePath());
     if (!file.open(QIODevice::WriteOnly)) {
@@ -143,51 +180,49 @@ void SessionManager::saveNow()
                  qUtf8Printable(file.fileName()));
 }
 
-bool SessionManager::restore(TabModel *model)
+QList<SessionWindow> SessionManager::savedWindows()
 {
-    if (!model)
-        return false;
-    watch(model);
+    QList<SessionWindow> windows;
 
     QFile file(sessionFilePath());
     if (!file.open(QIODevice::ReadOnly))
-        return false;
+        return windows;
 
     QJsonParseError error;
     const QJsonDocument document = QJsonDocument::fromJson(file.readAll(), &error);
     if (error.error != QJsonParseError::NoError || !document.isObject()) {
         qWarning("Kondor: ignoring invalid session file: %s",
                  qUtf8Printable(error.errorString()));
-        return false;
+        return windows;
     }
 
     const QJsonObject root = document.object();
-    if (root.value(QStringLiteral("version")).toInt() != kSessionVersion) {
+    const int version = root.value(QStringLiteral("version")).toInt();
+    if (version < 1 || version > kSessionVersion) {
         qWarning("Kondor: ignoring unsupported session file version");
-        return false;
+        return windows;
     }
 
-    const QJsonArray tabs = root.value(QStringLiteral("tabs")).toArray();
-    int restored = 0;
-    for (const QJsonValue &value : tabs) {
-        const QJsonObject entry = value.toObject();
-        const QString urlString = entry.value(QStringLiteral("url")).toString();
-        const bool newTabPage = urlString == QLatin1String(kNewTabPageUrl);
-        const QUrl url = newTabPage ? QUrl() : QUrl(urlString);
-        if (!newTabPage && url.isEmpty())
-            continue;
-
-        Tab *tab = model->addTab(false, url);
-        const QString title = entry.value(QStringLiteral("title")).toString();
-        if (tab && !title.isEmpty())
-            tab->setTitle(title);
-        ++restored;
+    // One entry per window; the old format had a single window at the root.
+    QList<QJsonObject> entries;
+    if (version >= 2) {
+        const QJsonArray array = root.value(QStringLiteral("windows")).toArray();
+        entries.reserve(array.size());
+        for (const QJsonValue &value : array)
+            entries.append(value.toObject());
+    } else {
+        entries.append(root);
     }
 
-    if (restored == 0)
-        return false;
+    for (const QJsonObject &entry : std::as_const(entries)) {
+        SessionWindow window;
+        window.currentIndex = entry.value(QStringLiteral("currentIndex")).toInt();
+        const QJsonArray tabs = entry.value(QStringLiteral("tabs")).toArray();
+        for (const QJsonValue &value : tabs)
+            window.tabs.append(tabFromJson(value.toObject()));
+        if (!window.tabs.isEmpty())
+            windows.append(window);
+    }
 
-    const int currentIndex = root.value(QStringLiteral("currentIndex")).toInt();
-    model->setCurrentIndex(qBound(0, currentIndex, restored - 1));
-    return true;
+    return windows;
 }

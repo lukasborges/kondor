@@ -12,7 +12,7 @@ TabButton {
     required property Tab tab
     required property TabModel tabModel
 
-    // Browser window and tab bar helpers, passed in from Main.qml.
+    // Browser window and tab bar helpers, passed in from BrowserWindow.qml.
     property var tabBarItem: null
     property var targetWindow: null
     property int tabCount: 1

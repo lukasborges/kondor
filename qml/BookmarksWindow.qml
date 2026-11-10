@@ -8,7 +8,7 @@ import org.kde.kirigami as Kirigami
 import Kondor
 
 // "Manage Bookmarks" window (Ctrl+Shift+O): folder tree on the left, the items
-// of the selected folder on the right. Created on demand in Main.qml. Visuals
+// of the selected folder on the right. Created on demand in BrowserWindow.qml. Visuals
 // follow the 02b-bookmarks-manager.qml prototype.
 ApplicationWindow {
     id: root

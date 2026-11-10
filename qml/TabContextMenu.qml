@@ -14,6 +14,8 @@ Menu {
     // Every "new tab" entry point goes through the window, which also focuses
     // the address bar.
     signal newTabRequested()
+    // The window opens the tab's URL in a new one, then closes it here.
+    signal moveToNewWindowRequested()
 
     MenuItem {
         text: qsTr("New Tab")
@@ -35,6 +37,12 @@ Menu {
         icon.name: "tab-duplicate"
         enabled: menu.tab !== null
         onTriggered: menu.tabModel.duplicateTab(menu.tabIndex)
+    }
+    MenuItem {
+        text: qsTr("Move Tab to New Window")
+        icon.name: "window-new"
+        enabled: menu.tab !== null
+        onTriggered: menu.moveToNewWindowRequested()
     }
     MenuItem {
         text: menu.tab && menu.tab.pinned ? qsTr("Unpin Tab") : qsTr("Pin Tab")

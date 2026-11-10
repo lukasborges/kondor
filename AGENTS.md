@@ -23,9 +23,14 @@ behave like a native **KDE Plasma** app (Breeze style, Breeze icons, system colo
 
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
-cmake --build build --parallel
+cmake --build build --parallel 4
 ./build/kondor
 ```
+
+Always give `--parallel` a job count (4 on the maintainer's machine). With the Makefile generator
+a bare `--parallel` means `make -j` with **no limit**. Every test target recompiles the sources, so
+a full build then starts dozens of compilers at once and runs the machine out of memory. The agent
+loops also run under a systemd memory cap (`MemoryMax=16G`) that kills such a build.
 
 Smoke test without a display (useful in CI or for agents):
 

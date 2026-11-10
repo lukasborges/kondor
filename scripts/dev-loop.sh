@@ -75,6 +75,7 @@ You are the developer agent of this repository. Follow docs/agents/developer.md 
 4. If the spec is ambiguous, comment "**Question:** ..." on the PR (or the issue) and add the
    question label instead of guessing.
 5. Never edit docs/specs, prototypes, AGENTS.md or docs/agents; never merge; never push to main.
+6. Build with cmake --build <dir> --parallel 4, never a bare --parallel (with Makefiles it means unlimited jobs and runs the machine out of memory).
 
 Stop after this one step and print a short report: what changed, test results, PR link, labels.
 EOF
@@ -132,6 +133,9 @@ After=network-online.target
 
 [Service]
 Type=simple
+Environment=CMAKE_BUILD_PARALLEL_LEVEL=4
+MemoryHigh=12G
+MemoryMax=16G
 Environment=PATH=$HOME/.opencode/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin
 Environment=KONDOR_REPO=$repo
 Environment=KONDOR_CONTROL_DIR=$control

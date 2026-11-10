@@ -238,6 +238,24 @@
     </message>
 </context>
 <context>
+    <name>DefaultBookmarks</name>
+    <message>
+        <location filename="../src/database.cpp" line="36"/>
+        <source>News</source>
+        <translation>Nachrichten</translation>
+    </message>
+    <message>
+        <location filename="../src/database.cpp" line="45"/>
+        <source>Development</source>
+        <translation>Entwicklung</translation>
+    </message>
+    <message>
+        <location filename="../src/database.cpp" line="54"/>
+        <source>Linux</source>
+        <translation>Linux</translation>
+    </message>
+</context>
+<context>
     <name>DownloadManager</name>
     <message>
         <location filename="../src/downloadmanager.cpp" line="377"/>

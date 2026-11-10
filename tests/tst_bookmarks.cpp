@@ -1,5 +1,8 @@
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
+#include <QProcess>
+#include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QStandardPaths>
 #include <QTemporaryDir>
@@ -10,12 +13,68 @@
 #include "bookmarkmodel.h"
 #include "database.h"
 
+namespace {
+QString profileDatabasePath(const QString &dataHome)
+{
+    // Same layout Database uses below: <XDG_DATA_HOME>/<org>/<app>.
+    return dataHome
+        + QStringLiteral("/KDE-Test/Kondor-Bookmarks-Test/kondor.sqlite");
+}
+
+// Opens a profile database outside the singleton, so the migration tests can
+// prepare and inspect the databases of other profiles.
+QSqlDatabase openProfileDatabase(const QString &path, const QString &connection)
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase(QStringLiteral("QSQLITE"), connection);
+    db.setDatabaseName(path);
+    db.open();
+    return db;
+}
+
+void closeProfileDatabase(QSqlDatabase &db)
+{
+    const QString connection = db.connectionName();
+    db.close();
+    db = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connection);
+}
+
+// Runs this test binary in child mode, where a fresh Database (and therefore
+// its migrations) opens against the given profile directory.
+bool migrateProfile(const QString &dataHome)
+{
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    env.insert(QStringLiteral("XDG_DATA_HOME"), dataHome);
+    env.insert(QStringLiteral("XDG_CONFIG_HOME"), dataHome);
+    env.insert(QStringLiteral("XDG_CACHE_HOME"), dataHome);
+
+    QProcess process;
+    process.setProcessEnvironment(env);
+    process.start(QCoreApplication::applicationFilePath(),
+                  {QStringLiteral("--migrate"), dataHome});
+    if (!process.waitForFinished(30000))
+        return false;
+    return process.exitStatus() == QProcess::NormalExit && process.exitCode() == 0;
+}
+
+int countRows(QSqlDatabase &db, const QString &sql)
+{
+    QSqlQuery query(db);
+    if (!query.exec(sql) || !query.next())
+        return -1;
+    return query.value(0).toInt();
+}
+}
+
 class TestBookmarks : public QObject
 {
     Q_OBJECT
 
 private slots:
     void initTestCase();
+    void defaultBookmarksOnFirstRun();
+    void existingBookmarksAreNotReplaced();
+    void deletedDefaultsStayDeleted();
     void rootFolders();
     void addAndFindBookmarks();
     void moveBetweenFolders();
@@ -29,6 +88,139 @@ private slots:
 void TestBookmarks::initTestCase()
 {
     QVERIFY2(Database::instance()->isValid(), "the test database must open");
+}
+
+void TestBookmarks::defaultBookmarksOnFirstRun()
+{
+    BookmarkManager *manager = BookmarkManager::instance();
+    const QVariantList toolbar = manager->folderContents(manager->toolbarFolderId());
+
+    const QStringList titles = {
+        QStringLiteral("KDE"),         QStringLiteral("Planet KDE"),
+        QStringLiteral("Qt Docs"),     QStringLiteral("News"),
+        QStringLiteral("Development"), QStringLiteral("Linux"),
+    };
+    QCOMPARE(toolbar.size(), titles.size());
+    for (int i = 0; i < toolbar.size(); ++i)
+        QCOMPARE(toolbar.at(i).toMap().value(QStringLiteral("title")).toString(), titles.at(i));
+
+    // Bookmark titles are site names; the first three sit next to the folders.
+    QCOMPARE(toolbar.at(0).toMap().value(QStringLiteral("url")).toString(),
+             QStringLiteral("https://kde.org/"));
+    QCOMPARE(toolbar.at(1).toMap().value(QStringLiteral("url")).toString(),
+             QStringLiteral("https://planet.kde.org/"));
+    QCOMPARE(toolbar.at(2).toMap().value(QStringLiteral("url")).toString(),
+             QStringLiteral("https://doc.qt.io/"));
+    QVERIFY(toolbar.at(3).toMap().value(QStringLiteral("isFolder")).toBool());
+    QVERIFY(toolbar.at(4).toMap().value(QStringLiteral("isFolder")).toBool());
+    QVERIFY(toolbar.at(5).toMap().value(QStringLiteral("isFolder")).toBool());
+
+    const QVariantList newsRows =
+        manager->folderContents(toolbar.at(3).toMap().value(QStringLiteral("id")).toLongLong());
+    const QVariantList developmentRows =
+        manager->folderContents(toolbar.at(4).toMap().value(QStringLiteral("id")).toLongLong());
+    const QVariantList linuxRows =
+        manager->folderContents(toolbar.at(5).toMap().value(QStringLiteral("id")).toLongLong());
+    QCOMPARE(newsRows.size(), 6);
+    QCOMPARE(developmentRows.size(), 6);
+    QCOMPARE(linuxRows.size(), 7);
+
+    QCOMPARE(newsRows.at(0).toMap().value(QStringLiteral("title")).toString(),
+             QStringLiteral("LWN.net"));
+    QCOMPARE(newsRows.at(0).toMap().value(QStringLiteral("url")).toString(),
+             QStringLiteral("https://lwn.net/"));
+    QCOMPARE(developmentRows.at(1).toMap().value(QStringLiteral("title")).toString(),
+             QStringLiteral("KDE Human Interface Guidelines"));
+    QCOMPARE(linuxRows.last().toMap().value(QStringLiteral("title")).toString(),
+             QStringLiteral("KDE Discuss"));
+    QCOMPARE(linuxRows.last().toMap().value(QStringLiteral("url")).toString(),
+             QStringLiteral("https://discuss.kde.org/"));
+
+    // "Other Bookmarks" stays empty.
+    QCOMPARE(manager->childCount(manager->otherFolderId()), 0);
+}
+
+void TestBookmarks::existingBookmarksAreNotReplaced()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString path = profileDatabasePath(dir.path());
+    QVERIFY(QDir().mkpath(QFileInfo(path).absolutePath()));
+
+    // A version 2 profile that already has one user bookmark.
+    {
+        QSqlDatabase db = openProfileDatabase(path, QStringLiteral("prepare-v2"));
+        QVERIFY(db.isOpen());
+        QSqlQuery query(db);
+        QVERIFY(query.exec(QStringLiteral(
+            "CREATE TABLE bookmarks ("
+            "  id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            "  parent_id INTEGER REFERENCES bookmarks(id) ON DELETE CASCADE,"
+            "  is_folder INTEGER NOT NULL DEFAULT 0,"
+            "  title TEXT NOT NULL DEFAULT '',"
+            "  url TEXT,"
+            "  position INTEGER NOT NULL DEFAULT 0,"
+            "  created_at INTEGER NOT NULL,"
+            "  special TEXT"
+            ")")));
+        QVERIFY(query.exec(QStringLiteral(
+            "INSERT INTO bookmarks (parent_id, is_folder, title, url, position,"
+            " created_at, special) VALUES "
+            "(NULL, 1, 'Bookmarks Toolbar', NULL, 0, 1, 'toolbar'),"
+            "(NULL, 1, 'Other Bookmarks', NULL, 0, 1, 'other'),"
+            "(1, 0, 'Mine', 'https://mine.example/', 0, 1, NULL)")));
+        QVERIFY(query.exec(QStringLiteral("PRAGMA user_version = 2")));
+        closeProfileDatabase(db);
+    }
+
+    QVERIFY(migrateProfile(dir.path()));
+
+    QSqlDatabase db = openProfileDatabase(path, QStringLiteral("inspect-v2"));
+    QVERIFY(db.isOpen());
+    QCOMPARE(countRows(db, QStringLiteral("PRAGMA user_version")), 4);
+    // The two roots plus the user's bookmark: nothing was added.
+    QCOMPARE(countRows(db, QStringLiteral("SELECT COUNT(*) FROM bookmarks")), 3);
+    QCOMPARE(countRows(db,
+                       QStringLiteral("SELECT COUNT(*) FROM bookmarks WHERE title = 'News'")),
+             0);
+    QCOMPARE(countRows(
+                 db, QStringLiteral(
+                         "SELECT COUNT(*) FROM bookmarks WHERE title = 'Mine'")),
+             1);
+    closeProfileDatabase(db);
+}
+
+void TestBookmarks::deletedDefaultsStayDeleted()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString path = profileDatabasePath(dir.path());
+    QVERIFY(migrateProfile(dir.path()));
+
+    int remaining = 0;
+    {
+        QSqlDatabase db = openProfileDatabase(path, QStringLiteral("delete-default"));
+        QVERIFY(db.isOpen());
+        QCOMPARE(countRows(db, QStringLiteral(
+                                    "SELECT COUNT(*) FROM bookmarks WHERE title = 'Qt Docs'")),
+                 1);
+        QSqlQuery query(db);
+        QVERIFY(query.exec(QStringLiteral(
+            "DELETE FROM bookmarks WHERE title = 'Qt Docs' AND url = 'https://doc.qt.io/'")));
+        remaining = countRows(db, QStringLiteral("SELECT COUNT(*) FROM bookmarks"));
+        closeProfileDatabase(db);
+    }
+
+    // Re-opening the profile runs no seeding: the version is already current.
+    QVERIFY(migrateProfile(dir.path()));
+
+    QSqlDatabase db = openProfileDatabase(path, QStringLiteral("inspect-deleted"));
+    QVERIFY(db.isOpen());
+    QCOMPARE(countRows(db, QStringLiteral(
+                                "SELECT COUNT(*) FROM bookmarks WHERE title = 'Qt Docs'")),
+             0);
+    QCOMPARE(countRows(db, QStringLiteral("SELECT COUNT(*) FROM bookmarks")), remaining);
+    closeProfileDatabase(db);
 }
 
 void TestBookmarks::rootFolders()
@@ -55,10 +247,11 @@ void TestBookmarks::addAndFindBookmarks()
 
     // The same URL is allowed in another folder; the star still finds one id.
     const qint64 toolbar = manager->toolbarFolderId();
+    const int toolbarChildren = manager->childCount(toolbar);
     const qint64 second = manager->addBookmark(url, QStringLiteral("Page again"), toolbar);
     QVERIFY(second > 0);
     QVERIFY(second != first);
-    QCOMPARE(manager->childCount(toolbar), 1);
+    QCOMPARE(manager->childCount(toolbar), toolbarChildren + 1);
 
     const QVariantMap info = manager->bookmark(first);
     QCOMPARE(info.value(QStringLiteral("parentId")).toLongLong(), other);
@@ -265,6 +458,14 @@ int main(int argc, char *argv[])
     QCoreApplication app(argc, argv);
     QCoreApplication::setOrganizationName(QStringLiteral("KDE-Test"));
     QCoreApplication::setApplicationName(QStringLiteral("Kondor-Bookmarks-Test"));
+
+    // Child mode used by the migration tests: open the database of the profile
+    // given on the command line (through the singleton, so migrations run) and
+    // exit. The caller passes the matching XDG_* variables.
+    if (argc >= 3 && qstrcmp(argv[1], "--migrate") == 0) {
+        qputenv("XDG_DATA_HOME", argv[2]);
+        return Database::instance()->isValid() ? 0 : 1;
+    }
 
     // Never touch the real profile: the database lives in this temp dir.
     QTemporaryDir dataDir;

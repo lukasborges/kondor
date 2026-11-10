@@ -1648,17 +1648,17 @@
 <context>
     <name>TabStrip</name>
     <message>
-        <location filename="../qml/TabStrip.qml" line="289"/>
+        <location filename="../qml/TabStrip.qml" line="298"/>
         <source>Scroll Tabs Left</source>
         <translation>Posunout karty doleva</translation>
     </message>
     <message>
-        <location filename="../qml/TabStrip.qml" line="306"/>
+        <location filename="../qml/TabStrip.qml" line="315"/>
         <source>Scroll Tabs Right</source>
         <translation>Posunout karty doprava</translation>
     </message>
     <message>
-        <location filename="../qml/TabStrip.qml" line="322"/>
+        <location filename="../qml/TabStrip.qml" line="331"/>
         <source>New Tab</source>
         <translation>Nová karta</translation>
     </message>

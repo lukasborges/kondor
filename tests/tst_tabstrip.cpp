@@ -30,6 +30,7 @@ private slots:
     void currentTabIsScrolledIntoView();
     void closingWithTheMouseKeepsTheWidth();
     void pinnedTabsStayNarrow();
+    void scrolledOutTabsAreClipped();
 
 private:
     void addTabs(int count);
@@ -250,6 +251,39 @@ void TestTabStrip::pinnedTabsStayNarrow()
     QTest::qWait(50);
     QCOMPARE(itemAt(0)->width(), 36.0);
     QCOMPARE(itemAt(1)->width(), 240.0);
+}
+
+void TestTabStrip::scrolledOutTabsAreClipped()
+{
+    addTabs(20);
+    QVERIFY(view()->property("clip").toBool());
+
+    auto inside = [&](int index) {
+        QQuickItem *item = itemAt(index);
+        const QRectF r = tabBar()->mapRectFromItem(item, item->boundingRect());
+        return r.left() >= -0.5 && r.right() <= tabBar()->width() + 0.5;
+    };
+    auto overlaps = [&](int index, const char *buttonName) {
+        QQuickItem *item = itemAt(index);
+        QQuickItem *b = button(buttonName);
+        const QRectF r = m_strip->mapRectFromItem(item, item->boundingRect());
+        const QRectF br(b->position(), b->size());
+        return r.intersects(br) && r.intersected(br).width() > 0.5;
+    };
+
+    // Last tab: current after addTabs.
+    m_tabs->setCurrentIndex(19);
+    QTRY_VERIFY(!button("scrollRightButton")->isEnabled());
+    QVERIFY(inside(19));
+    QVERIFY(!overlaps(19, "scrollRightButton"));
+    QVERIFY(button("scrollLeftButton")->isEnabled());
+
+    // First tab.
+    m_tabs->setCurrentIndex(0);
+    QTRY_VERIFY(!button("scrollLeftButton")->isEnabled());
+    QVERIFY(inside(0));
+    QVERIFY(!overlaps(0, "scrollLeftButton"));
+    QVERIFY(button("scrollRightButton")->isEnabled());
 }
 
 int main(int argc, char *argv[])

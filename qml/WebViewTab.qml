@@ -24,6 +24,10 @@ Item {
         anchors.fill: parent
         profile: root.tab.profile
 
+        // Qt WebEngine disables page full screen by default, so a video
+        // player's button would never reach onFullScreenRequested.
+        settings.fullScreenSupportEnabled: true
+
         onTitleChanged: {
             root.tab.setTitle(title)
             if (!root.tab.isPrivate)
@@ -55,6 +59,14 @@ Item {
 
         onFindTextFinished: function(result) {
             root.tab.setFindResult(result.numberOfMatches, result.activeMatch)
+        }
+
+        // The page asked for full screen (a video player). Accept it and let
+        // the window follow the tab; the player's button or Esc asks the page
+        // to leave it, which arrives here again with toggleOn false.
+        onFullScreenRequested: function(request) {
+            request.accept()
+            root.tab.setFullScreen(request.toggleOn)
         }
 
         // The page asked for a site permission (camera, microphone, location,
@@ -177,6 +189,16 @@ Item {
         }
         function onStopFindRequested() { webView.findText("") }
         function onFocusPageRequested() { webView.forceActiveFocus() }
+        function onExitFullScreenRequested() {
+            webView.triggerWebAction(WebEngineView.ExitFullScreen)
+        }
+    }
+
+    // Leaving the tab (switching or closing) ends its page's full screen, so
+    // the window can go back to normal instead of staying full screen.
+    onVisibleChanged: {
+        if (!visible && root.tab && root.tab.isFullScreen)
+            root.tab.exitFullScreen()
     }
 
     Component.onCompleted: {

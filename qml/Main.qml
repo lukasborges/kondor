@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Dialogs
 import QtQuick.Layouts
+import QtQuick.Window
 import org.kde.kirigami as Kirigami
 import Kondor
 
@@ -30,6 +31,36 @@ ApplicationWindow {
     // Set once the user confirms quitting with downloads still running, so the
     // confirmation is not asked again on the retried close.
     property bool quitConfirmed: false
+
+    // Page full screen comes from the current tab (a video player); F11 turns
+    // the whole window full screen and keeps the toolbars on screen.
+    property bool pageFullScreen: tabs.currentTab ? tabs.currentTab.isFullScreen : false
+    property bool windowFullScreen: false
+    // Windowed or maximized state to return to when full screen ends.
+    property int visibilityBeforeFullScreen: Window.Windowed
+
+    function updateFullScreen() {
+        if (pageFullScreen || windowFullScreen) {
+            if (window.visibility !== Window.FullScreen)
+                visibilityBeforeFullScreen = window.visibility
+            window.showFullScreen()
+        } else if (visibilityBeforeFullScreen === Window.Maximized) {
+            window.showMaximized()
+        } else {
+            window.showNormal()
+        }
+    }
+
+    onPageFullScreenChanged: {
+        // Hidden chrome leaves no other clue, so say how to get out.
+        if (pageFullScreen)
+            fullScreenHint.show()
+        else
+            fullScreenHint.hide()
+        updateFullScreen()
+    }
+
+    onWindowFullScreenChanged: updateFullScreen()
 
     onClosing: function(close) {
         // Save while the tabs still exist: closing the last tab closes the
@@ -285,6 +316,8 @@ ApplicationWindow {
 
     header: ColumnLayout {
         spacing: 0
+        // A page in full screen takes the whole window, like a video player.
+        visible: !window.pageFullScreen
 
         // ── Tab bar ──────────────────────────────────────────────────────
         Rectangle {
@@ -824,6 +857,14 @@ ApplicationWindow {
         }
     }
 
+    // ── Transient full-screen hint ──────────────────────────────────────
+    FullScreenHint {
+        id: fullScreenHint
+        //: Shown for a few seconds when a page enters full screen
+        text: qsTr("Press Esc to exit full screen")
+        anchors.horizontalCenter: parent.horizontalCenter
+    }
+
     // ── History window (created on demand) ──────────────────────────────
     property var historyWindow: null
 
@@ -1135,6 +1176,20 @@ ApplicationWindow {
         sequence: "Shift+F3"
         enabled: findBar.visible
         onActivated: findBar.findPrevious()
+    }
+    Shortcut {
+        sequences: [StandardKey.FullScreen, "F11"]
+        onActivated: window.windowFullScreen = !window.windowFullScreen
+    }
+    // Esc only has a meaning in page full screen: the page leaves it and the
+    // window follows, keeping the find bar's own Esc handling untouched.
+    Shortcut {
+        sequence: "Esc"
+        enabled: window.pageFullScreen
+        onActivated: {
+            if (tabs.currentTab)
+                tabs.currentTab.exitFullScreen()
+        }
     }
 
     Connections {

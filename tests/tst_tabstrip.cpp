@@ -40,6 +40,7 @@ private slots:
     void closingAfterAClickDoesNotCrash();
     void releaseAnimatesIntoTheSlot();
     void currentTabIsVisibleAfterARelease();
+    void closingTheDraggedTabResetsTheDragState();
 
 private:
     // Left edge of a tab in strip coordinates.
@@ -521,6 +522,22 @@ void TestTabStrip::currentTabIsVisibleAfterARelease()
     QQuickItem *current = itemAt(m_tabs->currentIndex());
     QTRY_VERIFY(current->mapToItem(view(), QPointF(0, 0)).x() >= -0.5
                 && current->mapToItem(view(), QPointF(current->width(), 0)).x() <= view()->width() + 0.5);
+}
+
+void TestTabStrip::closingTheDraggedTabResetsTheDragState()
+{
+    addTabs(5);
+    const QPoint press(int(leftOf(1)) + 100, 18);
+    QTest::mousePress(m_window, Qt::LeftButton, {}, press);
+    for (int dx = 5; dx <= 60; dx += 5)
+        QTest::mouseMove(m_window, press + QPoint(dx, 0));
+    QTest::qWait(60);
+    QVERIFY(m_strip->property("tabDragActive").toBool());
+    m_tabs->closeTabObject(tabAt(m_tabs->currentIndex()));
+    QTest::mouseRelease(m_window, Qt::LeftButton, {}, press + QPoint(60, 0));
+    QTest::qWait(300);
+    QCOMPARE(m_strip->property("tabDragActive").toBool(), false);
+    QCOMPARE(m_tabs->count(), 4);
 }
 
 int main(int argc, char *argv[])

@@ -133,6 +133,14 @@ TabButton {
 
     Component.onCompleted: lastX = x
 
+    Component.onDestruction: {
+        // Closing the dragged tab mid-drag never emits activeChanged.
+        if (dragHandler.active && control.tabStrip) {
+            control.tabStrip.tabDragActive = false
+            control.tabStrip.scheduleEnsureVisible()
+        }
+    }
+
     onXChanged: {
         if (dragHandler.active) {
             dragHandler.update()

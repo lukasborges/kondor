@@ -211,3 +211,59 @@ add_test(NAME tst_aboutinfo COMMAND tst_aboutinfo)
 set_tests_properties(tst_aboutinfo PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
 )
+
+qt_add_executable(tst_settings
+    tst_settings.cpp
+    ../src/settings.cpp
+)
+
+target_include_directories(tst_settings PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_settings PRIVATE
+    Qt6::Core
+    Qt6::Test
+)
+
+add_test(NAME tst_settings COMMAND tst_settings)
+
+qt_add_executable(tst_settingswindow
+    tst_settingswindow.cpp
+    ../src/tab.cpp
+    ../src/tabmodel.cpp
+    ../src/profilemanager.cpp
+    ../src/addressresolver.cpp
+    ../src/settings.cpp
+    ../src/downloadmanager.cpp
+    ../src/notifier.cpp
+    ../src/historymanager.cpp
+    ../src/historymodel.cpp
+    ../src/database.cpp
+    ../src/faviconstore.cpp
+)
+
+target_compile_definitions(tst_settingswindow PRIVATE
+    KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+)
+
+target_include_directories(tst_settingswindow PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_settingswindow PRIVATE
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebEngineQuick
+)
+
+add_test(NAME tst_settingswindow COMMAND tst_settingswindow)
+set_tests_properties(tst_settingswindow PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)

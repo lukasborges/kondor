@@ -22,6 +22,7 @@ class Tab : public QObject
     Q_PROPERTY(bool canGoBack READ canGoBack NOTIFY canGoBackChanged)
     Q_PROPERTY(bool canGoForward READ canGoForward NOTIFY canGoForwardChanged)
     Q_PROPERTY(QQuickWebEngineProfile *profile READ profile CONSTANT)
+    Q_PROPERTY(qreal zoomFactor READ zoomFactor NOTIFY zoomFactorChanged)
     Q_PROPERTY(bool isPrivate READ isPrivate CONSTANT)
     Q_PROPERTY(bool pinned READ pinned NOTIFY pinnedChanged)
     Q_PROPERTY(int findMatches READ findMatches NOTIFY findResultChanged)
@@ -44,6 +45,7 @@ public:
 
     QString title() const { return m_title; }
     QUrl url() const { return m_url; }
+    qreal zoomFactor() const { return m_zoomFactor; }
     QUrl iconUrl() const { return m_iconUrl; }
     qreal progress() const { return m_progress; }
     bool loading() const { return m_loading; }
@@ -70,6 +72,7 @@ public:
     // Calls coming from the WebEngineView (QML) to synchronize the state.
     Q_INVOKABLE void setTitle(const QString &title);
     Q_INVOKABLE void setUrl(const QUrl &url);
+    Q_INVOKABLE void setZoomFactor(qreal factor);
     Q_INVOKABLE void setIconUrl(const QUrl &iconUrl);
     Q_INVOKABLE void setProgress(qreal progress);
     Q_INVOKABLE void setLoading(bool loading);
@@ -118,6 +121,7 @@ public:
 signals:
     void titleChanged();
     void urlChanged();
+    void zoomFactorChanged();
     void iconUrlChanged();
     void progressChanged();
     void loadingChanged();
@@ -164,6 +168,7 @@ private:
 
     QString m_title;
     QUrl m_url;
+    qreal m_zoomFactor = 1.0;
     QUrl m_iconUrl;
     qreal m_progress = 0.0;
     bool m_loading = false;

@@ -31,6 +31,32 @@ Item {
         }
     }
 
+    // Host whose saved zoom the view currently shows, and a guard so that
+    // applying a saved zoom is not saved back.
+    property string zoomHost: ""
+    property bool applyingZoom: false
+
+    function setViewZoom(factor) {
+        if (Math.abs(webView.zoomFactor - factor) < 0.0001)
+            return
+        root.applyingZoom = true
+        webView.zoomFactor = factor
+        root.applyingZoom = false
+    }
+
+    function applySavedZoom(host) {
+        root.zoomHost = host
+        root.setViewZoom(host === "" ? 1.0 : ZoomManager.zoomFor(host))
+    }
+
+    Connections {
+        target: ZoomManager
+        function onZoomChanged(host, factor) {
+            if (host === root.zoomHost)
+                root.setViewZoom(factor)
+        }
+    }
+
     function setDevToolsOpen(open) {
         if (open === root.tab.devToolsOpen)
             return
@@ -70,7 +96,19 @@ Item {
                 if (!root.tab.isPrivate)
                     HistoryManager.updateTitle(webView.url, title)
             }
-            onUrlChanged: root.tab.setUrl(url)
+            onUrlChanged: {
+                root.tab.setUrl(url)
+                const host = ZoomManager.hostOf(url)
+                if (host !== root.zoomHost)
+                    root.applySavedZoom(host)
+            }
+            // Covers Ctrl+wheel, the zoom commands and the page itself.
+            onZoomFactorChanged: {
+                root.tab.setZoomFactor(zoomFactor)
+                // Private tabs read the saved zoom but never write it.
+                if (!root.applyingZoom && !root.tab.isPrivate && root.zoomHost !== "")
+                    ZoomManager.setZoomFor(root.zoomHost, zoomFactor)
+            }
             onIconChanged: {
                 root.tab.setIconUrl(icon)
                 // Only normal tabs persist a favicon: nothing from a private tab
@@ -94,6 +132,13 @@ Item {
                 if (loadRequest.status === WebEngineLoadingInfo.LoadSucceededStatus
                         && !root.tab.isPrivate)
                     HistoryManager.addVisit(webView.url, webView.title)
+
+                // Chromium may reset the zoom when the page commits. A private
+                // tab keeps what the user set in it, so only normal tabs
+                // re-apply the saved value.
+                if (loadRequest.status === WebEngineLoadingInfo.LoadSucceededStatus
+                        && !root.tab.isPrivate)
+                    root.applySavedZoom(ZoomManager.hostOf(webView.url))
             }
 
             onCanGoBackChanged: root.tab.setCanGoBack(canGoBack)
@@ -312,8 +357,8 @@ Item {
         function onForwardRequested() { if (webView.canGoForward) webView.goForward() }
         function onReloadRequested() { webView.reload() }
         function onStopRequested() { webView.stop() }
-        function onZoomInRequested() { webView.zoomFactor = Math.min(5.0, webView.zoomFactor + 0.1) }
-        function onZoomOutRequested() { webView.zoomFactor = Math.max(0.25, webView.zoomFactor - 0.1) }
+        function onZoomInRequested() { webView.zoomFactor = ZoomManager.step(webView.zoomFactor, 1) }
+        function onZoomOutRequested() { webView.zoomFactor = ZoomManager.step(webView.zoomFactor, -1) }
         function onResetZoomRequested() { webView.zoomFactor = 1.0 }
 
         function onFindRequested(text, backward, caseSensitive) {

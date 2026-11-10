@@ -609,7 +609,7 @@ ApplicationWindow {
                     placeholderText: qsTr("Search or enter address")
                     selectByMouse: true
                     leftPadding: securityButton.visible ? securitySlot.width + 8 : 8
-                    rightPadding: bookmarkButton.visible ? bookmarkButton.width + 10 : 8
+                    rightPadding: bookmarkSlot.width > 0 ? bookmarkSlot.width + 10 : 8
 
                     // Text as the user typed it, before selecting a row or
                     // completing a host: Esc restores it.
@@ -824,6 +824,23 @@ ApplicationWindow {
                         anchors.right: parent.right
                         anchors.rightMargin: 3
                         anchors.verticalCenter: parent.verticalCenter
+
+                        ToolButton {
+                            id: zoomButton
+                            readonly property real factor: tabs.currentTab ? tabs.currentTab.zoomFactor : 1.0
+                            visible: Math.round(factor * 100) !== 100
+                            text: Math.round(factor * 100) + "%"
+                            icon.name: "zoom-in"
+                            icon.width: 16
+                            icon.height: 16
+                            display: AbstractButton.TextBesideIcon
+                            flat: true
+                            implicitHeight: 28
+                            ToolTip.visible: hovered
+                            ToolTip.text: qsTr("Reset Zoom (Ctrl+0)")
+                            ToolTip.delay: 600
+                            onClicked: tabs.currentTab.resetZoom()
+                        }
 
                         ToolButton {
                             id: bookmarkButton

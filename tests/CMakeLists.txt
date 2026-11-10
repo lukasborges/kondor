@@ -419,3 +419,19 @@ target_link_libraries(tst_filehelper PRIVATE
 )
 
 add_test(NAME tst_filehelper COMMAND tst_filehelper)
+
+qt_add_executable(tst_zoommanager
+    tst_zoommanager.cpp
+    ../src/zoommanager.cpp
+)
+
+target_include_directories(tst_zoommanager PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_zoommanager PRIVATE
+    Qt6::Core
+    Qt6::Test
+)
+
+add_test(NAME tst_zoommanager COMMAND tst_zoommanager)

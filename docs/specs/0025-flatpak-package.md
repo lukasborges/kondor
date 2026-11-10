@@ -48,4 +48,11 @@ No UI for this issue, so there is no prototype.
 
 ## Decisions
 
-_None yet._ Answers to developer questions (`question` label) are recorded here as `| Question | Decision |` rows.
+| Question | Decision |
+| --- | --- |
+| How is the Flatpak build verified when neither agent machine has `flatpak-builder`? (review of PR #97) | A workflow `.github/workflows/flatpak.yml` builds the manifest on `pull_request` (paths: `packaging/flatpak/**`, `packaging/*.metainfo.xml`, `packaging/kondor.desktop`, `CMakeLists.txt`, `.github/workflows/flatpak.yml`, `.github/workflows/release.yml`) and on `workflow_dispatch`, with the same container and `flatpak-builder@v6` action as the release job; the bundle is only kept as a workflow artifact. Its check must be green before the PR is approved. The run-time criteria (Breeze look, downloads, notifications, audio) are checked by the maintainer with that artifact. |
+| Single instance (#15) inside the sandbox | `$XDG_RUNTIME_DIR` is private to each Flatpak instance, so the socket of `SingleInstance::serverName()` is never seen by a second `flatpak run`. When `FLATPAK_ID` is set the socket lives in `$XDG_RUNTIME_DIR/app/$FLATPAK_ID/`, which Flatpak shares between all instances of the app. |
+| Spell checking dictionaries in the Flatpak | Not built from `/usr/share/hunspell` (the SDK has none). The BaseApp ships them: the manifest sets `--env=QTWEBENGINE_DICTIONARIES_PATH=/app/qtwebengine_dictionaries`. |
+| BaseApp integration | Follow the BaseApp README: `cleanup-commands: [/app/cleanup-BaseApp.sh]` and `--env=QTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess`; no `QTWEBENGINE_DISABLE_SANDBOX`. |
+| App identity inside the sandbox | `FLATPAK_ID` (when set) replaces `kondor` as the desktop file name in `src/main.cpp` and as the default notification `app_icon` in `Notifier`, because `rename-desktop-file`/`rename-icon` export both under the app id. |
+| Release upload | The upload to the GitHub release must not rely on `gh` being present in the `flatpak-github-actions` container: either install/verify it there or upload from a second job on the plain runner using the artifact the action produces. |

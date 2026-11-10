@@ -212,27 +212,27 @@
         <translation>Новое имя:</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="795"/>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete Folder</source>
         <translation>Удалить папку</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="795"/>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete Bookmark</source>
         <translation>Удалить закладку</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="797"/>
+        <location filename="../qml/BookmarksWindow.qml" line="800"/>
         <source>Delete this folder and everything in it?</source>
         <translation>Удалить эту папку и всё её содержимое?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="798"/>
+        <location filename="../qml/BookmarksWindow.qml" line="801"/>
         <source>Delete this bookmark?</source>
         <translation>Удалить эту закладку?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="819"/>
+        <location filename="../qml/BookmarksWindow.qml" line="822"/>
         <source>Import Bookmarks</source>
         <translation>Импорт закладок</translation>
     </message>

@@ -212,27 +212,27 @@
         <translation>新しい名前:</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="795"/>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete Folder</source>
         <translation>フォルダーを削除</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="795"/>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete Bookmark</source>
         <translation>ブックマークを削除</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="797"/>
+        <location filename="../qml/BookmarksWindow.qml" line="800"/>
         <source>Delete this folder and everything in it?</source>
         <translation>このフォルダーと中身をすべて削除しますか？</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="798"/>
+        <location filename="../qml/BookmarksWindow.qml" line="801"/>
         <source>Delete this bookmark?</source>
         <translation>このブックマークを削除しますか？</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="819"/>
+        <location filename="../qml/BookmarksWindow.qml" line="822"/>
         <source>Import Bookmarks</source>
         <translation>ブックマークをインポート</translation>
     </message>

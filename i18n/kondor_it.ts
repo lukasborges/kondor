@@ -212,27 +212,27 @@
         <translation>Nuovo nome:</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="795"/>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete Folder</source>
         <translation>Elimina cartella</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="795"/>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete Bookmark</source>
         <translation>Elimina segnalibro</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="797"/>
+        <location filename="../qml/BookmarksWindow.qml" line="800"/>
         <source>Delete this folder and everything in it?</source>
         <translation>Eliminare questa cartella e tutto il suo contenuto?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="798"/>
+        <location filename="../qml/BookmarksWindow.qml" line="801"/>
         <source>Delete this bookmark?</source>
         <translation>Eliminare questo segnalibro?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="819"/>
+        <location filename="../qml/BookmarksWindow.qml" line="822"/>
         <source>Import Bookmarks</source>
         <translation>Importa segnalibri</translation>
     </message>

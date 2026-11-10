@@ -212,27 +212,27 @@
         <translation>Nytt namn:</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="795"/>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete Folder</source>
         <translation>Ta bort mapp</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="795"/>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete Bookmark</source>
         <translation>Ta bort bokmärke</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="797"/>
+        <location filename="../qml/BookmarksWindow.qml" line="800"/>
         <source>Delete this folder and everything in it?</source>
         <translation>Ta bort den här mappen och allt i den?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="798"/>
+        <location filename="../qml/BookmarksWindow.qml" line="801"/>
         <source>Delete this bookmark?</source>
         <translation>Ta bort det här bokmärket?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="819"/>
+        <location filename="../qml/BookmarksWindow.qml" line="822"/>
         <source>Import Bookmarks</source>
         <translation>Importera bokmärken</translation>
     </message>

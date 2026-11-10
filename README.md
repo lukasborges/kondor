@@ -6,78 +6,56 @@
 
 <p align="center"><b>A fast, private web browser that feels at home on the KDE Plasma desktop.</b></p>
 
-Kondor Browser opens modern websites with the same engine as Chrome, but it looks and behaves like any other Plasma app: Breeze controls, your icons and your color scheme, KDE dialogs and notifications, and the keyboard shortcuts you already know. Ads and trackers are blocked from the start, and private tabs leave nothing behind when you close them.
+Kondor Browser runs the modern web on the same engine as Chrome, and it looks and feels like any other Plasma app.
 
 ![Kondor Browser screenshot](assets/screenshot.png)
 
 ## Highlights
 
-- **Native on Plasma.** It follows your light or dark color scheme and uses Breeze icons and the KDE Configure, About and file dialogs. It can be your default browser.
-- **Private by default.** Ads and trackers are blocked. Private tabs and windows never write anything to disk, and every site asks before it uses your camera, microphone or location.
-- **Everything at hand.** Tabs, bookmarks, history, downloads, reader mode, find in page, zoom and developer tools, without add-ons.
-- **Speaks your language.** Kondor Browser comes in 19 languages, picked from your system settings.
+- **Native on Plasma**: Breeze look, KDE dialogs, your color scheme
+- **Private by default**: blocks ads and trackers, private tabs leave no trace
+- **All built in**: reader mode, downloads, developer tools, no add-ons needed
 
 ## Download
 
-Get the latest AppImage from the [Releases page](https://github.com/lukasborges/kondor/releases/latest). Make it executable and run it; no installation needed. To build it yourself, see [Build and run](#build-and-run).
-
-New features and fixes land every week. See what's coming next on the [Kondor Roadmap](https://github.com/users/lukasborges/projects/1).
+Get the AppImage from the [latest release](https://github.com/lukasborges/kondor/releases/latest), make it executable and run it. See what's coming next on the [Roadmap](https://github.com/users/lukasborges/projects/1).
 
 ## Features
 
 ### Tabs and windows
+- **Tidy tabs**: drag, pin, and scroll when there are many
+- **Reopen closed tabs** with Ctrl+Shift+T
+- **Multiple windows**, with your session restored on startup
 
-- Open as many tabs as you like. They share the tab bar evenly, and arrows appear when there are too many to fit.
-- Drag tabs to reorder them, pin the ones you always keep open, and middle-click to close.
-- Right-click a tab to reload, duplicate, pin it, close the others, or move it to a new window.
-- Closed a tab by mistake? **Ctrl+Shift+T** brings it back, up to the last 20.
-- Work in several windows at once. When you start Kondor again, it can reopen every window and tab from last time.
-- Launching Kondor while it is already running opens the link in the window you used last, instead of starting a second copy.
-
-### Search and the address bar
-
-- Type an address or anything you want to search for in the same bar.
-- Suggestions appear as you type: your bookmarks, the sites you visit most, and, if you turn them on, the search engine's suggestions. Known sites are completed for you (`kd` becomes `kde.org`).
-- Choose your search engine in the settings, or enter any search URL.
-- New tabs show a search box and the sites you visit most, one click away.
+### Search and address bar
+- **One bar** for addresses and searches
+- **Smart suggestions** from your bookmarks and history
+- **New Tab page** with your most visited sites
 
 ### Privacy and security
+- **Ad and tracker blocking** built in
+- **Private tabs and windows** that leave no trace
+- **Site permissions**: sites ask before using the camera, microphone or location
+- **Security padlock** and warnings for unsafe sites
 
-- **Ad and tracker blocking** using the EasyList and EasyPrivacy lists, which update by themselves. A shield shows how many requests were blocked on the current page, and you can switch blocking off for a site.
-- **Private tabs and windows** keep no history, cookies, downloads list or site settings, and each private tab is isolated from the others.
-- **Site permissions:** camera, microphone, screen sharing, location, notifications and clipboard access are always requested in a bar above the page. Your answer is remembered per site, and you can review it or take it back at any time.
-- **Connection security** at a glance: a padlock for secure sites, a "Not Secure" label for the rest, and a clear warning page before you visit a site with an invalid certificate.
-- Optionally block third-party cookies and clear your browsing data when you quit.
+### Reading
+- **Reader mode** for clutter-free articles
+- **Find in page**, **zoom per site** and **spell checking**
+- **Print**, **save as PDF** or **save the page**
+- **Full screen** for videos and windows
 
-### Reading and using pages
-
-- **Reader mode** turns cluttered articles into clean, readable text in your color scheme, with adjustable font and size.
-- **Find in page** highlights every match as you type.
-- **Zoom** is remembered for each site.
-- **Spell checking** in text fields, with suggestions in the right-click menu and a choice of languages.
-- A **right-click menu** for links, images, videos, selected text and text fields.
-- **Print**, **save as PDF**, or **save the page** to read it offline.
-- **Full screen** for videos, or for the whole window with F11.
-- A page that crashes only affects its own tab, and one click reloads it.
-
-### Bookmarks, history and downloads
-
-- Bookmark a page with the star (**Ctrl+D**) and organize bookmarks in folders on the bookmarks toolbar.
-- The bookmark manager supports drag and drop between folders and imports bookmarks from Firefox and Chrome. New profiles start with a set of KDE and Linux bookmarks.
-- **History** is grouped by day and searchable, and you can clear all of it or just a time range.
-- **Downloads** show their progress in the toolbar and can be paused, resumed or opened. You get a desktop notification when one finishes, and Kondor asks before quitting while downloads are still running.
+### Library
+- **Bookmarks** with a toolbar, folders and Firefox/Chrome import
+- **Searchable history** grouped by day
+- **Downloads** with pause, resume and notifications
 
 ### Made for KDE
+- **Breeze look** that follows your color scheme
+- **KDE settings window**, dialogs and notifications
+- **Available in 19 languages**
 
-- Breeze style, Breeze icons and your system color scheme.
-- A **Configure Kondor Browser** window in the familiar KDE layout, with a searchable sidebar and Defaults, OK, Apply and Cancel buttons.
-- Desktop notifications, KDE file dialogs, and a **New Private Window** action in the launcher.
-- Familiar keyboard shortcuts, listed [below](#keyboard-shortcuts).
-
-### For web developers
-
-- Chromium **developer tools** (F12), docked below the page, and **Inspect Element** in the right-click menu.
-- **View page source** from the right-click menu.
+### For developers
+- **Developer tools** (F12) and **view source**
 
 ## Stack
 

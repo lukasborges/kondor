@@ -257,59 +257,58 @@
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="491"/>
-        <location filename="../qml/BrowserWindow.qml" line="965"/>
+        <location filename="../qml/BrowserWindow.qml" line="827"/>
         <source>New Tab</source>
         <translation>새 탭</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="550"/>
+        <location filename="../qml/BrowserWindow.qml" line="412"/>
         <source>Back</source>
         <translation>뒤로</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="563"/>
+        <location filename="../qml/BrowserWindow.qml" line="425"/>
         <source>Forward</source>
         <translation>앞으로</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="576"/>
+        <location filename="../qml/BrowserWindow.qml" line="438"/>
         <source>Stop</source>
         <translation>중지</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="576"/>
+        <location filename="../qml/BrowserWindow.qml" line="438"/>
         <source>Reload</source>
         <translation>새로고침</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="592"/>
+        <location filename="../qml/BrowserWindow.qml" line="454"/>
         <source>Home</source>
         <translation>홈</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="609"/>
+        <location filename="../qml/BrowserWindow.qml" line="471"/>
         <source>Search or enter address</source>
         <translation>검색어 또는 주소 입력</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="877"/>
+        <location filename="../qml/BrowserWindow.qml" line="739"/>
         <source>Bookmark This Page</source>
         <translation>이 페이지 북마크</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="928"/>
+        <location filename="../qml/BrowserWindow.qml" line="790"/>
         <source>Downloads</source>
         <translation>다운로드</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="957"/>
+        <location filename="../qml/BrowserWindow.qml" line="819"/>
         <source>Menu</source>
         <translation>메뉴</translation>
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="970"/>
+        <location filename="../qml/BrowserWindow.qml" line="832"/>
         <source>New Private Tab</source>
         <translation>새 비공개 탭</translation>
     </message>
@@ -319,195 +318,195 @@
         <translation>비공개 브라우징</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="807"/>
+        <location filename="../qml/BrowserWindow.qml" line="669"/>
         <source>Not Secure</source>
         <translation>안전하지 않음</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="815"/>
+        <location filename="../qml/BrowserWindow.qml" line="677"/>
         <source>Site Information</source>
         <translation>사이트 정보</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="840"/>
+        <location filename="../qml/BrowserWindow.qml" line="702"/>
         <source>Reset Zoom (Ctrl+0)</source>
         <translation>확대/축소 초기화 (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="859"/>
+        <location filename="../qml/BrowserWindow.qml" line="721"/>
         <source>Exit Reader Mode (Ctrl+Alt+R)</source>
         <translation>리더 모드 종료 (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="860"/>
+        <location filename="../qml/BrowserWindow.qml" line="722"/>
         <source>Reader Mode (Ctrl+Alt+R)</source>
         <translation>리더 모드 (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="877"/>
+        <location filename="../qml/BrowserWindow.qml" line="739"/>
         <source>Edit This Bookmark</source>
         <translation>이 북마크 편집</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="975"/>
+        <location filename="../qml/BrowserWindow.qml" line="837"/>
         <source>New Window</source>
         <translation>새 창</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="980"/>
+        <location filename="../qml/BrowserWindow.qml" line="842"/>
         <source>New Private Window</source>
         <translation>새 비공개 창</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="985"/>
+        <location filename="../qml/BrowserWindow.qml" line="847"/>
         <source>Reopen Closed Tab</source>
         <translation>닫은 탭 다시 열기</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="992"/>
+        <location filename="../qml/BrowserWindow.qml" line="854"/>
         <source>Close Tab</source>
         <translation>탭 닫기</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="998"/>
+        <location filename="../qml/BrowserWindow.qml" line="860"/>
         <source>Find in Page…</source>
         <translation>페이지에서 찾기…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1004"/>
+        <location filename="../qml/BrowserWindow.qml" line="866"/>
         <source>Save Page As…</source>
         <translation>다른 이름으로 페이지 저장…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1010"/>
+        <location filename="../qml/BrowserWindow.qml" line="872"/>
         <source>Save as PDF…</source>
         <translation>PDF로 저장…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1016"/>
+        <location filename="../qml/BrowserWindow.qml" line="878"/>
         <source>Print…</source>
         <translation>인쇄…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1023"/>
+        <location filename="../qml/BrowserWindow.qml" line="885"/>
         <source>Zoom In</source>
         <translation>확대</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1032"/>
+        <location filename="../qml/BrowserWindow.qml" line="894"/>
         <source>Zoom Out</source>
         <translation>축소</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1041"/>
+        <location filename="../qml/BrowserWindow.qml" line="903"/>
         <source>Actual Size</source>
         <translation>실제 크기</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1051"/>
+        <location filename="../qml/BrowserWindow.qml" line="913"/>
         <source>Bookmarks</source>
         <translation>북마크</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1062"/>
+        <location filename="../qml/BrowserWindow.qml" line="924"/>
         <source>History</source>
         <translation>기록</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1067"/>
+        <location filename="../qml/BrowserWindow.qml" line="929"/>
         <source>Site Permissions…</source>
         <translation>사이트 권한…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1072"/>
+        <location filename="../qml/BrowserWindow.qml" line="934"/>
         <source>More Tools</source>
         <translation>도구 더 보기</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1075"/>
+        <location filename="../qml/BrowserWindow.qml" line="937"/>
         <source>Developer Tools</source>
         <translation>개발자 도구</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1089"/>
+        <location filename="../qml/BrowserWindow.qml" line="951"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 설정…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1096"/>
+        <location filename="../qml/BrowserWindow.qml" line="958"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 정보</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1150"/>
+        <location filename="../qml/BrowserWindow.qml" line="1012"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>전체 화면을 종료하려면 Esc 키를 누르십시오</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1220"/>
+        <location filename="../qml/BrowserWindow.qml" line="1082"/>
         <source>Page bookmarked</source>
         <translation>페이지를 북마크에 추가함</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1220"/>
+        <location filename="../qml/BrowserWindow.qml" line="1082"/>
         <source>Edit Bookmark</source>
         <translation>북마크 편집</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1228"/>
+        <location filename="../qml/BrowserWindow.qml" line="1090"/>
         <source>Name:</source>
         <translation>이름:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1234"/>
+        <location filename="../qml/BrowserWindow.qml" line="1096"/>
         <source>Folder:</source>
         <translation>폴더:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1244"/>
+        <location filename="../qml/BrowserWindow.qml" line="1106"/>
         <source>Remove</source>
         <translation>제거</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1252"/>
+        <location filename="../qml/BrowserWindow.qml" line="1114"/>
         <source>Done</source>
         <translation>완료</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1263"/>
+        <location filename="../qml/BrowserWindow.qml" line="1125"/>
         <source>Save as PDF</source>
         <translation>PDF로 저장</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1265"/>
+        <location filename="../qml/BrowserWindow.qml" line="1127"/>
         <source>PDF (*.pdf)</source>
         <translation>PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1272"/>
+        <location filename="../qml/BrowserWindow.qml" line="1134"/>
         <source>Save Page As</source>
         <translation>다른 이름으로 페이지 저장</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1274"/>
+        <location filename="../qml/BrowserWindow.qml" line="1136"/>
         <source>Web Page, Complete (*.html)</source>
         <translation>웹 페이지, 전체 (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1275"/>
+        <location filename="../qml/BrowserWindow.qml" line="1137"/>
         <source>Web Page, HTML Only (*.html)</source>
         <translation>웹 페이지, HTML만 (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1276"/>
+        <location filename="../qml/BrowserWindow.qml" line="1138"/>
         <source>Web Archive (*.mhtml)</source>
         <translation>웹 아카이브 (*.mhtml)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1292"/>
+        <location filename="../qml/BrowserWindow.qml" line="1154"/>
         <source>Save File</source>
         <translation>파일 저장</translation>
     </message>
@@ -1514,18 +1513,18 @@
 <context>
     <name>TabButtonDelegate</name>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="26"/>
-        <location filename="../qml/TabButtonDelegate.qml" line="27"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="23"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="24"/>
         <source>New Tab</source>
         <translation>새 탭</translation>
     </message>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="26"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="23"/>
         <source>New Private Tab</source>
         <translation>새 비공개 탭</translation>
     </message>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="101"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="85"/>
         <source>Close Tab</source>
         <translation>탭 닫기</translation>
     </message>
@@ -1576,6 +1575,24 @@
         <location filename="../qml/TabContextMenu.qml" line="67"/>
         <source>Close Tabs to the Right</source>
         <translation>오른쪽 탭 닫기</translation>
+    </message>
+</context>
+<context>
+    <name>TabStrip</name>
+    <message>
+        <location filename="../qml/TabStrip.qml" line="289"/>
+        <source>Scroll Tabs Left</source>
+        <translation>탭을 왼쪽으로 스크롤</translation>
+    </message>
+    <message>
+        <location filename="../qml/TabStrip.qml" line="306"/>
+        <source>Scroll Tabs Right</source>
+        <translation>탭을 오른쪽으로 스크롤</translation>
+    </message>
+    <message>
+        <location filename="../qml/TabStrip.qml" line="322"/>
+        <source>New Tab</source>
+        <translation>새 탭</translation>
     </message>
 </context>
 <context>

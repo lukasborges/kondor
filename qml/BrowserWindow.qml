@@ -175,21 +175,6 @@ ApplicationWindow {
         closeTabFor(tab)
     }
 
-    // True when the scene point is on the empty part of the tab bar, not on a
-    // tab or on the new-tab button.
-    function emptyTabBarAt(sceneX, sceneY) {
-        const buttonPoint = newTabButton.mapFromItem(null, sceneX, sceneY)
-        if (buttonPoint.x >= 0 && buttonPoint.x <= newTabButton.width
-                && buttonPoint.y >= 0 && buttonPoint.y <= newTabButton.height)
-            return false
-        if (tabBar.contentItem) {
-            const point = tabBar.contentItem.mapFromItem(null, sceneX, sceneY)
-            if (point.x <= tabBar.contentItem.contentWidth)
-                return false
-        }
-        return true
-    }
-
     function moveCurrentTab(delta) {
         const from = tabs.currentIndex
         const tab = tabs.currentTab
@@ -397,136 +382,13 @@ ApplicationWindow {
         visible: !window.pageFullScreen
 
         // ── Tab bar ──────────────────────────────────────────────────────
-        Rectangle {
+        TabStrip {
+            id: tabStrip
             Layout.fillWidth: true
-            implicitHeight: tabBar.implicitHeight
-            Kirigami.Theme.colorSet: Kirigami.Theme.Header
-            Kirigami.Theme.inherit: false
-            color: Kirigami.Theme.backgroundColor
-
-            RowLayout {
-                id: tabBarRow
-                anchors.fill: parent
-                spacing: 0
-
-                // A private window shows the mode here, next to its tabs.
-                Kirigami.Icon {
-                    visible: window.privateWindow
-                    source: "view-private"
-                    Layout.preferredWidth: 22
-                    Layout.preferredHeight: 22
-                    Layout.leftMargin: 8
-                    Layout.rightMargin: 4
-                }
-
-                TabBar {
-                    id: tabBar
-                    // Let the bar shrink when the tabs no longer fit; after the
-                    // minimum width the internal ListView scrolls.
-                    Layout.minimumWidth: 0
-                    // Room left for the tabs once the new-tab button is placed.
-                    readonly property real tabsAreaWidth: Math.max(90, tabBarRow.width - newTabButton.implicitWidth - 10)
-                    Layout.maximumWidth: tabsAreaWidth
-                    // Index a dragged tab would land on; drives the drop indicator.
-                    property int dropTargetIndex: -1
-
-                    currentIndex: tabs.currentIndex
-                    background: null
-
-                    onCurrentIndexChanged: {
-                        if (tabs.currentIndex !== currentIndex)
-                            tabs.setCurrentIndex(currentIndex)
-                    }
-
-                    Component.onCompleted: {
-                        // Let the internal ListView flick when the tabs overflow.
-                        if (contentItem)
-                            contentItem.interactive = true
-                    }
-
-                    Repeater {
-                        model: tabs
-
-                        delegate: TabButtonDelegate {
-                            tabModel: tabs
-                            tabBarItem: tabBar
-                            targetWindow: window
-                            tabCount: tabs.count
-                            pinnedCount: tabs.pinnedCount
-                            tabsAreaWidth: tabBar.tabsAreaWidth
-                        }
-                    }
-
-                    // A mouse wheel over the tab bar scrolls it horizontally.
-                    WheelHandler {
-                        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-                        onWheel: function(event) {
-                            const view = tabBar.contentItem
-                            if (!view)
-                                return
-                            const maximum = Math.max(0, view.contentWidth - view.width)
-                            if (maximum <= 0)
-                                return
-
-                            const delta = event.pixelDelta.x !== 0 ? event.pixelDelta.x
-                                : event.pixelDelta.y !== 0 ? -event.pixelDelta.y
-                                : event.angleDelta.x !== 0 ? event.angleDelta.x
-                                : -event.angleDelta.y
-                            view.contentX = Math.max(0, Math.min(maximum, view.contentX + delta))
-                        }
-                    }
-                }
-
-                // New-tab button, right after the last tab.
-                ToolButton {
-                    id: newTabButton
-                    Layout.alignment: Qt.AlignVCenter
-                    Layout.leftMargin: 2
-                    Layout.minimumWidth: implicitWidth
-                    display: AbstractButton.IconOnly
-                    icon.name: "tab-new"
-                    icon.width: 16
-                    icon.height: 16
-                    ToolTip.visible: hovered
-                    ToolTip.text: qsTr("New Tab")
-                    ToolTip.delay: 600
-                    onClicked: window.openNewTab(false)
-                }
-
-                Item { Layout.fillWidth: true }
-            }
-
-            // Where a dragged tab will land.
-            Rectangle {
-                readonly property Item targetItem: tabBar.dropTargetIndex >= 0 && tabBar.contentItem
-                    ? tabBar.itemAt(tabBar.dropTargetIndex) : null
-                visible: targetItem !== null
-                x: tabBar.x + (targetItem ? targetItem.x - tabBar.contentItem.contentX : 0)
-                y: tabBar.y
-                width: 2
-                height: tabBar.height
-                color: Kirigami.Theme.highlightColor
-            }
-
-            // Double-click (or middle click) on the empty part of the tab bar
-            // opens a new tab.
-            TapHandler {
-                acceptedButtons: Qt.LeftButton
-                onDoubleTapped: function(eventPoint) {
-                    if (window.emptyTabBarAt(eventPoint.scenePosition.x,
-                                             eventPoint.scenePosition.y))
-                        window.openNewTab(false)
-                }
-            }
-
-            TapHandler {
-                acceptedButtons: Qt.MiddleButton
-                onTapped: function(eventPoint) {
-                    if (window.emptyTabBarAt(eventPoint.scenePosition.x,
-                                             eventPoint.scenePosition.y))
-                        window.openNewTab(false)
-                }
-            }
+            tabModel: tabs
+            targetWindow: window
+            privateWindow: window.privateWindow
+            onNewTabRequested: window.openNewTab(false)
         }
 
         // ── Navigation bar ───────────────────────────────────────────────
@@ -1541,12 +1403,6 @@ ApplicationWindow {
     Connections {
         target: tabs
         function onCurrentIndexChanged() {
-            if (tabBar.currentIndex !== tabs.currentIndex)
-                tabBar.currentIndex = tabs.currentIndex
-            // Keep the current tab visible when the tab bar overflows.
-            if (tabs.currentIndex >= 0 && tabBar.contentItem) {
-                tabBar.contentItem.positionViewAtIndex(tabs.currentIndex, ListView.Contain)
-            }
         }
         function onCurrentTabChanged() {
             addressSuggestions.close()

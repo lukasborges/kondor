@@ -257,59 +257,58 @@
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="491"/>
-        <location filename="../qml/BrowserWindow.qml" line="965"/>
+        <location filename="../qml/BrowserWindow.qml" line="827"/>
         <source>New Tab</source>
         <translation>Pestanya nova</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="550"/>
+        <location filename="../qml/BrowserWindow.qml" line="412"/>
         <source>Back</source>
         <translation>Endarrere</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="563"/>
+        <location filename="../qml/BrowserWindow.qml" line="425"/>
         <source>Forward</source>
         <translation>Endavant</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="576"/>
+        <location filename="../qml/BrowserWindow.qml" line="438"/>
         <source>Stop</source>
         <translation>Atura</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="576"/>
+        <location filename="../qml/BrowserWindow.qml" line="438"/>
         <source>Reload</source>
         <translation>Torna a carregar</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="592"/>
+        <location filename="../qml/BrowserWindow.qml" line="454"/>
         <source>Home</source>
         <translation>Inici</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="609"/>
+        <location filename="../qml/BrowserWindow.qml" line="471"/>
         <source>Search or enter address</source>
         <translation>Cerqueu o escriviu una adreça</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="877"/>
+        <location filename="../qml/BrowserWindow.qml" line="739"/>
         <source>Bookmark This Page</source>
         <translation>Marca aquesta pàgina</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="928"/>
+        <location filename="../qml/BrowserWindow.qml" line="790"/>
         <source>Downloads</source>
         <translation>Baixades</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="957"/>
+        <location filename="../qml/BrowserWindow.qml" line="819"/>
         <source>Menu</source>
         <translation>Menú</translation>
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="970"/>
+        <location filename="../qml/BrowserWindow.qml" line="832"/>
         <source>New Private Tab</source>
         <translation>Pestanya privada nova</translation>
     </message>
@@ -319,195 +318,195 @@
         <translation>Navegació privada</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="807"/>
+        <location filename="../qml/BrowserWindow.qml" line="669"/>
         <source>Not Secure</source>
         <translation>No segur</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="815"/>
+        <location filename="../qml/BrowserWindow.qml" line="677"/>
         <source>Site Information</source>
         <translation>Informació del lloc</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="840"/>
+        <location filename="../qml/BrowserWindow.qml" line="702"/>
         <source>Reset Zoom (Ctrl+0)</source>
         <translation>Restableix el zoom (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="859"/>
+        <location filename="../qml/BrowserWindow.qml" line="721"/>
         <source>Exit Reader Mode (Ctrl+Alt+R)</source>
         <translation>Surt del mode lector (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="860"/>
+        <location filename="../qml/BrowserWindow.qml" line="722"/>
         <source>Reader Mode (Ctrl+Alt+R)</source>
         <translation>Mode lector (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="877"/>
+        <location filename="../qml/BrowserWindow.qml" line="739"/>
         <source>Edit This Bookmark</source>
         <translation>Edita aquest marcador</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="975"/>
+        <location filename="../qml/BrowserWindow.qml" line="837"/>
         <source>New Window</source>
         <translation>Finestra nova</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="980"/>
+        <location filename="../qml/BrowserWindow.qml" line="842"/>
         <source>New Private Window</source>
         <translation>Finestra privada nova</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="985"/>
+        <location filename="../qml/BrowserWindow.qml" line="847"/>
         <source>Reopen Closed Tab</source>
         <translation>Reobre la pestanya tancada</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="992"/>
+        <location filename="../qml/BrowserWindow.qml" line="854"/>
         <source>Close Tab</source>
         <translation>Tanca la pestanya</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="998"/>
+        <location filename="../qml/BrowserWindow.qml" line="860"/>
         <source>Find in Page…</source>
         <translation>Cerca a la pàgina…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1004"/>
+        <location filename="../qml/BrowserWindow.qml" line="866"/>
         <source>Save Page As…</source>
         <translation>Desa la pàgina com a…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1010"/>
+        <location filename="../qml/BrowserWindow.qml" line="872"/>
         <source>Save as PDF…</source>
         <translation>Desa com a PDF…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1016"/>
+        <location filename="../qml/BrowserWindow.qml" line="878"/>
         <source>Print…</source>
         <translation>Imprimeix…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1023"/>
+        <location filename="../qml/BrowserWindow.qml" line="885"/>
         <source>Zoom In</source>
         <translation>Amplia</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1032"/>
+        <location filename="../qml/BrowserWindow.qml" line="894"/>
         <source>Zoom Out</source>
         <translation>Redueix</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1041"/>
+        <location filename="../qml/BrowserWindow.qml" line="903"/>
         <source>Actual Size</source>
         <translation>Mida real</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1051"/>
+        <location filename="../qml/BrowserWindow.qml" line="913"/>
         <source>Bookmarks</source>
         <translation>Marcadors</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1062"/>
+        <location filename="../qml/BrowserWindow.qml" line="924"/>
         <source>History</source>
         <translation>Historial</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1067"/>
+        <location filename="../qml/BrowserWindow.qml" line="929"/>
         <source>Site Permissions…</source>
         <translation>Permisos dels llocs…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1072"/>
+        <location filename="../qml/BrowserWindow.qml" line="934"/>
         <source>More Tools</source>
         <translation>Més eines</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1075"/>
+        <location filename="../qml/BrowserWindow.qml" line="937"/>
         <source>Developer Tools</source>
         <translation>Eines de desenvolupament</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1089"/>
+        <location filename="../qml/BrowserWindow.qml" line="951"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Configura el %1…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1096"/>
+        <location filename="../qml/BrowserWindow.qml" line="958"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Quant al %1</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1150"/>
+        <location filename="../qml/BrowserWindow.qml" line="1012"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Premeu Esc per a sortir de la pantalla completa</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1220"/>
+        <location filename="../qml/BrowserWindow.qml" line="1082"/>
         <source>Page bookmarked</source>
         <translation>Pàgina marcada</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1220"/>
+        <location filename="../qml/BrowserWindow.qml" line="1082"/>
         <source>Edit Bookmark</source>
         <translation>Edita el marcador</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1228"/>
+        <location filename="../qml/BrowserWindow.qml" line="1090"/>
         <source>Name:</source>
         <translation>Nom:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1234"/>
+        <location filename="../qml/BrowserWindow.qml" line="1096"/>
         <source>Folder:</source>
         <translation>Carpeta:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1244"/>
+        <location filename="../qml/BrowserWindow.qml" line="1106"/>
         <source>Remove</source>
         <translation>Elimina</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1252"/>
+        <location filename="../qml/BrowserWindow.qml" line="1114"/>
         <source>Done</source>
         <translation>Fet</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1263"/>
+        <location filename="../qml/BrowserWindow.qml" line="1125"/>
         <source>Save as PDF</source>
         <translation>Desa com a PDF</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1265"/>
+        <location filename="../qml/BrowserWindow.qml" line="1127"/>
         <source>PDF (*.pdf)</source>
         <translation>PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1272"/>
+        <location filename="../qml/BrowserWindow.qml" line="1134"/>
         <source>Save Page As</source>
         <translation>Desa la pàgina com a</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1274"/>
+        <location filename="../qml/BrowserWindow.qml" line="1136"/>
         <source>Web Page, Complete (*.html)</source>
         <translation>Pàgina web completa (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1275"/>
+        <location filename="../qml/BrowserWindow.qml" line="1137"/>
         <source>Web Page, HTML Only (*.html)</source>
         <translation>Pàgina web, només HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1276"/>
+        <location filename="../qml/BrowserWindow.qml" line="1138"/>
         <source>Web Archive (*.mhtml)</source>
         <translation>Arxiu web (*.mhtml)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1292"/>
+        <location filename="../qml/BrowserWindow.qml" line="1154"/>
         <source>Save File</source>
         <translation>Desa el fitxer</translation>
     </message>
@@ -1514,18 +1513,18 @@
 <context>
     <name>TabButtonDelegate</name>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="26"/>
-        <location filename="../qml/TabButtonDelegate.qml" line="27"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="23"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="24"/>
         <source>New Tab</source>
         <translation>Pestanya nova</translation>
     </message>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="26"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="23"/>
         <source>New Private Tab</source>
         <translation>Pestanya privada nova</translation>
     </message>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="101"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="85"/>
         <source>Close Tab</source>
         <translation>Tanca la pestanya</translation>
     </message>
@@ -1576,6 +1575,24 @@
         <location filename="../qml/TabContextMenu.qml" line="67"/>
         <source>Close Tabs to the Right</source>
         <translation>Tanca les pestanyes de la dreta</translation>
+    </message>
+</context>
+<context>
+    <name>TabStrip</name>
+    <message>
+        <location filename="../qml/TabStrip.qml" line="289"/>
+        <source>Scroll Tabs Left</source>
+        <translation>Desplaça les pestanyes a l&apos;esquerra</translation>
+    </message>
+    <message>
+        <location filename="../qml/TabStrip.qml" line="306"/>
+        <source>Scroll Tabs Right</source>
+        <translation>Desplaça les pestanyes a la dreta</translation>
+    </message>
+    <message>
+        <location filename="../qml/TabStrip.qml" line="322"/>
+        <source>New Tab</source>
+        <translation>Pestanya nova</translation>
     </message>
 </context>
 <context>

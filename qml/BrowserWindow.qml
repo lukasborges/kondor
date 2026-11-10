@@ -725,6 +725,7 @@ ApplicationWindow {
                                     if (changedHost === adBlockButton.host)
                                         adBlockButton.refresh()
                                 }
+                                function onAllowListChanged() { adBlockButton.refresh() }
                             }
                             Connections {
                                 target: Settings

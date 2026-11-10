@@ -208,6 +208,8 @@ void AdBlockManager::downloadFinished()
 bool AdBlockManager::isAllowed(const QString &host) const
 {
     const QString key = host.toLower();
+    if (m_sessionBlocked.contains(key))
+        return false;
     return Settings::instance()->adBlockAllowList().contains(key) || m_sessionAllowed.contains(key);
 }
 
@@ -222,17 +224,22 @@ void AdBlockManager::setAllowed(const QString &host, bool allowed, bool persiste
             list.append(key);
         else if (!allowed)
             list.removeAll(key);
+        // A persistent choice replaces any session-only one for the host.
+        m_sessionAllowed.remove(key);
+        m_sessionBlocked.remove(key);
         Settings::instance()->setAdBlockAllowList(list);
-        // A host allowed in a private tab earlier is allowed no more.
-        if (!allowed && m_sessionAllowed.remove(key))
-            syncAllowedHosts();
+    } else if (allowed) {
+        m_sessionAllowed.insert(key);
+        m_sessionBlocked.remove(key);
     } else {
-        if (allowed)
-            m_sessionAllowed.insert(key);
-        else
-            m_sessionAllowed.remove(key);
-        syncAllowedHosts();
+        // Session-only override that wins over the persistent list, which a
+        // private tab never touches.
+        m_sessionAllowed.remove(key);
+        if (Settings::instance()->adBlockAllowList().contains(key))
+            m_sessionBlocked.insert(key);
     }
+    syncAllowedHosts();
+    emit allowListChanged();
 }
 
 void AdBlockManager::syncAllowedHosts()
@@ -241,6 +248,8 @@ void AdBlockManager::syncAllowedHosts()
     const QStringList persisted = Settings::instance()->adBlockAllowList();
     for (const QString &host : persisted)
         hosts.insert(host);
+    for (const QString &host : std::as_const(m_sessionBlocked))
+        hosts.remove(host);
     m_interceptor->setAllowedHosts(hosts);
 }
 

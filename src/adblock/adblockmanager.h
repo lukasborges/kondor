@@ -66,6 +66,8 @@ signals:
     void updatingChanged();
     void lastUpdateChanged();
     void blockedCountChanged(const QString &host);
+    // The allow list changed, persistently or for the session only.
+    void allowListChanged();
 
 private:
     explicit AdBlockManager(QObject *parent = nullptr);
@@ -86,6 +88,7 @@ private:
     QNetworkAccessManager *m_network = nullptr;
     QHash<QString, int> m_counts;
     QSet<QString> m_sessionAllowed;
+    QSet<QString> m_sessionBlocked;    // private-tab override of the persistent list
     int m_pendingDownloads = 0;
     bool m_downloadedAnything = false;
     bool m_reloadAfterLoad = false;

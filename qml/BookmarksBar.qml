@@ -82,7 +82,9 @@ ToolBar {
                 onClicked: {
                     if (barButton.isFolder) {
                         folderMenu.folderId = barButton.id
-                        folderMenu.popup(barButton)
+                        // Line the menu up with the button's bottom-left
+                        // corner, wherever the click or key press landed.
+                        folderMenu.popup(barButton, 0, barButton.height)
                     } else {
                         root.openBookmark(barButton.url, BookmarkManager.ctrlPressed())
                     }

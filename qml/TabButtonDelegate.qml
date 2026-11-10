@@ -15,34 +15,18 @@ TabButton {
     // Browser window and tab bar helpers, passed in from BrowserWindow.qml.
     property var tabBarItem: null
     property var targetWindow: null
-    property int tabCount: 1
+    // The TabStrip owns the tab widths.
+    property var tabStrip: null
     property int pinnedCount: 0
-    property real tabsAreaWidth: 0
 
-    readonly property int pinnedTabWidth: 36
-    readonly property int minimumTabWidth: 90
-    readonly property int maximumTabWidth: 220
     readonly property string fullTitle: tab.newTabPage
         ? (tab.isPrivate ? qsTr("New Private Tab") : qsTr("New Tab"))
         : (tab.title.length ? tab.title : qsTr("New Tab"))
 
-    // Unpinned tabs share the room left by the pinned ones. They shrink down
-    // to the minimum and the tab bar starts scrolling after that.
-    readonly property real sharedWidth: {
-        const unpinned = Math.max(1, tabCount - pinnedCount)
-        return Math.max(minimumTabWidth, (tabsAreaWidth - pinnedCount * pinnedTabWidth) / unpinned)
-    }
-    readonly property real naturalWidth: Math.min(maximumTabWidth, Math.max(130, Math.ceil(titleMetrics.advanceWidth) + 62))
-
-    width: tab.pinned ? pinnedTabWidth : Math.max(minimumTabWidth, Math.min(naturalWidth, sharedWidth))
+    // Every unpinned tab has the same width, whatever its title (#83).
+    width: tab.pinned ? tabStrip.pinnedTabWidth : tabStrip.tabWidth
     text: ""
     Accessible.name: fullTitle
-
-    TextMetrics {
-        id: titleMetrics
-        font: Kirigami.Theme.defaultFont
-        text: control.fullTitle
-    }
 
     contentItem: RowLayout {
         spacing: 6
@@ -100,13 +84,13 @@ TabButton {
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Close Tab")
             ToolTip.delay: 600
-            onClicked: control.targetWindow.closeTabFor(control.tab)
+            onClicked: control.tabStrip.closeWithMouse(control.tab)
         }
     }
 
     TapHandler {
         acceptedButtons: Qt.MiddleButton
-        onTapped: control.targetWindow.closeTabFor(control.tab)
+        onTapped: control.tabStrip.closeWithMouse(control.tab)
     }
 
     TapHandler {

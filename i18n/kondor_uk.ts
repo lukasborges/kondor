@@ -257,59 +257,58 @@
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="491"/>
-        <location filename="../qml/BrowserWindow.qml" line="965"/>
+        <location filename="../qml/BrowserWindow.qml" line="827"/>
         <source>New Tab</source>
         <translation>Нова вкладка</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="550"/>
+        <location filename="../qml/BrowserWindow.qml" line="412"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="563"/>
+        <location filename="../qml/BrowserWindow.qml" line="425"/>
         <source>Forward</source>
         <translation>Вперед</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="576"/>
+        <location filename="../qml/BrowserWindow.qml" line="438"/>
         <source>Stop</source>
         <translation>Зупинити</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="576"/>
+        <location filename="../qml/BrowserWindow.qml" line="438"/>
         <source>Reload</source>
         <translation>Перезавантажити</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="592"/>
+        <location filename="../qml/BrowserWindow.qml" line="454"/>
         <source>Home</source>
         <translation>Домівка</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="609"/>
+        <location filename="../qml/BrowserWindow.qml" line="471"/>
         <source>Search or enter address</source>
         <translation>Пошук або введення адреси</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="877"/>
+        <location filename="../qml/BrowserWindow.qml" line="739"/>
         <source>Bookmark This Page</source>
         <translation>Додати цю сторінку до закладок</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="928"/>
+        <location filename="../qml/BrowserWindow.qml" line="790"/>
         <source>Downloads</source>
         <translation>Завантажене</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="957"/>
+        <location filename="../qml/BrowserWindow.qml" line="819"/>
         <source>Menu</source>
         <translation>Меню</translation>
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="970"/>
+        <location filename="../qml/BrowserWindow.qml" line="832"/>
         <source>New Private Tab</source>
         <translation>Нова приватна вкладка</translation>
     </message>
@@ -319,195 +318,195 @@
         <translation>Приватний перегляд</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="807"/>
+        <location filename="../qml/BrowserWindow.qml" line="669"/>
         <source>Not Secure</source>
         <translation>Не захищено</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="815"/>
+        <location filename="../qml/BrowserWindow.qml" line="677"/>
         <source>Site Information</source>
         <translation>Інформація про сайт</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="840"/>
+        <location filename="../qml/BrowserWindow.qml" line="702"/>
         <source>Reset Zoom (Ctrl+0)</source>
         <translation>Скинути масштаб (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="859"/>
+        <location filename="../qml/BrowserWindow.qml" line="721"/>
         <source>Exit Reader Mode (Ctrl+Alt+R)</source>
         <translation>Вийти з режиму читання (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="860"/>
+        <location filename="../qml/BrowserWindow.qml" line="722"/>
         <source>Reader Mode (Ctrl+Alt+R)</source>
         <translation>Режим читання (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="877"/>
+        <location filename="../qml/BrowserWindow.qml" line="739"/>
         <source>Edit This Bookmark</source>
         <translation>Редагувати цю закладку</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="975"/>
+        <location filename="../qml/BrowserWindow.qml" line="837"/>
         <source>New Window</source>
         <translation>Нове вікно</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="980"/>
+        <location filename="../qml/BrowserWindow.qml" line="842"/>
         <source>New Private Window</source>
         <translation>Нове приватне вікно</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="985"/>
+        <location filename="../qml/BrowserWindow.qml" line="847"/>
         <source>Reopen Closed Tab</source>
         <translation>Повторно відкрити закриту вкладку</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="992"/>
+        <location filename="../qml/BrowserWindow.qml" line="854"/>
         <source>Close Tab</source>
         <translation>Закрити вкладку</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="998"/>
+        <location filename="../qml/BrowserWindow.qml" line="860"/>
         <source>Find in Page…</source>
         <translation>Знайти на сторінці…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1004"/>
+        <location filename="../qml/BrowserWindow.qml" line="866"/>
         <source>Save Page As…</source>
         <translation>Зберегти сторінку як…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1010"/>
+        <location filename="../qml/BrowserWindow.qml" line="872"/>
         <source>Save as PDF…</source>
         <translation>Зберегти як PDF…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1016"/>
+        <location filename="../qml/BrowserWindow.qml" line="878"/>
         <source>Print…</source>
         <translation>Друк…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1023"/>
+        <location filename="../qml/BrowserWindow.qml" line="885"/>
         <source>Zoom In</source>
         <translation>Збільшити</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1032"/>
+        <location filename="../qml/BrowserWindow.qml" line="894"/>
         <source>Zoom Out</source>
         <translation>Зменшити</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1041"/>
+        <location filename="../qml/BrowserWindow.qml" line="903"/>
         <source>Actual Size</source>
         <translation>Звичайний розмір</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1051"/>
+        <location filename="../qml/BrowserWindow.qml" line="913"/>
         <source>Bookmarks</source>
         <translation>Закладки</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1062"/>
+        <location filename="../qml/BrowserWindow.qml" line="924"/>
         <source>History</source>
         <translation>Журнал</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1067"/>
+        <location filename="../qml/BrowserWindow.qml" line="929"/>
         <source>Site Permissions…</source>
         <translation>Дозволи сайтів…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1072"/>
+        <location filename="../qml/BrowserWindow.qml" line="934"/>
         <source>More Tools</source>
         <translation>Додаткові інструменти</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1075"/>
+        <location filename="../qml/BrowserWindow.qml" line="937"/>
         <source>Developer Tools</source>
         <translation>Засоби розробника</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1089"/>
+        <location filename="../qml/BrowserWindow.qml" line="951"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Налаштувати %1…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1096"/>
+        <location filename="../qml/BrowserWindow.qml" line="958"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Про %1</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1150"/>
+        <location filename="../qml/BrowserWindow.qml" line="1012"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Натисніть Esc, щоб вийти з повноекранного режиму</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1220"/>
+        <location filename="../qml/BrowserWindow.qml" line="1082"/>
         <source>Page bookmarked</source>
         <translation>Сторінку додано до закладок</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1220"/>
+        <location filename="../qml/BrowserWindow.qml" line="1082"/>
         <source>Edit Bookmark</source>
         <translation>Редагувати закладку</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1228"/>
+        <location filename="../qml/BrowserWindow.qml" line="1090"/>
         <source>Name:</source>
         <translation>Назва:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1234"/>
+        <location filename="../qml/BrowserWindow.qml" line="1096"/>
         <source>Folder:</source>
         <translation>Каталог:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1244"/>
+        <location filename="../qml/BrowserWindow.qml" line="1106"/>
         <source>Remove</source>
         <translation>Вилучити</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1252"/>
+        <location filename="../qml/BrowserWindow.qml" line="1114"/>
         <source>Done</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1263"/>
+        <location filename="../qml/BrowserWindow.qml" line="1125"/>
         <source>Save as PDF</source>
         <translation>Зберегти як PDF</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1265"/>
+        <location filename="../qml/BrowserWindow.qml" line="1127"/>
         <source>PDF (*.pdf)</source>
         <translation>PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1272"/>
+        <location filename="../qml/BrowserWindow.qml" line="1134"/>
         <source>Save Page As</source>
         <translation>Зберегти сторінку як</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1274"/>
+        <location filename="../qml/BrowserWindow.qml" line="1136"/>
         <source>Web Page, Complete (*.html)</source>
         <translation>Вебсторінка повністю (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1275"/>
+        <location filename="../qml/BrowserWindow.qml" line="1137"/>
         <source>Web Page, HTML Only (*.html)</source>
         <translation>Вебсторінка, лише HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1276"/>
+        <location filename="../qml/BrowserWindow.qml" line="1138"/>
         <source>Web Archive (*.mhtml)</source>
         <translation>Веб-архів (*.mhtml)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1292"/>
+        <location filename="../qml/BrowserWindow.qml" line="1154"/>
         <source>Save File</source>
         <translation>Зберегти файл</translation>
     </message>
@@ -1514,18 +1513,18 @@
 <context>
     <name>TabButtonDelegate</name>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="26"/>
-        <location filename="../qml/TabButtonDelegate.qml" line="27"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="23"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="24"/>
         <source>New Tab</source>
         <translation>Нова вкладка</translation>
     </message>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="26"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="23"/>
         <source>New Private Tab</source>
         <translation>Нова приватна вкладка</translation>
     </message>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="101"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="85"/>
         <source>Close Tab</source>
         <translation>Закрити вкладку</translation>
     </message>
@@ -1576,6 +1575,24 @@
         <location filename="../qml/TabContextMenu.qml" line="67"/>
         <source>Close Tabs to the Right</source>
         <translation>Закрити вкладки праворуч</translation>
+    </message>
+</context>
+<context>
+    <name>TabStrip</name>
+    <message>
+        <location filename="../qml/TabStrip.qml" line="289"/>
+        <source>Scroll Tabs Left</source>
+        <translation>Прокрутити вкладки ліворуч</translation>
+    </message>
+    <message>
+        <location filename="../qml/TabStrip.qml" line="306"/>
+        <source>Scroll Tabs Right</source>
+        <translation>Прокрутити вкладки праворуч</translation>
+    </message>
+    <message>
+        <location filename="../qml/TabStrip.qml" line="322"/>
+        <source>New Tab</source>
+        <translation>Нова вкладка</translation>
     </message>
 </context>
 <context>

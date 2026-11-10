@@ -33,6 +33,7 @@ qt_add_qml_module(kondor
     VERSION 1.0
     QML_FILES
         qml/BrowserWindow.qml
+        qml/TabStrip.qml
         qml/WebViewTab.qml
         qml/PageContextMenu.qml
         qml/ReaderControls.qml

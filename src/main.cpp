@@ -15,7 +15,9 @@
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
 #include "adblock/adblockmanager.h"
+#include "extensionloader.h"
 #include "faviconstore.h"
+#include "profilemanager.h"
 #include "settings.h"
 #include "singleinstance.h"
 #include "startupargs.h"
@@ -51,8 +53,11 @@ int main(int argc, char *argv[])
 {
     // Make sure Qt warnings and errors are printed even when the system's
     // qtlogging.ini silences the debug category.
-    qInstallMessageHandler([](QtMsgType type, const QMessageLogContext &, const QString &msg) {
-        if (type == QtDebugMsg || type == QtInfoMsg)
+    qInstallMessageHandler([](QtMsgType type, const QMessageLogContext &ctx, const QString &msg) {
+        // The extension loader reports its results with qInfo().
+        const bool extensionLog = ctx.category
+            && qstrcmp(ctx.category, "kondor.extensions") == 0;
+        if ((type == QtDebugMsg || type == QtInfoMsg) && !extensionLog)
             return;
         std::fprintf(stderr, "%s\n", msg.toUtf8().constData());
         std::fflush(stderr);
@@ -113,6 +118,12 @@ int main(int argc, char *argv[])
         QStringLiteral("new-instance"),
         QStringLiteral("start a separate process instead of reusing the running one"));
     parser.addOption(newInstanceOption);
+    const QCommandLineOption loadExtensionOption(
+        QStringLiteral("load-extension"),
+        QStringLiteral("Load an unpacked extension (developer option). Repeatable; "
+                       "not forwarded to a running instance, use with --new-instance"),
+        QStringLiteral("dir"));
+    parser.addOption(loadExtensionOption);
     parser.addPositionalArgument(QStringLiteral("urls"),
                                  QStringLiteral("URLs or files to open"),
                                  QStringLiteral("[urls...]"));
@@ -189,6 +200,13 @@ int main(int argc, char *argv[])
 
     // Cached filter lists load in the background; stale ones are refreshed.
     AdBlockManager::instance()->start();
+
+    // Developer option: unpacked extensions go into the default profile only,
+    // before any window loads its pages.
+    ExtensionLoader extensionLoader;
+    if (parser.isSet(loadExtensionOption))
+        extensionLoader.load(ProfileManager::instance()->defaultProfile(),
+                             parser.values(loadExtensionOption));
 
     QQmlApplicationEngine engine;
     engine.addImageProvider(QStringLiteral("kondor-favicon"), new FaviconImageProvider);

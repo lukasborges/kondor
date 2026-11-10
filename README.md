@@ -67,6 +67,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 
 ### For developers
 - **Developer tools** (F12) and **view source**
+- **Load unpacked extensions** with `--load-extension <dir>` (experimental, needs `--new-instance`)
 
 ## Keyboard shortcuts
 

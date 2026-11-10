@@ -20,7 +20,7 @@ A working prototype with the core functionality in place: it actually browses, w
 
 - **Real tabs** with `Qt WebEngine` (one `WebEngineView` per tab, preserving state when switching)
 - **Tab management**: favicons and a loading indicator, drag to reorder, middle-click to close, pinned tabs, a tab context menu (reload, duplicate, pin, close others and tabs to the right), keyboard switching and overflow handling (tabs shrink, then the bar scrolls)
-- **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches with the configured engine); local hosts use `http://`, public hosts `https://`
+- **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches with the configured engine); local hosts use `http://`, public hosts `https://`. When the text looks like an address, a dropdown offers **Visit** (Enter) and **Search with the configured engine** (Down, Enter) for the same text
 - **New Tab page**: new tabs show Kondor's own page with a search field and the eight sites visited most in the last 90 days (favicons, open in a new tab or private tab, remove a site); private tabs get a private variant without top sites. The home page is only used by the first tab at startup and by the Home button, and a blank home page (the default) means the New Tab page
 - **Navigation**: back, forward, reload/stop, home
 - **Private mode**: off-the-record tabs, isolated from the persistent profile

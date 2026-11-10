@@ -28,6 +28,10 @@ public:
 
     // Turns typed text into a URL: address, host shortcut or search.
     Q_INVOKABLE QUrl resolveAddress(const QString &text) const;
+    // URL when the text looks like an address, empty otherwise.
+    Q_INVOKABLE QUrl addressUrl(const QString &text) const;
+    // Search URL for the text with the configured engine.
+    Q_INVOKABLE QUrl searchUrl(const QString &text) const;
 
     // Privacy page: "Clear Cookies and Cache Now".
     Q_INVOKABLE void clearCookiesAndCacheNow();

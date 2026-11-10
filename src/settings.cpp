@@ -86,6 +86,23 @@ QString Settings::searchUrlTemplate() const
     return QStringLiteral("https://duckduckgo.com/?q=%1");
 }
 
+QString Settings::searchEngineName() const
+{
+    if (m_searchEngine == QLatin1String("google"))
+        return QStringLiteral("Google");
+    if (m_searchEngine == QLatin1String("startpage"))
+        return QStringLiteral("Startpage");
+    if (m_searchEngine == QLatin1String("brave"))
+        return QStringLiteral("Brave Search");
+    if (m_searchEngine == QLatin1String("custom")) {
+        if (m_customSearchUrl.contains(QLatin1String("%1")))
+            return QString();
+        // The custom URL is unusable, so search falls back to DuckDuckGo.
+        return QStringLiteral("DuckDuckGo");
+    }
+    return QStringLiteral("DuckDuckGo");
+}
+
 void Settings::setHomePage(const QString &homePage)
 {
     if (m_homePage == homePage)

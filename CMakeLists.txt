@@ -43,6 +43,7 @@ qt_add_qml_module(kondor
         qml/BookmarkMenu.qml
         qml/BookmarksWindow.qml
         qml/SiteIcon.qml
+        qml/AddressSuggestions.qml
     SOURCES
         src/addressresolver.h
         src/addressresolver.cpp

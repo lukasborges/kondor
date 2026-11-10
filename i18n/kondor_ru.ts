@@ -2,6 +2,25 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru" sourcelanguage="en">
 <context>
+    <name>AddressSuggestions</name>
+    <message>
+        <location filename="../qml/AddressSuggestions.qml" line="35"/>
+        <source>Search with %1</source>
+        <extracomment>%1 is the search engine name</extracomment>
+        <translation>Искать в %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddressSuggestions.qml" line="36"/>
+        <source>Search</source>
+        <translation>Поиск</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddressSuggestions.qml" line="42"/>
+        <source>Visit</source>
+        <translation>Перейти</translation>
+    </message>
+</context>
+<context>
     <name>BookmarkManager</name>
     <message>
         <location filename="../src/bookmarkmanager.cpp" line="372"/>
@@ -359,7 +378,7 @@
     <message>
         <location filename="../qml/Main.qml" line="20"/>
         <location filename="../qml/Main.qml" line="347"/>
-        <location filename="../qml/Main.qml" line="565"/>
+        <location filename="../qml/Main.qml" line="627"/>
         <source>New Tab</source>
         <translation>Новая вкладка</translation>
     </message>
@@ -394,115 +413,115 @@
         <translation>Поиск или ввод адреса</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="510"/>
+        <location filename="../qml/Main.qml" line="558"/>
         <source>Bookmark This Page</source>
         <translation>Добавить страницу в закладки</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="528"/>
+        <location filename="../qml/Main.qml" line="590"/>
         <source>Downloads</source>
         <translation>Загрузки</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="557"/>
+        <location filename="../qml/Main.qml" line="619"/>
         <source>Menu</source>
         <translation>Меню</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="570"/>
+        <location filename="../qml/Main.qml" line="632"/>
         <source>New Private Tab</source>
         <translation>Новая приватная вкладка</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="510"/>
+        <location filename="../qml/Main.qml" line="558"/>
         <source>Edit This Bookmark</source>
         <translation>Изменить эту закладку</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="575"/>
+        <location filename="../qml/Main.qml" line="637"/>
         <source>Reopen Closed Tab</source>
         <translation>Заново открыть закрытую вкладку</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="582"/>
+        <location filename="../qml/Main.qml" line="644"/>
         <source>Close Tab</source>
         <translation>Закрыть вкладку</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="588"/>
+        <location filename="../qml/Main.qml" line="650"/>
         <source>Find in Page…</source>
         <translation>Найти на странице…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="595"/>
+        <location filename="../qml/Main.qml" line="657"/>
         <source>Zoom In</source>
         <translation>Увеличить</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="604"/>
+        <location filename="../qml/Main.qml" line="666"/>
         <source>Zoom Out</source>
         <translation>Уменьшить</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="613"/>
+        <location filename="../qml/Main.qml" line="675"/>
         <source>Actual Size</source>
         <translation>Обычный размер</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="623"/>
+        <location filename="../qml/Main.qml" line="685"/>
         <source>Bookmarks</source>
         <translation>Закладки</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="634"/>
+        <location filename="../qml/Main.qml" line="696"/>
         <source>History</source>
         <translation>Журнал</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="641"/>
+        <location filename="../qml/Main.qml" line="703"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Настроить %1…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="648"/>
+        <location filename="../qml/Main.qml" line="710"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>О программе %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="738"/>
+        <location filename="../qml/Main.qml" line="800"/>
         <source>Page bookmarked</source>
         <translation>Страница добавлена в закладки</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="738"/>
+        <location filename="../qml/Main.qml" line="800"/>
         <source>Edit Bookmark</source>
         <translation>Изменить закладку</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="746"/>
+        <location filename="../qml/Main.qml" line="808"/>
         <source>Name:</source>
         <translation>Имя:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="752"/>
+        <location filename="../qml/Main.qml" line="814"/>
         <source>Folder:</source>
         <translation>Папка:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="762"/>
+        <location filename="../qml/Main.qml" line="824"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="770"/>
+        <location filename="../qml/Main.qml" line="832"/>
         <source>Done</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="782"/>
+        <location filename="../qml/Main.qml" line="844"/>
         <source>Save File</source>
         <translation>Сохранить файл</translation>
     </message>

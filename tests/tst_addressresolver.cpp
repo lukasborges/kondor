@@ -9,6 +9,10 @@ class TestAddressResolver : public QObject
 private slots:
     void resolvesAddress_data();
     void resolvesAddress();
+    void addressUrls_data();
+    void addressUrls();
+    void searchUrls_data();
+    void searchUrls();
 };
 
 void TestAddressResolver::resolvesAddress_data()
@@ -69,6 +73,68 @@ void TestAddressResolver::resolvesAddress()
     const QString searchTemplate = QStringLiteral("https://duckduckgo.com/?q=%1");
 
     const QUrl actual = resolveAddress(input, homePage, searchTemplate);
+    QCOMPARE(actual.toString(QUrl::FullyEncoded), expected);
+}
+
+void TestAddressResolver::addressUrls_data()
+{
+    QTest::addColumn<QString>("input");
+    QTest::addColumn<QString>("expected");
+
+    QTest::newRow("naked domain") << QStringLiteral("teste.com.br")
+                                  << QStringLiteral("https://teste.com.br");
+    QTest::newRow("domain with path")
+        << QStringLiteral("kde.org/applications") << QStringLiteral("https://kde.org/applications");
+    QTest::newRow("explicit scheme")
+        << QStringLiteral("http://example.com") << QStringLiteral("http://example.com");
+    QTest::newRow("node.js looks like a host")
+        << QStringLiteral("node.js") << QStringLiteral("https://node.js");
+    QTest::newRow("localhost with port")
+        << QStringLiteral("localhost:8080") << QStringLiteral("http://localhost:8080");
+    QTest::newRow("about scheme")
+        << QStringLiteral("about:blank") << QStringLiteral("about:blank");
+    QTest::newRow("plain word is not an address") << QStringLiteral("kde") << QString();
+    QTest::newRow("spaces are not an address")
+        << QStringLiteral("kde plasma") << QString();
+    QTest::newRow("blank input") << QString() << QString();
+    QTest::newRow("whitespace input") << QStringLiteral("   ") << QString();
+}
+
+void TestAddressResolver::addressUrls()
+{
+    QFETCH(QString, input);
+    QFETCH(QString, expected);
+
+    const QUrl actual = addressUrl(input);
+    QCOMPARE(actual.toString(QUrl::FullyEncoded), expected);
+}
+
+void TestAddressResolver::searchUrls_data()
+{
+    QTest::addColumn<QString>("input");
+    QTest::addColumn<QString>("expected");
+
+    QTest::newRow("address text still has a search URL")
+        << QStringLiteral("teste.com.br")
+        << QStringLiteral("https://duckduckgo.com/?q=teste.com.br");
+    QTest::newRow("node.js searches too")
+        << QStringLiteral("node.js") << QStringLiteral("https://duckduckgo.com/?q=node.js");
+    QTest::newRow("plain words")
+        << QStringLiteral("kde plasma")
+        << QStringLiteral("https://duckduckgo.com/?q=kde%20plasma");
+    QTest::newRow("localhost") << QStringLiteral("localhost:8080")
+                               << QStringLiteral("https://duckduckgo.com/?q=localhost%3A8080");
+    QTest::newRow("blank input") << QString() << QStringLiteral("https://duckduckgo.com/?q=");
+}
+
+void TestAddressResolver::searchUrls()
+{
+    QFETCH(QString, input);
+    QFETCH(QString, expected);
+
+    const QString searchTemplate = QStringLiteral("https://duckduckgo.com/?q=%1");
+
+    const QUrl actual = searchUrl(input, searchTemplate);
     QCOMPARE(actual.toString(QUrl::FullyEncoded), expected);
 }
 

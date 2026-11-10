@@ -2,6 +2,25 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="cs" sourcelanguage="en">
 <context>
+    <name>AddressSuggestions</name>
+    <message>
+        <location filename="../qml/AddressSuggestions.qml" line="35"/>
+        <source>Search with %1</source>
+        <extracomment>%1 is the search engine name</extracomment>
+        <translation>Hledat v %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddressSuggestions.qml" line="36"/>
+        <source>Search</source>
+        <translation>Hledání</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddressSuggestions.qml" line="42"/>
+        <source>Visit</source>
+        <translation>Navštívit</translation>
+    </message>
+</context>
+<context>
     <name>BookmarkManager</name>
     <message>
         <location filename="../src/bookmarkmanager.cpp" line="372"/>
@@ -359,7 +378,7 @@
     <message>
         <location filename="../qml/Main.qml" line="20"/>
         <location filename="../qml/Main.qml" line="347"/>
-        <location filename="../qml/Main.qml" line="565"/>
+        <location filename="../qml/Main.qml" line="627"/>
         <source>New Tab</source>
         <translation>Nová karta</translation>
     </message>
@@ -394,115 +413,115 @@
         <translation>Hledat nebo zadat adresu</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="510"/>
+        <location filename="../qml/Main.qml" line="558"/>
         <source>Bookmark This Page</source>
         <translation>Přidat stránku do záložek</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="528"/>
+        <location filename="../qml/Main.qml" line="590"/>
         <source>Downloads</source>
         <translation>Stažené</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="557"/>
+        <location filename="../qml/Main.qml" line="619"/>
         <source>Menu</source>
         <translation>Nabídka</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="570"/>
+        <location filename="../qml/Main.qml" line="632"/>
         <source>New Private Tab</source>
         <translation>Nová anonymní karta</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="510"/>
+        <location filename="../qml/Main.qml" line="558"/>
         <source>Edit This Bookmark</source>
         <translation>Upravit tuto záložku</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="575"/>
+        <location filename="../qml/Main.qml" line="637"/>
         <source>Reopen Closed Tab</source>
         <translation>Znovu otevřít zavřenou kartu</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="582"/>
+        <location filename="../qml/Main.qml" line="644"/>
         <source>Close Tab</source>
         <translation>Zavřít kartu</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="588"/>
+        <location filename="../qml/Main.qml" line="650"/>
         <source>Find in Page…</source>
         <translation>Hledat na stránce…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="595"/>
+        <location filename="../qml/Main.qml" line="657"/>
         <source>Zoom In</source>
         <translation>Přiblížit</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="604"/>
+        <location filename="../qml/Main.qml" line="666"/>
         <source>Zoom Out</source>
         <translation>Oddálit</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="613"/>
+        <location filename="../qml/Main.qml" line="675"/>
         <source>Actual Size</source>
         <translation>Skutečná velikost</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="623"/>
+        <location filename="../qml/Main.qml" line="685"/>
         <source>Bookmarks</source>
         <translation>Záložky</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="634"/>
+        <location filename="../qml/Main.qml" line="696"/>
         <source>History</source>
         <translation>Historie</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="641"/>
+        <location filename="../qml/Main.qml" line="703"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Nastavit %1…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="648"/>
+        <location filename="../qml/Main.qml" line="710"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>O aplikaci %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="738"/>
+        <location filename="../qml/Main.qml" line="800"/>
         <source>Page bookmarked</source>
         <translation>Stránka přidána do záložek</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="738"/>
+        <location filename="../qml/Main.qml" line="800"/>
         <source>Edit Bookmark</source>
         <translation>Upravit záložku</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="746"/>
+        <location filename="../qml/Main.qml" line="808"/>
         <source>Name:</source>
         <translation>Název:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="752"/>
+        <location filename="../qml/Main.qml" line="814"/>
         <source>Folder:</source>
         <translation>Složka:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="762"/>
+        <location filename="../qml/Main.qml" line="824"/>
         <source>Remove</source>
         <translation>Odebrat</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="770"/>
+        <location filename="../qml/Main.qml" line="832"/>
         <source>Done</source>
         <translation>Hotovo</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="782"/>
+        <location filename="../qml/Main.qml" line="844"/>
         <source>Save File</source>
         <translation>Uložit soubor</translation>
     </message>

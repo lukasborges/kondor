@@ -2,6 +2,25 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN" sourcelanguage="en">
 <context>
+    <name>AddressSuggestions</name>
+    <message>
+        <location filename="../qml/AddressSuggestions.qml" line="35"/>
+        <source>Search with %1</source>
+        <extracomment>%1 is the search engine name</extracomment>
+        <translation>使用 %1 搜索</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddressSuggestions.qml" line="36"/>
+        <source>Search</source>
+        <translation>搜索</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddressSuggestions.qml" line="42"/>
+        <source>Visit</source>
+        <translation>访问</translation>
+    </message>
+</context>
+<context>
     <name>BookmarkManager</name>
     <message>
         <location filename="../src/bookmarkmanager.cpp" line="372"/>
@@ -359,7 +378,7 @@
     <message>
         <location filename="../qml/Main.qml" line="20"/>
         <location filename="../qml/Main.qml" line="347"/>
-        <location filename="../qml/Main.qml" line="565"/>
+        <location filename="../qml/Main.qml" line="627"/>
         <source>New Tab</source>
         <translation>新建标签页</translation>
     </message>
@@ -394,115 +413,115 @@
         <translation>搜索或输入地址</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="510"/>
+        <location filename="../qml/Main.qml" line="558"/>
         <source>Bookmark This Page</source>
         <translation>将此页加入书签</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="528"/>
+        <location filename="../qml/Main.qml" line="590"/>
         <source>Downloads</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="557"/>
+        <location filename="../qml/Main.qml" line="619"/>
         <source>Menu</source>
         <translation>菜单</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="570"/>
+        <location filename="../qml/Main.qml" line="632"/>
         <source>New Private Tab</source>
         <translation>新建隐私标签页</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="510"/>
+        <location filename="../qml/Main.qml" line="558"/>
         <source>Edit This Bookmark</source>
         <translation>编辑此书签</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="575"/>
+        <location filename="../qml/Main.qml" line="637"/>
         <source>Reopen Closed Tab</source>
         <translation>重新打开关闭的标签页</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="582"/>
+        <location filename="../qml/Main.qml" line="644"/>
         <source>Close Tab</source>
         <translation>关闭标签页</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="588"/>
+        <location filename="../qml/Main.qml" line="650"/>
         <source>Find in Page…</source>
         <translation>在页面中查找…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="595"/>
+        <location filename="../qml/Main.qml" line="657"/>
         <source>Zoom In</source>
         <translation>放大</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="604"/>
+        <location filename="../qml/Main.qml" line="666"/>
         <source>Zoom Out</source>
         <translation>缩小</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="613"/>
+        <location filename="../qml/Main.qml" line="675"/>
         <source>Actual Size</source>
         <translation>实际大小</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="623"/>
+        <location filename="../qml/Main.qml" line="685"/>
         <source>Bookmarks</source>
         <translation>书签</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="634"/>
+        <location filename="../qml/Main.qml" line="696"/>
         <source>History</source>
         <translation>历史记录</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="641"/>
+        <location filename="../qml/Main.qml" line="703"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>设置 %1…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="648"/>
+        <location filename="../qml/Main.qml" line="710"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>关于 %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="738"/>
+        <location filename="../qml/Main.qml" line="800"/>
         <source>Page bookmarked</source>
         <translation>页面已加入书签</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="738"/>
+        <location filename="../qml/Main.qml" line="800"/>
         <source>Edit Bookmark</source>
         <translation>编辑书签</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="746"/>
+        <location filename="../qml/Main.qml" line="808"/>
         <source>Name:</source>
         <translation>名称：</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="752"/>
+        <location filename="../qml/Main.qml" line="814"/>
         <source>Folder:</source>
         <translation>文件夹：</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="762"/>
+        <location filename="../qml/Main.qml" line="824"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="770"/>
+        <location filename="../qml/Main.qml" line="832"/>
         <source>Done</source>
         <translation>完成</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="782"/>
+        <location filename="../qml/Main.qml" line="844"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>

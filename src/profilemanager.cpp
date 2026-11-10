@@ -132,3 +132,13 @@ QUrl ProfileManager::resolveAddress(const QString &text) const
 {
     return ::resolveAddress(text, QUrl(homePage()), Settings::instance()->searchUrlTemplate());
 }
+
+QUrl ProfileManager::addressUrl(const QString &text) const
+{
+    return ::addressUrl(text);
+}
+
+QUrl ProfileManager::searchUrl(const QString &text) const
+{
+    return ::searchUrl(text, Settings::instance()->searchUrlTemplate());
+}

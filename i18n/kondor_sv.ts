@@ -562,7 +562,7 @@
     <message>
         <location filename="../qml/Main.qml" line="21"/>
         <location filename="../qml/Main.qml" line="404"/>
-        <location filename="../qml/Main.qml" line="828"/>
+        <location filename="../qml/Main.qml" line="841"/>
         <source>New Tab</source>
         <translation>Ny flik</translation>
     </message>
@@ -597,136 +597,136 @@
         <translation>Sök eller ange en adress</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="740"/>
+        <location filename="../qml/Main.qml" line="753"/>
         <source>Bookmark This Page</source>
         <translation>Bokmärk den här sidan</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="791"/>
+        <location filename="../qml/Main.qml" line="804"/>
         <source>Downloads</source>
         <translation>Hämtningar</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="820"/>
+        <location filename="../qml/Main.qml" line="833"/>
         <source>Menu</source>
         <translation>Meny</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="21"/>
-        <location filename="../qml/Main.qml" line="833"/>
+        <location filename="../qml/Main.qml" line="846"/>
         <source>New Private Tab</source>
         <translation>Ny privat flik</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="707"/>
+        <location filename="../qml/Main.qml" line="720"/>
         <source>Not Secure</source>
         <translation>Inte säkert</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="715"/>
+        <location filename="../qml/Main.qml" line="728"/>
         <source>Site Information</source>
         <translation>Webbplatsinformation</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="740"/>
+        <location filename="../qml/Main.qml" line="753"/>
         <source>Edit This Bookmark</source>
         <translation>Redigera detta bokmärke</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="838"/>
+        <location filename="../qml/Main.qml" line="851"/>
         <source>Reopen Closed Tab</source>
         <translation>Öppna stängd flik igen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="845"/>
+        <location filename="../qml/Main.qml" line="858"/>
         <source>Close Tab</source>
         <translation>Stäng flik</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="851"/>
+        <location filename="../qml/Main.qml" line="864"/>
         <source>Find in Page…</source>
         <translation>Sök på sidan…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="858"/>
+        <location filename="../qml/Main.qml" line="871"/>
         <source>Zoom In</source>
         <translation>Zooma in</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="867"/>
+        <location filename="../qml/Main.qml" line="880"/>
         <source>Zoom Out</source>
         <translation>Zooma ut</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="876"/>
+        <location filename="../qml/Main.qml" line="889"/>
         <source>Actual Size</source>
         <translation>Verklig storlek</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="886"/>
+        <location filename="../qml/Main.qml" line="899"/>
         <source>Bookmarks</source>
         <translation>Bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="897"/>
+        <location filename="../qml/Main.qml" line="910"/>
         <source>History</source>
         <translation>Historik</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="902"/>
+        <location filename="../qml/Main.qml" line="915"/>
         <source>Site Permissions…</source>
         <translation>Webbplatsbehörigheter…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="909"/>
+        <location filename="../qml/Main.qml" line="922"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Anpassa %1…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="916"/>
+        <location filename="../qml/Main.qml" line="929"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Om %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="970"/>
+        <location filename="../qml/Main.qml" line="983"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Tryck på Esc för att lämna helskärm</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="1040"/>
+        <location filename="../qml/Main.qml" line="1053"/>
         <source>Page bookmarked</source>
         <translation>Sidan har bokmärkts</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="1040"/>
+        <location filename="../qml/Main.qml" line="1053"/>
         <source>Edit Bookmark</source>
         <translation>Redigera bokmärke</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="1048"/>
+        <location filename="../qml/Main.qml" line="1061"/>
         <source>Name:</source>
         <translation>Namn:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="1054"/>
+        <location filename="../qml/Main.qml" line="1067"/>
         <source>Folder:</source>
         <translation>Mapp:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="1064"/>
+        <location filename="../qml/Main.qml" line="1077"/>
         <source>Remove</source>
         <translation>Ta bort</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="1072"/>
+        <location filename="../qml/Main.qml" line="1085"/>
         <source>Done</source>
         <translation>Klar</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="1084"/>
+        <location filename="../qml/Main.qml" line="1097"/>
         <source>Save File</source>
         <translation>Spara fil</translation>
     </message>

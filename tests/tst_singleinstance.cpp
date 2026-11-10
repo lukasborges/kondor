@@ -1,3 +1,4 @@
+#include <QDir>
 #include <QSignalSpy>
 #include <QTest>
 
@@ -8,11 +9,33 @@ class TestSingleInstance : public QObject
     Q_OBJECT
 
 private slots:
+    void socketNameDependsOnProfileDirectory();
     void encodesAndDecodesMessage();
     void rejectsInvalidData();
     void forwardsMessageToRunningInstance();
     void forwardsWhenAnotherInstanceStartedFirst();
 };
+
+void TestSingleInstance::socketNameDependsOnProfileDirectory()
+{
+    const QByteArray originalDataHome = qgetenv("XDG_DATA_HOME");
+    const QString base = QDir::tempPath() + QStringLiteral("/kondor-socket-test-%1")
+                             .arg(QCoreApplication::applicationPid());
+
+    qputenv("XDG_DATA_HOME", (base + QStringLiteral("/first")).toUtf8());
+    const QString firstName = SingleInstance::serverName();
+    qputenv("XDG_DATA_HOME", (base + QStringLiteral("/second")).toUtf8());
+    const QString secondName = SingleInstance::serverName();
+
+    if (originalDataHome.isEmpty())
+        qunsetenv("XDG_DATA_HOME");
+    else
+        qputenv("XDG_DATA_HOME", originalDataHome);
+
+    QVERIFY(firstName.endsWith(QStringLiteral(".socket")));
+    QVERIFY(firstName.contains(QStringLiteral("/kondor-")));
+    QVERIFY(firstName != secondName);
+}
 
 void TestSingleInstance::encodesAndDecodesMessage()
 {

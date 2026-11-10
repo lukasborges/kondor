@@ -112,7 +112,7 @@ src/
   settings.*          QML singleton: user settings persisted with QSettings
   sessionmanager.*    QML singleton: save/restore the normal tabs of every window
   windowmanager.*     QML singleton: create the browser windows (normal and private)
-  singleinstance.*    one process per session: later launches forward their URLs over a local socket
+  singleinstance.*    one process per profile: later launches forward their URLs over a local socket in the runtime directory
   tab.*               per-tab state (title, URL, icon, loading, history, pending permissions)
   tabmodel.*          tab model (QAbstractListModel)
   database.*          SQLite storage (schema + migrations)

@@ -39,7 +39,7 @@ public:
                             QObject *parent = nullptr);
     ~SingleInstance() override;
 
-    // The socket name shared by every Kondor instance of this user.
+    // The socket name shared by every Kondor instance of this user and profile.
     static QString serverName();
 
     // The message as one JSON line, as sent to the running instance.
@@ -52,9 +52,10 @@ public:
     // received it, so the caller should quit.
     bool sendMessage(const SingleInstanceMessage &message);
 
-    // Tries to become the server. When another instance won the startup race,
-    // forwards the message to it instead (Forwarded) and does not listen.
-    // Replaces a socket file left behind by a crash before giving up.
+    // Tries to become the server. When another instance is already running
+    // (or won the startup race), forwards the message to it instead
+    // (Forwarded) and does not listen. Replaces a socket file left behind by a
+    // crash before giving up.
     StartResult start(const SingleInstanceMessage &message);
 
 signals:

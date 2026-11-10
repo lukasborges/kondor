@@ -1,13 +1,11 @@
 #include "singleinstance.h"
 
+#include <QCryptographicHash>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLocalSocket>
-
-#ifdef Q_OS_UNIX
-#include <unistd.h>
-#endif
+#include <QStandardPaths>
 
 namespace {
 // A command line is tiny; anything bigger than this is not one of ours.
@@ -18,6 +16,9 @@ SingleInstance::SingleInstance(const QString &serverName, QObject *parent)
     : QObject(parent)
     , m_name(serverName.isEmpty() ? SingleInstance::serverName() : serverName)
 {
+    // The socket must belong to this user only, whatever the umask: nobody
+    // else may connect and receive forwarded URLs or the activation token.
+    m_server.setSocketOptions(QLocalServer::UserAccessOption);
     connect(&m_server, &QLocalServer::newConnection,
             this, &SingleInstance::handleNewConnection);
 }
@@ -26,11 +27,20 @@ SingleInstance::~SingleInstance() = default;
 
 QString SingleInstance::serverName()
 {
-#ifdef Q_OS_UNIX
-    return QStringLiteral("kondor-") + QString::number(getuid());
-#else
-    return QStringLiteral("kondor-") + qEnvironmentVariable("USER");
-#endif
+    // Per-user runtime directory (mode 0700), so no other local user can create
+    // the socket first and impersonate the running instance. The hash of the
+    // profile data directory gives one instance per profile: a run with an
+    // isolated XDG_DATA_HOME (smoke tests, agent reviews) never forwards its
+    // URLs into the real running Kondor.
+    const QString dataLocation =
+        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    const QByteArray profileHash =
+        QCryptographicHash::hash(dataLocation.toUtf8(), QCryptographicHash::Sha1)
+            .toHex()
+            .left(16);
+    return QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation)
+        + QStringLiteral("/kondor-") + QString::fromLatin1(profileHash)
+        + QStringLiteral(".socket");
 }
 
 QByteArray SingleInstance::encodeMessage(const SingleInstanceMessage &message)
@@ -90,12 +100,10 @@ bool SingleInstance::sendMessage(const SingleInstanceMessage &message)
 
 SingleInstance::StartResult SingleInstance::start(const SingleInstanceMessage &message)
 {
-    if (m_server.listen(m_name))
-        return StartResult::Listening;
-
-    // Another instance may have started listening between the caller's first
-    // connection attempt and now (two launches at the same time): hand it the
-    // command line instead of replacing its live socket.
+    // Find the running instance by connecting, not by letting listen() fail:
+    // with UserAccessOption QLocalServer binds a temporary name and renames it
+    // into place, so bind() never reports EADDRINUSE and a second listen()
+    // would silently take the socket name over.
     if (sendMessage(message))
         return StartResult::Forwarded;
 
@@ -104,9 +112,8 @@ SingleInstance::StartResult SingleInstance::start(const SingleInstanceMessage &m
     if (m_server.listen(m_name))
         return StartResult::Listening;
 
-    // Two launches at the same time after a crash can both remove the stale
-    // socket; the one that lost listen() forwards to the winner instead of
-    // starting a second instance.
+    // Another instance won the startup race after all: hand it the command
+    // line instead of running a second browser.
     if (sendMessage(message))
         return StartResult::Forwarded;
 

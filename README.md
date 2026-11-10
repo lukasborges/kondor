@@ -19,24 +19,25 @@ A working prototype with the core functionality in place: it actually browses, w
 ### Implemented
 
 - **Real tabs** with `Qt WebEngine` (one `WebEngineView` per tab, preserving state when switching)
+- **Multiple windows**: Ctrl+N opens an independent window and Ctrl+Shift+P a private one where every tab, including new ones, is private (private browsing icon in the tab bar and a title suffix); each window has its own tabs, address bar and shortcuts, closing one leaves the others open, closing the last one quits, and "Move Tab to New Window" in the tab context menu moves a tab to a window of its own (the page reloads there). Shift+click on a link opens it in a new window
 - **Tab management**: favicons and a loading indicator, drag to reorder, middle-click to close, pinned tabs, a tab context menu (reload, duplicate, pin, close others and tabs to the right), keyboard switching and overflow handling (tabs shrink, then the bar scrolls)
 - **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches with the configured engine); local hosts use `http://`, public hosts `https://`. While typing, a dropdown offers **Visit** and **Search with the configured engine** for the same text, then matching bookmarks and history entries (most visited first) and, when enabled in Settings, the search engine's suggestions; Up/Down select a row, Enter opens it, Esc restores the typed text, and clicking a row opens it in the current tab (middle click in a background tab). A host is completed inline from the history (`kd` → `kde.org`, with the added part selected), and Backspace just removes that completion
 - **New Tab page**: new tabs show Kondor's own page with a search field and the eight sites visited most in the last 90 days (favicons, open in a new tab or private tab, remove a site); private tabs get a private variant without top sites. The home page is only used by the first tab at startup and by the Home button, and a blank home page (the default) means the New Tab page
 - **Navigation**: back, forward, reload/stop, home
 - **Page context menu**: right-click on a link, image, video or audio, selected text or an editable field for the matching actions (open in a new/private tab, copy or save, search the selection, spelling suggestions, undo/redo/cut/copy/paste); on the page itself it offers back, forward, reload and view source. `Shift+F10` or the `Menu` key opens it from the keyboard
-- **Private mode**: off-the-record tabs, isolated from the persistent profile
+- **Private mode**: off-the-record tabs and windows, isolated from the persistent profile
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
 - **Bookmarks**: star button in the address bar (Ctrl+D) with a name/folder editor, a bookmarks toolbar (Ctrl+Shift+B), a Bookmarks menu, and a manager window (Ctrl+Shift+O) with folders, rename, delete, reordering, drag and drop between folders, a "Move To" menu and import of Firefox/Chrome HTML exports. A new profile starts with a set of KDE and Linux bookmarks (KDE, Planet KDE, Qt Docs and the News, Development and Linux folders); they are added once, and an existing profile is never changed
 - **Settings** (Ctrl+,): a KDE Configure window with a sidebar (searchable with Ctrl+F), page tabs and Defaults / OK / Apply / Cancel; options cover the home page (blank means the New Tab page), startup behavior, New Tab page top sites, search engine (including a custom URL and optional search suggestions in the address bar), download folder and privacy options (third-party cookies, clear data on exit, site permission management). Changes stay pending until OK or Apply, and are stored in `~/.config/KDE/Kondor.conf`
 - **About window** (Menu → About Kondor Browser): app, Qt and Chromium versions, components and authors, with a viewer for the license text; links open in a new normal tab
-- **Session restore**: optionally reopen the tabs from the previous session on startup (General → Startup in the Configure window); private tabs are never saved. Ctrl+Shift+T reopens the last closed normal tabs, up to 20
+- **Session restore**: optionally reopen the tabs of every window from the previous session on startup (General → Startup in the Configure window); private tabs are never saved. Ctrl+Shift+T reopens the last closed normal tabs, up to 20
 - **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
 - **Full screen**: a video can take the whole screen (the toolbars hide and a hint says how to leave), while F11 toggles window full screen keeping the toolbars; leaving full screen returns the window to its previous size and state
 - **Site permissions**: camera, microphone, screen sharing, location, notifications, clipboard, pointer lock and local fonts are requested in an inline bar with **Allow** / **Block**; the decision is remembered for the site (normal tabs only) and can be reviewed or revoked in Menu → **Site Permissions…** or Settings → Privacy
 - **Security indicator**: the address bar shows a padlock for HTTPS, **Not Secure** for HTTP and a page icon for local files; clicking it opens a site information popup with the connection state and the permissions remembered for the site. Certificate errors show a "Your connection is not private" page with **Back to Safety** and, when the error allows it, an advanced **Continue Anyway (Unsafe)** option; an accepted certificate is remembered for that site in the profile and keeps showing the warning state
 - **Crashed pages**: when a page's renderer process dies (crash, kill, out of memory), that tab shows a page with the reason, the exit code and **Reload** / **Close Tab** buttons; the tab keeps its place and the other tabs are not affected
 - **Download manager**: downloads show live progress, speed and size in a toolbar popup; pause, resume, cancel, open the file or show it in its folder, desktop notification on completion/failure, optional "ask where to save", and a confirmation before quitting with active downloads
-- **Command line**: `kondor URL…` opens the given URLs or local files in tabs (`--private` for a private tab), and the app registers as a web browser so it can be the system default
+- **Command line**: `kondor URL…` opens the given URLs or local files in tabs of a new window (`--private` for a private window), and the app registers as a web browser so it can be the system default
 - **Menu** and **keyboard shortcuts**
 - **KDE look** via the `org.kde.desktop` (QQC2) style, with a `Fusion` fallback
 - **Semantic colors** (`Kirigami.Theme`/`palette`): follows the system color scheme
@@ -109,7 +110,8 @@ src/
   startupargs.*       QML singleton: command-line URLs and private mode
   startupurl.*        command-line argument to URL conversion (unit tested)
   settings.*          QML singleton: user settings persisted with QSettings
-  sessionmanager.*    QML singleton: save/restore the normal tabs of a session
+  sessionmanager.*    QML singleton: save/restore the normal tabs of every window
+  windowmanager.*     QML singleton: create the browser windows (normal and private)
   tab.*               per-tab state (title, URL, icon, loading, history, pending permissions)
   tabmodel.*          tab model (QAbstractListModel)
   database.*          SQLite storage (schema + migrations)
@@ -123,7 +125,7 @@ src/
   notifier.*          QML singleton: desktop notifications over D-Bus
   aboutinfo.*         QML singleton: read-only version and license data for the About window
 qml/
-  Main.qml            window, tab bar, navigation bar, menu, shortcuts
+  BrowserWindow.qml   one browser window: tab bar, navigation bar, menu, shortcuts
   AddressSuggestions.qml  address bar dropdown (visit/search, bookmarks, history, suggestions)
   WebViewTab.qml      WebEngineView + bridge to the Tab object
   NewTabPage.qml      New Tab page (logo, search field, top sites)
@@ -150,7 +152,10 @@ qml/
 | --- | --- |
 | `Ctrl+T` | New tab |
 | `Ctrl+Shift+N` | New private tab |
-| `Ctrl+W` | Close tab (quits the app if it is the last one) |
+| `Ctrl+N` | New window |
+| `Ctrl+Shift+P` | New private window |
+| `Ctrl+W` | Close tab (closes the window if it is the last one; the app quits when the last window closes) |
+| `Ctrl+Shift+W` | Close window |
 | `Ctrl+Shift+T` | Reopen closed tab |
 | `Ctrl+Tab` / `Ctrl+PgDown` | Next tab |
 | `Ctrl+Shift+Tab` / `Ctrl+PgUp` | Previous tab |

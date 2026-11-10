@@ -38,6 +38,9 @@ public:
     // Tab page instead).
     Q_INVOKABLE QObject *newWindow(bool privateWindow = false, const QList<QUrl> &urls = {});
 
+    // A window that finished closing: drops it from the list and deletes it.
+    Q_INVOKABLE void closeWindow(QObject *window);
+
     // Opens the windows of the last session or, when there is nothing to
     // restore, the command-line URLs or a single window with the home page.
     void openStartupWindows();

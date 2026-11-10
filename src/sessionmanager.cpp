@@ -133,6 +133,11 @@ void SessionManager::saveNow()
     m_saveTimer.stop();
     pruneModels();
 
+    // Every window is gone and the app is quitting: the session saved when the
+    // last window closed is the one to keep.
+    if (m_models.isEmpty())
+        return;
+
     QJsonArray windows;
     for (const QPointer<TabModel> &model : std::as_const(m_models)) {
         QJsonArray tabs;

@@ -60,6 +60,14 @@ QObject *WindowManager::newWindow(bool privateWindow, const QList<QUrl> &urls)
     return createWindow(privateWindow, urls, QStringList(), -1);
 }
 
+void WindowManager::closeWindow(QObject *window)
+{
+    if (!window)
+        return;
+    // Deferred: the close event is still being handled here.
+    window->deleteLater();
+}
+
 QObject *WindowManager::createWindow(bool privateWindow, const QList<QUrl> &urls,
                                      const QStringList &titles, int currentIndex)
 {

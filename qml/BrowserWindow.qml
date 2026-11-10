@@ -85,7 +85,11 @@ ApplicationWindow {
         if (DownloadManager.hasActiveDownloads && !window.quitConfirmed) {
             close.accepted = false
             quitDialog.open()
+            return
         }
+        // A closed window is over: WindowManager drops it from the list and
+        // deletes it, and the app quits when the last one is gone.
+        WindowManager.closeWindow(window)
     }
 
     MessageDialog {

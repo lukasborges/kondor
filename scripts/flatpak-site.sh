@@ -46,7 +46,7 @@ HTML
 size="$(du -sb "$site" | cut -f1)"
 echo "Site size: $size bytes"
 echo "Largest file:"
-find "$site" -type f -printf '%s %p\n' | sort -rn | head -n 1
+find "$site" -type f -printf '%s %p\n' | sort -n | tail -n 1
 if [ "$size" -gt "$max_bytes" ]; then
     echo "::error::The site is $size bytes, above the 900 MB limit for GitHub Pages"
     exit 1

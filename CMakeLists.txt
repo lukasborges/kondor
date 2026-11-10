@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.8 REQUIRED COMPONENTS
+    Concurrent
     Core
     DBus
     Gui
@@ -47,6 +48,7 @@ qt_add_qml_module(kondor
         qml/PermissionTypeInfo.qml
         qml/SitePermissionsDialog.qml
         qml/SiteInfoPopup.qml
+        qml/AdBlockPopup.qml
         qml/CertificateErrorPage.qml
         qml/CrashedPage.qml
         qml/HistoryWindow.qml
@@ -103,6 +105,12 @@ qt_add_qml_module(kondor
         src/searchsuggestions.cpp
         src/zoommanager.h
         src/zoommanager.cpp
+        src/adblock/filterengine.h
+        src/adblock/filterengine.cpp
+        src/adblock/adblockinterceptor.h
+        src/adblock/adblockinterceptor.cpp
+        src/adblock/adblockmanager.h
+        src/adblock/adblockmanager.cpp
 )
 
 qt_add_translations(kondor
@@ -156,9 +164,11 @@ target_compile_definitions(kondor PRIVATE
 
 target_include_directories(kondor PRIVATE
     src
+    src/adblock
 )
 
 target_link_libraries(kondor PRIVATE
+    Qt6::Concurrent
     Qt6::Core
     Qt6::DBus
     Qt6::Gui

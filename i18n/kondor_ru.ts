@@ -97,6 +97,44 @@
     </message>
 </context>
 <context>
+    <name>AdBlockPopup</name>
+    <message>
+        <location filename="../qml/AdBlockPopup.qml" line="30"/>
+        <source>Updating lists…</source>
+        <translation>Обновление списков…</translation>
+    </message>
+    <message>
+        <location filename="../qml/AdBlockPopup.qml" line="32"/>
+        <source>Lists not downloaded yet</source>
+        <translation>Списки ещё не загружены</translation>
+    </message>
+    <message>
+        <location filename="../qml/AdBlockPopup.qml" line="33"/>
+        <source>Lists updated %1</source>
+        <translation>Списки обновлены: %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/AdBlockPopup.qml" line="65"/>
+        <source>Blocked on this page: %1</source>
+        <translation>Заблокировано на этой странице: %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/AdBlockPopup.qml" line="83"/>
+        <source>Blocking enabled on this site</source>
+        <translation>Блокировка включена на этом сайте</translation>
+    </message>
+    <message>
+        <location filename="../qml/AdBlockPopup.qml" line="98"/>
+        <source>Ad and tracker blocking is turned off in Settings.</source>
+        <translation>Блокировка рекламы и трекеров отключена в настройках.</translation>
+    </message>
+    <message>
+        <location filename="../qml/AdBlockPopup.qml" line="116"/>
+        <source>Update Lists Now</source>
+        <translation>Обновить списки сейчас</translation>
+    </message>
+</context>
+<context>
     <name>AddressSuggestions</name>
     <message>
         <location filename="../qml/AddressSuggestions.qml" line="58"/>
@@ -257,7 +295,7 @@
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="827"/>
+        <location filename="../qml/BrowserWindow.qml" line="897"/>
         <source>New Tab</source>
         <translation>Новая вкладка</translation>
     </message>
@@ -292,23 +330,23 @@
         <translation>Поиск или ввод адреса</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="739"/>
+        <location filename="../qml/BrowserWindow.qml" line="801"/>
         <source>Bookmark This Page</source>
         <translation>Добавить страницу в закладки</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="790"/>
+        <location filename="../qml/BrowserWindow.qml" line="860"/>
         <source>Downloads</source>
         <translation>Загрузки</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="819"/>
+        <location filename="../qml/BrowserWindow.qml" line="889"/>
         <source>Menu</source>
         <translation>Меню</translation>
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="832"/>
+        <location filename="../qml/BrowserWindow.qml" line="902"/>
         <source>New Private Tab</source>
         <translation>Новая приватная вкладка</translation>
     </message>
@@ -328,185 +366,190 @@
         <translation>Информация о сайте</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="702"/>
+        <location filename="../qml/BrowserWindow.qml" line="716"/>
+        <source>Ad and Tracker Blocking</source>
+        <translation>Блокировка рекламы и трекеров</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="764"/>
         <source>Reset Zoom (Ctrl+0)</source>
         <translation>Сбросить масштаб (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="721"/>
+        <location filename="../qml/BrowserWindow.qml" line="783"/>
         <source>Exit Reader Mode (Ctrl+Alt+R)</source>
         <translation>Выйти из режима чтения (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="722"/>
+        <location filename="../qml/BrowserWindow.qml" line="784"/>
         <source>Reader Mode (Ctrl+Alt+R)</source>
         <translation>Режим чтения (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="739"/>
+        <location filename="../qml/BrowserWindow.qml" line="801"/>
         <source>Edit This Bookmark</source>
         <translation>Изменить эту закладку</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="837"/>
+        <location filename="../qml/BrowserWindow.qml" line="907"/>
         <source>New Window</source>
         <translation>Новое окно</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="842"/>
+        <location filename="../qml/BrowserWindow.qml" line="912"/>
         <source>New Private Window</source>
         <translation>Новое приватное окно</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="847"/>
+        <location filename="../qml/BrowserWindow.qml" line="917"/>
         <source>Reopen Closed Tab</source>
         <translation>Заново открыть закрытую вкладку</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="854"/>
+        <location filename="../qml/BrowserWindow.qml" line="924"/>
         <source>Close Tab</source>
         <translation>Закрыть вкладку</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="860"/>
+        <location filename="../qml/BrowserWindow.qml" line="930"/>
         <source>Find in Page…</source>
         <translation>Найти на странице…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="866"/>
+        <location filename="../qml/BrowserWindow.qml" line="936"/>
         <source>Save Page As…</source>
         <translation>Сохранить страницу как…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="872"/>
+        <location filename="../qml/BrowserWindow.qml" line="942"/>
         <source>Save as PDF…</source>
         <translation>Сохранить как PDF…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="878"/>
+        <location filename="../qml/BrowserWindow.qml" line="948"/>
         <source>Print…</source>
         <translation>Печать…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="885"/>
+        <location filename="../qml/BrowserWindow.qml" line="955"/>
         <source>Zoom In</source>
         <translation>Увеличить</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="894"/>
+        <location filename="../qml/BrowserWindow.qml" line="964"/>
         <source>Zoom Out</source>
         <translation>Уменьшить</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="903"/>
+        <location filename="../qml/BrowserWindow.qml" line="973"/>
         <source>Actual Size</source>
         <translation>Обычный размер</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="913"/>
+        <location filename="../qml/BrowserWindow.qml" line="983"/>
         <source>Bookmarks</source>
         <translation>Закладки</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="924"/>
+        <location filename="../qml/BrowserWindow.qml" line="994"/>
         <source>History</source>
         <translation>Журнал</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="929"/>
+        <location filename="../qml/BrowserWindow.qml" line="999"/>
         <source>Site Permissions…</source>
         <translation>Разрешения сайтов…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="934"/>
+        <location filename="../qml/BrowserWindow.qml" line="1004"/>
         <source>More Tools</source>
         <translation>Дополнительные инструменты</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="937"/>
+        <location filename="../qml/BrowserWindow.qml" line="1007"/>
         <source>Developer Tools</source>
         <translation>Инструменты разработчика</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="951"/>
+        <location filename="../qml/BrowserWindow.qml" line="1021"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Настроить %1…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="958"/>
+        <location filename="../qml/BrowserWindow.qml" line="1028"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>О программе %1</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1012"/>
+        <location filename="../qml/BrowserWindow.qml" line="1082"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Нажмите Esc, чтобы выйти из полноэкранного режима</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1082"/>
+        <location filename="../qml/BrowserWindow.qml" line="1152"/>
         <source>Page bookmarked</source>
         <translation>Страница добавлена в закладки</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1082"/>
+        <location filename="../qml/BrowserWindow.qml" line="1152"/>
         <source>Edit Bookmark</source>
         <translation>Изменить закладку</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1090"/>
+        <location filename="../qml/BrowserWindow.qml" line="1160"/>
         <source>Name:</source>
         <translation>Имя:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1096"/>
+        <location filename="../qml/BrowserWindow.qml" line="1166"/>
         <source>Folder:</source>
         <translation>Папка:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1106"/>
+        <location filename="../qml/BrowserWindow.qml" line="1176"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1114"/>
+        <location filename="../qml/BrowserWindow.qml" line="1184"/>
         <source>Done</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1125"/>
+        <location filename="../qml/BrowserWindow.qml" line="1195"/>
         <source>Save as PDF</source>
         <translation>Сохранить как PDF</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1127"/>
+        <location filename="../qml/BrowserWindow.qml" line="1197"/>
         <source>PDF (*.pdf)</source>
         <translation>PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1134"/>
+        <location filename="../qml/BrowserWindow.qml" line="1204"/>
         <source>Save Page As</source>
         <translation>Сохранить страницу как</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1136"/>
+        <location filename="../qml/BrowserWindow.qml" line="1206"/>
         <source>Web Page, Complete (*.html)</source>
         <translation>Веб-страница полностью (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1137"/>
+        <location filename="../qml/BrowserWindow.qml" line="1207"/>
         <source>Web Page, HTML Only (*.html)</source>
         <translation>Веб-страница, только HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1138"/>
+        <location filename="../qml/BrowserWindow.qml" line="1208"/>
         <source>Web Archive (*.mhtml)</source>
         <translation>Веб-архив (*.mhtml)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1154"/>
+        <location filename="../qml/BrowserWindow.qml" line="1224"/>
         <source>Save File</source>
         <translation>Сохранить файл</translation>
     </message>
@@ -809,7 +852,7 @@
 <context>
     <name>Kondor</name>
     <message>
-        <location filename="../src/main.cpp" line="180"/>
+        <location filename="../src/main.cpp" line="181"/>
         <source>Kondor Browser</source>
         <extracomment>Application display name: translate &quot;Browser&quot;, keep &quot;Kondor&quot;</extracomment>
         <translation>Браузер Kondor</translation>
@@ -1186,19 +1229,19 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="409"/>
+        <location filename="../qml/SettingsWindow.qml" line="416"/>
         <source>Startup</source>
         <translation>Запуск</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="502"/>
+        <location filename="../qml/SettingsWindow.qml" line="509"/>
         <source>On startup:</source>
         <translation>При запуске:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="529"/>
+        <location filename="../qml/SettingsWindow.qml" line="536"/>
         <source>Home page:</source>
         <translation>Домашняя страница:</translation>
     </message>
@@ -1209,7 +1252,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="632"/>
+        <location filename="../qml/SettingsWindow.qml" line="639"/>
         <source>Search engine:</source>
         <translation>Поисковая система:</translation>
     </message>
@@ -1225,7 +1268,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="54"/>
-        <location filename="../qml/SettingsWindow.qml" line="711"/>
+        <location filename="../qml/SettingsWindow.qml" line="718"/>
         <source>Save files to:</source>
         <translation>Сохранять файлы в:</translation>
     </message>
@@ -1236,13 +1279,13 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="63"/>
-        <location filename="../qml/SettingsWindow.qml" line="873"/>
+        <location filename="../qml/SettingsWindow.qml" line="903"/>
         <source>Site permissions:</source>
         <translation>Разрешения сайтов:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="63"/>
-        <location filename="../qml/SettingsWindow.qml" line="874"/>
+        <location filename="../qml/SettingsWindow.qml" line="904"/>
         <source>Manage Site Permissions…</source>
         <translation>Управление разрешениями сайтов…</translation>
     </message>
@@ -1253,167 +1296,192 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="69"/>
-        <location filename="../qml/SettingsWindow.qml" line="771"/>
+        <location filename="../qml/SettingsWindow.qml" line="778"/>
         <source>Check spelling while typing</source>
         <translation>Проверять орфографию при вводе</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="69"/>
-        <location filename="../qml/SettingsWindow.qml" line="788"/>
+        <location filename="../qml/SettingsWindow.qml" line="795"/>
         <source>Languages:</source>
         <translation>Языки:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="530"/>
+        <location filename="../qml/SettingsWindow.qml" line="537"/>
         <source>New Tab page</source>
         <translation>Страница новой вкладки</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="549"/>
+        <location filename="../qml/SettingsWindow.qml" line="556"/>
         <source>Use Current Page</source>
         <translation>Использовать текущую страницу</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="562"/>
+        <location filename="../qml/SettingsWindow.qml" line="569"/>
         <source>Use New Tab Page</source>
         <translation>Использовать страницу новой вкладки</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="410"/>
+        <location filename="../qml/SettingsWindow.qml" line="417"/>
         <source>New Tabs</source>
         <translation>Новые вкладки</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="850"/>
+        <location filename="../qml/SettingsWindow.qml" line="880"/>
         <source>On exit:</source>
         <translation>При выходе:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="864"/>
+        <location filename="../qml/SettingsWindow.qml" line="894"/>
         <source>Browsing data:</source>
         <translation>Данные просмотра:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="344"/>
+        <location filename="../qml/SettingsWindow.qml" line="351"/>
         <source>Search…</source>
         <translation>Поиск…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="448"/>
+        <location filename="../qml/SettingsWindow.qml" line="455"/>
         <source>Defaults</source>
         <translation>По умолчанию</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="457"/>
+        <location filename="../qml/SettingsWindow.qml" line="464"/>
         <source>OK</source>
         <translation>ОК</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="464"/>
+        <location filename="../qml/SettingsWindow.qml" line="471"/>
         <source>Apply</source>
         <translation>Применить</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="471"/>
+        <location filename="../qml/SettingsWindow.qml" line="478"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="503"/>
+        <location filename="../qml/SettingsWindow.qml" line="510"/>
         <source>Open the home page</source>
         <translation>Открыть домашнюю страницу</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="515"/>
+        <location filename="../qml/SettingsWindow.qml" line="522"/>
         <source>Open the tabs from last time</source>
         <translation>Открыть вкладки предыдущего сеанса</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="589"/>
+        <location filename="../qml/SettingsWindow.qml" line="596"/>
         <source>New Tab page:</source>
         <translation>Страница новой вкладки:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="590"/>
+        <location filename="../qml/SettingsWindow.qml" line="597"/>
         <source>Show top sites</source>
         <translation>Показывать часто посещаемые сайты</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="601"/>
+        <location filename="../qml/SettingsWindow.qml" line="608"/>
         <source>Restore Removed Sites</source>
         <translation>Восстановить удалённые сайты</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="639"/>
+        <location filename="../qml/SettingsWindow.qml" line="646"/>
         <source>Custom…</source>
         <translation>Другая…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="654"/>
+        <location filename="../qml/SettingsWindow.qml" line="661"/>
         <source>Custom URL:</source>
         <translation>Свой URL:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="670"/>
+        <location filename="../qml/SettingsWindow.qml" line="677"/>
         <source>Show search suggestions in the address bar</source>
         <translation>Показывать поисковые подсказки в адресной строке</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="686"/>
+        <location filename="../qml/SettingsWindow.qml" line="693"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>URL должен содержать «%1» на месте поисковых запросов.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="721"/>
+        <location filename="../qml/SettingsWindow.qml" line="728"/>
         <source>Choose…</source>
         <translation>Выбрать…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="54"/>
-        <location filename="../qml/SettingsWindow.qml" line="729"/>
+        <location filename="../qml/SettingsWindow.qml" line="736"/>
         <source>Ask where to save each file</source>
         <translation>Спрашивать, куда сохранять каждый файл</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="744"/>
+        <location filename="../qml/SettingsWindow.qml" line="751"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>Выбранная папка больше не существует. Загрузки сохраняются в %1.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="837"/>
+        <location filename="../qml/SettingsWindow.qml" line="844"/>
         <source>Cookies:</source>
         <translation>Файлы cookie:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="838"/>
+        <location filename="../qml/SettingsWindow.qml" line="845"/>
         <source>Block third-party cookies</source>
         <translation>Блокировать сторонние файлы cookie</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="851"/>
+        <location filename="../qml/SettingsWindow.qml" line="881"/>
         <source>Clear cookies, cache and history</source>
         <translation>Очищать файлы cookie, кеш и журнал</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="865"/>
+        <location filename="../qml/SettingsWindow.qml" line="895"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Очистить файлы cookie и кеш</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="811"/>
+        <location filename="../qml/SettingsWindow.qml" line="818"/>
         <source>No spelling dictionaries are installed.</source>
         <translation>Словари для проверки орфографии не установлены.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="895"/>
+        <location filename="../qml/SettingsWindow.qml" line="857"/>
+        <source>Ads and trackers:</source>
+        <translation>Реклама и трекеры:</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="858"/>
+        <source>Block ads and trackers</source>
+        <translation>Блокировать рекламу и трекеры</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="870"/>
+        <source>Updating lists…</source>
+        <translation>Обновление списков…</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="872"/>
+        <source>Lists not downloaded yet</source>
+        <translation>Списки ещё не загружены</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="873"/>
+        <source>Lists last updated: %1</source>
+        <translation>Последнее обновление списков: %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="925"/>
         <source>Choose Download Folder</source>
         <translation>Выбрать папку загрузок</translation>
     </message>

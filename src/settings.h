@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QDateTime>
 #include <QObject>
 #include <QSettings>
 #include <QStringList>
@@ -50,6 +51,12 @@ class Settings : public QObject
                    NOTIFY spellCheckEnabledChanged)
     Q_PROPERTY(QStringList spellCheckLanguages READ spellCheckLanguages
                    WRITE setSpellCheckLanguages NOTIFY spellCheckLanguagesChanged)
+    Q_PROPERTY(bool adBlockEnabled READ adBlockEnabled WRITE setAdBlockEnabled
+                   NOTIFY adBlockEnabledChanged)
+    Q_PROPERTY(QStringList adBlockAllowList READ adBlockAllowList WRITE setAdBlockAllowList
+                   NOTIFY adBlockAllowListChanged)
+    Q_PROPERTY(QDateTime adBlockLastUpdate READ adBlockLastUpdate WRITE setAdBlockLastUpdate
+                   NOTIFY adBlockLastUpdateChanged)
 
 public:
     static Settings *instance();
@@ -73,6 +80,10 @@ public:
     int readerFontSize() const { return m_readerFontSize; }
     bool readerSerif() const { return m_readerSerif; }
     QStringList spellCheckLanguages() const { return m_spellCheckLanguages; }
+    bool adBlockEnabled() const { return m_adBlockEnabled; }
+    QStringList adBlockAllowList() const { return m_adBlockAllowList; }
+    // When the filter lists were last downloaded; invalid if never.
+    QDateTime adBlockLastUpdate() const { return m_adBlockLastUpdate; }
 
     void setHomePage(const QString &homePage);
     void setSearchEngine(const QString &searchEngine);
@@ -90,6 +101,9 @@ public:
     void setReaderFontSize(int readerFontSize);
     void setReaderSerif(bool readerSerif);
     void setSpellCheckLanguages(const QStringList &spellCheckLanguages);
+    void setAdBlockEnabled(bool adBlockEnabled);
+    void setAdBlockAllowList(const QStringList &adBlockAllowList);
+    void setAdBlockLastUpdate(const QDateTime &adBlockLastUpdate);
 
     // Default value of the option with this property name ("homePage",
     // "searchEngine", …). The only source of truth for defaults: the
@@ -131,6 +145,9 @@ signals:
     void readerFontSizeChanged();
     void readerSerifChanged();
     void spellCheckLanguagesChanged();
+    void adBlockEnabledChanged();
+    void adBlockAllowListChanged();
+    void adBlockLastUpdateChanged();
 
 private:
     explicit Settings(QObject *parent = nullptr);
@@ -150,6 +167,9 @@ private:
     bool m_searchSuggestions = false;
     bool m_spellCheckEnabled = true;
     QStringList m_spellCheckLanguages;
+    bool m_adBlockEnabled = true;
+    QStringList m_adBlockAllowList;
+    QDateTime m_adBlockLastUpdate;
     int m_readerFontSize = 18;
     bool m_readerSerif = true;
 };

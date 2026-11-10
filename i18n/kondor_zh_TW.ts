@@ -243,6 +243,39 @@
     </message>
 </context>
 <context>
+    <name>CertificateErrorPage</name>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="52"/>
+        <source>Your connection is not private</source>
+        <translation>您的連線並非私人連線</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="60"/>
+        <source>Attackers might be trying to steal your information from &lt;b&gt;%1&lt;/b&gt; (for example, passwords, messages or credit cards).</source>
+        <translation>攻擊者可能會試圖從 &lt;b&gt;%1&lt;/b&gt; 竊取您的資訊（例如：密碼、訊息或信用卡）。</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="77"/>
+        <source>Advanced…</source>
+        <translation>進階…</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="85"/>
+        <source>Back to Safety</source>
+        <translation>返回安全連線</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="96"/>
+        <source>This site could not prove its identity. Continuing may expose your data.</source>
+        <translation>此網站無法證明其身分。繼續前往可能會洩露您的資料。</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="99"/>
+        <source>Continue Anyway (Unsafe)</source>
+        <translation>仍要繼續（不安全）</translation>
+    </message>
+</context>
+<context>
     <name>DefaultBookmarks</name>
     <message>
         <location filename="../src/database.cpp" line="36"/>
@@ -505,156 +538,166 @@
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="359"/>
-        <location filename="../qml/Main.qml" line="639"/>
+        <location filename="../qml/Main.qml" line="371"/>
+        <location filename="../qml/Main.qml" line="689"/>
         <source>New Tab</source>
         <translation>新增分頁</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="418"/>
+        <location filename="../qml/Main.qml" line="430"/>
         <source>Back</source>
         <translation>上一頁</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="431"/>
+        <location filename="../qml/Main.qml" line="443"/>
         <source>Forward</source>
         <translation>下一頁</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="444"/>
+        <location filename="../qml/Main.qml" line="456"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="444"/>
+        <location filename="../qml/Main.qml" line="456"/>
         <source>Reload</source>
         <translation>重新載入</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="460"/>
+        <location filename="../qml/Main.qml" line="472"/>
         <source>Home</source>
         <translation>首頁</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="477"/>
+        <location filename="../qml/Main.qml" line="489"/>
         <source>Search or enter address</source>
         <translation>搜尋或輸入地址</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="570"/>
+        <location filename="../qml/Main.qml" line="613"/>
         <source>Bookmark This Page</source>
         <translation>將此頁加入書籤</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="602"/>
+        <location filename="../qml/Main.qml" line="652"/>
         <source>Downloads</source>
         <translation>下載</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="631"/>
+        <location filename="../qml/Main.qml" line="681"/>
         <source>Menu</source>
         <translation>選單</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="644"/>
+        <location filename="../qml/Main.qml" line="694"/>
         <source>New Private Tab</source>
         <translation>新增隱私分頁</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="570"/>
+        <location filename="../qml/Main.qml" line="580"/>
+        <source>Not Secure</source>
+        <translation>不安全</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="588"/>
+        <source>Site Information</source>
+        <translation>網站資訊</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="613"/>
         <source>Edit This Bookmark</source>
         <translation>編輯此書籤</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="649"/>
+        <location filename="../qml/Main.qml" line="699"/>
         <source>Reopen Closed Tab</source>
         <translation>重新開啟已關閉的分頁</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="656"/>
+        <location filename="../qml/Main.qml" line="706"/>
         <source>Close Tab</source>
         <translation>關閉分頁</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="662"/>
+        <location filename="../qml/Main.qml" line="712"/>
         <source>Find in Page…</source>
         <translation>在頁面中尋找…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="669"/>
+        <location filename="../qml/Main.qml" line="719"/>
         <source>Zoom In</source>
         <translation>放大</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="678"/>
+        <location filename="../qml/Main.qml" line="728"/>
         <source>Zoom Out</source>
         <translation>縮小</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="687"/>
+        <location filename="../qml/Main.qml" line="737"/>
         <source>Actual Size</source>
         <translation>實際大小</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="697"/>
+        <location filename="../qml/Main.qml" line="747"/>
         <source>Bookmarks</source>
         <translation>書籤</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="708"/>
+        <location filename="../qml/Main.qml" line="758"/>
         <source>History</source>
         <translation>歷史記錄</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="713"/>
+        <location filename="../qml/Main.qml" line="763"/>
         <source>Site Permissions…</source>
         <translation>網站權限…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="720"/>
+        <location filename="../qml/Main.qml" line="770"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>設定 %1…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="727"/>
+        <location filename="../qml/Main.qml" line="777"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>關於 %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="843"/>
+        <location filename="../qml/Main.qml" line="893"/>
         <source>Page bookmarked</source>
         <translation>頁面已加入書籤</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="843"/>
+        <location filename="../qml/Main.qml" line="893"/>
         <source>Edit Bookmark</source>
         <translation>編輯書籤</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="851"/>
+        <location filename="../qml/Main.qml" line="901"/>
         <source>Name:</source>
         <translation>名稱：</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="857"/>
+        <location filename="../qml/Main.qml" line="907"/>
         <source>Folder:</source>
         <translation>資料夾：</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="867"/>
+        <location filename="../qml/Main.qml" line="917"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="875"/>
+        <location filename="../qml/Main.qml" line="925"/>
         <source>Done</source>
         <translation>完成</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="887"/>
+        <location filename="../qml/Main.qml" line="937"/>
         <source>Save File</source>
         <translation>儲存檔案</translation>
     </message>
@@ -1048,6 +1091,49 @@
         <location filename="../qml/SettingsWindow.qml" line="779"/>
         <source>Choose Download Folder</source>
         <translation>選擇下載資料夾</translation>
+    </message>
+</context>
+<context>
+    <name>SiteInfoPopup</name>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="38"/>
+        <source>Connection is secure</source>
+        <translation>連線是安全的</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="40"/>
+        <source>Not Secure</source>
+        <translation>不安全</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="42"/>
+        <source>Your connection is not private</source>
+        <translation>您的連線並非私人連線</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="44"/>
+        <source>Local file</source>
+        <translation>本機檔案</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="160"/>
+        <source>Permissions for this site</source>
+        <translation>此網站的權限</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="187"/>
+        <source>Allowed</source>
+        <translation>已允許</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="187"/>
+        <source>Blocked</source>
+        <translation>已封鎖</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="197"/>
+        <source>Revoke</source>
+        <translation>撤銷</translation>
     </message>
 </context>
 <context>

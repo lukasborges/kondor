@@ -28,6 +28,11 @@ class Tab : public QObject
     Q_PROPERTY(int findActiveMatch READ findActiveMatch NOTIFY findResultChanged)
     Q_PROPERTY(bool newTabPage READ newTabPage NOTIFY newTabPageChanged)
     Q_PROPERTY(QVariant pendingPermission READ pendingPermission NOTIFY pendingPermissionChanged)
+    Q_PROPERTY(QString securityState READ securityState NOTIFY securityStateChanged)
+    Q_PROPERTY(bool certificateErrorPending READ certificateErrorPending NOTIFY certificateErrorChanged)
+    Q_PROPERTY(QUrl certificateErrorUrl READ certificateErrorUrl NOTIFY certificateErrorChanged)
+    Q_PROPERTY(QString certificateErrorDescription READ certificateErrorDescription NOTIFY certificateErrorChanged)
+    Q_PROPERTY(bool certificateErrorOverridable READ certificateErrorOverridable NOTIFY certificateErrorChanged)
 
 public:
     explicit Tab(QQuickWebEngineProfile *profile, QObject *parent = nullptr);
@@ -46,6 +51,11 @@ public:
     int findActiveMatch() const { return m_findActiveMatch; }
     bool newTabPage() const { return m_newTabPage; }
     QVariant pendingPermission() const;
+    QString securityState() const { return m_securityState; }
+    bool certificateErrorPending() const { return m_certificateErrorPending; }
+    QUrl certificateErrorUrl() const { return m_certificateErrorUrl; }
+    QString certificateErrorDescription() const { return m_certificateErrorDescription; }
+    bool certificateErrorOverridable() const { return m_certificateErrorOverridable; }
 
     // Calls coming from the WebEngineView (QML) to synchronize the state.
     Q_INVOKABLE void setTitle(const QString &title);
@@ -56,7 +66,10 @@ public:
     Q_INVOKABLE void setCanGoBack(bool canGoBack);
     Q_INVOKABLE void setCanGoForward(bool canGoForward);
     Q_INVOKABLE void setFindResult(int matches, int activeMatch);
+    Q_INVOKABLE void setPendingCertificateError(const QUrl &url, const QString &description,
+                                                bool overridable);
     void setPinned(bool pinned);
+    void setCertificateOverridden(bool overridden);
 
     // Commands coming from the UI; they become signals consumed by the WebEngineView.
     Q_INVOKABLE void navigateTo(const QUrl &url);
@@ -71,6 +84,8 @@ public:
     Q_INVOKABLE void find(const QString &text, bool backward, bool caseSensitive);
     Q_INVOKABLE void stopFind();
     Q_INVOKABLE void focusPage();
+    Q_INVOKABLE void acceptCertificateError();
+    Q_INVOKABLE void rejectCertificateError();
 
     // Site permissions are answered one at a time; a page can ask for several
     // in a row (camera and microphone), and switching tabs must keep each
@@ -90,6 +105,8 @@ signals:
     void pinnedChanged();
     void newTabPageChanged();
     void pendingPermissionChanged();
+    void securityStateChanged();
+    void certificateErrorChanged();
 
     void navigationRequested(const QUrl &url);
     void newTabPageRequested();
@@ -103,10 +120,14 @@ signals:
     void findRequested(const QString &text, bool backward, bool caseSensitive);
     void stopFindRequested();
     void focusPageRequested();
+    void acceptCertificateErrorRequested();
+    void rejectCertificateErrorRequested();
 
 private:
     void setNewTabPage(bool newTabPage);
     void denyPendingPermissions();
+    void updateSecurityState();
+    void clearPendingCertificateError();
 
     QString m_title;
     QUrl m_url;
@@ -123,4 +144,15 @@ private:
     // A tab without a real URL starts on the New Tab page.
     bool m_newTabPage = true;
     QList<QWebEnginePermission> m_pendingPermissions;
+
+    // "secure" (https), "insecure" (http), "error" (certificate warning on
+    // screen or overridden by the user) or "local" (file:, about:, data:).
+    QString m_securityState = QStringLiteral("local");
+    // Set while the user accepted a certificate error for this host; cleared
+    // as soon as the tab navigates to another host.
+    QString m_overriddenCertificateHost;
+    bool m_certificateErrorPending = false;
+    QUrl m_certificateErrorUrl;
+    QString m_certificateErrorDescription;
+    bool m_certificateErrorOverridable = false;
 };

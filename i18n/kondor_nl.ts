@@ -243,6 +243,39 @@
     </message>
 </context>
 <context>
+    <name>CertificateErrorPage</name>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="52"/>
+        <source>Your connection is not private</source>
+        <translation>Uw verbinding is niet privé</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="60"/>
+        <source>Attackers might be trying to steal your information from &lt;b&gt;%1&lt;/b&gt; (for example, passwords, messages or credit cards).</source>
+        <translation>Aanvallers proberen mogelijk uw gegevens van &lt;b&gt;%1&lt;/b&gt; te stelen (bijvoorbeeld wachtwoorden, berichten of creditcards).</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="77"/>
+        <source>Advanced…</source>
+        <translation>Geavanceerd…</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="85"/>
+        <source>Back to Safety</source>
+        <translation>Terug naar veiligheid</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="96"/>
+        <source>This site could not prove its identity. Continuing may expose your data.</source>
+        <translation>Deze site kon zijn identiteit niet bewijzen. Doorgaan kan uw gegevens blootstellen.</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="99"/>
+        <source>Continue Anyway (Unsafe)</source>
+        <translation>Toch doorgaan (onveilig)</translation>
+    </message>
+</context>
+<context>
     <name>DefaultBookmarks</name>
     <message>
         <location filename="../src/database.cpp" line="36"/>
@@ -505,156 +538,166 @@
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="359"/>
-        <location filename="../qml/Main.qml" line="639"/>
+        <location filename="../qml/Main.qml" line="371"/>
+        <location filename="../qml/Main.qml" line="689"/>
         <source>New Tab</source>
         <translation>Nieuw tabblad</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="418"/>
+        <location filename="../qml/Main.qml" line="430"/>
         <source>Back</source>
         <translation>Terug</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="431"/>
+        <location filename="../qml/Main.qml" line="443"/>
         <source>Forward</source>
         <translation>Vooruit</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="444"/>
+        <location filename="../qml/Main.qml" line="456"/>
         <source>Stop</source>
         <translation>Stoppen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="444"/>
+        <location filename="../qml/Main.qml" line="456"/>
         <source>Reload</source>
         <translation>Herladen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="460"/>
+        <location filename="../qml/Main.qml" line="472"/>
         <source>Home</source>
         <translation>Startpagina</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="477"/>
+        <location filename="../qml/Main.qml" line="489"/>
         <source>Search or enter address</source>
         <translation>Zoeken of een adres invoeren</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="570"/>
+        <location filename="../qml/Main.qml" line="613"/>
         <source>Bookmark This Page</source>
         <translation>Deze pagina als bladwijzer opslaan</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="602"/>
+        <location filename="../qml/Main.qml" line="652"/>
         <source>Downloads</source>
         <translation>Downloads</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="631"/>
+        <location filename="../qml/Main.qml" line="681"/>
         <source>Menu</source>
         <translation>Menu</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="644"/>
+        <location filename="../qml/Main.qml" line="694"/>
         <source>New Private Tab</source>
         <translation>Nieuw privétabblad</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="570"/>
+        <location filename="../qml/Main.qml" line="580"/>
+        <source>Not Secure</source>
+        <translation>Niet veilig</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="588"/>
+        <source>Site Information</source>
+        <translation>Site-informatie</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="613"/>
         <source>Edit This Bookmark</source>
         <translation>Deze bladwijzer bewerken</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="649"/>
+        <location filename="../qml/Main.qml" line="699"/>
         <source>Reopen Closed Tab</source>
         <translation>Gesloten tabblad opnieuw openen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="656"/>
+        <location filename="../qml/Main.qml" line="706"/>
         <source>Close Tab</source>
         <translation>Tabblad sluiten</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="662"/>
+        <location filename="../qml/Main.qml" line="712"/>
         <source>Find in Page…</source>
         <translation>Op pagina zoeken…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="669"/>
+        <location filename="../qml/Main.qml" line="719"/>
         <source>Zoom In</source>
         <translation>Inzoomen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="678"/>
+        <location filename="../qml/Main.qml" line="728"/>
         <source>Zoom Out</source>
         <translation>Uitzoomen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="687"/>
+        <location filename="../qml/Main.qml" line="737"/>
         <source>Actual Size</source>
         <translation>Werkelijke grootte</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="697"/>
+        <location filename="../qml/Main.qml" line="747"/>
         <source>Bookmarks</source>
         <translation>Bladwijzers</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="708"/>
+        <location filename="../qml/Main.qml" line="758"/>
         <source>History</source>
         <translation>Geschiedenis</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="713"/>
+        <location filename="../qml/Main.qml" line="763"/>
         <source>Site Permissions…</source>
         <translation>Website-machtigingen…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="720"/>
+        <location filename="../qml/Main.qml" line="770"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 instellen…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="727"/>
+        <location filename="../qml/Main.qml" line="777"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Over %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="843"/>
+        <location filename="../qml/Main.qml" line="893"/>
         <source>Page bookmarked</source>
         <translation>Pagina als bladwijzer opgeslagen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="843"/>
+        <location filename="../qml/Main.qml" line="893"/>
         <source>Edit Bookmark</source>
         <translation>Bladwijzer bewerken</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="851"/>
+        <location filename="../qml/Main.qml" line="901"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="857"/>
+        <location filename="../qml/Main.qml" line="907"/>
         <source>Folder:</source>
         <translation>Map:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="867"/>
+        <location filename="../qml/Main.qml" line="917"/>
         <source>Remove</source>
         <translation>Verwijderen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="875"/>
+        <location filename="../qml/Main.qml" line="925"/>
         <source>Done</source>
         <translation>Gereed</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="887"/>
+        <location filename="../qml/Main.qml" line="937"/>
         <source>Save File</source>
         <translation>Bestand opslaan</translation>
     </message>
@@ -1048,6 +1091,49 @@
         <location filename="../qml/SettingsWindow.qml" line="779"/>
         <source>Choose Download Folder</source>
         <translation>Downloadmap kiezen</translation>
+    </message>
+</context>
+<context>
+    <name>SiteInfoPopup</name>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="38"/>
+        <source>Connection is secure</source>
+        <translation>Verbinding is veilig</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="40"/>
+        <source>Not Secure</source>
+        <translation>Niet veilig</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="42"/>
+        <source>Your connection is not private</source>
+        <translation>Uw verbinding is niet privé</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="44"/>
+        <source>Local file</source>
+        <translation>Lokaal bestand</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="160"/>
+        <source>Permissions for this site</source>
+        <translation>Machtigingen voor deze site</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="187"/>
+        <source>Allowed</source>
+        <translation>Toegestaan</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="187"/>
+        <source>Blocked</source>
+        <translation>Geblokkeerd</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="197"/>
+        <source>Revoke</source>
+        <translation>Intrekken</translation>
     </message>
 </context>
 <context>

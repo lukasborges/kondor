@@ -28,6 +28,9 @@ private slots:
     void showNewTabPageRestoresIt();
     void aboutBlankKeepsNewTabPage();
     void closedNewTabPageIsNotRemembered();
+    void securityStateFollowsScheme();
+    void certificateOverrideKeepsTheErrorStateForItsHost();
+    void rejectCertificateErrorClearsThePendingError();
 };
 
 void TestTabModel::startsEmpty()
@@ -229,6 +232,62 @@ void TestTabModel::closedNewTabPageIsNotRemembered()
     model.addTab();
     model.closeTab(1);
     QVERIFY(!model.canReopenClosedTab());
+}
+
+void TestTabModel::securityStateFollowsScheme()
+{
+    TabModel model;
+    Tab *tab = model.addTab();
+
+    tab->setUrl(QUrl(QStringLiteral("https://example.com/")));
+    QCOMPARE(tab->securityState(), QStringLiteral("secure"));
+
+    tab->setUrl(QUrl(QStringLiteral("http://example.com/")));
+    QCOMPARE(tab->securityState(), QStringLiteral("insecure"));
+
+    tab->setUrl(QUrl(QStringLiteral("file:///etc/hosts")));
+    QCOMPARE(tab->securityState(), QStringLiteral("local"));
+
+    tab->setUrl(QUrl(QStringLiteral("about:blank")));
+    QCOMPARE(tab->securityState(), QStringLiteral("local"));
+}
+
+void TestTabModel::certificateOverrideKeepsTheErrorStateForItsHost()
+{
+    TabModel model;
+    Tab *tab = model.addTab();
+    const QUrl failedUrl(QStringLiteral("https://expired.example/"));
+
+    QSignalSpy acceptSpy(tab, &Tab::acceptCertificateErrorRequested);
+    tab->setPendingCertificateError(failedUrl, QStringLiteral("Expired"), true);
+    QVERIFY(tab->certificateErrorPending());
+    QCOMPARE(tab->certificateErrorOverridable(), true);
+    QCOMPARE(tab->securityState(), QStringLiteral("error"));
+
+    tab->acceptCertificateError();
+    QVERIFY(!tab->certificateErrorPending());
+    QCOMPARE(acceptSpy.count(), 1);
+
+    tab->setUrl(failedUrl);
+    QCOMPARE(tab->securityState(), QStringLiteral("error"));
+
+    // The override belongs to the failed host only.
+    tab->setUrl(QUrl(QStringLiteral("https://other.example/")));
+    QCOMPARE(tab->securityState(), QStringLiteral("secure"));
+}
+
+void TestTabModel::rejectCertificateErrorClearsThePendingError()
+{
+    TabModel model;
+    Tab *tab = model.addTab();
+    QSignalSpy rejectSpy(tab, &Tab::rejectCertificateErrorRequested);
+
+    tab->setPendingCertificateError(QUrl(QStringLiteral("https://bad.example/")),
+                                    QStringLiteral("Bad certificate"), true);
+    tab->rejectCertificateError();
+
+    QVERIFY(!tab->certificateErrorPending());
+    QCOMPARE(rejectSpy.count(), 1);
 }
 
 int main(int argc, char *argv[])

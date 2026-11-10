@@ -243,6 +243,39 @@
     </message>
 </context>
 <context>
+    <name>CertificateErrorPage</name>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="52"/>
+        <source>Your connection is not private</source>
+        <translation>La connessione non è privata</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="60"/>
+        <source>Attackers might be trying to steal your information from &lt;b&gt;%1&lt;/b&gt; (for example, passwords, messages or credit cards).</source>
+        <translation>Gli aggressori potrebbero cercare di rubare le tue informazioni da &lt;b&gt;%1&lt;/b&gt; (ad esempio password, messaggi o carte di credito).</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="77"/>
+        <source>Advanced…</source>
+        <translation>Avanzate…</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="85"/>
+        <source>Back to Safety</source>
+        <translation>Torna al sicuro</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="96"/>
+        <source>This site could not prove its identity. Continuing may expose your data.</source>
+        <translation>Questo sito non ha potuto dimostrare la propria identità. Continuare potrebbe esporre i tuoi dati.</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="99"/>
+        <source>Continue Anyway (Unsafe)</source>
+        <translation>Continua comunque (non sicuro)</translation>
+    </message>
+</context>
+<context>
     <name>DefaultBookmarks</name>
     <message>
         <location filename="../src/database.cpp" line="36"/>
@@ -505,156 +538,166 @@
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="359"/>
-        <location filename="../qml/Main.qml" line="639"/>
+        <location filename="../qml/Main.qml" line="371"/>
+        <location filename="../qml/Main.qml" line="689"/>
         <source>New Tab</source>
         <translation>Nuova scheda</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="418"/>
+        <location filename="../qml/Main.qml" line="430"/>
         <source>Back</source>
         <translation>Indietro</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="431"/>
+        <location filename="../qml/Main.qml" line="443"/>
         <source>Forward</source>
         <translation>Avanti</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="444"/>
+        <location filename="../qml/Main.qml" line="456"/>
         <source>Stop</source>
         <translation>Interrompi</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="444"/>
+        <location filename="../qml/Main.qml" line="456"/>
         <source>Reload</source>
         <translation>Ricarica</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="460"/>
+        <location filename="../qml/Main.qml" line="472"/>
         <source>Home</source>
         <translation>Home</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="477"/>
+        <location filename="../qml/Main.qml" line="489"/>
         <source>Search or enter address</source>
         <translation>Cerca o inserisci un indirizzo</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="570"/>
+        <location filename="../qml/Main.qml" line="613"/>
         <source>Bookmark This Page</source>
         <translation>Aggiungi questa pagina ai segnalibri</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="602"/>
+        <location filename="../qml/Main.qml" line="652"/>
         <source>Downloads</source>
         <translation>Download</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="631"/>
+        <location filename="../qml/Main.qml" line="681"/>
         <source>Menu</source>
         <translation>Menu</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="644"/>
+        <location filename="../qml/Main.qml" line="694"/>
         <source>New Private Tab</source>
         <translation>Nuova scheda privata</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="570"/>
+        <location filename="../qml/Main.qml" line="580"/>
+        <source>Not Secure</source>
+        <translation>Non sicuro</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="588"/>
+        <source>Site Information</source>
+        <translation>Informazioni sul sito</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="613"/>
         <source>Edit This Bookmark</source>
         <translation>Modifica questo segnalibro</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="649"/>
+        <location filename="../qml/Main.qml" line="699"/>
         <source>Reopen Closed Tab</source>
         <translation>Riapri scheda chiusa</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="656"/>
+        <location filename="../qml/Main.qml" line="706"/>
         <source>Close Tab</source>
         <translation>Chiudi scheda</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="662"/>
+        <location filename="../qml/Main.qml" line="712"/>
         <source>Find in Page…</source>
         <translation>Trova nella pagina…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="669"/>
+        <location filename="../qml/Main.qml" line="719"/>
         <source>Zoom In</source>
         <translation>Aumenta zoom</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="678"/>
+        <location filename="../qml/Main.qml" line="728"/>
         <source>Zoom Out</source>
         <translation>Riduci zoom</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="687"/>
+        <location filename="../qml/Main.qml" line="737"/>
         <source>Actual Size</source>
         <translation>Dimensione effettiva</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="697"/>
+        <location filename="../qml/Main.qml" line="747"/>
         <source>Bookmarks</source>
         <translation>Segnalibri</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="708"/>
+        <location filename="../qml/Main.qml" line="758"/>
         <source>History</source>
         <translation>Cronologia</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="713"/>
+        <location filename="../qml/Main.qml" line="763"/>
         <source>Site Permissions…</source>
         <translation>Autorizzazioni dei siti…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="720"/>
+        <location filename="../qml/Main.qml" line="770"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Configura %1…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="727"/>
+        <location filename="../qml/Main.qml" line="777"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Informazioni su %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="843"/>
+        <location filename="../qml/Main.qml" line="893"/>
         <source>Page bookmarked</source>
         <translation>Pagina aggiunta ai segnalibri</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="843"/>
+        <location filename="../qml/Main.qml" line="893"/>
         <source>Edit Bookmark</source>
         <translation>Modifica segnalibro</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="851"/>
+        <location filename="../qml/Main.qml" line="901"/>
         <source>Name:</source>
         <translation>Nome:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="857"/>
+        <location filename="../qml/Main.qml" line="907"/>
         <source>Folder:</source>
         <translation>Cartella:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="867"/>
+        <location filename="../qml/Main.qml" line="917"/>
         <source>Remove</source>
         <translation>Rimuovi</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="875"/>
+        <location filename="../qml/Main.qml" line="925"/>
         <source>Done</source>
         <translation>Fatto</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="887"/>
+        <location filename="../qml/Main.qml" line="937"/>
         <source>Save File</source>
         <translation>Salva file</translation>
     </message>
@@ -1048,6 +1091,49 @@
         <location filename="../qml/SettingsWindow.qml" line="779"/>
         <source>Choose Download Folder</source>
         <translation>Scegli cartella dei download</translation>
+    </message>
+</context>
+<context>
+    <name>SiteInfoPopup</name>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="38"/>
+        <source>Connection is secure</source>
+        <translation>La connessione è sicura</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="40"/>
+        <source>Not Secure</source>
+        <translation>Non sicuro</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="42"/>
+        <source>Your connection is not private</source>
+        <translation>La connessione non è privata</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="44"/>
+        <source>Local file</source>
+        <translation>File locale</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="160"/>
+        <source>Permissions for this site</source>
+        <translation>Autorizzazioni per questo sito</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="187"/>
+        <source>Allowed</source>
+        <translation>Consentito</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="187"/>
+        <source>Blocked</source>
+        <translation>Bloccato</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="197"/>
+        <source>Revoke</source>
+        <translation>Revoca</translation>
     </message>
 </context>
 <context>

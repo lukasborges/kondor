@@ -36,6 +36,12 @@ void Tab::setUrl(const QUrl &url)
     if (!url.isEmpty() && url != QUrl(QStringLiteral("about:blank")))
         setNewTabPage(false);
 
+    // A certificate override is only valid for the host it was granted for.
+    if (!m_overriddenCertificateHost.isEmpty()
+            && url.host().compare(m_overriddenCertificateHost, Qt::CaseInsensitive) != 0) {
+        m_overriddenCertificateHost.clear();
+    }
+
     // A prompt belongs to the origin that asked; leaving it denies the request.
     // Same-document changes (fragment, history.pushState) and same-origin
     // navigations keep it, so single-page apps like Meet keep their prompts.
@@ -45,7 +51,94 @@ void Tab::setUrl(const QUrl &url)
     if (m_url == url)
         return;
     m_url = url;
+    updateSecurityState();
     emit urlChanged();
+}
+
+void Tab::updateSecurityState()
+{
+    QString state;
+    const QString scheme = m_url.scheme().toLower();
+    if (m_certificateErrorPending) {
+        // While the warning is on screen the indicator must match it.
+        state = QStringLiteral("error");
+    } else if (scheme == QLatin1String("https")) {
+        // After an override the host keeps the warning state until it is left.
+        const bool overridden = !m_overriddenCertificateHost.isEmpty()
+                && m_url.host().compare(m_overriddenCertificateHost, Qt::CaseInsensitive) == 0;
+        state = overridden ? QStringLiteral("error") : QStringLiteral("secure");
+    } else if (scheme == QLatin1String("http")) {
+        state = QStringLiteral("insecure");
+    } else {
+        state = QStringLiteral("local");
+    }
+
+    if (m_securityState == state)
+        return;
+    m_securityState = state;
+    emit securityStateChanged();
+}
+
+void Tab::setPendingCertificateError(const QUrl &url, const QString &description, bool overridable)
+{
+    if (m_certificateErrorPending && m_certificateErrorUrl == url
+            && m_certificateErrorDescription == description
+            && m_certificateErrorOverridable == overridable) {
+        return;
+    }
+
+    m_certificateErrorPending = true;
+    m_certificateErrorUrl = url;
+    m_certificateErrorDescription = description;
+    m_certificateErrorOverridable = overridable;
+    updateSecurityState();
+    emit certificateErrorChanged();
+}
+
+void Tab::clearPendingCertificateError()
+{
+    if (!m_certificateErrorPending)
+        return;
+    m_certificateErrorPending = false;
+    m_certificateErrorUrl.clear();
+    m_certificateErrorDescription.clear();
+    m_certificateErrorOverridable = false;
+    updateSecurityState();
+    emit certificateErrorChanged();
+}
+
+void Tab::setCertificateOverridden(bool overridden)
+{
+    QString host;
+    if (overridden) {
+        host = m_certificateErrorUrl.host();
+        if (host.isEmpty())
+            host = m_url.host();
+    }
+
+    if (m_overriddenCertificateHost.compare(host, Qt::CaseInsensitive) == 0) {
+        updateSecurityState();
+        return;
+    }
+    m_overriddenCertificateHost = host;
+    updateSecurityState();
+}
+
+void Tab::acceptCertificateError()
+{
+    if (!m_certificateErrorPending)
+        return;
+    setCertificateOverridden(true);
+    clearPendingCertificateError();
+    emit acceptCertificateErrorRequested();
+}
+
+void Tab::rejectCertificateError()
+{
+    if (!m_certificateErrorPending)
+        return;
+    clearPendingCertificateError();
+    emit rejectCertificateErrorRequested();
 }
 
 void Tab::setIconUrl(const QUrl &iconUrl)
@@ -118,6 +211,9 @@ void Tab::navigateTo(const QUrl &url)
     // An empty URL means the New Tab page, which no caller navigates to.
     if (url.isEmpty())
         return;
+    // Typing another address while the certificate warning is up abandons the
+    // pending request; the view rejects it before navigating.
+    clearPendingCertificateError();
     setNewTabPage(false);
     emit navigationRequested(url);
 }
@@ -128,6 +224,7 @@ void Tab::showNewTabPage()
     // page history and make Back stay on the same blank page.
     if (m_newTabPage)
         return;
+    clearPendingCertificateError();
     setNewTabPage(true);
     emit newTabPageRequested();
 }

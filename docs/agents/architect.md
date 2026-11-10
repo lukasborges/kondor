@@ -53,8 +53,9 @@ Act only on queue rows assigned to `architect`:
   body (summary + link), then swap the label to `to-dev`.
 - `question` → answer in the thread where it was asked (PR or issue), add a row to the spec's
   "Decisions" table (commit it), then remove `question` (keep the state label).
-- `in-review` → review the PR (see below). Approve → squash-merge it (the `Closes #N` closes the
-  issue) → promote the next issue (open bugs first by priority, then the roadmap order) to `to-dev`. Changes needed → submit a
+- `in-review` → review the PR (see below). Approve → squash-merge it with
+  `gh pr merge <PR> --squash --body "Closes #N"` (the `Closes #N` closes the issue; the explicit body
+  replaces GitHub's default squash message, which adds `Co-authored-by` trailers) → promote the next issue (open bugs first by priority, then the roadmap order) to `to-dev`. Changes needed → submit a
   "request changes" review and swap the label to `to-dev`.
 - Queue empty and nothing in review → promote the highest-priority open `bug` issue (oldest
   first among equals), or else the next

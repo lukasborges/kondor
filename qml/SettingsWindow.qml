@@ -65,16 +65,25 @@ ApplicationWindow {
     ]
 
     property int currentPage: 0
+    // Set while the search field recreates the list model: the ListView
+    // resets currentIndex to 0 as it adopts the new model, and that reset
+    // must not move the shown page.
+    property bool syncingPageList: false
     // Kept here so it survives the page contents being reloaded.
     property int generalTab: 0
     property bool modified: false
     property bool defaultsEnabled: false
 
+    // Indices into `pages`, never the page objects: a ListView over a JS array
+    // hands each delegate a converted copy, so comparing objects with === or
+    // looking them up with indexOf() always fails. Integers are safe.
     readonly property var visiblePages: {
         const text = searchField.text.trim().toLowerCase()
+        const all = pages.map(function(page, index) { return index })
         if (text.length === 0)
-            return pages
-        return pages.filter(function(page) {
+            return all
+        return all.filter(function(index) {
+            const page = pages[index]
             return (page.title + " " + page.keywords.join(" ")).toLowerCase().includes(text)
         })
     }
@@ -83,7 +92,18 @@ ApplicationWindow {
         root.refresh()
         root.ensureVisiblePage()
     }
-    onVisiblePagesChanged: root.ensureVisiblePage()
+    onVisiblePagesChanged: {
+        root.syncingPageList = true
+        root.ensureVisiblePage()
+        // Adopting a new model makes the ListView reset currentIndex after
+        // this signal returns; restore the index once that reset has passed.
+        Qt.callLater(root.finishPageListSync)
+    }
+
+    function finishPageListSync() {
+        root.syncingPageList = false
+        root.ensureVisiblePage()
+    }
 
     // ── Pending state ───────────────────────────────────────────────────
     // Opening the window copies every option here; the controls edit only
@@ -214,9 +234,9 @@ ApplicationWindow {
     function ensureVisiblePage() {
         if (root.visiblePages.length === 0)
             return
-        let index = root.visiblePages.indexOf(root.pages[root.currentPage])
+        let index = root.visiblePages.indexOf(root.currentPage)
         if (index === -1) {
-            root.currentPage = root.pages.indexOf(root.visiblePages[0])
+            root.currentPage = root.visiblePages[0]
             index = 0
         }
         pageList.currentIndex = index
@@ -288,6 +308,7 @@ ApplicationWindow {
 
                     ListView {
                         id: pageList
+                        objectName: "pageList"
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         clip: true
@@ -296,23 +317,27 @@ ApplicationWindow {
                         model: root.visiblePages
 
                         delegate: ItemDelegate {
-                            required property var modelData
+                            required property int modelData
                             required property int index
                             width: ListView.view.width
-                            highlighted: modelData === root.pages[root.currentPage]
+                            highlighted: modelData === root.currentPage
                             display: AbstractButton.TextUnderIcon
-                            icon.name: modelData.icon
+                            icon.name: root.pages[modelData].icon
                             icon.width: Kirigami.Units.iconSizes.medium
                             icon.height: Kirigami.Units.iconSizes.medium
-                            text: modelData.title
-                            onClicked: root.currentPage = root.pages.indexOf(modelData)
+                            text: root.pages[modelData].title
+                            onClicked: root.currentPage = modelData
                         }
 
                         onCurrentIndexChanged: {
+                            // Only user navigation moves the shown page; see
+                            // `syncingPageList` for the model reset.
+                            if (root.syncingPageList)
+                                return
                             if (currentIndex < 0 || currentIndex >= root.visiblePages.length)
                                 return
-                            const page = root.pages.indexOf(root.visiblePages[currentIndex])
-                            if (page >= 0 && page !== root.currentPage)
+                            const page = root.visiblePages[currentIndex]
+                            if (page !== undefined && page !== root.currentPage)
                                 root.currentPage = page
                         }
                     }
@@ -328,6 +353,8 @@ ApplicationWindow {
                 spacing: 0
 
                 Kirigami.Heading {
+                    id: pageHeading
+                    objectName: "pageHeading"
                     Layout.fillWidth: true
                     Layout.margins: Kirigami.Units.smallSpacing
                     Layout.leftMargin: Kirigami.Units.largeSpacing
@@ -351,6 +378,8 @@ ApplicationWindow {
                 }
 
                 StackLayout {
+                    id: pageStack
+                    objectName: "pageStack"
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.margins: Kirigami.Units.gridUnit

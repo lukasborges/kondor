@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQmlExpression>
+#include <QQuickItem>
 #include <QQuickStyle>
 #include <QQuickWindow>
 #include <QSettings>
@@ -52,12 +53,17 @@ private slots:
     void applyWritesAndDisablesApply();
     void okAppliesAndCloses();
     void defaultsResetOnlyTheCurrentPage();
-    void searchFiltersPages();
+    void clickingSidebarSwitchesPages();
     void arrowKeysMoveBetweenPages();
+    void searchFiltersPages();
 
 private:
     QQuickWindow *createWindow();
     int visiblePageCount(QQuickWindow *window);
+    QQuickItem *sidebarEntry(QQuickWindow *window, int index);
+    QPoint entryCenter(QQuickItem *entry) const;
+    void typeText(QQuickWindow *window, const QString &text);
+    void verifyShownPage(QQuickWindow *window, int page, const QString &title);
     QQmlEngine m_engine;
 };
 
@@ -207,19 +213,95 @@ void TestSettingsWindow::defaultsResetOnlyTheCurrentPage()
     delete window;
 }
 
+QQuickItem *TestSettingsWindow::sidebarEntry(QQuickWindow *window, int index)
+{
+    QQmlExpression expression(qmlContext(window), window,
+                              QStringLiteral("pageList.itemAtIndex(%1)").arg(index));
+    const QVariant value = expression.evaluate();
+    if (expression.hasError())
+        qWarning() << expression.error();
+    return value.value<QQuickItem *>();
+}
+
+QPoint TestSettingsWindow::entryCenter(QQuickItem *entry) const
+{
+    return entry->mapToScene(QPointF(entry->width() / 2, entry->height() / 2)).toPoint();
+}
+
+void TestSettingsWindow::typeText(QQuickWindow *window, const QString &text)
+{
+    for (const QChar character : text)
+        QTest::keyClick(window, character.toLatin1());
+}
+
+// The heading, the page stack and the sidebar must all point at `page`.
+void TestSettingsWindow::verifyShownPage(QQuickWindow *window, int page, const QString &title)
+{
+    QCOMPARE(window->property("currentPage").toInt(), page);
+
+    QObject *heading = window->findChild<QObject *>(QStringLiteral("pageHeading"));
+    QVERIFY(heading);
+    QCOMPARE(heading->property("text").toString(), title);
+
+    QObject *stack = window->findChild<QObject *>(QStringLiteral("pageStack"));
+    QVERIFY(stack);
+    QCOMPARE(stack->property("currentIndex").toInt(), page);
+
+    QObject *list = window->findChild<QObject *>(QStringLiteral("pageList"));
+    QVERIFY(list);
+    QCOMPARE(list->property("currentIndex").toInt(), page);
+    for (int i = 0; i < 4; ++i) {
+        QQuickItem *entry = sidebarEntry(window, i);
+        QVERIFY(entry);
+        QCOMPARE(entry->property("highlighted").toBool(), i == page);
+    }
+}
+
+void TestSettingsWindow::clickingSidebarSwitchesPages()
+{
+    const QStringList titles{ QStringLiteral("General"), QStringLiteral("Search"),
+                              QStringLiteral("Downloads"), QStringLiteral("Privacy") };
+    QQuickWindow *window = createWindow();
+    QVERIFY(window);
+    QMetaObject::invokeMethod(window, "showWindow");
+    QVERIFY(QTest::qWaitForWindowExposed(window));
+
+    // General is shown and highlighted when the window opens.
+    verifyShownPage(window, 0, titles[0]);
+
+    // Click each sidebar entry with the real mouse-event path.
+    for (int page = 0; page < titles.size(); ++page) {
+        QQuickItem *entry = nullptr;
+        QTRY_VERIFY((entry = sidebarEntry(window, page)));
+        QTest::mouseClick(window, Qt::LeftButton, Qt::NoModifier, entryCenter(entry));
+        QTRY_COMPARE(window->property("currentPage").toInt(), page);
+        verifyShownPage(window, page, titles[page]);
+    }
+
+    // Closing and reopening keeps the shown page, its heading and the
+    // highlighted entry in sync.
+    QMetaObject::invokeMethod(window, "discardChanges");
+    QMetaObject::invokeMethod(window, "showWindow");
+    verifyShownPage(window, 3, titles[3]);
+
+    delete window;
+}
+
 void TestSettingsWindow::arrowKeysMoveBetweenPages()
 {
     QQuickWindow *window = createWindow();
     QVERIFY(window);
     QMetaObject::invokeMethod(window, "showWindow");
-    QCOMPARE(window->property("currentPage").toInt(), 0);
+    QVERIFY(QTest::qWaitForWindowExposed(window));
+
+    verifyShownPage(window, 0, QStringLiteral("General"));
 
     QTest::keyClick(window, Qt::Key_Down);
-    QCOMPARE(window->property("currentPage").toInt(), 1);
+    verifyShownPage(window, 1, QStringLiteral("Search"));
     QTest::keyClick(window, Qt::Key_Down);
-    QCOMPARE(window->property("currentPage").toInt(), 2);
+    verifyShownPage(window, 2, QStringLiteral("Downloads"));
     QTest::keyClick(window, Qt::Key_Up);
-    QCOMPARE(window->property("currentPage").toInt(), 1);
+    verifyShownPage(window, 1, QStringLiteral("Search"));
 
     // Esc discards and closes.
     QTest::keyClick(window, Qt::Key_Escape);
@@ -233,23 +315,43 @@ void TestSettingsWindow::searchFiltersPages()
     QQuickWindow *window = createWindow();
     QVERIFY(window);
     QMetaObject::invokeMethod(window, "showWindow");
+    QVERIFY(QTest::qWaitForWindowExposed(window));
     QCOMPARE(visiblePageCount(window), 4);
 
     QObject *search = findByClassName(window, QStringLiteral("SearchField"));
     QVERIFY(search);
+    auto *searchItem = qobject_cast<QQuickItem *>(search);
+    QVERIFY(searchItem);
+    searchItem->forceActiveFocus();
 
-    // "cookies" filters down to Privacy, which becomes the current page.
-    search->setProperty("text", "cookies");
-    QCOMPARE(visiblePageCount(window), 1);
+    // Typing "cookies" lists only Privacy, which is shown and highlighted.
+    typeText(window, QStringLiteral("cookies"));
+    QTRY_COMPARE(visiblePageCount(window), 1);
     QCOMPARE(window->property("currentPage").toInt(), 3);
+    QCOMPARE(window->findChild<QObject *>(QStringLiteral("pageHeading"))->property("text").toString(),
+             QStringLiteral("Privacy"));
+    QCOMPARE(window->findChild<QObject *>(QStringLiteral("pageStack"))->property("currentIndex").toInt(), 3);
 
-    // "engine" filters down to Search.
-    search->setProperty("text", "engine");
-    QCOMPARE(visiblePageCount(window), 1);
+    QQuickItem *privacy = nullptr;
+    QTRY_VERIFY((privacy = sidebarEntry(window, 0)));
+    QCOMPARE(privacy->property("text").toString(), QStringLiteral("Privacy"));
+    QVERIFY(privacy->property("highlighted").toBool());
+    QVERIFY(!sidebarEntry(window, 1));
+
+    // "engine" filters down to Search, shown the same way.
+    QTest::keyClick(window, Qt::Key_A, Qt::ControlModifier);
+    QTest::keyClick(window, Qt::Key_Delete);
+    typeText(window, QStringLiteral("engine"));
+    QTRY_COMPARE(visiblePageCount(window), 1);
     QCOMPARE(window->property("currentPage").toInt(), 1);
+    QCOMPARE(window->findChild<QObject *>(QStringLiteral("pageHeading"))->property("text").toString(),
+             QStringLiteral("Search"));
 
-    search->setProperty("text", "");
-    QCOMPARE(visiblePageCount(window), 4);
+    // Clearing the filter restores every entry and keeps Search selected.
+    QTest::keyClick(window, Qt::Key_A, Qt::ControlModifier);
+    QTest::keyClick(window, Qt::Key_Delete);
+    QTRY_COMPARE(visiblePageCount(window), 4);
+    verifyShownPage(window, 1, QStringLiteral("Search"));
 
     delete window;
 }

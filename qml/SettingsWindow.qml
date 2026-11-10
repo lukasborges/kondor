@@ -129,13 +129,14 @@ ApplicationWindow {
         property bool showTopSites: false
         property bool clearDataOnExit: false
         property bool blockThirdPartyCookies: false
+        property bool adBlockEnabled: true
         property bool searchSuggestions: false
         property bool spellCheckEnabled: false
         property var spellCheckLanguages: []
 
         readonly property var values: [homePage, searchEngine, customSearchUrl,
             downloadDirectory, askWhereToSave, startupBehavior, showTopSites,
-            clearDataOnExit, blockThirdPartyCookies, searchSuggestions,
+            clearDataOnExit, blockThirdPartyCookies, adBlockEnabled, searchSuggestions,
             spellCheckEnabled, spellCheckLanguages]
         onValuesChanged: root.refresh()
     }
@@ -150,6 +151,7 @@ ApplicationWindow {
         pending.showTopSites = Settings.showTopSites
         pending.clearDataOnExit = Settings.clearDataOnExit
         pending.blockThirdPartyCookies = Settings.blockThirdPartyCookies
+        pending.adBlockEnabled = Settings.adBlockEnabled
         pending.searchSuggestions = Settings.searchSuggestions
         pending.spellCheckEnabled = Settings.spellCheckEnabled
         pending.spellCheckLanguages = Settings.spellCheckLanguages
@@ -166,6 +168,7 @@ ApplicationWindow {
                 || pending.showTopSites !== Settings.showTopSites
                 || pending.clearDataOnExit !== Settings.clearDataOnExit
                 || pending.blockThirdPartyCookies !== Settings.blockThirdPartyCookies
+                || pending.adBlockEnabled !== Settings.adBlockEnabled
                 || pending.searchSuggestions !== Settings.searchSuggestions
                 || pending.spellCheckEnabled !== Settings.spellCheckEnabled
                 || !root.sameList(pending.spellCheckLanguages, Settings.spellCheckLanguages)
@@ -194,6 +197,7 @@ ApplicationWindow {
             return pending.blockThirdPartyCookies
                         === Settings.defaultValue("blockThirdPartyCookies")
                     && pending.clearDataOnExit === Settings.defaultValue("clearDataOnExit")
+                    && pending.adBlockEnabled === Settings.defaultValue("adBlockEnabled")
         case 4:
             return pending.spellCheckEnabled === Settings.defaultValue("spellCheckEnabled")
                     && root.sameList(pending.spellCheckLanguages,
@@ -221,6 +225,7 @@ ApplicationWindow {
         case 3:
             pending.blockThirdPartyCookies = Settings.defaultValue("blockThirdPartyCookies")
             pending.clearDataOnExit = Settings.defaultValue("clearDataOnExit")
+            pending.adBlockEnabled = Settings.defaultValue("adBlockEnabled")
             break
         case 4:
             pending.spellCheckEnabled = Settings.defaultValue("spellCheckEnabled")
@@ -249,6 +254,8 @@ ApplicationWindow {
             Settings.clearDataOnExit = pending.clearDataOnExit
         if (pending.blockThirdPartyCookies !== Settings.blockThirdPartyCookies)
             Settings.blockThirdPartyCookies = pending.blockThirdPartyCookies
+        if (pending.adBlockEnabled !== Settings.adBlockEnabled)
+            Settings.adBlockEnabled = pending.adBlockEnabled
         if (pending.searchSuggestions !== Settings.searchSuggestions)
             Settings.searchSuggestions = pending.searchSuggestions
         if (pending.spellCheckEnabled !== Settings.spellCheckEnabled)
@@ -843,6 +850,29 @@ ApplicationWindow {
                         target: cookiesCheck
                         property: "checked"
                         value: pending.blockThirdPartyCookies
+                    }
+
+                    CheckBox {
+                        id: adBlockCheck
+                        Kirigami.FormData.label: qsTr("Ads and trackers:")
+                        text: qsTr("Block ads and trackers")
+                        onToggled: pending.adBlockEnabled = checked
+                    }
+
+                    Binding {
+                        target: adBlockCheck
+                        property: "checked"
+                        value: pending.adBlockEnabled
+                    }
+
+                    Label {
+                        text: AdBlockManager.updating
+                              ? qsTr("Updating lists…")
+                              : isNaN(AdBlockManager.lastUpdate.getTime())
+                                ? qsTr("Lists not downloaded yet")
+                                : qsTr("Lists last updated: %1").arg(
+                                      AdBlockManager.lastUpdate.toLocaleString(Qt.locale(), Locale.ShortFormat))
+                        color: Kirigami.Theme.disabledTextColor
                     }
 
                     CheckBox {

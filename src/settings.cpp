@@ -24,6 +24,9 @@ constexpr auto kSpellCheckEnabled = "SpellCheck/Enabled";
 constexpr auto kSpellCheckLanguages = "SpellCheck/Languages";
 constexpr auto kReaderFontSize = "Reader/FontSize";
 constexpr auto kReaderSerif = "Reader/Serif";
+constexpr auto kAdBlockEnabled = "AdBlock/Enabled";
+constexpr auto kAdBlockAllowList = "AdBlock/AllowList";
+constexpr auto kAdBlockLastUpdate = "AdBlock/LastUpdate";
 
 // Option property names, used by defaultValue().
 constexpr auto kHomePageName = "homePage";
@@ -42,6 +45,8 @@ constexpr auto kSpellCheckEnabledName = "spellCheckEnabled";
 constexpr auto kSpellCheckLanguagesName = "spellCheckLanguages";
 constexpr auto kReaderFontSizeName = "readerFontSize";
 constexpr auto kReaderSerifName = "readerSerif";
+constexpr auto kAdBlockEnabledName = "adBlockEnabled";
+constexpr auto kAdBlockAllowListName = "adBlockAllowList";
 
 QString dictionariesPath()
 {
@@ -119,6 +124,13 @@ Settings::Settings(QObject *parent)
     , m_readerSerif(m_settings.value(QLatin1String(kReaderSerif),
                                      defaultValue(QLatin1String(kReaderSerifName)))
                         .toBool())
+    , m_adBlockEnabled(m_settings.value(QLatin1String(kAdBlockEnabled),
+                                        defaultValue(QLatin1String(kAdBlockEnabledName)))
+                           .toBool())
+    , m_adBlockAllowList(m_settings.value(QLatin1String(kAdBlockAllowList),
+                                          defaultValue(QLatin1String(kAdBlockAllowListName)))
+                             .toStringList())
+    , m_adBlockLastUpdate(m_settings.value(QLatin1String(kAdBlockLastUpdate)).toDateTime())
 {
 }
 
@@ -154,6 +166,10 @@ QVariant Settings::defaultValue(const QString &name) const
         return true;
     if (name == QLatin1String(kSpellCheckEnabledName))
         return true;
+    if (name == QLatin1String(kAdBlockEnabledName))
+        return true;
+    if (name == QLatin1String(kAdBlockAllowListName))
+        return QStringList();
     if (name == QLatin1String(kSpellCheckLanguagesName)) {
         // The system language when a dictionary for it exists, else US English.
         // Dictionary files use Chromium's hyphenated codes ("pt-BR").
@@ -399,4 +415,34 @@ void Settings::setSpellCheckLanguages(const QStringList &spellCheckLanguages)
     m_settings.setValue(QLatin1String(kSpellCheckLanguages), m_spellCheckLanguages);
     m_settings.sync();
     emit spellCheckLanguagesChanged();
+}
+
+void Settings::setAdBlockEnabled(bool adBlockEnabled)
+{
+    if (m_adBlockEnabled == adBlockEnabled)
+        return;
+    m_adBlockEnabled = adBlockEnabled;
+    m_settings.setValue(QLatin1String(kAdBlockEnabled), m_adBlockEnabled);
+    m_settings.sync();
+    emit adBlockEnabledChanged();
+}
+
+void Settings::setAdBlockAllowList(const QStringList &adBlockAllowList)
+{
+    if (m_adBlockAllowList == adBlockAllowList)
+        return;
+    m_adBlockAllowList = adBlockAllowList;
+    m_settings.setValue(QLatin1String(kAdBlockAllowList), m_adBlockAllowList);
+    m_settings.sync();
+    emit adBlockAllowListChanged();
+}
+
+void Settings::setAdBlockLastUpdate(const QDateTime &adBlockLastUpdate)
+{
+    if (m_adBlockLastUpdate == adBlockLastUpdate)
+        return;
+    m_adBlockLastUpdate = adBlockLastUpdate;
+    m_settings.setValue(QLatin1String(kAdBlockLastUpdate), m_adBlockLastUpdate);
+    m_settings.sync();
+    emit adBlockLastUpdateChanged();
 }

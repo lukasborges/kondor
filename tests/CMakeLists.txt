@@ -36,6 +36,9 @@ qt_add_executable(tst_tabmodel
     ../src/tabmodel.cpp
     ../src/tab.cpp
     ../src/profilemanager.cpp
+    ../src/adblock/adblockmanager.cpp
+    ../src/adblock/adblockinterceptor.cpp
+    ../src/adblock/filterengine.cpp
     ../src/addressresolver.cpp
     ../src/settings.cpp
     ../src/downloadmanager.cpp
@@ -71,6 +74,9 @@ qt_add_executable(tst_addresssuggestions
     ../src/tab.cpp
     ../src/tabmodel.cpp
     ../src/profilemanager.cpp
+    ../src/adblock/adblockmanager.cpp
+    ../src/adblock/adblockinterceptor.cpp
+    ../src/adblock/filterengine.cpp
     ../src/addressresolver.cpp
     ../src/settings.cpp
     ../src/downloadmanager.cpp
@@ -140,6 +146,9 @@ qt_add_executable(tst_bookmarkswindow
     ../src/tab.cpp
     ../src/tabmodel.cpp
     ../src/profilemanager.cpp
+    ../src/adblock/adblockmanager.cpp
+    ../src/adblock/adblockinterceptor.cpp
+    ../src/adblock/filterengine.cpp
     ../src/addressresolver.cpp
     ../src/settings.cpp
     ../src/downloadmanager.cpp
@@ -275,6 +284,9 @@ qt_add_executable(tst_settingswindow
     ../src/tab.cpp
     ../src/tabmodel.cpp
     ../src/profilemanager.cpp
+    ../src/adblock/adblockmanager.cpp
+    ../src/adblock/adblockinterceptor.cpp
+    ../src/adblock/filterengine.cpp
     ../src/addressresolver.cpp
     ../src/settings.cpp
     ../src/downloadmanager.cpp
@@ -315,6 +327,9 @@ qt_add_executable(tst_tabstrip
     ../src/tab.cpp
     ../src/tabmodel.cpp
     ../src/profilemanager.cpp
+    ../src/adblock/adblockmanager.cpp
+    ../src/adblock/adblockinterceptor.cpp
+    ../src/adblock/filterengine.cpp
     ../src/addressresolver.cpp
     ../src/settings.cpp
     ../src/downloadmanager.cpp
@@ -354,6 +369,9 @@ qt_add_executable(tst_sitepermissions
     tst_sitepermissions.cpp
     ../src/tab.cpp
     ../src/profilemanager.cpp
+    ../src/adblock/adblockmanager.cpp
+    ../src/adblock/adblockinterceptor.cpp
+    ../src/adblock/filterengine.cpp
     ../src/addressresolver.cpp
     ../src/settings.cpp
     ../src/downloadmanager.cpp
@@ -395,6 +413,9 @@ qt_add_executable(tst_sessionmanager
     ../src/tabmodel.cpp
     ../src/tab.cpp
     ../src/profilemanager.cpp
+    ../src/adblock/adblockmanager.cpp
+    ../src/adblock/adblockinterceptor.cpp
+    ../src/adblock/filterengine.cpp
     ../src/addressresolver.cpp
     ../src/settings.cpp
     ../src/downloadmanager.cpp
@@ -475,3 +496,28 @@ target_link_libraries(tst_zoommanager PRIVATE
 )
 
 add_test(NAME tst_zoommanager COMMAND tst_zoommanager)
+
+# ProfileManager installs the ad blocker on every profile.
+target_link_libraries(tst_tabmodel PRIVATE Qt6::Concurrent Qt6::Network)
+target_link_libraries(tst_addresssuggestions PRIVATE Qt6::Concurrent Qt6::Network)
+target_link_libraries(tst_bookmarkswindow PRIVATE Qt6::Concurrent Qt6::Network)
+target_link_libraries(tst_settingswindow PRIVATE Qt6::Concurrent Qt6::Network)
+target_link_libraries(tst_tabstrip PRIVATE Qt6::Concurrent Qt6::Network)
+target_link_libraries(tst_sitepermissions PRIVATE Qt6::Concurrent Qt6::Network)
+target_link_libraries(tst_sessionmanager PRIVATE Qt6::Concurrent Qt6::Network)
+
+qt_add_executable(tst_filterengine
+    tst_filterengine.cpp
+    ../src/adblock/filterengine.cpp
+)
+
+target_include_directories(tst_filterengine PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_filterengine PRIVATE
+    Qt6::Core
+    Qt6::Test
+)
+
+add_test(NAME tst_filterengine COMMAND tst_filterengine)

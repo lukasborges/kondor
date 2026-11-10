@@ -1,5 +1,6 @@
 #include "profilemanager.h"
 
+#include "adblock/adblockmanager.h"
 #include "addressresolver.h"
 #include "downloadmanager.h"
 #include "historymanager.h"
@@ -114,6 +115,7 @@ void ProfileManager::setupProfile(QQuickWebEngineProfile *profile)
 
     profile->setDownloadPath(Settings::instance()->downloadDirectory());
     applySpellCheckSettings(profile);
+    AdBlockManager::instance()->install(profile);
 
     // Downloads are owned by the shared DownloadManager; private profiles pass
     // the flag so their entries never outlive the session.

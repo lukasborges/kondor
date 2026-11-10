@@ -688,6 +688,69 @@ ApplicationWindow {
                         anchors.verticalCenter: parent.verticalCenter
 
                         ToolButton {
+                            id: adBlockButton
+                            readonly property string host: {
+                                const text = tabs.currentTab ? tabs.currentTab.url.toString() : ""
+                                const match = text.match(/^https?:\/\/([^\/?#:]+)/i)
+                                return match ? match[1].toLowerCase() : ""
+                            }
+                            property int count: 0
+                            property bool allowed: false
+
+                            function refresh() {
+                                count = AdBlockManager.blockedCount(host)
+                                allowed = AdBlockManager.isAllowed(host)
+                            }
+
+                            visible: host.length > 0 && tabs.currentTab && !tabs.currentTab.newTabPage
+                            display: AbstractButton.IconOnly
+                            icon.name: allowed || !AdBlockManager.enabled ? "security-low"
+                                                                         : "security-high"
+                            icon.width: 16
+                            icon.height: 16
+                            flat: true
+                            checked: adBlockPopup.opened
+                            implicitWidth: 28
+                            implicitHeight: 28
+                            ToolTip.visible: hovered
+                            ToolTip.text: qsTr("Ad and Tracker Blocking")
+                            ToolTip.delay: 600
+                            onHostChanged: refresh()
+                            Component.onCompleted: refresh()
+                            onClicked: adBlockPopup.opened ? adBlockPopup.close() : adBlockPopup.open()
+
+                            Connections {
+                                target: AdBlockManager
+                                function onBlockedCountChanged(changedHost) {
+                                    if (changedHost === adBlockButton.host)
+                                        adBlockButton.refresh()
+                                }
+                                function onAllowListChanged() { adBlockButton.refresh() }
+                            }
+                            Connections {
+                                target: Settings
+                                function onAdBlockAllowListChanged() { adBlockButton.refresh() }
+                            }
+
+                            Rectangle {
+                                visible: adBlockButton.count > 0
+                                anchors { right: parent.right; top: parent.top; rightMargin: 1; topMargin: 1 }
+                                width: Math.max(height, badge.implicitWidth + 6)
+                                height: 13
+                                radius: height / 2
+                                color: Kirigami.Theme.negativeBackgroundColor
+                                Label {
+                                    id: badge
+                                    anchors.centerIn: parent
+                                    text: adBlockButton.count > 99 ? "99+" : adBlockButton.count
+                                    color: Kirigami.Theme.negativeTextColor
+                                    font.pixelSize: 9
+                                    font.bold: true
+                                }
+                            }
+                        }
+
+                        ToolButton {
                             id: zoomButton
                             readonly property real factor: tabs.currentTab ? tabs.currentTab.zoomFactor : 1.0
                             visible: Math.round(factor * 100) !== 100
@@ -771,6 +834,14 @@ ApplicationWindow {
                                     addressSuggestions.networkSuggestions = items
                             }
                         }
+                    }
+
+                    AdBlockPopup {
+                        id: adBlockPopup
+                        tab: tabs.currentTab
+                        host: adBlockButton.host
+                        x: addressBar.width - width
+                        y: addressBar.height
                     }
 
                     SiteInfoPopup {

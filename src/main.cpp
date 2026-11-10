@@ -14,6 +14,7 @@
 #include <QTranslator>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
+#include "adblock/adblockmanager.h"
 #include "faviconstore.h"
 #include "settings.h"
 #include "singleinstance.h"
@@ -183,6 +184,9 @@ int main(int argc, char *argv[])
     QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
     if (QQuickStyle::name() != QLatin1String("org.kde.desktop"))
         QQuickStyle::setStyle(QStringLiteral("Fusion"));
+
+    // Cached filter lists load in the background; stale ones are refreshed.
+    AdBlockManager::instance()->start();
 
     QQmlApplicationEngine engine;
     engine.addImageProvider(QStringLiteral("kondor-favicon"), new FaviconImageProvider);

@@ -8,8 +8,6 @@
 
 Kondor Browser opens modern websites with the same engine as Chrome, but it looks and behaves like any other Plasma app: Breeze controls, your icons and your color scheme, KDE dialogs and notifications, and the keyboard shortcuts you already know. Ads and trackers are blocked from the start, and private tabs leave nothing behind when you close them.
 
-> Personal, experimental project. **Not an official KDE project.**
-
 ![Kondor Browser screenshot](assets/screenshot.png)
 
 ## Highlights

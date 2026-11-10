@@ -151,7 +151,7 @@
     <message>
         <location filename="../qml/BookmarksWindow.qml" line="352"/>
         <location filename="../qml/BookmarksWindow.qml" line="717"/>
-        <location filename="../qml/BookmarksWindow.qml" line="727"/>
+        <location filename="../qml/BookmarksWindow.qml" line="734"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>新增資料夾</translation>
@@ -192,37 +192,47 @@
         <translation>移至</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="745"/>
+        <location filename="../qml/BookmarksWindow.qml" line="728"/>
+        <source>Name:</source>
+        <translation>名稱：</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="755"/>
         <source>Rename Folder</source>
         <translation>重新命名資料夾</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="745"/>
+        <location filename="../qml/BookmarksWindow.qml" line="755"/>
         <source>Rename Bookmark</source>
         <translation>重新命名書籤</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="771"/>
+        <location filename="../qml/BookmarksWindow.qml" line="770"/>
+        <source>New name:</source>
+        <translation>新名稱：</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete Folder</source>
         <translation>刪除資料夾</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="771"/>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete Bookmark</source>
         <translation>刪除書籤</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="773"/>
+        <location filename="../qml/BookmarksWindow.qml" line="800"/>
         <source>Delete this folder and everything in it?</source>
         <translation>刪除此資料夾及其中的所有內容？</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="774"/>
+        <location filename="../qml/BookmarksWindow.qml" line="801"/>
         <source>Delete this bookmark?</source>
         <translation>刪除此書籤？</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="795"/>
+        <location filename="../qml/BookmarksWindow.qml" line="822"/>
         <source>Import Bookmarks</source>
         <translation>匯入書籤</translation>
     </message>

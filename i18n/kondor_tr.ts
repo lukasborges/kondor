@@ -151,7 +151,7 @@
     <message>
         <location filename="../qml/BookmarksWindow.qml" line="352"/>
         <location filename="../qml/BookmarksWindow.qml" line="717"/>
-        <location filename="../qml/BookmarksWindow.qml" line="727"/>
+        <location filename="../qml/BookmarksWindow.qml" line="734"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>Yeni klasör</translation>
@@ -192,37 +192,47 @@
         <translation>Şuraya taşı</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="745"/>
+        <location filename="../qml/BookmarksWindow.qml" line="728"/>
+        <source>Name:</source>
+        <translation>Ad:</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="755"/>
         <source>Rename Folder</source>
         <translation>Klasörü yeniden adlandır</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="745"/>
+        <location filename="../qml/BookmarksWindow.qml" line="755"/>
         <source>Rename Bookmark</source>
         <translation>Yer imini yeniden adlandır</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="771"/>
+        <location filename="../qml/BookmarksWindow.qml" line="770"/>
+        <source>New name:</source>
+        <translation>Yeni ad:</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete Folder</source>
         <translation>Klasörü sil</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="771"/>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete Bookmark</source>
         <translation>Yer imini sil</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="773"/>
+        <location filename="../qml/BookmarksWindow.qml" line="800"/>
         <source>Delete this folder and everything in it?</source>
         <translation>Bu klasör ve içindeki her şey silinsin mi?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="774"/>
+        <location filename="../qml/BookmarksWindow.qml" line="801"/>
         <source>Delete this bookmark?</source>
         <translation>Bu yer imi silinsin mi?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="795"/>
+        <location filename="../qml/BookmarksWindow.qml" line="822"/>
         <source>Import Bookmarks</source>
         <translation>Yer imlerini içe aktar</translation>
     </message>

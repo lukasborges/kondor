@@ -66,7 +66,7 @@ On **Fedora** (the original development environment):
 ```bash
 sudo dnf install cmake gcc-c++ \
     qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel \
-    kf6-qqc2-desktop-style kf6-kirigami hunspell-en-US hunspell-pt
+    kf6-qqc2-desktop-style kf6-kirigami hunspell-en-US hunspell-pt-BR
 ```
 
 The Hunspell dictionaries (`/usr/share/hunspell`) are converted to Qt WebEngine's

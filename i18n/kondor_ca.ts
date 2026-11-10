@@ -805,7 +805,7 @@
     <message>
         <location filename="../qml/PageContextMenu.qml" line="50"/>
         <source>Inspect Element</source>
-        <translation>Inspecciona l'element</translation>
+        <translation>Inspecciona l&apos;element</translation>
     </message>
     <message>
         <location filename="../qml/PageContextMenu.qml" line="75"/>

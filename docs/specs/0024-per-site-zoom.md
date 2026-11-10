@@ -20,7 +20,7 @@ Zoom commands exist (`Tab::zoomIn/zoomOut/resetZoom` → `WebViewTab.qml` change
    - after each zoom command: `root.tab.setZoomFactor(webView.zoomFactor)` and, if not private, `ZoomManager.setZoomFor(hostOf(webView.url), factor)`.
    - on `onUrlChanged` when the host changes and on `LoadSucceededStatus`: apply `ZoomManager.zoomFor(host)` (private tabs: read saved zoom, never write).
    - all tabs of the same host update when one changes (connect to a `zoomChanged(host)` signal).
-5. **Address bar indicator**: a flat `ToolButton` inside the right side of `addressBar` with text `"110%"` (`Math.round(zoomFactor*100) + "%"`), visible only when ≠ 100%; click resets (Ctrl+0); tooltip "Redefinir zoom".
+5. **Address bar indicator**: a flat `ToolButton` inside the right side of `addressBar` with text `"110%"` (`Math.round(zoomFactor*100) + "%"`), visible only when ≠ 100%; click resets (Ctrl+0); tooltip "Reset Zoom (Ctrl+0)".
 6. Also support Ctrl + mouse wheel zoom (Qt WebEngine does it natively — make sure the resulting `zoomFactor` change is captured: listen to `onZoomFactorChanged` on the view rather than only after commands).
 
 ## Acceptance criteria
@@ -51,4 +51,7 @@ Visual target — match it (controls, Kirigami components, icon names, wording, 
 
 ## Decisions
 
-_None yet._ Answers to developer questions (`question` label) are recorded here as `| Question | Decision |` rows.
+| Question | Decision |
+| --- | --- |
+| Tooltip text: the spec said "Redefinir zoom" (Portuguese) | Use "Reset Zoom (Ctrl+0)" in English, as in the prototype; AGENTS.md requires English source strings with translations in `i18n/*.ts` (PR #81). |
+| Should private tabs re-apply the saved zoom after every load? | No. Private tabs read the saved zoom when the host changes but keep a zoom set inside the tab across loads; they never write it (PR #81). |

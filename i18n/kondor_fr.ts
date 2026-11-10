@@ -562,7 +562,7 @@
     <message>
         <location filename="../qml/Main.qml" line="21"/>
         <location filename="../qml/Main.qml" line="404"/>
-        <location filename="../qml/Main.qml" line="822"/>
+        <location filename="../qml/Main.qml" line="830"/>
         <source>New Tab</source>
         <translation>Nouvel onglet</translation>
     </message>
@@ -597,136 +597,136 @@
         <translation>Rechercher ou saisir une adresse</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="734"/>
+        <location filename="../qml/Main.qml" line="742"/>
         <source>Bookmark This Page</source>
         <translation>Marquer cette page</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="785"/>
+        <location filename="../qml/Main.qml" line="793"/>
         <source>Downloads</source>
         <translation>Téléchargements</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="814"/>
+        <location filename="../qml/Main.qml" line="822"/>
         <source>Menu</source>
         <translation>Menu</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="21"/>
-        <location filename="../qml/Main.qml" line="827"/>
+        <location filename="../qml/Main.qml" line="835"/>
         <source>New Private Tab</source>
         <translation>Nouvel onglet privé</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="701"/>
+        <location filename="../qml/Main.qml" line="709"/>
         <source>Not Secure</source>
         <translation>Non sécurisé</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="709"/>
+        <location filename="../qml/Main.qml" line="717"/>
         <source>Site Information</source>
         <translation>Informations sur le site</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="734"/>
+        <location filename="../qml/Main.qml" line="742"/>
         <source>Edit This Bookmark</source>
         <translation>Modifier ce marque-page</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="832"/>
+        <location filename="../qml/Main.qml" line="840"/>
         <source>Reopen Closed Tab</source>
         <translation>Rouvrir l&apos;onglet fermé</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="839"/>
+        <location filename="../qml/Main.qml" line="847"/>
         <source>Close Tab</source>
         <translation>Fermer l’onglet</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="845"/>
+        <location filename="../qml/Main.qml" line="853"/>
         <source>Find in Page…</source>
         <translation>Rechercher dans la page…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="852"/>
+        <location filename="../qml/Main.qml" line="860"/>
         <source>Zoom In</source>
         <translation>Zoom avant</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="861"/>
+        <location filename="../qml/Main.qml" line="869"/>
         <source>Zoom Out</source>
         <translation>Zoom arrière</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="870"/>
+        <location filename="../qml/Main.qml" line="878"/>
         <source>Actual Size</source>
         <translation>Taille réelle</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="880"/>
+        <location filename="../qml/Main.qml" line="888"/>
         <source>Bookmarks</source>
         <translation>Marque-pages</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="891"/>
+        <location filename="../qml/Main.qml" line="899"/>
         <source>History</source>
         <translation>Historique</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="896"/>
+        <location filename="../qml/Main.qml" line="904"/>
         <source>Site Permissions…</source>
         <translation>Autorisations des sites…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="903"/>
+        <location filename="../qml/Main.qml" line="911"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Configurer %1…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="910"/>
+        <location filename="../qml/Main.qml" line="918"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>À propos de %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="964"/>
+        <location filename="../qml/Main.qml" line="972"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Appuyez sur Échap pour quitter le plein écran</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="1034"/>
+        <location filename="../qml/Main.qml" line="1042"/>
         <source>Page bookmarked</source>
         <translation>Page ajoutée aux marque-pages</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="1034"/>
+        <location filename="../qml/Main.qml" line="1042"/>
         <source>Edit Bookmark</source>
         <translation>Modifier le marque-page</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="1042"/>
+        <location filename="../qml/Main.qml" line="1050"/>
         <source>Name:</source>
         <translation>Nom :</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="1048"/>
+        <location filename="../qml/Main.qml" line="1056"/>
         <source>Folder:</source>
         <translation>Dossier :</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="1058"/>
+        <location filename="../qml/Main.qml" line="1066"/>
         <source>Remove</source>
         <translation>Retirer</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="1066"/>
+        <location filename="../qml/Main.qml" line="1074"/>
         <source>Done</source>
         <translation>Terminé</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="1078"/>
+        <location filename="../qml/Main.qml" line="1086"/>
         <source>Save File</source>
         <translation>Enregistrer le fichier</translation>
     </message>

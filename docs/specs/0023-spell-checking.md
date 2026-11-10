@@ -9,7 +9,7 @@ Spell checking in editable fields with selectable languages and suggestions in t
 
 ## Context
 
-Off. `QQuickWebEngineProfile` has `spellCheckEnabled` and `spellCheckLanguages`. Qt WebEngine needs **`.bdic` dictionaries** in a `qtwebengine_dictionaries` directory (looked up in `QTWEBENGINE_DICTIONARIES_PATH`, then next to the executable, then in Qt's data dir). Fedora ships Hunspell dictionaries in `/usr/share/hunspell/*.dic|.aff` (packages `hunspell-en-US`, `hunspell-pt`, …) and the converter `/usr/lib64/qt6/libexec/qwebengine_convert_dict` (package `qt6-qtwebengine`).
+Off. `QQuickWebEngineProfile` has `spellCheckEnabled` and `spellCheckLanguages`. Qt WebEngine needs **`.bdic` dictionaries** in a `qtwebengine_dictionaries` directory (looked up in `QTWEBENGINE_DICTIONARIES_PATH`, then next to the executable, then in Qt's data dir). Fedora ships Hunspell dictionaries in `/usr/share/hunspell/*.dic|.aff` (packages `hunspell-en-US`, `hunspell-pt-BR`, …; `hunspell-pt` only has `pt_PT`/`pt_AO`) and the converter `/usr/lib64/qt6/libexec/qwebengine_convert_dict` (package `qt6-qtwebengine`).
 
 ## Design / behavior
 
@@ -17,7 +17,7 @@ Off. `QQuickWebEngineProfile` has `spellCheckEnabled` and `spellCheckLanguages`.
 2. **Runtime path** in `src/main.cpp` **before** `QtWebEngineQuick::initialize()`: if `QTWEBENGINE_DICTIONARIES_PATH` is not set, set it to the first existing of: `<appDir>/../share/kondor/qtwebengine_dictionaries` (installed / AppImage), `<appDir>/qtwebengine_dictionaries` (build dir).
 3. **Settings** (#3): `spellCheckEnabled` (default true), `spellCheckLanguages` (QStringList, default from `QLocale::system().name()` if available else `en_US`). The Settings page lists the available `.bdic` files (scan the directory) as checkboxes. Apply to the default profile and new private profiles (`setSpellCheckEnabled`, `setSpellCheckLanguages`).
 4. **Context menu** (#13): show `request.spellCheckerSuggestions` (max 5) at the top when `request.misspelledWord` is set; clicking calls `webView.replaceMisspelledWord(word)`. Optional "Add to Dictionary" is out of scope.
-5. **AppImage/CI**: add `hunspell-en-US hunspell-pt` to the dnf lists in `build.yml`/`release.yml`; the release step must copy `share/kondor/qtwebengine_dictionaries` (it is installed by `cmake --install`, check it lands in the AppDir).
+5. **AppImage/CI**: add `hunspell-en-US hunspell-pt-BR` to the dnf lists in `build.yml`/`release.yml` (and the README package list); the release step must copy `share/kondor/qtwebengine_dictionaries` (it is installed by `cmake --install`) and fail unless `en-US.bdic` and `pt-BR.bdic` are both in the AppDir.
 
 ## Acceptance criteria
 
@@ -48,4 +48,8 @@ Visual target — match it (controls, Kirigami components, icon names, wording, 
 
 ## Decisions
 
-_None yet._ Answers to developer questions (`question` label) are recorded here as `| Question | Decision |` rows.
+| Question | Decision |
+| --- | --- |
+| Which Fedora package provides `pt_BR.dic`? (review of PR #82) | `hunspell-pt-BR`. `hunspell-pt` only ships `pt_PT`/`pt_AO`, so with it CI and the AppImage built no Portuguese dictionary. Install `hunspell-en-US hunspell-pt-BR`, and make the release check test for both `.bdic` files. |
+| File names of the converted dictionaries (PR #82) | Hyphenated, as Chromium looks them up for `spellCheckLanguages`: `en-US.bdic`, `pt-BR.bdic`. `KONDOR_SPELLCHECK_LANGS` keeps the Hunspell names (`en_US;pt_BR`). Checked offscreen: both languages give suggestions. |
+| "Spell Check Languages" context submenu (in the prototype, not in the spec) | Keep it. It toggles the same `Settings.spellCheckLanguages` as the Settings page. |

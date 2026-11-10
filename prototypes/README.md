@@ -58,7 +58,7 @@ Tips when editing:
 | #23 Spell checking | `23-spellcheck.qml` |
 | #24 Per-site zoom | `24-site-zoom.qml` |
 | #43 New Tab page | `43-new-tab-page.qml`, `43b-new-private-tab-page.qml`, `03-settings.qml` ("Home Page", "New Tabs") |
-| — Target main menu | `00-main-menu.qml` (all menu entries added by the roadmap) |
+| #93 Main menu (target layout) | `00-main-menu.qml`, `93b-main-menu-history.qml`, `93c-main-menu-tools.qml`, `93d-main-menu-help.qml` (shared mock in `common/MainMenuMock.qml`; `common/SubmenuMock.qml` draws an open submenu) |
 
 Issues without UI (#10 default browser, #15 single instance, #19 translations, #25 Flatpak,
 #26 tests) have no prototype.

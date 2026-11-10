@@ -526,178 +526,184 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../qml/Main.qml" line="47"/>
+        <location filename="../qml/Main.qml" line="78"/>
         <source>Quit %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>結束 %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="48"/>
+        <location filename="../qml/Main.qml" line="79"/>
         <source>Downloads are still in progress. Quit anyway?</source>
         <translation>仍有下載正在進行。仍要結束嗎？</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="371"/>
-        <location filename="../qml/Main.qml" line="689"/>
+        <location filename="../qml/Main.qml" line="21"/>
+        <location filename="../qml/Main.qml" line="404"/>
+        <location filename="../qml/Main.qml" line="722"/>
         <source>New Tab</source>
         <translation>新增分頁</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="430"/>
+        <location filename="../qml/Main.qml" line="463"/>
         <source>Back</source>
         <translation>上一頁</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="443"/>
+        <location filename="../qml/Main.qml" line="476"/>
         <source>Forward</source>
         <translation>下一頁</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="456"/>
+        <location filename="../qml/Main.qml" line="489"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="456"/>
+        <location filename="../qml/Main.qml" line="489"/>
         <source>Reload</source>
         <translation>重新載入</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="472"/>
+        <location filename="../qml/Main.qml" line="505"/>
         <source>Home</source>
         <translation>首頁</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="489"/>
+        <location filename="../qml/Main.qml" line="522"/>
         <source>Search or enter address</source>
         <translation>搜尋或輸入地址</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="613"/>
+        <location filename="../qml/Main.qml" line="646"/>
         <source>Bookmark This Page</source>
         <translation>將此頁加入書籤</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="652"/>
+        <location filename="../qml/Main.qml" line="685"/>
         <source>Downloads</source>
         <translation>下載</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="681"/>
+        <location filename="../qml/Main.qml" line="714"/>
         <source>Menu</source>
         <translation>選單</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="694"/>
+        <location filename="../qml/Main.qml" line="21"/>
+        <location filename="../qml/Main.qml" line="727"/>
         <source>New Private Tab</source>
         <translation>新增隱私分頁</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="580"/>
+        <location filename="../qml/Main.qml" line="613"/>
         <source>Not Secure</source>
         <translation>不安全</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="588"/>
+        <location filename="../qml/Main.qml" line="621"/>
         <source>Site Information</source>
         <translation>網站資訊</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="613"/>
+        <location filename="../qml/Main.qml" line="646"/>
         <source>Edit This Bookmark</source>
         <translation>編輯此書籤</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="699"/>
+        <location filename="../qml/Main.qml" line="732"/>
         <source>Reopen Closed Tab</source>
         <translation>重新開啟已關閉的分頁</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="706"/>
+        <location filename="../qml/Main.qml" line="739"/>
         <source>Close Tab</source>
         <translation>關閉分頁</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="712"/>
+        <location filename="../qml/Main.qml" line="745"/>
         <source>Find in Page…</source>
         <translation>在頁面中尋找…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="719"/>
+        <location filename="../qml/Main.qml" line="752"/>
         <source>Zoom In</source>
         <translation>放大</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="728"/>
+        <location filename="../qml/Main.qml" line="761"/>
         <source>Zoom Out</source>
         <translation>縮小</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="737"/>
+        <location filename="../qml/Main.qml" line="770"/>
         <source>Actual Size</source>
         <translation>實際大小</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="747"/>
+        <location filename="../qml/Main.qml" line="780"/>
         <source>Bookmarks</source>
         <translation>書籤</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="758"/>
+        <location filename="../qml/Main.qml" line="791"/>
         <source>History</source>
         <translation>歷史記錄</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="763"/>
+        <location filename="../qml/Main.qml" line="796"/>
         <source>Site Permissions…</source>
         <translation>網站權限…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="770"/>
+        <location filename="../qml/Main.qml" line="803"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>設定 %1…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="777"/>
+        <location filename="../qml/Main.qml" line="810"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>關於 %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="893"/>
+        <location filename="../qml/Main.qml" line="864"/>
+        <source>Press Esc to exit full screen</source>
+        <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
+        <translation>按 Esc 鍵結束全螢幕</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="934"/>
         <source>Page bookmarked</source>
         <translation>頁面已加入書籤</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="893"/>
+        <location filename="../qml/Main.qml" line="934"/>
         <source>Edit Bookmark</source>
         <translation>編輯書籤</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="901"/>
+        <location filename="../qml/Main.qml" line="942"/>
         <source>Name:</source>
         <translation>名稱：</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="907"/>
+        <location filename="../qml/Main.qml" line="948"/>
         <source>Folder:</source>
         <translation>資料夾：</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="917"/>
+        <location filename="../qml/Main.qml" line="958"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="925"/>
+        <location filename="../qml/Main.qml" line="966"/>
         <source>Done</source>
         <translation>完成</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="937"/>
+        <location filename="../qml/Main.qml" line="978"/>
         <source>Save File</source>
         <translation>儲存檔案</translation>
     </message>

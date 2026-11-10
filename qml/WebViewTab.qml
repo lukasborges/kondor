@@ -57,6 +57,14 @@ Item {
             root.tab.setFindResult(result.numberOfMatches, result.activeMatch)
         }
 
+        // The page asked for full screen (a video player). Accept it and let
+        // the window follow the tab; the player's button or Esc asks the page
+        // to leave it, which arrives here again with toggleOn false.
+        onFullScreenRequested: function(request) {
+            request.accept()
+            root.tab.setFullScreen(request.toggleOn)
+        }
+
         // The page asked for a site permission (camera, microphone, location,
         // notifications, ...). The prompt belongs to this tab and is answered
         // through the Tab object, so switching tabs keeps it with the page.
@@ -177,6 +185,16 @@ Item {
         }
         function onStopFindRequested() { webView.findText("") }
         function onFocusPageRequested() { webView.forceActiveFocus() }
+        function onExitFullScreenRequested() {
+            webView.triggerWebAction(WebEngineView.ExitFullScreen)
+        }
+    }
+
+    // Leaving the tab (switching or closing) ends its page's full screen, so
+    // the window can go back to normal instead of staying full screen.
+    onVisibleChanged: {
+        if (!visible && root.tab.isFullScreen)
+            root.tab.exitFullScreen()
     }
 
     Component.onCompleted: {

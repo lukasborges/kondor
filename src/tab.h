@@ -27,6 +27,7 @@ class Tab : public QObject
     Q_PROPERTY(int findMatches READ findMatches NOTIFY findResultChanged)
     Q_PROPERTY(int findActiveMatch READ findActiveMatch NOTIFY findResultChanged)
     Q_PROPERTY(bool newTabPage READ newTabPage NOTIFY newTabPageChanged)
+    Q_PROPERTY(bool isFullScreen READ isFullScreen NOTIFY fullScreenChanged)
     Q_PROPERTY(QVariant pendingPermission READ pendingPermission NOTIFY pendingPermissionChanged)
     Q_PROPERTY(QString securityState READ securityState NOTIFY securityStateChanged)
     Q_PROPERTY(bool certificateErrorPending READ certificateErrorPending NOTIFY certificateErrorChanged)
@@ -50,6 +51,7 @@ public:
     int findMatches() const { return m_findMatches; }
     int findActiveMatch() const { return m_findActiveMatch; }
     bool newTabPage() const { return m_newTabPage; }
+    bool isFullScreen() const { return m_isFullScreen; }
     QVariant pendingPermission() const;
     QString securityState() const { return m_securityState; }
     bool certificateErrorPending() const { return m_certificateErrorPending; }
@@ -66,6 +68,7 @@ public:
     Q_INVOKABLE void setCanGoBack(bool canGoBack);
     Q_INVOKABLE void setCanGoForward(bool canGoForward);
     Q_INVOKABLE void setFindResult(int matches, int activeMatch);
+    Q_INVOKABLE void setFullScreen(bool fullScreen);
     Q_INVOKABLE void setPendingCertificateError(const QUrl &url, const QString &description,
                                                 bool overridable);
     void setPinned(bool pinned);
@@ -83,6 +86,7 @@ public:
     Q_INVOKABLE void find(const QString &text, bool backward, bool caseSensitive);
     Q_INVOKABLE void stopFind();
     Q_INVOKABLE void focusPage();
+    Q_INVOKABLE void exitFullScreen();
     Q_INVOKABLE void acceptCertificateError();
     Q_INVOKABLE void rejectCertificateError();
 
@@ -103,6 +107,7 @@ signals:
     void findResultChanged();
     void pinnedChanged();
     void newTabPageChanged();
+    void fullScreenChanged();
     void pendingPermissionChanged();
     void securityStateChanged();
     void certificateErrorChanged();
@@ -119,6 +124,7 @@ signals:
     void findRequested(const QString &text, bool backward, bool caseSensitive);
     void stopFindRequested();
     void focusPageRequested();
+    void exitFullScreenRequested();
     void acceptCertificateErrorRequested();
     void rejectCertificateErrorRequested();
 
@@ -143,6 +149,8 @@ private:
     int m_findActiveMatch = 0;
     // A tab without a real URL starts on the New Tab page.
     bool m_newTabPage = true;
+    // Set by the page's full screen request (a video); the window follows it.
+    bool m_isFullScreen = false;
     QList<QWebEnginePermission> m_pendingPermissions;
 
     // "secure" (https), "insecure" (http), "error" (certificate warning on

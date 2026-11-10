@@ -526,178 +526,184 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../qml/Main.qml" line="47"/>
+        <location filename="../qml/Main.qml" line="78"/>
         <source>Quit %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 종료</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="48"/>
+        <location filename="../qml/Main.qml" line="79"/>
         <source>Downloads are still in progress. Quit anyway?</source>
         <translation>다운로드가 아직 진행 중입니다. 그래도 종료하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="371"/>
-        <location filename="../qml/Main.qml" line="689"/>
+        <location filename="../qml/Main.qml" line="21"/>
+        <location filename="../qml/Main.qml" line="404"/>
+        <location filename="../qml/Main.qml" line="722"/>
         <source>New Tab</source>
         <translation>새 탭</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="430"/>
+        <location filename="../qml/Main.qml" line="463"/>
         <source>Back</source>
         <translation>뒤로</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="443"/>
+        <location filename="../qml/Main.qml" line="476"/>
         <source>Forward</source>
         <translation>앞으로</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="456"/>
+        <location filename="../qml/Main.qml" line="489"/>
         <source>Stop</source>
         <translation>중지</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="456"/>
+        <location filename="../qml/Main.qml" line="489"/>
         <source>Reload</source>
         <translation>새로고침</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="472"/>
+        <location filename="../qml/Main.qml" line="505"/>
         <source>Home</source>
         <translation>홈</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="489"/>
+        <location filename="../qml/Main.qml" line="522"/>
         <source>Search or enter address</source>
         <translation>검색어 또는 주소 입력</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="613"/>
+        <location filename="../qml/Main.qml" line="646"/>
         <source>Bookmark This Page</source>
         <translation>이 페이지 북마크</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="652"/>
+        <location filename="../qml/Main.qml" line="685"/>
         <source>Downloads</source>
         <translation>다운로드</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="681"/>
+        <location filename="../qml/Main.qml" line="714"/>
         <source>Menu</source>
         <translation>메뉴</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="694"/>
+        <location filename="../qml/Main.qml" line="21"/>
+        <location filename="../qml/Main.qml" line="727"/>
         <source>New Private Tab</source>
         <translation>새 비공개 탭</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="580"/>
+        <location filename="../qml/Main.qml" line="613"/>
         <source>Not Secure</source>
         <translation>안전하지 않음</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="588"/>
+        <location filename="../qml/Main.qml" line="621"/>
         <source>Site Information</source>
         <translation>사이트 정보</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="613"/>
+        <location filename="../qml/Main.qml" line="646"/>
         <source>Edit This Bookmark</source>
         <translation>이 북마크 편집</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="699"/>
+        <location filename="../qml/Main.qml" line="732"/>
         <source>Reopen Closed Tab</source>
         <translation>닫은 탭 다시 열기</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="706"/>
+        <location filename="../qml/Main.qml" line="739"/>
         <source>Close Tab</source>
         <translation>탭 닫기</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="712"/>
+        <location filename="../qml/Main.qml" line="745"/>
         <source>Find in Page…</source>
         <translation>페이지에서 찾기…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="719"/>
+        <location filename="../qml/Main.qml" line="752"/>
         <source>Zoom In</source>
         <translation>확대</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="728"/>
+        <location filename="../qml/Main.qml" line="761"/>
         <source>Zoom Out</source>
         <translation>축소</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="737"/>
+        <location filename="../qml/Main.qml" line="770"/>
         <source>Actual Size</source>
         <translation>실제 크기</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="747"/>
+        <location filename="../qml/Main.qml" line="780"/>
         <source>Bookmarks</source>
         <translation>북마크</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="758"/>
+        <location filename="../qml/Main.qml" line="791"/>
         <source>History</source>
         <translation>기록</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="763"/>
+        <location filename="../qml/Main.qml" line="796"/>
         <source>Site Permissions…</source>
         <translation>사이트 권한…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="770"/>
+        <location filename="../qml/Main.qml" line="803"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 설정…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="777"/>
+        <location filename="../qml/Main.qml" line="810"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 정보</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="893"/>
+        <location filename="../qml/Main.qml" line="864"/>
+        <source>Press Esc to exit full screen</source>
+        <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
+        <translation>전체 화면을 종료하려면 Esc 키를 누르십시오</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="934"/>
         <source>Page bookmarked</source>
         <translation>페이지를 북마크에 추가함</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="893"/>
+        <location filename="../qml/Main.qml" line="934"/>
         <source>Edit Bookmark</source>
         <translation>북마크 편집</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="901"/>
+        <location filename="../qml/Main.qml" line="942"/>
         <source>Name:</source>
         <translation>이름:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="907"/>
+        <location filename="../qml/Main.qml" line="948"/>
         <source>Folder:</source>
         <translation>폴더:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="917"/>
+        <location filename="../qml/Main.qml" line="958"/>
         <source>Remove</source>
         <translation>제거</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="925"/>
+        <location filename="../qml/Main.qml" line="966"/>
         <source>Done</source>
         <translation>완료</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="937"/>
+        <location filename="../qml/Main.qml" line="978"/>
         <source>Save File</source>
         <translation>파일 저장</translation>
     </message>

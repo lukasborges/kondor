@@ -187,6 +187,23 @@ void Tab::setPinned(bool pinned)
     emit pinnedChanged();
 }
 
+void Tab::setFullScreen(bool fullScreen)
+{
+    if (m_isFullScreen == fullScreen)
+        return;
+    m_isFullScreen = fullScreen;
+    emit fullScreenChanged();
+}
+
+void Tab::exitFullScreen()
+{
+    // Only a page in full screen has something to exit; the page confirms by
+    // sending a new full screen request with toggleOn false.
+    if (!m_isFullScreen)
+        return;
+    emit exitFullScreenRequested();
+}
+
 void Tab::setNewTabPage(bool newTabPage)
 {
     if (m_newTabPage == newTabPage)

@@ -38,6 +38,7 @@ qt_add_qml_module(kondor
         qml/InlineBar.qml
         qml/FindBar.qml
         qml/PermissionBar.qml
+        qml/FullScreenHint.qml
         qml/PermissionTypeInfo.qml
         qml/SitePermissionsDialog.qml
         qml/SiteInfoPopup.qml

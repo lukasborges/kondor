@@ -12,7 +12,7 @@ A native **Qt 6** browser (Qt Quick + Qt WebEngine) with the **KDE/Breeze** look
 
 ## Status
 
-A working prototype with the core functionality in place: it actually browses, with tabs, a private mode, browsing history, bookmarks, a settings window and keyboard shortcuts.
+A working prototype with the core functionality in place: it actually browses, with tabs, a private mode, browsing history, bookmarks, settings and About windows and keyboard shortcuts.
 
 ## Features
 
@@ -27,6 +27,7 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
 - **Bookmarks**: star button in the address bar (Ctrl+D) with a name/folder editor, a bookmarks toolbar (Ctrl+Shift+B), a Bookmarks menu, and a manager window (Ctrl+Shift+O) with folders, rename, delete, reordering, drag and drop between folders, a "Move To" menu and import of Firefox/Chrome HTML exports
 - **Settings** (Ctrl+,): home page (blank means the New Tab page), New Tab page options (top sites), search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit), applied immediately and stored in `~/.config/KDE/Kondor.conf`
+- **About window** (Menu → About Kondor Browser): app, Qt and Chromium versions, components and authors, with a viewer for the license text; links open in a new normal tab
 - **Session restore**: optionally reopen the tabs from the previous session on startup (settings → On Startup); private tabs are never saved. Ctrl+Shift+T reopens the last closed normal tabs, up to 20
 - **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
 - **Download manager**: downloads show live progress, speed and size in a toolbar popup; pause, resume, cancel, open the file or show it in its folder, desktop notification on completion/failure, optional "ask where to save", and a confirmation before quitting with active downloads
@@ -38,7 +39,7 @@ A working prototype with the core functionality in place: it actually browses, w
 
 ## Stack
 
-- **Qt 6.5+** (tested with **6.11.2**): `Core`, `DBus`, `Gui`, `LinguistTools`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebEngineQuick`, `Widgets`
+- **Qt 6.5+** (tested with **6.11.2**): `Core`, `DBus`, `Gui`, `LinguistTools`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebEngineCore`, `WebEngineQuick`, `Widgets`
 - **Qt Quick Controls 2** with the **`org.kde.desktop`** (Breeze) style
 - **Kirigami** for theming (`Kirigami.Theme`)
 - **C++17** + **CMake 3.21+**
@@ -114,6 +115,7 @@ src/
   faviconstore.*      QML singleton: one favicon per host (table `favicons`), filled by normal tabs only
   downloadmanager.*   QML singleton: downloads list model, actions and notifications
   notifier.*          QML singleton: desktop notifications over D-Bus
+  aboutinfo.*         QML singleton: read-only version and license data for the About window
 qml/
   Main.qml            window, tab bar, navigation bar, menu, shortcuts
   WebViewTab.qml      WebEngineView + bridge to the Tab object
@@ -125,6 +127,7 @@ qml/
   DownloadsPopup.qml  download list popup with progress and actions
   HistoryWindow.qml   browsing history window (search, grouped by day, clear)
   SettingsWindow.qml  settings window (home page, new tabs, search, downloads, privacy)
+  AboutWindow.qml     About Kondor Browser window with components, authors and license
   BookmarksBar.qml    bookmarks toolbar under the navigation bar
   BookmarkMenu.qml    folder menu (bar folders and the main menu submenu)
   BookmarksWindow.qml bookmark manager window (folders, reorder, drag and drop, import)

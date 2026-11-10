@@ -2,6 +2,101 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ko" sourcelanguage="en">
 <context>
+    <name>AboutWindow</name>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="17"/>
+        <source>About %1</source>
+        <extracomment>%1 is the application name</extracomment>
+        <translation>%1 정보</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="73"/>
+        <source>Version %1</source>
+        <translation>버전 %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="90"/>
+        <source>About</source>
+        <translation>정보</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="94"/>
+        <source>Components</source>
+        <translation>구성 요소</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="98"/>
+        <source>Authors</source>
+        <translation>작성자</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="116"/>
+        <source>Web Browser</source>
+        <translation>웹 브라우저</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="119"/>
+        <source>© 2026 The Kondor Developers</source>
+        <translation>© 2026 Kondor 개발자</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="134"/>
+        <source>License: GNU General Public License Version 3</source>
+        <translation>라이선스: GNU General Public License Version 3</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="159"/>
+        <source>Using %1 (built against %2)</source>
+        <translation>%1 사용 중(%2로 빌드됨)</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="167"/>
+        <source>Chromium %1</source>
+        <translation>Chromium %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="173"/>
+        <source>KDE user interface framework, used for the Breeze look</source>
+        <translation>KDE 사용자 인터페이스 프레임워크, Breeze 모양에 사용됨</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="177"/>
+        <source>Windowing System</source>
+        <translation>창 시스템</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="183"/>
+        <source>Operating System</source>
+        <translation>운영 체제</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="229"/>
+        <source>Please use %1 to report bugs.</source>
+        <translation>버그를 보고하려면 %1을(를) 사용하십시오.</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="240"/>
+        <source>Maintainer</source>
+        <translation>관리자</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="266"/>
+        <source>Visit Author&apos;s Homepage</source>
+        <translation>작성자 홈페이지 방문</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="285"/>
+        <location filename="../qml/AboutWindow.qml" line="329"/>
+        <source>Close</source>
+        <translation>닫기</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="298"/>
+        <source>License Agreement</source>
+        <translation>라이선스 동의</translation>
+    </message>
+</context>
+<context>
     <name>AddressSuggestions</name>
     <message>
         <location filename="../qml/AddressSuggestions.qml" line="35"/>
@@ -377,151 +472,151 @@
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="347"/>
-        <location filename="../qml/Main.qml" line="627"/>
+        <location filename="../qml/Main.qml" line="353"/>
+        <location filename="../qml/Main.qml" line="633"/>
         <source>New Tab</source>
         <translation>새 탭</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="406"/>
+        <location filename="../qml/Main.qml" line="412"/>
         <source>Back</source>
         <translation>뒤로</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="419"/>
+        <location filename="../qml/Main.qml" line="425"/>
         <source>Forward</source>
         <translation>앞으로</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="432"/>
+        <location filename="../qml/Main.qml" line="438"/>
         <source>Stop</source>
         <translation>중지</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="432"/>
+        <location filename="../qml/Main.qml" line="438"/>
         <source>Reload</source>
         <translation>새로고침</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="448"/>
+        <location filename="../qml/Main.qml" line="454"/>
         <source>Home</source>
         <translation>홈</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="465"/>
+        <location filename="../qml/Main.qml" line="471"/>
         <source>Search or enter address</source>
         <translation>검색어 또는 주소 입력</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="558"/>
+        <location filename="../qml/Main.qml" line="564"/>
         <source>Bookmark This Page</source>
         <translation>이 페이지 북마크</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="590"/>
+        <location filename="../qml/Main.qml" line="596"/>
         <source>Downloads</source>
         <translation>다운로드</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="619"/>
+        <location filename="../qml/Main.qml" line="625"/>
         <source>Menu</source>
         <translation>메뉴</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="632"/>
+        <location filename="../qml/Main.qml" line="638"/>
         <source>New Private Tab</source>
         <translation>새 비공개 탭</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="558"/>
+        <location filename="../qml/Main.qml" line="564"/>
         <source>Edit This Bookmark</source>
         <translation>이 북마크 편집</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="637"/>
+        <location filename="../qml/Main.qml" line="643"/>
         <source>Reopen Closed Tab</source>
         <translation>닫은 탭 다시 열기</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="644"/>
+        <location filename="../qml/Main.qml" line="650"/>
         <source>Close Tab</source>
         <translation>탭 닫기</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="650"/>
+        <location filename="../qml/Main.qml" line="656"/>
         <source>Find in Page…</source>
         <translation>페이지에서 찾기…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="657"/>
+        <location filename="../qml/Main.qml" line="663"/>
         <source>Zoom In</source>
         <translation>확대</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="666"/>
+        <location filename="../qml/Main.qml" line="672"/>
         <source>Zoom Out</source>
         <translation>축소</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="675"/>
+        <location filename="../qml/Main.qml" line="681"/>
         <source>Actual Size</source>
         <translation>실제 크기</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="685"/>
+        <location filename="../qml/Main.qml" line="691"/>
         <source>Bookmarks</source>
         <translation>북마크</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="696"/>
+        <location filename="../qml/Main.qml" line="702"/>
         <source>History</source>
         <translation>기록</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="703"/>
+        <location filename="../qml/Main.qml" line="709"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 설정…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="710"/>
+        <location filename="../qml/Main.qml" line="716"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 정보</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="800"/>
+        <location filename="../qml/Main.qml" line="818"/>
         <source>Page bookmarked</source>
         <translation>페이지를 북마크에 추가함</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="800"/>
+        <location filename="../qml/Main.qml" line="818"/>
         <source>Edit Bookmark</source>
         <translation>북마크 편집</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="808"/>
+        <location filename="../qml/Main.qml" line="826"/>
         <source>Name:</source>
         <translation>이름:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="814"/>
+        <location filename="../qml/Main.qml" line="832"/>
         <source>Folder:</source>
         <translation>폴더:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="824"/>
+        <location filename="../qml/Main.qml" line="842"/>
         <source>Remove</source>
         <translation>제거</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="832"/>
+        <location filename="../qml/Main.qml" line="850"/>
         <source>Done</source>
         <translation>완료</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="844"/>
+        <location filename="../qml/Main.qml" line="862"/>
         <source>Save File</source>
         <translation>파일 저장</translation>
     </message>

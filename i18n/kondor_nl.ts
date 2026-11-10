@@ -2,6 +2,101 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="nl" sourcelanguage="en">
 <context>
+    <name>AboutWindow</name>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="17"/>
+        <source>About %1</source>
+        <extracomment>%1 is the application name</extracomment>
+        <translation>Over %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="73"/>
+        <source>Version %1</source>
+        <translation>Versie %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="90"/>
+        <source>About</source>
+        <translation>Over</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="94"/>
+        <source>Components</source>
+        <translation>Componenten</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="98"/>
+        <source>Authors</source>
+        <translation>Auteurs</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="116"/>
+        <source>Web Browser</source>
+        <translation>Webbrowser</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="119"/>
+        <source>© 2026 The Kondor Developers</source>
+        <translation>© 2026 De Kondor-ontwikkelaars</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="134"/>
+        <source>License: GNU General Public License Version 3</source>
+        <translation>Licentie: GNU General Public License Version 3</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="159"/>
+        <source>Using %1 (built against %2)</source>
+        <translation>Gebruikt %1 (gebouwd tegen %2)</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="167"/>
+        <source>Chromium %1</source>
+        <translation>Chromium %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="173"/>
+        <source>KDE user interface framework, used for the Breeze look</source>
+        <translation>KDE-framework voor de gebruikersinterface, gebruikt voor de Breeze-weergave</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="177"/>
+        <source>Windowing System</source>
+        <translation>Venstersysteem</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="183"/>
+        <source>Operating System</source>
+        <translation>Besturingssysteem</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="229"/>
+        <source>Please use %1 to report bugs.</source>
+        <translation>Gebruik %1 om fouten te melden.</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="240"/>
+        <source>Maintainer</source>
+        <translation>Onderhouder</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="266"/>
+        <source>Visit Author&apos;s Homepage</source>
+        <translation>Startpagina van de auteur bezoeken</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="285"/>
+        <location filename="../qml/AboutWindow.qml" line="329"/>
+        <source>Close</source>
+        <translation>Sluiten</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutWindow.qml" line="298"/>
+        <source>License Agreement</source>
+        <translation>Licentieovereenkomst</translation>
+    </message>
+</context>
+<context>
     <name>AddressSuggestions</name>
     <message>
         <location filename="../qml/AddressSuggestions.qml" line="35"/>
@@ -377,151 +472,151 @@
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="347"/>
-        <location filename="../qml/Main.qml" line="627"/>
+        <location filename="../qml/Main.qml" line="353"/>
+        <location filename="../qml/Main.qml" line="633"/>
         <source>New Tab</source>
         <translation>Nieuw tabblad</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="406"/>
+        <location filename="../qml/Main.qml" line="412"/>
         <source>Back</source>
         <translation>Terug</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="419"/>
+        <location filename="../qml/Main.qml" line="425"/>
         <source>Forward</source>
         <translation>Vooruit</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="432"/>
+        <location filename="../qml/Main.qml" line="438"/>
         <source>Stop</source>
         <translation>Stoppen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="432"/>
+        <location filename="../qml/Main.qml" line="438"/>
         <source>Reload</source>
         <translation>Herladen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="448"/>
+        <location filename="../qml/Main.qml" line="454"/>
         <source>Home</source>
         <translation>Startpagina</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="465"/>
+        <location filename="../qml/Main.qml" line="471"/>
         <source>Search or enter address</source>
         <translation>Zoeken of een adres invoeren</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="558"/>
+        <location filename="../qml/Main.qml" line="564"/>
         <source>Bookmark This Page</source>
         <translation>Deze pagina als bladwijzer opslaan</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="590"/>
+        <location filename="../qml/Main.qml" line="596"/>
         <source>Downloads</source>
         <translation>Downloads</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="619"/>
+        <location filename="../qml/Main.qml" line="625"/>
         <source>Menu</source>
         <translation>Menu</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="632"/>
+        <location filename="../qml/Main.qml" line="638"/>
         <source>New Private Tab</source>
         <translation>Nieuw privétabblad</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="558"/>
+        <location filename="../qml/Main.qml" line="564"/>
         <source>Edit This Bookmark</source>
         <translation>Deze bladwijzer bewerken</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="637"/>
+        <location filename="../qml/Main.qml" line="643"/>
         <source>Reopen Closed Tab</source>
         <translation>Gesloten tabblad opnieuw openen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="644"/>
+        <location filename="../qml/Main.qml" line="650"/>
         <source>Close Tab</source>
         <translation>Tabblad sluiten</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="650"/>
+        <location filename="../qml/Main.qml" line="656"/>
         <source>Find in Page…</source>
         <translation>Op pagina zoeken…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="657"/>
+        <location filename="../qml/Main.qml" line="663"/>
         <source>Zoom In</source>
         <translation>Inzoomen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="666"/>
+        <location filename="../qml/Main.qml" line="672"/>
         <source>Zoom Out</source>
         <translation>Uitzoomen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="675"/>
+        <location filename="../qml/Main.qml" line="681"/>
         <source>Actual Size</source>
         <translation>Werkelijke grootte</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="685"/>
+        <location filename="../qml/Main.qml" line="691"/>
         <source>Bookmarks</source>
         <translation>Bladwijzers</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="696"/>
+        <location filename="../qml/Main.qml" line="702"/>
         <source>History</source>
         <translation>Geschiedenis</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="703"/>
+        <location filename="../qml/Main.qml" line="709"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 instellen…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="710"/>
+        <location filename="../qml/Main.qml" line="716"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Over %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="800"/>
+        <location filename="../qml/Main.qml" line="818"/>
         <source>Page bookmarked</source>
         <translation>Pagina als bladwijzer opgeslagen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="800"/>
+        <location filename="../qml/Main.qml" line="818"/>
         <source>Edit Bookmark</source>
         <translation>Bladwijzer bewerken</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="808"/>
+        <location filename="../qml/Main.qml" line="826"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="814"/>
+        <location filename="../qml/Main.qml" line="832"/>
         <source>Folder:</source>
         <translation>Map:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="824"/>
+        <location filename="../qml/Main.qml" line="842"/>
         <source>Remove</source>
         <translation>Verwijderen</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="832"/>
+        <location filename="../qml/Main.qml" line="850"/>
         <source>Done</source>
         <translation>Gereed</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="844"/>
+        <location filename="../qml/Main.qml" line="862"/>
         <source>Save File</source>
         <translation>Bestand opslaan</translation>
     </message>

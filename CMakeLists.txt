@@ -13,6 +13,7 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
     Quick
     QuickControls2
     Sql
+    WebEngineCore
     WebEngineQuick
     Widgets
 )
@@ -44,7 +45,10 @@ qt_add_qml_module(kondor
         qml/BookmarksWindow.qml
         qml/SiteIcon.qml
         qml/AddressSuggestions.qml
+        qml/AboutWindow.qml
     SOURCES
+        src/aboutinfo.h
+        src/aboutinfo.cpp
         src/addressresolver.h
         src/addressresolver.cpp
         src/tab.h
@@ -109,6 +113,12 @@ qt_add_resources(kondor "app_icon"
         packaging/kondor.svg
 )
 
+qt_add_resources(kondor "license"
+    PREFIX "/"
+    FILES
+        LICENSE
+)
+
 target_compile_definitions(kondor PRIVATE
     PROJECT_VERSION="${PROJECT_VERSION}"
 )
@@ -125,6 +135,7 @@ target_link_libraries(kondor PRIVATE
     Qt6::Quick
     Qt6::QuickControls2
     Qt6::Sql
+    Qt6::WebEngineCore
     Qt6::WebEngineQuick
     Qt6::Widgets
 )

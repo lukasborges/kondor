@@ -159,6 +159,12 @@ ApplicationWindow {
         settingsWindow.showWindow()
     }
 
+    function openAbout() {
+        if (!aboutWindow)
+            aboutWindow = aboutWindowComponent.createObject(window)
+        aboutWindow.showWindow()
+    }
+
     function openBookmarks() {
         if (!bookmarksWindow)
             bookmarksWindow = bookmarksWindowComponent.createObject(window)
@@ -709,6 +715,7 @@ ApplicationWindow {
                             //: %1 is the application name
                             text: qsTr("About %1").arg(Qt.application.displayName)
                             icon.name: "help-about"
+                            onTriggered: window.openAbout()
                         }
                     }
                 }
@@ -767,6 +774,17 @@ ApplicationWindow {
         id: settingsWindowComponent
         SettingsWindow {
             tabModel: tabs
+        }
+    }
+
+    // ── About window (created on demand) ────────────────────────────────
+    property var aboutWindow: null
+
+    Component {
+        id: aboutWindowComponent
+        AboutWindow {
+            tabModel: tabs
+            mainWindow: window
         }
     }
 

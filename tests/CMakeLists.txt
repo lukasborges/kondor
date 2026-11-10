@@ -137,3 +137,35 @@ target_link_libraries(tst_faviconstore PRIVATE
 )
 
 add_test(NAME tst_faviconstore COMMAND tst_faviconstore)
+
+qt_add_executable(tst_aboutinfo
+    tst_aboutinfo.cpp
+    ../src/aboutinfo.cpp
+)
+
+qt_add_resources(tst_aboutinfo "license"
+    PREFIX "/"
+    FILES
+        ../LICENSE
+)
+
+target_compile_definitions(tst_aboutinfo PRIVATE
+    PROJECT_VERSION="${PROJECT_VERSION}"
+)
+
+target_include_directories(tst_aboutinfo PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_aboutinfo PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Test
+    Qt6::WebEngineCore
+)
+
+add_test(NAME tst_aboutinfo COMMAND tst_aboutinfo)
+set_tests_properties(tst_aboutinfo PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
+)

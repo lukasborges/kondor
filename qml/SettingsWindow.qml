@@ -58,7 +58,8 @@ ApplicationWindow {
             icon: "preferences-security",
             keywords: [qsTr("Cookies:"), qsTr("On exit:"),
                        qsTr("Clear cookies, cache and history"),
-                       qsTr("Browsing data:"), qsTr("Clear Cookies and Cache Now")],
+                       qsTr("Browsing data:"), qsTr("Clear Cookies and Cache Now"),
+                       qsTr("Site permissions:"), qsTr("Manage Site Permissions…")],
             component: privacyPage
         }
     ]
@@ -231,6 +232,12 @@ ApplicationWindow {
         root.raise()
         root.requestActivate()
         pageList.forceActiveFocus()
+    }
+
+    function openSitePermissions() {
+        if (!sitePermissionsWindow)
+            sitePermissionsWindow = sitePermissionsComponent.createObject(root)
+        sitePermissionsWindow.showWindow()
     }
 
     // FolderDialog hands a file:// URL to QML; Settings stores a local path.
@@ -714,11 +721,28 @@ ApplicationWindow {
                         icon.name: "edit-clear-history"
                         onClicked: ProfileManager.clearCookiesAndCacheNow()
                     }
+
+                    Item { Kirigami.FormData.isSection: true }
+
+                    Button {
+                        Kirigami.FormData.label: qsTr("Site permissions:")
+                        text: qsTr("Manage Site Permissions…")
+                        icon.name: "security-high"
+                        onClicked: root.openSitePermissions()
+                    }
                 }
 
                 Item { Layout.fillHeight: true }
             }
         }
+    }
+
+    // ── Site Permissions window (created on demand) ─────────────────────
+    property var sitePermissionsWindow: null
+
+    Component {
+        id: sitePermissionsComponent
+        SitePermissionsDialog {}
     }
 
     FolderDialog {

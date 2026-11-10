@@ -1,7 +1,10 @@
 #pragma once
 
+#include <QList>
 #include <QObject>
 #include <QUrl>
+#include <QVariant>
+#include <QWebEnginePermission>
 #include <QtQmlIntegration/qqmlintegration.h>
 #include <QQuickWebEngineProfile>
 
@@ -24,6 +27,7 @@ class Tab : public QObject
     Q_PROPERTY(int findMatches READ findMatches NOTIFY findResultChanged)
     Q_PROPERTY(int findActiveMatch READ findActiveMatch NOTIFY findResultChanged)
     Q_PROPERTY(bool newTabPage READ newTabPage NOTIFY newTabPageChanged)
+    Q_PROPERTY(QVariant pendingPermission READ pendingPermission NOTIFY pendingPermissionChanged)
 
 public:
     explicit Tab(QQuickWebEngineProfile *profile, QObject *parent = nullptr);
@@ -41,6 +45,7 @@ public:
     int findMatches() const { return m_findMatches; }
     int findActiveMatch() const { return m_findActiveMatch; }
     bool newTabPage() const { return m_newTabPage; }
+    QVariant pendingPermission() const;
 
     // Calls coming from the WebEngineView (QML) to synchronize the state.
     Q_INVOKABLE void setTitle(const QString &title);
@@ -67,6 +72,12 @@ public:
     Q_INVOKABLE void stopFind();
     Q_INVOKABLE void focusPage();
 
+    // Site permissions are answered one at a time; a page can ask for several
+    // in a row (camera and microphone), and switching tabs must keep each
+    // tab's pending prompts with it.
+    Q_INVOKABLE void enqueuePermission(const QWebEnginePermission &permission);
+    Q_INVOKABLE void answerPermission(bool grant);
+
 signals:
     void titleChanged();
     void urlChanged();
@@ -78,6 +89,7 @@ signals:
     void findResultChanged();
     void pinnedChanged();
     void newTabPageChanged();
+    void pendingPermissionChanged();
 
     void navigationRequested(const QUrl &url);
     void newTabPageRequested();
@@ -94,6 +106,7 @@ signals:
 
 private:
     void setNewTabPage(bool newTabPage);
+    void denyPendingPermissions();
 
     QString m_title;
     QUrl m_url;
@@ -109,4 +122,5 @@ private:
     int m_findActiveMatch = 0;
     // A tab without a real URL starts on the New Tab page.
     bool m_newTabPage = true;
+    QList<QWebEnginePermission> m_pendingPermissions;
 };

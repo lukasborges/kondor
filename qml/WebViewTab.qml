@@ -46,6 +46,24 @@ Item {
             root.tab.setFindResult(result.numberOfMatches, result.activeMatch)
         }
 
+        // The page asked for a site permission (camera, microphone, location,
+        // notifications, ...). The prompt belongs to this tab and is answered
+        // through the Tab object, so switching tabs keeps it with the page.
+        onPermissionRequested: function(permission) {
+            root.tab.enqueuePermission(permission)
+        }
+
+        // Screen sharing: on Wayland Qt WebEngine uses the xdg-desktop-portal
+        // picker itself. On X11 this signal selects a screen; without a
+        // chooser, taking the first one is the minimal useful behavior.
+        onDesktopMediaRequested: function(request) {
+            const screens = request.screensModel
+            if (screens && screens.count > 0)
+                request.selectScreen(screens.index(0, 0))
+            else
+                request.cancel()
+        }
+
         // A link with target=_blank / window.open opens in a new tab. The new
         // tab keeps the opener's profile, so private stays private (and keeps
         // its session) and background requests open in the background.

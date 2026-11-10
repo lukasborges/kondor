@@ -26,10 +26,11 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Private mode**: off-the-record tabs, isolated from the persistent profile
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
 - **Bookmarks**: star button in the address bar (Ctrl+D) with a name/folder editor, a bookmarks toolbar (Ctrl+Shift+B), a Bookmarks menu, and a manager window (Ctrl+Shift+O) with folders, rename, delete, reordering, drag and drop between folders, a "Move To" menu and import of Firefox/Chrome HTML exports. A new profile starts with a set of KDE and Linux bookmarks (KDE, Planet KDE, Qt Docs and the News, Development and Linux folders); they are added once, and an existing profile is never changed
-- **Settings** (Ctrl+,): a KDE Configure window with a sidebar (searchable with Ctrl+F), page tabs and Defaults / OK / Apply / Cancel; options cover the home page (blank means the New Tab page), startup behavior, New Tab page top sites, search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit). Changes stay pending until OK or Apply, and are stored in `~/.config/KDE/Kondor.conf`
+- **Settings** (Ctrl+,): a KDE Configure window with a sidebar (searchable with Ctrl+F), page tabs and Defaults / OK / Apply / Cancel; options cover the home page (blank means the New Tab page), startup behavior, New Tab page top sites, search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit, site permission management). Changes stay pending until OK or Apply, and are stored in `~/.config/KDE/Kondor.conf`
 - **About window** (Menu → About Kondor Browser): app, Qt and Chromium versions, components and authors, with a viewer for the license text; links open in a new normal tab
 - **Session restore**: optionally reopen the tabs from the previous session on startup (General → Startup in the Configure window); private tabs are never saved. Ctrl+Shift+T reopens the last closed normal tabs, up to 20
 - **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
+- **Site permissions**: camera, microphone, screen sharing, location, notifications, clipboard, pointer lock and local fonts are requested in an inline bar with **Allow** / **Block**; the decision is remembered for the site (normal tabs only) and can be reviewed or revoked in Menu → **Site Permissions…** or Settings → Privacy
 - **Download manager**: downloads show live progress, speed and size in a toolbar popup; pause, resume, cancel, open the file or show it in its folder, desktop notification on completion/failure, optional "ask where to save", and a confirmation before quitting with active downloads
 - **Command line**: `kondor URL…` opens the given URLs or local files in tabs (`--private` for a private tab), and the app registers as a web browser so it can be the system default
 - **Menu** and **keyboard shortcuts**
@@ -39,7 +40,7 @@ A working prototype with the core functionality in place: it actually browses, w
 
 ## Stack
 
-- **Qt 6.5+** (tested with **6.11.2**): `Core`, `DBus`, `Gui`, `LinguistTools`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebEngineCore`, `WebEngineQuick`, `Widgets`
+- **Qt 6.8+** (tested with **6.11.2**): `Core`, `DBus`, `Gui`, `LinguistTools`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebEngineCore`, `WebEngineQuick`, `Widgets`
 - **Qt Quick Controls 2** with the **`org.kde.desktop`** (Breeze) style
 - **Kirigami** for theming (`Kirigami.Theme`)
 - **C++17** + **CMake 3.21+**
@@ -47,7 +48,7 @@ A working prototype with the core functionality in place: it actually browses, w
 
 ## Requirements
 
-- Qt 6.5+ with the modules above (**including Qt WebEngine**)
+- Qt 6.8+ with the modules above (**including Qt WebEngine**)
 - The **`org.kde.desktop`** (QQC2 Desktop Style) and **Kirigami** packages available at runtime
 - A C++17-capable compiler and CMake 3.21+
 
@@ -105,7 +106,7 @@ src/
   startupurl.*        command-line argument to URL conversion (unit tested)
   settings.*          QML singleton: user settings persisted with QSettings
   sessionmanager.*    QML singleton: save/restore the normal tabs of a session
-  tab.*               per-tab state (title, URL, icon, loading, history)
+  tab.*               per-tab state (title, URL, icon, loading, history, pending permissions)
   tabmodel.*          tab model (QAbstractListModel)
   database.*          SQLite storage (schema + migrations)
   historymanager.*    QML singleton: write/query/clear browsing history
@@ -124,6 +125,9 @@ qml/
   TabContextMenu.qml  context menu for a tab in the tab bar
   InlineBar.qml       shared strip between the header and the page content
   FindBar.qml         find bar (Ctrl+F)
+  PermissionBar.qml   inline site permission request with Allow and Block
+  PermissionTypeInfo.qml  wording and Breeze icons for each permission type
+  SitePermissionsDialog.qml  remembered site decisions, filter and Revoke
   DownloadsPopup.qml  download list popup with progress and actions
   HistoryWindow.qml   browsing history window (search, grouped by day, clear)
   SettingsWindow.qml  settings window (home page, new tabs, search, downloads, privacy)

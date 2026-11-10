@@ -3,6 +3,7 @@
 #include "addressresolver.h"
 #include "downloadmanager.h"
 #include "historymanager.h"
+#include "notifier.h"
 #include "settings.h"
 
 #include <QCoreApplication>
@@ -10,6 +11,7 @@
 #include <QQuickWebEngineDownloadRequest>
 #include <QRegularExpression>
 #include <QWebEngineCookieStore>
+#include <QWebEngineNotification>
 
 #include <utility>
 
@@ -61,6 +63,9 @@ QQuickWebEngineProfile *ProfileManager::defaultProfile()
         // A storage name creates a persistent (on-the-record) profile.
         m_defaultProfile = new QQuickWebEngineProfile(QStringLiteral("kondor"), this);
         m_defaultProfile->setPersistentCookiesPolicy(QQuickWebEngineProfile::AllowPersistentCookies);
+        // Site permission decisions survive restarts for normal tabs.
+        m_defaultProfile->setPersistentPermissionsPolicy(
+                QQuickWebEngineProfile::PersistentPermissionsPolicy::StoreOnDisk);
         setupProfile(m_defaultProfile);
         // Only the persistent profile keeps cookies across sessions, so the
         // third-party cookie preference is enforced there.
@@ -74,6 +79,9 @@ QQuickWebEngineProfile *ProfileManager::createPrivateProfile()
     // No storage name: off-the-record profile (private), isolated from the rest.
     auto *profile = new QQuickWebEngineProfile(this);
     profile->setPersistentCookiesPolicy(QQuickWebEngineProfile::NoPersistentCookies);
+    // A private tab may keep its answers for the session, never on disk.
+    profile->setPersistentPermissionsPolicy(
+            QQuickWebEngineProfile::PersistentPermissionsPolicy::StoreInMemory);
     m_privateProfiles.append(profile);
     connect(profile, &QObject::destroyed, this, [this, profile]() {
         m_privateProfiles.removeOne(profile);
@@ -101,6 +109,17 @@ void ProfileManager::setupProfile(QQuickWebEngineProfile *profile)
     connect(profile, &QQuickWebEngineProfile::downloadRequested, DownloadManager::instance(),
             [profile](QQuickWebEngineDownloadRequest *download) {
                 DownloadManager::instance()->handleRequest(download, profile->isOffTheRecord());
+            });
+
+    // A page only reaches this signal after the site was allowed to show
+    // notifications. Route them to the desktop through the shared Notifier.
+    connect(profile, &QQuickWebEngineProfile::presentNotification, this,
+            [](QWebEngineNotification *notification) {
+                if (!notification)
+                    return;
+                Notifier::instance()->notify(notification->title(), notification->message(),
+                                             QStringLiteral("preferences-desktop-notification"));
+                notification->show();
             });
 }
 

@@ -14,7 +14,7 @@ Every launch starts a new process with its own window and a second use of the sa
 ## Design / behavior
 
 1. **`src/singleinstance.{h,cpp}`** using `QLocalServer`/`QLocalSocket` (no new dependency, `Qt6::Network`):
-   - Server name: `QStringLiteral("kondor-") + QString::number(getuid())` (or `qgetenv("USER")`).
+   - Socket path (full path passed to `listen()`/`connectToServer()`): `QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation) + "/kondor-" + <first 16 hex chars of the SHA-1 of QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)> + ".socket"`, computed after `setOrganizationName`/`setApplicationName`. The server calls `setSocketOptions(QLocalServer::UserAccessOption)` before `listen()`. See Decisions.
    - In `main()` **before** creating the QML engine (after `QGuiApplication` and command-line parsing from #10): try `QLocalSocket::connectToServer(name)`; if it connects within 500 ms, send one JSON line `{"urls": [...], "private": false, "activationToken": "<XDG_ACTIVATION_TOKEN env or empty>"}` , wait for `bytesWritten`, and `return 0`.
    - Otherwise `QLocalServer::removeServer(name)` (stale socket) and `listen(name)`. On a new connection read the JSON and emit `messageReceived(QList<QUrl> urls, bool privateMode, QByteArray activationToken)`.
 2. **Handling** (in C++ next to `WindowManager` (#14) or exposed to QML): open each URL in a new tab of the most recently active window (or a new window if the flag `--new-window` is passed / no window exists); with no URLs, just raise the window.
@@ -51,4 +51,6 @@ No UI for this issue, so there is no prototype.
 
 ## Decisions
 
-_None yet._ Answers to developer questions (`question` label) are recorded here as `| Question | Decision |` rows.
+| Question | Decision |
+| --- | --- |
+| Where does the single-instance socket live? (review of PR #76) | Not `/tmp/kondor-<uid>`. It goes in the per-user runtime directory (`XDG_RUNTIME_DIR`, mode 0700) and its name includes a hash of the profile data directory (`AppDataLocation`). Why: (1) a name under `/tmp` can be created first by another local user, who then gets every forwarded URL (private ones too) plus the activation token, and the real launch exits; (2) one instance per profile directory is what the feature protects, so a run with isolated `XDG_DATA_HOME` (smoke tests, agent reviews, AGENTS.md) never forwards its URLs into the maintainer's real running Kondor. Socket permissions: `QLocalServer::UserAccessOption`. |

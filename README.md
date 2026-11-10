@@ -17,9 +17,11 @@ Kondor Browser opens modern websites with the same engine as Chrome, but it look
 - **Everything at hand.** Tabs, bookmarks, history, downloads, reader mode, find in page, zoom and developer tools, without add-ons.
 - **Speaks your language.** Kondor Browser comes in 19 languages, picked from your system settings.
 
-## Status
+## Download
 
-Kondor Browser is a working browser in active development. Expect some rough edges. Planned work is tracked on the [Kondor Roadmap](https://github.com/users/lukasborges/projects/1).
+Get the latest AppImage from the [Releases page](https://github.com/lukasborges/kondor/releases/latest). Make it executable and run it; no installation needed. To build it yourself, see [Build and run](#build-and-run).
+
+New features and fixes land every week. See what's coming next on the [Kondor Roadmap](https://github.com/users/lukasborges/projects/1).
 
 ## Features
 

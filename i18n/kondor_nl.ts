@@ -151,7 +151,7 @@
     <message>
         <location filename="../qml/BookmarksWindow.qml" line="352"/>
         <location filename="../qml/BookmarksWindow.qml" line="717"/>
-        <location filename="../qml/BookmarksWindow.qml" line="727"/>
+        <location filename="../qml/BookmarksWindow.qml" line="734"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>Nieuwe map</translation>
@@ -192,37 +192,47 @@
         <translation>Verplaatsen naar</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="745"/>
+        <location filename="../qml/BookmarksWindow.qml" line="728"/>
+        <source>Name:</source>
+        <translation>Naam:</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="755"/>
         <source>Rename Folder</source>
         <translation>Mapnaam wijzigen</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="745"/>
+        <location filename="../qml/BookmarksWindow.qml" line="755"/>
         <source>Rename Bookmark</source>
         <translation>Bladwijzernaam wijzigen</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="771"/>
+        <location filename="../qml/BookmarksWindow.qml" line="770"/>
+        <source>New name:</source>
+        <translation>Nieuwe naam:</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="795"/>
         <source>Delete Folder</source>
         <translation>Map verwijderen</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="771"/>
+        <location filename="../qml/BookmarksWindow.qml" line="795"/>
         <source>Delete Bookmark</source>
         <translation>Bladwijzer verwijderen</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="773"/>
+        <location filename="../qml/BookmarksWindow.qml" line="797"/>
         <source>Delete this folder and everything in it?</source>
         <translation>Deze map en alles erin verwijderen?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="774"/>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete this bookmark?</source>
         <translation>Deze bladwijzer verwijderen?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="795"/>
+        <location filename="../qml/BookmarksWindow.qml" line="819"/>
         <source>Import Bookmarks</source>
         <translation>Bladwijzers importeren</translation>
     </message>

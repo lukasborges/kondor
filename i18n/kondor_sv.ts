@@ -151,7 +151,7 @@
     <message>
         <location filename="../qml/BookmarksWindow.qml" line="352"/>
         <location filename="../qml/BookmarksWindow.qml" line="717"/>
-        <location filename="../qml/BookmarksWindow.qml" line="727"/>
+        <location filename="../qml/BookmarksWindow.qml" line="734"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>Ny mapp</translation>
@@ -192,37 +192,47 @@
         <translation>Flytta till</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="745"/>
+        <location filename="../qml/BookmarksWindow.qml" line="728"/>
+        <source>Name:</source>
+        <translation>Namn:</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="755"/>
         <source>Rename Folder</source>
         <translation>Byt namn på mapp</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="745"/>
+        <location filename="../qml/BookmarksWindow.qml" line="755"/>
         <source>Rename Bookmark</source>
         <translation>Byt namn på bokmärke</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="771"/>
+        <location filename="../qml/BookmarksWindow.qml" line="770"/>
+        <source>New name:</source>
+        <translation>Nytt namn:</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="795"/>
         <source>Delete Folder</source>
         <translation>Ta bort mapp</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="771"/>
+        <location filename="../qml/BookmarksWindow.qml" line="795"/>
         <source>Delete Bookmark</source>
         <translation>Ta bort bokmärke</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="773"/>
+        <location filename="../qml/BookmarksWindow.qml" line="797"/>
         <source>Delete this folder and everything in it?</source>
         <translation>Ta bort den här mappen och allt i den?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="774"/>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete this bookmark?</source>
         <translation>Ta bort det här bokmärket?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="795"/>
+        <location filename="../qml/BookmarksWindow.qml" line="819"/>
         <source>Import Bookmarks</source>
         <translation>Importera bokmärken</translation>
     </message>

@@ -721,11 +721,21 @@ ApplicationWindow {
 
         onOpened: newFolderField.forceActiveFocus()
 
-        TextField {
-            id: newFolderField
-            //: Default name of a new bookmark folder
-            placeholderText: qsTr("New Folder")
-            width: Kirigami.Units.gridUnit * 18
+        ColumnLayout {
+            spacing: Kirigami.Units.smallSpacing
+
+            Label {
+                text: qsTr("Name:")
+            }
+
+            TextField {
+                id: newFolderField
+                //: Default name of a new bookmark folder
+                placeholderText: qsTr("New Folder")
+                Layout.fillWidth: true
+                Layout.preferredWidth: Kirigami.Units.gridUnit * 18
+                onAccepted: newFolderDialog.accept()
+            }
         }
 
         onAccepted: {
@@ -753,10 +763,27 @@ ApplicationWindow {
             renameField.forceActiveFocus()
         }
 
-        TextField {
-            id: renameField
-            width: Kirigami.Units.gridUnit * 18
+        ColumnLayout {
+            spacing: Kirigami.Units.smallSpacing
+
+            Label {
+                text: qsTr("New name:")
+            }
+
+            TextField {
+                id: renameField
+                Layout.fillWidth: true
+                Layout.preferredWidth: Kirigami.Units.gridUnit * 18
+                onAccepted: {
+                    if (renameField.text.trim().length > 0)
+                        renameDialog.accept()
+                }
+            }
         }
+
+        Component.onCompleted: standardButton(Dialog.Ok).enabled = Qt.binding(function() {
+            return renameField.text.trim().length > 0
+        })
 
         onAccepted: {
             if (renameDialog.targetId > 0)

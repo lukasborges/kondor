@@ -151,7 +151,7 @@
     <message>
         <location filename="../qml/BookmarksWindow.qml" line="352"/>
         <location filename="../qml/BookmarksWindow.qml" line="717"/>
-        <location filename="../qml/BookmarksWindow.qml" line="727"/>
+        <location filename="../qml/BookmarksWindow.qml" line="734"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>Nová složka</translation>
@@ -192,37 +192,47 @@
         <translation>Přesunout do</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="745"/>
+        <location filename="../qml/BookmarksWindow.qml" line="728"/>
+        <source>Name:</source>
+        <translation>Název:</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="755"/>
         <source>Rename Folder</source>
         <translation>Přejmenovat složku</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="745"/>
+        <location filename="../qml/BookmarksWindow.qml" line="755"/>
         <source>Rename Bookmark</source>
         <translation>Přejmenovat záložku</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="771"/>
+        <location filename="../qml/BookmarksWindow.qml" line="770"/>
+        <source>New name:</source>
+        <translation>Nový název:</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksWindow.qml" line="795"/>
         <source>Delete Folder</source>
         <translation>Smazat složku</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="771"/>
+        <location filename="../qml/BookmarksWindow.qml" line="795"/>
         <source>Delete Bookmark</source>
         <translation>Smazat záložku</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="773"/>
+        <location filename="../qml/BookmarksWindow.qml" line="797"/>
         <source>Delete this folder and everything in it?</source>
         <translation>Smazat tuto složku a vše v ní?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="774"/>
+        <location filename="../qml/BookmarksWindow.qml" line="798"/>
         <source>Delete this bookmark?</source>
         <translation>Smazat tuto záložku?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="795"/>
+        <location filename="../qml/BookmarksWindow.qml" line="819"/>
         <source>Import Bookmarks</source>
         <translation>Importovat záložky</translation>
     </message>

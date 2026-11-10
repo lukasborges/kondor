@@ -76,6 +76,8 @@ qt_add_qml_module(kondor
         src/sessionmanager.cpp
         src/windowmanager.h
         src/windowmanager.cpp
+        src/singleinstance.h
+        src/singleinstance.cpp
         src/database.h
         src/database.cpp
         src/historymanager.h

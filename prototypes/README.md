@@ -59,6 +59,7 @@ Tips when editing:
 | #24 Per-site zoom | `24-site-zoom.qml` |
 | #43 New Tab page | `43-new-tab-page.qml`, `43b-new-private-tab-page.qml`, `03-settings.qml` ("Home Page", "New Tabs") |
 | #93 Main menu (target layout) | `00-main-menu.qml`, `93b-main-menu-history.qml`, `93c-main-menu-tools.qml`, `93d-main-menu-help.qml` (shared mock in `common/MainMenuMock.qml`; `common/SubmenuMock.qml` draws an open submenu) |
+| #102 Add a password by hand | `102-passwords-add.qml`, `102b-passwords-add-duplicate.qml`, `102c-passwords-empty.qml`, `102d-passwords-no-match.qml` (in `common/SettingsDialogMock.qml`) |
 
 Issues without UI (#10 default browser, #15 single instance, #19 translations, #25 Flatpak,
 #26 tests) have no prototype.

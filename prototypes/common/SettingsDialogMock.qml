@@ -13,6 +13,10 @@ Rectangle {
     property int innerTab: 0      // tabs of the General and Passwords pages
     property bool withPasswords: false // show the Passwords page added by #21
     property bool walletDenied: false  // #21: KWallet disabled / access denied
+    property bool passwordsEmpty: false // #102: no saved passwords (placeholder)
+    property string passwordsFilter: "" // #102: text in the filter field
+    property bool addPasswordDialog: false // #102: the "Add Password" dialog is open
+    property bool addPasswordDuplicate: false // #102: the dialog's login is already saved
     property string search: ""
     property bool modified: false // pending changes → Apply enabled
 
@@ -189,10 +193,20 @@ Rectangle {
                             actions: [ Kirigami.Action { text: "Try Again"; icon.name: "view-refresh" } ]
                         }
                         CheckBox { text: "Offer to save passwords"; checked: true; enabled: !root.walletDenied }
-                        TextField {
+                        RowLayout {
                             Layout.fillWidth: true
-                            enabled: !root.walletDenied
-                            placeholderText: "Filter by site or username…"
+                            spacing: Kirigami.Units.smallSpacing
+                            TextField {
+                                Layout.fillWidth: true
+                                enabled: !root.walletDenied
+                                placeholderText: "Filter by site or username…"
+                                text: root.passwordsFilter
+                            }
+                            Button {
+                                text: "Add Password…"
+                                icon.name: "list-add"
+                                enabled: !root.walletDenied
+                            }
                         }
                         Frame {
                             Layout.fillWidth: true
@@ -205,10 +219,24 @@ Rectangle {
                                 color: Kirigami.Theme.backgroundColor
                                 border.color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.2)
                             }
+                            Kirigami.PlaceholderMessage {
+                                anchors.centerIn: parent
+                                width: parent.width - Kirigami.Units.gridUnit * 4
+                                visible: !root.walletDenied && root.passwordsEmpty
+                                icon.name: root.passwordsFilter.length ? "edit-none" : "dialog-password"
+                                text: root.passwordsFilter.length
+                                      ? "No saved passwords match “" + root.passwordsFilter + "”"
+                                      : "No saved passwords"
+                                explanation: root.passwordsFilter.length
+                                             ? ""
+                                             : "Kondor offers to save a password when you log in to a site. You can also add one here."
+                                helpfulAction: root.passwordsFilter.length ? null : addAction
+                                Kirigami.Action { id: addAction; text: "Add Password…"; icon.name: "list-add" }
+                            }
                             ListView {
                                 anchors.fill: parent
                                 clip: true
-                                visible: !root.walletDenied
+                                visible: !root.walletDenied && !root.passwordsEmpty
                                 section.property: "site"
                                 section.delegate: Kirigami.ListSectionHeader {
                                     required property string section
@@ -293,6 +321,50 @@ Rectangle {
             Button { text: "OK"; icon.name: "dialog-ok"; highlighted: true }
             Button { text: "Apply"; icon.name: "dialog-ok-apply"; enabled: root.modified }
             Button { text: "Cancel"; icon.name: "dialog-cancel" }
+        }
+    }
+
+    // ── Add Password dialog (#102) ──────────────────────────────────────
+    Dialog {
+        id: addDialog
+        parent: root
+        anchors.centerIn: parent
+        width: Kirigami.Units.gridUnit * 24
+        modal: true
+        dim: true
+        visible: root.addPasswordDialog
+        title: "Add Password"
+        standardButtons: Dialog.Save | Dialog.Cancel
+
+        contentItem: ColumnLayout {
+            spacing: Kirigami.Units.largeSpacing
+
+            Kirigami.FormLayout {
+                Layout.fillWidth: true
+                TextField {
+                    Kirigami.FormData.label: "Website:"
+                    Layout.fillWidth: true
+                    placeholderText: "https://example.com"
+                    text: "https://invent.kde.org"
+                }
+                TextField {
+                    Kirigami.FormData.label: "Username:"
+                    Layout.fillWidth: true
+                    text: root.addPasswordDuplicate ? "maria" : "maria.review"
+                }
+                Kirigami.PasswordField {
+                    Kirigami.FormData.label: "Password:"
+                    Layout.fillWidth: true
+                    text: "correct-horse-battery"
+                }
+            }
+
+            Kirigami.InlineMessage {
+                Layout.fillWidth: true
+                visible: root.addPasswordDuplicate
+                type: Kirigami.MessageType.Warning
+                text: "A password for maria on invent.kde.org is already saved. Saving replaces it."
+            }
         }
     }
 }

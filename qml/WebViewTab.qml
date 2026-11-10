@@ -168,7 +168,6 @@ Item {
         webView.url = original
     }
 
-    Timer { interval: 10000; running: true; onTriggered: { root.tab.toggleReaderMode() } }
     function setDevToolsOpen(open) {
         if (open === root.tab.devToolsOpen)
             return

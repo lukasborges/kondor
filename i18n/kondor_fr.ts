@@ -57,7 +57,7 @@
     <message>
         <location filename="../qml/AboutWindow.qml" line="173"/>
         <source>KDE user interface framework, used for the Breeze look</source>
-        <translation>Infrastructure d'interface utilisateur de KDE, utilisée pour l'apparence Breeze</translation>
+        <translation>Infrastructure d&apos;interface utilisateur de KDE, utilisée pour l&apos;apparence Breeze</translation>
     </message>
     <message>
         <location filename="../qml/AboutWindow.qml" line="177"/>
@@ -67,7 +67,7 @@
     <message>
         <location filename="../qml/AboutWindow.qml" line="183"/>
         <source>Operating System</source>
-        <translation>Système d'exploitation</translation>
+        <translation>Système d&apos;exploitation</translation>
     </message>
     <message>
         <location filename="../qml/AboutWindow.qml" line="229"/>
@@ -82,7 +82,7 @@
     <message>
         <location filename="../qml/AboutWindow.qml" line="266"/>
         <source>Visit Author&apos;s Homepage</source>
-        <translation>Visiter la page d'accueil de l'auteur</translation>
+        <translation>Visiter la page d&apos;accueil de l&apos;auteur</translation>
     </message>
     <message>
         <location filename="../qml/AboutWindow.qml" line="285"/>

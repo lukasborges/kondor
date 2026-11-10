@@ -47,7 +47,7 @@
     <message>
         <location filename="../qml/AboutWindow.qml" line="159"/>
         <source>Using %1 (built against %2)</source>
-        <translation>S'utilitza %1 (compilat amb %2)</translation>
+        <translation>S&apos;utilitza %1 (compilat amb %2)</translation>
     </message>
     <message>
         <location filename="../qml/AboutWindow.qml" line="167"/>
@@ -57,7 +57,7 @@
     <message>
         <location filename="../qml/AboutWindow.qml" line="173"/>
         <source>KDE user interface framework, used for the Breeze look</source>
-        <translation>Entorn d'interfície d'usuari de KDE, utilitzat per a l'aspecte Breeze</translation>
+        <translation>Entorn d&apos;interfície d&apos;usuari de KDE, utilitzat per a l&apos;aspecte Breeze</translation>
     </message>
     <message>
         <location filename="../qml/AboutWindow.qml" line="177"/>
@@ -72,7 +72,7 @@
     <message>
         <location filename="../qml/AboutWindow.qml" line="229"/>
         <source>Please use %1 to report bugs.</source>
-        <translation>Utilitzeu %1 per informar d'errors.</translation>
+        <translation>Utilitzeu %1 per informar d&apos;errors.</translation>
     </message>
     <message>
         <location filename="../qml/AboutWindow.qml" line="240"/>
@@ -82,7 +82,7 @@
     <message>
         <location filename="../qml/AboutWindow.qml" line="266"/>
         <source>Visit Author&apos;s Homepage</source>
-        <translation>Visiteu la pàgina d'inici de l'autor</translation>
+        <translation>Visiteu la pàgina d&apos;inici de l&apos;autor</translation>
     </message>
     <message>
         <location filename="../qml/AboutWindow.qml" line="285"/>

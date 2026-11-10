@@ -108,7 +108,8 @@ Rectangle {
                                    : pinnedCount * pinnedTabWidth + (index - pinnedCount) * tabWidth
     }
     readonly property real stripWidth: tabX(tabModel.count)
-    readonly property real viewWidth: Math.min(stripWidth, tabsAreaWidth)
+    // The real width of the visible strip, not the width it should have.
+    readonly property real viewWidth: view ? Math.min(stripWidth, view.width) : 0
     readonly property real maxScroll: Math.max(0, stripWidth - viewWidth)
     // The ListView may start its content at a non-zero originX; scroll
     // positions here are relative to it.
@@ -165,6 +166,8 @@ Rectangle {
     Connections {
         target: strip.view
         function onContentWidthChanged() { strip.scheduleEnsureVisible() }
+        // The visible width follows the layout a little after the area does.
+        function onWidthChanged() { strip.scheduleEnsureVisible() }
     }
 
     function scheduleEnsureVisible() {
@@ -240,6 +243,12 @@ Rectangle {
                     // The strip scrolls itself (ensureCurrentVisible): the
                     // style's highlight range would fight it.
                     contentItem.highlightRangeMode = ListView.NoHighlightRange
+                    // Tabs scrolled out must not paint under the arrows, the
+                    // New Tab button or the private icon (#87).
+                    contentItem.clip = true
+                    // Tabs have fixed widths: the style's -1 px overlap only
+                    // shifts them and breaks tabX().
+                    contentItem.spacing = 0
                 }
             }
 
@@ -331,7 +340,8 @@ Rectangle {
     Rectangle {
         readonly property Item targetItem: tabBar.dropTargetIndex >= 0 && tabBar.contentItem
             ? tabBar.itemAt(tabBar.dropTargetIndex) : null
-        visible: targetItem !== null
+        // Hidden outside the visible tab area: never drawn over the arrows.
+        visible: targetItem !== null && x >= tabBar.x - 1 && x + width <= tabBar.x + tabBar.width + 1
         x: tabBar.x + (targetItem ? targetItem.x - tabBar.contentItem.contentX : 0)
         y: tabBar.y
         width: 2

@@ -52,6 +52,12 @@ void TestSettings::defaultValue_data()
             << QStringLiteral("blockThirdPartyCookies") << QVariant(false);
     QTest::newRow("searchSuggestions")
             << QStringLiteral("searchSuggestions") << QVariant(false);
+    QTest::newRow("spellCheckEnabled")
+            << QStringLiteral("spellCheckEnabled") << QVariant(true);
+    // No dictionaries in the test environment: falls back to US English.
+    QTest::newRow("spellCheckLanguages")
+            << QStringLiteral("spellCheckLanguages")
+            << QVariant(QStringList{QStringLiteral("en-US")});
 }
 
 void TestSettings::defaultValue()

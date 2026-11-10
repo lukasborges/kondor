@@ -25,6 +25,7 @@ A working prototype with the core functionality in place: it actually browses, w
 - **New Tab page**: new tabs show Kondor's own page with a search field and the eight sites visited most in the last 90 days (favicons, open in a new tab or private tab, remove a site); private tabs get a private variant without top sites. The home page is only used by the first tab at startup and by the Home button, and a blank home page (the default) means the New Tab page
 - **Navigation**: back, forward, reload/stop, home
 - **Per-site zoom**: zoom steps (Ctrl++, Ctrl+-, Ctrl+wheel) are remembered per site in normal tabs and restored on later visits and restarts; the address bar shows the level when it is not 100% (click to reset). Private tabs use the saved level but never save
+- **Spell checking**: misspelled words in text fields are underlined and the context menu offers up to five suggestions; the languages (English and Portuguese dictionaries are built by default) are chosen in Settings → Spelling or in the "Spell Check Languages" submenu of the context menu
 - **Page context menu**: right-click on a link, image, video or audio, selected text or an editable field for the matching actions (open in a new/private tab, copy or save, search the selection, spelling suggestions, undo/redo/cut/copy/paste); on the page itself it offers back, forward, reload and view source. `Shift+F10` or the `Menu` key opens it from the keyboard
 - **Private mode**: off-the-record tabs and windows, isolated from the persistent profile
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
@@ -65,8 +66,12 @@ On **Fedora** (the original development environment):
 ```bash
 sudo dnf install cmake gcc-c++ \
     qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel \
-    kf6-qqc2-desktop-style kf6-kirigami
+    kf6-qqc2-desktop-style kf6-kirigami hunspell-en-US hunspell-pt
 ```
+
+The Hunspell dictionaries (`/usr/share/hunspell`) are converted to Qt WebEngine's
+`.bdic` format at build time for spell checking; choose the languages with
+`-DKONDOR_SPELLCHECK_LANGS="en_US;pt_BR"`.
 
 > Package names vary across distributions. What matters is having Qt 6 with
 > WebEngine plus KDE's `qqc2-desktop-style`/Kirigami.

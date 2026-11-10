@@ -1,7 +1,11 @@
 #include "settings.h"
 
+#include <QDir>
 #include <QFileInfo>
+#include <QLocale>
 #include <QStandardPaths>
+
+#include <algorithm>
 
 namespace {
 constexpr auto kHomePage = "General/HomePage";
@@ -16,6 +20,8 @@ constexpr auto kHiddenTopSites = "NewTab/HiddenTopSites";
 constexpr auto kClearDataOnExit = "Privacy/ClearOnExit";
 constexpr auto kBlockThirdPartyCookies = "Privacy/BlockThirdPartyCookies";
 constexpr auto kSearchSuggestions = "Search/Suggestions";
+constexpr auto kSpellCheckEnabled = "SpellCheck/Enabled";
+constexpr auto kSpellCheckLanguages = "SpellCheck/Languages";
 
 // Option property names, used by defaultValue().
 constexpr auto kHomePageName = "homePage";
@@ -30,6 +36,25 @@ constexpr auto kHiddenTopSitesName = "hiddenTopSites";
 constexpr auto kClearDataOnExitName = "clearDataOnExit";
 constexpr auto kBlockThirdPartyCookiesName = "blockThirdPartyCookies";
 constexpr auto kSearchSuggestionsName = "searchSuggestions";
+constexpr auto kSpellCheckEnabledName = "spellCheckEnabled";
+constexpr auto kSpellCheckLanguagesName = "spellCheckLanguages";
+
+QString dictionariesPath()
+{
+    return qEnvironmentVariable("QTWEBENGINE_DICTIONARIES_PATH");
+}
+
+QStringList dictionaryCodes()
+{
+    QStringList codes;
+    const QString path = dictionariesPath();
+    if (path.isEmpty())
+        return codes;
+    const QFileInfoList files = QDir(path).entryInfoList({QStringLiteral("*.bdic")}, QDir::Files);
+    for (const QFileInfo &file : files)
+        codes.append(file.completeBaseName());
+    return codes;
+}
 }
 
 Settings *Settings::instance()
@@ -78,6 +103,12 @@ Settings::Settings(QObject *parent)
     , m_searchSuggestions(m_settings.value(QLatin1String(kSearchSuggestions),
                                            defaultValue(QLatin1String(kSearchSuggestionsName)))
                               .toBool())
+    , m_spellCheckEnabled(m_settings.value(QLatin1String(kSpellCheckEnabled),
+                                           defaultValue(QLatin1String(kSpellCheckEnabledName)))
+                              .toBool())
+    , m_spellCheckLanguages(m_settings.value(QLatin1String(kSpellCheckLanguages),
+                                             defaultValue(QLatin1String(kSpellCheckLanguagesName)))
+                                .toStringList())
 {
 }
 
@@ -107,6 +138,16 @@ QVariant Settings::defaultValue(const QString &name) const
         return false;
     if (name == QLatin1String(kSearchSuggestionsName))
         return false;
+    if (name == QLatin1String(kSpellCheckEnabledName))
+        return true;
+    if (name == QLatin1String(kSpellCheckLanguagesName)) {
+        // The system language when a dictionary for it exists, else US English.
+        // Dictionary files use Chromium's hyphenated codes ("pt-BR").
+        const QString system = QLocale::system().name().replace(QLatin1Char('_'), QLatin1Char('-'));
+        if (dictionaryCodes().contains(system))
+            return QStringList{system};
+        return QStringList{QStringLiteral("en-US")};
+    }
     return QVariant();
 }
 
@@ -125,6 +166,30 @@ bool Settings::downloadDirectoryValid() const
 void Settings::refreshDownloadDirectory()
 {
     emit downloadDirectoryChanged();
+}
+
+QVariantList Settings::availableSpellCheckLanguages() const
+{
+    QVariantList languages;
+    for (const QString &code : dictionaryCodes()) {
+        const QLocale locale(QString(code).replace(QLatin1Char('-'), QLatin1Char('_')));
+        QString name = locale.nativeLanguageName();
+        if (name.isEmpty()) {
+            name = code;
+        } else {
+            name[0] = name.at(0).toUpper();
+            const QString territory = locale.nativeTerritoryName();
+            if (!territory.isEmpty())
+                name += QStringLiteral(" (%1)").arg(territory);
+        }
+        languages.append(QVariantMap{{QStringLiteral("code"), code},
+                                     {QStringLiteral("name"), name}});
+    }
+    std::sort(languages.begin(), languages.end(), [](const QVariant &a, const QVariant &b) {
+        return a.toMap().value(QStringLiteral("name")).toString().localeAwareCompare(
+                       b.toMap().value(QStringLiteral("name")).toString()) < 0;
+    });
+    return languages;
 }
 
 QString Settings::searchUrlTemplate() const
@@ -279,4 +344,24 @@ void Settings::setSearchSuggestions(bool searchSuggestions)
     m_settings.setValue(QLatin1String(kSearchSuggestions), m_searchSuggestions);
     m_settings.sync();
     emit searchSuggestionsChanged();
+}
+
+void Settings::setSpellCheckEnabled(bool spellCheckEnabled)
+{
+    if (m_spellCheckEnabled == spellCheckEnabled)
+        return;
+    m_spellCheckEnabled = spellCheckEnabled;
+    m_settings.setValue(QLatin1String(kSpellCheckEnabled), m_spellCheckEnabled);
+    m_settings.sync();
+    emit spellCheckEnabledChanged();
+}
+
+void Settings::setSpellCheckLanguages(const QStringList &spellCheckLanguages)
+{
+    if (m_spellCheckLanguages == spellCheckLanguages)
+        return;
+    m_spellCheckLanguages = spellCheckLanguages;
+    m_settings.setValue(QLatin1String(kSpellCheckLanguages), m_spellCheckLanguages);
+    m_settings.sync();
+    emit spellCheckLanguagesChanged();
 }

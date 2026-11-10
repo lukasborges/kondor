@@ -46,6 +46,15 @@ ProfileManager::ProfileManager(QObject *parent)
             profile->setDownloadPath(directory);
     });
 
+    const auto applySpellCheck = [this]() {
+        if (m_defaultProfile)
+            applySpellCheckSettings(m_defaultProfile);
+        for (QQuickWebEngineProfile *profile : std::as_const(m_privateProfiles))
+            applySpellCheckSettings(profile);
+    };
+    connect(settings, &Settings::spellCheckEnabledChanged, this, applySpellCheck);
+    connect(settings, &Settings::spellCheckLanguagesChanged, this, applySpellCheck);
+
     connect(QCoreApplication::instance(), &QCoreApplication::aboutToQuit, this, [this]() {
         if (!Settings::instance()->clearDataOnExit())
             return;
@@ -104,6 +113,7 @@ void ProfileManager::setupProfile(QQuickWebEngineProfile *profile)
     profile->setHttpAcceptLanguage(QLocale().bcp47Name());
 
     profile->setDownloadPath(Settings::instance()->downloadDirectory());
+    applySpellCheckSettings(profile);
 
     // Downloads are owned by the shared DownloadManager; private profiles pass
     // the flag so their entries never outlive the session.
@@ -128,6 +138,13 @@ void ProfileManager::setupProfile(QQuickWebEngineProfile *profile)
     connect(profile, &QObject::destroyed, this, [this, profile]() {
         m_overriddenCertificateHosts.remove(profile);
     });
+}
+
+void ProfileManager::applySpellCheckSettings(QQuickWebEngineProfile *profile)
+{
+    Settings *settings = Settings::instance();
+    profile->setSpellCheckLanguages(settings->spellCheckLanguages());
+    profile->setSpellCheckEnabled(settings->spellCheckEnabled());
 }
 
 void ProfileManager::applyThirdPartyCookieFilter(QQuickWebEngineProfile *profile)

@@ -6,6 +6,7 @@
 
 #include <QQmlComponent>
 #include <QQmlEngine>
+#include <QQuickWindow>
 #include <QVariantMap>
 
 WindowManager *WindowManager::instance()
@@ -89,15 +90,84 @@ QObject *WindowManager::createWindow(bool privateWindow, const QList<QUrl> &urls
     }
 
     m_windows.append(window);
+    m_activeWindow = window;
+    if (auto *quickWindow = qobject_cast<QQuickWindow *>(window)) {
+        connect(quickWindow, &QQuickWindow::activeChanged, this, [this, quickWindow]() {
+            if (quickWindow->isActive())
+                m_activeWindow = quickWindow;
+        });
+    }
     emit windowCountChanged();
     connect(window, &QObject::destroyed, this, [this]() {
         for (int i = int(m_windows.size()) - 1; i >= 0; --i) {
             if (m_windows.at(i).isNull())
                 m_windows.removeAt(i);
         }
+        // The active window was closed: the next launch should land in the
+        // most recently created window that is still open.
+        if (m_activeWindow.isNull() && !m_windows.isEmpty())
+            m_activeWindow = m_windows.last().data();
         emit windowCountChanged();
     });
     return window;
+}
+
+QObject *WindowManager::windowForRequest(bool privateWindow) const
+{
+    if (m_activeWindow && isPrivateWindow(m_activeWindow) == privateWindow)
+        return m_activeWindow;
+
+    // No active window of that kind (or a private one was in front): use the
+    // most recently created window that matches.
+    for (auto it = m_windows.crbegin(); it != m_windows.crend(); ++it) {
+        QObject *window = it->data();
+        if (window && isPrivateWindow(window) == privateWindow)
+            return window;
+    }
+    return nullptr;
+}
+
+bool WindowManager::isPrivateWindow(const QObject *window)
+{
+    return window && window->property("privateWindow").toBool();
+}
+
+void WindowManager::raiseWindow(QObject *window, const QByteArray &activationToken)
+{
+    auto *quickWindow = qobject_cast<QQuickWindow *>(window);
+    if (!quickWindow)
+        return;
+
+    // On Wayland raise() alone does not activate a window: the compositor
+    // wants the token of the launch that asks for it (Plasma puts it in the
+    // environment of the process it starts, and the second launch passes it
+    // on). Qt's Wayland plugin consumes it on requestActivate().
+    if (!activationToken.isEmpty())
+        qputenv("XDG_ACTIVATION_TOKEN", activationToken);
+
+    quickWindow->raise();
+    quickWindow->requestActivate();
+}
+
+void WindowManager::handleSingleInstanceMessage(const SingleInstanceMessage &message)
+{
+    // A private launch opens private tabs in the private window that is
+    // already open (or in a new private window), never a normal window
+    // quietly turning its tabs private.
+    QObject *window = message.newWindow ? nullptr : windowForRequest(message.privateMode);
+    if (!window) {
+        window = createWindow(message.privateMode, message.urls, QStringList(), -1);
+    } else if (!message.urls.isEmpty()) {
+        // One tab per URL, leaving the page the user is reading alone. The QML
+        // side adds them as private tabs when the window is a private one.
+        if (!QMetaObject::invokeMethod(window, "openUrlsInNewTabs",
+                                       Q_ARG(QVariant, QVariant::fromValue(message.urls)))) {
+            qWarning("Kondor: cannot add tabs to the running window");
+        }
+    }
+
+    if (window)
+        raiseWindow(window, message.activationToken);
 }
 
 void WindowManager::openStartupWindows()

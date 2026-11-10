@@ -384,3 +384,20 @@ add_test(NAME tst_sessionmanager COMMAND tst_sessionmanager)
 set_tests_properties(tst_sessionmanager PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
 )
+
+qt_add_executable(tst_singleinstance
+    tst_singleinstance.cpp
+    ../src/singleinstance.cpp
+)
+
+target_include_directories(tst_singleinstance PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_singleinstance PRIVATE
+    Qt6::Core
+    Qt6::Network
+    Qt6::Test
+)
+
+add_test(NAME tst_singleinstance COMMAND tst_singleinstance)

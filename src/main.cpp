@@ -6,6 +6,7 @@
 #include <QIcon>
 #include <QLibraryInfo>
 #include <QLocale>
+#include <QObject>
 #include <QQmlApplicationEngine>
 #include <QQuickImageProvider>
 #include <QQuickStyle>
@@ -14,6 +15,7 @@
 
 #include "faviconstore.h"
 #include "settings.h"
+#include "singleinstance.h"
 #include "startupargs.h"
 #include "startupurl.h"
 #include "windowmanager.h"
@@ -82,6 +84,14 @@ int main(int argc, char *argv[])
     const QCommandLineOption privateOption(QStringLiteral("private"),
                                            QStringLiteral("open URLs in a private tab"));
     parser.addOption(privateOption);
+    const QCommandLineOption newWindowOption(
+        QStringLiteral("new-window"),
+        QStringLiteral("open the URLs in a new window of the running instance"));
+    parser.addOption(newWindowOption);
+    const QCommandLineOption newInstanceOption(
+        QStringLiteral("new-instance"),
+        QStringLiteral("start a separate process instead of reusing the running one"));
+    parser.addOption(newInstanceOption);
     parser.addPositionalArgument(QStringLiteral("urls"),
                                  QStringLiteral("URLs or files to open"),
                                  QStringLiteral("[urls...]"));
@@ -101,9 +111,33 @@ int main(int argc, char *argv[])
             startupUrls.append(url);
     }
 
+    const bool startupPrivate = parser.isSet(privateOption);
     StartupArgs *startupArgs = StartupArgs::instance();
     startupArgs->setStartupUrls(startupUrls);
-    startupArgs->setStartupPrivate(parser.isSet(privateOption));
+    startupArgs->setStartupPrivate(startupPrivate);
+
+    // One Kondor per user session: a later launch hands its command line to
+    // the running process and exits. `--new-instance` opts out (development).
+    SingleInstance singleInstance;
+    if (!parser.isSet(newInstanceOption)) {
+        SingleInstanceMessage message;
+        message.urls = startupUrls;
+        message.privateMode = startupPrivate;
+        message.newWindow = parser.isSet(newWindowOption);
+        message.activationToken = qgetenv("XDG_ACTIVATION_TOKEN");
+
+        switch (singleInstance.start(message)) {
+        case SingleInstance::StartResult::Forwarded:
+            return 0;
+        case SingleInstance::StartResult::Listening:
+            break;
+        case SingleInstance::StartResult::Failed:
+            qWarning("Kondor: cannot listen for later launches on %s; "
+                     "running as a separate instance",
+                     qUtf8Printable(SingleInstance::serverName()));
+            break;
+        }
+    }
 
     // App identity: the .desktop name (used by Wayland/KWin) and the window icon.
     QGuiApplication::setDesktopFileName(QStringLiteral("kondor"));
@@ -137,6 +171,8 @@ int main(int argc, char *argv[])
     // can move between windows and Ctrl+N can open another one.
     WindowManager *windowManager = WindowManager::instance();
     windowManager->setEngine(&engine);
+    QObject::connect(&singleInstance, &SingleInstance::messageReceived,
+                     windowManager, &WindowManager::handleSingleInstanceMessage);
     windowManager->openStartupWindows();
 
     // Every startup window failed to load: without a window exec() would run

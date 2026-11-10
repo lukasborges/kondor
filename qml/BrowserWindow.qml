@@ -258,6 +258,13 @@ ApplicationWindow {
         sitePermissionsWindow.showWindow()
     }
 
+    // A later `kondor` launch: one tab per URL, leaving the current page as it
+    // is. WindowManager calls this through the single-instance handler.
+    function openUrlsInNewTabs(urls) {
+        for (let i = 0; i < urls.length; ++i)
+            tabs.addTab(privateWindow, urls[i])
+    }
+
     // Normal click navigates the current tab; middle/Ctrl+click opens a
     // background tab (in a private profile when the current tab is private).
     function openUrl(url, background) {

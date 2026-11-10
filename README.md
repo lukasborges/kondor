@@ -37,7 +37,7 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Security indicator**: the address bar shows a padlock for HTTPS, **Not Secure** for HTTP and a page icon for local files; clicking it opens a site information popup with the connection state and the permissions remembered for the site. Certificate errors show a "Your connection is not private" page with **Back to Safety** and, when the error allows it, an advanced **Continue Anyway (Unsafe)** option; an accepted certificate is remembered for that site in the profile and keeps showing the warning state
 - **Crashed pages**: when a page's renderer process dies (crash, kill, out of memory), that tab shows a page with the reason, the exit code and **Reload** / **Close Tab** buttons; the tab keeps its place and the other tabs are not affected
 - **Download manager**: downloads show live progress, speed and size in a toolbar popup; pause, resume, cancel, open the file or show it in its folder, desktop notification on completion/failure, optional "ask where to save", and a confirmation before quitting with active downloads
-- **Command line**: `kondor URL…` opens the given URLs or local files in tabs of a new window (`--private` for a private window), and the app registers as a web browser so it can be the system default
+- **Command line**: `kondor URL…` opens the given URLs or local files in tabs of a new window (`--private` for a private window), and the app registers as a web browser so it can be the system default. A second launch reuses the running process: it opens the URLs as new tabs in the most recently active window and raises it, then exits; `--new-window` opens them in a new window and `--new-instance` starts a separate process (development)
 - **Menu** and **keyboard shortcuts**
 - **KDE look** via the `org.kde.desktop` (QQC2) style, with a `Fusion` fallback
 - **Semantic colors** (`Kirigami.Theme`/`palette`): follows the system color scheme
@@ -112,6 +112,7 @@ src/
   settings.*          QML singleton: user settings persisted with QSettings
   sessionmanager.*    QML singleton: save/restore the normal tabs of every window
   windowmanager.*     QML singleton: create the browser windows (normal and private)
+  singleinstance.*    one process per session: later launches forward their URLs over a local socket
   tab.*               per-tab state (title, URL, icon, loading, history, pending permissions)
   tabmodel.*          tab model (QAbstractListModel)
   database.*          SQLite storage (schema + migrations)

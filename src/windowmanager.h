@@ -9,6 +9,8 @@
 
 #include <memory>
 
+#include "singleinstance.h"
+
 class QQmlComponent;
 class QQmlEngine;
 class QJSEngine;
@@ -41,6 +43,11 @@ public:
     // A window that finished closing: drops it from the list and deletes it.
     Q_INVOKABLE void closeWindow(QObject *window);
 
+    // A later `kondor` launch forwarded its command line: open the URLs as new
+    // tabs (or in a new window), then raise the window. With no URLs, only
+    // raise it.
+    void handleSingleInstanceMessage(const SingleInstanceMessage &message);
+
     // Opens the windows of the last session or, when there is nothing to
     // restore, the command-line URLs or a single window with the home page.
     void openStartupWindows();
@@ -57,7 +64,14 @@ private:
                           const QStringList &titles, int currentIndex);
     QQmlComponent *component();
 
+    // The most recently active window of the requested kind, or null.
+    QObject *windowForRequest(bool privateWindow) const;
+    static bool isPrivateWindow(const QObject *window);
+    static void raiseWindow(QObject *window, const QByteArray &activationToken);
+
     QQmlEngine *m_engine = nullptr;
     std::unique_ptr<QQmlComponent> m_component;
     QList<QPointer<QObject>> m_windows;
+    // Set when a window becomes active, so a later launch opens its tabs there.
+    QPointer<QObject> m_activeWindow;
 };

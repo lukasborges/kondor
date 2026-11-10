@@ -65,10 +65,20 @@ None. Creates the `Settings` block used by #2, #4, #6, #7, #11, #20, #23, #24.
 
 Visual target — match it (controls, Kirigami components, icon names, wording, placement). If it disagrees with this spec, the spec wins.
 
-**Settings window (General page)** — [`prototypes/03-settings.qml`](../../prototypes/03-settings.qml)
+The window layout was reworked by #57 into KDE's Configure dialog: a sidebar with search, the page title, tabs inside a page, and Defaults / OK / Apply / Cancel. The prototype below shows that layout.
+
+**Settings window (General → Startup)** — [`prototypes/03-settings.qml`](../../prototypes/03-settings.qml)
 
 ![Settings window (General page)](../../prototypes/screenshots/03-settings.png)
 
+**Privacy page with a pending change** — [`prototypes/03b-settings-privacy.qml`](../../prototypes/03b-settings-privacy.qml)
+
+![Settings window (Privacy page)](../../prototypes/screenshots/03b-settings-privacy.png)
+
 ## Decisions
 
-_None yet._ Answers to developer questions (`question` label) are recorded here as `| Question | Decision |` rows.
+Answers to developer questions (`question` label) are recorded here as `| Question | Decision |` rows.
+
+| Question | Decision |
+| --- | --- |
+| Tabs on top and immediate apply, or KDE's Configure dialog? | Changed in #57: KDE's `KConfigDialog` layout (sidebar with search and big icons, page title, tabs inside a page) with Defaults / OK / Apply / Cancel. Options are kept pending until OK/Apply, and `Settings::defaultValue()` is the single source of defaults. The `Settings` singleton still writes to disk as soon as a property is set; only the window buffers. |

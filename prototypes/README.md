@@ -33,7 +33,7 @@ Tips when editing:
 | --- | --- |
 | #1 Browsing history | `01-history.qml` |
 | #2 Bookmarks | `02-bookmarks.qml`, `02b-bookmarks-manager.qml` |
-| #3 Settings page | `03-settings.qml` |
+| #3 Settings page (layout from #57) | `03-settings.qml`, `03b-settings-privacy.qml` (shared mock in `common/SettingsDialogMock.qml`) |
 | #4 Download manager | `04-downloads.qml` |
 | #5 Find in page | `05-find-in-page.qml` |
 | #6 Session restore | `00-main-menu.qml` ("Reopen Closed Tab"), `03-settings.qml` ("On Startup") |

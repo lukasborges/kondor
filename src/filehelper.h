@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QUrl>
 #include <QTemporaryDir>
 #include <QtQmlIntegration/qqmlintegration.h>
 
@@ -23,6 +24,10 @@ public:
     // A page title turned into a safe file name stem: `/\:*?"<>|` become `_`,
     // at most 100 characters, "page" when nothing is left.
     Q_INVOKABLE QString sanitizeFileName(const QString &title) const;
+    // The file URL (built with QUrl::fromLocalFile, so `#`, `%` and spaces
+    // survive) for `directory`/<sanitized title><extension>.
+    Q_INVOKABLE QUrl suggestedFileUrl(const QString &directory, const QString &title,
+                                      const QString &extension) const;
     // A fresh path for a temporary PDF; the folder is removed when Kondor quits.
     Q_INVOKABLE QString tempPdfPath();
     // Opens a local file with the default application.

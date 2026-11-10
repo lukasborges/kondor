@@ -232,8 +232,8 @@ ApplicationWindow {
     readonly property bool canPrintOrSave: tabs.currentTab ? !tabs.currentTab.newTabPage : false
 
     function suggestedFile(extension) {
-        const name = FileHelper.sanitizeFileName(tabs.currentTab ? tabs.currentTab.title : "")
-        return "file://" + Settings.downloadDirectory + "/" + name + extension
+        return FileHelper.suggestedFileUrl(Settings.downloadDirectory,
+                                           tabs.currentTab ? tabs.currentTab.title : "", extension)
     }
 
     function saveAsPdf() {

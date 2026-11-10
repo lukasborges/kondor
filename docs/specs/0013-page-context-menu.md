@@ -52,4 +52,8 @@ Visual target — match it (controls, Kirigami components, icon names, wording, 
 
 ## Decisions
 
-_None yet._ Answers to developer questions (`question` label) are recorded here as `| Question | Decision |` rows.
+| Question | Decision |
+| --- | --- |
+| `addTabWithProfile(tab.profile, url, true)`: the third argument is `background`, so `true` opens the tab behind the current one. | Pass `false`: "Open Link in New Tab", "Open Image in New Tab" and the selection search open in the foreground, like the `addTab(tab.isPrivate, url)` fallback (PR #73). |
+| Selected text inside an editable field gets both the selection block and the editing block, which makes two "Copy" items and a search for the field's text. | Skip the selection block when `request.isContentEditable`; the editing block already has Copy (PR #73). |
+| Chromium does not let every media element toggle its controls (for example `<audio>`). | Show "Show Controls" only when `request.mediaFlags` has `MediaCanToggleControls`. "Loop" is always shown for media, checked from `MediaLoop` (PR #73). |

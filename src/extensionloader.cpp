@@ -3,9 +3,8 @@
 #include <QDir>
 #include <QLoggingCategory>
 #include <QQuickWebEngineProfile>
-#include <QtWebEngineCore/qtwebenginecoreglobal.h>
 
-#if QT_CONFIG(webengine_extensions)
+#if KONDOR_HAVE_EXTENSIONS
 #include <QWebEngineExtensionInfo>
 #include <QWebEngineExtensionManager>
 #endif
@@ -19,7 +18,7 @@ ExtensionLoader::ExtensionLoader(QObject *parent)
 
 bool ExtensionLoader::isSupported()
 {
-#if QT_CONFIG(webengine_extensions)
+#if KONDOR_HAVE_EXTENSIONS
     return true;
 #else
     return false;
@@ -31,7 +30,7 @@ void ExtensionLoader::load(QQuickWebEngineProfile *profile, const QStringList &d
     if (directories.isEmpty())
         return;
 
-#if QT_CONFIG(webengine_extensions)
+#if KONDOR_HAVE_EXTENSIONS
     if (!profile || profile->isOffTheRecord()) {
         qCWarning(lcExtensions, "Extensions are never loaded into private profiles");
         return;

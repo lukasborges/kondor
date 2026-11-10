@@ -2,6 +2,15 @@
 
 #include <QObject>
 #include <QStringList>
+#include <QtWebEngineCore/qtwebenginecoreglobal.h>
+
+// Extension support needs the Qt 6.10 API; the `webengine_extensions` feature
+// alone is already on in 6.8/6.9, where the classes do not exist.
+#if QT_VERSION >= QT_VERSION_CHECK(6, 10, 0) && QT_CONFIG(webengine_extensions)
+#  define KONDOR_HAVE_EXTENSIONS 1
+#else
+#  define KONDOR_HAVE_EXTENSIONS 0
+#endif
 
 class QQuickWebEngineProfile;
 

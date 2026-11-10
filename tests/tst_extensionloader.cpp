@@ -5,6 +5,7 @@
 #include <QTcpSocket>
 #include <QQuickWebEngineProfile>
 #include <QSignalSpy>
+#include <QTemporaryDir>
 #include <QTest>
 #include <QUrl>
 #include <QtWebEngineCore/qtwebenginecoreglobal.h>
@@ -12,13 +13,13 @@
 
 #include "extensionloader.h"
 
-#if QT_CONFIG(webengine_extensions)
+#if KONDOR_HAVE_EXTENSIONS
 #include <QQuickItem>
 #include <QWebEngineExtensionManager>
 #include <QWebEngineExtensionInfo>
 #endif
 
-#if QT_CONFIG(webengine_extensions)
+#if KONDOR_HAVE_EXTENSIONS
 static QWebEngineExtensionInfo findTestExtension(QQuickWebEngineProfile &profile)
 {
     const auto extensions = profile.extensionManager()->extensions();
@@ -42,7 +43,7 @@ private slots:
 
 void TestExtensionLoader::loadsAnUnpackedExtension()
 {
-#if QT_CONFIG(webengine_extensions)
+#if KONDOR_HAVE_EXTENSIONS
     QQuickWebEngineProfile profile(QStringLiteral("kondor-extension-test"));
     ExtensionLoader loader;
     QSignalSpy spy(&loader, &ExtensionLoader::loadFinished);
@@ -64,7 +65,7 @@ void TestExtensionLoader::loadsAnUnpackedExtension()
 
 void TestExtensionLoader::contentScriptRuns()
 {
-#if QT_CONFIG(webengine_extensions)
+#if KONDOR_HAVE_EXTENSIONS
     QQuickWebEngineProfile profile(QStringLiteral("kondor-extension-test"));
     ExtensionLoader loader;
     QSignalSpy spy(&loader, &ExtensionLoader::loadFinished);
@@ -121,7 +122,7 @@ void TestExtensionLoader::contentScriptRuns()
 
 void TestExtensionLoader::privateProfilesGetNoExtensions()
 {
-#if QT_CONFIG(webengine_extensions)
+#if KONDOR_HAVE_EXTENSIONS
     QQuickWebEngineProfile profile; // off the record
     QVERIFY(profile.isOffTheRecord());
     ExtensionLoader loader;
@@ -139,6 +140,13 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
     QtWebEngineQuick::initialize();
+    // Keep the named test profiles out of the real home.
+    QTemporaryDir home;
+    if (!home.isValid())
+        return 1;
+    qputenv("XDG_DATA_HOME", home.path().toUtf8());
+    qputenv("XDG_CONFIG_HOME", home.path().toUtf8());
+    qputenv("XDG_CACHE_HOME", home.path().toUtf8());
     QGuiApplication app(argc, argv);
     QCoreApplication::setOrganizationName(QStringLiteral("KDE-Test"));
     QCoreApplication::setApplicationName(QStringLiteral("Kondor-ExtensionLoader-Test"));

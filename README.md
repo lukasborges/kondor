@@ -2,52 +2,82 @@
   <img src="packaging/kondor.png" width="128" alt="Kondor Browser logo">
 </p>
 
-# Kondor Browser
+<h1 align="center">Kondor Browser</h1>
 
-A native **Qt 6** browser (Qt Quick + Qt WebEngine) with the **KDE/Breeze** look and feel.
+<p align="center"><b>A fast, private web browser that feels at home on the KDE Plasma desktop.</b></p>
 
-> Personal/experimental project. **Not an official KDE project.**
+Kondor Browser opens modern websites with the same engine as Chrome, but it looks and behaves like any other Plasma app: Breeze controls, your icons and your color scheme, KDE dialogs and notifications, and the keyboard shortcuts you already know. Ads and trackers are blocked from the start, and private tabs leave nothing behind when you close them.
+
+> Personal, experimental project. **Not an official KDE project.**
 
 ![Kondor Browser screenshot](assets/screenshot.png)
 
+## Highlights
+
+- **Native on Plasma.** It follows your light or dark color scheme and uses Breeze icons and the KDE Configure, About and file dialogs. It can be your default browser.
+- **Private by default.** Ads and trackers are blocked. Private tabs and windows never write anything to disk, and every site asks before it uses your camera, microphone or location.
+- **Everything at hand.** Tabs, bookmarks, history, downloads, reader mode, find in page, zoom and developer tools, without add-ons.
+- **Speaks your language.** Kondor Browser comes in 19 languages, picked from your system settings.
+
 ## Status
 
-A working prototype with the core functionality in place: it actually browses, with tabs, a private mode, browsing history, bookmarks, settings and About windows and keyboard shortcuts.
+Kondor Browser is a working browser in active development. Expect some rough edges. Planned work is tracked on the [Kondor Roadmap](https://github.com/users/lukasborges/projects/1).
 
 ## Features
 
-### Implemented
+### Tabs and windows
 
-- **Real tabs** with `Qt WebEngine` (one `WebEngineView` per tab, preserving state when switching)
-- **Multiple windows**: Ctrl+N opens an independent window and Ctrl+Shift+P a private one where every tab, including new ones, is private (private browsing icon in the tab bar and a title suffix); each window has its own tabs, address bar and shortcuts, closing one leaves the others open, closing the last one quits, and "Move Tab to New Window" in the tab context menu moves a tab to a window of its own (the page reloads there). Shift+click on a link opens it in a new window
-- **Tab management**: favicons and a loading indicator, drag to reorder, middle-click to close, pinned tabs, a tab context menu (reload, duplicate, pin, close others and tabs to the right), keyboard switching and Chrome-like tab sizing (every tab has the same width, up to 240 px, and they shrink together down to 120 px; past that, scroll arrows appear next to the New Tab button and the current tab is always scrolled into view; closing tabs with the mouse keeps the close buttons under the pointer until it leaves the bar)
-- **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches with the configured engine); local hosts use `http://`, public hosts `https://`. While typing, a dropdown offers **Visit** and **Search with the configured engine** for the same text, then matching bookmarks and history entries (most visited first) and, when enabled in Settings, the search engine's suggestions; Up/Down select a row, Enter opens it, Esc restores the typed text, and clicking a row opens it in the current tab (middle click in a background tab). A host is completed inline from the history (`kd` → `kde.org`, with the added part selected), and Backspace just removes that completion
-- **New Tab page**: new tabs show Kondor's own page with a search field and the eight sites visited most in the last 90 days (favicons, open in a new tab or private tab, remove a site); private tabs get a private variant without top sites. The home page is only used by the first tab at startup and by the Home button, and a blank home page (the default) means the New Tab page
-- **Navigation**: back, forward, reload/stop, home
-- **Per-site zoom**: zoom steps (Ctrl++, Ctrl+-, Ctrl+wheel) are remembered per site in normal tabs and restored on later visits and restarts; the address bar shows the level when it is not 100% (click to reset). Private tabs use the saved level but never save
-- **Spell checking**: misspelled words in text fields are underlined and the context menu offers up to five suggestions; the languages (English and Portuguese dictionaries are built by default) are chosen in Settings → Spelling or in the "Spell Check Languages" submenu of the context menu
-- **Page context menu**: right-click on a link, image, video or audio, selected text or an editable field for the matching actions (open in a new/private tab, copy or save, search the selection, spelling suggestions, undo/redo/cut/copy/paste); on the page itself it offers back, forward, reload and view source. `Shift+F10` or the `Menu` key opens it from the keyboard
-- **Private mode**: off-the-record tabs and windows, isolated from the persistent profile
-- **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
-- **Bookmarks**: star button in the address bar (Ctrl+D) with a name/folder editor, a bookmarks toolbar (Ctrl+Shift+B), a Bookmarks menu, and a manager window (Ctrl+Shift+O) with folders, rename, delete, reordering, drag and drop between folders, a "Move To" menu and import of Firefox/Chrome HTML exports. A new profile starts with a set of KDE and Linux bookmarks (KDE, Planet KDE, Qt Docs and the News, Development and Linux folders); they are added once, and an existing profile is never changed
-- **Settings** (Ctrl+,): a KDE Configure window with a sidebar (searchable with Ctrl+F), page tabs and Defaults / OK / Apply / Cancel; options cover the home page (blank means the New Tab page), startup behavior, New Tab page top sites, search engine (including a custom URL and optional search suggestions in the address bar), download folder and privacy options (third-party cookies, clear data on exit, site permission management). Changes stay pending until OK or Apply, and are stored in `~/.config/KDE/Kondor.conf`
-- **About window** (Menu → About Kondor Browser): app, Qt and Chromium versions, components and authors, with a viewer for the license text; links open in a new normal tab
-- **Session restore**: optionally reopen the tabs of every window from the previous session on startup (General → Startup in the Configure window); private tabs are never saved. Ctrl+Shift+T reopens the last closed normal tabs, up to 20
-- **Developer tools** (F12 / Ctrl+Shift+I): Chromium DevTools docked below the page, per tab; "Inspect Element" in the page context menu
-- **Print and save** (Ctrl+P / Ctrl+S): print through the PDF viewer, "Save as PDF…", and "Save Page As…" (complete, HTML only or web archive)
-- **Reader mode** (Ctrl+Alt+R): on article pages the address bar shows a reader button that replaces the page with a clean, centered article (title, byline, images) in the KDE color scheme, using Mozilla Readability; floating controls change the font size and family (remembered) and exit
-- **Ad and tracker blocking**: network requests matching EasyList and EasyPrivacy (downloaded on first run, cached, refreshed every four days; cosmetic filtering is not supported) are blocked. A shield button in the address bar shows how many requests were blocked on the page and opens a popup with a per-site switch (the page reloads) and "Update Lists Now"; Settings → Privacy has the global switch and the last update date
-- **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
-- **Full screen**: a video can take the whole screen (the toolbars hide and a hint says how to leave), while F11 toggles window full screen keeping the toolbars; leaving full screen returns the window to its previous size and state
-- **Site permissions**: camera, microphone, screen sharing, location, notifications, clipboard, pointer lock and local fonts are requested in an inline bar with **Allow** / **Block**; the decision is remembered for the site (normal tabs only) and can be reviewed or revoked in Menu → **Site Permissions…** or Settings → Privacy
-- **Security indicator**: the address bar shows a padlock for HTTPS, **Not Secure** for HTTP and a page icon for local files; clicking it opens a site information popup with the connection state and the permissions remembered for the site. Certificate errors show a "Your connection is not private" page with **Back to Safety** and, when the error allows it, an advanced **Continue Anyway (Unsafe)** option; an accepted certificate is remembered for that site in the profile and keeps showing the warning state
-- **Crashed pages**: when a page's renderer process dies (crash, kill, out of memory), that tab shows a page with the reason, the exit code and **Reload** / **Close Tab** buttons; the tab keeps its place and the other tabs are not affected
-- **Download manager**: downloads show live progress, speed and size in a toolbar popup; pause, resume, cancel, open the file or show it in its folder, desktop notification on completion/failure, optional "ask where to save", and a confirmation before quitting with active downloads
-- **Command line**: `kondor URL…` opens the given URLs or local files in tabs of a new window (`--private` for a private window), and the app registers as a web browser so it can be the system default. A second launch reuses the running process: it opens the URLs as new tabs in the most recently active window and raises it, then exits; `--new-window` opens them in a new window and `--new-instance` starts a separate process (development)
-- **Menu** and **keyboard shortcuts**
-- **KDE look** via the `org.kde.desktop` (QQC2) style, with a `Fusion` fallback
-- **Semantic colors** (`Kirigami.Theme`/`palette`): follows the system color scheme
-- **Translations**: English source strings with translations for the main KDE languages, selected by the system locale
+- Open as many tabs as you like. They share the tab bar evenly, and arrows appear when there are too many to fit.
+- Drag tabs to reorder them, pin the ones you always keep open, and middle-click to close.
+- Right-click a tab to reload, duplicate, pin it, close the others, or move it to a new window.
+- Closed a tab by mistake? **Ctrl+Shift+T** brings it back, up to the last 20.
+- Work in several windows at once. When you start Kondor again, it can reopen every window and tab from last time.
+- Launching Kondor while it is already running opens the link in the window you used last, instead of starting a second copy.
+
+### Search and the address bar
+
+- Type an address or anything you want to search for in the same bar.
+- Suggestions appear as you type: your bookmarks, the sites you visit most, and, if you turn them on, the search engine's suggestions. Known sites are completed for you (`kd` becomes `kde.org`).
+- Choose your search engine in the settings, or enter any search URL.
+- New tabs show a search box and the sites you visit most, one click away.
+
+### Privacy and security
+
+- **Ad and tracker blocking** using the EasyList and EasyPrivacy lists, which update by themselves. A shield shows how many requests were blocked on the current page, and you can switch blocking off for a site.
+- **Private tabs and windows** keep no history, cookies, downloads list or site settings, and each private tab is isolated from the others.
+- **Site permissions:** camera, microphone, screen sharing, location, notifications and clipboard access are always requested in a bar above the page. Your answer is remembered per site, and you can review it or take it back at any time.
+- **Connection security** at a glance: a padlock for secure sites, a "Not Secure" label for the rest, and a clear warning page before you visit a site with an invalid certificate.
+- Optionally block third-party cookies and clear your browsing data when you quit.
+
+### Reading and using pages
+
+- **Reader mode** turns cluttered articles into clean, readable text in your color scheme, with adjustable font and size.
+- **Find in page** highlights every match as you type.
+- **Zoom** is remembered for each site.
+- **Spell checking** in text fields, with suggestions in the right-click menu and a choice of languages.
+- A **right-click menu** for links, images, videos, selected text and text fields.
+- **Print**, **save as PDF**, or **save the page** to read it offline.
+- **Full screen** for videos, or for the whole window with F11.
+- A page that crashes only affects its own tab, and one click reloads it.
+
+### Bookmarks, history and downloads
+
+- Bookmark a page with the star (**Ctrl+D**) and organize bookmarks in folders on the bookmarks toolbar.
+- The bookmark manager supports drag and drop between folders and imports bookmarks from Firefox and Chrome. New profiles start with a set of KDE and Linux bookmarks.
+- **History** is grouped by day and searchable, and you can clear all of it or just a time range.
+- **Downloads** show their progress in the toolbar and can be paused, resumed or opened. You get a desktop notification when one finishes, and Kondor asks before quitting while downloads are still running.
+
+### Made for KDE
+
+- Breeze style, Breeze icons and your system color scheme.
+- A **Configure Kondor Browser** window in the familiar KDE layout, with a searchable sidebar and Defaults, OK, Apply and Cancel buttons.
+- Desktop notifications, KDE file dialogs, and a **New Private Window** action in the launcher.
+- Familiar keyboard shortcuts, listed [below](#keyboard-shortcuts).
+
+### For web developers
+
+- Chromium **developer tools** (F12), docked below the page, and **Inspect Element** in the right-click menu.
+- **View page source** from the right-click menu.
 
 ## Stack
 

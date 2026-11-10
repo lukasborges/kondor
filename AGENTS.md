@@ -163,7 +163,7 @@ mention the difference in the PR.
 1. Implement exactly the spec ("Out of scope" is binding) and match the prototype.
 2. Build without new warnings in your files; run the offscreen smoke test; do the spec's
    "Manual test".
-3. Update `README.md` (Features → Implemented, shortcut table) when user-visible behavior changes.
+3. Update `README.md` when user-visible behavior changes: add or adjust a short, user-facing bullet in the matching "Features" group (what the user can do, not how it is built), and the shortcut table.
 4. Commit messages **in English**, Conventional Commits style (`feat: add find in page`,
    `fix: …`, `chore: …`, `docs: …`), **without `Co-Authored-By` or any other attribution trailer**.
 5. Open a PR using `.github/pull_request_template.md` (body says `Closes #<issue-number>`), then

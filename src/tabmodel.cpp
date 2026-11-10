@@ -55,6 +55,10 @@ Tab *TabModel::insertTab(int index, QQuickWebEngineProfile *profile, const QUrl 
     auto *profiles = ProfileManager::instance();
     if (!profile)
         profile = profiles->defaultProfile();
+    // Privacy is per window: a model of a private window never keeps a tab in
+    // the persistent profile, whichever caller creates it.
+    if (m_privateTabs && !profile->isOffTheRecord())
+        profile = profiles->createPrivateProfile();
 
     index = qBound(0, index, int(m_tabs.size()));
 
@@ -86,7 +90,8 @@ Tab *TabModel::addTab(bool isPrivate, const QUrl &initialUrl)
 {
     auto *profiles = ProfileManager::instance();
     QQuickWebEngineProfile *profile =
-        isPrivate ? profiles->createPrivateProfile() : profiles->defaultProfile();
+        (isPrivate || m_privateTabs) ? profiles->createPrivateProfile()
+                                     : profiles->defaultProfile();
     return insertTab(int(m_tabs.size()), profile, initialUrl, true);
 }
 
@@ -258,4 +263,12 @@ void TabModel::setCurrentIndex(int index)
     m_currentIndex = index;
     emit currentIndexChanged();
     emit currentTabChanged();
+}
+
+void TabModel::setPrivateTabs(bool privateTabs)
+{
+    if (m_privateTabs == privateTabs)
+        return;
+    m_privateTabs = privateTabs;
+    emit privateTabsChanged();
 }

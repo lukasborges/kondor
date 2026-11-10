@@ -42,6 +42,8 @@ ApplicationWindow {
 
     TabModel {
         id: tabs
+        // A private window has only private tabs, however a tab is opened.
+        privateTabs: window.privateWindow
     }
 
     // Set once the user confirms quitting with downloads still running, so the
@@ -163,7 +165,8 @@ ApplicationWindow {
     function moveTabToNewWindow(tab) {
         if (!tab)
             return
-        if (!WindowManager.newWindow(tab.isPrivate, [tab.url.toString()]))
+        const url = tab.newTabPage ? "" : tab.url.toString()
+        if (!WindowManager.newWindow(tab.isPrivate, [url]))
             return
         closeTabFor(tab)
     }

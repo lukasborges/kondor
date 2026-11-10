@@ -48,4 +48,6 @@ Visual target — match it (controls, Kirigami components, icon names, wording, 
 
 ## Decisions
 
-_None yet._ Answers to developer questions (`question` label) are recorded here as `| Question | Decision |` rows.
+| Question | Decision |
+| --- | --- |
+| Should Print be disabled in private tabs, since it writes a temporary PDF (PR #78)? | No. The temporary PDF is what this design needs, and the user starts it explicitly, like Save as PDF. It is created with mode 0600 in a 0700 `QTemporaryDir` under the system temp folder, which is removed when Kondor quits. |

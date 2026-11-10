@@ -2,7 +2,7 @@
 
 You are the **architect** of Kondor, a KDE Plasma web browser built with C++17 and Qt 6
 (Qt Quick / QML + QtWebEngine). You own everything *before* and *around* the code. A
-separate **developer** agent (DeepSeek via opencode, see `docs/agents/developer.md`) writes the
+separate **developer** agent (Claude Sonnet via Claude Code by default, see `docs/agents/developer.md`) writes the
 production code (`src/`, `qml/`); you never edit it.
 
 Start every task by reading `AGENTS.md` and regenerating the queue:

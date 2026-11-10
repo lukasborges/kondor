@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Developer agent loop: polls the roadmap queue and runs the developer (opencode) whenever the
-# queue has a row for it. See docs/agents/developer.md → "Automatic mode".
+# Developer agent loop: polls the roadmap queue and runs the developer (Claude Code by default, or
+# opencode) whenever the queue has a row for it. See docs/agents/developer.md → "Automatic mode".
 #
 #   scripts/dev-loop.sh                 # loop forever (what the systemd service runs)
 #   scripts/dev-loop.sh --once          # one check (and at most one developer run), then exit
@@ -15,8 +15,11 @@
 #   KONDOR_STATE_DIR     lock, log, counters and pause flags (default: ~/.local/state/kondor-dev-loop)
 #   KONDOR_INTERVAL      seconds between checks (default: 60)
 #   KONDOR_MAX_NO_PROGRESS  developer runs on the same issue without leaving `to-dev` before pausing (default: 2)
+#   KONDOR_ENGINE        claude (Claude Code, default) or opencode
+#   KONDOR_CLAUDE        claude binary (default: claude in PATH, else ~/.local/bin/claude)
 #   KONDOR_OPENCODE      opencode binary (default: opencode in PATH, else ~/.opencode/bin/opencode)
-#   KONDOR_MODEL         model for the developer (default: deepseek/deepseek-flash; see `opencode models`)
+#   KONDOR_MODEL         model for the developer (default: sonnet with claude,
+#                        deepseek/deepseek-flash with opencode; see `opencode models`)
 #
 # Everything is wrapped in main() so bash parses the whole file before running it: the service
 # runs this script from the control worktree, which is updated to origin/main while it runs.
@@ -31,8 +34,15 @@ main() {
   local state="${KONDOR_STATE_DIR:-$HOME/.local/state/kondor-dev-loop}"
   local interval="${KONDOR_INTERVAL:-60}"
   local max_no_progress="${KONDOR_MAX_NO_PROGRESS:-2}"
+  local engine="${KONDOR_ENGINE:-claude}"
+  local claude="${KONDOR_CLAUDE:-$(command -v claude || echo "$HOME/.local/bin/claude")}"
   local opencode="${KONDOR_OPENCODE:-$(command -v opencode || echo "$HOME/.opencode/bin/opencode")}"
-  local model="${KONDOR_MODEL:-deepseek/deepseek-flash}"
+  local model
+  case "$engine" in
+    claude)   model="${KONDOR_MODEL:-sonnet}" ;;
+    opencode) model="${KONDOR_MODEL:-deepseek/deepseek-flash}" ;;
+    *) echo "KONDOR_ENGINE must be claude or opencode, not '$engine'" >&2; exit 2 ;;
+  esac
   local log="$state/dev-loop.log"
   mkdir -p "$state"
 
@@ -75,10 +85,28 @@ You are the developer agent of this repository. Follow docs/agents/developer.md 
 4. If the spec is ambiguous, comment "**Question:** ..." on the PR (or the issue) and add the
    question label instead of guessing.
 5. Never edit docs/specs, prototypes, AGENTS.md or docs/agents; never merge; never push to main.
-6. Build with cmake --build <dir> --parallel 4, never a bare --parallel (with Makefiles it means unlimited jobs and runs the machine out of memory).
+6. Commit messages and PR bodies never carry Co-Authored-By or any other attribution trailer.
+7. Build with cmake --build <dir> --parallel 4, never a bare --parallel (with Makefiles it means unlimited jobs and runs the machine out of memory).
 
 Stop after this one step and print a short report: what changed, test results, PR link, labels.
 EOF
+  }
+
+  # One developer run on issue #$1, from the control checkout.
+  run_developer() {
+    local n="$1"
+    cd "$control" || return 1
+    if [[ "$engine" == opencode ]]; then
+      # opencode loads docs/agents/developer.md through opencode.json.
+      "$opencode" run --standalone --auto --model "$model" --title "Kondor developer #$n" "$(prompt_for "$n")"
+    else
+      # Claude Code does not read opencode.json: pass the role file as system prompt. Its default
+      # commit/PR attribution trailers are turned off: the project forbids them (AGENTS.md).
+      "$claude" -p --permission-mode auto --model "$model" --output-format text \
+        --settings '{"includeCoAuthoredBy": false, "attribution": {"commit": "", "pr": ""}}' \
+        --append-system-prompt "$(cat docs/agents/developer.md)" \
+        "$(prompt_for "$n")"
+    fi
   }
 
   step() {
@@ -100,9 +128,8 @@ EOF
     fi
 
     local run_log="$state/run-$n-$(date +%Y%m%d-%H%M%S).log"
-    log "running developer on #$n with $model (log: $run_log)"
-    (cd "$control" && "$opencode" run --standalone --auto --model "$model" --title "Kondor developer #$n" "$(prompt_for "$n")") \
-      >"$run_log" 2>&1
+    log "running developer on #$n with $engine/$model (log: $run_log)"
+    run_developer "$n" >"$run_log" 2>&1
     local rc=$?
     ensure_control || return 0
     count_file="$state/no-progress-$n"
@@ -128,7 +155,7 @@ EOF
     mkdir -p "$unit_dir"
     cat > "$unit_dir/$unit" <<EOF
 [Unit]
-Description=Kondor developer agent loop (opencode)
+Description=Kondor developer agent loop ($engine)
 After=network-online.target
 
 [Service]
@@ -140,6 +167,7 @@ Environment=PATH=$control/scripts/bin:$HOME/.opencode/bin:$HOME/.local/bin:/usr/
 Environment=KONDOR_REPO=$repo
 Environment=KONDOR_CONTROL_DIR=$control
 Environment=KONDOR_STATE_DIR=$state
+Environment=KONDOR_ENGINE=$engine
 Environment=KONDOR_MODEL=$model
 ExecStartPre=/usr/bin/git -C $repo fetch -q origin
 ExecStartPre=/usr/bin/git -C $control checkout -q --force --detach origin/main
@@ -164,7 +192,7 @@ EOF
     "")
       exec 9>"$state/lock"
       flock -n 9 || { log "another loop is running; exiting"; exit 0; }
-      log "loop started (every ${interval}s, model $model, repo $repo, control $control)"
+      log "loop started (every ${interval}s, $engine model $model, repo $repo, control $control)"
       local self="${BASH_SOURCE[0]}" self_sum
       self_sum="$(sha1sum "$self" | cut -d' ' -f1)"
       while true; do

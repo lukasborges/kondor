@@ -5,8 +5,9 @@ You are the **developer** of Kondor, a KDE Plasma web browser built with C++17 a
 workflows when a dependency requires it). A separate **architect** agent owns the specs,
 prototypes, reviews and merges (`docs/agents/architect.md`).
 
-This file is loaded automatically by opencode through `opencode.json` at the repository root,
-together with `AGENTS.md`.
+The developer loop passes this file to the agent as its role: Claude Code (the default engine)
+gets it with `--append-system-prompt`, opencode loads it through `opencode.json` at the
+repository root. Read `AGENTS.md` too.
 
 ## Start of every session
 
@@ -68,15 +69,16 @@ records the decision in the spec.
 
 `scripts/dev-loop.sh` runs this role without a human in the loop. Every minute it refreshes a
 loop-owned worktree at `origin/main` (`~/.local/share/kondor-dev-loop/control`), regenerates the
-queue and, when there is a `developer` row, runs `opencode run --standalone --auto --model deepseek/deepseek-flash` (override with
-`KONDOR_MODEL`) from that worktree with a prompt for that one issue. If a run ends with the issue still in `to-dev` twice in
+queue and, when there is a `developer` row, runs the developer from that worktree: by default Claude Code with Sonnet
+(`claude -p --permission-mode auto --model sonnet`, attribution trailers turned off), or opencode
+with DeepSeek when `KONDOR_ENGINE=opencode` (`KONDOR_MODEL` overrides the model of either) with a prompt for that one issue. If a run ends with the issue still in `to-dev` twice in
 a row, the loop pauses that issue and sends a desktop notification.
 
 ```bash
 scripts/dev-loop.sh --dry-run      # show what would run now
 scripts/dev-loop.sh --install      # install + start the systemd user service
 journalctl --user -u kondor-dev-loop -f            # follow it
-tail -f ~/.local/state/kondor-dev-loop/dev-loop.log   # loop log; run-<N>-*.log per opencode run
+tail -f ~/.local/state/kondor-dev-loop/dev-loop.log   # loop log; run-<N>-*.log per developer run
 scripts/dev-loop.sh --resume <N>   # unpause an issue
 systemctl --user stop kondor-dev-loop              # stop (start again with start)
 scripts/dev-loop.sh --uninstall    # remove the service

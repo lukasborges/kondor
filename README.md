@@ -24,6 +24,7 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches with the configured engine); local hosts use `http://`, public hosts `https://`. While typing, a dropdown offers **Visit** and **Search with the configured engine** for the same text, then matching bookmarks and history entries (most visited first) and, when enabled in Settings, the search engine's suggestions; Up/Down select a row, Enter opens it, Esc restores the typed text, and clicking a row opens it in the current tab (middle click in a background tab). A host is completed inline from the history (`kd` → `kde.org`, with the added part selected), and Backspace just removes that completion
 - **New Tab page**: new tabs show Kondor's own page with a search field and the eight sites visited most in the last 90 days (favicons, open in a new tab or private tab, remove a site); private tabs get a private variant without top sites. The home page is only used by the first tab at startup and by the Home button, and a blank home page (the default) means the New Tab page
 - **Navigation**: back, forward, reload/stop, home
+- **Per-site zoom**: zoom steps (Ctrl++, Ctrl+-, Ctrl+wheel) are remembered per site in normal tabs and restored on later visits and restarts; the address bar shows the level when it is not 100% (click to reset). Private tabs use the saved level but never save
 - **Page context menu**: right-click on a link, image, video or audio, selected text or an editable field for the matching actions (open in a new/private tab, copy or save, search the selection, spelling suggestions, undo/redo/cut/copy/paste); on the page itself it offers back, forward, reload and view source. `Shift+F10` or the `Menu` key opens it from the keyboard
 - **Private mode**: off-the-record tabs and windows, isolated from the persistent profile
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
@@ -184,7 +185,7 @@ qml/
 | `Ctrl+R` / `F5` | Reload |
 | `Alt+←` / `Alt+→` | Back / forward |
 | `Ctrl++` / `Ctrl+-` | Zoom in / out |
-| `Ctrl+0` | Reset zoom |
+| `Ctrl+0` | Reset zoom (also by clicking the zoom level in the address bar) |
 
 ## Translations
 

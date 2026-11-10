@@ -98,6 +98,8 @@ qt_add_qml_module(kondor
         src/faviconstore.cpp
         src/searchsuggestions.h
         src/searchsuggestions.cpp
+        src/zoommanager.h
+        src/zoommanager.cpp
 )
 
 qt_add_translations(kondor

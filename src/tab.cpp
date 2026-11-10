@@ -303,6 +303,14 @@ void Tab::stop()
     emit stopRequested();
 }
 
+void Tab::setZoomFactor(qreal factor)
+{
+    if (qFuzzyCompare(m_zoomFactor, factor))
+        return;
+    m_zoomFactor = factor;
+    emit zoomFactorChanged();
+}
+
 void Tab::zoomIn()
 {
     emit zoomInRequested();

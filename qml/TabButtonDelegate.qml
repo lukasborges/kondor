@@ -103,18 +103,45 @@ TabButton {
     // The dragged tab is drawn at the pointer through this translate: the
     // ListView owns x. It settles back to 0 when the drag ends (#91).
     property real dragShift: 0
-    transform: Translate { x: control.dragShift }
-    z: dragHandler.active ? 10 : 0
+    // Neighbours of the dragged tab slide to their new slot through this
+    // offset (the ListView's move/displaced transitions crash on close).
+    property real slideShift: 0
+    property real lastX: 0
+    transform: [
+        Translate { x: control.dragShift },
+        Translate { x: control.slideShift }
+    ]
+    z: dragHandler.active || settle.running ? 10 : 0
 
-    Behavior on dragShift {
-        enabled: !dragHandler.active
-        NumberAnimation {
-            duration: Kirigami.Units.shortDuration
-            easing.type: Easing.OutCubic
-        }
+    NumberAnimation {
+        id: settle
+        target: control
+        property: "dragShift"
+        to: 0
+        duration: Kirigami.Units.shortDuration
+        easing.type: Easing.OutCubic
     }
 
-    onXChanged: if (dragHandler.active) dragHandler.update()
+    NumberAnimation {
+        id: slideAnimation
+        target: control
+        property: "slideShift"
+        to: 0
+        duration: Kirigami.Units.shortDuration
+        easing.type: Easing.OutCubic
+    }
+
+    Component.onCompleted: lastX = x
+
+    onXChanged: {
+        if (dragHandler.active) {
+            dragHandler.update()
+        } else if (tabStrip && tabStrip.tabDragActive) {
+            slideShift += lastX - x
+            slideAnimation.restart()
+        }
+        lastX = x
+    }
 
     // Scrolls the strip while a tab is dragged to its left or right edge.
     Timer {
@@ -204,9 +231,12 @@ TabButton {
                 grabOffset = contentX(centroid.scenePressPosition.x, centroid.scenePressPosition.y) - control.x
                 // Starting a drag selects the dragged tab.
                 control.tabModel.setCurrentIndex(control.tabModel.indexOfTab(control.tab))
+                settle.stop()
                 update()
             } else {
-                control.dragShift = 0
+                settle.start()
+                if (control.tabStrip)
+                    control.tabStrip.scheduleEnsureVisible()
             }
         }
     }

@@ -253,18 +253,6 @@ Rectangle {
                     // Tabs have fixed widths: the style's -1 px overlap only
                     // shifts them and breaks tabX().
                     contentItem.spacing = 0
-                    // Tabs slide aside while another one is dragged (#91).
-                    contentItem.move = slide
-                    contentItem.displaced = slide
-                }
-            }
-
-            resources: Transition {
-                id: slide
-                NumberAnimation {
-                    property: "x"
-                    duration: Kirigami.Units.shortDuration
-                    easing.type: Easing.OutCubic
                 }
             }
 

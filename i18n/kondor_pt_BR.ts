@@ -1648,17 +1648,17 @@
 <context>
     <name>TabStrip</name>
     <message>
-        <location filename="../qml/TabStrip.qml" line="298"/>
+        <location filename="../qml/TabStrip.qml" line="302"/>
         <source>Scroll Tabs Left</source>
         <translation>Rolar abas para a esquerda</translation>
     </message>
     <message>
-        <location filename="../qml/TabStrip.qml" line="315"/>
+        <location filename="../qml/TabStrip.qml" line="319"/>
         <source>Scroll Tabs Right</source>
         <translation>Rolar abas para a direita</translation>
     </message>
     <message>
-        <location filename="../qml/TabStrip.qml" line="331"/>
+        <location filename="../qml/TabStrip.qml" line="335"/>
         <source>New Tab</source>
         <translation>Nova aba</translation>
     </message>

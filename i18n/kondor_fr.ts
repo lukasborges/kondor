@@ -1648,17 +1648,17 @@
 <context>
     <name>TabStrip</name>
     <message>
-        <location filename="../qml/TabStrip.qml" line="298"/>
+        <location filename="../qml/TabStrip.qml" line="302"/>
         <source>Scroll Tabs Left</source>
         <translation>Faire défiler les onglets vers la gauche</translation>
     </message>
     <message>
-        <location filename="../qml/TabStrip.qml" line="315"/>
+        <location filename="../qml/TabStrip.qml" line="319"/>
         <source>Scroll Tabs Right</source>
         <translation>Faire défiler les onglets vers la droite</translation>
     </message>
     <message>
-        <location filename="../qml/TabStrip.qml" line="331"/>
+        <location filename="../qml/TabStrip.qml" line="335"/>
         <source>New Tab</source>
         <translation>Nouvel onglet</translation>
     </message>

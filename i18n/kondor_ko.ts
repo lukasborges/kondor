@@ -1648,17 +1648,17 @@
 <context>
     <name>TabStrip</name>
     <message>
-        <location filename="../qml/TabStrip.qml" line="298"/>
+        <location filename="../qml/TabStrip.qml" line="302"/>
         <source>Scroll Tabs Left</source>
         <translation>탭을 왼쪽으로 스크롤</translation>
     </message>
     <message>
-        <location filename="../qml/TabStrip.qml" line="315"/>
+        <location filename="../qml/TabStrip.qml" line="319"/>
         <source>Scroll Tabs Right</source>
         <translation>탭을 오른쪽으로 스크롤</translation>
     </message>
     <message>
-        <location filename="../qml/TabStrip.qml" line="331"/>
+        <location filename="../qml/TabStrip.qml" line="335"/>
         <source>New Tab</source>
         <translation>새 탭</translation>
     </message>

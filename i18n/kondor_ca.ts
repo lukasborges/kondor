@@ -1122,62 +1122,62 @@
 <context>
     <name>PasswordsPage</name>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="88"/>
+        <location filename="../qml/PasswordsPage.qml" line="87"/>
         <source>Delete Saved Password</source>
         <translation>Suprimeix la contrasenya desada</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="89"/>
+        <location filename="../qml/PasswordsPage.qml" line="88"/>
         <source>Delete the saved password for %1 on %2?</source>
         <translation>Voleu suprimir la contrasenya desada de %1 a %2?</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="106"/>
+        <location filename="../qml/PasswordsPage.qml" line="105"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
         <translation>El KWallet està inhabilitat o se n&apos;ha denegat l&apos;accés, de manera que no es poden desar ni omplir contrasenyes.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="109"/>
+        <location filename="../qml/PasswordsPage.qml" line="108"/>
         <source>Try Again</source>
         <translation>Torna-ho a provar</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="119"/>
+        <location filename="../qml/PasswordsPage.qml" line="118"/>
         <source>Offer to save passwords</source>
         <translation>Ofereix desar les contrasenyes</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="133"/>
+        <location filename="../qml/PasswordsPage.qml" line="132"/>
         <source>Filter by site or username…</source>
         <translation>Filtra per lloc o nom d&apos;usuari…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="190"/>
+        <location filename="../qml/PasswordsPage.qml" line="189"/>
         <source>Hide Password</source>
         <translation>Amaga la contrasenya</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="190"/>
+        <location filename="../qml/PasswordsPage.qml" line="189"/>
         <source>Show Password</source>
         <translation>Mostra la contrasenya</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="200"/>
+        <location filename="../qml/PasswordsPage.qml" line="199"/>
         <source>Copy Password</source>
         <translation>Copia la contrasenya</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="210"/>
+        <location filename="../qml/PasswordsPage.qml" line="209"/>
         <source>Delete</source>
         <translation>Suprimeix</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="233"/>
+        <location filename="../qml/PasswordsPage.qml" line="232"/>
         <source>Kondor never offers to save passwords on these sites.</source>
         <translation>El Kondor mai no ofereix desar contrasenyes en aquests llocs.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="265"/>
+        <location filename="../qml/PasswordsPage.qml" line="264"/>
         <source>Remove</source>
         <translation>Elimina</translation>
     </message>

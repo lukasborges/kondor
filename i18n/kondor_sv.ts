@@ -1122,62 +1122,62 @@
 <context>
     <name>PasswordsPage</name>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="88"/>
+        <location filename="../qml/PasswordsPage.qml" line="87"/>
         <source>Delete Saved Password</source>
         <translation>Ta bort sparat lösenord</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="89"/>
+        <location filename="../qml/PasswordsPage.qml" line="88"/>
         <source>Delete the saved password for %1 on %2?</source>
         <translation>Ta bort det sparade lösenordet för %1 på %2?</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="106"/>
+        <location filename="../qml/PasswordsPage.qml" line="105"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
         <translation>KWallet är inaktiverat eller åtkomst nekades, så lösenord kan inte sparas eller fyllas i.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="109"/>
+        <location filename="../qml/PasswordsPage.qml" line="108"/>
         <source>Try Again</source>
         <translation>Försök igen</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="119"/>
+        <location filename="../qml/PasswordsPage.qml" line="118"/>
         <source>Offer to save passwords</source>
         <translation>Erbjud att spara lösenord</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="133"/>
+        <location filename="../qml/PasswordsPage.qml" line="132"/>
         <source>Filter by site or username…</source>
         <translation>Filtrera efter webbplats eller användarnamn…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="190"/>
+        <location filename="../qml/PasswordsPage.qml" line="189"/>
         <source>Hide Password</source>
         <translation>Dölj lösenord</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="190"/>
+        <location filename="../qml/PasswordsPage.qml" line="189"/>
         <source>Show Password</source>
         <translation>Visa lösenord</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="200"/>
+        <location filename="../qml/PasswordsPage.qml" line="199"/>
         <source>Copy Password</source>
         <translation>Kopiera lösenord</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="210"/>
+        <location filename="../qml/PasswordsPage.qml" line="209"/>
         <source>Delete</source>
         <translation>Ta bort</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="233"/>
+        <location filename="../qml/PasswordsPage.qml" line="232"/>
         <source>Kondor never offers to save passwords on these sites.</source>
         <translation>Kondor erbjuder aldrig att spara lösenord på dessa webbplatser.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="265"/>
+        <location filename="../qml/PasswordsPage.qml" line="264"/>
         <source>Remove</source>
         <translation>Ta bort</translation>
     </message>

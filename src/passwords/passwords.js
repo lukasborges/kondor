@@ -54,7 +54,10 @@
     // `explicit`: the user picked this account, so replace the username too.
     function fillForm(password, credential, explicit) {
         const user = usernameField(password);
-        if (user && (explicit || user.value === ""))
+        // Autofill never puts a password next to a different username.
+        if (user && !explicit && user.value !== "" && user.value !== credential.username)
+            return;
+        if (user && user.value !== credential.username)
             setValue(user, credential.username);
         setValue(password, credential.password);
         filled.add(password);

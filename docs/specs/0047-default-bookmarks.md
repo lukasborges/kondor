@@ -21,12 +21,12 @@ already have bookmarks get nothing, and deleted defaults never come back.
 
 ## Design / behavior
 
-1. **Migration 3** in `Database::migrate()` (`kSchemaVersion = 3`), in the same transaction as the
+1. **Migration 4** in `Database::migrate()` (`kSchemaVersion = 4`; version 3 is the favicons migration of #45), in the same transaction as the
    others:
    - If the `bookmarks` table has **no row with `special IS NULL`** (no user bookmark or folder),
      insert the defaults below under the `toolbar` root, in this order (`position` 0, 1, 2…
      inside each parent; folders `is_folder = 1`, `url NULL`; `created_at` = now).
-   - Otherwise do nothing. Either way `user_version` becomes 3, so the step never runs again.
+   - Otherwise do nothing. Either way `user_version` becomes 4, so the step never runs again.
    - Put the data in one static table in `src/database.cpp` (or a small
      `src/defaultbookmarks.{h,cpp}` registered in CMake), not spread across `INSERT`s.
 2. **Folder names** are translated at insert time with
@@ -66,7 +66,7 @@ already have bookmarks get nothing, and deleted defaults never come back.
    defaults show up in the Bookmarks menu and in the manager, and on the toolbar once it is shown.
 4. **Tests** (`tests/tst_bookmarks.cpp`):
    - a fresh database has the 6 toolbar entries above, in order, with 6 / 6 / 7 children;
-   - a database at version 2 that already has a user bookmark is migrated to 3 with nothing added;
+   - a database at version 2 that already has a user bookmark is migrated to 4 with nothing added;
    - removing a default and re-opening the database does not bring it back.
 5. **Privacy:** this only touches the persistent profile's database; private tabs are unaffected.
 6. README: mention the default bookmarks in Features → Implemented.
@@ -108,3 +108,4 @@ Visual target — match it (controls, Kirigami components, icon names, wording, 
 | Question | Decision |
 | --- | --- |
 | Seed through a migration or a first-run flag? | Migration 3: it runs exactly once per database, needs no extra setting, and the "no user bookmarks" guard protects existing profiles. |
+| Version 3 is already the favicons migration (#45). Which version seeds the bookmarks? | Migration 4 (`kSchemaVersion = 4`), same behavior (PR #62). |

@@ -117,55 +117,6 @@ xdg-settings set default-web-browser kondor.desktop
 Kondor then opens links clicked in other applications. The desktop entry also provides a
 **New Private Window** action (`kondor --private`).
 
-## Project structure
-
-```
-CMakeLists.txt
-src/
-  main.cpp            startup (command line, WebEngine, KDE style, QML engine)
-  profilemanager.*    persistent/private profiles, address/search resolution
-  addressresolver.*   pure address/search resolution (unit tested)
-  startupargs.*       QML singleton: command-line URLs and private mode
-  startupurl.*        command-line argument to URL conversion (unit tested)
-  settings.*          QML singleton: user settings persisted with QSettings
-  sessionmanager.*    QML singleton: save/restore the normal tabs of every window
-  windowmanager.*     QML singleton: create the browser windows (normal and private)
-  singleinstance.*    one process per profile: later launches forward their URLs over a local socket in the runtime directory
-  tab.*               per-tab state (title, URL, icon, loading, history, pending permissions)
-  tabmodel.*          tab model (QAbstractListModel)
-  database.*          SQLite storage (schema + migrations)
-  historymanager.*    QML singleton: write/query/clear browsing history
-  historymodel.*      history list model (QAbstractListModel)
-  bookmarkmanager.*   QML singleton: bookmark tree, folders, HTML import
-  searchsuggestions.* QML singleton: search-engine autocomplete for the address bar
-  bookmarkmodel.*     one folder's items as a list model (QAbstractListModel)
-  faviconstore.*      QML singleton: one favicon per host (table `favicons`), filled by normal tabs only
-  downloadmanager.*   QML singleton: downloads list model, actions and notifications
-  notifier.*          QML singleton: desktop notifications over D-Bus
-  filehelper.*        QML singleton: file names, temporary PDFs and opening files for print / save
-  aboutinfo.*         QML singleton: read-only version and license data for the About window
-qml/
-  BrowserWindow.qml   one browser window: tab bar, navigation bar, menu, shortcuts
-  AddressSuggestions.qml  address bar dropdown (visit/search, bookmarks, history, suggestions)
-  WebViewTab.qml      WebEngineView + bridge to the Tab object
-  NewTabPage.qml      New Tab page (logo, search field, top sites)
-  TabButtonDelegate.qml  one tab button (favicon, title, close, drag, pinned)
-  TabContextMenu.qml  context menu for a tab in the tab bar
-  InlineBar.qml       shared strip between the header and the page content
-  FindBar.qml         find bar (Ctrl+F)
-  PermissionBar.qml   inline site permission request with Allow and Block
-  PermissionTypeInfo.qml  wording and Breeze icons for each permission type
-  SitePermissionsDialog.qml  remembered site decisions, filter and Revoke
-  DownloadsPopup.qml  download list popup with progress and actions
-  HistoryWindow.qml   browsing history window (search, grouped by day, clear)
-  SettingsWindow.qml  settings window (home page, new tabs, search, downloads, privacy)
-  AboutWindow.qml     About Kondor Browser window with components, authors and license
-  BookmarksBar.qml    bookmarks toolbar under the navigation bar
-  BookmarkMenu.qml    folder menu (bar folders and the main menu submenu)
-  BookmarksWindow.qml bookmark manager window (folders, reorder, drag and drop, import)
-  SiteIcon.qml        favicon with a fallback icon (toolbar, manager, New Tab page)
-```
-
 ## Keyboard shortcuts
 
 | Shortcut | Action |

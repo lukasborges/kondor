@@ -105,26 +105,7 @@ Menu {
         }
         Component {
             id: siteComponent
-            MenuItem {
-                id: siteItem
-                required property url pageUrl
-                required property string label
-                text: label
-                contentItem: RowLayout {
-                    spacing: Kirigami.Units.smallSpacing
-                    SiteIcon {
-                        pageUrl: siteItem.pageUrl
-                        Layout.preferredWidth: Kirigami.Units.iconSizes.small
-                        Layout.preferredHeight: Kirigami.Units.iconSizes.small
-                    }
-                    Label {
-                        text: siteItem.label
-                        elide: Text.ElideRight
-                        Layout.fillWidth: true
-                        Layout.maximumWidth: Kirigami.Units.gridUnit * 18
-                    }
-                }
-            }
+            SiteMenuItem {}
         }
     }
 

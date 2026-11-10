@@ -54,8 +54,10 @@ Menu {
                 menu.addMenu(submenu)
                 ++added
             } else {
-                const item = bookmarkComponent.createObject(null)
-                item.text = entry.title.length ? entry.title : entry.url
+                const item = bookmarkComponent.createObject(null, {
+                    pageUrl: entry.url,
+                    label: entry.title.length ? entry.title : entry.url
+                })
                 const url = entry.url
                 // qmllint disable missing-property
                 item.triggered.connect(function() {
@@ -98,7 +100,7 @@ Menu {
 
     Component {
         id: bookmarkComponent
-        MenuItem {}
+        SiteMenuItem {}
     }
 
     Component {

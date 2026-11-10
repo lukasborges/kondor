@@ -164,22 +164,22 @@
 <context>
     <name>BookmarkMenu</name>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="77"/>
+        <location filename="../qml/BookmarkMenu.qml" line="79"/>
         <source>Bookmark This Page</source>
         <translation>Dodaj tę stronę do zakładek</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="83"/>
+        <location filename="../qml/BookmarkMenu.qml" line="85"/>
         <source>Manage Bookmarks…</source>
         <translation>Zarządzaj zakładkami…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="90"/>
+        <location filename="../qml/BookmarkMenu.qml" line="92"/>
         <source>Show Bookmarks Toolbar</source>
         <translation>Pokaż pasek zakładek</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="112"/>
+        <location filename="../qml/BookmarkMenu.qml" line="114"/>
         <source>(Empty)</source>
         <translation>(Puste)</translation>
     </message>
@@ -861,42 +861,42 @@
         <translation>Dzisiaj</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="154"/>
+        <location filename="../qml/MainMenu.qml" line="135"/>
         <source>Zoom</source>
         <translation>Powiększenie</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="163"/>
+        <location filename="../qml/MainMenu.qml" line="144"/>
         <source>Zoom Out (Ctrl+−)</source>
         <translation>Pomniejsz (Ctrl+−)</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="173"/>
+        <location filename="../qml/MainMenu.qml" line="154"/>
         <source>Reset Zoom (Ctrl+0)</source>
         <translation>Przywróć powiększenie (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="183"/>
+        <location filename="../qml/MainMenu.qml" line="164"/>
         <source>Zoom In (Ctrl++)</source>
         <translation>Powiększ (Ctrl++)</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="196"/>
+        <location filename="../qml/MainMenu.qml" line="177"/>
         <source>Exit Full Screen (F11)</source>
         <translation>Wyjdź z trybu pełnoekranowego (F11)</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="197"/>
+        <location filename="../qml/MainMenu.qml" line="178"/>
         <source>Full Screen (F11)</source>
         <translation>Pełny ekran (F11)</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="210"/>
+        <location filename="../qml/MainMenu.qml" line="191"/>
         <source>More Tools</source>
         <translation>Więcej narzędzi</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="223"/>
+        <location filename="../qml/MainMenu.qml" line="204"/>
         <source>Help</source>
         <translation>Pomoc</translation>
     </message>

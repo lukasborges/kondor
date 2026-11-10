@@ -164,22 +164,22 @@
 <context>
     <name>BookmarkMenu</name>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="77"/>
+        <location filename="../qml/BookmarkMenu.qml" line="79"/>
         <source>Bookmark This Page</source>
         <translation>Добавить страницу в закладки</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="83"/>
+        <location filename="../qml/BookmarkMenu.qml" line="85"/>
         <source>Manage Bookmarks…</source>
         <translation>Управление закладками…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="90"/>
+        <location filename="../qml/BookmarkMenu.qml" line="92"/>
         <source>Show Bookmarks Toolbar</source>
         <translation>Показывать панель закладок</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="112"/>
+        <location filename="../qml/BookmarkMenu.qml" line="114"/>
         <source>(Empty)</source>
         <translation>(Пусто)</translation>
     </message>
@@ -861,42 +861,42 @@
         <translation>Сегодня</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="154"/>
+        <location filename="../qml/MainMenu.qml" line="135"/>
         <source>Zoom</source>
         <translation>Масштаб</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="163"/>
+        <location filename="../qml/MainMenu.qml" line="144"/>
         <source>Zoom Out (Ctrl+−)</source>
         <translation>Уменьшить (Ctrl+−)</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="173"/>
+        <location filename="../qml/MainMenu.qml" line="154"/>
         <source>Reset Zoom (Ctrl+0)</source>
         <translation>Сбросить масштаб (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="183"/>
+        <location filename="../qml/MainMenu.qml" line="164"/>
         <source>Zoom In (Ctrl++)</source>
         <translation>Увеличить (Ctrl++)</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="196"/>
+        <location filename="../qml/MainMenu.qml" line="177"/>
         <source>Exit Full Screen (F11)</source>
         <translation>Выйти из полноэкранного режима (F11)</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="197"/>
+        <location filename="../qml/MainMenu.qml" line="178"/>
         <source>Full Screen (F11)</source>
         <translation>Полноэкранный режим (F11)</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="210"/>
+        <location filename="../qml/MainMenu.qml" line="191"/>
         <source>More Tools</source>
         <translation>Дополнительные инструменты</translation>
     </message>
     <message>
-        <location filename="../qml/MainMenu.qml" line="223"/>
+        <location filename="../qml/MainMenu.qml" line="204"/>
         <source>Help</source>
         <translation>Справка</translation>
     </message>

@@ -63,6 +63,7 @@ qt_add_qml_module(kondor
         qml/MainMenu.qml
         qml/BookmarksWindow.qml
         qml/SiteIcon.qml
+        qml/SiteMenuItem.qml
         qml/AddressSuggestions.qml
         qml/AboutWindow.qml
     SOURCES

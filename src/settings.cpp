@@ -15,6 +15,19 @@ constexpr auto kShowTopSites = "NewTab/ShowTopSites";
 constexpr auto kHiddenTopSites = "NewTab/HiddenTopSites";
 constexpr auto kClearDataOnExit = "Privacy/ClearOnExit";
 constexpr auto kBlockThirdPartyCookies = "Privacy/BlockThirdPartyCookies";
+
+// Option property names, used by defaultValue().
+constexpr auto kHomePageName = "homePage";
+constexpr auto kSearchEngineName = "searchEngine";
+constexpr auto kCustomSearchUrlName = "customSearchUrl";
+constexpr auto kDownloadDirectoryName = "downloadDirectory";
+constexpr auto kAskWhereToSaveName = "askWhereToSave";
+constexpr auto kStartupBehaviorName = "startupBehavior";
+constexpr auto kShowBookmarksBarName = "showBookmarksBar";
+constexpr auto kShowTopSitesName = "showTopSites";
+constexpr auto kHiddenTopSitesName = "hiddenTopSites";
+constexpr auto kClearDataOnExitName = "clearDataOnExit";
+constexpr auto kBlockThirdPartyCookiesName = "blockThirdPartyCookies";
 }
 
 Settings *Settings::instance()
@@ -33,23 +46,61 @@ Settings *Settings::create(QQmlEngine *engine, QJSEngine *jsEngine)
 Settings::Settings(QObject *parent)
     : QObject(parent)
     , m_settings(QStringLiteral("KDE"), QStringLiteral("Kondor"))
-    , m_homePage(m_settings.value(QLatin1String(kHomePage)).toString())
+    , m_homePage(m_settings.value(QLatin1String(kHomePage),
+                                  defaultValue(QLatin1String(kHomePageName))).toString())
     , m_searchEngine(m_settings.value(QLatin1String(kSearchEngine),
-                                      QStringLiteral("duckduckgo")).toString())
-    , m_customSearchUrl(m_settings.value(QLatin1String(kCustomSearchUrl)).toString())
+                                      defaultValue(QLatin1String(kSearchEngineName))).toString())
+    , m_customSearchUrl(m_settings.value(QLatin1String(kCustomSearchUrl),
+                                         defaultValue(QLatin1String(kCustomSearchUrlName)))
+                            .toString())
     , m_downloadDirectory(m_settings.value(QLatin1String(kDownloadDirectory),
-                                           QStandardPaths::writableLocation(
-                                               QStandardPaths::DownloadLocation)).toString())
-    , m_askWhereToSave(m_settings.value(QLatin1String(kAskWhereToSave), false).toBool())
+                                           defaultValue(QLatin1String(kDownloadDirectoryName)))
+                              .toString())
+    , m_askWhereToSave(m_settings.value(QLatin1String(kAskWhereToSave),
+                                        defaultValue(QLatin1String(kAskWhereToSaveName))).toBool())
     , m_startupBehavior(m_settings.value(QLatin1String(kStartupBehavior),
-                                         QStringLiteral("homepage")).toString())
-    , m_showBookmarksBar(m_settings.value(QLatin1String(kShowBookmarksBar), false).toBool())
-    , m_showTopSites(m_settings.value(QLatin1String(kShowTopSites), true).toBool())
-    , m_hiddenTopSites(m_settings.value(QLatin1String(kHiddenTopSites)).toStringList())
-    , m_clearDataOnExit(m_settings.value(QLatin1String(kClearDataOnExit), false).toBool())
+                                         defaultValue(QLatin1String(kStartupBehaviorName))).toString())
+    , m_showBookmarksBar(m_settings.value(QLatin1String(kShowBookmarksBar),
+                                          defaultValue(QLatin1String(kShowBookmarksBarName)))
+                             .toBool())
+    , m_showTopSites(m_settings.value(QLatin1String(kShowTopSites),
+                                      defaultValue(QLatin1String(kShowTopSitesName))).toBool())
+    , m_hiddenTopSites(m_settings.value(QLatin1String(kHiddenTopSites),
+                                        defaultValue(QLatin1String(kHiddenTopSitesName)))
+                           .toStringList())
+    , m_clearDataOnExit(m_settings.value(QLatin1String(kClearDataOnExit),
+                                         defaultValue(QLatin1String(kClearDataOnExitName))).toBool())
     , m_blockThirdPartyCookies(m_settings.value(QLatin1String(kBlockThirdPartyCookies),
-                                                false).toBool())
+                                                defaultValue(QLatin1String(kBlockThirdPartyCookiesName)))
+                                   .toBool())
 {
+}
+
+QVariant Settings::defaultValue(const QString &name) const
+{
+    if (name == QLatin1String(kHomePageName))
+        return QString();
+    if (name == QLatin1String(kSearchEngineName))
+        return QStringLiteral("duckduckgo");
+    if (name == QLatin1String(kCustomSearchUrlName))
+        return QString();
+    if (name == QLatin1String(kDownloadDirectoryName))
+        return QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+    if (name == QLatin1String(kAskWhereToSaveName))
+        return false;
+    if (name == QLatin1String(kStartupBehaviorName))
+        return QStringLiteral("homepage");
+    if (name == QLatin1String(kShowBookmarksBarName))
+        return false;
+    if (name == QLatin1String(kShowTopSitesName))
+        return true;
+    if (name == QLatin1String(kHiddenTopSitesName))
+        return QStringList();
+    if (name == QLatin1String(kClearDataOnExitName))
+        return false;
+    if (name == QLatin1String(kBlockThirdPartyCookiesName))
+        return false;
+    return QVariant();
 }
 
 QString Settings::downloadDirectory() const

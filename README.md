@@ -26,9 +26,9 @@ A working prototype with the core functionality in place: it actually browses, w
 - **Private mode**: off-the-record tabs, isolated from the persistent profile
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
 - **Bookmarks**: star button in the address bar (Ctrl+D) with a name/folder editor, a bookmarks toolbar (Ctrl+Shift+B), a Bookmarks menu, and a manager window (Ctrl+Shift+O) with folders, rename, delete, reordering, drag and drop between folders, a "Move To" menu and import of Firefox/Chrome HTML exports
-- **Settings** (Ctrl+,): home page (blank means the New Tab page), New Tab page options (top sites), search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit), applied immediately and stored in `~/.config/KDE/Kondor.conf`
+- **Settings** (Ctrl+,): a KDE Configure window with a sidebar (searchable with Ctrl+F), page tabs and Defaults / OK / Apply / Cancel; options cover the home page (blank means the New Tab page), startup behavior, New Tab page top sites, search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit). Changes stay pending until OK or Apply, and are stored in `~/.config/KDE/Kondor.conf`
 - **About window** (Menu → About Kondor Browser): app, Qt and Chromium versions, components and authors, with a viewer for the license text; links open in a new normal tab
-- **Session restore**: optionally reopen the tabs from the previous session on startup (settings → On Startup); private tabs are never saved. Ctrl+Shift+T reopens the last closed normal tabs, up to 20
+- **Session restore**: optionally reopen the tabs from the previous session on startup (General → Startup in the Configure window); private tabs are never saved. Ctrl+Shift+T reopens the last closed normal tabs, up to 20
 - **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
 - **Download manager**: downloads show live progress, speed and size in a toolbar popup; pause, resume, cancel, open the file or show it in its folder, desktop notification on completion/failure, optional "ask where to save", and a confirmation before quitting with active downloads
 - **Command line**: `kondor URL…` opens the given URLs or local files in tabs (`--private` for a private tab), and the app registers as a web browser so it can be the system default
@@ -154,6 +154,7 @@ qml/
 | `Ctrl+,` / `Ctrl+Shift+,` | Configure Kondor Browser (settings) |
 | `Ctrl+L` | Focus the address bar |
 | `Ctrl+F` | Find in page |
+| `Ctrl+F` (Configure window) | Filter the settings pages |
 | `F3` / `Shift+F3` | Next / previous match (find bar open) |
 | `Esc` | Close the find bar |
 | `Ctrl+R` / `F5` | Reload |

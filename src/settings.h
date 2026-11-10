@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QSettings>
 #include <QStringList>
+#include <QVariant>
 #include <QtQmlIntegration/qqmlintegration.h>
 
 class QQmlEngine;
@@ -70,6 +71,11 @@ public:
     void setHiddenTopSites(const QStringList &hiddenTopSites);
     void setClearDataOnExit(bool clearDataOnExit);
     void setBlockThirdPartyCookies(bool blockThirdPartyCookies);
+
+    // Default value of the option with this property name ("homePage",
+    // "searchEngine", …). The only source of truth for defaults: the
+    // constructor and the Configure window's Defaults button both use it.
+    Q_INVOKABLE QVariant defaultValue(const QString &name) const;
 
     // URL template for the selected engine, with %1 where the query goes.
     Q_INVOKABLE QString searchUrlTemplate() const;

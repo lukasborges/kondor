@@ -776,6 +776,137 @@
     </message>
 </context>
 <context>
+    <name>PageContextMenu</name>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="74"/>
+        <source>Open Link in New Tab</source>
+        <translation>Apri link in una nuova scheda</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="75"/>
+        <source>Open Link in New Private Tab</source>
+        <translation>Apri link in una nuova scheda anonima</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="77"/>
+        <source>Copy Link Address</source>
+        <translation>Copia indirizzo del link</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="78"/>
+        <source>Save Link As…</source>
+        <translation>Salva link con nome…</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="84"/>
+        <source>Open Image in New Tab</source>
+        <translation>Apri immagine in una nuova scheda</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="85"/>
+        <source>Save Image As…</source>
+        <translation>Salva immagine con nome…</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="86"/>
+        <source>Copy Image</source>
+        <translation>Copia immagine</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="87"/>
+        <source>Copy Image Address</source>
+        <translation>Copia indirizzo dell&apos;immagine</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="93"/>
+        <source>Save Media As…</source>
+        <translation>Salva contenuto multimediale con nome…</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="94"/>
+        <source>Copy Media Address</source>
+        <translation>Copia indirizzo del contenuto multimediale</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="99"/>
+        <source>Show Controls</source>
+        <translation>Mostra controlli</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="107"/>
+        <source>Loop</source>
+        <translation>Ripeti</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="121"/>
+        <source>Search %1 for “%2”</source>
+        <extracomment>%1 is the search engine name, %2 the selected text</extracomment>
+        <translation>Cerca “%2” su %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="123"/>
+        <source>Search for “%1”</source>
+        <extracomment>%1 is the selected text</extracomment>
+        <translation>Cerca “%1”</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="125"/>
+        <location filename="../qml/PageContextMenu.qml" line="150"/>
+        <source>Copy</source>
+        <translation>Copia</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="143"/>
+        <source>Undo</source>
+        <translation>Annulla</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="145"/>
+        <source>Redo</source>
+        <translation>Ripristina</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="148"/>
+        <source>Cut</source>
+        <translation>Taglia</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="152"/>
+        <source>Paste</source>
+        <translation>Incolla</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="154"/>
+        <source>Paste as Plain Text</source>
+        <translation>Incolla come testo normale</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="156"/>
+        <source>Select All</source>
+        <translation>Seleziona tutto</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="163"/>
+        <source>Back</source>
+        <translation>Indietro</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="164"/>
+        <source>Forward</source>
+        <translation>Avanti</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="165"/>
+        <source>Reload</source>
+        <translation>Ricarica</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="167"/>
+        <source>View Page Source</source>
+        <translation>Visualizza codice sorgente della pagina</translation>
+    </message>
+</context>
+<context>
     <name>PermissionBar</name>
     <message>
         <location filename="../qml/PermissionBar.qml" line="39"/>
@@ -1279,17 +1410,17 @@
 <context>
     <name>WebViewTab</name>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="72"/>
+        <location filename="../qml/WebViewTab.qml" line="76"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>Il processo della pagina è terminato inaspettatamente.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="73"/>
+        <location filename="../qml/WebViewTab.qml" line="77"/>
         <source>The page crashed.</source>
         <translation>La pagina è andata in crash.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="74"/>
+        <location filename="../qml/WebViewTab.qml" line="78"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>Il processo della pagina è stato terminato (probabilmente per esaurimento della memoria).</translation>
     </message>

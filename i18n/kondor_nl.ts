@@ -776,6 +776,137 @@
     </message>
 </context>
 <context>
+    <name>PageContextMenu</name>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="74"/>
+        <source>Open Link in New Tab</source>
+        <translation>Link openen in nieuw tabblad</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="75"/>
+        <source>Open Link in New Private Tab</source>
+        <translation>Link openen in nieuw privétabblad</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="77"/>
+        <source>Copy Link Address</source>
+        <translation>Linkadres kopiëren</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="78"/>
+        <source>Save Link As…</source>
+        <translation>Link opslaan als…</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="84"/>
+        <source>Open Image in New Tab</source>
+        <translation>Afbeelding openen in nieuw tabblad</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="85"/>
+        <source>Save Image As…</source>
+        <translation>Afbeelding opslaan als…</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="86"/>
+        <source>Copy Image</source>
+        <translation>Afbeelding kopiëren</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="87"/>
+        <source>Copy Image Address</source>
+        <translation>Afbeeldingsadres kopiëren</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="93"/>
+        <source>Save Media As…</source>
+        <translation>Media opslaan als…</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="94"/>
+        <source>Copy Media Address</source>
+        <translation>Media-adres kopiëren</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="99"/>
+        <source>Show Controls</source>
+        <translation>Bedieningselementen tonen</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="107"/>
+        <source>Loop</source>
+        <translation>Herhalen</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="121"/>
+        <source>Search %1 for “%2”</source>
+        <extracomment>%1 is the search engine name, %2 the selected text</extracomment>
+        <translation>Zoeken met %1 naar ‘%2’</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="123"/>
+        <source>Search for “%1”</source>
+        <extracomment>%1 is the selected text</extracomment>
+        <translation>Zoeken naar ‘%1’</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="125"/>
+        <location filename="../qml/PageContextMenu.qml" line="150"/>
+        <source>Copy</source>
+        <translation>Kopiëren</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="143"/>
+        <source>Undo</source>
+        <translation>Ongedaan maken</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="145"/>
+        <source>Redo</source>
+        <translation>Opnieuw</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="148"/>
+        <source>Cut</source>
+        <translation>Knippen</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="152"/>
+        <source>Paste</source>
+        <translation>Plakken</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="154"/>
+        <source>Paste as Plain Text</source>
+        <translation>Plakken als platte tekst</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="156"/>
+        <source>Select All</source>
+        <translation>Alles selecteren</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="163"/>
+        <source>Back</source>
+        <translation>Terug</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="164"/>
+        <source>Forward</source>
+        <translation>Vooruit</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="165"/>
+        <source>Reload</source>
+        <translation>Herladen</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="167"/>
+        <source>View Page Source</source>
+        <translation>Paginabron weergeven</translation>
+    </message>
+</context>
+<context>
     <name>PermissionBar</name>
     <message>
         <location filename="../qml/PermissionBar.qml" line="39"/>
@@ -1279,17 +1410,17 @@
 <context>
     <name>WebViewTab</name>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="72"/>
+        <location filename="../qml/WebViewTab.qml" line="76"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>Het proces van de pagina is onverwacht beëindigd.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="73"/>
+        <location filename="../qml/WebViewTab.qml" line="77"/>
         <source>The page crashed.</source>
         <translation>De pagina is gecrasht.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="74"/>
+        <location filename="../qml/WebViewTab.qml" line="78"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>Het proces van de pagina is beëindigd (mogelijk door geheugengebrek).</translation>
     </message>

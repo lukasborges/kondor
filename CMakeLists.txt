@@ -32,6 +32,7 @@ qt_add_qml_module(kondor
     QML_FILES
         qml/Main.qml
         qml/WebViewTab.qml
+        qml/PageContextMenu.qml
         qml/NewTabPage.qml
         qml/TabButtonDelegate.qml
         qml/TabContextMenu.qml

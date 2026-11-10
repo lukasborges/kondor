@@ -607,7 +607,8 @@ ApplicationWindow {
                             completedPrefix = ""
                         }
                         typedText = text
-                        addressSuggestions.text = text
+                        // Query once the typing settles: building the rows
+                        // runs the bookmark and history queries.
                         suggestionsTimer.restart()
                     }
 
@@ -652,14 +653,9 @@ ApplicationWindow {
                         event.accepted = true
                     }
 
-                    // Tab never moves through the dropdown.
-                    Keys.onTabPressed: function(event) {
-                        event.accepted = true
-                    }
-
-                    Keys.onBacktabPressed: function(event) {
-                        event.accepted = true
-                    }
+                    // Tab and Shift+Tab never cycle the dropdown rows: they
+                    // keep the field's normal focus navigation, so focus can
+                    // leave the address bar as it does without a popup.
 
                     onActiveFocusChanged: {
                         if (activeFocus) {

@@ -25,6 +25,7 @@ gpg_key_b64="$(base64 -w0 < kondor-public.gpg)"
 
 # Bundle that also receives updates from the repository.
 flatpak build-bundle --repo-url="$repo_url" --gpg-keys=kondor-public.gpg \
+    --runtime-repo=https://dl.flathub.org/repo/flathub.flatpakrepo \
     "$repo" Kondor.flatpak "$app_id" stable
 
 rm -rf "$site"

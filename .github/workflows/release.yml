@@ -150,12 +150,21 @@ jobs:
       - name: Restore the published repository
         run: |
           ostree init --mode=archive-z2 --repo=repo
-          if curl -fsSL --head https://lukasborges.github.io/kondor/repo/summary > /dev/null; then
-            ostree remote add --repo=repo --no-gpg-verify published https://lukasborges.github.io/kondor/repo/
-            ostree pull --repo=repo --mirror published
-          else
-            echo "::notice::Nothing is published yet: starting from an empty repository"
-          fi
+          status="$(curl -sS --retry 3 --retry-all-errors -o /dev/null -w '%{http_code}' --head https://lukasborges.github.io/kondor/repo/summary)"
+          case "$status" in
+            200)
+              ostree remote add --repo=repo --no-gpg-verify published https://lukasborges.github.io/kondor/repo/
+              ostree pull --repo=repo --mirror published
+              ostree remote delete --repo=repo published
+              ;;
+            404)
+              echo "::notice::Nothing is published yet: starting from an empty repository"
+              ;;
+            *)
+              echo "::error::Unexpected HTTP status $status while checking the published repository"
+              exit 1
+              ;;
+          esac
 
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6

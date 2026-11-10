@@ -1,0 +1,11 @@
+[Flatpak Ref]
+Title=Kondor Browser
+Name=io.github.lukasborges.Kondor
+Branch=stable
+Url=https://lukasborges.github.io/kondor/repo/
+SuggestRemoteName=kondor
+Homepage=https://github.com/lukasborges/kondor
+Icon=https://raw.githubusercontent.com/lukasborges/kondor/main/packaging/kondor.svg
+IsRuntime=false
+RuntimeRepo=https://dl.flathub.org/repo/flathub.flatpakrepo
+GPGKey=@GPGKEY@

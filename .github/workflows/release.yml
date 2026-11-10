@@ -131,12 +131,78 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Import the signing key
+        env:
+          FLATPAK_GPG_PRIVATE_KEY: ${{ secrets.FLATPAK_GPG_PRIVATE_KEY }}
+        run: |
+          if [ -z "$FLATPAK_GPG_PRIVATE_KEY" ]; then
+            echo "::error::FLATPAK_GPG_PRIVATE_KEY is not set: see docs/specs/0098-flatpak-repository.md"
+            exit 1
+          fi
+          export GNUPGHOME="$RUNNER_TEMP/gnupg"
+          mkdir -m 700 "$GNUPGHOME"
+          printf '%s\n' "$FLATPAK_GPG_PRIVATE_KEY" | gpg --batch --import
+          key_id="$(gpg --list-secret-keys --with-colons | awk -F: '/^sec/ {print $5; exit}')"
+          test -n "$key_id"
+          echo "GNUPGHOME=$GNUPGHOME" >> "$GITHUB_ENV"
+          echo "FLATPAK_KEY_ID=$key_id" >> "$GITHUB_ENV"
+
+      - name: Restore the published repository
+        run: |
+          ostree init --mode=archive-z2 --repo=repo
+          status="$(curl -sS --retry 3 --retry-all-errors -o /dev/null -w '%{http_code}' --head https://lukasborges.github.io/kondor/repo/summary)"
+          case "$status" in
+            200)
+              ostree remote add --repo=repo --no-gpg-verify published https://lukasborges.github.io/kondor/repo/
+              ostree pull --repo=repo --mirror published
+              ostree remote delete --repo=repo published
+              ;;
+            404)
+              echo "::notice::Nothing is published yet: starting from an empty repository"
+              ;;
+            *)
+              echo "::error::Unexpected HTTP status $status while checking the published repository"
+              exit 1
+              ;;
+          esac
+
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
-          bundle: Kondor.flatpak
           manifest-path: packaging/flatpak/io.github.lukasborges.Kondor.yml
+          build-bundle: false
+          upload-artifact: false
+          branch: stable
+          gpg-sign: ${{ env.FLATPAK_KEY_ID }}
           cache-key: flatpak-builder-${{ github.sha }}
+
+      - name: Update the repository and build the site
+        run: scripts/flatpak-site.sh "$FLATPAK_KEY_ID" repo site
+
+      - name: Upload bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle
+          path: Kondor.flatpak
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  pages:
+    runs-on: ubuntu-24.04
+    needs: flatpak
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   flatpak-upload:
     runs-on: ubuntu-24.04
@@ -145,6 +211,7 @@ jobs:
       - name: Download bundle
         uses: actions/download-artifact@v4
         with:
+          name: bundle
           path: bundle
 
       - name: Upload bundle to the release

@@ -6,6 +6,7 @@ on:
       - 'packaging/flatpak/**'
       - 'packaging/*.metainfo.xml'
       - 'packaging/kondor.desktop'
+      - 'scripts/flatpak-site.sh'
       - 'CMakeLists.txt'
       - '.github/workflows/flatpak.yml'
       - '.github/workflows/release.yml'
@@ -22,9 +23,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Create a throwaway signing key
+        run: |
+          export GNUPGHOME="$RUNNER_TEMP/gnupg"
+          mkdir -m 700 "$GNUPGHOME"
+          gpg --batch --passphrase '' --quick-gen-key "Kondor CI test" rsa3072 sign never
+          key_id="$(gpg --list-secret-keys --with-colons | awk -F: '/^sec/ {print $5; exit}')"
+          echo "GNUPGHOME=$GNUPGHOME" >> "$GITHUB_ENV"
+          echo "FLATPAK_KEY_ID=$key_id" >> "$GITHUB_ENV"
+
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
-          bundle: Kondor.flatpak
           manifest-path: packaging/flatpak/io.github.lukasborges.Kondor.yml
+          build-bundle: false
+          upload-artifact: false
+          branch: stable
+          gpg-sign: ${{ env.FLATPAK_KEY_ID }}
           cache-key: flatpak-builder-${{ github.sha }}
+
+      - name: Update the repository and build the site
+        run: scripts/flatpak-site.sh "$FLATPAK_KEY_ID" repo site
+
+      - name: Check the repository with the throwaway key
+        run: |
+          flatpak remote-add --user --gpg-import=kondor-public.gpg kondor-test site/repo
+          flatpak remote-ls --user kondor-test | tee remote-ls.txt
+          grep -q io.github.lukasborges.Kondor remote-ls.txt
+          flatpak remote-ls --user --columns=application,branch kondor-test | grep -q 'io.github.lukasborges.Kondor.*stable'
+
+      - name: Keep the site
+        uses: actions/upload-artifact@v4
+        with:
+          name: flatpak-site
+          path: site

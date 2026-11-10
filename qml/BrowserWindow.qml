@@ -1237,6 +1237,11 @@ ApplicationWindow {
 
     // ── Shortcuts ───────────────────────────────────────────────────────
     Shortcut {
+        // Ctrl+Shift+, under the KDE platform theme; empty on the generic theme
+        sequences: [StandardKey.Preferences]
+        onActivated: window.openSettings()
+    }
+    Shortcut {
         sequence: "Ctrl+W"
         onActivated: window.closeTabAt(tabs.currentIndex)
     }

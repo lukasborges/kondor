@@ -14,7 +14,7 @@ Menu {
     // The BrowserWindow that owns the menu and its actions.
     required property var browserWindow
 
-    readonly property var tab: window.tabModel.currentTab
+    readonly property var tab: root.browserWindow.tabModel.currentTab
     readonly property bool zoomEnabled: tab ? !tab.newTabPage : false
 
     MenuItem { action: root.browserWindow.newTabAction }

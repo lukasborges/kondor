@@ -58,7 +58,9 @@ Settings, toolbar buttons and popups) is specified in a follow-up issue, based o
    - It fails with a clear message on a non-CRX response.
    - Dependencies: `curl`, `unzip`, coreutils/`od` or `python3`; nothing new to install on Fedora.
 5. **Compatibility report:** `docs/extensions-compatibility.md`, one row per extension below, tested
-   with a real window on Plasma and an isolated profile. Columns:
+   with a real window on Plasma and an isolated profile. **Moved to follow-up issue
+   [#105](https://github.com/lukasborges/kondor/issues/105)** (see "Decisions"): it is produced by
+   hand on a machine with network access and a display, not by the PR of this issue. Columns:
    - Extension and version, and Manifest version;
    - Loads? (yes/no + error);
    - Content scripts work?;
@@ -92,11 +94,15 @@ Settings, toolbar buttons and popups) is specified in a follow-up issue, based o
   "Extensions are not supported by this Qt WebEngine build" and is ignored.
 - [ ] `kondor --load-extension <dir>` loads an unpacked extension into normal tabs only, and logs
   its id and popup URL.
-- [ ] `scripts/fetch-extension.sh` fetches and unpacks each extension of the table.
-- [ ] `docs/extensions-compatibility.md` has the six rows and the summary.
+- [ ] `scripts/fetch-extension.sh` unpacks a CRX3 and a CRX2 file and fails with a clear message on a
+  non-CRX response (checked against synthetic files; fetching the six real extensions is verified in #105).
+- [ ] ~~`docs/extensions-compatibility.md` has the six rows and the summary.~~ Moved to #105.
 - [ ] Tests pass, and the smoke test is clean.
 
 ## Manual test
+
+Steps 1–4 need the Chrome Web Store download and a real window, so they are run in #105. For this
+issue, run step 2 with `tests/data/extension` instead: stderr shows the extension id and popup URL.
 
 Isolated profile (temporary `XDG_*` dirs):
 1. `scripts/fetch-extension.sh eimadpbcbfnmbkopoojfekhnkhdbieeh /tmp/ext/darkreader`.
@@ -107,6 +113,7 @@ Isolated profile (temporary `XDG_*` dirs):
 
 ## Out of scope
 
+- `docs/extensions-compatibility.md` and any measured result for the six extensions (follow-up #105);
 - any user-facing UI: an "Add to Kondor" button, an Extensions settings page, toolbar buttons,
   real popups, permission prompts;
 - persistent installation (`installExtension`), updates, and an extension list saved in the profile;
@@ -120,4 +127,8 @@ None: this issue has no user-facing UI.
 
 ## Decisions
 
-_None yet._ Answers to developer questions (`question` label) are recorded here as `| Question | Decision |` rows.
+| Question | Decision |
+| --- | --- |
+| The Chrome Web Store download sends no body from the developer agent's sandbox and there is no display, so the six extensions cannot be fetched or measured. Merge the loader/script/test now and produce the report by hand (a), or keep the issue open until someone supplies the data (b)? ([PR #104](https://github.com/lukasborges/kondor/pull/104#issuecomment-6781496080)) | **(a).** The architect's machine has the same download failure (HTTP 200, 0 bytes), so no agent can produce the report. #88 delivers the loader, `--load-extension`, `scripts/fetch-extension.sh` and the test; the compatibility report, the real fetch of the six extensions and the Dark Reader manual test move to follow-up issue #105, done by hand on a machine with network access and a display. No results are invented and no placeholder report file is committed. The script is verified against synthetic CRX2/CRX3 files and a non-CRX response. |
+| The test page: the spec says "a `data:` or local test page", but extensions cannot touch `file:` pages by default. | Serving the page from a local HTTP server inside the test is fine. |
+| After `loadExtension()` the extension is not enabled. | The loader calls `setExtensionEnabled(info, true)` for the extensions it loads; record this and the built-in component extensions listed by `extensions()` as findings in the PR, for the #105 report's summary. |

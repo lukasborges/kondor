@@ -43,6 +43,7 @@ Tips when editing:
 | #11 Address bar suggestions | `11-address-suggestions.qml` |
 | #47 Default bookmarks | `02-bookmarks.qml` (toolbar) |
 | #44 Address bar: visit or search | `44-address-visit-or-search.qml` |
+| #53 About window | `53-about.qml`, `53b-about-components.qml`, `53c-about-authors.qml` (shared mock in `common/AboutDialogMock.qml`) |
 | #12 Tab management | `12-tab-management.qml` |
 | #13 Page context menu | `13-page-context-menu.qml` |
 | #14 Multiple windows | `14-private-window.qml`, `00-main-menu.qml` |

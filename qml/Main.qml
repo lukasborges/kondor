@@ -588,10 +588,16 @@ ApplicationWindow {
                         const t = tabs.currentTab
                         if (!t)
                             return
-                        if (addressSuggestions.opened) {
+                        // A query that is still pending describes the text
+                        // from before the last keystroke, so its rows must not
+                        // be activated. Enter then resolves the typed text,
+                        // exactly as it does without a dropdown.
+                        if (addressSuggestions.opened && !suggestionsTimer.running) {
                             addressSuggestions.activate(addressSuggestions.currentIndex, false)
                             return
                         }
+                        suggestionsTimer.stop()
+                        addressSuggestions.close()
                         t.navigateTo(ProfileManager.resolveAddress(text))
                         focus = false
                     }
@@ -619,6 +625,12 @@ ApplicationWindow {
                     }
 
                     Keys.onDownPressed: function(event) {
+                        // Flush a pending query first: the open dropdown still
+                        // shows the rows of the previous text.
+                        if (suggestionsTimer.running) {
+                            suggestionsTimer.stop()
+                            addressBar.updateSuggestions()
+                        }
                         if (!addressSuggestions.opened) {
                             event.accepted = false
                             return
@@ -632,6 +644,10 @@ ApplicationWindow {
                     }
 
                     Keys.onUpPressed: function(event) {
+                        if (suggestionsTimer.running) {
+                            suggestionsTimer.stop()
+                            addressBar.updateSuggestions()
+                        }
                         if (!addressSuggestions.opened) {
                             event.accepted = false
                             return
@@ -647,6 +663,9 @@ ApplicationWindow {
                             event.accepted = false
                             return
                         }
+                        // A pending query would reopen the dropdown right
+                        // after it was closed, so drop it as well.
+                        suggestionsTimer.stop()
                         // Only the dropdown goes away; the typed text stays.
                         text = typedText
                         addressSuggestions.close()

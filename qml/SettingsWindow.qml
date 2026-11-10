@@ -90,13 +90,15 @@ ApplicationWindow {
     QtObject {
         id: pending
 
+        // Neutral values: `readSettings()` fills them in before the window
+        // is shown, and `Settings::defaultValue()` owns the real defaults.
         property string homePage: ""
-        property string searchEngine: "duckduckgo"
+        property string searchEngine: ""
         property string customSearchUrl: ""
         property string downloadDirectory: ""
         property bool askWhereToSave: false
-        property string startupBehavior: "homepage"
-        property bool showTopSites: true
+        property string startupBehavior: ""
+        property bool showTopSites: false
         property bool clearDataOnExit: false
         property bool blockThirdPartyCookies: false
 
@@ -326,6 +328,16 @@ ApplicationWindow {
                     text: root.pages[root.currentPage].title
                 }
 
+                TabBar {
+                    Layout.fillWidth: true
+                    visible: root.currentPage === 0
+                    currentIndex: root.generalTab
+                    onCurrentIndexChanged: root.generalTab = currentIndex
+
+                    TabButton { text: qsTr("Startup") }
+                    TabButton { text: qsTr("New Tabs") }
+                }
+
                 Kirigami.Separator {
                     Layout.fillWidth: true
                     visible: root.currentPage !== 0
@@ -393,148 +405,133 @@ ApplicationWindow {
     Component {
         id: generalPage
 
-        ColumnLayout {
-            spacing: 0
+        StackLayout {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            currentIndex: root.generalTab
 
-            TabBar {
-                Layout.fillWidth: true
-                currentIndex: root.generalTab
-                onCurrentIndexChanged: root.generalTab = currentIndex
+            // ── General → Startup ───────────────────────────────────
+            ScrollView {
+                id: startupView
+                contentWidth: availableWidth
+                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
-                TabButton { text: qsTr("Startup") }
-                TabButton { text: qsTr("New Tabs") }
-            }
+                ColumnLayout {
+                    width: startupView.availableWidth
+                    spacing: Kirigami.Units.largeSpacing
 
-            StackLayout {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                currentIndex: root.generalTab
+                    Kirigami.FormLayout {
+                        Layout.fillWidth: true
 
-                // ── General → Startup ───────────────────────────────────
-                ScrollView {
-                    id: startupView
-                    contentWidth: availableWidth
-                    ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                        RadioButton {
+                            id: homePageRadio
+                            Kirigami.FormData.label: qsTr("On startup:")
+                            text: qsTr("Open the home page")
+                            onClicked: pending.startupBehavior = "homepage"
+                        }
 
-                    ColumnLayout {
-                        width: startupView.availableWidth
-                        spacing: Kirigami.Units.largeSpacing
+                        Binding {
+                            target: homePageRadio
+                            property: "checked"
+                            value: pending.startupBehavior === "homepage"
+                        }
 
-                        Kirigami.FormLayout {
-                            Layout.fillWidth: true
-                            Layout.margins: Kirigami.Units.gridUnit
+                        RadioButton {
+                            id: restoreRadio
+                            text: qsTr("Open the tabs from last time")
+                            onClicked: pending.startupBehavior = "restore"
+                        }
 
-                            RadioButton {
-                                id: homePageRadio
-                                Kirigami.FormData.label: qsTr("On startup:")
-                                text: qsTr("Open the home page")
-                                onClicked: pending.startupBehavior = "homepage"
-                            }
+                        Binding {
+                            target: restoreRadio
+                            property: "checked"
+                            value: pending.startupBehavior === "restore"
+                        }
 
-                            Binding {
-                                target: homePageRadio
-                                property: "checked"
-                                value: pending.startupBehavior === "homepage"
-                            }
+                        Item { Kirigami.FormData.isSection: true }
 
-                            RadioButton {
-                                id: restoreRadio
-                                text: qsTr("Open the tabs from last time")
-                                onClicked: pending.startupBehavior = "restore"
-                            }
-
-                            Binding {
-                                target: restoreRadio
-                                property: "checked"
-                                value: pending.startupBehavior === "restore"
-                            }
-
-                            Item { Kirigami.FormData.isSection: true }
-
-                            TextField {
-                                id: homeField
-                                Kirigami.FormData.label: qsTr("Home page:")
-                                placeholderText: qsTr("New Tab page")
-                                Layout.preferredWidth: Kirigami.Units.gridUnit * 18
-                                onTextEdited: pending.homePage = text
-                                onEditingFinished: {
-                                    // A blank field means the New Tab page.
-                                    pending.homePage = text.trim().length === 0
-                                            ? ""
-                                            : ProfileManager.resolveAddress(text).toString()
-                                }
-                            }
-
-                            Binding {
-                                target: homeField
-                                property: "text"
-                                value: pending.homePage
-                            }
-
-                            RowLayout {
-                                Button {
-                                    text: qsTr("Use Current Page")
-                                    icon.name: "go-home"
-                                    // A private tab's URL must never land on disk.
-                                    enabled: root.tabModel.currentTab !== null
-                                             && !root.tabModel.currentTab.isPrivate
-                                    onClicked: {
-                                        const tab = root.tabModel.currentTab
-                                        if (tab)
-                                            pending.homePage = tab.url.toString()
-                                    }
-                                }
-
-                                Button {
-                                    text: qsTr("Use New Tab Page")
-                                    icon.name: "tab-new"
-                                    enabled: pending.homePage.length > 0
-                                    onClicked: pending.homePage = ""
-                                }
+                        TextField {
+                            id: homeField
+                            Kirigami.FormData.label: qsTr("Home page:")
+                            placeholderText: qsTr("New Tab page")
+                            Layout.preferredWidth: Kirigami.Units.gridUnit * 18
+                            onTextEdited: pending.homePage = text
+                            onEditingFinished: {
+                                // A blank field means the New Tab page.
+                                pending.homePage = text.trim().length === 0
+                                        ? ""
+                                        : ProfileManager.resolveAddress(text).toString()
                             }
                         }
 
-                        Item { Layout.fillHeight: true }
-                    }
-                }
+                        Binding {
+                            target: homeField
+                            property: "text"
+                            value: pending.homePage
+                        }
 
-                // ── General → New Tabs ──────────────────────────────────
-                ScrollView {
-                    id: newTabsView
-                    contentWidth: availableWidth
-                    ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-
-                    ColumnLayout {
-                        width: newTabsView.availableWidth
-                        spacing: Kirigami.Units.largeSpacing
-
-                        Kirigami.FormLayout {
-                            Layout.fillWidth: true
-                            Layout.margins: Kirigami.Units.gridUnit
-
-                            CheckBox {
-                                id: topSitesCheck
-                                Kirigami.FormData.label: qsTr("New Tab page:")
-                                text: qsTr("Show top sites")
-                                onToggled: pending.showTopSites = checked
-                            }
-
-                            Binding {
-                                target: topSitesCheck
-                                property: "checked"
-                                value: pending.showTopSites
+                        RowLayout {
+                            Button {
+                                text: qsTr("Use Current Page")
+                                icon.name: "go-home"
+                                // A private tab's URL must never land on disk.
+                                enabled: root.tabModel.currentTab !== null
+                                         && !root.tabModel.currentTab.isPrivate
+                                onClicked: {
+                                    const tab = root.tabModel.currentTab
+                                    if (tab)
+                                        pending.homePage = tab.url.toString()
+                                }
                             }
 
                             Button {
-                                text: qsTr("Restore Removed Sites")
-                                icon.name: "edit-undo"
-                                enabled: Settings.hiddenTopSites.length > 0
-                                onClicked: Settings.hiddenTopSites = []
+                                text: qsTr("Use New Tab Page")
+                                icon.name: "tab-new"
+                                enabled: pending.homePage.length > 0
+                                onClicked: pending.homePage = ""
                             }
                         }
-
-                        Item { Layout.fillHeight: true }
                     }
+
+                    Item { Layout.fillHeight: true }
+                }
+            }
+
+            // ── General → New Tabs ──────────────────────────────────
+            ScrollView {
+                id: newTabsView
+                contentWidth: availableWidth
+                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+
+                ColumnLayout {
+                    width: newTabsView.availableWidth
+                    spacing: Kirigami.Units.largeSpacing
+
+                    Kirigami.FormLayout {
+                        Layout.fillWidth: true
+
+                        CheckBox {
+                            id: topSitesCheck
+                            Kirigami.FormData.label: qsTr("New Tab page:")
+                            text: qsTr("Show top sites")
+                            onToggled: pending.showTopSites = checked
+                        }
+
+                        Binding {
+                            target: topSitesCheck
+                            property: "checked"
+                            value: pending.showTopSites
+                        }
+
+                        Button {
+                            text: qsTr("Restore Removed Sites")
+                            icon.name: "edit-undo"
+                            enabled: Settings.hiddenTopSites.length > 0
+                            onClicked: Settings.hiddenTopSites = []
+                        }
+                    }
+
+                    Item { Layout.fillHeight: true }
                 }
             }
         }
@@ -555,7 +552,6 @@ ApplicationWindow {
 
                 Kirigami.FormLayout {
                     Layout.fillWidth: true
-                    Layout.margins: Kirigami.Units.gridUnit
 
                     ComboBox {
                         id: engineBox
@@ -598,8 +594,6 @@ ApplicationWindow {
 
                 Kirigami.InlineMessage {
                     Layout.fillWidth: true
-                    Layout.leftMargin: Kirigami.Units.gridUnit
-                    Layout.rightMargin: Kirigami.Units.gridUnit
                     visible: pending.searchEngine === "custom"
                              && pending.customSearchUrl.indexOf("%1") === -1
                     type: Kirigami.MessageType.Warning
@@ -626,7 +620,6 @@ ApplicationWindow {
 
                 Kirigami.FormLayout {
                     Layout.fillWidth: true
-                    Layout.margins: Kirigami.Units.gridUnit
 
                     RowLayout {
                         Kirigami.FormData.label: qsTr("Save files to:")
@@ -660,8 +653,6 @@ ApplicationWindow {
 
                 Kirigami.InlineMessage {
                     Layout.fillWidth: true
-                    Layout.leftMargin: Kirigami.Units.gridUnit
-                    Layout.rightMargin: Kirigami.Units.gridUnit
                     visible: !Settings.downloadDirectoryValid
                     type: Kirigami.MessageType.Warning
                     text: qsTr("The selected folder no longer exists. Downloads are saved to %1.")
@@ -688,7 +679,6 @@ ApplicationWindow {
 
                 Kirigami.FormLayout {
                     Layout.fillWidth: true
-                    Layout.margins: Kirigami.Units.gridUnit
 
                     CheckBox {
                         id: cookiesCheck
@@ -715,6 +705,8 @@ ApplicationWindow {
                         property: "checked"
                         value: pending.clearDataOnExit
                     }
+
+                    Item { Kirigami.FormData.isSection: true }
 
                     Button {
                         Kirigami.FormData.label: qsTr("Browsing data:")

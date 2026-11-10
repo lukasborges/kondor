@@ -40,7 +40,11 @@ public:
     Q_INVOKABLE static QString originOf(const QUrl &url);
     // Passwords are only offered for https: origins and localhost.
     Q_INVOKABLE static bool canSaveFor(const QString &origin);
-    static QString hostOfOrigin(const QString &origin);
+    // Origin for what a user typed as a site ("example.com", "https://a.b/x"):
+    // trimmed, "https://" added when there is no "://"; empty unless passwords
+    // can be saved for the result.
+    Q_INVOKABLE static QString originFromInput(const QString &text);
+    Q_INVOKABLE static QString hostOfOrigin(const QString &origin);
 
     QString state() const;
     bool isOpen() const { return m_state == State::Open; }
@@ -58,7 +62,10 @@ public:
     // `[{ username, password }]` for an origin.
     QVariantList credentialsFor(const QString &origin) const;
 
-    bool save(const QString &origin, const QString &username, const QString &password);
+    // True when a login for this origin and username is already saved.
+    Q_INVOKABLE bool contains(const QString &origin, const QString &username) const;
+
+    Q_INVOKABLE bool save(const QString &origin, const QString &username, const QString &password);
     // Deletes a login from the wallet at once.
     Q_INVOKABLE void remove(const QString &origin, const QString &username);
     // Copies the password to the clipboard and clears it after 30 seconds if

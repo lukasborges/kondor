@@ -46,6 +46,22 @@ QString PasswordStore::originOf(const QUrl &url)
     return origin;
 }
 
+QString PasswordStore::originFromInput(const QString &text)
+{
+    QString input = text.trimmed();
+    if (input.isEmpty())
+        return {};
+    if (!input.contains(QLatin1String("://")))
+        input.prepend(QLatin1String("https://"));
+    const QString origin = originOf(QUrl(input));
+    return canSaveFor(origin) ? origin : QString();
+}
+
+bool PasswordStore::contains(const QString &origin, const QString &username) const
+{
+    return usernames(origin).contains(username);
+}
+
 QString PasswordStore::hostOfOrigin(const QString &origin)
 {
     return QUrl(origin).host();

@@ -46,6 +46,7 @@ qt_add_qml_module(kondor
         qml/InlineBar.qml
         qml/FindBar.qml
         qml/PermissionBar.qml
+        qml/AddPasswordDialog.qml
         qml/PasswordBar.qml
         qml/FullScreenHint.qml
         qml/PermissionTypeInfo.qml

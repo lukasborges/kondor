@@ -135,6 +135,49 @@
     </message>
 </context>
 <context>
+    <name>AddPasswordDialog</name>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="49"/>
+        <source>Add Password</source>
+        <translation>Přidat heslo</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="70"/>
+        <source>Website:</source>
+        <translation>Webová stránka:</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="72"/>
+        <source>https://example.com</source>
+        <translation>https://example.com</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="79"/>
+        <source>Username:</source>
+        <translation>Uživatelské jméno:</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="87"/>
+        <source>Password:</source>
+        <translation>Heslo:</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="100"/>
+        <source>The password could not be saved to KWallet.</source>
+        <translation>Heslo se nepodařilo uložit do KWallet.</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="102"/>
+        <source>Passwords can only be saved for https:// sites and localhost.</source>
+        <translation>Hesla lze ukládat jen pro stránky https:// a localhost.</translation>
+    </message>
+    <message>
+        <location filename="../qml/AddPasswordDialog.qml" line="103"/>
+        <source>A password for %1 on %2 is already saved. Saving replaces it.</source>
+        <translation>Heslo pro %1 na %2 je již uloženo. Uložením se nahradí.</translation>
+    </message>
+</context>
+<context>
     <name>AddressSuggestions</name>
     <message>
         <location filename="../qml/AddressSuggestions.qml" line="58"/>
@@ -1122,62 +1165,83 @@
 <context>
     <name>PasswordsPage</name>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="87"/>
+        <location filename="../qml/PasswordsPage.qml" line="106"/>
         <source>Delete Saved Password</source>
         <translation>Smazat uložené heslo</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="88"/>
+        <location filename="../qml/PasswordsPage.qml" line="107"/>
         <source>Delete the saved password for %1 on %2?</source>
         <translation>Smazat uložené heslo pro %1 na %2?</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="105"/>
+        <location filename="../qml/PasswordsPage.qml" line="124"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
         <translation>KWallet je zakázán nebo byl přístup k němu odepřen, proto nelze hesla ukládat ani vyplňovat.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="108"/>
+        <location filename="../qml/PasswordsPage.qml" line="127"/>
         <source>Try Again</source>
         <translation>Zkusit znovu</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="118"/>
+        <location filename="../qml/PasswordsPage.qml" line="137"/>
         <source>Offer to save passwords</source>
         <translation>Nabízet ukládání hesel</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="132"/>
+        <location filename="../qml/PasswordsPage.qml" line="155"/>
         <source>Filter by site or username…</source>
         <translation>Filtrovat podle webu nebo uživatelského jména…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <location filename="../qml/PasswordsPage.qml" line="160"/>
+        <location filename="../qml/PasswordsPage.qml" line="195"/>
+        <source>Add Password…</source>
+        <translation>Přidat heslo…</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="186"/>
+        <source>No saved passwords match “%1”</source>
+        <translation>Žádná uložená hesla neodpovídají „%1“</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="187"/>
+        <source>No saved passwords</source>
+        <translation>Žádná uložená hesla</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="190"/>
+        <source>Kondor offers to save a password when you log in to a site. You can also add one here.</source>
+        <translation>Kondor nabízí uložení hesla, když se přihlásíte na stránku. Zde můžete heslo také přidat.</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="243"/>
         <source>Hide Password</source>
         <translation>Skrýt heslo</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <location filename="../qml/PasswordsPage.qml" line="243"/>
         <source>Show Password</source>
         <translation>Zobrazit heslo</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="199"/>
+        <location filename="../qml/PasswordsPage.qml" line="253"/>
         <source>Copy Password</source>
         <translation>Kopírovat heslo</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="209"/>
+        <location filename="../qml/PasswordsPage.qml" line="263"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="232"/>
+        <location filename="../qml/PasswordsPage.qml" line="286"/>
         <source>Kondor never offers to save passwords on these sites.</source>
         <translation>Kondor na těchto webech nikdy nenabízí ukládání hesel.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="264"/>
+        <location filename="../qml/PasswordsPage.qml" line="318"/>
         <source>Remove</source>
         <translation>Odebrat</translation>
     </message>

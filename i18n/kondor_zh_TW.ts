@@ -245,71 +245,71 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="100"/>
+        <location filename="../qml/BrowserWindow.qml" line="103"/>
         <source>Quit %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>結束 %1</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="101"/>
+        <location filename="../qml/BrowserWindow.qml" line="104"/>
         <source>Downloads are still in progress. Quit anyway?</source>
         <translation>仍有下載正在進行。仍要結束嗎？</translation>
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="35"/>
-        <location filename="../qml/BrowserWindow.qml" line="454"/>
-        <location filename="../qml/BrowserWindow.qml" line="891"/>
+        <location filename="../qml/BrowserWindow.qml" line="457"/>
+        <location filename="../qml/BrowserWindow.qml" line="894"/>
         <source>New Tab</source>
         <translation>新增分頁</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="513"/>
+        <location filename="../qml/BrowserWindow.qml" line="516"/>
         <source>Back</source>
         <translation>上一頁</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="526"/>
+        <location filename="../qml/BrowserWindow.qml" line="529"/>
         <source>Forward</source>
         <translation>下一頁</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="539"/>
+        <location filename="../qml/BrowserWindow.qml" line="542"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="539"/>
+        <location filename="../qml/BrowserWindow.qml" line="542"/>
         <source>Reload</source>
         <translation>重新載入</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="555"/>
+        <location filename="../qml/BrowserWindow.qml" line="558"/>
         <source>Home</source>
         <translation>首頁</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="572"/>
+        <location filename="../qml/BrowserWindow.qml" line="575"/>
         <source>Search or enter address</source>
         <translation>搜尋或輸入地址</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="803"/>
+        <location filename="../qml/BrowserWindow.qml" line="806"/>
         <source>Bookmark This Page</source>
         <translation>將此頁加入書籤</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="854"/>
+        <location filename="../qml/BrowserWindow.qml" line="857"/>
         <source>Downloads</source>
         <translation>下載</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="883"/>
+        <location filename="../qml/BrowserWindow.qml" line="886"/>
         <source>Menu</source>
         <translation>選單</translation>
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="35"/>
-        <location filename="../qml/BrowserWindow.qml" line="896"/>
+        <location filename="../qml/BrowserWindow.qml" line="899"/>
         <source>New Private Tab</source>
         <translation>新增隱私分頁</translation>
     </message>
@@ -319,125 +319,125 @@
         <translation>隱私瀏覽</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="770"/>
+        <location filename="../qml/BrowserWindow.qml" line="773"/>
         <source>Not Secure</source>
         <translation>不安全</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="778"/>
+        <location filename="../qml/BrowserWindow.qml" line="781"/>
         <source>Site Information</source>
         <translation>網站資訊</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="803"/>
+        <location filename="../qml/BrowserWindow.qml" line="806"/>
         <source>Edit This Bookmark</source>
         <translation>編輯此書籤</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="901"/>
+        <location filename="../qml/BrowserWindow.qml" line="904"/>
         <source>New Window</source>
         <translation>新增視窗</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="906"/>
+        <location filename="../qml/BrowserWindow.qml" line="909"/>
         <source>New Private Window</source>
         <translation>新增隱私視窗</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="911"/>
+        <location filename="../qml/BrowserWindow.qml" line="914"/>
         <source>Reopen Closed Tab</source>
         <translation>重新開啟已關閉的分頁</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="918"/>
+        <location filename="../qml/BrowserWindow.qml" line="921"/>
         <source>Close Tab</source>
         <translation>關閉分頁</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="924"/>
+        <location filename="../qml/BrowserWindow.qml" line="927"/>
         <source>Find in Page…</source>
         <translation>在頁面中尋找…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="931"/>
+        <location filename="../qml/BrowserWindow.qml" line="934"/>
         <source>Zoom In</source>
         <translation>放大</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="940"/>
+        <location filename="../qml/BrowserWindow.qml" line="943"/>
         <source>Zoom Out</source>
         <translation>縮小</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="949"/>
+        <location filename="../qml/BrowserWindow.qml" line="952"/>
         <source>Actual Size</source>
         <translation>實際大小</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="959"/>
+        <location filename="../qml/BrowserWindow.qml" line="962"/>
         <source>Bookmarks</source>
         <translation>書籤</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="970"/>
+        <location filename="../qml/BrowserWindow.qml" line="973"/>
         <source>History</source>
         <translation>歷史記錄</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="975"/>
+        <location filename="../qml/BrowserWindow.qml" line="978"/>
         <source>Site Permissions…</source>
         <translation>網站權限…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="982"/>
+        <location filename="../qml/BrowserWindow.qml" line="985"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>設定 %1…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="989"/>
+        <location filename="../qml/BrowserWindow.qml" line="992"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>關於 %1</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1043"/>
+        <location filename="../qml/BrowserWindow.qml" line="1046"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>按 Esc 鍵結束全螢幕</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1113"/>
+        <location filename="../qml/BrowserWindow.qml" line="1116"/>
         <source>Page bookmarked</source>
         <translation>頁面已加入書籤</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1113"/>
+        <location filename="../qml/BrowserWindow.qml" line="1116"/>
         <source>Edit Bookmark</source>
         <translation>編輯書籤</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1121"/>
+        <location filename="../qml/BrowserWindow.qml" line="1124"/>
         <source>Name:</source>
         <translation>名稱：</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1127"/>
+        <location filename="../qml/BrowserWindow.qml" line="1130"/>
         <source>Folder:</source>
         <translation>資料夾：</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1137"/>
+        <location filename="../qml/BrowserWindow.qml" line="1140"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1145"/>
+        <location filename="../qml/BrowserWindow.qml" line="1148"/>
         <source>Done</source>
         <translation>完成</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1157"/>
+        <location filename="../qml/BrowserWindow.qml" line="1160"/>
         <source>Save File</source>
         <translation>儲存檔案</translation>
     </message>

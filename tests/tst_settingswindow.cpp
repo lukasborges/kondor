@@ -282,6 +282,7 @@ void TestSettingsWindow::clickingSidebarSwitchesPages()
     // highlighted entry in sync.
     QMetaObject::invokeMethod(window, "discardChanges");
     QMetaObject::invokeMethod(window, "showWindow");
+    QVERIFY(QTest::qWaitForWindowExposed(window));
     verifyShownPage(window, 3, titles[3]);
 
     delete window;

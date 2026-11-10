@@ -1582,7 +1582,7 @@
     <name>WebViewTab</name>
     <message>
         <location filename="../qml/WebViewTab.qml" line="27"/>
-        <location filename="../qml/WebViewTab.qml" line="495"/>
+        <location filename="../qml/WebViewTab.qml" line="494"/>
         <source>Print failed</source>
         <translation>Error al imprimir</translation>
     </message>
@@ -1597,17 +1597,17 @@
         <translation>Error al guardar el PDF</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="287"/>
+        <location filename="../qml/WebViewTab.qml" line="286"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>El proceso de la página terminó inesperadamente.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="288"/>
+        <location filename="../qml/WebViewTab.qml" line="287"/>
         <source>The page crashed.</source>
         <translation>La página ha fallado.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="289"/>
+        <location filename="../qml/WebViewTab.qml" line="288"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>Se ha terminado el proceso de la página (posiblemente por falta de memoria).</translation>
     </message>

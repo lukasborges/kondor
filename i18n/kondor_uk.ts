@@ -1582,7 +1582,7 @@
     <name>WebViewTab</name>
     <message>
         <location filename="../qml/WebViewTab.qml" line="27"/>
-        <location filename="../qml/WebViewTab.qml" line="495"/>
+        <location filename="../qml/WebViewTab.qml" line="494"/>
         <source>Print failed</source>
         <translation>Не вдалося надрукувати</translation>
     </message>
@@ -1597,17 +1597,17 @@
         <translation>Не вдалося зберегти PDF</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="287"/>
+        <location filename="../qml/WebViewTab.qml" line="286"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>Процес сторінки несподівано завершився.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="288"/>
+        <location filename="../qml/WebViewTab.qml" line="287"/>
         <source>The page crashed.</source>
         <translation>Сторінка аварійно завершилася.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="289"/>
+        <location filename="../qml/WebViewTab.qml" line="288"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>Процес сторінки було примусово завершено (можливо, через брак пам&apos;яті).</translation>
     </message>

@@ -1582,7 +1582,7 @@
     <name>WebViewTab</name>
     <message>
         <location filename="../qml/WebViewTab.qml" line="27"/>
-        <location filename="../qml/WebViewTab.qml" line="495"/>
+        <location filename="../qml/WebViewTab.qml" line="494"/>
         <source>Print failed</source>
         <translation>인쇄하지 못했습니다</translation>
     </message>
@@ -1597,17 +1597,17 @@
         <translation>PDF를 저장하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="287"/>
+        <location filename="../qml/WebViewTab.qml" line="286"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>페이지 프로세스가 예기치 않게 종료되었습니다.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="288"/>
+        <location filename="../qml/WebViewTab.qml" line="287"/>
         <source>The page crashed.</source>
         <translation>페이지가 충돌했습니다.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="289"/>
+        <location filename="../qml/WebViewTab.qml" line="288"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>페이지 프로세스가 종료되었습니다(메모리 부족일 수 있음).</translation>
     </message>

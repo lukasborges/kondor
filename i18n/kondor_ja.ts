@@ -1582,7 +1582,7 @@
     <name>WebViewTab</name>
     <message>
         <location filename="../qml/WebViewTab.qml" line="27"/>
-        <location filename="../qml/WebViewTab.qml" line="495"/>
+        <location filename="../qml/WebViewTab.qml" line="494"/>
         <source>Print failed</source>
         <translation>印刷に失敗しました</translation>
     </message>
@@ -1597,17 +1597,17 @@
         <translation>PDF の保存に失敗しました</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="287"/>
+        <location filename="../qml/WebViewTab.qml" line="286"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>ページのプロセスが予期せず終了しました。</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="288"/>
+        <location filename="../qml/WebViewTab.qml" line="287"/>
         <source>The page crashed.</source>
         <translation>ページがクラッシュしました。</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="289"/>
+        <location filename="../qml/WebViewTab.qml" line="288"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>ページのプロセスが強制終了されました (メモリ不足の可能性があります)。</translation>
     </message>

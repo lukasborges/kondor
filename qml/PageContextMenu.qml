@@ -175,7 +175,10 @@ Menu {
     }
 
     function addEntry(entry) {
-        const item = itemComponent.createObject(menu, {
+        // Create with a null parent and let addItem() take ownership; a Menu is a
+        // Popup, not an Item, so parenting to it makes Qt warn that the object was
+        // not placed in the graphics scene.
+        const item = itemComponent.createObject(null, {
             "text": entry.text,
             "iconName": entry.icon ?? "",
             "actionId": entry.action,
@@ -188,7 +191,7 @@ Menu {
     }
 
     function addSeparator() {
-        addItem(separatorComponent.createObject(menu))
+        addItem(separatorComponent.createObject(null))
     }
 
     function perform(action, data) {

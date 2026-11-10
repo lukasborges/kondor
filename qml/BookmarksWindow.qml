@@ -174,7 +174,10 @@ ApplicationWindow {
         return false
     }
 
-    function beginDrag(row, scenePos) {
+    // pressScenePos is where the pointer went down; scenePos has already
+    // passed the drag threshold, so the hot spot uses the press position to
+    // keep the preview exactly where the row was grabbed.
+    function beginDrag(row, scenePos, pressScenePos) {
         root.draggedId = row.id
         root.draggedIsFolder = row.isFolder
         root.draggedTitle = row.title.length ? row.title : row.url
@@ -191,8 +194,8 @@ ApplicationWindow {
         // Keep the offset between the pointer and the row it grabbed, so the
         // preview stays where the row was pressed (like Firefox's Library).
         const rowOrigin = row.mapToItem(null, Qt.point(0, 0))
-        dragProxy.Drag.hotSpot = Qt.point(scenePos.x - rowOrigin.x,
-                                         scenePos.y - rowOrigin.y)
+        dragProxy.Drag.hotSpot = Qt.point(pressScenePos.x - rowOrigin.x,
+                                         pressScenePos.y - rowOrigin.y)
         dragProxy.Drag.active = true
         root.moveDragProxy(scenePos)
     }
@@ -644,7 +647,8 @@ ApplicationWindow {
 
                                 onActiveChanged: {
                                     if (active) {
-                                        root.beginDrag(itemEntry, centroid.scenePosition)
+                                        root.beginDrag(itemEntry, centroid.scenePosition,
+                                                       centroid.scenePressPosition)
                                     } else {
                                         root.finishDrag()
                                     }
@@ -778,12 +782,17 @@ ApplicationWindow {
                 Layout.preferredHeight: 22
             }
 
-            SiteIcon {
-                visible: !root.draggedIsFolder
-                pageUrl: root.draggedUrl
+            // A Loader keeps the favicon request from happening at window
+            // creation, when no row is being dragged yet.
+            Loader {
+                active: root.draggedId >= 0 && !root.draggedIsFolder
+                visible: active
                 Layout.alignment: Qt.AlignVCenter
                 Layout.preferredWidth: 22
                 Layout.preferredHeight: 22
+                sourceComponent: SiteIcon {
+                    pageUrl: root.draggedUrl
+                }
             }
 
             Label {

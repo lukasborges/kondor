@@ -214,6 +214,24 @@ void Tab::exitFullScreen()
     emit exitFullScreenRequested();
 }
 
+void Tab::setDevToolsOpen(bool open)
+{
+    if (m_devToolsOpen == open)
+        return;
+    m_devToolsOpen = open;
+    emit devToolsOpenChanged();
+}
+
+void Tab::toggleDevTools()
+{
+    emit toggleDevToolsRequested();
+}
+
+void Tab::inspectElement()
+{
+    emit inspectElementRequested();
+}
+
 void Tab::setNewTabPage(bool newTabPage)
 {
     if (m_newTabPage == newTabPage)

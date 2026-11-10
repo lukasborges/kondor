@@ -389,55 +389,65 @@
         <translation>網站權限…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="992"/>
+        <location filename="../qml/BrowserWindow.qml" line="990"/>
+        <source>More Tools</source>
+        <translation>更多工具</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="993"/>
+        <source>Developer Tools</source>
+        <translation>開發人員工具</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1007"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>設定 %1…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="999"/>
+        <location filename="../qml/BrowserWindow.qml" line="1014"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>關於 %1</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1053"/>
+        <location filename="../qml/BrowserWindow.qml" line="1068"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>按 Esc 鍵結束全螢幕</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1123"/>
+        <location filename="../qml/BrowserWindow.qml" line="1138"/>
         <source>Page bookmarked</source>
         <translation>頁面已加入書籤</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1123"/>
+        <location filename="../qml/BrowserWindow.qml" line="1138"/>
         <source>Edit Bookmark</source>
         <translation>編輯書籤</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1131"/>
+        <location filename="../qml/BrowserWindow.qml" line="1146"/>
         <source>Name:</source>
         <translation>名稱：</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1137"/>
+        <location filename="../qml/BrowserWindow.qml" line="1152"/>
         <source>Folder:</source>
         <translation>資料夾：</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1147"/>
+        <location filename="../qml/BrowserWindow.qml" line="1162"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1155"/>
+        <location filename="../qml/BrowserWindow.qml" line="1170"/>
         <source>Done</source>
         <translation>完成</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1167"/>
+        <location filename="../qml/BrowserWindow.qml" line="1182"/>
         <source>Save File</source>
         <translation>儲存檔案</translation>
     </message>
@@ -793,130 +803,135 @@
 <context>
     <name>PageContextMenu</name>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="74"/>
+        <location filename="../qml/PageContextMenu.qml" line="50"/>
+        <source>Inspect Element</source>
+        <translation>檢查元素</translation>
+    </message>
+    <message>
+        <location filename="../qml/PageContextMenu.qml" line="75"/>
         <source>Open Link in New Tab</source>
         <translation>在新分頁中開啟連結</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="75"/>
+        <location filename="../qml/PageContextMenu.qml" line="76"/>
         <source>Open Link in New Private Tab</source>
         <translation>在新的隱私分頁中開啟連結</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="77"/>
+        <location filename="../qml/PageContextMenu.qml" line="78"/>
         <source>Copy Link Address</source>
         <translation>複製連結位址</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="78"/>
+        <location filename="../qml/PageContextMenu.qml" line="79"/>
         <source>Save Link As…</source>
         <translation>連結另存新檔…</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="84"/>
+        <location filename="../qml/PageContextMenu.qml" line="85"/>
         <source>Open Image in New Tab</source>
         <translation>在新分頁中開啟圖片</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="85"/>
+        <location filename="../qml/PageContextMenu.qml" line="86"/>
         <source>Save Image As…</source>
         <translation>圖片另存新檔…</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="86"/>
+        <location filename="../qml/PageContextMenu.qml" line="87"/>
         <source>Copy Image</source>
         <translation>複製圖片</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="87"/>
+        <location filename="../qml/PageContextMenu.qml" line="88"/>
         <source>Copy Image Address</source>
         <translation>複製圖片位址</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="93"/>
+        <location filename="../qml/PageContextMenu.qml" line="94"/>
         <source>Save Media As…</source>
         <translation>媒體另存新檔…</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="94"/>
+        <location filename="../qml/PageContextMenu.qml" line="95"/>
         <source>Copy Media Address</source>
         <translation>複製媒體位址</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="99"/>
+        <location filename="../qml/PageContextMenu.qml" line="100"/>
         <source>Show Controls</source>
         <translation>顯示控制項</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="107"/>
+        <location filename="../qml/PageContextMenu.qml" line="108"/>
         <source>Loop</source>
         <translation>循環</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="121"/>
+        <location filename="../qml/PageContextMenu.qml" line="122"/>
         <source>Search %1 for “%2”</source>
         <extracomment>%1 is the search engine name, %2 the selected text</extracomment>
         <translation>在 %1 中搜尋「%2」</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="123"/>
+        <location filename="../qml/PageContextMenu.qml" line="124"/>
         <source>Search for “%1”</source>
         <extracomment>%1 is the selected text</extracomment>
         <translation>搜尋「%1」</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="125"/>
-        <location filename="../qml/PageContextMenu.qml" line="150"/>
+        <location filename="../qml/PageContextMenu.qml" line="126"/>
+        <location filename="../qml/PageContextMenu.qml" line="151"/>
         <source>Copy</source>
         <translation>複製</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="143"/>
+        <location filename="../qml/PageContextMenu.qml" line="144"/>
         <source>Undo</source>
         <translation>復原</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="145"/>
+        <location filename="../qml/PageContextMenu.qml" line="146"/>
         <source>Redo</source>
         <translation>重做</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="148"/>
+        <location filename="../qml/PageContextMenu.qml" line="149"/>
         <source>Cut</source>
         <translation>剪下</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="152"/>
+        <location filename="../qml/PageContextMenu.qml" line="153"/>
         <source>Paste</source>
         <translation>貼上</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="154"/>
+        <location filename="../qml/PageContextMenu.qml" line="155"/>
         <source>Paste as Plain Text</source>
         <translation>以純文字貼上</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="156"/>
+        <location filename="../qml/PageContextMenu.qml" line="157"/>
         <source>Select All</source>
         <translation>全選</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="163"/>
+        <location filename="../qml/PageContextMenu.qml" line="164"/>
         <source>Back</source>
         <translation>上一頁</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="164"/>
+        <location filename="../qml/PageContextMenu.qml" line="165"/>
         <source>Forward</source>
         <translation>下一頁</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="165"/>
+        <location filename="../qml/PageContextMenu.qml" line="166"/>
         <source>Reload</source>
         <translation>重新載入</translation>
     </message>
     <message>
-        <location filename="../qml/PageContextMenu.qml" line="167"/>
+        <location filename="../qml/PageContextMenu.qml" line="168"/>
         <source>View Page Source</source>
         <translation>檢視頁面原始碼</translation>
     </message>
@@ -1440,17 +1455,17 @@
 <context>
     <name>WebViewTab</name>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="76"/>
+        <location filename="../qml/WebViewTab.qml" line="91"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>頁面行程意外結束。</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="77"/>
+        <location filename="../qml/WebViewTab.qml" line="92"/>
         <source>The page crashed.</source>
         <translation>頁面已當機。</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="78"/>
+        <location filename="../qml/WebViewTab.qml" line="93"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>頁面行程被終止（可能是記憶體不足）。</translation>
     </message>

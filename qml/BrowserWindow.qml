@@ -986,6 +986,21 @@ ApplicationWindow {
                             icon.name: "security-high"
                             onTriggered: window.openSitePermissions()
                         }
+                        Menu {
+                            title: qsTr("More Tools")
+                            icon.name: "applications-development"
+                            MenuItem {
+                                text: qsTr("Developer Tools")
+                                icon.name: "code-context"
+                                checkable: true
+                                checked: tabs.currentTab ? tabs.currentTab.devToolsOpen : false
+                                enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
+                                onTriggered: {
+                                    if (tabs.currentTab)
+                                        tabs.currentTab.toggleDevTools()
+                                }
+                            }
+                        }
                         MenuSeparator {}
                         MenuItem {
                             //: %1 is the application name
@@ -1362,6 +1377,11 @@ ApplicationWindow {
             if (tabs.currentTab && !tabs.currentTab.newTabPage)
                 tabs.currentTab.resetZoom()
         }
+    }
+    Shortcut {
+        sequences: ["F12", "Ctrl+Shift+I"]
+        enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
+        onActivated: tabs.currentTab.toggleDevTools()
     }
     Shortcut {
         sequences: [StandardKey.Find]

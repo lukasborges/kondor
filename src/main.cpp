@@ -161,7 +161,9 @@ int main(int argc, char *argv[])
     }
 
     // App identity: the .desktop name (used by Wayland/KWin) and the window icon.
-    QGuiApplication::setDesktopFileName(QStringLiteral("kondor"));
+    // Inside a Flatpak the desktop file is renamed to the app id.
+    const QString flatpakId = qEnvironmentVariable("FLATPAK_ID");
+    QGuiApplication::setDesktopFileName(flatpakId.isEmpty() ? QStringLiteral("kondor") : flatpakId);
     QGuiApplication::setWindowIcon(QIcon(QStringLiteral(":/packaging/kondor.png")));
 
     // Kondor's own strings; the .qm files are embedded under :/i18n.

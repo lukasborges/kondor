@@ -1,7 +1,10 @@
 #pragma once
 
+#include <QHash>
 #include <QList>
 #include <QObject>
+#include <QSet>
+#include <QString>
 #include <QUrl>
 #include <QtQmlIntegration/qqmlintegration.h>
 #include <QQuickWebEngineProfile>
@@ -36,6 +39,13 @@ public:
     // Privacy page: "Clear Cookies and Cache Now".
     Q_INVOKABLE void clearCookiesAndCacheNow();
 
+    // Hosts whose certificate error the user accepted. Qt WebEngine remembers
+    // the override per profile for its whole lifetime and stops reporting the
+    // error, so the tab's security state has to come from this set. It lives
+    // in memory only: a private profile's hosts die with the profile.
+    void markCertificateOverridden(QQuickWebEngineProfile *profile, const QString &host);
+    bool isCertificateOverridden(QQuickWebEngineProfile *profile, const QString &host) const;
+
     QString homePage() const;
 
 signals:
@@ -49,4 +59,6 @@ private:
     QQuickWebEngineProfile *m_defaultProfile = nullptr;
     // Private profiles that are still alive, so download folder changes reach them.
     QList<QQuickWebEngineProfile *> m_privateProfiles;
+    // Lower-case hosts with an accepted certificate error, per profile.
+    QHash<QQuickWebEngineProfile *, QSet<QString>> m_overriddenCertificateHosts;
 };

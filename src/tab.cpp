@@ -1,5 +1,7 @@
 #include "tab.h"
 
+#include "profilemanager.h"
+
 #include <QQuickWebEngineProfile>
 
 #include <utility>
@@ -36,12 +38,6 @@ void Tab::setUrl(const QUrl &url)
     if (!url.isEmpty() && url != QUrl(QStringLiteral("about:blank")))
         setNewTabPage(false);
 
-    // A certificate override is only valid for the host it was granted for.
-    if (!m_overriddenCertificateHost.isEmpty()
-            && url.host().compare(m_overriddenCertificateHost, Qt::CaseInsensitive) != 0) {
-        m_overriddenCertificateHost.clear();
-    }
-
     // A prompt belongs to the origin that asked; leaving it denies the request.
     // Same-document changes (fragment, history.pushState) and same-origin
     // navigations keep it, so single-page apps like Meet keep their prompts.
@@ -63,9 +59,11 @@ void Tab::updateSecurityState()
         // While the warning is on screen the indicator must match it.
         state = QStringLiteral("error");
     } else if (scheme == QLatin1String("https")) {
-        // After an override the host keeps the warning state until it is left.
-        const bool overridden = !m_overriddenCertificateHost.isEmpty()
-                && m_url.host().compare(m_overriddenCertificateHost, Qt::CaseInsensitive) == 0;
+        // Qt WebEngine accepts an overridden host's certificate for the whole
+        // lifetime of the profile without asking again, so the set kept by
+        // ProfileManager decides the state, not this tab's history.
+        const bool overridden = ProfileManager::instance()->isCertificateOverridden(m_profile,
+                                                                                    m_url.host());
         state = overridden ? QStringLiteral("error") : QStringLiteral("secure");
     } else if (scheme == QLatin1String("http")) {
         state = QStringLiteral("insecure");
@@ -107,28 +105,19 @@ void Tab::clearPendingCertificateError()
     emit certificateErrorChanged();
 }
 
-void Tab::setCertificateOverridden(bool overridden)
+void Tab::markCertificateOverridden()
 {
-    QString host;
-    if (overridden) {
-        host = m_certificateErrorUrl.host();
-        if (host.isEmpty())
-            host = m_url.host();
-    }
-
-    if (m_overriddenCertificateHost.compare(host, Qt::CaseInsensitive) == 0) {
-        updateSecurityState();
-        return;
-    }
-    m_overriddenCertificateHost = host;
-    updateSecurityState();
+    QString host = m_certificateErrorUrl.host();
+    if (host.isEmpty())
+        host = m_url.host();
+    ProfileManager::instance()->markCertificateOverridden(m_profile, host);
 }
 
 void Tab::acceptCertificateError()
 {
     if (!m_certificateErrorPending)
         return;
-    setCertificateOverridden(true);
+    markCertificateOverridden();
     clearPendingCertificateError();
     emit acceptCertificateErrorRequested();
 }

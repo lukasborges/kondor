@@ -69,7 +69,6 @@ public:
     Q_INVOKABLE void setPendingCertificateError(const QUrl &url, const QString &description,
                                                 bool overridable);
     void setPinned(bool pinned);
-    void setCertificateOverridden(bool overridden);
 
     // Commands coming from the UI; they become signals consumed by the WebEngineView.
     Q_INVOKABLE void navigateTo(const QUrl &url);
@@ -128,6 +127,7 @@ private:
     void denyPendingPermissions();
     void updateSecurityState();
     void clearPendingCertificateError();
+    void markCertificateOverridden();
 
     QString m_title;
     QUrl m_url;
@@ -148,9 +148,6 @@ private:
     // "secure" (https), "insecure" (http), "error" (certificate warning on
     // screen or overridden by the user) or "local" (file:, about:, data:).
     QString m_securityState = QStringLiteral("local");
-    // Set while the user accepted a certificate error for this host; cleared
-    // as soon as the tab navigates to another host.
-    QString m_overriddenCertificateHost;
     bool m_certificateErrorPending = false;
     QUrl m_certificateErrorUrl;
     QString m_certificateErrorDescription;

@@ -268,12 +268,22 @@ void TestTabModel::certificateOverrideKeepsTheErrorStateForItsHost()
     QVERIFY(!tab->certificateErrorPending());
     QCOMPARE(acceptSpy.count(), 1);
 
+    // Qt WebEngine keeps accepting the host for the lifetime of the profile,
+    // so leaving and coming back must still warn.
+    tab->setUrl(QUrl(QStringLiteral("https://other.example/")));
+    QCOMPARE(tab->securityState(), QStringLiteral("secure"));
     tab->setUrl(failedUrl);
     QCOMPARE(tab->securityState(), QStringLiteral("error"));
 
-    // The override belongs to the failed host only.
-    tab->setUrl(QUrl(QStringLiteral("https://other.example/")));
-    QCOMPARE(tab->securityState(), QStringLiteral("secure"));
+    // Every tab of the same profile knows about the override too.
+    Tab *sameProfile = model.addTab(false, failedUrl);
+    QCOMPARE(sameProfile->profile(), tab->profile());
+    QCOMPARE(sameProfile->securityState(), QStringLiteral("error"));
+
+    // A private tab has its own profile and never inherits the override.
+    Tab *privateTab = model.addTab(true, failedUrl);
+    QVERIFY(privateTab->profile() != tab->profile());
+    QCOMPARE(privateTab->securityState(), QStringLiteral("secure"));
 }
 
 void TestTabModel::rejectCertificateErrorClearsThePendingError()

@@ -37,11 +37,11 @@ bool isLocalHost(const QString &host)
 
 } // namespace
 
-QUrl resolveAddress(const QString &text, const QUrl &homePage, const QString &searchTemplate)
+QUrl addressUrl(const QString &text)
 {
     const QString input = text.trimmed();
     if (input.isEmpty())
-        return homePage;
+        return QUrl();
 
     if (input.contains(QLatin1String("://"))
         || input.startsWith(QLatin1String("about:"))
@@ -61,8 +61,26 @@ QUrl resolveAddress(const QString &text, const QUrl &homePage, const QString &se
         return QUrl(scheme + input);
     }
 
-    // Otherwise search with the configured engine.
+    return QUrl();
+}
+
+QUrl searchUrl(const QString &text, const QString &searchTemplate)
+{
     QString url = searchTemplate;
-    url.replace(QLatin1String("%1"), QString::fromUtf8(QUrl::toPercentEncoding(input)));
+    url.replace(QLatin1String("%1"),
+                QString::fromUtf8(QUrl::toPercentEncoding(text.trimmed())));
     return QUrl(url);
+}
+
+QUrl resolveAddress(const QString &text, const QUrl &homePage, const QString &searchTemplate)
+{
+    if (text.trimmed().isEmpty())
+        return homePage;
+
+    const QUrl url = addressUrl(text);
+    if (!url.isEmpty())
+        return url;
+
+    // Otherwise search with the configured engine.
+    return searchUrl(text, searchTemplate);
 }

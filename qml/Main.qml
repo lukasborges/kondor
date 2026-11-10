@@ -478,13 +478,61 @@ ApplicationWindow {
                         const t = tabs.currentTab
                         if (!t)
                             return
+                        if (addressSuggestions.opened) {
+                            addressSuggestions.activate(addressSuggestions.currentIndex)
+                            return
+                        }
                         t.navigateTo(ProfileManager.resolveAddress(text))
                         focus = false
                     }
 
+                    onTextEdited: {
+                        addressSuggestions.text = text
+                        if (addressSuggestions.rows.length > 0) {
+                            addressSuggestions.currentIndex = 0
+                            addressSuggestions.open()
+                        } else {
+                            addressSuggestions.close()
+                        }
+                    }
+
+                    Keys.onDownPressed: function(event) {
+                        if (!addressSuggestions.opened) {
+                            event.accepted = false
+                            return
+                        }
+                        addressSuggestions.currentIndex =
+                            Math.min(addressSuggestions.currentIndex + 1,
+                                     addressSuggestions.rows.length - 1)
+                        event.accepted = true
+                    }
+
+                    Keys.onUpPressed: function(event) {
+                        if (!addressSuggestions.opened) {
+                            event.accepted = false
+                            return
+                        }
+                        addressSuggestions.currentIndex =
+                            Math.max(addressSuggestions.currentIndex - 1, 0)
+                        event.accepted = true
+                    }
+
+                    Keys.onEscapePressed: function(event) {
+                        if (!addressSuggestions.opened) {
+                            event.accepted = false
+                            return
+                        }
+                        // Only the dropdown goes away; the typed text stays.
+                        addressSuggestions.close()
+                        event.accepted = true
+                    }
+
                     onActiveFocusChanged: {
-                        if (activeFocus)
+                        if (activeFocus) {
                             selectAll()
+                        } else {
+                            addressSuggestions.close()
+                        }
                     }
 
                     Component.onCompleted: syncFromTab()
@@ -515,6 +563,20 @@ ApplicationWindow {
                                 else
                                     window.openBookmarkEditor()
                             }
+                        }
+                    }
+
+                    AddressSuggestions {
+                        id: addressSuggestions
+                        x: 0
+                        y: addressBar.height
+                        width: addressBar.width
+
+                        onNavigate: function(url) {
+                            if (tabs.currentTab)
+                                tabs.currentTab.navigateTo(url)
+                            addressSuggestions.close()
+                            addressBar.focus = false
                         }
                     }
                 }
@@ -993,6 +1055,7 @@ ApplicationWindow {
             }
         }
         function onCurrentTabChanged() {
+            addressSuggestions.close()
             addressBar.syncFromTab()
         }
     }

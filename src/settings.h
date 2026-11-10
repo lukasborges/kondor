@@ -73,6 +73,10 @@ public:
 
     // URL template for the selected engine, with %1 where the query goes.
     Q_INVOKABLE QString searchUrlTemplate() const;
+    // Display name of the selected engine: "DuckDuckGo", "Google",
+    // "Startpage", "Brave Search", "" for a custom engine or "DuckDuckGo"
+    // when the custom URL is invalid and search falls back to it.
+    Q_INVOKABLE QString searchEngineName() const;
     // False when the configured download folder is missing, so the UI can warn.
     bool downloadDirectoryValid() const;
     // Re-emits downloadDirectoryChanged so the UI re-reads the folder and its

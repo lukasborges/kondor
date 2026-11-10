@@ -14,6 +14,13 @@ Rectangle {
         { title: "Wikipedia, the free encyclopedia", icon: "internet-web-browser" }
     ]
     property int currentTab: 0
+    // Width of every unpinned tab (#83: fixed 240, shrinking to 120).
+    property int tabWidth: 200
+    // #83: the tabs overflow at the minimum width; show the scroll arrows.
+    property bool tabScrollButtons: false
+    property real tabScrollX: 0
+    property bool tabScrollLeftEnabled: true
+    property bool tabScrollRightEnabled: true
     property string address: "https://kde.org/"
     property bool addressFocused: false
     property bool privateWindow: false
@@ -65,11 +72,15 @@ Rectangle {
                     id: tabBar
                     currentIndex: frame.currentTab
                     background: null
+                    clip: true
+                    Layout.fillWidth: frame.tabScrollButtons
+                    Layout.minimumWidth: 0
+                    Component.onCompleted: if (frame.tabScrollButtons) Qt.callLater(function() { tabBar.contentItem.contentX = frame.tabScrollX })
                     Repeater {
                         model: frame.tabs
                         delegate: TabButton {
                             required property var modelData
-                            width: modelData.pinned ? 40 : 200
+                            width: modelData.pinned ? 36 : frame.tabWidth
                             display: modelData.pinned ? AbstractButton.IconOnly : AbstractButton.TextBesideIcon
                             icon.name: modelData.private ? "view-private" : (modelData.icon || "text-html")
                             icon.width: 16
@@ -119,12 +130,29 @@ Rectangle {
                 }
 
                 ToolButton {
+                    visible: frame.tabScrollButtons
+                    enabled: frame.tabScrollLeftEnabled
+                    display: AbstractButton.IconOnly
+                    icon.name: "go-previous-symbolic"
+                    icon.width: 16
+                    icon.height: 16
+                }
+                ToolButton {
+                    visible: frame.tabScrollButtons
+                    enabled: frame.tabScrollRightEnabled
+                    display: AbstractButton.IconOnly
+                    icon.name: "go-next-symbolic"
+                    icon.width: 16
+                    icon.height: 16
+                }
+                ToolButton {
+                    Layout.leftMargin: 2
                     display: AbstractButton.IconOnly
                     icon.name: "tab-new"
                     icon.width: 16
                     icon.height: 16
                 }
-                Item { Layout.fillWidth: true }
+                Item { visible: !frame.tabScrollButtons; Layout.fillWidth: true }
             }
         }
 

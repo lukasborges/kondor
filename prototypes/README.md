@@ -45,6 +45,7 @@ Tips when editing:
 | #44 Address bar: visit or search | `44-address-visit-or-search.qml` |
 | #53 About window | `53-about.qml`, `53b-about-components.qml`, `53c-about-authors.qml` (shared mock in `common/AboutDialogMock.qml`) |
 | #12 Tab management | `12-tab-management.qml` |
+| #83 Tab sizing and scroll arrows | `83-tab-sizing.qml`, `83b-tab-sizing-shrunk.qml`, `83c-tab-sizing-scroll.qml` (BrowserFrame `tabWidth` / `tabScrollButtons`) |
 | #13 Page context menu | `13-page-context-menu.qml` |
 | #14 Multiple windows | `14-private-window.qml`, `00-main-menu.qml` |
 | #16 Developer tools | `16-devtools.qml` |

@@ -13,7 +13,7 @@ only through GitHub (labels, issue/PR comments, PR reviews); see "Agent workflow
 Kondor Browser is a small web browser written in **C++17 + Qt 6 (Qt Quick / QML + Qt WebEngine)** that must look and
 behave like a native **KDE Plasma** app (Breeze style, Breeze icons, system color scheme).
 
-- Minimum Qt: **6.5** (`find_package(Qt6 6.5 …)`), developed and tested on **Qt 6.11.2 / Fedora**.
+- Minimum Qt: **6.8** (`find_package(Qt6 6.8 …)`; site permissions, #7, need the 6.8 `WebEnginePermission` API), developed and tested on **Qt 6.11.2 / Fedora**.
 - QML style: `org.kde.desktop` (qqc2-desktop-style), set in `src/main.cpp`.
 - Kirigami is used **only for theming** (`Kirigami.Theme.*`) and, where useful, `Kirigami.FormLayout`
   / `Kirigami.InlineMessage` / `Kirigami.Icon`. The main window is a QQC2 `ApplicationWindow`, not a

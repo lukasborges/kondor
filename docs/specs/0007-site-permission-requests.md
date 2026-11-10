@@ -55,4 +55,6 @@ Visual target — match it (controls, Kirigami components, icon names, wording, 
 
 ## Decisions
 
-_None yet._ Answers to developer questions (`question` label) are recorded here as `| Question | Decision |` rows.
+| Question | Decision |
+| --- | --- |
+| The permission APIs (`WebEnginePermission`, `permissionRequested`, `persistentPermissionsPolicy`) need Qt 6.8+, but the declared minimum is Qt 6.5. Raise the minimum or add guards for 6.5? | Raise the minimum to **Qt 6.8**; no compile/runtime guards. In PR #66: `find_package(Qt6 6.8 …)` and `qt_standard_project_setup(REQUIRES 6.8)` in `CMakeLists.txt`, "Qt 6.8+" in `README.md` (both places) and in the comment of `.github/workflows/build.yml`. The architect updates `AGENTS.md` on `main`. CI and releases already build on Fedora (Qt 6.11). |

@@ -131,9 +131,19 @@ jobs:
           manifest-path: packaging/flatpak/io.github.lukasborges.Kondor.yml
           cache-key: flatpak-builder-${{ github.sha }}
 
+  flatpak-upload:
+    runs-on: ubuntu-24.04
+    needs: flatpak
+    steps:
+      - name: Download bundle
+        uses: actions/download-artifact@v4
+        with:
+          path: bundle
+
       - name: Upload bundle to the release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          gh release upload "$GITHUB_REF_NAME" Kondor.flatpak --clobber
+          file="$(find bundle -name Kondor.flatpak | head -n 1)"
+          test -n "$file"
+          gh release upload "$GITHUB_REF_NAME" "$file" --clobber --repo "$GITHUB_REPOSITORY"

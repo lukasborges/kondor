@@ -1,6 +1,7 @@
 #include "singleinstance.h"
 
 #include <QCryptographicHash>
+#include <QDir>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -38,7 +39,15 @@ QString SingleInstance::serverName()
         QCryptographicHash::hash(dataLocation.toUtf8(), QCryptographicHash::Sha1)
             .toHex()
             .left(16);
-    return QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation)
+    QString directory = QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation);
+    // Inside a Flatpak sandbox $XDG_RUNTIME_DIR is private to each instance;
+    // $XDG_RUNTIME_DIR/app/$FLATPAK_ID is shared by all instances of the app.
+    const QString flatpakId = qEnvironmentVariable("FLATPAK_ID");
+    if (!flatpakId.isEmpty()) {
+        directory += QStringLiteral("/app/") + flatpakId;
+        QDir().mkpath(directory);
+    }
+    return directory
         + QStringLiteral("/kondor-") + QString::fromLatin1(profileHash)
         + QStringLiteral(".socket");
 }

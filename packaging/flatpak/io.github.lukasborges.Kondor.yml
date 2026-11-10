@@ -18,6 +18,10 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.freedesktop.FileManager1
   - --talk-name=org.kde.kwalletd6
+  - --env=QTWEBENGINE_DICTIONARIES_PATH=/app/qtwebengine_dictionaries
+  - --env=QTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
 modules:
   - name: kondor
     buildsystem: cmake-ninja

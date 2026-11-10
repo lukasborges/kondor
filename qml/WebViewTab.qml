@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtWebEngine
+import org.kde.kirigami as Kirigami
 import Kondor
 
 Item {
@@ -57,6 +58,116 @@ Item {
         }
     }
 
+    // --- Reader mode -------------------------------------------------------
+    // The page's URL while the article is shown (loadHtml uses it as base URL).
+    property url readerOriginalUrl: ""
+    // True from loadHtml() until the article document finished loading, so its
+    // own load events are not taken for a navigation.
+    property bool readerLoadPending: false
+
+    function readResource(name) {
+        return FileHelper.readerResource(name)
+    }
+
+    function readerVars() {
+        const family = Settings.readerSerif
+            ? "'Noto Serif', 'DejaVu Serif', Georgia, serif"
+            : "'Noto Sans', 'DejaVu Sans', system-ui, sans-serif"
+        return "--reader-bg: " + readerColors.backgroundColor
+            + "; --reader-text: " + readerColors.textColor
+            + "; --reader-link: " + readerColors.linkColor
+            + "; --reader-muted: " + readerColors.disabledTextColor
+            + "; --reader-font: " + family
+            + "; --reader-size: " + Settings.readerFontSize + "px;"
+    }
+
+    // Colors of the View color set (the page background of the app).
+    Item {
+        id: readerColors
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+        Kirigami.Theme.inherit: false
+        readonly property color backgroundColor: Kirigami.Theme.backgroundColor
+        readonly property color textColor: Kirigami.Theme.textColor
+        readonly property color linkColor: Kirigami.Theme.linkColor
+        readonly property color disabledTextColor: Kirigami.Theme.disabledTextColor
+    }
+
+    function applyReaderStyle() {
+        if (!root.tab.readerActive || root.readerLoadPending)
+            return
+        const css = JSON.stringify(":root { " + root.readerVars() + " }")
+        webView.runJavaScript(
+            "document.getElementById('reader-vars').textContent = " + css + ";",
+            WebEngineScript.ApplicationWorld)
+    }
+
+    Connections {
+        target: Settings
+        function onReaderFontSizeChanged() { root.applyReaderStyle() }
+        function onReaderSerifChanged() { root.applyReaderStyle() }
+    }
+    Connections {
+        target: readerColors
+        function onBackgroundColorChanged() { root.applyReaderStyle() }
+        function onTextColorChanged() { root.applyReaderStyle() }
+        function onLinkColorChanged() { root.applyReaderStyle() }
+    }
+
+    function escapeHtml(text) {
+        return String(text ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;").replace(/"/g, "&quot;")
+    }
+
+    // Is the page an article? Runs after every successful normal load.
+    function detectReader() {
+        webView.runJavaScript(
+            root.readResource("Readability-readerable.js")
+                + "\n;isProbablyReaderable(document);",
+            WebEngineScript.ApplicationWorld,
+            function(result) { root.tab.setReaderAvailable(result === true) })
+    }
+
+    function enterReader() {
+        const original = webView.url
+        webView.runJavaScript(
+            root.readResource("Readability.js") + "\n;(function() {"
+                + "const a = new Readability(document.cloneNode(true)).parse();"
+                + "return a ? { title: a.title, byline: a.byline, content: a.content,"
+                + " siteName: a.siteName, lang: a.lang, dir: a.dir } : null; })();",
+            WebEngineScript.ApplicationWorld,
+            function(article) {
+                if (!article || !article.content || webView.url !== original) {
+                    root.tab.setReaderAvailable(false)
+                    return
+                }
+                const values = {
+                    lang: root.escapeHtml(article.lang || ""),
+                    dir: root.escapeHtml(article.dir || "ltr"),
+                    title: root.escapeHtml(article.title),
+                    siteName: root.escapeHtml(article.siteName),
+                    byline: root.escapeHtml(article.byline),
+                    vars: root.readerVars(),
+                    content: article.content
+                }
+                // One pass, so text inside the article is never substituted.
+                const html = root.readResource("template.html")
+                    .replace(/\{\{(\w+)\}\}/g, function(match, key) { return values[key] ?? "" })
+                root.readerOriginalUrl = original
+                root.readerLoadPending = true
+                root.tab.setReaderActive(true)
+                webView.loadHtml(html, original)
+            })
+    }
+
+    function exitReader() {
+        if (!root.tab.readerActive)
+            return
+        const original = root.readerOriginalUrl
+        root.readerLoadPending = false
+        root.tab.setReaderActive(false)
+        webView.url = original
+    }
+
     function setDevToolsOpen(open) {
         if (open === root.tab.devToolsOpen)
             return
@@ -93,7 +204,7 @@ Item {
 
             onTitleChanged: {
                 root.tab.setTitle(title)
-                if (!root.tab.isPrivate)
+                if (!root.tab.isPrivate && !root.tab.readerActive)
                     HistoryManager.updateTitle(webView.url, title)
             }
             onUrlChanged: {
@@ -124,11 +235,32 @@ Item {
                 if (loadRequest.status === WebEngineLoadingInfo.LoadStartedStatus)
                     root.tab.setCrashed(false, "")
 
+                // A navigation away from the article ends reader mode; the load
+                // of the article itself (loadHtml) does not.
+                if (loadRequest.status === WebEngineLoadingInfo.LoadStartedStatus
+                        && root.tab.readerActive && !root.readerLoadPending) {
+                    root.tab.setReaderActive(false)
+                    root.tab.setReaderAvailable(false)
+                } else if (loadRequest.status === WebEngineLoadingInfo.LoadStartedStatus
+                        && !root.tab.readerActive) {
+                    root.tab.setReaderAvailable(false)
+                }
+                const readerDocument = root.tab.readerActive
+                if (readerDocument && loadRequest.status !== WebEngineLoadingInfo.LoadStartedStatus)
+                    root.readerLoadPending = false
+
                 root.tab.setLoading(loadRequest.status === WebEngineLoadingInfo.LoadStartedStatus)
                 root.tab.setCanGoBack(webView.canGoBack)
                 root.tab.setCanGoForward(webView.canGoForward)
 
                 // Record the visit in history, for persistent tabs only.
+                if (readerDocument)
+                    return
+                if (loadRequest.status === WebEngineLoadingInfo.LoadSucceededStatus
+                        && !root.tab.newTabPage
+                        && webView.url.toString() !== "about:blank")
+                    root.detectReader()
+
                 if (loadRequest.status === WebEngineLoadingInfo.LoadSucceededStatus
                         && !root.tab.isPrivate)
                     HistoryManager.addVisit(webView.url, webView.title)
@@ -288,6 +420,13 @@ Item {
         tab: root.tab
     }
 
+    // Floating controls of reader mode.
+    ReaderControls {
+        anchors { right: parent.right; top: parent.top; margins: Kirigami.Units.largeSpacing }
+        visible: root.tab.readerActive
+        onExitRequested: root.exitReader()
+    }
+
     CrashedPage {
         anchors.fill: parent
         visible: root.tab.crashed
@@ -307,7 +446,17 @@ Item {
             rejectCertificateError()
             webView.url = "about:blank"
         }
+        function onToggleReaderModeRequested() {
+            if (root.tab.readerActive)
+                root.exitReader()
+            else
+                root.enterReader()
+        }
         function onBackRequested() {
+            if (root.tab.readerActive) {
+                root.exitReader()
+                return
+            }
             // The toolbar Back answers the pending certificate request too.
             if (rejectCertificateError())
                 root.tab.rejectCertificateError()

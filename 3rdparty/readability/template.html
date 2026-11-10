@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" dir="{{dir}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="script-src 'none'; object-src 'none'">
+<title>{{title}}</title>
+<style id="reader-vars">:root { {{vars}} }</style>
+<style>
+html { background: var(--reader-bg); color: var(--reader-text); }
+body { margin: 0; padding: 40px 24px 80px; font-family: var(--reader-font); font-size: var(--reader-size); line-height: 1.6; }
+article { max-width: 42em; margin: 0 auto; }
+.site { color: var(--reader-muted); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.7em; margin: 0 0 1em; }
+h1.title { font-size: 1.8em; line-height: 1.2; margin: 0 0 0.5em; }
+.byline { color: var(--reader-muted); margin: 0 0 2em; font-size: 0.9em; }
+a { color: var(--reader-link); }
+img, video, svg, canvas { max-width: 100%; height: auto; }
+figure { margin: 1.5em 0; }
+figcaption { color: var(--reader-muted); font-size: 0.85em; }
+pre, code { font-family: monospace; }
+pre { overflow-x: auto; padding: 0.8em; border: 1px solid var(--reader-muted); }
+blockquote { margin: 1em 0; padding-left: 1em; border-left: 3px solid var(--reader-muted); }
+table { border-collapse: collapse; max-width: 100%; }
+td, th { border: 1px solid var(--reader-muted); padding: 0.3em 0.6em; }
+</style>
+</head>
+<body>
+<article>
+<p class="site">{{siteName}}</p>
+<h1 class="title">{{title}}</h1>
+<p class="byline">{{byline}}</p>
+{{content}}
+</article>
+</body>
+</html>

@@ -35,6 +35,7 @@ qt_add_qml_module(kondor
         qml/BrowserWindow.qml
         qml/WebViewTab.qml
         qml/PageContextMenu.qml
+        qml/ReaderControls.qml
         qml/NewTabPage.qml
         qml/TabButtonDelegate.qml
         qml/TabContextMenu.qml
@@ -131,6 +132,15 @@ qt_add_resources(kondor "app_icon"
     FILES
         packaging/kondor.png
         packaging/kondor.svg
+)
+
+qt_add_resources(kondor "reader"
+    PREFIX "/reader"
+    BASE "${CMAKE_SOURCE_DIR}/3rdparty/readability"
+    FILES
+        3rdparty/readability/Readability.js
+        3rdparty/readability/Readability-readerable.js
+        3rdparty/readability/template.html
 )
 
 qt_add_resources(kondor "license"

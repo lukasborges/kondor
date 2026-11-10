@@ -43,6 +43,9 @@ class Settings : public QObject
                    WRITE setBlockThirdPartyCookies NOTIFY blockThirdPartyCookiesChanged)
     Q_PROPERTY(bool searchSuggestions READ searchSuggestions WRITE setSearchSuggestions
                    NOTIFY searchSuggestionsChanged)
+    Q_PROPERTY(int readerFontSize READ readerFontSize WRITE setReaderFontSize
+                   NOTIFY readerFontSizeChanged)
+    Q_PROPERTY(bool readerSerif READ readerSerif WRITE setReaderSerif NOTIFY readerSerifChanged)
     Q_PROPERTY(bool spellCheckEnabled READ spellCheckEnabled WRITE setSpellCheckEnabled
                    NOTIFY spellCheckEnabledChanged)
     Q_PROPERTY(QStringList spellCheckLanguages READ spellCheckLanguages
@@ -67,6 +70,8 @@ public:
     bool blockThirdPartyCookies() const { return m_blockThirdPartyCookies; }
     bool searchSuggestions() const { return m_searchSuggestions; }
     bool spellCheckEnabled() const { return m_spellCheckEnabled; }
+    int readerFontSize() const { return m_readerFontSize; }
+    bool readerSerif() const { return m_readerSerif; }
     QStringList spellCheckLanguages() const { return m_spellCheckLanguages; }
 
     void setHomePage(const QString &homePage);
@@ -82,6 +87,8 @@ public:
     void setBlockThirdPartyCookies(bool blockThirdPartyCookies);
     void setSearchSuggestions(bool searchSuggestions);
     void setSpellCheckEnabled(bool spellCheckEnabled);
+    void setReaderFontSize(int readerFontSize);
+    void setReaderSerif(bool readerSerif);
     void setSpellCheckLanguages(const QStringList &spellCheckLanguages);
 
     // Default value of the option with this property name ("homePage",
@@ -121,6 +128,8 @@ signals:
     void blockThirdPartyCookiesChanged();
     void searchSuggestionsChanged();
     void spellCheckEnabledChanged();
+    void readerFontSizeChanged();
+    void readerSerifChanged();
     void spellCheckLanguagesChanged();
 
 private:
@@ -141,4 +150,6 @@ private:
     bool m_searchSuggestions = false;
     bool m_spellCheckEnabled = true;
     QStringList m_spellCheckLanguages;
+    int m_readerFontSize = 18;
+    bool m_readerSerif = true;
 };

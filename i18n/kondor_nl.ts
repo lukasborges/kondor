@@ -258,7 +258,7 @@
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
         <location filename="../qml/BrowserWindow.qml" line="491"/>
-        <location filename="../qml/BrowserWindow.qml" line="945"/>
+        <location filename="../qml/BrowserWindow.qml" line="965"/>
         <source>New Tab</source>
         <translation>Nieuw tabblad</translation>
     </message>
@@ -293,23 +293,23 @@
         <translation>Zoeken of een adres invoeren</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="857"/>
+        <location filename="../qml/BrowserWindow.qml" line="877"/>
         <source>Bookmark This Page</source>
         <translation>Deze pagina als bladwijzer opslaan</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="908"/>
+        <location filename="../qml/BrowserWindow.qml" line="928"/>
         <source>Downloads</source>
         <translation>Downloads</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="937"/>
+        <location filename="../qml/BrowserWindow.qml" line="957"/>
         <source>Menu</source>
         <translation>Menu</translation>
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="950"/>
+        <location filename="../qml/BrowserWindow.qml" line="970"/>
         <source>New Private Tab</source>
         <translation>Nieuw privétabblad</translation>
     </message>
@@ -334,170 +334,180 @@
         <translation>Zoom herstellen (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="857"/>
+        <location filename="../qml/BrowserWindow.qml" line="859"/>
+        <source>Exit Reader Mode (Ctrl+Alt+R)</source>
+        <translation>Leesmodus verlaten (Ctrl+Alt+R)</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="860"/>
+        <source>Reader Mode (Ctrl+Alt+R)</source>
+        <translation>Leesmodus (Ctrl+Alt+R)</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="877"/>
         <source>Edit This Bookmark</source>
         <translation>Deze bladwijzer bewerken</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="955"/>
+        <location filename="../qml/BrowserWindow.qml" line="975"/>
         <source>New Window</source>
         <translation>Nieuw venster</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="960"/>
+        <location filename="../qml/BrowserWindow.qml" line="980"/>
         <source>New Private Window</source>
         <translation>Nieuw privévenster</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="965"/>
+        <location filename="../qml/BrowserWindow.qml" line="985"/>
         <source>Reopen Closed Tab</source>
         <translation>Gesloten tabblad opnieuw openen</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="972"/>
+        <location filename="../qml/BrowserWindow.qml" line="992"/>
         <source>Close Tab</source>
         <translation>Tabblad sluiten</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="978"/>
+        <location filename="../qml/BrowserWindow.qml" line="998"/>
         <source>Find in Page…</source>
         <translation>Op pagina zoeken…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="984"/>
+        <location filename="../qml/BrowserWindow.qml" line="1004"/>
         <source>Save Page As…</source>
         <translation>Pagina opslaan als…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="990"/>
+        <location filename="../qml/BrowserWindow.qml" line="1010"/>
         <source>Save as PDF…</source>
         <translation>Opslaan als pdf…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="996"/>
+        <location filename="../qml/BrowserWindow.qml" line="1016"/>
         <source>Print…</source>
         <translation>Afdrukken…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1003"/>
+        <location filename="../qml/BrowserWindow.qml" line="1023"/>
         <source>Zoom In</source>
         <translation>Inzoomen</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1012"/>
+        <location filename="../qml/BrowserWindow.qml" line="1032"/>
         <source>Zoom Out</source>
         <translation>Uitzoomen</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1021"/>
+        <location filename="../qml/BrowserWindow.qml" line="1041"/>
         <source>Actual Size</source>
         <translation>Werkelijke grootte</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1031"/>
+        <location filename="../qml/BrowserWindow.qml" line="1051"/>
         <source>Bookmarks</source>
         <translation>Bladwijzers</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1042"/>
+        <location filename="../qml/BrowserWindow.qml" line="1062"/>
         <source>History</source>
         <translation>Geschiedenis</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1047"/>
+        <location filename="../qml/BrowserWindow.qml" line="1067"/>
         <source>Site Permissions…</source>
         <translation>Website-machtigingen…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1052"/>
+        <location filename="../qml/BrowserWindow.qml" line="1072"/>
         <source>More Tools</source>
         <translation>Meer hulpmiddelen</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1055"/>
+        <location filename="../qml/BrowserWindow.qml" line="1075"/>
         <source>Developer Tools</source>
         <translation>Ontwikkelhulpmiddelen</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1069"/>
+        <location filename="../qml/BrowserWindow.qml" line="1089"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 instellen…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1076"/>
+        <location filename="../qml/BrowserWindow.qml" line="1096"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Over %1</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1130"/>
+        <location filename="../qml/BrowserWindow.qml" line="1150"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Druk op Esc om volledig scherm te verlaten</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1200"/>
+        <location filename="../qml/BrowserWindow.qml" line="1220"/>
         <source>Page bookmarked</source>
         <translation>Pagina als bladwijzer opgeslagen</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1200"/>
+        <location filename="../qml/BrowserWindow.qml" line="1220"/>
         <source>Edit Bookmark</source>
         <translation>Bladwijzer bewerken</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1208"/>
+        <location filename="../qml/BrowserWindow.qml" line="1228"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1214"/>
+        <location filename="../qml/BrowserWindow.qml" line="1234"/>
         <source>Folder:</source>
         <translation>Map:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1224"/>
+        <location filename="../qml/BrowserWindow.qml" line="1244"/>
         <source>Remove</source>
         <translation>Verwijderen</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1232"/>
+        <location filename="../qml/BrowserWindow.qml" line="1252"/>
         <source>Done</source>
         <translation>Gereed</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1243"/>
+        <location filename="../qml/BrowserWindow.qml" line="1263"/>
         <source>Save as PDF</source>
         <translation>Opslaan als pdf</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1245"/>
+        <location filename="../qml/BrowserWindow.qml" line="1265"/>
         <source>PDF (*.pdf)</source>
         <translation>PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1252"/>
+        <location filename="../qml/BrowserWindow.qml" line="1272"/>
         <source>Save Page As</source>
         <translation>Pagina opslaan als</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1254"/>
+        <location filename="../qml/BrowserWindow.qml" line="1274"/>
         <source>Web Page, Complete (*.html)</source>
         <translation>Webpagina, compleet (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1255"/>
+        <location filename="../qml/BrowserWindow.qml" line="1275"/>
         <source>Web Page, HTML Only (*.html)</source>
         <translation>Webpagina, alleen HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1256"/>
+        <location filename="../qml/BrowserWindow.qml" line="1276"/>
         <source>Web Archive (*.mhtml)</source>
         <translation>Webarchief (*.mhtml)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1272"/>
+        <location filename="../qml/BrowserWindow.qml" line="1292"/>
         <source>Save File</source>
         <translation>Bestand opslaan</translation>
     </message>
@@ -1124,6 +1134,45 @@
     </message>
 </context>
 <context>
+    <name>ReaderControls</name>
+    <message>
+        <location filename="../qml/ReaderControls.qml" line="30"/>
+        <source>Decrease Font Size</source>
+        <translation>Lettergrootte verkleinen</translation>
+    </message>
+    <message>
+        <location filename="../qml/ReaderControls.qml" line="36"/>
+        <source>%1 px</source>
+        <extracomment>Font size in pixels, %1 is the number</extracomment>
+        <translation>%1 px</translation>
+    </message>
+    <message>
+        <location filename="../qml/ReaderControls.qml" line="43"/>
+        <source>Increase Font Size</source>
+        <translation>Lettergrootte vergroten</translation>
+    </message>
+    <message>
+        <location filename="../qml/ReaderControls.qml" line="48"/>
+        <source>Serif</source>
+        <translation>Serif</translation>
+    </message>
+    <message>
+        <location filename="../qml/ReaderControls.qml" line="48"/>
+        <source>Sans Serif</source>
+        <translation>Sans-serif</translation>
+    </message>
+    <message>
+        <location filename="../qml/ReaderControls.qml" line="53"/>
+        <source>Switch Font Family</source>
+        <translation>Lettertypefamilie wisselen</translation>
+    </message>
+    <message>
+        <location filename="../qml/ReaderControls.qml" line="58"/>
+        <source>Exit Reader Mode</source>
+        <translation>Leesmodus verlaten</translation>
+    </message>
+</context>
+<context>
     <name>SettingsWindow</name>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="22"/>
@@ -1532,33 +1581,33 @@
 <context>
     <name>WebViewTab</name>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="26"/>
-        <location filename="../qml/WebViewTab.qml" line="345"/>
+        <location filename="../qml/WebViewTab.qml" line="27"/>
+        <location filename="../qml/WebViewTab.qml" line="494"/>
         <source>Print failed</source>
         <translation>Afdrukken mislukt</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="28"/>
+        <location filename="../qml/WebViewTab.qml" line="29"/>
         <source>PDF saved</source>
         <translation>Pdf opgeslagen</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="30"/>
+        <location filename="../qml/WebViewTab.qml" line="31"/>
         <source>Saving the PDF failed</source>
         <translation>Pdf opslaan mislukt</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="154"/>
+        <location filename="../qml/WebViewTab.qml" line="286"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>Het proces van de pagina is onverwacht beëindigd.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="155"/>
+        <location filename="../qml/WebViewTab.qml" line="287"/>
         <source>The page crashed.</source>
         <translation>De pagina is gecrasht.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="156"/>
+        <location filename="../qml/WebViewTab.qml" line="288"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>Het proces van de pagina is beëindigd (mogelijk door geheugengebrek).</translation>
     </message>

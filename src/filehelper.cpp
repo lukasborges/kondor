@@ -1,5 +1,8 @@
 #include "filehelper.h"
 
+#include <QFile>
+#include <QStringList>
+
 #include <QDesktopServices>
 #include <QDir>
 #include <QUrl>
@@ -43,6 +46,19 @@ QString FileHelper::tempPdfPath()
     if (!m_tempDir.isValid())
         return QString();
     return m_tempDir.filePath(QStringLiteral("print-%1.pdf").arg(++m_counter));
+}
+
+QString FileHelper::readerResource(const QString &name) const
+{
+    static const QStringList allowed{QStringLiteral("Readability.js"),
+                                     QStringLiteral("Readability-readerable.js"),
+                                     QStringLiteral("template.html")};
+    if (!allowed.contains(name))
+        return QString();
+    QFile file(QStringLiteral(":/reader/") + name);
+    if (!file.open(QIODevice::ReadOnly))
+        return QString();
+    return QString::fromUtf8(file.readAll());
 }
 
 bool FileHelper::openFile(const QString &path)

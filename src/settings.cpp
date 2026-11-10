@@ -22,6 +22,8 @@ constexpr auto kBlockThirdPartyCookies = "Privacy/BlockThirdPartyCookies";
 constexpr auto kSearchSuggestions = "Search/Suggestions";
 constexpr auto kSpellCheckEnabled = "SpellCheck/Enabled";
 constexpr auto kSpellCheckLanguages = "SpellCheck/Languages";
+constexpr auto kReaderFontSize = "Reader/FontSize";
+constexpr auto kReaderSerif = "Reader/Serif";
 
 // Option property names, used by defaultValue().
 constexpr auto kHomePageName = "homePage";
@@ -38,6 +40,8 @@ constexpr auto kBlockThirdPartyCookiesName = "blockThirdPartyCookies";
 constexpr auto kSearchSuggestionsName = "searchSuggestions";
 constexpr auto kSpellCheckEnabledName = "spellCheckEnabled";
 constexpr auto kSpellCheckLanguagesName = "spellCheckLanguages";
+constexpr auto kReaderFontSizeName = "readerFontSize";
+constexpr auto kReaderSerifName = "readerSerif";
 
 QString dictionariesPath()
 {
@@ -109,6 +113,12 @@ Settings::Settings(QObject *parent)
     , m_spellCheckLanguages(m_settings.value(QLatin1String(kSpellCheckLanguages),
                                              defaultValue(QLatin1String(kSpellCheckLanguagesName)))
                                 .toStringList())
+    , m_readerFontSize(qBound(12, m_settings.value(QLatin1String(kReaderFontSize),
+                                                   defaultValue(QLatin1String(kReaderFontSizeName)))
+                                      .toInt(), 32))
+    , m_readerSerif(m_settings.value(QLatin1String(kReaderSerif),
+                                     defaultValue(QLatin1String(kReaderSerifName)))
+                        .toBool())
 {
 }
 
@@ -138,6 +148,10 @@ QVariant Settings::defaultValue(const QString &name) const
         return false;
     if (name == QLatin1String(kSearchSuggestionsName))
         return false;
+    if (name == QLatin1String(kReaderFontSizeName))
+        return 18;
+    if (name == QLatin1String(kReaderSerifName))
+        return true;
     if (name == QLatin1String(kSpellCheckEnabledName))
         return true;
     if (name == QLatin1String(kSpellCheckLanguagesName)) {
@@ -344,6 +358,27 @@ void Settings::setSearchSuggestions(bool searchSuggestions)
     m_settings.setValue(QLatin1String(kSearchSuggestions), m_searchSuggestions);
     m_settings.sync();
     emit searchSuggestionsChanged();
+}
+
+void Settings::setReaderFontSize(int readerFontSize)
+{
+    readerFontSize = qBound(12, readerFontSize, 32);
+    if (m_readerFontSize == readerFontSize)
+        return;
+    m_readerFontSize = readerFontSize;
+    m_settings.setValue(QLatin1String(kReaderFontSize), m_readerFontSize);
+    m_settings.sync();
+    emit readerFontSizeChanged();
+}
+
+void Settings::setReaderSerif(bool readerSerif)
+{
+    if (m_readerSerif == readerSerif)
+        return;
+    m_readerSerif = readerSerif;
+    m_settings.setValue(QLatin1String(kReaderSerif), m_readerSerif);
+    m_settings.sync();
+    emit readerSerifChanged();
 }
 
 void Settings::setSpellCheckEnabled(bool spellCheckEnabled)

@@ -9,6 +9,7 @@
 #include <QCoreApplication>
 #include <QLocale>
 #include <QQuickWebEngineDownloadRequest>
+#include <QQuickWebEngineProfile>
 #include <QRegularExpression>
 #include <QWebEngineCookieStore>
 #include <QWebEngineNotification>
@@ -121,6 +122,12 @@ void ProfileManager::setupProfile(QQuickWebEngineProfile *profile)
                                              QStringLiteral("preferences-desktop-notification"));
                 notification->show();
             });
+
+    // Certificate overrides are kept per profile and never written to disk; a
+    // profile that goes away (a private tab's) takes its hosts with it.
+    connect(profile, &QObject::destroyed, this, [this, profile]() {
+        m_overriddenCertificateHosts.remove(profile);
+    });
 }
 
 void ProfileManager::applyThirdPartyCookieFilter(QQuickWebEngineProfile *profile)
@@ -140,6 +147,21 @@ void ProfileManager::clearCookiesAndCacheNow()
     profile->clearHttpCache();
     if (QWebEngineCookieStore *store = profile->cookieStore())
         store->deleteAllCookies();
+}
+
+void ProfileManager::markCertificateOverridden(QQuickWebEngineProfile *profile, const QString &host)
+{
+    if (!profile || host.isEmpty())
+        return;
+    m_overriddenCertificateHosts[profile].insert(host.toLower());
+}
+
+bool ProfileManager::isCertificateOverridden(QQuickWebEngineProfile *profile, const QString &host) const
+{
+    if (!profile || host.isEmpty())
+        return false;
+    const auto it = m_overriddenCertificateHosts.constFind(profile);
+    return it != m_overriddenCertificateHosts.constEnd() && it->contains(host.toLower());
 }
 
 QString ProfileManager::homePage() const

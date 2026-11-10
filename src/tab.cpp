@@ -1,5 +1,7 @@
 #include "tab.h"
 
+#include "profilemanager.h"
+
 #include <QQuickWebEngineProfile>
 
 #include <utility>
@@ -45,7 +47,87 @@ void Tab::setUrl(const QUrl &url)
     if (m_url == url)
         return;
     m_url = url;
+    updateSecurityState();
     emit urlChanged();
+}
+
+void Tab::updateSecurityState()
+{
+    QString state;
+    const QString scheme = m_url.scheme().toLower();
+    if (m_certificateErrorPending) {
+        // While the warning is on screen the indicator must match it.
+        state = QStringLiteral("error");
+    } else if (scheme == QLatin1String("https")) {
+        // Qt WebEngine accepts an overridden host's certificate for the whole
+        // lifetime of the profile without asking again, so the set kept by
+        // ProfileManager decides the state, not this tab's history.
+        const bool overridden = ProfileManager::instance()->isCertificateOverridden(m_profile,
+                                                                                    m_url.host());
+        state = overridden ? QStringLiteral("error") : QStringLiteral("secure");
+    } else if (scheme == QLatin1String("http")) {
+        state = QStringLiteral("insecure");
+    } else {
+        state = QStringLiteral("local");
+    }
+
+    if (m_securityState == state)
+        return;
+    m_securityState = state;
+    emit securityStateChanged();
+}
+
+void Tab::setPendingCertificateError(const QUrl &url, const QString &description, bool overridable)
+{
+    if (m_certificateErrorPending && m_certificateErrorUrl == url
+            && m_certificateErrorDescription == description
+            && m_certificateErrorOverridable == overridable) {
+        return;
+    }
+
+    m_certificateErrorPending = true;
+    m_certificateErrorUrl = url;
+    m_certificateErrorDescription = description;
+    m_certificateErrorOverridable = overridable;
+    updateSecurityState();
+    emit certificateErrorChanged();
+}
+
+void Tab::clearPendingCertificateError()
+{
+    if (!m_certificateErrorPending)
+        return;
+    m_certificateErrorPending = false;
+    m_certificateErrorUrl.clear();
+    m_certificateErrorDescription.clear();
+    m_certificateErrorOverridable = false;
+    updateSecurityState();
+    emit certificateErrorChanged();
+}
+
+void Tab::markCertificateOverridden()
+{
+    QString host = m_certificateErrorUrl.host();
+    if (host.isEmpty())
+        host = m_url.host();
+    ProfileManager::instance()->markCertificateOverridden(m_profile, host);
+}
+
+void Tab::acceptCertificateError()
+{
+    if (!m_certificateErrorPending)
+        return;
+    markCertificateOverridden();
+    clearPendingCertificateError();
+    emit acceptCertificateErrorRequested();
+}
+
+void Tab::rejectCertificateError()
+{
+    if (!m_certificateErrorPending)
+        return;
+    clearPendingCertificateError();
+    emit rejectCertificateErrorRequested();
 }
 
 void Tab::setIconUrl(const QUrl &iconUrl)
@@ -118,6 +200,9 @@ void Tab::navigateTo(const QUrl &url)
     // An empty URL means the New Tab page, which no caller navigates to.
     if (url.isEmpty())
         return;
+    // Typing another address while the certificate warning is up abandons the
+    // pending request; the view rejects it before navigating.
+    clearPendingCertificateError();
     setNewTabPage(false);
     emit navigationRequested(url);
 }
@@ -128,6 +213,7 @@ void Tab::showNewTabPage()
     // page history and make Back stay on the same blank page.
     if (m_newTabPage)
         return;
+    clearPendingCertificateError();
     setNewTabPage(true);
     emit newTabPageRequested();
 }

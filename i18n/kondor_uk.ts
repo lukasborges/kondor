@@ -243,6 +243,39 @@
     </message>
 </context>
 <context>
+    <name>CertificateErrorPage</name>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="52"/>
+        <source>Your connection is not private</source>
+        <translation>Ваше з&apos;єднання не захищене</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="60"/>
+        <source>Attackers might be trying to steal your information from &lt;b&gt;%1&lt;/b&gt; (for example, passwords, messages or credit cards).</source>
+        <translation>Зловмисники можуть намагатися викрасти вашу інформацію з &lt;b&gt;%1&lt;/b&gt; (наприклад, паролі, повідомлення або дані банківських карток).</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="77"/>
+        <source>Advanced…</source>
+        <translation>Додатково…</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="85"/>
+        <source>Back to Safety</source>
+        <translation>Повернутися в безпечне місце</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="96"/>
+        <source>This site could not prove its identity. Continuing may expose your data.</source>
+        <translation>Цей сайт не зміг підтвердити свою справжність. Продовження може розкрити ваші дані.</translation>
+    </message>
+    <message>
+        <location filename="../qml/CertificateErrorPage.qml" line="99"/>
+        <source>Continue Anyway (Unsafe)</source>
+        <translation>Продовжити попри все (небезпечно)</translation>
+    </message>
+</context>
+<context>
     <name>DefaultBookmarks</name>
     <message>
         <location filename="../src/database.cpp" line="36"/>
@@ -505,156 +538,166 @@
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="359"/>
-        <location filename="../qml/Main.qml" line="639"/>
+        <location filename="../qml/Main.qml" line="371"/>
+        <location filename="../qml/Main.qml" line="689"/>
         <source>New Tab</source>
         <translation>Нова вкладка</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="418"/>
+        <location filename="../qml/Main.qml" line="430"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="431"/>
+        <location filename="../qml/Main.qml" line="443"/>
         <source>Forward</source>
         <translation>Вперед</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="444"/>
+        <location filename="../qml/Main.qml" line="456"/>
         <source>Stop</source>
         <translation>Зупинити</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="444"/>
+        <location filename="../qml/Main.qml" line="456"/>
         <source>Reload</source>
         <translation>Перезавантажити</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="460"/>
+        <location filename="../qml/Main.qml" line="472"/>
         <source>Home</source>
         <translation>Домівка</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="477"/>
+        <location filename="../qml/Main.qml" line="489"/>
         <source>Search or enter address</source>
         <translation>Пошук або введення адреси</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="570"/>
+        <location filename="../qml/Main.qml" line="613"/>
         <source>Bookmark This Page</source>
         <translation>Додати цю сторінку до закладок</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="602"/>
+        <location filename="../qml/Main.qml" line="652"/>
         <source>Downloads</source>
         <translation>Завантажене</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="631"/>
+        <location filename="../qml/Main.qml" line="681"/>
         <source>Menu</source>
         <translation>Меню</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="644"/>
+        <location filename="../qml/Main.qml" line="694"/>
         <source>New Private Tab</source>
         <translation>Нова приватна вкладка</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="570"/>
+        <location filename="../qml/Main.qml" line="580"/>
+        <source>Not Secure</source>
+        <translation>Не захищено</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="588"/>
+        <source>Site Information</source>
+        <translation>Інформація про сайт</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="613"/>
         <source>Edit This Bookmark</source>
         <translation>Редагувати цю закладку</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="649"/>
+        <location filename="../qml/Main.qml" line="699"/>
         <source>Reopen Closed Tab</source>
         <translation>Повторно відкрити закриту вкладку</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="656"/>
+        <location filename="../qml/Main.qml" line="706"/>
         <source>Close Tab</source>
         <translation>Закрити вкладку</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="662"/>
+        <location filename="../qml/Main.qml" line="712"/>
         <source>Find in Page…</source>
         <translation>Знайти на сторінці…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="669"/>
+        <location filename="../qml/Main.qml" line="719"/>
         <source>Zoom In</source>
         <translation>Збільшити</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="678"/>
+        <location filename="../qml/Main.qml" line="728"/>
         <source>Zoom Out</source>
         <translation>Зменшити</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="687"/>
+        <location filename="../qml/Main.qml" line="737"/>
         <source>Actual Size</source>
         <translation>Звичайний розмір</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="697"/>
+        <location filename="../qml/Main.qml" line="747"/>
         <source>Bookmarks</source>
         <translation>Закладки</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="708"/>
+        <location filename="../qml/Main.qml" line="758"/>
         <source>History</source>
         <translation>Журнал</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="713"/>
+        <location filename="../qml/Main.qml" line="763"/>
         <source>Site Permissions…</source>
         <translation>Дозволи сайтів…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="720"/>
+        <location filename="../qml/Main.qml" line="770"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Налаштувати %1…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="727"/>
+        <location filename="../qml/Main.qml" line="777"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Про %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="843"/>
+        <location filename="../qml/Main.qml" line="893"/>
         <source>Page bookmarked</source>
         <translation>Сторінку додано до закладок</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="843"/>
+        <location filename="../qml/Main.qml" line="893"/>
         <source>Edit Bookmark</source>
         <translation>Редагувати закладку</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="851"/>
+        <location filename="../qml/Main.qml" line="901"/>
         <source>Name:</source>
         <translation>Назва:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="857"/>
+        <location filename="../qml/Main.qml" line="907"/>
         <source>Folder:</source>
         <translation>Каталог:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="867"/>
+        <location filename="../qml/Main.qml" line="917"/>
         <source>Remove</source>
         <translation>Вилучити</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="875"/>
+        <location filename="../qml/Main.qml" line="925"/>
         <source>Done</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="887"/>
+        <location filename="../qml/Main.qml" line="937"/>
         <source>Save File</source>
         <translation>Зберегти файл</translation>
     </message>
@@ -1048,6 +1091,49 @@
         <location filename="../qml/SettingsWindow.qml" line="779"/>
         <source>Choose Download Folder</source>
         <translation>Вибрати каталог завантажень</translation>
+    </message>
+</context>
+<context>
+    <name>SiteInfoPopup</name>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="38"/>
+        <source>Connection is secure</source>
+        <translation>З&apos;єднання захищене</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="40"/>
+        <source>Not Secure</source>
+        <translation>Не захищено</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="42"/>
+        <source>Your connection is not private</source>
+        <translation>Ваше з&apos;єднання не захищене</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="44"/>
+        <source>Local file</source>
+        <translation>Локальний файл</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="160"/>
+        <source>Permissions for this site</source>
+        <translation>Дозволи для цього сайту</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="187"/>
+        <source>Allowed</source>
+        <translation>Дозволено</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="187"/>
+        <source>Blocked</source>
+        <translation>Заблоковано</translation>
+    </message>
+    <message>
+        <location filename="../qml/SiteInfoPopup.qml" line="197"/>
+        <source>Revoke</source>
+        <translation>Відкликати</translation>
     </message>
 </context>
 <context>

@@ -8,6 +8,17 @@ Item {
     required property Tab tab
     required property TabModel tabModel
 
+    // Rejects the pending certificate request, if any, and drops the JS
+    // reference. Returns true when there was one to answer.
+    function rejectCertificateError() {
+        if (!certificateErrorHolder.error)
+            return false
+        const error = certificateErrorHolder.error
+        certificateErrorHolder.error = null
+        error.rejectCertificate()
+        return true
+    }
+
     WebEngineView {
         id: webView
         anchors.fill: parent
@@ -53,6 +64,22 @@ Item {
             root.tab.enqueuePermission(permission)
         }
 
+        // A page failed the certificate check. Keep the request pending (defer)
+        // so the error page can offer Back to Safety or an explicit override.
+        onCertificateError: function(error) {
+            if (!error.isMainFrame) {
+                error.rejectCertificate()
+                return
+            }
+            // A second error replaces the first one; answer the stale request.
+            if (certificateErrorHolder.error)
+                certificateErrorHolder.error.rejectCertificate()
+            error.defer()
+            certificateErrorHolder.error = error
+            root.tab.setPendingCertificateError(error.url, error.description,
+                                                error.overridable)
+        }
+
         // Screen sharing: on Wayland Qt WebEngine uses the xdg-desktop-portal
         // picker itself. On X11 this signal selects a screen; without a
         // chooser, taking the first one is the minimal useful behavior.
@@ -73,6 +100,13 @@ Item {
         }
     }
 
+    // Holds the JS reference to the pending WebEngineCertificateError; the
+    // value only stays answerable while this object keeps it.
+    QtObject {
+        id: certificateErrorHolder
+        property var error: null
+    }
+
     // Shown above the WebEngineView while the tab is on the New Tab page.
     NewTabPage {
         anchors.fill: parent
@@ -81,13 +115,51 @@ Item {
         tabModel: root.tabModel
     }
 
+    CertificateErrorPage {
+        anchors.fill: parent
+        visible: root.tab.certificateErrorPending
+        tab: root.tab
+    }
+
     Connections {
         target: root.tab
 
-        function onNavigationRequested(url) { webView.url = url }
+        function onNavigationRequested(url) {
+            rejectCertificateError()
+            webView.url = url
+        }
         // Back must return to the page that was on screen before.
-        function onNewTabPageRequested() { webView.url = "about:blank" }
-        function onBackRequested() { if (webView.canGoBack) webView.goBack() }
+        function onNewTabPageRequested() {
+            rejectCertificateError()
+            webView.url = "about:blank"
+        }
+        function onBackRequested() {
+            // The toolbar Back answers the pending certificate request too.
+            if (rejectCertificateError())
+                root.tab.rejectCertificateError()
+            if (webView.canGoBack)
+                webView.goBack()
+        }
+        function onAcceptCertificateErrorRequested() {
+            if (!certificateErrorHolder.error)
+                return
+            const error = certificateErrorHolder.error
+            certificateErrorHolder.error = null
+            error.acceptCertificate()
+        }
+        function onRejectCertificateErrorRequested() {
+            if (!certificateErrorHolder.error)
+                return
+            const error = certificateErrorHolder.error
+            certificateErrorHolder.error = null
+            error.rejectCertificate()
+            if (webView.canGoBack)
+                webView.goBack()
+            else if (root.tabModel.count > 1)
+                root.tabModel.closeTabObject(root.tab)
+            else
+                root.tab.showNewTabPage()
+        }
         function onForwardRequested() { if (webView.canGoForward) webView.goForward() }
         function onReloadRequested() { webView.reload() }
         function onStopRequested() { webView.stop() }

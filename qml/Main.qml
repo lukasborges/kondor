@@ -74,6 +74,18 @@ ApplicationWindow {
             tabs.setCurrentIndex(index)
     }
 
+    function securityIconForState(state) {
+        switch (state) {
+        case "secure":
+            return "security-high"
+        case "insecure":
+            return "security-medium"
+        case "error":
+            return "security-low"
+        }
+        return "text-html"
+    }
+
     function stepTab(delta) {
         if (tabs.count < 2)
             return
@@ -476,6 +488,7 @@ ApplicationWindow {
                     Layout.rightMargin: 8
                     placeholderText: qsTr("Search or enter address")
                     selectByMouse: true
+                    leftPadding: securityButton.visible ? securitySlot.width + 8 : 8
                     rightPadding: bookmarkButton.visible ? bookmarkButton.width + 10 : 8
 
                     function syncFromTab() {
@@ -550,6 +563,36 @@ ApplicationWindow {
                     Component.onCompleted: syncFromTab()
 
                     Row {
+                        id: securitySlot
+                        anchors.left: parent.left
+                        anchors.leftMargin: 2
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        ToolButton {
+                            id: securityButton
+                            readonly property string state: tabs.currentTab ? tabs.currentTab.securityState : ""
+
+                            visible: tabs.currentTab && !tabs.currentTab.newTabPage
+                                     && tabs.currentTab.url.toString().length > 0
+                            display: text.length > 0 ? AbstractButton.TextBesideIcon
+                                                     : AbstractButton.IconOnly
+                            text: (state === "insecure" || state === "error") && !addressBar.activeFocus
+                                  ? qsTr("Not Secure") : ""
+                            icon.name: window.securityIconForState(state)
+                            icon.color: (state === "insecure" || state === "error")
+                                        ? Kirigami.Theme.negativeTextColor
+                                        : Kirigami.Theme.textColor
+                            flat: true
+                            implicitHeight: 28
+                            ToolTip.visible: hovered
+                            ToolTip.text: qsTr("Site Information")
+                            ToolTip.delay: 600
+                            onClicked: siteInfoPopup.opened ? siteInfoPopup.close()
+                                                            : siteInfoPopup.open()
+                        }
+                    }
+
+                    Row {
                         id: bookmarkSlot
                         anchors.right: parent.right
                         anchors.rightMargin: 3
@@ -590,6 +633,13 @@ ApplicationWindow {
                             addressSuggestions.close()
                             addressBar.focus = false
                         }
+                    }
+
+                    SiteInfoPopup {
+                        id: siteInfoPopup
+                        tab: tabs.currentTab
+                        x: 0
+                        y: addressBar.height
                     }
                 }
 

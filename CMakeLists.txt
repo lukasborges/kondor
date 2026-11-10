@@ -40,6 +40,8 @@ qt_add_qml_module(kondor
         qml/PermissionBar.qml
         qml/PermissionTypeInfo.qml
         qml/SitePermissionsDialog.qml
+        qml/SiteInfoPopup.qml
+        qml/CertificateErrorPage.qml
         qml/HistoryWindow.qml
         qml/SettingsWindow.qml
         qml/DownloadsPopup.qml

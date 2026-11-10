@@ -187,6 +187,16 @@ void Tab::setPinned(bool pinned)
     emit pinnedChanged();
 }
 
+void Tab::setCrashed(bool crashed, const QString &reason, int exitCode)
+{
+    if (m_crashed == crashed && m_crashReason == reason && m_crashExitCode == exitCode)
+        return;
+    m_crashed = crashed;
+    m_crashReason = crashed ? reason : QString();
+    m_crashExitCode = crashed ? exitCode : 0;
+    emit crashChanged();
+}
+
 void Tab::setFullScreen(bool fullScreen)
 {
     if (m_isFullScreen == fullScreen)

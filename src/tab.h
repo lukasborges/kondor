@@ -34,6 +34,9 @@ class Tab : public QObject
     Q_PROPERTY(QUrl certificateErrorUrl READ certificateErrorUrl NOTIFY certificateErrorChanged)
     Q_PROPERTY(QString certificateErrorDescription READ certificateErrorDescription NOTIFY certificateErrorChanged)
     Q_PROPERTY(bool certificateErrorOverridable READ certificateErrorOverridable NOTIFY certificateErrorChanged)
+    Q_PROPERTY(bool crashed READ crashed NOTIFY crashChanged)
+    Q_PROPERTY(QString crashReason READ crashReason NOTIFY crashChanged)
+    Q_PROPERTY(int crashExitCode READ crashExitCode NOTIFY crashChanged)
 
 public:
     explicit Tab(QQuickWebEngineProfile *profile, QObject *parent = nullptr);
@@ -58,6 +61,9 @@ public:
     QUrl certificateErrorUrl() const { return m_certificateErrorUrl; }
     QString certificateErrorDescription() const { return m_certificateErrorDescription; }
     bool certificateErrorOverridable() const { return m_certificateErrorOverridable; }
+    bool crashed() const { return m_crashed; }
+    QString crashReason() const { return m_crashReason; }
+    int crashExitCode() const { return m_crashExitCode; }
 
     // Calls coming from the WebEngineView (QML) to synchronize the state.
     Q_INVOKABLE void setTitle(const QString &title);
@@ -71,6 +77,8 @@ public:
     Q_INVOKABLE void setFullScreen(bool fullScreen);
     Q_INVOKABLE void setPendingCertificateError(const QUrl &url, const QString &description,
                                                 bool overridable);
+    Q_INVOKABLE void setCrashed(bool crashed, const QString &reason = QString(),
+                                int exitCode = 0);
     void setPinned(bool pinned);
 
     // Commands coming from the UI; they become signals consumed by the WebEngineView.
@@ -111,6 +119,7 @@ signals:
     void pendingPermissionChanged();
     void securityStateChanged();
     void certificateErrorChanged();
+    void crashChanged();
 
     void navigationRequested(const QUrl &url);
     void newTabPageRequested();
@@ -160,4 +169,10 @@ private:
     QUrl m_certificateErrorUrl;
     QString m_certificateErrorDescription;
     bool m_certificateErrorOverridable = false;
+
+    // A page whose renderer process died keeps its tab; the crash page takes
+    // over the view until the next navigation or reload.
+    bool m_crashed = false;
+    QString m_crashReason;
+    int m_crashExitCode = 0;
 };

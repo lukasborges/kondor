@@ -276,6 +276,29 @@
     </message>
 </context>
 <context>
+    <name>CrashedPage</name>
+    <message>
+        <location filename="../qml/CrashedPage.qml" line="38"/>
+        <source>This tab crashed</source>
+<translation>Cet onglet a planté</translation>
+    </message>
+    <message>
+        <location filename="../qml/CrashedPage.qml" line="53"/>
+        <source>Exit code: %1</source>
+<translation>Code de sortie : %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/CrashedPage.qml" line="61"/>
+        <source>Close Tab</source>
+<translation>Fermer l’onglet</translation>
+    </message>
+    <message>
+        <location filename="../qml/CrashedPage.qml" line="67"/>
+        <source>Reload</source>
+<translation>Recharger</translation>
+    </message>
+</context>
+<context>
     <name>DefaultBookmarks</name>
     <message>
         <location filename="../src/database.cpp" line="36"/>
@@ -1205,7 +1228,7 @@
         <translation>Nouvel onglet privé</translation>
     </message>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="99"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="101"/>
         <source>Close Tab</source>
         <translation>Fermer l’onglet</translation>
     </message>
@@ -1251,6 +1274,24 @@
         <location filename="../qml/TabContextMenu.qml" line="59"/>
         <source>Close Tabs to the Right</source>
         <translation>Fermer les onglets à droite</translation>
+    </message>
+</context>
+<context>
+    <name>WebViewTab</name>
+    <message>
+        <location filename="../qml/WebViewTab.qml" line="72"/>
+        <source>The page&apos;s process ended unexpectedly.</source>
+<translation>Le processus de la page s&apos;est terminé de manière inattendue.</translation>
+    </message>
+    <message>
+        <location filename="../qml/WebViewTab.qml" line="73"/>
+        <source>The page crashed.</source>
+<translation>La page a planté.</translation>
+    </message>
+    <message>
+        <location filename="../qml/WebViewTab.qml" line="74"/>
+        <source>The page&apos;s process was killed (possibly out of memory).</source>
+<translation>Le processus de la page a été tué (probablement par manque de mémoire).</translation>
     </message>
 </context>
 </TS>

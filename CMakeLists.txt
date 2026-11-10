@@ -4,7 +4,7 @@ project(Kondor VERSION 0.1.5 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS
+find_package(Qt6 6.8 REQUIRED COMPONENTS
     Core
     DBus
     Gui
@@ -18,7 +18,7 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
     Widgets
 )
 
-qt_standard_project_setup(REQUIRES 6.5)
+qt_standard_project_setup(REQUIRES 6.8)
 
 qt_add_executable(kondor
     src/main.cpp
@@ -37,6 +37,9 @@ qt_add_qml_module(kondor
         qml/TabContextMenu.qml
         qml/InlineBar.qml
         qml/FindBar.qml
+        qml/PermissionBar.qml
+        qml/PermissionTypeInfo.qml
+        qml/SitePermissionsDialog.qml
         qml/HistoryWindow.qml
         qml/SettingsWindow.qml
         qml/DownloadsPopup.qml

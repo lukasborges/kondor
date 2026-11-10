@@ -171,6 +171,12 @@ ApplicationWindow {
         bookmarksWindow.showWindow()
     }
 
+    function openSitePermissions() {
+        if (!sitePermissionsWindow)
+            sitePermissionsWindow = sitePermissionsComponent.createObject(window)
+        sitePermissionsWindow.showWindow()
+    }
+
     // Normal click navigates the current tab; middle/Ctrl+click opens a
     // background tab (in a private profile when the current tab is private).
     function openBookmark(url, background) {
@@ -703,6 +709,11 @@ ApplicationWindow {
                             icon.name: "view-history"
                             onTriggered: window.openHistory()
                         }
+                        MenuItem {
+                            text: qsTr("Site Permissions…")
+                            icon.name: "security-high"
+                            onTriggered: window.openSitePermissions()
+                        }
                         MenuSeparator {}
                         MenuItem {
                             //: %1 is the application name
@@ -733,6 +744,12 @@ ApplicationWindow {
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
+
+        PermissionBar {
+            id: permissionBar
+            tab: tabs.currentTab
+            Layout.fillWidth: true
+        }
 
         FindBar {
             id: findBar
@@ -796,6 +813,14 @@ ApplicationWindow {
         BookmarksWindow {
             tabModel: tabs
         }
+    }
+
+    // ── Site Permissions (created on demand) ────────────────────────────
+    property var sitePermissionsWindow: null
+
+    Component {
+        id: sitePermissionsComponent
+        SitePermissionsDialog {}
     }
 
     // ── Star button popup: name and folder of the current page ──────────

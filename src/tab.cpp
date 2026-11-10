@@ -2,6 +2,18 @@
 
 #include <QQuickWebEngineProfile>
 
+#include <utility>
+
+namespace {
+bool sameOrigin(const QUrl &a, const QUrl &b)
+{
+    if (a.isEmpty() || b.isEmpty())
+        return false;
+    return a.scheme().compare(b.scheme(), Qt::CaseInsensitive) == 0
+            && a.host().compare(b.host(), Qt::CaseInsensitive) == 0 && a.port() == b.port();
+}
+}
+
 Tab::Tab(QQuickWebEngineProfile *profile, QObject *parent)
     : QObject(parent)
     , m_profile(profile)
@@ -23,6 +35,12 @@ void Tab::setUrl(const QUrl &url)
     // screen; any other non-empty URL means the tab shows a real page again.
     if (!url.isEmpty() && url != QUrl(QStringLiteral("about:blank")))
         setNewTabPage(false);
+
+    // A prompt belongs to the origin that asked; leaving it denies the request.
+    // Same-document changes (fragment, history.pushState) and same-origin
+    // navigations keep it, so single-page apps like Meet keep their prompts.
+    if (!sameOrigin(m_url, url))
+        denyPendingPermissions();
 
     if (m_url == url)
         return;
@@ -162,4 +180,57 @@ void Tab::stopFind()
 void Tab::focusPage()
 {
     emit focusPageRequested();
+}
+
+QVariant Tab::pendingPermission() const
+{
+    if (m_pendingPermissions.isEmpty())
+        return QVariant();
+    return QVariant::fromValue(m_pendingPermissions.first());
+}
+
+void Tab::enqueuePermission(const QWebEnginePermission &permission)
+{
+    if (!permission.isValid())
+        return;
+
+    const bool wasEmpty = m_pendingPermissions.isEmpty();
+    m_pendingPermissions.append(permission);
+    if (wasEmpty)
+        emit pendingPermissionChanged();
+}
+
+void Tab::answerPermission(bool grant)
+{
+    bool changed = false;
+    while (!m_pendingPermissions.isEmpty() && !m_pendingPermissions.first().isValid()) {
+        m_pendingPermissions.removeFirst();
+        changed = true;
+    }
+
+    if (m_pendingPermissions.isEmpty()) {
+        if (changed)
+            emit pendingPermissionChanged();
+        return;
+    }
+
+    const QWebEnginePermission permission = m_pendingPermissions.takeFirst();
+    if (grant)
+        permission.grant();
+    else
+        permission.deny();
+    emit pendingPermissionChanged();
+}
+
+void Tab::denyPendingPermissions()
+{
+    if (m_pendingPermissions.isEmpty())
+        return;
+
+    for (const QWebEnginePermission &permission : std::as_const(m_pendingPermissions)) {
+        if (permission.isValid())
+            permission.deny();
+    }
+    m_pendingPermissions.clear();
+    emit pendingPermissionChanged();
 }

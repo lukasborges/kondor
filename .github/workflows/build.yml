@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
-    # Ubuntu 24.04 has Qt 6.4 and the project requires 6.5+; we use Fedora (Qt 6.11).
+    # Ubuntu 24.04 has Qt 6.4 and the project requires 6.8+; we use Fedora (Qt 6.11).
     container: fedora:latest
 
     steps:

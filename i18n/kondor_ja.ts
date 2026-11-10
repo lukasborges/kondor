@@ -500,151 +500,156 @@
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="353"/>
-        <location filename="../qml/Main.qml" line="633"/>
+        <location filename="../qml/Main.qml" line="359"/>
+        <location filename="../qml/Main.qml" line="639"/>
         <source>New Tab</source>
         <translation>新しいタブ</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="412"/>
+        <location filename="../qml/Main.qml" line="418"/>
         <source>Back</source>
         <translation>戻る</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="425"/>
+        <location filename="../qml/Main.qml" line="431"/>
         <source>Forward</source>
         <translation>進む</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="438"/>
+        <location filename="../qml/Main.qml" line="444"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="438"/>
+        <location filename="../qml/Main.qml" line="444"/>
         <source>Reload</source>
         <translation>再読み込み</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="454"/>
+        <location filename="../qml/Main.qml" line="460"/>
         <source>Home</source>
         <translation>ホーム</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="471"/>
+        <location filename="../qml/Main.qml" line="477"/>
         <source>Search or enter address</source>
         <translation>検索またはアドレスを入力</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="564"/>
+        <location filename="../qml/Main.qml" line="570"/>
         <source>Bookmark This Page</source>
         <translation>このページをブックマーク</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="596"/>
+        <location filename="../qml/Main.qml" line="602"/>
         <source>Downloads</source>
         <translation>ダウンロード</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="625"/>
+        <location filename="../qml/Main.qml" line="631"/>
         <source>Menu</source>
         <translation>メニュー</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="638"/>
+        <location filename="../qml/Main.qml" line="644"/>
         <source>New Private Tab</source>
         <translation>新しいプライベートタブ</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="564"/>
+        <location filename="../qml/Main.qml" line="570"/>
         <source>Edit This Bookmark</source>
         <translation>このブックマークを編集</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="643"/>
+        <location filename="../qml/Main.qml" line="649"/>
         <source>Reopen Closed Tab</source>
         <translation>閉じたタブを開き直す</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="650"/>
+        <location filename="../qml/Main.qml" line="656"/>
         <source>Close Tab</source>
         <translation>タブを閉じる</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="656"/>
+        <location filename="../qml/Main.qml" line="662"/>
         <source>Find in Page…</source>
         <translation>ページ内を検索…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="663"/>
+        <location filename="../qml/Main.qml" line="669"/>
         <source>Zoom In</source>
         <translation>拡大</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="672"/>
+        <location filename="../qml/Main.qml" line="678"/>
         <source>Zoom Out</source>
         <translation>縮小</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="681"/>
+        <location filename="../qml/Main.qml" line="687"/>
         <source>Actual Size</source>
         <translation>実際のサイズ</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="691"/>
+        <location filename="../qml/Main.qml" line="697"/>
         <source>Bookmarks</source>
         <translation>ブックマーク</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="702"/>
+        <location filename="../qml/Main.qml" line="708"/>
         <source>History</source>
         <translation>履歴</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="709"/>
+        <location filename="../qml/Main.qml" line="713"/>
+        <source>Site Permissions…</source>
+        <translation>サイトの権限…</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="720"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 の設定…</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="716"/>
+        <location filename="../qml/Main.qml" line="727"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 について</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="818"/>
+        <location filename="../qml/Main.qml" line="843"/>
         <source>Page bookmarked</source>
         <translation>ページをブックマークしました</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="818"/>
+        <location filename="../qml/Main.qml" line="843"/>
         <source>Edit Bookmark</source>
         <translation>ブックマークを編集</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="826"/>
+        <location filename="../qml/Main.qml" line="851"/>
         <source>Name:</source>
         <translation>名前:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="832"/>
+        <location filename="../qml/Main.qml" line="857"/>
         <source>Folder:</source>
         <translation>フォルダー:</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="842"/>
+        <location filename="../qml/Main.qml" line="867"/>
         <source>Remove</source>
         <translation>削除</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="850"/>
+        <location filename="../qml/Main.qml" line="875"/>
         <source>Done</source>
         <translation>完了</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="862"/>
+        <location filename="../qml/Main.qml" line="887"/>
         <source>Save File</source>
         <translation>ファイルを保存</translation>
     </message>
@@ -694,6 +699,138 @@
     </message>
 </context>
 <context>
+    <name>PermissionBar</name>
+    <message>
+        <location filename="../qml/PermissionBar.qml" line="39"/>
+        <source>Allow</source>
+        <translation>許可</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionBar.qml" line="43"/>
+        <location filename="../qml/PermissionBar.qml" line="56"/>
+        <source>This decision is remembered for this site</source>
+        <translation>この決定はこのサイトに対して記憶されます</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionBar.qml" line="52"/>
+        <source>Block</source>
+        <translation>ブロック</translation>
+    </message>
+</context>
+<context>
+    <name>PermissionTypeInfo</name>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="36"/>
+        <source>Microphone</source>
+        <translation>マイク</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="38"/>
+        <source>Camera</source>
+        <translation>カメラ</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="40"/>
+        <source>Camera and Microphone</source>
+        <translation>カメラとマイク</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="42"/>
+        <source>Screen</source>
+        <translation>画面</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="44"/>
+        <source>Screen and Microphone</source>
+        <translation>画面とマイク</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="46"/>
+        <source>Pointer Lock</source>
+        <translation>ポインターロック</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="48"/>
+        <source>Notifications</source>
+        <translation>通知</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="50"/>
+        <source>Location</source>
+        <translation>位置情報</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="52"/>
+        <source>Clipboard</source>
+        <translation>クリップボード</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="54"/>
+        <source>Local Fonts</source>
+        <translation>ローカルフォント</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="56"/>
+        <source>Permission</source>
+        <translation>権限</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="62"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; wants to use your &lt;b&gt;microphone&lt;/b&gt;.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; が&lt;b&gt;マイク&lt;/b&gt;の使用を求めています。</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="64"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; wants to use your &lt;b&gt;camera&lt;/b&gt;.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; が&lt;b&gt;カメラ&lt;/b&gt;の使用を求めています。</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="66"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; wants to use your &lt;b&gt;camera&lt;/b&gt; and &lt;b&gt;microphone&lt;/b&gt;.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; が&lt;b&gt;カメラ&lt;/b&gt;と&lt;b&gt;マイク&lt;/b&gt;の使用を求めています。</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="68"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; wants to share your &lt;b&gt;screen&lt;/b&gt;.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; が&lt;b&gt;画面&lt;/b&gt;の共有を求めています。</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="70"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; wants to share your &lt;b&gt;screen&lt;/b&gt; and &lt;b&gt;microphone&lt;/b&gt;.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; が&lt;b&gt;画面&lt;/b&gt;と&lt;b&gt;マイク&lt;/b&gt;の共有を求めています。</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="72"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; wants to lock your &lt;b&gt;pointer&lt;/b&gt;.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; が&lt;b&gt;ポインター&lt;/b&gt;のロックを求めています。</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="74"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; wants to show you &lt;b&gt;notifications&lt;/b&gt;.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; が&lt;b&gt;通知&lt;/b&gt;の表示を求めています。</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="76"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; wants to know your &lt;b&gt;location&lt;/b&gt;.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; が&lt;b&gt;位置情報&lt;/b&gt;の取得を求めています。</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="78"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; wants to read your &lt;b&gt;clipboard&lt;/b&gt;.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; が&lt;b&gt;クリップボード&lt;/b&gt;の読み取りを求めています。</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="80"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; wants to use your &lt;b&gt;local fonts&lt;/b&gt;.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; が&lt;b&gt;ローカルフォント&lt;/b&gt;の使用を求めています。</translation>
+    </message>
+    <message>
+        <location filename="../qml/PermissionTypeInfo.qml" line="82"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; is requesting a &lt;b&gt;permission&lt;/b&gt;.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; が&lt;b&gt;権限&lt;/b&gt;を求めています。</translation>
+    </message>
+</context>
+<context>
     <name>SettingsWindow</name>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="22"/>
@@ -708,19 +845,19 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="337"/>
+        <location filename="../qml/SettingsWindow.qml" line="344"/>
         <source>Startup</source>
         <translation>起動</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="428"/>
+        <location filename="../qml/SettingsWindow.qml" line="435"/>
         <source>On startup:</source>
         <translation>起動時:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="455"/>
+        <location filename="../qml/SettingsWindow.qml" line="462"/>
         <source>Home page:</source>
         <translation>ホームページ:</translation>
     </message>
@@ -731,7 +868,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="558"/>
+        <location filename="../qml/SettingsWindow.qml" line="565"/>
         <source>Search engine:</source>
         <translation>検索エンジン:</translation>
     </message>
@@ -742,7 +879,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="625"/>
+        <location filename="../qml/SettingsWindow.qml" line="632"/>
         <source>Save files to:</source>
         <translation>ファイルの保存先:</translation>
     </message>
@@ -752,148 +889,209 @@
         <translation>プライバシー</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="456"/>
+        <location filename="../qml/SettingsWindow.qml" line="62"/>
+        <location filename="../qml/SettingsWindow.qml" line="728"/>
+        <source>Site permissions:</source>
+        <translation>サイトの権限:</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="62"/>
+        <location filename="../qml/SettingsWindow.qml" line="729"/>
+        <source>Manage Site Permissions…</source>
+        <translation>サイトの権限を管理…</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="463"/>
         <source>New Tab page</source>
         <translation>新しいタブページ</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="475"/>
+        <location filename="../qml/SettingsWindow.qml" line="482"/>
         <source>Use Current Page</source>
         <translation>現在のページを使用</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="488"/>
+        <location filename="../qml/SettingsWindow.qml" line="495"/>
         <source>Use New Tab Page</source>
         <translation>新しいタブページを使用</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="338"/>
+        <location filename="../qml/SettingsWindow.qml" line="345"/>
         <source>New Tabs</source>
         <translation>新しいタブ</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="698"/>
+        <location filename="../qml/SettingsWindow.qml" line="705"/>
         <source>On exit:</source>
         <translation>終了時:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="712"/>
+        <location filename="../qml/SettingsWindow.qml" line="719"/>
         <source>Browsing data:</source>
         <translation>閲覧データ:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="279"/>
+        <location filename="../qml/SettingsWindow.qml" line="286"/>
         <source>Search…</source>
         <translation>検索…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="374"/>
+        <location filename="../qml/SettingsWindow.qml" line="381"/>
         <source>Defaults</source>
         <translation>既定値</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="383"/>
+        <location filename="../qml/SettingsWindow.qml" line="390"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="390"/>
+        <location filename="../qml/SettingsWindow.qml" line="397"/>
         <source>Apply</source>
         <translation>適用</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="397"/>
+        <location filename="../qml/SettingsWindow.qml" line="404"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="429"/>
+        <location filename="../qml/SettingsWindow.qml" line="436"/>
         <source>Open the home page</source>
         <translation>ホームページを開く</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="441"/>
+        <location filename="../qml/SettingsWindow.qml" line="448"/>
         <source>Open the tabs from last time</source>
         <translation>前回のタブを開く</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="515"/>
+        <location filename="../qml/SettingsWindow.qml" line="522"/>
         <source>New Tab page:</source>
         <translation>新しいタブページ:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="516"/>
+        <location filename="../qml/SettingsWindow.qml" line="523"/>
         <source>Show top sites</source>
         <translation>トップサイトを表示</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="527"/>
+        <location filename="../qml/SettingsWindow.qml" line="534"/>
         <source>Restore Removed Sites</source>
         <translation>削除したサイトを復元</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="565"/>
+        <location filename="../qml/SettingsWindow.qml" line="572"/>
         <source>Custom…</source>
         <translation>カスタム…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="580"/>
+        <location filename="../qml/SettingsWindow.qml" line="587"/>
         <source>Custom URL:</source>
         <translation>カスタム URL:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="600"/>
+        <location filename="../qml/SettingsWindow.qml" line="607"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>URL には検索語が入る位置に「%1」を含める必要があります。</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="635"/>
+        <location filename="../qml/SettingsWindow.qml" line="642"/>
         <source>Choose…</source>
         <translation>選択…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="53"/>
-        <location filename="../qml/SettingsWindow.qml" line="643"/>
+        <location filename="../qml/SettingsWindow.qml" line="650"/>
         <source>Ask where to save each file</source>
         <translation>ファイルごとに保存先を尋ねる</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="658"/>
+        <location filename="../qml/SettingsWindow.qml" line="665"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>選択したフォルダーは存在しません。ダウンロードは %1 に保存されます。</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="59"/>
-        <location filename="../qml/SettingsWindow.qml" line="685"/>
+        <location filename="../qml/SettingsWindow.qml" line="692"/>
         <source>Cookies:</source>
         <translation>Cookie:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="686"/>
+        <location filename="../qml/SettingsWindow.qml" line="693"/>
         <source>Block third-party cookies</source>
         <translation>サードパーティ Cookie をブロック</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="699"/>
+        <location filename="../qml/SettingsWindow.qml" line="706"/>
         <source>Clear cookies, cache and history</source>
         <translation>Cookie、キャッシュ、履歴を消去</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="713"/>
+        <location filename="../qml/SettingsWindow.qml" line="720"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Cookie とキャッシュを今すぐ消去</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="726"/>
+        <location filename="../qml/SettingsWindow.qml" line="750"/>
         <source>Choose Download Folder</source>
         <translation>ダウンロードフォルダーを選択</translation>
+    </message>
+</context>
+<context>
+    <name>SitePermissionsDialog</name>
+    <message>
+        <location filename="../qml/SitePermissionsDialog.qml" line="19"/>
+        <source>Site Permissions — %1</source>
+        <extracomment>%1 is the application name</extracomment>
+        <translation>サイトの権限 — %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/SitePermissionsDialog.qml" line="98"/>
+        <source>Site Permissions</source>
+        <translation>サイトの権限</translation>
+    </message>
+    <message>
+        <location filename="../qml/SitePermissionsDialog.qml" line="105"/>
+        <source>Decisions remembered for sites visited in normal tabs. Private tabs never keep permissions.</source>
+        <translation>通常のタブで訪れたサイトの決定が記憶されます。プライベートタブでは権限は保存されません。</translation>
+    </message>
+    <message>
+        <location filename="../qml/SitePermissionsDialog.qml" line="111"/>
+        <source>Filter by site…</source>
+        <translation>サイトで絞り込む…</translation>
+    </message>
+    <message>
+        <location filename="../qml/SitePermissionsDialog.qml" line="162"/>
+        <source>Allowed</source>
+        <translation>許可済み</translation>
+    </message>
+    <message>
+        <location filename="../qml/SitePermissionsDialog.qml" line="162"/>
+        <source>Blocked</source>
+        <translation>ブロック済み</translation>
+    </message>
+    <message>
+        <location filename="../qml/SitePermissionsDialog.qml" line="168"/>
+        <source>Revoke</source>
+        <translation>取り消す</translation>
+    </message>
+    <message>
+        <location filename="../qml/SitePermissionsDialog.qml" line="180"/>
+        <source>No site permissions have been remembered yet.</source>
+        <translation>記憶されているサイトの権限はまだありません。</translation>
+    </message>
+    <message>
+        <location filename="../qml/SitePermissionsDialog.qml" line="190"/>
+        <source>Close</source>
+        <translation>閉じる</translation>
     </message>
 </context>
 <context>

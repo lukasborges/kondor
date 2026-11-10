@@ -37,7 +37,7 @@ QString PasswordStore::originOf(const QUrl &url)
     const QString scheme = url.scheme().toLower();
     if ((scheme != QLatin1String("http") && scheme != QLatin1String("https")) || url.host().isEmpty())
         return {};
-    QString origin = scheme + QLatin1String("://") + url.host().toLower();
+    QString origin = scheme + QLatin1String("://") + url.host(QUrl::FullyEncoded).toLower();
     const int port = url.port();
     const bool defaultPort = port == -1 || (scheme == QLatin1String("http") && port == 80)
         || (scheme == QLatin1String("https") && port == 443);
@@ -54,7 +54,7 @@ QString PasswordStore::hostOfOrigin(const QString &origin)
 bool PasswordStore::canSaveFor(const QString &origin)
 {
     const QUrl url(origin);
-    const QString host = url.host().toLower();
+    const QString host = url.host(QUrl::FullyEncoded).toLower();
     if (url.scheme() == QLatin1String("https"))
         return !host.isEmpty();
     return url.scheme() == QLatin1String("http")
@@ -89,6 +89,11 @@ void PasswordStore::ensureOpen()
 {
     if (m_state != State::Closed)
         return;
+    // Tests and agent runs must never reach the session wallet.
+    if (qEnvironmentVariableIntValue("KONDOR_NO_KWALLET") != 0) {
+        setState(State::Unavailable);
+        return;
+    }
     setState(State::Opening);
     m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), 0,
                                            KWallet::Wallet::Asynchronous);

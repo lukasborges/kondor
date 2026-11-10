@@ -25,6 +25,9 @@ void TestPasswordStore::originOf_data()
                                           << QStringLiteral("https://example.com");
     QTest::newRow("custom port kept") << QUrl(QStringLiteral("http://localhost:8080/a"))
                                       << QStringLiteral("http://localhost:8080");
+    // location.origin is always punycode, so the key must be too.
+    QTest::newRow("idn") << QUrl(QStringLiteral("https://b\u00fccher.example/login"))
+                         << QStringLiteral("https://xn--bcher-kva.example");
     QTest::newRow("file") << QUrl(QStringLiteral("file:///tmp/a.html")) << QString();
     QTest::newRow("about") << QUrl(QStringLiteral("about:blank")) << QString();
 }

@@ -602,3 +602,7 @@ target_link_libraries(tst_passwordstore PRIVATE
 )
 
 add_test(NAME tst_passwordstore COMMAND tst_passwordstore)
+
+# No test may reach the session wallet: PasswordStore goes straight to "unavailable".
+get_property(kondor_all_tests DIRECTORY PROPERTY TESTS)
+set_property(TEST ${kondor_all_tests} APPEND PROPERTY ENVIRONMENT "KONDOR_NO_KWALLET=1")

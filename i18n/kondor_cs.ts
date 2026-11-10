@@ -1122,62 +1122,62 @@
 <context>
     <name>PasswordsPage</name>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="87"/>
+        <location filename="../qml/PasswordsPage.qml" line="88"/>
         <source>Delete Saved Password</source>
         <translation>Smazat uložené heslo</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="88"/>
+        <location filename="../qml/PasswordsPage.qml" line="89"/>
         <source>Delete the saved password for %1 on %2?</source>
         <translation>Smazat uložené heslo pro %1 na %2?</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="105"/>
+        <location filename="../qml/PasswordsPage.qml" line="106"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
         <translation>KWallet je zakázán nebo byl přístup k němu odepřen, proto nelze hesla ukládat ani vyplňovat.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="108"/>
+        <location filename="../qml/PasswordsPage.qml" line="109"/>
         <source>Try Again</source>
         <translation>Zkusit znovu</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="118"/>
+        <location filename="../qml/PasswordsPage.qml" line="119"/>
         <source>Offer to save passwords</source>
         <translation>Nabízet ukládání hesel</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="132"/>
+        <location filename="../qml/PasswordsPage.qml" line="133"/>
         <source>Filter by site or username…</source>
         <translation>Filtrovat podle webu nebo uživatelského jména…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <location filename="../qml/PasswordsPage.qml" line="190"/>
         <source>Hide Password</source>
         <translation>Skrýt heslo</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <location filename="../qml/PasswordsPage.qml" line="190"/>
         <source>Show Password</source>
         <translation>Zobrazit heslo</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="199"/>
+        <location filename="../qml/PasswordsPage.qml" line="200"/>
         <source>Copy Password</source>
         <translation>Kopírovat heslo</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="209"/>
+        <location filename="../qml/PasswordsPage.qml" line="210"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="232"/>
+        <location filename="../qml/PasswordsPage.qml" line="233"/>
         <source>Kondor never offers to save passwords on these sites.</source>
         <translation>Kondor na těchto webech nikdy nenabízí ukládání hesel.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="264"/>
+        <location filename="../qml/PasswordsPage.qml" line="265"/>
         <source>Remove</source>
         <translation>Odebrat</translation>
     </message>
@@ -1429,51 +1429,51 @@
         <translation>Spravovat oprávnění stránek…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="67"/>
+        <location filename="../qml/SettingsWindow.qml" line="75"/>
         <source>Spelling</source>
         <translation>Pravopis</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="69"/>
+        <location filename="../qml/SettingsWindow.qml" line="77"/>
         <location filename="../qml/SettingsWindow.qml" line="807"/>
         <source>Check spelling while typing</source>
         <translation>Kontrolovat pravopis při psaní</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="69"/>
+        <location filename="../qml/SettingsWindow.qml" line="77"/>
         <location filename="../qml/SettingsWindow.qml" line="824"/>
         <source>Languages:</source>
         <translation>Jazyky:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="73"/>
+        <location filename="../qml/SettingsWindow.qml" line="67"/>
         <source>Passwords</source>
         <translation>Hesla</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="75"/>
+        <location filename="../qml/SettingsWindow.qml" line="69"/>
         <source>Offer to save passwords</source>
         <translation>Nabízet ukládání hesel</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="75"/>
+        <location filename="../qml/SettingsWindow.qml" line="69"/>
         <location filename="../qml/SettingsWindow.qml" line="445"/>
         <source>Saved Passwords</source>
         <translation>Uložená hesla</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="76"/>
+        <location filename="../qml/SettingsWindow.qml" line="70"/>
         <location filename="../qml/SettingsWindow.qml" line="446"/>
         <source>Never Saved</source>
         <translation>Nikdy neukládat</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="76"/>
+        <location filename="../qml/SettingsWindow.qml" line="70"/>
         <source>KWallet</source>
         <translation>KWallet</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="77"/>
+        <location filename="../qml/SettingsWindow.qml" line="71"/>
         <source>Filter by site or username…</source>
         <translation>Filtrovat podle webu nebo uživatelského jména…</translation>
     </message>

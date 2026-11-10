@@ -64,18 +64,18 @@ ApplicationWindow {
             component: privacyPage
         },
         {
-            title: qsTr("Spelling"),
-            icon: "tools-check-spelling",
-            keywords: [qsTr("Check spelling while typing"), qsTr("Languages:")],
-            component: spellingPage
-        },
-        {
             title: qsTr("Passwords"),
             icon: "preferences-desktop-user-password",
             keywords: [qsTr("Offer to save passwords"), qsTr("Saved Passwords"),
                        qsTr("Never Saved"), qsTr("KWallet"),
                        qsTr("Filter by site or username…")],
             component: passwordsPage
+        },
+        {
+            title: qsTr("Spelling"),
+            icon: "tools-check-spelling",
+            keywords: [qsTr("Check spelling while typing"), qsTr("Languages:")],
+            component: spellingPage
         }
     ]
 
@@ -210,11 +210,11 @@ ApplicationWindow {
                         === Settings.defaultValue("blockThirdPartyCookies")
                     && pending.clearDataOnExit === Settings.defaultValue("clearDataOnExit")
                     && pending.adBlockEnabled === Settings.defaultValue("adBlockEnabled")
-        case 4:
+        case 5:
             return pending.spellCheckEnabled === Settings.defaultValue("spellCheckEnabled")
                     && root.sameList(pending.spellCheckLanguages,
                                      Settings.defaultValue("spellCheckLanguages"))
-        case 5:
+        case 4:
             return pending.offerToSavePasswords === Settings.defaultValue("offerToSavePasswords")
         }
         return true
@@ -241,11 +241,11 @@ ApplicationWindow {
             pending.clearDataOnExit = Settings.defaultValue("clearDataOnExit")
             pending.adBlockEnabled = Settings.defaultValue("adBlockEnabled")
             break
-        case 4:
+        case 5:
             pending.spellCheckEnabled = Settings.defaultValue("spellCheckEnabled")
             pending.spellCheckLanguages = Settings.defaultValue("spellCheckLanguages")
             break
-        case 5:
+        case 4:
             pending.offerToSavePasswords = Settings.defaultValue("offerToSavePasswords")
             break
         }
@@ -438,7 +438,7 @@ ApplicationWindow {
 
                 TabBar {
                     Layout.fillWidth: true
-                    visible: root.currentPage === 5
+                    visible: root.currentPage === 4
                     currentIndex: root.passwordsTab
                     onCurrentIndexChanged: root.passwordsTab = currentIndex
 
@@ -448,7 +448,7 @@ ApplicationWindow {
 
                 Kirigami.Separator {
                     Layout.fillWidth: true
-                    visible: root.currentPage !== 0 && root.currentPage !== 5
+                    visible: root.currentPage !== 0 && root.currentPage !== 4
                 }
 
                 StackLayout {

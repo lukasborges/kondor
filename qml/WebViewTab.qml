@@ -190,12 +190,12 @@ Item {
     PasswordBridge {
         id: passwordBridge
         tab: root.tab
-        WebChannel.id: "kondorPasswords"
     }
 
+    // Only the page-facing API goes on the channel, never the bridge or Tab.
     WebChannel {
         id: passwordChannel
-        registeredObjects: [passwordBridge]
+        Component.onCompleted: registerObject("kondorPasswords", passwordBridge.pageApi())
     }
 
     // The page and, below it, Chromium DevTools while they are open. The

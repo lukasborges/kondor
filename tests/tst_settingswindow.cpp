@@ -57,6 +57,7 @@ private slots:
     void clickingSidebarSwitchesPages();
     void arrowKeysMoveBetweenPages();
     void searchFiltersPages();
+    void walletUnavailableState();
 
 private:
     QQuickWindow *createWindow();
@@ -358,7 +359,7 @@ void TestSettingsWindow::searchFiltersPages()
     QTest::keyClick(window, Qt::Key_Delete);
     typeText(window, QStringLiteral("kwallet"));
     QTRY_COMPARE(visiblePageCount(window), 1);
-    QCOMPARE(window->property("currentPage").toInt(), 5);
+    QCOMPARE(window->property("currentPage").toInt(), 4);
     QCOMPARE(window->findChild<QObject *>(QStringLiteral("pageHeading"))->property("text").toString(),
              QStringLiteral("Passwords"));
 
@@ -366,8 +367,22 @@ void TestSettingsWindow::searchFiltersPages()
     QTest::keyClick(window, Qt::Key_A, Qt::ControlModifier);
     QTest::keyClick(window, Qt::Key_Delete);
     QTRY_COMPARE(visiblePageCount(window), 6);
-    verifyShownPage(window, 5, QStringLiteral("Passwords"));
+    verifyShownPage(window, 4, QStringLiteral("Passwords"));
 
+    delete window;
+}
+
+void TestSettingsWindow::walletUnavailableState()
+{
+    // KONDOR_NO_KWALLET=1 (set by CTest): the Passwords page shows the
+    // wallet-denied state and never reaches the real wallet.
+    QVERIFY(qEnvironmentVariableIntValue("KONDOR_NO_KWALLET") != 0);
+    QQuickWindow *window = createWindow();
+    QVERIFY(window);
+    QMetaObject::invokeMethod(window, "showWindow");
+    QVERIFY(QTest::qWaitForWindowExposed(window));
+    window->setProperty("currentPage", 4);
+    QTRY_COMPARE(PasswordStore::instance()->state(), QStringLiteral("unavailable"));
     delete window;
 }
 

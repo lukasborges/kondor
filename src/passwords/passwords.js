@@ -11,6 +11,7 @@
         return;
 
     let bridge = null;
+    let requested = false;
     let credentials = [];
     const filled = new WeakSet();
     let lastReport = "";
@@ -50,9 +51,10 @@
         el.dispatchEvent(new Event("change", { bubbles: true }));
     }
 
-    function fillForm(password, credential) {
+    // `explicit`: the user picked this account, so replace the username too.
+    function fillForm(password, credential, explicit) {
         const user = usernameField(password);
-        if (user && user.value === "")
+        if (user && (explicit || user.value === ""))
             setValue(user, credential.username);
         setValue(password, credential.password);
         filled.add(password);
@@ -106,7 +108,14 @@
         }
     }, true);
 
+    // Credentials are requested only once the document has a password field,
+    // so a page without one never opens the wallet.
     function loadCredentials() {
+        if (passwordFields(document).length === 0) {
+            credentials = [];
+            return;
+        }
+        requested = true;
         bridge.credentialsFor(origin, function (list) {
             credentials = Array.isArray(list) ? list : [];
             autofill();
@@ -123,15 +132,21 @@
                 return;
             const field = passwordFields(document)[0];
             if (field)
-                fillForm(field, { username: username, password: password });
+                fillForm(field, { username: username, password: password }, true);
         });
         loadCredentials();
 
         // Login forms that appear later (single-page apps).
         let timer = 0;
         new MutationObserver(function () {
-            if (credentials.length === 1 && !timer) {
-                timer = setTimeout(function () { timer = 0; autofill(); }, 300);
+            if (!timer) {
+                timer = setTimeout(function () {
+                    timer = 0;
+                    if (!requested && passwordFields(document).length > 0)
+                        loadCredentials();
+                    else
+                        autofill();
+                }, 300);
             }
         }).observe(document.documentElement, { childList: true, subtree: true });
     });

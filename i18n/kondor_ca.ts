@@ -1096,7 +1096,7 @@
     <message>
         <location filename="../qml/PasswordBar.qml" line="38"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
-        <translation>El KWallet està inhabilitat o se n'ha denegat l'accés, de manera que no es poden desar ni omplir contrasenyes.</translation>
+        <translation>El KWallet està inhabilitat o se n&apos;ha denegat l&apos;accés, de manera que no es poden desar ni omplir contrasenyes.</translation>
     </message>
     <message>
         <location filename="../qml/PasswordBar.qml" line="44"/>
@@ -1122,62 +1122,62 @@
 <context>
     <name>PasswordsPage</name>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="87"/>
+        <location filename="../qml/PasswordsPage.qml" line="88"/>
         <source>Delete Saved Password</source>
         <translation>Suprimeix la contrasenya desada</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="88"/>
+        <location filename="../qml/PasswordsPage.qml" line="89"/>
         <source>Delete the saved password for %1 on %2?</source>
         <translation>Voleu suprimir la contrasenya desada de %1 a %2?</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="105"/>
+        <location filename="../qml/PasswordsPage.qml" line="106"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
-        <translation>El KWallet està inhabilitat o se n'ha denegat l'accés, de manera que no es poden desar ni omplir contrasenyes.</translation>
+        <translation>El KWallet està inhabilitat o se n&apos;ha denegat l&apos;accés, de manera que no es poden desar ni omplir contrasenyes.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="108"/>
+        <location filename="../qml/PasswordsPage.qml" line="109"/>
         <source>Try Again</source>
         <translation>Torna-ho a provar</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="118"/>
+        <location filename="../qml/PasswordsPage.qml" line="119"/>
         <source>Offer to save passwords</source>
         <translation>Ofereix desar les contrasenyes</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="132"/>
+        <location filename="../qml/PasswordsPage.qml" line="133"/>
         <source>Filter by site or username…</source>
-        <translation>Filtra per lloc o nom d'usuari…</translation>
+        <translation>Filtra per lloc o nom d&apos;usuari…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <location filename="../qml/PasswordsPage.qml" line="190"/>
         <source>Hide Password</source>
         <translation>Amaga la contrasenya</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <location filename="../qml/PasswordsPage.qml" line="190"/>
         <source>Show Password</source>
         <translation>Mostra la contrasenya</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="199"/>
+        <location filename="../qml/PasswordsPage.qml" line="200"/>
         <source>Copy Password</source>
         <translation>Copia la contrasenya</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="209"/>
+        <location filename="../qml/PasswordsPage.qml" line="210"/>
         <source>Delete</source>
         <translation>Suprimeix</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="232"/>
+        <location filename="../qml/PasswordsPage.qml" line="233"/>
         <source>Kondor never offers to save passwords on these sites.</source>
         <translation>El Kondor mai no ofereix desar contrasenyes en aquests llocs.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="264"/>
+        <location filename="../qml/PasswordsPage.qml" line="265"/>
         <source>Remove</source>
         <translation>Elimina</translation>
     </message>
@@ -1429,53 +1429,53 @@
         <translation>Gestiona els permisos dels llocs…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="67"/>
+        <location filename="../qml/SettingsWindow.qml" line="75"/>
         <source>Spelling</source>
         <translation>Ortografia</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="69"/>
+        <location filename="../qml/SettingsWindow.qml" line="77"/>
         <location filename="../qml/SettingsWindow.qml" line="807"/>
         <source>Check spelling while typing</source>
         <translation>Comprova l&apos;ortografia mentre escriviu</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="69"/>
+        <location filename="../qml/SettingsWindow.qml" line="77"/>
         <location filename="../qml/SettingsWindow.qml" line="824"/>
         <source>Languages:</source>
         <translation>Idiomes:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="73"/>
+        <location filename="../qml/SettingsWindow.qml" line="67"/>
         <source>Passwords</source>
         <translation>Contrasenyes</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="75"/>
+        <location filename="../qml/SettingsWindow.qml" line="69"/>
         <source>Offer to save passwords</source>
         <translation>Ofereix desar les contrasenyes</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="75"/>
+        <location filename="../qml/SettingsWindow.qml" line="69"/>
         <location filename="../qml/SettingsWindow.qml" line="445"/>
         <source>Saved Passwords</source>
         <translation>Contrasenyes desades</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="76"/>
+        <location filename="../qml/SettingsWindow.qml" line="70"/>
         <location filename="../qml/SettingsWindow.qml" line="446"/>
         <source>Never Saved</source>
         <translation>Mai desades</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="76"/>
+        <location filename="../qml/SettingsWindow.qml" line="70"/>
         <source>KWallet</source>
         <translation>KWallet</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="77"/>
+        <location filename="../qml/SettingsWindow.qml" line="71"/>
         <source>Filter by site or username…</source>
-        <translation>Filtra per lloc o nom d'usuari…</translation>
+        <translation>Filtra per lloc o nom d&apos;usuari…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="566"/>

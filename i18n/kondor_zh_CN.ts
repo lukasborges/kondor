@@ -1122,62 +1122,62 @@
 <context>
     <name>PasswordsPage</name>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="87"/>
+        <location filename="../qml/PasswordsPage.qml" line="88"/>
         <source>Delete Saved Password</source>
         <translation>删除已保存的密码</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="88"/>
+        <location filename="../qml/PasswordsPage.qml" line="89"/>
         <source>Delete the saved password for %1 on %2?</source>
         <translation>要删除 %2 上 %1 的已保存密码吗?</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="105"/>
+        <location filename="../qml/PasswordsPage.qml" line="106"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
         <translation>KWallet 已禁用或访问被拒绝,因此无法保存或填充密码。</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="108"/>
+        <location filename="../qml/PasswordsPage.qml" line="109"/>
         <source>Try Again</source>
         <translation>重试</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="118"/>
+        <location filename="../qml/PasswordsPage.qml" line="119"/>
         <source>Offer to save passwords</source>
         <translation>提示保存密码</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="132"/>
+        <location filename="../qml/PasswordsPage.qml" line="133"/>
         <source>Filter by site or username…</source>
         <translation>按网站或用户名筛选…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <location filename="../qml/PasswordsPage.qml" line="190"/>
         <source>Hide Password</source>
         <translation>隐藏密码</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <location filename="../qml/PasswordsPage.qml" line="190"/>
         <source>Show Password</source>
         <translation>显示密码</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="199"/>
+        <location filename="../qml/PasswordsPage.qml" line="200"/>
         <source>Copy Password</source>
         <translation>复制密码</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="209"/>
+        <location filename="../qml/PasswordsPage.qml" line="210"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="232"/>
+        <location filename="../qml/PasswordsPage.qml" line="233"/>
         <source>Kondor never offers to save passwords on these sites.</source>
         <translation>Kondor 不会在这些网站上提示保存密码。</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="264"/>
+        <location filename="../qml/PasswordsPage.qml" line="265"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
@@ -1429,51 +1429,51 @@
         <translation>管理网站权限…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="67"/>
+        <location filename="../qml/SettingsWindow.qml" line="75"/>
         <source>Spelling</source>
         <translation>拼写</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="69"/>
+        <location filename="../qml/SettingsWindow.qml" line="77"/>
         <location filename="../qml/SettingsWindow.qml" line="807"/>
         <source>Check spelling while typing</source>
         <translation>输入时检查拼写</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="69"/>
+        <location filename="../qml/SettingsWindow.qml" line="77"/>
         <location filename="../qml/SettingsWindow.qml" line="824"/>
         <source>Languages:</source>
         <translation>语言：</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="73"/>
+        <location filename="../qml/SettingsWindow.qml" line="67"/>
         <source>Passwords</source>
         <translation>密码</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="75"/>
+        <location filename="../qml/SettingsWindow.qml" line="69"/>
         <source>Offer to save passwords</source>
         <translation>提示保存密码</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="75"/>
+        <location filename="../qml/SettingsWindow.qml" line="69"/>
         <location filename="../qml/SettingsWindow.qml" line="445"/>
         <source>Saved Passwords</source>
         <translation>已保存的密码</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="76"/>
+        <location filename="../qml/SettingsWindow.qml" line="70"/>
         <location filename="../qml/SettingsWindow.qml" line="446"/>
         <source>Never Saved</source>
         <translation>从不保存</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="76"/>
+        <location filename="../qml/SettingsWindow.qml" line="70"/>
         <source>KWallet</source>
         <translation>KWallet</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="77"/>
+        <location filename="../qml/SettingsWindow.qml" line="71"/>
         <source>Filter by site or username…</source>
         <translation>按网站或用户名筛选…</translation>
     </message>

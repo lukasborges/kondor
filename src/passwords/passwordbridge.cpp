@@ -4,11 +4,29 @@
 #include "settings.h"
 #include "tab.h"
 
+PasswordPageApi::PasswordPageApi(PasswordBridge *bridge)
+    : QObject(bridge)
+    , m_bridge(bridge)
+{
+}
+
+void PasswordPageApi::formSubmitted(const QString &origin, const QString &username,
+                                    const QString &password)
+{
+    m_bridge->formSubmitted(origin, username, password);
+}
+
+QVariantList PasswordPageApi::credentialsFor(const QString &origin)
+{
+    return m_bridge->credentialsFor(origin);
+}
+
 PasswordBridge::PasswordBridge(QObject *parent)
     : QObject(parent)
+    , m_api(new PasswordPageApi(this))
 {
-    connect(PasswordStore::instance(), &PasswordStore::changed, this,
-            &PasswordBridge::credentialsChanged);
+    connect(PasswordStore::instance(), &PasswordStore::changed, m_api,
+            &PasswordPageApi::credentialsChanged);
 }
 
 void PasswordBridge::setTab(Tab *tab)
@@ -68,5 +86,5 @@ void PasswordBridge::fill(const QString &username)
     PasswordStore *store = PasswordStore::instance();
     if (origin.isEmpty() || !store->isOpen())
         return;
-    emit fillRequested(origin, username, store->password(origin, username));
+    emit m_api->fillRequested(origin, username, store->password(origin, username));
 }

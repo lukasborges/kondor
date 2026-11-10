@@ -1122,62 +1122,62 @@
 <context>
     <name>PasswordsPage</name>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="87"/>
+        <location filename="../qml/PasswordsPage.qml" line="88"/>
         <source>Delete Saved Password</source>
         <translation>Excluir a senha salva</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="88"/>
+        <location filename="../qml/PasswordsPage.qml" line="89"/>
         <source>Delete the saved password for %1 on %2?</source>
         <translation>Excluir a senha salva de %1 em %2?</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="105"/>
+        <location filename="../qml/PasswordsPage.qml" line="106"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
         <translation>O KWallet está desativado ou o acesso a ele foi negado, portanto as senhas não podem ser salvas nem preenchidas.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="108"/>
+        <location filename="../qml/PasswordsPage.qml" line="109"/>
         <source>Try Again</source>
         <translation>Tentar novamente</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="118"/>
+        <location filename="../qml/PasswordsPage.qml" line="119"/>
         <source>Offer to save passwords</source>
         <translation>Oferecer para salvar senhas</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="132"/>
+        <location filename="../qml/PasswordsPage.qml" line="133"/>
         <source>Filter by site or username…</source>
         <translation>Filtrar por site ou nome de usuário…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <location filename="../qml/PasswordsPage.qml" line="190"/>
         <source>Hide Password</source>
         <translation>Ocultar senha</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <location filename="../qml/PasswordsPage.qml" line="190"/>
         <source>Show Password</source>
         <translation>Mostrar senha</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="199"/>
+        <location filename="../qml/PasswordsPage.qml" line="200"/>
         <source>Copy Password</source>
         <translation>Copiar senha</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="209"/>
+        <location filename="../qml/PasswordsPage.qml" line="210"/>
         <source>Delete</source>
         <translation>Excluir</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="232"/>
+        <location filename="../qml/PasswordsPage.qml" line="233"/>
         <source>Kondor never offers to save passwords on these sites.</source>
         <translation>O Kondor nunca oferece para salvar senhas nestes sites.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="264"/>
+        <location filename="../qml/PasswordsPage.qml" line="265"/>
         <source>Remove</source>
         <translation>Remover</translation>
     </message>
@@ -1429,51 +1429,51 @@
         <translation>Gerenciar permissões de sites…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="67"/>
+        <location filename="../qml/SettingsWindow.qml" line="75"/>
         <source>Spelling</source>
         <translation>Ortografia</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="69"/>
+        <location filename="../qml/SettingsWindow.qml" line="77"/>
         <location filename="../qml/SettingsWindow.qml" line="807"/>
         <source>Check spelling while typing</source>
         <translation>Verificar a ortografia durante a digitação</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="69"/>
+        <location filename="../qml/SettingsWindow.qml" line="77"/>
         <location filename="../qml/SettingsWindow.qml" line="824"/>
         <source>Languages:</source>
         <translation>Idiomas:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="73"/>
+        <location filename="../qml/SettingsWindow.qml" line="67"/>
         <source>Passwords</source>
         <translation>Senhas</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="75"/>
+        <location filename="../qml/SettingsWindow.qml" line="69"/>
         <source>Offer to save passwords</source>
         <translation>Oferecer para salvar senhas</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="75"/>
+        <location filename="../qml/SettingsWindow.qml" line="69"/>
         <location filename="../qml/SettingsWindow.qml" line="445"/>
         <source>Saved Passwords</source>
         <translation>Senhas salvas</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="76"/>
+        <location filename="../qml/SettingsWindow.qml" line="70"/>
         <location filename="../qml/SettingsWindow.qml" line="446"/>
         <source>Never Saved</source>
         <translation>Nunca salvas</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="76"/>
+        <location filename="../qml/SettingsWindow.qml" line="70"/>
         <source>KWallet</source>
         <translation>KWallet</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="77"/>
+        <location filename="../qml/SettingsWindow.qml" line="71"/>
         <source>Filter by site or username…</source>
         <translation>Filtrar por site ou nome de usuário…</translation>
     </message>

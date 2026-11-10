@@ -295,7 +295,7 @@
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="1144"/>
+        <location filename="../qml/BrowserWindow.qml" line="1182"/>
         <source>New Tab</source>
         <translation>Nouvel onglet</translation>
     </message>
@@ -330,23 +330,23 @@
         <translation>Rechercher ou saisir une adresse</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="802"/>
+        <location filename="../qml/BrowserWindow.qml" line="835"/>
         <source>Bookmark This Page</source>
         <translation>Marquer cette page</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="861"/>
+        <location filename="../qml/BrowserWindow.qml" line="894"/>
         <source>Downloads</source>
         <translation>Téléchargements</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="890"/>
+        <location filename="../qml/BrowserWindow.qml" line="923"/>
         <source>Menu</source>
         <translation>Menu</translation>
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="1150"/>
+        <location filename="../qml/BrowserWindow.qml" line="1188"/>
         <source>New Private Tab</source>
         <translation>Nouvel onglet privé</translation>
     </message>
@@ -376,155 +376,160 @@
         <translation>Réinitialiser le zoom (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="784"/>
+        <location filename="../qml/BrowserWindow.qml" line="782"/>
+        <source>Fill Saved Password</source>
+        <translation>Remplir avec le mot de passe enregistré</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="817"/>
         <source>Exit Reader Mode (Ctrl+Alt+R)</source>
         <translation>Quitter le mode lecture (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="785"/>
+        <location filename="../qml/BrowserWindow.qml" line="818"/>
         <source>Reader Mode (Ctrl+Alt+R)</source>
         <translation>Mode lecture (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="802"/>
+        <location filename="../qml/BrowserWindow.qml" line="835"/>
         <source>Edit This Bookmark</source>
         <translation>Modifier ce marque-page</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1156"/>
+        <location filename="../qml/BrowserWindow.qml" line="1194"/>
         <source>New Window</source>
         <translation>Nouvelle fenêtre</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1162"/>
+        <location filename="../qml/BrowserWindow.qml" line="1200"/>
         <source>New Private Window</source>
         <translation>Nouvelle fenêtre privée</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1168"/>
+        <location filename="../qml/BrowserWindow.qml" line="1206"/>
         <source>Show All History</source>
         <translation>Afficher tout l&apos;historique</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1174"/>
+        <location filename="../qml/BrowserWindow.qml" line="1212"/>
         <source>Reopen Closed Tab</source>
         <translation>Rouvrir l&apos;onglet fermé</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1181"/>
+        <location filename="../qml/BrowserWindow.qml" line="1219"/>
         <source>Find in Page…</source>
         <translation>Rechercher dans la page…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1195"/>
+        <location filename="../qml/BrowserWindow.qml" line="1233"/>
         <source>Save Page As…</source>
         <translation>Enregistrer la page sous…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1209"/>
+        <location filename="../qml/BrowserWindow.qml" line="1247"/>
         <source>Save as PDF…</source>
         <translation>Enregistrer au format PDF…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1188"/>
+        <location filename="../qml/BrowserWindow.qml" line="1226"/>
         <source>Print…</source>
         <translation>Imprimer…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1215"/>
+        <location filename="../qml/BrowserWindow.qml" line="1253"/>
         <source>Site Permissions…</source>
         <translation>Autorisations des sites…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1202"/>
+        <location filename="../qml/BrowserWindow.qml" line="1240"/>
         <source>Developer Tools</source>
         <translation>Outils de développement</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1221"/>
+        <location filename="../qml/BrowserWindow.qml" line="1259"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Configurer %1…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1227"/>
+        <location filename="../qml/BrowserWindow.qml" line="1265"/>
         <source>Report a Bug…</source>
         <translation>Signaler un bogue…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1233"/>
+        <location filename="../qml/BrowserWindow.qml" line="1271"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>À propos de %1</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="947"/>
+        <location filename="../qml/BrowserWindow.qml" line="985"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Appuyez sur Échap pour quitter le plein écran</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1017"/>
+        <location filename="../qml/BrowserWindow.qml" line="1055"/>
         <source>Page bookmarked</source>
         <translation>Page ajoutée aux marque-pages</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1017"/>
+        <location filename="../qml/BrowserWindow.qml" line="1055"/>
         <source>Edit Bookmark</source>
         <translation>Modifier le marque-page</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1025"/>
+        <location filename="../qml/BrowserWindow.qml" line="1063"/>
         <source>Name:</source>
         <translation>Nom :</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1031"/>
+        <location filename="../qml/BrowserWindow.qml" line="1069"/>
         <source>Folder:</source>
         <translation>Dossier :</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1041"/>
+        <location filename="../qml/BrowserWindow.qml" line="1079"/>
         <source>Remove</source>
         <translation>Retirer</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1049"/>
+        <location filename="../qml/BrowserWindow.qml" line="1087"/>
         <source>Done</source>
         <translation>Terminé</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1060"/>
+        <location filename="../qml/BrowserWindow.qml" line="1098"/>
         <source>Save as PDF</source>
         <translation>Enregistrer au format PDF</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1062"/>
+        <location filename="../qml/BrowserWindow.qml" line="1100"/>
         <source>PDF (*.pdf)</source>
         <translation>PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1069"/>
+        <location filename="../qml/BrowserWindow.qml" line="1107"/>
         <source>Save Page As</source>
         <translation>Enregistrer la page sous</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1071"/>
+        <location filename="../qml/BrowserWindow.qml" line="1109"/>
         <source>Web Page, Complete (*.html)</source>
         <translation>Page web complète (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1072"/>
+        <location filename="../qml/BrowserWindow.qml" line="1110"/>
         <source>Web Page, HTML Only (*.html)</source>
         <translation>Page web, HTML uniquement (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1073"/>
+        <location filename="../qml/BrowserWindow.qml" line="1111"/>
         <source>Web Archive (*.mhtml)</source>
         <translation>Archive web (*.mhtml)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1089"/>
+        <location filename="../qml/BrowserWindow.qml" line="1127"/>
         <source>Save File</source>
         <translation>Enregistrer le fichier</translation>
     </message>
@@ -1082,6 +1087,102 @@
     </message>
 </context>
 <context>
+    <name>PasswordBar</name>
+    <message>
+        <location filename="../qml/PasswordBar.qml" line="34"/>
+        <source>Save the password for &lt;b&gt;%1&lt;/b&gt; on &lt;b&gt;%2&lt;/b&gt;?</source>
+        <translation>Enregistrer le mot de passe de &lt;b&gt;%1&lt;/b&gt; sur &lt;b&gt;%2&lt;/b&gt; ?</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordBar.qml" line="38"/>
+        <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
+        <translation>KWallet est désactivé ou l'accès a été refusé : les mots de passe ne peuvent être ni enregistrés ni remplis.</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordBar.qml" line="44"/>
+        <source>Save</source>
+        <translation>Enregistrer</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordBar.qml" line="50"/>
+        <source>Not Now</source>
+        <translation>Pas maintenant</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordBar.qml" line="50"/>
+        <source>Close</source>
+        <translation>Fermer</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordBar.qml" line="57"/>
+        <source>Never for This Site</source>
+        <translation>Jamais pour ce site</translation>
+    </message>
+</context>
+<context>
+    <name>PasswordsPage</name>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="87"/>
+        <source>Delete Saved Password</source>
+        <translation>Supprimer le mot de passe enregistré</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="88"/>
+        <source>Delete the saved password for %1 on %2?</source>
+        <translation>Supprimer le mot de passe enregistré de %1 sur %2 ?</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="105"/>
+        <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
+        <translation>KWallet est désactivé ou l'accès a été refusé : les mots de passe ne peuvent être ni enregistrés ni remplis.</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="108"/>
+        <source>Try Again</source>
+        <translation>Réessayer</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="118"/>
+        <source>Offer to save passwords</source>
+        <translation>Proposer d'enregistrer les mots de passe</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="132"/>
+        <source>Filter by site or username…</source>
+        <translation>Filtrer par site ou nom d'utilisateur…</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <source>Hide Password</source>
+        <translation>Masquer le mot de passe</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <source>Show Password</source>
+        <translation>Afficher le mot de passe</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="199"/>
+        <source>Copy Password</source>
+        <translation>Copier le mot de passe</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="209"/>
+        <source>Delete</source>
+        <translation>Supprimer</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="232"/>
+        <source>Kondor never offers to save passwords on these sites.</source>
+        <translation>Kondor ne propose jamais d'enregistrer les mots de passe sur ces sites.</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="264"/>
+        <source>Remove</source>
+        <translation>Retirer</translation>
+    </message>
+</context>
+<context>
     <name>PermissionBar</name>
     <message>
         <location filename="../qml/PermissionBar.qml" line="39"/>
@@ -1267,19 +1368,19 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="416"/>
+        <location filename="../qml/SettingsWindow.qml" line="435"/>
         <source>Startup</source>
         <translation>Démarrage</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="509"/>
+        <location filename="../qml/SettingsWindow.qml" line="538"/>
         <source>On startup:</source>
         <translation>Au démarrage :</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="536"/>
+        <location filename="../qml/SettingsWindow.qml" line="565"/>
         <source>Home page:</source>
         <translation>Page d&apos;accueil :</translation>
     </message>
@@ -1290,7 +1391,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="639"/>
+        <location filename="../qml/SettingsWindow.qml" line="668"/>
         <source>Search engine:</source>
         <translation>Moteur de recherche :</translation>
     </message>
@@ -1306,7 +1407,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="54"/>
-        <location filename="../qml/SettingsWindow.qml" line="718"/>
+        <location filename="../qml/SettingsWindow.qml" line="747"/>
         <source>Save files to:</source>
         <translation>Enregistrer les fichiers dans :</translation>
     </message>
@@ -1317,13 +1418,13 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="63"/>
-        <location filename="../qml/SettingsWindow.qml" line="903"/>
+        <location filename="../qml/SettingsWindow.qml" line="932"/>
         <source>Site permissions:</source>
         <translation>Autorisations des sites :</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="63"/>
-        <location filename="../qml/SettingsWindow.qml" line="904"/>
+        <location filename="../qml/SettingsWindow.qml" line="933"/>
         <source>Manage Site Permissions…</source>
         <translation>Gérer les autorisations des sites…</translation>
     </message>
@@ -1334,192 +1435,224 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="69"/>
-        <location filename="../qml/SettingsWindow.qml" line="778"/>
+        <location filename="../qml/SettingsWindow.qml" line="807"/>
         <source>Check spelling while typing</source>
         <translation>Vérifier l&apos;orthographe pendant la saisie</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="69"/>
-        <location filename="../qml/SettingsWindow.qml" line="795"/>
+        <location filename="../qml/SettingsWindow.qml" line="824"/>
         <source>Languages:</source>
         <translation>Langues :</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="537"/>
+        <location filename="../qml/SettingsWindow.qml" line="73"/>
+        <source>Passwords</source>
+        <translation>Mots de passe</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="75"/>
+        <source>Offer to save passwords</source>
+        <translation>Proposer d'enregistrer les mots de passe</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="75"/>
+        <location filename="../qml/SettingsWindow.qml" line="445"/>
+        <source>Saved Passwords</source>
+        <translation>Mots de passe enregistrés</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="76"/>
+        <location filename="../qml/SettingsWindow.qml" line="446"/>
+        <source>Never Saved</source>
+        <translation>Jamais enregistrés</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="76"/>
+        <source>KWallet</source>
+        <translation>KWallet</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="77"/>
+        <source>Filter by site or username…</source>
+        <translation>Filtrer par site ou nom d'utilisateur…</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="566"/>
         <source>New Tab page</source>
         <translation>Page de nouvel onglet</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="556"/>
+        <location filename="../qml/SettingsWindow.qml" line="585"/>
         <source>Use Current Page</source>
         <translation>Utiliser la page actuelle</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="569"/>
+        <location filename="../qml/SettingsWindow.qml" line="598"/>
         <source>Use New Tab Page</source>
         <translation>Utiliser la page de nouvel onglet</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="417"/>
+        <location filename="../qml/SettingsWindow.qml" line="436"/>
         <source>New Tabs</source>
         <translation>Nouveaux onglets</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="880"/>
+        <location filename="../qml/SettingsWindow.qml" line="909"/>
         <source>On exit:</source>
         <translation>À la fermeture :</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="894"/>
+        <location filename="../qml/SettingsWindow.qml" line="923"/>
         <source>Browsing data:</source>
         <translation>Données de navigation :</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="351"/>
+        <location filename="../qml/SettingsWindow.qml" line="370"/>
         <source>Search…</source>
         <translation>Rechercher…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="455"/>
+        <location filename="../qml/SettingsWindow.qml" line="484"/>
         <source>Defaults</source>
         <translation>Par défaut</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="464"/>
+        <location filename="../qml/SettingsWindow.qml" line="493"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="471"/>
+        <location filename="../qml/SettingsWindow.qml" line="500"/>
         <source>Apply</source>
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="478"/>
+        <location filename="../qml/SettingsWindow.qml" line="507"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="510"/>
+        <location filename="../qml/SettingsWindow.qml" line="539"/>
         <source>Open the home page</source>
         <translation>Ouvrir la page d&apos;accueil</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="522"/>
+        <location filename="../qml/SettingsWindow.qml" line="551"/>
         <source>Open the tabs from last time</source>
         <translation>Ouvrir les onglets de la dernière fois</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="596"/>
+        <location filename="../qml/SettingsWindow.qml" line="625"/>
         <source>New Tab page:</source>
         <translation>Page de nouvel onglet :</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="597"/>
+        <location filename="../qml/SettingsWindow.qml" line="626"/>
         <source>Show top sites</source>
         <translation>Afficher les sites les plus visités</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="608"/>
+        <location filename="../qml/SettingsWindow.qml" line="637"/>
         <source>Restore Removed Sites</source>
         <translation>Restaurer les sites retirés</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="646"/>
+        <location filename="../qml/SettingsWindow.qml" line="675"/>
         <source>Custom…</source>
         <translation>Personnalisé…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="661"/>
+        <location filename="../qml/SettingsWindow.qml" line="690"/>
         <source>Custom URL:</source>
         <translation>URL personnalisée :</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="677"/>
+        <location filename="../qml/SettingsWindow.qml" line="706"/>
         <source>Show search suggestions in the address bar</source>
         <translation>Afficher les suggestions de recherche dans la barre d&apos;adresse</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="693"/>
+        <location filename="../qml/SettingsWindow.qml" line="722"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>L’URL doit contenir « %1 » à l’emplacement des termes de recherche.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="728"/>
+        <location filename="../qml/SettingsWindow.qml" line="757"/>
         <source>Choose…</source>
         <translation>Choisir…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="54"/>
-        <location filename="../qml/SettingsWindow.qml" line="736"/>
+        <location filename="../qml/SettingsWindow.qml" line="765"/>
         <source>Ask where to save each file</source>
         <translation>Demander où enregistrer chaque fichier</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="751"/>
+        <location filename="../qml/SettingsWindow.qml" line="780"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>Le dossier sélectionné n’existe plus. Les téléchargements sont enregistrés dans %1.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="844"/>
+        <location filename="../qml/SettingsWindow.qml" line="873"/>
         <source>Cookies:</source>
         <translation>Cookies :</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="845"/>
+        <location filename="../qml/SettingsWindow.qml" line="874"/>
         <source>Block third-party cookies</source>
         <translation>Bloquer les cookies tiers</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="881"/>
+        <location filename="../qml/SettingsWindow.qml" line="910"/>
         <source>Clear cookies, cache and history</source>
         <translation>Effacer les cookies, le cache et l’historique</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="895"/>
+        <location filename="../qml/SettingsWindow.qml" line="924"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Effacer les cookies et le cache maintenant</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="818"/>
+        <location filename="../qml/SettingsWindow.qml" line="847"/>
         <source>No spelling dictionaries are installed.</source>
         <translation>Aucun dictionnaire orthographique n&apos;est installé.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="857"/>
+        <location filename="../qml/SettingsWindow.qml" line="886"/>
         <source>Ads and trackers:</source>
         <translation>Publicités et traqueurs :</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="858"/>
+        <location filename="../qml/SettingsWindow.qml" line="887"/>
         <source>Block ads and trackers</source>
         <translation>Bloquer les publicités et les traqueurs</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="870"/>
+        <location filename="../qml/SettingsWindow.qml" line="899"/>
         <source>Updating lists…</source>
         <translation>Mise à jour des listes…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="872"/>
+        <location filename="../qml/SettingsWindow.qml" line="901"/>
         <source>Lists not downloaded yet</source>
         <translation>Listes pas encore téléchargées</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="873"/>
+        <location filename="../qml/SettingsWindow.qml" line="902"/>
         <source>Lists last updated: %1</source>
         <translation>Dernière mise à jour des listes : %1</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="925"/>
+        <location filename="../qml/SettingsWindow.qml" line="967"/>
         <source>Choose Download Folder</source>
         <translation>Choisir le dossier de téléchargement</translation>
     </message>
@@ -1704,33 +1837,33 @@
 <context>
     <name>WebViewTab</name>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="27"/>
-        <location filename="../qml/WebViewTab.qml" line="494"/>
+        <location filename="../qml/WebViewTab.qml" line="28"/>
+        <location filename="../qml/WebViewTab.qml" line="513"/>
         <source>Print failed</source>
         <translation>Échec de l’impression</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="29"/>
+        <location filename="../qml/WebViewTab.qml" line="30"/>
         <source>PDF saved</source>
         <translation>PDF enregistré</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="31"/>
+        <location filename="../qml/WebViewTab.qml" line="32"/>
         <source>Saving the PDF failed</source>
         <translation>Échec de l’enregistrement du PDF</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="286"/>
+        <location filename="../qml/WebViewTab.qml" line="305"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>Le processus de la page s&apos;est terminé de manière inattendue.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="287"/>
+        <location filename="../qml/WebViewTab.qml" line="306"/>
         <source>The page crashed.</source>
         <translation>La page a planté.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="288"/>
+        <location filename="../qml/WebViewTab.qml" line="307"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>Le processus de la page a été tué (probablement par manque de mémoire).</translation>
     </message>

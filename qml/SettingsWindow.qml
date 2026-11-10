@@ -68,6 +68,14 @@ ApplicationWindow {
             icon: "tools-check-spelling",
             keywords: [qsTr("Check spelling while typing"), qsTr("Languages:")],
             component: spellingPage
+        },
+        {
+            title: qsTr("Passwords"),
+            icon: "preferences-desktop-user-password",
+            keywords: [qsTr("Offer to save passwords"), qsTr("Saved Passwords"),
+                       qsTr("Never Saved"), qsTr("KWallet"),
+                       qsTr("Filter by site or username…")],
+            component: passwordsPage
         }
     ]
 
@@ -78,6 +86,7 @@ ApplicationWindow {
     property bool syncingPageList: false
     // Kept here so it survives the page contents being reloaded.
     property int generalTab: 0
+    property int passwordsTab: 0
     property bool modified: false
     property bool defaultsEnabled: false
 
@@ -133,11 +142,12 @@ ApplicationWindow {
         property bool searchSuggestions: false
         property bool spellCheckEnabled: false
         property var spellCheckLanguages: []
+        property bool offerToSavePasswords: true
 
         readonly property var values: [homePage, searchEngine, customSearchUrl,
             downloadDirectory, askWhereToSave, startupBehavior, showTopSites,
             clearDataOnExit, blockThirdPartyCookies, adBlockEnabled, searchSuggestions,
-            spellCheckEnabled, spellCheckLanguages]
+            spellCheckEnabled, spellCheckLanguages, offerToSavePasswords]
         onValuesChanged: root.refresh()
     }
 
@@ -155,6 +165,7 @@ ApplicationWindow {
         pending.searchSuggestions = Settings.searchSuggestions
         pending.spellCheckEnabled = Settings.spellCheckEnabled
         pending.spellCheckLanguages = Settings.spellCheckLanguages
+        pending.offerToSavePasswords = Settings.offerToSavePasswords
         root.refresh()
     }
 
@@ -172,6 +183,7 @@ ApplicationWindow {
                 || pending.searchSuggestions !== Settings.searchSuggestions
                 || pending.spellCheckEnabled !== Settings.spellCheckEnabled
                 || !root.sameList(pending.spellCheckLanguages, Settings.spellCheckLanguages)
+                || pending.offerToSavePasswords !== Settings.offerToSavePasswords
         root.defaultsEnabled = !root.pageAtDefaults()
     }
 
@@ -202,6 +214,8 @@ ApplicationWindow {
             return pending.spellCheckEnabled === Settings.defaultValue("spellCheckEnabled")
                     && root.sameList(pending.spellCheckLanguages,
                                      Settings.defaultValue("spellCheckLanguages"))
+        case 5:
+            return pending.offerToSavePasswords === Settings.defaultValue("offerToSavePasswords")
         }
         return true
     }
@@ -230,6 +244,9 @@ ApplicationWindow {
         case 4:
             pending.spellCheckEnabled = Settings.defaultValue("spellCheckEnabled")
             pending.spellCheckLanguages = Settings.defaultValue("spellCheckLanguages")
+            break
+        case 5:
+            pending.offerToSavePasswords = Settings.defaultValue("offerToSavePasswords")
             break
         }
         root.refresh()
@@ -262,6 +279,8 @@ ApplicationWindow {
             Settings.spellCheckEnabled = pending.spellCheckEnabled
         if (!root.sameList(pending.spellCheckLanguages, Settings.spellCheckLanguages))
             Settings.spellCheckLanguages = pending.spellCheckLanguages
+        if (pending.offerToSavePasswords !== Settings.offerToSavePasswords)
+            Settings.offerToSavePasswords = pending.offerToSavePasswords
         root.refresh()
     }
 
@@ -417,9 +436,19 @@ ApplicationWindow {
                     TabButton { text: qsTr("New Tabs") }
                 }
 
+                TabBar {
+                    Layout.fillWidth: true
+                    visible: root.currentPage === 5
+                    currentIndex: root.passwordsTab
+                    onCurrentIndexChanged: root.passwordsTab = currentIndex
+
+                    TabButton { text: qsTr("Saved Passwords") }
+                    TabButton { text: qsTr("Never Saved") }
+                }
+
                 Kirigami.Separator {
                     Layout.fillWidth: true
-                    visible: root.currentPage !== 0
+                    visible: root.currentPage !== 0 && root.currentPage !== 5
                 }
 
                 StackLayout {
@@ -909,6 +938,19 @@ ApplicationWindow {
 
                 Item { Layout.fillHeight: true }
             }
+        }
+    }
+
+    // ── Passwords page ──────────────────────────────────────────────────
+    Component {
+        id: passwordsPage
+
+        PasswordsPage {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            tab: root.passwordsTab
+            offerToSave: pending.offerToSavePasswords
+            onOfferToSaveToggled: function(checked) { pending.offerToSavePasswords = checked }
         }
     }
 

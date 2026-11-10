@@ -35,6 +35,7 @@ Get the AppImage from the [latest release](https://github.com/lukasborges/kondor
 ### Privacy and security
 - **Ad and tracker blocking** built in
 - **Private tabs and windows** that leave no trace
+- **Passwords** saved in KWallet and filled in for you
 - **Site permissions**: sites ask before using the camera, microphone or location
 - **Security padlock** and warnings for unsafe sites
 
@@ -108,7 +109,7 @@ Kondor then opens links clicked in other applications. The desktop entry also pr
 
 ## Stack
 
-- **Qt 6.8+** (tested with **6.11.2**): `Core`, `DBus`, `Gui`, `LinguistTools`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebEngineCore`, `WebEngineQuick`, `Widgets`
+- **Qt 6.8+** (tested with **6.11.2**): `Core`, `DBus`, `Gui`, `LinguistTools`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebChannel`, `WebEngineCore`, `WebEngineQuick`, `Widgets`
 - **Qt Quick Controls 2** with the **`org.kde.desktop`** (Breeze) style
 - **Kirigami** for theming (`Kirigami.Theme`)
 - **C++17** + **CMake 3.21+**
@@ -125,7 +126,7 @@ On **Fedora** (the original development environment):
 ```bash
 sudo dnf install cmake gcc-c++ \
     qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel \
-    kf6-qqc2-desktop-style kf6-kirigami hunspell-en-US hunspell-pt-BR
+    qt6-qtwebchannel-devel kf6-qqc2-desktop-style kf6-kirigami kf6-kwallet-devel hunspell-en-US hunspell-pt-BR
 ```
 
 The Hunspell dictionaries (`/usr/share/hunspell`) are converted to Qt WebEngine's

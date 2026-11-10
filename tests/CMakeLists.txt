@@ -35,6 +35,7 @@ qt_add_executable(tst_tabmodel
     tst_tabmodel.cpp
     ../src/tabmodel.cpp
     ../src/tab.cpp
+    ../src/passwords/passwordstore.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
@@ -62,6 +63,7 @@ target_link_libraries(tst_tabmodel PRIVATE
     Qt6::Sql
     Qt6::Test
     Qt6::WebEngineQuick
+    KF6::Wallet
 )
 
 add_test(NAME tst_tabmodel COMMAND tst_tabmodel)
@@ -72,6 +74,7 @@ set_tests_properties(tst_tabmodel PROPERTIES
 qt_add_executable(tst_addresssuggestions
     tst_addresssuggestions.cpp
     ../src/tab.cpp
+    ../src/passwords/passwordstore.cpp
     ../src/tabmodel.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
@@ -107,6 +110,7 @@ target_link_libraries(tst_addresssuggestions PRIVATE
     Qt6::Sql
     Qt6::Test
     Qt6::WebEngineQuick
+    KF6::Wallet
 )
 
 add_test(NAME tst_addresssuggestions COMMAND tst_addresssuggestions)
@@ -144,6 +148,7 @@ qt_add_executable(tst_bookmarkswindow
     ../src/bookmarkmodel.cpp
     ../src/database.cpp
     ../src/tab.cpp
+    ../src/passwords/passwordstore.cpp
     ../src/tabmodel.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
@@ -176,6 +181,7 @@ target_link_libraries(tst_bookmarkswindow PRIVATE
     Qt6::Sql
     Qt6::Test
     Qt6::WebEngineQuick
+    KF6::Wallet
 )
 
 add_test(NAME tst_bookmarkswindow COMMAND tst_bookmarkswindow)
@@ -189,6 +195,7 @@ qt_add_executable(tst_mainmenu
     ../src/bookmarkmodel.cpp
     ../src/database.cpp
     ../src/tab.cpp
+    ../src/passwords/passwordstore.cpp
     ../src/tabmodel.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
@@ -221,6 +228,7 @@ target_link_libraries(tst_mainmenu PRIVATE
     Qt6::Sql
     Qt6::Test
     Qt6::WebEngineQuick
+    KF6::Wallet
 )
 
 add_test(NAME tst_mainmenu COMMAND tst_mainmenu)
@@ -327,6 +335,7 @@ add_test(NAME tst_settings COMMAND tst_settings)
 qt_add_executable(tst_settingswindow
     tst_settingswindow.cpp
     ../src/tab.cpp
+    ../src/passwords/passwordstore.cpp
     ../src/tabmodel.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
@@ -360,6 +369,7 @@ target_link_libraries(tst_settingswindow PRIVATE
     Qt6::Sql
     Qt6::Test
     Qt6::WebEngineQuick
+    KF6::Wallet
 )
 
 add_test(NAME tst_settingswindow COMMAND tst_settingswindow)
@@ -370,6 +380,7 @@ set_tests_properties(tst_settingswindow PROPERTIES
 qt_add_executable(tst_tabstrip
     tst_tabstrip.cpp
     ../src/tab.cpp
+    ../src/passwords/passwordstore.cpp
     ../src/tabmodel.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
@@ -403,6 +414,7 @@ target_link_libraries(tst_tabstrip PRIVATE
     Qt6::Sql
     Qt6::Test
     Qt6::WebEngineQuick
+    KF6::Wallet
 )
 
 add_test(NAME tst_tabstrip COMMAND tst_tabstrip)
@@ -413,6 +425,7 @@ set_tests_properties(tst_tabstrip PROPERTIES
 qt_add_executable(tst_sitepermissions
     tst_sitepermissions.cpp
     ../src/tab.cpp
+    ../src/passwords/passwordstore.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
@@ -445,6 +458,7 @@ target_link_libraries(tst_sitepermissions PRIVATE
     Qt6::Sql
     Qt6::Test
     Qt6::WebEngineQuick
+    KF6::Wallet
 )
 
 add_test(NAME tst_sitepermissions COMMAND tst_sitepermissions)
@@ -457,6 +471,7 @@ qt_add_executable(tst_sessionmanager
     ../src/sessionmanager.cpp
     ../src/tabmodel.cpp
     ../src/tab.cpp
+    ../src/passwords/passwordstore.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
@@ -484,6 +499,7 @@ target_link_libraries(tst_sessionmanager PRIVATE
     Qt6::Sql
     Qt6::Test
     Qt6::WebEngineQuick
+    KF6::Wallet
 )
 
 add_test(NAME tst_sessionmanager COMMAND tst_sessionmanager)
@@ -567,3 +583,22 @@ target_link_libraries(tst_filterengine PRIVATE
 )
 
 add_test(NAME tst_filterengine COMMAND tst_filterengine)
+
+qt_add_executable(tst_passwordstore
+    tst_passwordstore.cpp
+    ../src/passwords/passwordstore.cpp
+)
+
+target_include_directories(tst_passwordstore PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_passwordstore PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Test
+    KF6::Wallet
+)
+
+add_test(NAME tst_passwordstore COMMAND tst_passwordstore)

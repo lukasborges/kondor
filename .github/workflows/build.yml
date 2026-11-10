@@ -15,8 +15,8 @@ jobs:
       - name: Install dependencies
         run: |
           dnf -y install cmake ninja-build gcc-c++ make git nodejs \
-            qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel \
-            kf6-kirigami kf6-qqc2-desktop-style hunspell-en-US hunspell-pt-BR
+            qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel qt6-qtwebchannel-devel \
+            kf6-kirigami kf6-qqc2-desktop-style kf6-kwallet-devel hunspell-en-US hunspell-pt-BR
 
       - name: Checkout
         uses: actions/checkout@v4

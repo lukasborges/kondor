@@ -17,8 +17,10 @@ find_package(Qt6 6.8 REQUIRED COMPONENTS
     Sql
     WebEngineCore
     WebEngineQuick
+    WebChannel
     Widgets
 )
+find_package(KF6Wallet REQUIRED)
 
 include(GNUInstallDirs)
 qt_standard_project_setup(REQUIRES 6.8)
@@ -44,6 +46,7 @@ qt_add_qml_module(kondor
         qml/InlineBar.qml
         qml/FindBar.qml
         qml/PermissionBar.qml
+        qml/PasswordBar.qml
         qml/FullScreenHint.qml
         qml/PermissionTypeInfo.qml
         qml/SitePermissionsDialog.qml
@@ -53,6 +56,7 @@ qt_add_qml_module(kondor
         qml/CrashedPage.qml
         qml/HistoryWindow.qml
         qml/SettingsWindow.qml
+        qml/PasswordsPage.qml
         qml/DownloadsPopup.qml
         qml/BookmarksBar.qml
         qml/BookmarkMenu.qml
@@ -112,6 +116,10 @@ qt_add_qml_module(kondor
         src/adblock/adblockinterceptor.cpp
         src/adblock/adblockmanager.h
         src/adblock/adblockmanager.cpp
+        src/passwords/passwordstore.h
+        src/passwords/passwordstore.cpp
+        src/passwords/passwordbridge.h
+        src/passwords/passwordbridge.cpp
 )
 
 qt_add_translations(kondor
@@ -153,6 +161,13 @@ qt_add_resources(kondor "reader"
         3rdparty/readability/template.html
 )
 
+qt_add_resources(kondor "passwords_script"
+    PREFIX "/scripts"
+    BASE "${CMAKE_SOURCE_DIR}/src/passwords"
+    FILES
+        src/passwords/passwords.js
+)
+
 qt_add_resources(kondor "license"
     PREFIX "/"
     FILES
@@ -166,6 +181,7 @@ target_compile_definitions(kondor PRIVATE
 target_include_directories(kondor PRIVATE
     src
     src/adblock
+    src/passwords
 )
 
 target_link_libraries(kondor PRIVATE
@@ -178,9 +194,11 @@ target_link_libraries(kondor PRIVATE
     Qt6::Quick
     Qt6::QuickControls2
     Qt6::Sql
+    Qt6::WebChannel
     Qt6::WebEngineCore
     Qt6::WebEngineQuick
     Qt6::Widgets
+    KF6::Wallet
 )
 
 if(BUILD_TESTING)

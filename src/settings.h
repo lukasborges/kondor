@@ -55,6 +55,10 @@ class Settings : public QObject
                    NOTIFY adBlockEnabledChanged)
     Q_PROPERTY(QStringList adBlockAllowList READ adBlockAllowList WRITE setAdBlockAllowList
                    NOTIFY adBlockAllowListChanged)
+    Q_PROPERTY(bool offerToSavePasswords READ offerToSavePasswords WRITE setOfferToSavePasswords
+                   NOTIFY offerToSavePasswordsChanged)
+    Q_PROPERTY(QStringList passwordNeverSaveSites READ passwordNeverSaveSites
+                   WRITE setPasswordNeverSaveSites NOTIFY passwordNeverSaveSitesChanged)
     Q_PROPERTY(QDateTime adBlockLastUpdate READ adBlockLastUpdate WRITE setAdBlockLastUpdate
                    NOTIFY adBlockLastUpdateChanged)
 
@@ -82,6 +86,9 @@ public:
     QStringList spellCheckLanguages() const { return m_spellCheckLanguages; }
     bool adBlockEnabled() const { return m_adBlockEnabled; }
     QStringList adBlockAllowList() const { return m_adBlockAllowList; }
+    bool offerToSavePasswords() const { return m_offerToSavePasswords; }
+    // Origins ("https://example.com") where Kondor never offers to save a password.
+    QStringList passwordNeverSaveSites() const { return m_passwordNeverSaveSites; }
     // When the filter lists were last downloaded; invalid if never.
     QDateTime adBlockLastUpdate() const { return m_adBlockLastUpdate; }
 
@@ -104,6 +111,8 @@ public:
     void setAdBlockEnabled(bool adBlockEnabled);
     void setAdBlockAllowList(const QStringList &adBlockAllowList);
     void setAdBlockLastUpdate(const QDateTime &adBlockLastUpdate);
+    void setOfferToSavePasswords(bool offerToSavePasswords);
+    void setPasswordNeverSaveSites(const QStringList &passwordNeverSaveSites);
 
     // Default value of the option with this property name ("homePage",
     // "searchEngine", …). The only source of truth for defaults: the
@@ -148,6 +157,8 @@ signals:
     void adBlockEnabledChanged();
     void adBlockAllowListChanged();
     void adBlockLastUpdateChanged();
+    void offerToSavePasswordsChanged();
+    void passwordNeverSaveSitesChanged();
 
 private:
     explicit Settings(QObject *parent = nullptr);
@@ -172,4 +183,6 @@ private:
     QDateTime m_adBlockLastUpdate;
     int m_readerFontSize = 18;
     bool m_readerSerif = true;
+    bool m_offerToSavePasswords = true;
+    QStringList m_passwordNeverSaveSites;
 };

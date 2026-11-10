@@ -768,6 +768,39 @@ ApplicationWindow {
                         }
 
                         ToolButton {
+                            id: passwordButton
+                            visible: tabs.currentTab
+                                     ? tabs.currentTab.passwordUsernames.length > 0 : false
+                            display: AbstractButton.IconOnly
+                            icon.name: "dialog-password"
+                            icon.width: 16
+                            icon.height: 16
+                            flat: true
+                            implicitWidth: 28
+                            implicitHeight: 28
+                            ToolTip.visible: hovered
+                            ToolTip.text: qsTr("Fill Saved Password")
+                            ToolTip.delay: 600
+                            onClicked: passwordMenu.popup(passwordButton, 0, passwordButton.height)
+
+                            Menu {
+                                id: passwordMenu
+
+                                Instantiator {
+                                    model: tabs.currentTab ? tabs.currentTab.passwordUsernames : []
+                                    delegate: MenuItem {
+                                        required property string modelData
+                                        text: modelData
+                                        icon.name: "user-identity"
+                                        onTriggered: tabs.currentTab.fillPassword(modelData)
+                                    }
+                                    onObjectAdded: function(index, object) { passwordMenu.insertItem(index, object) }
+                                    onObjectRemoved: function(index, object) { passwordMenu.removeItem(object) }
+                                }
+                            }
+                        }
+
+                        ToolButton {
                             id: readerButton
                             visible: tabs.currentTab
                                      ? (tabs.currentTab.readerAvailable || tabs.currentTab.readerActive)
@@ -913,6 +946,11 @@ ApplicationWindow {
 
         PermissionBar {
             id: permissionBar
+            tab: tabs.currentTab
+            Layout.fillWidth: true
+        }
+
+        PasswordBar {
             tab: tabs.currentTab
             Layout.fillWidth: true
         }

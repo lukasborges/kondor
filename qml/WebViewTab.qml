@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtWebChannel
 import QtWebEngine
 import org.kde.kirigami as Kirigami
 import Kondor
@@ -186,6 +187,17 @@ Item {
         return true
     }
 
+    PasswordBridge {
+        id: passwordBridge
+        tab: root.tab
+        WebChannel.id: "kondorPasswords"
+    }
+
+    WebChannel {
+        id: passwordChannel
+        registeredObjects: [passwordBridge]
+    }
+
     // The page and, below it, Chromium DevTools while they are open. The
     // DevTools view shares the page's profile, so a private tab's DevTools
     // stay off the record.
@@ -197,6 +209,13 @@ Item {
             id: webView
             SplitView.fillHeight: true
             profile: root.tab.profile
+
+            // Password manager: the page script is installed only on the
+            // persistent profile (ProfileManager), so a private tab never gets
+            // it, and the bridge refuses private tabs anyway. The script runs
+            // in the application world, out of reach of the page's own scripts.
+            webChannel: root.tab.isPrivate ? null : passwordChannel
+            webChannelWorld: WebEngineScript.ApplicationWorld
 
             // Qt WebEngine disables page full screen by default, so a video
             // player's button would never reach onFullScreenRequested.
@@ -503,6 +522,7 @@ Item {
             root.setDevToolsOpen(true)
             webView.triggerWebAction(WebEngineView.InspectElement)
         }
+        function onFillPasswordRequested(username) { passwordBridge.fill(username) }
         function onForwardRequested() { if (webView.canGoForward) webView.goForward() }
         function onReloadRequested() { webView.reload() }
         function onStopRequested() { webView.stop() }

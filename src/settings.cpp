@@ -27,6 +27,8 @@ constexpr auto kReaderSerif = "Reader/Serif";
 constexpr auto kAdBlockEnabled = "AdBlock/Enabled";
 constexpr auto kAdBlockAllowList = "AdBlock/AllowList";
 constexpr auto kAdBlockLastUpdate = "AdBlock/LastUpdate";
+constexpr auto kOfferToSavePasswords = "Passwords/OfferToSave";
+constexpr auto kPasswordNeverSave = "Passwords/NeverSave";
 
 // Option property names, used by defaultValue().
 constexpr auto kHomePageName = "homePage";
@@ -47,6 +49,8 @@ constexpr auto kReaderFontSizeName = "readerFontSize";
 constexpr auto kReaderSerifName = "readerSerif";
 constexpr auto kAdBlockEnabledName = "adBlockEnabled";
 constexpr auto kAdBlockAllowListName = "adBlockAllowList";
+constexpr auto kOfferToSavePasswordsName = "offerToSavePasswords";
+constexpr auto kPasswordNeverSaveSitesName = "passwordNeverSaveSites";
 
 QString dictionariesPath()
 {
@@ -131,6 +135,12 @@ Settings::Settings(QObject *parent)
                                           defaultValue(QLatin1String(kAdBlockAllowListName)))
                              .toStringList())
     , m_adBlockLastUpdate(m_settings.value(QLatin1String(kAdBlockLastUpdate)).toDateTime())
+    , m_offerToSavePasswords(m_settings.value(QLatin1String(kOfferToSavePasswords),
+                                              defaultValue(QLatin1String(kOfferToSavePasswordsName)))
+                                 .toBool())
+    , m_passwordNeverSaveSites(m_settings.value(QLatin1String(kPasswordNeverSave),
+                                                defaultValue(QLatin1String(kPasswordNeverSaveSitesName)))
+                                   .toStringList())
 {
 }
 
@@ -169,6 +179,10 @@ QVariant Settings::defaultValue(const QString &name) const
     if (name == QLatin1String(kAdBlockEnabledName))
         return true;
     if (name == QLatin1String(kAdBlockAllowListName))
+        return QStringList();
+    if (name == QLatin1String(kOfferToSavePasswordsName))
+        return true;
+    if (name == QLatin1String(kPasswordNeverSaveSitesName))
         return QStringList();
     if (name == QLatin1String(kSpellCheckLanguagesName)) {
         // The system language when a dictionary for it exists, else US English.
@@ -445,4 +459,24 @@ void Settings::setAdBlockLastUpdate(const QDateTime &adBlockLastUpdate)
     m_settings.setValue(QLatin1String(kAdBlockLastUpdate), m_adBlockLastUpdate);
     m_settings.sync();
     emit adBlockLastUpdateChanged();
+}
+
+void Settings::setOfferToSavePasswords(bool offerToSavePasswords)
+{
+    if (m_offerToSavePasswords == offerToSavePasswords)
+        return;
+    m_offerToSavePasswords = offerToSavePasswords;
+    m_settings.setValue(QLatin1String(kOfferToSavePasswords), m_offerToSavePasswords);
+    m_settings.sync();
+    emit offerToSavePasswordsChanged();
+}
+
+void Settings::setPasswordNeverSaveSites(const QStringList &passwordNeverSaveSites)
+{
+    if (m_passwordNeverSaveSites == passwordNeverSaveSites)
+        return;
+    m_passwordNeverSaveSites = passwordNeverSaveSites;
+    m_settings.setValue(QLatin1String(kPasswordNeverSave), m_passwordNeverSaveSites);
+    m_settings.sync();
+    emit passwordNeverSaveSitesChanged();
 }

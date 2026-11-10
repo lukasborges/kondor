@@ -69,8 +69,10 @@ Pages, at `https://lukasborges.github.io/kondor/`.
      still come from Flathub.
 5. **Bundle updates.** `Kondor.flatpak` is built with the repository URL and the public key
    (`flatpak build-bundle --repo-url=https://lukasborges.github.io/kondor/repo/ --gpg-keys=<public
-   key file> … stable`), so a bundle install also receives updates from the repository. If the
-   action has no input for the key, build the bundle with that command in a step after the build.
+   key file> --runtime-repo=https://dl.flathub.org/repo/flathub.flatpakrepo … stable`), so a bundle
+   install also receives updates from the repository and can still fetch the KDE runtime on a
+   system without the Flathub remote (as the bundle of #25 does). If the action has no input for
+   the key, build the bundle with that command in a step after the build.
 6. **Pull-request check** (`.github/workflows/flatpak.yml`). It runs steps 3.2–3.5 with a throwaway
    key generated in the job (`gpg --batch --passphrase '' --quick-gen-key "Kondor CI test" rsa3072
    sign never`). It skips the mirror (3.1) and the deployment (3.6). It then checks the result:
@@ -94,8 +96,13 @@ Pages, at `https://lukasborges.github.io/kondor/`.
 2. Store it: `gpg --export-secret-keys --armor <key id> | gh secret set FLATPAK_GPG_PRIVATE_KEY --repo lukasborges/kondor`.
 3. Enable Pages with GitHub Actions as the source:
    `gh api -X POST repos/lukasborges/kondor/pages -f build_type=workflow`.
+4. Allow release tags to deploy to Pages. GitHub creates the `github-pages` environment with a
+   deployment policy that only admits the default branch, so a deployment started by a tag is
+   rejected ("Tag "v…" is not allowed to deploy to github-pages due to environment protection
+   rules"):
+   `gh api -X POST repos/lukasborges/kondor/environments/github-pages/deployment-branch-policies -f name='v*' -f type=tag`.
 
-The developer documents these three steps in the PR description and does not perform them.
+The developer documents these steps in the PR description and does not perform them.
 
 ## Acceptance criteria
 
@@ -143,3 +150,5 @@ No UI for this issue, so there is no prototype.
 | --- | --- |
 | Where is the repository hosted? | GitHub Pages of `lukasborges/kondor`: no new account, free for a public repository, served over HTTPS. If the site outgrows the 1 GB limit, the repository moves to object storage in a follow-up issue. |
 | How are previous commits kept when Pages replaces the whole site? | Each release mirrors the published repository (`ostree pull --mirror`) before exporting the new build, and prunes to depth 2. |
+| Does the bundle built by the script still name a runtime repository? (review of PR #101) | Yes: `flatpak build-bundle` gets `--runtime-repo=https://dl.flathub.org/repo/flathub.flatpakrepo`, like the bundle the action built for #25. Without it, installing `Kondor.flatpak` fails on a system that has no Flathub remote. |
+| Can a tag deploy to the `github-pages` environment? (review of PR #101) | Not by default: the environment only admits `main`. The maintainer adds a `v*` tag policy (Maintainer setup, step 4); the workflow keeps `environment: github-pages`. |

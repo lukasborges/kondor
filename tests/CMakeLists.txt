@@ -401,3 +401,21 @@ target_link_libraries(tst_singleinstance PRIVATE
 )
 
 add_test(NAME tst_singleinstance COMMAND tst_singleinstance)
+
+qt_add_executable(tst_filehelper
+    tst_filehelper.cpp
+    ../src/filehelper.cpp
+)
+
+target_include_directories(tst_filehelper PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_filehelper PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Test
+)
+
+add_test(NAME tst_filehelper COMMAND tst_filehelper)

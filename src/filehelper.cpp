@@ -32,6 +32,12 @@ QString FileHelper::sanitizeFileName(const QString &title) const
     return name.isEmpty() ? QStringLiteral("page") : name;
 }
 
+QUrl FileHelper::suggestedFileUrl(const QString &directory, const QString &title,
+                                  const QString &extension) const
+{
+    return QUrl::fromLocalFile(QDir(directory).filePath(sanitizeFileName(title) + extension));
+}
+
 QString FileHelper::tempPdfPath()
 {
     if (!m_tempDir.isValid())

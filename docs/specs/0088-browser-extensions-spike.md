@@ -22,8 +22,10 @@ Settings, toolbar buttons and popups) is specified in a follow-up issue, based o
 - The API is behind `QT_CONFIG(webengine_extensions)`. Fedora's Qt 6.11.2 enables it
   (`QT_FEATURE_webengine_extensions 1` in `qtwebenginecore-config.h`) and is based on
   **Chromium 140**.
-- The minimum Qt of Kondor is 6.5 (`find_package(Qt6 6.5 …)`), so every use must compile out on
-  older Qt and on builds without the feature.
+- The minimum Qt of Kondor is 6.8 (`find_package(Qt6 6.8 …)`), so every use must compile out on
+  older Qt and on builds without the feature. The `webengine_extensions` feature is public and on
+  in Qt 6.8 and 6.9 too (it only served the PDF viewer there), so the feature check alone does not
+  tell whether the API exists: the Qt version must be checked as well.
 - Most `chrome.*` APIs (tabs, windows, contextMenus, action badges…) are implemented by Chrome's
   browser layer, which Qt WebEngine does not ship. Measuring what actually works is the point of
   this spike.
@@ -33,8 +35,9 @@ Settings, toolbar buttons and popups) is specified in a follow-up issue, based o
 ## Design / behavior
 
 1. **Build guard.** All extension code lives in `src/extensionloader.{h,cpp}` (registered in
-   `CMakeLists.txt`). It is wrapped in `#if QT_CONFIG(webengine_extensions)` and is a no-op
-   otherwise. The build must keep working with Qt 6.5–6.9.
+   `CMakeLists.txt`). It is wrapped in
+   `#if QT_VERSION >= QT_VERSION_CHECK(6, 10, 0) && QT_CONFIG(webengine_extensions)` and is a no-op
+   otherwise. The build must keep working with Qt 6.8 and 6.9.
 2. **`--load-extension <dir>` command-line option** (repeatable), parsed with the existing
    `QCommandLineParser` in `src/main.cpp`. Help text: "Load an unpacked extension (developer
    option)". For each directory:
@@ -90,7 +93,7 @@ Settings, toolbar buttons and popups) is specified in a follow-up issue, based o
 
 ## Acceptance criteria
 
-- [ ] Builds with and without `webengine_extensions`. Without it, `--load-extension` prints
+- [ ] Builds with and without `webengine_extensions`, and with Qt 6.8/6.9 (no extension API). Without it, `--load-extension` prints
   "Extensions are not supported by this Qt WebEngine build" and is ignored.
 - [ ] `kondor --load-extension <dir>` loads an unpacked extension into normal tabs only, and logs
   its id and popup URL.
@@ -132,3 +135,5 @@ None: this issue has no user-facing UI.
 | The Chrome Web Store download sends no body from the developer agent's sandbox and there is no display, so the six extensions cannot be fetched or measured. Merge the loader/script/test now and produce the report by hand (a), or keep the issue open until someone supplies the data (b)? ([PR #104](https://github.com/lukasborges/kondor/pull/104#issuecomment-6781496080)) | **(a).** The architect's machine has the same download failure (HTTP 200, 0 bytes), so no agent can produce the report. #88 delivers the loader, `--load-extension`, `scripts/fetch-extension.sh` and the test; the compatibility report, the real fetch of the six extensions and the Dark Reader manual test move to follow-up issue #105, done by hand on a machine with network access and a display. No results are invented and no placeholder report file is committed. The script is verified against synthetic CRX2/CRX3 files and a non-CRX response. |
 | The test page: the spec says "a `data:` or local test page", but extensions cannot touch `file:` pages by default. | Serving the page from a local HTTP server inside the test is fine. |
 | After `loadExtension()` the extension is not enabled. | The loader calls `setExtensionEnabled(info, true)` for the extensions it loads; record this and the built-in component extensions listed by `extensions()` as findings in the PR, for the #105 report's summary. |
+| Is `#if QT_CONFIG(webengine_extensions)` enough as the build guard? ([PR #104 review](https://github.com/lukasborges/kondor/pull/104)) | No. Qt 6.8 and 6.9 define the feature as on but have no `QWebEngineExtensionManager`, so the build breaks there. The guard is `QT_VERSION >= QT_VERSION_CHECK(6, 10, 0) && QT_CONFIG(webengine_extensions)`, in the loader and in the test. |
+| Where does the test's persistent profile live? | In a `QTemporaryDir` (`setPersistentStoragePath`/`setCachePath`), like the other tests that isolate their storage; a test never writes under the real home. |

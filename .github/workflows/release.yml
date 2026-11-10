@@ -18,7 +18,7 @@ jobs:
         run: |
           dnf -y install cmake ninja-build gcc-c++ make file wget git nodejs gh \
             qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel \
-            kf6-kirigami kf6-qqc2-desktop-style fuse-libs \
+            kf6-kirigami kf6-qqc2-desktop-style hunspell-en-US hunspell-pt-BR fuse-libs \
             plasma-integration plasma-breeze-qt6 qt6-qtsvg
 
       - name: Checkout
@@ -36,6 +36,10 @@ jobs:
       - name: Prepare AppDir
         run: |
           cp packaging/kondor.desktop AppDir/
+          # Spell checking dictionaries installed by `cmake --install`
+          test -f AppDir/usr/share/kondor/qtwebengine_dictionaries/en-US.bdic
+          test -f AppDir/usr/share/kondor/qtwebengine_dictionaries/pt-BR.bdic
+
           cp packaging/kondor.png AppDir/
 
           # QtWebEngine (fallback; the Qt plugin usually copies it by itself)

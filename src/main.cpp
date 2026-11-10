@@ -2,6 +2,7 @@
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QDir>
+#include <QFileInfo>
 #include <QGuiApplication>
 #include <QIcon>
 #include <QLibraryInfo>
@@ -58,6 +59,25 @@ int main(int argc, char *argv[])
 
     // Required by QtWebEngine to share the context with Qt Quick.
     QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
+
+    // Spell checking dictionaries (.bdic) live next to the install or the build.
+    // QCoreApplication does not exist yet, so find the executable through /proc.
+    if (!qEnvironmentVariableIsSet("QTWEBENGINE_DICTIONARIES_PATH")) {
+        const QString appDir =
+            QFileInfo(QStringLiteral("/proc/self/exe")).canonicalFilePath().section(
+                QLatin1Char('/'), 0, -2);
+        const QStringList candidates = {
+            appDir + QStringLiteral("/../share/kondor/qtwebengine_dictionaries"),
+            appDir + QStringLiteral("/qtwebengine_dictionaries"),
+        };
+        for (const QString &candidate : candidates) {
+            if (QFileInfo(candidate).isDir()) {
+                qputenv("QTWEBENGINE_DICTIONARIES_PATH",
+                        QDir::cleanPath(candidate).toLocal8Bit());
+                break;
+            }
+        }
+    }
 
     // Must happen before loading anything from WebEngine in QML.
     QtWebEngineQuick::initialize();

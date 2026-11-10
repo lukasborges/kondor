@@ -43,6 +43,10 @@ class Settings : public QObject
                    WRITE setBlockThirdPartyCookies NOTIFY blockThirdPartyCookiesChanged)
     Q_PROPERTY(bool searchSuggestions READ searchSuggestions WRITE setSearchSuggestions
                    NOTIFY searchSuggestionsChanged)
+    Q_PROPERTY(bool spellCheckEnabled READ spellCheckEnabled WRITE setSpellCheckEnabled
+                   NOTIFY spellCheckEnabledChanged)
+    Q_PROPERTY(QStringList spellCheckLanguages READ spellCheckLanguages
+                   WRITE setSpellCheckLanguages NOTIFY spellCheckLanguagesChanged)
 
 public:
     static Settings *instance();
@@ -62,6 +66,8 @@ public:
     bool clearDataOnExit() const { return m_clearDataOnExit; }
     bool blockThirdPartyCookies() const { return m_blockThirdPartyCookies; }
     bool searchSuggestions() const { return m_searchSuggestions; }
+    bool spellCheckEnabled() const { return m_spellCheckEnabled; }
+    QStringList spellCheckLanguages() const { return m_spellCheckLanguages; }
 
     void setHomePage(const QString &homePage);
     void setSearchEngine(const QString &searchEngine);
@@ -75,11 +81,18 @@ public:
     void setClearDataOnExit(bool clearDataOnExit);
     void setBlockThirdPartyCookies(bool blockThirdPartyCookies);
     void setSearchSuggestions(bool searchSuggestions);
+    void setSpellCheckEnabled(bool spellCheckEnabled);
+    void setSpellCheckLanguages(const QStringList &spellCheckLanguages);
 
     // Default value of the option with this property name ("homePage",
     // "searchEngine", …). The only source of truth for defaults: the
     // constructor and the Configure window's Defaults button both use it.
     Q_INVOKABLE QVariant defaultValue(const QString &name) const;
+
+    // Dictionaries Qt WebEngine can use: one entry per `<code>.bdic` file in the
+    // directory named by QTWEBENGINE_DICTIONARIES_PATH, as `{ code, name }`
+    // with the language's native display name, sorted by name.
+    Q_INVOKABLE QVariantList availableSpellCheckLanguages() const;
 
     // URL template for the selected engine, with %1 where the query goes.
     Q_INVOKABLE QString searchUrlTemplate() const;
@@ -107,6 +120,8 @@ signals:
     void clearDataOnExitChanged();
     void blockThirdPartyCookiesChanged();
     void searchSuggestionsChanged();
+    void spellCheckEnabledChanged();
+    void spellCheckLanguagesChanged();
 
 private:
     explicit Settings(QObject *parent = nullptr);
@@ -124,4 +139,6 @@ private:
     bool m_clearDataOnExit = false;
     bool m_blockThirdPartyCookies = false;
     bool m_searchSuggestions = false;
+    bool m_spellCheckEnabled = true;
+    QStringList m_spellCheckLanguages;
 };

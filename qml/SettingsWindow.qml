@@ -62,6 +62,12 @@ ApplicationWindow {
                        qsTr("Browsing data:"), qsTr("Clear Cookies and Cache Now"),
                        qsTr("Site permissions:"), qsTr("Manage Site Permissions…")],
             component: privacyPage
+        },
+        {
+            title: qsTr("Spelling"),
+            icon: "tools-check-spelling",
+            keywords: [qsTr("Check spelling while typing"), qsTr("Languages:")],
+            component: spellingPage
         }
     ]
 
@@ -124,10 +130,13 @@ ApplicationWindow {
         property bool clearDataOnExit: false
         property bool blockThirdPartyCookies: false
         property bool searchSuggestions: false
+        property bool spellCheckEnabled: false
+        property var spellCheckLanguages: []
 
         readonly property var values: [homePage, searchEngine, customSearchUrl,
             downloadDirectory, askWhereToSave, startupBehavior, showTopSites,
-            clearDataOnExit, blockThirdPartyCookies, searchSuggestions]
+            clearDataOnExit, blockThirdPartyCookies, searchSuggestions,
+            spellCheckEnabled, spellCheckLanguages]
         onValuesChanged: root.refresh()
     }
 
@@ -142,6 +151,8 @@ ApplicationWindow {
         pending.clearDataOnExit = Settings.clearDataOnExit
         pending.blockThirdPartyCookies = Settings.blockThirdPartyCookies
         pending.searchSuggestions = Settings.searchSuggestions
+        pending.spellCheckEnabled = Settings.spellCheckEnabled
+        pending.spellCheckLanguages = Settings.spellCheckLanguages
         root.refresh()
     }
 
@@ -156,7 +167,13 @@ ApplicationWindow {
                 || pending.clearDataOnExit !== Settings.clearDataOnExit
                 || pending.blockThirdPartyCookies !== Settings.blockThirdPartyCookies
                 || pending.searchSuggestions !== Settings.searchSuggestions
+                || pending.spellCheckEnabled !== Settings.spellCheckEnabled
+                || !root.sameList(pending.spellCheckLanguages, Settings.spellCheckLanguages)
         root.defaultsEnabled = !root.pageAtDefaults()
+    }
+
+    function sameList(a, b) {
+        return a.length === b.length && a.every(function(value, i) { return value === b[i] })
     }
 
     function pageAtDefaults() {
@@ -177,6 +194,10 @@ ApplicationWindow {
             return pending.blockThirdPartyCookies
                         === Settings.defaultValue("blockThirdPartyCookies")
                     && pending.clearDataOnExit === Settings.defaultValue("clearDataOnExit")
+        case 4:
+            return pending.spellCheckEnabled === Settings.defaultValue("spellCheckEnabled")
+                    && root.sameList(pending.spellCheckLanguages,
+                                     Settings.defaultValue("spellCheckLanguages"))
         }
         return true
     }
@@ -200,6 +221,10 @@ ApplicationWindow {
         case 3:
             pending.blockThirdPartyCookies = Settings.defaultValue("blockThirdPartyCookies")
             pending.clearDataOnExit = Settings.defaultValue("clearDataOnExit")
+            break
+        case 4:
+            pending.spellCheckEnabled = Settings.defaultValue("spellCheckEnabled")
+            pending.spellCheckLanguages = Settings.defaultValue("spellCheckLanguages")
             break
         }
         root.refresh()
@@ -226,6 +251,10 @@ ApplicationWindow {
             Settings.blockThirdPartyCookies = pending.blockThirdPartyCookies
         if (pending.searchSuggestions !== Settings.searchSuggestions)
             Settings.searchSuggestions = pending.searchSuggestions
+        if (pending.spellCheckEnabled !== Settings.spellCheckEnabled)
+            Settings.spellCheckEnabled = pending.spellCheckEnabled
+        if (!root.sameList(pending.spellCheckLanguages, Settings.spellCheckLanguages))
+            Settings.spellCheckLanguages = pending.spellCheckLanguages
         root.refresh()
     }
 
@@ -714,6 +743,72 @@ ApplicationWindow {
                     type: Kirigami.MessageType.Warning
                     text: qsTr("The selected folder no longer exists. Downloads are saved to %1.")
                               .arg(Settings.downloadDirectory)
+                }
+
+                Item { Layout.fillHeight: true }
+            }
+        }
+    }
+
+    // ── Spelling page ───────────────────────────────────────────────────
+    Component {
+        id: spellingPage
+
+        ScrollView {
+            id: spellingView
+            contentWidth: availableWidth
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+
+            ColumnLayout {
+                width: spellingView.availableWidth
+                spacing: Kirigami.Units.largeSpacing
+
+                Kirigami.FormLayout {
+                    Layout.fillWidth: true
+
+                    CheckBox {
+                        id: spellingCheck
+                        text: qsTr("Check spelling while typing")
+                        onToggled: pending.spellCheckEnabled = checked
+                    }
+
+                    Binding {
+                        target: spellingCheck
+                        property: "checked"
+                        value: pending.spellCheckEnabled
+                    }
+
+                    Repeater {
+                        model: Settings.availableSpellCheckLanguages()
+
+                        delegate: CheckBox {
+                            id: languageCheck
+                            required property var modelData
+                            required property int index
+                            Kirigami.FormData.label: index === 0 ? qsTr("Languages:") : ""
+                            text: modelData.name
+                            enabled: pending.spellCheckEnabled
+                            onToggled: {
+                                const others = pending.spellCheckLanguages.filter(
+                                    function(code) { return code !== modelData.code })
+                                pending.spellCheckLanguages =
+                                    checked ? others.concat([modelData.code]) : others
+                            }
+
+                            Binding {
+                                target: languageCheck
+                                property: "checked"
+                                value: pending.spellCheckLanguages.indexOf(languageCheck.modelData.code) !== -1
+                            }
+                        }
+                    }
+                }
+
+                Kirigami.InlineMessage {
+                    Layout.fillWidth: true
+                    visible: Settings.availableSpellCheckLanguages().length === 0
+                    type: Kirigami.MessageType.Information
+                    text: qsTr("No spelling dictionaries are installed.")
                 }
 
                 Item { Layout.fillHeight: true }

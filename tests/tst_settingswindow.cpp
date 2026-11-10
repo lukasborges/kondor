@@ -317,7 +317,7 @@ void TestSettingsWindow::searchFiltersPages()
     QVERIFY(window);
     QMetaObject::invokeMethod(window, "showWindow");
     QVERIFY(QTest::qWaitForWindowExposed(window));
-    QCOMPARE(visiblePageCount(window), 4);
+    QCOMPARE(visiblePageCount(window), 5);
 
     QObject *search = findByClassName(window, QStringLiteral("SearchField"));
     QVERIFY(search);
@@ -351,7 +351,7 @@ void TestSettingsWindow::searchFiltersPages()
     // Clearing the filter restores every entry and keeps Search selected.
     QTest::keyClick(window, Qt::Key_A, Qt::ControlModifier);
     QTest::keyClick(window, Qt::Key_Delete);
-    QTRY_COMPARE(visiblePageCount(window), 4);
+    QTRY_COMPARE(visiblePageCount(window), 5);
     verifyShownPage(window, 1, QStringLiteral("Search"));
 
     delete window;

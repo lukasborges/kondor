@@ -19,6 +19,7 @@ find_package(Qt6 6.8 REQUIRED COMPONENTS
     Widgets
 )
 
+include(GNUInstallDirs)
 qt_standard_project_setup(REQUIRES 6.8)
 
 qt_add_executable(kondor
@@ -170,6 +171,43 @@ install(TARGETS kondor
     BUNDLE DESTINATION .
     RUNTIME DESTINATION bin
 )
+
+# Spell checking dictionaries: Hunspell .dic/.aff files converted to the .bdic
+# format Qt WebEngine reads. Chromium names them with a hyphen ("pt-BR").
+set(KONDOR_SPELLCHECK_LANGS "en_US;pt_BR" CACHE STRING
+    "Hunspell dictionaries (from /usr/share/hunspell) to convert and install")
+find_program(QWEBENGINE_CONVERT_DICT qwebengine_convert_dict
+    HINTS "${QT6_INSTALL_PREFIX}/${QT6_INSTALL_LIBEXECS}" /usr/lib64/qt6/libexec /usr/lib/qt6/libexec)
+set(KONDOR_DICTIONARIES_DIR "${CMAKE_BINARY_DIR}/qtwebengine_dictionaries")
+set(KONDOR_BDIC_FILES)
+if(QWEBENGINE_CONVERT_DICT)
+    foreach(lang IN LISTS KONDOR_SPELLCHECK_LANGS)
+        set(dic "/usr/share/hunspell/${lang}.dic")
+        string(REPLACE "_" "-" bdic_name "${lang}")
+        if(EXISTS "${dic}")
+            set(bdic "${KONDOR_DICTIONARIES_DIR}/${bdic_name}.bdic")
+            add_custom_command(
+                OUTPUT "${bdic}"
+                COMMAND ${CMAKE_COMMAND} -E make_directory "${KONDOR_DICTIONARIES_DIR}"
+                COMMAND ${CMAKE_COMMAND} -E env QT_QPA_PLATFORM=offscreen
+                        "${QWEBENGINE_CONVERT_DICT}" "${dic}" "${bdic}"
+                DEPENDS "${dic}"
+                COMMENT "Converting the ${lang} dictionary"
+                VERBATIM)
+            list(APPEND KONDOR_BDIC_FILES "${bdic}")
+        else()
+            message(WARNING "Hunspell dictionary ${dic} not found: no ${lang} spell checking")
+        endif()
+    endforeach()
+else()
+    message(WARNING "qwebengine_convert_dict not found: spell checking dictionaries are not built")
+endif()
+if(KONDOR_BDIC_FILES)
+    add_custom_target(kondor_dictionaries ALL DEPENDS ${KONDOR_BDIC_FILES})
+    add_dependencies(kondor kondor_dictionaries)
+    install(DIRECTORY "${KONDOR_DICTIONARIES_DIR}"
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/kondor)
+endif()
 
 # Icon and menu entry (.desktop)
 install(FILES packaging/kondor.desktop DESTINATION share/applications)

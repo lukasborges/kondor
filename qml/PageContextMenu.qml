@@ -26,8 +26,13 @@ Menu {
     }
 
     function rebuild() {
-        while (count > 0)
-            removeItem(itemAt(0))
+        while (count > 0) {
+            const first = itemAt(0)
+            if (first.subMenu)
+                removeMenu(first.subMenu)
+            else
+                removeItem(first)
+        }
 
         const r = request
         const blocks = []
@@ -131,11 +136,12 @@ Menu {
     function editingBlock(r) {
         const entries = []
         if (r.misspelledWord !== "") {
-            for (const suggestion of r.spellCheckerSuggestions) {
+            for (const suggestion of r.spellCheckerSuggestions.slice(0, 5)) {
                 entries.push({
                     text: suggestion,
                     action: "replaceMisspelling",
-                    data: suggestion
+                    data: suggestion,
+                    bold: true
                 })
             }
             if (entries.length > 0)
@@ -156,6 +162,10 @@ Menu {
                        enabled: (r.editFlags & ContextMenuRequest.CanPaste) !== 0 })
         entries.push({ text: qsTr("Select All"), icon: "edit-select-all", action: "selectAll",
                        enabled: (r.editFlags & ContextMenuRequest.CanSelectAll) !== 0 })
+        if (Settings.spellCheckEnabled && Settings.availableSpellCheckLanguages().length > 0) {
+            entries.push(null)
+            entries.push({ spellCheckLanguages: true })
+        }
         return entries
     }
 
@@ -176,6 +186,10 @@ Menu {
     }
 
     function addEntry(entry) {
+        if (entry.spellCheckLanguages === true) {
+            addLanguagesMenu()
+            return
+        }
         // Create with a null parent and let addItem() take ownership; a Menu is a
         // Popup, not an Item, so parenting to it makes Qt warn that the object was
         // not placed in the graphics scene.
@@ -188,7 +202,28 @@ Menu {
             "checkable": entry.checkable === true,
             "checked": entry.checked === true
         })
+        if (entry.bold === true)
+            item.font.bold = true
         addItem(item)
+    }
+
+    // "Spell Check Languages" submenu: one checkable entry per dictionary.
+    function addLanguagesMenu() {
+        const submenu = languagesComponent.createObject(null)
+        for (const language of Settings.availableSpellCheckLanguages()) {
+            const item = languageItemComponent.createObject(null, {
+                "text": language.name,
+                "code": language.code,
+                "checked": Settings.spellCheckLanguages.indexOf(language.code) !== -1
+            })
+            submenu.addItem(item)
+        }
+        addMenu(submenu)
+    }
+
+    function toggleSpellCheckLanguage(code, enabled) {
+        const others = Settings.spellCheckLanguages.filter(function(c) { return c !== code })
+        Settings.spellCheckLanguages = enabled ? others.concat([code]) : others
     }
 
     function addSeparator() {
@@ -289,6 +324,26 @@ Menu {
 
             icon.name: iconName
             onTriggered: menu.perform(actionId, actionData)
+        }
+    }
+
+    Component {
+        id: languagesComponent
+
+        Menu {
+            title: qsTr("Spell Check Languages")
+            icon.name: "tools-check-spelling"
+            popupType: Popup.Item
+        }
+    }
+
+    Component {
+        id: languageItemComponent
+
+        MenuItem {
+            property string code
+            checkable: true
+            onToggled: menu.toggleSpellCheckLanguage(code, checked)
         }
     }
 

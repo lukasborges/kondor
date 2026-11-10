@@ -20,6 +20,10 @@ private slots:
     void stripsWwwAndIgnoresOtherSchemes();
     void skipsHiddenHosts();
     void ignoresVisitsOlderThanNinetyDays();
+    void suggestMatchesUrlAndTitle();
+    void suggestSortsByVisitsAndLimit();
+    void suggestEscapesWildcards();
+    void hostCompletionPrefersMostVisitedHost();
 
 private:
     void addVisit(const QString &url, const QString &title, qint64 visitedAt);
@@ -80,6 +84,76 @@ void TestTopSites::stripsWwwAndIgnoresOtherSchemes()
     QCOMPARE(sites.size(), 1);
     QCOMPARE(sites.at(0).toMap().value(QStringLiteral("host")).toString(),
              QStringLiteral("example.org"));
+}
+
+void TestTopSites::suggestMatchesUrlAndTitle()
+{
+    const qint64 now = QDateTime::currentMSecsSinceEpoch();
+    addVisit(QStringLiteral("https://kde.org/"), QStringLiteral("KDE Community"), now - 1000);
+    addVisit(QStringLiteral("https://plasma.kde.org/"), QStringLiteral("Plasma"), now - 2000);
+
+    const QVariantList byUrl = HistoryManager::instance()->suggest(QStringLiteral("plasma"));
+    QCOMPARE(byUrl.size(), 1);
+    const QVariantMap entry = byUrl.at(0).toMap();
+    QCOMPARE(entry.value(QStringLiteral("type")).toString(), QStringLiteral("history"));
+    QCOMPARE(entry.value(QStringLiteral("url")).toString(),
+             QStringLiteral("https://plasma.kde.org/"));
+    QCOMPARE(entry.value(QStringLiteral("title")).toString(), QStringLiteral("Plasma"));
+
+    // Title matches count too.
+    const QVariantList byTitle = HistoryManager::instance()->suggest(QStringLiteral("community"));
+    QCOMPARE(byTitle.size(), 1);
+    QCOMPARE(byTitle.at(0).toMap().value(QStringLiteral("url")).toString(),
+             QStringLiteral("https://kde.org/"));
+
+    QVERIFY(HistoryManager::instance()->suggest(QStringLiteral("   ")).isEmpty());
+}
+
+void TestTopSites::suggestSortsByVisitsAndLimit()
+{
+    const qint64 now = QDateTime::currentMSecsSinceEpoch();
+    addVisit(QStringLiteral("https://a.example/"), QStringLiteral("Example A"), now - 3000);
+    addVisit(QStringLiteral("https://b.example/"), QStringLiteral("Example B"), now - 2000);
+    addVisit(QStringLiteral("https://b.example/"), QStringLiteral("Example B"), now - 1000);
+
+    const QVariantList all = HistoryManager::instance()->suggest(QStringLiteral("example"));
+    QCOMPARE(all.size(), 2);
+    QCOMPARE(all.at(0).toMap().value(QStringLiteral("url")).toString(),
+             QStringLiteral("https://b.example/"));
+    QCOMPARE(HistoryManager::instance()->suggest(QStringLiteral("example"), 1).size(), 1);
+}
+
+void TestTopSites::suggestEscapesWildcards()
+{
+    const qint64 now = QDateTime::currentMSecsSinceEpoch();
+    addVisit(QStringLiteral("https://example.org/100%25"), QStringLiteral("Percent"), now - 1000);
+    addVisit(QStringLiteral("https://example.org/other"), QStringLiteral("Other"), now - 2000);
+
+    // A bare % must not behave as a LIKE wildcard matching every URL.
+    QCOMPARE(HistoryManager::instance()->suggest(QStringLiteral("%")).size(), 1);
+    // An underscore is a literal too, not "any single character".
+    QCOMPARE(HistoryManager::instance()->suggest(QStringLiteral("000_")).size(), 0);
+}
+
+void TestTopSites::hostCompletionPrefersMostVisitedHost()
+{
+    const qint64 now = QDateTime::currentMSecsSinceEpoch();
+    addVisit(QStringLiteral("https://www.kde.org/"), QStringLiteral("KDE"), now - 2000);
+    addVisit(QStringLiteral("https://kde.org/announcements/"), QStringLiteral("KDE news"),
+             now - 1000);
+    addVisit(QStringLiteral("https://example.org/kde-guide"), QStringLiteral("Guide"),
+             now - 3000);
+
+    QCOMPARE(HistoryManager::instance()->hostCompletion(QStringLiteral("kd")),
+             QStringLiteral("kde.org"));
+    QCOMPARE(HistoryManager::instance()->hostCompletion(QStringLiteral("kde.o")),
+             QStringLiteral("kde.org"));
+    QCOMPARE(HistoryManager::instance()->hostCompletion(QStringLiteral("kde.org")),
+             QString());
+    QCOMPARE(HistoryManager::instance()->hostCompletion(QStringLiteral("kde p")),
+             QString());
+    QCOMPARE(HistoryManager::instance()->hostCompletion(QStringLiteral("zzz")),
+             QString());
 }
 
 void TestTopSites::skipsHiddenHosts()

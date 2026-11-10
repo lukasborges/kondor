@@ -222,7 +222,7 @@ ApplicationWindow {
 
     // Normal click navigates the current tab; middle/Ctrl+click opens a
     // background tab (in a private profile when the current tab is private).
-    function openBookmark(url, background) {
+    function openUrl(url, background) {
         if (!url)
             return
         const tab = tabs.currentTab
@@ -524,6 +524,21 @@ ApplicationWindow {
                     leftPadding: securityButton.visible ? securitySlot.width + 8 : 8
                     rightPadding: bookmarkButton.visible ? bookmarkButton.width + 10 : 8
 
+                    // Text as the user typed it, before selecting a row or
+                    // completing a host: Esc restores it.
+                    property string typedText: ""
+                    // Text before the current user edit. An edit that makes
+                    // the field shorter is a deletion (Backspace/Delete) and
+                    // inline completion must not refill what was just removed,
+                    // even when the removed text was pasted or typed faster
+                    // than the 120 ms debounce.
+                    property string previousText: ""
+                    // How much of previousText the user actually typed: the
+                    // rest may be a selected inline completion, so replacing
+                    // it counts as typing, not as a deletion.
+                    property int previousTypedLength: 0
+                    property bool lastEditDeleted: false
+
                     function syncFromTab() {
                         if (activeFocus)
                             return
@@ -532,29 +547,94 @@ ApplicationWindow {
                         text = (t && !t.newTabPage) ? t.url.toString() : ""
                     }
 
+                    // "kd" becomes "kde.org" with "e.org" selected, from
+                    // the most visited matching history URL.
+                    function completeHost() {
+                        const typed = text
+                        if (lastEditDeleted || typed.length < 2)
+                            return
+                        const host = HistoryManager.hostCompletion(typed)
+                        if (host.length === 0)
+                            return
+                        text = host
+                        previousText = host
+                        previousTypedLength = typed.length
+                        select(typed.length, host.length)
+                    }
+
+                    function updateSuggestions() {
+                        if (!activeFocus || text.trim().length === 0) {
+                            addressSuggestions.close()
+                            SearchSuggestions.cancel()
+                            return
+                        }
+                        completeHost()
+
+                        // Rows describe what the field now shows, including an
+                        // inline completion, so the Visit row appears with it.
+                        const query = text.trim()
+                        addressSuggestions.text = query
+                        addressSuggestions.currentIndex = 0
+                        addressSuggestions.open()
+
+                        // Network suggestions are opt-in and never requested
+                        // from a private tab.
+                        const tab = tabs.currentTab
+                        if (Settings.searchSuggestions && tab && !tab.isPrivate) {
+                            SearchSuggestions.request(query)
+                        } else {
+                            SearchSuggestions.cancel()
+                            addressSuggestions.networkSuggestions = []
+                        }
+                    }
+
                     onAccepted: {
                         const t = tabs.currentTab
                         if (!t)
                             return
-                        if (addressSuggestions.opened) {
-                            addressSuggestions.activate(addressSuggestions.currentIndex)
+                        // A query that is still pending describes the text
+                        // from before the last keystroke, so its rows must not
+                        // be activated. Enter then resolves the typed text,
+                        // exactly as it does without a dropdown.
+                        if (addressSuggestions.opened && !suggestionsTimer.running) {
+                            addressSuggestions.activate(addressSuggestions.currentIndex, false)
                             return
                         }
+                        suggestionsTimer.stop()
+                        addressSuggestions.close()
                         t.navigateTo(ProfileManager.resolveAddress(text))
                         focus = false
                     }
 
                     onTextEdited: {
-                        addressSuggestions.text = text
-                        if (addressSuggestions.rows.length > 0) {
-                            addressSuggestions.currentIndex = 0
-                            addressSuggestions.open()
-                        } else {
-                            addressSuggestions.close()
-                        }
+                        // A shrunk field is a deletion (Backspace/Delete), no
+                        // matter how the removed text got there (pasted or
+                        // typed before the debounce fired). Replacing the
+                        // selected part of an inline completion also shrinks
+                        // the text, but that is typing: it may complete again.
+                        lastEditDeleted = text.length < previousText.length
+                                && text.length <= previousTypedLength
+                        previousText = text
+                        previousTypedLength = text.length
+                        typedText = text
+                        // Query once the typing settles: building the rows
+                        // runs the bookmark and history queries.
+                        suggestionsTimer.restart()
+                    }
+
+                    Timer {
+                        id: suggestionsTimer
+                        interval: 120
+                        onTriggered: addressBar.updateSuggestions()
                     }
 
                     Keys.onDownPressed: function(event) {
+                        // Flush a pending query first: the open dropdown still
+                        // shows the rows of the previous text.
+                        if (suggestionsTimer.running) {
+                            suggestionsTimer.stop()
+                            addressBar.updateSuggestions()
+                        }
                         if (!addressSuggestions.opened) {
                             event.accepted = false
                             return
@@ -562,34 +642,61 @@ ApplicationWindow {
                         addressSuggestions.currentIndex =
                             Math.min(addressSuggestions.currentIndex + 1,
                                      addressSuggestions.rows.length - 1)
+                        // Show the selected row's text without querying again.
+                        text = addressSuggestions.selectedText(addressSuggestions.currentIndex)
+                        previousText = text
+                        previousTypedLength = text.length
                         event.accepted = true
                     }
 
                     Keys.onUpPressed: function(event) {
+                        if (suggestionsTimer.running) {
+                            suggestionsTimer.stop()
+                            addressBar.updateSuggestions()
+                        }
                         if (!addressSuggestions.opened) {
                             event.accepted = false
                             return
                         }
                         addressSuggestions.currentIndex =
                             Math.max(addressSuggestions.currentIndex - 1, 0)
+                        text = addressSuggestions.selectedText(addressSuggestions.currentIndex)
+                        previousText = text
+                        previousTypedLength = text.length
                         event.accepted = true
                     }
 
                     Keys.onEscapePressed: function(event) {
+                        // A pending query would reopen the dropdown right
+                        // after it was closed, so drop it even when the
+                        // dropdown did not open yet (first keystroke).
+                        suggestionsTimer.stop()
                         if (!addressSuggestions.opened) {
                             event.accepted = false
                             return
                         }
                         // Only the dropdown goes away; the typed text stays.
+                        text = typedText
+                        previousText = typedText
+                        previousTypedLength = typedText.length
                         addressSuggestions.close()
                         event.accepted = true
                     }
 
+                    // Tab and Shift+Tab never cycle the dropdown rows: they
+                    // keep the field's normal focus navigation, so focus can
+                    // leave the address bar as it does without a popup.
+
                     onActiveFocusChanged: {
                         if (activeFocus) {
+                            typedText = text
+                            previousText = text
+                            previousTypedLength = text.length
+                            lastEditDeleted = false
                             selectAll()
                         } else {
                             addressSuggestions.close()
+                            SearchSuggestions.cancel()
                         }
                     }
 
@@ -660,11 +767,23 @@ ApplicationWindow {
                         y: addressBar.height
                         width: addressBar.width
 
-                        onNavigate: function(url) {
-                            if (tabs.currentTab)
+                        onNavigate: function(url, background) {
+                            if (background) {
+                                window.openUrl(url, true)
+                            } else if (tabs.currentTab) {
                                 tabs.currentTab.navigateTo(url)
+                            }
                             addressSuggestions.close()
                             addressBar.focus = false
+                        }
+
+                        Connections {
+                            target: SearchSuggestions
+                            function onSuggestionsReady(text, items) {
+                                // Very fast typing: drop answers for older text.
+                                if (text === addressSuggestions.text)
+                                    addressSuggestions.networkSuggestions = items
+                            }
                         }
                     }
 
@@ -782,7 +901,7 @@ ApplicationWindow {
                             showCommands: true
                             folderId: BookmarkManager.toolbarFolderId()
                             onBookmarkActivated: function(url, background) {
-                                window.openBookmark(url, background)
+                                window.openUrl(url, background)
                             }
                             onBookmarkThisPageRequested: window.openBookmarkEditor()
                             onManageBookmarksRequested: window.openBookmarks()
@@ -1204,6 +1323,7 @@ ApplicationWindow {
         }
         function onCurrentTabChanged() {
             addressSuggestions.close()
+            SearchSuggestions.cancel()
             addressBar.syncFromTab()
         }
     }

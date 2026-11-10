@@ -269,6 +269,43 @@ bool BookmarkManager::isBookmarked(const QUrl &url) const
     return bookmarkIdFor(url) > 0;
 }
 
+QVariantList BookmarkManager::search(const QString &text, int limit) const
+{
+    QVariantList results;
+    Database *db = Database::instance();
+    const QString needle = text.trimmed();
+    if (!db->isValid() || needle.isEmpty() || limit <= 0)
+        return results;
+
+    // The needle is data, not a pattern: escape LIKE's wildcards.
+    QString pattern = needle;
+    pattern.replace(QLatin1String("\\"), QLatin1String("\\\\"));
+    pattern.replace(QLatin1String("%"), QLatin1String("\\%"));
+    pattern.replace(QLatin1String("_"), QLatin1String("\\_"));
+    pattern = QLatin1Char('%') + pattern + QLatin1Char('%');
+
+    QSqlQuery query(db->handle());
+    query.prepare(QStringLiteral(
+        "SELECT url, title FROM bookmarks"
+        " WHERE is_folder = 0 AND (url LIKE ? ESCAPE '\\' OR title LIKE ? ESCAPE '\\')"
+        " ORDER BY (title LIKE ? ESCAPE '\\') DESC, title COLLATE NOCASE, id LIMIT ?"));
+    query.addBindValue(pattern);
+    query.addBindValue(pattern);
+    query.addBindValue(pattern);
+    query.addBindValue(limit);
+    if (!query.exec())
+        return results;
+
+    while (query.next()) {
+        QVariantMap entry;
+        entry.insert(QStringLiteral("type"), QStringLiteral("bookmark"));
+        entry.insert(QStringLiteral("url"), query.value(0).toString());
+        entry.insert(QStringLiteral("title"), query.value(1).toString());
+        results.append(entry);
+    }
+    return results;
+}
+
 qint64 BookmarkManager::bookmarkIdFor(const QUrl &url) const
 {
     Database *db = Database::instance();

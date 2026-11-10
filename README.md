@@ -20,14 +20,14 @@ A working prototype with the core functionality in place: it actually browses, w
 
 - **Real tabs** with `Qt WebEngine` (one `WebEngineView` per tab, preserving state when switching)
 - **Tab management**: favicons and a loading indicator, drag to reorder, middle-click to close, pinned tabs, a tab context menu (reload, duplicate, pin, close others and tabs to the right), keyboard switching and overflow handling (tabs shrink, then the bar scrolls)
-- **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches with the configured engine); local hosts use `http://`, public hosts `https://`. When the text looks like an address, a dropdown offers **Visit** (Enter) and **Search with the configured engine** (Down, Enter) for the same text
+- **Unified address/search bar**: accepts a URL, a host (`example.com`, IP, `localhost`) or free text (searches with the configured engine); local hosts use `http://`, public hosts `https://`. While typing, a dropdown offers **Visit** and **Search with the configured engine** for the same text, then matching bookmarks and history entries (most visited first) and, when enabled in Settings, the search engine's suggestions; Up/Down select a row, Enter opens it, Esc restores the typed text, and clicking a row opens it in the current tab (middle click in a background tab). A host is completed inline from the history (`kd` → `kde.org`, with the added part selected), and Backspace just removes that completion
 - **New Tab page**: new tabs show Kondor's own page with a search field and the eight sites visited most in the last 90 days (favicons, open in a new tab or private tab, remove a site); private tabs get a private variant without top sites. The home page is only used by the first tab at startup and by the Home button, and a blank home page (the default) means the New Tab page
 - **Navigation**: back, forward, reload/stop, home
 - **Page context menu**: right-click on a link, image, video or audio, selected text or an editable field for the matching actions (open in a new/private tab, copy or save, search the selection, spelling suggestions, undo/redo/cut/copy/paste); on the page itself it offers back, forward, reload and view source. `Shift+F10` or the `Menu` key opens it from the keyboard
 - **Private mode**: off-the-record tabs, isolated from the persistent profile
 - **Browsing history**: records visited pages (persistent profile only), with a searchable history window (Ctrl+H) grouped by day and clear options (all or a time range)
 - **Bookmarks**: star button in the address bar (Ctrl+D) with a name/folder editor, a bookmarks toolbar (Ctrl+Shift+B), a Bookmarks menu, and a manager window (Ctrl+Shift+O) with folders, rename, delete, reordering, drag and drop between folders, a "Move To" menu and import of Firefox/Chrome HTML exports. A new profile starts with a set of KDE and Linux bookmarks (KDE, Planet KDE, Qt Docs and the News, Development and Linux folders); they are added once, and an existing profile is never changed
-- **Settings** (Ctrl+,): a KDE Configure window with a sidebar (searchable with Ctrl+F), page tabs and Defaults / OK / Apply / Cancel; options cover the home page (blank means the New Tab page), startup behavior, New Tab page top sites, search engine (including a custom URL), download folder and privacy options (third-party cookies, clear data on exit, site permission management). Changes stay pending until OK or Apply, and are stored in `~/.config/KDE/Kondor.conf`
+- **Settings** (Ctrl+,): a KDE Configure window with a sidebar (searchable with Ctrl+F), page tabs and Defaults / OK / Apply / Cancel; options cover the home page (blank means the New Tab page), startup behavior, New Tab page top sites, search engine (including a custom URL and optional search suggestions in the address bar), download folder and privacy options (third-party cookies, clear data on exit, site permission management). Changes stay pending until OK or Apply, and are stored in `~/.config/KDE/Kondor.conf`
 - **About window** (Menu → About Kondor Browser): app, Qt and Chromium versions, components and authors, with a viewer for the license text; links open in a new normal tab
 - **Session restore**: optionally reopen the tabs from the previous session on startup (General → Startup in the Configure window); private tabs are never saved. Ctrl+Shift+T reopens the last closed normal tabs, up to 20
 - **Find in page** (Ctrl+F): incremental search with match counter, previous/next and match case
@@ -116,6 +116,7 @@ src/
   historymanager.*    QML singleton: write/query/clear browsing history
   historymodel.*      history list model (QAbstractListModel)
   bookmarkmanager.*   QML singleton: bookmark tree, folders, HTML import
+  searchsuggestions.* QML singleton: search-engine autocomplete for the address bar
   bookmarkmodel.*     one folder's items as a list model (QAbstractListModel)
   faviconstore.*      QML singleton: one favicon per host (table `favicons`), filled by normal tabs only
   downloadmanager.*   QML singleton: downloads list model, actions and notifications
@@ -123,6 +124,7 @@ src/
   aboutinfo.*         QML singleton: read-only version and license data for the About window
 qml/
   Main.qml            window, tab bar, navigation bar, menu, shortcuts
+  AddressSuggestions.qml  address bar dropdown (visit/search, bookmarks, history, suggestions)
   WebViewTab.qml      WebEngineView + bridge to the Tab object
   NewTabPage.qml      New Tab page (logo, search field, top sites)
   TabButtonDelegate.qml  one tab button (favicon, title, close, drag, pinned)

@@ -126,19 +126,24 @@
 <context>
     <name>BookmarkMenu</name>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="70"/>
+        <location filename="../qml/BookmarkMenu.qml" line="77"/>
         <source>Bookmark This Page</source>
         <translation>Добавить страницу в закладки</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="76"/>
+        <location filename="../qml/BookmarkMenu.qml" line="83"/>
         <source>Manage Bookmarks…</source>
         <translation>Управление закладками…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="83"/>
+        <location filename="../qml/BookmarkMenu.qml" line="90"/>
         <source>Show Bookmarks Toolbar</source>
         <translation>Показывать панель закладок</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarkMenu.qml" line="112"/>
+        <source>(Empty)</source>
+        <translation>(Пусто)</translation>
     </message>
 </context>
 <context>

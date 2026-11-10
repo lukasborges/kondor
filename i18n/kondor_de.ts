@@ -126,19 +126,24 @@
 <context>
     <name>BookmarkMenu</name>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="70"/>
+        <location filename="../qml/BookmarkMenu.qml" line="77"/>
         <source>Bookmark This Page</source>
         <translation>Diese Seite als Lesezeichen speichern</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="76"/>
+        <location filename="../qml/BookmarkMenu.qml" line="83"/>
         <source>Manage Bookmarks…</source>
         <translation>Lesezeichen verwalten…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="83"/>
+        <location filename="../qml/BookmarkMenu.qml" line="90"/>
         <source>Show Bookmarks Toolbar</source>
         <translation>Lesezeichenleiste anzeigen</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarkMenu.qml" line="112"/>
+        <source>(Empty)</source>
+        <translation>(Leer)</translation>
     </message>
 </context>
 <context>

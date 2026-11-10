@@ -126,19 +126,24 @@
 <context>
     <name>BookmarkMenu</name>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="70"/>
+        <location filename="../qml/BookmarkMenu.qml" line="77"/>
         <source>Bookmark This Page</source>
         <translation>このページをブックマーク</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="76"/>
+        <location filename="../qml/BookmarkMenu.qml" line="83"/>
         <source>Manage Bookmarks…</source>
         <translation>ブックマークを管理…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkMenu.qml" line="83"/>
+        <location filename="../qml/BookmarkMenu.qml" line="90"/>
         <source>Show Bookmarks Toolbar</source>
         <translation>ブックマークツールバーを表示</translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarkMenu.qml" line="112"/>
+        <source>(Empty)</source>
+        <translation>(空)</translation>
     </message>
 </context>
 <context>

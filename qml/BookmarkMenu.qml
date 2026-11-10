@@ -37,6 +37,7 @@ Menu {
 
     function appendFolder(menu, id, depth) {
         const entries = BookmarkManager.folderContents(id)
+        let added = 0
         for (let i = 0; i < entries.length; ++i) {
             const entry = entries[i]
             if (entry.isFolder) {
@@ -51,6 +52,7 @@ Menu {
                 // qmllint enable missing-property
                 root.appendFolder(submenu, entry.id, depth + 1)
                 menu.addMenu(submenu)
+                ++added
             } else {
                 const item = bookmarkComponent.createObject(null)
                 item.text = entry.title.length ? entry.title : entry.url
@@ -61,8 +63,13 @@ Menu {
                 })
                 // qmllint enable missing-property
                 menu.addItem(item)
+                ++added
             }
         }
+        // An empty folder still opens a normal-sized menu with a disabled
+        // "(Empty)" item, like Firefox, instead of a blank popup.
+        if (added === 0)
+            menu.addItem(emptyComponent.createObject(null))
     }
 
     MenuItem {
@@ -97,6 +104,14 @@ Menu {
     Component {
         id: menuComponent
         Menu {}
+    }
+
+    Component {
+        id: emptyComponent
+        MenuItem {
+            text: qsTr("(Empty)")
+            enabled: false
+        }
     }
 
     Connections {

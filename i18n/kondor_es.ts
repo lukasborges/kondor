@@ -1648,17 +1648,17 @@
 <context>
     <name>TabStrip</name>
     <message>
-        <location filename="../qml/TabStrip.qml" line="298"/>
+        <location filename="../qml/TabStrip.qml" line="302"/>
         <source>Scroll Tabs Left</source>
         <translation>Desplazar pestañas a la izquierda</translation>
     </message>
     <message>
-        <location filename="../qml/TabStrip.qml" line="315"/>
+        <location filename="../qml/TabStrip.qml" line="319"/>
         <source>Scroll Tabs Right</source>
         <translation>Desplazar pestañas a la derecha</translation>
     </message>
     <message>
-        <location filename="../qml/TabStrip.qml" line="331"/>
+        <location filename="../qml/TabStrip.qml" line="335"/>
         <source>New Tab</source>
         <translation>Nueva pestaña</translation>
     </message>

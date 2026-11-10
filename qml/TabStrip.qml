@@ -1,5 +1,5 @@
 // The tab bar: fixed-width tabs that shrink together down to a minimum, scroll
-// arrows when they still do not fit, the New Tab button and the drop indicator.
+// arrows when they still do not fit and the New Tab button.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -25,7 +25,8 @@ Rectangle {
     readonly property alias newTabButton: newTabButton
     readonly property alias scrollLeftButton: scrollLeftButton
     readonly property alias scrollRightButton: scrollRightButton
-    property alias dropTargetIndex: tabBar.dropTargetIndex
+    // True while a tab is being dragged: the strip is not scrolled to the current tab then.
+    property bool tabDragActive: false
 
     readonly property int pinnedCount: tabModel.pinnedCount
     readonly property int unpinnedCount: Math.max(0, tabModel.count - pinnedCount)
@@ -170,7 +171,13 @@ Rectangle {
         function onWidthChanged() { strip.scheduleEnsureVisible() }
     }
 
+    function scrollAnimationStop() {
+        scrollAnimation.stop()
+    }
+
     function scheduleEnsureVisible() {
+        if (tabDragActive)
+            return
         Qt.callLater(ensureCurrentVisible)
     }
 
@@ -225,9 +232,6 @@ Rectangle {
             // ListView scrolls then.
             Layout.minimumWidth: 0
             Layout.maximumWidth: strip.tabsAreaWidth
-            // Index a dragged tab would land on; drives the drop indicator.
-            property int dropTargetIndex: -1
-
             currentIndex: strip.tabModel.currentIndex
             background: null
 
@@ -334,19 +338,6 @@ Rectangle {
         }
 
         Item { Layout.fillWidth: true }
-    }
-
-    // Where a dragged tab will land.
-    Rectangle {
-        readonly property Item targetItem: tabBar.dropTargetIndex >= 0 && tabBar.contentItem
-            ? tabBar.itemAt(tabBar.dropTargetIndex) : null
-        // Hidden outside the visible tab area: never drawn over the arrows.
-        visible: targetItem !== null && x >= tabBar.x - 1 && x + width <= tabBar.x + tabBar.width + 1
-        x: tabBar.x + (targetItem ? targetItem.x - tabBar.contentItem.contentX : 0)
-        y: tabBar.y
-        width: 2
-        height: tabBar.height
-        color: Kirigami.Theme.highlightColor
     }
 
     // Double-click (or middle click) on the empty part opens a new tab.

@@ -100,70 +100,152 @@ TabButton {
         }
     }
 
+    // The dragged tab is drawn at the pointer through this translate: the
+    // ListView owns x. It settles back to 0 when the drag ends (#91).
+    property real dragShift: 0
+    // Neighbours of the dragged tab slide to their new slot through this
+    // offset (the ListView's move/displaced transitions crash on close).
+    property real slideShift: 0
+    property real lastX: 0
+    transform: [
+        Translate { x: control.dragShift },
+        Translate { x: control.slideShift }
+    ]
+    z: dragHandler.active || settle.running ? 10 : 0
+
+    NumberAnimation {
+        id: settle
+        target: control
+        property: "dragShift"
+        to: 0
+        duration: Kirigami.Units.shortDuration
+        easing.type: Easing.OutCubic
+    }
+
+    NumberAnimation {
+        id: slideAnimation
+        target: control
+        property: "slideShift"
+        to: 0
+        duration: Kirigami.Units.shortDuration
+        easing.type: Easing.OutCubic
+    }
+
+    Component.onCompleted: lastX = x
+
+    Component.onDestruction: {
+        // Closing the dragged tab mid-drag never emits activeChanged.
+        if (dragHandler.active && control.tabStrip) {
+            control.tabStrip.tabDragActive = false
+            control.tabStrip.scheduleEnsureVisible()
+        }
+    }
+
+    onXChanged: {
+        if (dragHandler.active) {
+            dragHandler.update()
+        } else if (tabStrip && tabStrip.tabDragActive) {
+            slideShift += lastX - x
+            slideAnimation.restart()
+        }
+        lastX = x
+    }
+
+    // Scrolls the strip while a tab is dragged to its left or right edge.
+    Timer {
+        interval: 16
+        repeat: true
+        running: dragHandler.active && control.tabStrip && control.tabStrip.maxScroll > 0
+        onTriggered: {
+            const strip = control.tabStrip
+            const view = strip.view
+            const x = view.mapFromItem(null, dragHandler.sceneX, dragHandler.sceneY).x
+            let delta = 0
+            if (x < 24)
+                delta = -8
+            else if (x > view.width - 24)
+                delta = 8
+            if (delta === 0)
+                return
+            strip.scrollAnimationStop()
+            view.contentX = view.originX + Math.max(0, Math.min(strip.maxScroll, strip.scrolled + delta))
+            dragHandler.update()
+        }
+    }
+
     DragHandler {
         id: dragHandler
         target: null
         xAxis.enabled: true
         yAxis.enabled: false
 
-        property int targetIndex: -1
+        // Last pointer position (scene) and where the tab was grabbed.
+        property real sceneX: 0
+        property real sceneY: 0
+        property real grabOffset: 0
 
-        function tabIndexAt(sceneX, sceneY) {
-            if (!control.tabBarItem)
-                return -1
-            const content = control.tabBarItem.contentItem
-            if (!content)
-                return -1
+        // Content x of a scene point, in the ListView's content coordinates.
+        function contentX(sx, sy) {
+            return control.parent.mapFromItem(null, sx, sy).x
+        }
 
-            const point = content.mapFromItem(null, sceneX, sceneY)
-            let best = -1
-            let bestDistance = Number.MAX_VALUE
-            for (let i = 0; i < control.tabBarItem.count; ++i) {
-                const item = control.tabBarItem.itemAt(i)
-                if (!item)
-                    continue
-                const distance = Math.abs(point.x - (item.x + item.width / 2))
-                if (distance < bestDistance) {
-                    bestDistance = distance
-                    best = i
-                }
+        // Draw the tab at the pointer, and move it in the model when its
+        // center has reached another slot.
+        function update() {
+            const strip = control.tabStrip
+            if (!strip || !control.parent)
+                return
+            const pinned = control.tab.pinned
+            const sectionStart = pinned ? 0 : strip.tabX(control.pinnedCount)
+            const sectionEnd = pinned ? strip.tabX(control.pinnedCount) : strip.stripWidth
+            const width = control.width
+            const origin = strip.origin
+            let left = contentX(sceneX, sceneY) - origin - grabOffset
+            left = Math.max(sectionStart, Math.min(sectionEnd - width, left))
+
+            const own = control.tabModel.indexOfTab(control.tab)
+            const center = left + width / 2
+            let target
+            if (pinned)
+                target = Math.floor(center / strip.pinnedTabWidth)
+            else
+                target = control.pinnedCount + Math.floor((center - sectionStart) / strip.tabWidth)
+            target = pinned
+                ? Math.max(0, Math.min(control.pinnedCount - 1, target))
+                : Math.max(control.pinnedCount, Math.min(control.tabModel.count - 1, target))
+            if (target !== own) {
+                control.tabModel.moveTab(own, target)
+                if (control.tabBarItem && control.tabBarItem.contentItem)
+                    control.tabBarItem.contentItem.forceLayout()
             }
-            return best
+            // A move can change the ListView's originX: read it again.
+            control.dragShift = left + strip.origin - control.x
         }
 
         onCentroidChanged: {
             if (!active)
                 return
-
-            let target = tabIndexAt(centroid.scenePosition.x, centroid.scenePosition.y)
-            if (target < 0)
-                return
-
-            // Pinned and unpinned tabs cannot be mixed by dragging.
-            if (control.tab.pinned)
-                target = Math.min(target, control.pinnedCount - 1)
-            else
-                target = Math.max(target, control.pinnedCount)
-
-            targetIndex = target === control.tabModel.indexOfTab(control.tab) ? -1 : target
-            if (control.tabBarItem)
-                control.tabBarItem.dropTargetIndex = targetIndex
+            sceneX = centroid.scenePosition.x
+            sceneY = centroid.scenePosition.y
+            update()
         }
 
         onActiveChanged: {
+            if (control.tabStrip)
+                control.tabStrip.tabDragActive = active
             if (active) {
-                control.opacity = 0.6
-                return
+                sceneX = centroid.scenePosition.x
+                sceneY = centroid.scenePosition.y
+                grabOffset = contentX(centroid.scenePressPosition.x, centroid.scenePressPosition.y) - control.x
+                // Starting a drag selects the dragged tab.
+                control.tabModel.setCurrentIndex(control.tabModel.indexOfTab(control.tab))
+                settle.stop()
+                update()
+            } else {
+                settle.start()
+                if (control.tabStrip)
+                    control.tabStrip.scheduleEnsureVisible()
             }
-
-            control.opacity = 1.0
-            if (control.tabBarItem)
-                control.tabBarItem.dropTargetIndex = -1
-
-            const ownIndex = control.tabModel.indexOfTab(control.tab)
-            if (targetIndex >= 0 && targetIndex !== ownIndex)
-                control.tabModel.moveTab(ownIndex, targetIndex)
-            targetIndex = -1
         }
     }
 }

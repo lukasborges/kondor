@@ -31,8 +31,34 @@ private slots:
     void closingWithTheMouseKeepsTheWidth();
     void pinnedTabsStayNarrow();
     void scrolledOutTabsAreClipped();
+    void draggedTabFollowsThePointerAndReordersLive();
+    void draggedTabIsClampedToTheStrip();
+    void draggingInAScrolledStripGoesTheRightWay();
+    void draggingToTheEdgeAutoScrolls();
+    void pinnedTabsStayInTheirSection();
+    void shortMoveIsAClick();
+    void closingAfterAClickDoesNotCrash();
+    void releaseAnimatesIntoTheSlot();
+    void currentTabIsVisibleAfterARelease();
+    void closingTheDraggedTabResetsTheDragState();
 
 private:
+    // Left edge of a tab in strip coordinates.
+    qreal leftOf(int index) const
+    {
+        return itemAt(index)->mapToItem(m_strip, QPointF(0, 0)).x();
+    }
+    Tab *tabAt(int i) const
+    {
+        return m_tabs->data(m_tabs->index(i), TabModel::TabRole).value<Tab *>();
+    }
+    QList<Tab *> order() const
+    {
+        QList<Tab *> list;
+        for (int i = 0; i < m_tabs->count(); ++i)
+            list << tabAt(i);
+        return list;
+    }
     void addTabs(int count);
     void resizeStrip(int width);
     qreal tabWidth() const { return m_strip->property("tabWidth").toReal(); }
@@ -284,6 +310,234 @@ void TestTabStrip::scrolledOutTabsAreClipped()
     QVERIFY(inside(0));
     QVERIFY(!overlaps(0, "scrollLeftButton"));
     QVERIFY(button("scrollRightButton")->isEnabled());
+}
+
+void TestTabStrip::draggedTabFollowsThePointerAndReordersLive()
+{
+    addTabs(5);
+    const QList<Tab *> before = order();
+    m_tabs->setCurrentIndex(4);
+    QQuickItem *dragged = itemAt(1);
+    const qreal startLeft = leftOf(1);
+    const qreal width = tabWidth();
+    const QPoint press(int(startLeft) + 100, 18);
+    auto moveBy = [&](int dx) {
+        const int step = dx < 0 ? -5 : 5;
+        for (int d = step; qAbs(d) < qAbs(dx); d += step)
+            QTest::mouseMove(m_window, press + QPoint(d, 0));
+        QTest::mouseMove(m_window, press + QPoint(dx, 0));
+        QTest::qWait(60);
+    };
+    auto left = [&] { return dragged->mapToItem(m_strip, QPointF(0, 0)).x(); };
+
+    QTest::mousePress(m_window, Qt::LeftButton, {}, press);
+    // The origin may be non-zero: the checks below must not depend on it.
+    moveBy(int(width / 2) - 5);
+    QVERIFY(qAbs(left() - (startLeft + int(width / 2) - 5)) <= 1.0);
+    QCOMPARE(order(), before);
+    // Starting the drag selects the dragged tab.
+    QCOMPARE(m_tabs->currentTab(), before[1]);
+
+    moveBy(int(width / 2) + 5);
+    QCOMPARE(tabAt(1), before[2]);
+    QCOMPARE(tabAt(2), before[1]);
+    QVERIFY(qAbs(left() - (startLeft + int(width / 2) + 5)) <= 1.0);
+
+    // Next swap: past the center of tab 3.
+    moveBy(int(width * 1.5) - 5);
+    QCOMPARE(tabAt(2), before[1]);
+    moveBy(int(width * 1.5) + 5);
+    QCOMPARE(tabAt(3), before[1]);
+    QVERIFY(qAbs(left() - (startLeft + int(width * 1.5) + 5)) <= 1.0);
+
+    QTest::mouseRelease(m_window, Qt::LeftButton, {}, press + QPoint(int(width * 1.5) + 5, 0));
+    QTRY_COMPARE(dragged->property("dragShift").toReal(), 0.0);
+    QCOMPARE(tabAt(3), before[1]);
+    QCOMPARE(m_tabs->currentTab(), before[1]);
+}
+
+void TestTabStrip::draggedTabIsClampedToTheStrip()
+{
+    addTabs(5);
+    const QList<Tab *> before = order();
+    QQuickItem *dragged = itemAt(3);
+    const qreal first = leftOf(0);
+    const qreal last = leftOf(4);
+    const QPoint press(int(leftOf(3)) + 100, 18);
+    QTest::mousePress(m_window, Qt::LeftButton, {}, press);
+    for (int dx = -10; press.x() + dx > 2; dx -= 10)
+        QTest::mouseMove(m_window, press + QPoint(dx, 0));
+    QTest::qWait(100);
+    QCOMPARE(tabAt(0), before[3]);
+    QVERIFY(qAbs(dragged->mapToItem(m_strip, QPointF(0, 0)).x() - first) <= 1.0);
+    for (int dx = -press.x() + 5; dx <= 1090 - press.x(); dx += 20)
+        QTest::mouseMove(m_window, press + QPoint(dx, 0));
+    QTest::qWait(100);
+    QCOMPARE(tabAt(4), before[3]);
+    QVERIFY(qAbs(dragged->mapToItem(m_strip, QPointF(0, 0)).x() - last) <= 1.0);
+    QTest::mouseRelease(m_window, Qt::LeftButton, {}, press + QPoint(1090 - press.x(), 0));
+    QTRY_COMPARE(dragged->property("dragShift").toReal(), 0.0);
+}
+
+void TestTabStrip::draggingInAScrolledStripGoesTheRightWay()
+{
+    resizeStrip(1100);
+    addTabs(30);
+    const qreal maxScroll = m_strip->property("maxScroll").toReal();
+    QVERIFY(maxScroll > 0);
+    QMetaObject::invokeMethod(m_strip, "scrollTo", Q_ARG(QVariant, maxScroll));
+    QTRY_COMPARE(scrolled(), maxScroll);
+    const QList<Tab *> before = order();
+    QQuickItem *dragged = itemAt(27);
+    const qreal startLeft = leftOf(27);
+    const QPoint press(int(startLeft) + 30, 18);
+    QTest::mousePress(m_window, Qt::LeftButton, {}, press);
+    for (int dx = -10; dx >= -130; dx -= 10)
+        QTest::mouseMove(m_window, press + QPoint(dx, 0));
+    QTest::qWait(100);
+    QCOMPARE(tabAt(26), before[27]);
+    QVERIFY(qAbs(dragged->mapToItem(m_strip, QPointF(0, 0)).x() - (startLeft - 130)) <= 1.0);
+    QTest::mouseRelease(m_window, Qt::LeftButton, {}, press + QPoint(-130, 0));
+    QTRY_COMPARE(dragged->property("dragShift").toReal(), 0.0);
+}
+
+void TestTabStrip::draggingToTheEdgeAutoScrolls()
+{
+    resizeStrip(1100);
+    addTabs(30);
+    QMetaObject::invokeMethod(m_strip, "scrollTo", Q_ARG(QVariant, 0.0));
+    QTRY_COMPARE(scrolled(), 0.0);
+    const qreal maxScroll = m_strip->property("maxScroll").toReal();
+    const QList<Tab *> before = order();
+    QQuickItem *dragged = itemAt(1);
+    const QPoint press(int(leftOf(1)) + 30, 18);
+    QTest::mousePress(m_window, Qt::LeftButton, {}, press);
+    const int viewWidth = int(view()->width());
+    for (int x = press.x(); x < viewWidth - 10; x += 20)
+        QTest::mouseMove(m_window, QPoint(x, 18));
+    const QPoint edge(viewWidth - 10, 18);
+    QTest::mouseMove(m_window, edge);
+    QTRY_VERIFY_WITH_TIMEOUT(scrolled() > 50, 2000);
+    QTRY_COMPARE_WITH_TIMEOUT(scrolled(), maxScroll, 10000);
+    QTRY_COMPARE(tabAt(29), before[1]);
+    QVERIFY(qAbs(dragged->mapToItem(m_strip, QPointF(0, 0)).x() - leftOf(29)) <= 1.0);
+
+    // Leaving the edge zone stops the scrolling.
+    QTest::mouseMove(m_window, QPoint(viewWidth / 2, 18));
+    QTest::qWait(100);
+    const qreal stopped = scrolled();
+    QTest::qWait(150);
+    QCOMPARE(scrolled(), stopped);
+    QTest::mouseRelease(m_window, Qt::LeftButton, {}, QPoint(viewWidth / 2, 18));
+    QTRY_COMPARE(dragged->property("dragShift").toReal(), 0.0);
+}
+
+void TestTabStrip::pinnedTabsStayInTheirSection()
+{
+    addTabs(5);
+    m_tabs->setPinned(0, true);
+    m_tabs->setPinned(1, true);
+    QTest::qWait(100);
+    const QList<Tab *> before = order();
+    const QPoint press(int(leftOf(0)) + 18, 18);
+    QTest::mousePress(m_window, Qt::LeftButton, {}, press);
+    for (int dx = 0; dx <= 400; dx += 20)
+        QTest::mouseMove(m_window, press + QPoint(dx, 0));
+    QTest::qWait(100);
+    QCOMPARE(tabAt(1), before[0]);
+    QCOMPARE(tabAt(2), before[2]);
+    QTest::mouseRelease(m_window, Qt::LeftButton, {}, press + QPoint(400, 0));
+    QTest::qWait(100);
+    QVERIFY(tabAt(0)->pinned() && tabAt(1)->pinned());
+}
+
+void TestTabStrip::shortMoveIsAClick()
+{
+    addTabs(5);
+    const QList<Tab *> before = order();
+    const QPoint press(int(leftOf(1)) + 100, 18);
+    QTest::mousePress(m_window, Qt::LeftButton, {}, press);
+    QTest::mouseMove(m_window, press + QPoint(2, 0));
+    QTest::mouseRelease(m_window, Qt::LeftButton, {}, press + QPoint(2, 0));
+    QTest::qWait(50);
+    QCOMPARE(order(), before);
+    QCOMPARE(m_tabs->currentIndex(), 1);
+}
+
+void TestTabStrip::closingAfterAClickDoesNotCrash()
+{
+    // Regression: ListView move/displaced transitions crashed here.
+    for (int variant = 0; variant < 4; ++variant) {
+        cleanup();
+        init();
+        addTabs(5);
+        m_tabs->setCurrentIndex(variant < 3 ? 4 : 1);
+        QTest::mouseClick(m_window, Qt::LeftButton, {}, QPoint(int(leftOf(1)) + 60, 18));
+        QTest::qWait(1000);
+        if (variant == 0) {
+            QTest::mouseClick(m_window, Qt::LeftButton, {},
+                              QPoint(int(leftOf(1) + tabWidth()) - 14, 18));
+        } else if (variant == 1) {
+            QTest::mouseClick(m_window, Qt::LeftButton, {},
+                              QPoint(int(leftOf(2) + tabWidth()) - 14, 18));
+        } else {
+            QTest::mouseClick(m_window, Qt::MiddleButton, {}, QPoint(int(leftOf(2)) + 60, 18));
+        }
+        QTest::qWait(300);
+        QCOMPARE(m_tabs->count(), 4);
+    }
+}
+
+void TestTabStrip::releaseAnimatesIntoTheSlot()
+{
+    addTabs(5);
+    QQuickItem *dragged = itemAt(1);
+    const QPoint press(int(leftOf(1)) + 100, 18);
+    QTest::mousePress(m_window, Qt::LeftButton, {}, press);
+    for (int dx = 5; dx <= 40; dx += 5)
+        QTest::mouseMove(m_window, press + QPoint(dx, 0));
+    QTest::qWait(60);
+    QVERIFY(dragged->property("dragShift").toReal() != 0.0);
+    QTest::mouseRelease(m_window, Qt::LeftButton, {}, press + QPoint(40, 0));
+    QVERIFY(dragged->property("dragShift").toReal() != 0.0);
+    QTRY_COMPARE(dragged->property("dragShift").toReal(), 0.0);
+}
+
+void TestTabStrip::currentTabIsVisibleAfterARelease()
+{
+    resizeStrip(1100);
+    addTabs(30);
+    QMetaObject::invokeMethod(m_strip, "scrollTo", Q_ARG(QVariant, 253.0));
+    QTRY_COMPARE(scrolled(), 253.0);
+    int index = 0;
+    while (index < 29 && leftOf(index) < 40)
+        ++index;
+    const QPoint press(int(leftOf(index)) + int(tabWidth()) - 30, 18);
+    QTest::mousePress(m_window, Qt::LeftButton, {}, press);
+    for (int x = press.x(); x > 40; x -= 10)
+        QTest::mouseMove(m_window, QPoint(x, 18));
+    QTest::mouseMove(m_window, QPoint(40, 18));
+    QTest::qWait(60);
+    QTest::mouseRelease(m_window, Qt::LeftButton, {}, QPoint(40, 18));
+    QQuickItem *current = itemAt(m_tabs->currentIndex());
+    QTRY_VERIFY(current->mapToItem(view(), QPointF(0, 0)).x() >= -0.5
+                && current->mapToItem(view(), QPointF(current->width(), 0)).x() <= view()->width() + 0.5);
+}
+
+void TestTabStrip::closingTheDraggedTabResetsTheDragState()
+{
+    addTabs(5);
+    const QPoint press(int(leftOf(1)) + 100, 18);
+    QTest::mousePress(m_window, Qt::LeftButton, {}, press);
+    for (int dx = 5; dx <= 60; dx += 5)
+        QTest::mouseMove(m_window, press + QPoint(dx, 0));
+    QTest::qWait(60);
+    QVERIFY(m_strip->property("tabDragActive").toBool());
+    m_tabs->closeTabObject(tabAt(m_tabs->currentIndex()));
+    QTest::mouseRelease(m_window, Qt::LeftButton, {}, press + QPoint(60, 0));
+    QTest::qWait(300);
+    QCOMPARE(m_strip->property("tabDragActive").toBool(), false);
+    QCOMPARE(m_tabs->count(), 4);
 }
 
 int main(int argc, char *argv[])

@@ -112,3 +112,38 @@ jobs:
           gh release create "$GITHUB_REF_NAME" Kondor-*.AppImage \
             --title "Kondor Browser $GITHUB_REF_NAME" \
             --generate-notes
+
+  flatpak:
+    runs-on: ubuntu-24.04
+    needs: release
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.11
+      options: --privileged
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Flatpak
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: Kondor.flatpak
+          manifest-path: packaging/flatpak/io.github.lukasborges.Kondor.yml
+          cache-key: flatpak-builder-${{ github.sha }}
+
+  flatpak-upload:
+    runs-on: ubuntu-24.04
+    needs: flatpak
+    steps:
+      - name: Download bundle
+        uses: actions/download-artifact@v4
+        with:
+          path: bundle
+
+      - name: Upload bundle to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          file="$(find bundle -name Kondor.flatpak | head -n 1)"
+          test -n "$file"
+          gh release upload "$GITHUB_REF_NAME" "$file" --clobber --repo "$GITHUB_REPOSITORY"

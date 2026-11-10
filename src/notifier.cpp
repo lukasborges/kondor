@@ -33,7 +33,10 @@ void Notifier::notify(const QString &title, const QString &body, const QString &
     if (!notifications.isValid())
         return;
 
-    const QString icon = iconName.isEmpty() ? QStringLiteral("kondor") : iconName;
+    // The Flatpak exports the application icon under its application ID.
+    const QString appIcon = qEnvironmentVariable("FLATPAK_ID", QStringLiteral("kondor"));
+    const QString icon = (iconName.isEmpty() || iconName == QLatin1String("kondor"))
+        ? appIcon : iconName;
     notifications.call(QStringLiteral("Notify"),
                        QGuiApplication::applicationDisplayName(), // app_name
                        0u,                                        // replaces_id

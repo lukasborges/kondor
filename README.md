@@ -18,7 +18,7 @@ Kondor Browser runs the modern web on the same engine as Chrome, and it looks an
 
 ## Download
 
-Get the AppImage from the [latest release](https://github.com/lukasborges/kondor/releases/latest), make it executable and run it. See what's coming next on the [Roadmap](https://github.com/users/lukasborges/projects/1).
+Get the AppImage from the [latest release](https://github.com/lukasborges/kondor/releases/latest), make it executable and run it. Or install the Flatpak bundle (`Kondor.flatpak`) from the same page with `flatpak install --user Kondor.flatpak`; publishing on Flathub is a later step. See what's coming next on the [Roadmap](https://github.com/users/lukasborges/projects/1).
 
 ## Features
 

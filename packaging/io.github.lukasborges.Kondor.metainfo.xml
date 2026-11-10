@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.lukasborges.Kondor</id>
+  <name>Kondor Browser</name>
+  <summary>A lightweight Qt/KDE web browser</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <developer id="io.github.lukasborges">
+    <name>Lucas Borges</name>
+  </developer>
+  <description>
+    <p>Kondor Browser is a small web browser that looks and behaves like a native KDE Plasma application: Breeze style, Breeze icons and your system color scheme.</p>
+    <p>It blocks ads and trackers, keeps private tabs off the disk, and has reader mode, a download manager, bookmarks, history, site permissions and developer tools built in.</p>
+  </description>
+  <launchable type="desktop-id">io.github.lukasborges.Kondor.desktop</launchable>
+  <url type="homepage">https://github.com/lukasborges/kondor</url>
+  <url type="bugtracker">https://github.com/lukasborges/kondor/issues</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/lukasborges/kondor/main/assets/screenshot.png</image>
+      <caption>Kondor Browser on KDE Plasma</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Network</category>
+    <category>WebBrowser</category>
+  </categories>
+  <provides>
+    <binary>kondor</binary>
+  </provides>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="0.2.0" date="2026-11-10"/>
+    <release version="0.1.5" date="2026-11-08"/>
+    <release version="0.1.4" date="2026-11-08"/>
+  </releases>
+</component>

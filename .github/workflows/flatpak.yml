@@ -1,0 +1,30 @@
+name: Flatpak
+
+on:
+  pull_request:
+    paths:
+      - 'packaging/flatpak/**'
+      - 'packaging/*.metainfo.xml'
+      - 'packaging/kondor.desktop'
+      - 'CMakeLists.txt'
+      - '.github/workflows/flatpak.yml'
+      - '.github/workflows/release.yml'
+  workflow_dispatch:
+
+jobs:
+  flatpak:
+    runs-on: ubuntu-24.04
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.11
+      options: --privileged
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Flatpak
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: Kondor.flatpak
+          manifest-path: packaging/flatpak/io.github.lukasborges.Kondor.yml
+          cache-key: flatpak-builder-${{ github.sha }}

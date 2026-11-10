@@ -251,5 +251,6 @@ endif()
 
 # Icon and menu entry (.desktop)
 install(FILES packaging/kondor.desktop DESTINATION share/applications)
+install(FILES packaging/io.github.lukasborges.Kondor.metainfo.xml DESTINATION share/metainfo)
 install(FILES packaging/kondor.png DESTINATION share/icons/hicolor/256x256/apps)
 install(FILES packaging/kondor.svg DESTINATION share/icons/hicolor/scalable/apps)

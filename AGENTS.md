@@ -30,7 +30,8 @@ cmake --build build --parallel 4
 Always give `--parallel` a job count (4 on the maintainer's machine). With the Makefile generator
 a bare `--parallel` means `make -j` with **no limit**. Every test target recompiles the sources, so
 a full build then starts dozens of compilers at once and runs the machine out of memory. The agent
-loops also run under a systemd memory cap (`MemoryMax=16G`) that kills such a build.
+loops enforce it: their systemd units put `scripts/bin` first in `PATH`, where a `cmake` wrapper
+caps every build at 4 jobs, and they run under a memory cap (`MemoryMax=16G`).
 
 Smoke test without a display (useful in CI or for agents):
 

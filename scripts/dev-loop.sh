@@ -136,7 +136,7 @@ Type=simple
 Environment=CMAKE_BUILD_PARALLEL_LEVEL=4
 MemoryHigh=12G
 MemoryMax=16G
-Environment=PATH=$HOME/.opencode/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin
+Environment=PATH=$control/scripts/bin:$HOME/.opencode/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin
 Environment=KONDOR_REPO=$repo
 Environment=KONDOR_CONTROL_DIR=$control
 Environment=KONDOR_STATE_DIR=$state

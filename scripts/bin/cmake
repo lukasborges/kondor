@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# cmake wrapper for the agent loops (their systemd units put scripts/bin first in PATH).
+# With the Makefile generator `cmake --build <dir> --parallel` (or -j) without a count means
+# `make -j` with no limit, which starts dozens of compilers and runs the machine out of memory.
+# This wrapper gives every build a job count, capped at KONDOR_BUILD_JOBS (default 4), and
+# passes every other cmake invocation through unchanged. See AGENTS.md → "Build and run".
+set -euo pipefail
+
+jobs="${KONDOR_BUILD_JOBS:-4}"
+real=/usr/bin/cmake
+
+build=0
+for a in "$@"; do
+  [[ "$a" == --build ]] && build=1
+  [[ "$a" == -- ]] && break
+done
+(( build )) || exec "$real" "$@"
+
+cap() { local n="$1"; (( n > jobs )) && n="$jobs"; (( n < 1 )) && n=1; echo "$n"; }
+
+argv=("$@") out=() i=0 n=$# seen=0 native=0
+while (( i < n )); do
+  a="${argv[i]}"
+  if (( native )); then
+    # Arguments after "--" go to make: bound a bare -j / -jN there too.
+    case "$a" in
+      -j) if [[ "${argv[i+1]:-}" =~ ^[0-9]+$ ]]; then out+=(-j "$(cap "${argv[i+1]}")"); ((i += 2)); continue; fi
+          out+=(-j "$jobs") ;;
+      -j[0-9]*) out+=("-j$(cap "${a#-j}")") ;;
+      --jobs|--jobs=*) out+=("--jobs=$jobs") ;;
+      *) out+=("$a") ;;
+    esac
+    ((i += 1)); continue
+  fi
+  case "$a" in
+    --)
+      native=1; out+=("$a") ;;
+    --parallel|-j)
+      seen=1
+      if [[ "${argv[i+1]:-}" =~ ^[0-9]+$ ]]; then out+=("$a" "$(cap "${argv[i+1]}")"); ((i += 2)); continue; fi
+      out+=("$a" "$jobs") ;;
+    --parallel=*)
+      seen=1; out+=("--parallel" "$(cap "${a#--parallel=}")") ;;
+    -j[0-9]*)
+      seen=1; out+=("-j" "$(cap "${a#-j}")") ;;
+    *)
+      out+=("$a") ;;
+  esac
+  ((i += 1))
+done
+
+# No --parallel at all: cmake would use CMAKE_BUILD_PARALLEL_LEVEL (also set by the units);
+# make it explicit so the limit holds even without that variable.
+if (( ! seen )); then
+  final=() inserted=0
+  for a in "${out[@]}"; do
+    if [[ "$a" == -- ]] && (( ! inserted )); then final+=(--parallel "$jobs"); inserted=1; fi
+    final+=("$a")
+  done
+  (( inserted )) || final+=(--parallel "$jobs")
+  out=("${final[@]}")
+fi
+
+exec "$real" "${out[@]}"

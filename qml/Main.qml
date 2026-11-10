@@ -533,6 +533,10 @@ ApplicationWindow {
                     // even when the removed text was pasted or typed faster
                     // than the 120 ms debounce.
                     property string previousText: ""
+                    // How much of previousText the user actually typed: the
+                    // rest may be a selected inline completion, so replacing
+                    // it counts as typing, not as a deletion.
+                    property int previousTypedLength: 0
                     property bool lastEditDeleted: false
 
                     function syncFromTab() {
@@ -554,6 +558,7 @@ ApplicationWindow {
                             return
                         text = host
                         previousText = host
+                        previousTypedLength = typed.length
                         select(typed.length, host.length)
                     }
 
@@ -602,11 +607,15 @@ ApplicationWindow {
                     }
 
                     onTextEdited: {
-                        // Any edit that shrinks the field is a deletion, no
+                        // A shrunk field is a deletion (Backspace/Delete), no
                         // matter how the removed text got there (pasted or
-                        // typed before the debounce fired).
+                        // typed before the debounce fired). Replacing the
+                        // selected part of an inline completion also shrinks
+                        // the text, but that is typing: it may complete again.
                         lastEditDeleted = text.length < previousText.length
+                                && text.length <= previousTypedLength
                         previousText = text
+                        previousTypedLength = text.length
                         typedText = text
                         // Query once the typing settles: building the rows
                         // runs the bookmark and history queries.
@@ -636,6 +645,7 @@ ApplicationWindow {
                         // Show the selected row's text without querying again.
                         text = addressSuggestions.selectedText(addressSuggestions.currentIndex)
                         previousText = text
+                        previousTypedLength = text.length
                         event.accepted = true
                     }
 
@@ -652,6 +662,7 @@ ApplicationWindow {
                             Math.max(addressSuggestions.currentIndex - 1, 0)
                         text = addressSuggestions.selectedText(addressSuggestions.currentIndex)
                         previousText = text
+                        previousTypedLength = text.length
                         event.accepted = true
                     }
 
@@ -667,6 +678,7 @@ ApplicationWindow {
                         // Only the dropdown goes away; the typed text stays.
                         text = typedText
                         previousText = typedText
+                        previousTypedLength = typedText.length
                         addressSuggestions.close()
                         event.accepted = true
                     }
@@ -679,6 +691,7 @@ ApplicationWindow {
                         if (activeFocus) {
                             typedText = text
                             previousText = text
+                            previousTypedLength = text.length
                             lastEditDeleted = false
                             selectAll()
                         } else {

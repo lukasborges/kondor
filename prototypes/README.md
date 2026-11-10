@@ -51,7 +51,7 @@ Tips when editing:
 | #17 Print / save as PDF | `00-main-menu.qml` |
 | #18 Crashed page | `18-crashed-tab.qml` |
 | #20 Ad and tracker blocking | `20-adblock.qml` |
-| #21 Passwords | `21-passwords.qml` |
+| #21 Passwords | `21-passwords.qml`, `21b-passwords-settings.qml`, `21c-passwords-never-saved.qml`, `21d-passwords-wallet-denied.qml` (Settings page, in `common/SettingsDialogMock.qml`) |
 | #22 Reader mode | `22-reader-mode.qml` |
 | #23 Spell checking | `23-spellcheck.qml` |
 | #24 Per-site zoom | `24-site-zoom.qml` |

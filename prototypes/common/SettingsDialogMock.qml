@@ -9,8 +9,10 @@ import org.kde.kirigami as Kirigami
 
 Rectangle {
     id: root
-    property int page: 0          // 0 General, 1 Search, 2 Downloads, 3 Privacy
-    property int innerTab: 0      // tabs of the General page
+    property int page: 0          // 0 General, 1 Search, 2 Downloads, 3 Privacy, 4 Passwords (#21)
+    property int innerTab: 0      // tabs of the General and Passwords pages
+    property bool withPasswords: false // show the Passwords page added by #21
+    property bool walletDenied: false  // #21: KWallet disabled / access denied
     property string search: ""
     property bool modified: false // pending changes → Apply enabled
 
@@ -22,7 +24,8 @@ Rectangle {
         { title: "General", icon: "internet-web-browser" },
         { title: "Search", icon: "system-search" },
         { title: "Downloads", icon: "folder-download" },
-        { title: "Privacy", icon: "preferences-security" }
+        { title: "Privacy", icon: "preferences-security" },
+        { title: "Passwords", icon: "preferences-desktop-user-password" }
     ]
 
     ColumnLayout {
@@ -66,7 +69,7 @@ Rectangle {
                     }
 
                     Repeater {
-                        model: root.pages
+                        model: root.withPasswords ? root.pages : root.pages.slice(0, 4)
                         delegate: ItemDelegate {
                             required property var modelData
                             required property int index
@@ -103,18 +106,20 @@ Rectangle {
                 TabBar {
                     id: bar
                     Layout.fillWidth: true
-                    visible: root.page === 0
+                    visible: root.page === 0 || root.page === 4
                     currentIndex: root.innerTab
-                    TabButton { text: "Startup" }
-                    TabButton { text: "New Tabs" }
+                    TabButton { text: root.page === 4 ? "Saved Passwords" : "Startup" }
+                    TabButton { text: root.page === 4 ? "Never Saved" : "New Tabs" }
                 }
-                Kirigami.Separator { Layout.fillWidth: true; visible: root.page !== 0 }
+                Kirigami.Separator { Layout.fillWidth: true; visible: root.page !== 0 && root.page !== 4 }
 
                 StackLayout {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.margins: Kirigami.Units.gridUnit
-                    currentIndex: root.page === 0 ? root.innerTab : root.page + 1
+                    currentIndex: root.page === 0 ? root.innerTab
+                                : root.page === 4 ? 5 + root.innerTab
+                                : root.page + 1
 
                     // General → Startup
                     Kirigami.FormLayout {
@@ -170,6 +175,109 @@ Rectangle {
                         CheckBox { Kirigami.FormData.label: "On exit:"; text: "Clear cookies, cache and history" }
                         Item { Kirigami.FormData.isSection: true }
                         Button { Kirigami.FormData.label: "Browsing data:"; text: "Clear Cookies and Cache Now"; icon.name: "edit-clear-history" }
+                    }
+
+                    // Passwords → Saved Passwords (#21)
+                    ColumnLayout {
+                        spacing: Kirigami.Units.largeSpacing
+
+                        Kirigami.InlineMessage {
+                            Layout.fillWidth: true
+                            visible: root.walletDenied
+                            type: Kirigami.MessageType.Warning
+                            text: "KWallet is disabled or access to it was denied, so passwords cannot be saved or filled."
+                            actions: [ Kirigami.Action { text: "Try Again"; icon.name: "view-refresh" } ]
+                        }
+                        CheckBox { text: "Offer to save passwords"; checked: true; enabled: !root.walletDenied }
+                        TextField {
+                            Layout.fillWidth: true
+                            enabled: !root.walletDenied
+                            placeholderText: "Filter by site or username…"
+                        }
+                        Frame {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            padding: 0
+                            enabled: !root.walletDenied
+                            Kirigami.Theme.colorSet: Kirigami.Theme.View
+                            Kirigami.Theme.inherit: false
+                            background: Rectangle {
+                                color: Kirigami.Theme.backgroundColor
+                                border.color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.2)
+                            }
+                            ListView {
+                                anchors.fill: parent
+                                clip: true
+                                visible: !root.walletDenied
+                                section.property: "site"
+                                section.delegate: Kirigami.ListSectionHeader {
+                                    required property string section
+                                    width: ListView.view.width
+                                    text: section
+                                }
+                                model: ListModel {
+                                    ListElement { site: "invent.kde.org"; user: "maria"; shown: true }
+                                    ListElement { site: "invent.kde.org"; user: "maria.dev"; shown: false }
+                                    ListElement { site: "lwn.net"; user: "maria@example.org"; shown: false }
+                                    ListElement { site: "store.kde.org"; user: "maria"; shown: false }
+                                }
+                                delegate: ItemDelegate {
+                                    required property string user
+                                    required property bool shown
+                                    width: ListView.view.width
+                                    contentItem: RowLayout {
+                                        spacing: Kirigami.Units.largeSpacing
+                                        Label { text: user; Layout.preferredWidth: Kirigami.Units.gridUnit * 10; elide: Text.ElideRight }
+                                        Label {
+                                            Layout.fillWidth: true
+                                            text: shown ? "correct-horse-battery" : "••••••••••"
+                                            font.family: shown ? "monospace" : Kirigami.Theme.defaultFont.family
+                                        }
+                                        ToolButton {
+                                            icon.name: shown ? "view-hidden" : "view-visible"
+                                            display: AbstractButton.IconOnly
+                                            text: shown ? "Hide Password" : "Show Password"
+                                        }
+                                        ToolButton { icon.name: "edit-copy"; display: AbstractButton.IconOnly; text: "Copy Password" }
+                                        ToolButton { icon.name: "edit-delete"; display: AbstractButton.IconOnly; text: "Delete" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Passwords → Never Saved (#21)
+                    ColumnLayout {
+                        spacing: Kirigami.Units.largeSpacing
+                        Label {
+                            Layout.fillWidth: true
+                            wrapMode: Text.WordWrap
+                            text: "Kondor never offers to save passwords on these sites."
+                        }
+                        Frame {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            padding: 0
+                            Kirigami.Theme.colorSet: Kirigami.Theme.View
+                            Kirigami.Theme.inherit: false
+                            background: Rectangle {
+                                color: Kirigami.Theme.backgroundColor
+                                border.color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.2)
+                            }
+                            ListView {
+                                anchors.fill: parent
+                                clip: true
+                                model: ["accounts.example.com", "bank.example.net"]
+                                delegate: ItemDelegate {
+                                    required property string modelData
+                                    width: ListView.view.width
+                                    contentItem: RowLayout {
+                                        Label { text: modelData; Layout.fillWidth: true }
+                                        Button { text: "Remove"; icon.name: "list-remove"; flat: true }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

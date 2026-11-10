@@ -26,7 +26,25 @@ Nothing. Kondor already bundles `QtWebChannel` (see `release.yml`), and `QQuickW
 5. **UI**:
    - Save prompt using the shared `InlineBar` (#5): "Save the password for **user** on **site**?" — "Save", "Not Now", "Never for This Site" (store the origin in setting `Passwords/NeverSave`).
    - Address bar key icon (`dialog-password`) when credentials exist for the site; click → menu of usernames → fills the chosen credential (call a JS function through `runJavaScript(…, WebEngineScript.ApplicationWorld)`).
-   - Settings (#3) page "Passwords": list origins/usernames, "Show" (re-reads from wallet), "Delete", checkbox "Offer to save passwords" (default on).
+   - **Settings page "Passwords"** in the Configure window (#3 with the #57 layout).
+     - It is a new sidebar entry after Privacy, with the `preferences-desktop-user-password` icon. Its keywords include "password", "KWallet" and "never".
+     - It has two tabs. See the 21b/21c/21d prototypes.
+     - **Saved Passwords** tab:
+       - **Offer to save passwords** checkbox: setting `offerToSavePasswords`, default on. It is a normal pending option, applied with OK/Apply, and **Defaults** resets it.
+       - **Filter field**, "Filter by site or username…".
+       - **List:** a `ListView` in a `Frame` with `Kirigami.Theme.View` colors, grouped by site with `Kirigami.ListSectionHeader` (host only, sorted). The rows are sorted by username.
+       - **Each row:**
+         - the username;
+         - the password masked as "••••••••••";
+         - icon-only `ToolButton`s with tooltips: **Show Password** (`view-visible`, toggles to **Hide Password** `view-hidden`), **Copy Password** (`edit-copy`) and **Delete** (`edit-delete`).
+       - **What the list holds:** only origins and usernames. A password is read from the wallet only when Show or Copy is clicked, and it is masked again when the window closes.
+       - **Copy** puts the password on the clipboard. It is cleared after 30 s if the clipboard still holds it.
+       - **Delete** asks first, with a `MessageDialog`: "Delete the saved password for %1 on %2?" (Yes/No). It then removes the entry from the wallet **at once**: it is an action, like "Clear Cookies and Cache Now", not a pending option.
+     - **Never Saved** tab:
+       - the label "Kondor never offers to save passwords on these sites.";
+       - the list of `Passwords/NeverSave` origins, each with a flat **Remove** button (`list-remove`). Removing acts at once.
+     - **Wallet unavailable:** if KWallet is disabled or access is denied, the Saved Passwords tab shows a warning `Kirigami.InlineMessage`: "KWallet is disabled or access to it was denied, so passwords cannot be saved or filled." It has a **Try Again** action (`view-refresh`) that reopens the wallet, and the rest of the tab is disabled.
+     - New strings go in `qsTr()` and are translated in every `i18n/*.ts`.
 6. **Never** in private tabs: don't inject the script into private profiles, or make the bridge refuse.
 
 ## Acceptance criteria
@@ -34,11 +52,12 @@ Nothing. Kondor already bundles `QtWebChannel` (see `release.yml`), and `QQuickW
 - [ ] Logging into a site offers to save; accepted credentials appear in KWallet (KWalletManager, folder "Kondor").
 - [ ] Revisiting the login page autofills a single credential; multiple credentials can be chosen from the key icon.
 - [ ] "Never for This Site" works; private tabs never prompt or fill.
-- [ ] Credentials can be listed/deleted in Settings; nothing is stored in plain text by Kondor.
+- [ ] Settings → Passwords matches the 21b/21c/21d prototypes. Saved credentials are listed by site, and passwords can be shown, copied and deleted (with confirmation). "Never Saved" sites can be removed, and the wallet-denied state shows the warning with Try Again.
+- [ ] Nothing is stored in plain text by Kondor, and passwords are never kept in the list model unless Show was clicked.
 
 ## Manual test
 
-Use a test login page (e.g. `https://practicetestautomation.com/practice-test-login/` user `student` / `Password123`), save, log out, return; check KWalletManager; try a private tab.
+Use a test login page (e.g. `https://practicetestautomation.com/practice-test-login/` user `student` / `Password123`), save, log out, return; check KWalletManager; try a private tab. Then open Settings → Passwords: show, copy (paste it somewhere, wait 30 s, paste again) and delete the credential; choose "Never for This Site" on a login and remove it from the Never Saved tab; deny the wallet (or disable KWallet in System Settings) and check the warning and Try Again.
 
 ## Out of scope
 
@@ -55,6 +74,18 @@ Visual target — match it (controls, Kirigami components, icon names, wording, 
 **Save-password prompt and key icon in the address bar** — [`prototypes/21-passwords.qml`](../../prototypes/21-passwords.qml)
 
 ![Save-password prompt and key icon in the address bar](../../prototypes/screenshots/21-passwords.png)
+
+**Settings → Passwords, Saved Passwords tab** — [`prototypes/21b-passwords-settings.qml`](../../prototypes/21b-passwords-settings.qml)
+
+![Settings, Passwords page](../../prototypes/screenshots/21b-passwords-settings.png)
+
+**Settings → Passwords, Never Saved tab** — [`prototypes/21c-passwords-never-saved.qml`](../../prototypes/21c-passwords-never-saved.qml)
+
+![Settings, Passwords page, Never Saved tab](../../prototypes/screenshots/21c-passwords-never-saved.png)
+
+**Settings → Passwords when KWallet is disabled or denied** — [`prototypes/21d-passwords-wallet-denied.qml`](../../prototypes/21d-passwords-wallet-denied.qml)
+
+![Settings, Passwords page, wallet denied](../../prototypes/screenshots/21d-passwords-wallet-denied.png)
 
 ## Decisions
 

@@ -86,6 +86,8 @@ qt_add_qml_module(kondor
         src/historymodel.cpp
         src/downloadmanager.h
         src/downloadmanager.cpp
+        src/filehelper.h
+        src/filehelper.cpp
         src/notifier.h
         src/notifier.cpp
         src/bookmarkmanager.h

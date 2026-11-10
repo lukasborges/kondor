@@ -245,209 +245,254 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="103"/>
+        <location filename="../qml/BrowserWindow.qml" line="104"/>
         <source>Quit %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 を終了</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="104"/>
+        <location filename="../qml/BrowserWindow.qml" line="105"/>
         <source>Downloads are still in progress. Quit anyway?</source>
         <translation>ダウンロードが進行中です。それでも終了しますか？</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="35"/>
-        <location filename="../qml/BrowserWindow.qml" line="464"/>
-        <location filename="../qml/BrowserWindow.qml" line="901"/>
+        <location filename="../qml/BrowserWindow.qml" line="36"/>
+        <location filename="../qml/BrowserWindow.qml" line="491"/>
+        <location filename="../qml/BrowserWindow.qml" line="928"/>
         <source>New Tab</source>
         <translation>新しいタブ</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="523"/>
+        <location filename="../qml/BrowserWindow.qml" line="550"/>
         <source>Back</source>
         <translation>戻る</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="536"/>
+        <location filename="../qml/BrowserWindow.qml" line="563"/>
         <source>Forward</source>
         <translation>進む</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="549"/>
+        <location filename="../qml/BrowserWindow.qml" line="576"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="549"/>
+        <location filename="../qml/BrowserWindow.qml" line="576"/>
         <source>Reload</source>
         <translation>再読み込み</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="565"/>
+        <location filename="../qml/BrowserWindow.qml" line="592"/>
         <source>Home</source>
         <translation>ホーム</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="582"/>
+        <location filename="../qml/BrowserWindow.qml" line="609"/>
         <source>Search or enter address</source>
         <translation>検索またはアドレスを入力</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="813"/>
+        <location filename="../qml/BrowserWindow.qml" line="840"/>
         <source>Bookmark This Page</source>
         <translation>このページをブックマーク</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="864"/>
+        <location filename="../qml/BrowserWindow.qml" line="891"/>
         <source>Downloads</source>
         <translation>ダウンロード</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="893"/>
+        <location filename="../qml/BrowserWindow.qml" line="920"/>
         <source>Menu</source>
         <translation>メニュー</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="35"/>
-        <location filename="../qml/BrowserWindow.qml" line="906"/>
+        <location filename="../qml/BrowserWindow.qml" line="36"/>
+        <location filename="../qml/BrowserWindow.qml" line="933"/>
         <source>New Private Tab</source>
         <translation>新しいプライベートタブ</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="40"/>
+        <location filename="../qml/BrowserWindow.qml" line="41"/>
         <source>Private Browsing</source>
         <translation>プライベートブラウジング</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="780"/>
+        <location filename="../qml/BrowserWindow.qml" line="807"/>
         <source>Not Secure</source>
         <translation>保護されていません</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="788"/>
+        <location filename="../qml/BrowserWindow.qml" line="815"/>
         <source>Site Information</source>
         <translation>サイト情報</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="813"/>
+        <location filename="../qml/BrowserWindow.qml" line="840"/>
         <source>Edit This Bookmark</source>
         <translation>このブックマークを編集</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="911"/>
+        <location filename="../qml/BrowserWindow.qml" line="938"/>
         <source>New Window</source>
         <translation>新しいウィンドウ</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="916"/>
+        <location filename="../qml/BrowserWindow.qml" line="943"/>
         <source>New Private Window</source>
         <translation>新しいプライベートウィンドウ</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="921"/>
+        <location filename="../qml/BrowserWindow.qml" line="948"/>
         <source>Reopen Closed Tab</source>
         <translation>閉じたタブを開き直す</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="928"/>
+        <location filename="../qml/BrowserWindow.qml" line="955"/>
         <source>Close Tab</source>
         <translation>タブを閉じる</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="934"/>
+        <location filename="../qml/BrowserWindow.qml" line="961"/>
         <source>Find in Page…</source>
         <translation>ページ内を検索…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="941"/>
+        <location filename="../qml/BrowserWindow.qml" line="967"/>
+        <source>Save Page As…</source>
+        <translation>名前を付けてページを保存…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="973"/>
+        <source>Save as PDF…</source>
+        <translation>PDF として保存…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="979"/>
+        <source>Print…</source>
+        <translation>印刷…</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="986"/>
         <source>Zoom In</source>
         <translation>拡大</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="950"/>
+        <location filename="../qml/BrowserWindow.qml" line="995"/>
         <source>Zoom Out</source>
         <translation>縮小</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="959"/>
+        <location filename="../qml/BrowserWindow.qml" line="1004"/>
         <source>Actual Size</source>
         <translation>実際のサイズ</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="969"/>
+        <location filename="../qml/BrowserWindow.qml" line="1014"/>
         <source>Bookmarks</source>
         <translation>ブックマーク</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="980"/>
+        <location filename="../qml/BrowserWindow.qml" line="1025"/>
         <source>History</source>
         <translation>履歴</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="985"/>
+        <location filename="../qml/BrowserWindow.qml" line="1030"/>
         <source>Site Permissions…</source>
         <translation>サイトの権限…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="990"/>
+        <location filename="../qml/BrowserWindow.qml" line="1035"/>
         <source>More Tools</source>
         <translation>その他のツール</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="993"/>
+        <location filename="../qml/BrowserWindow.qml" line="1038"/>
         <source>Developer Tools</source>
         <translation>開発者ツール</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1007"/>
+        <location filename="../qml/BrowserWindow.qml" line="1052"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 の設定…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1014"/>
+        <location filename="../qml/BrowserWindow.qml" line="1059"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 について</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1068"/>
+        <location filename="../qml/BrowserWindow.qml" line="1113"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>全画面表示を終了するには Esc キーを押してください</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1138"/>
+        <location filename="../qml/BrowserWindow.qml" line="1183"/>
         <source>Page bookmarked</source>
         <translation>ページをブックマークしました</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1138"/>
+        <location filename="../qml/BrowserWindow.qml" line="1183"/>
         <source>Edit Bookmark</source>
         <translation>ブックマークを編集</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1146"/>
+        <location filename="../qml/BrowserWindow.qml" line="1191"/>
         <source>Name:</source>
         <translation>名前:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1152"/>
+        <location filename="../qml/BrowserWindow.qml" line="1197"/>
         <source>Folder:</source>
         <translation>フォルダー:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1162"/>
+        <location filename="../qml/BrowserWindow.qml" line="1207"/>
         <source>Remove</source>
         <translation>削除</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1170"/>
+        <location filename="../qml/BrowserWindow.qml" line="1215"/>
         <source>Done</source>
         <translation>完了</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1182"/>
+        <location filename="../qml/BrowserWindow.qml" line="1226"/>
+        <source>Save as PDF</source>
+        <translation>PDF として保存</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1228"/>
+        <source>PDF (*.pdf)</source>
+        <translation>PDF (*.pdf)</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1235"/>
+        <source>Save Page As</source>
+        <translation>名前を付けてページを保存</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1237"/>
+        <source>Web Page, Complete (*.html)</source>
+        <translation>Web ページ (完全) (*.html)</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1238"/>
+        <source>Web Page, HTML Only (*.html)</source>
+        <translation>Web ページ (HTML のみ) (*.html)</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1239"/>
+        <source>Web Archive (*.mhtml)</source>
+        <translation>Web アーカイブ (*.mhtml)</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1255"/>
         <source>Save File</source>
         <translation>ファイルを保存</translation>
     </message>
@@ -529,12 +574,12 @@
 <context>
     <name>DownloadManager</name>
     <message>
-        <location filename="../src/downloadmanager.cpp" line="377"/>
+        <location filename="../src/downloadmanager.cpp" line="382"/>
         <source>Download completed</source>
         <translation>ダウンロードが完了しました</translation>
     </message>
     <message>
-        <location filename="../src/downloadmanager.cpp" line="384"/>
+        <location filename="../src/downloadmanager.cpp" line="389"/>
         <source>Download failed</source>
         <translation>ダウンロードに失敗しました</translation>
     </message>
@@ -1455,17 +1500,33 @@
 <context>
     <name>WebViewTab</name>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="91"/>
+        <location filename="../qml/WebViewTab.qml" line="26"/>
+        <location filename="../qml/WebViewTab.qml" line="300"/>
+        <source>Print failed</source>
+        <translation>印刷に失敗しました</translation>
+    </message>
+    <message>
+        <location filename="../qml/WebViewTab.qml" line="28"/>
+        <source>PDF saved</source>
+        <translation>PDF を保存しました</translation>
+    </message>
+    <message>
+        <location filename="../qml/WebViewTab.qml" line="30"/>
+        <source>Saving the PDF failed</source>
+        <translation>PDF の保存に失敗しました</translation>
+    </message>
+    <message>
+        <location filename="../qml/WebViewTab.qml" line="109"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>ページのプロセスが予期せず終了しました。</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="92"/>
+        <location filename="../qml/WebViewTab.qml" line="110"/>
         <source>The page crashed.</source>
         <translation>ページがクラッシュしました。</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="93"/>
+        <location filename="../qml/WebViewTab.qml" line="111"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>ページのプロセスが強制終了されました (メモリ不足の可能性があります)。</translation>
     </message>

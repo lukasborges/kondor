@@ -99,6 +99,12 @@ public:
     Q_INVOKABLE void exitFullScreen();
     Q_INVOKABLE void setDevToolsOpen(bool open);
     Q_INVOKABLE void toggleDevTools();
+    // Printing and saving. The commands act on the page; pdfFinished reports
+    // the result of a PDF export.
+    Q_INVOKABLE void printToPdf(const QString &filePath);
+    Q_INVOKABLE void print();
+    Q_INVOKABLE void savePage(const QString &filePath, int format);
+    Q_INVOKABLE void setPdfFinished(const QString &filePath, bool success);
     Q_INVOKABLE void inspectElement();
     Q_INVOKABLE void acceptCertificateError();
     Q_INVOKABLE void rejectCertificateError();
@@ -141,6 +147,10 @@ signals:
     void focusPageRequested();
     void exitFullScreenRequested();
     void toggleDevToolsRequested();
+    void printToPdfRequested(const QString &filePath);
+    void printRequested();
+    void savePageRequested(const QString &filePath, int format);
+    void pdfFinished(const QString &filePath, bool success);
     void inspectElementRequested();
     void acceptCertificateErrorRequested();
     void rejectCertificateErrorRequested();

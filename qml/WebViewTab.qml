@@ -13,6 +13,24 @@ Item {
     // coordinates. The Menu / Shift+F10 shortcut opens the menu there.
     property point contextMenuPosition: Qt.point(0, 0)
 
+    // Temporary PDF being printed for the viewer, if any.
+    property string printPath: ""
+
+    function pdfFinished(filePath, success) {
+        root.tab.setPdfFinished(filePath, success)
+        if (filePath === root.printPath) {
+            root.printPath = ""
+            if (success)
+                FileHelper.openFile(filePath)
+            else
+                Notifier.notify(qsTr("Print failed"), root.tab.title, "document-print")
+        } else if (success) {
+            Notifier.notify(qsTr("PDF saved"), filePath, "document-export")
+        } else {
+            Notifier.notify(qsTr("Saving the PDF failed"), filePath, "document-export")
+        }
+    }
+
     function setDevToolsOpen(open) {
         if (open === root.tab.devToolsOpen)
             return
@@ -126,6 +144,11 @@ Item {
 
             // A page failed the certificate check. Keep the request pending (defer)
             // so the error page can offer Back to Safety or an explicit override.
+            // window.print() from the page.
+            onPrintRequested: root.tab.print()
+
+            onPdfPrintingFinished: function(filePath, success) { root.pdfFinished(filePath, success) }
+
             onCertificateError: function(error) {
                 if (!error.isMainFrame) {
                     error.rejectCertificate()
@@ -266,6 +289,21 @@ Item {
             else
                 root.tab.showNewTabPage()
         }
+        function onPrintToPdfRequested(filePath) {
+            webView.printToPdf(filePath, WebEngineView.A4, WebEngineView.Portrait)
+        }
+        function onPrintRequested() {
+            // No printer API in QML: render a temporary PDF and let the PDF
+            // viewer print it.
+            const path = FileHelper.tempPdfPath()
+            if (path === "") {
+                Notifier.notify(qsTr("Print failed"), root.tab.title, "document-print")
+                return
+            }
+            root.printPath = path
+            webView.printToPdf(path, WebEngineView.A4, WebEngineView.Portrait)
+        }
+        function onSavePageRequested(filePath, format) { webView.save(filePath, format) }
         function onToggleDevToolsRequested() { root.setDevToolsOpen(!root.tab.devToolsOpen) }
         function onInspectElementRequested() {
             root.setDevToolsOpen(true)

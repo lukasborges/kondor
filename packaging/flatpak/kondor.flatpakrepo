@@ -1,0 +1,8 @@
+[Flatpak Repo]
+Title=Kondor Browser
+Url=https://lukasborges.github.io/kondor/repo/
+Homepage=https://github.com/lukasborges/kondor
+Comment=A fast, private web browser that feels at home on the KDE Plasma desktop.
+Description=A fast, private web browser that feels at home on the KDE Plasma desktop.
+Icon=https://raw.githubusercontent.com/lukasborges/kondor/main/packaging/kondor.svg
+GPGKey=@GPGKEY@

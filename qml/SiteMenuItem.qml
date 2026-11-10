@@ -16,9 +16,14 @@ MenuItem {
     text: label
 
     contentItem: RowLayout {
-        spacing: Kirigami.Units.smallSpacing
+        // Mirror the style's own MenuItem row so the favicon sits in the icon column.
+        Item {
+            Layout.preferredWidth: (root.ListView.view && root.ListView.view.hasCheckables) || root.checkable
+                ? root.indicator.width : Kirigami.Units.smallSpacing
+        }
         SiteIcon {
             pageUrl: root.pageUrl
+            Layout.alignment: Qt.AlignVCenter
             Layout.preferredWidth: Kirigami.Units.iconSizes.small
             Layout.preferredHeight: Kirigami.Units.iconSizes.small
         }
@@ -29,7 +34,10 @@ MenuItem {
                 : root.pressed ? Kirigami.Theme.highlightedTextColor
                 : Kirigami.Theme.textColor
             Layout.fillWidth: true
-            Layout.maximumWidth: Kirigami.Units.gridUnit * 18
+            Layout.preferredWidth: Math.min(implicitWidth, Kirigami.Units.gridUnit * 18)
+        }
+        Item {
+            Layout.preferredWidth: Kirigami.Units.smallSpacing
         }
     }
 }

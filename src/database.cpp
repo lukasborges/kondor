@@ -1,16 +1,119 @@
 #include "database.h"
 
+#include <QCoreApplication>
 #include <QDir>
 #include <QDateTime>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QStandardPaths>
+#include <QString>
 #include <QVariant>
+#include <QVector>
+#include <functional>
 #include <utility>
 
 namespace {
 // Schema version. Each migration bumps `PRAGMA user_version` by 1.
-constexpr int kSchemaVersion = 3;
+constexpr int kSchemaVersion = 4;
+
+// One node of the bookmark set a new profile starts with. Folders have no URL
+// and their title is translated at insert time; bookmark titles are site names
+// and stay as written.
+struct DefaultBookmark {
+    const char *title;
+    const char *url;
+    QVector<DefaultBookmark> children;
+
+    bool isFolder() const { return url == nullptr; }
+};
+
+const QVector<DefaultBookmark> &defaultBookmarks()
+{
+    static const QVector<DefaultBookmark> bookmarks = {
+        {"KDE", "https://kde.org/", {}},
+        {"Planet KDE", "https://planet.kde.org/", {}},
+        {"Qt Docs", "https://doc.qt.io/", {}},
+        {QT_TRANSLATE_NOOP("DefaultBookmarks", "News"), nullptr,
+         {
+             {"LWN.net", "https://lwn.net/", {}},
+             {"Phoronix", "https://www.phoronix.com/", {}},
+             {"9to5Linux", "https://9to5linux.com/", {}},
+             {"OMG! Ubuntu", "https://www.omgubuntu.co.uk/", {}},
+             {"GamingOnLinux", "https://www.gamingonlinux.com/", {}},
+             {"DistroWatch", "https://distrowatch.com/", {}},
+         }},
+        {QT_TRANSLATE_NOOP("DefaultBookmarks", "Development"), nullptr,
+         {
+             {"KDE Developer", "https://develop.kde.org/", {}},
+             {"KDE Human Interface Guidelines", "https://develop.kde.org/hig/", {}},
+             {"KDE Invent", "https://invent.kde.org/", {}},
+             {"freedesktop.org", "https://www.freedesktop.org/", {}},
+             {"The Linux Kernel Archives", "https://www.kernel.org/", {}},
+             {"Kondor Browser on GitHub", "https://github.com/lukasborges/kondor", {}},
+         }},
+        {QT_TRANSLATE_NOOP("DefaultBookmarks", "Linux"), nullptr,
+         {
+             {"Fedora Project", "https://fedoraproject.org/", {}},
+             {"Fedora Docs", "https://docs.fedoraproject.org/", {}},
+             {"ArchWiki", "https://wiki.archlinux.org/", {}},
+             {"Flathub", "https://flathub.org/", {}},
+             {"KDE Applications", "https://apps.kde.org/", {}},
+             {"KDE UserBase", "https://userbase.kde.org/", {}},
+             {"KDE Discuss", "https://discuss.kde.org/", {}},
+         }},
+    };
+    return bookmarks;
+}
+
+// Fills the empty Bookmarks Toolbar with the default set. Only a profile
+// without any user bookmark or folder (special IS NULL) gets them, so existing
+// profiles are never touched.
+bool seedDefaultBookmarks(const QSqlDatabase &db)
+{
+    QSqlQuery existing(db);
+    if (!existing.exec(QStringLiteral("SELECT 1 FROM bookmarks WHERE special IS NULL LIMIT 1")))
+        return false;
+    if (existing.next())
+        return true;
+
+    QSqlQuery toolbar(db);
+    if (!toolbar.exec(QStringLiteral("SELECT id FROM bookmarks WHERE special = 'toolbar' LIMIT 1"))
+        || !toolbar.next()) {
+        return false;
+    }
+    const QVariant toolbarId = toolbar.value(0);
+    const QVariant now = QDateTime::currentMSecsSinceEpoch();
+
+    std::function<bool(const QVector<DefaultBookmark> &, const QVariant &)> insertRows;
+    insertRows = [&](const QVector<DefaultBookmark> &rows, const QVariant &parentId) {
+        for (int position = 0; position < rows.size(); ++position) {
+            const DefaultBookmark &row = rows.at(position);
+            QSqlQuery insert(db);
+            insert.prepare(QStringLiteral(
+                "INSERT INTO bookmarks (parent_id, is_folder, title, url, position,"
+                " created_at, special) "
+                "VALUES (?, ?, ?, ?, ?, ?, NULL)"));
+            const QString title = row.isFolder()
+                ? QCoreApplication::translate("DefaultBookmarks", row.title)
+                : QString::fromUtf8(row.title);
+            insert.addBindValue(parentId);
+            insert.addBindValue(row.isFolder() ? 1 : 0);
+            insert.addBindValue(title);
+            insert.addBindValue(row.isFolder() ? QVariant()
+                                               : QVariant(QString::fromUtf8(row.url)));
+            insert.addBindValue(position);
+            insert.addBindValue(now);
+            if (!insert.exec())
+                return false;
+            if (!row.children.isEmpty()
+                && !insertRows(row.children, insert.lastInsertId())) {
+                return false;
+            }
+        }
+        return true;
+    };
+    return insertRows(defaultBookmarks(), toolbarId);
+}
 }
 
 Database *Database::instance()
@@ -142,6 +245,13 @@ void Database::migrate()
             "  image BLOB NOT NULL,"
             "  updated_at INTEGER NOT NULL"
             ")"));
+    }
+
+    if (current < 4) {
+        // Default bookmarks for a new profile. It only fills a Bookmarks
+        // Toolbar that has no user bookmark, and never runs again once the
+        // version is bumped, so deleted defaults never come back.
+        ok = ok && seedDefaultBookmarks(m_db);
     }
 
     if (!ok) {

@@ -659,13 +659,14 @@ ApplicationWindow {
                     }
 
                     Keys.onEscapePressed: function(event) {
+                        // A pending query would reopen the dropdown right
+                        // after it was closed, so drop it even when the
+                        // dropdown did not open yet (first keystroke).
+                        suggestionsTimer.stop()
                         if (!addressSuggestions.opened) {
                             event.accepted = false
                             return
                         }
-                        // A pending query would reopen the dropdown right
-                        // after it was closed, so drop it as well.
-                        suggestionsTimer.stop()
                         // Only the dropdown goes away; the typed text stays.
                         text = typedText
                         addressSuggestions.close()

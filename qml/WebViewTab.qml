@@ -44,6 +44,11 @@ Item {
         onLoadProgressChanged: root.tab.setProgress(loadProgress)
 
         onLoadingChanged: function(loadRequest) {
+            // A new load means the page has a renderer again; the crash page
+            // goes away as soon as the reload starts.
+            if (loadRequest.status === WebEngineLoadingInfo.LoadStartedStatus)
+                root.tab.setCrashed(false, "")
+
             root.tab.setLoading(loadRequest.status === WebEngineLoadingInfo.LoadStartedStatus)
             root.tab.setCanGoBack(webView.canGoBack)
             root.tab.setCanGoForward(webView.canGoForward)
@@ -56,6 +61,21 @@ Item {
 
         onCanGoBackChanged: root.tab.setCanGoBack(canGoBack)
         onCanGoForwardChanged: root.tab.setCanGoForward(canGoForward)
+
+        // The renderer process died (crash, kill, out of memory). The view
+        // stays blank until the user reloads, so this tab shows an
+        // explanation; other tabs are not affected.
+        onRenderProcessTerminated: function(terminationStatus, exitCode) {
+            if (terminationStatus === WebEngineView.NormalTerminationStatus)
+                return
+            const reasons = {
+                [WebEngineView.AbnormalTerminationStatus]: qsTr("The page's process ended unexpectedly."),
+                [WebEngineView.CrashedTerminationStatus]: qsTr("The page crashed."),
+                [WebEngineView.KilledTerminationStatus]: qsTr("The page's process was killed (possibly out of memory).")
+            }
+            root.tab.setLoading(false)
+            root.tab.setCrashed(true, reasons[terminationStatus] ?? "", exitCode)
+        }
 
         onFindTextFinished: function(result) {
             root.tab.setFindResult(result.numberOfMatches, result.activeMatch)
@@ -131,6 +151,13 @@ Item {
         anchors.fill: parent
         visible: root.tab.certificateErrorPending
         tab: root.tab
+    }
+
+    CrashedPage {
+        anchors.fill: parent
+        visible: root.tab.crashed
+        tab: root.tab
+        tabModel: root.tabModel
     }
 
     Connections {

@@ -276,6 +276,29 @@
     </message>
 </context>
 <context>
+    <name>CrashedPage</name>
+    <message>
+        <location filename="../qml/CrashedPage.qml" line="38"/>
+        <source>This tab crashed</source>
+        <translation>Den här fliken kraschade</translation>
+    </message>
+    <message>
+        <location filename="../qml/CrashedPage.qml" line="53"/>
+        <source>Exit code: %1</source>
+        <translation>Utgångskod: %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/CrashedPage.qml" line="61"/>
+        <source>Close Tab</source>
+        <translation>Stäng flik</translation>
+    </message>
+    <message>
+        <location filename="../qml/CrashedPage.qml" line="67"/>
+        <source>Reload</source>
+        <translation>Läs in igen</translation>
+    </message>
+</context>
+<context>
     <name>DefaultBookmarks</name>
     <message>
         <location filename="../src/database.cpp" line="36"/>
@@ -1205,7 +1228,7 @@
         <translation>Ny privat flik</translation>
     </message>
     <message>
-        <location filename="../qml/TabButtonDelegate.qml" line="99"/>
+        <location filename="../qml/TabButtonDelegate.qml" line="101"/>
         <source>Close Tab</source>
         <translation>Stäng flik</translation>
     </message>
@@ -1251,6 +1274,24 @@
         <location filename="../qml/TabContextMenu.qml" line="59"/>
         <source>Close Tabs to the Right</source>
         <translation>Stäng flikar till höger</translation>
+    </message>
+</context>
+<context>
+    <name>WebViewTab</name>
+    <message>
+        <location filename="../qml/WebViewTab.qml" line="72"/>
+        <source>The page&apos;s process ended unexpectedly.</source>
+        <translation>Sidans process avslutades oväntat.</translation>
+    </message>
+    <message>
+        <location filename="../qml/WebViewTab.qml" line="73"/>
+        <source>The page crashed.</source>
+        <translation>Sidan kraschade.</translation>
+    </message>
+    <message>
+        <location filename="../qml/WebViewTab.qml" line="74"/>
+        <source>The page&apos;s process was killed (possibly out of memory).</source>
+        <translation>Sidans process dödades (möjligen på grund av minnesbrist).</translation>
     </message>
 </context>
 </TS>

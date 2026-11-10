@@ -43,6 +43,7 @@ qt_add_qml_module(kondor
         qml/SitePermissionsDialog.qml
         qml/SiteInfoPopup.qml
         qml/CertificateErrorPage.qml
+        qml/CrashedPage.qml
         qml/HistoryWindow.qml
         qml/SettingsWindow.qml
         qml/DownloadsPopup.qml

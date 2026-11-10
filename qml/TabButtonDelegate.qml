@@ -62,19 +62,21 @@ TabButton {
                 anchors.centerIn: parent
                 width: 16
                 height: 16
-                visible: !control.tab.loading
-                source: control.tab.isPrivate
-                    ? "view-private"
-                    : control.tab.newTabPage
-                        ? "tab-new"
-                        : (control.tab.iconUrl.toString().length ? control.tab.iconUrl.toString() : "text-html")
+                visible: !control.tab.loading || control.tab.crashed
+                source: control.tab.crashed
+                    ? "dialog-error"
+                    : control.tab.isPrivate
+                        ? "view-private"
+                        : control.tab.newTabPage
+                            ? "tab-new"
+                            : (control.tab.iconUrl.toString().length ? control.tab.iconUrl.toString() : "text-html")
             }
 
             BusyIndicator {
                 anchors.centerIn: parent
                 width: 16
                 height: 16
-                visible: control.tab.loading
+                visible: control.tab.loading && !control.tab.crashed
                 running: visible
             }
         }

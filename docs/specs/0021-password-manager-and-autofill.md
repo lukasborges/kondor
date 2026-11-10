@@ -89,4 +89,12 @@ Visual target — match it (controls, Kirigami components, icon names, wording, 
 
 ## Decisions
 
-_None yet._ Answers to developer questions (`question` label) are recorded here as `| Question | Decision |` rows.
+| Question | Decision |
+| --- | --- |
+| How is the page script installed (design item 3 says a QML `WebEngineScript`)? | Accepted as built in PR #96: `ProfileManager` adds one `QWebEngineScript` (`qwebchannel.js` + `passwords.js`, application world, subframes) to the persistent profile only, so private profiles never get it. |
+| How does the key icon fill a chosen credential (design item 5 says `runJavaScript`)? | Accepted as built in PR #96: through a bridge signal to the page script, so the password never passes through QML. An explicit fill from the key icon always replaces the username field, even when it is not empty. |
+| Where does the one-time "wallet unavailable" warning of design item 4 appear? | In the tab's `InlineBar`, the first time a login would have been offered while KWallet is unavailable, with the same text as the Settings warning and a Close button. |
+| What may the object registered on the `QWebChannel` expose? | Only the API of design item 2 (`formSubmitted`, `credentialsFor`) and the signals the page script needs. No `Tab`, profile or other object may be reachable from it (a `QObject*` property is published with its whole object graph). |
+| When is the wallet opened? | Only when it is needed: a page that has a password field (the script asks for credentials only then), a submitted login, or the Settings → Passwords page. Loading a page without a password field never opens KWallet. |
+| How do tests and agent runs stay away from the real wallet? KWallet is reached over the session D-Bus, so the temporary `XDG_*` directories do not isolate it. | With `KONDOR_NO_KWALLET=1` in the environment, `PasswordStore` goes straight to the "unavailable" state without any D-Bus call. `tests/CMakeLists.txt` sets it for every test. Agents that need a wallet run Kondor inside `dbus-run-session` (never on the maintainer's session bus). |
+| Where is the Passwords entry in the sidebar now that Spelling (#23) exists? | Right after Privacy and before Spelling, as design item 5 says. |

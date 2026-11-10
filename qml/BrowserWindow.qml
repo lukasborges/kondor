@@ -84,7 +84,10 @@ ApplicationWindow {
         // Save while the tabs still exist: closing the last tab closes the
         // window before TabModel removes it.
         SessionManager.save(tabs)
-        if (DownloadManager.hasActiveDownloads && !window.quitConfirmed) {
+        // Only the last window quits the app; another one closing leaves the
+        // downloads running.
+        if (WindowManager.windowCount <= 1 && DownloadManager.hasActiveDownloads
+                && !window.quitConfirmed) {
             close.accepted = false
             quitDialog.open()
             return

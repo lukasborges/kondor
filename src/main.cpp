@@ -139,5 +139,11 @@ int main(int argc, char *argv[])
     windowManager->setEngine(&engine);
     windowManager->openStartupWindows();
 
+    // Every startup window failed to load: without a window exec() would run
+    // forever (quitOnLastWindowClosed never fires), so fail like a QML error in
+    // the application root did before.
+    if (windowManager->windowCount() == 0)
+        return 1;
+
     return app.exec();
 }

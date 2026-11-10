@@ -14,6 +14,7 @@
 #include <QSaveFile>
 #include <QStandardPaths>
 
+#include <algorithm>
 #include <utility>
 
 namespace {
@@ -136,6 +137,16 @@ void SessionManager::saveNow()
     // Every window is gone and the app is quitting: the session saved when the
     // last window closed is the one to keep.
     if (m_models.isEmpty())
+        return;
+
+    // The last normal window closed while a private one is still open: keep the
+    // session saved when that window closed instead of overwriting it with the
+    // empty session of a window that never restores.
+    const bool anyNormalWindow =
+        std::any_of(m_models.cbegin(), m_models.cend(), [](const QPointer<TabModel> &model) {
+            return model && !model->privateTabs();
+        });
+    if (!anyNormalWindow)
         return;
 
     QJsonArray windows;

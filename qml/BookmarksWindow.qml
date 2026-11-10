@@ -32,6 +32,16 @@ ApplicationWindow {
     // insertion row shown as a line (0..count, -1 when none).
     property var draggedId: -1
     property bool draggedIsFolder: false
+    // Appearance of the drag preview, captured from the source row when the
+    // gesture starts so the preview can be built outside the list.
+    property string draggedTitle: ""
+    property string draggedUrl: ""
+    property real draggedWidth: 0
+    property real draggedHeight: 0
+    property real draggedPaddingLeft: 0
+    property real draggedPaddingRight: 0
+    property real draggedPaddingTop: 0
+    property real draggedPaddingBottom: 0
     property var dropFolderId: -1
     property int dropPosition: -1
     // Model that currently carries `filter`, so it can be cleared on switch.
@@ -164,18 +174,34 @@ ApplicationWindow {
         return false
     }
 
-    function beginDrag(id, isFolder, scenePos) {
-        root.draggedId = id
-        root.draggedIsFolder = isFolder
+    // pressScenePos is where the pointer went down; scenePos has already
+    // passed the drag threshold, so the hot spot uses the press position to
+    // keep the preview exactly where the row was grabbed.
+    function beginDrag(row, scenePos, pressScenePos) {
+        root.draggedId = row.id
+        root.draggedIsFolder = row.isFolder
+        root.draggedTitle = row.title.length ? row.title : row.url
+        root.draggedUrl = row.url
+        root.draggedWidth = row.width
+        root.draggedHeight = row.height
+        root.draggedPaddingLeft = row.leftPadding
+        root.draggedPaddingRight = row.rightPadding
+        root.draggedPaddingTop = row.topPadding
+        root.draggedPaddingBottom = row.bottomPadding
         root.clearDropTarget()
         // The drag source is a single proxy item: a row inside a view cannot
         // follow the pointer, so the window-level proxy carries the drag.
+        // Keep the offset between the pointer and the row it grabbed, so the
+        // preview stays where the row was pressed (like Firefox's Library).
+        const rowOrigin = row.mapToItem(null, Qt.point(0, 0))
+        dragProxy.Drag.hotSpot = Qt.point(pressScenePos.x - rowOrigin.x,
+                                         pressScenePos.y - rowOrigin.y)
         dragProxy.Drag.active = true
         root.moveDragProxy(scenePos)
     }
 
-    // Keeps the proxy under the pointer, so every DropArea sees real drag
-    // positions (the left tree included).
+    // Keeps the proxy's hot spot under the pointer, so every DropArea sees
+    // real drag positions (the left tree included).
     function moveDragProxy(scenePos) {
         const pos = dragProxy.parent.mapFromItem(null, scenePos)
         dragProxy.x = pos.x - dragProxy.Drag.hotSpot.x
@@ -194,6 +220,10 @@ ApplicationWindow {
     function endDrag() {
         root.draggedId = -1
         root.draggedIsFolder = false
+        root.draggedTitle = ""
+        root.draggedUrl = ""
+        root.draggedWidth = 0
+        root.draggedHeight = 0
         root.clearDropTarget()
     }
 
@@ -557,8 +587,11 @@ ApplicationWindow {
                             required property bool isFolder
 
                             width: ListView.view.width
+                            // The row being dragged stays highlighted while
+                            // the preview follows the pointer.
                             highlighted: itemEntry.id === root.selectedItemId
                                          || itemEntry.id === root.dropFolderId
+                                         || itemEntry.id === root.draggedId
 
                             contentItem: RowLayout {
                                 spacing: Kirigami.Units.largeSpacing
@@ -614,8 +647,8 @@ ApplicationWindow {
 
                                 onActiveChanged: {
                                     if (active) {
-                                        root.beginDrag(itemEntry.id, itemEntry.isFolder,
-                                                       centroid.scenePosition)
+                                        root.beginDrag(itemEntry, centroid.scenePosition,
+                                                       centroid.scenePressPosition)
                                     } else {
                                         root.finishDrag()
                                     }
@@ -714,17 +747,64 @@ ApplicationWindow {
         onTriggered: root.filter = searchField.text
     }
 
-    // Drag source that follows the pointer while a row's DragHandler is
-    // active. Keeping it at window level (instead of the row itself) makes
-    // the drag reach every DropArea, including the folder tree.
+    // Drag source and preview that follows the pointer while a row's
+    // DragHandler is active. Keeping it at window level (instead of the row
+    // itself) makes the drag reach every DropArea, including the folder tree,
+    // and keeps the preview above both panes (not clipped by a ScrollView).
+    // It has no input handlers, so it never takes input.
     Item {
         id: dragProxy
-        width: 1
-        height: 1
-        visible: false
+        width: Math.min(root.draggedWidth, Kirigami.Units.gridUnit * 20)
+        height: root.draggedHeight
+        visible: dragProxy.Drag.active
         z: 1000
         Drag.keys: ["kondor/bookmark"]
-        Drag.hotSpot: Qt.point(0, 0)
+
+        Rectangle {
+            anchors.fill: parent
+            color: Kirigami.Theme.highlightColor
+            opacity: 0.6
+        }
+
+        RowLayout {
+            anchors.fill: parent
+            anchors.leftMargin: root.draggedPaddingLeft
+            anchors.rightMargin: root.draggedPaddingRight
+            anchors.topMargin: root.draggedPaddingTop
+            anchors.bottomMargin: root.draggedPaddingBottom
+            spacing: Kirigami.Units.largeSpacing
+
+            Kirigami.Icon {
+                visible: root.draggedIsFolder
+                source: "folder"
+                Layout.alignment: Qt.AlignVCenter
+                Layout.preferredWidth: 22
+                Layout.preferredHeight: 22
+            }
+
+            // A Loader keeps the favicon request from happening at window
+            // creation, when no row is being dragged yet.
+            Loader {
+                active: root.draggedId >= 0 && !root.draggedIsFolder
+                visible: active
+                Layout.alignment: Qt.AlignVCenter
+                Layout.preferredWidth: 22
+                Layout.preferredHeight: 22
+                sourceComponent: SiteIcon {
+                    pageUrl: root.draggedUrl
+                }
+            }
+
+            Label {
+                objectName: "dragPreviewTitle"
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
+                text: root.draggedTitle
+                elide: Text.ElideRight
+                color: Kirigami.Theme.highlightedTextColor
+                font.bold: true
+            }
+        }
     }
 
     // Right-click menu of the right-hand list: "Move To" is a submenu with

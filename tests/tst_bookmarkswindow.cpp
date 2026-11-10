@@ -11,6 +11,8 @@
 #include <QTest>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
+#include <functional>
+
 #include "bookmarkmanager.h"
 #include "database.h"
 #include "faviconstore.h"
@@ -59,7 +61,10 @@ private:
     QQuickWindow *createWindow(TabModel *tabs, qint64 folderId);
     QQuickItem *rowAt(QQuickWindow *window, const QString &listId, int index);
     QPoint rowCenter(QQuickItem *row) const;
-    void drag(QQuickWindow *window, const QPoint &from, const QPoint &to);
+    bool previewShows(QQuickWindow *window, const QString &title) const;
+    bool previewHidden(QQuickWindow *window) const;
+    void drag(QQuickWindow *window, const QPoint &from, const QPoint &to,
+              const std::function<void()> &duringDrag = {});
 };
 
 void TestBookmarksWindow::initTestCase()
@@ -123,7 +128,23 @@ QPoint TestBookmarksWindow::rowCenter(QQuickItem *row) const
     return row->mapToScene(QPointF(row->width() / 2, row->height() / 2)).toPoint();
 }
 
-void TestBookmarksWindow::drag(QQuickWindow *window, const QPoint &from, const QPoint &to)
+// The window-level preview is visible and carries the dragged item's title.
+bool TestBookmarksWindow::previewShows(QQuickWindow *window, const QString &title) const
+{
+    QQmlExpression visible(qmlContext(window), window, QStringLiteral("dragProxy.visible"));
+    const bool shown = visible.evaluate().toBool();
+    QQuickItem *label = window->findChild<QQuickItem *>(QStringLiteral("dragPreviewTitle"));
+    return shown && label && label->property("text").toString() == title;
+}
+
+bool TestBookmarksWindow::previewHidden(QQuickWindow *window) const
+{
+    QQmlExpression visible(qmlContext(window), window, QStringLiteral("dragProxy.visible"));
+    return !visible.evaluate().toBool();
+}
+
+void TestBookmarksWindow::drag(QQuickWindow *window, const QPoint &from, const QPoint &to,
+                               const std::function<void()> &duringDrag)
 {
     QTest::mousePress(window, Qt::LeftButton, Qt::NoModifier, from);
     // A real pointer produces many moves; a single jump would not pass the
@@ -133,6 +154,9 @@ void TestBookmarksWindow::drag(QQuickWindow *window, const QPoint &from, const Q
         const QPoint step = from + (to - from) * i / steps;
         QTest::mouseMove(window, step);
     }
+    // Inspect the preview after the moves, with the button still pressed.
+    if (duringDrag)
+        duringDrag();
     QTest::mouseRelease(window, Qt::LeftButton, Qt::NoModifier, to);
     // Drag moves are delivered through queued events.
     QTest::qWait(100);
@@ -170,7 +194,12 @@ void TestBookmarksWindow::dragIntoTreeFolder()
     QQuickItem *targetRow = nullptr;
     QTRY_VERIFY((targetRow = rowAt(window.data(), QStringLiteral("folderList"), targetIndex)));
 
-    drag(window.data(), rowCenter(sourceRow), rowCenter(targetRow));
+    bool previewShown = false;
+    drag(window.data(), rowCenter(sourceRow), rowCenter(targetRow), [&]() {
+        previewShown = previewShows(window.data(), QStringLiteral("Tree drag"));
+    });
+    QVERIFY(previewShown);
+    QVERIFY(previewHidden(window.data()));
 
     QCOMPARE(manager->bookmark(id).value(QStringLiteral("parentId")).toLongLong(), target);
 }
@@ -236,7 +265,12 @@ void TestBookmarksWindow::dragBetweenRows()
     // Drop in the top band of the first row: insert above it.
     const QPoint from = rowCenter(secondRow);
     const QPoint to = firstRow->mapToScene(QPointF(firstRow->width() / 2, 2)).toPoint();
-    drag(window.data(), from, QPoint(to.x(), to.y() + 1));
+    bool previewShown = false;
+    drag(window.data(), from, QPoint(to.x(), to.y() + 1), [&]() {
+        previewShown = previewShows(window.data(), QStringLiteral("Second"));
+    });
+    QVERIFY(previewShown);
+    QVERIFY(previewHidden(window.data()));
 
     const QVariantList contents = manager->folderContents(folder);
     QCOMPARE(contents.size(), 2);

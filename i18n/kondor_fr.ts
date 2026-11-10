@@ -1207,7 +1207,7 @@
         <location filename="../qml/SettingsWindow.qml" line="69"/>
         <location filename="../qml/SettingsWindow.qml" line="771"/>
         <source>Check spelling while typing</source>
-        <translation>Vérifier l'orthographe pendant la saisie</translation>
+        <translation>Vérifier l&apos;orthographe pendant la saisie</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="69"/>
@@ -1362,7 +1362,7 @@
     <message>
         <location filename="../qml/SettingsWindow.qml" line="811"/>
         <source>No spelling dictionaries are installed.</source>
-        <translation>Aucun dictionnaire orthographique n'est installé.</translation>
+        <translation>Aucun dictionnaire orthographique n&apos;est installé.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="895"/>

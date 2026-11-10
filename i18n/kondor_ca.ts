@@ -1207,7 +1207,7 @@
         <location filename="../qml/SettingsWindow.qml" line="69"/>
         <location filename="../qml/SettingsWindow.qml" line="771"/>
         <source>Check spelling while typing</source>
-        <translation>Comprova l'ortografia mentre escriviu</translation>
+        <translation>Comprova l&apos;ortografia mentre escriviu</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="69"/>

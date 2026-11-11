@@ -225,4 +225,4 @@ pt_BR) · 7. #36 Rename to Kondor Browser · 8. #34 Translations for the main KD
 extension · 39. #111 User Scripts extension · 40. #112 Cookie Banner Blocker extension ·
 41. #113 Skip Sponsors extension · 42. #114 YouTube Dislike Counts extension · 43. #115 JSON
 Viewer extension · 44. #116 User Styles extension · 45. #117 Clean Links extension ·
-46. #118 Mouse Gestures extension
+46. #118 Mouse Gestures extension · 47. #121 Native Windows build

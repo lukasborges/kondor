@@ -107,6 +107,24 @@ EOF
     esac
   }
 
+  # True when the promote step has something to do: an open bug, or an open issue of AGENTS.md
+  # "Roadmap order", that has no state label. When neither exists, running Claude only burns a
+  # run and ends in a no-progress pause.
+  promotable() {
+    local roadmap open
+    roadmap="$(awk '/^### Roadmap order/ {on = 1; next} on && /^#/ {exit} on' "$control/AGENTS.md" \
+      | grep -oE '#[0-9]+' | tr -d '#' | sort -u)"
+    open="$(gh issue list --repo lukasborges/kondor --state open --limit 500 --json number,labels \
+      -q '.[] | select([.labels[].name] | any(. == "to-spec" or . == "to-dev" or . == "in-review") | not)
+             | "\(.number) \([.labels[].name] | any(. == "bug"))"')" || return 0  # unsure: let Claude decide
+    while read -r n bug; do
+      [[ -n "$n" ]] || continue
+      [[ "$bug" == true ]] && return 0
+      grep -qx "$n" <<<"$roadmap" && return 0
+    done <<<"$open"
+    return 1
+  }
+
   # True when issue $1 has the approved label and its PR's build check has not finished yet.
   build_pending() {
     local n="$1" pr
@@ -131,6 +149,17 @@ EOF
     read -r n st <<<"$next"
     [[ "$n" == "promote" ]] && st="promote"
     key="$n"
+    if [[ "$st" == "promote" ]] && ! promotable; then
+      # An empty backlog is not a failure: clear any no-progress pause so the next filed issue
+      # is promoted right away, and log the idle state only once.
+      rm -f "$state/paused-promote" "$state/no-progress-promote"
+      if [[ ! -e "$state/idle" ]]; then
+        touch "$state/idle"
+        log "queue: backlog empty, nothing to promote (file a bug or add an issue to AGENTS.md \"Roadmap order\")"
+      fi
+      return 0
+    fi
+    rm -f "$state/idle"
     if [[ -e "$state/paused-$key" ]]; then
       log "queue: architect step '$st' on $key is paused (scripts/architect-loop.sh --resume $key)"
       return 0

@@ -4,15 +4,20 @@
 #include "settings.h"
 
 #include <QCoreApplication>
-#include <QDBusConnection>
-#include <QDBusInterface>
-#include <QDBusMessage>
 #include <QDesktopServices>
 #include <QDir>
 #include <QFileInfo>
 #include <QLocale>
 #include <QMimeDatabase>
 #include <QQuickWebEngineDownloadRequest>
+
+#ifdef Q_OS_WIN
+#include <QProcess>
+#else
+#include <QDBusConnection>
+#include <QDBusInterface>
+#include <QDBusMessage>
+#endif
 
 DownloadModel::DownloadModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -455,6 +460,11 @@ void DownloadManager::showInFolder(int row)
         return;
 
     const QString path = QDir(download->downloadDirectory()).filePath(download->downloadFileName());
+#ifdef Q_OS_WIN
+    if (QProcess::startDetached(QStringLiteral("explorer.exe"),
+                                { QStringLiteral("/select,") + QDir::toNativeSeparators(path) }))
+        return;
+#else
     QDBusInterface fileManager(QStringLiteral("org.freedesktop.FileManager1"),
                                QStringLiteral("/org/freedesktop/FileManager1"),
                                QStringLiteral("org.freedesktop.FileManager1"),
@@ -466,8 +476,9 @@ void DownloadManager::showInFolder(int row)
         if (reply.type() != QDBusMessage::ErrorMessage)
             return;
     }
+#endif
 
-    // No file manager on D-Bus (or it failed): at least open the folder.
+    // No file manager could select the file: at least open the folder.
     QDesktopServices::openUrl(QUrl::fromLocalFile(download->downloadDirectory()));
 }
 

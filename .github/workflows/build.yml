@@ -86,3 +86,35 @@ jobs:
           name: kondor-linux
           path: build/kondor
           if-no-files-found: error
+
+  windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache KDE Craft
+        uses: actions/cache@v4
+        with:
+          path: C:\CraftRoot
+          key: craft-windows-cl-msvc2022-x86_64-${{ hashFiles('packaging/windows/craft-packages.txt') }}
+
+      - name: Hunspell dictionaries
+        shell: pwsh
+        run: packaging\windows\fetch-dictionaries.ps1 -Destination "$env:RUNNER_TEMP\hunspell"
+
+      - name: Build and deploy
+        shell: pwsh
+        run: packaging\windows\build.ps1 -HunspellDir "$env:RUNNER_TEMP\hunspell"
+
+      - name: Smoke test
+        shell: pwsh
+        run: packaging\windows\smoke-test.ps1 -Folder build-win\dist\Kondor
+
+      - name: Upload zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: kondor-windows
+          path: build-win/dist/Kondor-windows-x86_64.zip
+          if-no-files-found: error

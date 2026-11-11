@@ -1,0 +1,9 @@
+libs/qt6/qtwebengine
+libs/qt6/qttools
+kde/frameworks/tier1/kirigami
+kde/frameworks/tier3/kwallet
+kde/frameworks/tier3/qqc2-desktop-style
+kde/frameworks/tier1/breeze-icons
+kde/frameworks/tier3/kiconthemes
+kde/frameworks/tier3/kconfigwidgets
+kde/plasma/breeze

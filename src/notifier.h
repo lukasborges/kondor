@@ -5,10 +5,13 @@
 #include <QtQmlIntegration/qqmlintegration.h>
 
 class QQmlEngine;
+class QSystemTrayIcon;
+class QTimer;
 class QJSEngine;
 
 // QML singleton `Notifier`: sends desktop notifications through the freedesktop
-// notification service (org.freedesktop.Notifications) over D-Bus. Other
+// notification service (org.freedesktop.Notifications) over D-Bus; on Windows
+// as a toast of a tray icon shown only around notifications. Other
 // components (downloads, crash notices, ...) share this block.
 class Notifier : public QObject
 {
@@ -25,4 +28,9 @@ public:
 
 private:
     explicit Notifier(QObject *parent = nullptr);
+
+#ifdef Q_OS_WIN
+    QSystemTrayIcon *m_trayIcon = nullptr;
+    QTimer *m_hideTimer = nullptr;
+#endif
 };

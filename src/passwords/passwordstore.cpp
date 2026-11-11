@@ -114,6 +114,11 @@ void PasswordStore::ensureOpen()
         setState(State::Unavailable);
         return;
     }
+#ifdef Q_OS_WIN
+    // KWallet needs a session bus and daemon, which Windows does not have.
+    setState(State::Unavailable);
+    return;
+#endif
     setState(State::Opening);
     m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), 0,
                                            KWallet::Wallet::Asynchronous);

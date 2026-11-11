@@ -21,6 +21,11 @@ find_package(Qt6 6.8 REQUIRED COMPONENTS
     Widgets
 )
 find_package(KF6Wallet REQUIRED)
+if(WIN32)
+    # Without the KDE platform theme, Windows needs these for Breeze icons and style.
+    find_package(KF6IconThemes REQUIRED)
+    find_package(KF6ConfigWidgets REQUIRED)
+endif()
 
 include(GNUInstallDirs)
 qt_standard_project_setup(REQUIRES 6.8)
@@ -181,6 +186,13 @@ qt_add_resources(kondor "license"
         LICENSE
 )
 
+if(WIN32)
+    # No console window; icon and version info compiled into kondor.exe.
+    set_target_properties(kondor PROPERTIES WIN32_EXECUTABLE ON)
+    configure_file(packaging/windows/kondor.rc.in "${CMAKE_BINARY_DIR}/kondor.rc" @ONLY)
+    target_sources(kondor PRIVATE "${CMAKE_BINARY_DIR}/kondor.rc")
+endif()
+
 target_compile_definitions(kondor PRIVATE
     PROJECT_VERSION="${PROJECT_VERSION}"
 )
@@ -207,6 +219,9 @@ target_link_libraries(kondor PRIVATE
     Qt6::Widgets
     KF6::Wallet
 )
+if(WIN32)
+    target_link_libraries(kondor PRIVATE KF6::IconThemes KF6::ConfigWidgets)
+endif()
 
 if(BUILD_TESTING)
     enable_testing()
@@ -222,14 +237,16 @@ install(TARGETS kondor
 # Spell checking dictionaries: Hunspell .dic/.aff files converted to the .bdic
 # format Qt WebEngine reads. Chromium names them with a hyphen ("pt-BR").
 set(KONDOR_SPELLCHECK_LANGS "en_US;pt_BR" CACHE STRING
-    "Hunspell dictionaries (from /usr/share/hunspell) to convert and install")
+    "Hunspell dictionaries (from KONDOR_HUNSPELL_DIR) to convert and install")
+set(KONDOR_HUNSPELL_DIR "/usr/share/hunspell" CACHE PATH
+    "Folder with the Hunspell .dic/.aff files")
 find_program(QWEBENGINE_CONVERT_DICT qwebengine_convert_dict
     HINTS "${QT6_INSTALL_PREFIX}/${QT6_INSTALL_LIBEXECS}" /usr/lib64/qt6/libexec /usr/lib/qt6/libexec)
 set(KONDOR_DICTIONARIES_DIR "${CMAKE_BINARY_DIR}/qtwebengine_dictionaries")
 set(KONDOR_BDIC_FILES)
 if(QWEBENGINE_CONVERT_DICT)
     foreach(lang IN LISTS KONDOR_SPELLCHECK_LANGS)
-        set(dic "/usr/share/hunspell/${lang}.dic")
+        set(dic "${KONDOR_HUNSPELL_DIR}/${lang}.dic")
         string(REPLACE "_" "-" bdic_name "${lang}")
         if(EXISTS "${dic}")
             set(bdic "${KONDOR_DICTIONARIES_DIR}/${bdic_name}.bdic")
@@ -252,8 +269,14 @@ endif()
 if(KONDOR_BDIC_FILES)
     add_custom_target(kondor_dictionaries ALL DEPENDS ${KONDOR_BDIC_FILES})
     add_dependencies(kondor kondor_dictionaries)
-    install(DIRECTORY "${KONDOR_DICTIONARIES_DIR}"
-        DESTINATION ${CMAKE_INSTALL_DATADIR}/kondor)
+    if(WIN32)
+        # Next to kondor.exe, a place src/main.cpp looks in.
+        install(DIRECTORY "${KONDOR_DICTIONARIES_DIR}"
+            DESTINATION ${CMAKE_INSTALL_BINDIR})
+    else()
+        install(DIRECTORY "${KONDOR_DICTIONARIES_DIR}"
+            DESTINATION ${CMAKE_INSTALL_DATADIR}/kondor)
+    endif()
 endif()
 
 # Icon and menu entry (.desktop)

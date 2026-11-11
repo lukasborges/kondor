@@ -28,6 +28,8 @@ Updates arrive in Discover and through `flatpak update`.
 
 **AppImage**: get it from the [latest release](https://github.com/lukasborges/kondor/releases/latest), make it executable and run it.
 
+**Windows**: download `Kondor-windows-x86_64.zip` from the [latest release](https://github.com/lukasborges/kondor/releases/latest), unzip it and run `Kondor\bin\kondor.exe` (not signed, so SmartScreen may warn).
+
 See what's coming next on the [Roadmap](https://github.com/users/lukasborges/projects/1).
 
 ## Features
@@ -108,7 +110,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 
 ## Set as default browser
 
-Install Kondor (or use the AppImage), then open **System Settings → Default Applications → Web
+This applies to Linux; on Windows it is not available yet. Install Kondor (or use the AppImage), then open **System Settings → Default Applications → Web
 browser** and choose **Kondor Browser**. From a terminal the same is done with:
 
 ```bash
@@ -168,6 +170,21 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build
 ./build/kondor
 ```
+
+### Windows
+
+Kondor builds on Windows 11 with MSVC 2022 against [KDE Craft](https://community.kde.org/Craft)
+(needs Visual Studio 2022 with the C++ workload, Git for Windows and Python 3):
+
+1. Install Craft for `windows-cl-msvc2022-x86_64` with its binary cache, then run `craft` with the
+   packages listed in `packaging/windows/craft-packages.txt`.
+2. In the Craft environment, configure and build with CMake and Ninja, passing
+   `-DCMAKE_PREFIX_PATH=C:\CraftRoot` and `-DKONDOR_HUNSPELL_DIR=<folder with en_US and pt_BR .dic/.aff>`
+   (`packaging\windows\fetch-dictionaries.ps1` downloads them).
+3. Deploy with `packaging\windows\deploy.ps1 -CraftRoot C:\CraftRoot -BuildDir <build> -Output <folder>`,
+   which also writes `Kondor-windows-x86_64.zip`.
+
+`packaging\windows\build.ps1` does all of it in one go and is what CI runs.
 
 ### Tests
 

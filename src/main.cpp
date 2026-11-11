@@ -25,6 +25,14 @@
 #include "windowmanager.h"
 
 #include <cstdio>
+#include <iterator>
+
+#ifdef Q_OS_WIN
+#include <KIconTheme>
+#include <KStyleManager>
+#include <QProxyStyle>
+#include <qt_windows.h>
+#endif
 
 namespace {
 // Serves Kondor's own favicons: `image://kondor-favicon/<page URL>` resolves
@@ -47,6 +55,24 @@ public:
         return image;
     }
 };
+
+#ifdef Q_OS_WIN
+// Windows' default toolbar icon size (24 px) makes Breeze pick the colored
+// 32-256 px variants of icons; Plasma's default is 22.
+class ToolBarIconSizeStyle : public QProxyStyle
+{
+public:
+    using QProxyStyle::QProxyStyle;
+
+    int pixelMetric(PixelMetric metric, const QStyleOption *option,
+                    const QWidget *widget) const override
+    {
+        if (metric == PM_ToolBarIconSize)
+            return 22;
+        return QProxyStyle::pixelMetric(metric, option, widget);
+    }
+};
+#endif
 }
 
 int main(int argc, char *argv[])
@@ -67,11 +93,17 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
 
     // Spell checking dictionaries (.bdic) live next to the install or the build.
-    // QCoreApplication does not exist yet, so find the executable through /proc.
+    // QCoreApplication does not exist yet, so ask the OS where the executable is.
     if (!qEnvironmentVariableIsSet("QTWEBENGINE_DICTIONARIES_PATH")) {
-        const QString appDir =
-            QFileInfo(QStringLiteral("/proc/self/exe")).canonicalFilePath().section(
-                QLatin1Char('/'), 0, -2);
+#ifdef Q_OS_WIN
+        wchar_t exePath[32768];
+        const DWORD exePathLength = GetModuleFileNameW(nullptr, exePath, DWORD(std::size(exePath)));
+        const QString exeFile =
+            QDir::fromNativeSeparators(QString::fromWCharArray(exePath, int(exePathLength)));
+#else
+        const QString exeFile = QFileInfo(QStringLiteral("/proc/self/exe")).canonicalFilePath();
+#endif
+        const QString appDir = exeFile.section(QLatin1Char('/'), 0, -2);
         const QStringList candidates = {
             appDir + QStringLiteral("/../share/kondor/qtwebengine_dictionaries"),
             appDir + QStringLiteral("/qtwebengine_dictionaries"),
@@ -97,7 +129,14 @@ int main(int argc, char *argv[])
 
     // QApplication (not QGuiApplication): the KDE platform theme only provides
     // its native file dialogs to a QApplication.
+#ifdef Q_OS_WIN
+    KIconTheme::initTheme();
+#endif
     QApplication app(argc, argv);
+#ifdef Q_OS_WIN
+    KStyleManager::initStyle();
+    QApplication::setStyle(new ToolBarIconSizeStyle(QApplication::style()->name()));
+#endif
 
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
     QCoreApplication::setApplicationName(QStringLiteral("Kondor"));

@@ -39,6 +39,10 @@ QString SingleInstance::serverName()
         QCryptographicHash::hash(dataLocation.toUtf8(), QCryptographicHash::Sha1)
             .toHex()
             .left(16);
+#ifdef Q_OS_WIN
+    // Named pipes have no directory; the profile hash is already per user.
+    return QStringLiteral("kondor-") + QString::fromLatin1(profileHash);
+#else
     QString directory = QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation);
     // Inside a Flatpak sandbox $XDG_RUNTIME_DIR is private to each instance;
     // $XDG_RUNTIME_DIR/app/$FLATPAK_ID is shared by all instances of the app.
@@ -50,6 +54,7 @@ QString SingleInstance::serverName()
     return directory
         + QStringLiteral("/kondor-") + QString::fromLatin1(profileHash)
         + QStringLiteral(".socket");
+#endif
 }
 
 QByteArray SingleInstance::encodeMessage(const SingleInstanceMessage &message)

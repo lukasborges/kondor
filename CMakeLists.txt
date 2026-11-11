@@ -47,6 +47,7 @@ qt_add_qml_module(kondor
         qml/FindBar.qml
         qml/PermissionBar.qml
         qml/AddPasswordDialog.qml
+        qml/ImportPasswordsDialog.qml
         qml/PasswordBar.qml
         qml/FullScreenHint.qml
         qml/PermissionTypeInfo.qml
@@ -122,6 +123,8 @@ qt_add_qml_module(kondor
         src/adblock/adblockmanager.cpp
         src/passwords/passwordstore.h
         src/passwords/passwordstore.cpp
+        src/passwords/passwordimport.h
+        src/passwords/passwordimport.cpp
         src/passwords/passwordbridge.h
         src/passwords/passwordbridge.cpp
 )

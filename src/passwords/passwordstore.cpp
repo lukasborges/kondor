@@ -3,12 +3,16 @@
 #include <KWallet>
 
 #include <QClipboard>
+#include <QFile>
+#include <QFileInfo>
 #include <QGuiApplication>
 #include <QMap>
+#include <QSet>
 
 namespace {
 const QString kFolder = QStringLiteral("Kondor");
 constexpr int kClipboardClearMs = 30 * 1000;
+constexpr qint64 kMaxImportBytes = 20 * 1024 * 1024;
 }
 
 PasswordStore *PasswordStore::instance()
@@ -277,4 +281,133 @@ void PasswordStore::clearClipboardIfStillHolds()
     if (!m_copiedPassword.isEmpty() && clipboard->text() == m_copiedPassword)
         clipboard->clear();
     m_copiedPassword.clear();
+}
+
+QVariantMap PasswordStore::prepareImport(const QUrl &file)
+{
+    m_pendingImport.clear();
+    QVariantMap info{
+        {QStringLiteral("fileName"), file.fileName()},
+        {QStringLiteral("format"), QString()},
+        {QStringLiteral("newCount"), 0},
+        {QStringLiteral("identicalCount"), 0},
+        {QStringLiteral("conflictCount"), 0},
+        {QStringLiteral("conflictSites"), 0},
+        {QStringLiteral("skippedNoSite"), 0},
+        {QStringLiteral("skippedNoCredentials"), 0},
+        {QStringLiteral("skippedNotLogin"), 0},
+        {QStringLiteral("error"), QString()},
+    };
+    auto fail = [&info](const char *error) {
+        info.insert(QStringLiteral("error"), QLatin1String(error));
+        return info;
+    };
+
+    if (!isOpen() || !m_wallet->isOpen())
+        return fail("walletUnavailable");
+
+    QFile source(file.toLocalFile());
+    if (!file.isLocalFile() || !QFileInfo(source).isFile())
+        return fail("unreadable");
+    if (source.size() > kMaxImportBytes)
+        return fail("tooLarge");
+    if (!source.open(QIODevice::ReadOnly))
+        return fail("unreadable");
+    QByteArray data = source.read(kMaxImportBytes + 1);
+    source.close();
+    if (data.size() > kMaxImportBytes) {
+        data.fill('\0');
+        return fail("tooLarge");
+    }
+    PasswordImport::Result parsed = PasswordImport::parse(data);
+    data.fill('\0');
+
+    if (parsed.error == PasswordImport::Error::NotPasswordExport)
+        return fail("notPasswordExport");
+    if (parsed.error == PasswordImport::Error::Empty)
+        return fail("empty");
+
+    m_wallet->setFolder(kFolder);
+    QHash<QString, QMap<QString, QString>> saved;
+    int newCount = 0;
+    int identicalCount = 0;
+    int conflictCount = 0;
+    QSet<QString> conflictOrigins;
+    for (const PasswordImport::Login &login : std::as_const(parsed.logins)) {
+        auto it = saved.find(login.origin);
+        if (it == saved.end()) {
+            QMap<QString, QString> map;
+            if (m_wallet->readMap(login.origin, map) != 0)
+                map.clear();
+            it = saved.insert(login.origin, map);
+        }
+        if (!it->contains(login.username)) {
+            ++newCount;
+        } else if (it->value(login.username) == login.password) {
+            ++identicalCount;
+        } else {
+            ++conflictCount;
+            conflictOrigins.insert(login.origin);
+        }
+    }
+
+    m_pendingImport = std::move(parsed.logins);
+    info.insert(QStringLiteral("format"), PasswordImport::formatName(parsed.format));
+    info.insert(QStringLiteral("newCount"), newCount);
+    info.insert(QStringLiteral("identicalCount"), identicalCount);
+    info.insert(QStringLiteral("conflictCount"), conflictCount);
+    info.insert(QStringLiteral("conflictSites"), int(conflictOrigins.size()));
+    info.insert(QStringLiteral("skippedNoSite"), parsed.skippedNoSite);
+    info.insert(QStringLiteral("skippedNoCredentials"), parsed.skippedNoCredentials);
+    info.insert(QStringLiteral("skippedNotLogin"), parsed.skippedNotLogin);
+    return info;
+}
+
+int PasswordStore::commitImport(bool replaceConflicts)
+{
+    const QList<PasswordImport::Login> pending = std::move(m_pendingImport);
+    m_pendingImport.clear();
+    if (!isOpen() || !m_wallet->isOpen())
+        return -1;
+
+    QMap<QString, QList<PasswordImport::Login>> byOrigin;
+    for (const PasswordImport::Login &login : pending)
+        byOrigin[login.origin].append(login);
+
+    m_wallet->setFolder(kFolder);
+    int written = 0;
+    bool failed = false;
+    for (auto it = byOrigin.cbegin(); it != byOrigin.cend() && !failed; ++it) {
+        QMap<QString, QString> map;
+        if (m_wallet->readMap(it.key(), map) != 0)
+            map.clear();
+        int changes = 0;
+        for (const PasswordImport::Login &login : it.value()) {
+            if (map.contains(login.username)) {
+                if (map.value(login.username) == login.password || !replaceConflicts)
+                    continue;
+            }
+            map.insert(login.username, login.password);
+            ++changes;
+        }
+        if (changes == 0)
+            continue;
+        if (m_wallet->writeMap(it.key(), map) != 0)
+            failed = true;
+        else
+            written += changes;
+    }
+    reloadUsernames();
+    emit changed();
+    return failed ? -1 : written;
+}
+
+void PasswordStore::cancelImport()
+{
+    m_pendingImport.clear();
+}
+
+bool PasswordStore::moveImportFileToTrash(const QUrl &file)
+{
+    return file.isLocalFile() && QFile::moveToTrash(file.toLocalFile());
 }

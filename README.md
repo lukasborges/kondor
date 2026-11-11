@@ -45,7 +45,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 ### Privacy and security
 - **Ad and tracker blocking** built in
 - **Private tabs and windows** that leave no trace
-- **Passwords** saved in KWallet, filled in for you, and addable by hand
+- **Passwords** saved in KWallet, filled in for you, and addable by hand, importable from a CSV export
 - **Site permissions**: sites ask before using the camera, microphone or location
 - **Security padlock** and warnings for unsafe sites
 
@@ -117,6 +117,20 @@ xdg-settings set default-web-browser kondor.desktop
 
 Kondor then opens links clicked in other applications. The desktop entry also provides a
 **New Private Window** action (`kondor --private`).
+
+## Importing passwords
+
+In **Settings → Passwords**, **Import…** reads the CSV file another browser or password manager
+exports and saves its logins to KWallet. Where to export it:
+
+- **Chrome, Chromium, Edge, Brave, Vivaldi, Opera**: Settings → Passwords (Password Manager) →
+  Settings → Export passwords
+- **Firefox, LibreWolf, Waterfox**: Passwords (`about:logins`) → ⋯ → Export passwords
+- **Bitwarden**: File/Vault → Export vault → `.csv`
+- **1Password 8**: ⋯ at the top of the sidebar → Export → CSV
+
+Any other CSV with website, username and password columns (KeePassXC, LastPass…) works too. The
+file holds your passwords unencrypted, so Kondor offers to move it to the trash afterwards.
 
 ## Stack
 

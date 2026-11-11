@@ -873,6 +873,156 @@
     </message>
 </context>
 <context>
+    <name>ImportPasswordsDialog</name>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="33"/>
+        <source>“%1” is not a password export: it has no website, username and password columns.</source>
+        <translation>«%1» не є експортом паролів: у ньому немає стовпців вебсайту, імені користувача та пароля.</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="35"/>
+        <source>“%1” has no passwords to import.</source>
+        <translation>У «%1» немає паролів для імпорту.</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="37"/>
+        <source>“%1” could not be read.</source>
+        <translation>Не вдалося прочитати «%1».</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="39"/>
+        <source>“%1” is too large to be a password export.</source>
+        <translation>«%1» завеликий для експорту паролів.</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="41"/>
+        <source>KWallet is not available, so passwords cannot be imported.</source>
+        <translation>KWallet недоступний, тому імпортувати паролі не можна.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="49"/>
+        <source>%n without an https:// website</source>
+        <translation>
+            <numerusform>%n без вебсайту https://</numerusform>
+            <numerusform>%n без вебсайту https://</numerusform>
+            <numerusform>%n без вебсайту https://</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="51"/>
+        <source>%n without a username or password</source>
+        <translation>
+            <numerusform>%n без імені користувача або пароля</numerusform>
+            <numerusform>%n без імені користувача або пароля</numerusform>
+            <numerusform>%n без імені користувача або пароля</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="53"/>
+        <source>%n that are not logins</source>
+        <translation>
+            <numerusform>%n, що не є обліковим записом</numerusform>
+            <numerusform>%n, що не є обліковими записами</numerusform>
+            <numerusform>%n, що не є обліковими записами</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="54"/>
+        <source>%n entries: %1</source>
+        <translation>
+            <numerusform>%n запис: %1</numerusform>
+            <numerusform>%n записи: %1</numerusform>
+            <numerusform>%n записів: %1</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="75"/>
+        <source>Import Passwords</source>
+        <translation>Імпорт паролів</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="86"/>
+        <source>Import %n Password(s)</source>
+        <translation>
+            <numerusform>Імпортувати %n пароль</numerusform>
+            <numerusform>Імпортувати %n паролі</numerusform>
+            <numerusform>Імпортувати %n паролів</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="92"/>
+        <source>Cancel</source>
+        <translation>Скасувати</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="92"/>
+        <source>Close</source>
+        <translation>Закрити</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="114"/>
+        <source>File:</source>
+        <translation>Файл:</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="118"/>
+        <source>%1 (%2)</source>
+        <translation>%1 (%2)</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="123"/>
+        <source>New:</source>
+        <translation>Нові:</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="125"/>
+        <source>%n password(s)</source>
+        <translation>
+            <numerusform>%n пароль</numerusform>
+            <numerusform>%n паролі</numerusform>
+            <numerusform>%n паролів</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="129"/>
+        <source>Already saved:</source>
+        <translation>Уже збережені:</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="131"/>
+        <source>%n password(s) are identical and are skipped</source>
+        <translation>
+            <numerusform>%n пароль збігається і буде пропущений</numerusform>
+            <numerusform>%n паролі збігаються і будуть пропущені</numerusform>
+            <numerusform>%n паролів збігається і буде пропущено</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="135"/>
+        <source>Different:</source>
+        <translation>Відрізняються:</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="137"/>
+        <source>%n site(s) already have a different saved password</source>
+        <translation>
+            <numerusform>Для %n сайту вже збережено інший пароль</numerusform>
+            <numerusform>Для %n сайтів вже збережено інший пароль</numerusform>
+            <numerusform>Для %n сайтів вже збережено інший пароль</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="143"/>
+        <source>Replace them with the imported passwords</source>
+        <translation>Замінити їх імпортованими паролями</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="147"/>
+        <source>Not imported:</source>
+        <translation>Не імпортовано:</translation>
+    </message>
+</context>
+<context>
     <name>Kondor</name>
     <message>
         <location filename="../src/main.cpp" line="194"/>
@@ -1165,83 +1315,132 @@
 <context>
     <name>PasswordsPage</name>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="108"/>
+        <location filename="../qml/PasswordsPage.qml" line="118"/>
+        <source>Import Passwords</source>
+        <translation>Імпорт паролів</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="121"/>
+        <source>CSV files (*.csv)</source>
+        <translation>Файли CSV (*.csv)</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="121"/>
+        <source>All files (*)</source>
+        <translation>Усі файли (*)</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="146"/>
         <source>Delete Saved Password</source>
         <translation>Видалити збережений пароль</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="109"/>
+        <location filename="../qml/PasswordsPage.qml" line="147"/>
         <source>Delete the saved password for %1 on %2?</source>
         <translation>Видалити збережений пароль для %1 на %2?</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="126"/>
+        <location filename="../qml/PasswordsPage.qml" line="164"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
         <translation>KWallet вимкнено або доступ до нього заборонено, тому паролі не можна ні зберігати, ні підставляти.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="129"/>
+        <location filename="../qml/PasswordsPage.qml" line="167"/>
         <source>Try Again</source>
         <translation>Спробувати ще раз</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="139"/>
+        <location filename="../qml/PasswordsPage.qml" line="180"/>
+        <source>Some passwords could not be saved to KWallet.</source>
+        <translation>Не вдалося зберегти деякі паролі в KWallet.</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="182"/>
+        <source>“%1” was moved to the trash.</source>
+        <translation>«%1» переміщено до смітника.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/PasswordsPage.qml" line="183"/>
+        <source>Imported %n password(s) from “%1”. The file holds your passwords unencrypted: delete it when you no longer need it.</source>
+        <translation>
+            <numerusform>Імпортовано %n пароль із «%1». Файл містить ваші паролі в незашифрованому вигляді: видаліть його, коли він більше не потрібен.</numerusform>
+            <numerusform>Імпортовано %n паролі з «%1». Файл містить ваші паролі в незашифрованому вигляді: видаліть його, коли він більше не потрібен.</numerusform>
+            <numerusform>Імпортовано %n паролів із «%1». Файл містить ваші паролі в незашифрованому вигляді: видаліть його, коли він більше не потрібен.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="187"/>
+        <source>Move File to Trash</source>
+        <translation>Перемістити файл до смітника</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="207"/>
         <source>Offer to save passwords</source>
         <translation>Пропонувати зберігати паролі</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="157"/>
+        <location filename="../qml/PasswordsPage.qml" line="225"/>
         <source>Filter by site or username…</source>
         <translation>Фільтр за сайтом або іменем користувача…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="162"/>
-        <location filename="../qml/PasswordsPage.qml" line="197"/>
+        <location filename="../qml/PasswordsPage.qml" line="230"/>
+        <location filename="../qml/PasswordsPage.qml" line="275"/>
         <source>Add Password…</source>
         <translation>Додати пароль…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="188"/>
+        <location filename="../qml/PasswordsPage.qml" line="237"/>
+        <source>Import…</source>
+        <translation>Імпорт…</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="241"/>
+        <source>Import passwords from a CSV file</source>
+        <translation>Імпортувати паролі з файлу CSV</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="266"/>
         <source>No saved passwords match “%1”</source>
         <translation>Немає збережених паролів, що відповідають «%1»</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <location filename="../qml/PasswordsPage.qml" line="267"/>
         <source>No saved passwords</source>
         <translation>Немає збережених паролів</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="192"/>
-        <source>Kondor offers to save a password when you log in to a site. You can also add one here.</source>
-        <translation>Kondor пропонує зберегти пароль, коли ви входите на сайт. Ви також можете додати пароль тут.</translation>
+        <location filename="../qml/PasswordsPage.qml" line="270"/>
+        <source>Kondor offers to save a password when you log in to a site. You can also add one here, or import the CSV file exported by another browser or password manager.</source>
+        <translation>Kondor пропонує зберегти пароль, коли ви входите на сайт. Пароль також можна додати тут або імпортувати файл CSV, експортований з іншого браузера чи менеджера паролів.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="245"/>
+        <location filename="../qml/PasswordsPage.qml" line="323"/>
         <source>Hide Password</source>
         <translation>Приховати пароль</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="245"/>
+        <location filename="../qml/PasswordsPage.qml" line="323"/>
         <source>Show Password</source>
         <translation>Показати пароль</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="255"/>
+        <location filename="../qml/PasswordsPage.qml" line="333"/>
         <source>Copy Password</source>
         <translation>Копіювати пароль</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="265"/>
+        <location filename="../qml/PasswordsPage.qml" line="343"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="288"/>
+        <location filename="../qml/PasswordsPage.qml" line="366"/>
         <source>Kondor never offers to save passwords on these sites.</source>
         <translation>Kondor ніколи не пропонує зберігати паролі на цих сайтах.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="320"/>
+        <location filename="../qml/PasswordsPage.qml" line="398"/>
         <source>Remove</source>
         <translation>Вилучити</translation>
     </message>

@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
+import QtCore
 import org.kde.kirigami as Kirigami
 import Kondor
 
@@ -26,6 +27,14 @@ StackLayout {
     readonly property bool active: root.visible && Window.window !== null && Window.window.visible
     // Passwords revealed by Show, by "origin\nusername". Dropped when the window closes.
     property var revealed: ({})
+    // State of the message about the last import (cleared when the window closes).
+    property bool importDone: false
+    property bool importFailed: false
+    property bool importTrashed: false
+    property bool importTrashFailed: false
+    property int importedCount: 0
+    property string importedName: ""
+    property url importedFile
 
     function keyOf(origin, username) {
         return origin + "\n" + username
@@ -70,6 +79,9 @@ StackLayout {
             root.revealed = ({})
             addDialog.close()
             addDialog.clear()
+            importDialog.close()
+            PasswordStore.cancelImport()
+            root.importDone = false
         }
     }
 
@@ -98,6 +110,32 @@ StackLayout {
                     break
                 }
             }
+        }
+    }
+
+    FileDialog {
+        id: importFileDialog
+        title: qsTr("Import Passwords")
+        fileMode: FileDialog.OpenFile
+        currentFolder: StandardPaths.writableLocation(StandardPaths.DownloadLocation)
+        nameFilters: [qsTr("CSV files (*.csv)"), qsTr("All files (*)")]
+        onAccepted: {
+            root.importDone = false
+            importDialog.openFor(PasswordStore.prepareImport(selectedFile))
+            root.importedFile = selectedFile
+        }
+    }
+
+    ImportPasswordsDialog {
+        id: importDialog
+        parent: Overlay.overlay
+        onImported: function(count, fileName) {
+            root.importedCount = count
+            root.importedName = fileName
+            root.importFailed = count < 0
+            root.importTrashed = false
+            root.importTrashFailed = false
+            root.importDone = true
         }
     }
 
@@ -133,6 +171,36 @@ StackLayout {
             ]
         }
 
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            visible: root.importDone
+            type: root.importFailed ? Kirigami.MessageType.Error : Kirigami.MessageType.Positive
+            showCloseButton: true
+            text: root.importFailed
+                  ? qsTr("Some passwords could not be saved to KWallet.")
+                  : root.importTrashed
+                    ? qsTr("“%1” was moved to the trash.").arg(root.importedName)
+                    : qsTr("Imported %n password(s) from “%1”. The file holds your passwords unencrypted: delete it when you no longer need it.", "", root.importedCount).arg(root.importedName)
+            actions: [
+                Kirigami.Action {
+                    visible: !root.importFailed && !root.importTrashed && !root.importTrashFailed
+                    text: qsTr("Move File to Trash")
+                    icon.name: "user-trash"
+                    onTriggered: {
+                        if (PasswordStore.moveImportFileToTrash(root.importedFile))
+                            root.importTrashed = true
+                        else
+                            root.importTrashFailed = true
+                    }
+                }
+            ]
+            // The close button sets `visible` directly, which drops the binding.
+            onVisibleChanged: if (!visible) {
+                root.importDone = false
+                visible = Qt.binding(function() { return root.importDone })
+            }
+        }
+
         CheckBox {
             id: offerCheck
             enabled: !root.walletDenied
@@ -164,6 +232,16 @@ StackLayout {
                 enabled: !root.walletDenied
                 onClicked: addDialog.open()
             }
+
+            Button {
+                text: qsTr("Import…")
+                icon.name: "document-import"
+                enabled: !root.walletDenied
+                ToolTip.visible: hovered
+                ToolTip.text: qsTr("Import passwords from a CSV file")
+                ToolTip.delay: 600
+                onClicked: importFileDialog.open()
+            }
         }
 
         Frame {
@@ -189,7 +267,7 @@ StackLayout {
                       : qsTr("No saved passwords")
                 explanation: filterField.text.trim() !== ""
                              ? ""
-                             : qsTr("Kondor offers to save a password when you log in to a site. You can also add one here.")
+                             : qsTr("Kondor offers to save a password when you log in to a site. You can also add one here, or import the CSV file exported by another browser or password manager.")
                 helpfulAction: filterField.text.trim() !== "" ? null : addAction
 
                 Kirigami.Action {

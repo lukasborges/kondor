@@ -6,7 +6,11 @@
 #include <QTimer>
 #include <QUrl>
 #include <QVariantList>
+#include <QVariantMap>
+#include <QList>
 #include <QtQmlIntegration/qqmlintegration.h>
+
+#include "passwordimport.h"
 
 class QQmlEngine;
 class QJSEngine;
@@ -72,6 +76,20 @@ public:
     // the clipboard still holds it.
     Q_INVOKABLE void copyPassword(const QString &origin, const QString &username);
 
+    // Import from a CSV file. The parsed logins stay in C++ (m_pendingImport)
+    // and are never handed to QML. prepareImport() reads and parses the file and
+    // returns `{ fileName, format, newCount, identicalCount, conflictCount,
+    // conflictSites, skippedNoSite, skippedNoCredentials, skippedNotLogin,
+    // error }`; error is "", "unreadable", "tooLarge", "notPasswordExport",
+    // "empty" or "walletUnavailable".
+    Q_INVOKABLE QVariantMap prepareImport(const QUrl &file);
+    // Writes the new logins (and the conflicting ones when asked). Returns the
+    // number written, or -1 when a write failed. Always drops the pending import.
+    Q_INVOKABLE int commitImport(bool replaceConflicts);
+    Q_INVOKABLE void cancelImport();
+    // Moves the exported file to the trash; true on success.
+    Q_INVOKABLE bool moveImportFileToTrash(const QUrl &file);
+
     // Set once the "wallet unavailable" notice was shown in a tab, so it is
     // not repeated for every login.
     bool unavailableNoticeShown() const { return m_noticeShown; }
@@ -98,4 +116,5 @@ private:
     bool m_noticeShown = false;
     QTimer m_clipboardTimer;
     QString m_copiedPassword;
+    QList<PasswordImport::Login> m_pendingImport;
 };

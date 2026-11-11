@@ -1,0 +1,6 @@
+folder,favorite,type,name,notes,fields,reprompt,login_uri,login_username,login_password,login_totp
+,0,login,Example,,,0,"https://example.com,https://www.example.com",alice,pw-bw-1,
+,0,note,A note,secret text,,0,,,,
+,0,login,Plain,,,0,http://example.com,carol,pw-bw-3,
+,0,login,Android,,,0,android://abc@com.example.app,dave,pw-bw-4,
+,0,login,Empty,,,0,https://example.org,erin,,

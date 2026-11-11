@@ -873,6 +873,148 @@
     </message>
 </context>
 <context>
+    <name>ImportPasswordsDialog</name>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="33"/>
+        <source>“%1” is not a password export: it has no website, username and password columns.</source>
+        <translation>“%1” no es una exportación de contraseñas: no tiene columnas de sitio web, nombre de usuario y contraseña.</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="35"/>
+        <source>“%1” has no passwords to import.</source>
+        <translation>“%1” no tiene contraseñas que importar.</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="37"/>
+        <source>“%1” could not be read.</source>
+        <translation>No se pudo leer “%1”.</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="39"/>
+        <source>“%1” is too large to be a password export.</source>
+        <translation>“%1” es demasiado grande para ser una exportación de contraseñas.</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="41"/>
+        <source>KWallet is not available, so passwords cannot be imported.</source>
+        <translation>KWallet no está disponible, por lo que no se pueden importar contraseñas.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="49"/>
+        <source>%n without an https:// website</source>
+        <translation>
+            <numerusform>%n sin sitio web https://</numerusform>
+            <numerusform>%n sin sitio web https://</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="51"/>
+        <source>%n without a username or password</source>
+        <translation>
+            <numerusform>%n sin nombre de usuario o contraseña</numerusform>
+            <numerusform>%n sin nombre de usuario o contraseña</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="53"/>
+        <source>%n that are not logins</source>
+        <translation>
+            <numerusform>%n que no es un inicio de sesión</numerusform>
+            <numerusform>%n que no son inicios de sesión</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="54"/>
+        <source>%n entries: %1</source>
+        <translation>
+            <numerusform>%n entrada: %1</numerusform>
+            <numerusform>%n entradas: %1</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="75"/>
+        <source>Import Passwords</source>
+        <translation>Importar contraseñas</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="86"/>
+        <source>Import %n Password(s)</source>
+        <translation>
+            <numerusform>Importar %n contraseña</numerusform>
+            <numerusform>Importar %n contraseñas</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="92"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="92"/>
+        <source>Close</source>
+        <translation>Cerrar</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="114"/>
+        <source>File:</source>
+        <translation>Archivo:</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="118"/>
+        <source>%1 (%2)</source>
+        <translation>%1 (%2)</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="123"/>
+        <source>New:</source>
+        <translation>Nuevas:</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="125"/>
+        <source>%n password(s)</source>
+        <translation>
+            <numerusform>%n contraseña</numerusform>
+            <numerusform>%n contraseñas</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="129"/>
+        <source>Already saved:</source>
+        <translation>Ya guardadas:</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="131"/>
+        <source>%n password(s) are identical and are skipped</source>
+        <translation>
+            <numerusform>%n contraseña es idéntica y se omite</numerusform>
+            <numerusform>%n contraseñas son idénticas y se omiten</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="135"/>
+        <source>Different:</source>
+        <translation>Diferentes:</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/ImportPasswordsDialog.qml" line="137"/>
+        <source>%n site(s) already have a different saved password</source>
+        <translation>
+            <numerusform>%n sitio ya tiene una contraseña guardada diferente</numerusform>
+            <numerusform>%n sitios ya tienen una contraseña guardada diferente</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="143"/>
+        <source>Replace them with the imported passwords</source>
+        <translation>Reemplazarlas por las contraseñas importadas</translation>
+    </message>
+    <message>
+        <location filename="../qml/ImportPasswordsDialog.qml" line="147"/>
+        <source>Not imported:</source>
+        <translation>No importadas:</translation>
+    </message>
+</context>
+<context>
     <name>Kondor</name>
     <message>
         <location filename="../src/main.cpp" line="194"/>
@@ -1165,83 +1307,131 @@
 <context>
     <name>PasswordsPage</name>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="108"/>
+        <location filename="../qml/PasswordsPage.qml" line="118"/>
+        <source>Import Passwords</source>
+        <translation>Importar contraseñas</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="121"/>
+        <source>CSV files (*.csv)</source>
+        <translation>Archivos CSV (*.csv)</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="121"/>
+        <source>All files (*)</source>
+        <translation>Todos los archivos (*)</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="146"/>
         <source>Delete Saved Password</source>
         <translation>Eliminar la contraseña guardada</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="109"/>
+        <location filename="../qml/PasswordsPage.qml" line="147"/>
         <source>Delete the saved password for %1 on %2?</source>
         <translation>¿Eliminar la contraseña guardada de %1 en %2?</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="126"/>
+        <location filename="../qml/PasswordsPage.qml" line="164"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
         <translation>KWallet está desactivado o se ha denegado el acceso, por lo que no se pueden guardar ni rellenar contraseñas.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="129"/>
+        <location filename="../qml/PasswordsPage.qml" line="167"/>
         <source>Try Again</source>
         <translation>Reintentar</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="139"/>
+        <location filename="../qml/PasswordsPage.qml" line="180"/>
+        <source>Some passwords could not be saved to KWallet.</source>
+        <translation>No se pudieron guardar algunas contraseñas en KWallet.</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="182"/>
+        <source>“%1” was moved to the trash.</source>
+        <translation>“%1” se movió a la papelera.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/PasswordsPage.qml" line="183"/>
+        <source>Imported %n password(s) from “%1”. The file holds your passwords unencrypted: delete it when you no longer need it.</source>
+        <translation>
+            <numerusform>Se importó %n contraseña de “%1”. El archivo contiene tus contraseñas sin cifrar: elimínalo cuando ya no lo necesites.</numerusform>
+            <numerusform>Se importaron %n contraseñas de “%1”. El archivo contiene tus contraseñas sin cifrar: elimínalo cuando ya no lo necesites.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="187"/>
+        <source>Move File to Trash</source>
+        <translation>Mover el archivo a la papelera</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="207"/>
         <source>Offer to save passwords</source>
         <translation>Ofrecer guardar contraseñas</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="157"/>
+        <location filename="../qml/PasswordsPage.qml" line="225"/>
         <source>Filter by site or username…</source>
         <translation>Filtrar por sitio o nombre de usuario…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="162"/>
-        <location filename="../qml/PasswordsPage.qml" line="197"/>
+        <location filename="../qml/PasswordsPage.qml" line="230"/>
+        <location filename="../qml/PasswordsPage.qml" line="275"/>
         <source>Add Password…</source>
         <translation>Añadir contraseña…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="188"/>
+        <location filename="../qml/PasswordsPage.qml" line="237"/>
+        <source>Import…</source>
+        <translation>Importar…</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="241"/>
+        <source>Import passwords from a CSV file</source>
+        <translation>Importar contraseñas desde un archivo CSV</translation>
+    </message>
+    <message>
+        <location filename="../qml/PasswordsPage.qml" line="266"/>
         <source>No saved passwords match “%1”</source>
         <translation>Ninguna contraseña guardada coincide con «%1»</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="189"/>
+        <location filename="../qml/PasswordsPage.qml" line="267"/>
         <source>No saved passwords</source>
         <translation>No hay contraseñas guardadas</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="192"/>
-        <source>Kondor offers to save a password when you log in to a site. You can also add one here.</source>
-        <translation>Kondor ofrece guardar una contraseña cuando inicia sesión en un sitio. También puede añadir una aquí.</translation>
+        <location filename="../qml/PasswordsPage.qml" line="270"/>
+        <source>Kondor offers to save a password when you log in to a site. You can also add one here, or import the CSV file exported by another browser or password manager.</source>
+        <translation>Kondor ofrece guardar una contraseña cuando inicias sesión en un sitio. También puedes añadir una aquí o importar el archivo CSV exportado por otro navegador o gestor de contraseñas.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="245"/>
+        <location filename="../qml/PasswordsPage.qml" line="323"/>
         <source>Hide Password</source>
         <translation>Ocultar contraseña</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="245"/>
+        <location filename="../qml/PasswordsPage.qml" line="323"/>
         <source>Show Password</source>
         <translation>Mostrar contraseña</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="255"/>
+        <location filename="../qml/PasswordsPage.qml" line="333"/>
         <source>Copy Password</source>
         <translation>Copiar contraseña</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="265"/>
+        <location filename="../qml/PasswordsPage.qml" line="343"/>
         <source>Delete</source>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="288"/>
+        <location filename="../qml/PasswordsPage.qml" line="366"/>
         <source>Kondor never offers to save passwords on these sites.</source>
         <translation>Kondor nunca ofrece guardar contraseñas en estos sitios.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="320"/>
+        <location filename="../qml/PasswordsPage.qml" line="398"/>
         <source>Remove</source>
         <translation>Quitar</translation>
     </message>

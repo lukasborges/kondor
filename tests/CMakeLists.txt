@@ -36,6 +36,7 @@ qt_add_executable(tst_tabmodel
     ../src/tabmodel.cpp
     ../src/tab.cpp
     ../src/passwords/passwordstore.cpp
+    ../src/passwords/passwordimport.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
@@ -75,6 +76,7 @@ qt_add_executable(tst_addresssuggestions
     tst_addresssuggestions.cpp
     ../src/tab.cpp
     ../src/passwords/passwordstore.cpp
+    ../src/passwords/passwordimport.cpp
     ../src/tabmodel.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
@@ -149,6 +151,7 @@ qt_add_executable(tst_bookmarkswindow
     ../src/database.cpp
     ../src/tab.cpp
     ../src/passwords/passwordstore.cpp
+    ../src/passwords/passwordimport.cpp
     ../src/tabmodel.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
@@ -196,6 +199,7 @@ qt_add_executable(tst_mainmenu
     ../src/database.cpp
     ../src/tab.cpp
     ../src/passwords/passwordstore.cpp
+    ../src/passwords/passwordimport.cpp
     ../src/tabmodel.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
@@ -336,6 +340,7 @@ qt_add_executable(tst_settingswindow
     tst_settingswindow.cpp
     ../src/tab.cpp
     ../src/passwords/passwordstore.cpp
+    ../src/passwords/passwordimport.cpp
     ../src/tabmodel.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
@@ -381,6 +386,7 @@ qt_add_executable(tst_tabstrip
     tst_tabstrip.cpp
     ../src/tab.cpp
     ../src/passwords/passwordstore.cpp
+    ../src/passwords/passwordimport.cpp
     ../src/tabmodel.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
@@ -426,6 +432,7 @@ qt_add_executable(tst_sitepermissions
     tst_sitepermissions.cpp
     ../src/tab.cpp
     ../src/passwords/passwordstore.cpp
+    ../src/passwords/passwordimport.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
@@ -472,6 +479,7 @@ qt_add_executable(tst_sessionmanager
     ../src/tabmodel.cpp
     ../src/tab.cpp
     ../src/passwords/passwordstore.cpp
+    ../src/passwords/passwordimport.cpp
     ../src/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
@@ -587,6 +595,7 @@ add_test(NAME tst_filterengine COMMAND tst_filterengine)
 qt_add_executable(tst_passwordstore
     tst_passwordstore.cpp
     ../src/passwords/passwordstore.cpp
+    ../src/passwords/passwordimport.cpp
 )
 
 target_include_directories(tst_passwordstore PRIVATE
@@ -602,6 +611,30 @@ target_link_libraries(tst_passwordstore PRIVATE
 )
 
 add_test(NAME tst_passwordstore COMMAND tst_passwordstore)
+
+qt_add_executable(tst_passwordimport
+    tst_passwordimport.cpp
+    ../src/passwords/passwordimport.cpp
+    ../src/passwords/passwordstore.cpp
+)
+
+target_include_directories(tst_passwordimport PRIVATE
+    ../src
+)
+
+target_compile_definitions(tst_passwordimport PRIVATE
+    KONDOR_TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data"
+)
+
+target_link_libraries(tst_passwordimport PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Test
+    KF6::Wallet
+)
+
+add_test(NAME tst_passwordimport COMMAND tst_passwordimport)
 
 # No test may reach the session wallet: PasswordStore goes straight to "unavailable".
 get_property(kondor_all_tests DIRECTORY PROPERTY TESTS)

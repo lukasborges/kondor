@@ -157,6 +157,29 @@ mention the difference in the PR.
 - **Working copies**: each agent uses its own git worktree; the developer works on
   `feature/<issue-number>-<short-slug>` branches cut from current `origin/main`, the architect on
   `main`.
+- **Specs written at promotion**: an issue in "Roadmap order" may have no spec yet. When the
+  architect promotes it, it writes the spec (and the prototype, if it has UI) first, as for a
+  `to-spec` issue, then adds `to-dev`.
+
+### Extensions repository
+
+Kondor extensions (#107) live in a second repository,
+[`lukasborges/kondor-extensions`](https://github.com/lukasborges/kondor-extensions), where the
+community proposes extensions by pull request and CI publishes the catalog (#108). Issues about it
+are still tracked here, on the same roadmap, and their spec has the line
+`**Repository:** lukasborges/kondor-extensions`. For those issues:
+
+- the developer clones that repository once next to this one (`git clone
+  https://github.com/lukasborges/kondor-extensions ../kondor-extensions`) and works in a worktree of
+  it (`git -C ../kondor-extensions worktree add ../kondor-extensions-<N> -b feature/<N>-<slug>
+  origin/main`);
+- the PR is opened **in that repository**, and its body says `Closes lukasborges/kondor#<N>` (a
+  plain `#<N>` would point to the wrong repository);
+- the architect reviews it there and merges it with
+  `gh pr merge <PR> --repo lukasborges/kondor-extensions --squash --body "Closes lukasborges/kondor#<N>"`;
+- that repository has no C++ build: the checks are its own (`build` job of #108). An extension is
+  tested by packing it (`python3 tools/pack.py extensions/<id>`) and installing it in a Kondor
+  build from `main` with "Install from File…", on an isolated profile.
 
 ### Developer delivery checklist
 
@@ -197,4 +220,9 @@ pt_BR) · 7. #36 Rename to Kondor Browser · 8. #34 Translations for the main KD
 24. #16 Developer tools · 25. #17 Print and save as PDF · 26. #24 Per-site zoom ·
 27. #23 Spell checking · 28. #22 Reader mode · 29. #20 Ad and tracker blocking ·
 30. #21 Passwords · 31. #25 Flatpak · 32. #98 Self-hosted Flatpak repository ·
-33. #88 Browser extensions spike · 34. #106 Import passwords
+33. #88 Browser extensions spike · 34. #106 Import passwords · 35. #107 Kondor extensions ·
+36. #108 Extensions repository · 37. #109 Dark Mode extension · 38. #110 Video Speed Controller
+extension · 39. #111 User Scripts extension · 40. #112 Cookie Banner Blocker extension ·
+41. #113 Skip Sponsors extension · 42. #114 YouTube Dislike Counts extension · 43. #115 JSON
+Viewer extension · 44. #116 User Styles extension · 45. #117 Clean Links extension ·
+46. #118 Mouse Gestures extension

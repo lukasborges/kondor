@@ -20,13 +20,19 @@ spec_ref() {
   printf '%s' "${f:-—}"
 }
 
-# $1 = issue number -> "PR #N" if an open PR body says "Closes #N", else an em dash.
+# $1 = issue number -> "PR #N" if an open PR body says "Closes #N", "kondor-extensions PR #N" if a
+# PR of the extensions repository says "Closes lukasborges/kondor#N" (AGENTS.md → "Extensions
+# repository"), else an em dash.
 pr_ref() {
   local n
   n="$(gh pr list --repo "$repo" --state open --search "\"Closes #$1\" in:body" \
         --json number,body --jq "[.[] | select(.body | test(\"(?i)closes #$1\\\\b\"))][0].number // empty" \
         2>/dev/null || true)"
-  if [[ -n "$n" ]]; then printf 'PR #%s' "$n"; else printf '—'; fi
+  if [[ -n "$n" ]]; then printf 'PR #%s' "$n"; return; fi
+  n="$(gh pr list --repo lukasborges/kondor-extensions --state open --search "\"lukasborges/kondor#$1\" in:body" \
+        --json number,body --jq "[.[] | select(.body | test(\"(?i)closes lukasborges/kondor#$1\\\\b\"))][0].number // empty" \
+        2>/dev/null || true)"
+  if [[ -n "$n" ]]; then printf 'kondor-extensions PR #%s' "$n"; else printf '—'; fi
 }
 
 # --- rows ------------------------------------------------------------------

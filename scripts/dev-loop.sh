@@ -73,6 +73,10 @@ You are the developer agent of this repository. Follow docs/agents/developer.md 
 
 1. git fetch origin. Read the spec docs/specs/$(printf '%04d' "$n")-*.md from origin/main and its
    prototype (if issue #$n is labeled bug, its body is the spec instead), and every comment on issue #$n and on its PR (gh issue view $n --comments; gh pr list --search "Closes #$n").
+   If the spec says Repository: lukasborges/kondor-extensions, the work happens in that repository:
+   follow AGENTS.md → "Extensions repository" for the clone, the worktree, the PR (in that
+   repository, body "Closes lukasborges/kondor#$n") and how to test; its PR is found with
+   gh pr list --repo lukasborges/kondor-extensions --search "lukasborges/kondor#$n".
 2. If a branch for this issue already exists (git branch --list 'feature/$n-*' 'fix/$n-*'; git worktree list),
    continue it in the worktree where it is checked out. Otherwise create a new worktree from
    origin/main as described in docs/agents/developer.md. Never commit in the current directory

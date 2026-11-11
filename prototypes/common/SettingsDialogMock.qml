@@ -20,6 +20,11 @@ Rectangle {
     property bool importDialog: false // #106: the "Import Passwords" review dialog is open
     property bool importUnrecognized: false // #106: the chosen file is not a password export
     property bool importDone: false // #106: an import just finished (message on the page)
+    property bool withExtensions: false // #107: show the Extensions page
+    property bool extensionsEmpty: false // #107: no extension installed (placeholder)
+    property bool catalogDialog: false // #107: the "Get New Extensions" dialog is open
+    property bool installDialog: false // #107: the install confirmation is open
+    property bool installFromFile: false // #107: the confirmation is for a .kondorext file
     property string search: ""
     property bool modified: false // pending changes → Apply enabled
 
@@ -32,7 +37,8 @@ Rectangle {
         { title: "Search", icon: "system-search" },
         { title: "Downloads", icon: "folder-download" },
         { title: "Privacy", icon: "preferences-security" },
-        { title: "Passwords", icon: "preferences-desktop-user-password" }
+        { title: "Passwords", icon: "preferences-desktop-user-password" },
+        { title: "Extensions", icon: "preferences-plugin" }
     ]
 
     ColumnLayout {
@@ -76,7 +82,7 @@ Rectangle {
                     }
 
                     Repeater {
-                        model: root.withPasswords ? root.pages : root.pages.slice(0, 4)
+                        model: root.withExtensions ? root.pages : root.withPasswords ? root.pages.slice(0, 5) : root.pages.slice(0, 4)
                         delegate: ItemDelegate {
                             required property var modelData
                             required property int index
@@ -126,6 +132,7 @@ Rectangle {
                     Layout.margins: Kirigami.Units.gridUnit
                     currentIndex: root.page === 0 ? root.innerTab
                                 : root.page === 4 ? 5 + root.innerTab
+                                : root.page === 5 ? 7
                                 : root.page + 1
 
                     // General → Startup
@@ -323,6 +330,77 @@ Rectangle {
                             }
                         }
                     }
+
+                    // Extensions (#107)
+                    ColumnLayout {
+                        spacing: Kirigami.Units.largeSpacing
+                        RowLayout {
+                            Layout.fillWidth: true
+                            spacing: Kirigami.Units.smallSpacing
+                            TextField { Layout.fillWidth: true; placeholderText: "Filter extensions…" }
+                            Button { text: "Get New Extensions…"; icon.name: "get-hot-new-stuff" }
+                            Button { text: "Install from File…"; icon.name: "document-import" }
+                        }
+                        Frame {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            padding: 0
+                            Kirigami.Theme.colorSet: Kirigami.Theme.View
+                            Kirigami.Theme.inherit: false
+                            background: Rectangle {
+                                color: Kirigami.Theme.backgroundColor
+                                border.color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.2)
+                            }
+                            Kirigami.PlaceholderMessage {
+                                anchors.centerIn: parent
+                                width: parent.width - Kirigami.Units.gridUnit * 4
+                                visible: root.extensionsEmpty
+                                icon.name: "preferences-plugin"
+                                text: "No extensions installed"
+                                explanation: "Extensions add features to Kondor. Get them from the Kondor extensions catalog, or install a .kondorext file."
+                                helpfulAction: Kirigami.Action { text: "Get New Extensions…"; icon.name: "get-hot-new-stuff" }
+                            }
+                            ListView {
+                                anchors.fill: parent
+                                clip: true
+                                visible: !root.extensionsEmpty
+                                model: ListModel {
+                                    ListElement { iconName: "weather-clear-night"; name: "Dark Mode"; version: "1.0.0"; desc: "Shows every site with dark colors."; access: "Read and change all websites"; on: true; review: false }
+                                    ListElement { iconName: "media-playback-start"; name: "Video Speed Controller"; version: "1.2.0"; desc: "Change the playback speed of any video with the keyboard."; access: "Read and change all websites"; on: true; review: true }
+                                    ListElement { iconName: "application-json"; name: "JSON Viewer"; version: "0.9.1"; desc: "Formats JSON documents and lets you fold them."; access: "Read and change all websites"; on: false; review: false }
+                                }
+                                delegate: ItemDelegate {
+                                    required property string iconName
+                                    required property string name
+                                    required property string version
+                                    required property string desc
+                                    required property string access
+                                    required property bool on
+                                    required property bool review
+                                    width: ListView.view.width
+                                    contentItem: RowLayout {
+                                        spacing: Kirigami.Units.largeSpacing
+                                        Kirigami.Icon { source: iconName; Layout.preferredWidth: Kirigami.Units.iconSizes.medium; Layout.preferredHeight: Layout.preferredWidth }
+                                        ColumnLayout {
+                                            Layout.fillWidth: true
+                                            spacing: 0
+                                            RowLayout {
+                                                Label { text: name; font.bold: true }
+                                                Label { text: version; opacity: 0.7; font: Kirigami.Theme.smallFont }
+                                            }
+                                            Label { Layout.fillWidth: true; text: desc; elide: Text.ElideRight }
+                                            Label { Layout.fillWidth: true; text: access; opacity: 0.7; font: Kirigami.Theme.smallFont; elide: Text.ElideRight }
+                                        }
+                                        Button { visible: review; text: "Update…"; icon.name: "update-none" }
+                                        Switch { checked: on }
+                                        ToolButton { icon.name: "configure"; display: AbstractButton.IconOnly; text: "Configure…" }
+                                        ToolButton { icon.name: "edit-delete"; display: AbstractButton.IconOnly; text: "Remove" }
+                                    }
+                                }
+                            }
+                        }
+                        CheckBox { text: "Update extensions automatically"; checked: true }
+                    }
                 }
             }
         }
@@ -446,6 +524,126 @@ Rectangle {
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     text: "3 entries: 2 without an https:// website, 1 without a username or password"
+                }
+            }
+        }
+    }
+
+    // ── Get New Extensions dialog (#107) ────────────────────────────────
+    Dialog {
+        parent: root
+        anchors.centerIn: parent
+        width: Kirigami.Units.gridUnit * 40
+        height: Kirigami.Units.gridUnit * 28
+        modal: true
+        dim: true
+        visible: root.catalogDialog
+        title: "Get New Extensions"
+        standardButtons: Dialog.Close
+
+        contentItem: ColumnLayout {
+            spacing: Kirigami.Units.largeSpacing
+            TextField { Layout.fillWidth: true; placeholderText: "Search extensions…" }
+            Frame {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                padding: 0
+                Kirigami.Theme.colorSet: Kirigami.Theme.View
+                Kirigami.Theme.inherit: false
+                background: Rectangle {
+                    color: Kirigami.Theme.backgroundColor
+                    border.color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.2)
+                }
+                ListView {
+                    anchors.fill: parent
+                    clip: true
+                    model: ListModel {
+                        ListElement { iconName: "weather-clear-night"; name: "Dark Mode"; author: "Kondor contributors"; desc: "Shows every site with dark colors."; entryState: "installed" }
+                        ListElement { iconName: "text-x-script"; name: "User Scripts"; author: "Kondor contributors"; desc: "Install and manage user scripts that customize websites."; entryState: "install" }
+                        ListElement { iconName: "preferences-web-browser-cookies"; name: "Cookie Banner Blocker"; author: "Kondor contributors"; desc: "Rejects or hides cookie consent banners."; entryState: "install" }
+                        ListElement { iconName: "media-skip-forward"; name: "Skip Sponsors"; author: "Kondor contributors"; desc: "Skips sponsored segments in YouTube videos (SponsorBlock)."; entryState: "install" }
+                        ListElement { iconName: "media-playback-start"; name: "Video Speed Controller"; author: "Kondor contributors"; desc: "Change the playback speed of any video with the keyboard."; entryState: "update" }
+                    }
+                    delegate: ItemDelegate {
+                        required property string iconName
+                        required property string name
+                        required property string author
+                        required property string desc
+                        required property string entryState
+                        width: ListView.view.width
+                        contentItem: RowLayout {
+                            spacing: Kirigami.Units.largeSpacing
+                            Kirigami.Icon { source: iconName; Layout.preferredWidth: Kirigami.Units.iconSizes.large; Layout.preferredHeight: Layout.preferredWidth }
+                            ColumnLayout {
+                                Layout.fillWidth: true
+                                spacing: 0
+                                RowLayout {
+                                    Label { text: name; font.bold: true }
+                                    Label { text: "by " + author; opacity: 0.7; font: Kirigami.Theme.smallFont }
+                                }
+                                Label { Layout.fillWidth: true; text: desc; wrapMode: Text.WordWrap }
+                            }
+                            Button {
+                                text: entryState === "installed" ? "Installed" : entryState === "update" ? "Update" : "Install"
+                                icon.name: entryState === "installed" ? "checkmark" : entryState === "update" ? "update-none" : "download"
+                                enabled: entryState !== "installed"
+                            }
+                        }
+                    }
+                }
+            }
+            Label {
+                text: "<a href=\"#\">Submit an extension…</a>"
+                textFormat: Text.StyledText
+                color: Kirigami.Theme.linkColor
+            }
+        }
+    }
+
+    // ── Install confirmation (#107) ─────────────────────────────────────
+    Dialog {
+        parent: root
+        anchors.centerIn: parent
+        width: Kirigami.Units.gridUnit * 26
+        modal: true
+        dim: true
+        visible: root.installDialog
+        title: "Install Extension"
+        footer: DialogButtonBox {
+            Button { text: "Install"; icon.name: "download"; DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole }
+            Button { text: "Cancel"; icon.name: "dialog-cancel"; DialogButtonBox.buttonRole: DialogButtonBox.RejectRole }
+        }
+
+        contentItem: ColumnLayout {
+            spacing: Kirigami.Units.largeSpacing
+            Kirigami.InlineMessage {
+                Layout.fillWidth: true
+                visible: root.installFromFile
+                type: Kirigami.MessageType.Warning
+                text: "This extension does not come from the Kondor extensions catalog. Only install extensions from people you trust."
+            }
+            RowLayout {
+                spacing: Kirigami.Units.largeSpacing
+                Kirigami.Icon { source: root.installFromFile ? "input-mouse" : "media-skip-forward"; Layout.preferredWidth: Kirigami.Units.iconSizes.large; Layout.preferredHeight: Layout.preferredWidth }
+                Label {
+                    Layout.fillWidth: true
+                    wrapMode: Text.WordWrap
+                    text: root.installFromFile ? "Install “Mouse Gestures” 0.3.0 by Maria Example?"
+                                               : "Install “Skip Sponsors” 1.0.0 by Kondor contributors?"
+                }
+            }
+            Label { text: "It will be able to:" }
+            Repeater {
+                model: root.installFromFile
+                       ? [ { icon: "internet-services", text: "Read and change all websites" },
+                           { icon: "tab-new", text: "Open, close and navigate your tabs" } ]
+                       : [ { icon: "internet-services", text: "Read and change pages on www.youtube.com" } ]
+                delegate: RowLayout {
+                    required property var modelData
+                    Layout.leftMargin: Kirigami.Units.largeSpacing
+                    spacing: Kirigami.Units.smallSpacing
+                    Kirigami.Icon { source: modelData.icon; Layout.preferredWidth: Kirigami.Units.iconSizes.small; Layout.preferredHeight: Layout.preferredWidth }
+                    Label { text: modelData.text }
                 }
             }
         }

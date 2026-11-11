@@ -16,7 +16,8 @@ home of Kondor extensions:
 ## Context
 
 - **Repository state:** the repository exists (public, GPL-3.0, branch `main`) with only `LICENSE`
-  and a stub `README.md`. Pages is not enabled yet.
+  and a stub `README.md`. Pages is already enabled with GitHub Actions as the source, at
+  `https://lukasborges.github.io/kondor-extensions/`, but nothing is deployed yet.
 - **Format:** the package format, the manifest and the catalog are defined in
   [`0107-kondor-extensions.md`](0107-kondor-extensions.md), items 1 and 5. This issue implements
   the producer side and must not change the format. If it needs a change, ask a question.
@@ -129,8 +130,7 @@ home of Kondor extensions:
 
 ## Maintainer setup (done by the maintainer after the merge, documented in the PR)
 
-1. Enable Pages through GitHub Actions:
-   `gh api -X POST repos/lukasborges/kondor-extensions/pages -f build_type=workflow`.
+1. ~~Enable Pages through GitHub Actions~~: done by the maintainer on 2026-11-10.
 2. Protect `main`: require pull requests and the `build` check.
 3. Run `publish.yml` once (`gh workflow run publish.yml --repo lukasborges/kondor-extensions`) and
    open the catalog URL.

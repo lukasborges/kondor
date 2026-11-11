@@ -220,9 +220,9 @@ pt_BR) · 7. #36 Rename to Kondor Browser · 8. #34 Translations for the main KD
 24. #16 Developer tools · 25. #17 Print and save as PDF · 26. #24 Per-site zoom ·
 27. #23 Spell checking · 28. #22 Reader mode · 29. #20 Ad and tracker blocking ·
 30. #21 Passwords · 31. #25 Flatpak · 32. #98 Self-hosted Flatpak repository ·
-33. #88 Browser extensions spike · 34. #106 Import passwords · 35. #107 Kondor extensions ·
-36. #108 Extensions repository · 37. #109 Dark Mode extension · 38. #110 Video Speed Controller
-extension · 39. #111 User Scripts extension · 40. #112 Cookie Banner Blocker extension ·
-41. #113 Skip Sponsors extension · 42. #114 YouTube Dislike Counts extension · 43. #115 JSON
-Viewer extension · 44. #116 User Styles extension · 45. #117 Clean Links extension ·
-46. #118 Mouse Gestures extension · 47. #121 Native Windows build
+33. #88 Browser extensions spike · 34. #106 Import passwords · 35. #121 Native Windows build ·
+36. #107 Kondor extensions · 37. #108 Extensions repository · 38. #109 Dark Mode extension ·
+39. #110 Video Speed Controller extension · 40. #111 User Scripts extension · 41. #112 Cookie
+Banner Blocker extension · 42. #113 Skip Sponsors extension · 43. #114 YouTube Dislike Counts
+extension · 44. #115 JSON Viewer extension · 45. #116 User Styles extension · 46. #117 Clean
+Links extension · 47. #118 Mouse Gestures extension

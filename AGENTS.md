@@ -197,4 +197,4 @@ pt_BR) · 7. #36 Rename to Kondor Browser · 8. #34 Translations for the main KD
 24. #16 Developer tools · 25. #17 Print and save as PDF · 26. #24 Per-site zoom ·
 27. #23 Spell checking · 28. #22 Reader mode · 29. #20 Ad and tracker blocking ·
 30. #21 Passwords · 31. #25 Flatpak · 32. #98 Self-hosted Flatpak repository ·
-33. #88 Browser extensions spike
+33. #88 Browser extensions spike · 34. #106 Import passwords

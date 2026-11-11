@@ -17,6 +17,9 @@ Rectangle {
     property string passwordsFilter: "" // #102: text in the filter field
     property bool addPasswordDialog: false // #102: the "Add Password" dialog is open
     property bool addPasswordDuplicate: false // #102: the dialog's login is already saved
+    property bool importDialog: false // #106: the "Import Passwords" review dialog is open
+    property bool importUnrecognized: false // #106: the chosen file is not a password export
+    property bool importDone: false // #106: an import just finished (message on the page)
     property string search: ""
     property bool modified: false // pending changes → Apply enabled
 
@@ -192,6 +195,14 @@ Rectangle {
                             text: "KWallet is disabled or access to it was denied, so passwords cannot be saved or filled."
                             actions: [ Kirigami.Action { text: "Try Again"; icon.name: "view-refresh" } ]
                         }
+                        Kirigami.InlineMessage {
+                            Layout.fillWidth: true
+                            visible: root.importDone
+                            type: Kirigami.MessageType.Positive
+                            showCloseButton: true
+                            text: "Imported 38 passwords from “bitwarden_export.csv”. The file holds your passwords unencrypted: delete it when you no longer need it."
+                            actions: [ Kirigami.Action { text: "Move File to Trash"; icon.name: "user-trash" } ]
+                        }
                         CheckBox { text: "Offer to save passwords"; checked: true; enabled: !root.walletDenied }
                         RowLayout {
                             Layout.fillWidth: true
@@ -205,6 +216,11 @@ Rectangle {
                             Button {
                                 text: "Add Password…"
                                 icon.name: "list-add"
+                                enabled: !root.walletDenied
+                            }
+                            Button {
+                                text: "Import…"
+                                icon.name: "document-import"
                                 enabled: !root.walletDenied
                             }
                         }
@@ -229,7 +245,7 @@ Rectangle {
                                       : "No saved passwords"
                                 explanation: root.passwordsFilter.length
                                              ? ""
-                                             : "Kondor offers to save a password when you log in to a site. You can also add one here."
+                                             : "Kondor offers to save a password when you log in to a site. You can also add one here, or import the CSV file exported by another browser or password manager."
                                 helpfulAction: root.passwordsFilter.length ? null : addAction
                                 Kirigami.Action { id: addAction; text: "Add Password…"; icon.name: "list-add" }
                             }
@@ -364,6 +380,73 @@ Rectangle {
                 visible: root.addPasswordDuplicate
                 type: Kirigami.MessageType.Warning
                 text: "A password for maria on invent.kde.org is already saved. Saving replaces it."
+            }
+        }
+    }
+
+    // ── Import Passwords dialog (#106) ──────────────────────────────────
+    Dialog {
+        id: importDialog
+        parent: root
+        anchors.centerIn: parent
+        width: Kirigami.Units.gridUnit * 34
+        modal: true
+        dim: true
+        visible: root.importDialog
+        title: "Import Passwords"
+        footer: DialogButtonBox {
+            Button {
+                visible: !root.importUnrecognized
+                text: "Import 38 Passwords"
+                icon.name: "document-import"
+                DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
+            }
+            Button {
+                text: root.importUnrecognized ? "Close" : "Cancel"
+                icon.name: root.importUnrecognized ? "dialog-close" : "dialog-cancel"
+                DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
+            }
+        }
+
+        contentItem: ColumnLayout {
+            spacing: Kirigami.Units.largeSpacing
+
+            Kirigami.InlineMessage {
+                Layout.fillWidth: true
+                visible: root.importUnrecognized
+                type: Kirigami.MessageType.Error
+                text: "“notes.csv” is not a password export: it has no website, username and password columns."
+            }
+
+            Kirigami.FormLayout {
+                Layout.fillWidth: true
+                visible: !root.importUnrecognized
+                Label {
+                    Kirigami.FormData.label: "File:"
+                    text: "bitwarden_export.csv (Bitwarden)"
+                }
+                Label {
+                    Kirigami.FormData.label: "New:"
+                    text: "38 passwords"
+                }
+                Label {
+                    Kirigami.FormData.label: "Already saved:"
+                    text: "4 passwords are identical and are skipped"
+                }
+                Label {
+                    Kirigami.FormData.label: "Different:"
+                    text: "2 sites already have a different saved password"
+                }
+                CheckBox {
+                    text: "Replace them with the imported passwords"
+                    checked: false
+                }
+                Label {
+                    Kirigami.FormData.label: "Not imported:"
+                    Layout.fillWidth: true
+                    wrapMode: Text.WordWrap
+                    text: "3 entries: 2 without an https:// website, 1 without a username or password"
+                }
             }
         }
     }

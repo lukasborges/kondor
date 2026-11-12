@@ -1,33 +1,32 @@
-// Kondor web channel client, page side. Runs in the application world of every
-// frame (after qwebchannel.js, in the same script), so the password manager
-// and the extensions share one connection: `window.__kondorChannel` is a
-// promise for the objects registered on the tab's channel
-// (`kondorPasswords` in normal tabs, `kondorExtensions` in every tab). The
-// page's own scripts cannot see this world.
-(function () {
-    "use strict";
+{
+    const hasTransport = () => typeof QWebChannel !== "undefined" && typeof qt !== "undefined"
+        && !!qt.webChannelTransport;
 
-    if (window.__kondorChannel)
-        return;
+    const connectTo = (resolve) => {
+        if (!hasTransport())
+            return false;
+        new QWebChannel(qt.webChannelTransport, (channel) => resolve(channel.objects));
+        return true;
+    };
 
-    window.__kondorChannel = new Promise(function (resolve) {
-        function connect() {
-            if (typeof QWebChannel === "undefined" || typeof qt === "undefined"
-                    || !qt.webChannelTransport)
-                return false;
-            new QWebChannel(qt.webChannelTransport, function (channel) {
-                resolve(channel.objects);
-            });
-            return true;
-        }
-
-        if (connect())
-            return;
-        // At document start the transport may not exist yet.
+    const retryUntilConnected = (resolve) => {
         let tries = 0;
-        const timer = setInterval(function () {
-            if (connect() || ++tries > 200)
+        const timer = setInterval(() => {
+            if (connectTo(resolve) || ++tries > 200)
                 clearInterval(timer);
         }, 25);
-    });
-})();
+    };
+
+    const startChannel = (resolve) => {
+        if (!connectTo(resolve))
+            retryUntilConnected(resolve);
+    };
+
+    const connectChannel = () => {
+        if (window.__kondorChannel)
+            return;
+        window.__kondorChannel = new Promise(startChannel);
+    };
+
+    connectChannel();
+}

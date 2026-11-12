@@ -1,4 +1,3 @@
-// Context menu for a tab in the tab bar.
 import QtQuick
 import QtQuick.Controls
 import Kondor
@@ -11,10 +10,7 @@ Menu {
     property TabModel tabModel: null
     property var targetWindow: null
 
-    // Every "new tab" entry point goes through the window, which also focuses
-    // the address bar.
     signal newTabRequested()
-    // The window opens the tab's URL in a new one, then closes it here.
     signal moveToNewWindowRequested()
 
     MenuItem {

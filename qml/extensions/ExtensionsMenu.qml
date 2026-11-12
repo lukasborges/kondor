@@ -3,44 +3,64 @@ import QtQuick.Controls
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// The toolbar "Extensions" menu: one section per enabled extension with a
-// toolbar action (its items, with a per-tab checked state, and "Run on <site>"),
-// then "Manage Extensions…". The sections are rebuilt every time it opens.
 Menu {
     id: root
 
     required property Tab tab
     signal manageRequested()
 
-    // Flat description of the current content: `{ kind, ... }` entries.
     property var entries: []
     readonly property string host: root.tab ? root.tab.url.toString().replace(/^https?:\/\/([^/:?#]+).*$/, "$1") : ""
 
     function rebuild() {
+        root.entries = root.tab ? root.collectEntries() : []
+    }
+
+    function collectEntries() {
         const list = []
-        if (!root.tab) {
-            root.entries = list
-            return
+        for (const extension of ExtensionManager.actionExtensions(root.tab.isPrivate))
+            list.push(...root.entriesOf(extension))
+        return list
+    }
+
+    function entriesOf(extension) {
+        const list = [{ kind: "header", title: extension.name, icon: extension.iconSource }]
+        list.push(...extension.items.map(function(item) { return root.itemEntry(extension, item) }))
+        if (extension.siteToggle && ExtensionManager.originOf(root.tab.url) !== "")
+            list.push(root.siteEntry(extension))
+        return list
+    }
+
+    function itemEntry(extension, item) {
+        return {
+            kind: "item", extension: extension.id, id: item.id, title: item.title,
+            checkable: item.checkable, icon: item.icon,
+            checked: root.tab.extensionItems.isChecked(extension.id, item.id)
         }
-        const extensions = ExtensionManager.actionExtensions(root.tab.isPrivate)
-        for (const extension of extensions) {
-            list.push({ kind: "header", title: extension.name, icon: extension.iconSource })
-            for (const item of extension.items) {
-                list.push({
-                    kind: "item", extension: extension.id, id: item.id, title: item.title,
-                    checkable: item.checkable, icon: item.icon,
-                    checked: root.tab.extensionItems.isChecked(extension.id, item.id)
-                })
-            }
-            if (extension.siteToggle && ExtensionManager.originOf(root.tab.url) !== "") {
-                list.push({
-                    kind: "site", extension: extension.id,
-                    title: qsTr("Run on %1").arg(root.host),
-                    checked: ExtensionManager.siteEnabled(extension.id, root.tab.url)
-                })
-            }
+    }
+
+    function siteEntry(extension) {
+        return {
+            kind: "site", extension: extension.id,
+            title: qsTr("Run on %1").arg(root.host),
+            checked: ExtensionManager.siteEnabled(extension.id, root.tab.url)
         }
-        root.entries = list
+    }
+
+    function triggerItem(data) {
+        root.tab.extensionItems.trigger(data.extension, data.id, data.checkable === true)
+    }
+
+    function toggleSite(data, checked) {
+        ExtensionManager.setSiteEnabled(data.extension, root.tab.url, checked)
+        root.tab.reload()
+    }
+
+    function trigger(data, checked) {
+        if (data.kind === "item")
+            root.triggerItem(data)
+        else if (data.kind === "site")
+            root.toggleSite(data, checked)
     }
 
     onAboutToShow: root.rebuild()
@@ -58,18 +78,8 @@ Menu {
             font.bold: entry.modelData.kind === "header"
             icon.name: entry.modelData.kind === "header" || entry.modelData.icon
                        ? (entry.modelData.icon ?? "") : ""
-            // Headers are always drawn at full strength.
             opacity: 1.0
-            onTriggered: {
-                if (entry.modelData.kind === "item") {
-                    root.tab.extensionItems.trigger(entry.modelData.extension, entry.modelData.id,
-                                                  entry.modelData.checkable === true)
-                } else if (entry.modelData.kind === "site") {
-                    ExtensionManager.setSiteEnabled(entry.modelData.extension, root.tab.url,
-                                                    entry.checked)
-                    root.tab.reload()
-                }
-            }
+            onTriggered: root.trigger(entry.modelData, entry.checked)
         }
     }
 

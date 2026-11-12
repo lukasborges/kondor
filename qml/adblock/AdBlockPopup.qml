@@ -4,8 +4,6 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Ad and tracker blocking for the current site, opened from the shield button
-// in the address bar: blocked count, per-site switch and a list refresh.
 Popup {
     id: root
 
@@ -84,7 +82,6 @@ Popup {
             enabled: AdBlockManager.enabled
             checked: !root.siteAllowed && AdBlockManager.enabled
             onToggled: {
-                // A private tab never writes its choice to disk.
                 AdBlockManager.setAllowed(root.host, !checked,
                                           root.tab ? !root.tab.isPrivate : true)
                 root.siteAllowed = AdBlockManager.isAllowed(root.host)

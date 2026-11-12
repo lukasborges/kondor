@@ -6,9 +6,6 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Native New Tab page shown by WebViewTab when its Tab is not displaying a
-// page: the logo, a search field and the sites the user visits most. Private
-// tabs get a variant without top sites and without touching the history.
 Rectangle {
     id: page
 
@@ -21,12 +18,10 @@ Rectangle {
 
     property var topSites: []
 
-    // The width available to the centered column, also used to decide how many
-    // tiles fit per row. Using the grid's own width would create a binding loop
-    // (columns -> implicit width -> columns).
     readonly property real contentWidth: Math.min(page.width - Kirigami.Units.gridUnit * 4,
                                                   Kirigami.Units.gridUnit
                                                   * (page.tab.isPrivate ? 30 : 36))
+    readonly property bool showsTopSites: !page.tab.isPrivate && Settings.showTopSites
 
     function refreshTopSites() {
         if (page.tab.isPrivate || !Settings.showTopSites) {
@@ -50,14 +45,20 @@ Rectangle {
         Settings.hiddenTopSites = hidden
     }
 
-    onVisibleChanged: {
+    function search(text) {
+        if (text.trim().length === 0)
+            return false
+        page.tab.navigateTo(ProfileManager.resolveAddress(text))
+        return true
+    }
+
+    function refreshIfVisible() {
         if (visible)
             refreshTopSites()
     }
-    Component.onCompleted: {
-        if (visible)
-            refreshTopSites()
-    }
+
+    onVisibleChanged: refreshIfVisible()
+    Component.onCompleted: refreshIfVisible()
 
     Connections {
         target: Settings
@@ -77,7 +78,6 @@ Rectangle {
         width: page.contentWidth
         spacing: Kirigami.Units.gridUnit * 2
 
-        // ── Normal tab: logo and application name ───────────────────────
         RowLayout {
             visible: !page.tab.isPrivate
             Layout.alignment: Qt.AlignHCenter
@@ -96,7 +96,6 @@ Rectangle {
             }
         }
 
-        // ── Private tab: icon and explanation ───────────────────────────
         Kirigami.Icon {
             visible: page.tab.isPrivate
             source: "view-private"
@@ -118,97 +117,21 @@ Rectangle {
             Layout.preferredWidth: Kirigami.Units.gridUnit * 30
             placeholderText: qsTr("Search or enter address")
 
-            onAccepted: {
-                if (text.trim().length === 0)
-                    return
-                page.tab.navigateTo(ProfileManager.resolveAddress(text))
-                text = ""
-            }
+            onAccepted: if (page.search(text)) text = ""
         }
 
-        // ── Top sites (normal tabs only) ────────────────────────────────
-        GridLayout {
-            id: topSitesGrid
+        TopSitesGrid {
             Layout.alignment: Qt.AlignHCenter
-            visible: !page.tab.isPrivate && Settings.showTopSites
-                     && page.topSites.length > 0
-            columns: Math.max(1, Math.min(4,
-                Math.floor(page.contentWidth / (Kirigami.Units.gridUnit * 8))))
-            rowSpacing: Kirigami.Units.largeSpacing
-            columnSpacing: Kirigami.Units.largeSpacing
-
-            Repeater {
-                model: page.topSites
-
-                delegate: ItemDelegate {
-                    id: tile
-                    required property var modelData
-
-                    Layout.preferredWidth: Kirigami.Units.gridUnit * 7
-                    Layout.maximumWidth: Kirigami.Units.gridUnit * 7
-                    Accessible.name: tile.modelData.host
-
-                    contentItem: ColumnLayout {
-                        spacing: Kirigami.Units.smallSpacing
-
-                        Rectangle {
-                            Layout.alignment: Qt.AlignHCenter
-                            Layout.preferredWidth: Kirigami.Units.gridUnit * 3.5
-                            Layout.preferredHeight: Kirigami.Units.gridUnit * 3.5
-                            radius: Kirigami.Units.cornerRadius
-                            color: Kirigami.Theme.alternateBackgroundColor
-                            border.color: Qt.alpha(Kirigami.Theme.textColor, 0.15)
-
-                            SiteIcon {
-                                anchors.centerIn: parent
-                                width: Kirigami.Units.iconSizes.medium
-                                height: width
-                                pageUrl: tile.modelData.url
-                                fallback: "internet-web-browser"
-                            }
-                        }
-
-                        Label {
-                            Layout.fillWidth: true
-                            horizontalAlignment: Text.AlignHCenter
-                            elide: Text.ElideRight
-                            text: tile.modelData.host
-                        }
-                    }
-
-                    ToolTip.visible: hovered
-                    ToolTip.text: tile.modelData.title.length
-                                  ? tile.modelData.title + "\n" + tile.modelData.url
-                                  : tile.modelData.url
-                    ToolTip.delay: 600
-
-                    onClicked: {
-                        if (BookmarkManager.ctrlPressed())
-                            page.openInNewTab(tile.modelData.url, false)
-                        else
-                            page.tab.navigateTo(tile.modelData.url)
-                    }
-
-                    // The delegate only handles the left button.
-                    MouseArea {
-                        anchors.fill: parent
-                        acceptedButtons: Qt.MiddleButton | Qt.RightButton
-                        onClicked: function(mouse) {
-                            if (mouse.button === Qt.MiddleButton) {
-                                page.openInNewTab(tile.modelData.url, false)
-                            } else {
-                                tileMenu.site = tile.modelData
-                                tileMenu.popup(tile, mouse.x, mouse.y)
-                            }
-                        }
-                    }
-                }
-            }
+            visible: page.showsTopSites && page.topSites.length > 0
+            sites: page.topSites
+            contentWidth: page.contentWidth
+            onNavigateRequested: function(url) { page.tab.navigateTo(url) }
+            onOpenInNewTabRequested: function(url) { page.openInNewTab(url, false) }
+            onMenuRequested: function(request) { tileMenu.popupFor(request) }
         }
 
         Label {
-            visible: !page.tab.isPrivate && Settings.showTopSites
-                     && page.topSites.length === 0
+            visible: page.showsTopSites && page.topSites.length === 0
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
             color: Kirigami.Theme.disabledTextColor
@@ -234,34 +157,9 @@ Rectangle {
         }
     }
 
-    Menu {
+    TopSiteMenu {
         id: tileMenu
-        property var site: null
-
-        MenuItem {
-            text: qsTr("Open in New Tab")
-            icon.name: "tab-new"
-            onTriggered: {
-                if (tileMenu.site)
-                    page.openInNewTab(tileMenu.site.url, false)
-            }
-        }
-        MenuItem {
-            text: qsTr("Open in New Private Tab")
-            icon.name: "view-private"
-            onTriggered: {
-                if (tileMenu.site)
-                    page.openInNewTab(tileMenu.site.url, true)
-            }
-        }
-        MenuSeparator {}
-        MenuItem {
-            text: qsTr("Remove from Top Sites")
-            icon.name: "list-remove"
-            onTriggered: {
-                if (tileMenu.site)
-                    page.hideSite(tileMenu.site.host)
-            }
-        }
+        onOpenRequested: function(url, isPrivate) { page.openInNewTab(url, isPrivate) }
+        onHideRequested: function(host) { page.hideSite(host) }
     }
 }

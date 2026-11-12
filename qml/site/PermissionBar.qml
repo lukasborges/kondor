@@ -4,9 +4,6 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Inline prompt for a site permission request (camera, microphone, location,
-// notifications, ...). It belongs to the tab that asked; the answer is stored
-// by the profile, so there is no separate "remember" checkbox.
 InlineBar {
     id: root
 

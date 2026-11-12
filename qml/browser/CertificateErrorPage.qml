@@ -4,9 +4,6 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Full-page warning shown over the WebEngineView while the tab has a pending
-// certificate error. Back to Safety rejects it; an overridable error also
-// offers an explicit, secondary "Continue Anyway (Unsafe)".
 Item {
     id: root
 

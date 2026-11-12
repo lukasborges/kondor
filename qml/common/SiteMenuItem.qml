@@ -4,19 +4,15 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// A menu row for a web page: the site favicon (SiteIcon) followed by the
-// elided title. Used by the History and Bookmarks menus.
 MenuItem {
     id: root
 
     required property url pageUrl
     required property string label
 
-    // `text` keeps the menu width and keyboard type-ahead working.
     text: label
 
     contentItem: RowLayout {
-        // Mirror the style's own MenuItem row so the favicon sits in the icon column.
         Item {
             Layout.preferredWidth: (root.ListView.view && root.ListView.view.hasCheckables) || root.checkable
                 ? root.indicator.width : Kirigami.Units.smallSpacing

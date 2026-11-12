@@ -4,8 +4,6 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Floating controls of reader mode, shown over the top-right corner of the
-// page: font size, font family and a way out.
 Pane {
     id: root
 

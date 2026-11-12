@@ -4,10 +4,6 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Dropdown under the address bar. Its rows are, in this order: visiting the
-// typed address and searching for it (#44), matching bookmarks, matching
-// history entries and the search engine's suggestions (#11). Focus stays in
-// the field: the bar owns the keyboard and inline completion.
 Popup {
     id: root
 
@@ -15,11 +11,8 @@ Popup {
     focus: false
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
 
-    // Typed text the rows are built from; programmatic changes to the address
-    // bar (selected rows, inline completion) must not rebuild them.
     property string text
     property int currentIndex: 0
-    // Search-engine suggestions that arrived for `text`; cleared on every edit.
     property var networkSuggestions: []
 
     readonly property int maxRows: 10
@@ -31,90 +24,63 @@ Popup {
     onTextChanged: networkSuggestions = []
 
     function buildRows() {
-        const typed = text.trim()
-        if (typed.length === 0)
-            return []
+        const typed = root.text.trim()
+        return typed.length === 0 ? [] : root.buildRowsFor(typed)
+    }
 
+    function buildRowsFor(typed) {
         const rows = []
         const seen = ({})
+        root.appendUnique(rows, seen, root.visitRow(typed))
+        rows.push(root.searchRow(typed))
+        root.appendMatches(rows, seen, typed)
+        return rows.concat(root.networkRows()).slice(0, root.maxRows)
+    }
 
-        // #44 rows: for an address, visiting it (selected) and searching for
-        // the same text; otherwise only the search row.
+    function appendMatches(rows, seen, typed) {
+        BookmarkManager.search(typed, 4).forEach(function(bookmark) {
+            root.appendUnique(rows, seen, root.matchRow("bookmarks", bookmark))
+        })
+        HistoryManager.suggest(typed, 6).forEach(function(entry) {
+            root.appendUnique(rows, seen, root.matchRow("view-history", entry))
+        })
+    }
+
+    function appendUnique(rows, seen, row) {
+        if (row.url.length === 0 || seen[row.url])
+            return
+        seen[row.url] = true
+        rows.push(row)
+    }
+
+    function visitRow(typed) {
         const address = String(ProfileManager.addressUrl(typed))
-        if (address.length > 0) {
-            rows.push({
-                iconName: "globe",
-                label: address,
-                suffix: qsTr("Visit"),
-                url: address,
-                fieldText: address
-            })
-            seen[address] = true
-        }
+        return { iconName: "globe", label: address, suffix: qsTr("Visit"),
+                 url: address, fieldText: address }
+    }
 
+    function searchRow(typed) {
         const engineName = Settings.searchEngineName()
         //: %1 is the search engine name
-        const searchSuffix = engineName.length > 0
-            ? qsTr("Search with %1").arg(engineName)
-            : qsTr("Search")
-        rows.push({
-            iconName: "edit-find",
-            label: typed,
-            suffix: searchSuffix,
-            url: ProfileManager.searchUrl(typed),
-            fieldText: typed
+        const suffix = engineName.length > 0 ? qsTr("Search with %1").arg(engineName) : qsTr("Search")
+        return { iconName: "edit-find", label: typed, suffix: suffix,
+                 url: ProfileManager.searchUrl(typed), fieldText: typed }
+    }
+
+    function matchRow(iconName, entry) {
+        const url = String(entry.url)
+        const title = String(entry.title)
+        return { iconName: iconName, label: title.length > 0 ? title : url,
+                 suffix: url, url: url, fieldText: url }
+    }
+
+    function networkRows() {
+        return root.networkSuggestions.map(String).filter(function(suggestion) {
+            return suggestion.length > 0
+        }).map(function(suggestion) {
+            return { iconName: "edit-find", label: suggestion, suffix: "",
+                     url: ProfileManager.searchUrl(suggestion), fieldText: suggestion }
         })
-
-        // Bookmarks (#2) and history (#1) only ever read persistent data, so
-        // they are safe to show while a private tab is focused.
-        const bookmarks = BookmarkManager.search(typed, 4)
-        for (let i = 0; i < bookmarks.length; ++i) {
-            const bookmark = bookmarks[i]
-            const url = String(bookmark.url)
-            if (url.length === 0 || seen[url])
-                continue
-            seen[url] = true
-            rows.push({
-                iconName: "bookmarks",
-                label: String(bookmark.title).length > 0 ? String(bookmark.title) : url,
-                suffix: url,
-                url: url,
-                fieldText: url
-            })
-        }
-
-        const history = HistoryManager.suggest(typed, 6)
-        for (let i = 0; i < history.length; ++i) {
-            const entry = history[i]
-            const url = String(entry.url)
-            if (url.length === 0 || seen[url])
-                continue
-            seen[url] = true
-            rows.push({
-                iconName: "view-history",
-                label: String(entry.title).length > 0 ? String(entry.title) : url,
-                suffix: url,
-                url: url,
-                fieldText: url
-            })
-        }
-
-        // Network suggestions carry no URL of their own: activating one
-        // searches for it.
-        for (let i = 0; i < networkSuggestions.length; ++i) {
-            const suggestion = String(networkSuggestions[i])
-            if (suggestion.length === 0)
-                continue
-            rows.push({
-                iconName: "edit-find",
-                label: suggestion,
-                suffix: "",
-                url: ProfileManager.searchUrl(suggestion),
-                fieldText: suggestion
-            })
-        }
-
-        return rows.slice(0, maxRows)
     }
 
     function activate(index, background) {
@@ -123,8 +89,6 @@ Popup {
         navigate(rows[index].url, background === true)
     }
 
-    // Text the address bar shows when the row is selected with the keyboard:
-    // the typed/suggested search text rather than the engine's search URL.
     function selectedText(index) {
         if (index < 0 || index >= rows.length)
             return ""
@@ -182,7 +146,6 @@ Popup {
                     }
                 }
 
-                // Middle click opens the row in a background tab.
                 MouseArea {
                     anchors.fill: parent
                     acceptedButtons: Qt.MiddleButton

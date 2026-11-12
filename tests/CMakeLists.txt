@@ -553,6 +553,50 @@ set_tests_properties(tst_tabstrip PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
 )
 
+qt_add_executable(tst_tabstripscroll
+    browser/tst_tabstripscroll.cpp
+    ${KONDOR_TAB_SOURCES}
+    ${KONDOR_PASSWORD_STORE_SOURCES}
+    ${KONDOR_TAB_MODEL_SOURCES}
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
+    ${KONDOR_ADBLOCK_SOURCES}
+    ../src/browser/addressresolver.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
+    ../src/browser/faviconstore.cpp
+)
+
+target_compile_definitions(tst_tabstripscroll PRIVATE
+    KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+    KONDOR_QML_IMPORT_DIR="${KONDOR_TEST_QML_IMPORT_DIR}"
+)
+
+target_include_directories(tst_tabstripscroll PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_tabstripscroll PRIVATE
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebEngineQuick
+    KF6::Wallet
+)
+
+add_test(NAME tst_tabstripscroll COMMAND tst_tabstripscroll)
+set_tests_properties(tst_tabstripscroll PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)
+
 qt_add_executable(tst_sitepermissions
     site/tst_sitepermissions.cpp
     ${KONDOR_TAB_SOURCES}
@@ -593,6 +637,142 @@ target_link_libraries(tst_sitepermissions PRIVATE
 
 add_test(NAME tst_sitepermissions COMMAND tst_sitepermissions)
 set_tests_properties(tst_sitepermissions PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)
+
+qt_add_executable(tst_pagecontextmenu
+    browser/tst_pagecontextmenu.cpp
+    ${KONDOR_TAB_MODEL_SOURCES}
+    ${KONDOR_TAB_SOURCES}
+    ${KONDOR_PASSWORD_STORE_SOURCES}
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
+    ${KONDOR_ADBLOCK_SOURCES}
+    ../src/browser/addressresolver.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
+    ../src/browser/faviconstore.cpp
+)
+
+target_compile_definitions(tst_pagecontextmenu PRIVATE
+    KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+    KONDOR_QML_IMPORT_DIR="${KONDOR_TEST_QML_IMPORT_DIR}"
+)
+
+target_include_directories(tst_pagecontextmenu PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_pagecontextmenu PRIVATE
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebEngineQuick
+    Qt6::Concurrent
+    Qt6::Network
+    KF6::Wallet
+)
+
+add_test(NAME tst_pagecontextmenu COMMAND tst_pagecontextmenu)
+set_tests_properties(tst_pagecontextmenu PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)
+
+qt_add_executable(tst_permissiontypeinfo
+    site/tst_permissiontypeinfo.cpp
+    ${KONDOR_TAB_SOURCES}
+    ${KONDOR_PASSWORD_STORE_SOURCES}
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
+    ${KONDOR_ADBLOCK_SOURCES}
+    ../src/browser/addressresolver.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
+    ../src/browser/faviconstore.cpp
+)
+
+target_compile_definitions(tst_permissiontypeinfo PRIVATE
+    KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+    KONDOR_QML_IMPORT_DIR="${KONDOR_TEST_QML_IMPORT_DIR}"
+)
+
+target_include_directories(tst_permissiontypeinfo PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_permissiontypeinfo PRIVATE
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebEngineQuick
+    Qt6::Concurrent
+    Qt6::Network
+    KF6::Wallet
+)
+
+add_test(NAME tst_permissiontypeinfo COMMAND tst_permissiontypeinfo)
+set_tests_properties(tst_permissiontypeinfo PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)
+
+qt_add_executable(tst_downloadstatus
+    downloads/tst_downloadstatus.cpp
+    ${KONDOR_TAB_SOURCES}
+    ${KONDOR_PASSWORD_STORE_SOURCES}
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
+    ${KONDOR_ADBLOCK_SOURCES}
+    ../src/browser/addressresolver.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
+    ../src/browser/faviconstore.cpp
+)
+
+target_compile_definitions(tst_downloadstatus PRIVATE
+    KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+    KONDOR_QML_IMPORT_DIR="${KONDOR_TEST_QML_IMPORT_DIR}"
+)
+
+target_include_directories(tst_downloadstatus PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_downloadstatus PRIVATE
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebEngineQuick
+    Qt6::Concurrent
+    Qt6::Network
+    KF6::Wallet
+)
+
+add_test(NAME tst_downloadstatus COMMAND tst_downloadstatus)
+set_tests_properties(tst_downloadstatus PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
 )
 
@@ -730,6 +910,7 @@ target_link_libraries(tst_bookmarkswindow PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_mainmenu PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_settingswindow PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_tabstrip PRIVATE Qt6::Concurrent Qt6::Network)
+target_link_libraries(tst_tabstripscroll PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_sitepermissions PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_sessionmanager PRIVATE Qt6::Concurrent Qt6::Network)
 

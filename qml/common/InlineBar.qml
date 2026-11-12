@@ -3,8 +3,6 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Shared strip between the header and the page content (find, permissions,
-// crash notices). The page keeps the View color set and thin separators.
 Rectangle {
     id: root
 

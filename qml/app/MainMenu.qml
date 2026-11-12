@@ -17,10 +17,10 @@ Menu {
     readonly property var tab: root.browserWindow.tabModel.currentTab
     readonly property bool zoomEnabled: tab ? !tab.newTabPage : false
 
-    MenuItem { action: root.browserWindow.newTabAction }
-    MenuItem { action: root.browserWindow.newPrivateTabAction }
-    MenuItem { action: root.browserWindow.newWindowAction }
-    MenuItem { action: root.browserWindow.newPrivateWindowAction }
+    MenuItem { action: root.browserWindow.actions.newTabAction }
+    MenuItem { action: root.browserWindow.actions.newPrivateTabAction }
+    MenuItem { action: root.browserWindow.actions.newWindowAction }
+    MenuItem { action: root.browserWindow.actions.newPrivateWindowAction }
 
     MenuSeparator {}
 
@@ -90,8 +90,8 @@ Menu {
             }
         }
 
-        MenuItem { action: root.browserWindow.historyAction }
-        MenuItem { action: root.browserWindow.reopenClosedTabAction }
+        MenuItem { action: root.browserWindow.actions.historyAction }
+        MenuItem { action: root.browserWindow.actions.reopenClosedTabAction }
 
         Component {
             id: separatorComponent
@@ -111,9 +111,9 @@ Menu {
 
     MenuSeparator {}
 
-    MenuItem { action: root.browserWindow.findAction }
-    MenuItem { action: root.browserWindow.printAction }
-    MenuItem { action: root.browserWindow.savePageAction }
+    MenuItem { action: root.browserWindow.actions.findAction }
+    MenuItem { action: root.browserWindow.actions.printAction }
+    MenuItem { action: root.browserWindow.actions.savePageAction }
 
     MenuSeparator {}
 
@@ -191,21 +191,21 @@ Menu {
         title: qsTr("More Tools")
         icon.name: "applications-development"
 
-        MenuItem { action: root.browserWindow.devToolsAction }
-        MenuItem { action: root.browserWindow.saveAsPdfAction }
-        MenuItem { action: root.browserWindow.sitePermissionsAction }
+        MenuItem { action: root.browserWindow.actions.devToolsAction }
+        MenuItem { action: root.browserWindow.actions.saveAsPdfAction }
+        MenuItem { action: root.browserWindow.actions.sitePermissionsAction }
     }
 
     MenuSeparator {}
 
-    MenuItem { action: root.browserWindow.settingsAction }
+    MenuItem { action: root.browserWindow.actions.settingsAction }
 
     Menu {
         title: qsTr("Help")
         icon.name: "help-contents"
 
-        MenuItem { action: root.browserWindow.reportBugAction }
+        MenuItem { action: root.browserWindow.actions.reportBugAction }
         MenuSeparator {}
-        MenuItem { action: root.browserWindow.aboutAction }
+        MenuItem { action: root.browserWindow.actions.aboutAction }
     }
 }

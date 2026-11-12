@@ -37,6 +37,27 @@ qt_add_qml_module(kondor
     VERSION 1.0
     QML_FILES
         qml/app/BrowserWindow.qml
+        qml/app/WindowTabController.qml
+        qml/app/FullScreenController.qml
+        qml/app/WindowCloseGuard.qml
+        qml/app/WindowDialogs.qml
+        qml/app/PageFileDialogs.qml
+        qml/app/BrowserActions.qml
+        qml/app/BrowserShortcuts.qml
+        qml/app/NavigationToolBar.qml
+        qml/app/PageArea.qml
+        qml/browser/AddressBar.qml
+        qml/browser/AddressCompleter.qml
+        qml/browser/AddressBarButtons.qml
+        qml/site/SiteSecurityButton.qml
+        qml/adblock/AdBlockButton.qml
+        qml/browser/ZoomButton.qml
+        qml/passwords/PasswordButton.qml
+        qml/browser/ReaderButton.qml
+        qml/bookmarks/BookmarkButton.qml
+        qml/bookmarks/BookmarkEditorPopup.qml
+        qml/downloads/DownloadSaveDialog.qml
+        qml/common/LocalPath.qml
         qml/browser/TabStrip.qml
         qml/browser/WebViewTab.qml
         qml/browser/PageContextMenu.qml

@@ -2,7 +2,6 @@
   "comments": {
     "qml/adblock/AdBlockPopup.qml": 3,
     "qml/app/AboutWindow.qml": 13,
-    "qml/app/BrowserWindow.qml": 106,
     "qml/app/MainMenu.qml": 8,
     "qml/bookmarks/BookmarkMenu.qml": 16,
     "qml/bookmarks/BookmarksBar.qml": 7,
@@ -126,7 +125,6 @@
   },
   "file-length": {
     "qml/app/AboutWindow.qml": 337,
-    "qml/app/BrowserWindow.qml": 1488,
     "qml/app/MainMenu.qml": 211,
     "qml/bookmarks/BookmarksWindow.qml": 962,
     "qml/browser/NewTabPage.qml": 267,
@@ -173,18 +171,6 @@
     "tests/site/tst_sitepermissions.cpp": 251
   },
   "function-length": {
-    "qml/app/BrowserWindow.qml::moveCurrentTab": 11,
-    "qml/app/BrowserWindow.qml::onAccepted#2": 15,
-    "qml/app/BrowserWindow.qml::onClosing#1": 14,
-    "qml/app/BrowserWindow.qml::onCompleted#1": 17,
-    "qml/app/BrowserWindow.qml::onDownPressed#1": 18,
-    "qml/app/BrowserWindow.qml::onEscapePressed#1": 14,
-    "qml/app/BrowserWindow.qml::onTextEdited#1": 13,
-    "qml/app/BrowserWindow.qml::onUpPressed#1": 14,
-    "qml/app/BrowserWindow.qml::openBookmarkEditor": 28,
-    "qml/app/BrowserWindow.qml::openUrl": 12,
-    "qml/app/BrowserWindow.qml::saveBookmark": 13,
-    "qml/app/BrowserWindow.qml::updateSuggestions": 23,
     "qml/app/MainMenu.qml::rebuild": 40,
     "qml/bookmarks/BookmarkMenu.qml::appendFolder": 36,
     "qml/bookmarks/BookmarksBar.qml::openBookmark": 11,
@@ -389,7 +375,6 @@
     "src/passwords/passwordstore.cpp::PasswordStore::remove": 13,
     "src/passwords/passwordstore.cpp::PasswordStore::save": 11,
     "src/passwords/passwordstore.cpp::PasswordStore::state": 11,
-    "tests/app/tst_mainmenu.cpp::TestMainMenu::actionsDoNotShareASequenceWithAShortcut": 21,
     "tests/app/tst_mainmenu.cpp::TestMainMenu::initTestCase": 24,
     "tests/app/tst_mainmenu.cpp::TestMainMenu::rowsAndOrder": 23,
     "tests/app/tst_singleinstance.cpp::TestSingleInstance::forwardsMessageToRunningInstance": 23,

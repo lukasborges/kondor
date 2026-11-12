@@ -71,27 +71,26 @@ ApplicationWindow {
 
     TabModel { id: tabs }
 
-    readonly property Action newTabAction: Action {
-        text: "New Tab"; shortcut: "Ctrl+T"; onTriggered: window.newTabs++
+    readonly property QtObject actions: QtObject {
+        readonly property Action newTabAction: Action { text: "New Tab"; shortcut: "Ctrl+T"; onTriggered: window.newTabs++ }
+        readonly property Action newPrivateTabAction: Action { text: "New Private Tab"; shortcut: "Ctrl+Shift+N" }
+        readonly property Action newWindowAction: Action { text: "New Window"; shortcut: "Ctrl+N" }
+        readonly property Action newPrivateWindowAction: Action { text: "New Private Window"; shortcut: "Ctrl+Shift+P" }
+        readonly property Action historyAction: Action { text: "Show All History"; shortcut: "Ctrl+H" }
+        readonly property Action reopenClosedTabAction: Action {
+            text: "Reopen Closed Tab"; shortcut: "Ctrl+Shift+T"; enabled: tabs.canReopenClosedTab
+            onTriggered: { tabs.reopenClosedTab(); window.reopens++ }
+        }
+        readonly property Action findAction: Action { text: "Find in Page…"; shortcut: StandardKey.Find }
+        readonly property Action printAction: Action { text: "Print…"; shortcut: StandardKey.Print }
+        readonly property Action savePageAction: Action { text: "Save Page As…"; shortcut: StandardKey.Save }
+        readonly property Action devToolsAction: Action { text: "Developer Tools"; shortcut: "F12" }
+        readonly property Action saveAsPdfAction: Action { text: "Save as PDF…" }
+        readonly property Action sitePermissionsAction: Action { text: "Site Permissions…" }
+        readonly property Action settingsAction: Action { text: "Configure Kondor Browser…"; shortcut: "Ctrl+," }
+        readonly property Action reportBugAction: Action { text: "Report a Bug…" }
+        readonly property Action aboutAction: Action { text: "About Kondor Browser" }
     }
-    readonly property Action newPrivateTabAction: Action { text: "New Private Tab"; shortcut: "Ctrl+Shift+N" }
-    readonly property Action newWindowAction: Action { text: "New Window"; shortcut: "Ctrl+N" }
-    readonly property Action newPrivateWindowAction: Action { text: "New Private Window"; shortcut: "Ctrl+Shift+P" }
-    readonly property Action historyAction: Action { text: "Show All History"; shortcut: "Ctrl+H" }
-    readonly property Action reopenClosedTabAction: Action {
-        text: "Reopen Closed Tab"; shortcut: "Ctrl+Shift+T"
-        enabled: tabs.canReopenClosedTab
-        onTriggered: { tabs.reopenClosedTab(); window.reopens++ }
-    }
-    readonly property Action findAction: Action { text: "Find in Page…"; shortcut: StandardKey.Find }
-    readonly property Action printAction: Action { text: "Print…"; shortcut: StandardKey.Print }
-    readonly property Action savePageAction: Action { text: "Save Page As…"; shortcut: StandardKey.Save }
-    readonly property Action devToolsAction: Action { text: "Developer Tools"; shortcut: "F12" }
-    readonly property Action saveAsPdfAction: Action { text: "Save as PDF…" }
-    readonly property Action sitePermissionsAction: Action { text: "Site Permissions…" }
-    readonly property Action settingsAction: Action { text: "Configure Kondor Browser…"; shortcut: "Ctrl+," }
-    readonly property Action reportBugAction: Action { text: "Report a Bug…" }
-    readonly property Action aboutAction: Action { text: "About Kondor Browser" }
 
     MainMenu {
         id: mainMenu
@@ -117,6 +116,7 @@ private slots:
     void actionsDoNotShareASequenceWithAShortcut();
 
 private:
+    static QStringList sequencesIn(const QString &file, const QString &pattern);
     QStringList rowsOf(const QString &menuExpression);
     QQmlEngine m_engine;
     QQuickWindow *m_window = nullptr;
@@ -259,30 +259,28 @@ void TestMainMenu::shortcutsWorkWithTheMenuClosed()
         QVERIFY2(!warning.contains(QStringLiteral("Ambiguous")), qPrintable(warning));
 }
 
-// The Actions of the main menu own their sequences: BrowserWindow.qml must not
-// also declare a Shortcut for them, or Qt reports "Ambiguous shortcut".
+QStringList TestMainMenu::sequencesIn(const QString &file, const QString &pattern)
+{
+    QFile source(QStringLiteral(KONDOR_QML_DIR "/app/") + file);
+    if (!source.open(QIODevice::ReadOnly))
+        return {};
+    QStringList sequences;
+    const QString text = QString::fromUtf8(source.readAll());
+    for (const QRegularExpressionMatch &m : QRegularExpression(pattern).globalMatch(text))
+        sequences << m.captured(1);
+    return sequences;
+}
+
 void TestMainMenu::actionsDoNotShareASequenceWithAShortcut()
 {
-    QFile file(QStringLiteral(KONDOR_QML_DIR "/app/BrowserWindow.qml"));
-    QVERIFY(file.open(QIODevice::ReadOnly));
-    const QString source = QString::fromUtf8(file.readAll());
-
-    QStringList actionSequences;
-    QRegularExpression actionRe(QStringLiteral(R"(shortcut: ("[^"]+"|StandardKey\.\w+))"));
-    for (const QRegularExpressionMatch &m : actionRe.globalMatch(source))
-        actionSequences << m.captured(1);
-    QVERIFY(actionSequences.size() >= 10);
-
-    QStringList shortcutSequences;
-    QRegularExpression shortcutRe(QStringLiteral(R"(Shortcut \{\s*sequences?: ([^\n]+))"));
-    for (const QRegularExpressionMatch &m : shortcutRe.globalMatch(source))
-        shortcutSequences << m.captured(1);
-
-    for (const QString &sequence : std::as_const(actionSequences)) {
-        for (const QString &shortcut : std::as_const(shortcutSequences)) {
-            QVERIFY2(!shortcut.contains(sequence),
-                     qPrintable(QStringLiteral("%1 is both an Action and a Shortcut").arg(sequence)));
-        }
+    const QStringList actions = sequencesIn(QStringLiteral("BrowserActions.qml"),
+        QStringLiteral(R"(shortcut: ("[^"]+"|StandardKey\.\w+))"));
+    const QStringList shortcuts = sequencesIn(QStringLiteral("BrowserShortcuts.qml"),
+        QStringLiteral(R"(Shortcut \{\s*sequences?: ([^\n]+))"));
+    QVERIFY(actions.size() >= 10 && !shortcuts.isEmpty());
+    for (const QString &sequence : actions) {
+        for (const QString &shortcut : shortcuts)
+            QVERIFY2(!shortcut.contains(sequence), qPrintable(sequence + QStringLiteral(" is both an Action and a Shortcut (ambiguous shortcut)")));
     }
 }
 

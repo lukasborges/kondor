@@ -359,6 +359,17 @@ void ExtensionCatalog::install(const QString &id)
 
 void ExtensionCatalog::startAutoUpdate()
 {
+    if (!m_autoUpdateConnected) {
+        m_autoUpdateConnected = true;
+        connect(Settings::instance(), &Settings::extensionsAutoUpdateChanged, this, [this]() {
+            if (Settings::instance()->extensionsAutoUpdate()) {
+                m_updateTimer.start();
+                checkForUpdates();
+            } else {
+                m_updateTimer.stop();
+            }
+        });
+    }
     if (!Settings::instance()->extensionsAutoUpdate())
         return;
     m_updateTimer.start();
@@ -417,9 +428,12 @@ void ExtensionCatalog::applyUpdates()
                 return;
             }
             QString installError;
+            bool needsReview = false;
             ExtensionManager *manager = ExtensionManager::instance();
-            if (manager->installPackage(path, QStringLiteral("catalog"), id, &installError))
+            if (manager->installPackage(path, QStringLiteral("catalog"), id, &installError, &needsReview))
                 manager->setUpdateInfo(id, false, false);
+            else if (needsReview)
+                manager->setUpdateInfo(id, true, true);
             else
                 qWarning("Extension %s: update failed: %s", qPrintable(id), qPrintable(installError));
             QFile::remove(path);

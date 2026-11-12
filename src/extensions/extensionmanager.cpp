@@ -16,6 +16,7 @@
 #include <QVersionNumber>
 
 #include "database.h"
+#include "extensioncatalog.h"
 
 namespace {
 
@@ -395,7 +396,7 @@ bool ExtensionManager::commit(Staged *staged, QString *error)
 }
 
 bool ExtensionManager::installPackage(const QString &zipPath, const QString &source,
-                                      const QString &expectedId, QString *error)
+                                      const QString &expectedId, QString *error, bool *needsReview)
 {
     Staged staged;
     if (!stage(zipPath, source, &staged, error))
@@ -405,6 +406,18 @@ bool ExtensionManager::installPackage(const QString &zipPath, const QString &sou
         if (error)
             *error = tr("The package is for “%1”, not “%2”").arg(staged.package.id(), expectedId);
         return false;
+    }
+    if (needsReview) {
+        *needsReview = false;
+        if (isInstalled(expectedId)
+            && !ExtensionCatalog::isSilentUpdate(staged.package.allMatches(), staged.package.permissions(),
+                                                 installedMatches(expectedId), installedPermissions(expectedId))) {
+            QDir(staged.directory).removeRecursively();
+            *needsReview = true;
+            if (error)
+                *error = tr("The package asks for more permissions than the installed version");
+            return false;
+        }
     }
     if (!commit(&staged, error)) {
         QDir(staged.directory).removeRecursively();

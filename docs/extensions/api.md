@@ -68,7 +68,7 @@ return Promises.
 | `kondor.onAction(cb)` | `cb(itemId, checked)` when the user picks one of your toolbar menu items. |
 | `kondor.action.setChecked(itemId, checked)` | Updates a checkable item's state for this tab. |
 | `kondor.tabs.back()` / `forward()` / `reload()` / `close()` / `open(url, {background})` / `next()` / `previous()` | Needs `tabs`. |
-| `kondor.download(url, fileName?)` | Needs `downloads`. |
+| `kondor.download(url, fileName?)` | Needs `downloads`. Works for same-origin URLs and URLs the server sends as attachments; a cross-origin URL may navigate instead of downloading. |
 | `kondor.notify(title, body)` | Needs `notifications`. |
 
 ## Behavior to know about

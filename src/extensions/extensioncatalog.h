@@ -126,6 +126,7 @@ private:
     QUrl m_catalogUrl;
     QUrl m_loadedFrom;
     QTimer m_updateTimer;
+    bool m_autoUpdateConnected = false;
     QPointer<QNetworkReply> m_refreshReply;
     QStringList m_updating;
 };

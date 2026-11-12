@@ -860,7 +860,8 @@ namespace {
 // Writes a catalog with one "sample" entry (a copy of the sample with this
 // version and permissions) under `root` and returns the catalog file's URL.
 QUrl writeCatalog(const QString &root, const QString &version, const QStringList &permissions,
-                  const QString &shaOverride = QString(), qint64 sizeOverride = -1)
+                  const QString &shaOverride = QString(), qint64 sizeOverride = -1,
+                  const QStringList &catalogPermissions = QStringList(), bool overrideCatalogPermissions = false)
 {
     const QString dir = makeVariant(root, QStringLiteral("pkg-") + version, [&](QJsonObject &manifest) {
         manifest.insert(QStringLiteral("version"), version);
@@ -877,7 +878,7 @@ QUrl writeCatalog(const QString &root, const QString &version, const QStringList
         {QStringLiteral("version"), version},
         {QStringLiteral("author"), QStringLiteral("Kondor contributors")},
         {QStringLiteral("icon"), QStringLiteral("weather-clear-night")},
-        {QStringLiteral("permissions"), QJsonArray::fromStringList(permissions)},
+        {QStringLiteral("permissions"), QJsonArray::fromStringList(overrideCatalogPermissions ? catalogPermissions : permissions)},
         {QStringLiteral("matches"), QJsonArray{QStringLiteral("*://127.0.0.1/*"), QStringLiteral("*://localhost/*")}},
         {QStringLiteral("package"), QStringLiteral("packages/sample-%1.kondorext").arg(version)},
         {QStringLiteral("sha256"), shaOverride.isEmpty() ? sha256Of(zip) : shaOverride},
@@ -986,6 +987,20 @@ void TestExtensions::catalogUpdates()
     QVERIFY(QTest::qWaitFor([&]() { return manager->data(manager->index(0), ExtensionManager::UpdateNeedsReviewRole).toBool(); }, 10000));
     QCOMPARE(manager->installedVersion(QStringLiteral("sample")), QStringLiteral("1.1.0"));
     QVERIFY(catalog->data(catalog->index(0), ExtensionCatalog::UpdateAvailableRole).toBool());
+
+    // The catalog claims the old permissions but the package adds one: not silent.
+    url = writeCatalog(root.path(), QStringLiteral("1.1.5"), {QStringLiteral("tabs"), QStringLiteral("downloads")},
+                       QString(), -1, {QStringLiteral("tabs")}, true);
+    QVERIFY(refreshCatalog(catalog, url));
+    QVERIFY(QTest::qWaitFor([&]() { return manager->data(manager->index(0), ExtensionManager::UpdateNeedsReviewRole).toBool(); }, 10000));
+    QCOMPARE(manager->installedVersion(QStringLiteral("sample")), QStringLiteral("1.1.0"));
+    QVERIFY(!manager->installedPermissions(QStringLiteral("sample")).contains(QLatin1String("downloads")));
+
+    // A new permission only marks it for review.
+    url = writeCatalog(root.path(), QStringLiteral("1.2.0"), {QStringLiteral("tabs"), QStringLiteral("downloads")});
+    QVERIFY(refreshCatalog(catalog, url));
+    QTest::qWait(300);
+    QCOMPARE(manager->installedVersion(QStringLiteral("sample")), QStringLiteral("1.1.0"));
 
     // "Update…" asks first, with the replacement text.
     catalog->install(QStringLiteral("sample"));

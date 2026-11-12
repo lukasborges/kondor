@@ -93,8 +93,11 @@ public:
     static bool isPackageFile(const QString &path);
     // Installs without asking (silent catalog updates). The new package must
     // have `expectedId`. Returns false and sets `error` on failure.
+    // With `needsReview`, the package's own manifest must not ask for more
+    // permissions or sites than the installed one; otherwise nothing is
+    // installed, `*needsReview` is set and false is returned.
     bool installPackage(const QString &zipPath, const QString &source,
-                        const QString &expectedId, QString *error);
+                        const QString &expectedId, QString *error, bool *needsReview = nullptr);
 
     // --- Installed extensions ----------------------------------------------
     Q_INVOKABLE bool isInstalled(const QString &id) const;

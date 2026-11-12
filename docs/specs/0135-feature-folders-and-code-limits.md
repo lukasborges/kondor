@@ -176,3 +176,5 @@ No UI, so there is no prototype.
 | How strict? | Extreme, as the maintainer prefers: 10-line functions, 200-line files, no comments except bug-linked workarounds and translator notes. |
 | Fix all offenders at once? | No: a shrinking baseline keeps CI green, and the follow-up issues #136–#139 refactor the hotspots one by one without changing behavior. |
 | Folders by layer or by feature? | By feature, mirrored in `src/`, `qml/` and `tests/`: a change to one feature stays in one folder name. |
+| Do brace initializers count as nesting? (review of PR #141) | No. Nesting counts blocks (`if`, loops, `switch`, `try`, plain `{ }` blocks), lambdas and nested functions only. Brace-init lists such as `return {{TabRole, "tab"}};` or `QJsonObject{{…}, {…}}` are not a nesting level. |
+| Do arrow functions count as functions? (review of PR #141) | Yes. A QML handler written as `onX: (…) => { … }` is a handler like `onX: function(…) { … }`, and a JS/QML arrow function with a block body (`const f = (a) => { … }`) outside any other function is a function; inside one it counts toward the enclosing function and as a nesting level. |

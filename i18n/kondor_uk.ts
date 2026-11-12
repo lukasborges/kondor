@@ -2702,33 +2702,33 @@
 <context>
     <name>WebViewTab</name>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="28"/>
-        <location filename="../qml/browser/WebViewTab.qml" line="539"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="25"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="546"/>
         <source>Print failed</source>
         <translation>Не вдалося надрукувати</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="30"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="27"/>
         <source>PDF saved</source>
         <translation>PDF збережено</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="32"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="29"/>
         <source>Saving the PDF failed</source>
         <translation>Не вдалося зберегти PDF</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="317"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="300"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>Процес сторінки несподівано завершився.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="318"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="301"/>
         <source>The page crashed.</source>
         <translation>Сторінка аварійно завершилася.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="319"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="302"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>Процес сторінки було примусово завершено (можливо, через брак пам&apos;яті).</translation>
     </message>

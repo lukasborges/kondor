@@ -50,11 +50,11 @@ add_test(NAME tst_startupurl COMMAND tst_startupurl)
 
 qt_add_executable(tst_tabmodel
     browser/tst_tabmodel.cpp
-    ../src/browser/tabmodel.cpp
-    ../src/browser/tab.cpp
+    ${KONDOR_TAB_MODEL_SOURCES}
+    ${KONDOR_TAB_SOURCES}
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/browser/profilemanager.cpp
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
@@ -89,13 +89,95 @@ set_tests_properties(tst_tabmodel PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
 )
 
-qt_add_executable(tst_addresssuggestions
-    browser/tst_addresssuggestions.cpp
-    ../src/browser/tab.cpp
+qt_add_executable(tst_tabpasswords
+    browser/tst_tabpasswords.cpp
+    ${KONDOR_TAB_MODEL_SOURCES}
+    ${KONDOR_TAB_SOURCES}
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/browser/tabmodel.cpp
-    ../src/browser/profilemanager.cpp
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
+    ../src/adblock/adblockmanager.cpp
+    ../src/adblock/adblockinterceptor.cpp
+    ../src/adblock/filterengine.cpp
+    ../src/browser/addressresolver.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
+    ../src/browser/faviconstore.cpp
+)
+
+target_include_directories(tst_tabpasswords PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_tabpasswords PRIVATE
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebEngineQuick
+    KF6::Wallet
+)
+
+add_test(NAME tst_tabpasswords COMMAND tst_tabpasswords)
+set_tests_properties(tst_tabpasswords PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)
+
+qt_add_executable(tst_tabsecurity
+    browser/tst_tabsecurity.cpp
+    ${KONDOR_TAB_MODEL_SOURCES}
+    ${KONDOR_TAB_SOURCES}
+    ../src/passwords/passwordstore.cpp
+    ../src/passwords/passwordimport.cpp
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
+    ../src/adblock/adblockmanager.cpp
+    ../src/adblock/adblockinterceptor.cpp
+    ../src/adblock/filterengine.cpp
+    ../src/browser/addressresolver.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
+    ../src/browser/faviconstore.cpp
+)
+
+target_include_directories(tst_tabsecurity PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_tabsecurity PRIVATE
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebEngineQuick
+    KF6::Wallet
+)
+
+add_test(NAME tst_tabsecurity COMMAND tst_tabsecurity)
+set_tests_properties(tst_tabsecurity PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)
+
+qt_add_executable(tst_addresssuggestions
+    browser/tst_addresssuggestions.cpp
+    ${KONDOR_TAB_SOURCES}
+    ../src/passwords/passwordstore.cpp
+    ../src/passwords/passwordimport.cpp
+    ${KONDOR_TAB_MODEL_SOURCES}
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
@@ -140,11 +222,11 @@ set_tests_properties(tst_addresssuggestions PROPERTIES
 
 qt_add_executable(tst_addressbar
     browser/tst_addressbar.cpp
-    ../src/browser/tab.cpp
+    ${KONDOR_TAB_SOURCES}
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/browser/tabmodel.cpp
-    ../src/browser/profilemanager.cpp
+    ${KONDOR_TAB_MODEL_SOURCES}
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
@@ -158,7 +240,7 @@ qt_add_executable(tst_addressbar
     ../src/browser/faviconstore.cpp
     ${KONDOR_BOOKMARK_MANAGER_SOURCES}
     ${KONDOR_BOOKMARK_MODEL_SOURCES}
-    ../src/browser/searchsuggestions.cpp
+    ${KONDOR_SUGGESTION_SOURCES}
 )
 
 target_compile_definitions(tst_addressbar PRIVATE
@@ -218,11 +300,11 @@ qt_add_executable(tst_bookmarkswindow
     ${KONDOR_BOOKMARK_MANAGER_SOURCES}
     ${KONDOR_BOOKMARK_MODEL_SOURCES}
     ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/tab.cpp
+    ${KONDOR_TAB_SOURCES}
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/browser/tabmodel.cpp
-    ../src/browser/profilemanager.cpp
+    ${KONDOR_TAB_MODEL_SOURCES}
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
@@ -267,11 +349,11 @@ qt_add_executable(tst_mainmenu
     ${KONDOR_BOOKMARK_MANAGER_SOURCES}
     ${KONDOR_BOOKMARK_MODEL_SOURCES}
     ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/tab.cpp
+    ${KONDOR_TAB_SOURCES}
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/browser/tabmodel.cpp
-    ../src/browser/profilemanager.cpp
+    ${KONDOR_TAB_MODEL_SOURCES}
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
@@ -409,11 +491,11 @@ add_test(NAME tst_settings COMMAND tst_settings)
 
 qt_add_executable(tst_settingswindow
     settings/tst_settingswindow.cpp
-    ../src/browser/tab.cpp
+    ${KONDOR_TAB_SOURCES}
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/browser/tabmodel.cpp
-    ../src/browser/profilemanager.cpp
+    ${KONDOR_TAB_MODEL_SOURCES}
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
@@ -458,11 +540,11 @@ set_tests_properties(tst_settingswindow PROPERTIES
 
 qt_add_executable(tst_tabstrip
     browser/tst_tabstrip.cpp
-    ../src/browser/tab.cpp
+    ${KONDOR_TAB_SOURCES}
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/browser/tabmodel.cpp
-    ../src/browser/profilemanager.cpp
+    ${KONDOR_TAB_MODEL_SOURCES}
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
@@ -505,10 +587,10 @@ set_tests_properties(tst_tabstrip PROPERTIES
 
 qt_add_executable(tst_sitepermissions
     site/tst_sitepermissions.cpp
-    ../src/browser/tab.cpp
+    ${KONDOR_TAB_SOURCES}
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/browser/profilemanager.cpp
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
@@ -551,12 +633,12 @@ set_tests_properties(tst_sitepermissions PROPERTIES
 
 qt_add_executable(tst_sessionmanager
     browser/tst_sessionmanager.cpp
-    ../src/browser/sessionmanager.cpp
-    ../src/browser/tabmodel.cpp
-    ../src/browser/tab.cpp
+    ${KONDOR_SESSION_SOURCES}
+    ${KONDOR_TAB_MODEL_SOURCES}
+    ${KONDOR_TAB_SOURCES}
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/browser/profilemanager.cpp
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
@@ -626,6 +708,22 @@ target_link_libraries(tst_filehelper PRIVATE
 
 add_test(NAME tst_filehelper COMMAND tst_filehelper)
 
+qt_add_executable(tst_suggestionlist
+    browser/tst_suggestionlist.cpp
+    ../src/browser/suggestionlist.cpp
+)
+
+target_include_directories(tst_suggestionlist PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_suggestionlist PRIVATE
+    Qt6::Core
+    Qt6::Test
+)
+
+add_test(NAME tst_suggestionlist COMMAND tst_suggestionlist)
+
 qt_add_executable(tst_zoommanager
     browser/tst_zoommanager.cpp
     ../src/browser/zoommanager.cpp
@@ -644,6 +742,8 @@ add_test(NAME tst_zoommanager COMMAND tst_zoommanager)
 
 # ProfileManager installs the ad blocker on every profile.
 target_link_libraries(tst_tabmodel PRIVATE Qt6::Concurrent Qt6::Network)
+target_link_libraries(tst_tabpasswords PRIVATE Qt6::Concurrent Qt6::Network)
+target_link_libraries(tst_tabsecurity PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_addresssuggestions PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_addressbar PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_bookmarkswindow PRIVATE Qt6::Concurrent Qt6::Network)
@@ -748,10 +848,10 @@ set_tests_properties(tst_extensionloader PROPERTIES
 qt_add_executable(tst_extensions
     extensions/tst_extensions.cpp
     ../src/extensions/extensionbridge.cpp
-    ../src/browser/tab.cpp
+    ${KONDOR_TAB_SOURCES}
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/browser/profilemanager.cpp
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp

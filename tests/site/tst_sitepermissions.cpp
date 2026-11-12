@@ -82,27 +82,27 @@ void TestSitePermissions::answersQueuedPermissionsInOrder()
     const QWebEnginePermission notifications =
             profile.queryPermission(origin, QWebEnginePermission::PermissionType::Notifications);
 
-    QSignalSpy spy(&tab, &Tab::pendingPermissionChanged);
-    tab.enqueuePermission(geolocation);
-    tab.enqueuePermission(notifications);
+    QSignalSpy spy(tab.permissions(), &TabPermissions::pendingChanged);
+    tab.permissions()->enqueue(geolocation);
+    tab.permissions()->enqueue(notifications);
     QCOMPARE(spy.count(), 1);
 
-    QVERIFY(tab.pendingPermission().isValid());
-    QCOMPARE(int(tab.pendingPermission().value<QWebEnginePermission>().permissionType()),
+    QVERIFY(tab.permissions()->pending().isValid());
+    QCOMPARE(int(tab.permissions()->pending().value<QWebEnginePermission>().permissionType()),
              int(QWebEnginePermission::PermissionType::Geolocation));
 
-    tab.answerPermission(true);
+    tab.permissions()->answer(true);
     QCOMPARE(spy.count(), 2);
     QCOMPARE(profile.queryPermission(origin, QWebEnginePermission::PermissionType::Geolocation).state(),
              QWebEnginePermission::State::Granted);
-    QCOMPARE(int(tab.pendingPermission().value<QWebEnginePermission>().permissionType()),
+    QCOMPARE(int(tab.permissions()->pending().value<QWebEnginePermission>().permissionType()),
              int(QWebEnginePermission::PermissionType::Notifications));
 
-    tab.answerPermission(false);
+    tab.permissions()->answer(false);
     QCOMPARE(spy.count(), 3);
     QCOMPARE(profile.queryPermission(origin, QWebEnginePermission::PermissionType::Notifications).state(),
              QWebEnginePermission::State::Denied);
-    QVERIFY(!tab.pendingPermission().isValid());
+    QVERIFY(!tab.permissions()->pending().isValid());
 }
 
 void TestSitePermissions::navigatingAwayDeniesPendingPermissions()
@@ -114,14 +114,14 @@ void TestSitePermissions::navigatingAwayDeniesPendingPermissions()
 
     const QUrl origin(QStringLiteral("https://leave.example"));
     tab.setUrl(origin);
-    tab.enqueuePermission(
+    tab.permissions()->enqueue(
             profile.queryPermission(origin, QWebEnginePermission::PermissionType::Geolocation));
 
     tab.setUrl(QUrl(QStringLiteral("https://other.example/")));
 
     QCOMPARE(profile.queryPermission(origin, QWebEnginePermission::PermissionType::Geolocation).state(),
              QWebEnginePermission::State::Denied);
-    QVERIFY(!tab.pendingPermission().isValid());
+    QVERIFY(!tab.permissions()->pending().isValid());
 }
 
 void TestSitePermissions::navigatingWithinSameOriginKeepsPendingPermissions()
@@ -133,14 +133,14 @@ void TestSitePermissions::navigatingWithinSameOriginKeepsPendingPermissions()
 
     const QUrl permissionOrigin(QStringLiteral("https://stay.example"));
     tab.setUrl(QUrl(QStringLiteral("https://stay.example/meet")));
-    tab.enqueuePermission(
+    tab.permissions()->enqueue(
             profile.queryPermission(permissionOrigin, QWebEnginePermission::PermissionType::Geolocation));
 
     // Same-document changes and same-origin navigations keep the prompt.
     tab.setUrl(QUrl(QStringLiteral("https://stay.example/meet#room")));
-    QVERIFY(tab.pendingPermission().isValid());
+    QVERIFY(tab.permissions()->pending().isValid());
     tab.setUrl(QUrl(QStringLiteral("https://stay.example/meet/room")));
-    QVERIFY(tab.pendingPermission().isValid());
+    QVERIFY(tab.permissions()->pending().isValid());
     QCOMPARE(profile.queryPermission(permissionOrigin, QWebEnginePermission::PermissionType::Geolocation).state(),
              QWebEnginePermission::State::Ask);
 
@@ -148,7 +148,7 @@ void TestSitePermissions::navigatingWithinSameOriginKeepsPendingPermissions()
     tab.setUrl(QUrl(QStringLiteral("https://elsewhere.example/")));
     QCOMPARE(profile.queryPermission(permissionOrigin, QWebEnginePermission::PermissionType::Geolocation).state(),
              QWebEnginePermission::State::Denied);
-    QVERIFY(!tab.pendingPermission().isValid());
+    QVERIFY(!tab.permissions()->pending().isValid());
 }
 
 void TestSitePermissions::requestBarShowsAndAnswersThePendingPermission()
@@ -159,7 +159,7 @@ void TestSitePermissions::requestBarShowsAndAnswersThePendingPermission()
     Tab tab(&profile);
 
     const QUrl origin(QStringLiteral("https://meet.example"));
-    tab.enqueuePermission(
+    tab.permissions()->enqueue(
             profile.queryPermission(origin, QWebEnginePermission::PermissionType::Geolocation));
 
     m_engine.addImportPath(QStringLiteral(KONDOR_QML_IMPORT_DIR));
@@ -180,7 +180,7 @@ void TestSitePermissions::requestBarShowsAndAnswersThePendingPermission()
     QVERIFY(text->property("text").toString().contains(QStringLiteral("meet.example")));
     QVERIFY(text->property("text").toString().contains(QStringLiteral("location")));
 
-    tab.answerPermission(true);
+    tab.permissions()->answer(true);
     QCOMPARE(object->property("visible").toBool(), false);
     QCOMPARE(profile.queryPermission(origin, QWebEnginePermission::PermissionType::Geolocation).state(),
              QWebEnginePermission::State::Granted);

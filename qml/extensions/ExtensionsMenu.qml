@@ -29,7 +29,7 @@ Menu {
                 list.push({
                     kind: "item", extension: extension.id, id: item.id, title: item.title,
                     checkable: item.checkable, icon: item.icon,
-                    checked: root.tab.extensionItemChecked(extension.id, item.id)
+                    checked: root.tab.extensionItems.isChecked(extension.id, item.id)
                 })
             }
             if (extension.siteToggle && ExtensionManager.originOf(root.tab.url) !== "") {
@@ -62,7 +62,7 @@ Menu {
             opacity: 1.0
             onTriggered: {
                 if (entry.modelData.kind === "item") {
-                    root.tab.triggerExtensionItem(entry.modelData.extension, entry.modelData.id,
+                    root.tab.extensionItems.trigger(entry.modelData.extension, entry.modelData.id,
                                                   entry.modelData.checkable === true)
                 } else if (entry.modelData.kind === "site") {
                     ExtensionManager.setSiteEnabled(entry.modelData.extension, root.tab.url,

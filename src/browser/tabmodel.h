@@ -6,6 +6,8 @@
 #include <QVariantList>
 #include <QtQmlIntegration/qqmlintegration.h>
 
+#include "browser/closedtabs.h"
+
 class QQuickWebEngineProfile;
 class Tab;
 
@@ -20,10 +22,7 @@ class TabModel : public QAbstractListModel
     Q_PROPERTY(int pinnedCount READ pinnedCount NOTIFY pinnedCountChanged)
     Q_PROPERTY(bool canReopenClosedTab READ canReopenClosedTab
                    NOTIFY canReopenClosedTabChanged)
-    // Closed normal tabs of this window, most recent first: {url, title}.
     Q_PROPERTY(QVariantList recentlyClosed READ recentlyClosed NOTIFY recentlyClosedChanged)
-    // Set for the model of a private window: every tab it creates is private,
-    // whatever profile the caller asks for.
     Q_PROPERTY(bool privateTabs READ privateTabs WRITE setPrivateTabs
                    NOTIFY privateTabsChanged)
 
@@ -44,17 +43,15 @@ public:
     int pinnedCount() const;
     bool canReopenClosedTab() const { return !m_closed.isEmpty(); }
     bool privateTabs() const { return m_privateTabs; }
-    QVariantList recentlyClosed() const;
+    QVariantList recentlyClosed() const { return m_closed.toVariantList(); }
     void setPrivateTabs(bool privateTabs);
 
-    Q_INVOKABLE Tab *insertTab(int index, QQuickWebEngineProfile *profile, const QUrl &url, bool activate);
     Q_INVOKABLE Tab *addTab(bool isPrivate = false, const QUrl &initialUrl = QUrl());
     Q_INVOKABLE Tab *addTabWithProfile(QQuickWebEngineProfile *profile, const QUrl &url, bool background);
     Q_INVOKABLE int indexOfTab(Tab *tab) const;
     Q_INVOKABLE void closeTab(int index);
     Q_INVOKABLE void closeTabObject(Tab *tab);
     Q_INVOKABLE void reopenClosedTab();
-    // Reopens the closed tab at `index` of recentlyClosed (0 is the most recent).
     Q_INVOKABLE void reopenClosedTab(int index);
     Q_INVOKABLE void moveTab(int from, int to);
     Q_INVOKABLE void duplicateTab(int index);
@@ -73,15 +70,28 @@ signals:
     void privateTabsChanged();
 
 private:
-    struct ClosedTab {
+    struct NewTab {
+        int index;
+        QQuickWebEngineProfile *profile;
         QUrl url;
-        QString title;
-        int index = 0;
+        bool activate;
     };
 
+    Tab *insertTab(const NewTab &newTab);
+    void insertRow(int index, Tab *tab);
+    QQuickWebEngineProfile *profileFor(QQuickWebEngineProfile *requested) const;
+    int childTabRow() const;
+    bool isValidIndex(int index) const;
+    void notifyCurrentChanged();
+    void rememberClosed(int index);
+    Tab *removeRow(int index);
+    void fixCurrentAfterRemoval(int removedIndex);
+    void keepCurrentWhenInsertedBefore(int index);
+    void followCurrentTab(Tab *current);
+    int pinnedCountExcluding(int index) const;
+
     QList<Tab *> m_tabs;
-    // Last closed normal tabs, oldest first; private tabs are never kept.
-    QList<ClosedTab> m_closed;
+    ClosedTabs m_closed;
     int m_currentIndex = -1;
     bool m_privateTabs = false;
 };

@@ -128,19 +128,15 @@ qt_add_qml_module(kondor
         src/app/aboutinfo.cpp
         src/browser/addressresolver.h
         src/browser/addressresolver.cpp
-        src/browser/tab.h
-        src/browser/tab.cpp
-        src/browser/tabmodel.h
-        src/browser/tabmodel.cpp
-        src/browser/profilemanager.h
-        src/browser/profilemanager.cpp
+        ${KONDOR_TAB_SOURCES}
+        ${KONDOR_TAB_MODEL_SOURCES}
+        ${KONDOR_PROFILE_MANAGER_SOURCES}
         src/app/startupargs.h
         src/app/startupargs.cpp
         src/app/startupurl.h
         src/app/startupurl.cpp
         ${KONDOR_SETTINGS_SOURCES}
-        src/browser/sessionmanager.h
-        src/browser/sessionmanager.cpp
+        ${KONDOR_SESSION_SOURCES}
         src/app/windowmanager.h
         src/app/windowmanager.cpp
         src/app/singleinstance.h
@@ -159,8 +155,7 @@ qt_add_qml_module(kondor
         src/browser/faviconstore.cpp
         src/extensions/extensionloader.h
         src/extensions/extensionloader.cpp
-        src/browser/searchsuggestions.h
-        src/browser/searchsuggestions.cpp
+        ${KONDOR_SUGGESTION_SOURCES}
         src/browser/zoommanager.h
         src/browser/zoommanager.cpp
         src/adblock/filterengine.h

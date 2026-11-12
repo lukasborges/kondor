@@ -11,11 +11,8 @@ Item {
     required property Tab tab
     required property TabModel tabModel
 
-    // Last page position a context menu was requested at, in the view's
-    // coordinates. The Menu / Shift+F10 shortcut opens the menu there.
     property point contextMenuPosition: Qt.point(0, 0)
 
-    // Temporary PDF being printed for the viewer, if any.
     property string printPath: ""
 
     function pdfFinished(filePath, success) {
@@ -33,8 +30,6 @@ Item {
         }
     }
 
-    // Host whose saved zoom the view currently shows, and a guard so that
-    // applying a saved zoom is not saved back.
     property string zoomHost: ""
     property bool applyingZoom: false
 
@@ -59,11 +54,7 @@ Item {
         }
     }
 
-    // --- Reader mode -------------------------------------------------------
-    // The page's URL while the article is shown (loadHtml uses it as base URL).
     property url readerOriginalUrl: ""
-    // True from loadHtml() until the article document finished loading, so its
-    // own load events are not taken for a navigation.
     property bool readerLoadPending: false
 
     function readResource(name) {
@@ -82,7 +73,6 @@ Item {
             + "; --reader-size: " + Settings.readerFontSize + "px;"
     }
 
-    // Colors of the View color set (the page background of the app).
     Item {
         id: readerColors
         Kirigami.Theme.colorSet: Kirigami.Theme.View
@@ -119,7 +109,6 @@ Item {
             .replace(/>/g, "&gt;").replace(/"/g, "&quot;")
     }
 
-    // Is the page an article? Runs after every successful normal load.
     function detectReader() {
         webView.runJavaScript(
             root.readResource("Readability-readerable.js")
@@ -176,8 +165,6 @@ Item {
         root.tab.setDevToolsOpen(open)
     }
 
-    // Rejects the pending certificate request, if any, and drops the JS
-    // reference. Returns true when there was one to answer.
     function rejectCertificateError() {
         if (!certificateErrorHolder.error)
             return false
@@ -197,10 +184,6 @@ Item {
         tab: root.tab
     }
 
-    // Only the page-facing APIs go on the channel, never a bridge or Tab. The
-    // extensions API is there in every tab (an extension only runs in a
-    // private tab when the user allowed it); the passwords API never is in a
-    // private one.
     WebChannel {
         id: pageChannel
         Component.onCompleted: {
@@ -338,7 +321,7 @@ Item {
             // notifications, ...). The prompt belongs to this tab and is answered
             // through the Tab object, so switching tabs keeps it with the page.
             onPermissionRequested: function(permission) {
-                root.tab.enqueuePermission(permission)
+                root.tab.permissions.enqueue(permission)
             }
 
             // Right click: take over from Qt WebEngine's minimal default menu and
@@ -447,7 +430,7 @@ Item {
 
     CertificateErrorPage {
         anchors.fill: parent
-        visible: root.tab.certificateErrorPending
+        visible: root.tab.security.certificateErrorPending
         tab: root.tab
     }
 
@@ -475,6 +458,50 @@ Item {
                 + JSON.stringify(id) + "] && window.__kondorExtensions["
                 + JSON.stringify(id) + "](" + JSON.stringify(ExtensionManager.settingValues(id))
                 + ");",
+                WebEngineScript.ApplicationWorld)
+        }
+    }
+
+    Connections {
+        target: root.tab.security
+
+        function onAcceptCertificateErrorRequested() {
+            if (!certificateErrorHolder.error)
+                return
+            const error = certificateErrorHolder.error
+            certificateErrorHolder.error = null
+            error.acceptCertificate()
+        }
+        function onRejectCertificateErrorRequested() {
+            if (!certificateErrorHolder.error)
+                return
+            const error = certificateErrorHolder.error
+            certificateErrorHolder.error = null
+            error.rejectCertificate()
+            if (webView.canGoBack)
+                webView.goBack()
+            else if (root.tabModel.count > 1)
+                root.tabModel.closeTabObject(root.tab)
+            else
+                root.tab.showNewTabPage()
+        }
+    }
+
+    Connections {
+        target: root.tab.passwords
+
+        function onFillRequested(username) { passwordBridge.fill(username) }
+    }
+
+    Connections {
+        target: root.tab.extensionItems
+
+        function onTriggered(extensionId, itemId, checked) {
+            webView.runJavaScript(
+                "window.__kondorExtensionActions && window.__kondorExtensionActions["
+                + JSON.stringify(extensionId) + "] && window.__kondorExtensionActions["
+                + JSON.stringify(extensionId) + "](" + JSON.stringify(itemId) + ", "
+                + (checked ? "true" : "false") + ");",
                 WebEngineScript.ApplicationWorld)
         }
     }
@@ -508,26 +535,6 @@ Item {
             if (webView.canGoBack)
                 webView.goBack()
         }
-        function onAcceptCertificateErrorRequested() {
-            if (!certificateErrorHolder.error)
-                return
-            const error = certificateErrorHolder.error
-            certificateErrorHolder.error = null
-            error.acceptCertificate()
-        }
-        function onRejectCertificateErrorRequested() {
-            if (!certificateErrorHolder.error)
-                return
-            const error = certificateErrorHolder.error
-            certificateErrorHolder.error = null
-            error.rejectCertificate()
-            if (webView.canGoBack)
-                webView.goBack()
-            else if (root.tabModel.count > 1)
-                root.tabModel.closeTabObject(root.tab)
-            else
-                root.tab.showNewTabPage()
-        }
         function onPrintToPdfRequested(filePath) {
             webView.printToPdf(filePath, WebEngineView.A4, WebEngineView.Portrait)
         }
@@ -548,9 +555,6 @@ Item {
             root.setDevToolsOpen(true)
             webView.triggerWebAction(WebEngineView.InspectElement)
         }
-        function onFillPasswordRequested(username) { passwordBridge.fill(username) }
-
-        // Kondor extensions: commands of the page API and the toolbar menu.
         function onCloseRequested() { root.tabModel.closeTabObject(root.tab) }
         function onOpenTabRequested(url, background) {
             root.tabModel.addTabWithProfile(root.tab.profile, url, background)
@@ -571,14 +575,6 @@ Item {
                 + "(document.body || document.documentElement).appendChild(a);"
                 + "a.click(); a.remove(); })("
                 + JSON.stringify(url.toString()) + ", " + JSON.stringify(fileName) + ");",
-                WebEngineScript.ApplicationWorld)
-        }
-        function onExtensionItemTriggered(extensionId, itemId, checked) {
-            webView.runJavaScript(
-                "window.__kondorExtensionActions && window.__kondorExtensionActions["
-                + JSON.stringify(extensionId) + "] && window.__kondorExtensionActions["
-                + JSON.stringify(extensionId) + "](" + JSON.stringify(itemId) + ", "
-                + (checked ? "true" : "false") + ");",
                 WebEngineScript.ApplicationWorld)
         }
         function onForwardRequested() { if (webView.canGoForward) webView.goForward() }

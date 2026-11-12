@@ -2702,33 +2702,33 @@
 <context>
     <name>WebViewTab</name>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="28"/>
-        <location filename="../qml/browser/WebViewTab.qml" line="539"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="25"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="546"/>
         <source>Print failed</source>
         <translation>Drukowanie nie powiodło się</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="30"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="27"/>
         <source>PDF saved</source>
         <translation>Zapisano plik PDF</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="32"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="29"/>
         <source>Saving the PDF failed</source>
         <translation>Nie udało się zapisać pliku PDF</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="317"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="300"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>Proces strony zakończył się nieoczekiwanie.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="318"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="301"/>
         <source>The page crashed.</source>
         <translation>Strona uległa awarii.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="319"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="302"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>Proces strony został zabity (prawdopodobnie z powodu braku pamięci).</translation>
     </message>

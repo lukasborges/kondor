@@ -2682,33 +2682,33 @@
 <context>
     <name>WebViewTab</name>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="28"/>
-        <location filename="../qml/browser/WebViewTab.qml" line="539"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="25"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="546"/>
         <source>Print failed</source>
         <translation>Yazdırma başarısız oldu</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="30"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="27"/>
         <source>PDF saved</source>
         <translation>PDF kaydedildi</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="32"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="29"/>
         <source>Saving the PDF failed</source>
         <translation>PDF kaydedilemedi</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="317"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="300"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>Sayfanın süreci beklenmedik şekilde sona erdi.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="318"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="301"/>
         <source>The page crashed.</source>
         <translation>Sayfa çöktü.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="319"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="302"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>Sayfanın süreci sonlandırıldı (muhtemelen bellek yetersizliğinden).</translation>
     </message>

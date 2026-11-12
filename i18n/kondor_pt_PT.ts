@@ -2692,33 +2692,33 @@
 <context>
     <name>WebViewTab</name>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="28"/>
-        <location filename="../qml/browser/WebViewTab.qml" line="539"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="25"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="546"/>
         <source>Print failed</source>
         <translation>Falha ao imprimir</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="30"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="27"/>
         <source>PDF saved</source>
         <translation>PDF guardado</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="32"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="29"/>
         <source>Saving the PDF failed</source>
         <translation>Falha ao guardar o PDF</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="317"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="300"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>O processo da página terminou inesperadamente.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="318"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="301"/>
         <source>The page crashed.</source>
         <translation>A página falhou.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="319"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="302"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>O processo da página foi terminado (possivelmente por falta de memória).</translation>
     </message>

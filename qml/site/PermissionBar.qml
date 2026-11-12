@@ -11,7 +11,7 @@ InlineBar {
     id: root
 
     property Tab tab: null
-    property var permission: tab ? tab.pendingPermission : null
+    property var permission: tab ? tab.permissions.pending : null
     readonly property bool hasPermission: permission !== null && permission !== undefined
 
     visible: hasPermission
@@ -44,7 +44,7 @@ InlineBar {
         ToolTip.delay: 600
         onClicked: {
             if (root.tab)
-                root.tab.answerPermission(true)
+                root.tab.permissions.answer(true)
         }
     }
 
@@ -57,7 +57,7 @@ InlineBar {
         ToolTip.delay: 600
         onClicked: {
             if (root.tab)
-                root.tab.answerPermission(false)
+                root.tab.permissions.answer(false)
         }
     }
 }

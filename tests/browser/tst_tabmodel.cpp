@@ -33,9 +33,10 @@ private slots:
     void showNewTabPageRestoresIt();
     void aboutBlankKeepsNewTabPage();
     void closedNewTabPageIsNotRemembered();
-    void securityStateFollowsScheme();
-    void certificateOverrideKeepsTheErrorStateForItsHost();
-    void rejectCertificateErrorClearsThePendingError();
+    void pinningMovesTabToEndOfPinnedGroup();
+    void unpinningMovesTabToStartOfUnpinnedTabs();
+    void moveTabKeepsTheCurrentTabSelected();
+    void recentlyClosedKeepsAtMostTheLimit();
 };
 
 void TestTabModel::startsEmpty()
@@ -308,70 +309,65 @@ void TestTabModel::closedNewTabPageIsNotRemembered()
     QVERIFY(!model.canReopenClosedTab());
 }
 
-void TestTabModel::securityStateFollowsScheme()
+void TestTabModel::pinningMovesTabToEndOfPinnedGroup()
 {
     TabModel model;
-    Tab *tab = model.addTab();
+    Tab *first = model.addTab();
+    Tab *second = model.addTab();
+    Tab *third = model.addTab();
 
-    tab->setUrl(QUrl(QStringLiteral("https://example.com/")));
-    QCOMPARE(tab->securityState(), QStringLiteral("secure"));
+    model.setPinned(0, true);
+    model.setPinned(2, true);
 
-    tab->setUrl(QUrl(QStringLiteral("http://example.com/")));
-    QCOMPARE(tab->securityState(), QStringLiteral("insecure"));
-
-    tab->setUrl(QUrl(QStringLiteral("file:///etc/hosts")));
-    QCOMPARE(tab->securityState(), QStringLiteral("local"));
-
-    tab->setUrl(QUrl(QStringLiteral("about:blank")));
-    QCOMPARE(tab->securityState(), QStringLiteral("local"));
+    QCOMPARE(model.pinnedCount(), 2);
+    QCOMPARE(model.indexOfTab(first), 0);
+    QCOMPARE(model.indexOfTab(third), 1);
+    QCOMPARE(model.indexOfTab(second), 2);
 }
 
-void TestTabModel::certificateOverrideKeepsTheErrorStateForItsHost()
+void TestTabModel::unpinningMovesTabToStartOfUnpinnedTabs()
 {
     TabModel model;
-    Tab *tab = model.addTab();
-    const QUrl failedUrl(QStringLiteral("https://expired.example/"));
+    Tab *first = model.addTab();
+    Tab *second = model.addTab();
+    Tab *third = model.addTab();
+    model.setPinned(0, true);
+    model.setPinned(1, true);
 
-    QSignalSpy acceptSpy(tab, &Tab::acceptCertificateErrorRequested);
-    tab->setPendingCertificateError(failedUrl, QStringLiteral("Expired"), true);
-    QVERIFY(tab->certificateErrorPending());
-    QCOMPARE(tab->certificateErrorOverridable(), true);
-    QCOMPARE(tab->securityState(), QStringLiteral("error"));
+    model.setPinned(0, false);
 
-    tab->acceptCertificateError();
-    QVERIFY(!tab->certificateErrorPending());
-    QCOMPARE(acceptSpy.count(), 1);
-
-    // Qt WebEngine keeps accepting the host for the lifetime of the profile,
-    // so leaving and coming back must still warn.
-    tab->setUrl(QUrl(QStringLiteral("https://other.example/")));
-    QCOMPARE(tab->securityState(), QStringLiteral("secure"));
-    tab->setUrl(failedUrl);
-    QCOMPARE(tab->securityState(), QStringLiteral("error"));
-
-    // Every tab of the same profile knows about the override too.
-    Tab *sameProfile = model.addTab(false, failedUrl);
-    QCOMPARE(sameProfile->profile(), tab->profile());
-    QCOMPARE(sameProfile->securityState(), QStringLiteral("error"));
-
-    // A private tab has its own profile and never inherits the override.
-    Tab *privateTab = model.addTab(true, failedUrl);
-    QVERIFY(privateTab->profile() != tab->profile());
-    QCOMPARE(privateTab->securityState(), QStringLiteral("secure"));
+    QCOMPARE(model.pinnedCount(), 1);
+    QCOMPARE(model.indexOfTab(second), 0);
+    QCOMPARE(model.indexOfTab(first), 1);
+    QCOMPARE(model.indexOfTab(third), 2);
 }
 
-void TestTabModel::rejectCertificateErrorClearsThePendingError()
+void TestTabModel::moveTabKeepsTheCurrentTabSelected()
 {
     TabModel model;
-    Tab *tab = model.addTab();
-    QSignalSpy rejectSpy(tab, &Tab::rejectCertificateErrorRequested);
+    model.addTab();
+    Tab *second = model.addTab();
+    model.addTab();
+    model.setCurrentIndex(1);
 
-    tab->setPendingCertificateError(QUrl(QStringLiteral("https://bad.example/")),
-                                    QStringLiteral("Bad certificate"), true);
-    tab->rejectCertificateError();
+    model.moveTab(0, 2);
 
-    QVERIFY(!tab->certificateErrorPending());
-    QCOMPARE(rejectSpy.count(), 1);
+    QCOMPARE(model.currentTab(), second);
+    QCOMPARE(model.currentIndex(), 0);
+}
+
+void TestTabModel::recentlyClosedKeepsAtMostTheLimit()
+{
+    TabModel model;
+    for (int i = 0; i < 25; ++i)
+        model.addTab(false, QUrl(QStringLiteral("https://site%1.example/").arg(i)));
+    for (int i = 0; i < 25; ++i)
+        model.closeTab(0);
+
+    const QVariantList closed = model.recentlyClosed();
+    QCOMPARE(closed.size(), 20);
+    QCOMPARE(closed.first().toMap().value(QStringLiteral("url")).toUrl(),
+             QUrl(QStringLiteral("https://site24.example/")));
 }
 
 int main(int argc, char *argv[])

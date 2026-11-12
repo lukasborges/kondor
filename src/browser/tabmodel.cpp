@@ -1,13 +1,12 @@
 #include "browser/tabmodel.h"
 
+#include "browser/assignandnotify.h"
 #include "browser/profilemanager.h"
 #include "browser/tab.h"
 
 #include <QQuickWebEngineProfile>
 
-namespace {
-constexpr int kMaxClosedTabs = 20;
-} // namespace
+#include <algorithm>
 
 TabModel::TabModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -16,16 +15,14 @@ TabModel::TabModel(QObject *parent)
 
 int TabModel::rowCount(const QModelIndex &parent) const
 {
-    return parent.isValid() ? 0 : int(m_tabs.size());
+    return parent.isValid() ? 0 : count();
 }
 
 QVariant TabModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || index.row() < 0 || index.row() >= m_tabs.size())
+    if (!index.isValid() || !isValidIndex(index.row()) || role != TabRole)
         return {};
-    if (role == TabRole)
-        return QVariant::fromValue(m_tabs.at(index.row()));
-    return {};
+    return QVariant::fromValue(m_tabs.at(index.row()));
 }
 
 QHash<int, QByteArray> TabModel::roleNames() const
@@ -33,76 +30,91 @@ QHash<int, QByteArray> TabModel::roleNames() const
     return {{TabRole, "tab"}};
 }
 
+bool TabModel::isValidIndex(int index) const
+{
+    return index >= 0 && index < count();
+}
+
 Tab *TabModel::currentTab() const
 {
-    if (m_currentIndex < 0 || m_currentIndex >= m_tabs.size())
-        return nullptr;
-    return m_tabs.at(m_currentIndex);
+    return isValidIndex(m_currentIndex) ? m_tabs.at(m_currentIndex) : nullptr;
 }
 
 int TabModel::pinnedCount() const
 {
-    int count = 0;
-    for (const Tab *tab : m_tabs) {
-        if (tab->pinned())
-            ++count;
-    }
-    return count;
+    return int(std::count_if(m_tabs.cbegin(), m_tabs.cend(),
+                             [](const Tab *tab) { return tab->pinned(); }));
 }
 
-Tab *TabModel::insertTab(int index, QQuickWebEngineProfile *profile, const QUrl &url, bool activate)
+int TabModel::pinnedCountExcluding(int index) const
+{
+    return pinnedCount() - (m_tabs.at(index)->pinned() ? 1 : 0);
+}
+
+void TabModel::notifyCurrentChanged()
+{
+    emit currentIndexChanged();
+    emit currentTabChanged();
+}
+
+QQuickWebEngineProfile *TabModel::profileFor(QQuickWebEngineProfile *requested) const
 {
     auto *profiles = ProfileManager::instance();
-    if (!profile)
-        profile = profiles->defaultProfile();
-    // Privacy is per window: a model of a private window never keeps a tab in
-    // the persistent profile, whichever caller creates it.
+    QQuickWebEngineProfile *profile = requested ? requested : profiles->defaultProfile();
     if (m_privateTabs && !profile->isOffTheRecord())
-        profile = profiles->createPrivateProfile();
+        return profiles->createPrivateProfile();
+    return profile;
+}
 
-    index = qBound(0, index, int(m_tabs.size()));
-
-    auto *tab = new Tab(profile, this);
-    // An empty URL means the New Tab page; the home page is only used by the
-    // first tab at startup and by the Home button.
-    tab->setUrl(url);
-
+void TabModel::insertRow(int index, Tab *tab)
+{
     beginInsertRows(QModelIndex(), index, index);
     m_tabs.insert(index, tab);
     endInsertRows();
     emit countChanged();
     emit pinnedCountChanged();
+}
 
-    // Keep the same tab selected when another one is inserted before it.
-    if (m_currentIndex >= index) {
-        ++m_currentIndex;
-        emit currentIndexChanged();
-        emit currentTabChanged();
-    }
-
-    if (activate)
+Tab *TabModel::insertTab(const NewTab &newTab)
+{
+    auto *tab = new Tab(profileFor(newTab.profile), this);
+    tab->setUrl(newTab.url);
+    const int index = qBound(0, newTab.index, count());
+    insertRow(index, tab);
+    keepCurrentWhenInsertedBefore(index);
+    if (newTab.activate)
         setCurrentIndex(index);
-
     return tab;
+}
+
+void TabModel::keepCurrentWhenInsertedBefore(int index)
+{
+    if (m_currentIndex < index)
+        return;
+    ++m_currentIndex;
+    notifyCurrentChanged();
 }
 
 Tab *TabModel::addTab(bool isPrivate, const QUrl &initialUrl)
 {
     auto *profiles = ProfileManager::instance();
-    QQuickWebEngineProfile *profile =
-        (isPrivate || m_privateTabs) ? profiles->createPrivateProfile()
-                                     : profiles->defaultProfile();
-    return insertTab(int(m_tabs.size()), profile, initialUrl, true);
+    const bool needsPrivateProfile = isPrivate || m_privateTabs;
+    QQuickWebEngineProfile *profile = needsPrivateProfile ? profiles->createPrivateProfile()
+                                                          : profiles->defaultProfile();
+    return insertTab({count(), profile, initialUrl, true});
+}
+
+int TabModel::childTabRow() const
+{
+    const Tab *current = currentTab();
+    if (!current)
+        return count();
+    return current->pinned() ? pinnedCount() : m_currentIndex + 1;
 }
 
 Tab *TabModel::addTabWithProfile(QQuickWebEngineProfile *profile, const QUrl &url, bool background)
 {
-    // Child tabs open right after the tab that created them, like Firefox. An
-    // unpinned child of a pinned tab goes after the pinned group instead.
-    int row = int(m_tabs.size());
-    if (m_currentIndex >= 0 && m_currentIndex < m_tabs.size())
-        row = m_tabs.at(m_currentIndex)->pinned() ? pinnedCount() : m_currentIndex + 1;
-    return insertTab(row, profile, url, !background);
+    return insertTab({childTabRow(), profile, url, !background});
 }
 
 int TabModel::indexOfTab(Tab *tab) const
@@ -110,184 +122,58 @@ int TabModel::indexOfTab(Tab *tab) const
     return int(m_tabs.indexOf(tab));
 }
 
-void TabModel::closeTab(int index)
+void TabModel::followCurrentTab(Tab *current)
 {
-    if (index < 0 || index >= m_tabs.size())
+    if (!current)
         return;
-
-    Tab *closing = m_tabs.at(index);
-    // A New Tab page has no page to reopen.
-    if (!closing->isPrivate() && !closing->newTabPage()) {
-        m_closed.append({closing->url(), closing->title(), index});
-        while (m_closed.size() > kMaxClosedTabs)
-            m_closed.removeFirst();
-        if (m_closed.size() == 1)
-            emit canReopenClosedTabChanged();
-        emit recentlyClosedChanged();
-    }
-
-    beginRemoveRows(QModelIndex(), index, index);
-    Tab *tab = m_tabs.takeAt(index);
-    endRemoveRows();
-    emit countChanged();
-    emit pinnedCountChanged();
-
-    if (m_currentIndex > index) {
-        --m_currentIndex;
-        emit currentIndexChanged();
-        emit currentTabChanged();
-    } else if (m_currentIndex == index) {
-        if (m_tabs.isEmpty())
-            m_currentIndex = -1;
-        else
-            m_currentIndex = qMin(index, int(m_tabs.size()) - 1);
-        emit currentIndexChanged();
-        emit currentTabChanged();
-    }
-
-    // The QML view is destroyed in endRemoveRows; the Tab can go afterwards.
-    tab->deleteLater();
-}
-
-void TabModel::closeTabObject(Tab *tab)
-{
-    const int idx = m_tabs.indexOf(tab);
-    if (idx >= 0)
-        closeTab(idx);
-}
-
-QVariantList TabModel::recentlyClosed() const
-{
-    QVariantList list;
-    for (qsizetype i = m_closed.size() - 1; i >= 0; --i) {
-        QVariantMap entry;
-        entry.insert(QStringLiteral("url"), m_closed.at(i).url);
-        entry.insert(QStringLiteral("title"), m_closed.at(i).title);
-        list.append(entry);
-    }
-    return list;
-}
-
-void TabModel::reopenClosedTab()
-{
-    reopenClosedTab(0);
-}
-
-void TabModel::reopenClosedTab(int index)
-{
-    if (index < 0 || index >= m_closed.size())
+    const int newIndex = indexOfTab(current);
+    if (newIndex == m_currentIndex)
         return;
-
-    const ClosedTab closed = m_closed.takeAt(m_closed.size() - 1 - index);
-
-    // A reopened tab is never pinned, so it cannot land inside the pinned group.
-    const int row = qBound(pinnedCount(), closed.index, int(m_tabs.size()));
-    Tab *tab = insertTab(row, ProfileManager::instance()->defaultProfile(), closed.url, true);
-    if (tab && !closed.title.isEmpty())
-        tab->setTitle(closed.title);
-
-    if (m_closed.isEmpty())
-        emit canReopenClosedTabChanged();
-    emit recentlyClosedChanged();
+    m_currentIndex = newIndex;
+    notifyCurrentChanged();
 }
 
 void TabModel::moveTab(int from, int to)
 {
-    if (from < 0 || from >= m_tabs.size() || to < 0 || to >= m_tabs.size() || from == to)
+    if (!isValidIndex(from) || !isValidIndex(to) || from == to)
         return;
-
     Tab *current = currentTab();
-
-    // Qt expects the destination row as it is before the source row is removed.
     beginMoveRows(QModelIndex(), from, from, QModelIndex(), to > from ? to + 1 : to);
     m_tabs.move(from, to);
     endMoveRows();
-
-    if (current) {
-        const int newIndex = int(m_tabs.indexOf(current));
-        if (newIndex != m_currentIndex) {
-            m_currentIndex = newIndex;
-            emit currentIndexChanged();
-            emit currentTabChanged();
-        }
-    }
+    followCurrentTab(current);
 }
 
 void TabModel::duplicateTab(int index)
 {
-    if (index < 0 || index >= m_tabs.size())
+    if (!isValidIndex(index))
         return;
-
-    Tab *source = m_tabs.at(index);
-    Tab *copy = insertTab(index + 1, source->profile(), source->url(), true);
+    const Tab *source = m_tabs.at(index);
+    Tab *copy = insertTab({index + 1, source->profile(), source->url(), true});
     if (source->pinned())
         setPinned(indexOfTab(copy), true);
 }
 
-void TabModel::closeOtherTabs(int index)
-{
-    if (index < 0 || index >= m_tabs.size())
-        return;
-
-    // Pinned tabs are protected and stay open.
-    for (int i = int(m_tabs.size()) - 1; i >= 0; --i) {
-        if (i == index || m_tabs.at(i)->pinned())
-            continue;
-        closeTab(i);
-        if (i < index)
-            --index;
-    }
-}
-
-void TabModel::closeTabsToTheRight(int index)
-{
-    if (index < 0 || index >= m_tabs.size())
-        return;
-
-    for (int i = int(m_tabs.size()) - 1; i > index; --i) {
-        if (!m_tabs.at(i)->pinned())
-            closeTab(i);
-    }
-}
-
 void TabModel::setPinned(int index, bool pinned)
 {
-    if (index < 0 || index >= m_tabs.size())
+    if (!isValidIndex(index) || m_tabs.at(index)->pinned() == pinned)
         return;
-
-    Tab *tab = m_tabs.at(index);
-    if (tab->pinned() == pinned)
-        return;
-
-    tab->setPinned(pinned);
-
-    // Pinned tabs live at the start of the model. The tab goes to the end of
-    // the pinned group when pinned and to the start of the rest when unpinned.
-    int target = 0;
-    for (int i = 0; i < m_tabs.size(); ++i) {
-        if (i != index && m_tabs.at(i)->pinned())
-            ++target;
-    }
-
+    m_tabs.at(index)->setPinned(pinned);
+    const int target = pinnedCountExcluding(index);
     if (index != target)
         moveTab(index, target);
-
     emit pinnedCountChanged();
 }
 
 void TabModel::setCurrentIndex(int index)
 {
-    if (index < 0 || index >= m_tabs.size() || index == m_currentIndex)
+    if (!isValidIndex(index) || index == m_currentIndex)
         return;
     m_currentIndex = index;
-    emit currentIndexChanged();
-    emit currentTabChanged();
+    notifyCurrentChanged();
 }
 
 void TabModel::setPrivateTabs(bool privateTabs)
 {
-    if (m_privateTabs == privateTabs)
-        return;
-    m_privateTabs = privateTabs;
-    emit privateTabsChanged();
+    assignAndNotify(m_privateTabs, privateTabs, [this] { emit privateTabsChanged(); });
 }

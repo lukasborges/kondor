@@ -11,7 +11,7 @@ InlineBar {
     id: root
 
     property Tab tab: null
-    readonly property string kind: tab ? tab.passwordPrompt : ""
+    readonly property string kind: tab ? tab.passwords.prompt : ""
 
     visible: kind !== ""
 
@@ -32,8 +32,8 @@ InlineBar {
         textFormat: Text.RichText
         text: root.kind === "save"
               ? qsTr("Save the password for <b>%1</b> on <b>%2</b>?")
-                    .arg(root.escapeHtml(root.tab.passwordPromptUsername))
-                    .arg(root.escapeHtml(root.tab.passwordPromptHost))
+                    .arg(root.escapeHtml(root.tab.passwords.promptUsername))
+                    .arg(root.escapeHtml(root.tab.passwords.promptHost))
               : root.kind === "walletUnavailable"
                 ? qsTr("KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.")
                 : ""
@@ -43,19 +43,19 @@ InlineBar {
         visible: root.kind === "save"
         text: qsTr("Save")
         icon.name: "document-save"
-        onClicked: root.tab.savePendingPassword()
+        onClicked: root.tab.passwords.savePending()
     }
 
     Button {
         text: root.kind === "save" ? qsTr("Not Now") : qsTr("Close")
         icon.name: root.kind === "save" ? "dialog-cancel" : "window-close"
-        onClicked: root.tab.dismissPasswordPrompt()
+        onClicked: root.tab.passwords.dismissPrompt()
     }
 
     Button {
         visible: root.kind === "save"
         text: qsTr("Never for This Site")
         icon.name: "edit-delete"
-        onClicked: root.tab.neverSavePendingPassword()
+        onClicked: root.tab.passwords.neverSavePending()
     }
 }

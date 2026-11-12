@@ -1,7 +1,7 @@
 #include <QTest>
 #include <QUrl>
 
-#include "filehelper.h"
+#include "core/filehelper.h"
 
 class TestFileHelper : public QObject
 {

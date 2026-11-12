@@ -1,5 +1,6 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
+import Kondor
 
 // Icon of an extension: a Breeze icon name, a file inside the package, or an
 // image of the catalog. Falls back to the plugin icon while an image loads or

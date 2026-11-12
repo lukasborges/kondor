@@ -3,7 +3,7 @@
 #include <QObject>
 #include <QPointer>
 #include <QVariantList>
-#include "tab.h"
+#include "browser/tab.h"
 #include <QtQmlIntegration/qqmlintegration.h>
 
 

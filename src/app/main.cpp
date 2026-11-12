@@ -15,16 +15,16 @@
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
 #include "adblock/adblockmanager.h"
-#include "extensionloader.h"
+#include "extensions/extensionloader.h"
 #include "extensions/extensioncatalog.h"
 #include "extensions/extensionmanager.h"
-#include "faviconstore.h"
-#include "profilemanager.h"
-#include "settings.h"
-#include "singleinstance.h"
-#include "startupargs.h"
-#include "startupurl.h"
-#include "windowmanager.h"
+#include "browser/faviconstore.h"
+#include "browser/profilemanager.h"
+#include "core/settings.h"
+#include "app/singleinstance.h"
+#include "app/startupargs.h"
+#include "app/startupurl.h"
+#include "app/windowmanager.h"
 
 #include <cstdio>
 

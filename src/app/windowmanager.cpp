@@ -1,9 +1,9 @@
-#include "windowmanager.h"
+#include "app/windowmanager.h"
 
 #include "extensions/extensionmanager.h"
-#include "sessionmanager.h"
-#include "settings.h"
-#include "startupargs.h"
+#include "browser/sessionmanager.h"
+#include "core/settings.h"
+#include "app/startupargs.h"
 
 #include <QQmlComponent>
 #include <QQmlEngine>

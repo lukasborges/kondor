@@ -3,7 +3,7 @@
 #include <QStandardPaths>
 #include <QTest>
 
-#include "zoommanager.h"
+#include "browser/zoommanager.h"
 
 class TestZoomManager : public QObject
 {

@@ -1,6 +1,6 @@
-#include "searchsuggestions.h"
+#include "browser/searchsuggestions.h"
 
-#include "settings.h"
+#include "core/settings.h"
 
 #include <QJsonArray>
 #include <QJsonDocument>

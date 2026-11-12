@@ -1,7 +1,7 @@
-#include "bookmarkmanager.h"
+#include "bookmarks/bookmarkmanager.h"
 
-#include "bookmarkmodel.h"
-#include "database.h"
+#include "bookmarks/bookmarkmodel.h"
+#include "core/database.h"
 
 #include <QDateTime>
 #include <QFile>

@@ -1,7 +1,7 @@
-#include "adblockmanager.h"
+#include "adblock/adblockmanager.h"
 
-#include "adblockinterceptor.h"
-#include "settings.h"
+#include "adblock/adblockinterceptor.h"
+#include "core/settings.h"
 
 #include <QDir>
 #include <QFile>

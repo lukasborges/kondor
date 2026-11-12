@@ -5,9 +5,9 @@
 #include <QStandardPaths>
 #include <QTest>
 
-#include "database.h"
-#include "faviconstore.h"
-#include "historymanager.h"
+#include "core/database.h"
+#include "browser/faviconstore.h"
+#include "history/historymanager.h"
 
 class TestFaviconStore : public QObject
 {

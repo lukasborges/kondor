@@ -8,8 +8,8 @@
 #include <QUrl>
 #include <QtQmlIntegration/qqmlintegration.h>
 
-#include "tab.h"
-#include "tabmodel.h"
+#include "browser/tab.h"
+#include "browser/tabmodel.h"
 
 class QQmlEngine;
 class QJSEngine;

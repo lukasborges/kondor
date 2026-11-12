@@ -10,8 +10,8 @@
 #include <QWebEnginePermission>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "profilemanager.h"
-#include "tab.h"
+#include "browser/profilemanager.h"
+#include "browser/tab.h"
 
 namespace {
 QObject *findByClassName(QObject *parent, const QString &className)
@@ -162,9 +162,11 @@ void TestSitePermissions::requestBarShowsAndAnswersThePendingPermission()
     tab.enqueuePermission(
             profile.queryPermission(origin, QWebEnginePermission::PermissionType::Geolocation));
 
+    m_engine.addImportPath(QStringLiteral(KONDOR_QML_IMPORT_DIR));
+
     QQmlComponent component(&m_engine,
                             QUrl::fromLocalFile(QStringLiteral(KONDOR_QML_DIR
-                                                               "/PermissionBar.qml")));
+                                                               "/site/PermissionBar.qml")));
     QObject *object = component.createWithInitialProperties(
             { { QStringLiteral("tab"), QVariant::fromValue(&tab) } });
     if (!object) {
@@ -192,9 +194,11 @@ void TestSitePermissions::dialogListsAndRevokesDecisions()
     const QUrl origin(QStringLiteral("https://permissions.example"));
     profile->queryPermission(origin, QWebEnginePermission::PermissionType::Geolocation).grant();
 
+    m_engine.addImportPath(QStringLiteral(KONDOR_QML_IMPORT_DIR));
+
     QQmlComponent component(&m_engine,
                             QUrl::fromLocalFile(QStringLiteral(KONDOR_QML_DIR
-                                                               "/SitePermissionsDialog.qml")));
+                                                               "/site/SitePermissionsDialog.qml")));
     QObject *object = component.create();
     if (!object) {
         qWarning() << component.errors();

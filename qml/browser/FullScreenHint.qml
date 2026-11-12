@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import Kondor
 
 // Transient hint shown at the top of the page when it enters full screen:
 // a video covers the window and hiding the toolbar leaves no other way out.

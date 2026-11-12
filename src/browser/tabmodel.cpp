@@ -1,7 +1,7 @@
-#include "tabmodel.h"
+#include "browser/tabmodel.h"
 
-#include "profilemanager.h"
-#include "tab.h"
+#include "browser/profilemanager.h"
+#include "browser/tab.h"
 
 #include <QQuickWebEngineProfile>
 

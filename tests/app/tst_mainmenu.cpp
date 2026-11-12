@@ -11,14 +11,14 @@
 #include <QTest>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "bookmarkmanager.h"
-#include "database.h"
-#include "faviconstore.h"
-#include "historymanager.h"
-#include "profilemanager.h"
-#include "settings.h"
-#include "tab.h"
-#include "tabmodel.h"
+#include "bookmarks/bookmarkmanager.h"
+#include "core/database.h"
+#include "browser/faviconstore.h"
+#include "history/historymanager.h"
+#include "browser/profilemanager.h"
+#include "core/settings.h"
+#include "browser/tab.h"
+#include "browser/tabmodel.h"
 
 namespace {
 QStringList g_warnings;
@@ -155,7 +155,7 @@ void TestMainMenu::init()
 {
     g_warnings.clear();
     // The stub imports MainMenu.qml and its neighbours from the source tree.
-    m_engine.addImportPath(QStringLiteral(KONDOR_QML_DIR));
+    m_engine.addImportPath(QStringLiteral(KONDOR_QML_IMPORT_DIR));
     QQmlComponent component(&m_engine);
     component.setData(kStubWindow,
                       QUrl::fromLocalFile(QStringLiteral(KONDOR_QML_DIR "/StubWindow.qml")));
@@ -263,7 +263,7 @@ void TestMainMenu::shortcutsWorkWithTheMenuClosed()
 // also declare a Shortcut for them, or Qt reports "Ambiguous shortcut".
 void TestMainMenu::actionsDoNotShareASequenceWithAShortcut()
 {
-    QFile file(QStringLiteral(KONDOR_QML_DIR "/BrowserWindow.qml"));
+    QFile file(QStringLiteral(KONDOR_QML_DIR "/app/BrowserWindow.qml"));
     QVERIFY(file.open(QIODevice::ReadOnly));
     const QString source = QString::fromUtf8(file.readAll());
 

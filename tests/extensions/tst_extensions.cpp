@@ -23,14 +23,14 @@
 
 #include <KZip>
 
-#include "database.h"
+#include "core/database.h"
 #include "extensions/extensionbridge.h"
 #include "extensions/extensioncatalog.h"
 #include "extensions/extensionmanager.h"
 #include "extensions/extensionpackage.h"
-#include "profilemanager.h"
-#include "settings.h"
-#include "tab.h"
+#include "browser/profilemanager.h"
+#include "core/settings.h"
+#include "browser/tab.h"
 
 namespace {
 
@@ -1031,6 +1031,7 @@ void TestExtensions::catalogUpdates()
 namespace {
 QObject *createInWindow(QQmlEngine *engine, const QByteArray &source, const QVariantMap &properties = {})
 {
+    engine->addImportPath(QStringLiteral(KONDOR_QML_IMPORT_DIR));
     QQmlComponent component(engine);
     component.setData(source, QUrl::fromLocalFile(QStringLiteral(KONDOR_QML_DIR "/Host.qml")));
     QObject *object = component.createWithInitialProperties(properties);

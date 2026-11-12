@@ -8,10 +8,10 @@
 #include <QTest>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "profilemanager.h"
-#include "settings.h"
-#include "tab.h"
-#include "tabmodel.h"
+#include "browser/profilemanager.h"
+#include "core/settings.h"
+#include "browser/tab.h"
+#include "browser/tabmodel.h"
 
 // Tab sizing of the tab strip (#83): fixed width, shrinking, scroll buttons.
 class TestTabStrip : public QObject
@@ -104,8 +104,10 @@ void TestTabStrip::init()
     m_window = new QQuickWindow;
     m_window->resize(1100, 60);
 
+    m_engine.addImportPath(QStringLiteral(KONDOR_QML_IMPORT_DIR));
+
     QQmlComponent component(&m_engine, QUrl::fromLocalFile(QStringLiteral(KONDOR_QML_DIR
-                                                                         "/TabStrip.qml")));
+                                                                         "/browser/TabStrip.qml")));
     QObject *object = component.createWithInitialProperties(
         { { QStringLiteral("tabModel"), QVariant::fromValue(m_tabs) } });
     if (!object)

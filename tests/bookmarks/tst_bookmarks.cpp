@@ -9,9 +9,9 @@
 #include <QTest>
 #include <QVariantMap>
 
-#include "bookmarkmanager.h"
-#include "bookmarkmodel.h"
-#include "database.h"
+#include "bookmarks/bookmarkmanager.h"
+#include "bookmarks/bookmarkmodel.h"
+#include "core/database.h"
 
 namespace {
 QString profileDatabasePath(const QString &dataHome)

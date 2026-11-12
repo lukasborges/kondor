@@ -1,9 +1,9 @@
-#include "historymanager.h"
+#include "history/historymanager.h"
 
-#include "database.h"
-#include "faviconstore.h"
-#include "historymodel.h"
-#include "settings.h"
+#include "core/database.h"
+#include "browser/faviconstore.h"
+#include "history/historymodel.h"
+#include "core/settings.h"
 
 #include <QDate>
 #include <QDateTime>

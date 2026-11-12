@@ -1,5 +1,6 @@
 import QtQuick
 import QtWebEngine
+import Kondor
 
 // Shared wording and Breeze icon names for every site permission type, used by
 // the request bar and by the Site Permissions dialog.

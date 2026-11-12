@@ -1,4 +1,4 @@
-#include "extensioncatalog.h"
+#include "extensions/extensioncatalog.h"
 
 #include <QCryptographicHash>
 #include <QDir>
@@ -13,9 +13,9 @@
 
 #include <functional>
 
-#include "extensionmanager.h"
-#include "extensionpackage.h"
-#include "settings.h"
+#include "extensions/extensionmanager.h"
+#include "extensions/extensionpackage.h"
+#include "core/settings.h"
 
 namespace {
 

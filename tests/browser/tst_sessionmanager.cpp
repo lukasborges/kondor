@@ -4,9 +4,9 @@
 #include <QTest>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "sessionmanager.h"
-#include "tab.h"
-#include "tabmodel.h"
+#include "browser/sessionmanager.h"
+#include "browser/tab.h"
+#include "browser/tabmodel.h"
 
 namespace {
 QString sessionFilePath()

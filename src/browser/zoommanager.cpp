@@ -1,4 +1,4 @@
-#include "zoommanager.h"
+#include "browser/zoommanager.h"
 
 #include <QtGlobal>
 

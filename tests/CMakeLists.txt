@@ -1,3 +1,13 @@
+set(KONDOR_TEST_QML_IMPORT_DIR "${CMAKE_CURRENT_BINARY_DIR}/qmlimport")
+file(GLOB KONDOR_QML_SOURCES "${CMAKE_SOURCE_DIR}/qml/*/*.qml")
+set(KONDOR_QMLDIR_CONTENT "module Kondor\n")
+foreach(qml_file IN LISTS KONDOR_QML_SOURCES)
+    get_filename_component(qml_type "${qml_file}" NAME_WE)
+    file(RELATIVE_PATH qml_relative "${KONDOR_TEST_QML_IMPORT_DIR}/Kondor" "${qml_file}")
+    string(APPEND KONDOR_QMLDIR_CONTENT "${qml_type} 1.0 ${qml_relative}\n")
+endforeach()
+file(WRITE "${KONDOR_TEST_QML_IMPORT_DIR}/Kondor/qmldir" "${KONDOR_QMLDIR_CONTENT}")
+
 # Sources of the Kondor extensions (#107) for the tests that need them.
 set(KONDOR_EXTENSION_PACKAGE_SOURCES
     ../src/extensions/extensionpackage.cpp
@@ -6,8 +16,8 @@ set(KONDOR_EXTENSION_PACKAGE_SOURCES
 )
 
 qt_add_executable(tst_addressresolver
-    tst_addressresolver.cpp
-    ../src/addressresolver.cpp
+    browser/tst_addressresolver.cpp
+    ../src/browser/addressresolver.cpp
 )
 
 target_include_directories(tst_addressresolver PRIVATE
@@ -22,9 +32,9 @@ target_link_libraries(tst_addressresolver PRIVATE
 add_test(NAME tst_addressresolver COMMAND tst_addressresolver)
 
 qt_add_executable(tst_startupurl
-    tst_startupurl.cpp
-    ../src/startupurl.cpp
-    ../src/addressresolver.cpp
+    app/tst_startupurl.cpp
+    ../src/app/startupurl.cpp
+    ../src/browser/addressresolver.cpp
 )
 
 target_include_directories(tst_startupurl PRIVATE
@@ -39,23 +49,23 @@ target_link_libraries(tst_startupurl PRIVATE
 add_test(NAME tst_startupurl COMMAND tst_startupurl)
 
 qt_add_executable(tst_tabmodel
-    tst_tabmodel.cpp
-    ../src/tabmodel.cpp
-    ../src/tab.cpp
+    browser/tst_tabmodel.cpp
+    ../src/browser/tabmodel.cpp
+    ../src/browser/tab.cpp
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/profilemanager.cpp
+    ../src/browser/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
-    ../src/addressresolver.cpp
-    ../src/settings.cpp
-    ../src/downloadmanager.cpp
-    ../src/notifier.cpp
-    ../src/historymanager.cpp
-    ../src/historymodel.cpp
-    ../src/database.cpp
-    ../src/faviconstore.cpp
+    ../src/browser/addressresolver.cpp
+    ../src/core/settings.cpp
+    ../src/downloads/downloadmanager.cpp
+    ../src/core/notifier.cpp
+    ../src/history/historymanager.cpp
+    ../src/history/historymodel.cpp
+    ../src/core/database.cpp
+    ../src/browser/faviconstore.cpp
 )
 
 target_include_directories(tst_tabmodel PRIVATE
@@ -80,29 +90,30 @@ set_tests_properties(tst_tabmodel PROPERTIES
 )
 
 qt_add_executable(tst_addresssuggestions
-    tst_addresssuggestions.cpp
-    ../src/tab.cpp
+    browser/tst_addresssuggestions.cpp
+    ../src/browser/tab.cpp
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/tabmodel.cpp
-    ../src/profilemanager.cpp
+    ../src/browser/tabmodel.cpp
+    ../src/browser/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
-    ../src/addressresolver.cpp
-    ../src/settings.cpp
-    ../src/downloadmanager.cpp
-    ../src/notifier.cpp
-    ../src/historymanager.cpp
-    ../src/historymodel.cpp
-    ../src/database.cpp
-    ../src/faviconstore.cpp
-    ../src/bookmarkmanager.cpp
-    ../src/bookmarkmodel.cpp
+    ../src/browser/addressresolver.cpp
+    ../src/core/settings.cpp
+    ../src/downloads/downloadmanager.cpp
+    ../src/core/notifier.cpp
+    ../src/history/historymanager.cpp
+    ../src/history/historymodel.cpp
+    ../src/core/database.cpp
+    ../src/browser/faviconstore.cpp
+    ../src/bookmarks/bookmarkmanager.cpp
+    ../src/bookmarks/bookmarkmodel.cpp
 )
 
 target_compile_definitions(tst_addresssuggestions PRIVATE
     KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+    KONDOR_QML_IMPORT_DIR="${KONDOR_TEST_QML_IMPORT_DIR}"
 )
 
 target_include_directories(tst_addresssuggestions PRIVATE
@@ -128,10 +139,10 @@ set_tests_properties(tst_addresssuggestions PROPERTIES
 )
 
 qt_add_executable(tst_bookmarks
-    tst_bookmarks.cpp
-    ../src/bookmarkmanager.cpp
-    ../src/bookmarkmodel.cpp
-    ../src/database.cpp
+    bookmarks/tst_bookmarks.cpp
+    ../src/bookmarks/bookmarkmanager.cpp
+    ../src/bookmarks/bookmarkmodel.cpp
+    ../src/core/database.cpp
 )
 
 target_include_directories(tst_bookmarks PRIVATE
@@ -152,29 +163,30 @@ set_tests_properties(tst_bookmarks PROPERTIES
 )
 
 qt_add_executable(tst_bookmarkswindow
-    tst_bookmarkswindow.cpp
-    ../src/bookmarkmanager.cpp
-    ../src/bookmarkmodel.cpp
-    ../src/database.cpp
-    ../src/tab.cpp
+    bookmarks/tst_bookmarkswindow.cpp
+    ../src/bookmarks/bookmarkmanager.cpp
+    ../src/bookmarks/bookmarkmodel.cpp
+    ../src/core/database.cpp
+    ../src/browser/tab.cpp
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/tabmodel.cpp
-    ../src/profilemanager.cpp
+    ../src/browser/tabmodel.cpp
+    ../src/browser/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
-    ../src/addressresolver.cpp
-    ../src/settings.cpp
-    ../src/downloadmanager.cpp
-    ../src/notifier.cpp
-    ../src/historymanager.cpp
-    ../src/historymodel.cpp
-    ../src/faviconstore.cpp
+    ../src/browser/addressresolver.cpp
+    ../src/core/settings.cpp
+    ../src/downloads/downloadmanager.cpp
+    ../src/core/notifier.cpp
+    ../src/history/historymanager.cpp
+    ../src/history/historymodel.cpp
+    ../src/browser/faviconstore.cpp
 )
 
 target_compile_definitions(tst_bookmarkswindow PRIVATE
     KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+    KONDOR_QML_IMPORT_DIR="${KONDOR_TEST_QML_IMPORT_DIR}"
 )
 
 target_include_directories(tst_bookmarkswindow PRIVATE
@@ -200,29 +212,30 @@ set_tests_properties(tst_bookmarkswindow PROPERTIES
 )
 
 qt_add_executable(tst_mainmenu
-    tst_mainmenu.cpp
-    ../src/bookmarkmanager.cpp
-    ../src/bookmarkmodel.cpp
-    ../src/database.cpp
-    ../src/tab.cpp
+    app/tst_mainmenu.cpp
+    ../src/bookmarks/bookmarkmanager.cpp
+    ../src/bookmarks/bookmarkmodel.cpp
+    ../src/core/database.cpp
+    ../src/browser/tab.cpp
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/tabmodel.cpp
-    ../src/profilemanager.cpp
+    ../src/browser/tabmodel.cpp
+    ../src/browser/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
-    ../src/addressresolver.cpp
-    ../src/settings.cpp
-    ../src/downloadmanager.cpp
-    ../src/notifier.cpp
-    ../src/historymanager.cpp
-    ../src/historymodel.cpp
-    ../src/faviconstore.cpp
+    ../src/browser/addressresolver.cpp
+    ../src/core/settings.cpp
+    ../src/downloads/downloadmanager.cpp
+    ../src/core/notifier.cpp
+    ../src/history/historymanager.cpp
+    ../src/history/historymodel.cpp
+    ../src/browser/faviconstore.cpp
 )
 
 target_compile_definitions(tst_mainmenu PRIVATE
     KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+    KONDOR_QML_IMPORT_DIR="${KONDOR_TEST_QML_IMPORT_DIR}"
 )
 
 target_include_directories(tst_mainmenu PRIVATE
@@ -248,12 +261,12 @@ set_tests_properties(tst_mainmenu PROPERTIES
 )
 
 qt_add_executable(tst_topsites
-    tst_topsites.cpp
-    ../src/historymanager.cpp
-    ../src/historymodel.cpp
-    ../src/database.cpp
-    ../src/faviconstore.cpp
-    ../src/settings.cpp
+    history/tst_topsites.cpp
+    ../src/history/historymanager.cpp
+    ../src/history/historymodel.cpp
+    ../src/core/database.cpp
+    ../src/browser/faviconstore.cpp
+    ../src/core/settings.cpp
 )
 
 target_include_directories(tst_topsites PRIVATE
@@ -272,12 +285,12 @@ target_link_libraries(tst_topsites PRIVATE
 add_test(NAME tst_topsites COMMAND tst_topsites)
 
 qt_add_executable(tst_faviconstore
-    tst_faviconstore.cpp
-    ../src/faviconstore.cpp
-    ../src/historymanager.cpp
-    ../src/historymodel.cpp
-    ../src/database.cpp
-    ../src/settings.cpp
+    browser/tst_faviconstore.cpp
+    ../src/browser/faviconstore.cpp
+    ../src/history/historymanager.cpp
+    ../src/history/historymodel.cpp
+    ../src/core/database.cpp
+    ../src/core/settings.cpp
 )
 
 target_include_directories(tst_faviconstore PRIVATE
@@ -296,8 +309,8 @@ target_link_libraries(tst_faviconstore PRIVATE
 add_test(NAME tst_faviconstore COMMAND tst_faviconstore)
 
 qt_add_executable(tst_aboutinfo
-    tst_aboutinfo.cpp
-    ../src/aboutinfo.cpp
+    app/tst_aboutinfo.cpp
+    ../src/app/aboutinfo.cpp
 )
 
 qt_add_resources(tst_aboutinfo "license"
@@ -328,8 +341,8 @@ set_tests_properties(tst_aboutinfo PROPERTIES
 )
 
 qt_add_executable(tst_settings
-    tst_settings.cpp
-    ../src/settings.cpp
+    core/tst_settings.cpp
+    ../src/core/settings.cpp
 )
 
 target_include_directories(tst_settings PRIVATE
@@ -344,28 +357,29 @@ target_link_libraries(tst_settings PRIVATE
 add_test(NAME tst_settings COMMAND tst_settings)
 
 qt_add_executable(tst_settingswindow
-    tst_settingswindow.cpp
-    ../src/tab.cpp
+    settings/tst_settingswindow.cpp
+    ../src/browser/tab.cpp
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/tabmodel.cpp
-    ../src/profilemanager.cpp
+    ../src/browser/tabmodel.cpp
+    ../src/browser/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
-    ../src/addressresolver.cpp
-    ../src/settings.cpp
-    ../src/downloadmanager.cpp
-    ../src/notifier.cpp
-    ../src/historymanager.cpp
-    ../src/historymodel.cpp
-    ../src/database.cpp
-    ../src/faviconstore.cpp
+    ../src/browser/addressresolver.cpp
+    ../src/core/settings.cpp
+    ../src/downloads/downloadmanager.cpp
+    ../src/core/notifier.cpp
+    ../src/history/historymanager.cpp
+    ../src/history/historymodel.cpp
+    ../src/core/database.cpp
+    ../src/browser/faviconstore.cpp
     ${KONDOR_EXTENSION_PACKAGE_SOURCES}
 )
 
 target_compile_definitions(tst_settingswindow PRIVATE
     KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+    KONDOR_QML_IMPORT_DIR="${KONDOR_TEST_QML_IMPORT_DIR}"
 )
 
 target_include_directories(tst_settingswindow PRIVATE
@@ -392,27 +406,28 @@ set_tests_properties(tst_settingswindow PROPERTIES
 )
 
 qt_add_executable(tst_tabstrip
-    tst_tabstrip.cpp
-    ../src/tab.cpp
+    browser/tst_tabstrip.cpp
+    ../src/browser/tab.cpp
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/tabmodel.cpp
-    ../src/profilemanager.cpp
+    ../src/browser/tabmodel.cpp
+    ../src/browser/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
-    ../src/addressresolver.cpp
-    ../src/settings.cpp
-    ../src/downloadmanager.cpp
-    ../src/notifier.cpp
-    ../src/historymanager.cpp
-    ../src/historymodel.cpp
-    ../src/database.cpp
-    ../src/faviconstore.cpp
+    ../src/browser/addressresolver.cpp
+    ../src/core/settings.cpp
+    ../src/downloads/downloadmanager.cpp
+    ../src/core/notifier.cpp
+    ../src/history/historymanager.cpp
+    ../src/history/historymodel.cpp
+    ../src/core/database.cpp
+    ../src/browser/faviconstore.cpp
 )
 
 target_compile_definitions(tst_tabstrip PRIVATE
     KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+    KONDOR_QML_IMPORT_DIR="${KONDOR_TEST_QML_IMPORT_DIR}"
 )
 
 target_include_directories(tst_tabstrip PRIVATE
@@ -438,26 +453,27 @@ set_tests_properties(tst_tabstrip PROPERTIES
 )
 
 qt_add_executable(tst_sitepermissions
-    tst_sitepermissions.cpp
-    ../src/tab.cpp
+    site/tst_sitepermissions.cpp
+    ../src/browser/tab.cpp
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/profilemanager.cpp
+    ../src/browser/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
-    ../src/addressresolver.cpp
-    ../src/settings.cpp
-    ../src/downloadmanager.cpp
-    ../src/notifier.cpp
-    ../src/historymanager.cpp
-    ../src/historymodel.cpp
-    ../src/database.cpp
-    ../src/faviconstore.cpp
+    ../src/browser/addressresolver.cpp
+    ../src/core/settings.cpp
+    ../src/downloads/downloadmanager.cpp
+    ../src/core/notifier.cpp
+    ../src/history/historymanager.cpp
+    ../src/history/historymodel.cpp
+    ../src/core/database.cpp
+    ../src/browser/faviconstore.cpp
 )
 
 target_compile_definitions(tst_sitepermissions PRIVATE
     KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+    KONDOR_QML_IMPORT_DIR="${KONDOR_TEST_QML_IMPORT_DIR}"
 )
 
 target_include_directories(tst_sitepermissions PRIVATE
@@ -483,24 +499,24 @@ set_tests_properties(tst_sitepermissions PROPERTIES
 )
 
 qt_add_executable(tst_sessionmanager
-    tst_sessionmanager.cpp
-    ../src/sessionmanager.cpp
-    ../src/tabmodel.cpp
-    ../src/tab.cpp
+    browser/tst_sessionmanager.cpp
+    ../src/browser/sessionmanager.cpp
+    ../src/browser/tabmodel.cpp
+    ../src/browser/tab.cpp
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/profilemanager.cpp
+    ../src/browser/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
-    ../src/addressresolver.cpp
-    ../src/settings.cpp
-    ../src/downloadmanager.cpp
-    ../src/notifier.cpp
-    ../src/historymanager.cpp
-    ../src/historymodel.cpp
-    ../src/database.cpp
-    ../src/faviconstore.cpp
+    ../src/browser/addressresolver.cpp
+    ../src/core/settings.cpp
+    ../src/downloads/downloadmanager.cpp
+    ../src/core/notifier.cpp
+    ../src/history/historymanager.cpp
+    ../src/history/historymodel.cpp
+    ../src/core/database.cpp
+    ../src/browser/faviconstore.cpp
 )
 
 target_include_directories(tst_sessionmanager PRIVATE
@@ -525,8 +541,8 @@ set_tests_properties(tst_sessionmanager PROPERTIES
 )
 
 qt_add_executable(tst_singleinstance
-    tst_singleinstance.cpp
-    ../src/singleinstance.cpp
+    app/tst_singleinstance.cpp
+    ../src/app/singleinstance.cpp
 )
 
 target_include_directories(tst_singleinstance PRIVATE
@@ -542,8 +558,8 @@ target_link_libraries(tst_singleinstance PRIVATE
 add_test(NAME tst_singleinstance COMMAND tst_singleinstance)
 
 qt_add_executable(tst_filehelper
-    tst_filehelper.cpp
-    ../src/filehelper.cpp
+    core/tst_filehelper.cpp
+    ../src/core/filehelper.cpp
 )
 
 target_include_directories(tst_filehelper PRIVATE
@@ -560,8 +576,8 @@ target_link_libraries(tst_filehelper PRIVATE
 add_test(NAME tst_filehelper COMMAND tst_filehelper)
 
 qt_add_executable(tst_zoommanager
-    tst_zoommanager.cpp
-    ../src/zoommanager.cpp
+    browser/tst_zoommanager.cpp
+    ../src/browser/zoommanager.cpp
 )
 
 target_include_directories(tst_zoommanager PRIVATE
@@ -586,7 +602,7 @@ target_link_libraries(tst_sitepermissions PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_sessionmanager PRIVATE Qt6::Concurrent Qt6::Network)
 
 qt_add_executable(tst_filterengine
-    tst_filterengine.cpp
+    adblock/tst_filterengine.cpp
     ../src/adblock/filterengine.cpp
 )
 
@@ -602,7 +618,7 @@ target_link_libraries(tst_filterengine PRIVATE
 add_test(NAME tst_filterengine COMMAND tst_filterengine)
 
 qt_add_executable(tst_passwordstore
-    tst_passwordstore.cpp
+    passwords/tst_passwordstore.cpp
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
 )
@@ -622,7 +638,7 @@ target_link_libraries(tst_passwordstore PRIVATE
 add_test(NAME tst_passwordstore COMMAND tst_passwordstore)
 
 qt_add_executable(tst_passwordimport
-    tst_passwordimport.cpp
+    passwords/tst_passwordimport.cpp
     ../src/passwords/passwordimport.cpp
     ../src/passwords/passwordstore.cpp
 )
@@ -650,8 +666,8 @@ get_property(kondor_all_tests DIRECTORY PROPERTY TESTS)
 set_property(TEST ${kondor_all_tests} APPEND PROPERTY ENVIRONMENT "KONDOR_NO_KWALLET=1")
 
 qt_add_executable(tst_extensionloader
-    tst_extensionloader.cpp
-    ../src/extensionloader.cpp
+    extensions/tst_extensionloader.cpp
+    ../src/extensions/extensionloader.cpp
 )
 
 target_include_directories(tst_extensionloader PRIVATE
@@ -678,23 +694,23 @@ set_tests_properties(tst_extensionloader PROPERTIES
 )
 
 qt_add_executable(tst_extensions
-    tst_extensions.cpp
+    extensions/tst_extensions.cpp
     ../src/extensions/extensionbridge.cpp
-    ../src/tab.cpp
+    ../src/browser/tab.cpp
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
-    ../src/profilemanager.cpp
+    ../src/browser/profilemanager.cpp
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
-    ../src/addressresolver.cpp
-    ../src/settings.cpp
-    ../src/downloadmanager.cpp
-    ../src/notifier.cpp
-    ../src/historymanager.cpp
-    ../src/historymodel.cpp
-    ../src/database.cpp
-    ../src/faviconstore.cpp
+    ../src/browser/addressresolver.cpp
+    ../src/core/settings.cpp
+    ../src/downloads/downloadmanager.cpp
+    ../src/core/notifier.cpp
+    ../src/history/historymanager.cpp
+    ../src/history/historymodel.cpp
+    ../src/core/database.cpp
+    ../src/browser/faviconstore.cpp
     ${KONDOR_EXTENSION_PACKAGE_SOURCES}
 )
 
@@ -716,11 +732,11 @@ qt_add_resources(tst_extensions "passwords_script"
 target_compile_definitions(tst_extensions PRIVATE
     KONDOR_TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data"
     KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+    KONDOR_QML_IMPORT_DIR="${KONDOR_TEST_QML_IMPORT_DIR}"
 )
 
 target_include_directories(tst_extensions PRIVATE
     ../src
-    ../src/extensions
 )
 
 target_link_libraries(tst_extensions PRIVATE

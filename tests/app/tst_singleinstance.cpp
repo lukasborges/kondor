@@ -2,7 +2,7 @@
 #include <QSignalSpy>
 #include <QTest>
 
-#include "singleinstance.h"
+#include "app/singleinstance.h"
 
 class TestSingleInstance : public QObject
 {

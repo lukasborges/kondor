@@ -1,6 +1,6 @@
-#include "passwordimport.h"
+#include "passwords/passwordimport.h"
 
-#include "passwordstore.h"
+#include "passwords/passwordstore.h"
 
 #include <QHash>
 #include <QRegularExpression>

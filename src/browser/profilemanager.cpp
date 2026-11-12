@@ -1,14 +1,14 @@
-#include "profilemanager.h"
+#include "browser/profilemanager.h"
 
 #include <QFile>
 #include <QWebEngineScript>
 
 #include "adblock/adblockmanager.h"
-#include "addressresolver.h"
-#include "downloadmanager.h"
-#include "historymanager.h"
-#include "notifier.h"
-#include "settings.h"
+#include "browser/addressresolver.h"
+#include "downloads/downloadmanager.h"
+#include "history/historymanager.h"
+#include "core/notifier.h"
+#include "core/settings.h"
 
 #include <QCoreApplication>
 #include <QLocale>

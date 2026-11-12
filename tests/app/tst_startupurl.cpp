@@ -1,7 +1,7 @@
 #include <QTemporaryDir>
 #include <QTest>
 
-#include "startupurl.h"
+#include "app/startupurl.h"
 
 class TestStartupUrl : public QObject
 {

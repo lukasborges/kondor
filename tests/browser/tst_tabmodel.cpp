@@ -4,9 +4,9 @@
 #include <QTest>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "profilemanager.h"
-#include "tab.h"
-#include "tabmodel.h"
+#include "browser/profilemanager.h"
+#include "browser/tab.h"
+#include "browser/tabmodel.h"
 
 class TestTabModel : public QObject
 {

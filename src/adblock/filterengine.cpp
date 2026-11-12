@@ -1,4 +1,4 @@
-#include "filterengine.h"
+#include "adblock/filterengine.h"
 
 #include <QSet>
 

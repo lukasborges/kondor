@@ -13,11 +13,11 @@
 
 #include <functional>
 
-#include "bookmarkmanager.h"
-#include "database.h"
-#include "faviconstore.h"
-#include "profilemanager.h"
-#include "tabmodel.h"
+#include "bookmarks/bookmarkmanager.h"
+#include "core/database.h"
+#include "browser/faviconstore.h"
+#include "browser/profilemanager.h"
+#include "browser/tabmodel.h"
 
 namespace {
 // The window uses `image://kondor-favicon/` for bookmark rows; the real
@@ -95,9 +95,10 @@ QQuickWindow *TestBookmarksWindow::createWindow(TabModel *tabs, qint64 folderId)
 {
     // One engine for the whole test: QML singletons (and Kirigami's Units)
     // are registered per engine and must not be torn down between windows.
+    m_engine.addImportPath(QStringLiteral(KONDOR_QML_IMPORT_DIR));
     QQmlComponent component(&m_engine,
                             QUrl::fromLocalFile(QStringLiteral(KONDOR_QML_DIR
-                                                               "/BookmarksWindow.qml")));
+                                                               "/bookmarks/BookmarksWindow.qml")));
     QObject *object = component.createWithInitialProperties({
         {QStringLiteral("tabModel"), QVariant::fromValue(tabs)},
         {QStringLiteral("selectedFolderId"), QVariant::fromValue(folderId)},

@@ -1,4 +1,4 @@
-#include "singleinstance.h"
+#include "app/singleinstance.h"
 
 #include <QCryptographicHash>
 #include <QDir>

@@ -1,6 +1,6 @@
-#include "historymodel.h"
+#include "history/historymodel.h"
 
-#include "database.h"
+#include "core/database.h"
 
 #include <QLocale>
 #include <QSqlQuery>

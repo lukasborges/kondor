@@ -9,7 +9,7 @@
 #include <QVariantMap>
 #include <QtQmlIntegration/qqmlintegration.h>
 
-#include "bookmarkmodel.h"
+#include "bookmarks/bookmarkmodel.h"
 
 class QQmlEngine;
 class QJSEngine;

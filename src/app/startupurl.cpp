@@ -1,6 +1,6 @@
-#include "startupurl.h"
+#include "app/startupurl.h"
 
-#include "addressresolver.h"
+#include "browser/addressresolver.h"
 
 #include <QDir>
 #include <QFileInfo>

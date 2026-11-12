@@ -5,7 +5,7 @@
 #include <QVariantList>
 #include <QtQmlIntegration/qqmlintegration.h>
 
-#include "historymodel.h"
+#include "history/historymodel.h"
 
 class QQmlEngine;
 class QJSEngine;

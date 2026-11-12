@@ -8,9 +8,9 @@
 #include <QVariantList>
 #include <QVariantMap>
 
-#include "database.h"
-#include "historymanager.h"
-#include "settings.h"
+#include "core/database.h"
+#include "history/historymanager.h"
+#include "core/settings.h"
 
 class TestTopSites : public QObject
 {

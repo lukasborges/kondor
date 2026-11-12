@@ -1,4 +1,4 @@
-#include "notifier.h"
+#include "core/notifier.h"
 
 #include <QDBusConnection>
 #include <QDBusInterface>

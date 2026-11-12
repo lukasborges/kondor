@@ -1,8 +1,8 @@
-#include "tab.h"
+#include "browser/tab.h"
 
 #include "passwords/passwordstore.h"
-#include "profilemanager.h"
-#include "settings.h"
+#include "browser/profilemanager.h"
+#include "core/settings.h"
 
 #include <QQuickWebEngineProfile>
 

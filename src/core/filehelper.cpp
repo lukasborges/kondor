@@ -1,4 +1,4 @@
-#include "filehelper.h"
+#include "core/filehelper.h"
 
 #include <QFile>
 #include <QStringList>

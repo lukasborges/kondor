@@ -1,10 +1,10 @@
-#include "extensionbridge.h"
+#include "extensions/extensionbridge.h"
 
 #include <QJsonDocument>
 #include <QJsonObject>
 
-#include "extensionmanager.h"
-#include "notifier.h"
+#include "extensions/extensionmanager.h"
+#include "core/notifier.h"
 
 namespace {
 

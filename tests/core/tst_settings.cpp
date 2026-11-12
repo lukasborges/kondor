@@ -2,7 +2,7 @@
 #include <QStandardPaths>
 #include <QTest>
 
-#include "settings.h"
+#include "core/settings.h"
 
 class TestSettings : public QObject
 {

@@ -12,12 +12,12 @@
 #include <QVariantList>
 #include <QVariantMap>
 
-#include "bookmarkmanager.h"
-#include "database.h"
-#include "faviconstore.h"
-#include "historymanager.h"
-#include "profilemanager.h"
-#include "settings.h"
+#include "bookmarks/bookmarkmanager.h"
+#include "core/database.h"
+#include "browser/faviconstore.h"
+#include "history/historymanager.h"
+#include "browser/profilemanager.h"
+#include "core/settings.h"
 
 // Builds the address bar dropdown from the real singletons and checks the
 // row order, limits and activation URLs of #44 and #11.
@@ -80,9 +80,10 @@ void TestAddressSuggestions::cleanupTestCase()
 
 QObject *TestAddressSuggestions::createPopup()
 {
+    m_engine.addImportPath(QStringLiteral(KONDOR_QML_IMPORT_DIR));
     QQmlComponent component(&m_engine,
                             QUrl::fromLocalFile(QStringLiteral(KONDOR_QML_DIR
-                                                               "/AddressSuggestions.qml")));
+                                                               "/browser/AddressSuggestions.qml")));
     QObject *popup = component.create();
     if (!popup)
         qWarning() << component.errors();

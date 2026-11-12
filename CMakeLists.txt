@@ -27,7 +27,7 @@ include(GNUInstallDirs)
 qt_standard_project_setup(REQUIRES 6.8)
 
 qt_add_executable(kondor
-    src/main.cpp
+    src/app/main.cpp
 )
 
 option(BUILD_TESTING "Build tests" ON)
@@ -36,93 +36,93 @@ qt_add_qml_module(kondor
     URI Kondor
     VERSION 1.0
     QML_FILES
-        qml/BrowserWindow.qml
-        qml/TabStrip.qml
-        qml/WebViewTab.qml
-        qml/PageContextMenu.qml
-        qml/ReaderControls.qml
-        qml/NewTabPage.qml
-        qml/TabButtonDelegate.qml
-        qml/TabContextMenu.qml
-        qml/InlineBar.qml
-        qml/ConfirmDialog.qml
-        qml/FindBar.qml
-        qml/PermissionBar.qml
-        qml/AddPasswordDialog.qml
-        qml/ImportPasswordsDialog.qml
-        qml/PasswordBar.qml
-        qml/FullScreenHint.qml
-        qml/PermissionTypeInfo.qml
-        qml/SitePermissionsDialog.qml
-        qml/SiteInfoPopup.qml
-        qml/AdBlockPopup.qml
-        qml/CertificateErrorPage.qml
-        qml/CrashedPage.qml
-        qml/HistoryWindow.qml
-        qml/SettingsWindow.qml
-        qml/PasswordsPage.qml
-        qml/DownloadsPopup.qml
-        qml/BookmarksBar.qml
-        qml/BookmarkMenu.qml
-        qml/MainMenu.qml
-        qml/BookmarksWindow.qml
-        qml/SiteIcon.qml
-        qml/SiteMenuItem.qml
-        qml/AddressSuggestions.qml
-        qml/AboutWindow.qml
-        qml/ExtensionIcon.qml
-        qml/ExtensionsPage.qml
-        qml/ExtensionCatalogDialog.qml
-        qml/InstallExtensionDialog.qml
-        qml/ExtensionSettingsDialog.qml
-        qml/ExtensionsMenu.qml
+        qml/app/BrowserWindow.qml
+        qml/browser/TabStrip.qml
+        qml/browser/WebViewTab.qml
+        qml/browser/PageContextMenu.qml
+        qml/browser/ReaderControls.qml
+        qml/browser/NewTabPage.qml
+        qml/browser/TabButtonDelegate.qml
+        qml/browser/TabContextMenu.qml
+        qml/common/InlineBar.qml
+        qml/common/ConfirmDialog.qml
+        qml/browser/FindBar.qml
+        qml/site/PermissionBar.qml
+        qml/passwords/AddPasswordDialog.qml
+        qml/passwords/ImportPasswordsDialog.qml
+        qml/passwords/PasswordBar.qml
+        qml/browser/FullScreenHint.qml
+        qml/site/PermissionTypeInfo.qml
+        qml/site/SitePermissionsDialog.qml
+        qml/site/SiteInfoPopup.qml
+        qml/adblock/AdBlockPopup.qml
+        qml/browser/CertificateErrorPage.qml
+        qml/browser/CrashedPage.qml
+        qml/history/HistoryWindow.qml
+        qml/settings/SettingsWindow.qml
+        qml/passwords/PasswordsPage.qml
+        qml/downloads/DownloadsPopup.qml
+        qml/bookmarks/BookmarksBar.qml
+        qml/bookmarks/BookmarkMenu.qml
+        qml/app/MainMenu.qml
+        qml/bookmarks/BookmarksWindow.qml
+        qml/common/SiteIcon.qml
+        qml/common/SiteMenuItem.qml
+        qml/browser/AddressSuggestions.qml
+        qml/app/AboutWindow.qml
+        qml/extensions/ExtensionIcon.qml
+        qml/extensions/ExtensionsPage.qml
+        qml/extensions/ExtensionCatalogDialog.qml
+        qml/extensions/InstallExtensionDialog.qml
+        qml/extensions/ExtensionSettingsDialog.qml
+        qml/extensions/ExtensionsMenu.qml
     SOURCES
-        src/aboutinfo.h
-        src/aboutinfo.cpp
-        src/addressresolver.h
-        src/addressresolver.cpp
-        src/tab.h
-        src/tab.cpp
-        src/tabmodel.h
-        src/tabmodel.cpp
-        src/profilemanager.h
-        src/profilemanager.cpp
-        src/startupargs.h
-        src/startupargs.cpp
-        src/startupurl.h
-        src/startupurl.cpp
-        src/settings.h
-        src/settings.cpp
-        src/sessionmanager.h
-        src/sessionmanager.cpp
-        src/windowmanager.h
-        src/windowmanager.cpp
-        src/singleinstance.h
-        src/singleinstance.cpp
-        src/database.h
-        src/database.cpp
-        src/historymanager.h
-        src/historymanager.cpp
-        src/historymodel.h
-        src/historymodel.cpp
-        src/downloadmanager.h
-        src/downloadmanager.cpp
-        src/filehelper.h
-        src/filehelper.cpp
-        src/notifier.h
-        src/notifier.cpp
-        src/bookmarkmanager.h
-        src/bookmarkmanager.cpp
-        src/bookmarkmodel.h
-        src/bookmarkmodel.cpp
-        src/faviconstore.h
-        src/faviconstore.cpp
-        src/extensionloader.h
-        src/extensionloader.cpp
-        src/searchsuggestions.h
-        src/searchsuggestions.cpp
-        src/zoommanager.h
-        src/zoommanager.cpp
+        src/app/aboutinfo.h
+        src/app/aboutinfo.cpp
+        src/browser/addressresolver.h
+        src/browser/addressresolver.cpp
+        src/browser/tab.h
+        src/browser/tab.cpp
+        src/browser/tabmodel.h
+        src/browser/tabmodel.cpp
+        src/browser/profilemanager.h
+        src/browser/profilemanager.cpp
+        src/app/startupargs.h
+        src/app/startupargs.cpp
+        src/app/startupurl.h
+        src/app/startupurl.cpp
+        src/core/settings.h
+        src/core/settings.cpp
+        src/browser/sessionmanager.h
+        src/browser/sessionmanager.cpp
+        src/app/windowmanager.h
+        src/app/windowmanager.cpp
+        src/app/singleinstance.h
+        src/app/singleinstance.cpp
+        src/core/database.h
+        src/core/database.cpp
+        src/history/historymanager.h
+        src/history/historymanager.cpp
+        src/history/historymodel.h
+        src/history/historymodel.cpp
+        src/downloads/downloadmanager.h
+        src/downloads/downloadmanager.cpp
+        src/core/filehelper.h
+        src/core/filehelper.cpp
+        src/core/notifier.h
+        src/core/notifier.cpp
+        src/bookmarks/bookmarkmanager.h
+        src/bookmarks/bookmarkmanager.cpp
+        src/bookmarks/bookmarkmodel.h
+        src/bookmarks/bookmarkmodel.cpp
+        src/browser/faviconstore.h
+        src/browser/faviconstore.cpp
+        src/extensions/extensionloader.h
+        src/extensions/extensionloader.cpp
+        src/browser/searchsuggestions.h
+        src/browser/searchsuggestions.cpp
+        src/browser/zoommanager.h
+        src/browser/zoommanager.cpp
         src/adblock/filterengine.h
         src/adblock/filterengine.cpp
         src/adblock/adblockinterceptor.h
@@ -209,11 +209,13 @@ target_compile_definitions(kondor PRIVATE
     PROJECT_VERSION="${PROJECT_VERSION}"
 )
 
+file(GLOB KONDOR_SOURCE_FOLDERS LIST_DIRECTORIES true "${CMAKE_CURRENT_SOURCE_DIR}/src/*")
+list(FILTER KONDOR_SOURCE_FOLDERS EXCLUDE REGEX "\\.(cpp|h|js)$")
+
+# qmltyperegistrar includes the headers of the QML types by file name only
 target_include_directories(kondor PRIVATE
     src
-    src/adblock
-    src/passwords
-    src/extensions
+    ${KONDOR_SOURCE_FOLDERS}
 )
 
 target_link_libraries(kondor PRIVATE

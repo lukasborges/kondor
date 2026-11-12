@@ -1,6 +1,6 @@
-#include "bookmarkmodel.h"
+#include "bookmarks/bookmarkmodel.h"
 
-#include "database.h"
+#include "core/database.h"
 
 #include <QSqlQuery>
 #include <QVariant>

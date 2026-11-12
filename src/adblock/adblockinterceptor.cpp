@@ -1,4 +1,4 @@
-#include "adblockinterceptor.h"
+#include "adblock/adblockinterceptor.h"
 
 #include <QReadLocker>
 #include <QWebEngineUrlRequestInfo>

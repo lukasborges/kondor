@@ -1,7 +1,7 @@
-#include "sessionmanager.h"
+#include "browser/sessionmanager.h"
 
-#include "tab.h"
-#include "tabmodel.h"
+#include "browser/tab.h"
+#include "browser/tabmodel.h"
 
 #include <QCoreApplication>
 #include <QDir>

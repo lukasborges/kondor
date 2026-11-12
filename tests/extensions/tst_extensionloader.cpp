@@ -11,7 +11,7 @@
 #include <QtWebEngineCore/qtwebenginecoreglobal.h>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "extensionloader.h"
+#include "extensions/extensionloader.h"
 
 #if KONDOR_HAVE_EXTENSIONS
 #include <QQuickItem>

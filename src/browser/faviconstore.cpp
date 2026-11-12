@@ -1,6 +1,6 @@
-#include "faviconstore.h"
+#include "browser/faviconstore.h"
 
-#include "database.h"
+#include "core/database.h"
 
 #include <QBuffer>
 #include <QDateTime>

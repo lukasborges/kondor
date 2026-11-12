@@ -1,7 +1,7 @@
 #include <QCoreApplication>
 #include <QTest>
 
-#include "aboutinfo.h"
+#include "app/aboutinfo.h"
 
 class TestAboutInfo : public QObject
 {

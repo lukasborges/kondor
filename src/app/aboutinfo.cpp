@@ -1,4 +1,4 @@
-#include "aboutinfo.h"
+#include "app/aboutinfo.h"
 
 #include <QCoreApplication>
 #include <QFile>

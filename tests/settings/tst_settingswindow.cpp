@@ -14,9 +14,9 @@
 #include "extensions/extensioncatalog.h"
 #include "extensions/extensionmanager.h"
 #include "passwords/passwordstore.h"
-#include "profilemanager.h"
-#include "settings.h"
-#include "tabmodel.h"
+#include "browser/profilemanager.h"
+#include "core/settings.h"
+#include "browser/tabmodel.h"
 
 namespace {
 // The `pending` object is the only QML object with these properties.
@@ -112,8 +112,9 @@ void TestSettingsWindow::init()
 
 QQuickWindow *TestSettingsWindow::createWindow()
 {
+    m_engine.addImportPath(QStringLiteral(KONDOR_QML_IMPORT_DIR));
     QQmlComponent component(&m_engine, QUrl::fromLocalFile(QStringLiteral(KONDOR_QML_DIR
-                                                                         "/SettingsWindow.qml")));
+                                                                         "/settings/SettingsWindow.qml")));
     auto *tabs = new TabModel;
     QObject *object = component.createWithInitialProperties(
         { { QStringLiteral("tabModel"), QVariant::fromValue(tabs) } });

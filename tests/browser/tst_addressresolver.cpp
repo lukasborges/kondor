@@ -1,6 +1,6 @@
 #include <QTest>
 
-#include "addressresolver.h"
+#include "browser/addressresolver.h"
 
 class TestAddressResolver : public QObject
 {

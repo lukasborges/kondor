@@ -286,8 +286,8 @@ pt_BR) · 7. #36 Rename to Kondor Browser · 8. #34 Translations for the main KD
 38. #137 Split SettingsWindow.qml and BookmarksWindow.qml · 39. #138 Shrink C++: core, bookmarks,
 history, downloads · 40. #144 Shrink C++: browser · 41. #145 Shrink C++: app, adblock, passwords ·
 42. #146 Shrink C++: extensions · 43. #139 Shrink QML functions and files ·
-44. #108 Extensions repository · 45. #109 Dark Mode extension · 46. #110 Video Speed Controller
-extension · 47. #111 User Scripts extension · 48. #112 Cookie Banner Blocker extension ·
-49. #113 Skip Sponsors extension · 50. #114 YouTube Dislike Counts extension ·
-51. #115 JSON Viewer extension · 52. #116 User Styles extension · 53. #117 Clean Links extension ·
-54. #118 Mouse Gestures extension
+44. #151 Shrink the test files · 45. #108 Extensions repository · 46. #109 Dark Mode extension ·
+47. #110 Video Speed Controller extension · 48. #111 User Scripts extension ·
+49. #112 Cookie Banner Blocker extension · 50. #113 Skip Sponsors extension ·
+51. #114 YouTube Dislike Counts extension · 52. #115 JSON Viewer extension ·
+53. #116 User Styles extension · 54. #117 Clean Links extension · 55. #118 Mouse Gestures extension

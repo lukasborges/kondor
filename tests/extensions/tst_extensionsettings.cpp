@@ -25,6 +25,11 @@ QVariantMap boolSetting()
     return {{QStringLiteral("type"), QStringLiteral("bool")}, {QStringLiteral("default"), false}};
 }
 
+QVariantMap boolSettingDefaultingToTrue()
+{
+    return {{QStringLiteral("type"), QStringLiteral("bool")}, {QStringLiteral("default"), true}};
+}
+
 QVariantMap choiceSetting()
 {
     QVariantMap setting = settingOf(QStringLiteral("choice"));
@@ -53,6 +58,8 @@ void TestExtensionSettings::sanitizesEachSettingType_data()
     const QVariant fallback = QStringLiteral("fallback");
     const QVariantMap number = settingOf(QStringLiteral("number"));
     addRow("bool good", {boolSetting(), true, true});
+    addRow("bool true text", {boolSetting(), QStringLiteral("true"), true});
+    addRow("bool false text", {boolSettingDefaultingToTrue(), QStringLiteral("false"), false});
     addRow("bool bad", {boolSetting(), QStringLiteral("yes"), false});
     addRow("number good", {number, 5, 5.0});
     addRow("number bad", {number, QStringLiteral("x"), fallback});

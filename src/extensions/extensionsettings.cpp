@@ -27,9 +27,16 @@ double clampedNumber(const QVariantMap &setting, double number)
     return number;
 }
 
+bool isBoolText(const QVariant &value)
+{
+    const QString text = value.metaType().id() == QMetaType::QString ? value.toString() : QString();
+    return text == QLatin1String("true") || text == QLatin1String("false");
+}
+
 QVariant sanitizeBool(const QVariantMap &setting, const QVariant &value)
 {
-    return value.metaType().id() == QMetaType::Bool ? value.toBool() : fallbackOf(setting).toBool();
+    const bool isBool = value.metaType().id() == QMetaType::Bool || isBoolText(value);
+    return isBool ? value.toBool() : fallbackOf(setting).toBool();
 }
 
 QVariant sanitizeNumber(const QVariantMap &setting, const QVariant &value)

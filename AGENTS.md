@@ -103,6 +103,7 @@ exactly as described here; later issues reuse it. Do not create parallel alterna
 | **Notifications** | `src/notifier.{h,cpp}` | QML singleton `Notifier` with `Q_INVOKABLE void notify(const QString &title, const QString &body, const QString &iconName)`, implemented with `QDBusInterface` on `org.freedesktop.Notifications` (`Notify` method, app name `Kondor`, `app_icon` = `kondor`). Add `DBus` to Qt components and `Qt6::DBus`. Defined in issue #4. |
 | **Inline page bar** | `qml/InlineBar.qml` | A bar shown between the toolbar and the page (for find, permission prompts, crash notices): `Kirigami.InlineMessage`-like look, uses `Kirigami.Theme` colors. Defined in issue #5. |
 | **Favicons** | `src/faviconstore.{h,cpp}`, `qml/SiteIcon.qml` | QML singleton `FaviconStore` keeps one favicon per host in the `favicons` table of **Database** (filled only from normal tabs); `image://kondor-favicon/<page URL>` serves it and `SiteIcon` shows it with a fallback icon. Qt's `image://favicon/` only resolves icon URLs of open views, never page URLs. Defined in bug #45. |
+| **SQL helper** | `src/core/sql.{h,cpp}` | Namespace `Sql` over **Database**: `run(statement, values)` → `std::optional<QSqlQuery>` (prepared, bound, executed; `nullopt` on an invalid database or failure), `ids(statement, values)` → `QList<qint64>`, `inTransaction(work)` (commit when `work` returns true, else roll back), `idOrNull(id)`. All C++ SQL goes through it instead of `QSqlQuery` boilerplate. Defined in issue #138. |
 
 ## UI prototypes (visual target)
 
@@ -279,9 +280,11 @@ pt_BR) · 7. #36 Rename to Kondor Browser · 8. #34 Translations for the main KD
 30. #21 Passwords · 31. #25 Flatpak · 32. #98 Self-hosted Flatpak repository ·
 33. #88 Browser extensions spike · 34. #106 Import passwords · 35. #107 Kondor extensions ·
 36. #135 Feature folders and Clean Code limits · 37. #136 Split BrowserWindow.qml ·
-38. #137 Split SettingsWindow.qml and BookmarksWindow.qml · 39. #138 Shrink C++ functions and files ·
-40. #139 Shrink QML functions and files · 41. #108 Extensions repository · 42. #109 Dark Mode extension ·
-43. #110 Video Speed Controller extension · 44. #111 User Scripts extension · 45. #112 Cookie Banner
-Blocker extension · 46. #113 Skip Sponsors extension · 47. #114 YouTube Dislike Counts extension ·
-48. #115 JSON Viewer extension · 49. #116 User Styles extension · 50. #117 Clean Links extension ·
-51. #118 Mouse Gestures extension
+38. #137 Split SettingsWindow.qml and BookmarksWindow.qml · 39. #138 Shrink C++: core, bookmarks,
+history, downloads · 40. #144 Shrink C++: browser · 41. #145 Shrink C++: app, adblock, passwords ·
+42. #146 Shrink C++: extensions · 43. #139 Shrink QML functions and files ·
+44. #108 Extensions repository · 45. #109 Dark Mode extension · 46. #110 Video Speed Controller
+extension · 47. #111 User Scripts extension · 48. #112 Cookie Banner Blocker extension ·
+49. #113 Skip Sponsors extension · 50. #114 YouTube Dislike Counts extension ·
+51. #115 JSON Viewer extension · 52. #116 User Styles extension · 53. #117 Clean Links extension ·
+54. #118 Mouse Gestures extension

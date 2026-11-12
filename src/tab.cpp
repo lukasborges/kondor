@@ -503,3 +503,50 @@ void Tab::fillPassword(const QString &username)
         return;
     emit fillPasswordRequested(username);
 }
+
+void Tab::closeTab()
+{
+    emit closeRequested();
+}
+
+void Tab::openTab(const QUrl &url, bool background)
+{
+    emit openTabRequested(url, background);
+}
+
+void Tab::selectNeighborTab(int delta)
+{
+    emit neighborTabRequested(delta);
+}
+
+void Tab::downloadUrl(const QUrl &url, const QString &fileName)
+{
+    emit downloadUrlRequested(url, fileName);
+}
+
+bool Tab::extensionItemChecked(const QString &extensionId, const QString &itemId) const
+{
+    return m_checkedExtensionItems.contains(extensionId + QLatin1Char('/') + itemId);
+}
+
+void Tab::setExtensionItemChecked(const QString &extensionId, const QString &itemId, bool checked)
+{
+    const QString key = extensionId + QLatin1Char('/') + itemId;
+    if (m_checkedExtensionItems.contains(key) == checked)
+        return;
+    if (checked)
+        m_checkedExtensionItems.insert(key);
+    else
+        m_checkedExtensionItems.remove(key);
+    emit extensionItemsChanged();
+}
+
+void Tab::triggerExtensionItem(const QString &extensionId, const QString &itemId, bool checkable)
+{
+    bool checked = false;
+    if (checkable) {
+        checked = !extensionItemChecked(extensionId, itemId);
+        setExtensionItemChecked(extensionId, itemId, checked);
+    }
+    emit extensionItemTriggered(extensionId, itemId, checked);
+}

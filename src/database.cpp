@@ -14,7 +14,7 @@
 
 namespace {
 // Schema version. Each migration bumps `PRAGMA user_version` by 1.
-constexpr int kSchemaVersion = 4;
+constexpr int kSchemaVersion = 5;
 
 // One node of the bookmark set a new profile starts with. Folders have no URL
 // and their title is translated at insert time; bookmark titles are site names
@@ -252,6 +252,17 @@ void Database::migrate()
         // Toolbar that has no user bookmark, and never runs again once the
         // version is bumped, so deleted defaults never come back.
         ok = ok && seedDefaultBookmarks(m_db);
+    }
+
+    if (current < 5) {
+        // Storage of the Kondor extensions (JSON values, see ExtensionManager).
+        ok = ok && query.exec(QStringLiteral(
+            "CREATE TABLE IF NOT EXISTS extension_storage ("
+            "  extension_id TEXT NOT NULL,"
+            "  key TEXT NOT NULL,"
+            "  value TEXT NOT NULL,"
+            "  PRIMARY KEY (extension_id, key)"
+            ")"));
     }
 
     if (!ok) {

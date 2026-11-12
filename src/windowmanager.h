@@ -63,6 +63,9 @@ private:
     QObject *createWindow(bool privateWindow, const QList<QUrl> &urls,
                           const QStringList &titles, int currentIndex);
     QQmlComponent *component();
+    // Opens a .kondorext in the install dialog of the window's Settings →
+    // Extensions page.
+    void showExtensionPackage(QObject *window, const QString &path);
 
     // The most recently active window of the requested kind, or null.
     QObject *windowForRequest(bool privateWindow) const;

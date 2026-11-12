@@ -1,0 +1,35 @@
+{
+  "kondor": 1,
+  "id": "sample",
+  "name": "Sample Extension",
+  "name[pt_BR]": "Extensão de Exemplo",
+  "description": "Marks pages it runs on, for the Kondor tests.",
+  "description[pt_BR]": "Marca as páginas em que roda, para os testes do Kondor.",
+  "version": "1.0.0",
+  "author": "Kondor contributors",
+  "homepage": "https://github.com/lukasborges/kondor-extensions",
+  "license": "GPL-3.0-or-later",
+  "icon": "icon.svg",
+  "permissions": ["tabs", "notifications"],
+  "contentScripts": [
+    {
+      "matches": ["*://127.0.0.1/*", "*://localhost/*"],
+      "exclude": ["*://127.0.0.1:*/excluded/*"],
+      "js": ["content.js"],
+      "css": ["style.css"],
+      "runAt": "document-end",
+      "allFrames": false
+    }
+  ],
+  "settings": [
+    { "key": "greeting", "type": "string", "label": "Greeting", "label[pt_BR]": "Saudação", "default": "hello" },
+    { "key": "size", "type": "number", "label": "Size", "default": 50, "min": 0, "max": 100, "suffix": "%" },
+    { "key": "enabledFeature", "type": "bool", "label": "Feature", "default": true },
+    { "key": "mode", "type": "choice", "label": "Mode", "default": "a",
+      "choices": [ { "value": "a", "label": "Mode A" }, { "value": "b", "label": "Mode B", "label[pt_BR]": "Modo B" } ] }
+  ],
+  "action": {
+    "items": [ { "id": "toggle", "title": "Toggle Mark", "title[pt_BR]": "Alternar Marca", "checkable": true } ],
+    "siteToggle": true
+  }
+}

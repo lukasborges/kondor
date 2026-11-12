@@ -11,6 +11,8 @@
 #include <QTest>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
+#include "extensions/extensioncatalog.h"
+#include "extensions/extensionmanager.h"
 #include "passwords/passwordstore.h"
 #include "profilemanager.h"
 #include "settings.h"
@@ -80,6 +82,14 @@ void TestSettingsWindow::initTestCase()
                                        [](QQmlEngine *, QJSEngine *) -> QObject * {
                                            return Settings::instance();
                                        });
+    qmlRegisterSingletonType<ExtensionManager>("Kondor", 1, 0, "ExtensionManager",
+                                               [](QQmlEngine *, QJSEngine *) -> QObject * {
+                                                   return ExtensionManager::instance();
+                                               });
+    qmlRegisterSingletonType<ExtensionCatalog>("Kondor", 1, 0, "ExtensionCatalog",
+                                               [](QQmlEngine *, QJSEngine *) -> QObject * {
+                                                   return ExtensionCatalog::instance();
+                                               });
     qmlRegisterSingletonType<PasswordStore>("Kondor", 1, 0, "PasswordStore",
                                             [](QQmlEngine *, QJSEngine *) -> QObject * {
                                                 return PasswordStore::instance();
@@ -323,7 +333,7 @@ void TestSettingsWindow::searchFiltersPages()
     QVERIFY(window);
     QMetaObject::invokeMethod(window, "showWindow");
     QVERIFY(QTest::qWaitForWindowExposed(window));
-    QCOMPARE(visiblePageCount(window), 6);
+    QCOMPARE(visiblePageCount(window), 7);
 
     QObject *search = findByClassName(window, QStringLiteral("SearchField"));
     QVERIFY(search);
@@ -366,7 +376,7 @@ void TestSettingsWindow::searchFiltersPages()
     // Clearing the filter restores every entry and keeps the page selected.
     QTest::keyClick(window, Qt::Key_A, Qt::ControlModifier);
     QTest::keyClick(window, Qt::Key_Delete);
-    QTRY_COMPARE(visiblePageCount(window), 6);
+    QTRY_COMPARE(visiblePageCount(window), 7);
     verifyShownPage(window, 4, QStringLiteral("Passwords"));
 
     delete window;

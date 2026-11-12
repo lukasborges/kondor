@@ -16,6 +16,8 @@
 
 #include "adblock/adblockmanager.h"
 #include "extensionloader.h"
+#include "extensions/extensioncatalog.h"
+#include "extensions/extensionmanager.h"
 #include "faviconstore.h"
 #include "profilemanager.h"
 #include "settings.h"
@@ -201,6 +203,15 @@ int main(int argc, char *argv[])
     // Cached filter lists load in the background; stale ones are refreshed.
     AdBlockManager::instance()->start();
 
+    // Kondor extensions (#107): every profile, now and later, gets the content
+    // scripts of the enabled extensions (private ones only when allowed).
+    ExtensionManager *extensions = ExtensionManager::instance();
+    ProfileManager *profiles = ProfileManager::instance();
+    QObject::connect(profiles, &ProfileManager::profileCreated, extensions,
+                     &ExtensionManager::registerProfile);
+    for (QQuickWebEngineProfile *profile : profiles->profiles())
+        extensions->registerProfile(profile);
+
     // Developer option: unpacked extensions go into the default profile only,
     // before any window loads its pages.
     ExtensionLoader extensionLoader;
@@ -218,6 +229,9 @@ int main(int argc, char *argv[])
     QObject::connect(&singleInstance, &SingleInstance::messageReceived,
                      windowManager, &WindowManager::handleSingleInstanceMessage);
     windowManager->openStartupWindows();
+
+    // Catalog extensions update in the background (when the user allows it).
+    ExtensionCatalog::instance()->startAutoUpdate();
 
     // Every startup window failed to load: without a window exec() would run
     // forever (quitOnLastWindowClosed never fires), so fail like a QML error in

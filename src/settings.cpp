@@ -29,6 +29,7 @@ constexpr auto kAdBlockAllowList = "AdBlock/AllowList";
 constexpr auto kAdBlockLastUpdate = "AdBlock/LastUpdate";
 constexpr auto kOfferToSavePasswords = "Passwords/OfferToSave";
 constexpr auto kPasswordNeverSave = "Passwords/NeverSave";
+constexpr auto kExtensionsAutoUpdate = "Extensions/AutoUpdate";
 
 // Option property names, used by defaultValue().
 constexpr auto kHomePageName = "homePage";
@@ -51,6 +52,7 @@ constexpr auto kAdBlockEnabledName = "adBlockEnabled";
 constexpr auto kAdBlockAllowListName = "adBlockAllowList";
 constexpr auto kOfferToSavePasswordsName = "offerToSavePasswords";
 constexpr auto kPasswordNeverSaveSitesName = "passwordNeverSaveSites";
+constexpr auto kExtensionsAutoUpdateName = "extensionsAutoUpdate";
 
 QString dictionariesPath()
 {
@@ -141,6 +143,9 @@ Settings::Settings(QObject *parent)
     , m_passwordNeverSaveSites(m_settings.value(QLatin1String(kPasswordNeverSave),
                                                 defaultValue(QLatin1String(kPasswordNeverSaveSitesName)))
                                    .toStringList())
+    , m_extensionsAutoUpdate(m_settings.value(QLatin1String(kExtensionsAutoUpdate),
+                                              defaultValue(QLatin1String(kExtensionsAutoUpdateName)))
+                                 .toBool())
 {
 }
 
@@ -184,6 +189,8 @@ QVariant Settings::defaultValue(const QString &name) const
         return true;
     if (name == QLatin1String(kPasswordNeverSaveSitesName))
         return QStringList();
+    if (name == QLatin1String(kExtensionsAutoUpdateName))
+        return true;
     if (name == QLatin1String(kSpellCheckLanguagesName)) {
         // The system language when a dictionary for it exists, else US English.
         // Dictionary files use Chromium's hyphenated codes ("pt-BR").
@@ -479,4 +486,14 @@ void Settings::setPasswordNeverSaveSites(const QStringList &passwordNeverSaveSit
     m_settings.setValue(QLatin1String(kPasswordNeverSave), m_passwordNeverSaveSites);
     m_settings.sync();
     emit passwordNeverSaveSitesChanged();
+}
+
+void Settings::setExtensionsAutoUpdate(bool extensionsAutoUpdate)
+{
+    if (m_extensionsAutoUpdate == extensionsAutoUpdate)
+        return;
+    m_extensionsAutoUpdate = extensionsAutoUpdate;
+    m_settings.setValue(QLatin1String(kExtensionsAutoUpdate), m_extensionsAutoUpdate);
+    m_settings.sync();
+    emit extensionsAutoUpdateChanged();
 }

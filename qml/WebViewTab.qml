@@ -192,10 +192,22 @@ Item {
         tab: root.tab
     }
 
-    // Only the page-facing API goes on the channel, never the bridge or Tab.
+    ExtensionBridge {
+        id: extensionBridge
+        tab: root.tab
+    }
+
+    // Only the page-facing APIs go on the channel, never a bridge or Tab. The
+    // extensions API is there in every tab (an extension only runs in a
+    // private tab when the user allowed it); the passwords API never is in a
+    // private one.
     WebChannel {
-        id: passwordChannel
-        Component.onCompleted: registerObject("kondorPasswords", passwordBridge.pageApi())
+        id: pageChannel
+        Component.onCompleted: {
+            registerObject("kondorExtensions", extensionBridge.pageApi())
+            if (!root.tab.isPrivate)
+                registerObject("kondorPasswords", passwordBridge.pageApi())
+        }
     }
 
     // The page and, below it, Chromium DevTools while they are open. The
@@ -210,11 +222,11 @@ Item {
             SplitView.fillHeight: true
             profile: root.tab.profile
 
-            // Password manager: the page script is installed only on the
-            // persistent profile (ProfileManager), so a private tab never gets
-            // it, and the bridge refuses private tabs anyway. The script runs
-            // in the application world, out of reach of the page's own scripts.
-            webChannel: root.tab.isPrivate ? null : passwordChannel
+            // Password manager and extensions: the page scripts run in the
+            // application world, out of reach of the page's own scripts. The
+            // password script is installed only on the persistent profile
+            // (ProfileManager), and the bridge refuses private tabs anyway.
+            webChannel: pageChannel
             webChannelWorld: WebEngineScript.ApplicationWorld
 
             // Qt WebEngine disables page full screen by default, so a video
@@ -453,6 +465,20 @@ Item {
         tabModel: root.tabModel
     }
 
+    // A setting of an extension changed: its scripts in this page learn the
+    // new values without a reload.
+    Connections {
+        target: ExtensionManager
+        function onSettingsChanged(id) {
+            webView.runJavaScript(
+                "window.__kondorExtensions && window.__kondorExtensions["
+                + JSON.stringify(id) + "] && window.__kondorExtensions["
+                + JSON.stringify(id) + "](" + JSON.stringify(ExtensionManager.settingValues(id))
+                + ");",
+                WebEngineScript.ApplicationWorld)
+        }
+    }
+
     Connections {
         target: root.tab
 
@@ -523,6 +549,38 @@ Item {
             webView.triggerWebAction(WebEngineView.InspectElement)
         }
         function onFillPasswordRequested(username) { passwordBridge.fill(username) }
+
+        // Kondor extensions: commands of the page API and the toolbar menu.
+        function onCloseRequested() { root.tabModel.closeTabObject(root.tab) }
+        function onOpenTabRequested(url, background) {
+            root.tabModel.addTabWithProfile(root.tab.profile, url, background)
+        }
+        function onNeighborTabRequested(delta) {
+            const count = root.tabModel.count
+            const index = root.tabModel.indexOfTab(root.tab)
+            if (count > 1 && index >= 0)
+                root.tabModel.setCurrentIndex((index + delta + count) % count)
+        }
+        function onDownloadUrlRequested(url, fileName) {
+            // Qt Quick has no "download this URL" call: an anchor with the
+            // download attribute asks the profile for the file.
+            webView.runJavaScript(
+                "(function(url, name) {"
+                + "const a = document.createElement('a'); a.href = url;"
+                + "if (name) a.download = name; a.style.display = 'none';"
+                + "(document.body || document.documentElement).appendChild(a);"
+                + "a.click(); a.remove(); })("
+                + JSON.stringify(url.toString()) + ", " + JSON.stringify(fileName) + ");",
+                WebEngineScript.ApplicationWorld)
+        }
+        function onExtensionItemTriggered(extensionId, itemId, checked) {
+            webView.runJavaScript(
+                "window.__kondorExtensionActions && window.__kondorExtensionActions["
+                + JSON.stringify(extensionId) + "] && window.__kondorExtensionActions["
+                + JSON.stringify(extensionId) + "](" + JSON.stringify(itemId) + ", "
+                + (checked ? "true" : "false") + ");",
+                WebEngineScript.ApplicationWorld)
+        }
         function onForwardRequested() { if (webView.canGoForward) webView.goForward() }
         function onReloadRequested() { webView.reload() }
         function onStopRequested() { webView.stop() }

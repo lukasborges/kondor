@@ -72,6 +72,14 @@ ApplicationWindow {
             component: passwordsPage
         },
         {
+            id: "extensions",
+            title: qsTr("Extensions"),
+            icon: "preferences-plugin",
+            keywords: [qsTr("Filter extensions…"), qsTr("Get New Extensions…"),
+                       qsTr("Install from File…"), qsTr("Update extensions automatically")],
+            component: extensionsPage
+        },
+        {
             title: qsTr("Spelling"),
             icon: "tools-check-spelling",
             keywords: [qsTr("Check spelling while typing"), qsTr("Languages:")],
@@ -143,11 +151,12 @@ ApplicationWindow {
         property bool spellCheckEnabled: false
         property var spellCheckLanguages: []
         property bool offerToSavePasswords: true
+        property bool extensionsAutoUpdate: true
 
         readonly property var values: [homePage, searchEngine, customSearchUrl,
             downloadDirectory, askWhereToSave, startupBehavior, showTopSites,
             clearDataOnExit, blockThirdPartyCookies, adBlockEnabled, searchSuggestions,
-            spellCheckEnabled, spellCheckLanguages, offerToSavePasswords]
+            spellCheckEnabled, spellCheckLanguages, offerToSavePasswords, extensionsAutoUpdate]
         onValuesChanged: root.refresh()
     }
 
@@ -166,6 +175,7 @@ ApplicationWindow {
         pending.spellCheckEnabled = Settings.spellCheckEnabled
         pending.spellCheckLanguages = Settings.spellCheckLanguages
         pending.offerToSavePasswords = Settings.offerToSavePasswords
+        pending.extensionsAutoUpdate = Settings.extensionsAutoUpdate
         root.refresh()
     }
 
@@ -184,6 +194,7 @@ ApplicationWindow {
                 || pending.spellCheckEnabled !== Settings.spellCheckEnabled
                 || !root.sameList(pending.spellCheckLanguages, Settings.spellCheckLanguages)
                 || pending.offerToSavePasswords !== Settings.offerToSavePasswords
+                || pending.extensionsAutoUpdate !== Settings.extensionsAutoUpdate
         root.defaultsEnabled = !root.pageAtDefaults()
     }
 
@@ -210,12 +221,14 @@ ApplicationWindow {
                         === Settings.defaultValue("blockThirdPartyCookies")
                     && pending.clearDataOnExit === Settings.defaultValue("clearDataOnExit")
                     && pending.adBlockEnabled === Settings.defaultValue("adBlockEnabled")
-        case 5:
+        case 6:
             return pending.spellCheckEnabled === Settings.defaultValue("spellCheckEnabled")
                     && root.sameList(pending.spellCheckLanguages,
                                      Settings.defaultValue("spellCheckLanguages"))
         case 4:
             return pending.offerToSavePasswords === Settings.defaultValue("offerToSavePasswords")
+        case 5:
+            return pending.extensionsAutoUpdate === Settings.defaultValue("extensionsAutoUpdate")
         }
         return true
     }
@@ -241,12 +254,15 @@ ApplicationWindow {
             pending.clearDataOnExit = Settings.defaultValue("clearDataOnExit")
             pending.adBlockEnabled = Settings.defaultValue("adBlockEnabled")
             break
-        case 5:
+        case 6:
             pending.spellCheckEnabled = Settings.defaultValue("spellCheckEnabled")
             pending.spellCheckLanguages = Settings.defaultValue("spellCheckLanguages")
             break
         case 4:
             pending.offerToSavePasswords = Settings.defaultValue("offerToSavePasswords")
+            break
+        case 5:
+            pending.extensionsAutoUpdate = Settings.defaultValue("extensionsAutoUpdate")
             break
         }
         root.refresh()
@@ -281,6 +297,8 @@ ApplicationWindow {
             Settings.spellCheckLanguages = pending.spellCheckLanguages
         if (pending.offerToSavePasswords !== Settings.offerToSavePasswords)
             Settings.offerToSavePasswords = pending.offerToSavePasswords
+        if (pending.extensionsAutoUpdate !== Settings.extensionsAutoUpdate)
+            Settings.extensionsAutoUpdate = pending.extensionsAutoUpdate
         root.refresh()
     }
 
@@ -316,6 +334,16 @@ ApplicationWindow {
         root.raise()
         root.requestActivate()
         pageList.forceActiveFocus()
+    }
+
+    // Shows the window on the page with this `id` (see `pages`).
+    function showPage(pageId) {
+        root.showWindow()
+        const index = root.pages.findIndex(function(page) { return page.id === pageId })
+        if (index >= 0) {
+            searchField.text = ""
+            root.currentPage = index
+        }
     }
 
     function openSitePermissions() {
@@ -951,6 +979,18 @@ ApplicationWindow {
             tab: root.passwordsTab
             offerToSave: pending.offerToSavePasswords
             onOfferToSaveToggled: function(checked) { pending.offerToSavePasswords = checked }
+        }
+    }
+
+    // ── Extensions page ─────────────────────────────────────────────────
+    Component {
+        id: extensionsPage
+
+        ExtensionsPage {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            autoUpdate: pending.extensionsAutoUpdate
+            onAutoUpdateToggled: function(checked) { pending.extensionsAutoUpdate = checked }
         }
     }
 

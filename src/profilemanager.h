@@ -48,13 +48,18 @@ public:
 
     QString homePage() const;
 
+    // Profiles that exist now (the persistent one and the live private ones).
+    QList<QQuickWebEngineProfile *> profiles() const;
+
 signals:
     void homePageChanged();
+    // Emitted once a new profile is set up, so it can get further user scripts.
+    void profileCreated(QQuickWebEngineProfile *profile);
 
 private:
     explicit ProfileManager(QObject *parent = nullptr);
     void setupProfile(QQuickWebEngineProfile *profile);
-    void installPasswordScript(QQuickWebEngineProfile *profile);
+    void installPageScripts(QQuickWebEngineProfile *profile);
     void applySpellCheckSettings(QQuickWebEngineProfile *profile);
     void applyThirdPartyCookieFilter(QQuickWebEngineProfile *profile);
 

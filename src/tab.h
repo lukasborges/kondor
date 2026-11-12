@@ -2,6 +2,7 @@
 
 #include <QList>
 #include <QObject>
+#include <QSet>
 #include <QStringList>
 #include <QUrl>
 #include <QVariant>
@@ -149,6 +150,20 @@ public:
     Q_INVOKABLE void dismissPasswordPrompt();
     Q_INVOKABLE void fillPassword(const QString &username);
 
+    // Kondor extensions (#107). The page API of an extension reaches the tab
+    // through these commands; WebViewTab.qml carries them out.
+    Q_INVOKABLE void closeTab();
+    Q_INVOKABLE void openTab(const QUrl &url, bool background);
+    Q_INVOKABLE void selectNeighborTab(int delta);
+    Q_INVOKABLE void downloadUrl(const QUrl &url, const QString &fileName);
+    // Toolbar menu items of extensions: the checked state is per tab (and
+    // never stored), picking an item tells the extension's page scripts.
+    Q_INVOKABLE bool extensionItemChecked(const QString &extensionId, const QString &itemId) const;
+    Q_INVOKABLE void setExtensionItemChecked(const QString &extensionId, const QString &itemId,
+                                             bool checked);
+    Q_INVOKABLE void triggerExtensionItem(const QString &extensionId, const QString &itemId,
+                                          bool checkable);
+
 signals:
     void titleChanged();
     void urlChanged();
@@ -172,6 +187,7 @@ signals:
     void passwordPromptChanged();
     void passwordUsernamesChanged();
     void fillPasswordRequested(const QString &username);
+    void extensionItemsChanged();
 
     void navigationRequested(const QUrl &url);
     void newTabPageRequested();
@@ -195,6 +211,11 @@ signals:
     void inspectElementRequested();
     void acceptCertificateErrorRequested();
     void rejectCertificateErrorRequested();
+    void closeRequested();
+    void openTabRequested(const QUrl &url, bool background);
+    void neighborTabRequested(int delta);
+    void downloadUrlRequested(const QUrl &url, const QString &fileName);
+    void extensionItemTriggered(const QString &extensionId, const QString &itemId, bool checked);
 
 private:
     void setNewTabPage(bool newTabPage);
@@ -246,4 +267,7 @@ private:
     QString m_passwordPromptUsername;
     QString m_pendingPassword;
     QStringList m_passwordUsernames;
+
+    // "<extension id>/<item id>" of the checked toolbar menu items.
+    QSet<QString> m_checkedExtensionItems;
 };

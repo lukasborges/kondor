@@ -120,3 +120,31 @@ set(KONDOR_SUGGESTION_SOURCES
     ${CMAKE_SOURCE_DIR}/src/browser/searchsuggestions.h
     ${CMAKE_SOURCE_DIR}/src/browser/searchsuggestions.cpp
 )
+
+set(KONDOR_APP_SOURCES
+    ${CMAKE_SOURCE_DIR}/src/app/windowmanager.h
+    ${CMAKE_SOURCE_DIR}/src/app/windowmanager.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/windowlaunch.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/windowactivation.h
+    ${CMAKE_SOURCE_DIR}/src/app/windowactivation.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/singleinstance.h
+    ${CMAKE_SOURCE_DIR}/src/app/singleinstance.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/singleinstancemessage.h
+    ${CMAKE_SOURCE_DIR}/src/app/singleinstancemessage.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/startupurl.h
+    ${CMAKE_SOURCE_DIR}/src/app/startupurl.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/extensionpackages.h
+    ${CMAKE_SOURCE_DIR}/src/app/extensionpackages.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/commandline.h
+    ${CMAKE_SOURCE_DIR}/src/app/commandline.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/environment.h
+    ${CMAKE_SOURCE_DIR}/src/app/environment.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/messagehandler.h
+    ${CMAKE_SOURCE_DIR}/src/app/messagehandler.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/appidentity.h
+    ${CMAKE_SOURCE_DIR}/src/app/appidentity.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/appstartup.h
+    ${CMAKE_SOURCE_DIR}/src/app/appstartup.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/faviconimageprovider.h
+    ${CMAKE_SOURCE_DIR}/src/app/faviconimageprovider.cpp
+)

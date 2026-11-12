@@ -35,6 +35,7 @@ qt_add_executable(tst_startupurl
     app/tst_startupurl.cpp
     ../src/app/startupurl.cpp
     ../src/browser/addressresolver.cpp
+    ${KONDOR_SETTINGS_SOURCES}
 )
 
 target_include_directories(tst_startupurl PRIVATE
@@ -676,6 +677,7 @@ set_tests_properties(tst_sessionmanager PROPERTIES
 qt_add_executable(tst_singleinstance
     app/tst_singleinstance.cpp
     ../src/app/singleinstance.cpp
+    ../src/app/singleinstancemessage.cpp
 )
 
 target_include_directories(tst_singleinstance PRIVATE
@@ -689,6 +691,22 @@ target_link_libraries(tst_singleinstance PRIVATE
 )
 
 add_test(NAME tst_singleinstance COMMAND tst_singleinstance)
+
+qt_add_executable(tst_extensionpackages
+    app/tst_extensionpackages.cpp
+    ../src/app/extensionpackages.cpp
+)
+
+target_include_directories(tst_extensionpackages PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_extensionpackages PRIVATE
+    Qt6::Core
+    Qt6::Test
+)
+
+add_test(NAME tst_extensionpackages COMMAND tst_extensionpackages)
 
 qt_add_executable(tst_filehelper
     core/tst_filehelper.cpp

@@ -133,14 +133,9 @@ qt_add_qml_module(kondor
         ${KONDOR_PROFILE_MANAGER_SOURCES}
         src/app/startupargs.h
         src/app/startupargs.cpp
-        src/app/startupurl.h
-        src/app/startupurl.cpp
+        ${KONDOR_APP_SOURCES}
         ${KONDOR_SETTINGS_SOURCES}
         ${KONDOR_SESSION_SOURCES}
-        src/app/windowmanager.h
-        src/app/windowmanager.cpp
-        src/app/singleinstance.h
-        src/app/singleinstance.cpp
         ${KONDOR_DATABASE_SOURCES}
         ${KONDOR_HISTORY_MANAGER_SOURCES}
         ${KONDOR_HISTORY_MODEL_SOURCES}

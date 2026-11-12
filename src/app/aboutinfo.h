@@ -7,7 +7,6 @@
 class QQmlEngine;
 class QJSEngine;
 
-// Read-only information shown in the "About Kondor Browser" window.
 class AboutInfo : public QObject
 {
     Q_OBJECT

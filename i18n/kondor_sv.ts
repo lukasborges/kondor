@@ -1423,7 +1423,7 @@
 <context>
     <name>Kondor</name>
     <message>
-        <location filename="../src/app/main.cpp" line="196"/>
+        <location filename="../src/app/appidentity.cpp" line="22"/>
         <source>Kondor Browser</source>
         <extracomment>Application display name: translate &quot;Browser&quot;, keep &quot;Kondor&quot;</extracomment>
         <translation>Webbläsaren Kondor</translation>

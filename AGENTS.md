@@ -180,7 +180,8 @@ the limits.
 
 Agents on the maintainer's machine also have the `clean-code` skill
 ([wondelai/skills](https://github.com/wondelai/skills/tree/main/clean-code), in `~/.claude/skills/`
-and `~/.config/opencode/skills/`). Use it when writing, reviewing or refactoring code. Where it
+and `~/.config/opencode/skills/`). **Load it every time before writing, changing, reviewing or
+refactoring code** (the maintainer's rule). Where it
 differs from this section, **this section wins**:
 - the limits here are stricter (10 lines, not 20);
 - no TODO comments;

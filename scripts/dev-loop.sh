@@ -81,7 +81,8 @@ You are the developer agent of this repository. Follow docs/agents/developer.md 
    continue it in the worktree where it is checked out. Otherwise create a new worktree from
    origin/main as described in docs/agents/developer.md. Never commit in the current directory
    (it is the loop's read-only control checkout).
-3. Do exactly the next step: implement the spec or address every open review point, build, run
+3. Before writing any code, load the clean-code skill (AGENTS.md → "Code quality"; that section
+   wins where they differ). Do exactly the next step: implement the spec or address every open review point, build, run
    the offscreen smoke test and the spec's manual test (always with temporary XDG_CONFIG_HOME,
    XDG_DATA_HOME and XDG_CACHE_HOME as in AGENTS.md, never the real profile), rebase on origin/main, push, open or update
    the PR using .github/pull_request_template.md (Closes #$n), and switch the issue label from

@@ -59,6 +59,8 @@ class Settings : public QObject
                    NOTIFY offerToSavePasswordsChanged)
     Q_PROPERTY(QStringList passwordNeverSaveSites READ passwordNeverSaveSites
                    WRITE setPasswordNeverSaveSites NOTIFY passwordNeverSaveSitesChanged)
+    Q_PROPERTY(bool extensionsAutoUpdate READ extensionsAutoUpdate WRITE setExtensionsAutoUpdate
+                   NOTIFY extensionsAutoUpdateChanged)
     Q_PROPERTY(QDateTime adBlockLastUpdate READ adBlockLastUpdate WRITE setAdBlockLastUpdate
                    NOTIFY adBlockLastUpdateChanged)
 
@@ -87,6 +89,7 @@ public:
     bool adBlockEnabled() const { return m_adBlockEnabled; }
     QStringList adBlockAllowList() const { return m_adBlockAllowList; }
     bool offerToSavePasswords() const { return m_offerToSavePasswords; }
+    bool extensionsAutoUpdate() const { return m_extensionsAutoUpdate; }
     // Origins ("https://example.com") where Kondor never offers to save a password.
     QStringList passwordNeverSaveSites() const { return m_passwordNeverSaveSites; }
     // When the filter lists were last downloaded; invalid if never.
@@ -113,6 +116,7 @@ public:
     void setAdBlockLastUpdate(const QDateTime &adBlockLastUpdate);
     void setOfferToSavePasswords(bool offerToSavePasswords);
     void setPasswordNeverSaveSites(const QStringList &passwordNeverSaveSites);
+    void setExtensionsAutoUpdate(bool extensionsAutoUpdate);
 
     // Default value of the option with this property name ("homePage",
     // "searchEngine", …). The only source of truth for defaults: the
@@ -159,6 +163,7 @@ signals:
     void adBlockLastUpdateChanged();
     void offerToSavePasswordsChanged();
     void passwordNeverSaveSitesChanged();
+    void extensionsAutoUpdateChanged();
 
 private:
     explicit Settings(QObject *parent = nullptr);
@@ -185,4 +190,5 @@ private:
     bool m_readerSerif = true;
     bool m_offerToSavePasswords = true;
     QStringList m_passwordNeverSaveSites;
+    bool m_extensionsAutoUpdate = true;
 };

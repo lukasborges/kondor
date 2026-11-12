@@ -21,6 +21,7 @@ find_package(Qt6 6.8 REQUIRED COMPONENTS
     Widgets
 )
 find_package(KF6Wallet REQUIRED)
+find_package(KF6Archive REQUIRED)
 
 include(GNUInstallDirs)
 qt_standard_project_setup(REQUIRES 6.8)
@@ -68,6 +69,12 @@ qt_add_qml_module(kondor
         qml/SiteMenuItem.qml
         qml/AddressSuggestions.qml
         qml/AboutWindow.qml
+        qml/ExtensionIcon.qml
+        qml/ExtensionsPage.qml
+        qml/ExtensionCatalogDialog.qml
+        qml/InstallExtensionDialog.qml
+        qml/ExtensionSettingsDialog.qml
+        qml/ExtensionsMenu.qml
     SOURCES
         src/aboutinfo.h
         src/aboutinfo.cpp
@@ -127,6 +134,14 @@ qt_add_qml_module(kondor
         src/passwords/passwordimport.cpp
         src/passwords/passwordbridge.h
         src/passwords/passwordbridge.cpp
+        src/extensions/extensionpackage.h
+        src/extensions/extensionpackage.cpp
+        src/extensions/extensionmanager.h
+        src/extensions/extensionmanager.cpp
+        src/extensions/extensionbridge.h
+        src/extensions/extensionbridge.cpp
+        src/extensions/extensioncatalog.h
+        src/extensions/extensioncatalog.cpp
 )
 
 qt_add_translations(kondor
@@ -175,6 +190,14 @@ qt_add_resources(kondor "passwords_script"
         src/passwords/passwords.js
 )
 
+qt_add_resources(kondor "extension_scripts"
+    PREFIX "/scripts"
+    BASE "${CMAKE_SOURCE_DIR}/src/extensions"
+    FILES
+        src/extensions/channel.js
+        src/extensions/extensionruntime.js
+)
+
 qt_add_resources(kondor "license"
     PREFIX "/"
     FILES
@@ -189,6 +212,7 @@ target_include_directories(kondor PRIVATE
     src
     src/adblock
     src/passwords
+    src/extensions
 )
 
 target_link_libraries(kondor PRIVATE
@@ -206,6 +230,7 @@ target_link_libraries(kondor PRIVATE
     Qt6::WebEngineQuick
     Qt6::Widgets
     KF6::Wallet
+    KF6::Archive
 )
 
 if(BUILD_TESTING)
@@ -259,5 +284,6 @@ endif()
 # Icon and menu entry (.desktop)
 install(FILES packaging/kondor.desktop DESTINATION share/applications)
 install(FILES packaging/io.github.lukasborges.Kondor.metainfo.xml DESTINATION share/metainfo)
+install(FILES packaging/kondor-extension.xml DESTINATION share/mime/packages)
 install(FILES packaging/kondor.png DESTINATION share/icons/hicolor/256x256/apps)
 install(FILES packaging/kondor.svg DESTINATION share/icons/hicolor/scalable/apps)

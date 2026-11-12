@@ -178,7 +178,7 @@ void TestBookmarks::existingBookmarksAreNotReplaced()
 
     QSqlDatabase db = openProfileDatabase(path, QStringLiteral("inspect-v2"));
     QVERIFY(db.isOpen());
-    QCOMPARE(countRows(db, QStringLiteral("PRAGMA user_version")), 4);
+    QCOMPARE(countRows(db, QStringLiteral("PRAGMA user_version")), 5);
     // The two roots plus the user's bookmark: nothing was added.
     QCOMPARE(countRows(db, QStringLiteral("SELECT COUNT(*) FROM bookmarks")), 3);
     QCOMPARE(countRows(db,

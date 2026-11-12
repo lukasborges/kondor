@@ -338,58 +338,58 @@
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="1182"/>
+        <location filename="../qml/BrowserWindow.qml" line="1210"/>
         <source>New Tab</source>
         <translation>新しいタブ</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="412"/>
+        <location filename="../qml/BrowserWindow.qml" line="419"/>
         <source>Back</source>
         <translation>戻る</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="425"/>
+        <location filename="../qml/BrowserWindow.qml" line="432"/>
         <source>Forward</source>
         <translation>進む</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="438"/>
+        <location filename="../qml/BrowserWindow.qml" line="445"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="438"/>
+        <location filename="../qml/BrowserWindow.qml" line="445"/>
         <source>Reload</source>
         <translation>再読み込み</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="454"/>
+        <location filename="../qml/BrowserWindow.qml" line="461"/>
         <source>Home</source>
         <translation>ホーム</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="471"/>
+        <location filename="../qml/BrowserWindow.qml" line="478"/>
         <source>Search or enter address</source>
         <translation>検索またはアドレスを入力</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="835"/>
+        <location filename="../qml/BrowserWindow.qml" line="842"/>
         <source>Bookmark This Page</source>
         <translation>このページをブックマーク</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="894"/>
+        <location filename="../qml/BrowserWindow.qml" line="901"/>
         <source>Downloads</source>
         <translation>ダウンロード</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="923"/>
+        <location filename="../qml/BrowserWindow.qml" line="951"/>
         <source>Menu</source>
         <translation>メニュー</translation>
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="1188"/>
+        <location filename="../qml/BrowserWindow.qml" line="1216"/>
         <source>New Private Tab</source>
         <translation>新しいプライベートタブ</translation>
     </message>
@@ -399,180 +399,185 @@
         <translation>プライベートブラウジング</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="669"/>
+        <location filename="../qml/BrowserWindow.qml" line="676"/>
         <source>Not Secure</source>
         <translation>保護されていません</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="677"/>
+        <location filename="../qml/BrowserWindow.qml" line="684"/>
         <source>Site Information</source>
         <translation>サイト情報</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="716"/>
+        <location filename="../qml/BrowserWindow.qml" line="723"/>
         <source>Ad and Tracker Blocking</source>
         <translation>広告とトラッカーのブロック</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="765"/>
+        <location filename="../qml/BrowserWindow.qml" line="772"/>
         <source>Reset Zoom (Ctrl+0)</source>
         <translation>ズームをリセット (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="782"/>
+        <location filename="../qml/BrowserWindow.qml" line="789"/>
         <source>Fill Saved Password</source>
         <translation>保存したパスワードを入力</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="817"/>
+        <location filename="../qml/BrowserWindow.qml" line="824"/>
         <source>Exit Reader Mode (Ctrl+Alt+R)</source>
         <translation>リーダーモードを終了 (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="818"/>
+        <location filename="../qml/BrowserWindow.qml" line="825"/>
         <source>Reader Mode (Ctrl+Alt+R)</source>
         <translation>リーダーモード (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="835"/>
+        <location filename="../qml/BrowserWindow.qml" line="842"/>
         <source>Edit This Bookmark</source>
         <translation>このブックマークを編集</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1194"/>
+        <location filename="../qml/BrowserWindow.qml" line="935"/>
+        <source>Extensions</source>
+        <translation>拡張機能</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1222"/>
         <source>New Window</source>
         <translation>新しいウィンドウ</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1200"/>
+        <location filename="../qml/BrowserWindow.qml" line="1228"/>
         <source>New Private Window</source>
         <translation>新しいプライベートウィンドウ</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1206"/>
+        <location filename="../qml/BrowserWindow.qml" line="1234"/>
         <source>Show All History</source>
         <translation>すべての履歴を表示</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1212"/>
+        <location filename="../qml/BrowserWindow.qml" line="1240"/>
         <source>Reopen Closed Tab</source>
         <translation>閉じたタブを開き直す</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1219"/>
+        <location filename="../qml/BrowserWindow.qml" line="1247"/>
         <source>Find in Page…</source>
         <translation>ページ内を検索…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1233"/>
+        <location filename="../qml/BrowserWindow.qml" line="1261"/>
         <source>Save Page As…</source>
         <translation>名前を付けてページを保存…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1247"/>
+        <location filename="../qml/BrowserWindow.qml" line="1275"/>
         <source>Save as PDF…</source>
         <translation>PDF として保存…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1226"/>
+        <location filename="../qml/BrowserWindow.qml" line="1254"/>
         <source>Print…</source>
         <translation>印刷…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1253"/>
+        <location filename="../qml/BrowserWindow.qml" line="1281"/>
         <source>Site Permissions…</source>
         <translation>サイトの権限…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1240"/>
+        <location filename="../qml/BrowserWindow.qml" line="1268"/>
         <source>Developer Tools</source>
         <translation>開発者ツール</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1259"/>
+        <location filename="../qml/BrowserWindow.qml" line="1287"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 の設定…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1265"/>
+        <location filename="../qml/BrowserWindow.qml" line="1293"/>
         <source>Report a Bug…</source>
         <translation>バグを報告…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1271"/>
+        <location filename="../qml/BrowserWindow.qml" line="1299"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 について</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="985"/>
+        <location filename="../qml/BrowserWindow.qml" line="1013"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>全画面表示を終了するには Esc キーを押してください</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1055"/>
+        <location filename="../qml/BrowserWindow.qml" line="1083"/>
         <source>Page bookmarked</source>
         <translation>ページをブックマークしました</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1055"/>
+        <location filename="../qml/BrowserWindow.qml" line="1083"/>
         <source>Edit Bookmark</source>
         <translation>ブックマークを編集</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1063"/>
+        <location filename="../qml/BrowserWindow.qml" line="1091"/>
         <source>Name:</source>
         <translation>名前:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1069"/>
+        <location filename="../qml/BrowserWindow.qml" line="1097"/>
         <source>Folder:</source>
         <translation>フォルダー:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1079"/>
+        <location filename="../qml/BrowserWindow.qml" line="1107"/>
         <source>Remove</source>
         <translation>削除</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1087"/>
+        <location filename="../qml/BrowserWindow.qml" line="1115"/>
         <source>Done</source>
         <translation>完了</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1098"/>
+        <location filename="../qml/BrowserWindow.qml" line="1126"/>
         <source>Save as PDF</source>
         <translation>PDF として保存</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1100"/>
+        <location filename="../qml/BrowserWindow.qml" line="1128"/>
         <source>PDF (*.pdf)</source>
         <translation>PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1107"/>
+        <location filename="../qml/BrowserWindow.qml" line="1135"/>
         <source>Save Page As</source>
         <translation>名前を付けてページを保存</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1109"/>
+        <location filename="../qml/BrowserWindow.qml" line="1137"/>
         <source>Web Page, Complete (*.html)</source>
         <translation>Web ページ (完全) (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1110"/>
+        <location filename="../qml/BrowserWindow.qml" line="1138"/>
         <source>Web Page, HTML Only (*.html)</source>
         <translation>Web ページ (HTML のみ) (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1111"/>
+        <location filename="../qml/BrowserWindow.qml" line="1139"/>
         <source>Web Archive (*.mhtml)</source>
         <translation>Web アーカイブ (*.mhtml)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1127"/>
+        <location filename="../qml/BrowserWindow.qml" line="1155"/>
         <source>Save File</source>
         <translation>ファイルを保存</translation>
     </message>
@@ -760,6 +765,352 @@
         <location filename="../qml/DownloadsPopup.qml" line="199"/>
         <source>Clear Finished</source>
         <translation>完了した項目を消去</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionCatalog</name>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="194"/>
+        <source>The catalog is not valid JSON</source>
+        <translation>カタログは有効なJSONではありません</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="200"/>
+        <source>The catalog has an unsupported format</source>
+        <translation>カタログの形式はサポートされていません</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="291"/>
+        <source>Cannot create a temporary file</source>
+        <translation>一時ファイルを作成できません</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="302"/>
+        <source>The package is larger than expected</source>
+        <translation>パッケージが想定より大きいです</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="327"/>
+        <source>Cannot read the downloaded package</source>
+        <translation>ダウンロードしたパッケージを読み込めません</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="334"/>
+        <source>The downloaded package does not match its checksum</source>
+        <translation>ダウンロードしたパッケージがチェックサムと一致しません</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="352"/>
+        <source>Could not download “%1”: %2</source>
+        <translation>“%1”をダウンロードできませんでした: %2</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionCatalogDialog</name>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="21"/>
+        <source>Get New Extensions</source>
+        <translation>新しい拡張機能を入手</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="40"/>
+        <source>Search extensions…</source>
+        <translation>拡張機能を検索…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="47"/>
+        <source>The extensions catalog could not be loaded.</source>
+        <translation>拡張機能カタログを読み込めませんでした。</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="50"/>
+        <source>Try Again</source>
+        <translation>再試行</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="121"/>
+        <source>by %1</source>
+        <translation>作者: %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="134"/>
+        <source>Installed</source>
+        <translation>インストール済み</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="135"/>
+        <source>Update</source>
+        <translation>更新</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="135"/>
+        <source>Install</source>
+        <translation>インストール</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="149"/>
+        <source>The catalog has no extensions yet</source>
+        <translation>カタログにはまだ拡張機能がありません</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="155"/>
+        <source>Submit an extension…</source>
+        <translation>拡張機能を投稿…</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionManager</name>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="233"/>
+        <source>Cannot create %1</source>
+        <translation>%1 を作成できません</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="353"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="368"/>
+        <source>Cannot install into %1</source>
+        <translation>%1 にインストールできません</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="360"/>
+        <source>Cannot replace %1</source>
+        <translation>%1 を置き換えできません</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="407"/>
+        <source>The package is for “%1”, not “%2”</source>
+        <translation>このパッケージは“%1”用であり、“%2”用ではありません</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="418"/>
+        <source>The package asks for more permissions than the installed version</source>
+        <translation>このパッケージはインストール済みのバージョンより多くの権限を要求しています</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="869"/>
+        <source>Storage is not available</source>
+        <translation>ストレージを利用できません</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="889"/>
+        <source>The extension&apos;s storage is full (limit: 1 MiB)</source>
+        <translation>拡張機能のストレージがいっぱいです (上限: 1 MiB)</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionPackage</name>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="187"/>
+        <source>Read and change all websites</source>
+        <translation>すべてのウェブサイトのデータの読み取りと変更</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/extensions/extensionpackage.cpp" line="192"/>
+        <source>%1 and %n more</source>
+        <extracomment>%1 is a list of sites, %n the number of further sites</extracomment>
+        <translation>
+            <numerusform>%1 ほか %n 件</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="194"/>
+        <source>Read and change pages on %1</source>
+        <translation>%1 のページの読み取りと変更</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="198"/>
+        <source>Open, close and navigate your tabs</source>
+        <translation>タブの表示、終了、移動</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="200"/>
+        <source>Download files</source>
+        <translation>ファイルのダウンロード</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="202"/>
+        <source>Show notifications</source>
+        <translation>通知の表示</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="313"/>
+        <location filename="../src/extensions/extensionpackage.cpp" line="569"/>
+        <source>The package has more than %1 files</source>
+        <translation>パッケージのファイル数が %1 個を超えています</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="317"/>
+        <location filename="../src/extensions/extensionpackage.cpp" line="574"/>
+        <source>The package is larger than %1 MiB</source>
+        <translation>パッケージが %1 MiB より大きいです</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="533"/>
+        <location filename="../src/extensions/extensionpackage.cpp" line="538"/>
+        <source>The file is not a valid ZIP archive</source>
+        <translation>ファイルが有効な ZIP アーカイブではありません</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="561"/>
+        <source>Unsafe file name in the package: %1</source>
+        <translation>パッケージ内に安全でないファイル名があります: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="587"/>
+        <source>Cannot create %1</source>
+        <translation>%1 を作成できません</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="597"/>
+        <location filename="../src/extensions/extensionpackage.cpp" line="602"/>
+        <source>Cannot write %1</source>
+        <translation>%1 に書き込めません</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionSettingsDialog</name>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="62"/>
+        <source>Configure — %1</source>
+        <extracomment>%1 is the name of an extension</extracomment>
+        <translation>設定 — %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="67"/>
+        <source>Restore Defaults</source>
+        <translation>デフォルトに戻す</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="73"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="80"/>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="121"/>
+        <source>Privacy</source>
+        <translation>プライバシー</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="125"/>
+        <source>Allow in private windows</source>
+        <translation>プライベートウィンドウで許可</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="137"/>
+        <source>Turned off on:</source>
+        <translation>次のサイトでは無効:</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="156"/>
+        <source>Remove</source>
+        <translation>削除</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="294"/>
+        <source>Choose a Color</source>
+        <translation>色を選択</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionsMenu</name>
+    <message>
+        <location filename="../qml/ExtensionsMenu.qml" line="38"/>
+        <source>Run on %1</source>
+        <translation>%1 で実行</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsMenu.qml" line="79"/>
+        <source>Manage Extensions…</source>
+        <translation>拡張機能を管理…</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionsPage</name>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="40"/>
+        <source>Filter extensions…</source>
+        <translation>拡張機能を絞り込み…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="43"/>
+        <location filename="../qml/ExtensionsPage.qml" line="74"/>
+        <source>Get New Extensions…</source>
+        <translation>新しい拡張機能を入手…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="48"/>
+        <source>Install from File…</source>
+        <translation>ファイルからインストール…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="71"/>
+        <source>No extensions installed</source>
+        <translation>インストールされている拡張機能はありません</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="72"/>
+        <source>Extensions add features to Kondor. Get them from the Kondor extensions catalog, or install a .kondorext file.</source>
+        <translation>拡張機能は Kondor に機能を追加します。Kondor 拡張機能カタログから入手するか、.kondorext ファイルをインストールしてください。</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="146"/>
+        <source>Update…</source>
+        <translation>更新…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="154"/>
+        <source>Turn off</source>
+        <translation>オフにする</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="154"/>
+        <source>Turn on</source>
+        <translation>オンにする</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="159"/>
+        <source>Configure…</source>
+        <translation>設定…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="168"/>
+        <source>Remove</source>
+        <translation>削除</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="185"/>
+        <source>Update extensions automatically</source>
+        <translation>拡張機能を自動的に更新</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="192"/>
+        <source>Install Extension</source>
+        <translation>拡張機能をインストール</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="195"/>
+        <source>Kondor extensions (*.kondorext)</source>
+        <translation>Kondor 拡張機能 (*.kondorext)</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="195"/>
+        <source>All files (*)</source>
+        <translation>すべてのファイル (*)</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="203"/>
+        <source>Remove Extension</source>
+        <translation>拡張機能を削除</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="204"/>
+        <source>Remove the extension “%1” and its data?</source>
+        <translation>拡張機能“%1”とそのデータを削除しますか?</translation>
     </message>
 </context>
 <context>
@@ -1007,9 +1358,67 @@
     </message>
 </context>
 <context>
+    <name>InstallExtensionDialog</name>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="25"/>
+        <source>Install Extension</source>
+        <translation>拡張機能をインストール</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="33"/>
+        <source>Replace</source>
+        <translation>置き換え</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="33"/>
+        <source>Install</source>
+        <translation>インストール</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="39"/>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="39"/>
+        <source>Close</source>
+        <translation>閉じる</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="53"/>
+        <source>“%1” is not a valid Kondor extension: %2</source>
+        <translation>“%1”は有効な Kondor 拡張機能ではありません: %2</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="61"/>
+        <source>This extension does not come from the Kondor extensions catalog. Only install extensions from people you trust.</source>
+        <translation>この拡張機能は Kondor 拡張機能カタログからのものではありません。信頼できる人が作成した拡張機能のみをインストールしてください。</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="78"/>
+        <source>“%1” %2 is installed. Replace it with version %3?</source>
+        <translation>“%1” %2 はインストール済みです。バージョン %3 に置き換えますか?</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="80"/>
+        <source>Install “%1” %2 by %3?</source>
+        <translation>“%1” %2(作者: %3)をインストールしますか?</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="82"/>
+        <source>an unknown author</source>
+        <translation>不明な作者</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="88"/>
+        <source>It will be able to:</source>
+        <translation>この拡張機能は次のことができるようになります:</translation>
+    </message>
+</context>
+<context>
     <name>Kondor</name>
     <message>
-        <location filename="../src/main.cpp" line="194"/>
+        <location filename="../src/main.cpp" line="196"/>
         <source>Kondor Browser</source>
         <extracomment>Application display name: translate &quot;Browser&quot;, keep &quot;Kondor&quot;</extracomment>
         <translation>Kondor ブラウザー</translation>
@@ -1613,19 +2022,19 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="435"/>
+        <location filename="../qml/SettingsWindow.qml" line="463"/>
         <source>Startup</source>
         <translation>起動</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="538"/>
+        <location filename="../qml/SettingsWindow.qml" line="566"/>
         <source>On startup:</source>
         <translation>起動時:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="565"/>
+        <location filename="../qml/SettingsWindow.qml" line="593"/>
         <source>Home page:</source>
         <translation>ホームページ:</translation>
     </message>
@@ -1636,7 +2045,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="668"/>
+        <location filename="../qml/SettingsWindow.qml" line="696"/>
         <source>Search engine:</source>
         <translation>検索エンジン:</translation>
     </message>
@@ -1652,7 +2061,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="54"/>
-        <location filename="../qml/SettingsWindow.qml" line="747"/>
+        <location filename="../qml/SettingsWindow.qml" line="775"/>
         <source>Save files to:</source>
         <translation>ファイルの保存先:</translation>
     </message>
@@ -1663,30 +2072,55 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="63"/>
-        <location filename="../qml/SettingsWindow.qml" line="932"/>
+        <location filename="../qml/SettingsWindow.qml" line="960"/>
         <source>Site permissions:</source>
         <translation>サイトの権限:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="63"/>
-        <location filename="../qml/SettingsWindow.qml" line="933"/>
+        <location filename="../qml/SettingsWindow.qml" line="961"/>
         <source>Manage Site Permissions…</source>
         <translation>サイトの権限を管理…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="75"/>
+        <location filename="../qml/SettingsWindow.qml" line="76"/>
+        <source>Extensions</source>
+        <translation>拡張機能</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="78"/>
+        <source>Filter extensions…</source>
+        <translation>拡張機能を絞り込み…</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="78"/>
+        <source>Get New Extensions…</source>
+        <translation>新しい拡張機能を入手…</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="79"/>
+        <source>Install from File…</source>
+        <translation>ファイルからインストール…</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="79"/>
+        <source>Update extensions automatically</source>
+        <translation>拡張機能を自動的に更新</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="83"/>
         <source>Spelling</source>
         <translation>スペルチェック</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="77"/>
-        <location filename="../qml/SettingsWindow.qml" line="807"/>
+        <location filename="../qml/SettingsWindow.qml" line="85"/>
+        <location filename="../qml/SettingsWindow.qml" line="835"/>
         <source>Check spelling while typing</source>
         <translation>入力中にスペルをチェックする</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="77"/>
-        <location filename="../qml/SettingsWindow.qml" line="824"/>
+        <location filename="../qml/SettingsWindow.qml" line="85"/>
+        <location filename="../qml/SettingsWindow.qml" line="852"/>
         <source>Languages:</source>
         <translation>言語:</translation>
     </message>
@@ -1702,13 +2136,13 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="69"/>
-        <location filename="../qml/SettingsWindow.qml" line="445"/>
+        <location filename="../qml/SettingsWindow.qml" line="473"/>
         <source>Saved Passwords</source>
         <translation>保存済みパスワード</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="70"/>
-        <location filename="../qml/SettingsWindow.qml" line="446"/>
+        <location filename="../qml/SettingsWindow.qml" line="474"/>
         <source>Never Saved</source>
         <translation>保存しないサイト</translation>
     </message>
@@ -1723,181 +2157,181 @@
         <translation>サイトまたはユーザー名で絞り込み…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="566"/>
+        <location filename="../qml/SettingsWindow.qml" line="594"/>
         <source>New Tab page</source>
         <translation>新しいタブページ</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="585"/>
+        <location filename="../qml/SettingsWindow.qml" line="613"/>
         <source>Use Current Page</source>
         <translation>現在のページを使用</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="598"/>
+        <location filename="../qml/SettingsWindow.qml" line="626"/>
         <source>Use New Tab Page</source>
         <translation>新しいタブページを使用</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="436"/>
+        <location filename="../qml/SettingsWindow.qml" line="464"/>
         <source>New Tabs</source>
         <translation>新しいタブ</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="909"/>
+        <location filename="../qml/SettingsWindow.qml" line="937"/>
         <source>On exit:</source>
         <translation>終了時:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="923"/>
+        <location filename="../qml/SettingsWindow.qml" line="951"/>
         <source>Browsing data:</source>
         <translation>閲覧データ:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="370"/>
+        <location filename="../qml/SettingsWindow.qml" line="398"/>
         <source>Search…</source>
         <translation>検索…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="484"/>
+        <location filename="../qml/SettingsWindow.qml" line="512"/>
         <source>Defaults</source>
         <translation>既定値</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="493"/>
+        <location filename="../qml/SettingsWindow.qml" line="521"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="500"/>
+        <location filename="../qml/SettingsWindow.qml" line="528"/>
         <source>Apply</source>
         <translation>適用</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="507"/>
+        <location filename="../qml/SettingsWindow.qml" line="535"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="539"/>
+        <location filename="../qml/SettingsWindow.qml" line="567"/>
         <source>Open the home page</source>
         <translation>ホームページを開く</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="551"/>
+        <location filename="../qml/SettingsWindow.qml" line="579"/>
         <source>Open the tabs from last time</source>
         <translation>前回のタブを開く</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="625"/>
+        <location filename="../qml/SettingsWindow.qml" line="653"/>
         <source>New Tab page:</source>
         <translation>新しいタブページ:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="626"/>
+        <location filename="../qml/SettingsWindow.qml" line="654"/>
         <source>Show top sites</source>
         <translation>トップサイトを表示</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="637"/>
+        <location filename="../qml/SettingsWindow.qml" line="665"/>
         <source>Restore Removed Sites</source>
         <translation>削除したサイトを復元</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="675"/>
+        <location filename="../qml/SettingsWindow.qml" line="703"/>
         <source>Custom…</source>
         <translation>カスタム…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="690"/>
+        <location filename="../qml/SettingsWindow.qml" line="718"/>
         <source>Custom URL:</source>
         <translation>カスタム URL:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="706"/>
+        <location filename="../qml/SettingsWindow.qml" line="734"/>
         <source>Show search suggestions in the address bar</source>
         <translation>アドレスバーに検索候補を表示する</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="722"/>
+        <location filename="../qml/SettingsWindow.qml" line="750"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>URL には検索語が入る位置に「%1」を含める必要があります。</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="757"/>
+        <location filename="../qml/SettingsWindow.qml" line="785"/>
         <source>Choose…</source>
         <translation>選択…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="54"/>
-        <location filename="../qml/SettingsWindow.qml" line="765"/>
+        <location filename="../qml/SettingsWindow.qml" line="793"/>
         <source>Ask where to save each file</source>
         <translation>ファイルごとに保存先を尋ねる</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="780"/>
+        <location filename="../qml/SettingsWindow.qml" line="808"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>選択したフォルダーは存在しません。ダウンロードは %1 に保存されます。</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="873"/>
+        <location filename="../qml/SettingsWindow.qml" line="901"/>
         <source>Cookies:</source>
         <translation>Cookie:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="874"/>
+        <location filename="../qml/SettingsWindow.qml" line="902"/>
         <source>Block third-party cookies</source>
         <translation>サードパーティ Cookie をブロック</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="910"/>
+        <location filename="../qml/SettingsWindow.qml" line="938"/>
         <source>Clear cookies, cache and history</source>
         <translation>Cookie、キャッシュ、履歴を消去</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="924"/>
+        <location filename="../qml/SettingsWindow.qml" line="952"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Cookie とキャッシュを今すぐ消去</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="847"/>
+        <location filename="../qml/SettingsWindow.qml" line="875"/>
         <source>No spelling dictionaries are installed.</source>
         <translation>スペルチェック用の辞書がインストールされていません。</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="886"/>
+        <location filename="../qml/SettingsWindow.qml" line="914"/>
         <source>Ads and trackers:</source>
         <translation>広告とトラッカー:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="887"/>
+        <location filename="../qml/SettingsWindow.qml" line="915"/>
         <source>Block ads and trackers</source>
         <translation>広告とトラッカーをブロックする</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="899"/>
+        <location filename="../qml/SettingsWindow.qml" line="927"/>
         <source>Updating lists…</source>
         <translation>リストを更新しています…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="901"/>
+        <location filename="../qml/SettingsWindow.qml" line="929"/>
         <source>Lists not downloaded yet</source>
         <translation>リストはまだダウンロードされていません</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="902"/>
+        <location filename="../qml/SettingsWindow.qml" line="930"/>
         <source>Lists last updated: %1</source>
         <translation>リストの最終更新: %1</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="967"/>
+        <location filename="../qml/SettingsWindow.qml" line="1007"/>
         <source>Choose Download Folder</source>
         <translation>ダウンロードフォルダーを選択</translation>
     </message>
@@ -2083,7 +2517,7 @@
     <name>WebViewTab</name>
     <message>
         <location filename="../qml/WebViewTab.qml" line="28"/>
-        <location filename="../qml/WebViewTab.qml" line="513"/>
+        <location filename="../qml/WebViewTab.qml" line="539"/>
         <source>Print failed</source>
         <translation>印刷に失敗しました</translation>
     </message>
@@ -2098,17 +2532,17 @@
         <translation>PDF の保存に失敗しました</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="305"/>
+        <location filename="../qml/WebViewTab.qml" line="317"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>ページのプロセスが予期せず終了しました。</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="306"/>
+        <location filename="../qml/WebViewTab.qml" line="318"/>
         <source>The page crashed.</source>
         <translation>ページがクラッシュしました。</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="307"/>
+        <location filename="../qml/WebViewTab.qml" line="319"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>ページのプロセスが強制終了されました (メモリ不足の可能性があります)。</translation>
     </message>

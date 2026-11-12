@@ -1,5 +1,6 @@
 #include "windowmanager.h"
 
+#include "extensions/extensionmanager.h"
 #include "sessionmanager.h"
 #include "settings.h"
 #include "startupargs.h"
@@ -8,6 +9,24 @@
 #include <QQmlEngine>
 #include <QQuickWindow>
 #include <QVariantMap>
+
+namespace {
+// Takes the .kondorext files out of a list of addresses to open: they are
+// extension packages for the install dialog, not pages.
+QStringList takeExtensionPackages(QList<QUrl> *urls)
+{
+    QStringList packages;
+    for (auto it = urls->begin(); it != urls->end();) {
+        if (it->isLocalFile() && ExtensionManager::isPackageFile(it->toLocalFile())) {
+            packages.append(it->toLocalFile());
+            it = urls->erase(it);
+        } else {
+            ++it;
+        }
+    }
+    return packages;
+}
+}
 
 WindowManager *WindowManager::instance()
 {
@@ -151,28 +170,59 @@ void WindowManager::raiseWindow(QObject *window, const QByteArray &activationTok
 
 void WindowManager::handleSingleInstanceMessage(const SingleInstanceMessage &message)
 {
+    // Extension packages (opened from the file manager) are confirmed in
+    // Settings → Extensions of a normal window.
+    QList<QUrl> urls = message.urls;
+    const QStringList packages = takeExtensionPackages(&urls);
+    if (!packages.isEmpty() && urls.isEmpty() && !message.privateMode && !message.newWindow) {
+        QObject *window = windowForRequest(false);
+        if (!window)
+            window = createWindow(false, {}, QStringList(), -1);
+        showExtensionPackage(window, packages.first());
+        if (window)
+            raiseWindow(window, message.activationToken);
+        return;
+    }
+
     // A private launch opens private tabs in the private window that is
     // already open (or in a new private window), never a normal window
     // quietly turning its tabs private.
     QObject *window = message.newWindow ? nullptr : windowForRequest(message.privateMode);
     if (!window) {
-        window = createWindow(message.privateMode, message.urls, QStringList(), -1);
-    } else if (!message.urls.isEmpty()) {
+        window = createWindow(message.privateMode, urls, QStringList(), -1);
+    } else if (!urls.isEmpty()) {
         // One tab per URL, leaving the page the user is reading alone. The QML
         // side adds them as private tabs when the window is a private one.
         if (!QMetaObject::invokeMethod(window, "openUrlsInNewTabs",
-                                       Q_ARG(QVariant, QVariant::fromValue(message.urls)))) {
+                                       Q_ARG(QVariant, QVariant::fromValue(urls)))) {
             qWarning("Kondor: cannot add tabs to the running window");
         }
+    }
+
+    if (!packages.isEmpty()) {
+        QObject *normal = windowForRequest(false);
+        if (!normal)
+            normal = createWindow(false, {}, QStringList(), -1);
+        showExtensionPackage(normal, packages.first());
+        if (!window)
+            window = normal;
     }
 
     if (window)
         raiseWindow(window, message.activationToken);
 }
 
+void WindowManager::showExtensionPackage(QObject *window, const QString &path)
+{
+    ExtensionManager::instance()->inspectFile(path);
+    if (window && !QMetaObject::invokeMethod(window, "openExtensionsSettings"))
+        qWarning("Kondor: cannot open the extensions settings");
+}
+
 void WindowManager::openStartupWindows()
 {
-    const QList<QUrl> startupUrls = StartupArgs::instance()->startupUrls();
+    QList<QUrl> startupUrls = StartupArgs::instance()->startupUrls();
+    const QStringList packages = takeExtensionPackages(&startupUrls);
     const bool startupPrivate = StartupArgs::instance()->startupPrivate();
     const bool restore = Settings::instance()->startupBehavior() == QLatin1String("restore");
 
@@ -200,4 +250,7 @@ void WindowManager::openStartupWindows()
 
     if (!opened)
         createWindow(false, {}, QStringList(), -1);
+
+    if (!packages.isEmpty())
+        showExtensionPackage(windowForRequest(false), packages.first());
 }

@@ -338,58 +338,58 @@
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="1182"/>
+        <location filename="../qml/BrowserWindow.qml" line="1210"/>
         <source>New Tab</source>
         <translation>Nová karta</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="412"/>
+        <location filename="../qml/BrowserWindow.qml" line="419"/>
         <source>Back</source>
         <translation>Zpět</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="425"/>
+        <location filename="../qml/BrowserWindow.qml" line="432"/>
         <source>Forward</source>
         <translation>Vpřed</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="438"/>
+        <location filename="../qml/BrowserWindow.qml" line="445"/>
         <source>Stop</source>
         <translation>Zastavit</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="438"/>
+        <location filename="../qml/BrowserWindow.qml" line="445"/>
         <source>Reload</source>
         <translation>Znovu načíst</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="454"/>
+        <location filename="../qml/BrowserWindow.qml" line="461"/>
         <source>Home</source>
         <translation>Domů</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="471"/>
+        <location filename="../qml/BrowserWindow.qml" line="478"/>
         <source>Search or enter address</source>
         <translation>Hledat nebo zadat adresu</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="835"/>
+        <location filename="../qml/BrowserWindow.qml" line="842"/>
         <source>Bookmark This Page</source>
         <translation>Přidat stránku do záložek</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="894"/>
+        <location filename="../qml/BrowserWindow.qml" line="901"/>
         <source>Downloads</source>
         <translation>Stažené</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="923"/>
+        <location filename="../qml/BrowserWindow.qml" line="951"/>
         <source>Menu</source>
         <translation>Nabídka</translation>
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="1188"/>
+        <location filename="../qml/BrowserWindow.qml" line="1216"/>
         <source>New Private Tab</source>
         <translation>Nová anonymní karta</translation>
     </message>
@@ -399,180 +399,185 @@
         <translation>Anonymní prohlížení</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="669"/>
+        <location filename="../qml/BrowserWindow.qml" line="676"/>
         <source>Not Secure</source>
         <translation>Nezabezpečeno</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="677"/>
+        <location filename="../qml/BrowserWindow.qml" line="684"/>
         <source>Site Information</source>
         <translation>Informace o webu</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="716"/>
+        <location filename="../qml/BrowserWindow.qml" line="723"/>
         <source>Ad and Tracker Blocking</source>
         <translation>Blokování reklam a sledovačů</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="765"/>
+        <location filename="../qml/BrowserWindow.qml" line="772"/>
         <source>Reset Zoom (Ctrl+0)</source>
         <translation>Obnovit zvětšení (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="782"/>
+        <location filename="../qml/BrowserWindow.qml" line="789"/>
         <source>Fill Saved Password</source>
         <translation>Vyplnit uložené heslo</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="817"/>
+        <location filename="../qml/BrowserWindow.qml" line="824"/>
         <source>Exit Reader Mode (Ctrl+Alt+R)</source>
         <translation>Ukončit režim čtečky (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="818"/>
+        <location filename="../qml/BrowserWindow.qml" line="825"/>
         <source>Reader Mode (Ctrl+Alt+R)</source>
         <translation>Režim čtečky (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="835"/>
+        <location filename="../qml/BrowserWindow.qml" line="842"/>
         <source>Edit This Bookmark</source>
         <translation>Upravit tuto záložku</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1194"/>
+        <location filename="../qml/BrowserWindow.qml" line="935"/>
+        <source>Extensions</source>
+        <translation>Rozšíření</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1222"/>
         <source>New Window</source>
         <translation>Nové okno</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1200"/>
+        <location filename="../qml/BrowserWindow.qml" line="1228"/>
         <source>New Private Window</source>
         <translation>Nové anonymní okno</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1206"/>
+        <location filename="../qml/BrowserWindow.qml" line="1234"/>
         <source>Show All History</source>
         <translation>Zobrazit celou historii</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1212"/>
+        <location filename="../qml/BrowserWindow.qml" line="1240"/>
         <source>Reopen Closed Tab</source>
         <translation>Znovu otevřít zavřenou kartu</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1219"/>
+        <location filename="../qml/BrowserWindow.qml" line="1247"/>
         <source>Find in Page…</source>
         <translation>Hledat na stránce…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1233"/>
+        <location filename="../qml/BrowserWindow.qml" line="1261"/>
         <source>Save Page As…</source>
         <translation>Uložit stránku jako…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1247"/>
+        <location filename="../qml/BrowserWindow.qml" line="1275"/>
         <source>Save as PDF…</source>
         <translation>Uložit jako PDF…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1226"/>
+        <location filename="../qml/BrowserWindow.qml" line="1254"/>
         <source>Print…</source>
         <translation>Tisk…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1253"/>
+        <location filename="../qml/BrowserWindow.qml" line="1281"/>
         <source>Site Permissions…</source>
         <translation>Oprávnění stránek…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1240"/>
+        <location filename="../qml/BrowserWindow.qml" line="1268"/>
         <source>Developer Tools</source>
         <translation>Nástroje pro vývojáře</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1259"/>
+        <location filename="../qml/BrowserWindow.qml" line="1287"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Nastavit %1…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1265"/>
+        <location filename="../qml/BrowserWindow.qml" line="1293"/>
         <source>Report a Bug…</source>
         <translation>Nahlásit chybu…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1271"/>
+        <location filename="../qml/BrowserWindow.qml" line="1299"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>O aplikaci %1</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="985"/>
+        <location filename="../qml/BrowserWindow.qml" line="1013"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Stisknutím Esc opustíte režim celé obrazovky</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1055"/>
+        <location filename="../qml/BrowserWindow.qml" line="1083"/>
         <source>Page bookmarked</source>
         <translation>Stránka přidána do záložek</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1055"/>
+        <location filename="../qml/BrowserWindow.qml" line="1083"/>
         <source>Edit Bookmark</source>
         <translation>Upravit záložku</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1063"/>
+        <location filename="../qml/BrowserWindow.qml" line="1091"/>
         <source>Name:</source>
         <translation>Název:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1069"/>
+        <location filename="../qml/BrowserWindow.qml" line="1097"/>
         <source>Folder:</source>
         <translation>Složka:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1079"/>
+        <location filename="../qml/BrowserWindow.qml" line="1107"/>
         <source>Remove</source>
         <translation>Odebrat</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1087"/>
+        <location filename="../qml/BrowserWindow.qml" line="1115"/>
         <source>Done</source>
         <translation>Hotovo</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1098"/>
+        <location filename="../qml/BrowserWindow.qml" line="1126"/>
         <source>Save as PDF</source>
         <translation>Uložit jako PDF</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1100"/>
+        <location filename="../qml/BrowserWindow.qml" line="1128"/>
         <source>PDF (*.pdf)</source>
         <translation>PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1107"/>
+        <location filename="../qml/BrowserWindow.qml" line="1135"/>
         <source>Save Page As</source>
         <translation>Uložit stránku jako</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1109"/>
+        <location filename="../qml/BrowserWindow.qml" line="1137"/>
         <source>Web Page, Complete (*.html)</source>
         <translation>Webová stránka, úplná (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1110"/>
+        <location filename="../qml/BrowserWindow.qml" line="1138"/>
         <source>Web Page, HTML Only (*.html)</source>
         <translation>Webová stránka, pouze HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1111"/>
+        <location filename="../qml/BrowserWindow.qml" line="1139"/>
         <source>Web Archive (*.mhtml)</source>
         <translation>Webový archiv (*.mhtml)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1127"/>
+        <location filename="../qml/BrowserWindow.qml" line="1155"/>
         <source>Save File</source>
         <translation>Uložit soubor</translation>
     </message>
@@ -760,6 +765,354 @@
         <location filename="../qml/DownloadsPopup.qml" line="199"/>
         <source>Clear Finished</source>
         <translation>Vymazat dokončené</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionCatalog</name>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="194"/>
+        <source>The catalog is not valid JSON</source>
+        <translation>Katalog není platný JSON</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="200"/>
+        <source>The catalog has an unsupported format</source>
+        <translation>Katalog má nepodporovaný formát</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="291"/>
+        <source>Cannot create a temporary file</source>
+        <translation>Nelze vytvořit dočasný soubor</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="302"/>
+        <source>The package is larger than expected</source>
+        <translation>Balíček je větší, než se očekávalo</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="327"/>
+        <source>Cannot read the downloaded package</source>
+        <translation>Nelze přečíst stažený balíček</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="334"/>
+        <source>The downloaded package does not match its checksum</source>
+        <translation>Stažený balíček neodpovídá kontrolnímu součtu</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="352"/>
+        <source>Could not download “%1”: %2</source>
+        <translation>Nepodařilo se stáhnout „%1“: %2</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionCatalogDialog</name>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="21"/>
+        <source>Get New Extensions</source>
+        <translation>Získat nová rozšíření</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="40"/>
+        <source>Search extensions…</source>
+        <translation>Hledat rozšíření…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="47"/>
+        <source>The extensions catalog could not be loaded.</source>
+        <translation>Katalog rozšíření se nepodařilo načíst.</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="50"/>
+        <source>Try Again</source>
+        <translation>Zkusit znovu</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="121"/>
+        <source>by %1</source>
+        <translation>od %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="134"/>
+        <source>Installed</source>
+        <translation>Nainstalováno</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="135"/>
+        <source>Update</source>
+        <translation>Aktualizovat</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="135"/>
+        <source>Install</source>
+        <translation>Nainstalovat</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="149"/>
+        <source>The catalog has no extensions yet</source>
+        <translation>Katalog zatím neobsahuje žádná rozšíření</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="155"/>
+        <source>Submit an extension…</source>
+        <translation>Odeslat rozšíření…</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionManager</name>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="233"/>
+        <source>Cannot create %1</source>
+        <translation>Nelze vytvořit %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="353"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="368"/>
+        <source>Cannot install into %1</source>
+        <translation>Nelze instalovat do %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="360"/>
+        <source>Cannot replace %1</source>
+        <translation>Nelze nahradit %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="407"/>
+        <source>The package is for “%1”, not “%2”</source>
+        <translation>Balíček je určen pro „%1“, nikoli pro „%2“</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="418"/>
+        <source>The package asks for more permissions than the installed version</source>
+        <translation>Balíček požaduje více oprávnění než nainstalovaná verze</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="869"/>
+        <source>Storage is not available</source>
+        <translation>Úložiště není dostupné</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="889"/>
+        <source>The extension&apos;s storage is full (limit: 1 MiB)</source>
+        <translation>Úložiště rozšíření je plné (limit: 1 MiB)</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionPackage</name>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="187"/>
+        <source>Read and change all websites</source>
+        <translation>Čtení a změna všech webových stránek</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/extensions/extensionpackage.cpp" line="192"/>
+        <source>%1 and %n more</source>
+        <extracomment>%1 is a list of sites, %n the number of further sites</extracomment>
+        <translation>
+            <numerusform>%1 a %n další</numerusform>
+            <numerusform>%1 a %n další</numerusform>
+            <numerusform>%1 a %n dalších</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="194"/>
+        <source>Read and change pages on %1</source>
+        <translation>Čtení a změna stránek na %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="198"/>
+        <source>Open, close and navigate your tabs</source>
+        <translation>Otevírání a zavírání karet a navigace v nich</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="200"/>
+        <source>Download files</source>
+        <translation>Stahování souborů</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="202"/>
+        <source>Show notifications</source>
+        <translation>Zobrazování oznámení</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="313"/>
+        <location filename="../src/extensions/extensionpackage.cpp" line="569"/>
+        <source>The package has more than %1 files</source>
+        <translation>Balíček obsahuje více než %1 souborů</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="317"/>
+        <location filename="../src/extensions/extensionpackage.cpp" line="574"/>
+        <source>The package is larger than %1 MiB</source>
+        <translation>Balíček je větší než %1 MiB</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="533"/>
+        <location filename="../src/extensions/extensionpackage.cpp" line="538"/>
+        <source>The file is not a valid ZIP archive</source>
+        <translation>Soubor není platný archiv ZIP</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="561"/>
+        <source>Unsafe file name in the package: %1</source>
+        <translation>Nebezpečný název souboru v balíčku: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="587"/>
+        <source>Cannot create %1</source>
+        <translation>Nelze vytvořit %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="597"/>
+        <location filename="../src/extensions/extensionpackage.cpp" line="602"/>
+        <source>Cannot write %1</source>
+        <translation>Nelze zapsat %1</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionSettingsDialog</name>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="62"/>
+        <source>Configure — %1</source>
+        <extracomment>%1 is the name of an extension</extracomment>
+        <translation>Nastavení — %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="67"/>
+        <source>Restore Defaults</source>
+        <translation>Obnovit výchozí hodnoty</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="73"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="80"/>
+        <source>Cancel</source>
+        <translation>Zrušit</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="121"/>
+        <source>Privacy</source>
+        <translation>Soukromí</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="125"/>
+        <source>Allow in private windows</source>
+        <translation>Povolit v anonymních oknech</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="137"/>
+        <source>Turned off on:</source>
+        <translation>Vypnuto na:</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="156"/>
+        <source>Remove</source>
+        <translation>Odebrat</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="294"/>
+        <source>Choose a Color</source>
+        <translation>Výběr barvy</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionsMenu</name>
+    <message>
+        <location filename="../qml/ExtensionsMenu.qml" line="38"/>
+        <source>Run on %1</source>
+        <translation>Spustit na %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsMenu.qml" line="79"/>
+        <source>Manage Extensions…</source>
+        <translation>Spravovat rozšíření…</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionsPage</name>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="40"/>
+        <source>Filter extensions…</source>
+        <translation>Filtrovat rozšíření…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="43"/>
+        <location filename="../qml/ExtensionsPage.qml" line="74"/>
+        <source>Get New Extensions…</source>
+        <translation>Získat nová rozšíření…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="48"/>
+        <source>Install from File…</source>
+        <translation>Nainstalovat ze souboru…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="71"/>
+        <source>No extensions installed</source>
+        <translation>Nejsou nainstalována žádná rozšíření</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="72"/>
+        <source>Extensions add features to Kondor. Get them from the Kondor extensions catalog, or install a .kondorext file.</source>
+        <translation>Rozšíření přidávají do Kondoru funkce. Získejte je z katalogu rozšíření Kondoru nebo nainstalujte soubor .kondorext.</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="146"/>
+        <source>Update…</source>
+        <translation>Aktualizovat…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="154"/>
+        <source>Turn off</source>
+        <translation>Vypnout</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="154"/>
+        <source>Turn on</source>
+        <translation>Zapnout</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="159"/>
+        <source>Configure…</source>
+        <translation>Nastavit…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="168"/>
+        <source>Remove</source>
+        <translation>Odebrat</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="185"/>
+        <source>Update extensions automatically</source>
+        <translation>Aktualizovat rozšíření automaticky</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="192"/>
+        <source>Install Extension</source>
+        <translation>Instalace rozšíření</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="195"/>
+        <source>Kondor extensions (*.kondorext)</source>
+        <translation>Rozšíření Kondoru (*.kondorext)</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="195"/>
+        <source>All files (*)</source>
+        <translation>Všechny soubory (*)</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="203"/>
+        <source>Remove Extension</source>
+        <translation>Odebrání rozšíření</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="204"/>
+        <source>Remove the extension “%1” and its data?</source>
+        <translation>Odebrat rozšíření „%1“ a jeho data?</translation>
     </message>
 </context>
 <context>
@@ -1023,9 +1376,67 @@
     </message>
 </context>
 <context>
+    <name>InstallExtensionDialog</name>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="25"/>
+        <source>Install Extension</source>
+        <translation>Instalace rozšíření</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="33"/>
+        <source>Replace</source>
+        <translation>Nahradit</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="33"/>
+        <source>Install</source>
+        <translation>Nainstalovat</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="39"/>
+        <source>Cancel</source>
+        <translation>Zrušit</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="39"/>
+        <source>Close</source>
+        <translation>Zavřít</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="53"/>
+        <source>“%1” is not a valid Kondor extension: %2</source>
+        <translation>„%1“ není platné rozšíření Kondoru: %2</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="61"/>
+        <source>This extension does not come from the Kondor extensions catalog. Only install extensions from people you trust.</source>
+        <translation>Toto rozšíření nepochází z katalogu rozšíření Kondoru. Instalujte rozšíření pouze od lidí, kterým důvěřujete.</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="78"/>
+        <source>“%1” %2 is installed. Replace it with version %3?</source>
+        <translation>„%1“ %2 je nainstalováno. Nahradit verzí %3?</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="80"/>
+        <source>Install “%1” %2 by %3?</source>
+        <translation>Nainstalovat „%1“ %2 od %3?</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="82"/>
+        <source>an unknown author</source>
+        <translation>neznámý autor</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="88"/>
+        <source>It will be able to:</source>
+        <translation>Bude moci:</translation>
+    </message>
+</context>
+<context>
     <name>Kondor</name>
     <message>
-        <location filename="../src/main.cpp" line="194"/>
+        <location filename="../src/main.cpp" line="196"/>
         <source>Kondor Browser</source>
         <extracomment>Application display name: translate &quot;Browser&quot;, keep &quot;Kondor&quot;</extracomment>
         <translation>Prohlížeč Kondor</translation>
@@ -1631,19 +2042,19 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="435"/>
+        <location filename="../qml/SettingsWindow.qml" line="463"/>
         <source>Startup</source>
         <translation>Spuštění</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="538"/>
+        <location filename="../qml/SettingsWindow.qml" line="566"/>
         <source>On startup:</source>
         <translation>Při spuštění:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="565"/>
+        <location filename="../qml/SettingsWindow.qml" line="593"/>
         <source>Home page:</source>
         <translation>Domovská stránka:</translation>
     </message>
@@ -1654,7 +2065,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="668"/>
+        <location filename="../qml/SettingsWindow.qml" line="696"/>
         <source>Search engine:</source>
         <translation>Vyhledávač:</translation>
     </message>
@@ -1670,7 +2081,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="54"/>
-        <location filename="../qml/SettingsWindow.qml" line="747"/>
+        <location filename="../qml/SettingsWindow.qml" line="775"/>
         <source>Save files to:</source>
         <translation>Ukládat soubory do:</translation>
     </message>
@@ -1681,30 +2092,55 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="63"/>
-        <location filename="../qml/SettingsWindow.qml" line="932"/>
+        <location filename="../qml/SettingsWindow.qml" line="960"/>
         <source>Site permissions:</source>
         <translation>Oprávnění stránek:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="63"/>
-        <location filename="../qml/SettingsWindow.qml" line="933"/>
+        <location filename="../qml/SettingsWindow.qml" line="961"/>
         <source>Manage Site Permissions…</source>
         <translation>Spravovat oprávnění stránek…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="75"/>
+        <location filename="../qml/SettingsWindow.qml" line="76"/>
+        <source>Extensions</source>
+        <translation>Rozšíření</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="78"/>
+        <source>Filter extensions…</source>
+        <translation>Filtrovat rozšíření…</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="78"/>
+        <source>Get New Extensions…</source>
+        <translation>Získat nová rozšíření…</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="79"/>
+        <source>Install from File…</source>
+        <translation>Nainstalovat ze souboru…</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="79"/>
+        <source>Update extensions automatically</source>
+        <translation>Aktualizovat rozšíření automaticky</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="83"/>
         <source>Spelling</source>
         <translation>Pravopis</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="77"/>
-        <location filename="../qml/SettingsWindow.qml" line="807"/>
+        <location filename="../qml/SettingsWindow.qml" line="85"/>
+        <location filename="../qml/SettingsWindow.qml" line="835"/>
         <source>Check spelling while typing</source>
         <translation>Kontrolovat pravopis při psaní</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="77"/>
-        <location filename="../qml/SettingsWindow.qml" line="824"/>
+        <location filename="../qml/SettingsWindow.qml" line="85"/>
+        <location filename="../qml/SettingsWindow.qml" line="852"/>
         <source>Languages:</source>
         <translation>Jazyky:</translation>
     </message>
@@ -1720,13 +2156,13 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="69"/>
-        <location filename="../qml/SettingsWindow.qml" line="445"/>
+        <location filename="../qml/SettingsWindow.qml" line="473"/>
         <source>Saved Passwords</source>
         <translation>Uložená hesla</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="70"/>
-        <location filename="../qml/SettingsWindow.qml" line="446"/>
+        <location filename="../qml/SettingsWindow.qml" line="474"/>
         <source>Never Saved</source>
         <translation>Nikdy neukládat</translation>
     </message>
@@ -1741,181 +2177,181 @@
         <translation>Filtrovat podle webu nebo uživatelského jména…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="566"/>
+        <location filename="../qml/SettingsWindow.qml" line="594"/>
         <source>New Tab page</source>
         <translation>Stránka nové karty</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="585"/>
+        <location filename="../qml/SettingsWindow.qml" line="613"/>
         <source>Use Current Page</source>
         <translation>Použít aktuální stránku</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="598"/>
+        <location filename="../qml/SettingsWindow.qml" line="626"/>
         <source>Use New Tab Page</source>
         <translation>Použít stránku nové karty</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="436"/>
+        <location filename="../qml/SettingsWindow.qml" line="464"/>
         <source>New Tabs</source>
         <translation>Nové karty</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="909"/>
+        <location filename="../qml/SettingsWindow.qml" line="937"/>
         <source>On exit:</source>
         <translation>Při ukončení:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="923"/>
+        <location filename="../qml/SettingsWindow.qml" line="951"/>
         <source>Browsing data:</source>
         <translation>Data prohlížení:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="370"/>
+        <location filename="../qml/SettingsWindow.qml" line="398"/>
         <source>Search…</source>
         <translation>Hledat…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="484"/>
+        <location filename="../qml/SettingsWindow.qml" line="512"/>
         <source>Defaults</source>
         <translation>Výchozí</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="493"/>
+        <location filename="../qml/SettingsWindow.qml" line="521"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="500"/>
+        <location filename="../qml/SettingsWindow.qml" line="528"/>
         <source>Apply</source>
         <translation>Použít</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="507"/>
+        <location filename="../qml/SettingsWindow.qml" line="535"/>
         <source>Cancel</source>
         <translation>Zrušit</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="539"/>
+        <location filename="../qml/SettingsWindow.qml" line="567"/>
         <source>Open the home page</source>
         <translation>Otevřít domovskou stránku</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="551"/>
+        <location filename="../qml/SettingsWindow.qml" line="579"/>
         <source>Open the tabs from last time</source>
         <translation>Otevřít karty z minule</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="625"/>
+        <location filename="../qml/SettingsWindow.qml" line="653"/>
         <source>New Tab page:</source>
         <translation>Stránka nové karty:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="626"/>
+        <location filename="../qml/SettingsWindow.qml" line="654"/>
         <source>Show top sites</source>
         <translation>Zobrazovat nejnavštěvovanější weby</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="637"/>
+        <location filename="../qml/SettingsWindow.qml" line="665"/>
         <source>Restore Removed Sites</source>
         <translation>Obnovit odebrané weby</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="675"/>
+        <location filename="../qml/SettingsWindow.qml" line="703"/>
         <source>Custom…</source>
         <translation>Vlastní…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="690"/>
+        <location filename="../qml/SettingsWindow.qml" line="718"/>
         <source>Custom URL:</source>
         <translation>Vlastní URL:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="706"/>
+        <location filename="../qml/SettingsWindow.qml" line="734"/>
         <source>Show search suggestions in the address bar</source>
         <translation>Zobrazovat návrhy vyhledávání v adresním řádku</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="722"/>
+        <location filename="../qml/SettingsWindow.qml" line="750"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>URL musí obsahovat „%1“ na místě vyhledávaných výrazů.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="757"/>
+        <location filename="../qml/SettingsWindow.qml" line="785"/>
         <source>Choose…</source>
         <translation>Vybrat…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="54"/>
-        <location filename="../qml/SettingsWindow.qml" line="765"/>
+        <location filename="../qml/SettingsWindow.qml" line="793"/>
         <source>Ask where to save each file</source>
         <translation>Ptát se, kam uložit každý soubor</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="780"/>
+        <location filename="../qml/SettingsWindow.qml" line="808"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>Vybraná složka již neexistuje. Stažené soubory se ukládají do %1.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="873"/>
+        <location filename="../qml/SettingsWindow.qml" line="901"/>
         <source>Cookies:</source>
         <translation>Soubory cookie:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="874"/>
+        <location filename="../qml/SettingsWindow.qml" line="902"/>
         <source>Block third-party cookies</source>
         <translation>Blokovat soubory cookie třetích stran</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="910"/>
+        <location filename="../qml/SettingsWindow.qml" line="938"/>
         <source>Clear cookies, cache and history</source>
         <translation>Vymazat soubory cookie, mezipaměť a historii</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="924"/>
+        <location filename="../qml/SettingsWindow.qml" line="952"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Vymazat soubory cookie a mezipaměť</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="847"/>
+        <location filename="../qml/SettingsWindow.qml" line="875"/>
         <source>No spelling dictionaries are installed.</source>
         <translation>Nejsou nainstalovány žádné pravopisné slovníky.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="886"/>
+        <location filename="../qml/SettingsWindow.qml" line="914"/>
         <source>Ads and trackers:</source>
         <translation>Reklamy a sledovače:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="887"/>
+        <location filename="../qml/SettingsWindow.qml" line="915"/>
         <source>Block ads and trackers</source>
         <translation>Blokovat reklamy a sledovače</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="899"/>
+        <location filename="../qml/SettingsWindow.qml" line="927"/>
         <source>Updating lists…</source>
         <translation>Aktualizace seznamů…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="901"/>
+        <location filename="../qml/SettingsWindow.qml" line="929"/>
         <source>Lists not downloaded yet</source>
         <translation>Seznamy ještě nebyly staženy</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="902"/>
+        <location filename="../qml/SettingsWindow.qml" line="930"/>
         <source>Lists last updated: %1</source>
         <translation>Seznamy naposledy aktualizovány: %1</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="967"/>
+        <location filename="../qml/SettingsWindow.qml" line="1007"/>
         <source>Choose Download Folder</source>
         <translation>Vybrat složku pro stahování</translation>
     </message>
@@ -2101,7 +2537,7 @@
     <name>WebViewTab</name>
     <message>
         <location filename="../qml/WebViewTab.qml" line="28"/>
-        <location filename="../qml/WebViewTab.qml" line="513"/>
+        <location filename="../qml/WebViewTab.qml" line="539"/>
         <source>Print failed</source>
         <translation>Tisk se nezdařil</translation>
     </message>
@@ -2116,17 +2552,17 @@
         <translation>Uložení PDF se nezdařilo</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="305"/>
+        <location filename="../qml/WebViewTab.qml" line="317"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>Proces stránky neočekávaně skončil.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="306"/>
+        <location filename="../qml/WebViewTab.qml" line="318"/>
         <source>The page crashed.</source>
         <translation>Stránka spadla.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="307"/>
+        <location filename="../qml/WebViewTab.qml" line="319"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>Proces stránky byl ukončen (pravděpodobně kvůli nedostatku paměti).</translation>
     </message>

@@ -19,7 +19,7 @@ jobs:
           for attempt in 1 2 3; do
             timeout 15m dnf -y install cmake ninja-build gcc-c++ make git nodejs \
                 qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel qt6-qtwebchannel-devel \
-                kf6-kirigami kf6-qqc2-desktop-style kf6-kwallet-devel hunspell-en-US hunspell-pt-BR && exit 0
+                kf6-kirigami kf6-qqc2-desktop-style kf6-kwallet-devel kf6-karchive-devel hunspell-en-US hunspell-pt-BR && exit 0
             echo "::warning::dnf install failed or timed out (attempt $attempt of 3)"
             sleep 30
           done

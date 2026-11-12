@@ -252,6 +252,13 @@ ApplicationWindow {
         settingsWindow.showWindow()
     }
 
+    // Settings → Extensions (toolbar menu, or a .kondorext opened from the
+    // file manager).
+    function openExtensionsSettings() {
+        window.openSettings()
+        window.settingsWindow.showPage("extensions")
+    }
+
     function openAbout() {
         if (!aboutWindow)
             aboutWindow = aboutWindowComponent.createObject(window)
@@ -912,6 +919,27 @@ ApplicationWindow {
                         id: downloadsPopup
                         x: downloadsButton.width - width
                         y: downloadsButton.height
+                    }
+                }
+
+                ToolButton {
+                    id: extensionsButton
+                    objectName: "extensionsButton"
+                    // Only when the current tab has an enabled extension with a
+                    // toolbar action (in a private tab: allowed there).
+                    visible: tabs.currentTab !== null
+                             && (ExtensionManager.revision, ExtensionManager.hasActionExtensions(tabs.currentTab.isPrivate))
+                    display: AbstractButton.IconOnly
+                    icon.name: "preferences-plugin"
+                    ToolTip.visible: hovered
+                    ToolTip.text: qsTr("Extensions")
+                    ToolTip.delay: 600
+                    onClicked: extensionsMenu.popup(extensionsButton, 0, extensionsButton.height)
+
+                    ExtensionsMenu {
+                        id: extensionsMenu
+                        tab: tabs.currentTab
+                        onManageRequested: window.openExtensionsSettings()
                     }
                 }
 

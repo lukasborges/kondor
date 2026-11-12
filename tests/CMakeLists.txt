@@ -1,3 +1,10 @@
+# Sources of the Kondor extensions (#107) for the tests that need them.
+set(KONDOR_EXTENSION_PACKAGE_SOURCES
+    ../src/extensions/extensionpackage.cpp
+    ../src/extensions/extensionmanager.cpp
+    ../src/extensions/extensioncatalog.cpp
+)
+
 qt_add_executable(tst_addressresolver
     tst_addressresolver.cpp
     ../src/addressresolver.cpp
@@ -354,6 +361,7 @@ qt_add_executable(tst_settingswindow
     ../src/historymodel.cpp
     ../src/database.cpp
     ../src/faviconstore.cpp
+    ${KONDOR_EXTENSION_PACKAGE_SOURCES}
 )
 
 target_compile_definitions(tst_settingswindow PRIVATE
@@ -375,6 +383,7 @@ target_link_libraries(tst_settingswindow PRIVATE
     Qt6::Test
     Qt6::WebEngineQuick
     KF6::Wallet
+    KF6::Archive
 )
 
 add_test(NAME tst_settingswindow COMMAND tst_settingswindow)
@@ -666,4 +675,73 @@ target_link_libraries(tst_extensionloader PRIVATE
 add_test(NAME tst_extensionloader COMMAND tst_extensionloader)
 set_tests_properties(tst_extensionloader PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)
+
+qt_add_executable(tst_extensions
+    tst_extensions.cpp
+    ../src/extensions/extensionbridge.cpp
+    ../src/tab.cpp
+    ../src/passwords/passwordstore.cpp
+    ../src/passwords/passwordimport.cpp
+    ../src/profilemanager.cpp
+    ../src/adblock/adblockmanager.cpp
+    ../src/adblock/adblockinterceptor.cpp
+    ../src/adblock/filterengine.cpp
+    ../src/addressresolver.cpp
+    ../src/settings.cpp
+    ../src/downloadmanager.cpp
+    ../src/notifier.cpp
+    ../src/historymanager.cpp
+    ../src/historymodel.cpp
+    ../src/database.cpp
+    ../src/faviconstore.cpp
+    ${KONDOR_EXTENSION_PACKAGE_SOURCES}
+)
+
+qt_add_resources(tst_extensions "extension_scripts"
+    PREFIX "/scripts"
+    BASE "${CMAKE_SOURCE_DIR}/src/extensions"
+    FILES
+        ${CMAKE_SOURCE_DIR}/src/extensions/channel.js
+        ${CMAKE_SOURCE_DIR}/src/extensions/extensionruntime.js
+)
+
+qt_add_resources(tst_extensions "passwords_script"
+    PREFIX "/scripts"
+    BASE "${CMAKE_SOURCE_DIR}/src/passwords"
+    FILES
+        ${CMAKE_SOURCE_DIR}/src/passwords/passwords.js
+)
+
+target_compile_definitions(tst_extensions PRIVATE
+    KONDOR_TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data"
+    KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+)
+
+target_include_directories(tst_extensions PRIVATE
+    ../src
+    ../src/extensions
+)
+
+target_link_libraries(tst_extensions PRIVATE
+    Qt6::Concurrent
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Network
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebChannel
+    Qt6::WebEngineQuick
+    KF6::Wallet
+    KF6::Archive
+)
+
+add_test(NAME tst_extensions COMMAND tst_extensions)
+set_tests_properties(tst_extensions PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1;KONDOR_NO_KWALLET=1"
+    TIMEOUT 300
 )

@@ -1,0 +1,226 @@
+pragma ComponentBehavior: Bound
+
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
+import QtCore
+import org.kde.kirigami as Kirigami
+import Kondor
+
+// Settings → Extensions: the installed Kondor extensions, with "Get New
+// Extensions…" (the community catalog) and "Install from File…". Switching,
+// configuring and removing an extension act at once, like "Clear Cookies and
+// Cache Now"; only "Update extensions automatically" is a pending option owned
+// by the Configure window.
+ColumnLayout {
+    id: root
+
+    property bool autoUpdate: true
+    signal autoUpdateToggled(bool checked)
+
+    spacing: Kirigami.Units.largeSpacing
+
+    function matchesFilter(name, description) {
+        const text = filterField.text.trim().toLowerCase()
+        return text === "" || (name + " " + description).toLowerCase().includes(text)
+    }
+
+    function openCatalog() {
+        catalogDialog.open()
+    }
+
+    RowLayout {
+        Layout.fillWidth: true
+        spacing: Kirigami.Units.smallSpacing
+
+        TextField {
+            id: filterField
+            Layout.fillWidth: true
+            placeholderText: qsTr("Filter extensions…")
+        }
+        Button {
+            text: qsTr("Get New Extensions…")
+            icon.name: "get-hot-new-stuff"
+            onClicked: root.openCatalog()
+        }
+        Button {
+            text: qsTr("Install from File…")
+            icon.name: "document-import"
+            onClicked: installFileDialog.open()
+        }
+    }
+
+    Frame {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        padding: 0
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+        Kirigami.Theme.inherit: false
+        background: Rectangle {
+            color: Kirigami.Theme.backgroundColor
+            border.color: Kirigami.ColorUtils.linearInterpolation(
+                              Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.2)
+        }
+
+        Kirigami.PlaceholderMessage {
+            anchors.centerIn: parent
+            width: parent.width - Kirigami.Units.gridUnit * 4
+            visible: extensionList.count === 0
+            icon.name: "preferences-plugin"
+            text: qsTr("No extensions installed")
+            explanation: qsTr("Extensions add features to Kondor. Get them from the Kondor extensions catalog, or install a .kondorext file.")
+            helpfulAction: Kirigami.Action {
+                text: qsTr("Get New Extensions…")
+                icon.name: "get-hot-new-stuff"
+                onTriggered: root.openCatalog()
+            }
+        }
+
+        ListView {
+            id: extensionList
+            objectName: "extensionList"
+            anchors.fill: parent
+            clip: true
+            model: ExtensionManager
+
+            delegate: ItemDelegate {
+                id: row
+                required property string id
+                required property string name
+                required property string description
+                required property string version
+                required property string iconSource
+                // `enabled` is also a property of the delegate: read the role through `model`.
+                required property var model
+                required property var permissions
+                required property bool updateNeedsReview
+
+                width: ListView.view.width
+                visible: root.matchesFilter(row.name, row.description)
+                height: visible ? implicitHeight : 0
+                // The row only shows information: its controls do the work.
+                hoverEnabled: false
+                down: false
+
+                contentItem: RowLayout {
+                    spacing: Kirigami.Units.largeSpacing
+
+                    ExtensionIcon {
+                        source: row.iconSource
+                        size: Kirigami.Units.iconSizes.medium
+                    }
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        spacing: 0
+
+                        RowLayout {
+                            Label {
+                                text: row.name
+                                font.bold: true
+                            }
+                            Label {
+                                text: row.version
+                                opacity: 0.7
+                                font: Kirigami.Theme.smallFont
+                            }
+                        }
+                        Label {
+                            Layout.fillWidth: true
+                            text: row.description
+                            elide: Text.ElideRight
+                        }
+                        Label {
+                            Layout.fillWidth: true
+                            visible: row.permissions.length > 0
+                            text: row.permissions.length > 0 ? row.permissions[0] : ""
+                            opacity: 0.7
+                            font: Kirigami.Theme.smallFont
+                            elide: Text.ElideRight
+                        }
+                    }
+
+                    Button {
+                        visible: row.updateNeedsReview
+                        text: qsTr("Update…")
+                        icon.name: "update-none"
+                        onClicked: ExtensionCatalog.install(row.id)
+                    }
+                    Switch {
+                        checked: row.model.enabled
+                        onToggled: ExtensionManager.setEnabled(row.id, checked)
+                        ToolTip.visible: hovered
+                        ToolTip.text: row.model.enabled ? qsTr("Turn off") : qsTr("Turn on")
+                        ToolTip.delay: 600
+                    }
+                    ToolButton {
+                        icon.name: "configure"
+                        text: qsTr("Configure…")
+                        display: AbstractButton.IconOnly
+                        ToolTip.visible: hovered
+                        ToolTip.text: text
+                        ToolTip.delay: 600
+                        onClicked: configureDialog.openFor(row.id)
+                    }
+                    ToolButton {
+                        icon.name: "edit-delete"
+                        text: qsTr("Remove")
+                        display: AbstractButton.IconOnly
+                        ToolTip.visible: hovered
+                        ToolTip.text: text
+                        ToolTip.delay: 600
+                        onClicked: {
+                            removeDialog.extensionId = row.id
+                            removeDialog.extensionName = row.name
+                            removeDialog.open()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    CheckBox {
+        text: qsTr("Update extensions automatically")
+        checked: root.autoUpdate
+        onToggled: root.autoUpdateToggled(checked)
+    }
+
+    FileDialog {
+        id: installFileDialog
+        title: qsTr("Install Extension")
+        fileMode: FileDialog.OpenFile
+        currentFolder: StandardPaths.writableLocation(StandardPaths.DownloadLocation)
+        nameFilters: [qsTr("Kondor extensions (*.kondorext)"), qsTr("All files (*)")]
+        onAccepted: ExtensionManager.inspectFile(selectedFile.toString())
+    }
+
+    MessageDialog {
+        id: removeDialog
+        property string extensionId: ""
+        property string extensionName: ""
+        title: qsTr("Remove Extension")
+        text: qsTr("Remove the extension “%1” and its data?").arg(removeDialog.extensionName)
+        buttons: MessageDialog.Yes | MessageDialog.No
+        onButtonClicked: function(button) {
+            if (button === MessageDialog.Yes)
+                ExtensionManager.remove(removeDialog.extensionId)
+        }
+    }
+
+    ExtensionCatalogDialog {
+        id: catalogDialog
+        parent: Overlay.overlay
+    }
+
+    InstallExtensionDialog {
+        id: installDialog
+        parent: Overlay.overlay
+    }
+
+    ExtensionSettingsDialog {
+        id: configureDialog
+        parent: Overlay.overlay
+    }
+}

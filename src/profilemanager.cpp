@@ -104,34 +104,57 @@ QQuickWebEngineProfile *ProfileManager::createPrivateProfile()
     return profile;
 }
 
-void ProfileManager::installPasswordScript(QQuickWebEngineProfile *profile)
+void ProfileManager::installPageScripts(QQuickWebEngineProfile *profile)
 {
+    QObject *collection = profile->property("userScripts").value<QObject *>();
+    const auto insert = [collection](const QWebEngineScript &script) {
+        if (!collection
+            || !QMetaObject::invokeMethod(collection, "insert", Q_ARG(QWebEngineScript, script))) {
+            qWarning("Cannot install the page script %s", qPrintable(script.name()));
+            return false;
+        }
+        return true;
+    };
+
+    QFile webChannelJs(QStringLiteral(":/qtwebchannel/qwebchannel.js"));
+    QFile channelJs(QStringLiteral(":/scripts/channel.js"));
+    if (!webChannelJs.open(QIODevice::ReadOnly) || !channelJs.open(QIODevice::ReadOnly)) {
+        qWarning("Web channel script resources not found: autofill and extensions are off");
+        return;
+    }
+    // The web channel client, shared by the password manager and the
+    // extensions (every tab, private ones included). It runs in the
+    // application world, out of reach of the page's own scripts.
+    QWebEngineScript channel;
+    channel.setName(QStringLiteral("kondor-channel"));
+    channel.setSourceCode(QString::fromUtf8(webChannelJs.readAll()) + QLatin1Char('\n')
+                          + QString::fromUtf8(channelJs.readAll()));
+    channel.setInjectionPoint(QWebEngineScript::DocumentCreation);
+    channel.setWorldId(QWebEngineScript::ApplicationWorld);
+    channel.setRunsOnSubFrames(true);
+    if (!insert(channel))
+        return;
+
     // Persistent profile only: private tabs never get the password script.
     if (profile->isOffTheRecord())
         return;
-    QFile webChannelJs(QStringLiteral(":/qtwebchannel/qwebchannel.js"));
     QFile passwordsJs(QStringLiteral(":/scripts/passwords.js"));
-    if (!webChannelJs.open(QIODevice::ReadOnly) || !passwordsJs.open(QIODevice::ReadOnly)) {
-        qWarning("Password script resources not found: autofill is off");
+    if (!passwordsJs.open(QIODevice::ReadOnly)) {
+        qWarning("Password script resource not found: autofill is off");
         return;
     }
     QWebEngineScript script;
     script.setName(QStringLiteral("kondor-passwords"));
-    script.setSourceCode(QString::fromUtf8(webChannelJs.readAll()) + QLatin1Char('\n')
-                         + QString::fromUtf8(passwordsJs.readAll()));
+    script.setSourceCode(QString::fromUtf8(passwordsJs.readAll()));
     script.setInjectionPoint(QWebEngineScript::DocumentReady);
     script.setWorldId(QWebEngineScript::ApplicationWorld);
     script.setRunsOnSubFrames(true);
-
-    QObject *collection = profile->property("userScripts").value<QObject *>();
-    if (!collection
-        || !QMetaObject::invokeMethod(collection, "insert", Q_ARG(QWebEngineScript, script)))
-        qWarning("Cannot install the password script: autofill is off");
+    insert(script);
 }
 
 void ProfileManager::setupProfile(QQuickWebEngineProfile *profile)
 {
-    installPasswordScript(profile);
+    installPageScripts(profile);
 
     // User-Agent: keep Chromium (compatibility), but drop the "QtWebEngine"
     // token that makes some sites treat the browser as unknown.
@@ -170,6 +193,9 @@ void ProfileManager::setupProfile(QQuickWebEngineProfile *profile)
     connect(profile, &QObject::destroyed, this, [this, profile]() {
         m_overriddenCertificateHosts.remove(profile);
     });
+
+    // Lets the extension manager add its content scripts to this profile.
+    emit profileCreated(profile);
 }
 
 void ProfileManager::applySpellCheckSettings(QQuickWebEngineProfile *profile)
@@ -211,6 +237,15 @@ bool ProfileManager::isCertificateOverridden(QQuickWebEngineProfile *profile, co
         return false;
     const auto it = m_overriddenCertificateHosts.constFind(profile);
     return it != m_overriddenCertificateHosts.constEnd() && it->contains(host.toLower());
+}
+
+QList<QQuickWebEngineProfile *> ProfileManager::profiles() const
+{
+    QList<QQuickWebEngineProfile *> list;
+    if (m_defaultProfile)
+        list.append(m_defaultProfile);
+    list.append(m_privateProfiles);
+    return list;
 }
 
 QString ProfileManager::homePage() const

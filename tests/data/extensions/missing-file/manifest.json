@@ -1,0 +1,4 @@
+{
+  "kondor": 1, "id": "missing-file", "name": "Missing File", "description": "d", "version": "1.0.0",
+  "contentScripts": [ { "matches": ["https://*/*"], "js": ["content.js"] } ]
+}

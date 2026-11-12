@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-kondor-extension">
+    <comment>Kondor extension</comment>
+    <comment xml:lang="pt_BR">Extensão do Kondor</comment>
+    <icon name="preferences-plugin"/>
+    <glob pattern="*.kondorext"/>
+    <sub-class-of type="application/zip"/>
+  </mime-type>
+</mime-info>

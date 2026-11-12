@@ -1,13 +1,12 @@
 // Kondor password manager, page side. Runs in the application world of every
-// frame of a normal tab (never in private tabs), after qwebchannel.js, and
-// talks to the C++ object "kondorPasswords". The page's own scripts cannot see
-// this world or the bridge.
+// frame of a normal tab (never in private tabs), after channel.js, and talks
+// to the C++ object "kondorPasswords" through the shared web channel promise.
+// The page's own scripts cannot see this world or the bridge.
 (function () {
     "use strict";
 
     const origin = location.origin;
-    if (!origin || origin === "null" || typeof QWebChannel === "undefined"
-            || typeof qt === "undefined" || !qt.webChannelTransport)
+    if (!origin || origin === "null" || !window.__kondorChannel)
         return;
 
     let bridge = null;
@@ -125,8 +124,8 @@
         });
     }
 
-    new QWebChannel(qt.webChannelTransport, function (channel) {
-        bridge = channel.objects.kondorPasswords;
+    window.__kondorChannel.then(function (objects) {
+        bridge = objects.kondorPasswords;
         if (!bridge)
             return;
         bridge.credentialsChanged.connect(loadCredentials);

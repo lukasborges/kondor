@@ -141,8 +141,8 @@ and say so in the PR.
 
 On an isolated profile (`XDG_CONFIG_HOME`, `XDG_DATA_HOME`, `XDG_CACHE_HOME` in a temporary directory,
 see AGENTS.md): build, run `ctest --output-on-failure` twice in a row (no test depends on the order
-or on a previous run), then run `./build/tests/tst_extensions -functions` and `./build/tests/tst_tabstrip
--functions` and check that every test of today is listed under its new class. The offscreen smoke
+or on a previous run), then check in each split `main` that every new test class is run (QTest's `-functions` lists only the
+first class of an executable, see "Decisions"). The offscreen smoke
 test of the app still shows no QML errors.
 
 ## Out of scope
@@ -171,3 +171,4 @@ None: no visible change.
 | Split files into new executables or keep one per target? | Keep one executable per target. Every test executable recompiles its production sources (AGENTS.md → "Build and run"); seven more `tst_extensions`-like targets would make CI and the agent loops much slower and heavier. Several test classes in one executable, each run with `QTest::qExec` from `main`, keep the files small and the `ctest` names unchanged. |
 | Where do helpers used by several feature folders go? | `tests/common/`, like `qml/common/`: only the helpers that are copied today (`findByClassName`, `registerSingleton`) and the isolated home used by every touched `main`. |
 | How is "no assertion dropped" checked? | By the before/after counts of assertion macros, data rows and test functions in the PR body, which the reviewer re-counts. |
+| `-functions` lists only the first class of a split executable (PR #153 review). | Accepted. QTest calls `exit()` after printing the list, so with several `QTest::qExec` calls in one `main` only the first class is listed, and a single test function can no longer be selected by name. This follows from keeping one executable per target. The manual test checks the `run…` calls in `main` instead. |

@@ -712,37 +712,37 @@
 <context>
     <name>ExtensionCatalog</name>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="194"/>
+        <location filename="../src/extensions/catalogentry.cpp" line="81"/>
         <source>The catalog is not valid JSON</source>
         <translation>El catàleg no és un JSON vàlid</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="200"/>
+        <location filename="../src/extensions/catalogentry.cpp" line="83"/>
         <source>The catalog has an unsupported format</source>
         <translation>El catàleg té un format no admès</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="291"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="48"/>
         <source>Cannot create a temporary file</source>
         <translation>No es pot crear un fitxer temporal</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="302"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="68"/>
         <source>The package is larger than expected</source>
         <translation>El paquet és més gran del que s&apos;esperava</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="327"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="76"/>
         <source>Cannot read the downloaded package</source>
         <translation>No es pot llegir el paquet baixat</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="334"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="81"/>
         <source>The downloaded package does not match its checksum</source>
         <translation>El paquet baixat no coincideix amb la seva suma de verificació</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="352"/>
+        <location filename="../src/extensions/extensioncatalogactions.cpp" line="77"/>
         <source>Could not download “%1”: %2</source>
         <translation>No s&apos;ha pogut baixar «%1»: %2</translation>
     </message>
@@ -803,38 +803,39 @@
 <context>
     <name>ExtensionManager</name>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="233"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="64"/>
         <source>Cannot create %1</source>
         <translation>No es pot crear %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="353"/>
-        <location filename="../src/extensions/extensionmanager.cpp" line="368"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="90"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="103"/>
         <source>Cannot install into %1</source>
         <translation>No es pot instal·lar a %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="360"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="81"/>
         <source>Cannot replace %1</source>
         <translation>No es pot reemplaçar %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="407"/>
+        <location filename="../src/extensions/extensionupdate.cpp" line="12"/>
         <source>The package is for “%1”, not “%2”</source>
         <translation>El paquet és per a «%1», no per a «%2»</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="418"/>
+        <location filename="../src/extensions/extensionupdate.cpp" line="23"/>
         <source>The package asks for more permissions than the installed version</source>
         <translation>El paquet demana més permisos que la versió instal·lada</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="869"/>
+        <location filename="../src/extensions/extensionstorage.cpp" line="48"/>
+        <location filename="../src/extensions/extensionstorage.cpp" line="65"/>
         <source>Storage is not available</source>
         <translation>L&apos;emmagatzematge no està disponible</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="889"/>
+        <location filename="../src/extensions/extensionstorage.cpp" line="68"/>
         <source>The extension&apos;s storage is full (limit: 1 MiB)</source>
         <translation>L&apos;emmagatzematge de l&apos;extensió és ple (límit: 1 MiB)</translation>
     </message>
@@ -842,12 +843,12 @@
 <context>
     <name>ExtensionPackage</name>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="187"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="76"/>
         <source>Read and change all websites</source>
         <translation>Llegeix i canvia tots els llocs web</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/extensions/extensionpackage.cpp" line="192"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="67"/>
         <source>%1 and %n more</source>
         <extracomment>%1 is a list of sites, %n the number of further sites</extracomment>
         <translation>
@@ -856,56 +857,52 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="194"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="80"/>
         <source>Read and change pages on %1</source>
         <translation>Llegeix i canvia les pàgines de %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="198"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="20"/>
         <source>Open, close and navigate your tabs</source>
         <translation>Obre, tanca i navega per les pestanyes</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="200"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="21"/>
         <source>Download files</source>
         <translation>Baixa fitxers</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="202"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="23"/>
         <source>Show notifications</source>
         <translation>Mostra notificacions</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="313"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="569"/>
+        <location filename="../src/extensions/packagelimits.cpp" line="23"/>
         <source>The package has more than %1 files</source>
         <translation>El paquet té més de %1 fitxers</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="317"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="574"/>
+        <location filename="../src/extensions/packagelimits.cpp" line="26"/>
         <source>The package is larger than %1 MiB</source>
         <translation>El paquet és més gran de %1 MiB</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="533"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="538"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="98"/>
         <source>The file is not a valid ZIP archive</source>
         <translation>El fitxer no és un arxiu ZIP vàlid</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="561"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="40"/>
         <source>Unsafe file name in the package: %1</source>
         <translation>Nom de fitxer insegur al paquet: %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="587"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="104"/>
         <source>Cannot create %1</source>
         <translation>No es pot crear %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="597"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="602"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="87"/>
         <source>Cannot write %1</source>
         <translation>No es pot escriure %1</translation>
     </message>

@@ -1,3 +1,77 @@
+set(KONDOR_EXTENSION_PACKAGE_SOURCES
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionpackage.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionpackage.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/packagepath.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/packagepath.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/packagelimits.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/packagelimits.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/stringlistfield.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/stringlistfield.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifestvalidator.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifestvalidator.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/contentscriptreader.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/contentscriptreader.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifesticon.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifesticon.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifestsections.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifestsections.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/permissiondescription.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/permissiondescription.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/localizedmanifest.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/localizedmanifest.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/packagesuffix.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/packagesuffix.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/packagearchive.cpp
+)
+
+set(KONDOR_EXTENSION_MANAGER_SOURCES
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionmanager.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionmanager.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionqueries.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionmodel.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensioncatalogmodel.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensioncatalogactions.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionscripts.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensioninstall.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionupdate.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionconfiguration.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/installedextension.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/packagefile.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/installresult.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionaccess.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionstate.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionstate.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionsettings.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionsettings.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensioninstaller.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensioninstaller.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/contentscriptbuilder.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/contentscriptbuilder.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/profilescripts.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/profilescripts.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionstorage.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionstorage.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/catalogentry.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/catalogentry.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/packagedownload.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/packagedownload.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/catalogupdater.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/catalogupdater.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensioncatalog.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensioncatalog.cpp
+)
+
+set(KONDOR_EXTENSION_BRIDGE_SOURCES
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensioncall.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensioncall.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionpageapi.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionpageapi.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionbridge.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/extensionbridge.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/bridgecalls.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/bridgecalls.cpp
+)
+
 set(KONDOR_PASSWORD_STORE_SOURCES
     ${CMAKE_SOURCE_DIR}/src/passwords/passwordorigin.h
     ${CMAKE_SOURCE_DIR}/src/passwords/passwordorigin.cpp

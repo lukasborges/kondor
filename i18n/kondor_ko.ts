@@ -712,37 +712,37 @@
 <context>
     <name>ExtensionCatalog</name>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="194"/>
+        <location filename="../src/extensions/catalogentry.cpp" line="81"/>
         <source>The catalog is not valid JSON</source>
         <translation>카탈로그가 올바른 JSON이 아닙니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="200"/>
+        <location filename="../src/extensions/catalogentry.cpp" line="83"/>
         <source>The catalog has an unsupported format</source>
         <translation>카탈로그 형식이 지원되지 않습니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="291"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="48"/>
         <source>Cannot create a temporary file</source>
         <translation>임시 파일을 만들 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="302"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="68"/>
         <source>The package is larger than expected</source>
         <translation>패키지가 예상보다 큽니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="327"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="76"/>
         <source>Cannot read the downloaded package</source>
         <translation>다운로드한 패키지를 읽을 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="334"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="81"/>
         <source>The downloaded package does not match its checksum</source>
         <translation>다운로드한 패키지가 체크섬과 일치하지 않습니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="352"/>
+        <location filename="../src/extensions/extensioncatalogactions.cpp" line="77"/>
         <source>Could not download “%1”: %2</source>
         <translation>“%1”을(를) 다운로드할 수 없습니다: %2</translation>
     </message>
@@ -803,38 +803,39 @@
 <context>
     <name>ExtensionManager</name>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="233"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="64"/>
         <source>Cannot create %1</source>
         <translation>%1을(를) 만들 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="353"/>
-        <location filename="../src/extensions/extensionmanager.cpp" line="368"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="90"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="103"/>
         <source>Cannot install into %1</source>
         <translation>%1에 설치할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="360"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="81"/>
         <source>Cannot replace %1</source>
         <translation>%1을(를) 바꿀 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="407"/>
+        <location filename="../src/extensions/extensionupdate.cpp" line="12"/>
         <source>The package is for “%1”, not “%2”</source>
         <translation>이 패키지는 “%2”이(가) 아닌 “%1”용입니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="418"/>
+        <location filename="../src/extensions/extensionupdate.cpp" line="23"/>
         <source>The package asks for more permissions than the installed version</source>
         <translation>이 패키지는 설치된 버전보다 더 많은 권한을 요청합니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="869"/>
+        <location filename="../src/extensions/extensionstorage.cpp" line="48"/>
+        <location filename="../src/extensions/extensionstorage.cpp" line="65"/>
         <source>Storage is not available</source>
         <translation>저장소를 사용할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="889"/>
+        <location filename="../src/extensions/extensionstorage.cpp" line="68"/>
         <source>The extension&apos;s storage is full (limit: 1 MiB)</source>
         <translation>확장 기능의 저장 공간이 가득 찼습니다(제한: 1 MiB)</translation>
     </message>
@@ -842,12 +843,12 @@
 <context>
     <name>ExtensionPackage</name>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="187"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="76"/>
         <source>Read and change all websites</source>
         <translation>모든 웹 사이트 읽기 및 변경</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/extensions/extensionpackage.cpp" line="192"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="67"/>
         <source>%1 and %n more</source>
         <extracomment>%1 is a list of sites, %n the number of further sites</extracomment>
         <translation>
@@ -855,56 +856,52 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="194"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="80"/>
         <source>Read and change pages on %1</source>
         <translation>%1의 페이지 읽기 및 변경</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="198"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="20"/>
         <source>Open, close and navigate your tabs</source>
         <translation>탭 열기, 닫기 및 탐색</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="200"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="21"/>
         <source>Download files</source>
         <translation>파일 다운로드</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="202"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="23"/>
         <source>Show notifications</source>
         <translation>알림 표시</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="313"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="569"/>
+        <location filename="../src/extensions/packagelimits.cpp" line="23"/>
         <source>The package has more than %1 files</source>
         <translation>패키지에 %1개가 넘는 파일이 있습니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="317"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="574"/>
+        <location filename="../src/extensions/packagelimits.cpp" line="26"/>
         <source>The package is larger than %1 MiB</source>
         <translation>패키지가 %1 MiB보다 큽니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="533"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="538"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="98"/>
         <source>The file is not a valid ZIP archive</source>
         <translation>파일이 올바른 ZIP 압축 파일이 아닙니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="561"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="40"/>
         <source>Unsafe file name in the package: %1</source>
         <translation>패키지에 안전하지 않은 파일 이름이 있습니다: %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="587"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="104"/>
         <source>Cannot create %1</source>
         <translation>%1을(를) 만들 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="597"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="602"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="87"/>
         <source>Cannot write %1</source>
         <translation>%1에 쓸 수 없습니다</translation>
     </message>

@@ -27,7 +27,7 @@
 #include "extensions/extensionbridge.h"
 #include "extensions/extensioncatalog.h"
 #include "extensions/extensionmanager.h"
-#include "extensions/extensionpackage.h"
+#include "extensions/extensionstorage.h"
 #include "browser/profilemanager.h"
 #include "core/settings.h"
 #include "browser/tab.h"
@@ -222,12 +222,11 @@ QString TestExtensions::samplePackage()
 
 bool TestExtensions::installSample(const QString &source)
 {
-    QString error;
-    const bool ok = ExtensionManager::instance()->installPackage(samplePackage(), source,
-                                                                 QStringLiteral("sample"), &error);
-    if (!ok)
-        qWarning("%s", qPrintable(error));
-    return ok;
+    const InstallResult result = ExtensionManager::instance()->installPackage(
+        {samplePackage(), source}, QStringLiteral("sample"));
+    if (!result.isInstalled)
+        qWarning("%s", qPrintable(result.error));
+    return result.isInstalled;
 }
 
 // --- Package validation -------------------------------------------------------
@@ -413,10 +412,9 @@ void TestExtensions::runAtMapping()
     });
     const QString zip = m_work.path() + QStringLiteral("/runat.kondorext");
     QVERIFY(zipDirectory(dir, zip));
-    QString error;
     ExtensionManager *manager = ExtensionManager::instance();
-    QVERIFY2(manager->installPackage(zip, QStringLiteral("file"), QStringLiteral("sample"), &error),
-             qPrintable(error));
+    const InstallResult installed = manager->installPackage({zip, QStringLiteral("file")}, QStringLiteral("sample"));
+    QVERIFY2(installed.isInstalled, qPrintable(installed.error));
     const QList<QWebEngineScript> scripts = manager->scriptsFor(false);
     QCOMPARE(scripts.size(), 1);
     QCOMPARE(int(scripts.first().injectionPoint()), point);
@@ -432,7 +430,7 @@ void TestExtensions::privateProfileScripts()
     QCOMPARE(manager->scriptsFor(true).size(), 0);
     QCOMPARE(manager->scriptsFor(false).size(), 1);
 
-    manager->applyConfiguration(QStringLiteral("sample"), {}, true, {});
+    manager->applyConfiguration(QStringLiteral("sample"), {{QStringLiteral("privateAllowed"), true}});
     QCOMPARE(manager->scriptsFor(true).size(), 1);
     QVERIFY(manager->scriptSource(QStringLiteral("sample"), 0, true)
                 .contains(QStringLiteral("\"isPrivate\":true")));
@@ -543,31 +541,31 @@ void TestExtensions::replaceKeepsState()
     QVERIFY(installSample());
     ExtensionManager *manager = ExtensionManager::instance();
     const QString id = QStringLiteral("sample");
-    manager->applyConfiguration(id, {{QStringLiteral("greeting"), QStringLiteral("hi")}}, true,
-                                {QStringLiteral("https://example.com")});
+    manager->applyConfiguration(id, {{QStringLiteral("settings"), QVariantMap{{QStringLiteral("greeting"), QStringLiteral("hi")}}},
+                                     {QStringLiteral("privateAllowed"), true},
+                                     {QStringLiteral("disabledSites"), QStringList{QStringLiteral("https://example.com")}}});
     manager->setEnabled(id, false);
     QString error;
-    QVERIFY2(manager->storageSet(id, QStringLiteral("k"), QJsonValue(1), &error), qPrintable(error));
+    QVERIFY(ExtensionStorage::setValue(id, QStringLiteral("k"), QJsonValue(1)).isWritten);
 
     const QString dir = makeVariant(m_work.path(), QStringLiteral("v11"), [](QJsonObject &manifest) {
         manifest.insert(QStringLiteral("version"), QStringLiteral("1.1.0"));
     });
     const QString zip = m_work.path() + QStringLiteral("/v11.kondorext");
     QVERIFY(zipDirectory(dir, zip));
-    QVERIFY2(manager->installPackage(zip, QStringLiteral("catalog"), id, &error), qPrintable(error));
+    QVERIFY(manager->installPackage({zip, QStringLiteral("catalog")}, id).isInstalled);
 
     QCOMPARE(manager->installedVersion(id), QStringLiteral("1.1.0"));
     QCOMPARE(manager->source(id), QStringLiteral("catalog"));
     QVERIFY(!manager->data(manager->index(0), ExtensionManager::EnabledRole).toBool());
     QVERIFY(manager->data(manager->index(0), ExtensionManager::PrivateAllowedRole).toBool());
     QCOMPARE(manager->settingValues(id).value(QStringLiteral("greeting")).toString(), QStringLiteral("hi"));
-    QCOMPARE(manager->storageGet(id, QStringLiteral("k")).toInt(), 1);
+    QCOMPARE(ExtensionStorage::value(id, QStringLiteral("k")).toInt(), 1);
     QVERIFY(!QFileInfo::exists(ExtensionManager::extensionsDirectory() + QStringLiteral("/sample.new")));
     QVERIFY(!QFileInfo::exists(ExtensionManager::extensionsDirectory() + QStringLiteral("/sample.old")));
 
     // A package for another id is refused for an update of this one.
-    QVERIFY(!manager->installPackage(samplePackage(), QStringLiteral("catalog"),
-                                     QStringLiteral("other"), &error));
+    error = manager->installPackage({samplePackage(), QStringLiteral("catalog")}, QStringLiteral("other")).error;
     QVERIFY(error.contains(QStringLiteral("not “other”")));
 }
 
@@ -576,9 +574,9 @@ void TestExtensions::removeDeletesEverything()
     QVERIFY(installSample());
     ExtensionManager *manager = ExtensionManager::instance();
     const QString id = QStringLiteral("sample");
-    manager->applyConfiguration(id, {{QStringLiteral("greeting"), QStringLiteral("bye")}}, false, {});
+    manager->applyConfiguration(id, {{QStringLiteral("settings"), QVariantMap{{QStringLiteral("greeting"), QStringLiteral("bye")}}}});
     QString error;
-    QVERIFY(manager->storageSet(id, QStringLiteral("k"), QJsonValue(QStringLiteral("v")), &error));
+    QVERIFY(ExtensionStorage::setValue(id, QStringLiteral("k"), QJsonValue(QStringLiteral("v"))).isWritten);
 
     manager->remove(id);
     QVERIFY(!manager->isInstalled(id));
@@ -588,7 +586,7 @@ void TestExtensions::removeDeletesEverything()
     state.beginGroup(QStringLiteral("Extensions"));
     QVERIFY(!state.childGroups().contains(id));
     state.endGroup();
-    QVERIFY(manager->storageKeys(id).isEmpty());
+    QVERIFY(ExtensionStorage::keys(id).isEmpty());
 }
 
 void TestExtensions::settingsAreSanitized()
@@ -598,11 +596,10 @@ void TestExtensions::settingsAreSanitized()
     const QString id = QStringLiteral("sample");
     QCOMPARE(manager->settingValues(id).value(QStringLiteral("size")).toInt(), 50);
 
-    manager->applyConfiguration(id, {{QStringLiteral("size"), 500},
+    manager->applyConfiguration(id, {{QStringLiteral("settings"), QVariantMap{{QStringLiteral("size"), 500},
                                      {QStringLiteral("mode"), QStringLiteral("zzz")},
                                      {QStringLiteral("enabledFeature"), QStringLiteral("nope")},
-                                     {QStringLiteral("greeting"), QStringLiteral("changed")}},
-                                false, {});
+                                     {QStringLiteral("greeting"), QStringLiteral("changed")}}}});
     const QVariantMap values = manager->settingValues(id);
     QCOMPARE(values.value(QStringLiteral("size")).toInt(), 100); // clamped to max
     QCOMPARE(values.value(QStringLiteral("mode")).toString(), QStringLiteral("a")); // not a choice
@@ -610,9 +607,9 @@ void TestExtensions::settingsAreSanitized()
     QCOMPARE(values.value(QStringLiteral("greeting")).toString(), QStringLiteral("changed"));
 
     QSignalSpy changed(manager, &ExtensionManager::settingsChanged);
-    manager->applyConfiguration(id, {{QStringLiteral("greeting"), QStringLiteral("changed")}}, false, {});
+    manager->applyConfiguration(id, {{QStringLiteral("settings"), QVariantMap{{QStringLiteral("greeting"), QStringLiteral("changed")}}}});
     QCOMPARE(changed.count(), 0); // nothing changed
-    manager->applyConfiguration(id, {{QStringLiteral("greeting"), QStringLiteral("again")}}, false, {});
+    manager->applyConfiguration(id, {{QStringLiteral("settings"), QVariantMap{{QStringLiteral("greeting"), QStringLiteral("again")}}}});
     QCOMPARE(changed.count(), 1);
     QCOMPARE(changed.first().first().toString(), id);
 }
@@ -625,19 +622,19 @@ void TestExtensions::storageQuota()
     ExtensionManager *manager = ExtensionManager::instance();
     const QString id = QStringLiteral("sample");
     QString error;
-    QVERIFY(manager->storageSet(id, QStringLiteral("a"), QJsonValue(QString(600 * 1024, QLatin1Char('x'))), &error));
+    QVERIFY(ExtensionStorage::setValue(id, QStringLiteral("a"), QJsonValue(QString(600 * 1024, QLatin1Char('x')))).isWritten);
     // 600 KiB + 600 KiB is over the 1 MiB of one extension.
-    QVERIFY(!manager->storageSet(id, QStringLiteral("b"), QJsonValue(QString(600 * 1024, QLatin1Char('y'))), &error));
+    error = ExtensionStorage::setValue(id, QStringLiteral("b"), QJsonValue(QString(600 * 1024, QLatin1Char('y')))).error;
     QVERIFY(error.contains(QLatin1String("full")));
-    QVERIFY(!manager->storageKeys(id).contains(QStringLiteral("b")));
+    QVERIFY(!ExtensionStorage::keys(id).contains(QStringLiteral("b")));
     // Replacing a value counts only the new size.
-    QVERIFY(manager->storageSet(id, QStringLiteral("a"), QJsonValue(QString(900 * 1024, QLatin1Char('z'))), &error));
+    QVERIFY(ExtensionStorage::setValue(id, QStringLiteral("a"), QJsonValue(QString(900 * 1024, QLatin1Char('z')))).isWritten);
     // Structured values round-trip.
-    manager->storageRemove(id, QStringLiteral("a"));
+    ExtensionStorage::removeValue(id, QStringLiteral("a"));
     const QJsonObject object{{QStringLiteral("n"), 1}, {QStringLiteral("list"), QJsonArray{1, 2}}};
-    QVERIFY(manager->storageSet(id, QStringLiteral("obj"), object, &error));
-    QCOMPARE(manager->storageGet(id, QStringLiteral("obj")).toObject(), object);
-    QVERIFY(manager->storageGet(id, QStringLiteral("missing")).isNull());
+    QVERIFY(ExtensionStorage::setValue(id, QStringLiteral("obj"), object).isWritten);
+    QCOMPARE(ExtensionStorage::value(id, QStringLiteral("obj")).toObject(), object);
+    QVERIFY(ExtensionStorage::value(id, QStringLiteral("missing")).isNull());
 }
 
 void TestExtensions::storageIsPerExtension()
@@ -645,10 +642,10 @@ void TestExtensions::storageIsPerExtension()
     QVERIFY(installSample());
     ExtensionManager *manager = ExtensionManager::instance();
     QString error;
-    QVERIFY(manager->storageSet(QStringLiteral("sample"), QStringLiteral("k"), QJsonValue(1), &error));
-    QVERIFY(manager->storageGet(QStringLiteral("other"), QStringLiteral("k")).isNull());
-    QCOMPARE(manager->storageKeys(QStringLiteral("sample")), QStringList{QStringLiteral("k")});
-    QVERIFY(manager->storageKeys(QStringLiteral("other")).isEmpty());
+    QVERIFY(ExtensionStorage::setValue(QStringLiteral("sample"), QStringLiteral("k"), QJsonValue(1)).isWritten);
+    QVERIFY(ExtensionStorage::value(QStringLiteral("other"), QStringLiteral("k")).isNull());
+    QCOMPARE(ExtensionStorage::keys(QStringLiteral("sample")), QStringList{QStringLiteral("k")});
+    QVERIFY(ExtensionStorage::keys(QStringLiteral("other")).isEmpty());
 }
 
 namespace {
@@ -667,10 +664,7 @@ QString token(const QString &id)
 QJsonObject call(ExtensionBridge &bridge, const QString &id, const QString &token, const QString &method,
                  const QJsonArray &args = {})
 {
-    return QJsonDocument::fromJson(
-               bridge.request(id, token, method,
-                              QString::fromUtf8(QJsonDocument(args).toJson(QJsonDocument::Compact))).toUtf8())
-        .object();
+    return QJsonDocument::fromJson(bridge.request({id, token, method, args}).toUtf8()).object();
 }
 } // namespace
 
@@ -678,7 +672,7 @@ void TestExtensions::bridgeRejectsWrongToken()
 {
     QVERIFY(installSample());
     ExtensionManager *manager = ExtensionManager::instance();
-    manager->applyConfiguration(QStringLiteral("sample"), {}, true, {});
+    manager->applyConfiguration(QStringLiteral("sample"), {{QStringLiteral("privateAllowed"), true}});
     Tab tab(nullptr);
     ExtensionBridge bridge;
     bridge.setTab(&tab);
@@ -706,7 +700,7 @@ void TestExtensions::bridgeEnforcesPermissions()
     ExtensionBridge bridge;
     bridge.setTab(&tab);
     const QString good = token(QStringLiteral("sample"));
-    ExtensionManager::instance()->applyConfiguration(QStringLiteral("sample"), {}, true, {});
+    ExtensionManager::instance()->applyConfiguration(QStringLiteral("sample"), {{QStringLiteral("privateAllowed"), true}});
 
     const QJsonObject download = call(bridge, QStringLiteral("sample"), good, QStringLiteral("download"),
                                       {QStringLiteral("https://example.com/f.zip"), QString()});
@@ -720,9 +714,9 @@ void TestExtensions::bridgeEnforcesPermissions()
     const QString zip = m_work.path() + QStringLiteral("/notabs.kondorext");
     QVERIFY(zipDirectory(dir, zip));
     QString error;
-    QVERIFY2(ExtensionManager::instance()->installPackage(zip, QStringLiteral("file"), QStringLiteral("sample"), &error),
-             qPrintable(error));
-    ExtensionManager::instance()->applyConfiguration(QStringLiteral("sample"), {}, true, {});
+    const InstallResult installed = ExtensionManager::instance()->installPackage({zip, QStringLiteral("file")}, QStringLiteral("sample"));
+    QVERIFY2(installed.isInstalled, qPrintable(installed.error));
+    ExtensionManager::instance()->applyConfiguration(QStringLiteral("sample"), {{QStringLiteral("privateAllowed"), true}});
     const QString token2 = token(QStringLiteral("sample"));
     QVERIFY(token2 != good); // a new package, a new token
     QSignalSpy closes(&tab, &Tab::closeRequested);
@@ -738,7 +732,7 @@ void TestExtensions::bridgeStorageReadOnlyInPrivate()
 {
     QVERIFY(installSample());
     ExtensionManager *manager = ExtensionManager::instance();
-    manager->applyConfiguration(QStringLiteral("sample"), {}, true, {}); // allowed in private windows
+    manager->applyConfiguration(QStringLiteral("sample"), {{QStringLiteral("privateAllowed"), true}}); // allowed in private windows
     QQuickWebEngineProfile privateProfile;
     QVERIFY(privateProfile.isOffTheRecord());
     Tab privateTab(&privateProfile);
@@ -764,10 +758,10 @@ void TestExtensions::bridgeStorageReadOnlyInPrivate()
              QStringLiteral("Storage is read-only in private windows"));
     QVERIFY(!call(privateBridge, QStringLiteral("sample"), good, QStringLiteral("storage.remove"),
                   {QStringLiteral("k")}).value(QStringLiteral("ok")).toBool());
-    QCOMPARE(manager->storageGet(QStringLiteral("sample"), QStringLiteral("k")).toInt(), 42);
+    QCOMPARE(ExtensionStorage::value(QStringLiteral("sample"), QStringLiteral("k")).toInt(), 42);
 
     // Not allowed in private windows: the bridge refuses everything there.
-    manager->applyConfiguration(QStringLiteral("sample"), {}, false, {});
+    manager->applyConfiguration(QStringLiteral("sample"), {});
     QVERIFY(!call(privateBridge, QStringLiteral("sample"), good, QStringLiteral("storage.get"),
                   {QStringLiteral("k")}).value(QStringLiteral("ok")).toBool());
     QVERIFY(call(normalBridge, QStringLiteral("sample"), good, QStringLiteral("storage.get"),
@@ -777,7 +771,7 @@ void TestExtensions::bridgeStorageReadOnlyInPrivate()
 void TestExtensions::bridgeTabCommands()
 {
     QVERIFY(installSample());
-    ExtensionManager::instance()->applyConfiguration(QStringLiteral("sample"), {}, true, {});
+    ExtensionManager::instance()->applyConfiguration(QStringLiteral("sample"), {{QStringLiteral("privateAllowed"), true}});
     Tab tab(nullptr);
     ExtensionBridge bridge;
     bridge.setTab(&tab);
@@ -834,7 +828,7 @@ void TestExtensions::bridgeOffExtension()
     ExtensionBridge bridge;
     bridge.setTab(&tab);
     const QString good = token(QStringLiteral("sample"));
-    manager->applyConfiguration(QStringLiteral("sample"), {}, true, {});
+    manager->applyConfiguration(QStringLiteral("sample"), {{QStringLiteral("privateAllowed"), true}});
     manager->setEnabled(QStringLiteral("sample"), false);
     QVERIFY(!call(bridge, QStringLiteral("sample"), good, QStringLiteral("storage.keys")).value(QStringLiteral("ok")).toBool());
 }
@@ -846,14 +840,14 @@ void TestExtensions::silentUpdateRule()
     const QStringList matches{QStringLiteral("https://a.com/*"), QStringLiteral("https://b.com/*")};
     const QStringList permissions{QStringLiteral("tabs")};
     using C = ExtensionCatalog;
-    QVERIFY(C::isSilentUpdate(matches, permissions, matches, permissions));
+    QVERIFY(C::isSilentUpdate({matches, permissions}, {matches, permissions}));
     // A subset is fine.
-    QVERIFY(C::isSilentUpdate({QStringLiteral("https://a.com/*")}, {}, matches, permissions));
-    QVERIFY(C::isSilentUpdate({}, {}, matches, permissions));
+    QVERIFY(C::isSilentUpdate({{QStringLiteral("https://a.com/*")}, {}}, {matches, permissions}));
+    QVERIFY(C::isSilentUpdate({{}, {}}, {matches, permissions}));
     // A new site or a new permission asks again.
-    QVERIFY(!C::isSilentUpdate({QStringLiteral("https://c.com/*")}, permissions, matches, permissions));
-    QVERIFY(!C::isSilentUpdate(matches, {QStringLiteral("tabs"), QStringLiteral("downloads")}, matches, permissions));
-    QVERIFY(!C::isSilentUpdate({QStringLiteral("<all_urls>")}, permissions, matches, permissions));
+    QVERIFY(!C::isSilentUpdate({{QStringLiteral("https://c.com/*")}, permissions}, {matches, permissions}));
+    QVERIFY(!C::isSilentUpdate({matches, {QStringLiteral("tabs"), QStringLiteral("downloads")}}, {matches, permissions}));
+    QVERIFY(!C::isSilentUpdate({{QStringLiteral("<all_urls>")}, permissions}, {matches, permissions}));
 }
 
 namespace {
@@ -994,7 +988,7 @@ void TestExtensions::catalogUpdates()
     QVERIFY(refreshCatalog(catalog, url));
     QVERIFY(QTest::qWaitFor([&]() { return manager->data(manager->index(0), ExtensionManager::UpdateNeedsReviewRole).toBool(); }, 10000));
     QCOMPARE(manager->installedVersion(QStringLiteral("sample")), QStringLiteral("1.1.0"));
-    QVERIFY(!manager->installedPermissions(QStringLiteral("sample")).contains(QLatin1String("downloads")));
+    QVERIFY(!manager->installedAccess(QStringLiteral("sample")).permissions.contains(QLatin1String("downloads")));
 
     // A new permission only marks it for review.
     url = writeCatalog(root.path(), QStringLiteral("1.2.0"), {QStringLiteral("tabs"), QStringLiteral("downloads")});
@@ -1085,7 +1079,7 @@ void TestExtensions::toolbarMenuEntries()
     menu->setProperty("tab", QVariant::fromValue(&privateTab));
     QMetaObject::invokeMethod(menu, "rebuild");
     QCOMPARE(menu->property("entries").toList().size(), 0);
-    manager->applyConfiguration(QStringLiteral("sample"), {}, true, {});
+    manager->applyConfiguration(QStringLiteral("sample"), {{QStringLiteral("privateAllowed"), true}});
     QMetaObject::invokeMethod(menu, "rebuild");
     const QVariantList privateEntries = menu->property("entries").toList();
     QCOMPARE(privateEntries.size(), 2); // header + toggle, no "Run on"
@@ -1278,11 +1272,11 @@ void TestExtensions::contentScriptRunsInPages()
     QCOMPARE(attribute(normal, QStringLiteral("data-kondor-private")).toString(), QStringLiteral("false"));
     QTRY_COMPARE_WITH_TIMEOUT(attribute(normal, QStringLiteral("data-kondor-storage")).toString(),
                               QStringLiteral("ok"), 10000);
-    QCOMPARE(manager->storageGet(QStringLiteral("sample"), QStringLiteral("lastGreeting")).toString(),
+    QCOMPARE(ExtensionStorage::value(QStringLiteral("sample"), QStringLiteral("lastGreeting")).toString(),
              QStringLiteral("hello"));
 
     // A setting change reaches the open page (WebViewTab.qml does the same).
-    manager->applyConfiguration(QStringLiteral("sample"), {{QStringLiteral("greeting"), QStringLiteral("hola")}}, false, {});
+    manager->applyConfiguration(QStringLiteral("sample"), {{QStringLiteral("settings"), QVariantMap{{QStringLiteral("greeting"), QStringLiteral("hola")}}}});
     QMetaObject::invokeMethod(normal.view, "runJavaScript",
                               Q_ARG(QString, QStringLiteral("window.__kondorExtensions['sample'](%1);")
                                                  .arg(QString::fromUtf8(QJsonDocument(QJsonObject::fromVariantMap(
@@ -1313,7 +1307,7 @@ void TestExtensions::contentScriptRunsInPages()
     QTest::qWait(500);
     QCOMPARE(attribute(priv, QStringLiteral("data-kondor-sample")).toString(), QString());
 
-    manager->applyConfiguration(QStringLiteral("sample"), {}, true, {});
+    manager->applyConfiguration(QStringLiteral("sample"), {{QStringLiteral("privateAllowed"), true}});
     QTest::qWait(300); // the rebuild of the profiles' scripts is queued
     QMetaObject::invokeMethod(priv.view, "load", Q_ARG(QVariant, server.url(QStringLiteral("/again"))));
     QVERIFY(waitLoaded(priv));

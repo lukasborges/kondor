@@ -48,8 +48,8 @@ Dialog {
     }
 
     function accept() {
-        ExtensionManager.applyConfiguration(root.extensionId, root.values,
-                                            root.privateAllowed, root.sites)
+        ExtensionManager.applyConfiguration(root.extensionId, {settings: root.values,
+            privateAllowed: root.privateAllowed, disabledSites: root.sites})
         root.close()
     }
 

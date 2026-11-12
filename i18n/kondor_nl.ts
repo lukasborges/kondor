@@ -712,37 +712,37 @@
 <context>
     <name>ExtensionCatalog</name>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="194"/>
+        <location filename="../src/extensions/catalogentry.cpp" line="81"/>
         <source>The catalog is not valid JSON</source>
         <translation>De catalogus is geen geldige JSON</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="200"/>
+        <location filename="../src/extensions/catalogentry.cpp" line="83"/>
         <source>The catalog has an unsupported format</source>
         <translation>De catalogus heeft een niet-ondersteund formaat</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="291"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="48"/>
         <source>Cannot create a temporary file</source>
         <translation>Kan geen tijdelijk bestand aanmaken</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="302"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="68"/>
         <source>The package is larger than expected</source>
         <translation>Het pakket is groter dan verwacht</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="327"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="76"/>
         <source>Cannot read the downloaded package</source>
         <translation>Kan het gedownloade pakket niet lezen</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="334"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="81"/>
         <source>The downloaded package does not match its checksum</source>
         <translation>Het gedownloade pakket komt niet overeen met zijn controlesom</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="352"/>
+        <location filename="../src/extensions/extensioncatalogactions.cpp" line="77"/>
         <source>Could not download “%1”: %2</source>
         <translation>Kon “%1” niet downloaden: %2</translation>
     </message>
@@ -803,38 +803,39 @@
 <context>
     <name>ExtensionManager</name>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="233"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="64"/>
         <source>Cannot create %1</source>
         <translation>Kan %1 niet aanmaken</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="353"/>
-        <location filename="../src/extensions/extensionmanager.cpp" line="368"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="90"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="103"/>
         <source>Cannot install into %1</source>
         <translation>Kan niet installeren in %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="360"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="81"/>
         <source>Cannot replace %1</source>
         <translation>Kan %1 niet vervangen</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="407"/>
+        <location filename="../src/extensions/extensionupdate.cpp" line="12"/>
         <source>The package is for “%1”, not “%2”</source>
         <translation>Het pakket is voor “%1”, niet voor “%2”</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="418"/>
+        <location filename="../src/extensions/extensionupdate.cpp" line="23"/>
         <source>The package asks for more permissions than the installed version</source>
         <translation>Het pakket vraagt meer rechten aan dan de geïnstalleerde versie</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="869"/>
+        <location filename="../src/extensions/extensionstorage.cpp" line="48"/>
+        <location filename="../src/extensions/extensionstorage.cpp" line="65"/>
         <source>Storage is not available</source>
         <translation>Opslag is niet beschikbaar</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="889"/>
+        <location filename="../src/extensions/extensionstorage.cpp" line="68"/>
         <source>The extension&apos;s storage is full (limit: 1 MiB)</source>
         <translation>De opslag van de extensie is vol (limiet: 1 MiB)</translation>
     </message>
@@ -842,12 +843,12 @@
 <context>
     <name>ExtensionPackage</name>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="187"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="76"/>
         <source>Read and change all websites</source>
         <translation>Alle websites lezen en wijzigen</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/extensions/extensionpackage.cpp" line="192"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="67"/>
         <source>%1 and %n more</source>
         <extracomment>%1 is a list of sites, %n the number of further sites</extracomment>
         <translation>
@@ -856,56 +857,52 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="194"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="80"/>
         <source>Read and change pages on %1</source>
         <translation>Pagina’s op %1 lezen en wijzigen</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="198"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="20"/>
         <source>Open, close and navigate your tabs</source>
         <translation>Uw tabbladen openen, sluiten en ermee navigeren</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="200"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="21"/>
         <source>Download files</source>
         <translation>Bestanden downloaden</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="202"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="23"/>
         <source>Show notifications</source>
         <translation>Meldingen tonen</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="313"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="569"/>
+        <location filename="../src/extensions/packagelimits.cpp" line="23"/>
         <source>The package has more than %1 files</source>
         <translation>Het pakket bevat meer dan %1 bestanden</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="317"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="574"/>
+        <location filename="../src/extensions/packagelimits.cpp" line="26"/>
         <source>The package is larger than %1 MiB</source>
         <translation>Het pakket is groter dan %1 MiB</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="533"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="538"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="98"/>
         <source>The file is not a valid ZIP archive</source>
         <translation>Het bestand is geen geldig ZIP-archief</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="561"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="40"/>
         <source>Unsafe file name in the package: %1</source>
         <translation>Onveilige bestandsnaam in het pakket: %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="587"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="104"/>
         <source>Cannot create %1</source>
         <translation>Kan %1 niet aanmaken</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="597"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="602"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="87"/>
         <source>Cannot write %1</source>
         <translation>Kan %1 niet schrijven</translation>
     </message>

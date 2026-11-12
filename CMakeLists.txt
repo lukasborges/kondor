@@ -157,14 +157,9 @@ qt_add_qml_module(kondor
         ${KONDOR_PASSWORD_STORE_SOURCES}
         src/passwords/passwordbridge.h
         src/passwords/passwordbridge.cpp
-        src/extensions/extensionpackage.h
-        src/extensions/extensionpackage.cpp
-        src/extensions/extensionmanager.h
-        src/extensions/extensionmanager.cpp
-        src/extensions/extensionbridge.h
-        src/extensions/extensionbridge.cpp
-        src/extensions/extensioncatalog.h
-        src/extensions/extensioncatalog.cpp
+        ${KONDOR_EXTENSION_PACKAGE_SOURCES}
+        ${KONDOR_EXTENSION_MANAGER_SOURCES}
+        ${KONDOR_EXTENSION_BRIDGE_SOURCES}
 )
 
 qt_add_translations(kondor

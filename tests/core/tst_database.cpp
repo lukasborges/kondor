@@ -56,5 +56,5 @@ void TestDatabase::upgradesVersionOneFileKeepingHistory()
     QCOMPARE(scalar(QStringLiteral("SELECT COUNT(*) FROM bookmarks WHERE special IN ('toolbar','other')")), 2);
 }
 
-QTEST_MAIN(TestDatabase)
+QTEST_GUILESS_MAIN(TestDatabase)
 #include "tst_database.moc"

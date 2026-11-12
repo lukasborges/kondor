@@ -825,7 +825,6 @@ target_include_directories(tst_database PRIVATE
 
 target_link_libraries(tst_database PRIVATE
     Qt6::Core
-    Qt6::Gui
     Qt6::Sql
     Qt6::Test
 )

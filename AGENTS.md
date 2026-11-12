@@ -54,7 +54,9 @@ Fedora build dependencies are listed in `README.md` and in `.github/workflows/bu
 ## Architecture
 
 Code is organized by **feature folder**, with the same folder names in `src/` (C++), `qml/` (QML)
-and `tests/` (from #135; until it is merged, files are still flat in `src/` and `qml/`):
+and `tests/` (from #135). Crowded features are split into **sub-feature folders** such as
+`src/bookmarks/import/`, `src/extensions/catalog/` or `qml/browser/tabstrip/` (from #156; the
+mapping is in `docs/specs/0156-sub-feature-folders.md`):
 
 | Folder | Holds |
 | --- | --- |
@@ -162,6 +164,11 @@ the limits.
   helpers over nested `if`s and loops.
 - **Small files:** at most **200 lines** per `.cpp`, `.h`, `.js` or `.qml` file. Split a class by
   responsibility. Split a QML file into components in the same feature folder.
+- **Small folders:** at most **10 files** per folder in `src/`, `qml/` and `tests/` (not
+  `tests/data/`), and at most two folder levels below them (`src/browser/tabs/features/`). When a
+  folder would get an 11th file, split it into sub-feature folders (`import/`, `catalog/`,
+  `tabstrip/`; never `utils/` or `helpers/`). Files keep their class names when they move
+  (from #156).
 - **Names instead of comments:**
   - Write no comments. Rename, or extract a well-named function, until the code explains itself.
   - The only allowed comments are a "why" for a workaround that links its bug report
@@ -286,8 +293,9 @@ pt_BR) · 7. #36 Rename to Kondor Browser · 8. #34 Translations for the main KD
 38. #137 Split SettingsWindow.qml and BookmarksWindow.qml · 39. #138 Shrink C++: core, bookmarks,
 history, downloads · 40. #144 Shrink C++: browser · 41. #145 Shrink C++: app, adblock, passwords ·
 42. #146 Shrink C++: extensions · 43. #139 Shrink QML functions and files ·
-44. #151 Shrink the test files · 45. #108 Extensions repository · 46. #109 Dark Mode extension ·
-47. #110 Video Speed Controller extension · 48. #111 User Scripts extension ·
-49. #112 Cookie Banner Blocker extension · 50. #113 Skip Sponsors extension ·
-51. #114 YouTube Dislike Counts extension · 52. #115 JSON Viewer extension ·
-53. #116 User Styles extension · 54. #117 Clean Links extension · 55. #118 Mouse Gestures extension
+44. #151 Shrink the test files · 45. #156 Sub-feature folders ·
+46. #108 Extensions repository · 47. #109 Dark Mode extension ·
+48. #110 Video Speed Controller extension · 49. #111 User Scripts extension ·
+50. #112 Cookie Banner Blocker extension · 51. #113 Skip Sponsors extension ·
+52. #114 YouTube Dislike Counts extension · 53. #115 JSON Viewer extension ·
+54. #116 User Styles extension · 55. #117 Clean Links extension · 56. #118 Mouse Gestures extension

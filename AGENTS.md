@@ -81,6 +81,9 @@ Key pieces:
   and acts on the `WebEngineView`.
 - New per-tab features must use the same pattern: add a property + setter for state, or an
   `Q_INVOKABLE` command + `…Requested` signal, and handle it in `WebViewTab.qml`.
+- A feature with several related per-tab properties gets its own `Tab…` group object (from #144:
+  `tab.security`, `tab.permissions`, `tab.passwords`, `tab.extensionItems`), owned by the `Tab`
+  and exposed as a `CONSTANT` property. It follows the same state/command rules.
 - The UI must only talk to `tabs.currentTab` (a `Tab`), never directly to a `WebEngineView`.
 
 ### Profiles and privacy (hard rule)

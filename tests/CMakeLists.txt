@@ -138,6 +138,57 @@ set_tests_properties(tst_addresssuggestions PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
 )
 
+qt_add_executable(tst_addressbar
+    browser/tst_addressbar.cpp
+    ../src/browser/tab.cpp
+    ../src/passwords/passwordstore.cpp
+    ../src/passwords/passwordimport.cpp
+    ../src/browser/tabmodel.cpp
+    ../src/browser/profilemanager.cpp
+    ../src/adblock/adblockmanager.cpp
+    ../src/adblock/adblockinterceptor.cpp
+    ../src/adblock/filterengine.cpp
+    ../src/browser/addressresolver.cpp
+    ../src/core/settings.cpp
+    ../src/downloads/downloadmanager.cpp
+    ../src/core/notifier.cpp
+    ../src/history/historymanager.cpp
+    ../src/history/historymodel.cpp
+    ../src/core/database.cpp
+    ../src/browser/faviconstore.cpp
+    ../src/bookmarks/bookmarkmanager.cpp
+    ../src/bookmarks/bookmarkmodel.cpp
+    ../src/browser/searchsuggestions.cpp
+)
+
+target_compile_definitions(tst_addressbar PRIVATE
+    KONDOR_TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data"
+    KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+    KONDOR_QML_IMPORT_DIR="${KONDOR_TEST_QML_IMPORT_DIR}"
+)
+
+target_include_directories(tst_addressbar PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_addressbar PRIVATE
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebEngineQuick
+    KF6::Wallet
+)
+
+add_test(NAME tst_addressbar COMMAND tst_addressbar)
+set_tests_properties(tst_addressbar PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)
+
 qt_add_executable(tst_bookmarks
     bookmarks/tst_bookmarks.cpp
     ../src/bookmarks/bookmarkmanager.cpp
@@ -594,6 +645,7 @@ add_test(NAME tst_zoommanager COMMAND tst_zoommanager)
 # ProfileManager installs the ad blocker on every profile.
 target_link_libraries(tst_tabmodel PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_addresssuggestions PRIVATE Qt6::Concurrent Qt6::Network)
+target_link_libraries(tst_addressbar PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_bookmarkswindow PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_mainmenu PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_settingswindow PRIVATE Qt6::Concurrent Qt6::Network)

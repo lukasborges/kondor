@@ -16,7 +16,7 @@ home of Kondor extensions:
 ## Context
 
 - **Repository state:** the repository exists (public, GPL-3.0, branch `main`) with only `LICENSE`
-  and a stub `README.md`. Pages is already enabled with GitHub Actions as the source, at
+  and no `README.md`. Pages is already enabled with GitHub Actions as the source, at
   `https://lukasborges.github.io/kondor-extensions/`, but nothing is deployed yet.
 - **Format:** the package format, the manifest and the catalog are defined in
   [`0107-kondor-extensions.md`](0107-kondor-extensions.md), items 1 and 5. This issue implements

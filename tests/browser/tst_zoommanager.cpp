@@ -42,7 +42,6 @@ void TestZoomManager::saveAndReset()
     QCOMPARE(zoom->zoomFor(QStringLiteral("example.com")), 1.0);
     QCOMPARE(spy.count(), 1);
 
-    // Stored on disk, and removed again at 100%.
     QSettings settings(QStringLiteral("KDE"), QStringLiteral("Kondor"));
     QVERIFY(settings.contains(QStringLiteral("SiteZoom/kde.org")));
     zoom->setZoomFor(QStringLiteral("kde.org"), 1.25);
@@ -61,7 +60,6 @@ void TestZoomManager::stepLevels()
     QCOMPARE(zoom->step(1.0, -1), 0.9);
     QCOMPARE(zoom->step(5.0, 1), 5.0);
     QCOMPARE(zoom->step(0.3, -1), 0.3);
-    // Between levels (e.g. after Ctrl+wheel).
     QCOMPARE(zoom->step(1.2, 1), 1.25);
     QCOMPARE(zoom->step(1.2, -1), 1.1);
 }

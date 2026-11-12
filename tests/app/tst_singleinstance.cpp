@@ -14,6 +14,11 @@ private slots:
     void rejectsInvalidData();
     void forwardsMessageToRunningInstance();
     void forwardsWhenAnotherInstanceStartedFirst();
+
+private:
+    static SingleInstanceMessage privateUrlMessage();
+    static void verifyReceived(const SingleInstanceMessage &received,
+                               const SingleInstanceMessage &sent);
 };
 
 void TestSingleInstance::socketNameDependsOnProfileDirectory()
@@ -69,6 +74,24 @@ void TestSingleInstance::rejectsInvalidData()
     QVERIFY(decoded.activationToken.isEmpty());
 }
 
+SingleInstanceMessage TestSingleInstance::privateUrlMessage()
+{
+    SingleInstanceMessage message;
+    message.urls = {QUrl(QStringLiteral("https://kde.org"))};
+    message.privateMode = true;
+    message.activationToken = QByteArrayLiteral("token");
+    return message;
+}
+
+void TestSingleInstance::verifyReceived(const SingleInstanceMessage &received,
+                                        const SingleInstanceMessage &sent)
+{
+    QCOMPARE(received.urls.size(), 1);
+    QCOMPARE(received.urls.at(0), sent.urls.at(0));
+    QCOMPARE(received.privateMode, true);
+    QCOMPARE(received.activationToken, sent.activationToken);
+}
+
 void TestSingleInstance::forwardsMessageToRunningInstance()
 {
     const QString name = QStringLiteral("kondor-test-%1")
@@ -76,24 +99,14 @@ void TestSingleInstance::forwardsMessageToRunningInstance()
     SingleInstance server(name);
     QCOMPARE(server.start(SingleInstanceMessage()),
              SingleInstance::StartResult::Listening);
-
     QSignalSpy spy(&server, &SingleInstance::messageReceived);
 
-    SingleInstanceMessage outgoing;
-    outgoing.urls = {QUrl(QStringLiteral("https://kde.org"))};
-    outgoing.privateMode = true;
-    outgoing.activationToken = QByteArrayLiteral("token");
-
+    const SingleInstanceMessage outgoing = privateUrlMessage();
     SingleInstance client(name);
     QVERIFY(client.sendMessage(outgoing));
     QVERIFY(spy.wait(2000));
     QCOMPARE(spy.count(), 1);
-
-    const auto received = spy.at(0).at(0).value<SingleInstanceMessage>();
-    QCOMPARE(received.urls.size(), 1);
-    QCOMPARE(received.urls.at(0), outgoing.urls.at(0));
-    QCOMPARE(received.privateMode, true);
-    QCOMPARE(received.activationToken, outgoing.activationToken);
+    verifyReceived(spy.at(0).at(0).value<SingleInstanceMessage>(), outgoing);
 }
 
 void TestSingleInstance::forwardsWhenAnotherInstanceStartedFirst()
@@ -106,8 +119,6 @@ void TestSingleInstance::forwardsWhenAnotherInstanceStartedFirst()
 
     QSignalSpy spy(&running, &SingleInstance::messageReceived);
 
-    // The second launch loses listen() and must hand its message over instead
-    // of replacing the live socket.
     SingleInstance later(name);
     QCOMPARE(later.start(SingleInstanceMessage()),
              SingleInstance::StartResult::Forwarded);

@@ -3,8 +3,10 @@
 #include <QImage>
 #include <QSqlQuery>
 #include <QStandardPaths>
+#include <QTemporaryDir>
 #include <QTest>
 
+#include "common/isolatedhome.h"
 #include "core/database.h"
 #include "browser/faviconstore.h"
 #include "history/historymanager.h"
@@ -59,7 +61,6 @@ void TestFaviconStore::replacesOnlyWhenBytesChange()
     store->storeImage(QStringLiteral("kde.org"), red);
     const int revision = store->revision();
 
-    // The same pixels are the same PNG: no revision bump, no pointless reload.
     store->storeImage(QStringLiteral("kde.org"), red);
     QCOMPARE(store->revision(), revision);
 
@@ -76,8 +77,6 @@ void TestFaviconStore::clearHistorySinceKeepsOlderFavicons()
     store->storeImage(QStringLiteral("recent.example"), makeImage(Qt::red));
     store->storeImage(QStringLiteral("old.example"), makeImage(Qt::blue));
 
-    // storeImage() timestamps rows with "now"; age one of them by hand so the
-    // history's "clear since" window can be checked.
     QSqlQuery age(Database::instance()->handle());
     age.prepare(QStringLiteral("UPDATE favicons SET updated_at = ? WHERE host = ?"));
     age.addBindValue(now - 100000);
@@ -108,9 +107,6 @@ void TestFaviconStore::clearHistoryAlsoClearsFavicons()
     store->storeImage(QStringLiteral("kde.org"), makeImage(Qt::red));
     HistoryManager::instance()->addVisit(QUrl(QStringLiteral("https://kde.org/")),
                                          QStringLiteral("KDE"));
-
-    // Clearing history must not leave stored hosts behind: they reveal which
-    // sites the user visited.
     HistoryManager::instance()->clearAll();
 
     QVERIFY(store->imageForHost(QStringLiteral("kde.org")).isNull());
@@ -118,8 +114,11 @@ void TestFaviconStore::clearHistoryAlsoClearsFavicons()
 
 int main(int argc, char *argv[])
 {
-    // Keep the database out of the real user directories.
     QStandardPaths::setTestModeEnabled(true);
+    QTemporaryDir home;
+    if (!useIsolatedHome(home))
+        return 1;
+
     QCoreApplication app(argc, argv);
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
     QCoreApplication::setApplicationName(QStringLiteral("Kondor"));

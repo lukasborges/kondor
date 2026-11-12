@@ -16,17 +16,10 @@
 #include "browser/searchsuggestions.h"
 #include "browser/tab.h"
 #include "browser/tabmodel.h"
+#include "common/qmltesthelpers.h"
 #include "core/database.h"
 #include "core/settings.h"
 #include "history/historymanager.h"
-
-template<typename T>
-void registerSingleton(const char *name)
-{
-    qmlRegisterSingletonType<T>("Kondor", 1, 0, name, [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return T::instance();
-    });
-}
 
 inline void registerAddressBarTypes()
 {

@@ -4,10 +4,21 @@
 #include <QTest>
 
 #include "core/settings.h"
+#include "settingsharness.h"
 
 class TestSettings : public QObject
 {
     Q_OBJECT
+
+private:
+    void addSearchAndDownloadRows();
+    void addStartupAndInterfaceRows();
+    void addPrivacyRows();
+    void addSpellCheckAndPasswordRows();
+    static void verifySearchDefaults(Settings *settings);
+    static void verifyDownloadDefaults(Settings *settings);
+    static void verifyInterfaceDefaults(Settings *settings);
+    static void verifyPrivacyDefaults(Settings *settings);
 
 private slots:
     void initTestCase();
@@ -22,17 +33,13 @@ private slots:
 void TestSettings::initTestCase()
 {
     QStandardPaths::setTestModeEnabled(true);
-    // A fresh Settings must see an empty configuration file.
     QSettings settings(QStringLiteral("KDE"), QStringLiteral("Kondor"));
     settings.clear();
     settings.sync();
 }
 
-void TestSettings::defaultValue_data()
+void TestSettings::addSearchAndDownloadRows()
 {
-    QTest::addColumn<QString>("name");
-    QTest::addColumn<QVariant>("expected");
-
     QTest::newRow("homePage") << QStringLiteral("homePage") << QVariant(QString());
     QTest::newRow("searchEngine")
             << QStringLiteral("searchEngine") << QVariant(QStringLiteral("duckduckgo"));
@@ -43,6 +50,10 @@ void TestSettings::defaultValue_data()
             << QVariant(QStandardPaths::writableLocation(QStandardPaths::DownloadLocation));
     QTest::newRow("askWhereToSave")
             << QStringLiteral("askWhereToSave") << QVariant(false);
+}
+
+void TestSettings::addStartupAndInterfaceRows()
+{
     QTest::newRow("startupBehavior")
             << QStringLiteral("startupBehavior") << QVariant(QStringLiteral("homepage"));
     QTest::newRow("showBookmarksBar")
@@ -50,22 +61,40 @@ void TestSettings::defaultValue_data()
     QTest::newRow("showTopSites") << QStringLiteral("showTopSites") << QVariant(true);
     QTest::newRow("hiddenTopSites")
             << QStringLiteral("hiddenTopSites") << QVariant(QStringList());
+}
+
+void TestSettings::addPrivacyRows()
+{
     QTest::newRow("clearDataOnExit")
             << QStringLiteral("clearDataOnExit") << QVariant(false);
     QTest::newRow("blockThirdPartyCookies")
             << QStringLiteral("blockThirdPartyCookies") << QVariant(false);
     QTest::newRow("searchSuggestions")
             << QStringLiteral("searchSuggestions") << QVariant(false);
+}
+
+void TestSettings::addSpellCheckAndPasswordRows()
+{
     QTest::newRow("spellCheckEnabled")
             << QStringLiteral("spellCheckEnabled") << QVariant(true);
     QTest::newRow("offerToSavePasswords")
             << QStringLiteral("offerToSavePasswords") << QVariant(true);
     QTest::newRow("passwordNeverSaveSites")
             << QStringLiteral("passwordNeverSaveSites") << QVariant(QStringList());
-    // No dictionaries in the test environment: falls back to US English.
     QTest::newRow("spellCheckLanguages")
             << QStringLiteral("spellCheckLanguages")
             << QVariant(QStringList{QStringLiteral("en-US")});
+}
+
+void TestSettings::defaultValue_data()
+{
+    QTest::addColumn<QString>("name");
+    QTest::addColumn<QVariant>("expected");
+
+    addSearchAndDownloadRows();
+    addStartupAndInterfaceRows();
+    addPrivacyRows();
+    addSpellCheckAndPasswordRows();
 }
 
 void TestSettings::defaultValue()
@@ -76,19 +105,27 @@ void TestSettings::defaultValue()
     QCOMPARE(Settings::instance()->defaultValue(name), expected);
 }
 
-void TestSettings::freshSettingsUseDefaults()
+void TestSettings::verifySearchDefaults(Settings *settings)
 {
-    Settings *settings = Settings::instance();
-
     QCOMPARE(settings->homePage(), settings->defaultValue(QStringLiteral("homePage")).toString());
     QCOMPARE(settings->searchEngine(),
              settings->defaultValue(QStringLiteral("searchEngine")).toString());
     QCOMPARE(settings->customSearchUrl(),
              settings->defaultValue(QStringLiteral("customSearchUrl")).toString());
+    QCOMPARE(settings->searchSuggestions(),
+             settings->defaultValue(QStringLiteral("searchSuggestions")).toBool());
+}
+
+void TestSettings::verifyDownloadDefaults(Settings *settings)
+{
     QCOMPARE(settings->downloadDirectory(),
              settings->defaultValue(QStringLiteral("downloadDirectory")).toString());
     QCOMPARE(settings->askWhereToSave(),
              settings->defaultValue(QStringLiteral("askWhereToSave")).toBool());
+}
+
+void TestSettings::verifyInterfaceDefaults(Settings *settings)
+{
     QCOMPARE(settings->startupBehavior(),
              settings->defaultValue(QStringLiteral("startupBehavior")).toString());
     QCOMPARE(settings->showBookmarksBar(),
@@ -97,50 +134,23 @@ void TestSettings::freshSettingsUseDefaults()
              settings->defaultValue(QStringLiteral("showTopSites")).toBool());
     QCOMPARE(settings->hiddenTopSites(),
              settings->defaultValue(QStringLiteral("hiddenTopSites")).toStringList());
+}
+
+void TestSettings::verifyPrivacyDefaults(Settings *settings)
+{
     QCOMPARE(settings->clearDataOnExit(),
              settings->defaultValue(QStringLiteral("clearDataOnExit")).toBool());
     QCOMPARE(settings->blockThirdPartyCookies(),
              settings->defaultValue(QStringLiteral("blockThirdPartyCookies")).toBool());
-    QCOMPARE(settings->searchSuggestions(),
-             settings->defaultValue(QStringLiteral("searchSuggestions")).toBool());
 }
 
-namespace {
-
-struct StorageRow {
-    const char *property;
-    const char *key;
-    QVariant value;
-};
-
-const QVariant kText(QStringLiteral("changed"));
-const QVariant kList(QStringList{QStringLiteral("a.example")});
-
-const QList<StorageRow> kStorageRows = {
-    {"homePage", "General/HomePage", kText},
-    {"searchEngine", "Search/Engine", kText},
-    {"customSearchUrl", "Search/CustomUrl", kText},
-    {"downloadDirectory", "Downloads/Directory", kText},
-    {"askWhereToSave", "Downloads/AskWhereToSave", QVariant(true)},
-    {"startupBehavior", "General/Startup", kText},
-    {"showBookmarksBar", "UI/ShowBookmarksBar", QVariant(true)},
-    {"showTopSites", "NewTab/ShowTopSites", QVariant(false)},
-    {"hiddenTopSites", "NewTab/HiddenTopSites", kList},
-    {"clearDataOnExit", "Privacy/ClearOnExit", QVariant(true)},
-    {"blockThirdPartyCookies", "Privacy/BlockThirdPartyCookies", QVariant(true)},
-    {"searchSuggestions", "Search/Suggestions", QVariant(true)},
-    {"spellCheckEnabled", "SpellCheck/Enabled", QVariant(false)},
-    {"spellCheckLanguages", "SpellCheck/Languages", kList},
-    {"readerFontSize", "Reader/FontSize", QVariant(24)},
-    {"readerSerif", "Reader/Serif", QVariant(false)},
-    {"adBlockLastUpdate", "AdBlock/LastUpdate", QVariant(QDateTime::fromSecsSinceEpoch(1000000))},
-    {"adBlockEnabled", "AdBlock/Enabled", QVariant(false)},
-    {"adBlockAllowList", "AdBlock/AllowList", kList},
-    {"offerToSavePasswords", "Passwords/OfferToSave", QVariant(false)},
-    {"passwordNeverSaveSites", "Passwords/NeverSave", kList},
-    {"extensionsAutoUpdate", "Extensions/AutoUpdate", QVariant(false)},
-};
-
+void TestSettings::freshSettingsUseDefaults()
+{
+    Settings *settings = Settings::instance();
+    verifySearchDefaults(settings);
+    verifyDownloadDefaults(settings);
+    verifyInterfaceDefaults(settings);
+    verifyPrivacyDefaults(settings);
 }
 
 void TestSettings::storageKeysStayTheSame_data()

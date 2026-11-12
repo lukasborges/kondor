@@ -44,6 +44,9 @@ add_test(NAME tst_startupurl COMMAND tst_startupurl)
 
 qt_add_executable(tst_tabmodel
     browser/tst_tabmodel.cpp
+    browser/tst_recentlyclosedtabs.cpp
+    browser/tst_tabnewtabpage.cpp
+    browser/tst_tabpinning.cpp
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_TAB_SOURCES}
     ${KONDOR_PASSWORD_STORE_SOURCES}
@@ -61,6 +64,7 @@ qt_add_executable(tst_tabmodel
 
 target_include_directories(tst_tabmodel PRIVATE
     ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(tst_tabmodel PRIVATE
@@ -182,6 +186,7 @@ target_compile_definitions(tst_addresssuggestions PRIVATE
 
 target_include_directories(tst_addresssuggestions PRIVATE
     ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(tst_addresssuggestions PRIVATE
@@ -230,6 +235,7 @@ target_compile_definitions(tst_addressbar PRIVATE
 
 target_include_directories(tst_addressbar PRIVATE
     ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(tst_addressbar PRIVATE
@@ -252,6 +258,9 @@ set_tests_properties(tst_addressbar PROPERTIES
 
 qt_add_executable(tst_bookmarks
     bookmarks/tst_bookmarks.cpp
+    bookmarks/tst_defaultbookmarks.cpp
+    bookmarks/tst_bookmarktree.cpp
+    bookmarks/tst_bookmarkimport.cpp
     ${KONDOR_BOOKMARK_MANAGER_SOURCES}
     ${KONDOR_BOOKMARK_MODEL_SOURCES}
     ${KONDOR_DATABASE_SOURCES}
@@ -259,6 +268,7 @@ qt_add_executable(tst_bookmarks
 
 target_include_directories(tst_bookmarks PRIVATE
     ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(tst_bookmarks PRIVATE
@@ -276,6 +286,7 @@ set_tests_properties(tst_bookmarks PROPERTIES
 
 qt_add_executable(tst_bookmarkswindow
     bookmarks/tst_bookmarkswindow.cpp
+    bookmarks/tst_bookmarkswindowdrag.cpp
     ${KONDOR_BOOKMARK_MANAGER_SOURCES}
     ${KONDOR_BOOKMARK_MODEL_SOURCES}
     ${KONDOR_DATABASE_SOURCES}
@@ -300,6 +311,7 @@ target_compile_definitions(tst_bookmarkswindow PRIVATE
 
 target_include_directories(tst_bookmarkswindow PRIVATE
     ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(tst_bookmarkswindow PRIVATE
@@ -346,6 +358,7 @@ target_compile_definitions(tst_mainmenu PRIVATE
 
 target_include_directories(tst_mainmenu PRIVATE
     ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(tst_mainmenu PRIVATE
@@ -368,6 +381,7 @@ set_tests_properties(tst_mainmenu PROPERTIES
 
 qt_add_executable(tst_topsites
     history/tst_topsites.cpp
+    history/tst_historysuggestions.cpp
     ${KONDOR_HISTORY_MANAGER_SOURCES}
     ${KONDOR_HISTORY_MODEL_SOURCES}
     ${KONDOR_DATABASE_SOURCES}
@@ -377,6 +391,7 @@ qt_add_executable(tst_topsites
 
 target_include_directories(tst_topsites PRIVATE
     ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(tst_topsites PRIVATE
@@ -401,6 +416,7 @@ qt_add_executable(tst_faviconstore
 
 target_include_directories(tst_faviconstore PRIVATE
     ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(tst_faviconstore PRIVATE
@@ -464,6 +480,8 @@ add_test(NAME tst_settings COMMAND tst_settings)
 
 qt_add_executable(tst_settingswindow
     settings/tst_settingswindow.cpp
+    settings/tst_settingsapply.cpp
+    settings/tst_settingsnavigation.cpp
     ${KONDOR_TAB_SOURCES}
     ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_TAB_MODEL_SOURCES}
@@ -488,6 +506,7 @@ target_compile_definitions(tst_settingswindow PRIVATE
 
 target_include_directories(tst_settingswindow PRIVATE
     ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(tst_settingswindow PRIVATE
@@ -511,6 +530,11 @@ set_tests_properties(tst_settingswindow PROPERTIES
 
 qt_add_executable(tst_tabstrip
     browser/tst_tabstrip.cpp
+    browser/tst_tabstripwidths.cpp
+    browser/tst_tabstripclosing.cpp
+    browser/tst_tabdrag.cpp
+    browser/tst_tabdragscroll.cpp
+    browser/tst_tabdragrelease.cpp
     ${KONDOR_TAB_SOURCES}
     ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_TAB_MODEL_SOURCES}
@@ -533,6 +557,7 @@ target_compile_definitions(tst_tabstrip PRIVATE
 
 target_include_directories(tst_tabstrip PRIVATE
     ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(tst_tabstrip PRIVATE
@@ -599,6 +624,7 @@ set_tests_properties(tst_tabstripscroll PROPERTIES
 
 qt_add_executable(tst_sitepermissions
     site/tst_sitepermissions.cpp
+    site/tst_sitepermissionsui.cpp
     ${KONDOR_TAB_SOURCES}
     ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
@@ -620,6 +646,7 @@ target_compile_definitions(tst_sitepermissions PRIVATE
 
 target_include_directories(tst_sitepermissions PRIVATE
     ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(tst_sitepermissions PRIVATE
@@ -796,6 +823,7 @@ qt_add_executable(tst_sessionmanager
 
 target_include_directories(tst_sessionmanager PRIVATE
     ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(tst_sessionmanager PRIVATE
@@ -1008,6 +1036,7 @@ qt_add_executable(tst_extensionloader
 
 target_include_directories(tst_extensionloader PRIVATE
     ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_compile_definitions(tst_extensionloader PRIVATE
@@ -1066,6 +1095,17 @@ set(KONDOR_EXTENSION_BRIDGE_TEST_LIBRARIES
 
 qt_add_executable(tst_extensions
     extensions/tst_extensions.cpp
+    extensions/tst_extensionpackage.cpp
+    extensions/tst_extensionscripts.cpp
+    extensions/tst_extensioninstall.cpp
+    extensions/tst_extensionreplace.cpp
+    extensions/tst_extensionbridge.cpp
+    extensions/tst_extensionbridgetabs.cpp
+    extensions/tst_extensioncatalog.cpp
+    extensions/tst_extensionupdates.cpp
+    extensions/tst_extensionsui.cpp
+    extensions/tst_extensiondialogs.cpp
+    extensions/tst_extensionpages.cpp
     ${KONDOR_EXTENSION_BRIDGE_TEST_SOURCES}
 )
 
@@ -1092,6 +1132,7 @@ target_compile_definitions(tst_extensions PRIVATE
 
 target_include_directories(tst_extensions PRIVATE
     ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(tst_extensions PRIVATE

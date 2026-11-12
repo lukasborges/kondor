@@ -10,6 +10,7 @@
 
 #include <functional>
 
+#include "common/qmltesthelpers.h"
 #include "bookmarks/bookmarkmanager.h"
 #include "browser/faviconstore.h"
 #include "browser/profilemanager.h"
@@ -33,19 +34,16 @@ public:
     }
 };
 
-template<typename T>
-void registerSingleton(const char *name)
-{
-    qmlRegisterSingletonType<T>("Kondor", 1, 0, name,
-                                [](QQmlEngine *, QJSEngine *) -> QObject * { return T::instance(); });
-}
-
 inline void registerKondorTypes(QQmlEngine &engine)
 {
-    qmlRegisterType<TabModel>("Kondor", 1, 0, "TabModel");
-    registerSingleton<BookmarkManager>("BookmarkManager");
-    registerSingleton<FaviconStore>("FaviconStore");
-    registerSingleton<ProfileManager>("ProfileManager");
+    static const bool typesRegistered = [] {
+        qmlRegisterType<TabModel>("Kondor", 1, 0, "TabModel");
+        registerSingleton<BookmarkManager>("BookmarkManager");
+        registerSingleton<FaviconStore>("FaviconStore");
+        registerSingleton<ProfileManager>("ProfileManager");
+        return true;
+    }();
+    Q_UNUSED(typesRegistered)
     engine.addImageProvider(QStringLiteral("kondor-favicon"), new EmptyImageProvider);
 }
 
@@ -119,3 +117,74 @@ inline QStringList menuTitles(QObject *menu)
     }
     return titles;
 }
+
+class BookmarksWindowFixture
+{
+public:
+    BookmarksWindowFixture(QQmlEngine &engine, qint64 folderId)
+        : m_window(createBookmarksWindow(engine, &m_model, folderId))
+    {
+    }
+
+    QQuickWindow *window() const { return m_window.data(); }
+
+    bool show()
+    {
+        m_window->show();
+        return QTest::qWaitForWindowExposed(m_window.data());
+    }
+
+private:
+    TabModel m_model;
+    QScopedPointer<QQuickWindow> m_window;
+};
+
+inline QQuickItem *waitForRow(QQuickWindow *window, const char *listName, int index)
+{
+    QQuickItem *row = nullptr;
+    const bool found = QTest::qWaitFor([&] { return (row = rowAt(window, listName, index)) != nullptr; }, 5000);
+    return found ? row : nullptr;
+}
+
+inline qint64 addBookmarkTo(qint64 folderId, const QString &title, const QString &url)
+{
+    return BookmarkManager::instance()->addBookmark(QUrl(url), title, folderId);
+}
+
+inline qint64 parentIdOf(qint64 id)
+{
+    return BookmarkManager::instance()->bookmark(id).value(QStringLiteral("parentId")).toLongLong();
+}
+
+inline bool previewShows(QQuickWindow *window, const QString &title)
+{
+    const bool shown = childNamed(window, "dragProxy")->property("visible").toBool();
+    QObject *label = childNamed(window, "dragPreviewTitle");
+    return shown && label && label->property("text").toString() == title;
+}
+
+inline bool previewHidden(QQuickWindow *window)
+{
+    return !childNamed(window, "dragProxy")->property("visible").toBool();
+}
+
+struct DragPath
+{
+    QPoint from;
+    QPoint to;
+};
+
+inline bool dragShowingPreview(QQuickWindow *window, const DragPath &path, const QString &title)
+{
+    bool previewShown = false;
+    dragWithButtonDown(window, path.from, path.to, [&]() { previewShown = previewShows(window, title); });
+    return previewShown;
+}
+
+inline QPoint justInsideTopEdge(QQuickItem *row)
+{
+    const QPoint edge = row->mapToScene(QPointF(row->width() / 2, 2)).toPoint();
+    return QPoint(edge.x(), edge.y() + 1);
+}
+
+int runTestBookmarksWindowDrag(int argc, char *argv[]);

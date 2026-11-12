@@ -21,6 +21,7 @@ template<typename T>
 void registerSingleton(const char *name)
 {
     qmlRegisterSingletonType<T>("Kondor", 1, 0, name, [](QQmlEngine *, QJSEngine *) -> QObject * {
+        QQmlEngine::setObjectOwnership(T::instance(), QQmlEngine::CppOwnership);
         return T::instance();
     });
 }

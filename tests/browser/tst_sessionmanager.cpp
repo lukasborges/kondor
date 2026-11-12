@@ -1,12 +1,14 @@
 #include <QFile>
 #include <QGuiApplication>
 #include <QStandardPaths>
+#include <QTemporaryDir>
 #include <QTest>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
 #include "browser/sessionmanager.h"
 #include "browser/tab.h"
 #include "browser/tabmodel.h"
+#include "common/isolatedhome.h"
 
 namespace {
 void writeSessionFile(const QByteArray &content)
@@ -22,7 +24,7 @@ QString sessionFilePath()
     return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
         + QStringLiteral("/session.json");
 }
-} // namespace
+}
 
 class TestSessionManager : public QObject
 {
@@ -35,6 +37,10 @@ private slots:
     void readsTheVersionOneFormat();
     void ignoresInvalidAndFutureFiles();
     void savesNewTabPageAsAboutNewTab();
+
+private:
+    static TabModel *savedNormalWindow();
+    static TabModel *privateWindow();
 };
 
 void TestSessionManager::init()
@@ -63,30 +69,38 @@ void TestSessionManager::savesEveryNormalWindow()
     QCOMPARE(windows.at(1).tabs.at(1).url, QUrl(QStringLiteral("https://three.example/")));
 }
 
+TabModel *TestSessionManager::savedNormalWindow()
+{
+    auto *window = new TabModel;
+    window->addTab(false, QUrl(QStringLiteral("https://example.org/")));
+    SessionManager::instance()->save(window);
+    return window;
+}
+
+TabModel *TestSessionManager::privateWindow()
+{
+    auto *window = new TabModel;
+    window->setPrivateTabs(true);
+    window->addTab(true, QUrl(QStringLiteral("https://private.example/")));
+    return window;
+}
+
 void TestSessionManager::keepsTheSessionWhenOnlyPrivateWindowsRemain()
 {
-    auto *normalWindow = new TabModel;
-    normalWindow->addTab(false, QUrl(QStringLiteral("https://example.org/")));
-
     SessionManager *session = SessionManager::instance();
-    session->save(normalWindow);
+    TabModel *normalWindow = savedNormalWindow();
     QCOMPARE(session->savedWindows().size(), 1);
+    TabModel *closingPrivateWindow = privateWindow();
 
-    auto *privateWindow = new TabModel;
-    privateWindow->setPrivateTabs(true);
-    privateWindow->addTab(true, QUrl(QStringLiteral("https://private.example/")));
-
-    // The normal window closes, then the private one. The private window never
-    // restores, so the session saved when the normal window closed must stay.
     delete normalWindow;
-    session->save(privateWindow);
+    session->save(closingPrivateWindow);
 
     const QList<SessionWindow> windows = session->savedWindows();
     QCOMPARE(windows.size(), 1);
     QCOMPARE(windows.at(0).tabs.size(), 1);
     QCOMPARE(windows.at(0).tabs.at(0).url, QUrl(QStringLiteral("https://example.org/")));
 
-    delete privateWindow;
+    delete closingPrivateWindow;
 }
 
 void TestSessionManager::readsTheVersionOneFormat()
@@ -131,10 +145,13 @@ void TestSessionManager::savesNewTabPageAsAboutNewTab()
 
 int main(int argc, char *argv[])
 {
-    // Keep the session file out of the real user directories.
     QStandardPaths::setTestModeEnabled(true);
     QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
     QtWebEngineQuick::initialize();
+
+    QTemporaryDir home;
+    if (!useIsolatedHome(home))
+        return 1;
 
     QGuiApplication app(argc, argv);
     QCoreApplication::setOrganizationName(QStringLiteral("KDE-Test"));

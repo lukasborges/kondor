@@ -51,17 +51,26 @@ temporary directory too.
 It must not print QML errors (`ReferenceError`, `TypeError`, `Cannot assign…`, `is not a type`).
 Fedora build dependencies are listed in `README.md` and in `.github/workflows/build.yml`.
 
-## Architecture (current)
+## Architecture
 
-```
-src/main.cpp            app setup: QtWebEngineQuick::initialize, org.kde.desktop style, QML engine
-src/profilemanager.*    QML singleton `ProfileManager`: persistent profile "kondor", private profiles,
-                        resolveAddress() (URL vs. search), downloads (auto-accepted to ~/Downloads)
-src/tab.*               `Tab` (QML_UNCREATABLE): per-tab state + command signals
-src/tabmodel.*          `TabModel` (QAbstractListModel, role "tab"): add/close/current tab
-qml/Main.qml            window, tab bar, navigation toolbar, address bar, menu, shortcuts
-qml/WebViewTab.qml      one WebEngineView per tab, bridges WebEngineView <-> Tab
-```
+Code is organized by **feature folder**, with the same folder names in `src/` (C++), `qml/` (QML)
+and `tests/` (from #135; until it is merged, files are still flat in `src/` and `qml/`):
+
+| Folder | Holds |
+| --- | --- |
+| `app` | startup (`main.cpp`, arguments, single instance), windows (`WindowManager`, `BrowserWindow.qml`), main menu, About |
+| `core` | shared blocks: `Database`, `Settings`, `Notifier`, file helpers |
+| `browser` | `Tab`, `TabModel`, `ProfileManager`, zoom, address resolving and suggestions, sessions, favicons; `WebViewTab.qml`, tab strip, find bar, page menus, new tab and error pages |
+| `site` | site info, permissions bar and dialog |
+| `bookmarks`, `history`, `downloads`, `passwords`, `adblock`, `extensions`, `settings` | one feature each |
+| `common` | small reusable QML components (`InlineBar`, `SiteIcon`, `SiteMenuItem`, `ConfirmDialog`) |
+
+Key pieces:
+
+- `ProfileManager`: the persistent profile "kondor" and the private profiles.
+- `Tab` (QML_UNCREATABLE): per-tab state and command signals.
+- `TabModel` (role "tab"): add, close and current tab.
+- `WebViewTab.qml`: one WebEngineView per tab, bridging WebEngineView and `Tab`.
 
 ### The Tab bridge pattern (follow it)
 
@@ -110,8 +119,8 @@ mention the difference in the PR.
   when a value really changes (see `Tab::setTitle`). Expose classes to QML with `QML_ELEMENT`
   (and `QML_SINGLETON` for singletons); register every new source file in `CMakeLists.txt`
   (`qt_add_qml_module(... SOURCES ...)`).
-- **QML**: new components go in their own file under `qml/` and must be added to `QML_FILES` in
-  `CMakeLists.txt`. Keep `Main.qml` readable: extract big blocks (bars, popups, panels) into files.
+- **QML**: new components go in their own file under `qml/<feature>/`, with `import Kondor`, and
+  must be added to `QML_FILES` in `CMakeLists.txt`.
 - **Look & feel**: only QQC2 controls with the `org.kde.desktop` style; colors from
   `Kirigami.Theme`/`palette` (never hardcoded colors); icons via `icon.name` with **Breeze icon
   names** (`bookmark-new`, `edit-find`, `document-save`, `security-high`, …); tooltips with
@@ -131,6 +140,43 @@ mention the difference in the PR.
   `.github/workflows/release.yml` (dnf list), and — if it needs a runtime plugin — copied in the
   "Prepare AppDir" step of `release.yml`.
 - **No placeholders**: do not leave `TODO` stubs for things the issue asks for.
+
+## Code quality
+
+Clean Code, taken to the extreme: this is how the maintainer wants the code written, always.
+`scripts/check-code-quality.py` enforces the limits in CI (from #135). Existing offenders are listed
+in `scripts/code-quality-baseline.json`, which can only shrink: new and changed code always follows
+the limits.
+
+- **Tiny functions.**
+  - **Length:** every function, method, QML `function` and signal handler block has at most
+    **10 lines** in its body, and 5 is better. Tests may use 20.
+  - **One thing:** a function does one thing at one level of abstraction. Extract until a further
+    extraction would only restate the code.
+- **Few parameters:** at most **3**. Group related values in a struct or object.
+- **Shallow:** nesting depth inside a function is at most **2**. Prefer early returns and extracted
+  helpers over nested `if`s and loops.
+- **Small files:** at most **200 lines** per `.cpp`, `.h`, `.js` or `.qml` file. Split a class by
+  responsibility. Split a QML file into components in the same feature folder.
+- **Names instead of comments:**
+  - Write no comments. Rename, or extract a well-named function, until the code explains itself.
+  - The only allowed comments are a "why" for a workaround that links its bug report
+    (`bugreports.qt.io`, `bugs.kde.org`, `invent.kde.org/…/issues`, `github.com/…/issues`),
+    `//:` / `//~` notes for translators, and SPDX license lines.
+  - When touching code, delete the comments it already has.
+- **Intention-revealing names:**
+  - functions are verbs (`saveSession`, `isPrivateOrigin`);
+  - booleans read as questions (`isLoading`, `hasSelection`);
+  - no abbreviations beyond the Qt ones;
+  - one word per concept across the codebase.
+- **No side effects hidden behind a name.** A query does not change state; a command does not
+  return data it computes as a side job.
+- **No duplication:** reuse the shared building blocks and `qml/common/`; extract on the second
+  copy.
+- **Boy Scout rule:** every PR leaves the functions and files it touches within the limits, or
+  closer to them. Do not refactor unrelated code in a feature PR.
+- **Tests stay readable:** one behavior per test function, named after it
+  (`removesFolderAndChildren`).
 
 ## Agent workflow
 
@@ -185,7 +231,8 @@ are still tracked here, on the same roadmap, and their spec has the line
 
 1. Implement exactly the spec ("Out of scope" is binding) and match the prototype.
 2. Build without new warnings in your files; run the offscreen smoke test; do the spec's
-   "Manual test".
+   "Manual test". Follow "Code quality", and from #135 on run
+   `python3 scripts/check-code-quality.py --changed origin/main`.
 3. Update `README.md` when user-visible behavior changes: add or adjust one user-facing bullet in the matching "Features" group: a bold name plus at most about ten words on what the user can do (no implementation details, settings paths or edge cases), and the shortcut table.
 4. Commit messages **in English**, Conventional Commits style (`feat: add find in page`,
    `fix: …`, `chore: …`, `docs: …`), **without `Co-Authored-By` or any other attribution trailer**.
@@ -221,8 +268,10 @@ pt_BR) · 7. #36 Rename to Kondor Browser · 8. #34 Translations for the main KD
 27. #23 Spell checking · 28. #22 Reader mode · 29. #20 Ad and tracker blocking ·
 30. #21 Passwords · 31. #25 Flatpak · 32. #98 Self-hosted Flatpak repository ·
 33. #88 Browser extensions spike · 34. #106 Import passwords · 35. #107 Kondor extensions ·
-36. #108 Extensions repository · 37. #109 Dark Mode extension · 38. #110 Video Speed Controller
-extension · 39. #111 User Scripts extension · 40. #112 Cookie Banner Blocker extension ·
-41. #113 Skip Sponsors extension · 42. #114 YouTube Dislike Counts extension · 43. #115 JSON
-Viewer extension · 44. #116 User Styles extension · 45. #117 Clean Links extension ·
-46. #118 Mouse Gestures extension
+36. #135 Feature folders and Clean Code limits · 37. #136 Split BrowserWindow.qml ·
+38. #137 Split SettingsWindow.qml and BookmarksWindow.qml · 39. #138 Shrink C++ functions and files ·
+40. #139 Shrink QML functions and files · 41. #108 Extensions repository · 42. #109 Dark Mode extension ·
+43. #110 Video Speed Controller extension · 44. #111 User Scripts extension · 45. #112 Cookie Banner
+Blocker extension · 46. #113 Skip Sponsors extension · 47. #114 YouTube Dislike Counts extension ·
+48. #115 JSON Viewer extension · 49. #116 User Styles extension · 50. #117 Clean Links extension ·
+51. #118 Mouse Gestures extension

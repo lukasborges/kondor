@@ -141,6 +141,7 @@ void TestExtensionPages::disabledSiteDoesNotRunIt()
     Page normal = openNormal();
     QVERIFY(normal.view);
     QVERIFY(waitLoaded(normal));
+    verifyScriptRan(normal, QStringLiteral("hello"));
     ExtensionManager::instance()->setSiteEnabled(QStringLiteral("sample"), m_server.url(), false);
     QTest::qWait(300);
     loadUrl(normal, m_server.url(QStringLiteral("/after-toggle")));

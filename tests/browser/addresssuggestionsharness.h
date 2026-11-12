@@ -117,6 +117,15 @@ protected:
         return false;
     }
 
+    static bool hasRowLabeled(const QVariantList &rows, const QString &label)
+    {
+        for (const QVariant &row : rows) {
+            if (row.toMap().value(QStringLiteral("label")).toString() == label)
+                return true;
+        }
+        return false;
+    }
+
     static bool hasRowWithIconAndLabel(const QVariantList &rows, const char *iconName,
                                        const char *label)
     {

@@ -66,6 +66,8 @@ void TestExtensionBridgeTabs::privateBridgeRefusedWhenNotAllowed()
     privateBridge.setTab(&privateTab);
     const BridgeClient privateClient{&privateBridge, QStringLiteral("sample"), sampleToken()};
 
+    QVERIFY(m_fixture.client().isOk(QStringLiteral("storage.set"), {QStringLiteral("k"), 42}));
+    QVERIFY(privateClient.isOk(QStringLiteral("storage.get"), {QStringLiteral("k")}));
     ExtensionManager::instance()->applyConfiguration(QStringLiteral("sample"), {});
     QVERIFY(!privateClient.isOk(QStringLiteral("storage.get"), {QStringLiteral("k")}));
     QVERIFY(m_fixture.client().isOk(QStringLiteral("storage.get"), {QStringLiteral("k")}));

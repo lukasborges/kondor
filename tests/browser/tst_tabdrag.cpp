@@ -17,6 +17,7 @@ private slots:
 
 private:
     DragSession pressFifthOfFiveTabsSelected();
+    void releaseAndSettle(const DragSession &session, int dx);
     int halfWidth() const { return int(tabWidth() / 2); }
     void dragToTheLeftEdge(const DragSession &session);
     void dragToTheRightEdge(const DragSession &session);
@@ -29,6 +30,12 @@ DragSession TestTabDrag::pressFifthOfFiveTabsSelected()
     return pressOnTab(1, 100);
 }
 
+void TestTabDrag::releaseAndSettle(const DragSession &session, int dx)
+{
+    releaseDrag(session, dx);
+    waitForSlotAnimation(session);
+}
+
 void TestTabDrag::draggedTabFollowsThePointerAndSelectsItself()
 {
     const DragSession session = pressFifthOfFiveTabsSelected();
@@ -36,6 +43,7 @@ void TestTabDrag::draggedTabFollowsThePointerAndSelectsItself()
     verifyDraggedLeftIs(session, session.startLeft + halfWidth() - 5);
     QCOMPARE(order(), session.before);
     QCOMPARE(m_tabs->currentTab(), session.before[1]);
+    releaseAndSettle(session, halfWidth() - 5);
 }
 
 void TestTabDrag::draggedTabSwapsPastTheCenterOfItsNeighbour()
@@ -45,6 +53,7 @@ void TestTabDrag::draggedTabSwapsPastTheCenterOfItsNeighbour()
     QCOMPARE(tabAt(1), session.before[2]);
     QCOMPARE(tabAt(2), session.before[1]);
     verifyDraggedLeftIs(session, session.startLeft + halfWidth() + 5);
+    releaseAndSettle(session, halfWidth() + 5);
 }
 
 void TestTabDrag::draggedTabSwapsAgainPastTheNextCenter()
@@ -56,6 +65,7 @@ void TestTabDrag::draggedTabSwapsAgainPastTheNextCenter()
     dragBy(session, target + 5);
     QCOMPARE(tabAt(3), session.before[1]);
     verifyDraggedLeftIs(session, session.startLeft + target + 5);
+    releaseAndSettle(session, target + 5);
 }
 
 void TestTabDrag::releasingKeepsTheNewOrderAndSelection()

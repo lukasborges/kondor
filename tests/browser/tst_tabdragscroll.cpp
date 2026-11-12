@@ -80,6 +80,8 @@ void TestTabDragScroll::draggingToTheEdgeAutoScrolls()
     const DragSession session = pressSecondOfThirtyAndReachTheRightEdge();
     waitForAutoScrollToTheEnd(session);
     QVERIFY(qAbs(leftOfItem(session.dragged) - leftOf(29)) <= 1.0);
+    QTest::mouseRelease(m_window, Qt::LeftButton, {}, QPoint(int(view()->width()) - 10, kStripRowY));
+    waitForSlotAnimation(session);
 }
 
 void TestTabDragScroll::leavingTheEdgeZoneStopsTheScrolling()

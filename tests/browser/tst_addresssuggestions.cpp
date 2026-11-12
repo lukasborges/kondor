@@ -31,6 +31,7 @@ private slots:
 void TestAddressSuggestions::visitRowComesFirst()
 {
     const auto popup = popupTyping(QStringLiteral("kde.org"));
+    QVERIFY(popup);
     const QVariantList rows = rowsOf(popup.get());
     QVERIFY(rows.size() >= 2);
     QCOMPARE(fieldOf(rows, 0, "url"), QStringLiteral("https://kde.org"));
@@ -41,6 +42,7 @@ void TestAddressSuggestions::visitRowComesFirst()
 void TestAddressSuggestions::searchRowFollowsTheVisitRow()
 {
     const auto popup = popupTyping(QStringLiteral("kde.org"));
+    QVERIFY(popup);
     const QVariantList rows = rowsOf(popup.get());
     QVERIFY(rows.size() >= 2);
     QCOMPARE(fieldOf(rows, 1, "iconName"), QStringLiteral("edit-find"));
@@ -50,6 +52,7 @@ void TestAddressSuggestions::searchRowFollowsTheVisitRow()
 void TestAddressSuggestions::searchRowShowsTheTypedText()
 {
     const auto popup = popupTyping(QStringLiteral("kde.org"));
+    QVERIFY(popup);
     QCOMPARE(fieldOf(rowsOf(popup.get()), 1, "fieldText"), QStringLiteral("kde.org"));
 
     QVariant selected;
@@ -61,6 +64,7 @@ void TestAddressSuggestions::searchRowShowsTheTypedText()
 void TestAddressSuggestions::plainWordOffersOnlyTheSearchRow()
 {
     const auto popup = popupTyping(QStringLiteral("plasma"));
+    QVERIFY(popup);
     const QVariantList rows = rowsOf(popup.get());
     QCOMPARE(rows.size(), 1);
     QCOMPARE(fieldOf(rows, 0, "suffix"), QStringLiteral("Search with DuckDuckGo"));
@@ -69,6 +73,7 @@ void TestAddressSuggestions::plainWordOffersOnlyTheSearchRow()
 void TestAddressSuggestions::blankTextHasNoRows()
 {
     const auto popup = popupTyping(QStringLiteral("   "));
+    QVERIFY(popup);
     QVERIFY(rowsOf(popup.get()).isEmpty());
 }
 
@@ -77,6 +82,7 @@ void TestAddressSuggestions::addsBookmarkRows()
     addPlasmaHistory();
     SeededBookmarkFolder folder(addPlasmaBookmark());
     const auto popup = popupTyping(QStringLiteral("plasma"));
+    QVERIFY(popup);
     const QVariantList rows = rowsOf(popup.get());
     QVERIFY(hasRowWithIcon(rows, "bookmarks"));
     QVERIFY(hasRowWithIconAndLabel(rows, "bookmarks", "Plasma HIG"));
@@ -87,6 +93,7 @@ void TestAddressSuggestions::addsHistoryRows()
     addPlasmaHistory();
     SeededBookmarkFolder folder(addPlasmaBookmark());
     const auto popup = popupTyping(QStringLiteral("plasma"));
+    QVERIFY(popup);
     QVERIFY(hasRowWithIcon(rowsOf(popup.get()), "view-history"));
 }
 
@@ -95,6 +102,7 @@ void TestAddressSuggestions::addsNetworkSuggestionRows()
     addPlasmaHistory();
     SeededBookmarkFolder folder(addPlasmaBookmark());
     const auto popup = popupTyping(QStringLiteral("plasma"));
+    QVERIFY(popup);
     const int before = rowsOf(popup.get()).size();
 
     popup->setProperty("networkSuggestions", QVariantList{QStringLiteral("kde connect"),
@@ -109,12 +117,14 @@ void TestAddressSuggestions::addsNetworkSuggestionRows()
 
 void TestAddressSuggestions::editingTheTextDropsNetworkSuggestions()
 {
+    addPlasmaHistory();
+    SeededBookmarkFolder folder(addPlasmaBookmark());
     const auto popup = popupTyping(QStringLiteral("plasma"));
+    QVERIFY(popup);
     popup->setProperty("networkSuggestions", QVariantList{QStringLiteral("kde connect")});
+    QVERIFY(hasRowLabeled(rowsOf(popup.get()), QStringLiteral("kde connect")));
     popup->setProperty("text", QStringLiteral("plasma p"));
-    const QVariantList rows = rowsOf(popup.get());
-    for (int row = 0; row < rows.size(); ++row)
-        QVERIFY(fieldOf(rows, row, "label") != QLatin1String("kde connect"));
+    QVERIFY(!hasRowLabeled(rowsOf(popup.get()), QStringLiteral("kde connect")));
 }
 
 void TestAddressSuggestions::keepsTheRowOrder()
@@ -122,6 +132,7 @@ void TestAddressSuggestions::keepsTheRowOrder()
     addPlasmaHistory();
     SeededBookmarkFolder folder(addPlasmaBookmark());
     const auto popup = popupTyping(QStringLiteral("plasma"));
+    QVERIFY(popup);
     const QVariantList rows = rowsOf(popup.get());
     QVERIFY(rows.size() >= 3);
     QCOMPARE(fieldOf(rows, 0, "iconName"), QStringLiteral("edit-find"));
@@ -136,6 +147,7 @@ void TestAddressSuggestions::limitsRowsAndSkipsDuplicates()
     addHistory(QStringLiteral("https://example0.org/"), QStringLiteral("Example 0"), 2000000);
 
     const auto popup = popupTyping(QStringLiteral("example"));
+    QVERIFY(popup);
     const QVariantList rows = rowsOf(popup.get());
     QVERIFY(rows.size() <= 10);
     QSet<QString> urls;
@@ -149,6 +161,7 @@ void TestAddressSuggestions::limitsRowsAndSkipsDuplicates()
 void TestAddressSuggestions::activateEmitsTheRowUrl()
 {
     const auto popup = popupTyping(QStringLiteral("example.com"));
+    QVERIFY(popup);
     const QVariantList rows = rowsOf(popup.get());
     QCOMPARE(rows.size(), 2);
     QCOMPARE(fieldOf(rows, 0, "url"), QStringLiteral("https://example.com"));

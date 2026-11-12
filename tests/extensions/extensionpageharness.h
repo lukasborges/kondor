@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include <QQmlComponent>
 #include <QQmlEngine>
 #include <QQuickItem>
@@ -46,6 +48,8 @@ public:
         m_window.show();
     }
 
+    ~PageHost() { qDeleteAll(m_views); }
+
     Page open(QQuickWebEngineProfile *profile, const QUrl &url)
     {
         Page page;
@@ -53,6 +57,7 @@ public:
         if (!page.view)
             return page;
         page.view->setParentItem(m_window.contentItem());
+        m_views.push_back(page.view);
         page.tab = new Tab(profile, page.view);
         page.bridge = new ExtensionBridge(page.view);
         page.bridge->setTab(page.tab);
@@ -80,6 +85,7 @@ private:
                                   Q_ARG(QObject *, page.bridge->pageApi()));
     }
 
+    std::vector<QQuickItem *> m_views;
     QQmlEngine m_engine;
     QQuickWindow m_window;
 };

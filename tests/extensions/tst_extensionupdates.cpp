@@ -104,9 +104,11 @@ void TestExtensionUpdates::nothingUpdatesWhenAutomaticUpdatesAreOff()
 
 void TestExtensionUpdates::fileInstallsAreNeverUpdatedAutomatically()
 {
+    const QStringList withDownloads{QStringLiteral("tabs"), QStringLiteral("downloads")};
+    verifyInstalledFromCatalog(fixture(QStringLiteral("1.2.0"), withDownloads));
     QVERIFY(installSample(m_work.path(), QStringLiteral("file")));
     QCOMPARE(installedSampleVersion(), QStringLiteral("1.0.0"));
-    verifyRefreshed(writeCatalog(fixture(QStringLiteral("1.3.0"), {QStringLiteral("tabs"), QStringLiteral("downloads")})));
+    verifyRefreshed(writeCatalog(fixture(QStringLiteral("1.3.0"), withDownloads)));
     QTest::qWait(300);
     QCOMPARE(installedSampleVersion(), QStringLiteral("1.0.0"));
 }

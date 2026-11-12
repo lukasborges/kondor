@@ -164,10 +164,7 @@ qt_add_qml_module(kondor
         src/adblock/adblockinterceptor.cpp
         src/adblock/adblockmanager.h
         src/adblock/adblockmanager.cpp
-        src/passwords/passwordstore.h
-        src/passwords/passwordstore.cpp
-        src/passwords/passwordimport.h
-        src/passwords/passwordimport.cpp
+        ${KONDOR_PASSWORD_STORE_SOURCES}
         src/passwords/passwordbridge.h
         src/passwords/passwordbridge.cpp
         src/extensions/extensionpackage.h

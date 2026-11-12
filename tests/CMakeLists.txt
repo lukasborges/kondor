@@ -52,8 +52,7 @@ qt_add_executable(tst_tabmodel
     browser/tst_tabmodel.cpp
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_TAB_SOURCES}
-    ../src/passwords/passwordstore.cpp
-    ../src/passwords/passwordimport.cpp
+    ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
@@ -93,8 +92,7 @@ qt_add_executable(tst_tabpasswords
     browser/tst_tabpasswords.cpp
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_TAB_SOURCES}
-    ../src/passwords/passwordstore.cpp
-    ../src/passwords/passwordimport.cpp
+    ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
@@ -134,8 +132,7 @@ qt_add_executable(tst_tabsecurity
     browser/tst_tabsecurity.cpp
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_TAB_SOURCES}
-    ../src/passwords/passwordstore.cpp
-    ../src/passwords/passwordimport.cpp
+    ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
@@ -174,8 +171,7 @@ set_tests_properties(tst_tabsecurity PROPERTIES
 qt_add_executable(tst_addresssuggestions
     browser/tst_addresssuggestions.cpp
     ${KONDOR_TAB_SOURCES}
-    ../src/passwords/passwordstore.cpp
-    ../src/passwords/passwordimport.cpp
+    ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
@@ -223,8 +219,7 @@ set_tests_properties(tst_addresssuggestions PROPERTIES
 qt_add_executable(tst_addressbar
     browser/tst_addressbar.cpp
     ${KONDOR_TAB_SOURCES}
-    ../src/passwords/passwordstore.cpp
-    ../src/passwords/passwordimport.cpp
+    ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
@@ -301,8 +296,7 @@ qt_add_executable(tst_bookmarkswindow
     ${KONDOR_BOOKMARK_MODEL_SOURCES}
     ${KONDOR_DATABASE_SOURCES}
     ${KONDOR_TAB_SOURCES}
-    ../src/passwords/passwordstore.cpp
-    ../src/passwords/passwordimport.cpp
+    ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
@@ -350,8 +344,7 @@ qt_add_executable(tst_mainmenu
     ${KONDOR_BOOKMARK_MODEL_SOURCES}
     ${KONDOR_DATABASE_SOURCES}
     ${KONDOR_TAB_SOURCES}
-    ../src/passwords/passwordstore.cpp
-    ../src/passwords/passwordimport.cpp
+    ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
@@ -492,8 +485,7 @@ add_test(NAME tst_settings COMMAND tst_settings)
 qt_add_executable(tst_settingswindow
     settings/tst_settingswindow.cpp
     ${KONDOR_TAB_SOURCES}
-    ../src/passwords/passwordstore.cpp
-    ../src/passwords/passwordimport.cpp
+    ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
@@ -541,8 +533,7 @@ set_tests_properties(tst_settingswindow PROPERTIES
 qt_add_executable(tst_tabstrip
     browser/tst_tabstrip.cpp
     ${KONDOR_TAB_SOURCES}
-    ../src/passwords/passwordstore.cpp
-    ../src/passwords/passwordimport.cpp
+    ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
@@ -588,8 +579,7 @@ set_tests_properties(tst_tabstrip PROPERTIES
 qt_add_executable(tst_sitepermissions
     site/tst_sitepermissions.cpp
     ${KONDOR_TAB_SOURCES}
-    ../src/passwords/passwordstore.cpp
-    ../src/passwords/passwordimport.cpp
+    ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
@@ -636,8 +626,7 @@ qt_add_executable(tst_sessionmanager
     ${KONDOR_SESSION_SOURCES}
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_TAB_SOURCES}
-    ../src/passwords/passwordstore.cpp
-    ../src/passwords/passwordimport.cpp
+    ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
@@ -771,8 +760,7 @@ add_test(NAME tst_filterengine COMMAND tst_filterengine)
 
 qt_add_executable(tst_passwordstore
     passwords/tst_passwordstore.cpp
-    ../src/passwords/passwordstore.cpp
-    ../src/passwords/passwordimport.cpp
+    ${KONDOR_PASSWORD_STORE_SOURCES}
 )
 
 target_include_directories(tst_passwordstore PRIVATE
@@ -791,8 +779,7 @@ add_test(NAME tst_passwordstore COMMAND tst_passwordstore)
 
 qt_add_executable(tst_passwordimport
     passwords/tst_passwordimport.cpp
-    ../src/passwords/passwordimport.cpp
-    ../src/passwords/passwordstore.cpp
+    ${KONDOR_PASSWORD_STORE_SOURCES}
 )
 
 target_include_directories(tst_passwordimport PRIVATE
@@ -849,8 +836,7 @@ qt_add_executable(tst_extensions
     extensions/tst_extensions.cpp
     ../src/extensions/extensionbridge.cpp
     ${KONDOR_TAB_SOURCES}
-    ../src/passwords/passwordstore.cpp
-    ../src/passwords/passwordimport.cpp
+    ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
     ../src/adblock/adblockmanager.cpp
     ../src/adblock/adblockinterceptor.cpp
@@ -994,3 +980,35 @@ add_test(NAME tst_bookmarkhtmlparser COMMAND tst_bookmarkhtmlparser)
 set_tests_properties(tst_bookmarkhtmlparser PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
 )
+
+qt_add_executable(tst_passwordimportplan
+    passwords/tst_passwordimportplan.cpp
+    ../src/passwords/passwordimportplan.cpp
+)
+
+target_include_directories(tst_passwordimportplan PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_passwordimportplan PRIVATE
+    Qt6::Core
+    Qt6::Test
+)
+
+add_test(NAME tst_passwordimportplan COMMAND tst_passwordimportplan)
+
+qt_add_executable(tst_passwordimportfile
+    passwords/tst_passwordimportfile.cpp
+    ../src/passwords/passwordimportfile.cpp
+)
+
+target_include_directories(tst_passwordimportfile PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_passwordimportfile PRIVATE
+    Qt6::Core
+    Qt6::Test
+)
+
+add_test(NAME tst_passwordimportfile COMMAND tst_passwordimportfile)

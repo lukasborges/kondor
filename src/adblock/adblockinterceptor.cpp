@@ -4,6 +4,22 @@
 #include <QWebEngineUrlRequestInfo>
 #include <QWriteLocker>
 
+namespace {
+using ResourceType = QWebEngineUrlRequestInfo::ResourceType;
+
+FilterEngine::ResourceKind resourceKindOf(ResourceType type)
+{
+    static const QHash<int, FilterEngine::ResourceKind> kinds = {
+        {ResourceType::ResourceTypeSubFrame, FilterEngine::SubFrame},
+        {ResourceType::ResourceTypeStylesheet, FilterEngine::Stylesheet},
+        {ResourceType::ResourceTypeScript, FilterEngine::Script},
+        {ResourceType::ResourceTypeImage, FilterEngine::Image},
+        {ResourceType::ResourceTypeXhr, FilterEngine::XmlHttpRequest},
+    };
+    return kinds.value(static_cast<int>(type), FilterEngine::Other);
+}
+}
+
 AdBlockInterceptor::AdBlockInterceptor(QObject *parent)
     : QWebEngineUrlRequestInterceptor(parent)
 {
@@ -23,48 +39,34 @@ void AdBlockInterceptor::setAllowedHosts(const QSet<QString> &hosts)
 
 void AdBlockInterceptor::interceptRequest(QWebEngineUrlRequestInfo &info)
 {
-    using Type = QWebEngineUrlRequestInfo::ResourceType;
-    const Type type = info.resourceType();
-
-    if (type == Type::ResourceTypeMainFrame) {
+    if (info.resourceType() == ResourceType::ResourceTypeMainFrame)
         emit pageStarted(info.requestUrl().host().toLower());
-        return;
-    }
-    if (!m_enabled)
-        return;
+    else if (m_enabled)
+        blockIfListed(info);
+}
 
-    FilterEngine::ResourceKind kind = FilterEngine::Other;
-    switch (type) {
-    case Type::ResourceTypeSubFrame:
-        kind = FilterEngine::SubFrame;
-        break;
-    case Type::ResourceTypeStylesheet:
-        kind = FilterEngine::Stylesheet;
-        break;
-    case Type::ResourceTypeScript:
-        kind = FilterEngine::Script;
-        break;
-    case Type::ResourceTypeImage:
-        kind = FilterEngine::Image;
-        break;
-    case Type::ResourceTypeXhr:
-        kind = FilterEngine::XmlHttpRequest;
-        break;
-    default:
-        break;
-    }
-
+void AdBlockInterceptor::blockIfListed(QWebEngineUrlRequestInfo &info)
+{
     const QString firstParty = info.firstPartyUrl().host().toLower();
-    std::shared_ptr<const FilterEngine> engine;
-    {
-        QReadLocker locker(&m_lock);
-        if (m_allowedHosts.contains(firstParty))
-            return;
-        engine = m_engine;
-    }
-    if (!engine || !engine->shouldBlock(info.requestUrl(), firstParty, kind))
+    if (!isListed(info, firstParty))
         return;
-
     info.block(true);
     emit blocked(firstParty);
+}
+
+bool AdBlockInterceptor::isListed(const QWebEngineUrlRequestInfo &info,
+                                  const QString &firstPartyHost) const
+{
+    const auto engine = engineUnlessAllowed(firstPartyHost);
+    const FilterEngine::ResourceKind kind = resourceKindOf(info.resourceType());
+    return engine && engine->shouldBlock(info.requestUrl(), firstPartyHost, kind);
+}
+
+std::shared_ptr<const FilterEngine>
+AdBlockInterceptor::engineUnlessAllowed(const QString &firstPartyHost) const
+{
+    QReadLocker locker(&m_lock);
+    if (m_allowedHosts.contains(firstPartyHost))
+        return nullptr;
+    return m_engine;
 }

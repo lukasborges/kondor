@@ -60,7 +60,7 @@ private slots:
     void substringAndWildcard()
     {
         FilterEngine engine;
-        engine.addRule(QStringLiteral("/adserver/"));   // regex syntax: skipped
+        engine.addRule(QStringLiteral("/adserver/"));
         engine.addRule(QStringLiteral("-banner-ad."));
         engine.addRule(QStringLiteral("/track*.gif?"));
         QVERIFY(blocked(engine, "https://a.org/img/top-banner-ad.png", "x.org", FilterEngine::Image));
@@ -100,6 +100,32 @@ private slots:
         FilterEngine engine;
         engine.addList("[Adblock Plus 2.0]\n! x\n||a.com^\r\n||b.com^$script\n##.x\n");
         QCOMPARE(engine.ruleCount(), 2);
+    }
+
+    void domainOptionIncludesAndExcludesSites()
+    {
+        FilterEngine engine;
+        engine.addRule(QStringLiteral("||ads.net^$domain=news.org|~live.news.org"));
+        QVERIFY(blocked(engine, "https://ads.net/a.js", "news.org"));
+        QVERIFY(blocked(engine, "https://ads.net/a.js", "m.news.org"));
+        QVERIFY(!blocked(engine, "https://ads.net/a.js", "live.news.org"));
+        QVERIFY(!blocked(engine, "https://ads.net/a.js", "other.org"));
+    }
+
+    void countryCodeSecondLevelDomainIsFirstParty()
+    {
+        FilterEngine engine;
+        engine.addRule(QStringLiteral("||cdn.example.co.uk^$third-party"));
+        QVERIFY(!blocked(engine, "https://cdn.example.co.uk/a.js", "www.example.co.uk"));
+        QVERIFY(blocked(engine, "https://cdn.example.co.uk/a.js", "www.other.co.uk"));
+    }
+
+    void endAnchorRequiresTheEndOfTheAddress()
+    {
+        FilterEngine engine;
+        engine.addRule(QStringLiteral("/banner.gif|"));
+        QVERIFY(blocked(engine, "https://a.org/img/banner.gif", "x.org", FilterEngine::Image));
+        QVERIFY(!blocked(engine, "https://a.org/img/banner.gif?x=1", "x.org", FilterEngine::Image));
     }
 };
 

@@ -81,12 +81,36 @@ qt_add_qml_module(kondor
         qml/browser/CrashedPage.qml
         qml/history/HistoryWindow.qml
         qml/settings/SettingsWindow.qml
+        qml/settings/SettingsDraft.qml
+        qml/settings/SettingsPages.qml
+        qml/settings/SettingsSidebar.qml
+        qml/settings/SettingsPageHeader.qml
+        qml/settings/SettingsButtonBar.qml
+        qml/settings/SettingsPageStack.qml
+        qml/settings/GeneralSettingsPage.qml
+        qml/settings/SearchSettingsPage.qml
+        qml/settings/DownloadsSettingsPage.qml
+        qml/settings/PrivacySettingsPage.qml
+        qml/settings/SpellingSettingsPage.qml
         qml/passwords/PasswordsPage.qml
         qml/downloads/DownloadsPopup.qml
         qml/bookmarks/BookmarksBar.qml
         qml/bookmarks/BookmarkMenu.qml
         qml/app/MainMenu.qml
         qml/bookmarks/BookmarksWindow.qml
+        qml/bookmarks/BookmarkSelection.qml
+        qml/bookmarks/BookmarkFolderTree.qml
+        qml/bookmarks/BookmarkDragController.qml
+        qml/bookmarks/BookmarkDropTargets.qml
+        qml/bookmarks/BookmarkDragPreview.qml
+        qml/bookmarks/BookmarksToolBar.qml
+        qml/bookmarks/BookmarkFolderPane.qml
+        qml/bookmarks/BookmarkItemPane.qml
+        qml/bookmarks/BookmarkItemDelegate.qml
+        qml/bookmarks/BookmarkItemContextMenu.qml
+        qml/bookmarks/NewBookmarkFolderDialog.qml
+        qml/bookmarks/RenameBookmarkDialog.qml
+        qml/bookmarks/DeleteBookmarkDialog.qml
         qml/common/SiteIcon.qml
         qml/common/SiteMenuItem.qml
         qml/browser/AddressSuggestions.qml

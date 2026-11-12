@@ -19,7 +19,6 @@
 #include "browser/tabmodel.h"
 
 namespace {
-// The `pending` object is the only QML object with these properties.
 QObject *pendingOf(QObject *parent)
 {
     for (QObject *child : parent->children()) {
@@ -43,8 +42,13 @@ QObject *findByClassName(QObject *parent, const QString &className)
 }
 }
 
-// Drives the Configure window through its pending state and button actions,
-// as a user would: nothing is written to Settings before Apply or OK.
+template<typename T>
+void registerSingleton(const char *name)
+{
+    qmlRegisterSingletonType<T>("Kondor", 1, 0, name,
+                                [](QQmlEngine *, QJSEngine *) -> QObject * { return T::instance(); });
+}
+
 class TestSettingsWindow : public QObject
 {
     Q_OBJECT
@@ -55,7 +59,8 @@ private slots:
     void pendingChangesAreDiscarded();
     void applyWritesAndDisablesApply();
     void okAppliesAndCloses();
-    void defaultsResetOnlyTheCurrentPage();
+    void everyPageDefaultsResetOnlyItsOptions_data();
+    void everyPageDefaultsResetOnlyItsOptions();
     void clickingSidebarSwitchesPages();
     void arrowKeysMoveBetweenPages();
     void searchFiltersPages();
@@ -67,6 +72,8 @@ private:
     QQuickItem *sidebarEntry(QQuickWindow *window, int index);
     QPoint entryCenter(QQuickItem *entry) const;
     void typeText(QQuickWindow *window, const QString &text);
+    void searchFor(QQuickWindow *window, const QString &text);
+    void verifyOnlyPageIsListed(QQuickWindow *window, int page, const QString &title);
     void verifyShownPage(QQuickWindow *window, int page, const QString &title);
     QQmlEngine m_engine;
 };
@@ -74,31 +81,15 @@ private:
 void TestSettingsWindow::initTestCase()
 {
     qmlRegisterType<TabModel>("Kondor", 1, 0, "TabModel");
-    qmlRegisterSingletonType<ProfileManager>("Kondor", 1, 0, "ProfileManager",
-                                             [](QQmlEngine *, QJSEngine *) -> QObject * {
-                                                 return ProfileManager::instance();
-                                             });
-    qmlRegisterSingletonType<Settings>("Kondor", 1, 0, "Settings",
-                                       [](QQmlEngine *, QJSEngine *) -> QObject * {
-                                           return Settings::instance();
-                                       });
-    qmlRegisterSingletonType<ExtensionManager>("Kondor", 1, 0, "ExtensionManager",
-                                               [](QQmlEngine *, QJSEngine *) -> QObject * {
-                                                   return ExtensionManager::instance();
-                                               });
-    qmlRegisterSingletonType<ExtensionCatalog>("Kondor", 1, 0, "ExtensionCatalog",
-                                               [](QQmlEngine *, QJSEngine *) -> QObject * {
-                                                   return ExtensionCatalog::instance();
-                                               });
-    qmlRegisterSingletonType<PasswordStore>("Kondor", 1, 0, "PasswordStore",
-                                            [](QQmlEngine *, QJSEngine *) -> QObject * {
-                                                return PasswordStore::instance();
-                                            });
+    registerSingleton<ProfileManager>("ProfileManager");
+    registerSingleton<Settings>("Settings");
+    registerSingleton<ExtensionManager>("ExtensionManager");
+    registerSingleton<ExtensionCatalog>("ExtensionCatalog");
+    registerSingleton<PasswordStore>("PasswordStore");
 }
 
 void TestSettingsWindow::init()
 {
-    // Every test starts from the defaults.
     Settings *settings = Settings::instance();
     settings->setHomePage(QString());
     settings->setSearchEngine(QStringLiteral("duckduckgo"));
@@ -135,12 +126,8 @@ QQuickWindow *TestSettingsWindow::createWindow()
 
 int TestSettingsWindow::visiblePageCount(QQuickWindow *window)
 {
-    QQmlExpression expression(qmlContext(window), window,
-                              QStringLiteral("visiblePages.length"));
-    const int count = expression.evaluate().toInt();
-    if (expression.hasError())
-        qWarning() << expression.error();
-    return count;
+    QObject *list = window->findChild<QObject *>(QStringLiteral("pageList"));
+    return list ? list->property("count").toInt() : -1;
 }
 
 void TestSettingsWindow::pendingChangesAreDiscarded()
@@ -162,7 +149,6 @@ void TestSettingsWindow::pendingChangesAreDiscarded()
     QVERIFY(!window->isVisible());
     QCOMPARE(Settings::instance()->searchEngine(), QStringLiteral("duckduckgo"));
 
-    // Reopening always starts from the current Settings.
     QMetaObject::invokeMethod(window, "showWindow");
     QCOMPARE(pending->property("searchEngine").toString(), QStringLiteral("duckduckgo"));
     QCOMPARE(window->property("modified").toBool(), false);
@@ -205,39 +191,65 @@ void TestSettingsWindow::okAppliesAndCloses()
     delete window;
 }
 
-void TestSettingsWindow::defaultsResetOnlyTheCurrentPage()
+namespace {
+const QList<QPair<QByteArray, QVariant>> &changedOptionPerPage()
 {
+    static const QList<QPair<QByteArray, QVariant>> options{
+        { "homePage", QStringLiteral("https://kde.org") },
+        { "searchEngine", QStringLiteral("google") },
+        { "askWhereToSave", true },
+        { "blockThirdPartyCookies", true },
+        { "offerToSavePasswords", false },
+        { "extensionsAutoUpdate", false },
+        { "spellCheckEnabled", false },
+    };
+    return options;
+}
+
+void verifyOnlyPageReturnedToDefault(QObject *draft, int page)
+{
+    for (int i = 0; i < changedOptionPerPage().size(); ++i) {
+        const auto &option = changedOptionPerPage().at(i);
+        const QVariant defaultValue = Settings::instance()->defaultValue(QString::fromLatin1(option.first));
+        QCOMPARE(draft->property(option.first.constData()), i == page ? defaultValue : option.second);
+    }
+}
+}
+
+void TestSettingsWindow::everyPageDefaultsResetOnlyItsOptions_data()
+{
+    QTest::addColumn<int>("page");
+    const QStringList titles{ "general", "search", "downloads", "privacy", "passwords",
+                              "extensions", "spelling" };
+    for (int page = 0; page < titles.size(); ++page)
+        QTest::newRow(qPrintable(titles.at(page))) << page;
+}
+
+void TestSettingsWindow::everyPageDefaultsResetOnlyItsOptions()
+{
+    QFETCH(int, page);
     QQuickWindow *window = createWindow();
     QVERIFY(window);
     QMetaObject::invokeMethod(window, "showWindow");
-    QObject *pending = pendingOf(window);
-    QVERIFY(pending);
-
-    // General: change an option of this page and one of another page.
-    window->setProperty("currentPage", 0);
-    pending->setProperty("homePage", "https://kde.org");
-    pending->setProperty("blockThirdPartyCookies", true);
+    QObject *draft = pendingOf(window);
+    QVERIFY(draft);
+    for (const auto &option : changedOptionPerPage())
+        draft->setProperty(option.first.constData(), option.second);
+    window->setProperty("currentPage", page);
     QCOMPARE(window->property("defaultsEnabled").toBool(), true);
-
     QMetaObject::invokeMethod(window, "restoreDefaults");
-
-    QCOMPARE(pending->property("homePage").toString(), QString());
-    QCOMPARE(pending->property("blockThirdPartyCookies").toBool(), true);
+    verifyOnlyPageReturnedToDefault(draft, page);
     QCOMPARE(window->property("defaultsEnabled").toBool(), false);
-    // Resetting is pending only: Settings still has the old values.
-    QCOMPARE(Settings::instance()->homePage(), QString());
-
     delete window;
 }
 
 QQuickItem *TestSettingsWindow::sidebarEntry(QQuickWindow *window, int index)
 {
-    QQmlExpression expression(qmlContext(window), window,
-                              QStringLiteral("pageList.itemAtIndex(%1)").arg(index));
-    const QVariant value = expression.evaluate();
-    if (expression.hasError())
-        qWarning() << expression.error();
-    return value.value<QQuickItem *>();
+    QObject *list = window->findChild<QObject *>(QStringLiteral("pageList"));
+    QQuickItem *entry = nullptr;
+    QMetaObject::invokeMethod(list, "itemAtIndex", Q_RETURN_ARG(QQuickItem *, entry),
+                              Q_ARG(int, index));
+    return entry;
 }
 
 QPoint TestSettingsWindow::entryCenter(QQuickItem *entry) const
@@ -251,7 +263,6 @@ void TestSettingsWindow::typeText(QQuickWindow *window, const QString &text)
         QTest::keyClick(window, character.toLatin1());
 }
 
-// The heading, the page stack and the sidebar must all point at `page`.
 void TestSettingsWindow::verifyShownPage(QQuickWindow *window, int page, const QString &title)
 {
     QCOMPARE(window->property("currentPage").toInt(), page);
@@ -283,10 +294,8 @@ void TestSettingsWindow::clickingSidebarSwitchesPages()
     QMetaObject::invokeMethod(window, "showWindow");
     QVERIFY(QTest::qWaitForWindowExposed(window));
 
-    // General is shown and highlighted when the window opens.
     verifyShownPage(window, 0, titles[0]);
 
-    // Click each sidebar entry with the real mouse-event path.
     for (int page = 0; page < titles.size(); ++page) {
         QQuickItem *entry = nullptr;
         QTRY_VERIFY((entry = sidebarEntry(window, page)));
@@ -295,8 +304,6 @@ void TestSettingsWindow::clickingSidebarSwitchesPages()
         verifyShownPage(window, page, titles[page]);
     }
 
-    // Closing and reopening keeps the shown page, its heading and the
-    // highlighted entry in sync.
     QMetaObject::invokeMethod(window, "discardChanges");
     QMetaObject::invokeMethod(window, "showWindow");
     QVERIFY(QTest::qWaitForWindowExposed(window));
@@ -321,11 +328,24 @@ void TestSettingsWindow::arrowKeysMoveBetweenPages()
     QTest::keyClick(window, Qt::Key_Up);
     verifyShownPage(window, 1, QStringLiteral("Search"));
 
-    // Esc discards and closes.
     QTest::keyClick(window, Qt::Key_Escape);
     QVERIFY(!window->isVisible());
 
     delete window;
+}
+
+void TestSettingsWindow::searchFor(QQuickWindow *window, const QString &text)
+{
+    QTest::keyClick(window, Qt::Key_A, Qt::ControlModifier);
+    QTest::keyClick(window, Qt::Key_Delete);
+    typeText(window, text);
+}
+
+void TestSettingsWindow::verifyOnlyPageIsListed(QQuickWindow *window, int page, const QString &title)
+{
+    QTRY_COMPARE(visiblePageCount(window), 1);
+    QCOMPARE(window->property("currentPage").toInt(), page);
+    QCOMPARE(window->findChild<QObject *>(QStringLiteral("pageHeading"))->property("text").toString(), title);
 }
 
 void TestSettingsWindow::searchFiltersPages()
@@ -335,58 +355,29 @@ void TestSettingsWindow::searchFiltersPages()
     QMetaObject::invokeMethod(window, "showWindow");
     QVERIFY(QTest::qWaitForWindowExposed(window));
     QCOMPARE(visiblePageCount(window), 7);
-
-    QObject *search = findByClassName(window, QStringLiteral("SearchField"));
-    QVERIFY(search);
-    auto *searchItem = qobject_cast<QQuickItem *>(search);
+    auto *searchItem = qobject_cast<QQuickItem *>(findByClassName(window, QStringLiteral("SearchField")));
     QVERIFY(searchItem);
     searchItem->forceActiveFocus();
-
-    // Typing "cookies" lists only Privacy, which is shown and highlighted.
-    typeText(window, QStringLiteral("cookies"));
-    QTRY_COMPARE(visiblePageCount(window), 1);
-    QCOMPARE(window->property("currentPage").toInt(), 3);
-    QCOMPARE(window->findChild<QObject *>(QStringLiteral("pageHeading"))->property("text").toString(),
-             QStringLiteral("Privacy"));
+    searchFor(window, QStringLiteral("cookies"));
+    verifyOnlyPageIsListed(window, 3, QStringLiteral("Privacy"));
     QCOMPARE(window->findChild<QObject *>(QStringLiteral("pageStack"))->property("currentIndex").toInt(), 3);
-
     QQuickItem *privacy = nullptr;
     QTRY_VERIFY((privacy = sidebarEntry(window, 0)));
     QCOMPARE(privacy->property("text").toString(), QStringLiteral("Privacy"));
     QVERIFY(privacy->property("highlighted").toBool());
     QVERIFY(!sidebarEntry(window, 1));
-
-    // "engine" filters down to Search, shown the same way.
-    QTest::keyClick(window, Qt::Key_A, Qt::ControlModifier);
-    QTest::keyClick(window, Qt::Key_Delete);
-    typeText(window, QStringLiteral("engine"));
-    QTRY_COMPARE(visiblePageCount(window), 1);
-    QCOMPARE(window->property("currentPage").toInt(), 1);
-    QCOMPARE(window->findChild<QObject *>(QStringLiteral("pageHeading"))->property("text").toString(),
-             QStringLiteral("Search"));
-
-    // "kwallet" finds the Passwords page.
-    QTest::keyClick(window, Qt::Key_A, Qt::ControlModifier);
-    QTest::keyClick(window, Qt::Key_Delete);
-    typeText(window, QStringLiteral("kwallet"));
-    QTRY_COMPARE(visiblePageCount(window), 1);
-    QCOMPARE(window->property("currentPage").toInt(), 4);
-    QCOMPARE(window->findChild<QObject *>(QStringLiteral("pageHeading"))->property("text").toString(),
-             QStringLiteral("Passwords"));
-
-    // Clearing the filter restores every entry and keeps the page selected.
-    QTest::keyClick(window, Qt::Key_A, Qt::ControlModifier);
-    QTest::keyClick(window, Qt::Key_Delete);
+    searchFor(window, QStringLiteral("engine"));
+    verifyOnlyPageIsListed(window, 1, QStringLiteral("Search"));
+    searchFor(window, QStringLiteral("kwallet"));
+    verifyOnlyPageIsListed(window, 4, QStringLiteral("Passwords"));
+    searchFor(window, QString());
     QTRY_COMPARE(visiblePageCount(window), 7);
     verifyShownPage(window, 4, QStringLiteral("Passwords"));
-
     delete window;
 }
 
 void TestSettingsWindow::walletUnavailableState()
 {
-    // KONDOR_NO_KWALLET=1 (set by CTest): the Passwords page shows the
-    // wallet-denied state and never reaches the real wallet.
     QVERIFY(qEnvironmentVariableIntValue("KONDOR_NO_KWALLET") != 0);
     QQuickWindow *window = createWindow();
     QVERIFY(window);
@@ -402,7 +393,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
     QtWebEngineQuick::initialize();
 
-    // Never touch the real profile: settings live in the temporary home.
     QTemporaryDir home;
     if (!home.isValid())
         return 1;

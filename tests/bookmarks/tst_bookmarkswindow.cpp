@@ -1,50 +1,13 @@
 #include <QGuiApplication>
 #include <QQmlContext>
-#include <QQmlEngine>
 #include <QQmlExpression>
-#include <QJSEngine>
-#include <QQuickImageProvider>
-#include <QQuickItem>
 #include <QQuickStyle>
-#include <QQuickWindow>
 #include <QTemporaryDir>
-#include <QTest>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include <functional>
-
-#include "bookmarks/bookmarkmanager.h"
+#include "bookmarkswindowharness.h"
 #include "core/database.h"
-#include "browser/faviconstore.h"
-#include "browser/profilemanager.h"
-#include "browser/tabmodel.h"
 
-namespace {
-// The window uses `image://kondor-favicon/` for bookmark rows; the real
-// provider lives in the application, so the test accepts any request.
-class EmptyImageProvider : public QQuickImageProvider
-{
-public:
-    EmptyImageProvider()
-        : QQuickImageProvider(QQuickImageProvider::Image)
-    {
-    }
-
-    QImage requestImage(const QString &, QSize *size, const QSize &) override
-    {
-        QImage image(1, 1, QImage::Format_ARGB32);
-        image.fill(Qt::transparent);
-        if (size)
-            *size = image.size();
-        return image;
-    }
-};
-}
-
-// Drives the "Manage Bookmarks" window through the window's mouse-event path
-// (QTest events are delivered by the platform like a physical mouse), covering
-// the drag and drop gesture and the row clicks. The window is loaded from the
-// source tree with the same `Kondor` types the app registers.
 class TestBookmarksWindow : public QObject
 {
     Q_OBJECT
@@ -57,112 +20,37 @@ private slots:
     void clicksStillSelect();
     void deleteDialogHasTwoButtons();
     void acceptingDeleteDialogRemovesFolder();
+    void moveDownReordersTheSelectedItem();
+    void returnOnAFolderRowOpensThatFolder();
+    void searchFiltersTheSelectedFolder();
+    void moveToMenuSkipsParentAndOwnSubtree();
 
 private:
     QQmlEngine m_engine;
-    QQuickWindow *createWindow(TabModel *tabs, qint64 folderId);
-    QQuickItem *rowAt(QQuickWindow *window, const QString &listId, int index);
-    QPoint rowCenter(QQuickItem *row) const;
+    QQuickWindow *createWindow(TabModel *tabs, qint64 folderId)
+    {
+        return createBookmarksWindow(m_engine, tabs, folderId);
+    }
     bool previewShows(QQuickWindow *window, const QString &title) const;
     bool previewHidden(QQuickWindow *window) const;
-    void drag(QQuickWindow *window, const QPoint &from, const QPoint &to,
-              const std::function<void()> &duringDrag = {});
 };
 
 void TestBookmarksWindow::initTestCase()
 {
     QVERIFY2(Database::instance()->isValid(), "the test database must open");
-
-    // The same types the application's QML module exposes. The tests link the
-    // real C++ classes instead of the compiled module.
-    qmlRegisterType<TabModel>("Kondor", 1, 0, "TabModel");
-    qmlRegisterSingletonType<BookmarkManager>("Kondor", 1, 0, "BookmarkManager",
-                                              [](QQmlEngine *, QJSEngine *) -> QObject * {
-                                                  return BookmarkManager::instance();
-                                              });
-    qmlRegisterSingletonType<FaviconStore>("Kondor", 1, 0, "FaviconStore",
-                                           [](QQmlEngine *, QJSEngine *) -> QObject * {
-                                               return FaviconStore::instance();
-                                           });
-    m_engine.addImageProvider(QStringLiteral("kondor-favicon"), new EmptyImageProvider);
-    qmlRegisterSingletonType<ProfileManager>("Kondor", 1, 0, "ProfileManager",
-                                             [](QQmlEngine *, QJSEngine *) -> QObject * {
-                                                 return ProfileManager::instance();
-                                             });
+    registerKondorTypes(m_engine);
 }
 
-QQuickWindow *TestBookmarksWindow::createWindow(TabModel *tabs, qint64 folderId)
-{
-    // One engine for the whole test: QML singletons (and Kirigami's Units)
-    // are registered per engine and must not be torn down between windows.
-    m_engine.addImportPath(QStringLiteral(KONDOR_QML_IMPORT_DIR));
-    QQmlComponent component(&m_engine,
-                            QUrl::fromLocalFile(QStringLiteral(KONDOR_QML_DIR
-                                                               "/bookmarks/BookmarksWindow.qml")));
-    QObject *object = component.createWithInitialProperties({
-        {QStringLiteral("tabModel"), QVariant::fromValue(tabs)},
-        {QStringLiteral("selectedFolderId"), QVariant::fromValue(folderId)},
-    });
-    if (!object) {
-        qWarning() << component.errors();
-        return nullptr;
-    }
-    QQuickWindow *window = qobject_cast<QQuickWindow *>(object);
-    if (!window) {
-        delete object;
-        return nullptr;
-    }
-    window->resize(820, 540);
-    return window;
-}
-
-QQuickItem *TestBookmarksWindow::rowAt(QQuickWindow *window, const QString &listId, int index)
-{
-    QQmlExpression expression(qmlContext(window), window,
-                              QStringLiteral("%1.itemAtIndex(%2)").arg(listId).arg(index));
-    const QVariant value = expression.evaluate();
-    if (expression.hasError())
-        qWarning() << expression.error();
-    return value.value<QQuickItem *>();
-}
-
-QPoint TestBookmarksWindow::rowCenter(QQuickItem *row) const
-{
-    return row->mapToScene(QPointF(row->width() / 2, row->height() / 2)).toPoint();
-}
-
-// The window-level preview is visible and carries the dragged item's title.
 bool TestBookmarksWindow::previewShows(QQuickWindow *window, const QString &title) const
 {
-    QQmlExpression visible(qmlContext(window), window, QStringLiteral("dragProxy.visible"));
-    const bool shown = visible.evaluate().toBool();
-    QQuickItem *label = window->findChild<QQuickItem *>(QStringLiteral("dragPreviewTitle"));
+    const bool shown = childNamed(window, "dragProxy")->property("visible").toBool();
+    QObject *label = childNamed(window, "dragPreviewTitle");
     return shown && label && label->property("text").toString() == title;
 }
 
 bool TestBookmarksWindow::previewHidden(QQuickWindow *window) const
 {
-    QQmlExpression visible(qmlContext(window), window, QStringLiteral("dragProxy.visible"));
-    return !visible.evaluate().toBool();
-}
-
-void TestBookmarksWindow::drag(QQuickWindow *window, const QPoint &from, const QPoint &to,
-                               const std::function<void()> &duringDrag)
-{
-    QTest::mousePress(window, Qt::LeftButton, Qt::NoModifier, from);
-    // A real pointer produces many moves; a single jump would not pass the
-    // DragHandler threshold the same way.
-    const int steps = 12;
-    for (int i = 1; i <= steps; ++i) {
-        const QPoint step = from + (to - from) * i / steps;
-        QTest::mouseMove(window, step);
-    }
-    // Inspect the preview after the moves, with the button still pressed.
-    if (duringDrag)
-        duringDrag();
-    QTest::mouseRelease(window, Qt::LeftButton, Qt::NoModifier, to);
-    // Drag moves are delivered through queued events.
-    QTest::qWait(100);
+    return !childNamed(window, "dragProxy")->property("visible").toBool();
 }
 
 void TestBookmarksWindow::dragIntoTreeFolder()
@@ -183,22 +71,16 @@ void TestBookmarksWindow::dragIntoTreeFolder()
     QVERIFY(QTest::qWaitForWindowExposed(window.data()));
 
     QQuickItem *sourceRow = nullptr;
-    QTRY_VERIFY((sourceRow = rowAt(window.data(), QStringLiteral("itemList"), 0)));
+    QTRY_VERIFY((sourceRow = rowAt(window.data(), "itemList", 0)));
     QTRY_COMPARE(sourceRow->property("id").toLongLong(), id);
 
-    // Index of the target folder in the flat tree model.
-    const QVariantList folders = manager->folders();
-    int targetIndex = -1;
-    for (int i = 0; i < folders.size(); ++i) {
-        if (folders.at(i).toMap().value(QStringLiteral("id")).toLongLong() == target)
-            targetIndex = i;
-    }
+    const int targetIndex = folderRowOf(target);
     QVERIFY(targetIndex >= 0);
     QQuickItem *targetRow = nullptr;
-    QTRY_VERIFY((targetRow = rowAt(window.data(), QStringLiteral("folderList"), targetIndex)));
+    QTRY_VERIFY((targetRow = rowAt(window.data(), "folderList", targetIndex)));
 
     bool previewShown = false;
-    drag(window.data(), rowCenter(sourceRow), rowCenter(targetRow), [&]() {
+    dragWithButtonDown(window.data(), rowCenter(sourceRow), rowCenter(targetRow), [&]() {
         previewShown = previewShows(window.data(), QStringLiteral("Tree drag"));
     });
     QVERIFY(previewShown);
@@ -224,17 +106,16 @@ void TestBookmarksWindow::dragOntoFolderRow()
     window->show();
     QVERIFY(QTest::qWaitForWindowExposed(window.data()));
 
-    // Find the rows: the bookmark and the folder row in the right-hand list.
     QQuickItem *bookmarkRow = nullptr;
     QQuickItem *folderRow = nullptr;
-    QTRY_VERIFY((bookmarkRow = rowAt(window.data(), QStringLiteral("itemList"),
+    QTRY_VERIFY((bookmarkRow = rowAt(window.data(), "itemList",
                                      manager->modelForFolder(manager->otherFolderId())
                                          ->rowOf(id))));
     const int folderIndex = manager->modelForFolder(manager->otherFolderId())->rowOf(folder);
     QVERIFY(folderIndex >= 0);
-    QTRY_VERIFY((folderRow = rowAt(window.data(), QStringLiteral("itemList"), folderIndex)));
+    QTRY_VERIFY((folderRow = rowAt(window.data(), "itemList", folderIndex)));
 
-    drag(window.data(), rowCenter(bookmarkRow), rowCenter(folderRow));
+    dragWithButtonDown(window.data(), rowCenter(bookmarkRow), rowCenter(folderRow));
 
     QCOMPARE(manager->bookmark(id).value(QStringLiteral("parentId")).toLongLong(), folder);
 }
@@ -261,15 +142,14 @@ void TestBookmarksWindow::dragBetweenRows()
 
     QQuickItem *firstRow = nullptr;
     QQuickItem *secondRow = nullptr;
-    QTRY_VERIFY((firstRow = rowAt(window.data(), QStringLiteral("itemList"), 0)));
-    QTRY_VERIFY((secondRow = rowAt(window.data(), QStringLiteral("itemList"), 1)));
+    QTRY_VERIFY((firstRow = rowAt(window.data(), "itemList", 0)));
+    QTRY_VERIFY((secondRow = rowAt(window.data(), "itemList", 1)));
     QTRY_COMPARE(secondRow->property("id").toLongLong(), second);
 
-    // Drop in the top band of the first row: insert above it.
     const QPoint from = rowCenter(secondRow);
     const QPoint to = firstRow->mapToScene(QPointF(firstRow->width() / 2, 2)).toPoint();
     bool previewShown = false;
-    drag(window.data(), from, QPoint(to.x(), to.y() + 1), [&]() {
+    dragWithButtonDown(window.data(), from, QPoint(to.x(), to.y() + 1), [&]() {
         previewShown = previewShows(window.data(), QStringLiteral("Second"));
     });
     QVERIFY(previewShown);
@@ -299,30 +179,18 @@ void TestBookmarksWindow::clicksStillSelect()
     QVERIFY(QTest::qWaitForWindowExposed(window.data()));
 
     QQuickItem *bookmarkRow = nullptr;
-    QTRY_VERIFY((bookmarkRow = rowAt(window.data(), QStringLiteral("itemList"), 0)));
+    QTRY_VERIFY((bookmarkRow = rowAt(window.data(), "itemList", 0)));
 
-    // Right click still selects the row and opens its menu (no navigation).
     QTest::mouseClick(window.data(), Qt::RightButton, Qt::NoModifier, rowCenter(bookmarkRow));
     QCOMPARE(window->property("selectedItemId").toLongLong(), id);
-    {
-        QQmlExpression menu(qmlContext(window.data()), window.data(),
-                            QStringLiteral("itemContextMenu.visible"));
-        QCOMPARE(menu.evaluate().toBool(), true);
-        QQmlExpression close(qmlContext(window.data()), window.data(),
-                             QStringLiteral("itemContextMenu.close()"));
-        close.evaluate();
-    }
+    QObject *menu = childNamed(window.data(), "itemContextMenu");
+    QCOMPARE(menu->property("visible").toBool(), true);
+    QMetaObject::invokeMethod(menu, "close");
 
-    // Clicks on the tree still reach the delegates below the tree DropArea.
-    const QVariantList folders = manager->folders();
-    int otherIndex = -1;
-    for (int i = 0; i < folders.size(); ++i) {
-        if (folders.at(i).toMap().value(QStringLiteral("id")).toLongLong() == other)
-            otherIndex = i;
-    }
+    const int otherIndex = folderRowOf(other);
     QVERIFY(otherIndex >= 0);
     QQuickItem *otherRow = nullptr;
-    QTRY_VERIFY((otherRow = rowAt(window.data(), QStringLiteral("folderList"), otherIndex)));
+    QTRY_VERIFY((otherRow = rowAt(window.data(), "folderList", otherIndex)));
 
     QTest::mouseClick(window.data(), Qt::LeftButton, Qt::NoModifier, rowCenter(otherRow));
     QCOMPARE(window->property("selectedFolderId").toLongLong(), other);
@@ -334,11 +202,11 @@ void TestBookmarksWindow::deleteDialogHasTwoButtons()
     TabModel model;
     QScopedPointer<QQuickWindow> window(createWindow(&model, BookmarkManager::instance()->otherFolderId()));
     QVERIFY(window);
-    QQmlExpression type(qmlContext(window.data()), window.data(),
-                        QStringLiteral("deleteDialog.footer.contentChildren.length"));
-    QCOMPARE(type.evaluate().toInt(), 2);
-    QQmlExpression texts(qmlContext(window.data()), window.data(),
-                         QStringLiteral("deleteDialog.footer.contentChildren.map(b => b.text).join('|')"));
+    QObject *dialog = childNamed(window.data(), "deleteDialog");
+    QQmlExpression count(qmlContext(dialog), dialog, QStringLiteral("footer.contentChildren.length"));
+    QCOMPARE(count.evaluate().toInt(), 2);
+    QQmlExpression texts(qmlContext(dialog), dialog,
+                         QStringLiteral("footer.contentChildren.map(b => b.text).join('|')"));
     QCOMPARE(texts.evaluate().toString(), QStringLiteral("Delete|Cancel"));
 }
 
@@ -350,10 +218,87 @@ void TestBookmarksWindow::acceptingDeleteDialogRemovesFolder()
     TabModel model;
     QScopedPointer<QQuickWindow> window(createWindow(&model, folder));
     QVERIFY(window);
-    QQmlExpression open(qmlContext(window.data()), window.data(),
-                        QStringLiteral("deleteDialog.targetId = %1; deleteDialog.accept()").arg(folder));
-    open.evaluate();
+    QObject *dialog = childNamed(window.data(), "deleteDialog");
+    dialog->setProperty("targetId", folder);
+    QMetaObject::invokeMethod(dialog, "accept");
     QVERIFY(!manager->bookmark(folder).value(QStringLiteral("id")).toLongLong());
+}
+
+void TestBookmarksWindow::moveDownReordersTheSelectedItem()
+{
+    BookmarkManager *manager = BookmarkManager::instance();
+    const qint64 folder = manager->addFolder(QStringLiteral("Move down"), manager->toolbarFolderId());
+    const qint64 first = manager->addBookmark(QUrl(QStringLiteral("https://down.example/1")), QStringLiteral("One"), folder);
+    const qint64 second = manager->addBookmark(QUrl(QStringLiteral("https://down.example/2")), QStringLiteral("Two"), folder);
+    TabModel model;
+    QScopedPointer<QQuickWindow> window(createWindow(&model, folder));
+    QVERIFY(window);
+    window->show();
+    QVERIFY(QTest::qWaitForWindowExposed(window.data()));
+    QQuickItem *row = nullptr;
+    QTRY_VERIFY((row = rowAt(window.data(), "itemList", 0)));
+    QTest::mouseClick(window.data(), Qt::LeftButton, Qt::NoModifier, rowCenter(row));
+    QMetaObject::invokeMethod(childNamed(window.data(), "moveDownButton"), "click");
+    QCOMPARE(manager->folderContents(folder).first().toMap().value(QStringLiteral("id")).toLongLong(), second);
+    QCOMPARE(window->property("selectedItemId").toLongLong(), first);
+    QTRY_COMPARE(childNamed(window.data(), "itemList")->property("currentIndex").toInt(), 1);
+}
+
+void TestBookmarksWindow::returnOnAFolderRowOpensThatFolder()
+{
+    BookmarkManager *manager = BookmarkManager::instance();
+    const qint64 parent = manager->addFolder(QStringLiteral("Return parent"), manager->toolbarFolderId());
+    manager->addBookmark(QUrl(QStringLiteral("https://return.example")), QStringLiteral("Plain"), parent);
+    const qint64 child = manager->addFolder(QStringLiteral("Return child"), parent);
+    TabModel model;
+    QScopedPointer<QQuickWindow> window(createWindow(&model, parent));
+    QVERIFY(window);
+    window->show();
+    QVERIFY(QTest::qWaitForWindowExposed(window.data()));
+    auto *list = qobject_cast<QQuickItem *>(childNamed(window.data(), "itemList"));
+    QVERIFY(list);
+    list->forceActiveFocus();
+    list->setProperty("currentIndex", manager->modelForFolder(parent)->rowOf(child));
+    QTest::keyClick(window.data(), Qt::Key_Return);
+    QCOMPARE(window->property("selectedFolderId").toLongLong(), child);
+}
+
+void TestBookmarksWindow::searchFiltersTheSelectedFolder()
+{
+    BookmarkManager *manager = BookmarkManager::instance();
+    const qint64 first = manager->addFolder(QStringLiteral("Search first"), manager->toolbarFolderId());
+    const qint64 second = manager->addFolder(QStringLiteral("Search second"), manager->toolbarFolderId());
+    manager->addBookmark(QUrl(QStringLiteral("https://search.example/a")), QStringLiteral("Alpha"), first);
+    manager->addBookmark(QUrl(QStringLiteral("https://search.example/b")), QStringLiteral("Beta"), first);
+    TabModel model;
+    QScopedPointer<QQuickWindow> window(createWindow(&model, first));
+    QVERIFY(window);
+    childNamed(window.data(), "bookmarkSearchField")->setProperty("text", QStringLiteral("alpha"));
+    QTRY_COMPARE(manager->modelForFolder(first)->count(), 1);
+    window->setProperty("selectedFolderId", QVariant::fromValue(second));
+    QCOMPARE(manager->modelForFolder(first)->filter(), QString());
+    QCOMPARE(manager->modelForFolder(second)->filter(), QStringLiteral("alpha"));
+}
+
+void TestBookmarksWindow::moveToMenuSkipsParentAndOwnSubtree()
+{
+    BookmarkManager *manager = BookmarkManager::instance();
+    const qint64 parent = manager->addFolder(QStringLiteral("MoveP"), manager->toolbarFolderId());
+    const qint64 moved = manager->addFolder(QStringLiteral("MoveC"), parent);
+    manager->addFolder(QStringLiteral("MoveG"), moved);
+    manager->addFolder(QStringLiteral("MoveS"), parent);
+    TabModel model;
+    QScopedPointer<QQuickWindow> window(createWindow(&model, parent));
+    QVERIFY(window);
+    window->show();
+    QVERIFY(QTest::qWaitForWindowExposed(window.data()));
+    QQuickItem *row = nullptr;
+    QTRY_VERIFY((row = rowAt(window.data(), "itemList", manager->modelForFolder(parent)->rowOf(moved))));
+    QTest::mouseClick(window.data(), Qt::RightButton, Qt::NoModifier, rowCenter(row));
+    const QStringList titles = menuTitles(childNamed(window.data(), "moveToMenu"));
+    QVERIFY(titles.contains(QStringLiteral("MoveS")));
+    for (const QString &skipped : { QStringLiteral("MoveP"), QStringLiteral("MoveC"), QStringLiteral("MoveG") })
+        QVERIFY2(!titles.contains(skipped), qPrintable(skipped));
 }
 
 int main(int argc, char *argv[])
@@ -361,7 +306,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
     QtWebEngineQuick::initialize();
 
-    // Never touch the real profile: the database and settings live here.
     QTemporaryDir home;
     if (!home.isValid())
         return 1;

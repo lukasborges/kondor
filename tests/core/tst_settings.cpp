@@ -1,3 +1,4 @@
+#include <QDateTime>
 #include <QSettings>
 #include <QStandardPaths>
 #include <QTest>
@@ -13,6 +14,9 @@ private slots:
     void defaultValue_data();
     void defaultValue();
     void freshSettingsUseDefaults();
+    void storageKeysStayTheSame_data();
+    void storageKeysStayTheSame();
+    void readerFontSizeIsClamped();
 };
 
 void TestSettings::initTestCase()
@@ -99,6 +103,73 @@ void TestSettings::freshSettingsUseDefaults()
              settings->defaultValue(QStringLiteral("blockThirdPartyCookies")).toBool());
     QCOMPARE(settings->searchSuggestions(),
              settings->defaultValue(QStringLiteral("searchSuggestions")).toBool());
+}
+
+namespace {
+
+struct StorageRow {
+    const char *property;
+    const char *key;
+    QVariant value;
+};
+
+const QVariant kText(QStringLiteral("changed"));
+const QVariant kList(QStringList{QStringLiteral("a.example")});
+
+const QList<StorageRow> kStorageRows = {
+    {"homePage", "General/HomePage", kText},
+    {"searchEngine", "Search/Engine", kText},
+    {"customSearchUrl", "Search/CustomUrl", kText},
+    {"downloadDirectory", "Downloads/Directory", kText},
+    {"askWhereToSave", "Downloads/AskWhereToSave", QVariant(true)},
+    {"startupBehavior", "General/Startup", kText},
+    {"showBookmarksBar", "UI/ShowBookmarksBar", QVariant(true)},
+    {"showTopSites", "NewTab/ShowTopSites", QVariant(false)},
+    {"hiddenTopSites", "NewTab/HiddenTopSites", kList},
+    {"clearDataOnExit", "Privacy/ClearOnExit", QVariant(true)},
+    {"blockThirdPartyCookies", "Privacy/BlockThirdPartyCookies", QVariant(true)},
+    {"searchSuggestions", "Search/Suggestions", QVariant(true)},
+    {"spellCheckEnabled", "SpellCheck/Enabled", QVariant(false)},
+    {"spellCheckLanguages", "SpellCheck/Languages", kList},
+    {"readerFontSize", "Reader/FontSize", QVariant(24)},
+    {"readerSerif", "Reader/Serif", QVariant(false)},
+    {"adBlockLastUpdate", "AdBlock/LastUpdate", QVariant(QDateTime::fromSecsSinceEpoch(1000000))},
+    {"adBlockEnabled", "AdBlock/Enabled", QVariant(false)},
+    {"adBlockAllowList", "AdBlock/AllowList", kList},
+    {"offerToSavePasswords", "Passwords/OfferToSave", QVariant(false)},
+    {"passwordNeverSaveSites", "Passwords/NeverSave", kList},
+    {"extensionsAutoUpdate", "Extensions/AutoUpdate", QVariant(false)},
+};
+
+}
+
+void TestSettings::storageKeysStayTheSame_data()
+{
+    QTest::addColumn<QString>("property");
+    QTest::addColumn<QString>("key");
+    QTest::addColumn<QVariant>("value");
+    for (const StorageRow &row : kStorageRows)
+        QTest::newRow(row.property) << QString::fromLatin1(row.property)
+                                    << QString::fromLatin1(row.key) << row.value;
+}
+
+void TestSettings::storageKeysStayTheSame()
+{
+    QFETCH(QString, property);
+    QFETCH(QString, key);
+    QFETCH(QVariant, value);
+
+    QVERIFY(Settings::instance()->setProperty(qPrintable(property), value));
+    QSettings raw(QStringLiteral("KDE"), QStringLiteral("Kondor"));
+    QCOMPARE(raw.value(key), value);
+}
+
+void TestSettings::readerFontSizeIsClamped()
+{
+    Settings::instance()->setReaderFontSize(100);
+    QCOMPARE(Settings::instance()->readerFontSize(), 32);
+    Settings::instance()->setReaderFontSize(1);
+    QCOMPARE(Settings::instance()->readerFontSize(), 12);
 }
 
 QTEST_MAIN(TestSettings)

@@ -1,27 +1,15 @@
 #include "history/historymanager.h"
 
-#include "core/database.h"
 #include "browser/faviconstore.h"
+#include "core/sql.h"
 #include "history/historymodel.h"
-#include "core/settings.h"
+#include "history/historysearch.h"
+#include "history/topsitesranking.h"
 
-#include <QDate>
 #include <QDateTime>
-#include <QTime>
-#include <QHash>
-#include <QList>
-#include <QSqlQuery>
-#include <QVariant>
-#include <QVariantMap>
-
-#include <algorithm>
 
 namespace {
-// A visit is "recent" within this window: consecutive visits to the same URL
-// dedupe into one row, and updateTitle only touches visits this recent.
 constexpr qint64 kRecentVisitWindowMs = 30000;
-// The New Tab page only considers recent browsing.
-constexpr qint64 kTopSitesWindowMs = 90LL * 24 * 60 * 60 * 1000;
 }
 
 HistoryManager *HistoryManager::instance()
@@ -50,304 +38,107 @@ HistoryModel *HistoryManager::model() const
 
 bool HistoryManager::isTracked(const QUrl &url)
 {
-    if (url.isEmpty())
-        return false;
     const QString scheme = url.scheme();
-    return scheme == QLatin1String("http")
-        || scheme == QLatin1String("https")
-        || scheme == QLatin1String("file");
+    return !url.isEmpty()
+        && (scheme == QLatin1String("http")
+            || scheme == QLatin1String("https")
+            || scheme == QLatin1String("file"));
+}
+
+std::optional<qint64> HistoryManager::recentVisitIdOf(const QString &url, qint64 now)
+{
+    auto last = Sql::run(QStringLiteral(
+        "SELECT id, url, visited_at FROM history ORDER BY visited_at DESC, id DESC LIMIT 1"));
+    if (!last || !last->next())
+        return std::nullopt;
+    const bool isSameUrl = last->value(1).toString() == url;
+    const bool isRecent = now - last->value(2).toLongLong() < kRecentVisitWindowMs;
+    if (!isSameUrl || !isRecent)
+        return std::nullopt;
+    return last->value(0).toLongLong();
+}
+
+void HistoryManager::updateTitleOf(qint64 id, const QString &title)
+{
+    Sql::run(QStringLiteral("UPDATE history SET title = ? WHERE id = ?"), {title, id});
+}
+
+bool HistoryManager::mergeIntoRecentVisit(const QString &url, const QString &title, qint64 now)
+{
+    const auto recentId = recentVisitIdOf(url, now);
+    if (recentId)
+        updateTitleOf(*recentId, title);
+    return recentId.has_value();
+}
+
+bool HistoryManager::insertVisit(const QString &url, const QString &title, qint64 now)
+{
+    return Sql::run(QStringLiteral("INSERT INTO history (url, title, visited_at) VALUES (?, ?, ?)"),
+                    {url, title, now}).has_value();
 }
 
 void HistoryManager::addVisit(const QUrl &url, const QString &title)
 {
-    Database *db = Database::instance();
-    if (!db->isValid() || !isTracked(url))
+    if (!isTracked(url))
         return;
-
-    const QString urlStr = url.toString();
+    const QString address = url.toString();
     const qint64 now = QDateTime::currentMSecsSinceEpoch();
-
-    QSqlQuery last(db->handle());
-    last.prepare(QStringLiteral(
-        "SELECT id, url, visited_at FROM history ORDER BY visited_at DESC, id DESC LIMIT 1"));
-    if (last.exec() && last.next()) {
-        const qint64 lastTime = last.value(2).toLongLong();
-        if (last.value(1).toString() == urlStr && (now - lastTime) < kRecentVisitWindowMs) {
-            QSqlQuery update(db->handle());
-            update.prepare(QStringLiteral("UPDATE history SET title = ? WHERE id = ?"));
-            update.addBindValue(title);
-            update.addBindValue(last.value(0));
-            update.exec();
-            m_model->scheduleRefresh();
-            return;
-        }
-    }
-
-    QSqlQuery insert(db->handle());
-    insert.prepare(QStringLiteral(
-        "INSERT INTO history (url, title, visited_at) VALUES (?, ?, ?)"));
-    insert.addBindValue(urlStr);
-    insert.addBindValue(title);
-    insert.addBindValue(now);
-    if (insert.exec())
+    if (mergeIntoRecentVisit(address, title, now) || insertVisit(address, title, now))
         m_model->scheduleRefresh();
 }
 
 void HistoryManager::updateTitle(const QUrl &url, const QString &title)
 {
-    Database *db = Database::instance();
-    if (!db->isValid() || !isTracked(url))
+    if (!isTracked(url))
         return;
-
-    // Only update the current navigation's visit. `titleChanged` can fire before
-    // `loadFinished`, so restricting to recent visits keeps an older row for the
-    // same URL (e.g. yesterday's) untouched.
-    QSqlQuery find(db->handle());
-    find.prepare(QStringLiteral(
+    const QList<qint64> ids = Sql::ids(QStringLiteral(
         "SELECT id FROM history WHERE url = ? AND visited_at >= ?"
-        " ORDER BY visited_at DESC, id DESC LIMIT 1"));
-    find.addBindValue(url.toString());
-    find.addBindValue(QDateTime::currentMSecsSinceEpoch() - kRecentVisitWindowMs);
-    if (find.exec() && find.next()) {
-        QSqlQuery update(db->handle());
-        update.prepare(QStringLiteral("UPDATE history SET title = ? WHERE id = ?"));
-        update.addBindValue(title);
-        update.addBindValue(find.value(0));
-        if (update.exec())
-            m_model->scheduleRefresh();
-    }
+        " ORDER BY visited_at DESC, id DESC LIMIT 1"),
+        {url.toString(), QDateTime::currentMSecsSinceEpoch() - kRecentVisitWindowMs});
+    if (ids.isEmpty())
+        return;
+    updateTitleOf(ids.first(), title);
+    m_model->scheduleRefresh();
 }
 
 void HistoryManager::removeEntry(qint64 id)
 {
-    Database *db = Database::instance();
-    if (!db->isValid())
-        return;
-    QSqlQuery query(db->handle());
-    query.prepare(QStringLiteral("DELETE FROM history WHERE id = ?"));
-    query.addBindValue(id);
-    if (query.exec())
+    if (Sql::run(QStringLiteral("DELETE FROM history WHERE id = ?"), {id}))
         m_model->refresh();
 }
 
 void HistoryManager::clearAll()
 {
-    Database *db = Database::instance();
-    if (!db->isValid())
+    if (!Sql::run(QStringLiteral("DELETE FROM history")))
         return;
-    QSqlQuery query(db->handle());
-    if (query.exec(QStringLiteral("DELETE FROM history"))) {
-        m_model->refresh();
-        // Stored hosts reveal visited sites, so they go with the history.
-        FaviconStore::instance()->clearAll();
-    }
+    m_model->refresh();
+    FaviconStore::instance()->clearAll();
 }
 
 void HistoryManager::clearSince(qint64 msecsSinceEpoch)
 {
-    Database *db = Database::instance();
-    if (!db->isValid())
+    if (!Sql::run(QStringLiteral("DELETE FROM history WHERE visited_at >= ?"), {msecsSinceEpoch}))
         return;
-    QSqlQuery query(db->handle());
-    query.prepare(QStringLiteral("DELETE FROM history WHERE visited_at >= ?"));
-    query.addBindValue(msecsSinceEpoch);
-    if (query.exec()) {
-        m_model->refresh();
-        FaviconStore::instance()->clearSince(msecsSinceEpoch);
-    }
-}
-
-QVariantList HistoryManager::suggest(const QString &text, int limit) const
-{
-    QVariantList suggestions;
-    Database *db = Database::instance();
-    const QString needle = text.trimmed();
-    if (!db->isValid() || needle.isEmpty() || limit <= 0)
-        return suggestions;
-
-    // The needle is data, not a pattern: escape LIKE's wildcards.
-    QString pattern = needle;
-    pattern.replace(QLatin1String("\\"), QLatin1String("\\\\"));
-    pattern.replace(QLatin1String("%"), QLatin1String("\\%"));
-    pattern.replace(QLatin1String("_"), QLatin1String("\\_"));
-    pattern = QLatin1Char('%') + pattern + QLatin1Char('%');
-
-    QSqlQuery query(db->handle());
-    query.prepare(QStringLiteral(
-        "SELECT url, title, COUNT(*) AS visits, MAX(visited_at) AS last"
-        " FROM history WHERE url LIKE ? ESCAPE '\\' OR title LIKE ? ESCAPE '\\'"
-        " GROUP BY url ORDER BY visits DESC, last DESC LIMIT ?"));
-    query.addBindValue(pattern);
-    query.addBindValue(pattern);
-    query.addBindValue(limit);
-    if (!query.exec())
-        return suggestions;
-
-    while (query.next()) {
-        QVariantMap entry;
-        entry.insert(QStringLiteral("type"), QStringLiteral("history"));
-        entry.insert(QStringLiteral("url"), query.value(0).toString());
-        entry.insert(QStringLiteral("title"), query.value(1).toString());
-        suggestions.append(entry);
-    }
-    return suggestions;
-}
-
-QVariantList HistoryManager::recentToday(int limit) const
-{
-    QVariantList entries;
-    Database *db = Database::instance();
-    if (limit <= 0 || !db->isValid())
-        return entries;
-
-    const qint64 midnight = QDateTime(QDate::currentDate(), QTime(0, 0)).toMSecsSinceEpoch();
-    QSqlQuery query(db->handle());
-    query.prepare(QStringLiteral(
-        "SELECT url, title, MAX(visited_at) AS last FROM history WHERE visited_at >= ?"
-        " GROUP BY url ORDER BY last DESC LIMIT ?"));
-    query.addBindValue(midnight);
-    query.addBindValue(limit);
-    if (!query.exec())
-        return entries;
-
-    while (query.next()) {
-        QVariantMap entry;
-        entry.insert(QStringLiteral("url"), query.value(0).toString());
-        entry.insert(QStringLiteral("title"), query.value(1).toString());
-        entries.append(entry);
-    }
-    return entries;
-}
-
-QString HistoryManager::hostCompletion(const QString &text) const
-{
-    const QString prefix = text.trimmed();
-    if (prefix.isEmpty() || prefix.contains(QLatin1Char(' ')))
-        return QString();
-
-    const QVariantList entries = suggest(prefix, 50);
-    for (const QVariant &value : entries) {
-        QString host = QUrl(value.toMap().value(QStringLiteral("url")).toString()).host();
-        if (host.startsWith(QLatin1String("www.")))
-            host.remove(0, 4);
-        if (host.length() > prefix.length()
-                && host.startsWith(prefix, Qt::CaseInsensitive)) {
-            return host;
-        }
-    }
-    return QString();
+    m_model->refresh();
+    FaviconStore::instance()->clearSince(msecsSinceEpoch);
 }
 
 QVariantList HistoryManager::topSites(int limit) const
 {
-    QVariantList sites;
-    Database *db = Database::instance();
-    if (!db->isValid() || limit <= 0)
-        return sites;
+    return TopSitesRanking::topSites(limit);
+}
 
-    struct UrlStats {
-        int visits = 0;
-        qint64 lastVisit = 0;
-        QString title;
-    };
-    struct HostStats {
-        int score = 0;
-        qint64 lastVisit = 0;
-        QHash<QString, UrlStats> urls;
-    };
+QVariantList HistoryManager::suggest(const QString &text, int limit) const
+{
+    return HistorySearch::suggest(text, limit);
+}
 
-    QSqlQuery query(db->handle());
-    query.prepare(QStringLiteral(
-        "SELECT url, title, visited_at FROM history WHERE visited_at >= ?"
-        " ORDER BY visited_at DESC, id DESC"));
-    query.addBindValue(QDateTime::currentMSecsSinceEpoch() - kTopSitesWindowMs);
-    if (!query.exec())
-        return sites;
+QVariantList HistoryManager::recentToday(int limit) const
+{
+    return HistorySearch::recentToday(limit);
+}
 
-    // Rows come newest first, so the first non-empty title seen for a URL is
-    // its latest one.
-    QHash<QString, HostStats> hosts;
-    while (query.next()) {
-        const QUrl url(query.value(0).toString());
-        const QString scheme = url.scheme();
-        if (scheme != QLatin1String("http") && scheme != QLatin1String("https"))
-            continue;
-        QString host = url.host();
-        if (host.startsWith(QLatin1String("www.")))
-            host.remove(0, 4);
-        if (host.isEmpty())
-            continue;
-
-        const qint64 visitedAt = query.value(2).toLongLong();
-        const QString urlString = url.toString();
-        const QString title = query.value(1).toString();
-
-        HostStats &hostStats = hosts[host];
-        ++hostStats.score;
-        hostStats.lastVisit = qMax(hostStats.lastVisit, visitedAt);
-
-        UrlStats &urlStats = hostStats.urls[urlString];
-        ++urlStats.visits;
-        urlStats.lastVisit = qMax(urlStats.lastVisit, visitedAt);
-        if (urlStats.title.isEmpty() && !title.isEmpty())
-            urlStats.title = title;
-    }
-
-    struct Entry {
-        QString host;
-        QString url;
-        QString title;
-        int score = 0;
-        qint64 lastVisit = 0;
-    };
-
-    const QStringList hidden = Settings::instance()->hiddenTopSites();
-    QList<Entry> entries;
-    entries.reserve(hosts.size());
-    for (auto hostIt = hosts.constBegin(); hostIt != hosts.constEnd(); ++hostIt) {
-        if (hidden.contains(hostIt.key()))
-            continue;
-
-        // The tile points at the host's most visited URL; on a tie, the most
-        // recently visited one.
-        const UrlStats *best = nullptr;
-        QString bestUrl;
-        for (auto urlIt = hostIt.value().urls.constBegin();
-             urlIt != hostIt.value().urls.constEnd(); ++urlIt) {
-            const UrlStats &candidate = urlIt.value();
-            if (!best || candidate.visits > best->visits
-                    || (candidate.visits == best->visits && candidate.lastVisit > best->lastVisit)) {
-                best = &candidate;
-                bestUrl = urlIt.key();
-            }
-        }
-        if (!best)
-            continue;
-
-        Entry entry;
-        entry.host = hostIt.key();
-        entry.url = bestUrl;
-        entry.title = best->title;
-        entry.score = hostIt.value().score;
-        entry.lastVisit = hostIt.value().lastVisit;
-        entries.append(entry);
-    }
-
-    std::sort(entries.begin(), entries.end(), [](const Entry &a, const Entry &b) {
-        if (a.score != b.score)
-            return a.score > b.score;
-        return a.lastVisit > b.lastVisit;
-    });
-
-    const int count = qMin(limit, int(entries.size()));
-    sites.reserve(count);
-    for (int i = 0; i < count; ++i) {
-        const Entry &entry = entries.at(i);
-        QVariantMap site;
-        site.insert(QStringLiteral("url"), entry.url);
-        site.insert(QStringLiteral("title"), entry.title);
-        site.insert(QStringLiteral("host"), entry.host);
-        sites.append(site);
-    }
-    return sites;
+QString HistoryManager::hostCompletion(const QString &text) const
+{
+    return HistorySearch::hostCompletion(text);
 }

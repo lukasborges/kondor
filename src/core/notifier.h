@@ -7,9 +7,6 @@
 class QQmlEngine;
 class QJSEngine;
 
-// QML singleton `Notifier`: sends desktop notifications through the freedesktop
-// notification service (org.freedesktop.Notifications) over D-Bus. Other
-// components (downloads, crash notices, ...) share this block.
 class Notifier : public QObject
 {
     Q_OBJECT
@@ -20,7 +17,6 @@ public:
     static Notifier *instance();
     static Notifier *create(QQmlEngine *engine, QJSEngine *jsEngine);
 
-    // `iconName` follows the Breeze icon naming; when empty the app icon is used.
     Q_INVOKABLE void notify(const QString &title, const QString &body, const QString &iconName);
 
 private:

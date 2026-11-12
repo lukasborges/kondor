@@ -269,7 +269,7 @@
 <context>
     <name>BookmarkManager</name>
     <message>
-        <location filename="../src/bookmarks/bookmarkmanager.cpp" line="409"/>
+        <location filename="../src/bookmarks/bookmarkmanager.cpp" line="129"/>
         <source>New Folder</source>
         <translation>Nowy folder</translation>
     </message>
@@ -519,17 +519,17 @@
 <context>
     <name>DefaultBookmarks</name>
     <message>
-        <location filename="../src/core/database.cpp" line="36"/>
+        <location filename="../src/core/defaultbookmarks.cpp" line="9"/>
         <source>News</source>
         <translation>Wiadomości</translation>
     </message>
     <message>
-        <location filename="../src/core/database.cpp" line="45"/>
+        <location filename="../src/core/defaultbookmarks.cpp" line="18"/>
         <source>Development</source>
         <translation>Rozwój</translation>
     </message>
     <message>
-        <location filename="../src/core/database.cpp" line="54"/>
+        <location filename="../src/core/defaultbookmarks.cpp" line="27"/>
         <source>Linux</source>
         <translation>Linux</translation>
     </message>
@@ -565,12 +565,12 @@
 <context>
     <name>DownloadManager</name>
     <message>
-        <location filename="../src/downloads/downloadmanager.cpp" line="382"/>
+        <location filename="../src/downloads/downloadmanager.cpp" line="132"/>
         <source>Download completed</source>
         <translation>Pobieranie ukończone</translation>
     </message>
     <message>
-        <location filename="../src/downloads/downloadmanager.cpp" line="389"/>
+        <location filename="../src/downloads/downloadmanager.cpp" line="139"/>
         <source>Download failed</source>
         <translation>Pobieranie nie powiodło się</translation>
     </message>
@@ -1152,12 +1152,12 @@
 <context>
     <name>HistoryModel</name>
     <message>
-        <location filename="../src/history/historymodel.cpp" line="152"/>
+        <location filename="../src/history/historymodel.cpp" line="27"/>
         <source>Today</source>
         <translation>Dzisiaj</translation>
     </message>
     <message>
-        <location filename="../src/history/historymodel.cpp" line="154"/>
+        <location filename="../src/history/historymodel.cpp" line="29"/>
         <source>Yesterday</source>
         <translation>Wczoraj</translation>
     </message>

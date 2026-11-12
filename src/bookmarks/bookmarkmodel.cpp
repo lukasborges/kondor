@@ -1,25 +1,12 @@
 #include "bookmarks/bookmarkmodel.h"
 
-#include "core/database.h"
+#include "bookmarks/bookmarkqueries.h"
+#include "core/sql.h"
 
 #include <QSqlQuery>
 #include <QVariant>
 
-namespace {
-QString likePattern(const QString &term)
-{
-    QString pattern;
-    pattern.reserve(term.size() + 2);
-    for (QChar c : term) {
-        if (c == QLatin1Char('\\') || c == QLatin1Char('%') || c == QLatin1Char('_'))
-            pattern.append(QLatin1Char('\\'));
-        pattern.append(c);
-    }
-    pattern.prepend(QLatin1Char('%'));
-    pattern.append(QLatin1Char('%'));
-    return pattern;
-}
-}
+#include <utility>
 
 BookmarkModel::BookmarkModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -33,35 +20,33 @@ int BookmarkModel::rowCount(const QModelIndex &parent) const
 
 QVariant BookmarkModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || index.row() < 0 || index.row() >= m_entries.size())
+    if (!index.isValid() || !hasRow(index.row()))
         return {};
+    return fieldOf(m_entries.at(index.row()), role);
+}
 
-    const Entry &entry = m_entries.at(index.row());
+QVariant BookmarkModel::fieldOf(const Entry &entry, int role)
+{
     switch (role) {
-    case IdRole:
-        return entry.id;
-    case ParentIdRole:
-        return entry.parentId;
-    case TitleRole:
-        return entry.title;
-    case UrlRole:
-        return entry.url.toString();
-    case IsFolderRole:
-        return entry.isFolder;
-    default:
-        return {};
+    case IdRole: return entry.id;
+    case ParentIdRole: return entry.parentId;
+    case TitleRole: return entry.title;
+    case UrlRole: return entry.url.toString();
+    case IsFolderRole: return entry.isFolder;
+    default: return {};
     }
 }
 
 QHash<int, QByteArray> BookmarkModel::roleNames() const
 {
-    return {
+    static const QHash<int, QByteArray> roles{
         {IdRole, "id"},
         {ParentIdRole, "parentId"},
         {TitleRole, "title"},
         {UrlRole, "url"},
         {IsFolderRole, "isFolder"},
     };
+    return roles;
 }
 
 void BookmarkModel::setFolderId(qint64 folderId)
@@ -84,23 +69,17 @@ void BookmarkModel::setFilter(const QString &filter)
 
 QString BookmarkModel::urlAt(int row) const
 {
-    if (row < 0 || row >= m_entries.size())
-        return {};
-    return m_entries.at(row).url.toString();
+    return hasRow(row) ? m_entries.at(row).url.toString() : QString();
 }
 
 qint64 BookmarkModel::idAt(int row) const
 {
-    if (row < 0 || row >= m_entries.size())
-        return -1;
-    return m_entries.at(row).id;
+    return hasRow(row) ? m_entries.at(row).id : -1;
 }
 
 bool BookmarkModel::isFolderAt(int row) const
 {
-    if (row < 0 || row >= m_entries.size())
-        return false;
-    return m_entries.at(row).isFolder;
+    return hasRow(row) && m_entries.at(row).isFolder;
 }
 
 int BookmarkModel::rowOf(qint64 id) const
@@ -112,43 +91,47 @@ int BookmarkModel::rowOf(qint64 id) const
     return -1;
 }
 
+QString BookmarkModel::selectStatement() const
+{
+    QString statement = QStringLiteral(
+        "SELECT id, parent_id, title, url, is_folder FROM bookmarks WHERE parent_id = ?");
+    if (!m_filter.trimmed().isEmpty())
+        statement += QStringLiteral(" AND (title LIKE ? ESCAPE '\\' OR url LIKE ? ESCAPE '\\')");
+    return statement + QStringLiteral(" ORDER BY position, id");
+}
+
+QVariantList BookmarkModel::bindValues() const
+{
+    const QString term = m_filter.trimmed();
+    if (term.isEmpty())
+        return {m_folderId};
+    const QString pattern = BookmarkQueries::likePattern(term);
+    return {m_folderId, pattern, pattern};
+}
+
+BookmarkModel::Entry BookmarkModel::readEntry(const QSqlQuery &query)
+{
+    return {query.value(0).toLongLong(), query.value(1).toLongLong(),
+            query.value(2).toString(), QUrl(query.value(3).toString()),
+            query.value(4).toBool()};
+}
+
+QList<BookmarkModel::Entry> BookmarkModel::loadEntries() const
+{
+    QList<Entry> entries;
+    if (m_folderId < 0)
+        return entries;
+    auto query = Sql::run(selectStatement(), bindValues());
+    while (query && query->next())
+        entries.append(readEntry(*query));
+    return entries;
+}
+
 void BookmarkModel::refresh()
 {
-    Database *db = Database::instance();
-    QList<Entry> entries;
-
-    if (db->isValid() && m_folderId >= 0) {
-        const QString term = m_filter.trimmed();
-        QString sql = QStringLiteral(
-            "SELECT id, parent_id, title, url, is_folder FROM bookmarks"
-            " WHERE parent_id = ?");
-        if (!term.isEmpty())
-            sql += QStringLiteral(" AND (title LIKE ? ESCAPE '\\' OR url LIKE ? ESCAPE '\\')");
-        sql += QStringLiteral(" ORDER BY position, id");
-
-        QSqlQuery query(db->handle());
-        query.prepare(sql);
-        query.addBindValue(m_folderId);
-        if (!term.isEmpty()) {
-            const QString pattern = likePattern(term);
-            query.addBindValue(pattern);
-            query.addBindValue(pattern);
-        }
-        if (query.exec()) {
-            while (query.next()) {
-                Entry entry;
-                entry.id = query.value(0).toLongLong();
-                entry.parentId = query.value(1).toLongLong();
-                entry.title = query.value(2).toString();
-                entry.url = QUrl(query.value(3).toString());
-                entry.isFolder = query.value(4).toBool();
-                entries.append(entry);
-            }
-        }
-    }
-
+    QList<Entry> entries = loadEntries();
     beginResetModel();
-    m_entries = entries;
+    m_entries = std::move(entries);
     endResetModel();
     emit countChanged();
 }

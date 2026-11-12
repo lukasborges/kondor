@@ -10,9 +10,6 @@
 class QQmlEngine;
 class QJSEngine;
 
-// QML singleton `Settings`: user preferences persisted in
-// ~/.config/KDE/Kondor.conf through QSettings. Every setter writes and syncs
-// immediately, so changes apply without a restart.
 class Settings : public QObject
 {
     Q_OBJECT
@@ -65,14 +62,18 @@ class Settings : public QObject
                    NOTIFY adBlockLastUpdateChanged)
 
 public:
+    struct Option {
+        const char *key;
+        const char *name;
+        void (Settings::*changed)();
+    };
+
     static Settings *instance();
     static Settings *create(QQmlEngine *engine, QJSEngine *jsEngine);
 
     QString homePage() const { return m_homePage; }
     QString searchEngine() const { return m_searchEngine; }
     QString customSearchUrl() const { return m_customSearchUrl; }
-    // Falls back to QStandardPaths::DownloadLocation when the configured
-    // folder no longer exists.
     QString downloadDirectory() const;
     bool askWhereToSave() const { return m_askWhereToSave; }
     QString startupBehavior() const { return m_startupBehavior; }
@@ -90,9 +91,7 @@ public:
     QStringList adBlockAllowList() const { return m_adBlockAllowList; }
     bool offerToSavePasswords() const { return m_offerToSavePasswords; }
     bool extensionsAutoUpdate() const { return m_extensionsAutoUpdate; }
-    // Origins ("https://example.com") where Kondor never offers to save a password.
     QStringList passwordNeverSaveSites() const { return m_passwordNeverSaveSites; }
-    // When the filter lists were last downloaded; invalid if never.
     QDateTime adBlockLastUpdate() const { return m_adBlockLastUpdate; }
 
     void setHomePage(const QString &homePage);
@@ -118,27 +117,13 @@ public:
     void setPasswordNeverSaveSites(const QStringList &passwordNeverSaveSites);
     void setExtensionsAutoUpdate(bool extensionsAutoUpdate);
 
-    // Default value of the option with this property name ("homePage",
-    // "searchEngine", …). The only source of truth for defaults: the
-    // constructor and the Configure window's Defaults button both use it.
     Q_INVOKABLE QVariant defaultValue(const QString &name) const;
 
-    // Dictionaries Qt WebEngine can use: one entry per `<code>.bdic` file in the
-    // directory named by QTWEBENGINE_DICTIONARIES_PATH, as `{ code, name }`
-    // with the language's native display name, sorted by name.
     Q_INVOKABLE QVariantList availableSpellCheckLanguages() const;
 
-    // URL template for the selected engine, with %1 where the query goes.
     Q_INVOKABLE QString searchUrlTemplate() const;
-    // Display name of the selected engine: "DuckDuckGo", "Google",
-    // "Startpage", "Brave Search", "" for a custom engine or "DuckDuckGo"
-    // when the custom URL is invalid and search falls back to it.
     Q_INVOKABLE QString searchEngineName() const;
-    // False when the configured download folder is missing, so the UI can warn.
     bool downloadDirectoryValid() const;
-    // Re-emits downloadDirectoryChanged so the UI re-reads the folder and its
-    // validity; call it when a window is shown, since the folder may have been
-    // deleted while the app was running.
     Q_INVOKABLE void refreshDownloadDirectory();
 
 signals:
@@ -167,6 +152,9 @@ signals:
 
 private:
     explicit Settings(QObject *parent = nullptr);
+
+    template<typename T> T read(const Option &option) const;
+    template<typename T> void store(T &member, const T &value, const Option &option);
 
     QSettings m_settings;
     QString m_homePage;

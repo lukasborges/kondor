@@ -3,13 +3,12 @@
 #include <QAbstractListModel>
 #include <QDateTime>
 #include <QList>
+#include <QSqlQuery>
+#include <optional>
 #include <QTimer>
 #include <QUrl>
 #include <QtQmlIntegration/qqmlintegration.h>
 
-// History model: lists visits newest first, filtered by URL/title. Exposed via
-// `HistoryManager.model`; refreshes after every write (navigation writes are
-// debounced).
 class HistoryModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -42,10 +41,8 @@ public:
     bool active() const { return m_active; }
     void setActive(bool active);
 
-    // Immediate re-query (used for user actions and by the filter).
-    void refresh();
-    // Debounced re-query (used for the bursty navigation writes).
-    void scheduleRefresh();
+        void refresh();
+        void scheduleRefresh();
 
     Q_INVOKABLE QString urlAt(int index) const;
 
@@ -63,7 +60,10 @@ private:
         QString dayLabel;
     };
 
-    static QString likePattern(const QString &term);
+    static Entry entryOf(QSqlQuery &row);
+    static QVariant roleValue(const Entry &entry, int role);
+    std::optional<QSqlQuery> queryEntries() const;
+    QList<Entry> loadEntries() const;
     static QString dayLabel(const QDateTime &time);
     static QString timeLabel(const QDateTime &time);
 

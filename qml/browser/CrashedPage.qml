@@ -4,8 +4,6 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Full-page notice shown over the WebEngineView when this tab's renderer
-// process died. Reload starts a fresh process for the same page.
 Item {
     id: root
 
@@ -67,9 +65,6 @@ Item {
                     text: qsTr("Reload")
                     icon.name: "view-refresh"
                     highlighted: true
-                    // The Breeze style only activates a Button on Space, so
-                    // Return and Enter are handled explicitly: they reload right
-                    // away, like the default button.
                     focus: visible
                     Keys.onReturnPressed: clicked()
                     Keys.onEnterPressed: clicked()

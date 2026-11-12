@@ -7,8 +7,6 @@ import QtWebEngine
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// "Site Permissions" window: every decision the persistent profile remembers,
-// grouped by site, with a filter and a Revoke button. Created on demand.
 ApplicationWindow {
     id: root
     width: 640
@@ -22,7 +20,6 @@ ApplicationWindow {
     property var rows: []
 
     onClosing: function(close) {
-        // Do not destroy: just hide, so the window reopens on the same list.
         close.accepted = false
         root.visible = false
     }
@@ -36,38 +33,39 @@ ApplicationWindow {
         filterField.forceActiveFocus()
     }
 
-    function reload() {
-        const filter = filterField.text.trim().toLowerCase()
-        const permissions = ProfileManager.defaultProfile().listAllPermissions()
-        let result = []
+    function isDecided(permission) {
+        return permission.isValid
+            && (permission.state === WebEnginePermission.State.Granted
+                || permission.state === WebEnginePermission.State.Denied)
+    }
 
-        for (let i = 0; i < permissions.length; ++i) {
-            const permission = permissions[i]
-            if (!permission.isValid)
-                continue
-            if (permission.state !== WebEnginePermission.State.Granted
-                    && permission.state !== WebEnginePermission.State.Denied)
-                continue
+    function decidedPermissions() {
+        return Array.from(ProfileManager.defaultProfile().listAllPermissions()).filter(isDecided)
+    }
 
-            const site = typeInfo.hostFor(permission.origin)
-            if (filter.length > 0 && !site.toLowerCase().includes(filter))
-                continue
-
-            result.push({
-                site: site,
-                perm: typeInfo.labelFor(permission.permissionType),
-                ic: typeInfo.iconFor(permission.permissionType),
-                granted: permission.state === WebEnginePermission.State.Granted,
-                permission: permission
-            })
+    function rowFor(permission) {
+        return {
+            site: typeInfo.hostFor(permission.origin),
+            perm: typeInfo.labelFor(permission.permissionType),
+            ic: typeInfo.iconFor(permission.permissionType),
+            granted: permission.state === WebEnginePermission.State.Granted,
+            permission: permission
         }
+    }
 
-        result.sort(function(a, b) {
-            if (a.site === b.site)
-                return a.perm.localeCompare(b.perm)
-            return a.site.localeCompare(b.site)
-        })
-        root.rows = result
+    function compareRows(a, b) {
+        if (a.site === b.site)
+            return a.perm.localeCompare(b.perm)
+        return a.site.localeCompare(b.site)
+    }
+
+    function matchesFilter(row) {
+        const filter = filterField.text.trim().toLowerCase()
+        return filter.length === 0 || row.site.toLowerCase().includes(filter)
+    }
+
+    function reload() {
+        root.rows = decidedPermissions().map(rowFor).filter(matchesFilter).sort(compareRows)
     }
 
     function revoke(permission) {
@@ -75,7 +73,6 @@ ApplicationWindow {
             return
         permission.reset()
         root.reload()
-        // The backend may apply the reset asynchronously; refresh once more.
         Qt.callLater(root.reload)
     }
 

@@ -4,14 +4,11 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Transient hint shown at the top of the page when it enters full screen:
-// a video covers the window and hiding the toolbar leaves no other way out.
 Rectangle {
     id: root
 
     property alias text: hintLabel.text
 
-    // Placed by the caller (top center); fades out on its own after 3 s.
     y: Kirigami.Units.gridUnit
     width: hintRow.implicitWidth + Kirigami.Units.largeSpacing * 4
     height: hintRow.implicitHeight + Kirigami.Units.largeSpacing * 2

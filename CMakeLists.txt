@@ -61,10 +61,30 @@ qt_add_qml_module(kondor
         qml/downloads/DownloadSaveDialog.qml
         qml/common/LocalPath.qml
         qml/browser/TabStrip.qml
+        qml/browser/TabStripScroller.qml
+        qml/browser/TabWidthFreeze.qml
+        qml/browser/TabStripTaps.qml
+        qml/browser/TabStripWheel.qml
+        qml/browser/TabStripScrollButton.qml
+        qml/browser/TabDragHandler.qml
+        qml/browser/TabSlideAnimation.qml
         qml/browser/WebViewTab.qml
+        qml/browser/CertificateErrorHandler.qml
+        qml/browser/PageOutput.qml
+        qml/browser/PageScriptBridges.qml
+        qml/browser/PageView.qml
+        qml/browser/PageZoom.qml
+        qml/browser/ReaderMode.qml
+        qml/browser/ReaderStyle.qml
+        qml/browser/TabCommands.qml
         qml/browser/PageContextMenu.qml
+        qml/browser/PageMenuEntries.qml
+        qml/browser/PageMenuActions.qml
+        qml/browser/SpellCheckLanguagesMenu.qml
         qml/browser/ReaderControls.qml
         qml/browser/NewTabPage.qml
+        qml/browser/TopSitesGrid.qml
+        qml/browser/TopSiteMenu.qml
         qml/browser/TabButtonDelegate.qml
         qml/browser/TabContextMenu.qml
         qml/common/InlineBar.qml
@@ -78,10 +98,14 @@ qt_add_qml_module(kondor
         qml/site/PermissionTypeInfo.qml
         qml/site/SitePermissionsDialog.qml
         qml/site/SiteInfoPopup.qml
+        qml/site/SiteSecurityState.qml
         qml/adblock/AdBlockPopup.qml
         qml/browser/CertificateErrorPage.qml
         qml/browser/CrashedPage.qml
         qml/history/HistoryWindow.qml
+        qml/history/HistoryList.qml
+        qml/history/HistoryEntryMenu.qml
+        qml/history/ClearHistoryDialog.qml
         qml/settings/SettingsWindow.qml
         qml/settings/SettingsDraft.qml
         qml/settings/SettingsPages.qml
@@ -95,10 +119,23 @@ qt_add_qml_module(kondor
         qml/settings/PrivacySettingsPage.qml
         qml/settings/SpellingSettingsPage.qml
         qml/passwords/PasswordsPage.qml
+        qml/passwords/RevealedPasswords.qml
+        qml/passwords/NeverSavedTab.qml
+        qml/passwords/SavedPasswordsTab.qml
+        qml/passwords/SavedPasswordsList.qml
+        qml/passwords/SavedPasswordDelegate.qml
+        qml/passwords/RowToolButton.qml
+        qml/passwords/PasswordsFrame.qml
+        qml/passwords/ImportMessage.qml
+        qml/passwords/ImportResult.qml
         qml/downloads/DownloadsPopup.qml
+        qml/downloads/DownloadDelegate.qml
+        qml/downloads/DownloadStatus.qml
         qml/bookmarks/BookmarksBar.qml
         qml/bookmarks/BookmarkMenu.qml
         qml/app/MainMenu.qml
+        qml/app/HistoryMenu.qml
+        qml/app/ZoomMenuRow.qml
         qml/bookmarks/BookmarksWindow.qml
         qml/bookmarks/BookmarkSelection.qml
         qml/bookmarks/BookmarkFolderTree.qml
@@ -117,11 +154,18 @@ qt_add_qml_module(kondor
         qml/common/SiteMenuItem.qml
         qml/browser/AddressSuggestions.qml
         qml/app/AboutWindow.qml
+        qml/app/AboutTab.qml
+        qml/app/ComponentsTab.qml
+        qml/app/AuthorsTab.qml
+        qml/app/LicenseWindow.qml
         qml/extensions/ExtensionIcon.qml
         qml/extensions/ExtensionsPage.qml
         qml/extensions/ExtensionCatalogDialog.qml
         qml/extensions/InstallExtensionDialog.qml
         qml/extensions/ExtensionSettingsDialog.qml
+        qml/extensions/ExtensionSettingControls.qml
+        qml/extensions/ExtensionSitesSection.qml
+        qml/extensions/ExtensionDelegate.qml
         qml/extensions/ExtensionsMenu.qml
     SOURCES
         src/app/aboutinfo.h

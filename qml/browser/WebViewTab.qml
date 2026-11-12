@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Controls
-import QtWebChannel
 import QtWebEngine
 import org.kde.kirigami as Kirigami
 import Kondor
@@ -13,371 +12,94 @@ Item {
 
     property point contextMenuPosition: Qt.point(0, 0)
 
-    property string printPath: ""
-
-    function pdfFinished(filePath, success) {
-        root.tab.setPdfFinished(filePath, success)
-        if (filePath === root.printPath) {
-            root.printPath = ""
-            if (success)
-                FileHelper.openFile(filePath)
-            else
-                Notifier.notify(qsTr("Print failed"), root.tab.title, "document-print")
-        } else if (success) {
-            Notifier.notify(qsTr("PDF saved"), filePath, "document-export")
-        } else {
-            Notifier.notify(qsTr("Saving the PDF failed"), filePath, "document-export")
-        }
-    }
-
-    property string zoomHost: ""
-    property bool applyingZoom: false
-
-    function setViewZoom(factor) {
-        if (Math.abs(webView.zoomFactor - factor) < 0.0001)
-            return
-        root.applyingZoom = true
-        webView.zoomFactor = factor
-        root.applyingZoom = false
-    }
-
-    function applySavedZoom(host) {
-        root.zoomHost = host
-        root.setViewZoom(host === "" ? 1.0 : ZoomManager.zoomFor(host))
-    }
-
-    Connections {
-        target: ZoomManager
-        function onZoomChanged(host, factor) {
-            if (host === root.zoomHost)
-                root.setViewZoom(factor)
-        }
-    }
-
-    property url readerOriginalUrl: ""
-    property bool readerLoadPending: false
-
-    function readResource(name) {
-        return FileHelper.readerResource(name)
-    }
-
-    function readerVars() {
-        const family = Settings.readerSerif
-            ? "'Noto Serif', 'DejaVu Serif', Georgia, serif"
-            : "'Noto Sans', 'DejaVu Sans', system-ui, sans-serif"
-        return "--reader-bg: " + readerColors.backgroundColor
-            + "; --reader-text: " + readerColors.textColor
-            + "; --reader-link: " + readerColors.linkColor
-            + "; --reader-muted: " + readerColors.disabledTextColor
-            + "; --reader-font: " + family
-            + "; --reader-size: " + Settings.readerFontSize + "px;"
-    }
-
-    Item {
-        id: readerColors
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
-        Kirigami.Theme.inherit: false
-        readonly property color backgroundColor: Kirigami.Theme.backgroundColor
-        readonly property color textColor: Kirigami.Theme.textColor
-        readonly property color linkColor: Kirigami.Theme.linkColor
-        readonly property color disabledTextColor: Kirigami.Theme.disabledTextColor
-    }
-
-    function applyReaderStyle() {
-        if (!root.tab.readerActive || root.readerLoadPending)
-            return
-        const css = JSON.stringify(":root { " + root.readerVars() + " }")
-        webView.runJavaScript(
-            "document.getElementById('reader-vars').textContent = " + css + ";",
-            WebEngineScript.ApplicationWorld)
-    }
-
-    Connections {
-        target: Settings
-        function onReaderFontSizeChanged() { root.applyReaderStyle() }
-        function onReaderSerifChanged() { root.applyReaderStyle() }
-    }
-    Connections {
-        target: readerColors
-        function onBackgroundColorChanged() { root.applyReaderStyle() }
-        function onTextColorChanged() { root.applyReaderStyle() }
-        function onLinkColorChanged() { root.applyReaderStyle() }
-    }
-
-    function escapeHtml(text) {
-        return String(text ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;").replace(/"/g, "&quot;")
-    }
-
-    function detectReader() {
-        webView.runJavaScript(
-            root.readResource("Readability-readerable.js")
-                + "\n;isProbablyReaderable(document);",
-            WebEngineScript.ApplicationWorld,
-            function(result) { root.tab.setReaderAvailable(result === true) })
-    }
-
-    function enterReader() {
-        const original = webView.url
-        webView.runJavaScript(
-            root.readResource("Readability.js") + "\n;(function() {"
-                + "const a = new Readability(document.cloneNode(true)).parse();"
-                + "return a ? { title: a.title, byline: a.byline, content: a.content,"
-                + " siteName: a.siteName, lang: a.lang, dir: a.dir } : null; })();",
-            WebEngineScript.ApplicationWorld,
-            function(article) {
-                if (!article || !article.content || webView.url !== original) {
-                    root.tab.setReaderAvailable(false)
-                    return
-                }
-                const values = {
-                    lang: root.escapeHtml(article.lang || ""),
-                    dir: root.escapeHtml(article.dir || "ltr"),
-                    title: root.escapeHtml(article.title),
-                    siteName: root.escapeHtml(article.siteName),
-                    byline: root.escapeHtml(article.byline),
-                    vars: root.readerVars(),
-                    content: article.content
-                }
-                // One pass, so text inside the article is never substituted.
-                const html = root.readResource("template.html")
-                    .replace(/\{\{(\w+)\}\}/g, function(match, key) { return values[key] ?? "" })
-                root.readerOriginalUrl = original
-                root.readerLoadPending = true
-                root.tab.setReaderActive(true)
-                webView.loadHtml(html, original)
-            })
-    }
-
-    function exitReader() {
-        if (!root.tab.readerActive)
-            return
-        const original = root.readerOriginalUrl
-        root.readerLoadPending = false
-        root.tab.setReaderActive(false)
-        webView.url = original
-    }
-
     function setDevToolsOpen(open) {
         if (open === root.tab.devToolsOpen)
             return
-        webView.devToolsView = open ? devTools : null
+        pageView.devToolsView = open ? devTools : null
         root.tab.setDevToolsOpen(open)
     }
 
-    function rejectCertificateError() {
-        if (!certificateErrorHolder.error)
-            return false
-        const error = certificateErrorHolder.error
-        certificateErrorHolder.error = null
-        error.rejectCertificate()
-        return true
+    function showContextMenu(request) {
+        contextMenuPosition = Qt.point(request.position.x, request.position.y)
+        contextMenu.request = request
+        contextMenu.popupAt(contextMenuPosition)
     }
 
-    PasswordBridge {
-        id: passwordBridge
+    function popupMenuAtLastPosition() {
+        contextMenu.request = null
+        const center = Qt.point(pageView.width / 2, pageView.height / 2)
+        const isUnset = contextMenuPosition.x === 0 && contextMenuPosition.y === 0
+        contextMenu.popupAt(isUnset ? center : contextMenuPosition)
+    }
+
+    function leaveFullScreenAndMenu() {
+        contextMenu.close()
+        if (root.tab && root.tab.isFullScreen)
+            root.tab.exitFullScreen()
+    }
+
+    PageZoom {
+        id: pageZoom
         tab: root.tab
+        webView: pageView
     }
 
-    ExtensionBridge {
-        id: extensionBridge
+    ReaderStyle {
+        id: readerStyle
         tab: root.tab
+        webView: pageView
+        loadPending: readerMode.readerLoadPending
     }
 
-    WebChannel {
-        id: pageChannel
-        Component.onCompleted: {
-            registerObject("kondorExtensions", extensionBridge.pageApi())
-            if (!root.tab.isPrivate)
-                registerObject("kondorPasswords", passwordBridge.pageApi())
-        }
+    ReaderMode {
+        id: readerMode
+        tab: root.tab
+        webView: pageView
+        style: readerStyle
     }
 
-    // The page and, below it, Chromium DevTools while they are open. The
-    // DevTools view shares the page's profile, so a private tab's DevTools
-    // stay off the record.
+    PageOutput {
+        id: pageOutput
+        tab: root.tab
+        webView: pageView
+    }
+
+    CertificateErrorHandler {
+        id: certificateHandler
+        tab: root.tab
+        tabModel: root.tabModel
+        webView: pageView
+    }
+
+    PageScriptBridges {
+        id: scriptBridges
+        tab: root.tab
+        webView: pageView
+    }
+
+    TabCommands {
+        tab: root.tab
+        tabModel: root.tabModel
+        webView: pageView
+        reader: readerMode
+        certificates: certificateHandler
+    }
+
     SplitView {
         anchors.fill: parent
         orientation: Qt.Vertical
 
-        WebEngineView {
-            id: webView
+        PageView {
+            id: pageView
             SplitView.fillHeight: true
-            profile: root.tab.profile
-
-            // Password manager and extensions: the page scripts run in the
-            // application world, out of reach of the page's own scripts. The
-            // password script is installed only on the persistent profile
-            // (ProfileManager), and the bridge refuses private tabs anyway.
-            webChannel: pageChannel
-            webChannelWorld: WebEngineScript.ApplicationWorld
-
-            // Qt WebEngine disables page full screen by default, so a video
-            // player's button would never reach onFullScreenRequested.
-            settings.fullScreenSupportEnabled: true
-
-            onTitleChanged: {
-                root.tab.setTitle(title)
-                if (!root.tab.isPrivate && !root.tab.readerActive)
-                    HistoryManager.updateTitle(webView.url, title)
-            }
-            onUrlChanged: {
-                root.tab.setUrl(url)
-                const host = ZoomManager.hostOf(url)
-                if (host !== root.zoomHost)
-                    root.applySavedZoom(host)
-            }
-            // Covers Ctrl+wheel, the zoom commands and the page itself.
-            onZoomFactorChanged: {
-                root.tab.setZoomFactor(zoomFactor)
-                // Private tabs read the saved zoom but never write it.
-                if (!root.applyingZoom && !root.tab.isPrivate && root.zoomHost !== "")
-                    ZoomManager.setZoomFor(root.zoomHost, zoomFactor)
-            }
-            onIconChanged: {
-                root.tab.setIconUrl(icon)
-                // Only normal tabs persist a favicon: nothing from a private tab
-                // may be written to disk.
-                if (!root.tab.isPrivate && icon.toString() !== "")
-                    FaviconStore.store(webView.url, icon)
-            }
-            onLoadProgressChanged: root.tab.setProgress(loadProgress)
-
-            onLoadingChanged: function(loadRequest) {
-                // A new load means the page has a renderer again; the crash page
-                // goes away as soon as the reload starts.
-                if (loadRequest.status === WebEngineLoadingInfo.LoadStartedStatus)
-                    root.tab.setCrashed(false, "")
-
-                // A navigation away from the article ends reader mode; the load
-                // of the article itself (loadHtml) does not.
-                if (loadRequest.status === WebEngineLoadingInfo.LoadStartedStatus
-                        && root.tab.readerActive && !root.readerLoadPending) {
-                    root.tab.setReaderActive(false)
-                    root.tab.setReaderAvailable(false)
-                } else if (loadRequest.status === WebEngineLoadingInfo.LoadStartedStatus
-                        && !root.tab.readerActive) {
-                    root.tab.setReaderAvailable(false)
-                }
-                const readerDocument = root.tab.readerActive
-                if (readerDocument && loadRequest.status !== WebEngineLoadingInfo.LoadStartedStatus)
-                    root.readerLoadPending = false
-
-                root.tab.setLoading(loadRequest.status === WebEngineLoadingInfo.LoadStartedStatus)
-                root.tab.setCanGoBack(webView.canGoBack)
-                root.tab.setCanGoForward(webView.canGoForward)
-
-                // Record the visit in history, for persistent tabs only.
-                if (readerDocument)
-                    return
-                if (loadRequest.status === WebEngineLoadingInfo.LoadSucceededStatus
-                        && !root.tab.newTabPage
-                        && webView.url.toString() !== "about:blank")
-                    root.detectReader()
-
-                if (loadRequest.status === WebEngineLoadingInfo.LoadSucceededStatus
-                        && !root.tab.isPrivate)
-                    HistoryManager.addVisit(webView.url, webView.title)
-
-                // Chromium may reset the zoom when the page commits. A private
-                // tab keeps what the user set in it, so only normal tabs
-                // re-apply the saved value.
-                if (loadRequest.status === WebEngineLoadingInfo.LoadSucceededStatus
-                        && !root.tab.isPrivate)
-                    root.applySavedZoom(ZoomManager.hostOf(webView.url))
-            }
-
-            onCanGoBackChanged: root.tab.setCanGoBack(canGoBack)
-            onCanGoForwardChanged: root.tab.setCanGoForward(canGoForward)
-
-            // The renderer process died (crash, kill, out of memory). The view
-            // stays blank until the user reloads, so this tab shows an
-            // explanation; other tabs are not affected.
-            onRenderProcessTerminated: function(terminationStatus, exitCode) {
-                if (terminationStatus === WebEngineView.NormalTerminationStatus)
-                    return
-                const reasons = {
-                    [WebEngineView.AbnormalTerminationStatus]: qsTr("The page's process ended unexpectedly."),
-                    [WebEngineView.CrashedTerminationStatus]: qsTr("The page crashed."),
-                    [WebEngineView.KilledTerminationStatus]: qsTr("The page's process was killed (possibly out of memory).")
-                }
-                root.tab.setLoading(false)
-                root.tab.setCrashed(true, reasons[terminationStatus] ?? "", exitCode)
-            }
-
-            onFindTextFinished: function(result) {
-                root.tab.setFindResult(result.numberOfMatches, result.activeMatch)
-            }
-
-            // The page asked for full screen (a video player). Accept it and let
-            // the window follow the tab; the player's button or Esc asks the page
-            // to leave it, which arrives here again with toggleOn false.
-            onFullScreenRequested: function(request) {
-                request.accept()
-                root.tab.setFullScreen(request.toggleOn)
-            }
-
-            // The page asked for a site permission (camera, microphone, location,
-            // notifications, ...). The prompt belongs to this tab and is answered
-            // through the Tab object, so switching tabs keeps it with the page.
-            onPermissionRequested: function(permission) {
-                root.tab.permissions.enqueue(permission)
-            }
-
-            // Right click: take over from Qt WebEngine's minimal default menu and
-            // show the full page menu at the cursor.
-            onContextMenuRequested: function(request) {
-                request.accepted = true
-                root.contextMenuPosition = Qt.point(request.position.x, request.position.y)
-                contextMenu.request = request
-                contextMenu.popupAt(root.contextMenuPosition)
-            }
-
-            // A page failed the certificate check. Keep the request pending (defer)
-            // so the error page can offer Back to Safety or an explicit override.
-            // window.print() from the page.
-            onPrintRequested: root.tab.print()
-
-            onPdfPrintingFinished: function(filePath, success) { root.pdfFinished(filePath, success) }
-
-            onCertificateError: function(error) {
-                if (!error.isMainFrame) {
-                    error.rejectCertificate()
-                    return
-                }
-                // A second error replaces the first one; answer the stale request.
-                if (certificateErrorHolder.error)
-                    certificateErrorHolder.error.rejectCertificate()
-                error.defer()
-                certificateErrorHolder.error = error
-                root.tab.setPendingCertificateError(error.url, error.description,
-                                                    error.overridable)
-            }
-
-            // Screen sharing: on Wayland Qt WebEngine uses the xdg-desktop-portal
-            // picker itself. On X11 this signal selects a screen; without a
-            // chooser, taking the first one is the minimal useful behavior.
-            onDesktopMediaRequested: function(request) {
-                const screens = request.screensModel
-                if (screens && screens.count > 0)
-                    request.selectScreen(screens.index(0, 0))
-                else
-                    request.cancel()
-            }
-
-            // A link with target=_blank / window.open opens in a new tab, unless
-            // the page asked for a new window (shift+click): then the tab gets a
-            // window of its own. The new tab or window keeps the opener's profile,
-            // so private stays private (and keeps its session) and background
-            // requests open in the background.
-            onNewWindowRequested: function(request) {
-                if (request.destination === WebEngineNewWindowRequest.InNewWindow) {
-                    WindowManager.newWindow(root.tab.isPrivate, [request.requestedUrl])
-                    return
-                }
-                const background = request.destination === WebEngineNewWindowRequest.InNewBackgroundTab
-                root.tabModel.addTabWithProfile(root.tab.profile, request.requestedUrl, background)
-            }
+            tab: root.tab
+            tabModel: root.tabModel
+            zoom: pageZoom
+            reader: readerMode
+            output: pageOutput
+            certificates: certificateHandler
+            webChannel: scriptBridges.channel
+            onPageContextMenuRequested: function(request) { root.showContextMenu(request) }
         }
 
         WebEngineView {
@@ -386,41 +108,23 @@ Item {
             SplitView.preferredHeight: root.height * 0.4
             SplitView.minimumHeight: 100
             profile: root.tab.profile
-
-            // The "x" of the DevTools window.
             onWindowCloseRequested: root.setDevToolsOpen(false)
         }
     }
 
-    // Right-click menu of the page. The Menu / Shift+F10 shortcut opens the
-    // generic page menu at the last known position, or in the middle.
     PageContextMenu {
         id: contextMenu
-        webView: webView
+        webView: pageView
         tab: root.tab
         tabModel: root.tabModel
     }
 
     Shortcut {
         sequences: ["Menu", "Shift+F10"]
-        enabled: root.visible && webView.activeFocus
-        onActivated: {
-            contextMenu.request = null
-            const center = Qt.point(webView.width / 2, webView.height / 2)
-            const point = root.contextMenuPosition.x === 0 && root.contextMenuPosition.y === 0
-                ? center : root.contextMenuPosition
-            contextMenu.popupAt(point)
-        }
+        enabled: root.visible && pageView.activeFocus
+        onActivated: root.popupMenuAtLastPosition()
     }
 
-    // Holds the JS reference to the pending WebEngineCertificateError; the
-    // value only stays answerable while this object keeps it.
-    QtObject {
-        id: certificateErrorHolder
-        property var error: null
-    }
-
-    // Shown above the WebEngineView while the tab is on the New Tab page.
     NewTabPage {
         anchors.fill: parent
         visible: root.tab.newTabPage
@@ -434,11 +138,10 @@ Item {
         tab: root.tab
     }
 
-    // Floating controls of reader mode.
     ReaderControls {
         anchors { right: parent.right; top: parent.top; margins: Kirigami.Units.largeSpacing }
         visible: root.tab.readerActive
-        onExitRequested: root.exitReader()
+        onExitRequested: readerMode.exitReader()
     }
 
     CrashedPage {
@@ -448,169 +151,22 @@ Item {
         tabModel: root.tabModel
     }
 
-    // A setting of an extension changed: its scripts in this page learn the
-    // new values without a reload.
-    Connections {
-        target: ExtensionManager
-        function onSettingsChanged(id) {
-            webView.runJavaScript(
-                "window.__kondorExtensions && window.__kondorExtensions["
-                + JSON.stringify(id) + "] && window.__kondorExtensions["
-                + JSON.stringify(id) + "](" + JSON.stringify(ExtensionManager.settingValues(id))
-                + ");",
-                WebEngineScript.ApplicationWorld)
-        }
-    }
-
-    Connections {
-        target: root.tab.security
-
-        function onAcceptCertificateErrorRequested() {
-            if (!certificateErrorHolder.error)
-                return
-            const error = certificateErrorHolder.error
-            certificateErrorHolder.error = null
-            error.acceptCertificate()
-        }
-        function onRejectCertificateErrorRequested() {
-            if (!certificateErrorHolder.error)
-                return
-            const error = certificateErrorHolder.error
-            certificateErrorHolder.error = null
-            error.rejectCertificate()
-            if (webView.canGoBack)
-                webView.goBack()
-            else if (root.tabModel.count > 1)
-                root.tabModel.closeTabObject(root.tab)
-            else
-                root.tab.showNewTabPage()
-        }
-    }
-
-    Connections {
-        target: root.tab.passwords
-
-        function onFillRequested(username) { passwordBridge.fill(username) }
-    }
-
-    Connections {
-        target: root.tab.extensionItems
-
-        function onTriggered(extensionId, itemId, checked) {
-            webView.runJavaScript(
-                "window.__kondorExtensionActions && window.__kondorExtensionActions["
-                + JSON.stringify(extensionId) + "] && window.__kondorExtensionActions["
-                + JSON.stringify(extensionId) + "](" + JSON.stringify(itemId) + ", "
-                + (checked ? "true" : "false") + ");",
-                WebEngineScript.ApplicationWorld)
-        }
-    }
-
     Connections {
         target: root.tab
-
-        function onNavigationRequested(url) {
-            rejectCertificateError()
-            webView.url = url
-        }
-        // Back must return to the page that was on screen before.
-        function onNewTabPageRequested() {
-            rejectCertificateError()
-            webView.url = "about:blank"
-        }
-        function onToggleReaderModeRequested() {
-            if (root.tab.readerActive)
-                root.exitReader()
-            else
-                root.enterReader()
-        }
-        function onBackRequested() {
-            if (root.tab.readerActive) {
-                root.exitReader()
-                return
-            }
-            // The toolbar Back answers the pending certificate request too.
-            if (rejectCertificateError())
-                root.tab.rejectCertificateError()
-            if (webView.canGoBack)
-                webView.goBack()
-        }
-        function onPrintToPdfRequested(filePath) {
-            webView.printToPdf(filePath, WebEngineView.A4, WebEngineView.Portrait)
-        }
-        function onPrintRequested() {
-            // No printer API in QML: render a temporary PDF and let the PDF
-            // viewer print it.
-            const path = FileHelper.tempPdfPath()
-            if (path === "") {
-                Notifier.notify(qsTr("Print failed"), root.tab.title, "document-print")
-                return
-            }
-            root.printPath = path
-            webView.printToPdf(path, WebEngineView.A4, WebEngineView.Portrait)
-        }
-        function onSavePageRequested(filePath, format) { webView.save(filePath, format) }
         function onToggleDevToolsRequested() { root.setDevToolsOpen(!root.tab.devToolsOpen) }
         function onInspectElementRequested() {
             root.setDevToolsOpen(true)
-            webView.triggerWebAction(WebEngineView.InspectElement)
-        }
-        function onCloseRequested() { root.tabModel.closeTabObject(root.tab) }
-        function onOpenTabRequested(url, background) {
-            root.tabModel.addTabWithProfile(root.tab.profile, url, background)
-        }
-        function onNeighborTabRequested(delta) {
-            const count = root.tabModel.count
-            const index = root.tabModel.indexOfTab(root.tab)
-            if (count > 1 && index >= 0)
-                root.tabModel.setCurrentIndex((index + delta + count) % count)
-        }
-        function onDownloadUrlRequested(url, fileName) {
-            // Qt Quick has no "download this URL" call: an anchor with the
-            // download attribute asks the profile for the file.
-            webView.runJavaScript(
-                "(function(url, name) {"
-                + "const a = document.createElement('a'); a.href = url;"
-                + "if (name) a.download = name; a.style.display = 'none';"
-                + "(document.body || document.documentElement).appendChild(a);"
-                + "a.click(); a.remove(); })("
-                + JSON.stringify(url.toString()) + ", " + JSON.stringify(fileName) + ");",
-                WebEngineScript.ApplicationWorld)
-        }
-        function onForwardRequested() { if (webView.canGoForward) webView.goForward() }
-        function onReloadRequested() { webView.reload() }
-        function onStopRequested() { webView.stop() }
-        function onZoomInRequested() { webView.zoomFactor = ZoomManager.step(webView.zoomFactor, 1) }
-        function onZoomOutRequested() { webView.zoomFactor = ZoomManager.step(webView.zoomFactor, -1) }
-        function onResetZoomRequested() { webView.zoomFactor = 1.0 }
-
-        function onFindRequested(text, backward, caseSensitive) {
-            let flags = 0
-            if (backward)
-                flags |= WebEngineView.FindBackward
-            if (caseSensitive)
-                flags |= WebEngineView.FindCaseSensitively
-            webView.findText(text, flags)
-        }
-        function onStopFindRequested() { webView.findText("") }
-        function onFocusPageRequested() { webView.forceActiveFocus() }
-        function onExitFullScreenRequested() {
-            webView.triggerWebAction(WebEngineView.ExitFullScreen)
+            pageView.triggerWebAction(WebEngineView.InspectElement)
         }
     }
 
-    // Leaving the tab (switching or closing) ends its page's full screen and
-    // closes its context menu, so the window can go back to normal.
     onVisibleChanged: {
-        if (visible)
-            return
-        contextMenu.close()
-        if (root.tab && root.tab.isFullScreen)
-            root.tab.exitFullScreen()
+        if (!visible)
+            leaveFullScreenAndMenu()
     }
 
     Component.onCompleted: {
         if (root.tab.url.toString() !== "")
-            webView.url = root.tab.url
+            pageView.url = root.tab.url
     }
 }

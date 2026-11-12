@@ -1,95 +1,133 @@
-// Kondor extension runtime (API version 1), page side. ExtensionManager puts
-// this function in front of every content script and calls it with the
-// extension's configuration: its id, a per-extension token, a snapshot of its
-// settings and the page flags. The returned object is the `kondor` global of
-// the extension's scripts; it is only reachable through a closure.
-function __kondorCreateRuntime(cfg) {
-    "use strict";
+function __kondorBridgeError() {
+    return new Error("The Kondor extension bridge is not available");
+}
 
-    function call(method, args) {
-        const channel = window.__kondorChannel;
-        if (!channel)
-            return Promise.reject(new Error("The Kondor extension bridge is not available"));
-        return channel.then(function (objects) {
-            const api = objects.kondorExtensions;
-            if (!api)
-                throw new Error("The Kondor extension bridge is not available");
-            return new Promise(function (resolve, reject) {
-                api.request(JSON.stringify({id: cfg.id, token: cfg.token, method: method, arguments: args === undefined ? [] : args}),
-                            function (reply) {
-                    let result;
-                    try {
-                        result = JSON.parse(reply);
-                    } catch (e) {
-                        reject(new Error("Invalid reply from Kondor"));
-                        return;
-                    }
-                    if (result.ok)
-                        resolve(result.value);
-                    else
-                        reject(new Error(result.error));
-                });
-            });
-        });
+function __kondorParseReply(reply) {
+    try {
+        return JSON.parse(reply);
+    } catch (e) {
+        return { ok: false, error: "Invalid reply from Kondor" };
     }
+}
 
-    let values = Object.freeze(Object.assign({}, cfg.settings));
-    const settingsListeners = [];
-    const actionListeners = [];
+function __kondorSettle(reply, resolve, reject) {
+    const result = __kondorParseReply(reply);
+    if (result.ok)
+        resolve(result.value);
+    else
+        reject(new Error(result.error));
+}
 
-    // Called by the browser after the user changed a setting.
+function __kondorRequest(api, cfg, request) {
+    if (!api)
+        throw __kondorBridgeError();
+    const payload = JSON.stringify({ id: cfg.id, token: cfg.token, method: request.method,
+                                     arguments: request.args === undefined ? [] : request.args });
+    return new Promise((resolve, reject) =>
+        api.request(payload, (reply) => __kondorSettle(reply, resolve, reject)));
+}
+
+function __kondorCall(cfg, method, args) {
+    const channel = window.__kondorChannel;
+    if (!channel)
+        return Promise.reject(__kondorBridgeError());
+    return channel.then((objects) =>
+        __kondorRequest(objects.kondorExtensions, cfg, { method: method, args: args }));
+}
+
+function __kondorNewState(cfg) {
+    return {
+        values: Object.freeze(Object.assign({}, cfg.settings)),
+        settingsListeners: [],
+        actionListeners: []
+    };
+}
+
+function __kondorNotifyAll(listeners, args) {
+    listeners.slice().forEach((listener) => {
+        try { listener(...args); } catch (e) { console.error(e); }
+    });
+}
+
+function __kondorRegisterSettingsHook(cfg, state) {
     window.__kondorExtensions = window.__kondorExtensions || {};
-    window.__kondorExtensions[cfg.id] = function (updated) {
-        values = Object.freeze(Object.assign({}, updated));
-        settingsListeners.slice().forEach(function (listener) {
-            try { listener(values); } catch (e) { console.error(e); }
-        });
+    window.__kondorExtensions[cfg.id] = (updated) => {
+        state.values = Object.freeze(Object.assign({}, updated));
+        __kondorNotifyAll(state.settingsListeners, [state.values]);
     };
+}
 
-    // Called by the browser when the user picks a toolbar menu item.
+function __kondorRegisterActionHook(cfg, state) {
     window.__kondorExtensionActions = window.__kondorExtensionActions || {};
-    window.__kondorExtensionActions[cfg.id] = function (itemId, checked) {
-        actionListeners.slice().forEach(function (listener) {
-            try { listener(itemId, checked); } catch (e) { console.error(e); }
-        });
-    };
+    window.__kondorExtensionActions[cfg.id] = (itemId, checked) =>
+        __kondorNotifyAll(state.actionListeners, [itemId, checked]);
+}
 
-    return Object.freeze({
+function __kondorIdentityApi(cfg) {
+    return {
         extension: Object.freeze({ id: cfg.id, version: cfg.version }),
         locale: cfg.locale,
-        isPrivate: cfg.isPrivate,
-        settings: Object.freeze({
-            get values() { return values; },
-            onChanged: function (callback) { settingsListeners.push(callback); }
-        }),
-        storage: Object.freeze({
-            get: function (key) { return call("storage.get", [key]); },
-            set: function (key, value) { return call("storage.set", [key, value]); },
-            remove: function (key) { return call("storage.remove", [key]); },
-            keys: function () { return call("storage.keys"); }
-        }),
-        onAction: function (callback) { actionListeners.push(callback); },
-        action: Object.freeze({
-            setChecked: function (itemId, checked) {
-                return call("action.setChecked", [itemId, !!checked]);
-            }
-        }),
-        tabs: Object.freeze({
-            back: function () { return call("tabs.back"); },
-            forward: function () { return call("tabs.forward"); },
-            reload: function () { return call("tabs.reload"); },
-            close: function () { return call("tabs.close"); },
-            open: function (url, options) {
-                return call("tabs.open", [String(url), !!(options && options.background)]);
-            },
-            next: function () { return call("tabs.next"); },
-            previous: function () { return call("tabs.previous"); }
-        }),
-        download: function (url, fileName) {
-            return call("download", [String(url), fileName === undefined ? "" : String(fileName)]);
-        },
-        notify: function (title, body) {
-            return call("notify", [String(title), String(body === undefined ? "" : body)]);
-        }
+        isPrivate: cfg.isPrivate
+    };
+}
+
+function __kondorSettingsApi(state) {
+    return Object.freeze({
+        get values() { return state.values; },
+        onChanged: (callback) => { state.settingsListeners.push(callback); }
     });
+}
+
+function __kondorStorageApi(cfg) {
+    const call = (method, args) => __kondorCall(cfg, "storage." + method, args);
+    return Object.freeze({
+        get: (key) => call("get", [key]),
+        set: (key, value) => call("set", [key, value]),
+        remove: (key) => call("remove", [key]),
+        keys: () => call("keys")
+    });
+}
+
+function __kondorActionApi(cfg) {
+    return Object.freeze({
+        setChecked: (itemId, checked) =>
+            __kondorCall(cfg, "action.setChecked", [itemId, !!checked])
+    });
+}
+
+function __kondorTabsApi(cfg) {
+    const call = (method, args) => __kondorCall(cfg, "tabs." + method, args);
+    const open = (url, options) => call("open", [String(url), !!(options && options.background)]);
+    return Object.freeze({
+        back: () => call("back"), forward: () => call("forward"),
+        reload: () => call("reload"), close: () => call("close"),
+        open: open, next: () => call("next"), previous: () => call("previous")
+    });
+}
+
+function __kondorMessagingApi(cfg) {
+    return {
+        download: (url, fileName) => __kondorCall(cfg, "download",
+            [String(url), fileName === undefined ? "" : String(fileName)]),
+        notify: (title, body) => __kondorCall(cfg, "notify",
+            [String(title), String(body === undefined ? "" : body)])
+    };
+}
+
+function __kondorOwnApis(cfg, state) {
+    return {
+        settings: __kondorSettingsApi(state),
+        storage: __kondorStorageApi(cfg),
+        onAction: (callback) => { state.actionListeners.push(callback); },
+        action: __kondorActionApi(cfg),
+        tabs: __kondorTabsApi(cfg)
+    };
+}
+
+function __kondorCreateRuntime(cfg) {
+    const state = __kondorNewState(cfg);
+    __kondorRegisterSettingsHook(cfg, state);
+    __kondorRegisterActionHook(cfg, state);
+    return Object.freeze(Object.assign({}, __kondorIdentityApi(cfg),
+                                       __kondorOwnApis(cfg, state), __kondorMessagingApi(cfg)));
 }

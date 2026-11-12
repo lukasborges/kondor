@@ -4,13 +4,9 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Settings → Passwords → Add Password…: saves a login to KWallet by hand.
-// Saving acts at once (like Delete); the Configure window's OK/Apply/Cancel
-// do not affect it. The fields are cleared whenever the dialog closes.
 Dialog {
     id: root
 
-    // Emitted after the login was saved; carries its origin and username.
     signal saved(string origin, string username)
 
     readonly property string origin: PasswordStore.originFromInput(websiteField.text)
@@ -51,7 +47,6 @@ Dialog {
 
     onAboutToShow: websiteField.forceActiveFocus()
     onClosed: root.clear()
-    // Save must not close the dialog before the result is known.
     Component.onCompleted: {
         const save = standardButton(Dialog.Save)
         save.DialogButtonBox.buttonRole = DialogButtonBox.ActionRole

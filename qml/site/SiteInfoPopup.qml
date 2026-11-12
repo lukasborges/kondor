@@ -5,8 +5,6 @@ import QtWebEngine
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Site information opened from the security indicator in the address bar:
-// the connection state and the permissions the profile remembers for the site.
 Popup {
     id: root
 
@@ -18,82 +16,28 @@ Popup {
     modal: false
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
-    readonly property string securityState: tab ? tab.security.state : ""
+    function isDecided(permission) {
+        return permission.isValid
+            && (permission.state === WebEnginePermission.State.Granted
+                || permission.state === WebEnginePermission.State.Denied)
+    }
 
-    function stateIcon() {
-        switch (securityState) {
-        case "secure":
-            return "security-high"
-        case "insecure":
-            return "security-medium"
-        case "error":
-            return "security-low"
+    function rowFor(permission) {
+        return {
+            icon: typeInfo.iconFor(permission.permissionType),
+            label: typeInfo.labelFor(permission.permissionType),
+            granted: permission.state === WebEnginePermission.State.Granted,
+            permission: permission
         }
-        return "text-html"
     }
 
-    function stateText() {
-        switch (securityState) {
-        case "secure":
-            return qsTr("Connection is secure")
-        case "insecure":
-            return qsTr("Not Secure")
-        case "error":
-            return qsTr("Your connection is not private")
-        }
-        return qsTr("Local file")
-    }
-
-    function stateColor() {
-        switch (securityState) {
-        case "secure":
-            return Kirigami.Theme.positiveTextColor
-        case "insecure":
-        case "error":
-            return Kirigami.Theme.negativeTextColor
-        }
-        return Kirigami.Theme.disabledTextColor
-    }
-
-    function siteName() {
-        if (!tab)
-            return ""
-        const text = tab.url.toString()
-        const match = text.match(/^[a-z][a-z0-9+.-]*:\/\/([^\/?#]+)/i)
-        return match ? match[1] : text
-    }
-
-    // Permissions are stored per origin (scheme + host + port).
-    function originUrl() {
-        if (!tab)
-            return ""
-        const match = tab.url.toString().match(/^(https?:\/\/[^\/?#]+)/i)
-        return match ? match[1] : ""
+    function decidedPermissions(origin) {
+        return Array.from(tab.profile.listPermissionsForOrigin(origin)).filter(isDecided)
     }
 
     function reload() {
-        permissions = []
-        const origin = originUrl()
-        if (origin.length === 0)
-            return
-
-        const found = tab.profile.listPermissionsForOrigin(origin)
-        let rows = []
-        for (let i = 0; i < found.length; ++i) {
-            const permission = found[i]
-            if (!permission.isValid)
-                continue
-            if (permission.state !== WebEnginePermission.State.Granted
-                    && permission.state !== WebEnginePermission.State.Denied)
-                continue
-            rows.push({
-                icon: typeInfo.iconFor(permission.permissionType),
-                label: typeInfo.labelFor(permission.permissionType),
-                granted: permission.state === WebEnginePermission.State.Granted,
-                permission: permission
-            })
-        }
-        permissions = rows
+        const origin = security.originUrl()
+        permissions = origin.length === 0 ? [] : decidedPermissions(origin).map(rowFor)
     }
 
     function revoke(permission) {
@@ -101,7 +45,6 @@ Popup {
             return
         permission.reset()
         reload()
-        // The backend may apply the reset asynchronously; refresh once more.
         Qt.callLater(reload)
     }
 
@@ -109,6 +52,11 @@ Popup {
     onTabChanged: {
         if (opened)
             reload()
+    }
+
+    SiteSecurityState {
+        id: security
+        tab: root.tab
     }
 
     PermissionTypeInfo {
@@ -122,7 +70,7 @@ Popup {
             spacing: Kirigami.Units.largeSpacing
 
             Kirigami.Icon {
-                source: root.stateIcon()
+                source: security.stateIcon
                 Layout.preferredWidth: 32
                 Layout.preferredHeight: 32
             }
@@ -135,13 +83,13 @@ Popup {
                     level: 4
                     Layout.fillWidth: true
                     elide: Text.ElideRight
-                    text: root.siteName()
+                    text: security.siteName()
                 }
 
                 Label {
                     Layout.fillWidth: true
-                    text: root.stateText()
-                    color: root.stateColor()
+                    text: security.stateText
+                    color: security.stateColor
                 }
             }
         }

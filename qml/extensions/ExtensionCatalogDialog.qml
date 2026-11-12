@@ -6,9 +6,6 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// "Get New Extensions…": the entries of the Kondor extensions catalog, with an
-// Install / Installed / Update button each. Install downloads and checks the
-// package, then the install confirmation shows its permissions.
 Dialog {
     id: root
 

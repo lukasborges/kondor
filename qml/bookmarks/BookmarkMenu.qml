@@ -2,76 +2,62 @@ import QtQuick
 import QtQuick.Controls
 import Kondor
 
-// A menu that lists the contents of one bookmark folder. Used for the folders
-// in the bookmarks bar and, with `showCommands`, as the main menu's
-// "Bookmarks" submenu. The items are built when the menu opens, so they always
-// reflect the database.
 Menu {
     id: root
 
-    // Folder to list. -1 lists nothing (the commands of the main menu only).
     property var folderId: -1
-    // Show the bookmark commands above the folder contents.
     property bool showCommands: false
 
     signal bookmarkActivated(string url, bool background)
     signal bookmarkThisPageRequested()
     signal manageBookmarksRequested()
 
-    // The four static children below; everything after them is rebuilt.
     readonly property int staticCount: 4
 
     onAboutToShow: root.rebuild()
 
     function rebuild() {
-        while (root.count > root.staticCount) {
-            const item = root.itemAt(root.count - 1)
-            if (!item)
-                break
-            // removeItem deletes the item, unlike takeItem.
-            root.removeItem(item)
-        }
+        root.removeDynamicItems()
         if (root.folderId > 0)
             root.appendFolder(root, root.folderId, 0)
     }
 
+    function removeDynamicItems() {
+        while (root.count > root.staticCount && root.itemAt(root.count - 1))
+            root.removeItem(root.itemAt(root.count - 1))
+    }
+
     function appendFolder(menu, id, depth) {
-        const entries = BookmarkManager.folderContents(id)
-        let added = 0
-        for (let i = 0; i < entries.length; ++i) {
-            const entry = entries[i]
-            if (entry.isFolder) {
-                // Deeply nested folders are not much use in a menu; the
-                // manager window shows the whole tree anyway.
-                if (depth >= 8)
-                    continue
-                const submenu = menuComponent.createObject(null)
-                submenu.title = entry.title
-                // qmllint disable missing-property
-                submenu.icon.name = "folder"
-                // qmllint enable missing-property
-                root.appendFolder(submenu, entry.id, depth + 1)
-                menu.addMenu(submenu)
-                ++added
-            } else {
-                const item = bookmarkComponent.createObject(null, {
-                    pageUrl: entry.url,
-                    label: entry.title.length ? entry.title : entry.url
-                })
-                const url = entry.url
-                // qmllint disable missing-property
-                item.triggered.connect(function() {
-                    root.bookmarkActivated(url, BookmarkManager.ctrlPressed())
-                })
-                // qmllint enable missing-property
-                menu.addItem(item)
-                ++added
-            }
-        }
-        // An empty folder still opens a normal-sized menu with a disabled
-        // "(Empty)" item, like Firefox, instead of a blank popup.
-        if (added === 0)
+        const entries = BookmarkManager.folderContents(id).filter(function(entry) {
+            return !entry.isFolder || depth < 8
+        })
+        entries.forEach(function(entry) { root.appendEntry(menu, entry, depth) })
+        if (entries.length === 0)
             menu.addItem(emptyComponent.createObject(null))
+    }
+
+    function appendEntry(menu, entry, depth) {
+        if (entry.isFolder)
+            root.appendSubmenu(menu, entry, depth)
+        else
+            root.appendBookmark(menu, entry)
+    }
+
+    function appendSubmenu(menu, entry, depth) {
+        const submenu = menuComponent.createObject(null, { title: entry.title })
+        root.appendFolder(submenu, entry.id, depth + 1)
+        menu.addMenu(submenu)
+    }
+
+    function appendBookmark(menu, entry) {
+        const item = bookmarkComponent.createObject(null, {
+            pageUrl: entry.url,
+            label: entry.title.length ? entry.title : entry.url
+        })
+        item["triggered"].connect(function() {
+            root.bookmarkActivated(entry.url, BookmarkManager.ctrlPressed())
+        })
+        menu.addItem(item)
     }
 
     MenuItem {
@@ -105,7 +91,9 @@ Menu {
 
     Component {
         id: menuComponent
-        Menu {}
+        Menu {
+            icon.name: "folder"
+        }
     }
 
     Component {

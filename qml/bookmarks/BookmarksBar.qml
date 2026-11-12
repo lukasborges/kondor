@@ -6,8 +6,6 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Thin bar under the navigation toolbar with the "Bookmarks Toolbar" folder.
-// Shown with Ctrl+Shift+B (Settings.showBookmarksBar).
 ToolBar {
     id: root
 
@@ -17,14 +15,23 @@ ToolBar {
         const tab = root.tabModel.currentTab
         if (!tab || !url)
             return
-        if (background) {
-            // A new tab keeps the current mode: private stays private.
-            const profile = tab.isPrivate ? ProfileManager.createPrivateProfile()
-                                          : ProfileManager.defaultProfile()
-            root.tabModel.addTabWithProfile(profile, url, true)
-        } else {
+        if (background)
+            root.openInBackgroundTab(tab, url)
+        else
             tab.navigateTo(url)
-        }
+    }
+
+    function openInBackgroundTab(tab, url) {
+        const profile = tab.isPrivate ? ProfileManager.createPrivateProfile()
+                                      : ProfileManager.defaultProfile()
+        root.tabModel.addTabWithProfile(profile, url, true)
+    }
+
+    function activate(button) {
+        if (!button.isFolder)
+            return root.openBookmark(button.url, BookmarkManager.ctrlPressed())
+        folderMenu.folderId = button.id
+        folderMenu.popup(button, 0, button.height)
     }
 
     visible: Settings.showBookmarksBar
@@ -79,26 +86,12 @@ ToolBar {
                     }
                 }
 
-                onClicked: {
-                    if (barButton.isFolder) {
-                        folderMenu.folderId = barButton.id
-                        // Line the menu up with the button's bottom-left
-                        // corner, wherever the click or key press landed.
-                        folderMenu.popup(barButton, 0, barButton.height)
-                    } else {
-                        root.openBookmark(barButton.url, BookmarkManager.ctrlPressed())
-                    }
-                }
+                onClicked: root.activate(barButton)
 
-                // Middle click opens the bookmark in a background tab; the
-                // button itself only handles the left button.
                 MouseArea {
                     anchors.fill: parent
                     acceptedButtons: Qt.MiddleButton
-                    onClicked: {
-                        if (!barButton.isFolder)
-                            root.openBookmark(barButton.url, true)
-                    }
+                    onClicked: if (!barButton.isFolder) root.openBookmark(barButton.url, true)
                 }
             }
         }

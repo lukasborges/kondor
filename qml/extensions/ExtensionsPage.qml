@@ -8,11 +8,6 @@ import QtCore
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Settings → Extensions: the installed Kondor extensions, with "Get New
-// Extensions…" (the community catalog) and "Install from File…". Switching,
-// configuring and removing an extension act at once, like "Clear Cookies and
-// Cache Now"; only "Update extensions automatically" is a pending option owned
-// by the Configure window.
 ColumnLayout {
     id: root
 
@@ -21,9 +16,10 @@ ColumnLayout {
 
     spacing: Kirigami.Units.largeSpacing
 
-    function matchesFilter(name, description) {
-        const text = filterField.text.trim().toLowerCase()
-        return text === "" || (name + " " + description).toLowerCase().includes(text)
+    function confirmRemoval(id, name) {
+        removeDialog.extensionId = id
+        removeDialog.extensionName = name
+        removeDialog.open()
     }
 
     function openCatalog() {
@@ -84,99 +80,10 @@ ColumnLayout {
             clip: true
             model: ExtensionManager
 
-            delegate: ItemDelegate {
-                id: row
-                required property string id
-                required property string name
-                required property string description
-                required property string version
-                required property string iconSource
-                // `enabled` is also a property of the delegate: read the role through `model`.
-                required property var model
-                required property var permissions
-                required property bool updateNeedsReview
-
-                width: ListView.view.width
-                visible: root.matchesFilter(row.name, row.description)
-                height: visible ? implicitHeight : 0
-                // The row only shows information: its controls do the work.
-                hoverEnabled: false
-                down: false
-
-                contentItem: RowLayout {
-                    spacing: Kirigami.Units.largeSpacing
-
-                    ExtensionIcon {
-                        source: row.iconSource
-                        size: Kirigami.Units.iconSizes.medium
-                    }
-
-                    ColumnLayout {
-                        Layout.fillWidth: true
-                        spacing: 0
-
-                        RowLayout {
-                            Label {
-                                text: row.name
-                                font.bold: true
-                            }
-                            Label {
-                                text: row.version
-                                opacity: 0.7
-                                font: Kirigami.Theme.smallFont
-                            }
-                        }
-                        Label {
-                            Layout.fillWidth: true
-                            text: row.description
-                            elide: Text.ElideRight
-                        }
-                        Label {
-                            Layout.fillWidth: true
-                            visible: row.permissions.length > 0
-                            text: row.permissions.length > 0 ? row.permissions[0] : ""
-                            opacity: 0.7
-                            font: Kirigami.Theme.smallFont
-                            elide: Text.ElideRight
-                        }
-                    }
-
-                    Button {
-                        visible: row.updateNeedsReview
-                        text: qsTr("Update…")
-                        icon.name: "update-none"
-                        onClicked: ExtensionCatalog.install(row.id)
-                    }
-                    Switch {
-                        checked: row.model.enabled
-                        onToggled: ExtensionManager.setEnabled(row.id, checked)
-                        ToolTip.visible: hovered
-                        ToolTip.text: row.model.enabled ? qsTr("Turn off") : qsTr("Turn on")
-                        ToolTip.delay: 600
-                    }
-                    ToolButton {
-                        icon.name: "configure"
-                        text: qsTr("Configure…")
-                        display: AbstractButton.IconOnly
-                        ToolTip.visible: hovered
-                        ToolTip.text: text
-                        ToolTip.delay: 600
-                        onClicked: configureDialog.openFor(row.id)
-                    }
-                    ToolButton {
-                        icon.name: "edit-delete"
-                        text: qsTr("Remove")
-                        display: AbstractButton.IconOnly
-                        ToolTip.visible: hovered
-                        ToolTip.text: text
-                        ToolTip.delay: 600
-                        onClicked: {
-                            removeDialog.extensionId = row.id
-                            removeDialog.extensionName = row.name
-                            removeDialog.open()
-                        }
-                    }
-                }
+            delegate: ExtensionDelegate {
+                filterText: filterField.text
+                onConfigureRequested: function(id) { configureDialog.openFor(id) }
+                onRemoveRequested: function(id, name) { root.confirmRemoval(id, name) }
             }
         }
     }

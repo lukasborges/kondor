@@ -4,11 +4,6 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Confirmation before an extension is installed, from the catalog or from a
-// .kondorext file: what it is, what it will be able to do and, for a file,
-// that it does not come from the catalog. It shows the pending install of
-// ExtensionManager; for a file that is not a valid extension it only shows the
-// error.
 Dialog {
     id: root
 

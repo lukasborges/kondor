@@ -2,88 +2,87 @@ import QtQuick
 import QtWebEngine
 import Kondor
 
-// Shared wording and Breeze icon names for every site permission type, used by
-// the request bar and by the Site Permissions dialog.
 QtObject {
-    function iconFor(permissionType) {
-        switch (permissionType) {
-        case WebEnginePermission.PermissionType.MediaAudioCapture:
-            return "audio-input-microphone"
-        case WebEnginePermission.PermissionType.MediaVideoCapture:
-            return "camera-web"
-        case WebEnginePermission.PermissionType.MediaAudioVideoCapture:
-            return "camera-web"
-        case WebEnginePermission.PermissionType.DesktopVideoCapture:
-            return "video-display"
-        case WebEnginePermission.PermissionType.DesktopAudioVideoCapture:
-            return "video-display"
-        case WebEnginePermission.PermissionType.MouseLock:
-            return "input-mouse"
-        case WebEnginePermission.PermissionType.Notifications:
-            return "preferences-desktop-notification"
-        case WebEnginePermission.PermissionType.Geolocation:
-            return "mark-location"
-        case WebEnginePermission.PermissionType.ClipboardReadWrite:
-            return "edit-paste"
-        case WebEnginePermission.PermissionType.LocalFontsAccess:
-            return "preferences-desktop-font"
+    id: root
+
+    readonly property var types: {
+        const type = WebEnginePermission.PermissionType
+        return {
+            [type.MediaAudioCapture]: {
+                icon: "audio-input-microphone",
+                label: qsTr("Microphone"),
+                sentence: qsTr("<b>%1</b> wants to use your <b>microphone</b>.")
+            },
+            [type.MediaVideoCapture]: {
+                icon: "camera-web",
+                label: qsTr("Camera"),
+                sentence: qsTr("<b>%1</b> wants to use your <b>camera</b>.")
+            },
+            [type.MediaAudioVideoCapture]: {
+                icon: "camera-web",
+                label: qsTr("Camera and Microphone"),
+                sentence: qsTr("<b>%1</b> wants to use your <b>camera</b> and <b>microphone</b>.")
+            },
+            [type.DesktopVideoCapture]: {
+                icon: "video-display",
+                label: qsTr("Screen"),
+                sentence: qsTr("<b>%1</b> wants to share your <b>screen</b>.")
+            },
+            [type.DesktopAudioVideoCapture]: {
+                icon: "video-display",
+                label: qsTr("Screen and Microphone"),
+                sentence: qsTr("<b>%1</b> wants to share your <b>screen</b> and <b>microphone</b>.")
+            },
+            [type.MouseLock]: {
+                icon: "input-mouse",
+                label: qsTr("Pointer Lock"),
+                sentence: qsTr("<b>%1</b> wants to lock your <b>pointer</b>.")
+            },
+            [type.Notifications]: {
+                icon: "preferences-desktop-notification",
+                label: qsTr("Notifications"),
+                sentence: qsTr("<b>%1</b> wants to show you <b>notifications</b>.")
+            },
+            [type.Geolocation]: {
+                icon: "mark-location",
+                label: qsTr("Location"),
+                sentence: qsTr("<b>%1</b> wants to know your <b>location</b>.")
+            },
+            [type.ClipboardReadWrite]: {
+                icon: "edit-paste",
+                label: qsTr("Clipboard"),
+                sentence: qsTr("<b>%1</b> wants to read your <b>clipboard</b>.")
+            },
+            [type.LocalFontsAccess]: {
+                icon: "preferences-desktop-font",
+                label: qsTr("Local Fonts"),
+                sentence: qsTr("<b>%1</b> wants to use your <b>local fonts</b>.")
+            }
         }
-        return "security-high"
+    }
+
+    readonly property var unknownType: ({
+        icon: "security-high",
+        label: qsTr("Permission"),
+        sentence: qsTr("<b>%1</b> is requesting a <b>permission</b>.")
+    })
+
+    function infoFor(permissionType) {
+        return types[permissionType] ?? unknownType
+    }
+
+    function iconFor(permissionType) {
+        return infoFor(permissionType).icon
     }
 
     function labelFor(permissionType) {
-        switch (permissionType) {
-        case WebEnginePermission.PermissionType.MediaAudioCapture:
-            return qsTr("Microphone")
-        case WebEnginePermission.PermissionType.MediaVideoCapture:
-            return qsTr("Camera")
-        case WebEnginePermission.PermissionType.MediaAudioVideoCapture:
-            return qsTr("Camera and Microphone")
-        case WebEnginePermission.PermissionType.DesktopVideoCapture:
-            return qsTr("Screen")
-        case WebEnginePermission.PermissionType.DesktopAudioVideoCapture:
-            return qsTr("Screen and Microphone")
-        case WebEnginePermission.PermissionType.MouseLock:
-            return qsTr("Pointer Lock")
-        case WebEnginePermission.PermissionType.Notifications:
-            return qsTr("Notifications")
-        case WebEnginePermission.PermissionType.Geolocation:
-            return qsTr("Location")
-        case WebEnginePermission.PermissionType.ClipboardReadWrite:
-            return qsTr("Clipboard")
-        case WebEnginePermission.PermissionType.LocalFontsAccess:
-            return qsTr("Local Fonts")
-        }
-        return qsTr("Permission")
+        return infoFor(permissionType).label
     }
 
     function sentenceFor(permissionType, host) {
-        switch (permissionType) {
-        case WebEnginePermission.PermissionType.MediaAudioCapture:
-            return qsTr("<b>%1</b> wants to use your <b>microphone</b>.").arg(host)
-        case WebEnginePermission.PermissionType.MediaVideoCapture:
-            return qsTr("<b>%1</b> wants to use your <b>camera</b>.").arg(host)
-        case WebEnginePermission.PermissionType.MediaAudioVideoCapture:
-            return qsTr("<b>%1</b> wants to use your <b>camera</b> and <b>microphone</b>.").arg(host)
-        case WebEnginePermission.PermissionType.DesktopVideoCapture:
-            return qsTr("<b>%1</b> wants to share your <b>screen</b>.").arg(host)
-        case WebEnginePermission.PermissionType.DesktopAudioVideoCapture:
-            return qsTr("<b>%1</b> wants to share your <b>screen</b> and <b>microphone</b>.").arg(host)
-        case WebEnginePermission.PermissionType.MouseLock:
-            return qsTr("<b>%1</b> wants to lock your <b>pointer</b>.").arg(host)
-        case WebEnginePermission.PermissionType.Notifications:
-            return qsTr("<b>%1</b> wants to show you <b>notifications</b>.").arg(host)
-        case WebEnginePermission.PermissionType.Geolocation:
-            return qsTr("<b>%1</b> wants to know your <b>location</b>.").arg(host)
-        case WebEnginePermission.PermissionType.ClipboardReadWrite:
-            return qsTr("<b>%1</b> wants to read your <b>clipboard</b>.").arg(host)
-        case WebEnginePermission.PermissionType.LocalFontsAccess:
-            return qsTr("<b>%1</b> wants to use your <b>local fonts</b>.").arg(host)
-        }
-        return qsTr("<b>%1</b> is requesting a <b>permission</b>.").arg(host)
+        return infoFor(permissionType).sentence.arg(host)
     }
 
-    // "https://meet.jit.si/room" -> "meet.jit.si"
     function hostFor(origin) {
         if (!origin)
             return ""

@@ -4,9 +4,6 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Inline prompt of the password manager: offers to save the login just
-// submitted in this tab, or says once that KWallet is unavailable. It belongs
-// to the tab, so switching tabs keeps it with the page.
 InlineBar {
     id: root
 

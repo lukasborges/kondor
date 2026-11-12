@@ -4,15 +4,10 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-// Settings → Passwords → Import…: review of a CSV export before it is saved to
-// KWallet. The parsed logins stay in PasswordStore (C++); this dialog only sees
-// counts. Cancel, Close and closing the window drop the pending import.
 Dialog {
     id: root
 
-    // The map returned by PasswordStore.prepareImport().
     property var info: ({})
-    // Emitted after the import ran; `count` is -1 when a write failed.
     signal imported(int count, string fileName)
 
     readonly property string error: root.info.error ? root.info.error : ""

@@ -55,9 +55,7 @@ qt_add_executable(tst_tabmodel
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
     ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ../src/adblock/adblockmanager.cpp
-    ../src/adblock/adblockinterceptor.cpp
-    ../src/adblock/filterengine.cpp
+    ${KONDOR_ADBLOCK_SOURCES}
     ../src/browser/addressresolver.cpp
     ${KONDOR_SETTINGS_SOURCES}
     ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
@@ -96,9 +94,7 @@ qt_add_executable(tst_tabpasswords
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
     ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ../src/adblock/adblockmanager.cpp
-    ../src/adblock/adblockinterceptor.cpp
-    ../src/adblock/filterengine.cpp
+    ${KONDOR_ADBLOCK_SOURCES}
     ../src/browser/addressresolver.cpp
     ${KONDOR_SETTINGS_SOURCES}
     ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
@@ -137,9 +133,7 @@ qt_add_executable(tst_tabsecurity
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
     ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ../src/adblock/adblockmanager.cpp
-    ../src/adblock/adblockinterceptor.cpp
-    ../src/adblock/filterengine.cpp
+    ${KONDOR_ADBLOCK_SOURCES}
     ../src/browser/addressresolver.cpp
     ${KONDOR_SETTINGS_SOURCES}
     ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
@@ -178,9 +172,7 @@ qt_add_executable(tst_addresssuggestions
     ../src/passwords/passwordimport.cpp
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ../src/adblock/adblockmanager.cpp
-    ../src/adblock/adblockinterceptor.cpp
-    ../src/adblock/filterengine.cpp
+    ${KONDOR_ADBLOCK_SOURCES}
     ../src/browser/addressresolver.cpp
     ${KONDOR_SETTINGS_SOURCES}
     ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
@@ -227,9 +219,7 @@ qt_add_executable(tst_addressbar
     ../src/passwords/passwordimport.cpp
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ../src/adblock/adblockmanager.cpp
-    ../src/adblock/adblockinterceptor.cpp
-    ../src/adblock/filterengine.cpp
+    ${KONDOR_ADBLOCK_SOURCES}
     ../src/browser/addressresolver.cpp
     ${KONDOR_SETTINGS_SOURCES}
     ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
@@ -305,9 +295,7 @@ qt_add_executable(tst_bookmarkswindow
     ../src/passwords/passwordimport.cpp
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ../src/adblock/adblockmanager.cpp
-    ../src/adblock/adblockinterceptor.cpp
-    ../src/adblock/filterengine.cpp
+    ${KONDOR_ADBLOCK_SOURCES}
     ../src/browser/addressresolver.cpp
     ${KONDOR_SETTINGS_SOURCES}
     ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
@@ -354,9 +342,7 @@ qt_add_executable(tst_mainmenu
     ../src/passwords/passwordimport.cpp
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ../src/adblock/adblockmanager.cpp
-    ../src/adblock/adblockinterceptor.cpp
-    ../src/adblock/filterengine.cpp
+    ${KONDOR_ADBLOCK_SOURCES}
     ../src/browser/addressresolver.cpp
     ${KONDOR_SETTINGS_SOURCES}
     ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
@@ -496,9 +482,7 @@ qt_add_executable(tst_settingswindow
     ../src/passwords/passwordimport.cpp
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ../src/adblock/adblockmanager.cpp
-    ../src/adblock/adblockinterceptor.cpp
-    ../src/adblock/filterengine.cpp
+    ${KONDOR_ADBLOCK_SOURCES}
     ../src/browser/addressresolver.cpp
     ${KONDOR_SETTINGS_SOURCES}
     ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
@@ -545,9 +529,7 @@ qt_add_executable(tst_tabstrip
     ../src/passwords/passwordimport.cpp
     ${KONDOR_TAB_MODEL_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ../src/adblock/adblockmanager.cpp
-    ../src/adblock/adblockinterceptor.cpp
-    ../src/adblock/filterengine.cpp
+    ${KONDOR_ADBLOCK_SOURCES}
     ../src/browser/addressresolver.cpp
     ${KONDOR_SETTINGS_SOURCES}
     ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
@@ -591,9 +573,7 @@ qt_add_executable(tst_sitepermissions
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
     ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ../src/adblock/adblockmanager.cpp
-    ../src/adblock/adblockinterceptor.cpp
-    ../src/adblock/filterengine.cpp
+    ${KONDOR_ADBLOCK_SOURCES}
     ../src/browser/addressresolver.cpp
     ${KONDOR_SETTINGS_SOURCES}
     ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
@@ -639,9 +619,7 @@ qt_add_executable(tst_sessionmanager
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
     ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ../src/adblock/adblockmanager.cpp
-    ../src/adblock/adblockinterceptor.cpp
-    ../src/adblock/filterengine.cpp
+    ${KONDOR_ADBLOCK_SOURCES}
     ../src/browser/addressresolver.cpp
     ${KONDOR_SETTINGS_SOURCES}
     ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
@@ -755,7 +733,7 @@ target_link_libraries(tst_sessionmanager PRIVATE Qt6::Concurrent Qt6::Network)
 
 qt_add_executable(tst_filterengine
     adblock/tst_filterengine.cpp
-    ../src/adblock/filterengine.cpp
+    ${KONDOR_FILTER_ENGINE_SOURCES}
 )
 
 target_include_directories(tst_filterengine PRIVATE
@@ -768,6 +746,31 @@ target_link_libraries(tst_filterengine PRIVATE
 )
 
 add_test(NAME tst_filterengine COMMAND tst_filterengine)
+
+qt_add_executable(tst_adblockallowlist
+    adblock/tst_adblockallowlist.cpp
+    ${KONDOR_ADBLOCK_SOURCES}
+    ${KONDOR_SETTINGS_SOURCES}
+)
+
+target_include_directories(tst_adblockallowlist PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_adblockallowlist PRIVATE
+    Qt6::Concurrent
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Network
+    Qt6::Qml
+    Qt6::Test
+    Qt6::WebEngineQuick
+)
+
+add_test(NAME tst_adblockallowlist COMMAND tst_adblockallowlist)
+set_tests_properties(tst_adblockallowlist PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)
 
 qt_add_executable(tst_passwordstore
     passwords/tst_passwordstore.cpp
@@ -852,9 +855,7 @@ qt_add_executable(tst_extensions
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
     ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ../src/adblock/adblockmanager.cpp
-    ../src/adblock/adblockinterceptor.cpp
-    ../src/adblock/filterengine.cpp
+    ${KONDOR_ADBLOCK_SOURCES}
     ../src/browser/addressresolver.cpp
     ${KONDOR_SETTINGS_SOURCES}
     ${KONDOR_DOWNLOAD_MANAGER_SOURCES}

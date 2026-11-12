@@ -158,12 +158,7 @@ qt_add_qml_module(kondor
         ${KONDOR_SUGGESTION_SOURCES}
         src/browser/zoommanager.h
         src/browser/zoommanager.cpp
-        src/adblock/filterengine.h
-        src/adblock/filterengine.cpp
-        src/adblock/adblockinterceptor.h
-        src/adblock/adblockinterceptor.cpp
-        src/adblock/adblockmanager.h
-        src/adblock/adblockmanager.cpp
+        ${KONDOR_ADBLOCK_SOURCES}
         src/passwords/passwordstore.h
         src/passwords/passwordstore.cpp
         src/passwords/passwordimport.h

@@ -120,3 +120,29 @@ set(KONDOR_SUGGESTION_SOURCES
     ${CMAKE_SOURCE_DIR}/src/browser/searchsuggestions.h
     ${CMAKE_SOURCE_DIR}/src/browser/searchsuggestions.cpp
 )
+
+set(KONDOR_FILTER_ENGINE_SOURCES
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterengine.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterengine.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterrule.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterrule.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filteroptions.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filteroptions.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterpattern.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterpattern.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterrequest.h
+)
+
+set(KONDOR_ADBLOCK_SOURCES
+    ${KONDOR_FILTER_ENGINE_SOURCES}
+    ${CMAKE_SOURCE_DIR}/src/adblock/adblockinterceptor.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/adblockinterceptor.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/adblockallowlist.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/adblockallowlist.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterlists.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterlists.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterlistdownloader.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterlistdownloader.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/adblockmanager.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/adblockmanager.cpp
+)

@@ -271,8 +271,6 @@ QStringList TestMainMenu::sequencesIn(const QString &file, const QString &patter
     return sequences;
 }
 
-// The Actions of the main menu own their sequences: BrowserShortcuts.qml must
-// not also declare a Shortcut for them, or Qt reports "Ambiguous shortcut".
 void TestMainMenu::actionsDoNotShareASequenceWithAShortcut()
 {
     const QStringList actions = sequencesIn(QStringLiteral("BrowserActions.qml"),
@@ -282,7 +280,7 @@ void TestMainMenu::actionsDoNotShareASequenceWithAShortcut()
     QVERIFY(actions.size() >= 10 && !shortcuts.isEmpty());
     for (const QString &sequence : actions) {
         for (const QString &shortcut : shortcuts)
-            QVERIFY2(!shortcut.contains(sequence), qPrintable(sequence + " is both"));
+            QVERIFY2(!shortcut.contains(sequence), qPrintable(sequence + QStringLiteral(" is both an Action and a Shortcut (ambiguous shortcut)")));
     }
 }
 

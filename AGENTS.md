@@ -178,6 +178,15 @@ the limits.
 - **Tests stay readable:** one behavior per test function, named after it
   (`removesFolderAndChildren`).
 
+Agents on the maintainer's machine also have the `clean-code` skill
+([wondelai/skills](https://github.com/wondelai/skills/tree/main/clean-code), in `~/.claude/skills/`
+and `~/.config/opencode/skills/`). Use it when writing, reviewing or refactoring code. Where it
+differs from this section, **this section wins**:
+- the limits here are stricter (10 lines, not 20);
+- no TODO comments;
+- Qt code does not throw exceptions: report failures with return values, `std::optional` or error
+  signals.
+
 ## Agent workflow
 
 - **Specs** live in `docs/specs/<NNNN>-<slug>.md` (one per issue, source of truth, edited only by

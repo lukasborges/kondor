@@ -1,6 +1,8 @@
 #include "passwords/passwordimport.h"
 
-#include "passwords/passwordstore.h"
+#include "passwords/csvreader.h"
+#include "passwords/passwordimportcolumns.h"
+#include "passwords/passwordorigin.h"
 
 #include <QHash>
 #include <QRegularExpression>
@@ -10,193 +12,120 @@ namespace PasswordImport {
 
 namespace {
 
-// RFC 4180 with LF/CRLF line ends. Blank lines are dropped.
-QList<QStringList> parseCsv(const QByteArray &data)
-{
-    QString text = QString::fromUtf8(data);
-    if (text.startsWith(QChar(0xFEFF)))
-        text.remove(0, 1);
-
-    QList<QStringList> rows;
-    QStringList row;
-    QString field;
-    bool inQuotes = false;
-    bool rowHasContent = false;
-
-    auto endField = [&] {
-        row.append(field);
-        field.clear();
-    };
-    auto endRow = [&] {
-        endField();
-        if (rowHasContent)
-            rows.append(row);
-        row.clear();
-        rowHasContent = false;
-    };
-
-    for (qsizetype i = 0; i < text.size(); ++i) {
-        const QChar c = text.at(i);
-        if (inQuotes) {
-            if (c == QLatin1Char('"')) {
-                if (i + 1 < text.size() && text.at(i + 1) == QLatin1Char('"')) {
-                    field.append(QLatin1Char('"'));
-                    ++i;
-                } else {
-                    inQuotes = false;
-                }
-            } else {
-                field.append(c);
-            }
-            continue;
-        }
-        if (c == QLatin1Char('"')) {
-            inQuotes = true;
-            rowHasContent = true;
-        } else if (c == QLatin1Char(',')) {
-            endField();
-            rowHasContent = true;
-        } else if (c == QLatin1Char('\n')) {
-            endRow();
-        } else if (c == QLatin1Char('\r')) {
-            if (i + 1 < text.size() && text.at(i + 1) == QLatin1Char('\n'))
-                ++i;
-            endRow();
-        } else {
-            field.append(c);
-            rowHasContent = true;
-        }
-    }
-    if (rowHasContent || !field.isEmpty() || !row.isEmpty())
-        endRow();
-    return rows;
-}
-
-int findColumn(const QStringList &header, const QStringList &names)
-{
-    for (int i = 0; i < header.size(); ++i) {
-        if (names.contains(header.at(i)))
-            return i;
-    }
-    return -1;
-}
-
 QString cell(const QStringList &row, int column)
 {
     return column >= 0 && column < row.size() ? row.at(column) : QString();
 }
 
-Format detectFormat(const QStringList &header)
+QStringList originsIn(const QString &sites)
 {
-    if (header.contains(QLatin1String("login_password")))
-        return Format::Bitwarden;
-    if (header.contains(QLatin1String("otpauth")) && header.contains(QLatin1String("title")))
-        return Format::OnePassword;
-    if (header.contains(QLatin1String("formactionorigin")) || header.contains(QLatin1String("httprealm")))
-        return Format::Firefox;
-    if (header.contains(QLatin1String("group")) && header.contains(QLatin1String("title")))
-        return Format::KeePassXC;
-    const QStringList chrome{QStringLiteral("name"), QStringLiteral("url"), QStringLiteral("username"),
-                             QStringLiteral("password")};
-    if (header == chrome || header == chrome + QStringList{QStringLiteral("note")})
-        return Format::Chrome;
-    return Format::Csv;
+    QStringList origins;
+    for (const QString &part : sites.split(QRegularExpression(QStringLiteral("[,\r\n]")))) {
+        const QString origin = PasswordOrigin::originFromInput(part);
+        if (!origin.isEmpty() && !origins.contains(origin))
+            origins.append(origin);
+    }
+    return origins;
+}
+
+class RowReader
+{
+public:
+    RowReader(Format format, const Columns &columns)
+        : m_columns(columns)
+    {
+        m_result.format = format;
+    }
+
+    void addRow(const QStringList &row)
+    {
+        if (isNotLogin(row))
+            ++m_result.skippedNotLogin;
+        else
+            addLoginRow(row);
+    }
+
+    Result result() const { return m_result; }
+
+private:
+    bool isNotLogin(const QStringList &row) const
+    {
+        return m_columns.type >= 0 && cell(row, m_columns.type).trimmed().toLower() != QLatin1String("login");
+    }
+
+    void addLoginRow(const QStringList &row)
+    {
+        const QStringList origins = originsIn(cell(row, m_columns.site));
+        if (origins.isEmpty())
+            ++m_result.skippedNoSite;
+        else
+            addCredentials(origins, cell(row, m_columns.user), cell(row, m_columns.password));
+    }
+
+    void addCredentials(const QStringList &origins, const QString &username, const QString &password)
+    {
+        if (username.isEmpty() || password.isEmpty()) {
+            ++m_result.skippedNoCredentials;
+            return;
+        }
+        for (const QString &origin : origins)
+            addLogin({origin, username, password});
+    }
+
+    void addLogin(const Login &login)
+    {
+        const QString key = login.origin + QLatin1Char('\n') + login.username;
+        const auto it = m_seen.constFind(key);
+        if (it != m_seen.constEnd()) {
+            m_result.logins[it.value()].password = login.password;
+            return;
+        }
+        m_seen.insert(key, int(m_result.logins.size()));
+        m_result.logins.append(login);
+    }
+
+    Columns m_columns;
+    Result m_result;
+    QHash<QString, int> m_seen;
+};
+
+Result failure(Error error)
+{
+    Result result;
+    result.error = error;
+    return result;
+}
+
+Result readRows(const QList<QStringList> &rows, const QStringList &header, const Columns &columns)
+{
+    RowReader reader(detectFormat(header), columns);
+    for (qsizetype i = 1; i < rows.size(); ++i)
+        reader.addRow(rows.at(i));
+    return reader.result();
 }
 
 }
 
 QString formatName(Format format)
 {
-    switch (format) {
-    case Format::Bitwarden:
-        return QStringLiteral("Bitwarden");
-    case Format::OnePassword:
-        return QStringLiteral("1Password");
-    case Format::Firefox:
-        return QStringLiteral("Firefox");
-    case Format::Chrome:
-        return QStringLiteral("Chrome");
-    case Format::KeePassXC:
-        return QStringLiteral("KeePassXC");
-    case Format::Csv:
-        break;
-    }
-    return QStringLiteral("CSV");
+    static const QStringList names{QStringLiteral("Bitwarden"), QStringLiteral("1Password"),
+                                   QStringLiteral("Firefox"), QStringLiteral("Chrome"),
+                                   QStringLiteral("KeePassXC"), QStringLiteral("CSV")};
+    return names.at(int(format));
 }
 
 Result parse(const QByteArray &csv)
 {
-    Result result;
-    const QList<QStringList> rows = parseCsv(csv);
-    if (rows.isEmpty()) {
-        result.error = Error::Empty;
-        return result;
-    }
-
-    QStringList header;
-    for (const QString &name : rows.first())
-        header.append(name.trimmed().toLower());
-
-    const int siteColumn = findColumn(header, {QStringLiteral("url"), QStringLiteral("login_uri"),
-                                               QStringLiteral("website"), QStringLiteral("uri"),
-                                               QStringLiteral("web site"), QStringLiteral("login url")});
-    const int userColumn = findColumn(header, {QStringLiteral("username"), QStringLiteral("login_username"),
-                                               QStringLiteral("user name"), QStringLiteral("login"),
-                                               QStringLiteral("login name")});
-    const int passwordColumn = findColumn(header, {QStringLiteral("password"), QStringLiteral("login_password")});
-    if (siteColumn < 0 || userColumn < 0 || passwordColumn < 0) {
-        result.error = Error::NotPasswordExport;
-        return result;
-    }
-    if (rows.size() < 2) {
-        result.error = Error::Empty;
-        return result;
-    }
-
-    result.format = detectFormat(header);
-    const int typeColumn = header.indexOf(QStringLiteral("type"));
-
-    // origin + "\n" + username -> index in result.logins
-    QHash<QString, int> seen;
-    for (qsizetype r = 1; r < rows.size(); ++r) {
-        const QStringList &row = rows.at(r);
-
-        if (typeColumn >= 0 && cell(row, typeColumn).trimmed().toLower() != QLatin1String("login")) {
-            ++result.skippedNotLogin;
-            continue;
-        }
-
-        QStringList origins;
-        const QStringList parts = cell(row, siteColumn).split(QRegularExpression(QStringLiteral("[,\r\n]")));
-        for (const QString &part : parts) {
-            const QString origin = PasswordStore::originFromInput(part);
-            if (!origin.isEmpty() && !origins.contains(origin))
-                origins.append(origin);
-        }
-        if (origins.isEmpty()) {
-            ++result.skippedNoSite;
-            continue;
-        }
-
-        const QString username = cell(row, userColumn);
-        const QString password = cell(row, passwordColumn);
-        if (username.isEmpty() || password.isEmpty()) {
-            ++result.skippedNoCredentials;
-            continue;
-        }
-
-        for (const QString &origin : origins) {
-            const QString key = origin + QLatin1Char('\n') + username;
-            const auto it = seen.constFind(key);
-            if (it != seen.constEnd()) {
-                result.logins[it.value()].password = password;
-            } else {
-                seen.insert(key, int(result.logins.size()));
-                result.logins.append({origin, username, password});
-            }
-        }
-    }
-    return result;
+    const QList<QStringList> rows = readCsvRows(csv);
+    if (rows.isEmpty())
+        return failure(Error::Empty);
+    const QStringList header = normalizedHeader(rows.first());
+    const Columns columns = findColumns(header);
+    if (!columns.isComplete())
+        return failure(Error::NotPasswordExport);
+    if (rows.size() < 2)
+        return failure(Error::Empty);
+    return readRows(rows, header, columns);
 }
 
 }

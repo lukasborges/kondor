@@ -4,9 +4,6 @@
 #include <QList>
 #include <QString>
 
-// Parser for the CSV files that other browsers and password managers export
-// (Chrome-based, Firefox-based, Bitwarden, 1Password, KeePassXC, LastPass…).
-// Pure logic: it never touches KWallet, so it can be unit tested.
 namespace PasswordImport {
 
 enum class Format { Bitwarden, OnePassword, Firefox, Chrome, KeePassXC, Csv };
@@ -31,8 +28,6 @@ struct Result
 
 Result parse(const QByteArray &csv);
 
-// Name shown in the review dialog: "Bitwarden", "1Password", "Firefox",
-// "Chrome", "KeePassXC" or "CSV".
 QString formatName(Format format);
 
 }

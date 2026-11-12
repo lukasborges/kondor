@@ -1,3 +1,4 @@
+#include <QStandardPaths>
 #include <QTemporaryDir>
 #include <QTest>
 
@@ -8,9 +9,11 @@ class TestStartupUrl : public QObject
     Q_OBJECT
 
 private slots:
+    void initTestCase() { QStandardPaths::setTestModeEnabled(true); }
     void convertsArguments_data();
     void convertsArguments();
     void resolvesRelativeFilesAgainstWorkingDirectory();
+    void skipsEmptyArguments();
 };
 
 void TestStartupUrl::convertsArguments_data()
@@ -41,8 +44,8 @@ void TestStartupUrl::convertsArguments()
     const QUrl homePage(QStringLiteral("https://home.example/"));
     const QString searchTemplate = QStringLiteral("https://duckduckgo.com/?q=%1");
 
-    const QUrl actual = startupUrlForArgument(argument, QStringLiteral("/tmp"),
-                                              homePage, searchTemplate);
+    const StartupContext context{QStringLiteral("/tmp"), homePage, searchTemplate};
+    const QUrl actual = startupUrlForArgument(argument, context);
     QCOMPARE(actual.toString(QUrl::FullyEncoded), expected);
 }
 
@@ -61,17 +64,17 @@ void TestStartupUrl::resolvesRelativeFilesAgainstWorkingDirectory()
     const QString searchTemplate = QStringLiteral("https://duckduckgo.com/?q=%1");
     const QString expected = QUrl::fromLocalFile(path).toString(QUrl::FullyEncoded);
 
-    QCOMPARE(startupUrlForArgument(QStringLiteral("./page.html"), directory.path(),
-                                   homePage, searchTemplate)
-                 .toString(QUrl::FullyEncoded),
-             expected);
-    QCOMPARE(startupUrlForArgument(QStringLiteral("page.html"), directory.path(),
-                                   homePage, searchTemplate)
-                 .toString(QUrl::FullyEncoded),
-             expected);
-    QCOMPARE(startupUrlForArgument(path, directory.path(), homePage, searchTemplate)
-                 .toString(QUrl::FullyEncoded),
-             expected);
+    const StartupContext context{directory.path(), homePage, searchTemplate};
+    for (const QString &argument : {QStringLiteral("./page.html"), QStringLiteral("page.html"), path})
+        QCOMPARE(startupUrlForArgument(argument, context).toString(QUrl::FullyEncoded), expected);
+}
+
+void TestStartupUrl::skipsEmptyArguments()
+{
+    const QList<QUrl> urls = startupUrlsForArguments(
+        {QString(), QStringLiteral("   "), QStringLiteral("https://kde.org")});
+
+    QCOMPARE(urls, QList<QUrl>{QUrl(QStringLiteral("https://kde.org"))});
 }
 
 QTEST_GUILESS_MAIN(TestStartupUrl)

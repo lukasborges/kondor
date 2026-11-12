@@ -133,14 +133,9 @@ qt_add_qml_module(kondor
         ${KONDOR_PROFILE_MANAGER_SOURCES}
         src/app/startupargs.h
         src/app/startupargs.cpp
-        src/app/startupurl.h
-        src/app/startupurl.cpp
+        ${KONDOR_APP_SOURCES}
         ${KONDOR_SETTINGS_SOURCES}
         ${KONDOR_SESSION_SOURCES}
-        src/app/windowmanager.h
-        src/app/windowmanager.cpp
-        src/app/singleinstance.h
-        src/app/singleinstance.cpp
         ${KONDOR_DATABASE_SOURCES}
         ${KONDOR_HISTORY_MANAGER_SOURCES}
         ${KONDOR_HISTORY_MODEL_SOURCES}
@@ -158,16 +153,8 @@ qt_add_qml_module(kondor
         ${KONDOR_SUGGESTION_SOURCES}
         src/browser/zoommanager.h
         src/browser/zoommanager.cpp
-        src/adblock/filterengine.h
-        src/adblock/filterengine.cpp
-        src/adblock/adblockinterceptor.h
-        src/adblock/adblockinterceptor.cpp
-        src/adblock/adblockmanager.h
-        src/adblock/adblockmanager.cpp
-        src/passwords/passwordstore.h
-        src/passwords/passwordstore.cpp
-        src/passwords/passwordimport.h
-        src/passwords/passwordimport.cpp
+        ${KONDOR_ADBLOCK_SOURCES}
+        ${KONDOR_PASSWORD_STORE_SOURCES}
         src/passwords/passwordbridge.h
         src/passwords/passwordbridge.cpp
         src/extensions/extensionpackage.h

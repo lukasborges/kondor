@@ -8,8 +8,6 @@
 class QQmlEngine;
 class QJSEngine;
 
-// QML singleton `StartupArgs`: command-line values parsed before the QML engine
-// loads. Read-only for QML.
 class StartupArgs : public QObject
 {
     Q_OBJECT

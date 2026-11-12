@@ -46,11 +46,11 @@ void TestSingleInstance::encodesAndDecodesMessage()
     message.newWindow = true;
     message.activationToken = QByteArrayLiteral("activation-token");
 
-    const QByteArray encoded = SingleInstance::encodeMessage(message);
+    const QByteArray encoded = message.toJsonLine();
     QVERIFY(encoded.endsWith('\n'));
     QCOMPARE(encoded.count('\n'), 1);
 
-    const SingleInstanceMessage decoded = SingleInstance::decodeMessage(encoded);
+    const SingleInstanceMessage decoded = SingleInstanceMessage::fromJsonLine(encoded);
     QCOMPARE(decoded.urls.size(), message.urls.size());
     for (int i = 0; i < message.urls.size(); ++i)
         QCOMPARE(decoded.urls.at(i), message.urls.at(i));
@@ -62,7 +62,7 @@ void TestSingleInstance::encodesAndDecodesMessage()
 void TestSingleInstance::rejectsInvalidData()
 {
     const SingleInstanceMessage decoded =
-        SingleInstance::decodeMessage(QByteArrayLiteral("not json"));
+        SingleInstanceMessage::fromJsonLine(QByteArrayLiteral("not json"));
     QVERIFY(decoded.urls.isEmpty());
     QCOMPARE(decoded.privateMode, false);
     QCOMPARE(decoded.newWindow, false);

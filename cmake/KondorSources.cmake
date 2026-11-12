@@ -1,3 +1,26 @@
+set(KONDOR_PASSWORD_STORE_SOURCES
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordorigin.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordorigin.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/walletfolder.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/walletfolder.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordclipboard.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordclipboard.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportfile.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportfile.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportplan.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportplan.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/csvreader.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/csvreader.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportcolumns.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportcolumns.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimport.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimport.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordstore.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordstore.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordstorewallet.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordstoreimport.cpp
+)
+
 set(KONDOR_DATABASE_SOURCES
     ${CMAKE_SOURCE_DIR}/src/core/database.h
     ${CMAKE_SOURCE_DIR}/src/core/database.cpp
@@ -119,4 +142,58 @@ set(KONDOR_SUGGESTION_SOURCES
     ${CMAKE_SOURCE_DIR}/src/browser/suggestionlist.cpp
     ${CMAKE_SOURCE_DIR}/src/browser/searchsuggestions.h
     ${CMAKE_SOURCE_DIR}/src/browser/searchsuggestions.cpp
+)
+
+set(KONDOR_APP_SOURCES
+    ${CMAKE_SOURCE_DIR}/src/app/windowmanager.h
+    ${CMAKE_SOURCE_DIR}/src/app/windowmanager.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/windowlaunch.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/windowactivation.h
+    ${CMAKE_SOURCE_DIR}/src/app/windowactivation.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/singleinstance.h
+    ${CMAKE_SOURCE_DIR}/src/app/singleinstance.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/singleinstancemessage.h
+    ${CMAKE_SOURCE_DIR}/src/app/singleinstancemessage.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/startupurl.h
+    ${CMAKE_SOURCE_DIR}/src/app/startupurl.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/extensionpackages.h
+    ${CMAKE_SOURCE_DIR}/src/app/extensionpackages.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/commandline.h
+    ${CMAKE_SOURCE_DIR}/src/app/commandline.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/environment.h
+    ${CMAKE_SOURCE_DIR}/src/app/environment.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/messagehandler.h
+    ${CMAKE_SOURCE_DIR}/src/app/messagehandler.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/appidentity.h
+    ${CMAKE_SOURCE_DIR}/src/app/appidentity.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/appstartup.h
+    ${CMAKE_SOURCE_DIR}/src/app/appstartup.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/faviconimageprovider.h
+    ${CMAKE_SOURCE_DIR}/src/app/faviconimageprovider.cpp
+)
+
+set(KONDOR_FILTER_ENGINE_SOURCES
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterengine.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterengine.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterrule.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterrule.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filteroptions.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filteroptions.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterpattern.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterpattern.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterrequest.h
+)
+
+set(KONDOR_ADBLOCK_SOURCES
+    ${KONDOR_FILTER_ENGINE_SOURCES}
+    ${CMAKE_SOURCE_DIR}/src/adblock/adblockinterceptor.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/adblockinterceptor.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/adblockallowlist.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/adblockallowlist.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterlists.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterlists.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterlistdownloader.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filterlistdownloader.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/adblockmanager.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/adblockmanager.cpp
 )

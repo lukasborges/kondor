@@ -15,8 +15,14 @@ class QQmlComponent;
 class QQmlEngine;
 class QJSEngine;
 
-// QML singleton `WindowManager`: creates the browser windows, so the app can
-// have several of them (normal and private) and move tabs between them.
+struct WindowContents
+{
+    bool isPrivate = false;
+    QList<QUrl> urls;
+    QStringList titles;
+    int currentIndex = -1;
+};
+
 class WindowManager : public QObject
 {
     Q_OBJECT
@@ -31,25 +37,12 @@ public:
     static WindowManager *instance();
     static WindowManager *create(QQmlEngine *engine, QJSEngine *jsEngine);
 
-    // The engine that owns the QML component; main.cpp sets it before the first
-    // window is created.
     void setEngine(QQmlEngine *engine);
 
-    // Opens a new window with the given tabs (the New Tab page for empty URLs)
-    // or, without URLs, with the home page (a private window starts on the New
-    // Tab page instead).
     Q_INVOKABLE QObject *newWindow(bool privateWindow = false, const QList<QUrl> &urls = {});
-
-    // A window that finished closing: drops it from the list and deletes it.
     Q_INVOKABLE void closeWindow(QObject *window);
 
-    // A later `kondor` launch forwarded its command line: open the URLs as new
-    // tabs (or in a new window), then raise the window. With no URLs, only
-    // raise it.
     void handleSingleInstanceMessage(const SingleInstanceMessage &message);
-
-    // Opens the windows of the last session or, when there is nothing to
-    // restore, the command-line URLs or a single window with the home page.
     void openStartupWindows();
 
     int windowCount() const { return int(m_windows.size()); }
@@ -60,21 +53,26 @@ signals:
 private:
     explicit WindowManager(QObject *parent = nullptr);
 
-    QObject *createWindow(bool privateWindow, const QList<QUrl> &urls,
-                          const QStringList &titles, int currentIndex);
+    QObject *createWindow(const WindowContents &contents);
     QQmlComponent *component();
-    // Opens a .kondorext in the install dialog of the window's Settings →
-    // Extensions page.
-    void showExtensionPackage(QObject *window, const QString &path);
+    QQmlComponent *loadComponent();
+    void track(QObject *window);
+    void followActivity(QObject *window);
+    void forgetClosedWindows();
 
-    // The most recently active window of the requested kind, or null.
     QObject *windowForRequest(bool privateWindow) const;
     static bool isPrivateWindow(const QObject *window);
-    static void raiseWindow(QObject *window, const QByteArray &activationToken);
+
+    void showExtensionPackage(QObject *window, const QString &path);
+    QObject *showPackages(const QStringList &packages, QObject *window);
+    QObject *openUrlsForLaunch(const SingleInstanceMessage &message, const QList<QUrl> &urls);
+    QObject *normalWindow();
+    void addTabs(QObject *window, const QList<QUrl> &urls);
+    bool openRestoredWindows();
+    bool openCommandLineWindow(const QList<QUrl> &urls);
 
     QQmlEngine *m_engine = nullptr;
     std::unique_ptr<QQmlComponent> m_component;
     QList<QPointer<QObject>> m_windows;
-    // Set when a window becomes active, so a later launch opens its tabs there.
     QPointer<QObject> m_activeWindow;
 };

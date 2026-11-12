@@ -23,7 +23,6 @@ AboutInfo *AboutInfo::create(QQmlEngine *engine, QJSEngine *jsEngine)
 AboutInfo::AboutInfo(QObject *parent)
     : QObject(parent)
 {
-    // Embedded through qt_add_resources, so no file is needed at run time.
     QFile license(QStringLiteral(":/LICENSE"));
     if (license.open(QIODevice::ReadOnly | QIODevice::Text))
         m_licenseText = QString::fromUtf8(license.readAll()).trimmed();

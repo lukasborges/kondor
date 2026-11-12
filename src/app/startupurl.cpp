@@ -1,22 +1,42 @@
 #include "app/startupurl.h"
 
 #include "browser/addressresolver.h"
+#include "core/settings.h"
 
 #include <QDir>
 #include <QFileInfo>
 
-QUrl startupUrlForArgument(const QString &argument, const QString &workingDirectory,
-                           const QUrl &homePage, const QString &searchTemplate)
+namespace {
+StartupContext currentStartupContext()
+{
+    Settings *settings = Settings::instance();
+    return {QDir::currentPath(), QUrl(settings->homePage()), settings->searchUrlTemplate()};
+}
+
+bool isExistingFile(const QString &input, const QString &workingDirectory)
+{
+    return QFileInfo::exists(QDir(workingDirectory).absoluteFilePath(input));
+}
+}
+
+QUrl startupUrlForArgument(const QString &argument, const StartupContext &context)
 {
     const QString input = argument.trimmed();
     if (input.isEmpty())
         return {};
+    if (isExistingFile(input, context.workingDirectory))
+        return QUrl::fromUserInput(input, context.workingDirectory, QUrl::AssumeLocalFile);
+    return resolveAddress(input, context.homePage, context.searchTemplate);
+}
 
-    // A file that exists, absolute or relative to the directory kondor was
-    // started from, is a local file even without a scheme or a known extension.
-    if (QFileInfo::exists(QDir(workingDirectory).absoluteFilePath(input)))
-        return QUrl::fromUserInput(input, workingDirectory, QUrl::AssumeLocalFile);
-
-    // Everything else goes through the same rules as the address bar.
-    return resolveAddress(input, homePage, searchTemplate);
+QList<QUrl> startupUrlsForArguments(const QStringList &arguments)
+{
+    const StartupContext context = currentStartupContext();
+    QList<QUrl> urls;
+    for (const QString &argument : arguments) {
+        const QUrl url = startupUrlForArgument(argument, context);
+        if (!url.isEmpty())
+            urls.append(url);
+    }
+    return urls;
 }

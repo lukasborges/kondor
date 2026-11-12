@@ -90,6 +90,7 @@ set(KONDOR_TAB_SOURCES
 set(KONDOR_TAB_MODEL_SOURCES
     ${CMAKE_SOURCE_DIR}/src/browser/tabmodel.h
     ${CMAKE_SOURCE_DIR}/src/browser/tabmodel.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/tabmodelclosing.cpp
     ${CMAKE_SOURCE_DIR}/src/browser/closedtabs.h
     ${CMAKE_SOURCE_DIR}/src/browser/closedtabs.cpp
 )

@@ -78,6 +78,7 @@ private:
     };
 
     Tab *insertTab(const NewTab &newTab);
+    void insertRow(int index, Tab *tab);
     QQuickWebEngineProfile *profileFor(QQuickWebEngineProfile *requested) const;
     int childTabRow() const;
     bool isValidIndex(int index) const;

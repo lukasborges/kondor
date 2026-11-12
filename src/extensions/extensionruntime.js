@@ -15,7 +15,7 @@ function __kondorCreateRuntime(cfg) {
             if (!api)
                 throw new Error("The Kondor extension bridge is not available");
             return new Promise(function (resolve, reject) {
-                api.request(cfg.id, cfg.token, method, JSON.stringify(args === undefined ? [] : args),
+                api.request(JSON.stringify({id: cfg.id, token: cfg.token, method: method, arguments: args === undefined ? [] : args}),
                             function (reply) {
                     let result;
                     try {

@@ -11,6 +11,50 @@
 
 Q_LOGGING_CATEGORY(lcExtensions, "kondor.extensions")
 
+#if KONDOR_HAVE_EXTENSIONS
+namespace {
+
+QWebEngineExtensionManager *managerFor(QQuickWebEngineProfile *profile)
+{
+    if (!profile || profile->isOffTheRecord()) {
+        qCWarning(lcExtensions, "Extensions are never loaded into private profiles");
+        return nullptr;
+    }
+    if (!profile->extensionManager())
+        qCWarning(lcExtensions, "Extensions are not supported by this Qt WebEngine build");
+    return profile->extensionManager();
+}
+
+QHash<QString, QString> requestedDirectories(const QStringList &directories)
+{
+    QHash<QString, QString> requested;
+    for (const QString &directory : directories)
+        requested.insert(QDir::cleanPath(QDir(directory).absolutePath()), directory);
+    return requested;
+}
+
+void enableLoadedExtension(const QWebEngineExtensionInfo &info, QWebEngineExtensionManager *manager)
+{
+    if (!info.isEnabled())
+        manager->setExtensionEnabled(info, true);
+}
+
+void logLoaded(const QWebEngineExtensionInfo &info)
+{
+    const QUrl popup = info.actionPopupUrl();
+    qCInfo(lcExtensions).noquote()
+        << "Extension loaded:" << info.name() << "(" + info.id() + ") popup:"
+        << (popup.isEmpty() ? QStringLiteral("none") : popup.toString());
+}
+
+void logFailed(const QWebEngineExtensionInfo &info, const QString &directory)
+{
+    qCInfo(lcExtensions).noquote() << "Extension failed:" << directory + ":" << info.error();
+}
+
+}
+#endif
+
 ExtensionLoader::ExtensionLoader(QObject *parent)
     : QObject(parent)
 {
@@ -18,61 +62,52 @@ ExtensionLoader::ExtensionLoader(QObject *parent)
 
 bool ExtensionLoader::isSupported()
 {
-#if KONDOR_HAVE_EXTENSIONS
-    return true;
-#else
-    return false;
-#endif
+    return KONDOR_HAVE_EXTENSIONS;
 }
 
 void ExtensionLoader::load(QQuickWebEngineProfile *profile, const QStringList &directories)
 {
-    if (directories.isEmpty())
-        return;
+    if (!directories.isEmpty())
+        loadInto(profile, directories);
+}
 
 #if KONDOR_HAVE_EXTENSIONS
-    if (!profile || profile->isOffTheRecord()) {
-        qCWarning(lcExtensions, "Extensions are never loaded into private profiles");
-        return;
-    }
-    QWebEngineExtensionManager *manager = profile->extensionManager();
-    if (!manager) {
-        qCWarning(lcExtensions, "Extensions are not supported by this Qt WebEngine build");
-        return;
-    }
 
-    // loadFinished carries only the extension info; match it to the requested
-    // directory by canonical path to report failures with the user's argument.
-    QHash<QString, QString> pending;
-    for (const QString &directory : directories) {
-        const QString absolute = QDir(directory).absolutePath();
-        pending.insert(QDir::cleanPath(absolute), directory);
+void ExtensionLoader::handleLoadFinished(const QWebEngineExtensionInfo &info,
+                                         const QHash<QString, QString> &requested,
+                                         QWebEngineExtensionManager *manager)
+{
+    const QString directory = requested.value(QDir::cleanPath(info.path()), info.path());
+    if (info.isLoaded()) {
+        enableLoadedExtension(info, manager);
+        logLoaded(info);
+    } else {
+        logFailed(info, directory);
     }
+    emit loadFinished(directory, info.isLoaded());
+}
 
+void ExtensionLoader::loadInto(QQuickWebEngineProfile *profile, const QStringList &directories)
+{
+    QWebEngineExtensionManager *manager = managerFor(profile);
+    if (!manager)
+        return;
+    const QHash<QString, QString> requested = requestedDirectories(directories);
     connect(manager, &QWebEngineExtensionManager::loadFinished, this,
-            [this, pending, manager](const QWebEngineExtensionInfo &info) {
-                const QString key = QDir::cleanPath(info.path());
-                const QString directory = pending.value(key, info.path());
-                if (info.isLoaded()) {
-                    // A freshly loaded extension is not enabled yet, and a
-                    // disabled one injects no content scripts.
-                    if (!info.isEnabled())
-                        manager->setExtensionEnabled(info, true);
-                    const QUrl popup = info.actionPopupUrl();
-                    qCInfo(lcExtensions).noquote()
-                        << "Extension loaded:" << info.name() << "(" + info.id() + ") popup:"
-                        << (popup.isEmpty() ? QStringLiteral("none") : popup.toString());
-                } else {
-                    qCInfo(lcExtensions).noquote()
-                        << "Extension failed:" << directory + ":" << info.error();
-                }
-                emit loadFinished(directory, info.isLoaded());
+            [this, requested, manager](const QWebEngineExtensionInfo &info) {
+                handleLoadFinished(info, requested, manager);
             });
-
     for (const QString &directory : directories)
         manager->loadExtension(QDir(directory).absolutePath());
-#else
-    Q_UNUSED(profile)
-    qCWarning(lcExtensions, "Extensions are not supported by this Qt WebEngine build");
-#endif
 }
+
+#else
+
+void ExtensionLoader::loadInto(QQuickWebEngineProfile *profile, const QStringList &directories)
+{
+    Q_UNUSED(profile)
+    Q_UNUSED(directories)
+    qCWarning(lcExtensions, "Extensions are not supported by this Qt WebEngine build");
+}
+
+#endif

@@ -712,37 +712,37 @@
 <context>
     <name>ExtensionCatalog</name>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="194"/>
+        <location filename="../src/extensions/catalogentry.cpp" line="81"/>
         <source>The catalog is not valid JSON</source>
         <translation>目录不是有效的 JSON</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="200"/>
+        <location filename="../src/extensions/catalogentry.cpp" line="83"/>
         <source>The catalog has an unsupported format</source>
         <translation>目录格式不受支持</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="291"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="48"/>
         <source>Cannot create a temporary file</source>
         <translation>无法创建临时文件</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="302"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="68"/>
         <source>The package is larger than expected</source>
         <translation>软件包比预期的大</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="327"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="76"/>
         <source>Cannot read the downloaded package</source>
         <translation>无法读取已下载的软件包</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="334"/>
+        <location filename="../src/extensions/packagedownload.cpp" line="81"/>
         <source>The downloaded package does not match its checksum</source>
         <translation>已下载的软件包与其校验和不匹配</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalog.cpp" line="352"/>
+        <location filename="../src/extensions/extensioncatalogactions.cpp" line="77"/>
         <source>Could not download “%1”: %2</source>
         <translation>无法下载“%1”：%2</translation>
     </message>
@@ -803,38 +803,39 @@
 <context>
     <name>ExtensionManager</name>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="233"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="64"/>
         <source>Cannot create %1</source>
         <translation>无法创建 %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="353"/>
-        <location filename="../src/extensions/extensionmanager.cpp" line="368"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="90"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="103"/>
         <source>Cannot install into %1</source>
         <translation>无法安装到 %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="360"/>
+        <location filename="../src/extensions/extensioninstaller.cpp" line="81"/>
         <source>Cannot replace %1</source>
         <translation>无法替换 %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="407"/>
+        <location filename="../src/extensions/extensionupdate.cpp" line="12"/>
         <source>The package is for “%1”, not “%2”</source>
         <translation>该软件包适用于“%1”，而不是“%2”</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="418"/>
+        <location filename="../src/extensions/extensionupdate.cpp" line="23"/>
         <source>The package asks for more permissions than the installed version</source>
         <translation>该软件包请求的权限比已安装的版本更多</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="869"/>
+        <location filename="../src/extensions/extensionstorage.cpp" line="48"/>
+        <location filename="../src/extensions/extensionstorage.cpp" line="65"/>
         <source>Storage is not available</source>
         <translation>存储不可用</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="889"/>
+        <location filename="../src/extensions/extensionstorage.cpp" line="68"/>
         <source>The extension&apos;s storage is full (limit: 1 MiB)</source>
         <translation>扩展的存储空间已满（上限：1 MiB）</translation>
     </message>
@@ -842,12 +843,12 @@
 <context>
     <name>ExtensionPackage</name>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="187"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="76"/>
         <source>Read and change all websites</source>
         <translation>读取和更改所有网站</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/extensions/extensionpackage.cpp" line="192"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="67"/>
         <source>%1 and %n more</source>
         <extracomment>%1 is a list of sites, %n the number of further sites</extracomment>
         <translation>
@@ -855,56 +856,52 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="194"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="80"/>
         <source>Read and change pages on %1</source>
         <translation>读取和更改 %1 上的页面</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="198"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="20"/>
         <source>Open, close and navigate your tabs</source>
         <translation>打开、关闭和导航标签页</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="200"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="21"/>
         <source>Download files</source>
         <translation>下载文件</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="202"/>
+        <location filename="../src/extensions/permissiondescription.cpp" line="23"/>
         <source>Show notifications</source>
         <translation>显示通知</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="313"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="569"/>
+        <location filename="../src/extensions/packagelimits.cpp" line="23"/>
         <source>The package has more than %1 files</source>
         <translation>软件包中的文件超过 %1 个</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="317"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="574"/>
+        <location filename="../src/extensions/packagelimits.cpp" line="26"/>
         <source>The package is larger than %1 MiB</source>
         <translation>软件包大于 %1 MiB</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="533"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="538"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="98"/>
         <source>The file is not a valid ZIP archive</source>
         <translation>该文件不是有效的 ZIP 归档</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="561"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="40"/>
         <source>Unsafe file name in the package: %1</source>
         <translation>软件包中有不安全的文件名：%1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="587"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="104"/>
         <source>Cannot create %1</source>
         <translation>无法创建 %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionpackage.cpp" line="597"/>
-        <location filename="../src/extensions/extensionpackage.cpp" line="602"/>
+        <location filename="../src/extensions/packagearchive.cpp" line="87"/>
         <source>Cannot write %1</source>
         <translation>无法写入 %1</translation>
     </message>

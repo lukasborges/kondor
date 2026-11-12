@@ -8,13 +8,6 @@ foreach(qml_file IN LISTS KONDOR_QML_SOURCES)
 endforeach()
 file(WRITE "${KONDOR_TEST_QML_IMPORT_DIR}/Kondor/qmldir" "${KONDOR_QMLDIR_CONTENT}")
 
-# Sources of the Kondor extensions (#107) for the tests that need them.
-set(KONDOR_EXTENSION_PACKAGE_SOURCES
-    ../src/extensions/extensionpackage.cpp
-    ../src/extensions/extensionmanager.cpp
-    ../src/extensions/extensioncatalog.cpp
-)
-
 qt_add_executable(tst_addressresolver
     browser/tst_addressresolver.cpp
     ../src/browser/addressresolver.cpp
@@ -485,6 +478,7 @@ qt_add_executable(tst_settingswindow
     ${KONDOR_DATABASE_SOURCES}
     ../src/browser/faviconstore.cpp
     ${KONDOR_EXTENSION_PACKAGE_SOURCES}
+    ${KONDOR_EXTENSION_MANAGER_SOURCES}
 )
 
 target_compile_definitions(tst_settingswindow PRIVATE
@@ -662,6 +656,7 @@ add_test(NAME tst_singleinstance COMMAND tst_singleinstance)
 qt_add_executable(tst_extensionpackages
     app/tst_extensionpackages.cpp
     ../src/app/extensionpackages.cpp
+    ../src/extensions/packagesuffix.cpp
 )
 
 target_include_directories(tst_extensionpackages PRIVATE
@@ -853,9 +848,8 @@ set_tests_properties(tst_extensionloader PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
 )
 
-qt_add_executable(tst_extensions
-    extensions/tst_extensions.cpp
-    ../src/extensions/extensionbridge.cpp
+set(KONDOR_EXTENSION_BRIDGE_TEST_SOURCES
+    ${KONDOR_EXTENSION_BRIDGE_SOURCES}
     ${KONDOR_TAB_SOURCES}
     ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_PROFILE_MANAGER_SOURCES}
@@ -869,6 +863,29 @@ qt_add_executable(tst_extensions
     ${KONDOR_DATABASE_SOURCES}
     ../src/browser/faviconstore.cpp
     ${KONDOR_EXTENSION_PACKAGE_SOURCES}
+    ${KONDOR_EXTENSION_MANAGER_SOURCES}
+)
+
+set(KONDOR_EXTENSION_BRIDGE_TEST_LIBRARIES
+    Qt6::Concurrent
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Network
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebChannel
+    Qt6::WebEngineQuick
+    KF6::Wallet
+    KF6::Archive
+)
+
+qt_add_executable(tst_extensions
+    extensions/tst_extensions.cpp
+    ${KONDOR_EXTENSION_BRIDGE_TEST_SOURCES}
 )
 
 qt_add_resources(tst_extensions "extension_scripts"
@@ -897,20 +914,7 @@ target_include_directories(tst_extensions PRIVATE
 )
 
 target_link_libraries(tst_extensions PRIVATE
-    Qt6::Concurrent
-    Qt6::Core
-    Qt6::DBus
-    Qt6::Gui
-    Qt6::Network
-    Qt6::Qml
-    Qt6::Quick
-    Qt6::QuickControls2
-    Qt6::Sql
-    Qt6::Test
-    Qt6::WebChannel
-    Qt6::WebEngineQuick
-    KF6::Wallet
-    KF6::Archive
+    ${KONDOR_EXTENSION_BRIDGE_TEST_LIBRARIES}
 )
 
 add_test(NAME tst_extensions COMMAND tst_extensions)
@@ -918,6 +922,146 @@ set_tests_properties(tst_extensions PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1;KONDOR_NO_KWALLET=1"
     TIMEOUT 300
 )
+
+qt_add_executable(tst_extensioncall
+    extensions/tst_extensioncall.cpp
+    ${KONDOR_EXTENSION_BRIDGE_TEST_SOURCES}
+)
+
+qt_add_resources(tst_extensioncall "extension_scripts_call"
+    PREFIX "/scripts"
+    BASE "${CMAKE_SOURCE_DIR}/src/extensions"
+    FILES
+        ${CMAKE_SOURCE_DIR}/src/extensions/channel.js
+        ${CMAKE_SOURCE_DIR}/src/extensions/extensionruntime.js
+)
+
+qt_add_resources(tst_extensioncall "passwords_script_call"
+    PREFIX "/scripts"
+    BASE "${CMAKE_SOURCE_DIR}/src/passwords"
+    FILES
+        ${CMAKE_SOURCE_DIR}/src/passwords/passwords.js
+)
+
+target_compile_definitions(tst_extensioncall PRIVATE
+    KONDOR_TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data"
+)
+
+target_include_directories(tst_extensioncall PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_extensioncall PRIVATE
+    ${KONDOR_EXTENSION_BRIDGE_TEST_LIBRARIES}
+)
+
+add_test(NAME tst_extensioncall COMMAND tst_extensioncall)
+set_tests_properties(tst_extensioncall PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1;KONDOR_NO_KWALLET=1"
+    TIMEOUT 300
+)
+
+qt_add_executable(tst_extensionsettings
+    extensions/tst_extensionsettings.cpp
+    ../src/extensions/extensionsettings.cpp
+)
+
+target_include_directories(tst_extensionsettings PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_extensionsettings PRIVATE
+    Qt6::Core
+    Qt6::Test
+)
+
+add_test(NAME tst_extensionsettings COMMAND tst_extensionsettings)
+
+qt_add_executable(tst_catalogentry
+    extensions/tst_catalogentry.cpp
+    ../src/extensions/catalogentry.cpp
+    ${KONDOR_EXTENSION_PACKAGE_SOURCES}
+)
+
+target_include_directories(tst_catalogentry PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_catalogentry PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Test
+    KF6::Archive
+)
+
+add_test(NAME tst_catalogentry COMMAND tst_catalogentry)
+
+qt_add_executable(tst_manifestvalidator
+    extensions/tst_manifestvalidator.cpp
+    ${KONDOR_EXTENSION_PACKAGE_SOURCES}
+)
+
+target_include_directories(tst_manifestvalidator PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_manifestvalidator PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Test
+    KF6::Archive
+)
+
+add_test(NAME tst_manifestvalidator COMMAND tst_manifestvalidator)
+
+qt_add_executable(tst_contentscriptbuilder
+    extensions/tst_contentscriptbuilder.cpp
+    ../src/extensions/contentscriptbuilder.cpp
+    ${KONDOR_EXTENSION_PACKAGE_SOURCES}
+)
+
+qt_add_resources(tst_contentscriptbuilder "extension_scripts_builder"
+    PREFIX "/scripts"
+    BASE "${CMAKE_SOURCE_DIR}/src/extensions"
+    FILES
+        ${CMAKE_SOURCE_DIR}/src/extensions/extensionruntime.js
+)
+
+target_compile_definitions(tst_contentscriptbuilder PRIVATE
+    KONDOR_TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data"
+)
+
+target_include_directories(tst_contentscriptbuilder PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_contentscriptbuilder PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Test
+    Qt6::WebEngineCore
+    KF6::Archive
+)
+
+add_test(NAME tst_contentscriptbuilder COMMAND tst_contentscriptbuilder)
+
+qt_add_executable(tst_extensionstorage
+    extensions/tst_extensionstorage.cpp
+    ../src/extensions/extensionstorage.cpp
+    ${KONDOR_DATABASE_SOURCES}
+)
+
+target_include_directories(tst_extensionstorage PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_extensionstorage PRIVATE
+    Qt6::Core
+    Qt6::Sql
+    Qt6::Test
+)
+
+add_test(NAME tst_extensionstorage COMMAND tst_extensionstorage)
 
 qt_add_executable(tst_database
     core/tst_database.cpp

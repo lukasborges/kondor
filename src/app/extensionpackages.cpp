@@ -2,11 +2,12 @@
 
 #include <algorithm>
 
+#include "extensions/packagesuffix.h"
+
 namespace {
 bool isLocalPackage(const QUrl &url)
 {
-    return url.isLocalFile()
-        && url.toLocalFile().endsWith(QLatin1String(".kondorext"), Qt::CaseInsensitive);
+    return url.isLocalFile() && hasPackageSuffix(url.toLocalFile());
 }
 
 QStringList localPaths(const QList<QUrl> &urls)

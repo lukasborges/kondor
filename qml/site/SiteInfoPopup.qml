@@ -18,7 +18,7 @@ Popup {
     modal: false
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
-    readonly property string securityState: tab ? tab.securityState : ""
+    readonly property string securityState: tab ? tab.security.state : ""
 
     function stateIcon() {
         switch (securityState) {

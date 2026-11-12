@@ -2682,33 +2682,33 @@
 <context>
     <name>WebViewTab</name>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="28"/>
-        <location filename="../qml/browser/WebViewTab.qml" line="539"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="25"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="546"/>
         <source>Print failed</source>
         <translation>인쇄하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="30"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="27"/>
         <source>PDF saved</source>
         <translation>PDF를 저장했습니다</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="32"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="29"/>
         <source>Saving the PDF failed</source>
         <translation>PDF를 저장하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="317"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="300"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>페이지 프로세스가 예기치 않게 종료되었습니다.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="318"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="301"/>
         <source>The page crashed.</source>
         <translation>페이지가 충돌했습니다.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/WebViewTab.qml" line="319"/>
+        <location filename="../qml/browser/WebViewTab.qml" line="302"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>페이지 프로세스가 종료되었습니다(메모리 부족일 수 있음).</translation>
     </message>

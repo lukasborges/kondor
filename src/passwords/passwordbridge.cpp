@@ -3,6 +3,7 @@
 #include "passwords/passwordstore.h"
 #include "core/settings.h"
 #include "browser/tab.h"
+#include "browser/tabpasswords.h"
 
 PasswordPageApi::PasswordPageApi(PasswordBridge *bridge)
     : QObject(bridge)
@@ -57,7 +58,7 @@ void PasswordBridge::formSubmitted(const QString &origin, const QString &usernam
         // Feature off: tell the user once, in this tab.
         if (!store->unavailableNoticeShown()) {
             store->setUnavailableNoticeShown();
-            m_tab->showPasswordWalletNotice();
+            m_tab->passwords()->showWalletNotice();
         }
         return;
     }
@@ -66,7 +67,7 @@ void PasswordBridge::formSubmitted(const QString &origin, const QString &usernam
     // Already saved with this very password: nothing to offer.
     if (store->usernames(origin).contains(username) && store->password(origin, username) == password)
         return;
-    m_tab->offerPasswordSave(origin, username, password);
+    m_tab->passwords()->offerSave(origin, username, password);
 }
 
 QVariantList PasswordBridge::credentialsFor(const QString &origin)

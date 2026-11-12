@@ -16,7 +16,7 @@ Item {
     readonly property string host: {
         if (!tab)
             return ""
-        const text = tab.certificateErrorUrl.toString()
+        const text = tab.security.certificateErrorUrl.toString()
         const match = text.match(/^[a-z][a-z0-9+.-]*:\/\/([^\/?#]+)/i)
         return match ? match[1] : text
     }
@@ -65,7 +65,7 @@ Item {
                 wrapMode: Text.WordWrap
                 horizontalAlignment: Text.AlignHCenter
                 color: Kirigami.Theme.disabledTextColor
-                text: root.tab.certificateErrorDescription
+                text: root.tab.security.certificateErrorDescription
                 visible: text.length > 0
             }
 
@@ -77,7 +77,7 @@ Item {
                     text: qsTr("Advanced…")
                     icon.name: root.advanced ? "arrow-up" : "arrow-down"
                     flat: true
-                    visible: root.tab.certificateErrorOverridable
+                    visible: root.tab.security.certificateErrorOverridable
                     onClicked: root.advanced = !root.advanced
                 }
 
@@ -91,7 +91,7 @@ Item {
 
             Kirigami.InlineMessage {
                 Layout.fillWidth: true
-                visible: root.advanced && root.tab.certificateErrorOverridable
+                visible: root.advanced && root.tab.security.certificateErrorOverridable
                 type: Kirigami.MessageType.Warning
                 text: qsTr("This site could not prove its identity. Continuing may expose your data.")
                 actions: [

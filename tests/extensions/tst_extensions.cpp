@@ -816,12 +816,12 @@ void TestExtensions::bridgeTabCommands()
     // Toolbar items: the checked state is per tab.
     QVERIFY(call(bridge, id, good, QStringLiteral("action.setChecked"),
                  {QStringLiteral("toggle"), true}).value(QStringLiteral("ok")).toBool());
-    QVERIFY(tab.extensionItemChecked(id, QStringLiteral("toggle")));
+    QVERIFY(tab.extensionItems()->isChecked(id, QStringLiteral("toggle")));
     Tab other(nullptr);
-    QVERIFY(!other.extensionItemChecked(id, QStringLiteral("toggle")));
-    QSignalSpy triggered(&tab, &Tab::extensionItemTriggered);
-    tab.triggerExtensionItem(id, QStringLiteral("toggle"), true);
-    QVERIFY(!tab.extensionItemChecked(id, QStringLiteral("toggle")));
+    QVERIFY(!other.extensionItems()->isChecked(id, QStringLiteral("toggle")));
+    QSignalSpy triggered(tab.extensionItems(), &TabExtensionItems::triggered);
+    tab.extensionItems()->trigger(id, QStringLiteral("toggle"), true);
+    QVERIFY(!tab.extensionItems()->isChecked(id, QStringLiteral("toggle")));
     QCOMPARE(triggered.count(), 1);
     QVERIFY(!triggered.first().at(2).toBool());
 }
@@ -1047,7 +1047,7 @@ void TestExtensions::toolbarMenuEntries()
     ExtensionManager *manager = ExtensionManager::instance();
     Tab tab(nullptr);
     tab.setUrl(QUrl(QStringLiteral("https://www.example.com/page")));
-    tab.setExtensionItemChecked(QStringLiteral("sample"), QStringLiteral("toggle"), true);
+    tab.extensionItems()->setChecked(QStringLiteral("sample"), QStringLiteral("toggle"), true);
 
     // The menu needs the tab as a context property of its host.
     m_engine.rootContext()->setContextProperty(QStringLiteral("theTab"), &tab);

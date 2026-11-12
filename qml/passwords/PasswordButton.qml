@@ -7,7 +7,7 @@ ToolButton {
 
     required property TabModel tabs
 
-    visible: tabs.currentTab ? tabs.currentTab.passwordUsernames.length > 0 : false
+    visible: tabs.currentTab ? tabs.currentTab.passwords.usernames.length > 0 : false
     display: AbstractButton.IconOnly
     icon.name: "dialog-password"
     icon.width: 16
@@ -24,12 +24,12 @@ ToolButton {
         id: passwordMenu
 
         Instantiator {
-            model: root.tabs.currentTab ? root.tabs.currentTab.passwordUsernames : []
+            model: root.tabs.currentTab ? root.tabs.currentTab.passwords.usernames : []
             delegate: MenuItem {
                 required property string modelData
                 text: modelData
                 icon.name: "user-identity"
-                onTriggered: root.tabs.currentTab.fillPassword(modelData)
+                onTriggered: root.tabs.currentTab.passwords.fill(modelData)
             }
             onObjectAdded: function(index, object) { passwordMenu.insertItem(index, object) }
             onObjectRemoved: function(index, object) { passwordMenu.removeItem(object) }

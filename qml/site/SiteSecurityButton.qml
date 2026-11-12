@@ -10,7 +10,7 @@ ToolButton {
     required property Item addressField
 
     readonly property Tab tab: tabs.currentTab
-    readonly property string securityState: tab ? tab.securityState : ""
+    readonly property string securityState: tab ? tab.security.state : ""
     readonly property bool isNotSecure: securityState === "insecure" || securityState === "error"
     readonly property var iconNames: ({
         "secure": "security-high",

@@ -9,6 +9,14 @@
 #include "browser/tabmodel.h"
 
 namespace {
+void writeSessionFile(const QByteArray &content)
+{
+    QFile file(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+               + QStringLiteral("/session.json"));
+    QVERIFY(file.open(QIODevice::WriteOnly));
+    file.write(content);
+}
+
 QString sessionFilePath()
 {
     return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
@@ -24,6 +32,9 @@ private slots:
     void init();
     void savesEveryNormalWindow();
     void keepsTheSessionWhenOnlyPrivateWindowsRemain();
+    void readsTheVersionOneFormat();
+    void ignoresInvalidAndFutureFiles();
+    void savesNewTabPageAsAboutNewTab();
 };
 
 void TestSessionManager::init()
@@ -76,6 +87,46 @@ void TestSessionManager::keepsTheSessionWhenOnlyPrivateWindowsRemain()
     QCOMPARE(windows.at(0).tabs.at(0).url, QUrl(QStringLiteral("https://example.org/")));
 
     delete privateWindow;
+}
+
+void TestSessionManager::readsTheVersionOneFormat()
+{
+    writeSessionFile(R"({"version":1,"currentIndex":1,"tabs":[)"
+                     R"({"url":"https://a.example/","title":"A"},)"
+                     R"({"url":"about:newtab","title":""}]})");
+
+    const QList<SessionWindow> windows = SessionManager::instance()->savedWindows();
+
+    QCOMPARE(windows.size(), 1);
+    QCOMPARE(windows.at(0).currentIndex, 1);
+    QCOMPARE(windows.at(0).tabs.size(), 2);
+    QCOMPARE(windows.at(0).tabs.at(0).title, QStringLiteral("A"));
+    QVERIFY(windows.at(0).tabs.at(1).url.isEmpty());
+}
+
+void TestSessionManager::ignoresInvalidAndFutureFiles()
+{
+    writeSessionFile("not json");
+    QVERIFY(SessionManager::instance()->savedWindows().isEmpty());
+
+    writeSessionFile(R"({"version":3,"windows":[{"currentIndex":0,"tabs":[{"url":"https://a.example/"}]}]})");
+    QVERIFY(SessionManager::instance()->savedWindows().isEmpty());
+
+    writeSessionFile(R"({"version":2,"windows":[{"currentIndex":0,"tabs":[]}]})");
+    QVERIFY(SessionManager::instance()->savedWindows().isEmpty());
+}
+
+void TestSessionManager::savesNewTabPageAsAboutNewTab()
+{
+    TabModel model;
+    model.addTab();
+
+    SessionManager::instance()->save(&model);
+
+    QFile file(sessionFilePath());
+    QVERIFY(file.open(QIODevice::ReadOnly));
+    QVERIFY(file.readAll().contains("\"url\":\"about:newtab\""));
+    QVERIFY(SessionManager::instance()->savedWindows().at(0).tabs.at(0).url.isEmpty());
 }
 
 int main(int argc, char *argv[])

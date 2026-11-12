@@ -5,6 +5,8 @@
 
 #include "extensions/extensionmanager.h"
 #include "core/notifier.h"
+#include "browser/tab.h"
+#include "browser/tabextensionitems.h"
 
 namespace {
 
@@ -100,7 +102,7 @@ QString ExtensionBridge::request(const QString &extensionId, const QString &toke
     }
 
     if (method == QLatin1String("action.setChecked")) {
-        m_tab->setExtensionItemChecked(extensionId, stringArg(0), args.at(1).toBool());
+        m_tab->extensionItems()->setChecked(extensionId, stringArg(0), args.at(1).toBool());
         return okReply();
     }
 

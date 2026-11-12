@@ -1,40 +1,43 @@
 #include "browser/sessionmanager.h"
 
-#include "browser/tab.h"
-#include "browser/tabmodel.h"
+#include "browser/sessionformat.h"
 
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
-#include <QJsonArray>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonParseError>
 #include <QQmlEngine>
 #include <QSaveFile>
 #include <QStandardPaths>
 
 #include <algorithm>
-#include <utility>
 
 namespace {
-// 2 adds the "windows" array; version 1 is a single window at the root and is
-// still read, so an older session is not lost.
-constexpr int kSessionVersion = 2;
 constexpr int kAutosaveDelayMs = 2000;
-// Session marker for a tab on the New Tab page (it has no real URL).
-constexpr auto kNewTabPageUrl = "about:newtab";
 
-SessionTab tabFromJson(const QJsonObject &entry)
+Tab *tabAt(const TabModel *model, int row)
 {
-    SessionTab tab;
-    const QString urlString = entry.value(QStringLiteral("url")).toString();
-    if (urlString != QLatin1String(kNewTabPageUrl))
-        tab.url = QUrl(urlString);
-    tab.title = entry.value(QStringLiteral("title")).toString();
-    return tab;
+    return model->data(model->index(row), TabModel::TabRole).value<Tab *>();
 }
-} // namespace
+
+SessionTab sessionTabOf(const Tab *tab)
+{
+    return {tab->newTabPage() ? QUrl() : tab->url(), tab->title()};
+}
+
+SessionWindow sessionWindowOf(const TabModel *model)
+{
+    SessionWindow window;
+    for (int row = 0; row < model->count(); ++row) {
+        const Tab *tab = tabAt(model, row);
+        if (!tab || tab->isPrivate())
+            continue;
+        if (row == model->currentIndex())
+            window.currentIndex = int(window.tabs.size());
+        window.tabs.append(sessionTabOf(tab));
+    }
+    return window;
+}
+}
 
 SessionManager *SessionManager::instance()
 {
@@ -55,15 +58,13 @@ SessionManager::SessionManager(QObject *parent)
     m_saveTimer.setSingleShot(true);
     m_saveTimer.setInterval(kAutosaveDelayMs);
     connect(&m_saveTimer, &QTimer::timeout, this, &SessionManager::saveNow);
-
     if (auto *app = QCoreApplication::instance())
         connect(app, &QCoreApplication::aboutToQuit, this, &SessionManager::saveNow);
 }
 
 QString SessionManager::sessionFilePath()
 {
-    const QString dir =
-        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    const QString dir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     QDir().mkpath(dir);
     return dir + QStringLiteral("/session.json");
 }
@@ -72,49 +73,51 @@ void SessionManager::watch(TabModel *model)
 {
     if (!model || m_models.contains(model))
         return;
-
     pruneModels();
     m_models.append(model);
+    connectModel(model);
+    trackRows(model, 0, model->count() - 1);
+}
 
+void SessionManager::connectModel(TabModel *model)
+{
     connect(model, &TabModel::countChanged, this, &SessionManager::scheduleSave);
     connect(model, &TabModel::currentIndexChanged, this, &SessionManager::scheduleSave);
-    connect(model, &QObject::destroyed, this, [this]() {
-        pruneModels();
-        scheduleSave();
-    });
+    connect(model, &QAbstractItemModel::rowsRemoved, this, &SessionManager::scheduleSave);
+    connect(model, &QObject::destroyed, this, &SessionManager::forgetDestroyedModel);
+    connectInsertions(model);
+}
 
-    // New tabs appear through the model; follow their URL changes as well.
+void SessionManager::connectInsertions(TabModel *model)
+{
     connect(model, &QAbstractItemModel::rowsInserted, this,
             [this, model](const QModelIndex &, int first, int last) {
-                for (int row = first; row <= last && row < model->count(); ++row) {
-                    Tab *tab = model->data(model->index(row), TabModel::TabRole)
-                                   .value<Tab *>();
-                    trackTab(tab);
-                }
+                trackRows(model, first, last);
                 scheduleSave();
             });
-    connect(model, &QAbstractItemModel::rowsRemoved, this, &SessionManager::scheduleSave);
+}
 
-    for (int row = 0; row < model->count(); ++row) {
-        Tab *tab = model->data(model->index(row), TabModel::TabRole).value<Tab *>();
-        trackTab(tab);
-    }
+void SessionManager::forgetDestroyedModel()
+{
+    pruneModels();
+    scheduleSave();
+}
+
+void SessionManager::trackRows(TabModel *model, int first, int last)
+{
+    for (int row = first; row <= last && row < model->count(); ++row)
+        trackTab(tabAt(model, row));
 }
 
 void SessionManager::trackTab(Tab *tab)
 {
-    if (!tab)
-        return;
-    // Connections die with either side, so each tab is tracked exactly once.
-    connect(tab, &Tab::urlChanged, this, &SessionManager::scheduleSave);
+    if (tab)
+        connect(tab, &Tab::urlChanged, this, &SessionManager::scheduleSave);
 }
 
 void SessionManager::pruneModels()
 {
-    for (int i = int(m_models.size()) - 1; i >= 0; --i) {
-        if (m_models.at(i).isNull())
-            m_models.removeAt(i);
-    }
+    m_models.removeIf([](const QPointer<TabModel> &model) { return model.isNull(); });
 }
 
 void SessionManager::scheduleSave()
@@ -129,116 +132,47 @@ void SessionManager::save(TabModel *model)
     saveNow();
 }
 
+bool SessionManager::hasNormalWindow() const
+{
+    return std::any_of(m_models.cbegin(), m_models.cend(),
+                       [](const QPointer<TabModel> &model) { return model && !model->privateTabs(); });
+}
+
+QList<SessionWindow> SessionManager::collectWindows() const
+{
+    QList<SessionWindow> windows;
+    for (const QPointer<TabModel> &model : m_models) {
+        const SessionWindow window = sessionWindowOf(model);
+        if (!window.tabs.isEmpty())
+            windows.append(window);
+    }
+    return windows;
+}
+
+void SessionManager::writeSessionFile(const QByteArray &content) const
+{
+    QSaveFile file(sessionFilePath());
+    if (!file.open(QIODevice::WriteOnly)) {
+        qWarning("Kondor: cannot write the session file %s", qUtf8Printable(file.fileName()));
+        return;
+    }
+    file.write(content);
+    if (!file.commit())
+        qWarning("Kondor: cannot commit the session file %s", qUtf8Printable(file.fileName()));
+}
+
 void SessionManager::saveNow()
 {
     m_saveTimer.stop();
     pruneModels();
-
-    // Every window is gone and the app is quitting: the session saved when the
-    // last window closed is the one to keep.
-    if (m_models.isEmpty())
-        return;
-
-    // The last normal window closed while a private one is still open: keep the
-    // session saved when that window closed instead of overwriting it with the
-    // empty session of a window that never restores.
-    const bool anyNormalWindow =
-        std::any_of(m_models.cbegin(), m_models.cend(), [](const QPointer<TabModel> &model) {
-            return model && !model->privateTabs();
-        });
-    if (!anyNormalWindow)
-        return;
-
-    QJsonArray windows;
-    for (const QPointer<TabModel> &model : std::as_const(m_models)) {
-        QJsonArray tabs;
-        int currentIndex = 0;
-        for (int row = 0; row < model->count(); ++row) {
-            Tab *tab = model->data(model->index(row), TabModel::TabRole).value<Tab *>();
-            if (!tab || tab->isPrivate())
-                continue;
-
-            QJsonObject entry;
-            if (tab->newTabPage())
-                entry.insert(QStringLiteral("url"), QStringLiteral("about:newtab"));
-            else
-                entry.insert(QStringLiteral("url"), tab->url().toString());
-            entry.insert(QStringLiteral("title"), tab->title());
-            if (row == model->currentIndex())
-                currentIndex = int(tabs.size());
-            tabs.append(entry);
-        }
-
-        // A private window, or one whose normal tabs are all gone, is not a
-        // window to bring back.
-        if (tabs.isEmpty())
-            continue;
-
-        QJsonObject window;
-        window.insert(QStringLiteral("currentIndex"), currentIndex);
-        window.insert(QStringLiteral("tabs"), tabs);
-        windows.append(window);
-    }
-
-    QJsonObject root;
-    root.insert(QStringLiteral("version"), kSessionVersion);
-    root.insert(QStringLiteral("windows"), windows);
-
-    QSaveFile file(sessionFilePath());
-    if (!file.open(QIODevice::WriteOnly)) {
-        qWarning("Kondor: cannot write the session file %s",
-                 qUtf8Printable(file.fileName()));
-        return;
-    }
-    file.write(QJsonDocument(root).toJson(QJsonDocument::Compact));
-    if (!file.commit())
-        qWarning("Kondor: cannot commit the session file %s",
-                 qUtf8Printable(file.fileName()));
+    if (hasNormalWindow())
+        writeSessionFile(SessionFormat::toJson(collectWindows()));
 }
 
 QList<SessionWindow> SessionManager::savedWindows()
 {
-    QList<SessionWindow> windows;
-
     QFile file(sessionFilePath());
     if (!file.open(QIODevice::ReadOnly))
-        return windows;
-
-    QJsonParseError error;
-    const QJsonDocument document = QJsonDocument::fromJson(file.readAll(), &error);
-    if (error.error != QJsonParseError::NoError || !document.isObject()) {
-        qWarning("Kondor: ignoring invalid session file: %s",
-                 qUtf8Printable(error.errorString()));
-        return windows;
-    }
-
-    const QJsonObject root = document.object();
-    const int version = root.value(QStringLiteral("version")).toInt();
-    if (version < 1 || version > kSessionVersion) {
-        qWarning("Kondor: ignoring unsupported session file version");
-        return windows;
-    }
-
-    // One entry per window; the old format had a single window at the root.
-    QList<QJsonObject> entries;
-    if (version >= 2) {
-        const QJsonArray array = root.value(QStringLiteral("windows")).toArray();
-        entries.reserve(array.size());
-        for (const QJsonValue &value : array)
-            entries.append(value.toObject());
-    } else {
-        entries.append(root);
-    }
-
-    for (const QJsonObject &entry : std::as_const(entries)) {
-        SessionWindow window;
-        window.currentIndex = entry.value(QStringLiteral("currentIndex")).toInt();
-        const QJsonArray tabs = entry.value(QStringLiteral("tabs")).toArray();
-        for (const QJsonValue &value : tabs)
-            window.tabs.append(tabFromJson(value.toObject()));
-        if (!window.tabs.isEmpty())
-            windows.append(window);
-    }
-
-    return windows;
+        return {};
+    return SessionFormat::fromJson(file.readAll());
 }

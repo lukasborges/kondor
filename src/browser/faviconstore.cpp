@@ -1,18 +1,51 @@
 #include "browser/faviconstore.h"
 
-#include "core/database.h"
+#include "core/sql.h"
 
 #include <QBuffer>
 #include <QDateTime>
 #include <QQmlEngine>
 #include <QQuickImageProvider>
 #include <QQuickTextureFactory>
-#include <QSqlQuery>
-#include <QVariant>
+
+#include <memory>
 
 namespace {
-// Favicons are kept small: the UI never shows them larger than 22 px.
 constexpr int kMaxIconSize = 32;
+
+bool isWebPage(const QUrl &url)
+{
+    return url.scheme() == QLatin1String("http") || url.scheme() == QLatin1String("https");
+}
+
+QString providerIconId(const QUrl &iconSource)
+{
+    const QString prefix = QStringLiteral("image://favicon/");
+    const QString source = iconSource.toString();
+    return source.startsWith(prefix) ? source.mid(prefix.size()) : QString();
+}
+
+QImage scaledToIconSize(const QImage &image)
+{
+    if (image.width() <= kMaxIconSize && image.height() <= kMaxIconSize)
+        return image;
+    return image.scaled(kMaxIconSize, kMaxIconSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+}
+
+std::optional<QByteArray> encodePng(const QImage &image)
+{
+    QByteArray bytes;
+    QBuffer buffer(&bytes);
+    if (!buffer.open(QIODevice::WriteOnly) || !image.save(&buffer, "PNG"))
+        return std::nullopt;
+    return bytes;
+}
+
+bool isStoredWithBytes(const QString &host, const QByteArray &bytes)
+{
+    auto query = Sql::run(QStringLiteral("SELECT image FROM favicons WHERE host = ?"), {host});
+    return query && query->next() && query->value(0).toByteArray() == bytes;
+}
 }
 
 FaviconStore *FaviconStore::instance()
@@ -21,9 +54,8 @@ FaviconStore *FaviconStore::instance()
     return store;
 }
 
-FaviconStore *FaviconStore::create(QQmlEngine *engine, QJSEngine *jsEngine)
+FaviconStore *FaviconStore::create(QQmlEngine *engine, QJSEngine *)
 {
-    Q_UNUSED(jsEngine)
     FaviconStore *store = instance();
     store->m_engine = engine;
     return store;
@@ -45,117 +77,76 @@ void FaviconStore::bumpRevision()
     emit revisionChanged();
 }
 
+void FaviconStore::bumpRevisionIfRowsAffected(const std::optional<QSqlQuery> &query)
+{
+    if (query && query->numRowsAffected() > 0)
+        bumpRevision();
+}
+
+QQuickImageResponse *FaviconStore::requestIcon(const QString &iconId) const
+{
+    auto *provider = dynamic_cast<QQuickAsyncImageProvider *>(
+            m_engine->imageProvider(QStringLiteral("favicon")));
+    if (!provider)
+        return nullptr;
+    return provider->requestImageResponse(iconId, QSize(kMaxIconSize, kMaxIconSize));
+}
+
+void FaviconStore::storeResponse(QQuickImageResponse *response, const QString &host)
+{
+    const std::unique_ptr<QQuickTextureFactory> factory(response->textureFactory());
+    const QImage image = factory ? factory->image() : QImage();
+    if (!image.isNull())
+        storeImage(host, scaledToIconSize(image));
+    response->deleteLater();
+}
+
 void FaviconStore::store(const QUrl &pageUrl, const QUrl &iconSource)
 {
-    if (!m_engine || pageUrl.isEmpty() || iconSource.isEmpty())
+    const QString iconId = providerIconId(iconSource);
+    if (!m_engine || !isWebPage(pageUrl) || iconId.isEmpty())
         return;
-    const QString scheme = pageUrl.scheme();
-    if (scheme != QLatin1String("http") && scheme != QLatin1String("https"))
-        return;
-
-    const QString source = iconSource.toString();
-    const QString prefix = QStringLiteral("image://favicon/");
-    if (!source.startsWith(prefix))
-        return;
-    const QString iconId = source.mid(prefix.size());
-    if (iconId.isEmpty())
-        return;
-
-    auto *provider = dynamic_cast<QQuickAsyncImageProvider *>(
-        m_engine->imageProvider(QStringLiteral("favicon")));
-    if (!provider)
-        return;
-
-    QQuickImageResponse *response =
-        provider->requestImageResponse(iconId, QSize(kMaxIconSize, kMaxIconSize));
+    QQuickImageResponse *response = requestIcon(iconId);
     if (!response)
         return;
-
-    const QString host = pageUrl.host();
     connect(response, &QQuickImageResponse::finished, response,
-            [this, response, host]() {
-        QQuickTextureFactory *factory = response->textureFactory();
-        if (factory) {
-            const QImage image = factory->image();
-            if (!image.isNull()) {
-                const QImage scaled = image.width() > kMaxIconSize
-                        || image.height() > kMaxIconSize
-                    ? image.scaled(kMaxIconSize, kMaxIconSize, Qt::KeepAspectRatio,
-                                   Qt::SmoothTransformation)
-                    : image;
-                storeImage(host, scaled);
-            }
-            delete factory;
-        }
-        response->deleteLater();
-    });
+            [this, response, host = pageUrl.host()] { storeResponse(response, host); });
 }
 
 void FaviconStore::storeImage(const QString &host, const QImage &image)
 {
     if (host.isEmpty() || image.isNull())
         return;
-    Database *db = Database::instance();
-    if (!db->isValid())
+    const std::optional<QByteArray> bytes = encodePng(image);
+    if (!bytes || isStoredWithBytes(host, *bytes))
         return;
-
-    QByteArray bytes;
-    QBuffer buffer(&bytes);
-    if (!buffer.open(QIODevice::WriteOnly) || !image.save(&buffer, "PNG"))
-        return;
-
-    QSqlQuery existing(db->handle());
-    existing.prepare(QStringLiteral("SELECT image FROM favicons WHERE host = ?"));
-    existing.addBindValue(host);
-    if (existing.exec() && existing.next() && existing.value(0).toByteArray() == bytes)
-        return;
-
-    QSqlQuery insert(db->handle());
-    insert.prepare(QStringLiteral(
-        "INSERT OR REPLACE INTO favicons (host, image, updated_at) VALUES (?, ?, ?)"));
-    insert.addBindValue(host);
-    insert.addBindValue(bytes);
-    insert.addBindValue(QDateTime::currentMSecsSinceEpoch());
-    if (insert.exec())
+    const QString statement = QStringLiteral(
+            "INSERT OR REPLACE INTO favicons (host, image, updated_at) VALUES (?, ?, ?)");
+    if (Sql::run(statement, {host, *bytes, QDateTime::currentMSecsSinceEpoch()}))
         bumpRevision();
 }
 
 void FaviconStore::clearAll()
 {
-    Database *db = Database::instance();
-    if (!db->isValid())
-        return;
-    QSqlQuery query(db->handle());
-    if (query.exec(QStringLiteral("DELETE FROM favicons")) && query.numRowsAffected() > 0)
-        bumpRevision();
+    bumpRevisionIfRowsAffected(Sql::run(QStringLiteral("DELETE FROM favicons")));
 }
 
 void FaviconStore::clearSince(qint64 msecsSinceEpoch)
 {
-    Database *db = Database::instance();
-    if (!db->isValid())
-        return;
-    QSqlQuery query(db->handle());
-    query.prepare(QStringLiteral("DELETE FROM favicons WHERE updated_at >= ?"));
-    query.addBindValue(msecsSinceEpoch);
-    if (query.exec() && query.numRowsAffected() > 0)
-        bumpRevision();
+    bumpRevisionIfRowsAffected(
+            Sql::run(QStringLiteral("DELETE FROM favicons WHERE updated_at >= ?"),
+                     {msecsSinceEpoch}));
 }
 
 QImage FaviconStore::imageForHost(const QString &host) const
 {
-    Database *db = Database::instance();
-    if (host.isEmpty() || !db->isValid())
+    if (host.isEmpty())
         return QImage();
-
-    QSqlQuery query(db->handle());
-    query.prepare(QStringLiteral("SELECT image FROM favicons WHERE host = ?"));
-    query.addBindValue(host);
-    if (!query.exec() || !query.next())
+    auto query = Sql::run(QStringLiteral("SELECT image FROM favicons WHERE host = ?"), {host});
+    if (!query || !query->next())
         return QImage();
-
     QImage image;
-    if (!image.loadFromData(query.value(0).toByteArray(), "PNG"))
+    if (!image.loadFromData(query->value(0).toByteArray(), "PNG"))
         return QImage();
     return image;
 }

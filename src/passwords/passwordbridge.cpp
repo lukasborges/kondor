@@ -43,31 +43,41 @@ bool PasswordBridge::allowed() const
     return m_tab && !m_tab->isPrivate();
 }
 
+bool PasswordBridge::mayOfferSave(const QString &origin, const QString &password) const
+{
+    if (!allowed() || password.isEmpty() || !PasswordStore::canSaveFor(origin))
+        return false;
+    Settings *settings = Settings::instance();
+    return settings->offerToSavePasswords() && !settings->passwordNeverSaveSites().contains(origin);
+}
+
+void PasswordBridge::showWalletNoticeOnce()
+{
+    PasswordStore *store = PasswordStore::instance();
+    if (store->unavailableNoticeShown())
+        return;
+    store->setUnavailableNoticeShown();
+    m_tab->passwords()->showWalletNotice();
+}
+
+bool PasswordBridge::isAlreadySaved(const QString &origin, const QString &username,
+                                    const QString &password) const
+{
+    PasswordStore *store = PasswordStore::instance();
+    return store->usernames(origin).contains(username) && store->password(origin, username) == password;
+}
+
 void PasswordBridge::formSubmitted(const QString &origin, const QString &username,
                                    const QString &password)
 {
-    if (!allowed() || password.isEmpty() || !PasswordStore::canSaveFor(origin))
+    if (!mayOfferSave(origin, password))
         return;
-    Settings *settings = Settings::instance();
-    if (!settings->offerToSavePasswords() || settings->passwordNeverSaveSites().contains(origin))
-        return;
-
     PasswordStore *store = PasswordStore::instance();
     store->ensureOpen();
-    if (store->state() == QLatin1String("unavailable")) {
-        // Feature off: tell the user once, in this tab.
-        if (!store->unavailableNoticeShown()) {
-            store->setUnavailableNoticeShown();
-            m_tab->passwords()->showWalletNotice();
-        }
-        return;
-    }
-    if (!store->isOpen())
-        return;
-    // Already saved with this very password: nothing to offer.
-    if (store->usernames(origin).contains(username) && store->password(origin, username) == password)
-        return;
-    m_tab->passwords()->offerSave(origin, username, password);
+    if (store->state() == QLatin1String("unavailable"))
+        showWalletNoticeOnce();
+    else if (store->isOpen() && !isAlreadySaved(origin, username, password))
+        m_tab->passwords()->offerSave(origin, username, password);
 }
 
 QVariantList PasswordBridge::credentialsFor(const QString &origin)

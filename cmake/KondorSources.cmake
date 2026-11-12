@@ -1,3 +1,26 @@
+set(KONDOR_PASSWORD_STORE_SOURCES
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordorigin.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordorigin.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/walletfolder.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/walletfolder.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordclipboard.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordclipboard.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportfile.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportfile.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportplan.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportplan.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/csvreader.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/csvreader.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportcolumns.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportcolumns.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimport.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimport.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordstore.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordstore.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordstorewallet.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordstoreimport.cpp
+)
+
 set(KONDOR_DATABASE_SOURCES
     ${CMAKE_SOURCE_DIR}/src/core/database.h
     ${CMAKE_SOURCE_DIR}/src/core/database.cpp

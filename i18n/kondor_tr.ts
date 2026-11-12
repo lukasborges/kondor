@@ -236,8 +236,8 @@
     </message>
     <message>
         <location filename="../qml/BookmarksWindow.qml" line="407"/>
-        <location filename="../qml/BookmarksWindow.qml" line="849"/>
-        <location filename="../qml/BookmarksWindow.qml" line="866"/>
+        <location filename="../qml/BookmarksWindow.qml" line="850"/>
+        <location filename="../qml/BookmarksWindow.qml" line="867"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>Yeni klasör</translation>
@@ -249,76 +249,77 @@
     </message>
     <message>
         <location filename="../qml/BookmarksWindow.qml" line="426"/>
+        <location filename="../qml/BookmarksWindow.qml" line="936"/>
         <source>Delete</source>
         <translation>Sil</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="443"/>
+        <location filename="../qml/BookmarksWindow.qml" line="444"/>
         <source>Move Up</source>
         <translation>Yukarı taşı</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="454"/>
+        <location filename="../qml/BookmarksWindow.qml" line="455"/>
         <source>Move Down</source>
         <translation>Aşağı taşı</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="465"/>
+        <location filename="../qml/BookmarksWindow.qml" line="466"/>
         <source>Import from HTML…</source>
         <translation>HTML&apos;den içe aktar…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="473"/>
+        <location filename="../qml/BookmarksWindow.qml" line="474"/>
         <source>Search bookmarks…</source>
         <translation>Yer imlerinde ara…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="821"/>
+        <location filename="../qml/BookmarksWindow.qml" line="822"/>
         <source>Move To</source>
         <translation>Şuraya taşı</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="860"/>
+        <location filename="../qml/BookmarksWindow.qml" line="861"/>
         <source>Name:</source>
         <translation>Ad:</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="887"/>
+        <location filename="../qml/BookmarksWindow.qml" line="888"/>
         <source>Rename Folder</source>
         <translation>Klasörü yeniden adlandır</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="887"/>
+        <location filename="../qml/BookmarksWindow.qml" line="888"/>
         <source>Rename Bookmark</source>
         <translation>Yer imini yeniden adlandır</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="902"/>
+        <location filename="../qml/BookmarksWindow.qml" line="903"/>
         <source>New name:</source>
         <translation>Yeni ad:</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="930"/>
+        <location filename="../qml/BookmarksWindow.qml" line="932"/>
         <source>Delete Folder</source>
         <translation>Klasörü sil</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="930"/>
+        <location filename="../qml/BookmarksWindow.qml" line="932"/>
         <source>Delete Bookmark</source>
         <translation>Yer imini sil</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="932"/>
-        <source>Delete this folder and everything in it?</source>
-        <translation>Bu klasör ve içindeki her şey silinsin mi?</translation>
+        <location filename="../qml/BookmarksWindow.qml" line="934"/>
+        <source>Delete the folder “%1” and everything in it?</source>
+        <translation>“%1” klasörü ve içindeki her şey silinsin mi?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="933"/>
-        <source>Delete this bookmark?</source>
-        <translation>Bu yer imi silinsin mi?</translation>
+        <location filename="../qml/BookmarksWindow.qml" line="935"/>
+        <source>Delete the bookmark “%1”?</source>
+        <translation>“%1” yer imi silinsin mi?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="954"/>
+        <location filename="../qml/BookmarksWindow.qml" line="957"/>
         <source>Import Bookmarks</source>
         <translation>Yer imlerini içe aktar</translation>
     </message>
@@ -338,58 +339,58 @@
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="1210"/>
+        <location filename="../qml/BrowserWindow.qml" line="1212"/>
         <source>New Tab</source>
         <translation>Yeni sekme</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="419"/>
+        <location filename="../qml/BrowserWindow.qml" line="421"/>
         <source>Back</source>
         <translation>Geri</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="432"/>
+        <location filename="../qml/BrowserWindow.qml" line="434"/>
         <source>Forward</source>
         <translation>İleri</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="445"/>
+        <location filename="../qml/BrowserWindow.qml" line="447"/>
         <source>Stop</source>
         <translation>Durdur</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="445"/>
+        <location filename="../qml/BrowserWindow.qml" line="447"/>
         <source>Reload</source>
         <translation>Yeniden yükle</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="461"/>
+        <location filename="../qml/BrowserWindow.qml" line="463"/>
         <source>Home</source>
         <translation>Başlangıç</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="478"/>
+        <location filename="../qml/BrowserWindow.qml" line="480"/>
         <source>Search or enter address</source>
         <translation>Arayın veya bir adres girin</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="842"/>
+        <location filename="../qml/BrowserWindow.qml" line="844"/>
         <source>Bookmark This Page</source>
         <translation>Bu sayfayı yer imlerine ekle</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="901"/>
+        <location filename="../qml/BrowserWindow.qml" line="903"/>
         <source>Downloads</source>
         <translation>İndirilenler</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="951"/>
+        <location filename="../qml/BrowserWindow.qml" line="953"/>
         <source>Menu</source>
         <translation>Menü</translation>
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="1216"/>
+        <location filename="../qml/BrowserWindow.qml" line="1218"/>
         <source>New Private Tab</source>
         <translation>Yeni gizli sekme</translation>
     </message>
@@ -399,185 +400,190 @@
         <translation>Gizli gezinme</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="676"/>
+        <location filename="../qml/BrowserWindow.qml" line="106"/>
+        <source>Quit</source>
+        <translation>Çık</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="678"/>
         <source>Not Secure</source>
         <translation>Güvenli değil</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="684"/>
+        <location filename="../qml/BrowserWindow.qml" line="686"/>
         <source>Site Information</source>
         <translation>Site bilgileri</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="723"/>
+        <location filename="../qml/BrowserWindow.qml" line="725"/>
         <source>Ad and Tracker Blocking</source>
         <translation>Reklam ve İzleyici Engelleme</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="772"/>
+        <location filename="../qml/BrowserWindow.qml" line="774"/>
         <source>Reset Zoom (Ctrl+0)</source>
         <translation>Yakınlaştırmayı sıfırla (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="789"/>
+        <location filename="../qml/BrowserWindow.qml" line="791"/>
         <source>Fill Saved Password</source>
         <translation>Kayıtlı parolayı doldur</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="824"/>
+        <location filename="../qml/BrowserWindow.qml" line="826"/>
         <source>Exit Reader Mode (Ctrl+Alt+R)</source>
         <translation>Okuyucu kipinden çık (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="825"/>
+        <location filename="../qml/BrowserWindow.qml" line="827"/>
         <source>Reader Mode (Ctrl+Alt+R)</source>
         <translation>Okuyucu kipi (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="842"/>
+        <location filename="../qml/BrowserWindow.qml" line="844"/>
         <source>Edit This Bookmark</source>
         <translation>Bu yer imini düzenle</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="935"/>
+        <location filename="../qml/BrowserWindow.qml" line="937"/>
         <source>Extensions</source>
         <translation>Eklentiler</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1222"/>
+        <location filename="../qml/BrowserWindow.qml" line="1224"/>
         <source>New Window</source>
         <translation>Yeni pencere</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1228"/>
+        <location filename="../qml/BrowserWindow.qml" line="1230"/>
         <source>New Private Window</source>
         <translation>Yeni gizli pencere</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1234"/>
+        <location filename="../qml/BrowserWindow.qml" line="1236"/>
         <source>Show All History</source>
         <translation>Tüm Geçmişi Göster</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1240"/>
+        <location filename="../qml/BrowserWindow.qml" line="1242"/>
         <source>Reopen Closed Tab</source>
         <translation>Kapatılan sekmeyi yeniden aç</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1247"/>
+        <location filename="../qml/BrowserWindow.qml" line="1249"/>
         <source>Find in Page…</source>
         <translation>Sayfada bul…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1261"/>
+        <location filename="../qml/BrowserWindow.qml" line="1263"/>
         <source>Save Page As…</source>
         <translation>Sayfayı Farklı Kaydet…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1275"/>
+        <location filename="../qml/BrowserWindow.qml" line="1277"/>
         <source>Save as PDF…</source>
         <translation>PDF Olarak Kaydet…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1254"/>
+        <location filename="../qml/BrowserWindow.qml" line="1256"/>
         <source>Print…</source>
         <translation>Yazdır…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1281"/>
+        <location filename="../qml/BrowserWindow.qml" line="1283"/>
         <source>Site Permissions…</source>
         <translation>Site İzinleri…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1268"/>
+        <location filename="../qml/BrowserWindow.qml" line="1270"/>
         <source>Developer Tools</source>
         <translation>Geliştirici Araçları</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1287"/>
+        <location filename="../qml/BrowserWindow.qml" line="1289"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 ayarları…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1293"/>
+        <location filename="../qml/BrowserWindow.qml" line="1295"/>
         <source>Report a Bug…</source>
         <translation>Hata Bildir…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1299"/>
+        <location filename="../qml/BrowserWindow.qml" line="1301"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 hakkında</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1013"/>
+        <location filename="../qml/BrowserWindow.qml" line="1015"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Tam ekrandan çıkmak için Esc tuşuna basın</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1083"/>
+        <location filename="../qml/BrowserWindow.qml" line="1085"/>
         <source>Page bookmarked</source>
         <translation>Sayfa yer imlerine eklendi</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1083"/>
+        <location filename="../qml/BrowserWindow.qml" line="1085"/>
         <source>Edit Bookmark</source>
         <translation>Yer imini düzenle</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1091"/>
+        <location filename="../qml/BrowserWindow.qml" line="1093"/>
         <source>Name:</source>
         <translation>Ad:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1097"/>
+        <location filename="../qml/BrowserWindow.qml" line="1099"/>
         <source>Folder:</source>
         <translation>Klasör:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1107"/>
+        <location filename="../qml/BrowserWindow.qml" line="1109"/>
         <source>Remove</source>
         <translation>Kaldır</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1115"/>
+        <location filename="../qml/BrowserWindow.qml" line="1117"/>
         <source>Done</source>
         <translation>Bitti</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1126"/>
+        <location filename="../qml/BrowserWindow.qml" line="1128"/>
         <source>Save as PDF</source>
         <translation>PDF olarak kaydet</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1128"/>
+        <location filename="../qml/BrowserWindow.qml" line="1130"/>
         <source>PDF (*.pdf)</source>
         <translation>PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1135"/>
+        <location filename="../qml/BrowserWindow.qml" line="1137"/>
         <source>Save Page As</source>
         <translation>Sayfayı farklı kaydet</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1137"/>
+        <location filename="../qml/BrowserWindow.qml" line="1139"/>
         <source>Web Page, Complete (*.html)</source>
         <translation>Web Sayfası, Tam (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1138"/>
+        <location filename="../qml/BrowserWindow.qml" line="1140"/>
         <source>Web Page, HTML Only (*.html)</source>
         <translation>Web Sayfası, Yalnızca HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1139"/>
+        <location filename="../qml/BrowserWindow.qml" line="1141"/>
         <source>Web Archive (*.mhtml)</source>
         <translation>Web Arşivi (*.mhtml)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1155"/>
+        <location filename="../qml/BrowserWindow.qml" line="1157"/>
         <source>Save File</source>
         <translation>Dosyayı kaydet</translation>
     </message>
@@ -613,6 +619,14 @@
         <location filename="../qml/CertificateErrorPage.qml" line="99"/>
         <source>Continue Anyway (Unsafe)</source>
         <translation>Yine de devam et (güvenli değil)</translation>
+    </message>
+</context>
+<context>
+    <name>ConfirmDialog</name>
+    <message>
+        <location filename="../qml/ConfirmDialog.qml" line="35"/>
+        <source>Cancel</source>
+        <translation>İptal</translation>
     </message>
 </context>
 <context>
@@ -1079,6 +1093,7 @@
     </message>
     <message>
         <location filename="../qml/ExtensionsPage.qml" line="168"/>
+        <location filename="../qml/ExtensionsPage.qml" line="205"/>
         <source>Remove</source>
         <translation>Kaldır</translation>
     </message>
@@ -1733,105 +1748,106 @@
         <translation>%2 sitesindeki %1 için kayıtlı parola silinsin mi?</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="164"/>
+        <location filename="../qml/PasswordsPage.qml" line="162"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
         <translation>KWallet devre dışı veya erişim reddedildi; bu nedenle parolalar kaydedilemez veya doldurulamaz.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="167"/>
+        <location filename="../qml/PasswordsPage.qml" line="165"/>
         <source>Try Again</source>
         <translation>Yeniden dene</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="180"/>
+        <location filename="../qml/PasswordsPage.qml" line="178"/>
         <source>Some passwords could not be saved to KWallet.</source>
         <translation>Bazı parolalar KWallet’a kaydedilemedi.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="182"/>
+        <location filename="../qml/PasswordsPage.qml" line="180"/>
         <source>“%1” was moved to the trash.</source>
         <translation>“%1” çöp kutusuna taşındı.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/PasswordsPage.qml" line="183"/>
+        <location filename="../qml/PasswordsPage.qml" line="181"/>
         <source>Imported %n password(s) from “%1”. The file holds your passwords unencrypted: delete it when you no longer need it.</source>
         <translation>
             <numerusform>“%1” dosyasından %n parola içe aktarıldı. Dosya parolalarınızı şifrelenmemiş olarak içerir: artık gerekmediğinde silin.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="187"/>
+        <location filename="../qml/PasswordsPage.qml" line="185"/>
         <source>Move File to Trash</source>
         <translation>Dosyayı Çöp Kutusuna Taşı</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="207"/>
+        <location filename="../qml/PasswordsPage.qml" line="205"/>
         <source>Offer to save passwords</source>
         <translation>Parolaları kaydetmeyi öner</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="225"/>
+        <location filename="../qml/PasswordsPage.qml" line="223"/>
         <source>Filter by site or username…</source>
         <translation>Siteye veya kullanıcı adına göre süz…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="230"/>
-        <location filename="../qml/PasswordsPage.qml" line="275"/>
+        <location filename="../qml/PasswordsPage.qml" line="228"/>
+        <location filename="../qml/PasswordsPage.qml" line="273"/>
         <source>Add Password…</source>
         <translation>Parola ekle…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="237"/>
+        <location filename="../qml/PasswordsPage.qml" line="235"/>
         <source>Import…</source>
         <translation>İçe Aktar…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="241"/>
+        <location filename="../qml/PasswordsPage.qml" line="239"/>
         <source>Import passwords from a CSV file</source>
         <translation>Parolaları bir CSV dosyasından içe aktar</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="266"/>
+        <location filename="../qml/PasswordsPage.qml" line="264"/>
         <source>No saved passwords match “%1”</source>
         <translation>“%1” ile eşleşen kayıtlı parola yok</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="267"/>
+        <location filename="../qml/PasswordsPage.qml" line="265"/>
         <source>No saved passwords</source>
         <translation>Kayıtlı parola yok</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="270"/>
+        <location filename="../qml/PasswordsPage.qml" line="268"/>
         <source>Kondor offers to save a password when you log in to a site. You can also add one here, or import the CSV file exported by another browser or password manager.</source>
         <translation>Kondor, bir sitede oturum açtığınızda parolayı kaydetmeyi önerir. Burada bir parola ekleyebilir veya başka bir tarayıcının ya da parola yöneticisinin dışa aktardığı CSV dosyasını içe aktarabilirsiniz.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="323"/>
+        <location filename="../qml/PasswordsPage.qml" line="321"/>
         <source>Hide Password</source>
         <translation>Parolayı gizle</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="323"/>
+        <location filename="../qml/PasswordsPage.qml" line="321"/>
         <source>Show Password</source>
         <translation>Parolayı göster</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="333"/>
+        <location filename="../qml/PasswordsPage.qml" line="331"/>
         <source>Copy Password</source>
         <translation>Parolayı kopyala</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="343"/>
+        <location filename="../qml/PasswordsPage.qml" line="149"/>
+        <location filename="../qml/PasswordsPage.qml" line="341"/>
         <source>Delete</source>
         <translation>Sil</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="366"/>
+        <location filename="../qml/PasswordsPage.qml" line="364"/>
         <source>Kondor never offers to save passwords on these sites.</source>
         <translation>Kondor bu sitelerde parola kaydetmeyi asla önermez.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="398"/>
+        <location filename="../qml/PasswordsPage.qml" line="396"/>
         <source>Remove</source>
         <translation>Kaldır</translation>
     </message>

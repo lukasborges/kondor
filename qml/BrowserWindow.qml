@@ -98,12 +98,14 @@ ApplicationWindow {
         WindowManager.closeWindow(window)
     }
 
-    MessageDialog {
+    ConfirmDialog {
         id: quitDialog
         //: %1 is the application name
         title: qsTr("Quit %1").arg(Qt.application.displayName)
-        text: qsTr("Downloads are still in progress. Quit anyway?")
-        buttons: MessageDialog.Yes | MessageDialog.No
+        message: qsTr("Downloads are still in progress. Quit anyway?")
+        acceptText: qsTr("Quit")
+        acceptIcon: "application-exit"
+        destructive: false
         onAccepted: {
             window.quitConfirmed = true
             window.close()

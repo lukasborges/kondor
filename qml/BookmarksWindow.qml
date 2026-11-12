@@ -432,6 +432,7 @@ ApplicationWindow {
                         if (!target.id)
                             return
                         deleteDialog.targetId = target.id
+                        deleteDialog.targetName = target.title
                         deleteDialog.targetIsFolder = root.actionIsFolder()
                         deleteDialog.open()
                     }
@@ -923,15 +924,17 @@ ApplicationWindow {
         }
     }
 
-    MessageDialog {
+    ConfirmDialog {
         id: deleteDialog
         property var targetId: -1
+        property string targetName: ""
         property bool targetIsFolder: true
         title: deleteDialog.targetIsFolder ? qsTr("Delete Folder") : qsTr("Delete Bookmark")
-        text: deleteDialog.targetIsFolder
-              ? qsTr("Delete this folder and everything in it?")
-              : qsTr("Delete this bookmark?")
-        buttons: MessageDialog.Yes | MessageDialog.No
+        message: deleteDialog.targetIsFolder
+                 ? qsTr("Delete the folder “%1” and everything in it?").arg(deleteDialog.targetName)
+                 : qsTr("Delete the bookmark “%1”?").arg(deleteDialog.targetName)
+        acceptText: qsTr("Delete")
+        acceptIcon: "edit-delete"
         onAccepted: {
             const info = BookmarkManager.bookmark(deleteDialog.targetId)
             if (!info.id)

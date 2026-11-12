@@ -1,4 +1,4 @@
-#include "extensionmanager.h"
+#include "extensions/extensionmanager.h"
 
 #include <QCoreApplication>
 #include <QDir>
@@ -15,8 +15,8 @@
 #include <QUuid>
 #include <QVersionNumber>
 
-#include "database.h"
-#include "extensioncatalog.h"
+#include "core/database.h"
+#include "extensions/extensioncatalog.h"
 
 namespace {
 

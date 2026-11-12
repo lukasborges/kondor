@@ -10,7 +10,7 @@
 #include <QList>
 #include <QtQmlIntegration/qqmlintegration.h>
 
-#include "passwordimport.h"
+#include "passwords/passwordimport.h"
 
 class QQmlEngine;
 class QJSEngine;

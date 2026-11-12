@@ -5,7 +5,7 @@
 #include <QPointer>
 #include <QtQmlIntegration/qqmlintegration.h>
 
-#include "tab.h"
+#include "browser/tab.h"
 
 class ExtensionBridge;
 

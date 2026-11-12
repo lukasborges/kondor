@@ -1,6 +1,6 @@
 #pragma once
 
-#include "filterengine.h"
+#include "adblock/filterengine.h"
 
 #include <QDateTime>
 #include <QFutureWatcher>

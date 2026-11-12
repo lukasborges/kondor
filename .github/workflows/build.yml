@@ -17,7 +17,7 @@ jobs:
         timeout-minutes: 50
         run: |
           for attempt in 1 2 3; do
-            timeout 15m dnf -y install cmake ninja-build gcc-c++ make git nodejs \
+            timeout 15m dnf -y install cmake ninja-build gcc-c++ make git nodejs python3 \
                 qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel qt6-qtwebchannel-devel \
                 kf6-kirigami kf6-qqc2-desktop-style kf6-kwallet-devel kf6-karchive-devel hunspell-en-US hunspell-pt-BR && exit 0
             echo "::warning::dnf install failed or timed out (attempt $attempt of 3)"
@@ -27,6 +27,11 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Code quality
+        run: |
+          python3 -m unittest discover -s scripts/tests
+          python3 scripts/check-code-quality.py
 
       - name: Configure
         run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release

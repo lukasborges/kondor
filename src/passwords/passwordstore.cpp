@@ -1,4 +1,4 @@
-#include "passwordstore.h"
+#include "passwords/passwordstore.h"
 
 #include <KWallet>
 

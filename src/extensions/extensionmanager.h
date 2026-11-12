@@ -11,7 +11,7 @@
 #include <QWebEngineScript>
 #include <QtQmlIntegration/qqmlintegration.h>
 
-#include "extensionpackage.h"
+#include "extensions/extensionpackage.h"
 
 class QQmlEngine;
 class QJSEngine;

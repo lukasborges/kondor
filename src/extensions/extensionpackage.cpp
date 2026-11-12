@@ -1,4 +1,4 @@
-#include "extensionpackage.h"
+#include "extensions/extensionpackage.h"
 
 #include <QDir>
 #include <QDirIterator>

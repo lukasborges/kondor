@@ -29,10 +29,10 @@ def count_parameters(parameters: str) -> int:
     cleaned = parameters.strip()
     if cleaned in ("", "void"):
         return 0
-    return split_top_level(cleaned) 
+    return count_top_level_items(cleaned)
 
 
-def split_top_level(text: str) -> int:
+def count_top_level_items(text: str) -> int:
     depth = 0
     count = 1
     for char in text:

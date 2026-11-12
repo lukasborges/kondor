@@ -5,8 +5,11 @@ from .blocks import count_parameters, match_braces, matching_parenthesis
 from .metrics import Body, Function, measure, unique_keys
 
 HANDLER = re.compile(
-    r"(?<![\w.])((?:[A-Za-z_]\w*\.)*on[A-Z]\w*)\s*:\s*(?:function\s*\([^)]*\)\s*)?\{"
+    r"(?<![\w.])((?:[A-Za-z_]\w*\.)*on[A-Z]\w*)\s*:\s*"
+    r"((?:function\s*)?\([^)]*\)\s*(?:=>\s*)?|\w+\s*=>\s*)?\{"
 )
+ARROW = re.compile(r"(?:(\w+)\s*[:=]\s*)?(\([^)]*\)|\b\w+)\s*=>\s*\{")
+HEAD_PARAMETERS = re.compile(r"\(([^)]*)\)|(\w+)\s*=>")
 FUNCTION = re.compile(r"\bfunction\s*([A-Za-z_]\w*)?\s*\(")
 RETURN_TYPE = re.compile(r"\s*(?::\s*[\w.<>\[\]]+\s*)?\{")
 
@@ -19,21 +22,24 @@ class Candidate(NamedTuple):
     is_handler: bool
 
 
+def head_parameters(head: str) -> str:
+    match = HEAD_PARAMETERS.search(head or "")
+    return (match.group(1) or match.group(2) or "") if match else ""
+
+
 def handler_candidates(text: str) -> List[Candidate]:
     candidates = []
     for match in HANDLER.finditer(text):
         name = match.group(1).split(".")[-1]
-        parameters = parameters_of(text, match.start(), match.end())
+        parameters = head_parameters(match.group(2))
         candidates.append(Candidate(match.start(), name, match.end() - 1, parameters, True))
     return candidates
 
 
-def parameters_of(text: str, start: int, end: int) -> str:
-    keyword = text.find("function", start, end)
-    if keyword < 0:
-        return ""
-    open_index = text.index("(", keyword)
-    return text[open_index + 1:matching_parenthesis(text, open_index)]
+def arrow_candidates(text: str) -> List[Candidate]:
+    return [Candidate(match.start(), match.group(1) or "anonymous", match.end() - 1,
+                      match.group(2).strip("()"), False)
+            for match in ARROW.finditer(text)]
 
 
 def function_candidate(text: str, match) -> List[Candidate]:
@@ -76,7 +82,7 @@ def handler_keys(functions: List[Function], candidates: List[Candidate], path: s
 
 def find_qml_functions(path: str, text: str) -> List[Function]:
     pairs = match_braces(text)
-    chosen = outermost(handler_candidates(text) + function_candidates(text), pairs)
+    chosen = outermost(handler_candidates(text) + function_candidates(text) + arrow_candidates(text), pairs)
     chosen = [item for item in chosen if item.brace in pairs]
     bodies = [Body(text, (item.brace, pairs[item.brace])) for item in chosen]
     functions = [qml_function(path, body, item) for body, item in zip(bodies, chosen)]

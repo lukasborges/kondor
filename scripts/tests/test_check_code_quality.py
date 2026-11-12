@@ -84,6 +84,20 @@ class ParametersAndNestingTest(unittest.TestCase):
         self.assertIn("nesting", rules_of("src/a.cpp", source))
 
 
+class BraceInitializerTest(unittest.TestCase):
+    def test_nested_brace_list_in_one_if_is_not_nesting(self):
+        source = "void Foo::run()\n{\n    if (a) {\n        return {{1, 2}, {3, 4}};\n    }\n}\n"
+        self.assertEqual(rules_of("src/a.cpp", source), set())
+
+    def test_typed_brace_init_is_not_nesting(self):
+        source = "void Foo::run()\n{\n    x = QJsonObject{{1, QJsonArray{1, 2}}};\n}\n"
+        self.assertEqual(rules_of("src/a.cpp", source), set())
+
+    def test_blocks_around_brace_list_still_count(self):
+        source = "void Foo::run()\n{\n    if (a) {\n        for (;;) {\n            if (b) {\n                c = {1};\n            }\n        }\n    }\n}\n"
+        self.assertEqual(rules_of("src/a.cpp", source), {"nesting"})
+
+
 class QmlTest(unittest.TestCase):
     def test_long_function_fails(self):
         source = "Item {\n    function go() {\n%s    }\n}\n" % body(11)
@@ -105,6 +119,29 @@ class QmlTest(unittest.TestCase):
     def test_javascript_function_parameters_are_counted(self):
         source = "function f(a, b, c, d) {\n    return a;\n}\n"
         self.assertEqual(rules_of("src/a.js", source), {"parameters"})
+
+
+class ArrowFunctionTest(unittest.TestCase):
+    def test_long_arrow_handler_fails(self):
+        source = "Item {\n    onClicked: (mouse) => {\n%s    }\n}\n" % body(11)
+        violation = check_source("qml/a/A.qml", source)[0]
+        self.assertEqual((violation.rule, violation.key), ("function-length", "qml/a/A.qml::onClicked#1"))
+
+    def test_short_arrow_handler_passes(self):
+        source = "Item {\n    onClicked: mouse => {\n%s    }\n}\n" % body(3)
+        self.assertEqual(rules_of("qml/a/A.qml", source), set())
+
+    def test_long_top_level_arrow_function_fails(self):
+        source = "const f = (a, b) => {\n%s}\n" % body(11)
+        self.assertEqual(check_source("src/a.js", source)[0].key, "src/a.js::f")
+
+    def test_arrow_parameters_are_counted(self):
+        source = "const f = (a, b, c, d) => {\n    return a;\n}\n"
+        self.assertEqual(rules_of("src/a.js", source), {"parameters"})
+
+    def test_arrow_inside_function_counts_toward_it(self):
+        source = "function run() {\n    list.forEach((x) => {\n%s    });\n}\n" % body(10)
+        self.assertEqual(check_source("src/a.js", source)[0].key, "src/a.js::run")
 
 
 class FileAndCommentTest(unittest.TestCase):

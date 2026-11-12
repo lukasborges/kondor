@@ -57,9 +57,8 @@ def find_problems(violations: List[Violation], baseline: Baseline, paths: Option
 
 
 def lowered_baseline(violations: List[Violation], baseline: Baseline) -> Baseline:
-    lowered = build_baseline([violation for violation in violations
-                              if violation.key in baseline.get(violation.rule, {})])
-    return lowered
+    return build_baseline([violation for violation in violations
+                           if violation.key in baseline.get(violation.rule, {})])
 
 
 def can_initialize(path: str) -> bool:

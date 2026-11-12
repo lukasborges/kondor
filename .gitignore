@@ -28,3 +28,7 @@ Makefile
 
 # Work queue: generated locally by scripts/update-queue.sh
 docs/QUEUE.md
+
+# Python
+__pycache__/
+*.pyc

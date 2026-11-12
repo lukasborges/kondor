@@ -36,6 +36,3 @@ def read_source(root: str, path: str) -> str:
     with open(full_path, encoding="utf-8") as handle:
         return handle.read()
 
-
-def path_set(paths: List[str]) -> Set[str]:
-    return set(paths)

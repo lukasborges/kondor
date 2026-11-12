@@ -1,3 +1,4 @@
+import re
 from typing import Dict, NamedTuple
 
 from .blocks import line_of
@@ -17,12 +18,29 @@ def body_line_count(text: str, open_index: int, close_index: int) -> int:
     return 1 if first == last else last - first - 1
 
 
+BLOCK_OPENER = re.compile(
+    r"(?:[)\]{};:]|=>|\b(?:else|do|try|mutable|noexcept|const)|->\s*[\w:<>*&\s]+)\s*$"
+)
+OPENER_WINDOW = 80
+
+
+def opens_block(text: str, index: int) -> bool:
+    return bool(BLOCK_OPENER.search(text[max(0, index - OPENER_WINDOW):index]))
+
+
+def update_block_flags(flags: list, text: str, index: int) -> None:
+    if text[index] == "{":
+        flags.append(all(flags) and opens_block(text, index))
+    elif text[index] == "}" and flags:
+        flags.pop()
+
+
 def max_nesting(text: str, open_index: int, close_index: int) -> int:
-    depth = 0
+    flags: list = []
     deepest = 0
-    for char in text[open_index + 1:close_index]:
-        depth += {"{": 1, "}": -1}.get(char, 0)
-        deepest = max(deepest, depth)
+    for index in range(open_index + 1, close_index):
+        update_block_flags(flags, text, index)
+        deepest = max(deepest, sum(flags))
     return deepest
 
 

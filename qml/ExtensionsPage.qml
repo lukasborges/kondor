@@ -196,17 +196,15 @@ ColumnLayout {
         onAccepted: ExtensionManager.inspectFile(selectedFile.toString())
     }
 
-    MessageDialog {
+    ConfirmDialog {
         id: removeDialog
         property string extensionId: ""
         property string extensionName: ""
         title: qsTr("Remove Extension")
-        text: qsTr("Remove the extension “%1” and its data?").arg(removeDialog.extensionName)
-        buttons: MessageDialog.Yes | MessageDialog.No
-        onButtonClicked: function(button) {
-            if (button === MessageDialog.Yes)
-                ExtensionManager.remove(removeDialog.extensionId)
-        }
+        message: qsTr("Remove the extension “%1” and its data?").arg(removeDialog.extensionName)
+        acceptText: qsTr("Remove")
+        acceptIcon: "edit-delete"
+        onAccepted: ExtensionManager.remove(removeDialog.extensionId)
     }
 
     ExtensionCatalogDialog {

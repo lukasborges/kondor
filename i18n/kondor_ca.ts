@@ -236,8 +236,8 @@
     </message>
     <message>
         <location filename="../qml/BookmarksWindow.qml" line="407"/>
-        <location filename="../qml/BookmarksWindow.qml" line="849"/>
-        <location filename="../qml/BookmarksWindow.qml" line="866"/>
+        <location filename="../qml/BookmarksWindow.qml" line="850"/>
+        <location filename="../qml/BookmarksWindow.qml" line="867"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>Carpeta nova</translation>
@@ -249,76 +249,77 @@
     </message>
     <message>
         <location filename="../qml/BookmarksWindow.qml" line="426"/>
+        <location filename="../qml/BookmarksWindow.qml" line="936"/>
         <source>Delete</source>
         <translation>Suprimeix</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="443"/>
+        <location filename="../qml/BookmarksWindow.qml" line="444"/>
         <source>Move Up</source>
         <translation>Mou cap amunt</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="454"/>
+        <location filename="../qml/BookmarksWindow.qml" line="455"/>
         <source>Move Down</source>
         <translation>Mou cap avall</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="465"/>
+        <location filename="../qml/BookmarksWindow.qml" line="466"/>
         <source>Import from HTML…</source>
         <translation>Importa des d&apos;HTML…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="473"/>
+        <location filename="../qml/BookmarksWindow.qml" line="474"/>
         <source>Search bookmarks…</source>
         <translation>Cerca marcadors…</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="821"/>
+        <location filename="../qml/BookmarksWindow.qml" line="822"/>
         <source>Move To</source>
         <translation>Mou a</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="860"/>
+        <location filename="../qml/BookmarksWindow.qml" line="861"/>
         <source>Name:</source>
         <translation>Nom:</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="887"/>
+        <location filename="../qml/BookmarksWindow.qml" line="888"/>
         <source>Rename Folder</source>
         <translation>Canvia el nom de la carpeta</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="887"/>
+        <location filename="../qml/BookmarksWindow.qml" line="888"/>
         <source>Rename Bookmark</source>
         <translation>Canvia el nom del marcador</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="902"/>
+        <location filename="../qml/BookmarksWindow.qml" line="903"/>
         <source>New name:</source>
         <translation>Nom nou:</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="930"/>
+        <location filename="../qml/BookmarksWindow.qml" line="932"/>
         <source>Delete Folder</source>
         <translation>Suprimeix la carpeta</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="930"/>
+        <location filename="../qml/BookmarksWindow.qml" line="932"/>
         <source>Delete Bookmark</source>
         <translation>Suprimeix el marcador</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="932"/>
-        <source>Delete this folder and everything in it?</source>
-        <translation>Voleu suprimir aquesta carpeta i tot el que conté?</translation>
+        <location filename="../qml/BookmarksWindow.qml" line="934"/>
+        <source>Delete the folder “%1” and everything in it?</source>
+        <translation>Voleu suprimir la carpeta «%1» i tot el que conté?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="933"/>
-        <source>Delete this bookmark?</source>
-        <translation>Voleu suprimir aquest marcador?</translation>
+        <location filename="../qml/BookmarksWindow.qml" line="935"/>
+        <source>Delete the bookmark “%1”?</source>
+        <translation>Voleu suprimir el marcador «%1»?</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksWindow.qml" line="954"/>
+        <location filename="../qml/BookmarksWindow.qml" line="957"/>
         <source>Import Bookmarks</source>
         <translation>Importa marcadors</translation>
     </message>
@@ -338,58 +339,58 @@
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="1210"/>
+        <location filename="../qml/BrowserWindow.qml" line="1212"/>
         <source>New Tab</source>
         <translation>Pestanya nova</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="419"/>
+        <location filename="../qml/BrowserWindow.qml" line="421"/>
         <source>Back</source>
         <translation>Endarrere</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="432"/>
+        <location filename="../qml/BrowserWindow.qml" line="434"/>
         <source>Forward</source>
         <translation>Endavant</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="445"/>
+        <location filename="../qml/BrowserWindow.qml" line="447"/>
         <source>Stop</source>
         <translation>Atura</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="445"/>
+        <location filename="../qml/BrowserWindow.qml" line="447"/>
         <source>Reload</source>
         <translation>Torna a carregar</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="461"/>
+        <location filename="../qml/BrowserWindow.qml" line="463"/>
         <source>Home</source>
         <translation>Inici</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="478"/>
+        <location filename="../qml/BrowserWindow.qml" line="480"/>
         <source>Search or enter address</source>
         <translation>Cerqueu o escriviu una adreça</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="842"/>
+        <location filename="../qml/BrowserWindow.qml" line="844"/>
         <source>Bookmark This Page</source>
         <translation>Marca aquesta pàgina</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="901"/>
+        <location filename="../qml/BrowserWindow.qml" line="903"/>
         <source>Downloads</source>
         <translation>Baixades</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="951"/>
+        <location filename="../qml/BrowserWindow.qml" line="953"/>
         <source>Menu</source>
         <translation>Menú</translation>
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="1216"/>
+        <location filename="../qml/BrowserWindow.qml" line="1218"/>
         <source>New Private Tab</source>
         <translation>Pestanya privada nova</translation>
     </message>
@@ -399,185 +400,190 @@
         <translation>Navegació privada</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="676"/>
+        <location filename="../qml/BrowserWindow.qml" line="106"/>
+        <source>Quit</source>
+        <translation>Surt</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="678"/>
         <source>Not Secure</source>
         <translation>No segur</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="684"/>
+        <location filename="../qml/BrowserWindow.qml" line="686"/>
         <source>Site Information</source>
         <translation>Informació del lloc</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="723"/>
+        <location filename="../qml/BrowserWindow.qml" line="725"/>
         <source>Ad and Tracker Blocking</source>
         <translation>Bloqueig d&apos;anuncis i rastrejadors</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="772"/>
+        <location filename="../qml/BrowserWindow.qml" line="774"/>
         <source>Reset Zoom (Ctrl+0)</source>
         <translation>Restableix el zoom (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="789"/>
+        <location filename="../qml/BrowserWindow.qml" line="791"/>
         <source>Fill Saved Password</source>
         <translation>Omple la contrasenya desada</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="824"/>
+        <location filename="../qml/BrowserWindow.qml" line="826"/>
         <source>Exit Reader Mode (Ctrl+Alt+R)</source>
         <translation>Surt del mode lector (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="825"/>
+        <location filename="../qml/BrowserWindow.qml" line="827"/>
         <source>Reader Mode (Ctrl+Alt+R)</source>
         <translation>Mode lector (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="842"/>
+        <location filename="../qml/BrowserWindow.qml" line="844"/>
         <source>Edit This Bookmark</source>
         <translation>Edita aquest marcador</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="935"/>
+        <location filename="../qml/BrowserWindow.qml" line="937"/>
         <source>Extensions</source>
         <translation>Extensions</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1222"/>
+        <location filename="../qml/BrowserWindow.qml" line="1224"/>
         <source>New Window</source>
         <translation>Finestra nova</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1228"/>
+        <location filename="../qml/BrowserWindow.qml" line="1230"/>
         <source>New Private Window</source>
         <translation>Finestra privada nova</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1234"/>
+        <location filename="../qml/BrowserWindow.qml" line="1236"/>
         <source>Show All History</source>
         <translation>Mostra tot l&apos;historial</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1240"/>
+        <location filename="../qml/BrowserWindow.qml" line="1242"/>
         <source>Reopen Closed Tab</source>
         <translation>Reobre la pestanya tancada</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1247"/>
+        <location filename="../qml/BrowserWindow.qml" line="1249"/>
         <source>Find in Page…</source>
         <translation>Cerca a la pàgina…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1261"/>
+        <location filename="../qml/BrowserWindow.qml" line="1263"/>
         <source>Save Page As…</source>
         <translation>Desa la pàgina com a…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1275"/>
+        <location filename="../qml/BrowserWindow.qml" line="1277"/>
         <source>Save as PDF…</source>
         <translation>Desa com a PDF…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1254"/>
+        <location filename="../qml/BrowserWindow.qml" line="1256"/>
         <source>Print…</source>
         <translation>Imprimeix…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1281"/>
+        <location filename="../qml/BrowserWindow.qml" line="1283"/>
         <source>Site Permissions…</source>
         <translation>Permisos dels llocs…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1268"/>
+        <location filename="../qml/BrowserWindow.qml" line="1270"/>
         <source>Developer Tools</source>
         <translation>Eines de desenvolupament</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1287"/>
+        <location filename="../qml/BrowserWindow.qml" line="1289"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Configura el %1…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1293"/>
+        <location filename="../qml/BrowserWindow.qml" line="1295"/>
         <source>Report a Bug…</source>
         <translation>Informa d&apos;un error…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1299"/>
+        <location filename="../qml/BrowserWindow.qml" line="1301"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Quant al %1</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1013"/>
+        <location filename="../qml/BrowserWindow.qml" line="1015"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Premeu Esc per a sortir de la pantalla completa</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1083"/>
+        <location filename="../qml/BrowserWindow.qml" line="1085"/>
         <source>Page bookmarked</source>
         <translation>Pàgina marcada</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1083"/>
+        <location filename="../qml/BrowserWindow.qml" line="1085"/>
         <source>Edit Bookmark</source>
         <translation>Edita el marcador</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1091"/>
+        <location filename="../qml/BrowserWindow.qml" line="1093"/>
         <source>Name:</source>
         <translation>Nom:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1097"/>
+        <location filename="../qml/BrowserWindow.qml" line="1099"/>
         <source>Folder:</source>
         <translation>Carpeta:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1107"/>
+        <location filename="../qml/BrowserWindow.qml" line="1109"/>
         <source>Remove</source>
         <translation>Elimina</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1115"/>
+        <location filename="../qml/BrowserWindow.qml" line="1117"/>
         <source>Done</source>
         <translation>Fet</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1126"/>
+        <location filename="../qml/BrowserWindow.qml" line="1128"/>
         <source>Save as PDF</source>
         <translation>Desa com a PDF</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1128"/>
+        <location filename="../qml/BrowserWindow.qml" line="1130"/>
         <source>PDF (*.pdf)</source>
         <translation>PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1135"/>
+        <location filename="../qml/BrowserWindow.qml" line="1137"/>
         <source>Save Page As</source>
         <translation>Desa la pàgina com a</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1137"/>
+        <location filename="../qml/BrowserWindow.qml" line="1139"/>
         <source>Web Page, Complete (*.html)</source>
         <translation>Pàgina web completa (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1138"/>
+        <location filename="../qml/BrowserWindow.qml" line="1140"/>
         <source>Web Page, HTML Only (*.html)</source>
         <translation>Pàgina web, només HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1139"/>
+        <location filename="../qml/BrowserWindow.qml" line="1141"/>
         <source>Web Archive (*.mhtml)</source>
         <translation>Arxiu web (*.mhtml)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1155"/>
+        <location filename="../qml/BrowserWindow.qml" line="1157"/>
         <source>Save File</source>
         <translation>Desa el fitxer</translation>
     </message>
@@ -613,6 +619,14 @@
         <location filename="../qml/CertificateErrorPage.qml" line="99"/>
         <source>Continue Anyway (Unsafe)</source>
         <translation>Continua igualment (no segur)</translation>
+    </message>
+</context>
+<context>
+    <name>ConfirmDialog</name>
+    <message>
+        <location filename="../qml/ConfirmDialog.qml" line="35"/>
+        <source>Cancel</source>
+        <translation>Cancel·la</translation>
     </message>
 </context>
 <context>
@@ -1080,6 +1094,7 @@
     </message>
     <message>
         <location filename="../qml/ExtensionsPage.qml" line="168"/>
+        <location filename="../qml/ExtensionsPage.qml" line="205"/>
         <source>Remove</source>
         <translation>Elimina</translation>
     </message>
@@ -1742,27 +1757,27 @@
         <translation>Voleu suprimir la contrasenya desada de %1 a %2?</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="164"/>
+        <location filename="../qml/PasswordsPage.qml" line="162"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
         <translation>El KWallet està inhabilitat o se n&apos;ha denegat l&apos;accés, de manera que no es poden desar ni omplir contrasenyes.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="167"/>
+        <location filename="../qml/PasswordsPage.qml" line="165"/>
         <source>Try Again</source>
         <translation>Torna-ho a provar</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="180"/>
+        <location filename="../qml/PasswordsPage.qml" line="178"/>
         <source>Some passwords could not be saved to KWallet.</source>
         <translation>No s&apos;han pogut desar algunes contrasenyes al KWallet.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="182"/>
+        <location filename="../qml/PasswordsPage.qml" line="180"/>
         <source>“%1” was moved to the trash.</source>
         <translation>“%1” s&apos;ha mogut a la paperera.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/PasswordsPage.qml" line="183"/>
+        <location filename="../qml/PasswordsPage.qml" line="181"/>
         <source>Imported %n password(s) from “%1”. The file holds your passwords unencrypted: delete it when you no longer need it.</source>
         <translation>
             <numerusform>S&apos;ha importat %n contrasenya de “%1”. El fitxer conté les contrasenyes sense xifrar: suprimeix-lo quan ja no el necessitis.</numerusform>
@@ -1770,78 +1785,79 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="187"/>
+        <location filename="../qml/PasswordsPage.qml" line="185"/>
         <source>Move File to Trash</source>
         <translation>Mou el fitxer a la paperera</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="207"/>
+        <location filename="../qml/PasswordsPage.qml" line="205"/>
         <source>Offer to save passwords</source>
         <translation>Ofereix desar les contrasenyes</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="225"/>
+        <location filename="../qml/PasswordsPage.qml" line="223"/>
         <source>Filter by site or username…</source>
         <translation>Filtra per lloc o nom d&apos;usuari…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="230"/>
-        <location filename="../qml/PasswordsPage.qml" line="275"/>
+        <location filename="../qml/PasswordsPage.qml" line="228"/>
+        <location filename="../qml/PasswordsPage.qml" line="273"/>
         <source>Add Password…</source>
         <translation>Afegeix una contrasenya…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="237"/>
+        <location filename="../qml/PasswordsPage.qml" line="235"/>
         <source>Import…</source>
         <translation>Importa…</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="241"/>
+        <location filename="../qml/PasswordsPage.qml" line="239"/>
         <source>Import passwords from a CSV file</source>
         <translation>Importa contrasenyes d&apos;un fitxer CSV</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="266"/>
+        <location filename="../qml/PasswordsPage.qml" line="264"/>
         <source>No saved passwords match “%1”</source>
         <translation>No hi ha cap contrasenya desada que coincideixi amb «%1»</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="267"/>
+        <location filename="../qml/PasswordsPage.qml" line="265"/>
         <source>No saved passwords</source>
         <translation>No hi ha contrasenyes desades</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="270"/>
+        <location filename="../qml/PasswordsPage.qml" line="268"/>
         <source>Kondor offers to save a password when you log in to a site. You can also add one here, or import the CSV file exported by another browser or password manager.</source>
         <translation>El Kondor ofereix desar una contrasenya quan inicies la sessió en un lloc. També en pots afegir una aquí o importar el fitxer CSV exportat per un altre navegador o gestor de contrasenyes.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="323"/>
+        <location filename="../qml/PasswordsPage.qml" line="321"/>
         <source>Hide Password</source>
         <translation>Amaga la contrasenya</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="323"/>
+        <location filename="../qml/PasswordsPage.qml" line="321"/>
         <source>Show Password</source>
         <translation>Mostra la contrasenya</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="333"/>
+        <location filename="../qml/PasswordsPage.qml" line="331"/>
         <source>Copy Password</source>
         <translation>Copia la contrasenya</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="343"/>
+        <location filename="../qml/PasswordsPage.qml" line="149"/>
+        <location filename="../qml/PasswordsPage.qml" line="341"/>
         <source>Delete</source>
         <translation>Suprimeix</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="366"/>
+        <location filename="../qml/PasswordsPage.qml" line="364"/>
         <source>Kondor never offers to save passwords on these sites.</source>
         <translation>El Kondor mai no ofereix desar contrasenyes en aquests llocs.</translation>
     </message>
     <message>
-        <location filename="../qml/PasswordsPage.qml" line="398"/>
+        <location filename="../qml/PasswordsPage.qml" line="396"/>
         <source>Remove</source>
         <translation>Elimina</translation>
     </message>

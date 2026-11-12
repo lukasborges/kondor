@@ -45,6 +45,7 @@ qt_add_qml_module(kondor
         qml/TabButtonDelegate.qml
         qml/TabContextMenu.qml
         qml/InlineBar.qml
+        qml/ConfirmDialog.qml
         qml/FindBar.qml
         qml/PermissionBar.qml
         qml/AddPasswordDialog.qml

@@ -55,6 +55,8 @@ private slots:
     void dragOntoFolderRow();
     void dragBetweenRows();
     void clicksStillSelect();
+    void deleteDialogHasTwoButtons();
+    void acceptingDeleteDialogRemovesFolder();
 
 private:
     QQmlEngine m_engine;
@@ -324,6 +326,33 @@ void TestBookmarksWindow::clicksStillSelect()
     QTest::mouseClick(window.data(), Qt::LeftButton, Qt::NoModifier, rowCenter(otherRow));
     QCOMPARE(window->property("selectedFolderId").toLongLong(), other);
     QCOMPARE(window->property("selectedItemId").toLongLong(), qint64(-1));
+}
+
+void TestBookmarksWindow::deleteDialogHasTwoButtons()
+{
+    TabModel model;
+    QScopedPointer<QQuickWindow> window(createWindow(&model, BookmarkManager::instance()->otherFolderId()));
+    QVERIFY(window);
+    QQmlExpression type(qmlContext(window.data()), window.data(),
+                        QStringLiteral("deleteDialog.footer.contentChildren.length"));
+    QCOMPARE(type.evaluate().toInt(), 2);
+    QQmlExpression texts(qmlContext(window.data()), window.data(),
+                         QStringLiteral("deleteDialog.footer.contentChildren.map(b => b.text).join('|')"));
+    QCOMPARE(texts.evaluate().toString(), QStringLiteral("Delete|Cancel"));
+}
+
+void TestBookmarksWindow::acceptingDeleteDialogRemovesFolder()
+{
+    BookmarkManager *manager = BookmarkManager::instance();
+    const qint64 folder = manager->addFolder(QStringLiteral("Doomed"), manager->otherFolderId());
+    QVERIFY(folder > 0);
+    TabModel model;
+    QScopedPointer<QQuickWindow> window(createWindow(&model, folder));
+    QVERIFY(window);
+    QQmlExpression open(qmlContext(window.data()), window.data(),
+                        QStringLiteral("deleteDialog.targetId = %1; deleteDialog.accept()").arg(folder));
+    open.evaluate();
+    QVERIFY(!manager->bookmark(folder).value(QStringLiteral("id")).toLongLong());
 }
 
 int main(int argc, char *argv[])

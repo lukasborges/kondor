@@ -139,18 +139,16 @@ StackLayout {
         }
     }
 
-    MessageDialog {
+    ConfirmDialog {
         id: deleteDialog
         property string origin: ""
         property string username: ""
         title: qsTr("Delete Saved Password")
-        text: qsTr("Delete the saved password for %1 on %2?")
-                  .arg(deleteDialog.username).arg(deleteDialog.origin.replace(/^https?:\/\//, ""))
-        buttons: MessageDialog.Yes | MessageDialog.No
-        onButtonClicked: function(button) {
-            if (button === MessageDialog.Yes)
-                PasswordStore.remove(deleteDialog.origin, deleteDialog.username)
-        }
+        message: qsTr("Delete the saved password for %1 on %2?")
+                 .arg(deleteDialog.username).arg(deleteDialog.origin.replace(/^https?:\/\//, ""))
+        acceptText: qsTr("Delete")
+        acceptIcon: "edit-delete"
+        onAccepted: PasswordStore.remove(deleteDialog.origin, deleteDialog.username)
     }
 
     // ── Saved Passwords ─────────────────────────────────────────────────

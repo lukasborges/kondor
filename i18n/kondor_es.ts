@@ -338,58 +338,58 @@
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="1182"/>
+        <location filename="../qml/BrowserWindow.qml" line="1210"/>
         <source>New Tab</source>
         <translation>Nueva pestaña</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="412"/>
+        <location filename="../qml/BrowserWindow.qml" line="419"/>
         <source>Back</source>
         <translation>Atrás</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="425"/>
+        <location filename="../qml/BrowserWindow.qml" line="432"/>
         <source>Forward</source>
         <translation>Avanzar</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="438"/>
+        <location filename="../qml/BrowserWindow.qml" line="445"/>
         <source>Stop</source>
         <translation>Detener</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="438"/>
+        <location filename="../qml/BrowserWindow.qml" line="445"/>
         <source>Reload</source>
         <translation>Volver a cargar</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="454"/>
+        <location filename="../qml/BrowserWindow.qml" line="461"/>
         <source>Home</source>
         <translation>Inicio</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="471"/>
+        <location filename="../qml/BrowserWindow.qml" line="478"/>
         <source>Search or enter address</source>
         <translation>Buscar o introducir una dirección</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="835"/>
+        <location filename="../qml/BrowserWindow.qml" line="842"/>
         <source>Bookmark This Page</source>
         <translation>Añadir esta página a marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="894"/>
+        <location filename="../qml/BrowserWindow.qml" line="901"/>
         <source>Downloads</source>
         <translation>Descargas</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="923"/>
+        <location filename="../qml/BrowserWindow.qml" line="951"/>
         <source>Menu</source>
         <translation>Menú</translation>
     </message>
     <message>
         <location filename="../qml/BrowserWindow.qml" line="36"/>
-        <location filename="../qml/BrowserWindow.qml" line="1188"/>
+        <location filename="../qml/BrowserWindow.qml" line="1216"/>
         <source>New Private Tab</source>
         <translation>Nueva pestaña privada</translation>
     </message>
@@ -399,180 +399,185 @@
         <translation>Navegación privada</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="669"/>
+        <location filename="../qml/BrowserWindow.qml" line="676"/>
         <source>Not Secure</source>
         <translation>No seguro</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="677"/>
+        <location filename="../qml/BrowserWindow.qml" line="684"/>
         <source>Site Information</source>
         <translation>Información del sitio</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="716"/>
+        <location filename="../qml/BrowserWindow.qml" line="723"/>
         <source>Ad and Tracker Blocking</source>
         <translation>Bloqueo de anuncios y rastreadores</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="765"/>
+        <location filename="../qml/BrowserWindow.qml" line="772"/>
         <source>Reset Zoom (Ctrl+0)</source>
         <translation>Restablecer zoom (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="782"/>
+        <location filename="../qml/BrowserWindow.qml" line="789"/>
         <source>Fill Saved Password</source>
         <translation>Rellenar la contraseña guardada</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="817"/>
+        <location filename="../qml/BrowserWindow.qml" line="824"/>
         <source>Exit Reader Mode (Ctrl+Alt+R)</source>
         <translation>Salir del modo lector (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="818"/>
+        <location filename="../qml/BrowserWindow.qml" line="825"/>
         <source>Reader Mode (Ctrl+Alt+R)</source>
         <translation>Modo lector (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="835"/>
+        <location filename="../qml/BrowserWindow.qml" line="842"/>
         <source>Edit This Bookmark</source>
         <translation>Editar este marcador</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1194"/>
+        <location filename="../qml/BrowserWindow.qml" line="935"/>
+        <source>Extensions</source>
+        <translation>Extensiones</translation>
+    </message>
+    <message>
+        <location filename="../qml/BrowserWindow.qml" line="1222"/>
         <source>New Window</source>
         <translation>Nueva ventana</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1200"/>
+        <location filename="../qml/BrowserWindow.qml" line="1228"/>
         <source>New Private Window</source>
         <translation>Nueva ventana privada</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1206"/>
+        <location filename="../qml/BrowserWindow.qml" line="1234"/>
         <source>Show All History</source>
         <translation>Mostrar todo el historial</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1212"/>
+        <location filename="../qml/BrowserWindow.qml" line="1240"/>
         <source>Reopen Closed Tab</source>
         <translation>Reabrir pestaña cerrada</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1219"/>
+        <location filename="../qml/BrowserWindow.qml" line="1247"/>
         <source>Find in Page…</source>
         <translation>Buscar en la página…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1233"/>
+        <location filename="../qml/BrowserWindow.qml" line="1261"/>
         <source>Save Page As…</source>
         <translation>Guardar página como…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1247"/>
+        <location filename="../qml/BrowserWindow.qml" line="1275"/>
         <source>Save as PDF…</source>
         <translation>Guardar como PDF…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1226"/>
+        <location filename="../qml/BrowserWindow.qml" line="1254"/>
         <source>Print…</source>
         <translation>Imprimir…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1253"/>
+        <location filename="../qml/BrowserWindow.qml" line="1281"/>
         <source>Site Permissions…</source>
         <translation>Permisos de sitios…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1240"/>
+        <location filename="../qml/BrowserWindow.qml" line="1268"/>
         <source>Developer Tools</source>
         <translation>Herramientas de desarrollo</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1259"/>
+        <location filename="../qml/BrowserWindow.qml" line="1287"/>
         <source>Configure %1…</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Configurar %1…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1265"/>
+        <location filename="../qml/BrowserWindow.qml" line="1293"/>
         <source>Report a Bug…</source>
         <translation>Informar de un error…</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1271"/>
+        <location filename="../qml/BrowserWindow.qml" line="1299"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Acerca de %1</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="985"/>
+        <location filename="../qml/BrowserWindow.qml" line="1013"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Pulsa Esc para salir de la pantalla completa</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1055"/>
+        <location filename="../qml/BrowserWindow.qml" line="1083"/>
         <source>Page bookmarked</source>
         <translation>Página añadida a marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1055"/>
+        <location filename="../qml/BrowserWindow.qml" line="1083"/>
         <source>Edit Bookmark</source>
         <translation>Editar marcador</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1063"/>
+        <location filename="../qml/BrowserWindow.qml" line="1091"/>
         <source>Name:</source>
         <translation>Nombre:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1069"/>
+        <location filename="../qml/BrowserWindow.qml" line="1097"/>
         <source>Folder:</source>
         <translation>Carpeta:</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1079"/>
+        <location filename="../qml/BrowserWindow.qml" line="1107"/>
         <source>Remove</source>
         <translation>Quitar</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1087"/>
+        <location filename="../qml/BrowserWindow.qml" line="1115"/>
         <source>Done</source>
         <translation>Hecho</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1098"/>
+        <location filename="../qml/BrowserWindow.qml" line="1126"/>
         <source>Save as PDF</source>
         <translation>Guardar como PDF</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1100"/>
+        <location filename="../qml/BrowserWindow.qml" line="1128"/>
         <source>PDF (*.pdf)</source>
         <translation>PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1107"/>
+        <location filename="../qml/BrowserWindow.qml" line="1135"/>
         <source>Save Page As</source>
         <translation>Guardar página como</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1109"/>
+        <location filename="../qml/BrowserWindow.qml" line="1137"/>
         <source>Web Page, Complete (*.html)</source>
         <translation>Página web completa (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1110"/>
+        <location filename="../qml/BrowserWindow.qml" line="1138"/>
         <source>Web Page, HTML Only (*.html)</source>
         <translation>Página web, solo HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1111"/>
+        <location filename="../qml/BrowserWindow.qml" line="1139"/>
         <source>Web Archive (*.mhtml)</source>
         <translation>Archivo web (*.mhtml)</translation>
     </message>
     <message>
-        <location filename="../qml/BrowserWindow.qml" line="1127"/>
+        <location filename="../qml/BrowserWindow.qml" line="1155"/>
         <source>Save File</source>
         <translation>Guardar archivo</translation>
     </message>
@@ -760,6 +765,348 @@
         <location filename="../qml/DownloadsPopup.qml" line="199"/>
         <source>Clear Finished</source>
         <translation>Borrar completadas</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionCatalog</name>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="194"/>
+        <source>The catalog is not valid JSON</source>
+        <translation>El catálogo no es un JSON válido</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="200"/>
+        <source>The catalog has an unsupported format</source>
+        <translation>El catálogo tiene un formato no compatible</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="291"/>
+        <source>Cannot create a temporary file</source>
+        <translation>No se puede crear un archivo temporal</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="302"/>
+        <source>The package is larger than expected</source>
+        <translation>El paquete es más grande de lo esperado</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="327"/>
+        <source>Cannot read the downloaded package</source>
+        <translation>No se puede leer el paquete descargado</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="334"/>
+        <source>The downloaded package does not match its checksum</source>
+        <translation>El paquete descargado no coincide con su suma de comprobación</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensioncatalog.cpp" line="352"/>
+        <source>Could not download “%1”: %2</source>
+        <translation>No se pudo descargar «%1»: %2</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionCatalogDialog</name>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="21"/>
+        <source>Get New Extensions</source>
+        <translation>Obtener nuevas extensiones</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="40"/>
+        <source>Search extensions…</source>
+        <translation>Buscar extensiones…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="47"/>
+        <source>The extensions catalog could not be loaded.</source>
+        <translation>No se pudo cargar el catálogo de extensiones.</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="50"/>
+        <source>Try Again</source>
+        <translation>Reintentar</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="121"/>
+        <source>by %1</source>
+        <translation>por %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="134"/>
+        <source>Installed</source>
+        <translation>Instalada</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="135"/>
+        <source>Update</source>
+        <translation>Actualizar</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="135"/>
+        <source>Install</source>
+        <translation>Instalar</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="149"/>
+        <source>The catalog has no extensions yet</source>
+        <translation>El catálogo aún no tiene extensiones</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionCatalogDialog.qml" line="155"/>
+        <source>Submit an extension…</source>
+        <translation>Enviar una extensión…</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionManager</name>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="232"/>
+        <source>Cannot create %1</source>
+        <translation>No se puede crear %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="352"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="367"/>
+        <source>Cannot install into %1</source>
+        <translation>No se puede instalar en %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="359"/>
+        <source>Cannot replace %1</source>
+        <translation>No se puede reemplazar %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="406"/>
+        <source>The package is for “%1”, not “%2”</source>
+        <translation>El paquete es para «%1», no para «%2»</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="856"/>
+        <source>Storage is not available</source>
+        <translation>El almacenamiento no está disponible</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="876"/>
+        <source>The extension&apos;s storage is full (limit: 1 MiB)</source>
+        <translation>El almacenamiento de la extensión está lleno (límite: 1 MiB)</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionPackage</name>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="187"/>
+        <source>Read and change all websites</source>
+        <translation>Leer y modificar todos los sitios web</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/extensions/extensionpackage.cpp" line="192"/>
+        <source>%1 and %n more</source>
+        <extracomment>%1 is a list of sites, %n the number of further sites</extracomment>
+        <translation>
+            <numerusform>%1 y %n más</numerusform>
+            <numerusform>%1 y %n más</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="194"/>
+        <source>Read and change pages on %1</source>
+        <translation>Leer y modificar páginas en %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="198"/>
+        <source>Open, close and navigate your tabs</source>
+        <translation>Abrir, cerrar y navegar por sus pestañas</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="200"/>
+        <source>Download files</source>
+        <translation>Descargar archivos</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="202"/>
+        <source>Show notifications</source>
+        <translation>Mostrar notificaciones</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="313"/>
+        <location filename="../src/extensions/extensionpackage.cpp" line="569"/>
+        <source>The package has more than %1 files</source>
+        <translation>El paquete tiene más de %1 archivos</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="317"/>
+        <location filename="../src/extensions/extensionpackage.cpp" line="574"/>
+        <source>The package is larger than %1 MiB</source>
+        <translation>El paquete es mayor de %1 MiB</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="533"/>
+        <location filename="../src/extensions/extensionpackage.cpp" line="538"/>
+        <source>The file is not a valid ZIP archive</source>
+        <translation>El archivo no es un archivo ZIP válido</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="561"/>
+        <source>Unsafe file name in the package: %1</source>
+        <translation>Nombre de archivo no seguro en el paquete: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="587"/>
+        <source>Cannot create %1</source>
+        <translation>No se puede crear %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionpackage.cpp" line="597"/>
+        <location filename="../src/extensions/extensionpackage.cpp" line="602"/>
+        <source>Cannot write %1</source>
+        <translation>No se puede escribir %1</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionSettingsDialog</name>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="62"/>
+        <source>Configure — %1</source>
+        <extracomment>%1 is the name of an extension</extracomment>
+        <translation>Configurar — %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="67"/>
+        <source>Restore Defaults</source>
+        <translation>Restaurar valores predeterminados</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="73"/>
+        <source>OK</source>
+        <translation>Aceptar</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="80"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="121"/>
+        <source>Privacy</source>
+        <translation>Privacidad</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="125"/>
+        <source>Allow in private windows</source>
+        <translation>Permitir en ventanas privadas</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="137"/>
+        <source>Turned off on:</source>
+        <translation>Desactivada en:</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="156"/>
+        <source>Remove</source>
+        <translation>Quitar</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionSettingsDialog.qml" line="294"/>
+        <source>Choose a Color</source>
+        <translation>Elegir un color</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionsMenu</name>
+    <message>
+        <location filename="../qml/ExtensionsMenu.qml" line="38"/>
+        <source>Run on %1</source>
+        <translation>Ejecutar en %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsMenu.qml" line="79"/>
+        <source>Manage Extensions…</source>
+        <translation>Gestionar extensiones…</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionsPage</name>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="40"/>
+        <source>Filter extensions…</source>
+        <translation>Filtrar extensiones…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="43"/>
+        <location filename="../qml/ExtensionsPage.qml" line="74"/>
+        <source>Get New Extensions…</source>
+        <translation>Obtener nuevas extensiones…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="48"/>
+        <source>Install from File…</source>
+        <translation>Instalar desde archivo…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="71"/>
+        <source>No extensions installed</source>
+        <translation>No hay extensiones instaladas</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="72"/>
+        <source>Extensions add features to Kondor. Get them from the Kondor extensions catalog, or install a .kondorext file.</source>
+        <translation>Las extensiones añaden funciones a Kondor. Obténgalas del catálogo de extensiones de Kondor o instale un archivo .kondorext.</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="146"/>
+        <source>Update…</source>
+        <translation>Actualizar…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="154"/>
+        <source>Turn off</source>
+        <translation>Desactivar</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="154"/>
+        <source>Turn on</source>
+        <translation>Activar</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="159"/>
+        <source>Configure…</source>
+        <translation>Configurar…</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="168"/>
+        <source>Remove</source>
+        <translation>Quitar</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="185"/>
+        <source>Update extensions automatically</source>
+        <translation>Actualizar las extensiones automáticamente</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="192"/>
+        <source>Install Extension</source>
+        <translation>Instalar extensión</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="195"/>
+        <source>Kondor extensions (*.kondorext)</source>
+        <translation>Extensiones de Kondor (*.kondorext)</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="195"/>
+        <source>All files (*)</source>
+        <translation>Todos los archivos (*)</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="203"/>
+        <source>Remove Extension</source>
+        <translation>Quitar extensión</translation>
+    </message>
+    <message>
+        <location filename="../qml/ExtensionsPage.qml" line="204"/>
+        <source>Remove the extension “%1” and its data?</source>
+        <translation>¿Quitar la extensión «%1» y sus datos?</translation>
     </message>
 </context>
 <context>
@@ -1015,9 +1362,67 @@
     </message>
 </context>
 <context>
+    <name>InstallExtensionDialog</name>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="25"/>
+        <source>Install Extension</source>
+        <translation>Instalar extensión</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="33"/>
+        <source>Replace</source>
+        <translation>Reemplazar</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="33"/>
+        <source>Install</source>
+        <translation>Instalar</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="39"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="39"/>
+        <source>Close</source>
+        <translation>Cerrar</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="53"/>
+        <source>“%1” is not a valid Kondor extension: %2</source>
+        <translation>«%1» no es una extensión de Kondor válida: %2</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="61"/>
+        <source>This extension does not come from the Kondor extensions catalog. Only install extensions from people you trust.</source>
+        <translation>Esta extensión no procede del catálogo de extensiones de Kondor. Instale solo extensiones de personas de confianza.</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="78"/>
+        <source>“%1” %2 is installed. Replace it with version %3?</source>
+        <translation>«%1» %2 está instalada. ¿Reemplazarla por la versión %3?</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="80"/>
+        <source>Install “%1” %2 by %3?</source>
+        <translation>¿Instalar «%1» %2 de %3?</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="82"/>
+        <source>an unknown author</source>
+        <translation>un autor desconocido</translation>
+    </message>
+    <message>
+        <location filename="../qml/InstallExtensionDialog.qml" line="88"/>
+        <source>It will be able to:</source>
+        <translation>Podrá:</translation>
+    </message>
+</context>
+<context>
     <name>Kondor</name>
     <message>
-        <location filename="../src/main.cpp" line="194"/>
+        <location filename="../src/main.cpp" line="196"/>
         <source>Kondor Browser</source>
         <extracomment>Application display name: translate &quot;Browser&quot;, keep &quot;Kondor&quot;</extracomment>
         <translation>Navegador Kondor</translation>
@@ -1622,19 +2027,19 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="435"/>
+        <location filename="../qml/SettingsWindow.qml" line="463"/>
         <source>Startup</source>
         <translation>Inicio</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="538"/>
+        <location filename="../qml/SettingsWindow.qml" line="566"/>
         <source>On startup:</source>
         <translation>Al iniciar:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="565"/>
+        <location filename="../qml/SettingsWindow.qml" line="593"/>
         <source>Home page:</source>
         <translation>Página de inicio:</translation>
     </message>
@@ -1645,7 +2050,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="668"/>
+        <location filename="../qml/SettingsWindow.qml" line="696"/>
         <source>Search engine:</source>
         <translation>Motor de búsqueda:</translation>
     </message>
@@ -1661,7 +2066,7 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="54"/>
-        <location filename="../qml/SettingsWindow.qml" line="747"/>
+        <location filename="../qml/SettingsWindow.qml" line="775"/>
         <source>Save files to:</source>
         <translation>Guardar archivos en:</translation>
     </message>
@@ -1672,30 +2077,55 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="63"/>
-        <location filename="../qml/SettingsWindow.qml" line="932"/>
+        <location filename="../qml/SettingsWindow.qml" line="960"/>
         <source>Site permissions:</source>
         <translation>Permisos de sitios:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="63"/>
-        <location filename="../qml/SettingsWindow.qml" line="933"/>
+        <location filename="../qml/SettingsWindow.qml" line="961"/>
         <source>Manage Site Permissions…</source>
         <translation>Gestionar permisos de sitios…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="75"/>
+        <location filename="../qml/SettingsWindow.qml" line="76"/>
+        <source>Extensions</source>
+        <translation>Extensiones</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="78"/>
+        <source>Filter extensions…</source>
+        <translation>Filtrar extensiones…</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="78"/>
+        <source>Get New Extensions…</source>
+        <translation>Obtener nuevas extensiones…</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="79"/>
+        <source>Install from File…</source>
+        <translation>Instalar desde archivo…</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="79"/>
+        <source>Update extensions automatically</source>
+        <translation>Actualizar las extensiones automáticamente</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsWindow.qml" line="83"/>
         <source>Spelling</source>
         <translation>Ortografía</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="77"/>
-        <location filename="../qml/SettingsWindow.qml" line="807"/>
+        <location filename="../qml/SettingsWindow.qml" line="85"/>
+        <location filename="../qml/SettingsWindow.qml" line="835"/>
         <source>Check spelling while typing</source>
         <translation>Comprobar la ortografía al escribir</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="77"/>
-        <location filename="../qml/SettingsWindow.qml" line="824"/>
+        <location filename="../qml/SettingsWindow.qml" line="85"/>
+        <location filename="../qml/SettingsWindow.qml" line="852"/>
         <source>Languages:</source>
         <translation>Idiomas:</translation>
     </message>
@@ -1711,13 +2141,13 @@
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="69"/>
-        <location filename="../qml/SettingsWindow.qml" line="445"/>
+        <location filename="../qml/SettingsWindow.qml" line="473"/>
         <source>Saved Passwords</source>
         <translation>Contraseñas guardadas</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="70"/>
-        <location filename="../qml/SettingsWindow.qml" line="446"/>
+        <location filename="../qml/SettingsWindow.qml" line="474"/>
         <source>Never Saved</source>
         <translation>Nunca guardadas</translation>
     </message>
@@ -1732,181 +2162,181 @@
         <translation>Filtrar por sitio o nombre de usuario…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="566"/>
+        <location filename="../qml/SettingsWindow.qml" line="594"/>
         <source>New Tab page</source>
         <translation>Página de nueva pestaña</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="585"/>
+        <location filename="../qml/SettingsWindow.qml" line="613"/>
         <source>Use Current Page</source>
         <translation>Usar página actual</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="598"/>
+        <location filename="../qml/SettingsWindow.qml" line="626"/>
         <source>Use New Tab Page</source>
         <translation>Usar la página de nueva pestaña</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="40"/>
-        <location filename="../qml/SettingsWindow.qml" line="436"/>
+        <location filename="../qml/SettingsWindow.qml" line="464"/>
         <source>New Tabs</source>
         <translation>Pestañas nuevas</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="909"/>
+        <location filename="../qml/SettingsWindow.qml" line="937"/>
         <source>On exit:</source>
         <translation>Al salir:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="923"/>
+        <location filename="../qml/SettingsWindow.qml" line="951"/>
         <source>Browsing data:</source>
         <translation>Datos de navegación:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="370"/>
+        <location filename="../qml/SettingsWindow.qml" line="398"/>
         <source>Search…</source>
         <translation>Buscar…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="484"/>
+        <location filename="../qml/SettingsWindow.qml" line="512"/>
         <source>Defaults</source>
         <translation>Predeterminados</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="493"/>
+        <location filename="../qml/SettingsWindow.qml" line="521"/>
         <source>OK</source>
         <translation>Aceptar</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="500"/>
+        <location filename="../qml/SettingsWindow.qml" line="528"/>
         <source>Apply</source>
         <translation>Aplicar</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="507"/>
+        <location filename="../qml/SettingsWindow.qml" line="535"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="539"/>
+        <location filename="../qml/SettingsWindow.qml" line="567"/>
         <source>Open the home page</source>
         <translation>Abrir la página de inicio</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="551"/>
+        <location filename="../qml/SettingsWindow.qml" line="579"/>
         <source>Open the tabs from last time</source>
         <translation>Abrir las pestañas de la última vez</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="625"/>
+        <location filename="../qml/SettingsWindow.qml" line="653"/>
         <source>New Tab page:</source>
         <translation>Página de nueva pestaña:</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="41"/>
-        <location filename="../qml/SettingsWindow.qml" line="626"/>
+        <location filename="../qml/SettingsWindow.qml" line="654"/>
         <source>Show top sites</source>
         <translation>Mostrar los sitios más visitados</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="637"/>
+        <location filename="../qml/SettingsWindow.qml" line="665"/>
         <source>Restore Removed Sites</source>
         <translation>Restaurar los sitios eliminados</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="675"/>
+        <location filename="../qml/SettingsWindow.qml" line="703"/>
         <source>Custom…</source>
         <translation>Personalizado…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="47"/>
-        <location filename="../qml/SettingsWindow.qml" line="690"/>
+        <location filename="../qml/SettingsWindow.qml" line="718"/>
         <source>Custom URL:</source>
         <translation>URL personalizada:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="706"/>
+        <location filename="../qml/SettingsWindow.qml" line="734"/>
         <source>Show search suggestions in the address bar</source>
         <translation>Mostrar sugerencias de búsqueda en la barra de direcciones</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="722"/>
+        <location filename="../qml/SettingsWindow.qml" line="750"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>La URL debe contener «%1» donde van los términos de búsqueda.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="757"/>
+        <location filename="../qml/SettingsWindow.qml" line="785"/>
         <source>Choose…</source>
         <translation>Elegir…</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="54"/>
-        <location filename="../qml/SettingsWindow.qml" line="765"/>
+        <location filename="../qml/SettingsWindow.qml" line="793"/>
         <source>Ask where to save each file</source>
         <translation>Preguntar dónde guardar cada archivo</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="780"/>
+        <location filename="../qml/SettingsWindow.qml" line="808"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>La carpeta seleccionada ya no existe. Las descargas se guardan en %1.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="60"/>
-        <location filename="../qml/SettingsWindow.qml" line="873"/>
+        <location filename="../qml/SettingsWindow.qml" line="901"/>
         <source>Cookies:</source>
         <translation>Cookies:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="874"/>
+        <location filename="../qml/SettingsWindow.qml" line="902"/>
         <source>Block third-party cookies</source>
         <translation>Bloquear cookies de terceros</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="61"/>
-        <location filename="../qml/SettingsWindow.qml" line="910"/>
+        <location filename="../qml/SettingsWindow.qml" line="938"/>
         <source>Clear cookies, cache and history</source>
         <translation>Borrar cookies, caché e historial</translation>
     </message>
     <message>
         <location filename="../qml/SettingsWindow.qml" line="62"/>
-        <location filename="../qml/SettingsWindow.qml" line="924"/>
+        <location filename="../qml/SettingsWindow.qml" line="952"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Borrar cookies y caché ahora</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="847"/>
+        <location filename="../qml/SettingsWindow.qml" line="875"/>
         <source>No spelling dictionaries are installed.</source>
         <translation>No hay diccionarios ortográficos instalados.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="886"/>
+        <location filename="../qml/SettingsWindow.qml" line="914"/>
         <source>Ads and trackers:</source>
         <translation>Anuncios y rastreadores:</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="887"/>
+        <location filename="../qml/SettingsWindow.qml" line="915"/>
         <source>Block ads and trackers</source>
         <translation>Bloquear anuncios y rastreadores</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="899"/>
+        <location filename="../qml/SettingsWindow.qml" line="927"/>
         <source>Updating lists…</source>
         <translation>Actualizando listas…</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="901"/>
+        <location filename="../qml/SettingsWindow.qml" line="929"/>
         <source>Lists not downloaded yet</source>
         <translation>Listas aún no descargadas</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="902"/>
+        <location filename="../qml/SettingsWindow.qml" line="930"/>
         <source>Lists last updated: %1</source>
         <translation>Listas actualizadas por última vez: %1</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsWindow.qml" line="967"/>
+        <location filename="../qml/SettingsWindow.qml" line="1007"/>
         <source>Choose Download Folder</source>
         <translation>Elegir carpeta de descargas</translation>
     </message>
@@ -2092,7 +2522,7 @@
     <name>WebViewTab</name>
     <message>
         <location filename="../qml/WebViewTab.qml" line="28"/>
-        <location filename="../qml/WebViewTab.qml" line="513"/>
+        <location filename="../qml/WebViewTab.qml" line="539"/>
         <source>Print failed</source>
         <translation>Error al imprimir</translation>
     </message>
@@ -2107,17 +2537,17 @@
         <translation>Error al guardar el PDF</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="305"/>
+        <location filename="../qml/WebViewTab.qml" line="317"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>El proceso de la página terminó inesperadamente.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="306"/>
+        <location filename="../qml/WebViewTab.qml" line="318"/>
         <source>The page crashed.</source>
         <translation>La página ha fallado.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewTab.qml" line="307"/>
+        <location filename="../qml/WebViewTab.qml" line="319"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>Se ha terminado el proceso de la página (posiblemente por falta de memoria).</translation>
     </message>

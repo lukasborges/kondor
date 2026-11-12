@@ -46,6 +46,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 - **Ad and tracker blocking** built in
 - **Private tabs and windows** that leave no trace
 - **Passwords** saved in KWallet, filled in for you, and addable by hand, importable from a CSV export
+- **Extensions** from the Kondor catalog or a file, to add features to pages
 - **Site permissions**: sites ask before using the camera, microphone or location
 - **Security padlock** and warnings for unsafe sites
 
@@ -132,6 +133,15 @@ exports and saves its logins to KWallet. Where to export it:
 Any other CSV with website, username and password columns (KeePassXC, LastPass…) works too. The
 file holds your passwords unencrypted, so Kondor offers to move it to the trash afterwards.
 
+## Extensions
+
+**Settings → Extensions** lists the extensions you have installed. **Get New Extensions…** installs
+one from the community catalog (built from
+[`lukasborges/kondor-extensions`](https://github.com/lukasborges/kondor-extensions), where anyone can
+propose an extension by pull request), and **Install from File…** installs a `.kondorext` file from
+your computer; opening one in the file manager does the same. Extensions are off in private windows
+unless you allow them. Authors: see [`docs/extensions/api.md`](docs/extensions/api.md).
+
 ## Stack
 
 - **Qt 6.8+** (tested with **6.11.2**): `Core`, `DBus`, `Gui`, `LinguistTools`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebChannel`, `WebEngineCore`, `WebEngineQuick`, `Widgets`
@@ -151,7 +161,7 @@ On **Fedora** (the original development environment):
 ```bash
 sudo dnf install cmake gcc-c++ \
     qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel \
-    qt6-qtwebchannel-devel kf6-qqc2-desktop-style kf6-kirigami kf6-kwallet-devel hunspell-en-US hunspell-pt-BR
+    qt6-qtwebchannel-devel kf6-qqc2-desktop-style kf6-kirigami kf6-kwallet-devel kf6-karchive-devel hunspell-en-US hunspell-pt-BR
 ```
 
 The Hunspell dictionaries (`/usr/share/hunspell`) are converted to Qt WebEngine's

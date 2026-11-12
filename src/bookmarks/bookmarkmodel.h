@@ -6,9 +6,8 @@
 #include <QUrl>
 #include <QtQmlIntegration/qqmlintegration.h>
 
-// Items of one bookmark folder, in their stored order. Exposed via
-// `BookmarkManager.toolbarModel` and `BookmarkManager.modelForFolder()`;
-// refreshes after every bookmark write.
+class QSqlQuery;
+
 class BookmarkModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -43,8 +42,6 @@ public:
     Q_INVOKABLE QString urlAt(int row) const;
     Q_INVOKABLE qint64 idAt(int row) const;
     Q_INVOKABLE bool isFolderAt(int row) const;
-    // Row of the item with this id in the current (possibly filtered) list,
-    // or -1.
     Q_INVOKABLE int rowOf(qint64 id) const;
 
 public slots:
@@ -63,6 +60,13 @@ private:
         QUrl url;
         bool isFolder = false;
     };
+
+    QList<Entry> loadEntries() const;
+    QString selectStatement() const;
+    QVariantList bindValues() const;
+    static Entry readEntry(const QSqlQuery &query);
+    static QVariant fieldOf(const Entry &entry, int role);
+    bool hasRow(int row) const { return row >= 0 && row < m_entries.size(); }
 
     qint64 m_folderId = -1;
     QString m_filter;

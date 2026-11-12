@@ -24,6 +24,23 @@ Notifier::Notifier(QObject *parent)
 {
 }
 
+namespace {
+
+QString applicationIcon(const QString &iconName)
+{
+    const QString appIcon = qEnvironmentVariable("FLATPAK_ID", QStringLiteral("kondor"));
+    const bool usesAppIcon = iconName.isEmpty() || iconName == QLatin1String("kondor");
+    return usesAppIcon ? appIcon : iconName;
+}
+
+QVariantList notifyArguments(const QString &title, const QString &body, const QString &icon)
+{
+    return {QGuiApplication::applicationDisplayName(), 0u, icon, title, body,
+            QStringList(), QVariantMap(), 5000};
+}
+
+}
+
 void Notifier::notify(const QString &title, const QString &body, const QString &iconName)
 {
     QDBusInterface notifications(QStringLiteral("org.freedesktop.Notifications"),
@@ -32,18 +49,6 @@ void Notifier::notify(const QString &title, const QString &body, const QString &
                                  QDBusConnection::sessionBus());
     if (!notifications.isValid())
         return;
-
-    // The Flatpak exports the application icon under its application ID.
-    const QString appIcon = qEnvironmentVariable("FLATPAK_ID", QStringLiteral("kondor"));
-    const QString icon = (iconName.isEmpty() || iconName == QLatin1String("kondor"))
-        ? appIcon : iconName;
-    notifications.call(QStringLiteral("Notify"),
-                       QGuiApplication::applicationDisplayName(), // app_name
-                       0u,                                        // replaces_id
-                       icon,                      // app_icon
-                       title,                     // summary
-                       body,                      // body
-                       QStringList(),             // actions
-                       QVariantMap(),             // hints
-                       5000);                     // expire_timeout (ms)
+    notifications.callWithArgumentList(QDBus::Block, QStringLiteral("Notify"),
+                                       notifyArguments(title, body, applicationIcon(iconName)));
 }

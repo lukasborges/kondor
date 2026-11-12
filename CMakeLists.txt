@@ -30,6 +30,8 @@ qt_add_executable(kondor
     src/app/main.cpp
 )
 
+include(cmake/KondorSources.cmake)
+
 option(BUILD_TESTING "Build tests" ON)
 
 qt_add_qml_module(kondor
@@ -136,30 +138,23 @@ qt_add_qml_module(kondor
         src/app/startupargs.cpp
         src/app/startupurl.h
         src/app/startupurl.cpp
-        src/core/settings.h
-        src/core/settings.cpp
+        ${KONDOR_SETTINGS_SOURCES}
         src/browser/sessionmanager.h
         src/browser/sessionmanager.cpp
         src/app/windowmanager.h
         src/app/windowmanager.cpp
         src/app/singleinstance.h
         src/app/singleinstance.cpp
-        src/core/database.h
-        src/core/database.cpp
-        src/history/historymanager.h
-        src/history/historymanager.cpp
-        src/history/historymodel.h
-        src/history/historymodel.cpp
-        src/downloads/downloadmanager.h
-        src/downloads/downloadmanager.cpp
+        ${KONDOR_DATABASE_SOURCES}
+        ${KONDOR_HISTORY_MANAGER_SOURCES}
+        ${KONDOR_HISTORY_MODEL_SOURCES}
+        ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
         src/core/filehelper.h
         src/core/filehelper.cpp
-        src/core/notifier.h
-        src/core/notifier.cpp
-        src/bookmarks/bookmarkmanager.h
-        src/bookmarks/bookmarkmanager.cpp
-        src/bookmarks/bookmarkmodel.h
-        src/bookmarks/bookmarkmodel.cpp
+        ${KONDOR_NOTIFIER_SOURCES}
+        ${KONDOR_BOOKMARK_MANAGER_SOURCES}
+        src/bookmarks/bookmarkrow.h
+        ${KONDOR_BOOKMARK_MODEL_SOURCES}
         src/browser/faviconstore.h
         src/browser/faviconstore.cpp
         src/extensions/extensionloader.h

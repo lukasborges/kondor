@@ -1,16 +1,47 @@
 #include "history/historymodel.h"
 
-#include "core/database.h"
+#include "core/sql.h"
+#include "history/historysearch.h"
 
 #include <QLocale>
-#include <QSqlQuery>
 #include <QVariant>
+
+namespace {
+
+constexpr int kRefreshDebounceMs = 250;
+constexpr int kMaxEntries = 500;
+
+QString selectEntriesStatement(bool isFiltered)
+{
+    QString statement = QStringLiteral("SELECT id, url, title, visited_at FROM history");
+    if (isFiltered)
+        statement += QStringLiteral(" WHERE url LIKE ? ESCAPE '\\' OR title LIKE ? ESCAPE '\\'");
+    return statement + QStringLiteral(" ORDER BY visited_at DESC, id DESC LIMIT %1").arg(kMaxEntries);
+}
+
+QString dayLabelOf(const QDateTime &time)
+{
+    const QDate date = time.date();
+    const QDate today = QDate::currentDate();
+    if (date == today)
+        return HistoryModel::tr("Today");
+    if (date == today.addDays(-1))
+        return HistoryModel::tr("Yesterday");
+    return QLocale().toString(date, QLocale::LongFormat);
+}
+
+QString timeLabelOf(const QDateTime &time)
+{
+    return QLocale().toString(time.time(), QLocale::ShortFormat);
+}
+
+}
 
 HistoryModel::HistoryModel(QObject *parent)
     : QAbstractListModel(parent)
 {
     m_refreshTimer.setSingleShot(true);
-    m_refreshTimer.setInterval(250);
+    m_refreshTimer.setInterval(kRefreshDebounceMs);
     connect(&m_refreshTimer, &QTimer::timeout, this, &HistoryModel::refresh);
 }
 
@@ -23,29 +54,25 @@ QVariant HistoryModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid() || index.row() < 0 || index.row() >= m_entries.size())
         return {};
+    return roleValue(m_entries.at(index.row()), role);
+}
 
-    const Entry &entry = m_entries.at(index.row());
+QVariant HistoryModel::roleValue(const Entry &entry, int role)
+{
     switch (role) {
-    case IdRole:
-        return entry.id;
-    case UrlRole:
-        return entry.url.toString();
-    case TitleRole:
-        return entry.title;
-    case VisitedAtRole:
-        return entry.visitedAt;
-    case DayLabelRole:
-        return entry.dayLabel;
-    case TimeRole:
-        return timeLabel(entry.visitedAt);
-    default:
-        return {};
+    case IdRole: return entry.id;
+    case UrlRole: return entry.url.toString();
+    case TitleRole: return entry.title;
+    case VisitedAtRole: return entry.visitedAt;
+    case DayLabelRole: return entry.dayLabel;
+    case TimeRole: return timeLabelOf(entry.visitedAt);
+    default: return {};
     }
 }
 
 QHash<int, QByteArray> HistoryModel::roleNames() const
 {
-    return {
+    static const QHash<int, QByteArray> names = {
         {IdRole, "id"},
         {UrlRole, "url"},
         {TitleRole, "title"},
@@ -53,6 +80,7 @@ QHash<int, QByteArray> HistoryModel::roleNames() const
         {DayLabelRole, "dayLabel"},
         {TimeRole, "time"},
     };
+    return names;
 }
 
 void HistoryModel::setFilter(const QString &filter)
@@ -77,85 +105,48 @@ void HistoryModel::setActive(bool active)
         return;
     m_active = active;
     emit activeChanged();
-    if (m_active) {
-        m_refreshTimer.stop();
-        refresh();
-    }
+    if (!m_active)
+        return;
+    m_refreshTimer.stop();
+    refresh();
 }
 
 void HistoryModel::scheduleRefresh()
 {
-    // No view is showing the model: skip the query, it reloads on activation.
-    if (!m_active)
-        return;
-    m_refreshTimer.start();
+    if (m_active)
+        m_refreshTimer.start();
 }
 
 void HistoryModel::refresh()
 {
-    Database *db = Database::instance();
-    QList<Entry> entries;
-
-    if (db->isValid()) {
-        const QString term = m_filter.trimmed();
-        QString sql = QStringLiteral(
-            "SELECT id, url, title, visited_at FROM history");
-        if (!term.isEmpty())
-            sql += QStringLiteral(" WHERE url LIKE ? ESCAPE '\\' OR title LIKE ? ESCAPE '\\'");
-        sql += QStringLiteral(" ORDER BY visited_at DESC, id DESC LIMIT 500");
-
-        QSqlQuery query(db->handle());
-        query.prepare(sql);
-        if (!term.isEmpty()) {
-            const QString pattern = likePattern(term);
-            query.addBindValue(pattern);
-            query.addBindValue(pattern);
-        }
-        if (query.exec()) {
-            while (query.next()) {
-                Entry entry;
-                entry.id = query.value(0).toLongLong();
-                entry.url = QUrl(query.value(1).toString());
-                entry.title = query.value(2).toString();
-                entry.visitedAt = QDateTime::fromMSecsSinceEpoch(query.value(3).toLongLong());
-                entry.dayLabel = dayLabel(entry.visitedAt);
-                entries.append(entry);
-            }
-        }
-    }
-
+    const QList<Entry> entries = loadEntries();
     beginResetModel();
     m_entries = entries;
     endResetModel();
     emit countChanged();
 }
 
-QString HistoryModel::likePattern(const QString &term)
+std::optional<QSqlQuery> HistoryModel::queryEntries() const
 {
-    QString pattern;
-    pattern.reserve(term.size() + 2);
-    for (QChar c : term) {
-        if (c == QLatin1Char('\\') || c == QLatin1Char('%') || c == QLatin1Char('_'))
-            pattern.append(QLatin1Char('\\'));
-        pattern.append(c);
-    }
-    pattern.prepend(QLatin1Char('%'));
-    pattern.append(QLatin1Char('%'));
-    return pattern;
+    const QString term = m_filter.trimmed();
+    if (term.isEmpty())
+        return Sql::run(selectEntriesStatement(false));
+    const QString pattern = HistorySearch::likePattern(term);
+    return Sql::run(selectEntriesStatement(true), {pattern, pattern});
 }
 
-QString HistoryModel::dayLabel(const QDateTime &time)
+QList<HistoryModel::Entry> HistoryModel::loadEntries() const
 {
-    const QDate date = time.date();
-    const QDate today = QDate::currentDate();
-    if (date == today)
-        return tr("Today");
-    if (date == today.addDays(-1))
-        return tr("Yesterday");
-    return QLocale().toString(date, QLocale::LongFormat);
+    QList<Entry> entries;
+    auto rows = queryEntries();
+    while (rows && rows->next())
+        entries.append(entryOf(*rows));
+    return entries;
 }
 
-QString HistoryModel::timeLabel(const QDateTime &time)
+HistoryModel::Entry HistoryModel::entryOf(QSqlQuery &row)
 {
-    return QLocale().toString(time.time(), QLocale::ShortFormat);
+    const QDateTime visitedAt = QDateTime::fromMSecsSinceEpoch(row.value(3).toLongLong());
+    return {row.value(0).toLongLong(), QUrl(row.value(1).toString()),
+            row.value(2).toString(), visitedAt, dayLabelOf(visitedAt)};
 }

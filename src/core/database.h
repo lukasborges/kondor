@@ -3,10 +3,6 @@
 #include <QSqlDatabase>
 #include <QString>
 
-// Shared `Database` block: opens and keeps Kondor's single SQLite file
-// (<AppDataLocation>/kondor.sqlite) and applies schema migrations via
-// `PRAGMA user_version`. Not exposed to QML — the singletons that persist data
-// (HistoryManager, later bookmarks, etc.) talk to it.
 class Database
 {
 public:
@@ -18,9 +14,13 @@ public:
 private:
     Database();
 
+    void open();
+    bool isUsableFile() const;
     void migrate();
+    bool applyMigrations(int currentVersion);
     int schemaVersion() const;
 
     QSqlDatabase m_db;
+    QString m_path;
     bool m_valid = false;
 };

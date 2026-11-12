@@ -269,7 +269,7 @@
 <context>
     <name>BookmarkManager</name>
     <message>
-        <location filename="../src/bookmarks/bookmarkmanager.cpp" line="409"/>
+        <location filename="../src/bookmarks/bookmarkmanager.cpp" line="129"/>
         <source>New Folder</source>
         <translation>新增資料夾</translation>
     </message>
@@ -519,17 +519,17 @@
 <context>
     <name>DefaultBookmarks</name>
     <message>
-        <location filename="../src/core/database.cpp" line="36"/>
+        <location filename="../src/core/defaultbookmarks.cpp" line="9"/>
         <source>News</source>
         <translation>新聞</translation>
     </message>
     <message>
-        <location filename="../src/core/database.cpp" line="45"/>
+        <location filename="../src/core/defaultbookmarks.cpp" line="18"/>
         <source>Development</source>
         <translation>開發</translation>
     </message>
     <message>
-        <location filename="../src/core/database.cpp" line="54"/>
+        <location filename="../src/core/defaultbookmarks.cpp" line="27"/>
         <source>Linux</source>
         <translation>Linux</translation>
     </message>
@@ -565,12 +565,12 @@
 <context>
     <name>DownloadManager</name>
     <message>
-        <location filename="../src/downloads/downloadmanager.cpp" line="382"/>
+        <location filename="../src/downloads/downloadmanager.cpp" line="132"/>
         <source>Download completed</source>
         <translation>下載完成</translation>
     </message>
     <message>
-        <location filename="../src/downloads/downloadmanager.cpp" line="389"/>
+        <location filename="../src/downloads/downloadmanager.cpp" line="139"/>
         <source>Download failed</source>
         <translation>下載失敗</translation>
     </message>
@@ -1150,12 +1150,12 @@
 <context>
     <name>HistoryModel</name>
     <message>
-        <location filename="../src/history/historymodel.cpp" line="152"/>
+        <location filename="../src/history/historymodel.cpp" line="27"/>
         <source>Today</source>
         <translation>今天</translation>
     </message>
     <message>
-        <location filename="../src/history/historymodel.cpp" line="154"/>
+        <location filename="../src/history/historymodel.cpp" line="29"/>
         <source>Yesterday</source>
         <translation>昨天</translation>
     </message>

@@ -59,12 +59,12 @@ qt_add_executable(tst_tabmodel
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
     ../src/browser/addressresolver.cpp
-    ../src/core/settings.cpp
-    ../src/downloads/downloadmanager.cpp
-    ../src/core/notifier.cpp
-    ../src/history/historymanager.cpp
-    ../src/history/historymodel.cpp
-    ../src/core/database.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
     ../src/browser/faviconstore.cpp
 )
 
@@ -100,15 +100,15 @@ qt_add_executable(tst_addresssuggestions
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
     ../src/browser/addressresolver.cpp
-    ../src/core/settings.cpp
-    ../src/downloads/downloadmanager.cpp
-    ../src/core/notifier.cpp
-    ../src/history/historymanager.cpp
-    ../src/history/historymodel.cpp
-    ../src/core/database.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
     ../src/browser/faviconstore.cpp
-    ../src/bookmarks/bookmarkmanager.cpp
-    ../src/bookmarks/bookmarkmodel.cpp
+    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
+    ${KONDOR_BOOKMARK_MODEL_SOURCES}
 )
 
 target_compile_definitions(tst_addresssuggestions PRIVATE
@@ -149,15 +149,15 @@ qt_add_executable(tst_addressbar
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
     ../src/browser/addressresolver.cpp
-    ../src/core/settings.cpp
-    ../src/downloads/downloadmanager.cpp
-    ../src/core/notifier.cpp
-    ../src/history/historymanager.cpp
-    ../src/history/historymodel.cpp
-    ../src/core/database.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
     ../src/browser/faviconstore.cpp
-    ../src/bookmarks/bookmarkmanager.cpp
-    ../src/bookmarks/bookmarkmodel.cpp
+    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
+    ${KONDOR_BOOKMARK_MODEL_SOURCES}
     ../src/browser/searchsuggestions.cpp
 )
 
@@ -191,9 +191,9 @@ set_tests_properties(tst_addressbar PROPERTIES
 
 qt_add_executable(tst_bookmarks
     bookmarks/tst_bookmarks.cpp
-    ../src/bookmarks/bookmarkmanager.cpp
-    ../src/bookmarks/bookmarkmodel.cpp
-    ../src/core/database.cpp
+    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
+    ${KONDOR_BOOKMARK_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
 )
 
 target_include_directories(tst_bookmarks PRIVATE
@@ -215,9 +215,9 @@ set_tests_properties(tst_bookmarks PROPERTIES
 
 qt_add_executable(tst_bookmarkswindow
     bookmarks/tst_bookmarkswindow.cpp
-    ../src/bookmarks/bookmarkmanager.cpp
-    ../src/bookmarks/bookmarkmodel.cpp
-    ../src/core/database.cpp
+    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
+    ${KONDOR_BOOKMARK_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
     ../src/browser/tab.cpp
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
@@ -227,11 +227,11 @@ qt_add_executable(tst_bookmarkswindow
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
     ../src/browser/addressresolver.cpp
-    ../src/core/settings.cpp
-    ../src/downloads/downloadmanager.cpp
-    ../src/core/notifier.cpp
-    ../src/history/historymanager.cpp
-    ../src/history/historymodel.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
     ../src/browser/faviconstore.cpp
 )
 
@@ -264,9 +264,9 @@ set_tests_properties(tst_bookmarkswindow PROPERTIES
 
 qt_add_executable(tst_mainmenu
     app/tst_mainmenu.cpp
-    ../src/bookmarks/bookmarkmanager.cpp
-    ../src/bookmarks/bookmarkmodel.cpp
-    ../src/core/database.cpp
+    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
+    ${KONDOR_BOOKMARK_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
     ../src/browser/tab.cpp
     ../src/passwords/passwordstore.cpp
     ../src/passwords/passwordimport.cpp
@@ -276,11 +276,11 @@ qt_add_executable(tst_mainmenu
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
     ../src/browser/addressresolver.cpp
-    ../src/core/settings.cpp
-    ../src/downloads/downloadmanager.cpp
-    ../src/core/notifier.cpp
-    ../src/history/historymanager.cpp
-    ../src/history/historymodel.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
     ../src/browser/faviconstore.cpp
 )
 
@@ -313,11 +313,11 @@ set_tests_properties(tst_mainmenu PROPERTIES
 
 qt_add_executable(tst_topsites
     history/tst_topsites.cpp
-    ../src/history/historymanager.cpp
-    ../src/history/historymodel.cpp
-    ../src/core/database.cpp
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
     ../src/browser/faviconstore.cpp
-    ../src/core/settings.cpp
+    ${KONDOR_SETTINGS_SOURCES}
 )
 
 target_include_directories(tst_topsites PRIVATE
@@ -338,10 +338,10 @@ add_test(NAME tst_topsites COMMAND tst_topsites)
 qt_add_executable(tst_faviconstore
     browser/tst_faviconstore.cpp
     ../src/browser/faviconstore.cpp
-    ../src/history/historymanager.cpp
-    ../src/history/historymodel.cpp
-    ../src/core/database.cpp
-    ../src/core/settings.cpp
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
+    ${KONDOR_SETTINGS_SOURCES}
 )
 
 target_include_directories(tst_faviconstore PRIVATE
@@ -393,7 +393,7 @@ set_tests_properties(tst_aboutinfo PROPERTIES
 
 qt_add_executable(tst_settings
     core/tst_settings.cpp
-    ../src/core/settings.cpp
+    ${KONDOR_SETTINGS_SOURCES}
 )
 
 target_include_directories(tst_settings PRIVATE
@@ -418,12 +418,12 @@ qt_add_executable(tst_settingswindow
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
     ../src/browser/addressresolver.cpp
-    ../src/core/settings.cpp
-    ../src/downloads/downloadmanager.cpp
-    ../src/core/notifier.cpp
-    ../src/history/historymanager.cpp
-    ../src/history/historymodel.cpp
-    ../src/core/database.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
     ../src/browser/faviconstore.cpp
     ${KONDOR_EXTENSION_PACKAGE_SOURCES}
 )
@@ -467,12 +467,12 @@ qt_add_executable(tst_tabstrip
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
     ../src/browser/addressresolver.cpp
-    ../src/core/settings.cpp
-    ../src/downloads/downloadmanager.cpp
-    ../src/core/notifier.cpp
-    ../src/history/historymanager.cpp
-    ../src/history/historymodel.cpp
-    ../src/core/database.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
     ../src/browser/faviconstore.cpp
 )
 
@@ -513,12 +513,12 @@ qt_add_executable(tst_sitepermissions
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
     ../src/browser/addressresolver.cpp
-    ../src/core/settings.cpp
-    ../src/downloads/downloadmanager.cpp
-    ../src/core/notifier.cpp
-    ../src/history/historymanager.cpp
-    ../src/history/historymodel.cpp
-    ../src/core/database.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
     ../src/browser/faviconstore.cpp
 )
 
@@ -561,12 +561,12 @@ qt_add_executable(tst_sessionmanager
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
     ../src/browser/addressresolver.cpp
-    ../src/core/settings.cpp
-    ../src/downloads/downloadmanager.cpp
-    ../src/core/notifier.cpp
-    ../src/history/historymanager.cpp
-    ../src/history/historymodel.cpp
-    ../src/core/database.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
     ../src/browser/faviconstore.cpp
 )
 
@@ -756,12 +756,12 @@ qt_add_executable(tst_extensions
     ../src/adblock/adblockinterceptor.cpp
     ../src/adblock/filterengine.cpp
     ../src/browser/addressresolver.cpp
-    ../src/core/settings.cpp
-    ../src/downloads/downloadmanager.cpp
-    ../src/core/notifier.cpp
-    ../src/history/historymanager.cpp
-    ../src/history/historymodel.cpp
-    ../src/core/database.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
     ../src/browser/faviconstore.cpp
     ${KONDOR_EXTENSION_PACKAGE_SOURCES}
 )
@@ -812,4 +812,85 @@ add_test(NAME tst_extensions COMMAND tst_extensions)
 set_tests_properties(tst_extensions PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1;KONDOR_NO_KWALLET=1"
     TIMEOUT 300
+)
+
+qt_add_executable(tst_database
+    core/tst_database.cpp
+    ${KONDOR_DATABASE_SOURCES}
+)
+
+target_include_directories(tst_database PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_database PRIVATE
+    Qt6::Core
+    Qt6::Sql
+    Qt6::Test
+)
+
+add_test(NAME tst_database COMMAND tst_database)
+
+qt_add_executable(tst_historymanager
+    history/tst_historymanager.cpp
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
+    ../src/browser/faviconstore.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+)
+
+target_include_directories(tst_historymanager PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_historymanager PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::Sql
+    Qt6::Test
+)
+
+add_test(NAME tst_historymanager COMMAND tst_historymanager)
+
+qt_add_executable(tst_transferspeed
+    downloads/tst_transferspeed.cpp
+    ../src/downloads/transferspeed.cpp
+)
+
+target_include_directories(tst_transferspeed PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_transferspeed PRIVATE
+    Qt6::Core
+    Qt6::Test
+)
+
+add_test(NAME tst_transferspeed COMMAND tst_transferspeed)
+
+qt_add_executable(tst_bookmarkhtmlparser
+    bookmarks/tst_bookmarkhtmlparser.cpp
+    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
+    ${KONDOR_BOOKMARK_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
+)
+
+target_include_directories(tst_bookmarkhtmlparser PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_bookmarkhtmlparser PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Sql
+    Qt6::Test
+)
+
+add_test(NAME tst_bookmarkhtmlparser COMMAND tst_bookmarkhtmlparser)
+set_tests_properties(tst_bookmarkhtmlparser PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
 )

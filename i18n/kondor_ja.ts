@@ -861,33 +861,38 @@
 <context>
     <name>ExtensionManager</name>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="232"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="233"/>
         <source>Cannot create %1</source>
         <translation>%1 を作成できません</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="352"/>
-        <location filename="../src/extensions/extensionmanager.cpp" line="367"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="353"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="368"/>
         <source>Cannot install into %1</source>
         <translation>%1 にインストールできません</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="359"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="360"/>
         <source>Cannot replace %1</source>
         <translation>%1 を置き換えできません</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="406"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="407"/>
         <source>The package is for “%1”, not “%2”</source>
         <translation>このパッケージは“%1”用であり、“%2”用ではありません</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="856"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="418"/>
+        <source>The package asks for more permissions than the installed version</source>
+        <translation>このパッケージはインストール済みのバージョンより多くの権限を要求しています</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="869"/>
         <source>Storage is not available</source>
         <translation>ストレージを利用できません</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="876"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="889"/>
         <source>The extension&apos;s storage is full (limit: 1 MiB)</source>
         <translation>拡張機能のストレージがいっぱいです (上限: 1 MiB)</translation>
     </message>

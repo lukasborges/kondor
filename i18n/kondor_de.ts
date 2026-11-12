@@ -861,33 +861,38 @@
 <context>
     <name>ExtensionManager</name>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="232"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="233"/>
         <source>Cannot create %1</source>
         <translation>%1 kann nicht erstellt werden</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="352"/>
-        <location filename="../src/extensions/extensionmanager.cpp" line="367"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="353"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="368"/>
         <source>Cannot install into %1</source>
         <translation>Installation in %1 nicht möglich</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="359"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="360"/>
         <source>Cannot replace %1</source>
         <translation>%1 kann nicht ersetzt werden</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="406"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="407"/>
         <source>The package is for “%1”, not “%2”</source>
         <translation>Das Paket ist für „%1“, nicht für „%2“</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="856"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="418"/>
+        <source>The package asks for more permissions than the installed version</source>
+        <translation>Das Paket verlangt mehr Berechtigungen als die installierte Version</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="869"/>
         <source>Storage is not available</source>
         <translation>Speicher ist nicht verfügbar</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="876"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="889"/>
         <source>The extension&apos;s storage is full (limit: 1 MiB)</source>
         <translation>Der Speicher der Erweiterung ist voll (Limit: 1 MiB)</translation>
     </message>

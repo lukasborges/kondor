@@ -861,33 +861,38 @@
 <context>
     <name>ExtensionManager</name>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="232"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="233"/>
         <source>Cannot create %1</source>
         <translation>No se puede crear %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="352"/>
-        <location filename="../src/extensions/extensionmanager.cpp" line="367"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="353"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="368"/>
         <source>Cannot install into %1</source>
         <translation>No se puede instalar en %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="359"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="360"/>
         <source>Cannot replace %1</source>
         <translation>No se puede reemplazar %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="406"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="407"/>
         <source>The package is for “%1”, not “%2”</source>
         <translation>El paquete es para «%1», no para «%2»</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="856"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="418"/>
+        <source>The package asks for more permissions than the installed version</source>
+        <translation>El paquete solicita más permisos que la versión instalada</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/extensionmanager.cpp" line="869"/>
         <source>Storage is not available</source>
         <translation>El almacenamiento no está disponible</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionmanager.cpp" line="876"/>
+        <location filename="../src/extensions/extensionmanager.cpp" line="889"/>
         <source>The extension&apos;s storage is full (limit: 1 MiB)</source>
         <translation>El almacenamiento de la extensión está lleno (límite: 1 MiB)</translation>
     </message>

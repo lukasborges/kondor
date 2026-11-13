@@ -1457,7 +1457,7 @@
     <message>
         <location filename="../qml/passwords/ImportPreparingRow.qml" line="20"/>
         <source>Reading %1…</source>
-        <translation>S'està llegint %1…</translation>
+        <translation>S&apos;està llegint %1…</translation>
     </message>
 </context>
 <context>
@@ -1465,7 +1465,7 @@
     <message>
         <location filename="../qml/passwords/ImportProgressMessage.qml" line="15"/>
         <source>Importing passwords… %1 of %2 sites</source>
-        <translation>S'estan important les contrasenyes… %1 de %2 llocs</translation>
+        <translation>S&apos;estan important les contrasenyes… %1 de %2 llocs</translation>
     </message>
 </context>
 <context>

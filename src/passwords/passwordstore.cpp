@@ -58,7 +58,10 @@ PasswordStore *PasswordStore::create(QQmlEngine *engine, QJSEngine *jsEngine)
 PasswordStore::PasswordStore(QObject *parent)
     : QObject(parent)
     , m_clipboard(this)
+    , m_preparation([this] { return importSavedLogins(); }, this)
 {
+    connect(&m_preparation, &ImportPreparation::runningChanged, this, &PasswordStore::importPreparingChanged);
+    connect(&m_preparation, &ImportPreparation::prepared, this, &PasswordStore::importPrepared);
 }
 
 QString PasswordStore::originOf(const QUrl &url)
@@ -87,8 +90,9 @@ void PasswordStore::reloadUsernames()
     const auto folder = walletFolder();
     if (!folder)
         return;
-    for (const QString &origin : folder->origins())
-        rememberUsernames(origin, folder->logins(origin));
+    const SavedLogins saved = folder->allLogins().value_or(SavedLogins());
+    for (auto it = saved.cbegin(); it != saved.cend(); ++it)
+        rememberUsernames(it.key(), it.value());
 }
 
 void PasswordStore::rememberUsernames(const QString &origin,

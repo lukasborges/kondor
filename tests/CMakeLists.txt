@@ -77,6 +77,7 @@ target_link_libraries(tst_tabmodel PRIVATE
     Qt6::Test
     Qt6::WebEngineQuick
     KF6::Wallet
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_tabmodel COMMAND tst_tabmodel)
@@ -115,6 +116,7 @@ target_link_libraries(tst_tabpasswords PRIVATE
     Qt6::Test
     Qt6::WebEngineQuick
     KF6::Wallet
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_tabpasswords COMMAND tst_tabpasswords)
@@ -153,6 +155,7 @@ target_link_libraries(tst_tabsecurity PRIVATE
     Qt6::Test
     Qt6::WebEngineQuick
     KF6::Wallet
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_tabsecurity COMMAND tst_tabsecurity)
@@ -200,6 +203,7 @@ target_link_libraries(tst_addresssuggestions PRIVATE
     Qt6::Test
     Qt6::WebEngineQuick
     KF6::Wallet
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_addresssuggestions COMMAND tst_addresssuggestions)
@@ -249,6 +253,7 @@ target_link_libraries(tst_addressbar PRIVATE
     Qt6::Test
     Qt6::WebEngineQuick
     KF6::Wallet
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_addressbar COMMAND tst_addressbar)
@@ -325,6 +330,7 @@ target_link_libraries(tst_bookmarkswindow PRIVATE
     Qt6::Test
     Qt6::WebEngineQuick
     KF6::Wallet
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_bookmarkswindow COMMAND tst_bookmarkswindow)
@@ -372,6 +378,7 @@ target_link_libraries(tst_mainmenu PRIVATE
     Qt6::Test
     Qt6::WebEngineQuick
     KF6::Wallet
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_mainmenu COMMAND tst_mainmenu)
@@ -421,6 +428,7 @@ target_link_libraries(tst_toolbaraccessibility PRIVATE
     Qt6::Test
     Qt6::WebEngineQuick
     KF6::Wallet
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_toolbaraccessibility COMMAND tst_toolbaraccessibility)
@@ -594,6 +602,7 @@ target_link_libraries(tst_settingswindow PRIVATE
     Qt6::WebEngineQuick
     KF6::Wallet
     KF6::Archive
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_settingswindow COMMAND tst_settingswindow)
@@ -645,6 +654,7 @@ target_link_libraries(tst_tabstrip PRIVATE
     Qt6::Test
     Qt6::WebEngineQuick
     KF6::Wallet
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_tabstrip COMMAND tst_tabstrip)
@@ -689,6 +699,7 @@ target_link_libraries(tst_tabstripscroll PRIVATE
     Qt6::Test
     Qt6::WebEngineQuick
     KF6::Wallet
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_tabstripscroll COMMAND tst_tabstripscroll)
@@ -734,6 +745,7 @@ target_link_libraries(tst_sitepermissions PRIVATE
     Qt6::Test
     Qt6::WebEngineQuick
     KF6::Wallet
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_sitepermissions COMMAND tst_sitepermissions)
@@ -910,6 +922,7 @@ target_link_libraries(tst_sessionmanager PRIVATE
     Qt6::Test
     Qt6::WebEngineQuick
     KF6::Wallet
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_sessionmanager COMMAND tst_sessionmanager)
@@ -1073,6 +1086,7 @@ target_link_libraries(tst_passwordstore PRIVATE
     Qt6::Qml
     Qt6::Test
     KF6::Wallet
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_passwordstore COMMAND tst_passwordstore)
@@ -1121,6 +1135,7 @@ target_link_libraries(tst_passwordimport PRIVATE
     Qt6::Qml
     Qt6::Test
     KF6::Wallet
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_passwordimport COMMAND tst_passwordimport)
@@ -1151,6 +1166,7 @@ target_link_libraries(tst_extensionloader PRIVATE
     Qt6::WebEngineCore
     Qt6::WebEngineQuick
     Qt6::Test
+    Qt6::Concurrent
 )
 
 add_test(NAME tst_extensionloader COMMAND tst_extensionloader)
@@ -1482,6 +1498,47 @@ target_link_libraries(tst_passwordimportplan PRIVATE
 )
 
 add_test(NAME tst_passwordimportplan COMMAND tst_passwordimportplan)
+
+qt_add_executable(tst_passwordimportasync
+    passwords/tst_passwordimportasync.cpp
+    ../src/passwords/import/importcommit.cpp
+    ../src/passwords/import/importinfo.cpp
+    ../src/passwords/import/importpreparation.cpp
+    ../src/passwords/passwordimportfile.cpp
+    ../src/passwords/passwordimportplan.cpp
+    ../src/passwords/passwordimport.cpp
+    ../src/passwords/passwordimportcolumns.cpp
+    ../src/passwords/csvreader.cpp
+    ../src/passwords/passwordorigin.cpp
+)
+
+target_include_directories(tst_passwordimportasync PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_passwordimportasync PRIVATE
+    Qt6::Concurrent
+    Qt6::Core
+    Qt6::Test
+)
+
+add_test(NAME tst_passwordimportasync COMMAND tst_passwordimportasync)
+
+qt_add_executable(tst_passwordimportoutcome
+    passwords/tst_passwordimportoutcome.cpp
+    ../src/passwords/import/importoutcome.cpp
+)
+
+target_include_directories(tst_passwordimportoutcome PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_passwordimportoutcome PRIVATE
+    Qt6::Core
+    Qt6::Test
+)
+
+add_test(NAME tst_passwordimportoutcome COMMAND tst_passwordimportoutcome)
 
 qt_add_executable(tst_passwordimportfile
     passwords/tst_passwordimportfile.cpp

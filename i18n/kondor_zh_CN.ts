@@ -1287,143 +1287,174 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportMessage.qml" line="36"/>
+        <location filename="../qml/passwords/ImportMessage.qml" line="42"/>
         <source>Move File to Trash</source>
         <translation>将文件移至回收站</translation>
     </message>
 </context>
 <context>
+    <name>ImportNotifier</name>
+    <message>
+        <location filename="../qml/passwords/ImportNotifier.qml" line="10"/>
+        <source>Passwords Imported</source>
+        <translation>密码已导入</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/passwords/ImportNotifier.qml" line="11"/>
+        <source>%n password(s) imported from %1</source>
+        <translation>
+            <numerusform>已从 %1 导入 %n 个密码</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>ImportPasswordsDialog</name>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="28"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="26"/>
         <source>“%1” is not a password export: it has no website, username and password columns.</source>
         <translation>“%1”不是密码导出文件：其中没有网站、用户名和密码列。</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="30"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="28"/>
         <source>“%1” has no passwords to import.</source>
         <translation>“%1”中没有可导入的密码。</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="32"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="30"/>
         <source>“%1” could not be read.</source>
         <translation>无法读取“%1”。</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="34"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="32"/>
         <source>“%1” is too large to be a password export.</source>
         <translation>“%1”太大，不可能是密码导出文件。</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="36"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="34"/>
         <source>KWallet is not available, so passwords cannot be imported.</source>
         <translation>KWallet 不可用，因此无法导入密码。</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="44"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="42"/>
         <source>%n without an https:// website</source>
         <translation>
             <numerusform>%n 条没有 https:// 网站</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="46"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="44"/>
         <source>%n without a username or password</source>
         <translation>
             <numerusform>%n 条没有用户名或密码</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="48"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="46"/>
         <source>%n that are not logins</source>
         <translation>
             <numerusform>%n 条不是登录信息</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="49"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="47"/>
         <source>%n entries: %1</source>
         <translation>
             <numerusform>%n 个条目：%1</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="70"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="66"/>
         <source>Import Passwords</source>
         <translation>导入密码</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="81"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="77"/>
         <source>Import %n Password(s)</source>
         <translation>
             <numerusform>导入 %n 个密码</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="87"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="83"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="87"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="83"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="109"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="105"/>
         <source>File:</source>
         <translation>文件：</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="113"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="109"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="118"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="114"/>
         <source>New:</source>
         <translation>新增：</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="120"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="116"/>
         <source>%n password(s)</source>
         <translation>
             <numerusform>%n 个密码</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="124"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="120"/>
         <source>Already saved:</source>
         <translation>已保存：</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="126"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="122"/>
         <source>%n password(s) are identical and are skipped</source>
         <translation>
             <numerusform>%n 个密码相同，将被跳过</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="130"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="126"/>
         <source>Different:</source>
         <translation>不同：</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="132"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="128"/>
         <source>%n site(s) already have a different saved password</source>
         <translation>
             <numerusform>%n 个网站已保存了不同的密码</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="138"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="134"/>
         <source>Replace them with the imported passwords</source>
         <translation>用导入的密码替换它们</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="142"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="138"/>
         <source>Not imported:</source>
         <translation>未导入：</translation>
+    </message>
+</context>
+<context>
+    <name>ImportPreparingRow</name>
+    <message>
+        <location filename="../qml/passwords/ImportPreparingRow.qml" line="20"/>
+        <source>Reading %1…</source>
+        <translation>正在读取 %1…</translation>
+    </message>
+</context>
+<context>
+    <name>ImportProgressMessage</name>
+    <message>
+        <location filename="../qml/passwords/ImportProgressMessage.qml" line="15"/>
+        <source>Importing passwords… %1 of %2 sites</source>
+        <translation>正在导入密码… %1/%2 个网站</translation>
     </message>
 </context>
 <context>
@@ -1873,32 +1904,32 @@
 <context>
     <name>PasswordsPage</name>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="57"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="65"/>
         <source>Import Passwords</source>
         <translation>导入密码</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="60"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="68"/>
         <source>CSV files (*.csv)</source>
         <translation>CSV 文件 (*.csv)</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="60"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="68"/>
         <source>All files (*)</source>
         <translation>所有文件 (*)</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="74"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="87"/>
         <source>Delete Saved Password</source>
         <translation>删除已保存的密码</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="75"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="88"/>
         <source>Delete the saved password for %1 on %2?</source>
         <translation>要删除 %2 上 %1 的已保存密码吗?</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="77"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="90"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
@@ -2232,27 +2263,27 @@
         <translation>重试</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="50"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="54"/>
         <source>Offer to save passwords</source>
         <translation>提示保存密码</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="68"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="72"/>
         <source>Filter by site or username…</source>
         <translation>按网站或用户名筛选…</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="72"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="76"/>
         <source>Add Password…</source>
         <translation>添加密码…</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="79"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="83"/>
         <source>Import…</source>
         <translation>导入…</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="83"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="87"/>
         <source>Import passwords from a CSV file</source>
         <translation>从 CSV 文件导入密码</translation>
     </message>

@@ -8,8 +8,6 @@ Dialog {
     id: root
 
     property var info: ({})
-    signal imported(int count, string fileName)
-
     readonly property string error: root.info.error ? root.info.error : ""
     readonly property string fileName: root.info.fileName ? root.info.fileName : ""
     readonly property int newCount: root.info.newCount ? root.info.newCount : 0
@@ -56,10 +54,8 @@ Dialog {
     }
 
     function submit() {
-        const count = PasswordStore.commitImport(replaceCheck.checked)
-        const name = root.fileName
+        PasswordStore.commitImport(replaceCheck.checked)
         root.close()
-        root.imported(count, name)
     }
 
     anchors.centerIn: parent

@@ -19,6 +19,8 @@ StackLayout {
 
     function openPage() {
         PasswordStore.ensureOpen()
+        PasswordStore.setImportPageOpen(true)
+        root.showImportResult()
         savedTab.rebuild()
     }
 
@@ -28,7 +30,14 @@ StackLayout {
         addDialog.clear()
         importDialog.close()
         PasswordStore.cancelImport()
+        PasswordStore.setImportPageOpen(false)
         root.importResult.done = false
+    }
+
+    function showImportResult() {
+        const result = PasswordStore.takeImportResult()
+        if (result.fileName !== undefined)
+            root.importResult.finish(result.count, result.fileName)
     }
 
     function askToDelete(origin, username) {
@@ -38,9 +47,8 @@ StackLayout {
     }
 
     function prepareImport(file) {
-        root.importResult.done = false
-        importDialog.openFor(PasswordStore.prepareImport(file))
-        root.importResult.file = file
+        root.importResult.begin(file)
+        PasswordStore.prepareImport(file)
     }
 
     currentIndex: root.tab
@@ -64,7 +72,12 @@ StackLayout {
     ImportPasswordsDialog {
         id: importDialog
         parent: Overlay.overlay
-        onImported: function(count, fileName) { root.importResult.finish(count, fileName) }
+    }
+
+    Connections {
+        target: PasswordStore
+        function onImportPrepared(info) { importDialog.openFor(info) }
+        function onImportFinished() { if (root.active) root.showImportResult() }
     }
 
     ConfirmDialog {

@@ -13,6 +13,8 @@ Item {
     property var bookmarksWindow: null
     property var sitePermissionsWindow: null
 
+    ImportNotifier {}
+
     function createOnce(existing, component) {
         return existing ? existing : component.createObject(browserWindow)
     }

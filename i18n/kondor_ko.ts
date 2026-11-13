@@ -1287,143 +1287,174 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportMessage.qml" line="36"/>
+        <location filename="../qml/passwords/ImportMessage.qml" line="42"/>
         <source>Move File to Trash</source>
         <translation>파일을 휴지통으로 이동</translation>
     </message>
 </context>
 <context>
+    <name>ImportNotifier</name>
+    <message>
+        <location filename="../qml/passwords/ImportNotifier.qml" line="10"/>
+        <source>Passwords Imported</source>
+        <translation>비밀번호를 가져왔습니다</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/passwords/ImportNotifier.qml" line="11"/>
+        <source>%n password(s) imported from %1</source>
+        <translation>
+            <numerusform>%1에서 비밀번호 %n개를 가져왔습니다</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>ImportPasswordsDialog</name>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="28"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="26"/>
         <source>“%1” is not a password export: it has no website, username and password columns.</source>
         <translation>“%1”은(는) 비밀번호 내보내기 파일이 아닙니다. 웹사이트, 사용자 이름, 비밀번호 열이 없습니다.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="30"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="28"/>
         <source>“%1” has no passwords to import.</source>
         <translation>“%1”에 가져올 비밀번호가 없습니다.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="32"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="30"/>
         <source>“%1” could not be read.</source>
         <translation>“%1”을(를) 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="34"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="32"/>
         <source>“%1” is too large to be a password export.</source>
         <translation>“%1”은(는) 비밀번호 내보내기 파일로 보기에는 너무 큽니다.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="36"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="34"/>
         <source>KWallet is not available, so passwords cannot be imported.</source>
         <translation>KWallet을 사용할 수 없으므로 비밀번호를 가져올 수 없습니다.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="44"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="42"/>
         <source>%n without an https:// website</source>
         <translation>
             <numerusform>https:// 웹사이트가 없는 항목 %n개</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="46"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="44"/>
         <source>%n without a username or password</source>
         <translation>
             <numerusform>사용자 이름 또는 비밀번호가 없는 항목 %n개</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="48"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="46"/>
         <source>%n that are not logins</source>
         <translation>
             <numerusform>로그인이 아닌 항목 %n개</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="49"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="47"/>
         <source>%n entries: %1</source>
         <translation>
             <numerusform>항목 %n개: %1</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="70"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="66"/>
         <source>Import Passwords</source>
         <translation>비밀번호 가져오기</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="81"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="77"/>
         <source>Import %n Password(s)</source>
         <translation>
             <numerusform>비밀번호 %n개 가져오기</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="87"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="83"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="87"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="83"/>
         <source>Close</source>
         <translation>닫기</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="109"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="105"/>
         <source>File:</source>
         <translation>파일:</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="113"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="109"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="118"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="114"/>
         <source>New:</source>
         <translation>새 항목:</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="120"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="116"/>
         <source>%n password(s)</source>
         <translation>
             <numerusform>비밀번호 %n개</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="124"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="120"/>
         <source>Already saved:</source>
         <translation>이미 저장됨:</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="126"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="122"/>
         <source>%n password(s) are identical and are skipped</source>
         <translation>
             <numerusform>비밀번호 %n개가 동일하여 건너뜁니다</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="130"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="126"/>
         <source>Different:</source>
         <translation>다름:</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="132"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="128"/>
         <source>%n site(s) already have a different saved password</source>
         <translation>
             <numerusform>사이트 %n곳에 이미 다른 비밀번호가 저장되어 있습니다</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="138"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="134"/>
         <source>Replace them with the imported passwords</source>
         <translation>가져온 비밀번호로 바꾸기</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="142"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="138"/>
         <source>Not imported:</source>
         <translation>가져오지 않음:</translation>
+    </message>
+</context>
+<context>
+    <name>ImportPreparingRow</name>
+    <message>
+        <location filename="../qml/passwords/ImportPreparingRow.qml" line="20"/>
+        <source>Reading %1…</source>
+        <translation>%1 읽는 중…</translation>
+    </message>
+</context>
+<context>
+    <name>ImportProgressMessage</name>
+    <message>
+        <location filename="../qml/passwords/ImportProgressMessage.qml" line="15"/>
+        <source>Importing passwords… %1 of %2 sites</source>
+        <translation>비밀번호를 가져오는 중… %2개 사이트 중 %1개</translation>
     </message>
 </context>
 <context>
@@ -1873,32 +1904,32 @@
 <context>
     <name>PasswordsPage</name>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="57"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="65"/>
         <source>Import Passwords</source>
         <translation>비밀번호 가져오기</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="60"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="68"/>
         <source>CSV files (*.csv)</source>
         <translation>CSV 파일 (*.csv)</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="60"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="68"/>
         <source>All files (*)</source>
         <translation>모든 파일 (*)</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="74"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="87"/>
         <source>Delete Saved Password</source>
         <translation>저장된 암호 삭제</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="75"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="88"/>
         <source>Delete the saved password for %1 on %2?</source>
         <translation>%2의 %1 저장된 암호를 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="77"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="90"/>
         <source>Delete</source>
         <translation>삭제</translation>
     </message>
@@ -2232,27 +2263,27 @@
         <translation>다시 시도</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="50"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="54"/>
         <source>Offer to save passwords</source>
         <translation>암호 저장 제안</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="68"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="72"/>
         <source>Filter by site or username…</source>
         <translation>사이트 또는 사용자 이름으로 필터링…</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="72"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="76"/>
         <source>Add Password…</source>
         <translation>비밀번호 추가…</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="79"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="83"/>
         <source>Import…</source>
         <translation>가져오기…</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="83"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="87"/>
         <source>Import passwords from a CSV file</source>
         <translation>CSV 파일에서 비밀번호 가져오기</translation>
     </message>

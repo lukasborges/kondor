@@ -12,6 +12,12 @@ QtObject {
     property string name: ""
     property url file
 
+    function begin(importFile) {
+        root.done = false
+        root.file = importFile
+        root.name = decodeURIComponent(importFile.toString().split("/").pop())
+    }
+
     function finish(importedCount, fileName) {
         root.count = importedCount
         root.name = fileName

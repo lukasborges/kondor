@@ -39,69 +39,69 @@ qt_add_qml_module(kondor
     VERSION 1.0
     QML_FILES
         qml/app/BrowserWindow.qml
-        qml/app/WindowTabController.qml
-        qml/app/FullScreenController.qml
-        qml/app/WindowCloseGuard.qml
-        qml/app/WindowDialogs.qml
-        qml/app/PageFileDialogs.qml
+        qml/app/window/WindowTabController.qml
+        qml/app/window/FullScreenController.qml
+        qml/app/window/WindowCloseGuard.qml
+        qml/app/window/WindowDialogs.qml
+        qml/app/window/PageFileDialogs.qml
         qml/app/BrowserActions.qml
         qml/app/BrowserShortcuts.qml
         qml/app/NavigationToolBar.qml
         qml/app/PageArea.qml
-        qml/browser/AddressBar.qml
-        qml/browser/AddressCompleter.qml
-        qml/browser/AddressBarButtons.qml
+        qml/browser/address/AddressBar.qml
+        qml/browser/address/AddressCompleter.qml
+        qml/browser/address/AddressBarButtons.qml
         qml/site/SiteSecurityButton.qml
         qml/adblock/AdBlockButton.qml
         qml/browser/ZoomButton.qml
-        qml/passwords/PasswordButton.qml
-        qml/browser/ReaderButton.qml
-        qml/bookmarks/BookmarkButton.qml
-        qml/bookmarks/BookmarkEditorPopup.qml
+        qml/passwords/bar/PasswordButton.qml
+        qml/browser/reader/ReaderButton.qml
+        qml/bookmarks/bar/BookmarkButton.qml
+        qml/bookmarks/bar/BookmarkEditorPopup.qml
         qml/downloads/DownloadSaveDialog.qml
         qml/common/LocalPath.qml
-        qml/browser/TabStrip.qml
-        qml/browser/TabStripScroller.qml
-        qml/browser/TabWidthFreeze.qml
-        qml/browser/TabStripTaps.qml
-        qml/browser/TabStripWheel.qml
-        qml/browser/TabStripScrollButton.qml
-        qml/browser/TabDragHandler.qml
-        qml/browser/TabSlideAnimation.qml
-        qml/browser/WebViewTab.qml
-        qml/browser/CertificateErrorHandler.qml
-        qml/browser/PageOutput.qml
-        qml/browser/PageScriptBridges.qml
-        qml/browser/PageView.qml
-        qml/browser/PageZoom.qml
-        qml/browser/ReaderMode.qml
-        qml/browser/ReaderStyle.qml
-        qml/browser/TabCommands.qml
-        qml/browser/PageContextMenu.qml
-        qml/browser/PageMenuEntries.qml
-        qml/browser/PageMenuActions.qml
-        qml/browser/SpellCheckLanguagesMenu.qml
-        qml/browser/ReaderControls.qml
-        qml/browser/NewTabPage.qml
-        qml/browser/TopSitesGrid.qml
-        qml/browser/TopSiteMenu.qml
-        qml/browser/TabButtonDelegate.qml
-        qml/browser/TabContextMenu.qml
+        qml/browser/tabstrip/TabStrip.qml
+        qml/browser/tabstrip/TabStripScroller.qml
+        qml/browser/tabstrip/TabWidthFreeze.qml
+        qml/browser/tabstrip/TabStripTaps.qml
+        qml/browser/tabstrip/TabStripWheel.qml
+        qml/browser/tabstrip/TabStripScrollButton.qml
+        qml/browser/tabstrip/TabDragHandler.qml
+        qml/browser/tabstrip/TabSlideAnimation.qml
+        qml/browser/view/WebViewTab.qml
+        qml/browser/view/CertificateErrorHandler.qml
+        qml/browser/view/PageOutput.qml
+        qml/browser/view/PageScriptBridges.qml
+        qml/browser/view/PageView.qml
+        qml/browser/view/PageZoom.qml
+        qml/browser/reader/ReaderMode.qml
+        qml/browser/reader/ReaderStyle.qml
+        qml/browser/view/TabCommands.qml
+        qml/browser/contextmenu/PageContextMenu.qml
+        qml/browser/contextmenu/PageMenuEntries.qml
+        qml/browser/contextmenu/PageMenuActions.qml
+        qml/browser/contextmenu/SpellCheckLanguagesMenu.qml
+        qml/browser/reader/ReaderControls.qml
+        qml/browser/pages/NewTabPage.qml
+        qml/browser/pages/TopSitesGrid.qml
+        qml/browser/pages/TopSiteMenu.qml
+        qml/browser/tabstrip/TabButtonDelegate.qml
+        qml/browser/tabstrip/TabContextMenu.qml
         qml/common/InlineBar.qml
         qml/common/ConfirmDialog.qml
-        qml/browser/FindBar.qml
+        qml/browser/view/FindBar.qml
         qml/site/PermissionBar.qml
         qml/passwords/AddPasswordDialog.qml
-        qml/passwords/ImportPasswordsDialog.qml
-        qml/passwords/PasswordBar.qml
-        qml/browser/FullScreenHint.qml
+        qml/passwords/import/ImportPasswordsDialog.qml
+        qml/passwords/bar/PasswordBar.qml
+        qml/browser/view/FullScreenHint.qml
         qml/site/PermissionTypeInfo.qml
         qml/site/SitePermissionsDialog.qml
         qml/site/SiteInfoPopup.qml
         qml/site/SiteSecurityState.qml
         qml/adblock/AdBlockPopup.qml
-        qml/browser/CertificateErrorPage.qml
-        qml/browser/CrashedPage.qml
+        qml/browser/pages/CertificateErrorPage.qml
+        qml/browser/pages/CrashedPage.qml
         qml/history/HistoryWindow.qml
         qml/history/HistoryList.qml
         qml/history/HistoryEntryMenu.qml
@@ -113,11 +113,11 @@ qt_add_qml_module(kondor
         qml/settings/SettingsPageHeader.qml
         qml/settings/SettingsButtonBar.qml
         qml/settings/SettingsPageStack.qml
-        qml/settings/GeneralSettingsPage.qml
-        qml/settings/SearchSettingsPage.qml
-        qml/settings/DownloadsSettingsPage.qml
-        qml/settings/PrivacySettingsPage.qml
-        qml/settings/SpellingSettingsPage.qml
+        qml/settings/pages/GeneralSettingsPage.qml
+        qml/settings/pages/SearchSettingsPage.qml
+        qml/settings/pages/DownloadsSettingsPage.qml
+        qml/settings/pages/PrivacySettingsPage.qml
+        qml/settings/pages/SpellingSettingsPage.qml
         qml/passwords/PasswordsPage.qml
         qml/passwords/RevealedPasswords.qml
         qml/passwords/NeverSavedTab.qml
@@ -126,41 +126,41 @@ qt_add_qml_module(kondor
         qml/passwords/SavedPasswordDelegate.qml
         qml/passwords/RowToolButton.qml
         qml/passwords/PasswordsFrame.qml
-        qml/passwords/ImportMessage.qml
-        qml/passwords/ImportResult.qml
-        qml/passwords/ImportProgressMessage.qml
-        qml/passwords/ImportPreparingRow.qml
-        qml/passwords/ImportNotifier.qml
+        qml/passwords/import/ImportMessage.qml
+        qml/passwords/import/ImportResult.qml
+        qml/passwords/import/ImportProgressMessage.qml
+        qml/passwords/import/ImportPreparingRow.qml
+        qml/passwords/import/ImportNotifier.qml
         qml/downloads/DownloadsPopup.qml
         qml/downloads/DownloadDelegate.qml
         qml/downloads/DownloadStatus.qml
-        qml/bookmarks/BookmarksBar.qml
-        qml/bookmarks/BookmarkMenu.qml
-        qml/app/MainMenu.qml
-        qml/app/HistoryMenu.qml
-        qml/app/ZoomMenuRow.qml
+        qml/bookmarks/bar/BookmarksBar.qml
+        qml/bookmarks/bar/BookmarkMenu.qml
+        qml/app/menu/MainMenu.qml
+        qml/app/menu/HistoryMenu.qml
+        qml/app/menu/ZoomMenuRow.qml
         qml/bookmarks/BookmarksWindow.qml
         qml/bookmarks/BookmarkSelection.qml
         qml/bookmarks/BookmarkFolderTree.qml
-        qml/bookmarks/BookmarkDragController.qml
-        qml/bookmarks/BookmarkDropTargets.qml
-        qml/bookmarks/BookmarkDragPreview.qml
+        qml/bookmarks/drag/BookmarkDragController.qml
+        qml/bookmarks/drag/BookmarkDropTargets.qml
+        qml/bookmarks/drag/BookmarkDragPreview.qml
         qml/bookmarks/BookmarksToolBar.qml
         qml/bookmarks/BookmarkFolderPane.qml
         qml/bookmarks/BookmarkItemPane.qml
         qml/bookmarks/BookmarkItemDelegate.qml
         qml/bookmarks/BookmarkItemContextMenu.qml
-        qml/bookmarks/NewBookmarkFolderDialog.qml
-        qml/bookmarks/RenameBookmarkDialog.qml
-        qml/bookmarks/DeleteBookmarkDialog.qml
+        qml/bookmarks/dialogs/NewBookmarkFolderDialog.qml
+        qml/bookmarks/dialogs/RenameBookmarkDialog.qml
+        qml/bookmarks/dialogs/DeleteBookmarkDialog.qml
         qml/common/SiteIcon.qml
         qml/common/SiteMenuItem.qml
-        qml/browser/AddressSuggestions.qml
-        qml/app/AboutWindow.qml
-        qml/app/AboutTab.qml
-        qml/app/ComponentsTab.qml
-        qml/app/AuthorsTab.qml
-        qml/app/LicenseWindow.qml
+        qml/browser/address/AddressSuggestions.qml
+        qml/app/about/AboutWindow.qml
+        qml/app/about/AboutTab.qml
+        qml/app/about/ComponentsTab.qml
+        qml/app/about/AuthorsTab.qml
+        qml/app/about/LicenseWindow.qml
         qml/extensions/ExtensionIcon.qml
         qml/extensions/ExtensionsPage.qml
         qml/extensions/ExtensionCatalogDialog.qml
@@ -174,13 +174,13 @@ qt_add_qml_module(kondor
     SOURCES
         src/app/aboutinfo.h
         src/app/aboutinfo.cpp
-        src/browser/addressresolver.h
-        src/browser/addressresolver.cpp
+        src/browser/address/addressresolver.h
+        src/browser/address/addressresolver.cpp
         ${KONDOR_TAB_SOURCES}
         ${KONDOR_TAB_MODEL_SOURCES}
         ${KONDOR_PROFILE_MANAGER_SOURCES}
-        src/app/startupargs.h
-        src/app/startupargs.cpp
+        src/app/commandline/startupargs.h
+        src/app/commandline/startupargs.cpp
         ${KONDOR_APP_SOURCES}
         ${KONDOR_SETTINGS_SOURCES}
         ${KONDOR_SESSION_SOURCES}
@@ -194,17 +194,17 @@ qt_add_qml_module(kondor
         ${KONDOR_BOOKMARK_MANAGER_SOURCES}
         src/bookmarks/bookmarkrow.h
         ${KONDOR_BOOKMARK_MODEL_SOURCES}
-        src/browser/faviconstore.h
-        src/browser/faviconstore.cpp
-        src/extensions/extensionloader.h
-        src/extensions/extensionloader.cpp
+        src/browser/favicons/faviconstore.h
+        src/browser/favicons/faviconstore.cpp
+        src/extensions/install/extensionloader.h
+        src/extensions/install/extensionloader.cpp
         ${KONDOR_SUGGESTION_SOURCES}
         src/browser/zoommanager.h
         src/browser/zoommanager.cpp
         ${KONDOR_ADBLOCK_SOURCES}
         ${KONDOR_PASSWORD_STORE_SOURCES}
-        src/passwords/passwordbridge.h
-        src/passwords/passwordbridge.cpp
+        src/passwords/bridge/passwordbridge.h
+        src/passwords/bridge/passwordbridge.cpp
         ${KONDOR_EXTENSION_PACKAGE_SOURCES}
         ${KONDOR_EXTENSION_MANAGER_SOURCES}
         ${KONDOR_EXTENSION_BRIDGE_SOURCES}
@@ -251,18 +251,18 @@ qt_add_resources(kondor "reader"
 
 qt_add_resources(kondor "passwords_script"
     PREFIX "/scripts"
-    BASE "${CMAKE_SOURCE_DIR}/src/passwords"
+    BASE "${CMAKE_SOURCE_DIR}/src/passwords/bridge"
     FILES
-        src/passwords/passwords.js
-        src/passwords/usernamefield.js
+        src/passwords/bridge/passwords.js
+        src/passwords/bridge/usernamefield.js
 )
 
 qt_add_resources(kondor "extension_scripts"
     PREFIX "/scripts"
-    BASE "${CMAKE_SOURCE_DIR}/src/extensions"
+    BASE "${CMAKE_SOURCE_DIR}/src/extensions/bridge"
     FILES
-        src/extensions/channel.js
-        src/extensions/extensionruntime.js
+        src/extensions/bridge/channel.js
+        src/extensions/bridge/extensionruntime.js
 )
 
 qt_add_resources(kondor "license"
@@ -275,8 +275,13 @@ target_compile_definitions(kondor PRIVATE
     PROJECT_VERSION="${PROJECT_VERSION}"
 )
 
-file(GLOB KONDOR_SOURCE_FOLDERS LIST_DIRECTORIES true "${CMAKE_CURRENT_SOURCE_DIR}/src/*")
-list(FILTER KONDOR_SOURCE_FOLDERS EXCLUDE REGEX "\\.(cpp|h|js)$")
+file(GLOB_RECURSE KONDOR_SOURCE_ENTRIES LIST_DIRECTORIES true "${CMAKE_CURRENT_SOURCE_DIR}/src/*")
+set(KONDOR_SOURCE_FOLDERS)
+foreach(entry IN LISTS KONDOR_SOURCE_ENTRIES)
+    if(IS_DIRECTORY "${entry}")
+        list(APPEND KONDOR_SOURCE_FOLDERS "${entry}")
+    endif()
+endforeach()
 
 # qmltyperegistrar includes the headers of the QML types by file name only
 target_include_directories(kondor PRIVATE

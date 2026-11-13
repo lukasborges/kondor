@@ -6,9 +6,9 @@
 #include <QTemporaryDir>
 #include <QTest>
 
-#include "common/isolatedhome.h"
-#include "core/database.h"
-#include "browser/faviconstore.h"
+#include "../common/isolatedhome.h"
+#include "core/database/database.h"
+#include "browser/favicons/faviconstore.h"
 #include "history/historymanager.h"
 
 class TestFaviconStore : public QObject

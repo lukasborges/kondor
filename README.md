@@ -192,7 +192,7 @@ Pass `-DBUILD_TESTING=OFF` to configure without building them.
 
 ### Code quality
 
-The code follows the Clean Code limits in [AGENTS.md](AGENTS.md) ("Code quality"): functions of at most 10 lines, files of at most 200 lines, and almost no comments. `python3 scripts/check-code-quality.py` enforces them (`--changed origin/main` checks only your changes). The existing offenders are listed in `scripts/code-quality-baseline.json`, which can only shrink.
+The code follows the Clean Code limits in [AGENTS.md](AGENTS.md) ("Code quality"): functions of at most 10 lines, files of at most 200 lines, almost no comments, and folders of at most 10 files and two levels below a feature folder. `python3 scripts/check-code-quality.py` enforces them (`--changed origin/main` checks only your changes). The existing offenders are listed in `scripts/code-quality-baseline.json`, which can only shrink.
 
 ## Translations
 

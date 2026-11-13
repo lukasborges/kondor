@@ -1,7 +1,7 @@
 #include "history/historymanager.h"
 
-#include "browser/faviconstore.h"
-#include "core/sql.h"
+#include "browser/favicons/faviconstore.h"
+#include "core/database/sql.h"
 #include "history/historymodel.h"
 #include "history/historysearch.h"
 #include "history/topsitesranking.h"

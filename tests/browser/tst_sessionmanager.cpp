@@ -5,10 +5,10 @@
 #include <QTest>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "browser/sessionmanager.h"
-#include "browser/tab.h"
-#include "browser/tabmodel.h"
-#include "common/isolatedhome.h"
+#include "browser/session/sessionmanager.h"
+#include "browser/tabs/tab.h"
+#include "browser/tabs/tabmodel.h"
+#include "../common/isolatedhome.h"
 
 namespace {
 void writeSessionFile(const QByteArray &content)

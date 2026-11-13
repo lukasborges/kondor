@@ -1,6 +1,6 @@
 #include "extensions/extensionmanager.h"
 
-#include "extensions/extensionsettings.h"
+#include "extensions/state/extensionsettings.h"
 
 namespace {
 

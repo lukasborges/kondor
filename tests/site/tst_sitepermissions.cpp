@@ -4,7 +4,7 @@
 #include <QTemporaryDir>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "common/isolatedhome.h"
+#include "../common/isolatedhome.h"
 #include "sitepermissionsharness.h"
 
 class TestSitePermissions : public QObject

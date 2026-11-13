@@ -10,11 +10,11 @@
 
 #include <functional>
 
-#include "common/qmltesthelpers.h"
+#include "../common/qmltesthelpers.h"
 #include "bookmarks/bookmarkmanager.h"
-#include "browser/faviconstore.h"
-#include "browser/profilemanager.h"
-#include "browser/tabmodel.h"
+#include "browser/favicons/faviconstore.h"
+#include "browser/profile/profilemanager.h"
+#include "browser/tabs/tabmodel.h"
 
 class EmptyImageProvider : public QQuickImageProvider
 {

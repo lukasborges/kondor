@@ -1,7 +1,7 @@
 #include "extensions/extensionmanager.h"
 
-#include "extensions/contentscriptbuilder.h"
-#include "extensions/profilescripts.h"
+#include "extensions/scripts/contentscriptbuilder.h"
+#include "extensions/scripts/profilescripts.h"
 
 namespace {
 

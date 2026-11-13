@@ -2,7 +2,7 @@
 #include <QStandardPaths>
 #include <QTemporaryDir>
 
-#include "common/isolatedhome.h"
+#include "../common/isolatedhome.h"
 #include "topsitesharness.h"
 
 class TestTopSites : public QObject

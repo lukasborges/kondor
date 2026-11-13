@@ -2,7 +2,7 @@
 #include "bookmarks/bookmarkmodel.h"
 #include "bookmarktreeharness.h"
 #include "bookmarksprofileharness.h"
-#include "core/database.h"
+#include "core/database/database.h"
 
 class TestBookmarkTree : public QObject
 {

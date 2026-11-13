@@ -8,10 +8,10 @@
 #include <QtWebEngineCore/qwebenginecontextmenurequest.h>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "browser/profilemanager.h"
-#include "browser/tab.h"
-#include "browser/tabmodel.h"
-#include "core/settings.h"
+#include "browser/profile/profilemanager.h"
+#include "browser/tabs/tab.h"
+#include "browser/tabs/tabmodel.h"
+#include "core/settings/settings.h"
 #include "pagecontextmenucases.h"
 
 namespace {

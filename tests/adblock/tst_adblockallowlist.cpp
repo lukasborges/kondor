@@ -1,5 +1,5 @@
 #include "adblock/adblockmanager.h"
-#include "core/settings.h"
+#include "core/settings/settings.h"
 
 #include <QSettings>
 #include <QStandardPaths>

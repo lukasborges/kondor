@@ -2,8 +2,8 @@
 
 #include <QList>
 
-#include "passwords/passwordimport.h"
-#include "passwords/passwordimportplan.h"
+#include "passwords/csv/passwordimport.h"
+#include "passwords/csv/passwordimportplan.h"
 
 struct PendingImport
 {

@@ -4,7 +4,7 @@
 #include <QStandardPaths>
 #include <QTest>
 
-#include "core/database.h"
+#include "core/database/database.h"
 #include "history/historymanager.h"
 
 class TestHistoryManager : public QObject

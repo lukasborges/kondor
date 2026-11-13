@@ -6,11 +6,11 @@
 #include <QQuickWindow>
 #include <QTest>
 
-#include "browser/profilemanager.h"
-#include "browser/tabmodel.h"
-#include "common/qmltesthelpers.h"
-#include "core/settings.h"
-#include "extensions/extensioncatalog.h"
+#include "browser/profile/profilemanager.h"
+#include "browser/tabs/tabmodel.h"
+#include "../common/qmltesthelpers.h"
+#include "core/settings/settings.h"
+#include "extensions/catalog/extensioncatalog.h"
 #include "extensions/extensionmanager.h"
 #include "passwords/passwordstore.h"
 

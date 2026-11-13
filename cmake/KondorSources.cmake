@@ -1,27 +1,27 @@
 set(KONDOR_EXTENSION_PACKAGE_SOURCES
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensionpackage.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensionpackage.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/packagepath.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/packagepath.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/packagelimits.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/packagelimits.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/stringlistfield.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/stringlistfield.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/manifestvalidator.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/manifestvalidator.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/contentscriptreader.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/contentscriptreader.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/manifesticon.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/manifesticon.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/manifestsections.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/manifestsections.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/permissiondescription.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/permissiondescription.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/localizedmanifest.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/localizedmanifest.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/packagesuffix.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/packagesuffix.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/packagearchive.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/package/extensionpackage.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/package/extensionpackage.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/package/packagepath.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/package/packagepath.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/package/packagelimits.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/package/packagelimits.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifest/stringlistfield.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifest/stringlistfield.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifest/manifestvalidator.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifest/manifestvalidator.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/scripts/contentscriptreader.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/scripts/contentscriptreader.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifest/manifesticon.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifest/manifesticon.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifest/manifestsections.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifest/manifestsections.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/install/permissiondescription.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/install/permissiondescription.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifest/localizedmanifest.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/manifest/localizedmanifest.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/package/packagesuffix.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/package/packagesuffix.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/package/packagearchive.cpp
 )
 
 set(KONDOR_EXTENSION_MANAGER_SOURCES
@@ -29,47 +29,47 @@ set(KONDOR_EXTENSION_MANAGER_SOURCES
     ${CMAKE_SOURCE_DIR}/src/extensions/extensionmanager.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/extensionqueries.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/extensionmodel.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensioncatalogmodel.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensioncatalogactions.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/catalog/extensioncatalogmodel.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/catalog/extensioncatalogactions.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/extensionscripts.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/extensioninstall.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/extensionupdate.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/extensionconfiguration.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/installedextension.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/packagefile.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/package/packagefile.h
     ${CMAKE_SOURCE_DIR}/src/extensions/installresult.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensionaccess.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensionstate.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensionstate.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensionsettings.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensionsettings.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensioninstaller.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensioninstaller.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/contentscriptbuilder.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/contentscriptbuilder.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/profilescripts.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/profilescripts.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensionstorage.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensionstorage.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/catalogentry.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/catalogentry.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/packagedownload.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/packagedownload.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/catalogupdater.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/catalogupdater.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensioncatalog.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensioncatalog.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/state/extensionaccess.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/state/extensionstate.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/state/extensionstate.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/state/extensionsettings.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/state/extensionsettings.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/install/extensioninstaller.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/install/extensioninstaller.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/scripts/contentscriptbuilder.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/scripts/contentscriptbuilder.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/scripts/profilescripts.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/scripts/profilescripts.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/state/extensionstorage.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/state/extensionstorage.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/catalog/catalogentry.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/catalog/catalogentry.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/install/packagedownload.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/install/packagedownload.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/catalog/catalogupdater.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/catalog/catalogupdater.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/catalog/extensioncatalog.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/catalog/extensioncatalog.cpp
 )
 
 set(KONDOR_EXTENSION_BRIDGE_SOURCES
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensioncall.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensioncall.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensionpageapi.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensionpageapi.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensionbridge.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/extensionbridge.cpp
-    ${CMAKE_SOURCE_DIR}/src/extensions/bridgecalls.h
-    ${CMAKE_SOURCE_DIR}/src/extensions/bridgecalls.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/bridge/extensioncall.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/bridge/extensioncall.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/bridge/extensionpageapi.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/bridge/extensionpageapi.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/bridge/extensionbridge.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/bridge/extensionbridge.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/bridge/bridgecalls.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/bridge/bridgecalls.cpp
 )
 
 set(KONDOR_PASSWORD_STORE_SOURCES
@@ -79,16 +79,16 @@ set(KONDOR_PASSWORD_STORE_SOURCES
     ${CMAKE_SOURCE_DIR}/src/passwords/walletfolder.cpp
     ${CMAKE_SOURCE_DIR}/src/passwords/passwordclipboard.h
     ${CMAKE_SOURCE_DIR}/src/passwords/passwordclipboard.cpp
-    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportfile.h
-    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportfile.cpp
-    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportplan.h
-    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportplan.cpp
-    ${CMAKE_SOURCE_DIR}/src/passwords/csvreader.h
-    ${CMAKE_SOURCE_DIR}/src/passwords/csvreader.cpp
-    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportcolumns.h
-    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimportcolumns.cpp
-    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimport.h
-    ${CMAKE_SOURCE_DIR}/src/passwords/passwordimport.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/passwordimportfile.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/passwordimportfile.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/passwordimportplan.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/passwordimportplan.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/csvreader.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/csvreader.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/passwordimportcolumns.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/passwordimportcolumns.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/passwordimport.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/passwordimport.cpp
     ${CMAKE_SOURCE_DIR}/src/passwords/passwordstore.h
     ${CMAKE_SOURCE_DIR}/src/passwords/passwordstore.cpp
     ${CMAKE_SOURCE_DIR}/src/passwords/passwordstorewallet.cpp
@@ -105,25 +105,25 @@ set(KONDOR_PASSWORD_STORE_SOURCES
 )
 
 set(KONDOR_DATABASE_SOURCES
-    ${CMAKE_SOURCE_DIR}/src/core/database.h
-    ${CMAKE_SOURCE_DIR}/src/core/database.cpp
-    ${CMAKE_SOURCE_DIR}/src/core/databasemigrations.h
-    ${CMAKE_SOURCE_DIR}/src/core/databasemigrations.cpp
-    ${CMAKE_SOURCE_DIR}/src/core/defaultbookmarks.h
-    ${CMAKE_SOURCE_DIR}/src/core/defaultbookmarks.cpp
-    ${CMAKE_SOURCE_DIR}/src/core/sql.h
-    ${CMAKE_SOURCE_DIR}/src/core/sql.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/database/database.h
+    ${CMAKE_SOURCE_DIR}/src/core/database/database.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/database/databasemigrations.h
+    ${CMAKE_SOURCE_DIR}/src/core/database/databasemigrations.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/database/defaultbookmarks.h
+    ${CMAKE_SOURCE_DIR}/src/core/database/defaultbookmarks.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/database/sql.h
+    ${CMAKE_SOURCE_DIR}/src/core/database/sql.cpp
 )
 
 set(KONDOR_SETTINGS_SOURCES
-    ${CMAKE_SOURCE_DIR}/src/core/settings.h
-    ${CMAKE_SOURCE_DIR}/src/core/settings.cpp
-    ${CMAKE_SOURCE_DIR}/src/core/settingsdefaults.h
-    ${CMAKE_SOURCE_DIR}/src/core/settingsdefaults.cpp
-    ${CMAKE_SOURCE_DIR}/src/core/spellcheckdictionaries.h
-    ${CMAKE_SOURCE_DIR}/src/core/spellcheckdictionaries.cpp
-    ${CMAKE_SOURCE_DIR}/src/core/searchengines.h
-    ${CMAKE_SOURCE_DIR}/src/core/searchengines.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/settings/settings.h
+    ${CMAKE_SOURCE_DIR}/src/core/settings/settings.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/settings/settingsdefaults.h
+    ${CMAKE_SOURCE_DIR}/src/core/settings/settingsdefaults.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/settings/spellcheckdictionaries.h
+    ${CMAKE_SOURCE_DIR}/src/core/settings/spellcheckdictionaries.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/settings/searchengines.h
+    ${CMAKE_SOURCE_DIR}/src/core/settings/searchengines.cpp
 )
 
 set(KONDOR_NOTIFIER_SOURCES
@@ -134,18 +134,18 @@ set(KONDOR_NOTIFIER_SOURCES
 set(KONDOR_BOOKMARK_MANAGER_SOURCES
     ${CMAKE_SOURCE_DIR}/src/bookmarks/bookmarkmanager.h
     ${CMAKE_SOURCE_DIR}/src/bookmarks/bookmarkmanager.cpp
-    ${CMAKE_SOURCE_DIR}/src/bookmarks/bookmarkqueries.h
-    ${CMAKE_SOURCE_DIR}/src/bookmarks/bookmarkqueries.cpp
-    ${CMAKE_SOURCE_DIR}/src/bookmarks/bookmarkfoldertree.h
-    ${CMAKE_SOURCE_DIR}/src/bookmarks/bookmarkfoldertree.cpp
-    ${CMAKE_SOURCE_DIR}/src/bookmarks/bookmarkhtmlparser.h
-    ${CMAKE_SOURCE_DIR}/src/bookmarks/bookmarkhtmlparser.cpp
-    ${CMAKE_SOURCE_DIR}/src/bookmarks/bookmarkhtmlimporter.h
-    ${CMAKE_SOURCE_DIR}/src/bookmarks/bookmarkhtmlimporter.cpp
-    ${CMAKE_SOURCE_DIR}/src/bookmarks/bookmarkhtmltext.h
-    ${CMAKE_SOURCE_DIR}/src/bookmarks/bookmarkhtmltext.cpp
-    ${CMAKE_SOURCE_DIR}/src/bookmarks/bookmarkchecks.h
-    ${CMAKE_SOURCE_DIR}/src/bookmarks/bookmarkchecks.cpp
+    ${CMAKE_SOURCE_DIR}/src/bookmarks/storage/bookmarkqueries.h
+    ${CMAKE_SOURCE_DIR}/src/bookmarks/storage/bookmarkqueries.cpp
+    ${CMAKE_SOURCE_DIR}/src/bookmarks/storage/bookmarkfoldertree.h
+    ${CMAKE_SOURCE_DIR}/src/bookmarks/storage/bookmarkfoldertree.cpp
+    ${CMAKE_SOURCE_DIR}/src/bookmarks/import/bookmarkhtmlparser.h
+    ${CMAKE_SOURCE_DIR}/src/bookmarks/import/bookmarkhtmlparser.cpp
+    ${CMAKE_SOURCE_DIR}/src/bookmarks/import/bookmarkhtmlimporter.h
+    ${CMAKE_SOURCE_DIR}/src/bookmarks/import/bookmarkhtmlimporter.cpp
+    ${CMAKE_SOURCE_DIR}/src/bookmarks/import/bookmarkhtmltext.h
+    ${CMAKE_SOURCE_DIR}/src/bookmarks/import/bookmarkhtmltext.cpp
+    ${CMAKE_SOURCE_DIR}/src/bookmarks/storage/bookmarkchecks.h
+    ${CMAKE_SOURCE_DIR}/src/bookmarks/storage/bookmarkchecks.cpp
 )
 
 set(KONDOR_BOOKMARK_MODEL_SOURCES
@@ -179,94 +179,94 @@ set(KONDOR_DOWNLOAD_MANAGER_SOURCES
 )
 
 set(KONDOR_TAB_SOURCES
-    ${CMAKE_SOURCE_DIR}/src/browser/assignandnotify.h
-    ${CMAKE_SOURCE_DIR}/src/browser/tab.h
-    ${CMAKE_SOURCE_DIR}/src/browser/tab.cpp
-    ${CMAKE_SOURCE_DIR}/src/browser/tabcommands.cpp
-    ${CMAKE_SOURCE_DIR}/src/browser/tabsecurity.h
-    ${CMAKE_SOURCE_DIR}/src/browser/tabsecurity.cpp
-    ${CMAKE_SOURCE_DIR}/src/browser/tabpermissions.h
-    ${CMAKE_SOURCE_DIR}/src/browser/tabpermissions.cpp
-    ${CMAKE_SOURCE_DIR}/src/browser/tabsitereload.h
-    ${CMAKE_SOURCE_DIR}/src/browser/tabsitereload.cpp
-    ${CMAKE_SOURCE_DIR}/src/browser/tabpasswords.h
-    ${CMAKE_SOURCE_DIR}/src/browser/tabpasswords.cpp
-    ${CMAKE_SOURCE_DIR}/src/browser/tabextensionitems.h
-    ${CMAKE_SOURCE_DIR}/src/browser/tabextensionitems.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/assignandnotify.h
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/tab.h
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/tab.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/tabcommands.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/features/tabsecurity.h
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/features/tabsecurity.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/features/tabpermissions.h
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/features/tabpermissions.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/features/tabsitereload.h
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/features/tabsitereload.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/features/tabpasswords.h
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/features/tabpasswords.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/features/tabextensionitems.h
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/features/tabextensionitems.cpp
 )
 
 set(KONDOR_TAB_MODEL_SOURCES
-    ${CMAKE_SOURCE_DIR}/src/browser/tabmodel.h
-    ${CMAKE_SOURCE_DIR}/src/browser/tabmodel.cpp
-    ${CMAKE_SOURCE_DIR}/src/browser/tabmodelclosing.cpp
-    ${CMAKE_SOURCE_DIR}/src/browser/closedtabs.h
-    ${CMAKE_SOURCE_DIR}/src/browser/closedtabs.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/tabmodel.h
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/tabmodel.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/tabmodelclosing.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/closedtabs.h
+    ${CMAKE_SOURCE_DIR}/src/browser/tabs/closedtabs.cpp
 )
 
 set(KONDOR_PROFILE_MANAGER_SOURCES
-    ${CMAKE_SOURCE_DIR}/src/browser/profilemanager.h
-    ${CMAKE_SOURCE_DIR}/src/browser/profilemanager.cpp
-    ${CMAKE_SOURCE_DIR}/src/browser/profilesetup.h
-    ${CMAKE_SOURCE_DIR}/src/browser/profilesetup.cpp
-    ${CMAKE_SOURCE_DIR}/src/browser/pagescripts.h
-    ${CMAKE_SOURCE_DIR}/src/browser/pagescripts.cpp
-    ${CMAKE_SOURCE_DIR}/src/browser/certificateoverrides.h
-    ${CMAKE_SOURCE_DIR}/src/browser/certificateoverrides.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/profile/profilemanager.h
+    ${CMAKE_SOURCE_DIR}/src/browser/profile/profilemanager.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/profile/profilesetup.h
+    ${CMAKE_SOURCE_DIR}/src/browser/profile/profilesetup.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/profile/pagescripts.h
+    ${CMAKE_SOURCE_DIR}/src/browser/profile/pagescripts.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/profile/certificateoverrides.h
+    ${CMAKE_SOURCE_DIR}/src/browser/profile/certificateoverrides.cpp
 )
 
 set(KONDOR_SESSION_SOURCES
-    ${CMAKE_SOURCE_DIR}/src/browser/sessionwindow.h
-    ${CMAKE_SOURCE_DIR}/src/browser/sessionformat.h
-    ${CMAKE_SOURCE_DIR}/src/browser/sessionformat.cpp
-    ${CMAKE_SOURCE_DIR}/src/browser/sessionmanager.h
-    ${CMAKE_SOURCE_DIR}/src/browser/sessionmanager.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/session/sessionwindow.h
+    ${CMAKE_SOURCE_DIR}/src/browser/session/sessionformat.h
+    ${CMAKE_SOURCE_DIR}/src/browser/session/sessionformat.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/session/sessionmanager.h
+    ${CMAKE_SOURCE_DIR}/src/browser/session/sessionmanager.cpp
 )
 
 set(KONDOR_SUGGESTION_SOURCES
-    ${CMAKE_SOURCE_DIR}/src/browser/suggestionlist.h
-    ${CMAKE_SOURCE_DIR}/src/browser/suggestionlist.cpp
-    ${CMAKE_SOURCE_DIR}/src/browser/searchsuggestions.h
-    ${CMAKE_SOURCE_DIR}/src/browser/searchsuggestions.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/address/suggestionlist.h
+    ${CMAKE_SOURCE_DIR}/src/browser/address/suggestionlist.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/address/searchsuggestions.h
+    ${CMAKE_SOURCE_DIR}/src/browser/address/searchsuggestions.cpp
 )
 
 set(KONDOR_APP_SOURCES
-    ${CMAKE_SOURCE_DIR}/src/app/windowmanager.h
-    ${CMAKE_SOURCE_DIR}/src/app/windowmanager.cpp
-    ${CMAKE_SOURCE_DIR}/src/app/windowlaunch.cpp
-    ${CMAKE_SOURCE_DIR}/src/app/windowactivation.h
-    ${CMAKE_SOURCE_DIR}/src/app/windowactivation.cpp
-    ${CMAKE_SOURCE_DIR}/src/app/singleinstance.h
-    ${CMAKE_SOURCE_DIR}/src/app/singleinstance.cpp
-    ${CMAKE_SOURCE_DIR}/src/app/singleinstancemessage.h
-    ${CMAKE_SOURCE_DIR}/src/app/singleinstancemessage.cpp
-    ${CMAKE_SOURCE_DIR}/src/app/startupurl.h
-    ${CMAKE_SOURCE_DIR}/src/app/startupurl.cpp
-    ${CMAKE_SOURCE_DIR}/src/app/extensionpackages.h
-    ${CMAKE_SOURCE_DIR}/src/app/extensionpackages.cpp
-    ${CMAKE_SOURCE_DIR}/src/app/commandline.h
-    ${CMAKE_SOURCE_DIR}/src/app/commandline.cpp
-    ${CMAKE_SOURCE_DIR}/src/app/environment.h
-    ${CMAKE_SOURCE_DIR}/src/app/environment.cpp
-    ${CMAKE_SOURCE_DIR}/src/app/messagehandler.h
-    ${CMAKE_SOURCE_DIR}/src/app/messagehandler.cpp
-    ${CMAKE_SOURCE_DIR}/src/app/appidentity.h
-    ${CMAKE_SOURCE_DIR}/src/app/appidentity.cpp
-    ${CMAKE_SOURCE_DIR}/src/app/appstartup.h
-    ${CMAKE_SOURCE_DIR}/src/app/appstartup.cpp
-    ${CMAKE_SOURCE_DIR}/src/app/faviconimageprovider.h
-    ${CMAKE_SOURCE_DIR}/src/app/faviconimageprovider.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/windows/windowmanager.h
+    ${CMAKE_SOURCE_DIR}/src/app/windows/windowmanager.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/windows/windowlaunch.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/instance/windowactivation.h
+    ${CMAKE_SOURCE_DIR}/src/app/instance/windowactivation.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/instance/singleinstance.h
+    ${CMAKE_SOURCE_DIR}/src/app/instance/singleinstance.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/instance/singleinstancemessage.h
+    ${CMAKE_SOURCE_DIR}/src/app/instance/singleinstancemessage.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/commandline/startupurl.h
+    ${CMAKE_SOURCE_DIR}/src/app/commandline/startupurl.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/commandline/extensionpackages.h
+    ${CMAKE_SOURCE_DIR}/src/app/commandline/extensionpackages.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/commandline/commandline.h
+    ${CMAKE_SOURCE_DIR}/src/app/commandline/commandline.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/startup/environment.h
+    ${CMAKE_SOURCE_DIR}/src/app/startup/environment.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/startup/messagehandler.h
+    ${CMAKE_SOURCE_DIR}/src/app/startup/messagehandler.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/startup/appidentity.h
+    ${CMAKE_SOURCE_DIR}/src/app/startup/appidentity.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/startup/appstartup.h
+    ${CMAKE_SOURCE_DIR}/src/app/startup/appstartup.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/favicons/faviconimageprovider.h
+    ${CMAKE_SOURCE_DIR}/src/browser/favicons/faviconimageprovider.cpp
 )
 
 set(KONDOR_FILTER_ENGINE_SOURCES
-    ${CMAKE_SOURCE_DIR}/src/adblock/filterengine.h
-    ${CMAKE_SOURCE_DIR}/src/adblock/filterengine.cpp
-    ${CMAKE_SOURCE_DIR}/src/adblock/filterrule.h
-    ${CMAKE_SOURCE_DIR}/src/adblock/filterrule.cpp
-    ${CMAKE_SOURCE_DIR}/src/adblock/filteroptions.h
-    ${CMAKE_SOURCE_DIR}/src/adblock/filteroptions.cpp
-    ${CMAKE_SOURCE_DIR}/src/adblock/filterpattern.h
-    ${CMAKE_SOURCE_DIR}/src/adblock/filterpattern.cpp
-    ${CMAKE_SOURCE_DIR}/src/adblock/filterrequest.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filters/filterengine.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filters/filterengine.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filters/filterrule.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filters/filterrule.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filters/filteroptions.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filters/filteroptions.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filters/filterpattern.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/filters/filterpattern.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/filters/filterrequest.h
 )
 
 set(KONDOR_ADBLOCK_SOURCES
@@ -275,10 +275,10 @@ set(KONDOR_ADBLOCK_SOURCES
     ${CMAKE_SOURCE_DIR}/src/adblock/adblockinterceptor.cpp
     ${CMAKE_SOURCE_DIR}/src/adblock/adblockallowlist.h
     ${CMAKE_SOURCE_DIR}/src/adblock/adblockallowlist.cpp
-    ${CMAKE_SOURCE_DIR}/src/adblock/filterlists.h
-    ${CMAKE_SOURCE_DIR}/src/adblock/filterlists.cpp
-    ${CMAKE_SOURCE_DIR}/src/adblock/filterlistdownloader.h
-    ${CMAKE_SOURCE_DIR}/src/adblock/filterlistdownloader.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/lists/filterlists.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/lists/filterlists.cpp
+    ${CMAKE_SOURCE_DIR}/src/adblock/lists/filterlistdownloader.h
+    ${CMAKE_SOURCE_DIR}/src/adblock/lists/filterlistdownloader.cpp
     ${CMAKE_SOURCE_DIR}/src/adblock/adblockmanager.h
     ${CMAKE_SOURCE_DIR}/src/adblock/adblockmanager.cpp
 )

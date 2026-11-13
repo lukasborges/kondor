@@ -3,7 +3,7 @@
 #include <QStandardPaths>
 #include <QTest>
 
-#include "core/settings.h"
+#include "core/settings/settings.h"
 #include "settingsharness.h"
 
 class TestSettings : public QObject

@@ -1,6 +1,6 @@
 #include <QTest>
 
-#include "app/extensionpackages.h"
+#include "app/commandline/extensionpackages.h"
 
 class TestExtensionPackages : public QObject
 {

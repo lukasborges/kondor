@@ -1,6 +1,6 @@
 #include <QTest>
 
-#include "passwords/passwordimportplan.h"
+#include "passwords/csv/passwordimportplan.h"
 
 using PasswordImport::Login;
 

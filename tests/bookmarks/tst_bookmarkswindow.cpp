@@ -6,8 +6,8 @@
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
 #include "bookmarkswindowharness.h"
-#include "common/isolatedhome.h"
-#include "core/database.h"
+#include "../common/isolatedhome.h"
+#include "core/database/database.h"
 
 class TestBookmarksWindow : public QObject
 {

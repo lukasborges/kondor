@@ -1,6 +1,6 @@
 #include <QQmlEngine>
 
-#include "extensions/extensionsuiharness.h"
+#include "../extensions/extensionsuiharness.h"
 
 class TestPasswordsUi : public QObject
 {

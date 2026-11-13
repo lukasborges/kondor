@@ -2,7 +2,7 @@
 
 #include <QFile>
 
-#include "extensions/packagesuffix.h"
+#include "extensions/package/packagesuffix.h"
 
 namespace {
 

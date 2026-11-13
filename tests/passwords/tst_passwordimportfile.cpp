@@ -1,7 +1,7 @@
 #include <QTemporaryFile>
 #include <QTest>
 
-#include "passwords/passwordimportfile.h"
+#include "passwords/csv/passwordimportfile.h"
 
 class TestPasswordImportFile : public QObject
 {

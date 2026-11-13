@@ -6,7 +6,7 @@
 
 #include <optional>
 
-#include "passwords/passwordimportplan.h"
+#include "passwords/csv/passwordimportplan.h"
 
 namespace KWallet {
 class Wallet;

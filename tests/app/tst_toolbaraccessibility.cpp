@@ -4,9 +4,9 @@
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
 #include "adblock/adblockmanager.h"
-#include "browser/searchsuggestions.h"
-#include "common/accessibilitywalk.h"
-#include "common/isolatedhome.h"
+#include "browser/address/searchsuggestions.h"
+#include "../common/accessibilitywalk.h"
+#include "../common/isolatedhome.h"
 #include "downloads/downloadmanager.h"
 #include "mainmenuharness.h"
 

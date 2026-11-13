@@ -1,6 +1,6 @@
 #include "adblock/adblockallowlist.h"
 
-#include "core/settings.h"
+#include "core/settings/settings.h"
 
 namespace {
 bool isPersistent(const QString &host)

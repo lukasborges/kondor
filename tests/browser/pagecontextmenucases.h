@@ -6,7 +6,7 @@
 #include <QVariantMap>
 #include <QtWebEngineCore/qwebenginecontextmenurequest.h>
 
-#include "core/settings.h"
+#include "core/settings/settings.h"
 
 using Request = QWebEngineContextMenuRequest;
 

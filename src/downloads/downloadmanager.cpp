@@ -1,7 +1,7 @@
 #include "downloads/downloadmanager.h"
 
 #include "core/notifier.h"
-#include "core/settings.h"
+#include "core/settings/settings.h"
 #include "downloads/downloadroles.h"
 
 #include <QCoreApplication>

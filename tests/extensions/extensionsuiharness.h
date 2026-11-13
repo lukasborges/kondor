@@ -5,6 +5,8 @@
 #include <QQmlEngine>
 #include <QQuickItem>
 #include <QQuickWebEngineProfile>
+#include <QQuickWindow>
+#include <QtTest>
 
 #include "extensionsharness.h"
 
@@ -40,6 +42,30 @@ inline bool isChecked(const QVariant &entry)
     return entry.toMap().value(QStringLiteral("checked")).toBool();
 }
 
+inline QQuickItem *itemWithText(QQuickItem *root, const QString &text)
+{
+    if (root->isVisible() && root->property("text").toString() == text)
+        return root;
+    for (QQuickItem *child : root->childItems())
+        if (QQuickItem *found = itemWithText(child, text))
+            return found;
+    return nullptr;
+}
+
+inline void clickCenterOf(QQuickItem *item)
+{
+    const QPointF center = item->mapToScene(QPointF(item->width() / 2, item->height() / 2));
+    QTest::mouseClick(item->window(), Qt::LeftButton, Qt::NoModifier, center.toPoint());
+}
+
+inline bool isDialogOpen(QObject *window, const QString &title)
+{
+    for (QObject *object : window->findChildren<QObject *>())
+        if (object->property("title").toString() == title && object->property("opened").toBool())
+            return true;
+    return false;
+}
+
 inline QString settingValue(const QString &name)
 {
     return ExtensionManager::instance()->settingValues(QStringLiteral("sample")).value(name).toString();
@@ -73,4 +99,20 @@ constexpr const char *extensionsPageQml =
     "    visible: true\n"
     "    width: 700; height: 400\n"
     "    ExtensionsPage { anchors.fill: parent }\n"
+    "}\n";
+
+constexpr const char *emptySavedPasswordsQml =
+    "import QtQuick\nimport QtQuick.Controls\nimport Kondor\n"
+    "ApplicationWindow {\n"
+    "    id: window\n"
+    "    visible: true\n"
+    "    width: 700; height: 400\n"
+    "    property bool isAddRequested: false\n"
+    "    SavedPasswordsList {\n"
+    "        anchors.fill: parent\n"
+    "        walletDenied: false\n"
+    "        filter: \"\"\n"
+    "        revealed: RevealedPasswords {}\n"
+    "        onAddRequested: window.isAddRequested = true\n"
+    "    }\n"
     "}\n";

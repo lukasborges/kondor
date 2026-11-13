@@ -58,12 +58,14 @@ bool installChannelScript(QObject *collection)
 
 void installPasswordsScript(QObject *collection)
 {
-    const auto source = readResource(QStringLiteral(":/scripts/passwords.js"));
-    if (!source) {
+    const auto usernameField = readResource(QStringLiteral(":/scripts/usernamefield.js"));
+    const auto passwords = readResource(QStringLiteral(":/scripts/passwords.js"));
+    if (!usernameField || !passwords) {
         qWarning("Password script resource not found: autofill is off");
         return;
     }
-    const ScriptSpec spec{QStringLiteral("kondor-passwords"), *source, QWebEngineScript::DocumentReady};
+    const QString source = *usernameField + QLatin1Char('\n') + *passwords;
+    const ScriptSpec spec{QStringLiteral("kondor-passwords"), source, QWebEngineScript::DocumentReady};
     insertScript(collection, makeScript(spec));
 }
 }

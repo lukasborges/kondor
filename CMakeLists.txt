@@ -250,6 +250,7 @@ qt_add_resources(kondor "passwords_script"
     BASE "${CMAKE_SOURCE_DIR}/src/passwords"
     FILES
         src/passwords/passwords.js
+        src/passwords/usernamefield.js
 )
 
 qt_add_resources(kondor "extension_scripts"

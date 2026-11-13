@@ -136,10 +136,22 @@
         bridge.credentialsFor(origin, applyCredentials);
     };
 
+    const visibleTextFields = () => Array.from(document.querySelectorAll("input")).filter((el) => isTextField(el) && isVisible(el));
+
+    const fillUsernameOnly = (username) => {
+        const field = window.__kondorPickUsernameField(visibleTextFields());
+        if (field)
+            setValue(field, username);
+    };
+
     const fillFirstField = (forOrigin, username, password) => {
+        if (forOrigin !== origin)
+            return;
         const field = passwordFields(document)[0];
-        if (forOrigin === origin && field)
+        if (field)
             fillForm(field, { username: username, password: password }, true);
+        else
+            fillUsernameOnly(username);
     };
 
     const refreshAfterMutation = () => {

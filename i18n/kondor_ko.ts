@@ -2632,22 +2632,22 @@
 <context>
     <name>SiteReloadBar</name>
     <message>
-        <location filename="../qml/extensions/SiteReloadBar.qml" line="26"/>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="19"/>
         <source>%1 will run on this site after reloading.</source>
         <translation>다시 불러오면 이 사이트에서 %1 이(가) 실행됩니다.</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/SiteReloadBar.qml" line="27"/>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="20"/>
         <source>%1 will stop running on this site after reloading.</source>
         <translation>다시 불러오면 이 사이트에서 %1 이(가) 더 이상 실행되지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/SiteReloadBar.qml" line="31"/>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="36"/>
         <source>Reload</source>
         <translation>새로고침</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/SiteReloadBar.qml" line="39"/>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="44"/>
         <source>Close</source>
         <translation>닫기</translation>
     </message>

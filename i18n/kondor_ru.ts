@@ -2654,22 +2654,22 @@
 <context>
     <name>SiteReloadBar</name>
     <message>
-        <location filename="../qml/extensions/SiteReloadBar.qml" line="26"/>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="19"/>
         <source>%1 will run on this site after reloading.</source>
         <translation>После перезагрузки %1 будет работать на этом сайте.</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/SiteReloadBar.qml" line="27"/>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="20"/>
         <source>%1 will stop running on this site after reloading.</source>
         <translation>После перезагрузки %1 перестанет работать на этом сайте.</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/SiteReloadBar.qml" line="31"/>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="36"/>
         <source>Reload</source>
         <translation>Обновить</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/SiteReloadBar.qml" line="39"/>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="44"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>

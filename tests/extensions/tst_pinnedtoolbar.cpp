@@ -29,6 +29,27 @@ QQuickItem *pinnedButtonNamed(QQuickItem *root, const QString &name)
     return nullptr;
 }
 
+
+constexpr int toolBarIconBoxSize = 22;
+
+QSize paintedBoundsOf(const QImage &image)
+{
+    const QRgb background = image.pixel(0, 0);
+    QRect bounds;
+    for (int y = 0; y < image.height(); ++y)
+        for (int x = 0; x < image.width(); ++x)
+            if (image.pixel(x, y) != background)
+                bounds |= QRect(x, y, 1, 1);
+    return bounds.size();
+}
+
+QSize iconSizeOf(QQuickItem *button)
+{
+    const QRectF area = button->mapRectToScene(button->boundingRect());
+    const QImage window = button->window()->grabWindow();
+    return paintedBoundsOf(window.copy(area.toAlignedRect()));
+}
+
 }
 
 class TestPinnedToolBar : public QObject
@@ -46,10 +67,13 @@ private slots:
     void pinnedExtensionShowsVisibleButton();
     void unpinRemovesButton();
     void pinnedButtonOpensPanelOnExtension();
+    void pinnedFileIconFitsToolBarIconBox();
+    void pinnedThemeIconHasExtensionsButtonIconSize();
 
 private:
     QQuickItem *buttonOf(const QString &name) const;
     void showToolBar();
+    bool installThemeIconSample();
     bool isPinnedButtonLaidOut() const;
 
     QTemporaryDir m_work;
@@ -67,12 +91,21 @@ void TestPinnedToolBar::cleanup()
 
 void TestPinnedToolBar::showToolBar()
 {
-    QVERIFY(installSample(m_work.path()));
+    if (ExtensionManager::instance()->count() == 0)
+        QVERIFY(installSample(m_work.path()));
     m_tabs.addTab(false, QUrl(QStringLiteral("https://www.example.com/page")));
     m_engine.rootContext()->setContextProperty(QStringLiteral("theTabs"), &m_tabs);
     m_window.reset(createInWindow(&m_engine, toolBarWindowQml));
     QVERIFY(m_window);
     QVERIFY(QTest::qWaitForWindowExposed(qobject_cast<QQuickWindow *>(m_window.data())));
+}
+
+bool TestPinnedToolBar::installThemeIconSample()
+{
+    const QString zip = packVariant(m_work.path(), QStringLiteral("theme"), [](QJsonObject &manifest) {
+        manifest.insert(QStringLiteral("icon"), QStringLiteral("plugins"));
+    });
+    return ExtensionManager::instance()->installPackage({zip, QStringLiteral("file")}, QStringLiteral("sample")).isInstalled;
 }
 
 QQuickItem *TestPinnedToolBar::buttonOf(const QString &name) const
@@ -116,6 +149,28 @@ void TestPinnedToolBar::pinnedButtonOpensPanelOnExtension()
     QObject *panel = m_window->findChild<QObject *>(QStringLiteral("extensionsPanel"));
     QVERIFY(panel);
     QTRY_COMPARE(panel->property("currentId").toString(), QStringLiteral("sample"));
+}
+
+void TestPinnedToolBar::pinnedFileIconFitsToolBarIconBox()
+{
+    showToolBar();
+    ExtensionManager::instance()->setPinned(QStringLiteral("sample"), true);
+    QTRY_VERIFY(isPinnedButtonLaidOut());
+    const QSize painted = iconSizeOf(buttonOf(QStringLiteral("Sample Extension")));
+    QVERIFY(!painted.isEmpty());
+    QVERIFY(painted.width() <= toolBarIconBoxSize && painted.height() <= toolBarIconBoxSize);
+}
+
+void TestPinnedToolBar::pinnedThemeIconHasExtensionsButtonIconSize()
+{
+    QVERIFY(installThemeIconSample());
+    showToolBar();
+    ExtensionManager::instance()->setPinned(QStringLiteral("sample"), true);
+    QTRY_VERIFY(isPinnedButtonLaidOut());
+    QCOMPARE(iconSizeOf(buttonOf(QStringLiteral("Sample Extension"))),
+             iconSizeOf(findByName(m_window.data(), "extensionsButton")));
+    QCOMPARE(buttonOf(QStringLiteral("Sample Extension"))->width(),
+             findByName(m_window.data(), "extensionsButton")->width());
 }
 
 int runTestPinnedToolBar(int argc, char *argv[])

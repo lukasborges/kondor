@@ -21,7 +21,7 @@ ItemDelegate {
     objectName: "savedAccountRow"
     Layout.fillWidth: true
     padding: Kirigami.Units.smallSpacing
-    ToolTip.visible: hovered
+    ToolTip.visible: hovered && !copyUsernameButton.hovered && !copyPasswordButton.hovered
     ToolTip.text: qsTr("Fill")
     ToolTip.delay: 600
     //: %1 is the user name
@@ -48,6 +48,7 @@ ItemDelegate {
         }
 
         CopyFeedbackButton {
+            id: copyUsernameButton
             iconName: "edit-copy"
             tooltipText: qsTr("Copy Username")
             copiedTooltipText: qsTr("Copied.")
@@ -58,6 +59,7 @@ ItemDelegate {
         }
 
         CopyFeedbackButton {
+            id: copyPasswordButton
             objectName: "copyPasswordButton"
             iconName: "password-copy"
             tooltipText: qsTr("Copy Password")

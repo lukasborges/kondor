@@ -11,6 +11,7 @@ private slots:
     void rowClickFillsAndCloses();
     void copyButtonShowsCheckMarkAndStaysOpen();
     void downKeyMovesToNextRow();
+    void escapeClosesAndFocusesPage();
 
 private:
     QObject *openPopup();
@@ -99,6 +100,19 @@ void TestPasswordsUi::downKeyMovesToNextRow()
     QTest::keyClick(qobject_cast<QQuickWindow *>(m_window.data()), Qt::Key_Down);
 
     QTRY_VERIFY(rows().at(1)->hasActiveFocus());
+}
+
+void TestPasswordsUi::escapeClosesAndFocusesPage()
+{
+    QObject *popup = openPopup();
+    QVERIFY(popup);
+    QTRY_COMPARE(rows().size(), 2);
+    QTRY_VERIFY(rows().first()->hasActiveFocus());
+
+    QTest::keyClick(qobject_cast<QQuickWindow *>(m_window.data()), Qt::Key_Escape);
+
+    QTRY_VERIFY(!popup->property("opened").toBool());
+    QVERIFY(m_window->property("isPageFocused").toBool());
 }
 
 int runTestPasswordsUi(int argc, char *argv[])

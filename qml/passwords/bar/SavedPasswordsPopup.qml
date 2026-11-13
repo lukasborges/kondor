@@ -17,6 +17,12 @@ Popup {
             row.forceActiveFocus()
     }
 
+    function closeAndFocusPage() {
+        close()
+        if (tab)
+            tab.focusPage()
+    }
+
     function closeIfNoAccounts() {
         if (!tab || tab.passwords.usernames.length === 0)
             close()
@@ -26,7 +32,7 @@ Popup {
     padding: Kirigami.Units.largeSpacing
     modal: false
     focus: true
-    closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+    closePolicy: Popup.CloseOnPressOutside
     onOpened: focusRow(0)
     onTabChanged: close()
 
@@ -37,6 +43,7 @@ Popup {
 
     contentItem: ColumnLayout {
         spacing: Kirigami.Units.smallSpacing
+        Keys.onEscapePressed: root.closeAndFocusPage()
 
         RowLayout {
             spacing: Kirigami.Units.largeSpacing

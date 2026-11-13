@@ -11,6 +11,10 @@ RowLayout {
     required property var tab
     required property string host
 
+    function isSiteEnabled(revision) {
+        return ExtensionManager.siteEnabled(extension.id, tab.url)
+    }
+
     function toggleSite(isEnabled) {
         ExtensionManager.setSiteEnabled(extension.id, tab.url, isEnabled)
         tab.siteReload.recordToggle(extension.id, extension.name, isEnabled)
@@ -27,7 +31,7 @@ RowLayout {
 
     Switch {
         objectName: "siteSwitch"
-        checked: (ExtensionManager.revision, ExtensionManager.siteEnabled(root.extension.id, root.tab.url))
+        checked: root.isSiteEnabled(ExtensionManager.revision)
         //: %1 is the extension name, %2 is the site host
         Accessible.name: qsTr("Run %1 on %2").arg(root.extension.name).arg(root.host)
         onToggled: root.toggleSite(checked)

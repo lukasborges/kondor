@@ -17,6 +17,10 @@ Item {
         (holder.item.checkBox ?? holder.item).forceActiveFocus()
     }
 
+    function isItemChecked(revision) {
+        return tab.extensionItems.isChecked(extensionId, modelData.id)
+    }
+
     Layout.fillWidth: true
     implicitHeight: holder.implicitHeight
 
@@ -45,7 +49,7 @@ Item {
                 id: box
                 leftPadding: Kirigami.Units.smallSpacing
                 text: root.modelData.title
-                checked: (root.stateRevision, root.tab.extensionItems.isChecked(root.extensionId, root.modelData.id))
+                checked: root.isItemChecked(root.stateRevision)
                 Accessible.description: root.modelData.shortcut ?? ""
                 onToggled: root.tab.extensionItems.trigger(root.extensionId, root.modelData.id, true)
                 Layout.fillWidth: true

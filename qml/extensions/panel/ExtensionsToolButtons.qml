@@ -13,7 +13,11 @@ RowLayout {
 
     spacing: 0
     visible: tabs.currentTab !== null
-             && (ExtensionManager.revision, ExtensionManager.hasActionExtensions(isPrivate))
+             && hasActionExtensions(ExtensionManager.revision)
+
+    function hasActionExtensions(revision) {
+        return ExtensionManager.hasActionExtensions(isPrivate)
+    }
 
     function pinnedExtensions(revision, pins) {
         return ExtensionManager.pinnedActionExtensions(isPrivate)

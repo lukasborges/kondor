@@ -13,10 +13,14 @@ ItemDelegate {
 
     readonly property bool isRightToLeft: Qt.application.layoutDirection === Qt.RightToLeft
     readonly property bool isOffHere: modelData.siteToggle
-                                      && !(ExtensionManager.revision, ExtensionManager.siteEnabled(modelData.id, tab.url))
+                                      && !isSiteEnabled(ExtensionManager.revision)
 
     signal openRequested()
     signal stepRequested(int step)
+
+    function isSiteEnabled(revision) {
+        return ExtensionManager.siteEnabled(modelData.id, tab.url)
+    }
 
     width: ListView.view ? ListView.view.width : implicitWidth
     padding: Kirigami.Units.smallSpacing

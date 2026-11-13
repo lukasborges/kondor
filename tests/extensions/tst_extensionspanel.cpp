@@ -16,6 +16,7 @@ private slots:
     void checkableActionShowsState();
     void runOnSiteSwitchShowsReloadBar();
     void privateTabHasNoSiteSwitchAndNoPin();
+    void hostIsHiddenOnNonWebPage();
     void openAtShowsActions();
     void pinButtonTogglesPin();
 };
@@ -114,6 +115,14 @@ void TestExtensionsPanel::privateTabHasNoSiteSwitchAndNoPin()
     QVERIFY(!panelItem("pinButton")->isVisible());
     m_window.reset();
     m_tab.reset();
+}
+
+void TestExtensionsPanel::hostIsHiddenOnNonWebPage()
+{
+    openPanel();
+    QCOMPARE(m_panel->property("host").toString(), QStringLiteral("www.example.com"));
+    m_tab->setUrl(QUrl(QStringLiteral("about:newtab")));
+    QCOMPARE(m_panel->property("host").toString(), QString());
 }
 
 void TestExtensionsPanel::openAtShowsActions()

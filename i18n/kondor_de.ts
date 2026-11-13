@@ -1022,7 +1022,7 @@
         <location filename="../qml/extensions/panel/ExtensionRow.qml" line="27"/>
         <source>%1, off on %2</source>
         <extracomment>%1 is the extension name, %2 is the site host</extracomment>
-        <translation>%1, aus auf %2</translation>
+        <translation>%1, auf %2 deaktiviert</translation>
     </message>
 </context>
 <context>

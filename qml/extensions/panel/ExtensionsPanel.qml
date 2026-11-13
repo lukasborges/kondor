@@ -13,7 +13,8 @@ Popup {
     property string currentId: ""
     property string requestedId: ""
 
-    readonly property string host: tab ? tab.url.toString().replace(/^https?:\/\/([^/:?#]+).*$/, "$1") : ""
+    readonly property bool hasWebOrigin: tab && ExtensionManager.originOf(tab.url) !== ""
+    readonly property string host: hasWebOrigin ? tab.url.toString().replace(/^https?:\/\/([^/:?#]+).*$/, "$1") : ""
     readonly property var currentExtension: extensions.find(function(extension) { return extension.id === currentId })
                                             ?? ({ id: "", name: "", iconSource: "", siteToggle: false, items: [] })
 

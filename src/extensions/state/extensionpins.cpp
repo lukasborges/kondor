@@ -11,6 +11,14 @@ QString idOf(const QVariant &entry)
     return entry.toMap().value(QStringLiteral("id")).toString();
 }
 
+QVariant entryWithId(const QVariantList &entries, const QString &id)
+{
+    for (const QVariant &entry : entries)
+        if (idOf(entry) == id)
+            return entry;
+    return QVariant();
+}
+
 QStringList changedPins(QStringList pins, const QString &id, bool isPinned)
 {
     if (isPinned && !pins.contains(id))
@@ -36,10 +44,11 @@ void setPinned(const QString &id, bool isPinned)
 QVariantList onlyPinned(const QVariantList &entries)
 {
     QVariantList pinned;
-    for (const QString &id : Settings::instance()->pinnedExtensions())
-        for (const QVariant &entry : entries)
-            if (idOf(entry) == id)
-                pinned.append(entry);
+    for (const QString &id : Settings::instance()->pinnedExtensions()) {
+        const QVariant entry = entryWithId(entries, id);
+        if (entry.isValid())
+            pinned.append(entry);
+    }
     return pinned;
 }
 

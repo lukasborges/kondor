@@ -17,9 +17,11 @@
 
 #include "browser/tab.h"
 #include "common/qmltesthelpers.h"
+#include "core/settings.h"
 #include "extensions/extensioncatalog.h"
 #include "extensions/extensionmanager.h"
 #include "extensions/extensionstorage.h"
+#include "passwords/passwordstore.h"
 
 int runTestExtensionPackage(int argc, char *argv[]);
 int runTestExtensionScripts(int argc, char *argv[]);
@@ -32,6 +34,7 @@ int runTestExtensionUpdates(int argc, char *argv[]);
 int runTestExtensionsUi(int argc, char *argv[]);
 int runTestExtensionDialogs(int argc, char *argv[]);
 int runTestExtensionPages(int argc, char *argv[]);
+int runTestPasswordsUi(int argc, char *argv[]);
 
 using ManifestEdit = std::function<void(QJsonObject &)>;
 
@@ -137,5 +140,7 @@ inline void registerExtensionTypes()
     qmlRegisterUncreatableType<Tab>("Kondor", 1, 0, "Tab", QStringLiteral("test"));
     registerSingleton<ExtensionManager>("ExtensionManager");
     registerSingleton<ExtensionCatalog>("ExtensionCatalog");
+    registerSingleton<PasswordStore>("PasswordStore");
+    registerSingleton<Settings>("Settings");
     ExtensionManager::instance()->setLocale(QStringLiteral("en"));
 }

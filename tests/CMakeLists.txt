@@ -1106,6 +1106,7 @@ qt_add_executable(tst_extensions
     extensions/tst_extensionsui.cpp
     extensions/tst_extensiondialogs.cpp
     extensions/tst_extensionpages.cpp
+    passwords/tst_passwordsui.cpp
     ${KONDOR_EXTENSION_BRIDGE_TEST_SOURCES}
 )
 

@@ -1048,7 +1048,7 @@
     </message>
     <message>
         <location filename="../qml/extensions/ExtensionsPage.qml" line="39"/>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="70"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="83"/>
         <source>Get New Extensions…</source>
         <translation>新しい拡張機能を入手…</translation>
     </message>
@@ -1058,12 +1058,12 @@
         <translation>ファイルからインストール…</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="67"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="80"/>
         <source>No extensions installed</source>
         <translation>インストールされている拡張機能はありません</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="68"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="81"/>
         <source>Extensions add features to Kondor. Get them from the Kondor extensions catalog, or install a .kondorext file.</source>
         <translation>拡張機能は Kondor に機能を追加します。Kondor 拡張機能カタログから入手するか、.kondorext ファイルをインストールしてください。</translation>
     </message>
@@ -2194,22 +2194,22 @@
 <context>
     <name>SavedPasswordsList</name>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsList.qml" line="74"/>
+        <location filename="../qml/passwords/SavedPasswordsList.qml" line="94"/>
         <source>No saved passwords match “%1”</source>
         <translation>「%1」に一致する保存済みパスワードはありません</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsList.qml" line="75"/>
+        <location filename="../qml/passwords/SavedPasswordsList.qml" line="95"/>
         <source>No saved passwords</source>
         <translation>保存済みのパスワードはありません</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsList.qml" line="76"/>
+        <location filename="../qml/passwords/SavedPasswordsList.qml" line="96"/>
         <source>Kondor offers to save a password when you log in to a site. You can also add one here, or import the CSV file exported by another browser or password manager.</source>
         <translation>Kondor はサイトにログインしたときにパスワードの保存を提案します。ここで追加したり、他のブラウザーやパスワードマネージャーからエクスポートした CSV ファイルをインポートしたりすることもできます。</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsList.qml" line="81"/>
+        <location filename="../qml/passwords/SavedPasswordsList.qml" line="101"/>
         <source>Add Password…</source>
         <translation>パスワードを追加…</translation>
     </message>

@@ -16,7 +16,7 @@ int runAll(int argc, char *argv[])
         runTestExtensionPackage, runTestExtensionScripts, runTestExtensionInstall,
         runTestExtensionReplace, runTestExtensionBridge, runTestExtensionBridgeTabs,
         runTestExtensionCatalog, runTestExtensionUpdates, runTestExtensionsUi,
-        runTestExtensionDialogs, runTestExtensionPages,
+        runTestExtensionDialogs, runTestExtensionPages, runTestPasswordsUi,
     };
     int failures = 0;
     for (const TestRunner runner : runners)

@@ -13,6 +13,7 @@ private slots:
     void siteTurnedOffShowsUnchecked();
     void privateTabListsOnlyAllowedExtensions();
     void extensionsPageListsInstalled();
+    void emptyListButtonOpensCatalog();
 
 private:
     void openMenu();
@@ -98,6 +99,18 @@ void TestExtensionsUi::extensionsPageListsInstalled()
     QTRY_VERIFY2((QMetaObject::invokeMethod(list, "itemAtIndex", Q_RETURN_ARG(QQuickItem *, row),
                                             Q_ARG(int, 0)), row), "the row was not created");
     QVERIFY(row->isEnabled());
+}
+
+void TestExtensionsUi::emptyListButtonOpensCatalog()
+{
+    m_window.reset(createInWindow(&m_engine, extensionsPageQml));
+    QVERIFY(m_window);
+    auto *list = m_window->findChild<QQuickItem *>(QStringLiteral("extensionList"));
+    QVERIFY(list);
+    QQuickItem *button = nullptr;
+    QTRY_VERIFY((button = itemWithText(list->parentItem(), QStringLiteral("Get New Extensions…"))));
+    clickCenterOf(button);
+    QTRY_VERIFY(isDialogOpen(m_window.data(), QStringLiteral("Get New Extensions")));
 }
 
 int runTestExtensionsUi(int argc, char *argv[])

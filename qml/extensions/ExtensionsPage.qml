@@ -59,20 +59,6 @@ ColumnLayout {
                               Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.2)
         }
 
-        Kirigami.PlaceholderMessage {
-            anchors.centerIn: parent
-            width: parent.width - Kirigami.Units.gridUnit * 4
-            visible: extensionList.count === 0
-            icon.name: "preferences-plugin"
-            text: qsTr("No extensions installed")
-            explanation: qsTr("Extensions add features to Kondor. Get them from the Kondor extensions catalog, or install a .kondorext file.")
-            helpfulAction: Kirigami.Action {
-                text: qsTr("Get New Extensions…")
-                icon.name: "get-hot-new-stuff"
-                onTriggered: root.openCatalog()
-            }
-        }
-
         ListView {
             id: extensionList
             objectName: "extensionList"
@@ -84,6 +70,20 @@ ColumnLayout {
                 filterText: filterField.text
                 onConfigureRequested: function(id) { configureDialog.openFor(id) }
                 onRemoveRequested: function(id, name) { root.confirmRemoval(id, name) }
+            }
+
+            Kirigami.PlaceholderMessage {
+                anchors.centerIn: parent
+                width: parent.width - Kirigami.Units.gridUnit * 4
+                visible: extensionList.count === 0
+                icon.name: "preferences-plugin"
+                text: qsTr("No extensions installed")
+                explanation: qsTr("Extensions add features to Kondor. Get them from the Kondor extensions catalog, or install a .kondorext file.")
+                helpfulAction: Kirigami.Action {
+                    text: qsTr("Get New Extensions…")
+                    icon.name: "get-hot-new-stuff"
+                    onTriggered: root.openCatalog()
+                }
             }
         }
     }

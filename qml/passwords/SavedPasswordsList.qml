@@ -66,26 +66,9 @@ PasswordsFrame {
 
     ListModel { id: savedModel }
 
-    Kirigami.PlaceholderMessage {
-        anchors.centerIn: parent
-        width: parent.width - Kirigami.Units.gridUnit * 4
-        visible: !root.walletDenied && savedModel.count === 0
-        icon.name: root.isFiltering ? "edit-none" : "dialog-password"
-        text: root.isFiltering ? qsTr("No saved passwords match “%1”").arg(root.needle)
-                               : qsTr("No saved passwords")
-        explanation: root.isFiltering ? "" : qsTr("Kondor offers to save a password when you log in to a site. You can also add one here, or import the CSV file exported by another browser or password manager.")
-        helpfulAction: root.isFiltering ? null : addAction
-
-        Kirigami.Action {
-            id: addAction
-            text: qsTr("Add Password…")
-            icon.name: "list-add"
-            onTriggered: root.addRequested()
-        }
-    }
-
     ListView {
         id: savedList
+        objectName: "savedPasswordsList"
         anchors.fill: parent
         clip: true
         visible: !root.walletDenied
@@ -101,6 +84,24 @@ PasswordsFrame {
         delegate: SavedPasswordDelegate {
             revealed: root.revealed
             onDeleteRequested: function(origin, username) { root.deleteRequested(origin, username) }
+        }
+
+        Kirigami.PlaceholderMessage {
+            anchors.centerIn: parent
+            width: parent.width - Kirigami.Units.gridUnit * 4
+            visible: !root.walletDenied && savedModel.count === 0
+            icon.name: root.isFiltering ? "edit-none" : "dialog-password"
+            text: root.isFiltering ? qsTr("No saved passwords match “%1”").arg(root.needle)
+                                   : qsTr("No saved passwords")
+            explanation: root.isFiltering ? "" : qsTr("Kondor offers to save a password when you log in to a site. You can also add one here, or import the CSV file exported by another browser or password manager.")
+            helpfulAction: root.isFiltering ? null : addAction
+
+            Kirigami.Action {
+                id: addAction
+                text: qsTr("Add Password…")
+                icon.name: "list-add"
+                onTriggered: root.addRequested()
+            }
         }
     }
 }

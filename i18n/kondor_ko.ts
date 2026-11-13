@@ -1048,7 +1048,7 @@
     </message>
     <message>
         <location filename="../qml/extensions/ExtensionsPage.qml" line="39"/>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="70"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="83"/>
         <source>Get New Extensions…</source>
         <translation>새 확장 기능 받기…</translation>
     </message>
@@ -1058,12 +1058,12 @@
         <translation>파일에서 설치…</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="67"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="80"/>
         <source>No extensions installed</source>
         <translation>설치된 확장 기능이 없습니다</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="68"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="81"/>
         <source>Extensions add features to Kondor. Get them from the Kondor extensions catalog, or install a .kondorext file.</source>
         <translation>확장 기능은 Kondor에 기능을 추가합니다. Kondor 확장 기능 카탈로그에서 받거나 .kondorext 파일을 설치하십시오.</translation>
     </message>
@@ -2194,22 +2194,22 @@
 <context>
     <name>SavedPasswordsList</name>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsList.qml" line="74"/>
+        <location filename="../qml/passwords/SavedPasswordsList.qml" line="94"/>
         <source>No saved passwords match “%1”</source>
         <translation>“%1”와(과) 일치하는 저장된 비밀번호가 없습니다</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsList.qml" line="75"/>
+        <location filename="../qml/passwords/SavedPasswordsList.qml" line="95"/>
         <source>No saved passwords</source>
         <translation>저장된 비밀번호 없음</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsList.qml" line="76"/>
+        <location filename="../qml/passwords/SavedPasswordsList.qml" line="96"/>
         <source>Kondor offers to save a password when you log in to a site. You can also add one here, or import the CSV file exported by another browser or password manager.</source>
         <translation>Kondor는 사이트에 로그인할 때 비밀번호 저장을 제안합니다. 여기에서 직접 추가하거나 다른 브라우저 또는 비밀번호 관리자에서 내보낸 CSV 파일을 가져올 수도 있습니다.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsList.qml" line="81"/>
+        <location filename="../qml/passwords/SavedPasswordsList.qml" line="101"/>
         <source>Add Password…</source>
         <translation>비밀번호 추가…</translation>
     </message>

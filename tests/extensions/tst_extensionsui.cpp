@@ -12,11 +12,16 @@ private slots:
     void menuListsHeaderToggleAndRunOnSite();
     void siteTurnedOffShowsUnchecked();
     void privateTabListsOnlyAllowedExtensions();
+    void siteToggleShowsReloadBarWithoutReloading();
+    void reloadButtonReloadsAndHidesBar();
+    void togglingBackHidesReloadBar();
     void extensionsPageListsInstalled();
     void emptyListButtonOpensCatalog();
 
 private:
-    void openMenu();
+    void openMenu(const char *windowQml = menuWindowQml);
+    void toggleRunOnSite(bool isEnabled);
+    bool isReloadBarVisible() const;
 
     QTemporaryDir m_work;
     QQmlEngine m_engine;
@@ -38,14 +43,14 @@ void TestExtensionsUi::cleanup()
     removeEveryExtension();
 }
 
-void TestExtensionsUi::openMenu()
+void TestExtensionsUi::openMenu(const char *windowQml)
 {
     QVERIFY(installSample(m_work.path()));
     m_tab.reset(new Tab(nullptr));
     m_tab->setUrl(QUrl(QStringLiteral("https://www.example.com/page")));
     m_tab->extensionItems()->setChecked(QStringLiteral("sample"), QStringLiteral("toggle"), true);
     m_engine.rootContext()->setContextProperty(QStringLiteral("theTab"), m_tab.get());
-    m_window.reset(createInWindow(&m_engine, menuWindowQml));
+    m_window.reset(createInWindow(&m_engine, windowQml));
     QVERIFY(m_window);
     m_menu = childObject(m_window.data(), "menu");
     QVERIFY(m_menu);
@@ -83,6 +88,52 @@ void TestExtensionsUi::privateTabListsOnlyAllowedExtensions()
     allowInPrivateWindows(QStringLiteral("sample"));
     QCOMPARE(rebuiltEntries(m_menu).size(), 2);
     m_window.reset();
+}
+
+void TestExtensionsUi::toggleRunOnSite(bool isEnabled)
+{
+    QVariantMap data{{QStringLiteral("extension"), QStringLiteral("sample")},
+                     {QStringLiteral("extensionName"), QStringLiteral("Sample Extension")}};
+    QMetaObject::invokeMethod(m_menu, "toggleSite", Q_ARG(QVariant, data),
+                              Q_ARG(QVariant, isEnabled));
+}
+
+bool TestExtensionsUi::isReloadBarVisible() const
+{
+    return childObject(m_window.data(), "bar")->property("visible").toBool();
+}
+
+void TestExtensionsUi::siteToggleShowsReloadBarWithoutReloading()
+{
+    openMenu(menuAndReloadBarWindowQml);
+    QSignalSpy reloads(m_tab.get(), &Tab::reloadRequested);
+    toggleRunOnSite(false);
+    QCOMPARE(reloads.count(), 0);
+    QVERIFY(isReloadBarVisible());
+    QVERIFY(!ExtensionManager::instance()->siteEnabled(QStringLiteral("sample"), m_tab->url()));
+    QVERIFY(itemWithText(qobject_cast<QQuickItem *>(childObject(m_window.data(), "bar")),
+                         QStringLiteral("Sample Extension will stop running on this site after reloading.")));
+}
+
+void TestExtensionsUi::reloadButtonReloadsAndHidesBar()
+{
+    openMenu(menuAndReloadBarWindowQml);
+    QSignalSpy reloads(m_tab.get(), &Tab::reloadRequested);
+    toggleRunOnSite(false);
+    auto *bar = qobject_cast<QQuickItem *>(childObject(m_window.data(), "bar"));
+    QQuickItem *button = nullptr;
+    QTRY_VERIFY((button = itemWithText(bar, QStringLiteral("Reload"))));
+    clickCenterOf(button);
+    QCOMPARE(reloads.count(), 1);
+    QVERIFY(!isReloadBarVisible());
+}
+
+void TestExtensionsUi::togglingBackHidesReloadBar()
+{
+    openMenu(menuAndReloadBarWindowQml);
+    toggleRunOnSite(false);
+    toggleRunOnSite(true);
+    QVERIFY(!isReloadBarVisible());
 }
 
 void TestExtensionsUi::extensionsPageListsInstalled()

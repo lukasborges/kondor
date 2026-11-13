@@ -78,6 +78,17 @@ constexpr const char *menuWindowQml =
     "    ExtensionsMenu { id: menu; tab: theTab }\n"
     "}\n";
 
+constexpr const char *menuAndReloadBarWindowQml =
+    "import QtQuick\nimport QtQuick.Controls\nimport Kondor\n"
+    "ApplicationWindow {\n"
+    "    visible: true\n"
+    "    width: 700; height: 200\n"
+    "    property alias menu: menu\n"
+    "    property alias bar: bar\n"
+    "    ExtensionsMenu { id: menu; tab: theTab }\n"
+    "    SiteReloadBar { id: bar; tab: theTab; width: parent.width }\n"
+    "}\n";
+
 constexpr const char *settingsDialogQml =
     "import QtQuick\nimport QtQuick.Controls\nimport Kondor\n"
     "ApplicationWindow {\n"

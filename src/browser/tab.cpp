@@ -27,6 +27,7 @@ Tab::Tab(QQuickWebEngineProfile *profile, QObject *parent)
     , m_security(new TabSecurity(profile, this))
     , m_permissions(new TabPermissions(this))
     , m_passwords(new TabPasswords(m_isPrivate, this))
+    , m_siteReload(new TabSiteReload(this))
     , m_extensionItems(new TabExtensionItems(this))
 {
 }
@@ -36,12 +37,18 @@ void Tab::setTitle(const QString &title)
     assignAndNotify(m_title, title, [this] { emit titleChanged(); });
 }
 
+void Tab::denyAndDismissSiteState()
+{
+    m_permissions->denyAll();
+    m_siteReload->dismiss();
+}
+
 void Tab::setUrl(const QUrl &url)
 {
     if (isRealPage(url))
         setNewTabPage(false);
     if (!sameOrigin(m_url, url))
-        m_permissions->denyAll();
+        denyAndDismissSiteState();
     if (m_url == url)
         return;
     m_url = url;

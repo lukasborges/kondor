@@ -187,6 +187,8 @@ set(KONDOR_TAB_SOURCES
     ${CMAKE_SOURCE_DIR}/src/browser/tabsecurity.cpp
     ${CMAKE_SOURCE_DIR}/src/browser/tabpermissions.h
     ${CMAKE_SOURCE_DIR}/src/browser/tabpermissions.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/tabsitereload.h
+    ${CMAKE_SOURCE_DIR}/src/browser/tabsitereload.cpp
     ${CMAKE_SOURCE_DIR}/src/browser/tabpasswords.h
     ${CMAKE_SOURCE_DIR}/src/browser/tabpasswords.cpp
     ${CMAKE_SOURCE_DIR}/src/browser/tabextensionitems.h

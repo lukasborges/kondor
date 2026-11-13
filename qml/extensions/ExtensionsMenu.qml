@@ -41,7 +41,7 @@ Menu {
 
     function siteEntry(extension) {
         return {
-            kind: "site", extension: extension.id,
+            kind: "site", extension: extension.id, extensionName: extension.name,
             title: qsTr("Run on %1").arg(root.host),
             accessibleName: qsTr("Run %1 on %2").arg(extension.name).arg(root.host),
             checked: ExtensionManager.siteEnabled(extension.id, root.tab.url)
@@ -54,7 +54,7 @@ Menu {
 
     function toggleSite(data, checked) {
         ExtensionManager.setSiteEnabled(data.extension, root.tab.url, checked)
-        root.tab.reload()
+        root.tab.siteReload.recordToggle(data.extension, data.extensionName, checked)
     }
 
     function trigger(data, checked) {

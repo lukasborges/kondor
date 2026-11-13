@@ -170,6 +170,7 @@ qt_add_qml_module(kondor
         qml/extensions/ExtensionSitesSection.qml
         qml/extensions/ExtensionDelegate.qml
         qml/extensions/ExtensionsMenu.qml
+        qml/extensions/SiteReloadBar.qml
     SOURCES
         src/app/aboutinfo.h
         src/app/aboutinfo.cpp

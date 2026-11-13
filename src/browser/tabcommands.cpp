@@ -12,6 +12,7 @@ void Tab::goForward()
 
 void Tab::reload()
 {
+    m_siteReload->dismiss();
     emit reloadRequested();
 }
 

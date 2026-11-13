@@ -15,9 +15,12 @@ RowLayout {
     visible: tabs.currentTab !== null
              && (ExtensionManager.revision, ExtensionManager.hasActionExtensions(isPrivate))
 
+    function pinnedExtensions(revision, pins) {
+        return ExtensionManager.pinnedActionExtensions(isPrivate)
+    }
+
     Repeater {
-        model: (ExtensionManager.revision, Settings.pinnedExtensions,
-                ExtensionManager.pinnedActionExtensions(root.isPrivate))
+        model: root.pinnedExtensions(ExtensionManager.revision, Settings.pinnedExtensions)
 
         PinnedExtensionButton {
             onClicked: panel.openAt(modelData.id)
@@ -38,6 +41,7 @@ RowLayout {
 
         ExtensionsPanel {
             id: panel
+            objectName: "extensionsPanel"
             tab: root.tabs.currentTab
             onManageRequested: root.browserWindow.openSettingsPage("extensions")
             onSettingsRequested: function(extensionId) { settingsDialog.openFor(extensionId) }

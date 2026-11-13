@@ -15,12 +15,12 @@ ItemDelegate {
     readonly property bool isOffHere: modelData.siteToggle
                                       && !isSiteEnabled(ExtensionManager.revision)
 
+    signal openRequested()
+    signal stepRequested(int step)
+
     function isSiteEnabled(revision) {
         return ExtensionManager.siteEnabled(modelData.id, tab.url)
     }
-
-    signal openRequested()
-    signal stepRequested(int step)
 
     width: ListView.view ? ListView.view.width : implicitWidth
     padding: Kirigami.Units.smallSpacing

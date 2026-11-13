@@ -22,6 +22,11 @@ ColumnLayout {
         Layout.fillWidth: true
     }
 
+    SiteReloadBar {
+        tab: root.tabs.currentTab
+        Layout.fillWidth: true
+    }
+
     FindBar {
         id: findBar
         tab: root.tabs.currentTab

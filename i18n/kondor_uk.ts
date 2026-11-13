@@ -2652,6 +2652,29 @@
     </message>
 </context>
 <context>
+    <name>SiteReloadBar</name>
+    <message>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="19"/>
+        <source>%1 will run on this site after reloading.</source>
+        <translation>Після перезавантаження %1 працюватиме на цьому сайті.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="20"/>
+        <source>%1 will stop running on this site after reloading.</source>
+        <translation>Після перезавантаження %1 перестане працювати на цьому сайті.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="36"/>
+        <source>Reload</source>
+        <translation>Перезавантажити</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="44"/>
+        <source>Close</source>
+        <translation>Закрити</translation>
+    </message>
+</context>
+<context>
     <name>SiteSecurityButton</name>
     <message>
         <location filename="../qml/site/SiteSecurityButton.qml" line="27"/>

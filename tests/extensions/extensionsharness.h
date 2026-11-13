@@ -138,6 +138,7 @@ inline void removeEveryExtension()
 inline void registerExtensionTypes()
 {
     qmlRegisterUncreatableType<Tab>("Kondor", 1, 0, "Tab", QStringLiteral("test"));
+    qmlRegisterUncreatableType<TabSiteReload>("Kondor", 1, 0, "TabSiteReload", QStringLiteral("test"));
     registerSingleton<ExtensionManager>("ExtensionManager");
     registerSingleton<ExtensionCatalog>("ExtensionCatalog");
     registerSingleton<PasswordStore>("PasswordStore");

@@ -2641,6 +2641,29 @@
     </message>
 </context>
 <context>
+    <name>SiteReloadBar</name>
+    <message>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="19"/>
+        <source>%1 will run on this site after reloading.</source>
+        <translation>%1 s&apos;executarà en aquest lloc després de tornar a carregar.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="20"/>
+        <source>%1 will stop running on this site after reloading.</source>
+        <translation>%1 deixarà d&apos;executar-se en aquest lloc després de tornar a carregar.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="36"/>
+        <source>Reload</source>
+        <translation>Torna a carregar</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="44"/>
+        <source>Close</source>
+        <translation>Tanca</translation>
+    </message>
+</context>
+<context>
     <name>SiteSecurityButton</name>
     <message>
         <location filename="../qml/site/SiteSecurityButton.qml" line="27"/>

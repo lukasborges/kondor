@@ -8,6 +8,7 @@
 #include "browser/tabpasswords.h"
 #include "browser/tabpermissions.h"
 #include "browser/tabsecurity.h"
+#include "browser/tabsitereload.h"
 
 class QQuickWebEngineProfile;
 
@@ -41,6 +42,7 @@ class Tab : public QObject
     Q_PROPERTY(TabSecurity *security READ security CONSTANT)
     Q_PROPERTY(TabPermissions *permissions READ permissions CONSTANT)
     Q_PROPERTY(TabPasswords *passwords READ passwords CONSTANT)
+    Q_PROPERTY(TabSiteReload *siteReload READ siteReload CONSTANT)
     Q_PROPERTY(TabExtensionItems *extensionItems READ extensionItems CONSTANT)
 
 public:
@@ -70,6 +72,7 @@ public:
     TabSecurity *security() const { return m_security; }
     TabPermissions *permissions() const { return m_permissions; }
     TabPasswords *passwords() const { return m_passwords; }
+    TabSiteReload *siteReload() const { return m_siteReload; }
     TabExtensionItems *extensionItems() const { return m_extensionItems; }
 
     Q_INVOKABLE void setTitle(const QString &title);
@@ -158,6 +161,8 @@ signals:
     void downloadUrlRequested(const QUrl &url, const QString &fileName);
 
 private:
+    void dismissSiteReloadWhenLoadStarts(bool loading);
+
     void setNewTabPage(bool newTabPage);
 
     QString m_title;
@@ -184,5 +189,6 @@ private:
     TabSecurity *m_security = nullptr;
     TabPermissions *m_permissions = nullptr;
     TabPasswords *m_passwords = nullptr;
+    TabSiteReload *m_siteReload = nullptr;
     TabExtensionItems *m_extensionItems = nullptr;
 };

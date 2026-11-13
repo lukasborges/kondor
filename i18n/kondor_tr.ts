@@ -2630,6 +2630,29 @@
     </message>
 </context>
 <context>
+    <name>SiteReloadBar</name>
+    <message>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="19"/>
+        <source>%1 will run on this site after reloading.</source>
+        <translation>%1, yeniden yüklendikten sonra bu sitede çalışacak.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="20"/>
+        <source>%1 will stop running on this site after reloading.</source>
+        <translation>%1, yeniden yüklendikten sonra bu sitede çalışmayı durduracak.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="36"/>
+        <source>Reload</source>
+        <translation>Yeniden yükle</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/SiteReloadBar.qml" line="44"/>
+        <source>Close</source>
+        <translation>Kapat</translation>
+    </message>
+</context>
+<context>
     <name>SiteSecurityButton</name>
     <message>
         <location filename="../qml/site/SiteSecurityButton.qml" line="27"/>

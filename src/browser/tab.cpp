@@ -27,6 +27,7 @@ Tab::Tab(QQuickWebEngineProfile *profile, QObject *parent)
     , m_security(new TabSecurity(profile, this))
     , m_permissions(new TabPermissions(this))
     , m_passwords(new TabPasswords(m_isPrivate, this))
+    , m_siteReload(new TabSiteReload(this))
     , m_extensionItems(new TabExtensionItems(this))
 {
 }
@@ -60,8 +61,15 @@ void Tab::setProgress(qreal progress)
     assignAndNotify(m_progress, progress, [this] { emit progressChanged(); });
 }
 
+void Tab::dismissSiteReloadWhenLoadStarts(bool loading)
+{
+    if (loading)
+        m_siteReload->dismiss();
+}
+
 void Tab::setLoading(bool loading)
 {
+    dismissSiteReloadWhenLoadStarts(loading);
     assignAndNotify(m_loading, loading, [this] { emit loadingChanged(); });
 }
 

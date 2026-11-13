@@ -133,7 +133,8 @@ mention the difference in the PR.
 - **Look & feel**: only QQC2 controls with the `org.kde.desktop` style; colors from
   `Kirigami.Theme`/`palette` (never hardcoded colors); icons via `icon.name` with **Breeze icon
   names** (`bookmark-new`, `edit-find`, `document-save`, `security-high`, …); tooltips with
-  `ToolTip.delay: 600` like the existing buttons; follow KDE HIG wording (Title Case for menu items).
+  `ToolTip.delay: 600` like the existing buttons; follow KDE HIG wording (Title Case for menu items). UI work is designed and reviewed with the
+  `kde-ux` skill (`.claude/skills/kde-ux/`).
 - **Language: English everywhere.** UI source strings, code comments, docs, commit messages, PR
   descriptions and test names are written in English. Every user-visible string goes in `qsTr()`;
   translations live only in the `i18n/kondor_<lang>.ts` files (issues #19 and #34), never as another

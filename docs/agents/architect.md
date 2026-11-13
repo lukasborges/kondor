@@ -82,6 +82,15 @@ fix one of them in the same commit.
 
 ## Prototype
 
+Before designing or changing any UI (a prototype, a spec or bug issue that adds or changes UI, an
+answer to a UX question), load the **`kde-ux` skill** (`.claude/skills/kde-ux/`) and follow its
+workflow:
+
+1. Draft the prototype and render it.
+2. Write a UX review against its checklist, and iterate until it approves.
+3. Record the rejected alternatives in the spec's "Decisions" table.
+4. Add a row to `references/decisions.md` when a design is rejected.
+
 Copy structure and wording conventions from existing prototypes; use Breeze/Kirigami
 components and Breeze icon names; render with `python3 prototypes/render.py <NN>` and check the
 screenshot. The developer's implementation must match it visually.
@@ -94,7 +103,7 @@ screenshot. The developer's implementation must match it visually.
 3. Conventions — `AGENTS.md` (Tab bridge pattern, shared blocks, English, KDE HIG Title Case,
    `qsTr()`, shortcuts table in README, CMake/workflow updates for new deps).
 4. Privacy — nothing from a private tab may ever touch disk.
-5. Visual parity with the prototype.
+5. Visual parity with the prototype, and the `kde-ux` checklist for any UI state the prototype does not show.
 6. Branch based on current `main`, Conventional Commits, `Closes #N` in the PR body.
 7. Leave concrete comments (file:line, why, suggested fix) as a PR review; one verdict:
    approve + squash-merge, or request changes (`to-dev`).

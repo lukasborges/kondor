@@ -1078,6 +1078,7 @@ qt_add_executable(tst_extensions
     extensions/catalog/tst_extensionupdates.cpp
     extensions/tst_extensionsui.cpp
     extensions/tst_extensionspanel.cpp
+    extensions/tst_extensionsreloadbar.cpp
     extensions/state/tst_extensionpins.cpp
     extensions/tst_extensiondialogs.cpp
     extensions/bridge/tst_extensionpages.cpp

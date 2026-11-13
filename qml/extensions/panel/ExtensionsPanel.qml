@@ -64,7 +64,7 @@ Popup {
     padding: Kirigami.Units.largeSpacing
     modal: false
     focus: true
-    closePolicy: Popup.CloseOnPressOutside
+    closePolicy: Popup.CloseOnPressOutsideParent
     onTabChanged: close()
     onAboutToShow: {
         rebuild()

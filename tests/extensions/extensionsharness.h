@@ -33,6 +33,7 @@ int runTestExtensionCatalog(int argc, char *argv[]);
 int runTestExtensionUpdates(int argc, char *argv[]);
 int runTestExtensionsUi(int argc, char *argv[]);
 int runTestExtensionsPanel(int argc, char *argv[]);
+int runTestExtensionsReloadBar(int argc, char *argv[]);
 int runTestExtensionPins(int argc, char *argv[]);
 int runTestExtensionDialogs(int argc, char *argv[]);
 int runTestExtensionPages(int argc, char *argv[]);

@@ -1,4 +1,4 @@
-// The toolbar Extensions panel: one row per extension ("Off on this site" when off), drill-down to its actions.
+// The toolbar Extensions panel: one row per extension (dimmed when off on this site), drill-down to its actions.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -20,22 +20,25 @@ Popup {
     component ExtensionRow: ItemDelegate {
         id: row
         required property var modelData
+        readonly property bool offHere: modelData.siteToggle && !modelData.on
         width: ListView.view.width
         padding: Kirigami.Units.smallSpacing
-        Accessible.name: row.modelData.siteToggle && !row.modelData.on
-                         ? row.modelData.name + ", off on " + root.host : row.modelData.name
+        Accessible.name: row.offHere ? row.modelData.name + ", off on " + root.host : row.modelData.name
+        ToolTip.text: row.offHere ? "Off on this site" : ""
+        ToolTip.delay: 600
         contentItem: RowLayout {
             spacing: Kirigami.Units.smallSpacing
             Kirigami.Icon {
                 source: row.modelData.icon
+                enabled: !row.offHere
                 Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
                 Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
             }
-            Label { text: row.modelData.name; elide: Text.ElideRight; Layout.fillWidth: true }
             Label {
-                visible: row.modelData.siteToggle && !row.modelData.on
-                text: "Off on this site"
-                color: Kirigami.Theme.disabledTextColor
+                text: row.modelData.name
+                enabled: !row.offHere
+                elide: Text.ElideRight
+                Layout.fillWidth: true
             }
             Kirigami.Icon {
                 source: "go-next"

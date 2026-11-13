@@ -1,4 +1,5 @@
 // #176 Saved logins panel: click an account to fill, or copy its user name or password.
+// Feedback follows the KDE HIG: the copy button turns into a check mark for 2 s, no message.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -34,6 +35,7 @@ BrowserFrame {
     component AccountRow: ItemDelegate {
         id: row
         required property string username
+        property bool passwordCopied: false
         Layout.fillWidth: true
         padding: Kirigami.Units.smallSpacing
         contentItem: RowLayout {
@@ -41,7 +43,13 @@ BrowserFrame {
             Kirigami.Icon { source: "user-identity"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
             Label { text: row.username; elide: Text.ElideRight; Layout.fillWidth: true }
             ToolButton { icon.name: "edit-copy"; display: AbstractButton.IconOnly; implicitWidth: 28; implicitHeight: 28 }
-            ToolButton { icon.name: "password-copy"; display: AbstractButton.IconOnly; implicitWidth: 28; implicitHeight: 28 }
+            ToolButton {
+                icon.name: row.passwordCopied ? "dialog-ok-apply" : "password-copy"
+                icon.color: row.passwordCopied ? Kirigami.Theme.positiveTextColor : "transparent"
+                display: AbstractButton.IconOnly
+                implicitWidth: 28
+                implicitHeight: 28
+            }
         }
     }
 
@@ -70,18 +78,19 @@ BrowserFrame {
                 color: Kirigami.Theme.disabledTextColor
                 text: "Click an account to fill the page."
             }
-            AccountRow { username: "maria@example.org" }
+            AccountRow { username: "maria@example.org"; passwordCopied: true }
             AccountRow { username: "maria.work@example.org" }
             AccountRow { username: "m.silva@example.org" }
-            Kirigami.InlineMessage {
-                Layout.fillWidth: true
-                visible: true
-                type: Kirigami.MessageType.Positive
-                icon.name: "password-copy"
-                text: "Password copied. It will be cleared from the clipboard in 30 seconds."
-            }
             Kirigami.Separator { Layout.fillWidth: true }
             Button { text: "Manage Passwords…"; icon.name: "configure"; flat: true }
         }
+    }
+
+    ToolTip {
+        popupType: Popup.Item
+        x: 990
+        y: 108
+        text: "Copied"
+        Component.onCompleted: open()
     }
 }

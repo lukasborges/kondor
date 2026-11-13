@@ -925,6 +925,26 @@ set_tests_properties(tst_adblockallowlist PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
 )
 
+qt_add_executable(tst_passwordclipboard
+    passwords/tst_passwordclipboard.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordclipboard.cpp
+)
+
+target_include_directories(tst_passwordclipboard PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_passwordclipboard PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Test
+)
+
+add_test(NAME tst_passwordclipboard COMMAND tst_passwordclipboard)
+set_tests_properties(tst_passwordclipboard PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
+)
+
 qt_add_executable(tst_passwordstore
     passwords/tst_passwordstore.cpp
 )

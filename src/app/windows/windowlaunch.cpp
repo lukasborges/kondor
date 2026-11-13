@@ -71,7 +71,8 @@ QObject *WindowManager::showPackages(const QStringList &packages, QObject *windo
 void WindowManager::showExtensionPackage(QObject *window, const QString &path)
 {
     ExtensionManager::instance()->inspectFile(path);
-    if (window && !QMetaObject::invokeMethod(window, "openExtensionsSettings"))
+    const auto page = Q_ARG(QVariant, QStringLiteral("extensions"));
+    if (window && !QMetaObject::invokeMethod(window, "openSettingsPage", page))
         qWarning("Kondor: cannot open the extensions settings");
 }
 

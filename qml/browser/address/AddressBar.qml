@@ -84,6 +84,7 @@ TextField {
         anchors.verticalCenter: parent.verticalCenter
         tabs: root.tabs
         addressField: root
+        onPasswordsManageRequested: root.browserWindow.openSettingsPage("passwords")
     }
 
     AddressSuggestions {

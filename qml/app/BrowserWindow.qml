@@ -46,7 +46,7 @@ ApplicationWindow {
 
     function openUrl(url, background) { tabControl.openUrl(url, background) }
     function openUrlsInNewTabs(urls) { tabControl.openUrlsInNewTabs(urls) }
-    function openExtensionsSettings() { windowDialogs.openExtensionsSettings() }
+    function openSettingsPage(pageId) { windowDialogs.openSettingsPage(pageId) }
     function openBookmarks() { windowDialogs.openBookmarks() }
     function openBookmarkEditor() { toolBar.bookmarkEditor.openEditor() }
     function closeTabAt(index) { tabControl.closeTabAt(index) }

@@ -1907,7 +1907,7 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <location filename="../qml/passwords/bar/PasswordButton.qml" line="20"/>
+        <location filename="../qml/passwords/bar/PasswordButton.qml" line="23"/>
         <source>Fill Saved Password</source>
         <translation>Fyll i sparat lösenord</translation>
     </message>
@@ -2216,6 +2216,62 @@
     </message>
 </context>
 <context>
+    <name>SavedAccountRow</name>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="25"/>
+        <source>Fill</source>
+        <translation>Fyll i</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="28"/>
+        <source>Fill %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>Fyll i %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="52"/>
+        <source>Copy Username</source>
+        <translation>Kopiera användarnamn</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="53"/>
+        <source>Copied.</source>
+        <translation>Kopierat.</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="54"/>
+        <source>Username copied</source>
+        <translation>Användarnamn kopierat</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="56"/>
+        <source>Copy Username for %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>Kopiera användarnamn för %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="63"/>
+        <source>Copy Password</source>
+        <translation>Kopiera lösenord</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="64"/>
+        <source>Copied. Cleared in 30 seconds.</source>
+        <translation>Kopierat. Rensas om 30 sekunder.</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="65"/>
+        <source>Password copied, cleared in 30 seconds</source>
+        <translation>Lösenord kopierat, rensas om 30 sekunder</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="67"/>
+        <source>Copy Password for %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>Kopiera lösenord för %1</translation>
+    </message>
+</context>
+<context>
     <name>SavedPasswordDelegate</name>
     <message>
         <location filename="../qml/passwords/SavedPasswordDelegate.qml" line="38"/>
@@ -2259,6 +2315,19 @@
         <location filename="../qml/passwords/SavedPasswordsList.qml" line="101"/>
         <source>Add Password…</source>
         <translation>Lägg till lösenord…</translation>
+    </message>
+</context>
+<context>
+    <name>SavedPasswordsPopup</name>
+    <message>
+        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="55"/>
+        <source>Saved Passwords</source>
+        <translation>Sparade lösenord</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="82"/>
+        <source>Manage Passwords…</source>
+        <translation>Hantera lösenord…</translation>
     </message>
 </context>
 <context>

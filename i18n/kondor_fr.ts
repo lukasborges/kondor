@@ -1907,7 +1907,7 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <location filename="../qml/passwords/bar/PasswordButton.qml" line="20"/>
+        <location filename="../qml/passwords/bar/PasswordButton.qml" line="23"/>
         <source>Fill Saved Password</source>
         <translation>Remplir avec le mot de passe enregistré</translation>
     </message>
@@ -2216,6 +2216,62 @@
     </message>
 </context>
 <context>
+    <name>SavedAccountRow</name>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="25"/>
+        <source>Fill</source>
+        <translation>Remplir</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="28"/>
+        <source>Fill %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>Remplir %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="52"/>
+        <source>Copy Username</source>
+        <translation>Copier le nom d'utilisateur</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="53"/>
+        <source>Copied.</source>
+        <translation>Copié.</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="54"/>
+        <source>Username copied</source>
+        <translation>Nom d'utilisateur copié</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="56"/>
+        <source>Copy Username for %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>Copier le nom d'utilisateur de %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="63"/>
+        <source>Copy Password</source>
+        <translation>Copier le mot de passe</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="64"/>
+        <source>Copied. Cleared in 30 seconds.</source>
+        <translation>Copié. Effacé dans 30 secondes.</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="65"/>
+        <source>Password copied, cleared in 30 seconds</source>
+        <translation>Mot de passe copié, effacé dans 30 secondes</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="67"/>
+        <source>Copy Password for %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>Copier le mot de passe de %1</translation>
+    </message>
+</context>
+<context>
     <name>SavedPasswordDelegate</name>
     <message>
         <location filename="../qml/passwords/SavedPasswordDelegate.qml" line="38"/>
@@ -2259,6 +2315,19 @@
         <location filename="../qml/passwords/SavedPasswordsList.qml" line="101"/>
         <source>Add Password…</source>
         <translation>Ajouter un mot de passe…</translation>
+    </message>
+</context>
+<context>
+    <name>SavedPasswordsPopup</name>
+    <message>
+        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="55"/>
+        <source>Saved Passwords</source>
+        <translation>Mots de passe enregistrés</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="82"/>
+        <source>Manage Passwords…</source>
+        <translation>Gérer les mots de passe…</translation>
     </message>
 </context>
 <context>

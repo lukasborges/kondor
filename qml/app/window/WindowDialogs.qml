@@ -29,9 +29,9 @@ Item {
         settingsWindow.showWindow()
     }
 
-    function openExtensionsSettings() {
+    function openSettingsPage(pageId) {
         openSettings()
-        settingsWindow.showPage("extensions")
+        settingsWindow.showPage(pageId)
     }
 
     function openAbout() {

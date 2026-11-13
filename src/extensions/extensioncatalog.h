@@ -43,8 +43,6 @@ public:
     static ExtensionCatalog *instance();
     static ExtensionCatalog *create(QQmlEngine *engine, QJSEngine *jsEngine);
 
-    explicit ExtensionCatalog(QObject *parent = nullptr);
-
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
@@ -75,6 +73,7 @@ signals:
     void updatesChecked();
 
 private:
+    explicit ExtensionCatalog(QObject *parent = nullptr);
     void setState(const QString &state, const QString &error = QString());
     void setInstalling(const QString &id);
     void setInstallError(const QString &error);

@@ -63,7 +63,7 @@ target_include_directories(kondor_testlib PUBLIC
     ${CMAKE_SOURCE_DIR}/src
 )
 
-target_link_libraries(kondor_testlib PUBLIC
+target_link_libraries(kondor_testlib PRIVATE
     Qt6::Concurrent
     Qt6::Core
     Qt6::DBus

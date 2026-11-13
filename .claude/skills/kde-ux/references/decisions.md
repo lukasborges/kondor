@@ -18,6 +18,7 @@ Add a row whenever a design is rejected in review or a UX bug is filed.
 | #179 | Extension names in the Extensions menu as disabled `MenuItem`s (greyed out), with no line between extensions | A non-interactive section header: icon and bold name in the normal text color, a separator line, and `Accessible.role: Accessible.Heading` | A disabled item means "not available now"; groups must read as separate blocks |
 | #180 | Toggling "Run on <host>" reloads the page at once | Save, then offer **Reload** in the `InlineBar` | Do not throw away what the user typed; the user decides when to reload |
 | #181 | The colorful category icon `preferences-plugin` on a toolbar button | The monochrome action icon `plugins` | Toolbar and menu icons are monochrome action icons that follow the color scheme |
+| #198 | The colorful category icon `applications-development` on the More Tools submenu | The monochrome action icon `tools` | Same rule as #181: menu items use monochrome action icons that follow the color scheme |
 | #158 | Two "Run on <host>" items with the same accessible name | `Accessible.name` "Run %1 on %2" (extension, host) | Labels must be distinct within a window |
 | #157 | A `PlaceholderMessage` declared before a `ListView` with `anchors.fill`: its button got no clicks | The placeholder above the list in z-order | An empty state must be actionable |
 | #158 | Icon-only buttons that are `[button] ''` for screen readers | `Accessible.name` on every icon-only button | Screen readers must announce a distinct label |

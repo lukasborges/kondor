@@ -51,6 +51,7 @@ ColumnLayout {
                 icon.name: "internet-services"
                 display: AbstractButton.IconOnly
                 ToolTip.visible: hovered
+                Accessible.name: ToolTip.text
                 ToolTip.text: qsTr("Visit Author's Homepage")
                 ToolTip.delay: 600
                 onClicked: root.linkActivated(modelData.homepage)

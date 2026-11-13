@@ -33,6 +33,7 @@ ToolButton {
     implicitWidth: 28
     implicitHeight: 28
     ToolTip.visible: hovered
+    Accessible.name: ToolTip.text
     ToolTip.text: qsTr("Ad and Tracker Blocking")
     ToolTip.delay: 600
     onHostChanged: refresh()

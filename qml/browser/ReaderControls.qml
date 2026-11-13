@@ -25,6 +25,7 @@ Pane {
             display: AbstractButton.IconOnly
             enabled: Settings.readerFontSize > 12
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Decrease Font Size")
             ToolTip.delay: 600
             onClicked: Settings.readerFontSize -= 2
@@ -38,6 +39,7 @@ Pane {
             display: AbstractButton.IconOnly
             enabled: Settings.readerFontSize < 32
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Increase Font Size")
             ToolTip.delay: 600
             onClicked: Settings.readerFontSize += 2

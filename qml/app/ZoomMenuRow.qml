@@ -33,6 +33,7 @@ Item {
             flat: true
             enabled: root.zoomEnabled
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Zoom Out (Ctrl+−)")
             ToolTip.delay: 600
             onClicked: root.tab.zoomOut()
@@ -53,6 +54,7 @@ Item {
             flat: true
             enabled: root.zoomEnabled
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Zoom In (Ctrl++)")
             ToolTip.delay: 600
             onClicked: root.tab.zoomIn()
@@ -66,6 +68,7 @@ Item {
             display: AbstractButton.IconOnly
             flat: true
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: root.isFullScreen ? qsTr("Exit Full Screen (F11)")
                                             : qsTr("Full Screen (F11)")
             ToolTip.delay: 600

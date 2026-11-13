@@ -559,6 +559,7 @@ qt_add_executable(tst_tabstrip
     browser/tst_tabdrag.cpp
     browser/tst_tabdragscroll.cpp
     browser/tst_tabdragrelease.cpp
+    browser/tst_tabstripaccessibility.cpp
     ${KONDOR_TAB_SOURCES}
     ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_TAB_MODEL_SOURCES}

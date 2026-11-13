@@ -89,6 +89,7 @@ ItemDelegate {
             text: qsTr("Configure…")
             display: AbstractButton.IconOnly
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: text
             ToolTip.delay: 600
             onClicked: row.configureRequested(row.id)
@@ -98,6 +99,7 @@ ItemDelegate {
             text: qsTr("Remove")
             display: AbstractButton.IconOnly
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: text
             ToolTip.delay: 600
             onClicked: row.removeRequested(row.id, row.name)

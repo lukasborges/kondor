@@ -142,6 +142,7 @@ Popup {
                         display: AbstractButton.IconOnly
                         icon.name: "edit-undo"
                         ToolTip.visible: hovered
+                        Accessible.name: ToolTip.text
                         ToolTip.text: qsTr("Revoke")
                         ToolTip.delay: 600
                         onClicked: root.revoke(permissionRow.modelData.permission)

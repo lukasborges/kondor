@@ -161,6 +161,7 @@ Rectangle {
             icon.width: 16
             icon.height: 16
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("New Tab")
             ToolTip.delay: 600
             onClicked: strip.newTabRequested()

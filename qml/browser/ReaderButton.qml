@@ -19,6 +19,7 @@ ToolButton {
     implicitWidth: 28
     implicitHeight: 28
     ToolTip.visible: hovered
+    Accessible.name: ToolTip.text
     ToolTip.text: checked ? qsTr("Exit Reader Mode (Ctrl+Alt+R)") : qsTr("Reader Mode (Ctrl+Alt+R)")
     ToolTip.delay: 600
     onClicked: tabs.currentTab.toggleReaderMode()

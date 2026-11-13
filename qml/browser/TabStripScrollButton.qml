@@ -14,4 +14,5 @@ ToolButton {
     icon.height: 16
     ToolTip.visible: hovered
     ToolTip.delay: 600
+    Accessible.name: ToolTip.text
 }

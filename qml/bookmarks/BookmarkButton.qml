@@ -19,6 +19,7 @@ ToolButton {
     implicitWidth: 28
     implicitHeight: 28
     ToolTip.visible: hovered
+    Accessible.name: ToolTip.text
     ToolTip.text: editor.pageBookmarked ? qsTr("Edit This Bookmark") : qsTr("Bookmark This Page")
     ToolTip.delay: 600
     onClicked: editorPopup.opened ? editorPopup.close() : editorPopup.openEditor()

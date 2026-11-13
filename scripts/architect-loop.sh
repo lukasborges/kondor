@@ -144,6 +144,12 @@ EOF
       | grep -qvx COMPLETED
   }
 
+  # True when the Claude run failed before doing any work (authentication, Cloudflare, network).
+  # Such a run says nothing about the issue, so it must not count towards a no-progress pause.
+  api_unavailable() {
+    (( $1 != 0 )) && grep -qE 'Failed to authenticate|API Error' "$2"
+  }
+
   step() {
     local dry="$1" next n st key count_file count run_log rc after
     ensure_control || return 0
@@ -188,6 +194,10 @@ EOF
     [[ -n "$model" ]] && args+=(--model "$model")
     (cd "$control" && "$claude" "${args[@]}" "$(prompt_for "$n" "$st")") >"$run_log" 2>&1
     rc=$?
+    if api_unavailable "$rc" "$run_log"; then
+      log "architect run ($st on $key) could not reach the Claude API (rc=$rc), retrying next tick: $(head -c 200 "$run_log")"
+      return 0
+    fi
     ensure_control || return 0
     after="$(next_architect_step)"
     count_file="$state/no-progress-$key"

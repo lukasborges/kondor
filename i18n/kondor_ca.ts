@@ -2645,12 +2645,12 @@
     <message>
         <location filename="../qml/extensions/SiteReloadBar.qml" line="26"/>
         <source>%1 will run on this site after reloading.</source>
-        <translation>%1 s'executarà en aquest lloc després de tornar a carregar.</translation>
+        <translation>%1 s&apos;executarà en aquest lloc després de tornar a carregar.</translation>
     </message>
     <message>
         <location filename="../qml/extensions/SiteReloadBar.qml" line="27"/>
         <source>%1 will stop running on this site after reloading.</source>
-        <translation>%1 deixarà d'executar-se en aquest lloc després de tornar a carregar.</translation>
+        <translation>%1 deixarà d&apos;executar-se en aquest lloc després de tornar a carregar.</translation>
     </message>
     <message>
         <location filename="../qml/extensions/SiteReloadBar.qml" line="31"/>

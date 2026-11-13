@@ -37,6 +37,7 @@ QVariantMap localizedActionItem(const QJsonObject &item, const QString &locale)
         {QStringLiteral("title"), localized(item, QStringLiteral("title"), locale)},
         {QStringLiteral("checkable"), item.value(QLatin1String("checkable")).toBool()},
         {QStringLiteral("icon"), item.value(QLatin1String("icon")).toString()},
+        {QStringLiteral("keysSetting"), item.value(QLatin1String("keysSetting")).toString()},
     };
 }
 

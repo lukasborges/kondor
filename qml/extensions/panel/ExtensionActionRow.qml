@@ -14,6 +14,7 @@ ItemDelegate {
     Layout.fillWidth: true
     padding: Kirigami.Units.smallSpacing
     text: item.title
+    Accessible.description: item.shortcut ?? ""
     onClicked: tab.extensionItems.trigger(extensionId, item.id, false)
     Keys.onReturnPressed: clicked()
     Keys.onEnterPressed: clicked()
@@ -31,6 +32,12 @@ ItemDelegate {
             text: root.text
             elide: Text.ElideRight
             Layout.fillWidth: true
+        }
+
+        Label {
+            text: root.item.shortcut ?? ""
+            color: Kirigami.Theme.disabledTextColor
+            visible: text !== ""
         }
     }
 }

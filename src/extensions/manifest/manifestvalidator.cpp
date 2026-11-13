@@ -161,7 +161,8 @@ bool ManifestValidator::checkSettings()
 
 bool ManifestValidator::checkAction()
 {
-    m_error = actionError(m_manifest.value(QLatin1String("action")));
+    m_error = actionError(m_manifest.value(QLatin1String("action")),
+                          m_manifest.value(QLatin1String("settings")));
     return m_error.isEmpty();
 }
 

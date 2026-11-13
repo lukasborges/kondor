@@ -1212,6 +1212,23 @@ target_link_libraries(tst_manifestvalidator PRIVATE
 
 add_test(NAME tst_manifestvalidator COMMAND tst_manifestvalidator)
 
+qt_add_executable(tst_actionitemdisplay
+    extensions/action/tst_actionitemdisplay.cpp
+    ../src/extensions/action/actionitemdisplay.cpp
+)
+
+target_include_directories(tst_actionitemdisplay PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_actionitemdisplay PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Test
+)
+
+add_test(NAME tst_actionitemdisplay COMMAND tst_actionitemdisplay)
+
 qt_add_executable(tst_contentscriptbuilder
     extensions/scripts/tst_contentscriptbuilder.cpp
 )

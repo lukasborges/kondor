@@ -19,6 +19,9 @@ private slots:
     void hostIsHiddenOnNonWebPage();
     void openAtShowsActions();
     void pinButtonTogglesPin();
+    void actionRowShowsShortcut();
+    void checkableRowShowsShortcut();
+    void shortcutFollowsChangedSetting();
 };
 
 void TestExtensionsPanel::initTestCase()
@@ -140,6 +143,31 @@ void TestExtensionsPanel::pinButtonTogglesPin()
     QVERIFY(m_panel->property("opened").toBool());
     clickCenterOf(panelItem("pinButton"));
     QVERIFY(!ExtensionManager::instance()->isPinned(QStringLiteral("sample")));
+}
+
+void TestExtensionsPanel::actionRowShowsShortcut()
+{
+    QVERIFY(installKeyed());
+    openPanel(QStringLiteral("keyed"));
+    QVERIFY(itemWithText(panelItem("backButton")->parentItem()->parentItem(), QKeySequence(QStringLiteral("S")).toString(QKeySequence::NativeText)));
+}
+
+void TestExtensionsPanel::checkableRowShowsShortcut()
+{
+    QVERIFY(installKeyed());
+    openPanel(QStringLiteral("keyed"));
+    QQuickItem *box = itemWithText(panelItem("backButton")->parentItem()->parentItem(), QStringLiteral("Mark"));
+    QVERIFY(box);
+    QCOMPARE(QAccessible::queryAccessibleInterface(box)->text(QAccessible::Description), QKeySequence(QStringLiteral("S")).toString(QKeySequence::NativeText));
+}
+
+void TestExtensionsPanel::shortcutFollowsChangedSetting()
+{
+    QVERIFY(installKeyed());
+    openPanel(QStringLiteral("keyed"));
+    applySettings(QStringLiteral("keyed"), {{QStringLiteral("keyGo"), QStringLiteral("Shift+F")}});
+    const QString text = QKeySequence(QStringLiteral("Shift+F")).toString(QKeySequence::NativeText);
+    QTRY_VERIFY(itemWithText(panelItem("backButton")->parentItem()->parentItem(), text));
 }
 
 int runTestExtensionsPanel(int argc, char *argv[])

@@ -11,6 +11,7 @@ protected:
     QQuickItem *panelItem(const char *name) const;
     QString currentId() const;
     void toggleRunOnSite();
+    bool installKeyed();
 
     QTemporaryDir m_work;
     QQmlEngine m_engine;
@@ -68,4 +69,21 @@ inline QString PanelFixture::currentId() const
 inline void PanelFixture::toggleRunOnSite()
 {
     clickCenterOf(panelItem("siteSwitch"));
+}
+
+inline bool PanelFixture::installKeyed()
+{
+    const QJsonObject setting{{QStringLiteral("key"), QStringLiteral("keyGo")}, {QStringLiteral("type"), QStringLiteral("keys")},
+                              {QStringLiteral("label"), QStringLiteral("Go")}, {QStringLiteral("default"), QStringLiteral("S")}};
+    const QJsonObject plain{{QStringLiteral("id"), QStringLiteral("go")}, {QStringLiteral("title"), QStringLiteral("Go Now")},
+                            {QStringLiteral("keysSetting"), QStringLiteral("keyGo")}};
+    const QJsonObject check{{QStringLiteral("id"), QStringLiteral("mark")}, {QStringLiteral("title"), QStringLiteral("Mark")},
+                            {QStringLiteral("checkable"), true}, {QStringLiteral("keysSetting"), QStringLiteral("keyGo")}};
+    const QString zip = packVariant(m_work.path(), QStringLiteral("keyed"), [&](QJsonObject &manifest) {
+        manifest.insert(QStringLiteral("id"), QStringLiteral("keyed"));
+        manifest.insert(QStringLiteral("name"), QStringLiteral("Keyed"));
+        manifest.insert(QStringLiteral("settings"), QJsonArray{setting});
+        manifest.insert(QStringLiteral("action"), QJsonObject{{QStringLiteral("items"), QJsonArray{plain, check}}});
+    });
+    return ExtensionManager::instance()->installPackage({zip, QStringLiteral("file")}, QStringLiteral("keyed")).isInstalled;
 }

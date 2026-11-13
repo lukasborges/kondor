@@ -13,6 +13,7 @@ class TestManifestValidator : public QObject
 private slots:
     void initTestCase();
     void acceptsTheBaseManifest();
+    void acceptsKeysSettingOfKeysType();
     void reportsTheFirstErrorWithTodaysText_data();
     void reportsTheFirstErrorWithTodaysText();
 
@@ -85,6 +86,26 @@ void TestManifestValidator::acceptsTheBaseManifest()
 
 namespace {
 
+QJsonObject withKeysSetting(const QString &settingType, const QString &reference)
+{
+    const QJsonObject setting{{QStringLiteral("key"), QStringLiteral("faster")},
+                              {QStringLiteral("type"), settingType},
+                              {QStringLiteral("label"), QStringLiteral("Faster")}};
+    const QJsonObject item{{QStringLiteral("id"), QStringLiteral("go")},
+                           {QStringLiteral("title"), QStringLiteral("Go")},
+                           {QStringLiteral("keysSetting"), reference}};
+    QJsonObject manifest = with(QStringLiteral("settings"), QJsonArray{setting});
+    manifest.insert(QStringLiteral("action"), QJsonObject{{QStringLiteral("items"), QJsonArray{item}}});
+    return manifest;
+}
+
+void addKeysSettingRows()
+{
+    const char *message = "manifest.json: action.items[0].keysSetting: must name a keys setting";
+    addRow("keysSetting unknown", withKeysSetting(QStringLiteral("keys"), QStringLiteral("slower")), message);
+    addRow("keysSetting not keys", withKeysSetting(QStringLiteral("bool"), QStringLiteral("faster")), message);
+}
+
 void addIdentityRows()
 {
     addRow("no api", withoutKey(QStringLiteral("kondor")), "manifest.json: kondor: required");
@@ -122,6 +143,13 @@ void addSectionRows()
 
 }
 
+void TestManifestValidator::acceptsKeysSettingOfKeysType()
+{
+    ManifestValidator validator(m_directory.path());
+    const auto valid = validator.validate(withKeysSetting(QStringLiteral("keys"), QStringLiteral("faster")));
+    QVERIFY2(valid, qPrintable(validator.error()));
+}
+
 void TestManifestValidator::reportsTheFirstErrorWithTodaysText_data()
 {
     QTest::addColumn<QJsonObject>("manifest");
@@ -129,6 +157,7 @@ void TestManifestValidator::reportsTheFirstErrorWithTodaysText_data()
     addIdentityRows();
     addContentRows();
     addSectionRows();
+    addKeysSettingRows();
 }
 
 void TestManifestValidator::reportsTheFirstErrorWithTodaysText()

@@ -25,6 +25,12 @@ features are therefore **not available**; use the patterns below.
 | Settings form | `Kirigami.FormLayout` with `Kirigami.FormData.label` (sentence case); a `Switch` applies instantly, a `CheckBox` applies with Apply |
 | 3 or fewer exclusive options | `RadioButton`s; up to 10 → `ComboBox`; more → a list |
 
+## Menus
+
+- **Section titles** inside a `Menu` are a non-interactive item: icon, bold `Label` in `Kirigami.Theme.textColor`, `Kirigami.Separator` to the right, and `Accessible.role: Accessible.Heading`. **Never** use a disabled `MenuItem`, which reads as "unavailable".
+- Show an item's keyboard shortcut when it has one (discoverability).
+- A checkable item applies instantly. If applying needs a page reload, save the change and offer **Reload** in the `InlineBar`; never reload by itself.
+
 ## Content
 
 | Situation | Use |
@@ -35,6 +41,8 @@ features are therefore **not available**; use the patterns below.
 | Explanation of one sentence | A `Label` under the control, not a tooltip; longer → `Kirigami.ContextualHelpButton` |
 
 ## Icons
+
+- Toolbar buttons and menu items use **monochrome action icons** (`actions/` in Breeze, for example `plugins`, `configure`, `edit-copy`). Colorful category or app icons (`preferences-*`, app icons) are only for content: extension icons, site favicons, Settings categories.
 
 - Use Breeze names only. Check that the icon exists:
   `find /usr/share/icons/breeze -name '<name>.svg'`.

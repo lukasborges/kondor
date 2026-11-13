@@ -1,7 +1,7 @@
-#include "core/databasemigrations.h"
+#include "core/database/databasemigrations.h"
 
-#include "core/defaultbookmarks.h"
-#include "core/sql.h"
+#include "core/database/defaultbookmarks.h"
+#include "core/database/sql.h"
 
 #include <QCoreApplication>
 #include <QDateTime>

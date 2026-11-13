@@ -4,8 +4,8 @@
 #include <QStandardPaths>
 #include <QUuid>
 
-#include "extensions/extensionstorage.h"
-#include "extensions/profilescripts.h"
+#include "extensions/state/extensionstorage.h"
+#include "extensions/scripts/profilescripts.h"
 
 namespace {
 

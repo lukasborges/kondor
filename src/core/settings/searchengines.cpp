@@ -1,4 +1,4 @@
-#include "core/searchengines.h"
+#include "core/settings/searchengines.h"
 
 #include <QHash>
 

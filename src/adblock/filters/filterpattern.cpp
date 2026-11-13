@@ -1,4 +1,4 @@
-#include "adblock/filterpattern.h"
+#include "adblock/filters/filterpattern.h"
 
 namespace {
 constexpr int kMinTokenLength = 3;

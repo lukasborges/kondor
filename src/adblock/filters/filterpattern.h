@@ -1,7 +1,7 @@
 #pragma once
 
-#include "adblock/filterrequest.h"
-#include "adblock/filterrule.h"
+#include "adblock/filters/filterrequest.h"
+#include "adblock/filters/filterrule.h"
 
 #include <QSet>
 

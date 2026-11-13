@@ -9,11 +9,11 @@
 #include <memory>
 
 #include "bookmarks/bookmarkmanager.h"
-#include "browser/faviconstore.h"
-#include "browser/profilemanager.h"
-#include "common/qmltesthelpers.h"
-#include "core/database.h"
-#include "core/settings.h"
+#include "browser/favicons/faviconstore.h"
+#include "browser/profile/profilemanager.h"
+#include "../../common/qmltesthelpers.h"
+#include "core/database/database.h"
+#include "core/settings/settings.h"
 #include "history/historymanager.h"
 
 class SeededBookmarkFolder
@@ -49,7 +49,7 @@ protected:
     {
         m_engine.addImportPath(QStringLiteral(KONDOR_QML_IMPORT_DIR));
         QQmlComponent component(&m_engine, QUrl::fromLocalFile(QStringLiteral(
-            KONDOR_QML_DIR "/browser/AddressSuggestions.qml")));
+            KONDOR_QML_DIR "/browser/address/AddressSuggestions.qml")));
         QObject *popup = component.create();
         if (!popup)
             qWarning() << component.errors();

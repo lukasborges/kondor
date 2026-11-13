@@ -2,8 +2,8 @@
 
 #include <memory>
 
-#include "extensionsharness.h"
-#include "extensions/extensionbridge.h"
+#include "../extensionsharness.h"
+#include "extensions/bridge/extensionbridge.h"
 
 struct BridgeClient {
     ExtensionBridge *bridge;

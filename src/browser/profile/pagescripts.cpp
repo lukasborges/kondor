@@ -1,4 +1,4 @@
-#include "browser/pagescripts.h"
+#include "browser/profile/pagescripts.h"
 
 #include <QFile>
 #include <QVariant>

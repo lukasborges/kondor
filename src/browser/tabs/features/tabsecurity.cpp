@@ -1,7 +1,7 @@
-#include "browser/tabsecurity.h"
+#include "browser/tabs/features/tabsecurity.h"
 
-#include "browser/assignandnotify.h"
-#include "browser/profilemanager.h"
+#include "browser/tabs/assignandnotify.h"
+#include "browser/profile/profilemanager.h"
 
 TabSecurity::TabSecurity(QQuickWebEngineProfile *profile, QObject *parent)
     : QObject(parent)

@@ -1,4 +1,4 @@
-#include "adblock/filterlists.h"
+#include "adblock/lists/filterlists.h"
 
 #include <QFile>
 #include <QFileInfo>

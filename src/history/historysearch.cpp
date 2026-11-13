@@ -1,6 +1,6 @@
 #include "history/historysearch.h"
 
-#include "core/sql.h"
+#include "core/database/sql.h"
 
 #include <QDate>
 #include <QDateTime>

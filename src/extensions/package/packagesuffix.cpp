@@ -1,4 +1,4 @@
-#include "extensions/packagesuffix.h"
+#include "extensions/package/packagesuffix.h"
 
 bool hasPackageSuffix(const QString &path)
 {

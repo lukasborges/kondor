@@ -1,8 +1,8 @@
-#include "browser/profilesetup.h"
+#include "browser/profile/profilesetup.h"
 
 #include "adblock/adblockmanager.h"
 #include "core/notifier.h"
-#include "core/settings.h"
+#include "core/settings/settings.h"
 #include "downloads/downloadmanager.h"
 
 #include <QLocale>

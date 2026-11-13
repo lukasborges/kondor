@@ -1,9 +1,9 @@
 #include <QSignalSpy>
 #include <QTest>
 
-#include "browser/profilemanager.h"
-#include "browser/tab.h"
-#include "browser/tabmodel.h"
+#include "browser/profile/profilemanager.h"
+#include "browser/tabs/tab.h"
+#include "browser/tabs/tabmodel.h"
 #include "tabmodelharness.h"
 
 class TestTabNewTabPage : public QObject

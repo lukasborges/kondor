@@ -1,6 +1,6 @@
-#include "bookmarks/bookmarkqueries.h"
+#include "bookmarks/storage/bookmarkqueries.h"
 
-#include "core/sql.h"
+#include "core/database/sql.h"
 
 #include <QSqlQuery>
 

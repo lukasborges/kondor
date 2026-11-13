@@ -6,9 +6,9 @@
 
 #include <KZip>
 
-#include "browser/tab.h"
-#include "extensions/extensionbridge.h"
-#include "extensions/extensioncall.h"
+#include "browser/tabs/tab.h"
+#include "extensions/bridge/extensionbridge.h"
+#include "extensions/bridge/extensioncall.h"
 #include "extensions/extensionmanager.h"
 
 class TestExtensionCall : public QObject

@@ -1,4 +1,4 @@
-#include "extensions/extensionsettings.h"
+#include "extensions/state/extensionsettings.h"
 
 #include <QVariantList>
 

@@ -6,7 +6,7 @@
 
 #include <optional>
 
-#include "extensions/extensionpackage.h"
+#include "extensions/package/extensionpackage.h"
 
 struct ValidManifest {
     QStringList permissions;

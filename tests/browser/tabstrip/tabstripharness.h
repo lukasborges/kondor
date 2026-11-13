@@ -6,11 +6,11 @@
 #include <QQuickWindow>
 #include <QTest>
 
-#include "browser/profilemanager.h"
-#include "browser/tab.h"
-#include "browser/tabmodel.h"
-#include "common/qmltesthelpers.h"
-#include "core/settings.h"
+#include "browser/profile/profilemanager.h"
+#include "browser/tabs/tab.h"
+#include "browser/tabs/tabmodel.h"
+#include "../../common/qmltesthelpers.h"
+#include "core/settings/settings.h"
 
 int runTabStripWidths(int argc, char *argv[]);
 int runTabStripClosing(int argc, char *argv[]);
@@ -165,7 +165,7 @@ private:
     {
         m_engine.addImportPath(QStringLiteral(KONDOR_QML_IMPORT_DIR));
         QQmlComponent component(&m_engine, QUrl::fromLocalFile(QStringLiteral(
-            KONDOR_QML_DIR "/browser/TabStrip.qml")));
+            KONDOR_QML_DIR "/browser/tabstrip/TabStrip.qml")));
         QObject *object = component.createWithInitialProperties(
             { { QStringLiteral("tabModel"), QVariant::fromValue(m_tabs) } });
         if (!object)

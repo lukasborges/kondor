@@ -1,11 +1,11 @@
 #include "bookmarks/bookmarkmanager.h"
 
-#include "bookmarks/bookmarkchecks.h"
-#include "bookmarks/bookmarkfoldertree.h"
-#include "bookmarks/bookmarkhtmlimporter.h"
-#include "bookmarks/bookmarkhtmlparser.h"
-#include "bookmarks/bookmarkqueries.h"
-#include "core/sql.h"
+#include "bookmarks/storage/bookmarkchecks.h"
+#include "bookmarks/storage/bookmarkfoldertree.h"
+#include "bookmarks/import/bookmarkhtmlimporter.h"
+#include "bookmarks/import/bookmarkhtmlparser.h"
+#include "bookmarks/storage/bookmarkqueries.h"
+#include "core/database/sql.h"
 
 #include <QFile>
 #include <QGuiApplication>

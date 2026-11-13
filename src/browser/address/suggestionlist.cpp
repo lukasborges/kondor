@@ -1,4 +1,4 @@
-#include "browser/suggestionlist.h"
+#include "browser/address/suggestionlist.h"
 
 #include <QJsonArray>
 #include <QJsonDocument>

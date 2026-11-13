@@ -8,8 +8,8 @@
 #include <QQuickWebEngineProfile>
 #include <QQuickWindow>
 
-#include "extensions/extensionbridge.h"
-#include "extensionsharness.h"
+#include "extensions/bridge/extensionbridge.h"
+#include "../extensionsharness.h"
 
 constexpr const char *pageViewQml =
     "import QtQuick\nimport QtWebEngine\nimport QtWebChannel\n"

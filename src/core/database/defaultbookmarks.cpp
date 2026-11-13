@@ -1,4 +1,4 @@
-#include "core/defaultbookmarks.h"
+#include "core/database/defaultbookmarks.h"
 
 #include <QtGlobal>
 

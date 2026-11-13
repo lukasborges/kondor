@@ -1,10 +1,10 @@
-#include "extensions/manifesticon.h"
+#include "extensions/manifest/manifesticon.h"
 
 #include <QDir>
 #include <QImage>
 #include <QUrl>
 
-#include "extensions/packagepath.h"
+#include "extensions/package/packagepath.h"
 
 namespace {
 

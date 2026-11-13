@@ -1,4 +1,4 @@
-#include "extensions/stringlistfield.h"
+#include "extensions/manifest/stringlistfield.h"
 
 #include <QJsonArray>
 

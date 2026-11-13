@@ -1,8 +1,8 @@
-#include "extensions/extensioncatalog.h"
+#include "extensions/catalog/extensioncatalog.h"
 
 #include <QStandardPaths>
 
-#include "extensions/catalogupdater.h"
+#include "extensions/catalog/catalogupdater.h"
 #include "extensions/extensionmanager.h"
 
 namespace {

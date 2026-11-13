@@ -1,4 +1,4 @@
-#include "extensions/profilescripts.h"
+#include "extensions/scripts/profilescripts.h"
 
 #include <QQuickWebEngineProfile>
 

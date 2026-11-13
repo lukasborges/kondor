@@ -1,8 +1,8 @@
-#include "extensions/extensionbridge.h"
+#include "extensions/bridge/extensionbridge.h"
 
-#include "extensions/bridgecalls.h"
+#include "extensions/bridge/bridgecalls.h"
 #include "extensions/extensionmanager.h"
-#include "extensions/extensionpageapi.h"
+#include "extensions/bridge/extensionpageapi.h"
 
 ExtensionBridge::ExtensionBridge(QObject *parent)
     : QObject(parent)

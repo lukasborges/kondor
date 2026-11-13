@@ -1,4 +1,4 @@
-#include "extensions/packagedownload.h"
+#include "extensions/install/packagedownload.h"
 
 #include <QCoreApplication>
 #include <QCryptographicHash>
@@ -6,7 +6,7 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 
-#include "extensions/extensionpackage.h"
+#include "extensions/package/extensionpackage.h"
 
 namespace {
 

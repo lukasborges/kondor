@@ -2,8 +2,8 @@
 #include <QTemporaryDir>
 
 #include "bookmarksprofileharness.h"
-#include "common/isolatedhome.h"
-#include "core/database.h"
+#include "../common/isolatedhome.h"
+#include "core/database/database.h"
 
 namespace {
 int migrateProfileInChildMode(const char *dataHome)

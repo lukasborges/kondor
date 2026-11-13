@@ -11,14 +11,14 @@
 
 #include "adblock/adblockmanager.h"
 #include "bookmarks/bookmarkmanager.h"
-#include "browser/faviconstore.h"
-#include "browser/profilemanager.h"
-#include "browser/searchsuggestions.h"
-#include "browser/tab.h"
-#include "browser/tabmodel.h"
-#include "common/qmltesthelpers.h"
-#include "core/database.h"
-#include "core/settings.h"
+#include "browser/favicons/faviconstore.h"
+#include "browser/profile/profilemanager.h"
+#include "browser/address/searchsuggestions.h"
+#include "browser/tabs/tab.h"
+#include "browser/tabs/tabmodel.h"
+#include "../../common/qmltesthelpers.h"
+#include "core/database/database.h"
+#include "core/settings/settings.h"
 #include "history/historymanager.h"
 
 inline void registerAddressBarTypes()

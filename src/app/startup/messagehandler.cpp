@@ -1,4 +1,4 @@
-#include "app/messagehandler.h"
+#include "app/startup/messagehandler.h"
 
 #include <QByteArray>
 #include <QString>

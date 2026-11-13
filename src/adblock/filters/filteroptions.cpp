@@ -1,6 +1,6 @@
-#include "adblock/filteroptions.h"
+#include "adblock/filters/filteroptions.h"
 
-#include "adblock/filterpattern.h"
+#include "adblock/filters/filterpattern.h"
 
 #include <algorithm>
 

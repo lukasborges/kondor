@@ -1,11 +1,11 @@
-#include "extensions/catalogupdater.h"
+#include "extensions/catalog/catalogupdater.h"
 
 #include <QFile>
 
-#include "core/settings.h"
-#include "extensions/extensioncatalog.h"
+#include "core/settings/settings.h"
+#include "extensions/catalog/extensioncatalog.h"
 #include "extensions/extensionmanager.h"
-#include "extensions/packagedownload.h"
+#include "extensions/install/packagedownload.h"
 
 namespace {
 

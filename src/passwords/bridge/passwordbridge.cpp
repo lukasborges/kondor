@@ -1,9 +1,9 @@
-#include "passwords/passwordbridge.h"
+#include "passwords/bridge/passwordbridge.h"
 
 #include "passwords/passwordstore.h"
-#include "core/settings.h"
-#include "browser/tab.h"
-#include "browser/tabpasswords.h"
+#include "core/settings/settings.h"
+#include "browser/tabs/tab.h"
+#include "browser/tabs/features/tabpasswords.h"
 
 PasswordPageApi::PasswordPageApi(PasswordBridge *bridge)
     : QObject(bridge)

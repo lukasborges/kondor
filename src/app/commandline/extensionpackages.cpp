@@ -1,8 +1,8 @@
-#include "app/extensionpackages.h"
+#include "app/commandline/extensionpackages.h"
 
 #include <algorithm>
 
-#include "extensions/packagesuffix.h"
+#include "extensions/package/packagesuffix.h"
 
 namespace {
 bool isLocalPackage(const QUrl &url)

@@ -2,8 +2,8 @@
 
 #include "bookmarks/bookmarkmanager.h"
 #include "bookmarkimportharness.h"
-#include "bookmarksprofileharness.h"
-#include "core/database.h"
+#include "../bookmarksprofileharness.h"
+#include "core/database/database.h"
 
 class TestBookmarkImport : public QObject
 {

@@ -5,7 +5,7 @@
 #include <QStringList>
 #include <QTimer>
 
-#include "extensions/catalogentry.h"
+#include "extensions/catalog/catalogentry.h"
 #include "extensions/installresult.h"
 
 class ExtensionCatalog;

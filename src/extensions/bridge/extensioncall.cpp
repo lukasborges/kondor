@@ -1,4 +1,4 @@
-#include "extensions/extensioncall.h"
+#include "extensions/bridge/extensioncall.h"
 
 #include <QJsonDocument>
 #include <QJsonObject>

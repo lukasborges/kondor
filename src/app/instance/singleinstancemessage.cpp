@@ -1,4 +1,4 @@
-#include "app/singleinstancemessage.h"
+#include "app/instance/singleinstancemessage.h"
 
 #include <QJsonArray>
 #include <QJsonDocument>

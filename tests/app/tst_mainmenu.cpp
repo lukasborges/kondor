@@ -3,7 +3,7 @@
 #include <QTemporaryDir>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "common/isolatedhome.h"
+#include "../common/isolatedhome.h"
 #include "mainmenuharness.h"
 
 class TestMainMenu : public MainMenuFixture

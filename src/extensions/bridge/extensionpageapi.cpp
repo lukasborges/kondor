@@ -1,7 +1,7 @@
-#include "extensions/extensionpageapi.h"
+#include "extensions/bridge/extensionpageapi.h"
 
-#include "extensions/extensionbridge.h"
-#include "extensions/extensioncall.h"
+#include "extensions/bridge/extensionbridge.h"
+#include "extensions/bridge/extensioncall.h"
 
 ExtensionPageApi::ExtensionPageApi(ExtensionBridge *bridge)
     : QObject(bridge)

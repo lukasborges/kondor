@@ -1,4 +1,4 @@
-#include "passwords/passwordimportcolumns.h"
+#include "passwords/csv/passwordimportcolumns.h"
 
 #include <algorithm>
 

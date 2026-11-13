@@ -2,7 +2,7 @@
 
 #include <QStringList>
 
-#include "passwords/passwordimport.h"
+#include "passwords/csv/passwordimport.h"
 
 namespace PasswordImport {
 

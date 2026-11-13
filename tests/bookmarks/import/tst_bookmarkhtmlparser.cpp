@@ -1,6 +1,6 @@
 #include <QTest>
 
-#include "bookmarks/bookmarkhtmlparser.h"
+#include "bookmarks/import/bookmarkhtmlparser.h"
 
 class TestBookmarkHtmlParser : public QObject
 {

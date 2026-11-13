@@ -2,7 +2,7 @@
 
 #include <QCoreApplication>
 
-#include "extensions/extensioncatalog.h"
+#include "extensions/catalog/extensioncatalog.h"
 
 InstallResult ExtensionManager::refusalForWrongId(const StagedPackage &staged,
                                                   const QString &expectedId) const

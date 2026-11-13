@@ -7,8 +7,8 @@
 #include <QUrl>
 #include <QtQmlIntegration/qqmlintegration.h>
 
-#include "extensions/catalogentry.h"
-#include "extensions/extensionaccess.h"
+#include "extensions/catalog/catalogentry.h"
+#include "extensions/state/extensionaccess.h"
 
 class CatalogUpdater;
 class QNetworkReply;

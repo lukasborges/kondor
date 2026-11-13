@@ -7,9 +7,9 @@
 #include <QTimer>
 #include <QtQmlIntegration/qqmlintegration.h>
 
-#include "browser/sessionwindow.h"
-#include "browser/tab.h"
-#include "browser/tabmodel.h"
+#include "browser/session/sessionwindow.h"
+#include "browser/tabs/tab.h"
+#include "browser/tabs/tabmodel.h"
 
 class QQmlEngine;
 class QJSEngine;

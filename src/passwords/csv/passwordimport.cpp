@@ -1,7 +1,7 @@
-#include "passwords/passwordimport.h"
+#include "passwords/csv/passwordimport.h"
 
-#include "passwords/csvreader.h"
-#include "passwords/passwordimportcolumns.h"
+#include "passwords/csv/csvreader.h"
+#include "passwords/csv/passwordimportcolumns.h"
 #include "passwords/passwordorigin.h"
 
 #include <QHash>

@@ -8,10 +8,10 @@
 #include <QTest>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "browser/profilemanager.h"
-#include "browser/tab.h"
-#include "browser/tabmodel.h"
-#include "core/settings.h"
+#include "browser/profile/profilemanager.h"
+#include "browser/tabs/tab.h"
+#include "browser/tabs/tabmodel.h"
+#include "core/settings/settings.h"
 
 class TestTabStripScroll : public QObject
 {
@@ -53,7 +53,7 @@ void TestTabStripScroll::init()
     m_window = new QQuickWindow;
     m_window->resize(1100, 60);
     m_engine.addImportPath(QStringLiteral(KONDOR_QML_IMPORT_DIR));
-    QQmlComponent component(&m_engine, QUrl::fromLocalFile(QStringLiteral(KONDOR_QML_DIR "/browser/TabStrip.qml")));
+    QQmlComponent component(&m_engine, QUrl::fromLocalFile(QStringLiteral(KONDOR_QML_DIR "/browser/tabstrip/TabStrip.qml")));
     m_strip = qobject_cast<QQuickItem *>(component.createWithInitialProperties(
         { { QStringLiteral("tabModel"), QVariant::fromValue(m_tabs) } }));
     QVERIFY2(m_strip, qPrintable(component.errorString()));

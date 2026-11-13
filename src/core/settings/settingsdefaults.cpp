@@ -1,6 +1,6 @@
-#include "core/settingsdefaults.h"
+#include "core/settings/settingsdefaults.h"
 
-#include "core/spellcheckdictionaries.h"
+#include "core/settings/spellcheckdictionaries.h"
 
 #include <QHash>
 #include <QLocale>

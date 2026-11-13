@@ -15,12 +15,12 @@
 
 #include <KZip>
 
-#include "browser/tab.h"
-#include "common/qmltesthelpers.h"
-#include "core/settings.h"
-#include "extensions/extensioncatalog.h"
+#include "browser/tabs/tab.h"
+#include "../common/qmltesthelpers.h"
+#include "core/settings/settings.h"
+#include "extensions/catalog/extensioncatalog.h"
 #include "extensions/extensionmanager.h"
-#include "extensions/extensionstorage.h"
+#include "extensions/state/extensionstorage.h"
 #include "passwords/passwordstore.h"
 
 int runTestExtensionPackage(int argc, char *argv[]);

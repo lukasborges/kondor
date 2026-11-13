@@ -1,4 +1,4 @@
-#include "extensions/contentscriptbuilder.h"
+#include "extensions/scripts/contentscriptbuilder.h"
 
 #include <QFile>
 #include <QJsonArray>

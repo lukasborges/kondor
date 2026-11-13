@@ -6,7 +6,7 @@
 #include <QVariantList>
 #include <QtQmlIntegration/qqmlintegration.h>
 
-#include "browser/closedtabs.h"
+#include "browser/tabs/closedtabs.h"
 
 class QQuickWebEngineProfile;
 class Tab;

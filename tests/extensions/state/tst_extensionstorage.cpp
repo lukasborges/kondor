@@ -3,8 +3,8 @@
 #include <QStandardPaths>
 #include <QTest>
 
-#include "core/database.h"
-#include "extensions/extensionstorage.h"
+#include "core/database/database.h"
+#include "extensions/state/extensionstorage.h"
 
 class TestExtensionStorage : public QObject
 {

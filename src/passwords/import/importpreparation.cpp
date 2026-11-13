@@ -1,7 +1,7 @@
 #include "passwords/import/importpreparation.h"
 
 #include "passwords/import/importinfo.h"
-#include "passwords/passwordimportfile.h"
+#include "passwords/csv/passwordimportfile.h"
 
 #include <QtConcurrent>
 

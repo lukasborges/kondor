@@ -1,7 +1,7 @@
 #include <QJsonArray>
 #include <QTest>
 
-#include "extensions/catalogentry.h"
+#include "extensions/catalog/catalogentry.h"
 
 class TestCatalogEntry : public QObject
 {

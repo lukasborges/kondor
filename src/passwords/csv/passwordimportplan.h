@@ -5,7 +5,7 @@
 #include <QMap>
 #include <QString>
 
-#include "passwords/passwordimport.h"
+#include "passwords/csv/passwordimport.h"
 
 using SavedLogins = QHash<QString, QMap<QString, QString>>;
 

@@ -1,7 +1,7 @@
-#include "browser/tabmodel.h"
+#include "browser/tabs/tabmodel.h"
 
-#include "browser/profilemanager.h"
-#include "browser/tab.h"
+#include "browser/profile/profilemanager.h"
+#include "browser/tabs/tab.h"
 
 void TabModel::rememberClosed(int index)
 {

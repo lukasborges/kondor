@@ -1,13 +1,13 @@
-#include "app/appstartup.h"
+#include "app/startup/appstartup.h"
 
 #include "adblock/adblockmanager.h"
-#include "app/appidentity.h"
-#include "app/faviconimageprovider.h"
-#include "app/startupargs.h"
-#include "app/windowmanager.h"
-#include "browser/profilemanager.h"
-#include "extensions/extensioncatalog.h"
-#include "extensions/extensionloader.h"
+#include "app/startup/appidentity.h"
+#include "browser/favicons/faviconimageprovider.h"
+#include "app/commandline/startupargs.h"
+#include "app/windows/windowmanager.h"
+#include "browser/profile/profilemanager.h"
+#include "extensions/catalog/extensioncatalog.h"
+#include "extensions/install/extensionloader.h"
 #include "extensions/extensionmanager.h"
 
 #include <QApplication>

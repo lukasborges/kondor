@@ -9,9 +9,9 @@
 #include <QtWebEngineCore/qtwebenginecoreglobal.h>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "common/isolatedhome.h"
-#include "extensions/extensionloader.h"
-#include "pageserver.h"
+#include "../../common/isolatedhome.h"
+#include "extensions/install/extensionloader.h"
+#include "../pageserver.h"
 
 #if KONDOR_HAVE_EXTENSIONS
 #include <QQuickItem>

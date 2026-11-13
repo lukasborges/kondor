@@ -5,8 +5,8 @@
 #include <QStandardPaths>
 #include <QTest>
 
-#include "core/database.h"
-#include "core/sql.h"
+#include "core/database/database.h"
+#include "core/database/sql.h"
 
 class TestDatabase : public QObject
 {

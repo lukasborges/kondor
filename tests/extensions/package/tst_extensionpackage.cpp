@@ -1,4 +1,4 @@
-#include "extensionsharness.h"
+#include "../extensionsharness.h"
 
 class TestExtensionPackage : public QObject
 {

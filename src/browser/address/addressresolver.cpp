@@ -1,4 +1,4 @@
-#include "browser/addressresolver.h"
+#include "browser/address/addressresolver.h"
 
 #include <QRegularExpression>
 #include <QStringList>

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "app/commandline.h"
-#include "app/singleinstance.h"
+#include "app/commandline/commandline.h"
+#include "app/instance/singleinstance.h"
 
 class QApplication;
 class QQmlApplicationEngine;

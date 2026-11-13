@@ -1,4 +1,4 @@
-#include "app/windowmanager.h"
+#include "app/windows/windowmanager.h"
 
 #include <QQmlComponent>
 #include <QQmlEngine>

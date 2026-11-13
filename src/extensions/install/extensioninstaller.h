@@ -4,7 +4,7 @@
 
 #include <optional>
 
-#include "extensions/packagefile.h"
+#include "extensions/package/packagefile.h"
 
 class ExtensionInstaller
 {

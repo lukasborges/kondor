@@ -5,7 +5,7 @@
 #include <QVariantMap>
 #include <QWebEngineScript>
 
-#include "extensions/extensionpackage.h"
+#include "extensions/package/extensionpackage.h"
 
 struct ContentScriptContext {
     const ExtensionPackage *package = nullptr;

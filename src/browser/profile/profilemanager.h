@@ -8,7 +8,7 @@
 #include <QtQmlIntegration/qqmlintegration.h>
 #include <QQuickWebEngineProfile>
 
-#include "browser/certificateoverrides.h"
+#include "browser/profile/certificateoverrides.h"
 
 class QQmlEngine;
 class QJSEngine;

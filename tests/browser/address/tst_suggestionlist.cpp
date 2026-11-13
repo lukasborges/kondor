@@ -1,6 +1,6 @@
 #include <QTest>
 
-#include "browser/suggestionlist.h"
+#include "browser/address/suggestionlist.h"
 
 class TestSuggestionList : public QObject
 {

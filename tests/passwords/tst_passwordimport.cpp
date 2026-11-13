@@ -1,7 +1,7 @@
 #include <QFile>
 #include <QTest>
 
-#include "passwords/passwordimport.h"
+#include "passwords/csv/passwordimport.h"
 
 using namespace PasswordImport;
 

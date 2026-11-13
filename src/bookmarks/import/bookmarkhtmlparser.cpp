@@ -1,6 +1,6 @@
-#include "bookmarks/bookmarkhtmlparser.h"
+#include "bookmarks/import/bookmarkhtmlparser.h"
 
-#include "bookmarks/bookmarkhtmltext.h"
+#include "bookmarks/import/bookmarkhtmltext.h"
 #include "bookmarks/bookmarkrow.h"
 
 #include <optional>

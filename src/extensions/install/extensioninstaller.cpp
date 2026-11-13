@@ -1,4 +1,4 @@
-#include "extensions/extensioninstaller.h"
+#include "extensions/install/extensioninstaller.h"
 
 #include <QCoreApplication>
 #include <QDir>

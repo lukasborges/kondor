@@ -1,4 +1,4 @@
-#include "extensions/extensionpackage.h"
+#include "extensions/package/extensionpackage.h"
 
 #include <QDir>
 #include <QFile>
@@ -11,11 +11,11 @@
 
 #include <optional>
 
-#include "extensions/localizedmanifest.h"
-#include "extensions/manifestvalidator.h"
-#include "extensions/packagelimits.h"
-#include "extensions/packagepath.h"
-#include "extensions/permissiondescription.h"
+#include "extensions/manifest/localizedmanifest.h"
+#include "extensions/manifest/manifestvalidator.h"
+#include "extensions/package/packagelimits.h"
+#include "extensions/package/packagepath.h"
+#include "extensions/install/permissiondescription.h"
 
 namespace {
 

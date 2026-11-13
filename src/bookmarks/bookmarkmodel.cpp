@@ -1,7 +1,7 @@
 #include "bookmarks/bookmarkmodel.h"
 
-#include "bookmarks/bookmarkqueries.h"
-#include "core/sql.h"
+#include "bookmarks/storage/bookmarkqueries.h"
+#include "core/database/sql.h"
 
 #include <QSqlQuery>
 #include <QVariant>

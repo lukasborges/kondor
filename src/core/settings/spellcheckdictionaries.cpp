@@ -1,4 +1,4 @@
-#include "core/spellcheckdictionaries.h"
+#include "core/settings/spellcheckdictionaries.h"
 
 #include <QDir>
 #include <QFileInfo>

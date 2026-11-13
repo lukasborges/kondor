@@ -1,4 +1,4 @@
-#include "browser/sessionformat.h"
+#include "browser/session/sessionformat.h"
 
 #include <QJsonArray>
 #include <QJsonDocument>

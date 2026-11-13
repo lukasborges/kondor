@@ -1,7 +1,7 @@
 #include <QTest>
 
-#include "browser/tab.h"
-#include "browser/tabmodel.h"
+#include "browser/tabs/tab.h"
+#include "browser/tabs/tabmodel.h"
 #include "tabmodelharness.h"
 
 class TestTabPinning : public QObject

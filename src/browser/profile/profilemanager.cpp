@@ -1,9 +1,9 @@
-#include "browser/profilemanager.h"
+#include "browser/profile/profilemanager.h"
 
-#include "browser/addressresolver.h"
-#include "browser/pagescripts.h"
-#include "browser/profilesetup.h"
-#include "core/settings.h"
+#include "browser/address/addressresolver.h"
+#include "browser/profile/pagescripts.h"
+#include "browser/profile/profilesetup.h"
+#include "core/settings/settings.h"
 #include "history/historymanager.h"
 
 #include <QCoreApplication>

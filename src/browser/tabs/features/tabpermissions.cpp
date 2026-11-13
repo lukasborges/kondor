@@ -1,4 +1,4 @@
-#include "browser/tabpermissions.h"
+#include "browser/tabs/features/tabpermissions.h"
 
 #include <utility>
 

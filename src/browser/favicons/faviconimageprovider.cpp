@@ -1,6 +1,6 @@
-#include "app/faviconimageprovider.h"
+#include "browser/favicons/faviconimageprovider.h"
 
-#include "browser/faviconstore.h"
+#include "browser/favicons/faviconstore.h"
 
 #include <QUrl>
 

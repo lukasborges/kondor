@@ -1,8 +1,8 @@
-#include "extensions/contentscriptreader.h"
+#include "extensions/scripts/contentscriptreader.h"
 
-#include "extensions/manifestsections.h"
-#include "extensions/packagepath.h"
-#include "extensions/stringlistfield.h"
+#include "extensions/manifest/manifestsections.h"
+#include "extensions/package/packagepath.h"
+#include "extensions/manifest/stringlistfield.h"
 
 namespace {
 

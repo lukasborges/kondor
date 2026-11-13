@@ -1,4 +1,4 @@
-#include "extensions/extensionloader.h"
+#include "extensions/install/extensionloader.h"
 
 #include <QDir>
 #include <QLoggingCategory>

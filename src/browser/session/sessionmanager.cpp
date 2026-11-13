@@ -1,6 +1,6 @@
-#include "browser/sessionmanager.h"
+#include "browser/session/sessionmanager.h"
 
-#include "browser/sessionformat.h"
+#include "browser/session/sessionformat.h"
 
 #include <QCoreApplication>
 #include <QDir>

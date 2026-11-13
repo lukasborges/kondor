@@ -1,11 +1,11 @@
-#include "extensions/bridgecalls.h"
+#include "extensions/bridge/bridgecalls.h"
 
 #include <QUrl>
 
-#include "browser/tabextensionitems.h"
+#include "browser/tabs/features/tabextensionitems.h"
 #include "core/notifier.h"
 #include "extensions/extensionmanager.h"
-#include "extensions/extensionstorage.h"
+#include "extensions/state/extensionstorage.h"
 
 namespace {
 

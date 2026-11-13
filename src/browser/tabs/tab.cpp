@@ -1,6 +1,6 @@
-#include "browser/tab.h"
+#include "browser/tabs/tab.h"
 
-#include "browser/assignandnotify.h"
+#include "browser/tabs/assignandnotify.h"
 
 #include <QQuickWebEngineProfile>
 

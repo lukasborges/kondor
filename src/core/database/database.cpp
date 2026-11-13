@@ -1,7 +1,7 @@
-#include "core/database.h"
+#include "core/database/database.h"
 
-#include "core/databasemigrations.h"
-#include "core/sql.h"
+#include "core/database/databasemigrations.h"
+#include "core/database/sql.h"
 
 #include <QDir>
 #include <QSqlError>

@@ -1,4 +1,4 @@
-#include "extensions/extensionpackage.h"
+#include "extensions/package/extensionpackage.h"
 
 #include <QCoreApplication>
 #include <QDir>
@@ -8,8 +8,8 @@
 #include <KArchive>
 #include <KZip>
 
-#include "extensions/packagelimits.h"
-#include "extensions/packagepath.h"
+#include "extensions/package/packagelimits.h"
+#include "extensions/package/packagepath.h"
 
 namespace {
 

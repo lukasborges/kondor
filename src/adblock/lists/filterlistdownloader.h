@@ -1,6 +1,6 @@
 #pragma once
 
-#include "adblock/filterlists.h"
+#include "adblock/lists/filterlists.h"
 
 #include <QObject>
 

@@ -1,5 +1,5 @@
 #include "bookmarkswindowharness.h"
-#include "core/database.h"
+#include "core/database/database.h"
 
 class TestBookmarksWindowDrag : public QObject
 {

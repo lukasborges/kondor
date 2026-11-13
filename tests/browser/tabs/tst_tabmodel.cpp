@@ -5,10 +5,10 @@
 #include <QTest>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "browser/profilemanager.h"
-#include "browser/tab.h"
-#include "browser/tabmodel.h"
-#include "common/isolatedhome.h"
+#include "browser/profile/profilemanager.h"
+#include "browser/tabs/tab.h"
+#include "browser/tabs/tabmodel.h"
+#include "../../common/isolatedhome.h"
 #include "tabmodelharness.h"
 
 class TestTabModel : public QObject

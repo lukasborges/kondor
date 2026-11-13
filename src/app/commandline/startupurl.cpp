@@ -1,7 +1,7 @@
-#include "app/startupurl.h"
+#include "app/commandline/startupurl.h"
 
-#include "browser/addressresolver.h"
-#include "core/settings.h"
+#include "browser/address/addressresolver.h"
+#include "core/settings/settings.h"
 
 #include <QDir>
 #include <QFileInfo>

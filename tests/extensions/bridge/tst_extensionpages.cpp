@@ -1,8 +1,8 @@
 #include <memory>
 
-#include "browser/profilemanager.h"
+#include "browser/profile/profilemanager.h"
 #include "extensionpageharness.h"
-#include "pageserver.h"
+#include "../pageserver.h"
 
 class TestExtensionPages : public QObject
 {

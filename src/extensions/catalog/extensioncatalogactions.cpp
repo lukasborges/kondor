@@ -1,4 +1,4 @@
-#include "extensions/extensioncatalog.h"
+#include "extensions/catalog/extensioncatalog.h"
 
 #include <QDir>
 #include <QFile>
@@ -6,9 +6,9 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 
-#include "extensions/catalogupdater.h"
+#include "extensions/catalog/catalogupdater.h"
 #include "extensions/extensionmanager.h"
-#include "extensions/packagedownload.h"
+#include "extensions/install/packagedownload.h"
 
 namespace {
 

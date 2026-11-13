@@ -2,7 +2,7 @@
 
 #include "bookmarks/bookmarkmanager.h"
 #include "bookmarksprofileharness.h"
-#include "core/database.h"
+#include "core/database/database.h"
 
 class TestDefaultBookmarks : public QObject
 {

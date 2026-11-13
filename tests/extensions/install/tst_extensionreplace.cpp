@@ -1,6 +1,6 @@
 #include <QSettings>
 
-#include "extensionsharness.h"
+#include "../extensionsharness.h"
 
 class TestExtensionReplace : public QObject
 {

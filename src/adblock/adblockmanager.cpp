@@ -1,9 +1,9 @@
 #include "adblock/adblockmanager.h"
 
 #include "adblock/adblockinterceptor.h"
-#include "adblock/filterlistdownloader.h"
-#include "adblock/filterlists.h"
-#include "core/settings.h"
+#include "adblock/lists/filterlistdownloader.h"
+#include "adblock/lists/filterlists.h"
+#include "core/settings/settings.h"
 
 #include <QQuickWebEngineProfile>
 #include <QtConcurrent>

@@ -3,7 +3,7 @@
 #include <QObject>
 #include <QPointer>
 #include <QVariantList>
-#include "browser/tab.h"
+#include "browser/tabs/tab.h"
 #include <QtQmlIntegration/qqmlintegration.h>
 
 class PasswordBridge;

@@ -1,4 +1,4 @@
-#include "extensions/localizedmanifest.h"
+#include "extensions/manifest/localizedmanifest.h"
 
 #include <QJsonArray>
 #include <QLocale>

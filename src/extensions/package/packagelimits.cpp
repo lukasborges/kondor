@@ -1,9 +1,9 @@
-#include "extensions/packagelimits.h"
+#include "extensions/package/packagelimits.h"
 
 #include <QCoreApplication>
 #include <QDirIterator>
 
-#include "extensions/extensionpackage.h"
+#include "extensions/package/extensionpackage.h"
 
 PackageSize measureDirectory(const QString &directory)
 {

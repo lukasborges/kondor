@@ -1,4 +1,4 @@
-#include "extensions/manifestsections.h"
+#include "extensions/manifest/manifestsections.h"
 
 #include <QJsonArray>
 #include <QJsonObject>

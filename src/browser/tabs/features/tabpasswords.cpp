@@ -1,7 +1,7 @@
-#include "browser/tabpasswords.h"
+#include "browser/tabs/features/tabpasswords.h"
 
-#include "browser/assignandnotify.h"
-#include "core/settings.h"
+#include "browser/tabs/assignandnotify.h"
+#include "core/settings/settings.h"
 #include "passwords/passwordstore.h"
 
 TabPasswords::TabPasswords(bool isPrivate, QObject *parent)

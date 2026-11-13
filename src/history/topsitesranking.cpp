@@ -1,7 +1,7 @@
 #include "history/topsitesranking.h"
 
-#include "core/settings.h"
-#include "core/sql.h"
+#include "core/settings/settings.h"
+#include "core/database/sql.h"
 
 #include <QDateTime>
 #include <QHash>

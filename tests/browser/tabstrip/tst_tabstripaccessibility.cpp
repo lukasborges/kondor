@@ -1,6 +1,6 @@
 #include <QAccessible>
 
-#include "common/accessibilitywalk.h"
+#include "../../common/accessibilitywalk.h"
 #include "tabstripharness.h"
 
 class TestTabStripAccessibility : public TabStripFixture

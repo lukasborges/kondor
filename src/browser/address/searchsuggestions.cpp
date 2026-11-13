@@ -1,7 +1,7 @@
-#include "browser/searchsuggestions.h"
+#include "browser/address/searchsuggestions.h"
 
-#include "browser/suggestionlist.h"
-#include "core/settings.h"
+#include "browser/address/suggestionlist.h"
+#include "core/settings/settings.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>

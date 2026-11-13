@@ -1,4 +1,4 @@
-#include "passwords/passwordimportplan.h"
+#include "passwords/csv/passwordimportplan.h"
 
 #include <QSet>
 

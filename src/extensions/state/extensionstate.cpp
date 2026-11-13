@@ -1,4 +1,4 @@
-#include "extensions/extensionstate.h"
+#include "extensions/state/extensionstate.h"
 
 ExtensionState::ExtensionState()
     : m_settings(QStringLiteral("KDE"), QStringLiteral("Kondor"))

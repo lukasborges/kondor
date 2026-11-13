@@ -4,8 +4,8 @@
 #include <QPointer>
 #include <QtQmlIntegration/qqmlintegration.h>
 
-#include "browser/tab.h"
-#include "extensions/extensioncall.h"
+#include "browser/tabs/tab.h"
+#include "extensions/bridge/extensioncall.h"
 
 class ExtensionPageApi;
 

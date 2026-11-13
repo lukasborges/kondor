@@ -1,11 +1,11 @@
-#include "extensions/extensionstorage.h"
+#include "extensions/state/extensionstorage.h"
 
 #include <QCoreApplication>
 #include <QJsonArray>
 #include <QJsonDocument>
 
-#include "core/database.h"
-#include "core/sql.h"
+#include "core/database/database.h"
+#include "core/database/sql.h"
 
 namespace ExtensionStorage {
 

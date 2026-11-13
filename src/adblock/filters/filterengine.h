@@ -1,6 +1,6 @@
 #pragma once
 
-#include "adblock/filterrule.h"
+#include "adblock/filters/filterrule.h"
 
 #include <QHash>
 #include <QList>

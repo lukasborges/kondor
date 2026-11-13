@@ -5,7 +5,7 @@
 #include <QPointer>
 #include <QTemporaryFile>
 
-#include "extensions/catalogentry.h"
+#include "extensions/catalog/catalogentry.h"
 
 class QNetworkReply;
 

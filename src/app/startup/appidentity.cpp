@@ -1,4 +1,4 @@
-#include "app/appidentity.h"
+#include "app/startup/appidentity.h"
 
 #include <QApplication>
 #include <QIcon>

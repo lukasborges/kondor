@@ -1,8 +1,8 @@
-#include "core/settings.h"
+#include "core/settings/settings.h"
 
-#include "core/searchengines.h"
-#include "core/settingsdefaults.h"
-#include "core/spellcheckdictionaries.h"
+#include "core/settings/searchengines.h"
+#include "core/settings/settingsdefaults.h"
+#include "core/settings/spellcheckdictionaries.h"
 
 #include <QFileInfo>
 #include <QStandardPaths>

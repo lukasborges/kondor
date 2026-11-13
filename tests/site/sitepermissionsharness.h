@@ -7,9 +7,9 @@
 #include <QTest>
 #include <QWebEnginePermission>
 
-#include "browser/profilemanager.h"
-#include "browser/tab.h"
-#include "common/qmltesthelpers.h"
+#include "browser/profile/profilemanager.h"
+#include "browser/tabs/tab.h"
+#include "../common/qmltesthelpers.h"
 
 using PermissionType = QWebEnginePermission::PermissionType;
 using PermissionState = QWebEnginePermission::State;

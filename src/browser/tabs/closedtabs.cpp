@@ -1,4 +1,4 @@
-#include "browser/closedtabs.h"
+#include "browser/tabs/closedtabs.h"
 
 #include <QVariantMap>
 

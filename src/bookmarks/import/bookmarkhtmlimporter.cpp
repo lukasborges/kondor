@@ -1,8 +1,8 @@
-#include "bookmarks/bookmarkhtmlimporter.h"
+#include "bookmarks/import/bookmarkhtmlimporter.h"
 
-#include "bookmarks/bookmarkfoldertree.h"
-#include "bookmarks/bookmarkqueries.h"
-#include "core/sql.h"
+#include "bookmarks/storage/bookmarkfoldertree.h"
+#include "bookmarks/storage/bookmarkqueries.h"
+#include "core/database/sql.h"
 
 #include <QHash>
 

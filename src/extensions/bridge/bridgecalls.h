@@ -2,8 +2,8 @@
 
 #include <QString>
 
-#include "browser/tab.h"
-#include "extensions/extensioncall.h"
+#include "browser/tabs/tab.h"
+#include "extensions/bridge/extensioncall.h"
 
 struct BridgeContext {
     Tab *tab;

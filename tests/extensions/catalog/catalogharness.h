@@ -2,8 +2,8 @@
 
 #include <optional>
 
-#include "core/settings.h"
-#include "extensionsharness.h"
+#include "core/settings/settings.h"
+#include "../extensionsharness.h"
 
 struct CatalogFixture {
     QString root;

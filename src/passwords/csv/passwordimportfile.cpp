@@ -1,4 +1,4 @@
-#include "passwords/passwordimportfile.h"
+#include "passwords/csv/passwordimportfile.h"
 
 #include <QFile>
 #include <QFileInfo>

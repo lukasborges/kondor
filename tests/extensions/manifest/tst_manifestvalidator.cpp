@@ -4,7 +4,7 @@
 #include <QTemporaryDir>
 #include <QTest>
 
-#include "extensions/manifestvalidator.h"
+#include "extensions/manifest/manifestvalidator.h"
 
 class TestManifestValidator : public QObject
 {

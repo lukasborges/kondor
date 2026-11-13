@@ -4,11 +4,11 @@
 #include <QUrl>
 #include <QtQmlIntegration/qqmlintegration.h>
 
-#include "browser/tabextensionitems.h"
-#include "browser/tabpasswords.h"
-#include "browser/tabpermissions.h"
-#include "browser/tabsecurity.h"
-#include "browser/tabsitereload.h"
+#include "browser/tabs/features/tabextensionitems.h"
+#include "browser/tabs/features/tabpasswords.h"
+#include "browser/tabs/features/tabpermissions.h"
+#include "browser/tabs/features/tabsecurity.h"
+#include "browser/tabs/features/tabsitereload.h"
 
 class QQuickWebEngineProfile;
 

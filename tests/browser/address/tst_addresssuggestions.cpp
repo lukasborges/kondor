@@ -5,7 +5,7 @@
 #include <QTemporaryDir>
 
 #include "addresssuggestionsharness.h"
-#include "common/isolatedhome.h"
+#include "../../common/isolatedhome.h"
 
 class TestAddressSuggestions : public AddressSuggestionsFixture
 {

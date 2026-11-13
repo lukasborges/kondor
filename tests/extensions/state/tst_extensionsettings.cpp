@@ -1,6 +1,6 @@
 #include <QTest>
 
-#include "extensions/extensionsettings.h"
+#include "extensions/state/extensionsettings.h"
 
 class TestExtensionSettings : public QObject
 {

@@ -3,7 +3,7 @@
 #include <QTemporaryDir>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "common/isolatedhome.h"
+#include "../common/isolatedhome.h"
 #include "settingswindowharness.h"
 
 int main(int argc, char *argv[])

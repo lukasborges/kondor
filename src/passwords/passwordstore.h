@@ -15,7 +15,7 @@
 #include "passwords/import/importoutcome.h"
 #include "passwords/import/importpreparation.h"
 #include "passwords/passwordclipboard.h"
-#include "passwords/passwordimport.h"
+#include "passwords/csv/passwordimport.h"
 #include "passwords/walletfolder.h"
 
 class QQmlEngine;

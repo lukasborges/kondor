@@ -4,17 +4,17 @@
 <context>
     <name>AboutTab</name>
     <message>
-        <location filename="../qml/app/AboutTab.qml" line="15"/>
+        <location filename="../qml/app/about/AboutTab.qml" line="15"/>
         <source>Web Browser</source>
         <translation>Webbrowser</translation>
     </message>
     <message>
-        <location filename="../qml/app/AboutTab.qml" line="18"/>
+        <location filename="../qml/app/about/AboutTab.qml" line="18"/>
         <source>© 2026 The Kondor Developers</source>
         <translation>© 2026 Die Kondor-Entwickler</translation>
     </message>
     <message>
-        <location filename="../qml/app/AboutTab.qml" line="33"/>
+        <location filename="../qml/app/about/AboutTab.qml" line="33"/>
         <source>License: GNU General Public License Version 3</source>
         <translation>Lizenz: GNU General Public License Version 3</translation>
     </message>
@@ -22,33 +22,33 @@
 <context>
     <name>AboutWindow</name>
     <message>
-        <location filename="../qml/app/AboutWindow.qml" line="14"/>
+        <location filename="../qml/app/about/AboutWindow.qml" line="14"/>
         <source>About %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>Über %1</translation>
     </message>
     <message>
-        <location filename="../qml/app/AboutWindow.qml" line="70"/>
+        <location filename="../qml/app/about/AboutWindow.qml" line="70"/>
         <source>Version %1</source>
         <translation>Version %1</translation>
     </message>
     <message>
-        <location filename="../qml/app/AboutWindow.qml" line="86"/>
+        <location filename="../qml/app/about/AboutWindow.qml" line="86"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../qml/app/AboutWindow.qml" line="90"/>
+        <location filename="../qml/app/about/AboutWindow.qml" line="90"/>
         <source>Components</source>
         <translation>Komponenten</translation>
     </message>
     <message>
-        <location filename="../qml/app/AboutWindow.qml" line="94"/>
+        <location filename="../qml/app/about/AboutWindow.qml" line="94"/>
         <source>Authors</source>
         <translation>Autoren</translation>
     </message>
     <message>
-        <location filename="../qml/app/AboutWindow.qml" line="126"/>
+        <location filename="../qml/app/about/AboutWindow.qml" line="126"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -145,7 +145,7 @@
 <context>
     <name>AddressBar</name>
     <message>
-        <location filename="../qml/browser/AddressBar.qml" line="38"/>
+        <location filename="../qml/browser/address/AddressBar.qml" line="38"/>
         <source>Search or enter address</source>
         <translation>Adresse suchen oder eingeben</translation>
     </message>
@@ -153,18 +153,18 @@
 <context>
     <name>AddressSuggestions</name>
     <message>
-        <location filename="../qml/browser/AddressSuggestions.qml" line="65"/>
+        <location filename="../qml/browser/address/AddressSuggestions.qml" line="65"/>
         <source>Search with %1</source>
         <extracomment>%1 is the search engine name</extracomment>
         <translation>Mit %1 suchen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/AddressSuggestions.qml" line="65"/>
+        <location filename="../qml/browser/address/AddressSuggestions.qml" line="65"/>
         <source>Search</source>
         <translation>Suche</translation>
     </message>
     <message>
-        <location filename="../qml/browser/AddressSuggestions.qml" line="58"/>
+        <location filename="../qml/browser/address/AddressSuggestions.qml" line="58"/>
         <source>Visit</source>
         <translation>Besuchen</translation>
     </message>
@@ -172,17 +172,17 @@
 <context>
     <name>AuthorsTab</name>
     <message>
-        <location filename="../qml/app/AuthorsTab.qml" line="17"/>
+        <location filename="../qml/app/about/AuthorsTab.qml" line="17"/>
         <source>Please use %1 to report bugs.</source>
         <translation>Bitte melden Sie Fehler über %1.</translation>
     </message>
     <message>
-        <location filename="../qml/app/AuthorsTab.qml" line="28"/>
+        <location filename="../qml/app/about/AuthorsTab.qml" line="28"/>
         <source>Maintainer</source>
         <translation>Betreuer</translation>
     </message>
     <message>
-        <location filename="../qml/app/AuthorsTab.qml" line="55"/>
+        <location filename="../qml/app/about/AuthorsTab.qml" line="55"/>
         <source>Visit Author&apos;s Homepage</source>
         <translation>Homepage des Autors besuchen</translation>
     </message>
@@ -190,12 +190,12 @@
 <context>
     <name>BookmarkButton</name>
     <message>
-        <location filename="../qml/bookmarks/BookmarkButton.qml" line="23"/>
+        <location filename="../qml/bookmarks/bar/BookmarkButton.qml" line="23"/>
         <source>Edit This Bookmark</source>
         <translation>Dieses Lesezeichen bearbeiten</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarkButton.qml" line="23"/>
+        <location filename="../qml/bookmarks/bar/BookmarkButton.qml" line="23"/>
         <source>Bookmark This Page</source>
         <translation>Diese Seite als Lesezeichen speichern</translation>
     </message>
@@ -203,32 +203,32 @@
 <context>
     <name>BookmarkEditorPopup</name>
     <message>
-        <location filename="../qml/bookmarks/BookmarkEditorPopup.qml" line="92"/>
+        <location filename="../qml/bookmarks/bar/BookmarkEditorPopup.qml" line="92"/>
         <source>Page bookmarked</source>
         <translation>Seite als Lesezeichen gespeichert</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarkEditorPopup.qml" line="92"/>
+        <location filename="../qml/bookmarks/bar/BookmarkEditorPopup.qml" line="92"/>
         <source>Edit Bookmark</source>
         <translation>Lesezeichen bearbeiten</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarkEditorPopup.qml" line="100"/>
+        <location filename="../qml/bookmarks/bar/BookmarkEditorPopup.qml" line="100"/>
         <source>Name:</source>
         <translation>Name:</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarkEditorPopup.qml" line="106"/>
+        <location filename="../qml/bookmarks/bar/BookmarkEditorPopup.qml" line="106"/>
         <source>Folder:</source>
         <translation>Ordner:</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarkEditorPopup.qml" line="116"/>
+        <location filename="../qml/bookmarks/bar/BookmarkEditorPopup.qml" line="116"/>
         <source>Remove</source>
         <translation>Entfernen</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarkEditorPopup.qml" line="124"/>
+        <location filename="../qml/bookmarks/bar/BookmarkEditorPopup.qml" line="124"/>
         <source>Done</source>
         <translation>Fertig</translation>
     </message>
@@ -252,22 +252,22 @@
 <context>
     <name>BookmarkMenu</name>
     <message>
-        <location filename="../qml/bookmarks/BookmarkMenu.qml" line="65"/>
+        <location filename="../qml/bookmarks/bar/BookmarkMenu.qml" line="65"/>
         <source>Bookmark This Page</source>
         <translation>Diese Seite als Lesezeichen speichern</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarkMenu.qml" line="71"/>
+        <location filename="../qml/bookmarks/bar/BookmarkMenu.qml" line="71"/>
         <source>Manage Bookmarks…</source>
         <translation>Lesezeichen verwalten…</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarkMenu.qml" line="78"/>
+        <location filename="../qml/bookmarks/bar/BookmarkMenu.qml" line="78"/>
         <source>Show Bookmarks Toolbar</source>
         <translation>Lesezeichenleiste anzeigen</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarkMenu.qml" line="102"/>
+        <location filename="../qml/bookmarks/bar/BookmarkMenu.qml" line="102"/>
         <source>(Empty)</source>
         <translation>(Leer)</translation>
     </message>
@@ -430,32 +430,32 @@
 <context>
     <name>CertificateErrorPage</name>
     <message>
-        <location filename="../qml/browser/CertificateErrorPage.qml" line="49"/>
+        <location filename="../qml/browser/pages/CertificateErrorPage.qml" line="49"/>
         <source>Your connection is not private</source>
         <translation>Ihre Verbindung ist nicht privat</translation>
     </message>
     <message>
-        <location filename="../qml/browser/CertificateErrorPage.qml" line="57"/>
+        <location filename="../qml/browser/pages/CertificateErrorPage.qml" line="57"/>
         <source>Attackers might be trying to steal your information from &lt;b&gt;%1&lt;/b&gt; (for example, passwords, messages or credit cards).</source>
         <translation>Angreifer versuchen möglicherweise, Ihre Daten von &lt;b&gt;%1&lt;/b&gt; zu stehlen (zum Beispiel Passwörter, Nachrichten oder Kreditkarten).</translation>
     </message>
     <message>
-        <location filename="../qml/browser/CertificateErrorPage.qml" line="74"/>
+        <location filename="../qml/browser/pages/CertificateErrorPage.qml" line="74"/>
         <source>Advanced…</source>
         <translation>Erweitert…</translation>
     </message>
     <message>
-        <location filename="../qml/browser/CertificateErrorPage.qml" line="82"/>
+        <location filename="../qml/browser/pages/CertificateErrorPage.qml" line="82"/>
         <source>Back to Safety</source>
         <translation>Zurück zur Sicherheit</translation>
     </message>
     <message>
-        <location filename="../qml/browser/CertificateErrorPage.qml" line="93"/>
+        <location filename="../qml/browser/pages/CertificateErrorPage.qml" line="93"/>
         <source>This site could not prove its identity. Continuing may expose your data.</source>
         <translation>Diese Website konnte ihre Identität nicht nachweisen. Wenn Sie fortfahren, können Ihre Daten offengelegt werden.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/CertificateErrorPage.qml" line="96"/>
+        <location filename="../qml/browser/pages/CertificateErrorPage.qml" line="96"/>
         <source>Continue Anyway (Unsafe)</source>
         <translation>Trotzdem fortfahren (unsicher)</translation>
     </message>
@@ -491,27 +491,27 @@
 <context>
     <name>ComponentsTab</name>
     <message>
-        <location filename="../qml/app/ComponentsTab.qml" line="18"/>
+        <location filename="../qml/app/about/ComponentsTab.qml" line="18"/>
         <source>Using %1 (built against %2)</source>
         <translation>Verwendet %1 (gebaut gegen %2)</translation>
     </message>
     <message>
-        <location filename="../qml/app/ComponentsTab.qml" line="26"/>
+        <location filename="../qml/app/about/ComponentsTab.qml" line="26"/>
         <source>Chromium %1</source>
         <translation>Chromium %1</translation>
     </message>
     <message>
-        <location filename="../qml/app/ComponentsTab.qml" line="32"/>
+        <location filename="../qml/app/about/ComponentsTab.qml" line="32"/>
         <source>KDE user interface framework, used for the Breeze look</source>
         <translation>KDE-Benutzeroberflächen-Framework, sorgt für das Breeze-Erscheinungsbild</translation>
     </message>
     <message>
-        <location filename="../qml/app/ComponentsTab.qml" line="36"/>
+        <location filename="../qml/app/about/ComponentsTab.qml" line="36"/>
         <source>Windowing System</source>
         <translation>Fenstersystem</translation>
     </message>
     <message>
-        <location filename="../qml/app/ComponentsTab.qml" line="42"/>
+        <location filename="../qml/app/about/ComponentsTab.qml" line="42"/>
         <source>Operating System</source>
         <translation>Betriebssystem</translation>
     </message>
@@ -527,22 +527,22 @@
 <context>
     <name>CrashedPage</name>
     <message>
-        <location filename="../qml/browser/CrashedPage.qml" line="36"/>
+        <location filename="../qml/browser/pages/CrashedPage.qml" line="36"/>
         <source>This tab crashed</source>
         <translation>Dieser Tab ist abgestürzt</translation>
     </message>
     <message>
-        <location filename="../qml/browser/CrashedPage.qml" line="51"/>
+        <location filename="../qml/browser/pages/CrashedPage.qml" line="51"/>
         <source>Exit code: %1</source>
         <translation>Exit-Code: %1</translation>
     </message>
     <message>
-        <location filename="../qml/browser/CrashedPage.qml" line="59"/>
+        <location filename="../qml/browser/pages/CrashedPage.qml" line="59"/>
         <source>Close Tab</source>
         <translation>Tab schließen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/CrashedPage.qml" line="65"/>
+        <location filename="../qml/browser/pages/CrashedPage.qml" line="65"/>
         <source>Reload</source>
         <translation>Neu laden</translation>
     </message>
@@ -550,17 +550,17 @@
 <context>
     <name>DefaultBookmarks</name>
     <message>
-        <location filename="../src/core/defaultbookmarks.cpp" line="9"/>
+        <location filename="../src/core/database/defaultbookmarks.cpp" line="9"/>
         <source>News</source>
         <translation>Nachrichten</translation>
     </message>
     <message>
-        <location filename="../src/core/defaultbookmarks.cpp" line="18"/>
+        <location filename="../src/core/database/defaultbookmarks.cpp" line="18"/>
         <source>Development</source>
         <translation>Entwicklung</translation>
     </message>
     <message>
-        <location filename="../src/core/defaultbookmarks.cpp" line="27"/>
+        <location filename="../src/core/database/defaultbookmarks.cpp" line="27"/>
         <source>Linux</source>
         <translation>Linux</translation>
     </message>
@@ -568,27 +568,27 @@
 <context>
     <name>DeleteBookmarkDialog</name>
     <message>
-        <location filename="../qml/bookmarks/DeleteBookmarkDialog.qml" line="14"/>
+        <location filename="../qml/bookmarks/dialogs/DeleteBookmarkDialog.qml" line="14"/>
         <source>Delete Folder</source>
         <translation>Ordner löschen</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/DeleteBookmarkDialog.qml" line="14"/>
+        <location filename="../qml/bookmarks/dialogs/DeleteBookmarkDialog.qml" line="14"/>
         <source>Delete Bookmark</source>
         <translation>Lesezeichen löschen</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/DeleteBookmarkDialog.qml" line="16"/>
+        <location filename="../qml/bookmarks/dialogs/DeleteBookmarkDialog.qml" line="16"/>
         <source>Delete the folder “%1” and everything in it?</source>
         <translation>Den Ordner „%1“ und seinen gesamten Inhalt löschen?</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/DeleteBookmarkDialog.qml" line="17"/>
+        <location filename="../qml/bookmarks/dialogs/DeleteBookmarkDialog.qml" line="17"/>
         <source>Delete the bookmark “%1”?</source>
         <translation>Das Lesezeichen „%1“ löschen?</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/DeleteBookmarkDialog.qml" line="18"/>
+        <location filename="../qml/bookmarks/dialogs/DeleteBookmarkDialog.qml" line="18"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -721,27 +721,27 @@
 <context>
     <name>DownloadsSettingsPage</name>
     <message>
-        <location filename="../qml/settings/DownloadsSettingsPage.qml" line="26"/>
+        <location filename="../qml/settings/pages/DownloadsSettingsPage.qml" line="26"/>
         <source>Save files to:</source>
         <translation>Dateien speichern in:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/DownloadsSettingsPage.qml" line="36"/>
+        <location filename="../qml/settings/pages/DownloadsSettingsPage.qml" line="36"/>
         <source>Choose…</source>
         <translation>Auswählen…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/DownloadsSettingsPage.qml" line="44"/>
+        <location filename="../qml/settings/pages/DownloadsSettingsPage.qml" line="44"/>
         <source>Ask where to save each file</source>
         <translation>Bei jeder Datei nach dem Speicherort fragen</translation>
     </message>
     <message>
-        <location filename="../qml/settings/DownloadsSettingsPage.qml" line="59"/>
+        <location filename="../qml/settings/pages/DownloadsSettingsPage.qml" line="59"/>
         <source>The selected folder no longer exists. Downloads are saved to %1.</source>
         <translation>Der ausgewählte Ordner existiert nicht mehr. Downloads werden in %1 gespeichert.</translation>
     </message>
     <message>
-        <location filename="../qml/settings/DownloadsSettingsPage.qml" line="68"/>
+        <location filename="../qml/settings/pages/DownloadsSettingsPage.qml" line="68"/>
         <source>Choose Download Folder</source>
         <translation>Download-Ordner auswählen</translation>
     </message>
@@ -749,37 +749,37 @@
 <context>
     <name>ExtensionCatalog</name>
     <message>
-        <location filename="../src/extensions/catalogentry.cpp" line="81"/>
+        <location filename="../src/extensions/catalog/catalogentry.cpp" line="81"/>
         <source>The catalog is not valid JSON</source>
         <translation>Der Katalog ist kein gültiges JSON</translation>
     </message>
     <message>
-        <location filename="../src/extensions/catalogentry.cpp" line="83"/>
+        <location filename="../src/extensions/catalog/catalogentry.cpp" line="83"/>
         <source>The catalog has an unsupported format</source>
         <translation>Der Katalog hat ein nicht unterstütztes Format</translation>
     </message>
     <message>
-        <location filename="../src/extensions/packagedownload.cpp" line="48"/>
+        <location filename="../src/extensions/install/packagedownload.cpp" line="48"/>
         <source>Cannot create a temporary file</source>
         <translation>Temporäre Datei kann nicht erstellt werden</translation>
     </message>
     <message>
-        <location filename="../src/extensions/packagedownload.cpp" line="68"/>
+        <location filename="../src/extensions/install/packagedownload.cpp" line="68"/>
         <source>The package is larger than expected</source>
         <translation>Das Paket ist größer als erwartet</translation>
     </message>
     <message>
-        <location filename="../src/extensions/packagedownload.cpp" line="76"/>
+        <location filename="../src/extensions/install/packagedownload.cpp" line="76"/>
         <source>Cannot read the downloaded package</source>
         <translation>Das heruntergeladene Paket kann nicht gelesen werden</translation>
     </message>
     <message>
-        <location filename="../src/extensions/packagedownload.cpp" line="81"/>
+        <location filename="../src/extensions/install/packagedownload.cpp" line="81"/>
         <source>The downloaded package does not match its checksum</source>
         <translation>Das heruntergeladene Paket stimmt nicht mit seiner Prüfsumme überein</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioncatalogactions.cpp" line="77"/>
+        <location filename="../src/extensions/catalog/extensioncatalogactions.cpp" line="77"/>
         <source>Could not download “%1”: %2</source>
         <translation>„%1“ konnte nicht heruntergeladen werden: %2</translation>
     </message>
@@ -868,18 +868,18 @@
 <context>
     <name>ExtensionManager</name>
     <message>
-        <location filename="../src/extensions/extensioninstaller.cpp" line="64"/>
+        <location filename="../src/extensions/install/extensioninstaller.cpp" line="64"/>
         <source>Cannot create %1</source>
         <translation>%1 kann nicht erstellt werden</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioninstaller.cpp" line="90"/>
-        <location filename="../src/extensions/extensioninstaller.cpp" line="103"/>
+        <location filename="../src/extensions/install/extensioninstaller.cpp" line="90"/>
+        <location filename="../src/extensions/install/extensioninstaller.cpp" line="103"/>
         <source>Cannot install into %1</source>
         <translation>Installation in %1 nicht möglich</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensioninstaller.cpp" line="81"/>
+        <location filename="../src/extensions/install/extensioninstaller.cpp" line="81"/>
         <source>Cannot replace %1</source>
         <translation>%1 kann nicht ersetzt werden</translation>
     </message>
@@ -894,13 +894,13 @@
         <translation>Das Paket verlangt mehr Berechtigungen als die installierte Version</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionstorage.cpp" line="48"/>
-        <location filename="../src/extensions/extensionstorage.cpp" line="65"/>
+        <location filename="../src/extensions/state/extensionstorage.cpp" line="48"/>
+        <location filename="../src/extensions/state/extensionstorage.cpp" line="65"/>
         <source>Storage is not available</source>
         <translation>Speicher ist nicht verfügbar</translation>
     </message>
     <message>
-        <location filename="../src/extensions/extensionstorage.cpp" line="68"/>
+        <location filename="../src/extensions/state/extensionstorage.cpp" line="68"/>
         <source>The extension&apos;s storage is full (limit: 1 MiB)</source>
         <translation>Der Speicher der Erweiterung ist voll (Limit: 1 MiB)</translation>
     </message>
@@ -908,12 +908,12 @@
 <context>
     <name>ExtensionPackage</name>
     <message>
-        <location filename="../src/extensions/permissiondescription.cpp" line="76"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="76"/>
         <source>Read and change all websites</source>
         <translation>Alle Websites lesen und ändern</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/extensions/permissiondescription.cpp" line="67"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="67"/>
         <source>%1 and %n more</source>
         <extracomment>%1 is a list of sites, %n the number of further sites</extracomment>
         <translation>
@@ -922,52 +922,52 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/extensions/permissiondescription.cpp" line="80"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="80"/>
         <source>Read and change pages on %1</source>
         <translation>Seiten auf %1 lesen und ändern</translation>
     </message>
     <message>
-        <location filename="../src/extensions/permissiondescription.cpp" line="20"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="20"/>
         <source>Open, close and navigate your tabs</source>
         <translation>Ihre Tabs öffnen, schließen und steuern</translation>
     </message>
     <message>
-        <location filename="../src/extensions/permissiondescription.cpp" line="21"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="21"/>
         <source>Download files</source>
         <translation>Dateien herunterladen</translation>
     </message>
     <message>
-        <location filename="../src/extensions/permissiondescription.cpp" line="23"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="23"/>
         <source>Show notifications</source>
         <translation>Benachrichtigungen anzeigen</translation>
     </message>
     <message>
-        <location filename="../src/extensions/packagelimits.cpp" line="23"/>
+        <location filename="../src/extensions/package/packagelimits.cpp" line="23"/>
         <source>The package has more than %1 files</source>
         <translation>Das Paket enthält mehr als %1 Dateien</translation>
     </message>
     <message>
-        <location filename="../src/extensions/packagelimits.cpp" line="26"/>
+        <location filename="../src/extensions/package/packagelimits.cpp" line="26"/>
         <source>The package is larger than %1 MiB</source>
         <translation>Das Paket ist größer als %1 MiB</translation>
     </message>
     <message>
-        <location filename="../src/extensions/packagearchive.cpp" line="98"/>
+        <location filename="../src/extensions/package/packagearchive.cpp" line="98"/>
         <source>The file is not a valid ZIP archive</source>
         <translation>Die Datei ist kein gültiges ZIP-Archiv</translation>
     </message>
     <message>
-        <location filename="../src/extensions/packagearchive.cpp" line="40"/>
+        <location filename="../src/extensions/package/packagearchive.cpp" line="40"/>
         <source>Unsafe file name in the package: %1</source>
         <translation>Unsicherer Dateiname im Paket: %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/packagearchive.cpp" line="104"/>
+        <location filename="../src/extensions/package/packagearchive.cpp" line="104"/>
         <source>Cannot create %1</source>
         <translation>%1 kann nicht erstellt werden</translation>
     </message>
     <message>
-        <location filename="../src/extensions/packagearchive.cpp" line="87"/>
+        <location filename="../src/extensions/package/packagearchive.cpp" line="87"/>
         <source>Cannot write %1</source>
         <translation>%1 kann nicht geschrieben werden</translation>
     </message>
@@ -1112,37 +1112,37 @@
 <context>
     <name>FindBar</name>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="92"/>
+        <location filename="../qml/browser/view/FindBar.qml" line="92"/>
         <source>Find in page</source>
         <translation>In Seite suchen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="113"/>
+        <location filename="../qml/browser/view/FindBar.qml" line="113"/>
         <source>Previous (Shift+F3)</source>
         <translation>Vorherige (Umschalt+F3)</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="124"/>
+        <location filename="../qml/browser/view/FindBar.qml" line="124"/>
         <source>Next (F3)</source>
         <translation>Nächste (F3)</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="136"/>
+        <location filename="../qml/browser/view/FindBar.qml" line="136"/>
         <source>No results</source>
         <translation>Keine Ergebnisse</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="137"/>
+        <location filename="../qml/browser/view/FindBar.qml" line="137"/>
         <source>%1 of %2</source>
         <translation>%1 von %2</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="146"/>
+        <location filename="../qml/browser/view/FindBar.qml" line="146"/>
         <source>Match case</source>
         <translation>Groß-/Kleinschreibung beachten</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="160"/>
+        <location filename="../qml/browser/view/FindBar.qml" line="160"/>
         <source>Close (Esc)</source>
         <translation>Schließen (Esc)</translation>
     </message>
@@ -1150,52 +1150,52 @@
 <context>
     <name>GeneralSettingsPage</name>
     <message>
-        <location filename="../qml/settings/GeneralSettingsPage.qml" line="43"/>
+        <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="43"/>
         <source>On startup:</source>
         <translation>Beim Start:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/GeneralSettingsPage.qml" line="44"/>
+        <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="44"/>
         <source>Open the home page</source>
         <translation>Startseite öffnen</translation>
     </message>
     <message>
-        <location filename="../qml/settings/GeneralSettingsPage.qml" line="56"/>
+        <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="56"/>
         <source>Open the tabs from last time</source>
         <translation>Tabs der letzten Sitzung öffnen</translation>
     </message>
     <message>
-        <location filename="../qml/settings/GeneralSettingsPage.qml" line="70"/>
+        <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="70"/>
         <source>Home page:</source>
         <translation>Startseite:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/GeneralSettingsPage.qml" line="71"/>
+        <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="71"/>
         <source>New Tab page</source>
         <translation>Neuer Tab</translation>
     </message>
     <message>
-        <location filename="../qml/settings/GeneralSettingsPage.qml" line="85"/>
+        <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="85"/>
         <source>Use Current Page</source>
         <translation>Aktuelle Seite verwenden</translation>
     </message>
     <message>
-        <location filename="../qml/settings/GeneralSettingsPage.qml" line="93"/>
+        <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="93"/>
         <source>Use New Tab Page</source>
         <translation>Neuen Tab verwenden</translation>
     </message>
     <message>
-        <location filename="../qml/settings/GeneralSettingsPage.qml" line="119"/>
+        <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="119"/>
         <source>New Tab page:</source>
         <translation>Neuer Tab:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/GeneralSettingsPage.qml" line="120"/>
+        <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="120"/>
         <source>Show top sites</source>
         <translation>Meistbesuchte Seiten anzeigen</translation>
     </message>
     <message>
-        <location filename="../qml/settings/GeneralSettingsPage.qml" line="131"/>
+        <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="131"/>
         <source>Restore Removed Sites</source>
         <translation>Entfernte Seiten wiederherstellen</translation>
     </message>
@@ -1221,17 +1221,17 @@
 <context>
     <name>HistoryMenu</name>
     <message>
-        <location filename="../qml/app/HistoryMenu.qml" line="12"/>
+        <location filename="../qml/app/menu/HistoryMenu.qml" line="12"/>
         <source>History</source>
         <translation>Verlauf</translation>
     </message>
     <message>
-        <location filename="../qml/app/HistoryMenu.qml" line="19"/>
+        <location filename="../qml/app/menu/HistoryMenu.qml" line="19"/>
         <source>Recently Closed Tabs</source>
         <translation>Kürzlich geschlossene Tabs</translation>
     </message>
     <message>
-        <location filename="../qml/app/HistoryMenu.qml" line="20"/>
+        <location filename="../qml/app/menu/HistoryMenu.qml" line="20"/>
         <source>Today</source>
         <translation>Heute</translation>
     </message>
@@ -1271,17 +1271,17 @@
 <context>
     <name>ImportMessage</name>
     <message>
-        <location filename="../qml/passwords/ImportMessage.qml" line="15"/>
+        <location filename="../qml/passwords/import/ImportMessage.qml" line="15"/>
         <source>Some passwords could not be saved to KWallet.</source>
         <translation>Einige Passwörter konnten nicht in KWallet gespeichert werden.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportMessage.qml" line="17"/>
+        <location filename="../qml/passwords/import/ImportMessage.qml" line="17"/>
         <source>“%1” was moved to the trash.</source>
         <translation>„%1“ wurde in den Papierkorb verschoben.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportMessage.qml" line="18"/>
+        <location filename="../qml/passwords/import/ImportMessage.qml" line="18"/>
         <source>Imported %n password(s) from “%1”. The file holds your passwords unencrypted: delete it when you no longer need it.</source>
         <translation>
             <numerusform>%n Passwort aus „%1“ importiert. Die Datei enthält Ihre Passwörter unverschlüsselt: Löschen Sie sie, sobald Sie sie nicht mehr brauchen.</numerusform>
@@ -1289,7 +1289,7 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportMessage.qml" line="42"/>
+        <location filename="../qml/passwords/import/ImportMessage.qml" line="42"/>
         <source>Move File to Trash</source>
         <translation>Datei in den Papierkorb verschieben</translation>
     </message>
@@ -1297,12 +1297,12 @@
 <context>
     <name>ImportNotifier</name>
     <message>
-        <location filename="../qml/passwords/ImportNotifier.qml" line="10"/>
+        <location filename="../qml/passwords/import/ImportNotifier.qml" line="10"/>
         <source>Passwords Imported</source>
         <translation>Passwörter importiert</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportNotifier.qml" line="11"/>
+        <location filename="../qml/passwords/import/ImportNotifier.qml" line="11"/>
         <source>%n password(s) imported from %1</source>
         <translation>
             <numerusform>%n Passwort aus %1 importiert</numerusform>
@@ -1313,32 +1313,32 @@
 <context>
     <name>ImportPasswordsDialog</name>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="26"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="26"/>
         <source>“%1” is not a password export: it has no website, username and password columns.</source>
         <translation>„%1“ ist kein Passwortexport: Es fehlen Spalten für Website, Benutzername und Passwort.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="28"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="28"/>
         <source>“%1” has no passwords to import.</source>
         <translation>„%1“ enthält keine Passwörter zum Importieren.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="30"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="30"/>
         <source>“%1” could not be read.</source>
         <translation>„%1“ konnte nicht gelesen werden.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="32"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="32"/>
         <source>“%1” is too large to be a password export.</source>
         <translation>„%1“ ist zu groß für einen Passwortexport.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="34"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="34"/>
         <source>KWallet is not available, so passwords cannot be imported.</source>
         <translation>KWallet ist nicht verfügbar, daher können keine Passwörter importiert werden.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="42"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="42"/>
         <source>%n without an https:// website</source>
         <translation>
             <numerusform>%n ohne https://-Website</numerusform>
@@ -1346,7 +1346,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="44"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="44"/>
         <source>%n without a username or password</source>
         <translation>
             <numerusform>%n ohne Benutzername oder Passwort</numerusform>
@@ -1354,7 +1354,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="46"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="46"/>
         <source>%n that are not logins</source>
         <translation>
             <numerusform>%n, der kein Login ist</numerusform>
@@ -1362,7 +1362,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="47"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="47"/>
         <source>%n entries: %1</source>
         <translation>
             <numerusform>%n Eintrag: %1</numerusform>
@@ -1370,12 +1370,12 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="66"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="66"/>
         <source>Import Passwords</source>
         <translation>Passwörter importieren</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="77"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="77"/>
         <source>Import %n Password(s)</source>
         <translation>
             <numerusform>%n Passwort importieren</numerusform>
@@ -1383,32 +1383,32 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="83"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="83"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="83"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="83"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="105"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="105"/>
         <source>File:</source>
         <translation>Datei:</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="109"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="109"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="114"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="114"/>
         <source>New:</source>
         <translation>Neu:</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="116"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="116"/>
         <source>%n password(s)</source>
         <translation>
             <numerusform>%n Passwort</numerusform>
@@ -1416,12 +1416,12 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="120"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="120"/>
         <source>Already saved:</source>
         <translation>Bereits gespeichert:</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="122"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="122"/>
         <source>%n password(s) are identical and are skipped</source>
         <translation>
             <numerusform>%n Passwort ist identisch und wird übersprungen</numerusform>
@@ -1429,12 +1429,12 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="126"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="126"/>
         <source>Different:</source>
         <translation>Abweichend:</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="128"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="128"/>
         <source>%n site(s) already have a different saved password</source>
         <translation>
             <numerusform>Für %n Website ist bereits ein anderes Passwort gespeichert</numerusform>
@@ -1442,12 +1442,12 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="134"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="134"/>
         <source>Replace them with the imported passwords</source>
         <translation>Durch die importierten Passwörter ersetzen</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="138"/>
+        <location filename="../qml/passwords/import/ImportPasswordsDialog.qml" line="138"/>
         <source>Not imported:</source>
         <translation>Nicht importiert:</translation>
     </message>
@@ -1455,7 +1455,7 @@
 <context>
     <name>ImportPreparingRow</name>
     <message>
-        <location filename="../qml/passwords/ImportPreparingRow.qml" line="20"/>
+        <location filename="../qml/passwords/import/ImportPreparingRow.qml" line="20"/>
         <source>Reading %1…</source>
         <translation>%1 wird gelesen …</translation>
     </message>
@@ -1463,7 +1463,7 @@
 <context>
     <name>ImportProgressMessage</name>
     <message>
-        <location filename="../qml/passwords/ImportProgressMessage.qml" line="15"/>
+        <location filename="../qml/passwords/import/ImportProgressMessage.qml" line="15"/>
         <source>Importing passwords… %1 of %2 sites</source>
         <translation>Passwörter werden importiert … %1 von %2 Websites</translation>
     </message>
@@ -1529,7 +1529,7 @@
 <context>
     <name>Kondor</name>
     <message>
-        <location filename="../src/app/appidentity.cpp" line="22"/>
+        <location filename="../src/app/startup/appidentity.cpp" line="22"/>
         <source>Kondor Browser</source>
         <extracomment>Application display name: translate &quot;Browser&quot;, keep &quot;Kondor&quot;</extracomment>
         <translation>Kondor-Browser</translation>
@@ -1538,12 +1538,12 @@
 <context>
     <name>LicenseWindow</name>
     <message>
-        <location filename="../qml/app/LicenseWindow.qml" line="11"/>
+        <location filename="../qml/app/about/LicenseWindow.qml" line="11"/>
         <source>License Agreement</source>
         <translation>Lizenzvereinbarung</translation>
     </message>
     <message>
-        <location filename="../qml/app/LicenseWindow.qml" line="41"/>
+        <location filename="../qml/app/about/LicenseWindow.qml" line="41"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -1551,17 +1551,17 @@
 <context>
     <name>MainMenu</name>
     <message>
-        <location filename="../qml/app/MainMenu.qml" line="28"/>
+        <location filename="../qml/app/menu/MainMenu.qml" line="28"/>
         <source>Bookmarks</source>
         <translation>Lesezeichen</translation>
     </message>
     <message>
-        <location filename="../qml/app/MainMenu.qml" line="61"/>
+        <location filename="../qml/app/menu/MainMenu.qml" line="61"/>
         <source>More Tools</source>
         <translation>Weitere Werkzeuge</translation>
     </message>
     <message>
-        <location filename="../qml/app/MainMenu.qml" line="74"/>
+        <location filename="../qml/app/menu/MainMenu.qml" line="74"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
@@ -1625,14 +1625,14 @@
 <context>
     <name>NewBookmarkFolderDialog</name>
     <message>
-        <location filename="../qml/bookmarks/NewBookmarkFolderDialog.qml" line="12"/>
-        <location filename="../qml/bookmarks/NewBookmarkFolderDialog.qml" line="38"/>
+        <location filename="../qml/bookmarks/dialogs/NewBookmarkFolderDialog.qml" line="12"/>
+        <location filename="../qml/bookmarks/dialogs/NewBookmarkFolderDialog.qml" line="38"/>
         <source>New Folder</source>
         <extracomment>Default name of a new bookmark folder</extracomment>
         <translation>Neuer Ordner</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/NewBookmarkFolderDialog.qml" line="32"/>
+        <location filename="../qml/bookmarks/dialogs/NewBookmarkFolderDialog.qml" line="32"/>
         <source>Name:</source>
         <translation>Name:</translation>
     </message>
@@ -1640,28 +1640,28 @@
 <context>
     <name>NewTabPage</name>
     <message>
-        <location filename="../qml/browser/NewTabPage.qml" line="110"/>
+        <location filename="../qml/browser/pages/NewTabPage.qml" line="110"/>
         <source>Private Tab</source>
         <translation>Privater Tab</translation>
     </message>
     <message>
-        <location filename="../qml/browser/NewTabPage.qml" line="118"/>
+        <location filename="../qml/browser/pages/NewTabPage.qml" line="118"/>
         <source>Search or enter address</source>
         <translation>Adresse suchen oder eingeben</translation>
     </message>
     <message>
-        <location filename="../qml/browser/NewTabPage.qml" line="138"/>
+        <location filename="../qml/browser/pages/NewTabPage.qml" line="138"/>
         <source>The sites you visit most will appear here.</source>
         <translation>Die von Ihnen am häufigsten besuchten Seiten erscheinen hier.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/NewTabPage.qml" line="147"/>
+        <location filename="../qml/browser/pages/NewTabPage.qml" line="147"/>
         <source>%1 does not keep the history, cookies, form data or permissions of this tab. Everything is erased when you close it.</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 speichert weder den Verlauf noch Cookies, Formulardaten oder Berechtigungen dieses Tabs. Beim Schließen wird alles gelöscht.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/NewTabPage.qml" line="156"/>
+        <location filename="../qml/browser/pages/NewTabPage.qml" line="156"/>
         <source>Downloads and bookmarks you create are kept. Your provider and the sites you visit can still see your activity.</source>
         <translation>Heruntergeladene Dateien und von Ihnen erstellte Lesezeichen bleiben erhalten. Ihr Anbieter und die besuchten Seiten können Ihre Aktivität weiterhin sehen.</translation>
     </message>
@@ -1669,32 +1669,32 @@
 <context>
     <name>PageFileDialogs</name>
     <message>
-        <location filename="../qml/app/PageFileDialogs.qml" line="58"/>
+        <location filename="../qml/app/window/PageFileDialogs.qml" line="58"/>
         <source>Save as PDF</source>
         <translation>Als PDF speichern</translation>
     </message>
     <message>
-        <location filename="../qml/app/PageFileDialogs.qml" line="60"/>
+        <location filename="../qml/app/window/PageFileDialogs.qml" line="60"/>
         <source>PDF (*.pdf)</source>
         <translation>PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../qml/app/PageFileDialogs.qml" line="67"/>
+        <location filename="../qml/app/window/PageFileDialogs.qml" line="67"/>
         <source>Save Page As</source>
         <translation>Seite speichern unter</translation>
     </message>
     <message>
-        <location filename="../qml/app/PageFileDialogs.qml" line="69"/>
+        <location filename="../qml/app/window/PageFileDialogs.qml" line="69"/>
         <source>Web Page, Complete (*.html)</source>
         <translation>Webseite, vollständig (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/app/PageFileDialogs.qml" line="70"/>
+        <location filename="../qml/app/window/PageFileDialogs.qml" line="70"/>
         <source>Web Page, HTML Only (*.html)</source>
         <translation>Webseite, nur HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../qml/app/PageFileDialogs.qml" line="71"/>
+        <location filename="../qml/app/window/PageFileDialogs.qml" line="71"/>
         <source>Web Archive (*.mhtml)</source>
         <translation>Webarchiv (*.mhtml)</translation>
     </message>
@@ -1702,135 +1702,135 @@
 <context>
     <name>PageMenuEntries</name>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="11"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="11"/>
         <source>Open Link in New Tab</source>
         <translation>Link in neuem Tab öffnen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="12"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="12"/>
         <source>Open Link in New Private Tab</source>
         <translation>Link in neuem privaten Tab öffnen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="14"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="14"/>
         <source>Copy Link Address</source>
         <translation>Linkadresse kopieren</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="15"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="15"/>
         <source>Save Link As…</source>
         <translation>Link speichern unter…</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="18"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="18"/>
         <source>Open Image in New Tab</source>
         <translation>Bild in neuem Tab öffnen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="19"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="19"/>
         <source>Save Image As…</source>
         <translation>Bild speichern unter…</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="20"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="20"/>
         <source>Copy Image</source>
         <translation>Bild kopieren</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="21"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="21"/>
         <source>Copy Image Address</source>
         <translation>Bildadresse kopieren</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="24"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="24"/>
         <source>Save Media As…</source>
         <translation>Medium speichern unter…</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="25"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="25"/>
         <source>Copy Media Address</source>
         <translation>Medienadresse kopieren</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="28"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="28"/>
         <source>Undo</source>
         <translation>Rückgängig</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="29"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="29"/>
         <source>Redo</source>
         <translation>Wiederherstellen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="32"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="32"/>
         <source>Cut</source>
         <translation>Ausschneiden</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="33"/>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="96"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="33"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="96"/>
         <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="34"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="34"/>
         <source>Paste</source>
         <translation>Einfügen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="35"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="35"/>
         <source>Paste as Plain Text</source>
         <translation>Als reinen Text einfügen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="36"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="36"/>
         <source>Select All</source>
         <translation>Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="39"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="39"/>
         <source>Inspect Element</source>
         <translation>Element untersuchen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="83"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="83"/>
         <source>Show Controls</source>
         <translation>Bedienelemente anzeigen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="89"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="89"/>
         <source>Loop</source>
         <translation>Wiederholen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="105"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="105"/>
         <source>Search %1 for “%2”</source>
         <extracomment>%1 is the search engine name, %2 the selected text</extracomment>
         <translation>Mit %1 nach „%2“ suchen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="107"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="107"/>
         <source>Search for “%1”</source>
         <extracomment>%1 is the selected text</extracomment>
         <translation>Nach „%1“ suchen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="136"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="136"/>
         <source>Back</source>
         <translation>Zurück</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="137"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="137"/>
         <source>Forward</source>
         <translation>Vorwärts</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="138"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="138"/>
         <source>Reload</source>
         <translation>Neu laden</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageMenuEntries.qml" line="140"/>
+        <location filename="../qml/browser/contextmenu/PageMenuEntries.qml" line="140"/>
         <source>View Page Source</source>
         <translation>Seitenquelltext anzeigen</translation>
     </message>
@@ -1838,17 +1838,17 @@
 <context>
     <name>PageOutput</name>
     <message>
-        <location filename="../qml/browser/PageOutput.qml" line="16"/>
+        <location filename="../qml/browser/view/PageOutput.qml" line="16"/>
         <source>Print failed</source>
         <translation>Drucken fehlgeschlagen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageOutput.qml" line="29"/>
+        <location filename="../qml/browser/view/PageOutput.qml" line="29"/>
         <source>PDF saved</source>
         <translation>PDF gespeichert</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageOutput.qml" line="31"/>
+        <location filename="../qml/browser/view/PageOutput.qml" line="31"/>
         <source>Saving the PDF failed</source>
         <translation>Speichern des PDFs fehlgeschlagen</translation>
     </message>
@@ -1856,17 +1856,17 @@
 <context>
     <name>PageView</name>
     <message>
-        <location filename="../qml/browser/PageView.qml" line="70"/>
+        <location filename="../qml/browser/view/PageView.qml" line="70"/>
         <source>The page&apos;s process ended unexpectedly.</source>
         <translation>Der Prozess der Seite wurde unerwartet beendet.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageView.qml" line="71"/>
+        <location filename="../qml/browser/view/PageView.qml" line="71"/>
         <source>The page crashed.</source>
         <translation>Die Seite ist abgestürzt.</translation>
     </message>
     <message>
-        <location filename="../qml/browser/PageView.qml" line="72"/>
+        <location filename="../qml/browser/view/PageView.qml" line="72"/>
         <source>The page&apos;s process was killed (possibly out of memory).</source>
         <translation>Der Prozess der Seite wurde beendet (möglicherweise wegen Speichermangels).</translation>
     </message>
@@ -1874,32 +1874,32 @@
 <context>
     <name>PasswordBar</name>
     <message>
-        <location filename="../qml/passwords/PasswordBar.qml" line="31"/>
+        <location filename="../qml/passwords/bar/PasswordBar.qml" line="31"/>
         <source>Save the password for &lt;b&gt;%1&lt;/b&gt; on &lt;b&gt;%2&lt;/b&gt;?</source>
         <translation>Passwort für &lt;b&gt;%1&lt;/b&gt; auf &lt;b&gt;%2&lt;/b&gt; speichern?</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordBar.qml" line="35"/>
+        <location filename="../qml/passwords/bar/PasswordBar.qml" line="35"/>
         <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
         <translation>KWallet ist deaktiviert oder der Zugriff wurde verweigert. Passwörter können daher weder gespeichert noch eingefügt werden.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordBar.qml" line="41"/>
+        <location filename="../qml/passwords/bar/PasswordBar.qml" line="41"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordBar.qml" line="47"/>
+        <location filename="../qml/passwords/bar/PasswordBar.qml" line="47"/>
         <source>Not Now</source>
         <translation>Jetzt nicht</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordBar.qml" line="47"/>
+        <location filename="../qml/passwords/bar/PasswordBar.qml" line="47"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordBar.qml" line="54"/>
+        <location filename="../qml/passwords/bar/PasswordBar.qml" line="54"/>
         <source>Never for This Site</source>
         <translation>Nie für diese Website</translation>
     </message>
@@ -1907,7 +1907,7 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <location filename="../qml/passwords/PasswordButton.qml" line="20"/>
+        <location filename="../qml/passwords/bar/PasswordButton.qml" line="20"/>
         <source>Fill Saved Password</source>
         <translation>Gespeichertes Passwort einfügen</translation>
     </message>
@@ -2080,67 +2080,67 @@
 <context>
     <name>PrivacySettingsPage</name>
     <message>
-        <location filename="../qml/settings/PrivacySettingsPage.qml" line="24"/>
+        <location filename="../qml/settings/pages/PrivacySettingsPage.qml" line="24"/>
         <source>Updating lists…</source>
         <translation>Listen werden aktualisiert …</translation>
     </message>
     <message>
-        <location filename="../qml/settings/PrivacySettingsPage.qml" line="26"/>
+        <location filename="../qml/settings/pages/PrivacySettingsPage.qml" line="26"/>
         <source>Lists not downloaded yet</source>
         <translation>Listen noch nicht heruntergeladen</translation>
     </message>
     <message>
-        <location filename="../qml/settings/PrivacySettingsPage.qml" line="28"/>
+        <location filename="../qml/settings/pages/PrivacySettingsPage.qml" line="28"/>
         <source>Lists last updated: %1</source>
         <translation>Listen zuletzt aktualisiert: %1</translation>
     </message>
     <message>
-        <location filename="../qml/settings/PrivacySettingsPage.qml" line="45"/>
+        <location filename="../qml/settings/pages/PrivacySettingsPage.qml" line="45"/>
         <source>Cookies:</source>
         <translation>Cookies:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/PrivacySettingsPage.qml" line="46"/>
+        <location filename="../qml/settings/pages/PrivacySettingsPage.qml" line="46"/>
         <source>Block third-party cookies</source>
         <translation>Cookies von Drittanbietern blockieren</translation>
     </message>
     <message>
-        <location filename="../qml/settings/PrivacySettingsPage.qml" line="58"/>
+        <location filename="../qml/settings/pages/PrivacySettingsPage.qml" line="58"/>
         <source>Ads and trackers:</source>
         <translation>Werbung und Tracker:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/PrivacySettingsPage.qml" line="59"/>
+        <location filename="../qml/settings/pages/PrivacySettingsPage.qml" line="59"/>
         <source>Block ads and trackers</source>
         <translation>Werbung und Tracker blockieren</translation>
     </message>
     <message>
-        <location filename="../qml/settings/PrivacySettingsPage.qml" line="76"/>
+        <location filename="../qml/settings/pages/PrivacySettingsPage.qml" line="76"/>
         <source>On exit:</source>
         <translation>Beim Beenden:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/PrivacySettingsPage.qml" line="77"/>
+        <location filename="../qml/settings/pages/PrivacySettingsPage.qml" line="77"/>
         <source>Clear cookies, cache and history</source>
         <translation>Cookies, Cache und Verlauf löschen</translation>
     </message>
     <message>
-        <location filename="../qml/settings/PrivacySettingsPage.qml" line="90"/>
+        <location filename="../qml/settings/pages/PrivacySettingsPage.qml" line="90"/>
         <source>Browsing data:</source>
         <translation>Browserdaten:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/PrivacySettingsPage.qml" line="91"/>
+        <location filename="../qml/settings/pages/PrivacySettingsPage.qml" line="91"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Cookies und Cache jetzt löschen</translation>
     </message>
     <message>
-        <location filename="../qml/settings/PrivacySettingsPage.qml" line="99"/>
+        <location filename="../qml/settings/pages/PrivacySettingsPage.qml" line="99"/>
         <source>Site permissions:</source>
         <translation>Website-Berechtigungen:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/PrivacySettingsPage.qml" line="100"/>
+        <location filename="../qml/settings/pages/PrivacySettingsPage.qml" line="100"/>
         <source>Manage Site Permissions…</source>
         <translation>Website-Berechtigungen verwalten…</translation>
     </message>
@@ -2148,12 +2148,12 @@
 <context>
     <name>ReaderButton</name>
     <message>
-        <location filename="../qml/browser/ReaderButton.qml" line="23"/>
+        <location filename="../qml/browser/reader/ReaderButton.qml" line="23"/>
         <source>Exit Reader Mode (Ctrl+Alt+R)</source>
         <translation>Lesemodus beenden (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderButton.qml" line="23"/>
+        <location filename="../qml/browser/reader/ReaderButton.qml" line="23"/>
         <source>Reader Mode (Ctrl+Alt+R)</source>
         <translation>Lesemodus (Ctrl+Alt+R)</translation>
     </message>
@@ -2161,38 +2161,38 @@
 <context>
     <name>ReaderControls</name>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="29"/>
+        <location filename="../qml/browser/reader/ReaderControls.qml" line="29"/>
         <source>Decrease Font Size</source>
         <translation>Schrift verkleinern</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="35"/>
+        <location filename="../qml/browser/reader/ReaderControls.qml" line="35"/>
         <source>%1 px</source>
         <extracomment>Font size in pixels, %1 is the number</extracomment>
         <translation>%1 px</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="43"/>
+        <location filename="../qml/browser/reader/ReaderControls.qml" line="43"/>
         <source>Increase Font Size</source>
         <translation>Schrift vergrößern</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="48"/>
+        <location filename="../qml/browser/reader/ReaderControls.qml" line="48"/>
         <source>Serif</source>
         <translation>Serif</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="48"/>
+        <location filename="../qml/browser/reader/ReaderControls.qml" line="48"/>
         <source>Sans Serif</source>
         <translation>Sans Serif</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="53"/>
+        <location filename="../qml/browser/reader/ReaderControls.qml" line="53"/>
         <source>Switch Font Family</source>
         <translation>Schriftfamilie wechseln</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="58"/>
+        <location filename="../qml/browser/reader/ReaderControls.qml" line="58"/>
         <source>Exit Reader Mode</source>
         <translation>Lesemodus beenden</translation>
     </message>
@@ -2200,17 +2200,17 @@
 <context>
     <name>RenameBookmarkDialog</name>
     <message>
-        <location filename="../qml/bookmarks/RenameBookmarkDialog.qml" line="16"/>
+        <location filename="../qml/bookmarks/dialogs/RenameBookmarkDialog.qml" line="16"/>
         <source>Rename Folder</source>
         <translation>Ordner umbenennen</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/RenameBookmarkDialog.qml" line="16"/>
+        <location filename="../qml/bookmarks/dialogs/RenameBookmarkDialog.qml" line="16"/>
         <source>Rename Bookmark</source>
         <translation>Lesezeichen umbenennen</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/RenameBookmarkDialog.qml" line="49"/>
+        <location filename="../qml/bookmarks/dialogs/RenameBookmarkDialog.qml" line="49"/>
         <source>New name:</source>
         <translation>Neuer Name:</translation>
     </message>
@@ -2302,27 +2302,27 @@
 <context>
     <name>SearchSettingsPage</name>
     <message>
-        <location filename="../qml/settings/SearchSettingsPage.qml" line="24"/>
+        <location filename="../qml/settings/pages/SearchSettingsPage.qml" line="24"/>
         <source>Search engine:</source>
         <translation>Suchmaschine:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SearchSettingsPage.qml" line="31"/>
+        <location filename="../qml/settings/pages/SearchSettingsPage.qml" line="31"/>
         <source>Custom…</source>
         <translation>Benutzerdefiniert…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SearchSettingsPage.qml" line="46"/>
+        <location filename="../qml/settings/pages/SearchSettingsPage.qml" line="46"/>
         <source>Custom URL:</source>
         <translation>Benutzerdefinierte URL:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SearchSettingsPage.qml" line="62"/>
+        <location filename="../qml/settings/pages/SearchSettingsPage.qml" line="62"/>
         <source>Show search suggestions in the address bar</source>
         <translation>Suchvorschläge in der Adressleiste anzeigen</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SearchSettingsPage.qml" line="78"/>
+        <location filename="../qml/settings/pages/SearchSettingsPage.qml" line="78"/>
         <source>The URL must contain “%1” where the search terms go.</source>
         <translation>Die URL muss „%1“ an der Stelle der Suchbegriffe enthalten.</translation>
     </message>
@@ -2702,7 +2702,7 @@
 <context>
     <name>SpellCheckLanguagesMenu</name>
     <message>
-        <location filename="../qml/browser/SpellCheckLanguagesMenu.qml" line="8"/>
+        <location filename="../qml/browser/contextmenu/SpellCheckLanguagesMenu.qml" line="8"/>
         <source>Spell Check Languages</source>
         <translation>Sprachen der Rechtschreibprüfung</translation>
     </message>
@@ -2710,17 +2710,17 @@
 <context>
     <name>SpellingSettingsPage</name>
     <message>
-        <location filename="../qml/settings/SpellingSettingsPage.qml" line="29"/>
+        <location filename="../qml/settings/pages/SpellingSettingsPage.qml" line="29"/>
         <source>Check spelling while typing</source>
         <translation>Rechtschreibung während der Eingabe prüfen</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SpellingSettingsPage.qml" line="46"/>
+        <location filename="../qml/settings/pages/SpellingSettingsPage.qml" line="46"/>
         <source>Languages:</source>
         <translation>Sprachen:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SpellingSettingsPage.qml" line="64"/>
+        <location filename="../qml/settings/pages/SpellingSettingsPage.qml" line="64"/>
         <source>No spelling dictionaries are installed.</source>
         <translation>Es sind keine Rechtschreibwörterbücher installiert.</translation>
     </message>
@@ -2728,18 +2728,18 @@
 <context>
     <name>TabButtonDelegate</name>
     <message>
-        <location filename="../qml/browser/TabButtonDelegate.qml" line="21"/>
-        <location filename="../qml/browser/TabButtonDelegate.qml" line="22"/>
+        <location filename="../qml/browser/tabstrip/TabButtonDelegate.qml" line="21"/>
+        <location filename="../qml/browser/tabstrip/TabButtonDelegate.qml" line="22"/>
         <source>New Tab</source>
         <translation>Neuer Tab</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabButtonDelegate.qml" line="21"/>
+        <location filename="../qml/browser/tabstrip/TabButtonDelegate.qml" line="21"/>
         <source>New Private Tab</source>
         <translation>Neuer privater Tab</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabButtonDelegate.qml" line="94"/>
+        <location filename="../qml/browser/tabstrip/TabButtonDelegate.qml" line="94"/>
         <source>Close Tab</source>
         <translation>Tab schließen</translation>
     </message>
@@ -2747,47 +2747,47 @@
 <context>
     <name>TabContextMenu</name>
     <message>
-        <location filename="../qml/browser/TabContextMenu.qml" line="17"/>
+        <location filename="../qml/browser/tabstrip/TabContextMenu.qml" line="17"/>
         <source>New Tab</source>
         <translation>Neuer Tab</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabContextMenu.qml" line="23"/>
+        <location filename="../qml/browser/tabstrip/TabContextMenu.qml" line="23"/>
         <source>Reload</source>
         <translation>Neu laden</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabContextMenu.qml" line="32"/>
+        <location filename="../qml/browser/tabstrip/TabContextMenu.qml" line="32"/>
         <source>Duplicate Tab</source>
         <translation>Tab duplizieren</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabContextMenu.qml" line="38"/>
+        <location filename="../qml/browser/tabstrip/TabContextMenu.qml" line="38"/>
         <source>Move Tab to New Window</source>
         <translation>Tab in neues Fenster verschieben</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabContextMenu.qml" line="44"/>
+        <location filename="../qml/browser/tabstrip/TabContextMenu.qml" line="44"/>
         <source>Unpin Tab</source>
         <translation>Tab lösen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabContextMenu.qml" line="44"/>
+        <location filename="../qml/browser/tabstrip/TabContextMenu.qml" line="44"/>
         <source>Pin Tab</source>
         <translation>Tab anheften</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabContextMenu.qml" line="51"/>
+        <location filename="../qml/browser/tabstrip/TabContextMenu.qml" line="51"/>
         <source>Close Tab</source>
         <translation>Tab schließen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabContextMenu.qml" line="57"/>
+        <location filename="../qml/browser/tabstrip/TabContextMenu.qml" line="57"/>
         <source>Close Other Tabs</source>
         <translation>Andere Tabs schließen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabContextMenu.qml" line="63"/>
+        <location filename="../qml/browser/tabstrip/TabContextMenu.qml" line="63"/>
         <source>Close Tabs to the Right</source>
         <translation>Tabs rechts schließen</translation>
     </message>
@@ -2795,17 +2795,17 @@
 <context>
     <name>TabStrip</name>
     <message>
-        <location filename="../qml/browser/TabStrip.qml" line="141"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="141"/>
         <source>Scroll Tabs Left</source>
         <translation>Tabs nach links scrollen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabStrip.qml" line="150"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="150"/>
         <source>Scroll Tabs Right</source>
         <translation>Tabs nach rechts scrollen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabStrip.qml" line="165"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="165"/>
         <source>New Tab</source>
         <translation>Neuer Tab</translation>
     </message>
@@ -2813,17 +2813,17 @@
 <context>
     <name>TopSiteMenu</name>
     <message>
-        <location filename="../qml/browser/TopSiteMenu.qml" line="18"/>
+        <location filename="../qml/browser/pages/TopSiteMenu.qml" line="18"/>
         <source>Open in New Tab</source>
         <translation>In neuem Tab öffnen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TopSiteMenu.qml" line="23"/>
+        <location filename="../qml/browser/pages/TopSiteMenu.qml" line="23"/>
         <source>Open in New Private Tab</source>
         <translation>In neuem privaten Tab öffnen</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TopSiteMenu.qml" line="29"/>
+        <location filename="../qml/browser/pages/TopSiteMenu.qml" line="29"/>
         <source>Remove from Top Sites</source>
         <translation>Aus den meistbesuchten Seiten entfernen</translation>
     </message>
@@ -2831,18 +2831,18 @@
 <context>
     <name>WindowCloseGuard</name>
     <message>
-        <location filename="../qml/app/WindowCloseGuard.qml" line="30"/>
+        <location filename="../qml/app/window/WindowCloseGuard.qml" line="30"/>
         <source>Quit %1</source>
         <extracomment>%1 is the application name</extracomment>
         <translation>%1 beenden</translation>
     </message>
     <message>
-        <location filename="../qml/app/WindowCloseGuard.qml" line="31"/>
+        <location filename="../qml/app/window/WindowCloseGuard.qml" line="31"/>
         <source>Downloads are still in progress. Quit anyway?</source>
         <translation>Downloads laufen noch. Trotzdem beenden?</translation>
     </message>
     <message>
-        <location filename="../qml/app/WindowCloseGuard.qml" line="32"/>
+        <location filename="../qml/app/window/WindowCloseGuard.qml" line="32"/>
         <source>Quit</source>
         <translation>Beenden</translation>
     </message>
@@ -2858,32 +2858,32 @@
 <context>
     <name>ZoomMenuRow</name>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="27"/>
+        <location filename="../qml/app/menu/ZoomMenuRow.qml" line="27"/>
         <source>Zoom</source>
         <translation>Zoom</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="37"/>
+        <location filename="../qml/app/menu/ZoomMenuRow.qml" line="37"/>
         <source>Zoom Out (Ctrl+−)</source>
         <translation>Verkleinern (Ctrl+−)</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="47"/>
+        <location filename="../qml/app/menu/ZoomMenuRow.qml" line="47"/>
         <source>Reset Zoom (Ctrl+0)</source>
         <translation>Zoom zurücksetzen (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="58"/>
+        <location filename="../qml/app/menu/ZoomMenuRow.qml" line="58"/>
         <source>Zoom In (Ctrl++)</source>
         <translation>Vergrößern (Ctrl++)</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="72"/>
+        <location filename="../qml/app/menu/ZoomMenuRow.qml" line="72"/>
         <source>Exit Full Screen (F11)</source>
         <translation>Vollbildmodus beenden (F11)</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="73"/>
+        <location filename="../qml/app/menu/ZoomMenuRow.qml" line="73"/>
         <source>Full Screen (F11)</source>
         <translation>Vollbild (F11)</translation>
     </message>

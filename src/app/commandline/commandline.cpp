@@ -1,6 +1,6 @@
-#include "app/commandline.h"
+#include "app/commandline/commandline.h"
 
-#include "app/startupurl.h"
+#include "app/commandline/startupurl.h"
 
 #include <QCommandLineOption>
 #include <QCommandLineParser>

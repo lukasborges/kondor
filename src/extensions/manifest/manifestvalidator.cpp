@@ -1,14 +1,14 @@
-#include "extensions/manifestvalidator.h"
+#include "extensions/manifest/manifestvalidator.h"
 
 #include <QJsonArray>
 #include <QRegularExpression>
 
 #include <algorithm>
 
-#include "extensions/contentscriptreader.h"
-#include "extensions/manifesticon.h"
-#include "extensions/manifestsections.h"
-#include "extensions/stringlistfield.h"
+#include "extensions/scripts/contentscriptreader.h"
+#include "extensions/manifest/manifesticon.h"
+#include "extensions/manifest/manifestsections.h"
+#include "extensions/manifest/stringlistfield.h"
 
 namespace {
 

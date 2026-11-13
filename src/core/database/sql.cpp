@@ -1,6 +1,6 @@
-#include "core/sql.h"
+#include "core/database/sql.h"
 
-#include "core/database.h"
+#include "core/database/database.h"
 
 namespace Sql {
 

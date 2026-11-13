@@ -9,7 +9,7 @@
 
 #include <memory>
 
-#include "app/singleinstance.h"
+#include "app/instance/singleinstance.h"
 
 class QQmlComponent;
 class QQmlEngine;

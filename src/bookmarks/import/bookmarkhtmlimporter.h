@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bookmarks/bookmarkhtmlparser.h"
+#include "bookmarks/import/bookmarkhtmlparser.h"
 
 namespace BookmarkHtmlImporter {
 

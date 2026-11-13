@@ -1,11 +1,11 @@
-#include "extensions/catalogentry.h"
+#include "extensions/catalog/catalogentry.h"
 
 #include <QCoreApplication>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QVersionNumber>
 
-#include "extensions/extensionpackage.h"
+#include "extensions/package/extensionpackage.h"
 
 namespace {
 

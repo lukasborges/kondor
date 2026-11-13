@@ -1,4 +1,4 @@
-#include "extensions/permissiondescription.h"
+#include "extensions/install/permissiondescription.h"
 
 #include <QCoreApplication>
 #include <QVariantMap>

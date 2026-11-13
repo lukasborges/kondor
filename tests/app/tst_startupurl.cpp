@@ -2,7 +2,7 @@
 #include <QTemporaryDir>
 #include <QTest>
 
-#include "app/startupurl.h"
+#include "app/commandline/startupurl.h"
 
 class TestStartupUrl : public QObject
 {

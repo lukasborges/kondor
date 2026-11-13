@@ -1,4 +1,4 @@
-#include "browser/tabsitereload.h"
+#include "browser/tabs/features/tabsitereload.h"
 
 TabSiteReload::TabSiteReload(QObject *parent)
     : QObject(parent)

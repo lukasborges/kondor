@@ -1,4 +1,4 @@
-#include "browser/tab.h"
+#include "browser/tabs/tab.h"
 
 void Tab::goBack()
 {

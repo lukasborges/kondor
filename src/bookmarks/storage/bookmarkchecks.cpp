@@ -1,7 +1,7 @@
-#include "bookmarks/bookmarkchecks.h"
+#include "bookmarks/storage/bookmarkchecks.h"
 
-#include "bookmarks/bookmarkfoldertree.h"
-#include "bookmarks/bookmarkqueries.h"
+#include "bookmarks/storage/bookmarkfoldertree.h"
+#include "bookmarks/storage/bookmarkqueries.h"
 
 namespace BookmarkChecks {
 

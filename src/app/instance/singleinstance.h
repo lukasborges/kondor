@@ -1,6 +1,6 @@
 #pragma once
 
-#include "app/singleinstancemessage.h"
+#include "app/instance/singleinstancemessage.h"
 
 #include <QHash>
 #include <QLocalServer>

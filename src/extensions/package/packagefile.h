@@ -2,7 +2,7 @@
 
 #include <QString>
 
-#include "extensions/extensionpackage.h"
+#include "extensions/package/extensionpackage.h"
 
 struct PackageFile {
     QString zipPath;

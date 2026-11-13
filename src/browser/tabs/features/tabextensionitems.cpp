@@ -1,4 +1,4 @@
-#include "browser/tabextensionitems.h"
+#include "browser/tabs/features/tabextensionitems.h"
 
 TabExtensionItems::TabExtensionItems(QObject *parent)
     : QObject(parent)

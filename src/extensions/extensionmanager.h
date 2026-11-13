@@ -11,13 +11,13 @@
 
 #include <optional>
 
-#include "extensions/contentscriptbuilder.h"
-#include "extensions/extensionaccess.h"
-#include "extensions/extensioninstaller.h"
-#include "extensions/extensionstate.h"
+#include "extensions/scripts/contentscriptbuilder.h"
+#include "extensions/state/extensionaccess.h"
+#include "extensions/install/extensioninstaller.h"
+#include "extensions/state/extensionstate.h"
 #include "extensions/installedextension.h"
 #include "extensions/installresult.h"
-#include "extensions/packagefile.h"
+#include "extensions/package/packagefile.h"
 
 class ProfileScripts;
 class QQmlEngine;

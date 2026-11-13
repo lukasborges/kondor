@@ -1,4 +1,4 @@
-#include "app/environment.h"
+#include "app/startup/environment.h"
 
 #include <QCoreApplication>
 #include <QDir>

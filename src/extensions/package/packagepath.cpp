@@ -1,4 +1,4 @@
-#include "extensions/packagepath.h"
+#include "extensions/package/packagepath.h"
 
 #include <QDir>
 #include <QFileInfo>

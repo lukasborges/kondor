@@ -1,10 +1,10 @@
-#include "app/windowmanager.h"
+#include "app/windows/windowmanager.h"
 
-#include "app/extensionpackages.h"
-#include "app/startupargs.h"
-#include "app/windowactivation.h"
-#include "browser/sessionmanager.h"
-#include "core/settings.h"
+#include "app/commandline/extensionpackages.h"
+#include "app/commandline/startupargs.h"
+#include "app/instance/windowactivation.h"
+#include "browser/session/sessionmanager.h"
+#include "core/settings/settings.h"
 #include "extensions/extensionmanager.h"
 
 namespace {

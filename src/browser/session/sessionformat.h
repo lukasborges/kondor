@@ -1,6 +1,6 @@
 #pragma once
 
-#include "browser/sessionwindow.h"
+#include "browser/session/sessionwindow.h"
 
 #include <QByteArray>
 #include <QList>

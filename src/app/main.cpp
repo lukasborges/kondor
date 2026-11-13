@@ -1,8 +1,8 @@
-#include "app/appidentity.h"
-#include "app/appstartup.h"
-#include "app/commandline.h"
-#include "app/environment.h"
-#include "app/messagehandler.h"
+#include "app/startup/appidentity.h"
+#include "app/startup/appstartup.h"
+#include "app/commandline/commandline.h"
+#include "app/startup/environment.h"
+#include "app/startup/messagehandler.h"
 
 #include <QApplication>
 #include <QQmlApplicationEngine>

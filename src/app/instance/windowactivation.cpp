@@ -1,4 +1,4 @@
-#include "app/windowactivation.h"
+#include "app/instance/windowactivation.h"
 
 #include <QQuickWindow>
 

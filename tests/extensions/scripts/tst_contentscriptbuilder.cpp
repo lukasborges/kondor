@@ -2,7 +2,7 @@
 #include <QTemporaryDir>
 #include <QTest>
 
-#include "extensions/contentscriptbuilder.h"
+#include "extensions/scripts/contentscriptbuilder.h"
 
 class TestContentScriptBuilder : public QObject
 {

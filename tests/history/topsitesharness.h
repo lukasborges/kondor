@@ -5,8 +5,8 @@
 #include <QTest>
 #include <QVariantMap>
 
-#include "core/database.h"
-#include "core/settings.h"
+#include "core/database/database.h"
+#include "core/settings/settings.h"
 #include "history/historymanager.h"
 
 inline void resetHistory()

@@ -4,9 +4,9 @@
 #include <QTest>
 #include <QtWebEngineQuick/qtwebenginequickglobal.h>
 
-#include "browser/tab.h"
-#include "browser/tabmodel.h"
-#include "core/settings.h"
+#include "browser/tabs/tab.h"
+#include "browser/tabs/tabmodel.h"
+#include "core/settings/settings.h"
 
 class TestTabPasswords : public QObject
 {

@@ -1,4 +1,4 @@
-#include "extensions/extensioncatalog.h"
+#include "extensions/catalog/extensioncatalog.h"
 
 #include "extensions/extensionmanager.h"
 

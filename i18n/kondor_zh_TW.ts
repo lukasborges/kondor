@@ -2986,12 +2986,12 @@
         <translation>無法建立套件</translation>
     </message>
     <message>
-        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="56"/>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="59"/>
         <source>Unsupported address: %1</source>
         <translation>不支援的位址：%1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="72"/>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="75"/>
         <source>The script is larger than 5 MiB</source>
         <translation>腳本大於 5 MiB</translation>
     </message>

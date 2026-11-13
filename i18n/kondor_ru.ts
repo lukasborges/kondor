@@ -3008,12 +3008,12 @@
         <translation>Не удалось создать пакет</translation>
     </message>
     <message>
-        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="56"/>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="59"/>
         <source>Unsupported address: %1</source>
         <translation>Неподдерживаемый адрес: %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="72"/>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="75"/>
         <source>The script is larger than 5 MiB</source>
         <translation>Скрипт больше 5 МиБ</translation>
     </message>

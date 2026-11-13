@@ -2986,12 +2986,12 @@
         <translation>패키지를 만들 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="56"/>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="59"/>
         <source>Unsupported address: %1</source>
         <translation>지원되지 않는 주소: %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="72"/>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="75"/>
         <source>The script is larger than 5 MiB</source>
         <translation>스크립트가 5 MiB보다 큽니다</translation>
     </message>

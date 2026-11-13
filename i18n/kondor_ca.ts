@@ -1125,7 +1125,7 @@
     <message>
         <location filename="../qml/extensions/ExtensionsPage.qml" line="102"/>
         <source>Kondor extensions and user scripts (*.kondorext *.user.js)</source>
-        <translation>Extensions i scripts d'usuari del Kondor (*.kondorext *.user.js)</translation>
+        <translation>Extensions i scripts d&apos;usuari del Kondor (*.kondorext *.user.js)</translation>
     </message>
     <message>
         <location filename="../qml/extensions/ExtensionsPage.qml" line="113"/>
@@ -1540,7 +1540,7 @@
     <message>
         <location filename="../qml/extensions/InstallExtensionDialog.qml" line="22"/>
         <source>Install User Script</source>
-        <translation>Instal·la l'script d'usuari</translation>
+        <translation>Instal·la l&apos;script d&apos;usuari</translation>
     </message>
     <message>
         <location filename="../qml/extensions/InstallExtensionDialog.qml" line="30"/>
@@ -1565,7 +1565,7 @@
     <message>
         <location filename="../qml/extensions/InstallExtensionDialog.qml" line="51"/>
         <source>“%1” is not a valid user script: %2</source>
-        <translation>«%1» no és un script d'usuari vàlid: %2</translation>
+        <translation>«%1» no és un script d&apos;usuari vàlid: %2</translation>
     </message>
     <message>
         <location filename="../qml/extensions/InstallExtensionDialog.qml" line="53"/>
@@ -1575,7 +1575,7 @@
     <message>
         <location filename="../qml/extensions/InstallExtensionDialog.qml" line="62"/>
         <source>This user script does not come from the Kondor extensions catalog. Only install user scripts from people you trust.</source>
-        <translation>Aquest script d'usuari no ve del catàleg d'extensions del Kondor. Instal·leu només scripts d'usuari de persones de confiança.</translation>
+        <translation>Aquest script d&apos;usuari no ve del catàleg d&apos;extensions del Kondor. Instal·leu només scripts d&apos;usuari de persones de confiança.</translation>
     </message>
     <message>
         <location filename="../qml/extensions/InstallExtensionDialog.qml" line="63"/>
@@ -2979,17 +2979,17 @@
     <message>
         <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="133"/>
         <source>The script has no metadata block</source>
-        <translation>L'script no té cap bloc de metadades</translation>
+        <translation>L&apos;script no té cap bloc de metadades</translation>
     </message>
     <message>
         <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="135"/>
         <source>The script has no @name</source>
-        <translation>L'script no té cap @name</translation>
+        <translation>L&apos;script no té cap @name</translation>
     </message>
     <message>
         <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="137"/>
         <source>The script has neither @match nor @include</source>
-        <translation>L'script no té ni @match ni @include</translation>
+        <translation>L&apos;script no té ni @match ni @include</translation>
     </message>
     <message>
         <location filename="../src/extensions/userscripts/userscriptpackage.cpp" line="161"/>
@@ -2997,14 +2997,14 @@
         <translation>No es pot crear el paquet</translation>
     </message>
     <message>
-        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="56"/>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="59"/>
         <source>Unsupported address: %1</source>
         <translation>Adreça no admesa: %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="72"/>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="75"/>
         <source>The script is larger than 5 MiB</source>
-        <translation>L'script és més gran de 5 MiB</translation>
+        <translation>L&apos;script és més gran de 5 MiB</translation>
     </message>
 </context>
 <context>
@@ -3012,7 +3012,7 @@
     <message>
         <location filename="../qml/extensions/UserScriptBar.qml" line="32"/>
         <source>This page is a user script.</source>
-        <translation>Aquesta pàgina és un script d'usuari.</translation>
+        <translation>Aquesta pàgina és un script d&apos;usuari.</translation>
     </message>
     <message>
         <location filename="../qml/extensions/UserScriptBar.qml" line="36"/>

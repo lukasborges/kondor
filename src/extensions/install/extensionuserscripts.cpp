@@ -4,19 +4,9 @@
 #include "extensions/userscripts/userscriptdownload.h"
 #include "extensions/userscripts/userscriptpackage.h"
 
-namespace {
-
-bool isFetchableScheme(const QString &scheme)
-{
-    return scheme == QLatin1String("https") || scheme == QLatin1String("http")
-        || scheme == QLatin1String("file");
-}
-
-}
-
 bool ExtensionManager::isUserScriptUrl(const QUrl &url)
 {
-    return isFetchableScheme(url.scheme())
+    return isFetchableUserScriptUrl(url)
         && url.path().endsWith(QLatin1String(".user.js"), Qt::CaseInsensitive);
 }
 

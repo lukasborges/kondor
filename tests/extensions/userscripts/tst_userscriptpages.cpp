@@ -9,7 +9,7 @@ namespace {
 
 const char kScript[] =
     "// ==UserScript==\n// @name Pages\n// @namespace test\n// @version 1\n"
-    "// @match *://127.0.0.1/*\n// @grant GM.addStyle\n// @grant GM.setValue\n"
+    "// @match *://127.0.0.1/*\n// @include https://*.example.org/*\n// @grant GM.addStyle\n// @grant GM.setValue\n"
     "// ==/UserScript==\n"
     "GM.addStyle('body { outline: 5px solid red }');\n"
     "document.documentElement.setAttribute('data-us', 'ran');\n"
@@ -28,6 +28,7 @@ private slots:
     void cleanup();
     void runsStylesAndStoresValues();
     void doesNotRunInPrivateProfile();
+    void runsWhereMatchOrIncludeAgrees();
 
 private:
     bool installScript();
@@ -94,6 +95,14 @@ void TestUserScriptPages::doesNotRunInPrivateProfile()
     QVERIFY(waitLoaded(page));
     QTest::qWait(500);
     QCOMPARE(attribute(page, QStringLiteral("data-us")).toString(), QString());
+}
+
+void TestUserScriptPages::runsWhereMatchOrIncludeAgrees()
+{
+    Page page = m_host->open(m_normalProfile, m_server.url());
+    QVERIFY(page.view);
+    QVERIFY(waitLoaded(page));
+    QTRY_COMPARE_WITH_TIMEOUT(attribute(page, QStringLiteral("data-us")).toString(), QStringLiteral("ran"), 10000);
 }
 
 int runTestUserScriptPages(int argc, char *argv[])

@@ -1,4 +1,5 @@
 #include "extensions/scripts/contentscriptbuilder.h"
+#include "extensions/scripts/matchpatternglobs.h"
 
 #include <QFile>
 #include <QJsonArray>
@@ -60,17 +61,43 @@ QString fileText(const ExtensionPackage &package, const QString &file)
     return QString::fromUtf8(package.readFile(file));
 }
 
+QStringList includeGlobs(const ExtensionContentScript &content)
+{
+    QStringList globs = content.include;
+    for (const QString &match : content.matches)
+        globs.append(matchPatternAsGlobs(match));
+    return globs;
+}
+
+QString matchLines(const ExtensionContentScript &content)
+{
+    QString lines;
+    for (const QString &match : content.matches)
+        lines += QStringLiteral("// @match %1\n").arg(match);
+    return lines;
+}
+
+QString includeLines(const ExtensionContentScript &content)
+{
+    QString lines;
+    for (const QString &glob : includeGlobs(content))
+        lines += QStringLiteral("// @include %1\n").arg(glob);
+    return lines;
+}
+
+QString excludeLines(const ExtensionContentScript &content)
+{
+    QString lines;
+    for (const QString &exclude : content.exclude)
+        lines += QStringLiteral("// @exclude %1\n").arg(exclude);
+    return lines;
+}
+
 QString metadataBlock(const ExtensionContentScript &content)
 {
-    QString block = QStringLiteral("// ==UserScript==\n");
-    for (const QString &match : content.matches)
-        block += QStringLiteral("// @match %1\n").arg(match);
-    for (const QString &glob : content.include)
-        block += QStringLiteral("// @include %1\n").arg(glob);
-    for (const QString &exclude : content.exclude)
-        block += QStringLiteral("// @exclude %1\n").arg(exclude);
-    block += QStringLiteral("// @run-at %1\n").arg(content.runAt);
-    return block + QStringLiteral("// ==/UserScript==\n");
+    const QString urlLines = content.include.isEmpty() ? matchLines(content) : includeLines(content);
+    return QStringLiteral("// ==UserScript==\n") + urlLines + excludeLines(content)
+        + QStringLiteral("// @run-at %1\n// ==/UserScript==\n").arg(content.runAt);
 }
 
 QJsonArray styleTexts(const ExtensionPackage &package, const ExtensionContentScript &content)

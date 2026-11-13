@@ -43,6 +43,7 @@ qt_add_library(kondor_testlib STATIC
     ${CMAKE_SOURCE_DIR}/src/extensions/install/extensionloader.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/package/packagesuffix.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/scripts/contentscriptbuilder.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/scripts/matchpatternglobs.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/state/extensionsettings.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/state/extensionstorage.cpp
     ${CMAKE_SOURCE_DIR}/src/passwords/csv/csvreader.cpp

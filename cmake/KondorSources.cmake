@@ -62,6 +62,8 @@ set(KONDOR_EXTENSION_MANAGER_SOURCES
     ${CMAKE_SOURCE_DIR}/src/extensions/install/extensioninstaller.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/scripts/contentscriptbuilder.h
     ${CMAKE_SOURCE_DIR}/src/extensions/scripts/contentscriptbuilder.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/scripts/matchpatternglobs.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/scripts/matchpatternglobs.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/scripts/profilescripts.h
     ${CMAKE_SOURCE_DIR}/src/extensions/scripts/profilescripts.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/state/extensionstorage.h

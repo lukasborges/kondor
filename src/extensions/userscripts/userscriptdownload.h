@@ -9,6 +9,9 @@
 
 class QNetworkReply;
 
+bool isWebUrl(const QUrl &url);
+bool isFetchableUserScriptUrl(const QUrl &url);
+
 class UserScriptDownload : public QObject
 {
     Q_OBJECT

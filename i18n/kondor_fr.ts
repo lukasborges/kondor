@@ -1565,7 +1565,7 @@
     <message>
         <location filename="../qml/extensions/InstallExtensionDialog.qml" line="51"/>
         <source>“%1” is not a valid user script: %2</source>
-        <translation>« %1 » n'est pas un script utilisateur valide : %2</translation>
+        <translation>« %1 » n&apos;est pas un script utilisateur valide : %2</translation>
     </message>
     <message>
         <location filename="../qml/extensions/InstallExtensionDialog.qml" line="53"/>
@@ -1575,7 +1575,7 @@
     <message>
         <location filename="../qml/extensions/InstallExtensionDialog.qml" line="62"/>
         <source>This user script does not come from the Kondor extensions catalog. Only install user scripts from people you trust.</source>
-        <translation>Ce script utilisateur ne provient pas du catalogue d'extensions de Kondor. N'installez que des scripts utilisateur de personnes de confiance.</translation>
+        <translation>Ce script utilisateur ne provient pas du catalogue d&apos;extensions de Kondor. N&apos;installez que des scripts utilisateur de personnes de confiance.</translation>
     </message>
     <message>
         <location filename="../qml/extensions/InstallExtensionDialog.qml" line="63"/>
@@ -2979,17 +2979,17 @@
     <message>
         <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="133"/>
         <source>The script has no metadata block</source>
-        <translation>Le script n'a pas de bloc de métadonnées</translation>
+        <translation>Le script n&apos;a pas de bloc de métadonnées</translation>
     </message>
     <message>
         <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="135"/>
         <source>The script has no @name</source>
-        <translation>Le script n'a pas de @name</translation>
+        <translation>Le script n&apos;a pas de @name</translation>
     </message>
     <message>
         <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="137"/>
         <source>The script has neither @match nor @include</source>
-        <translation>Le script n'a ni @match ni @include</translation>
+        <translation>Le script n&apos;a ni @match ni @include</translation>
     </message>
     <message>
         <location filename="../src/extensions/userscripts/userscriptpackage.cpp" line="161"/>
@@ -2997,12 +2997,12 @@
         <translation>Impossible de créer le paquet</translation>
     </message>
     <message>
-        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="56"/>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="59"/>
         <source>Unsupported address: %1</source>
         <translation>Adresse non prise en charge : %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="72"/>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="75"/>
         <source>The script is larger than 5 MiB</source>
         <translation>Le script dépasse 5 Mio</translation>
     </message>

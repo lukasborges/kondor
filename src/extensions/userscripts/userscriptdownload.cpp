@@ -8,13 +8,6 @@
 
 namespace {
 
-bool isFetchable(const QUrl &url)
-{
-    const QString scheme = url.scheme();
-    return scheme == QLatin1String("https") || scheme == QLatin1String("http")
-        || scheme == QLatin1String("file");
-}
-
 QNetworkRequest requestFor(const QUrl &url)
 {
     QNetworkRequest request(url);
@@ -23,6 +16,16 @@ QNetworkRequest requestFor(const QUrl &url)
     return request;
 }
 
+}
+
+bool isWebUrl(const QUrl &url)
+{
+    return url.scheme() == QLatin1String("https") || url.scheme() == QLatin1String("http");
+}
+
+bool isFetchableUserScriptUrl(const QUrl &url)
+{
+    return isWebUrl(url) || url.isLocalFile();
 }
 
 UserScriptDownload::UserScriptDownload(QNetworkAccessManager &network, QObject *parent)
@@ -52,7 +55,7 @@ void UserScriptDownload::fetchScript(const QUrl &url)
 
 void UserScriptDownload::fetch(const QUrl &url, const BodyHandler &handler)
 {
-    if (!isFetchable(url))
+    if (!isFetchableUserScriptUrl(url))
         return fail(QCoreApplication::translate("UserScript", "Unsupported address: %1")
                         .arg(url.toString()));
     QNetworkReply *reply = m_network.get(requestFor(url));

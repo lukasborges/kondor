@@ -2986,14 +2986,14 @@
         <translation>Paket oluşturulamıyor</translation>
     </message>
     <message>
-        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="56"/>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="59"/>
         <source>Unsupported address: %1</source>
         <translation>Desteklenmeyen adres: %1</translation>
     </message>
     <message>
-        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="72"/>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="75"/>
         <source>The script is larger than 5 MiB</source>
-        <translation>Betik 5 MiB'tan büyük</translation>
+        <translation>Betik 5 MiB&apos;tan büyük</translation>
     </message>
 </context>
 <context>

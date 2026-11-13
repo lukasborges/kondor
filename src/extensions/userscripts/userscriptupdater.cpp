@@ -14,8 +14,7 @@ QUrl checkUrlOf(const QJsonObject &userScript)
     const QString update = userScript.value(QLatin1String("updateURL")).toString();
     const QString download = userScript.value(QLatin1String("downloadURL")).toString();
     const QUrl url(update.isEmpty() ? download : update);
-    const bool isWeb = url.scheme() == QLatin1String("https") || url.scheme() == QLatin1String("http");
-    return isWeb ? url : QUrl();
+    return isWebUrl(url) ? url : QUrl();
 }
 
 }

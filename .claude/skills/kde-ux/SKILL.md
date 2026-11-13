@@ -36,6 +36,13 @@ Any UI the prototype does not show (states, errors, long text) is reviewed with 
 
 ## Non-negotiables
 
+- **Show, don't tell.** The interface explains itself visually, with as little text as possible:
+  - Prefer visual state to words: a dimmed icon and name for "off", a check mark for "copied", an arrow for "opens more".
+  - Use standard patterns users already know, so nothing needs explaining.
+  - No hint sentences, subtitles or status labels when the visual already says it.
+  - Text is the last resort, only when the visual would be ambiguous.
+  - Every state still has words for those who cannot see it: put them in the tooltip and in `Accessible.name`, not on screen.
+  - Before adding any explanatory text, try to remove the need for it.
 - **Feedback:**
   - Show success by **changing the thing the user acted on** (an icon becomes a check mark for 2 s,
     a row appears), not with a "done" message.

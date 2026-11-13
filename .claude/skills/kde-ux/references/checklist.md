@@ -5,11 +5,13 @@ with the fix.
 
 ## Task fit
 
+- [ ] Show, don't tell. For every hint, subtitle or status label, ask whether a visual cue or a standard pattern could replace it. Remove it if one can, and keep the words in the tooltip and `Accessible.name`.
 - [ ] The most common action takes one click or key and is visible without hover.
 - [ ] Each thing (account, site, tab) appears once; the user picks the thing first, then the
       action (object → verb).
-- [ ] Every clickable element says what it does: a verb in the label, or an obvious standard
-      pattern. If a row click does something, a hint or the heading says so.
+- [ ] Every clickable element says what it does, through an obvious standard pattern (arrow, hover
+      highlight, icon) or a short verb label. Use a hint sentence only when the pattern would be
+      ambiguous.
 - [ ] Nothing important hides behind hover, a submenu or a keyboard shortcut only.
 - [ ] The design still works with 1 item, many items (10+), very long names, no items, and an
       error (wallet locked, offline). **Prototype the 10+ case**, not only two items (#183).

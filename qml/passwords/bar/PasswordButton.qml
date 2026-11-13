@@ -7,33 +7,28 @@ ToolButton {
 
     required property TabModel tabs
 
+    signal manageRequested()
+
     visible: tabs.currentTab ? tabs.currentTab.passwords.usernames.length > 0 : false
     display: AbstractButton.IconOnly
     icon.name: "dialog-password"
     icon.width: 16
     icon.height: 16
     flat: true
+    checked: popup.opened
     implicitWidth: 28
     implicitHeight: 28
-    ToolTip.visible: hovered
+    ToolTip.visible: hovered && !popup.opened
     Accessible.name: ToolTip.text
     ToolTip.text: qsTr("Fill Saved Password")
     ToolTip.delay: 600
-    onClicked: passwordMenu.popup(root, 0, root.height)
+    onClicked: popup.opened ? popup.close() : popup.open()
 
-    Menu {
-        id: passwordMenu
-
-        Instantiator {
-            model: root.tabs.currentTab ? root.tabs.currentTab.passwords.usernames : []
-            delegate: MenuItem {
-                required property string modelData
-                text: modelData
-                icon.name: "user-identity"
-                onTriggered: root.tabs.currentTab.passwords.fill(modelData)
-            }
-            onObjectAdded: function(index, object) { passwordMenu.insertItem(index, object) }
-            onObjectRemoved: function(index, object) { passwordMenu.removeItem(object) }
-        }
+    SavedPasswordsPopup {
+        id: popup
+        x: root.width - width
+        y: root.height
+        tab: root.tabs.currentTab
+        onManageRequested: root.manageRequested()
     }
 }

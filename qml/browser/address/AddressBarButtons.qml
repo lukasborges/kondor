@@ -7,6 +7,8 @@ Row {
     required property TabModel tabs
     required property Item addressField
 
+    signal passwordsManageRequested()
+
     readonly property alias bookmarkEditor: bookmarkButton.editor
 
     AdBlockButton {
@@ -16,7 +18,10 @@ Row {
 
     ZoomButton { tabs: root.tabs }
 
-    PasswordButton { tabs: root.tabs }
+    PasswordButton {
+        tabs: root.tabs
+        onManageRequested: root.passwordsManageRequested()
+    }
 
     ReaderButton { tabs: root.tabs }
 

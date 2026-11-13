@@ -18,6 +18,11 @@ QString TabPasswords::promptHost() const
     return PasswordStore::hostOfOrigin(m_origin);
 }
 
+QString TabPasswords::host() const
+{
+    return PasswordStore::hostOfOrigin(PasswordStore::originOf(m_url));
+}
+
 void TabPasswords::updateUsernamesFor(const QUrl &url)
 {
     m_url = url;
@@ -98,4 +103,18 @@ void TabPasswords::fill(const QString &username)
     if (m_isPrivate)
         return;
     emit fillRequested(username);
+}
+
+void TabPasswords::copyUsername(const QString &username)
+{
+    if (m_isPrivate)
+        return;
+    PasswordStore::instance()->copyText(username);
+}
+
+void TabPasswords::copyPassword(const QString &username)
+{
+    if (m_isPrivate)
+        return;
+    PasswordStore::instance()->copyPassword(PasswordStore::originOf(m_url), username);
 }

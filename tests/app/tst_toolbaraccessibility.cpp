@@ -39,7 +39,7 @@ private:
     {
         const QByteArray stubWindow(kStubWindow);
         const QByteArray mainMenu("MainMenu {\n        id: mainMenu\n        browserWindow: window\n    }");
-        const QByteArray toolBar("function openExtensionsSettings() {}\n"
+        const QByteArray toolBar("function openSettingsPage(pageId) {}\n"
                                  "    NavigationToolBar { tabs: tabs; browserWindow: window; width: 600 }");
         return QByteArray(stubWindow).replace(mainMenu, toolBar);
     }

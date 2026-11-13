@@ -55,6 +55,9 @@ qt_add_qml_module(kondor
         qml/adblock/AdBlockButton.qml
         qml/browser/ZoomButton.qml
         qml/passwords/bar/PasswordButton.qml
+        qml/passwords/bar/SavedPasswordsPopup.qml
+        qml/passwords/bar/SavedAccountRow.qml
+        qml/passwords/bar/CopyFeedbackButton.qml
         qml/browser/reader/ReaderButton.qml
         qml/bookmarks/bar/BookmarkButton.qml
         qml/bookmarks/bar/BookmarkEditorPopup.qml

@@ -146,7 +146,7 @@ ToolBar {
             ExtensionsMenu {
                 id: extensionsMenu
                 tab: root.tabs.currentTab
-                onManageRequested: root.browserWindow.openExtensionsSettings()
+                onManageRequested: root.browserWindow.openSettingsPage("extensions")
             }
         }
 

@@ -179,3 +179,8 @@ void PasswordStore::copyPassword(const QString &origin, const QString &username)
     if (!secret.isEmpty())
         m_clipboard.copy(secret);
 }
+
+void PasswordStore::copyText(const QString &text)
+{
+    m_clipboard.copyText(text);
+}

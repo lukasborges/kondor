@@ -63,6 +63,7 @@ public:
     Q_INVOKABLE bool save(const QString &origin, const QString &username, const QString &password);
     Q_INVOKABLE void remove(const QString &origin, const QString &username);
     Q_INVOKABLE void copyPassword(const QString &origin, const QString &username);
+    void copyText(const QString &text);
 
     Q_INVOKABLE void prepareImport(const QUrl &file);
     Q_INVOKABLE void commitImport(bool replaceConflicts);

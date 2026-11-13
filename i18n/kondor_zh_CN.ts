@@ -1896,7 +1896,7 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <location filename="../qml/passwords/bar/PasswordButton.qml" line="20"/>
+        <location filename="../qml/passwords/bar/PasswordButton.qml" line="23"/>
         <source>Fill Saved Password</source>
         <translation>填充已保存的密码</translation>
     </message>
@@ -2205,6 +2205,62 @@
     </message>
 </context>
 <context>
+    <name>SavedAccountRow</name>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="25"/>
+        <source>Fill</source>
+        <translation>填充</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="28"/>
+        <source>Fill %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>填充 %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="53"/>
+        <source>Copy Username</source>
+        <translation>复制用户名</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="54"/>
+        <source>Copied.</source>
+        <translation>已复制。</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="55"/>
+        <source>Username copied</source>
+        <translation>用户名已复制</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="57"/>
+        <source>Copy Username for %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>复制 %1 的用户名</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="65"/>
+        <source>Copy Password</source>
+        <translation>复制密码</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="66"/>
+        <source>Copied. Cleared in 30 seconds.</source>
+        <translation>已复制。30 秒后清除。</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="67"/>
+        <source>Password copied, cleared in 30 seconds</source>
+        <translation>密码已复制，30 秒后清除</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="69"/>
+        <source>Copy Password for %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>复制 %1 的密码</translation>
+    </message>
+</context>
+<context>
     <name>SavedPasswordDelegate</name>
     <message>
         <location filename="../qml/passwords/SavedPasswordDelegate.qml" line="38"/>
@@ -2248,6 +2304,19 @@
         <location filename="../qml/passwords/SavedPasswordsList.qml" line="101"/>
         <source>Add Password…</source>
         <translation>添加密码…</translation>
+    </message>
+</context>
+<context>
+    <name>SavedPasswordsPopup</name>
+    <message>
+        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="62"/>
+        <source>Saved Passwords</source>
+        <translation>已保存的密码</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="89"/>
+        <source>Manage Passwords…</source>
+        <translation>管理密码…</translation>
     </message>
 </context>
 <context>

@@ -9,9 +9,10 @@ class PasswordClipboard : public QObject
     Q_OBJECT
 
 public:
-    explicit PasswordClipboard(QObject *parent = nullptr);
+    explicit PasswordClipboard(QObject *parent = nullptr, int clearAfterMs = 30 * 1000);
 
     void copy(const QString &secret);
+    void copyText(const QString &text);
 
 private:
     void clearIfStillHolding();

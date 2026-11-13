@@ -1,3 +1,4 @@
+#include <QClipboard>
 #include <QGuiApplication>
 #include <QSignalSpy>
 #include <QStandardPaths>
@@ -18,6 +19,8 @@ private slots:
     void neverSaveAddsTheOriginOnce();
     void walletNoticeReplacesTheSavePrompt();
     void dismissClearsThePrompt();
+    void privateTabDoesNotCopy();
+    void hostFollowsUrl();
 };
 
 void TestTabPasswords::init()
@@ -80,6 +83,28 @@ void TestTabPasswords::dismissClearsThePrompt()
     QCOMPARE(tab->passwords()->prompt(), QString());
     QCOMPARE(tab->passwords()->promptUsername(), QString());
     QCOMPARE(spy.count(), 1);
+}
+
+void TestTabPasswords::privateTabDoesNotCopy()
+{
+    TabModel model;
+    Tab *tab = model.addTab(true);
+    QGuiApplication::clipboard()->setText(QStringLiteral("before"));
+
+    tab->passwords()->copyUsername(QStringLiteral("ann"));
+    tab->passwords()->copyPassword(QStringLiteral("ann"));
+
+    QCOMPARE(QGuiApplication::clipboard()->text(), QStringLiteral("before"));
+}
+
+void TestTabPasswords::hostFollowsUrl()
+{
+    TabModel model;
+    Tab *tab = model.addTab();
+
+    tab->passwords()->updateUsernamesFor(QUrl(QStringLiteral("https://Example.org/login?x=1")));
+
+    QCOMPARE(tab->passwords()->host(), QStringLiteral("example.org"));
 }
 
 int main(int argc, char *argv[])

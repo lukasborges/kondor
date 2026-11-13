@@ -15,6 +15,7 @@ class TabPasswords : public QObject
     Q_PROPERTY(QString prompt READ prompt NOTIFY promptChanged)
     Q_PROPERTY(QString promptUsername READ promptUsername NOTIFY promptChanged)
     Q_PROPERTY(QString promptHost READ promptHost NOTIFY promptChanged)
+    Q_PROPERTY(QString host READ host NOTIFY usernamesChanged)
     Q_PROPERTY(QStringList usernames READ usernames NOTIFY usernamesChanged)
 
 public:
@@ -23,6 +24,7 @@ public:
     QString prompt() const { return m_prompt; }
     QString promptUsername() const { return m_username; }
     QString promptHost() const;
+    QString host() const;
     QStringList usernames() const { return m_usernames; }
 
     void offerSave(const QString &origin, const QString &username, const QString &password);
@@ -32,6 +34,8 @@ public:
     Q_INVOKABLE void neverSavePending();
     Q_INVOKABLE void dismissPrompt();
     Q_INVOKABLE void fill(const QString &username);
+    Q_INVOKABLE void copyUsername(const QString &username);
+    Q_INVOKABLE void copyPassword(const QString &username);
 
 signals:
     void promptChanged();

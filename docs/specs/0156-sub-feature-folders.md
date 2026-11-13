@@ -203,3 +203,6 @@ No UI, so there is no prototype.
 | Drop the feature prefix from file names (`bookmarks/import/htmlparser.cpp`)? | No. A file stays named after its class, as in Qt and KDE code, and the move keeps history simple. |
 | How deep? | At most two levels below `src/`, `qml/` or `tests/`. Deeper trees cost more than they explain. |
 | Merge `src/<feature>` and `qml/<feature>`? | No. Keeping C++ and QML apart is the Qt convention, and merging would make the folders larger again. |
+| `src/passwords/import/` already holds 9 files (added after this spec). Where do `csvreader` and `passwordimport*` go? | `src/passwords/csv/` (PR #188). Putting them in `import/` would go over 10 files. |
+| What does "two levels" count from? | Levels below the feature folder, so `src/browser/tabs/features/` is the deepest allowed. The checker reports `src/a/b/c/d/` as `folder depth: 3 > 2` (PR #188). |
+| Where do the checker's folder tests go? | `scripts/tests/test_folders.py`, so that `test_check_code_quality.py` stays under 200 lines (PR #188). |

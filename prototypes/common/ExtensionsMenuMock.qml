@@ -29,6 +29,6 @@ Item {
         MenuItem { text: "Dim Images"; checkable: true; checked: false }
         MenuItem { text: "Run on www.youtube.com"; checkable: true; checked: true }
         MenuSeparator {}
-        MenuItem { text: "Manage Extensions…"; icon.name: "preferences-plugin" }
+        MenuItem { text: "Manage Extensions…"; icon.name: "configure" }
     }
 }

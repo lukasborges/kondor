@@ -759,12 +759,12 @@
     <message>
         <location filename="../qml/extensions/panel/ExtensionActionsFooter.qml" line="21"/>
         <source>Unpin from Toolbar</source>
-        <translation>Desfixa de la barra d'eines</translation>
+        <translation>Desfixa de la barra d&apos;eines</translation>
     </message>
     <message>
         <location filename="../qml/extensions/panel/ExtensionActionsFooter.qml" line="21"/>
         <source>Pin to Toolbar</source>
-        <translation>Fixa a la barra d'eines</translation>
+        <translation>Fixa a la barra d&apos;eines</translation>
     </message>
     <message>
         <location filename="../qml/extensions/panel/ExtensionActionsFooter.qml" line="30"/>

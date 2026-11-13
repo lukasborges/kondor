@@ -301,4 +301,15 @@ history, downloads · 40. #144 Shrink C++: browser · 41. #145 Shrink C++: app, 
 48. #110 Video Speed Controller extension · 49. #111 User Scripts extension ·
 50. #112 Cookie Banner Blocker extension · 51. #113 Skip Sponsors extension ·
 52. #114 YouTube Dislike Counts extension · 53. #115 JSON Viewer extension ·
-54. #116 User Styles extension · 55. #117 Clean Links extension · 56. #118 Mouse Gestures extension
+54. #116 User Styles extension · 55. #117 Clean Links extension · 56. #118 Mouse Gestures extension ·
+57. #163 Python port 1/12: Toolchain and packaging proof · 58. #164 Python port 2/12: Core ·
+59. #165 Python port 3/12: Ad blocking · 60. #166 Python port 4/12: Downloads and history ·
+61. #167 Python port 5/12: Bookmarks · 62. #168 Python port 6/12: Password store ·
+63. #169 Python port 7/12: Browser profile, address and session · 64. #170 Python port 8/12: Tabs ·
+65. #171 Python port 9/12: Extensions: state, catalog and install ·
+66. #172 Python port 10/12: Extensions: scripts and bridge ·
+67. #173 Python port 11/12: App startup · 68. #174 Python port 12/12: Switch to Python
+
+The Python port (#163-#174) follows its umbrella spec,
+[`docs/specs/0162-python-backend.md`](docs/specs/0162-python-backend.md). While it runs, `src/` only changes to fix `bug` issues, and a fix to a
+class that is already ported also fixes its Python twin.

@@ -1083,6 +1083,9 @@ qt_add_executable(tst_extensions
     extensions/state/tst_extensionpins.cpp
     extensions/tst_extensiondialogs.cpp
     extensions/bridge/tst_extensionpages.cpp
+    extensions/userscripts/tst_userscriptpackage.cpp
+    extensions/userscripts/tst_userscriptupdate.cpp
+    extensions/userscripts/tst_userscriptpages.cpp
     passwords/tst_passwordsui.cpp
 )
 
@@ -1092,6 +1095,13 @@ qt_add_resources(tst_extensions "extension_scripts"
     FILES
         ${CMAKE_SOURCE_DIR}/src/extensions/bridge/channel.js
         ${CMAKE_SOURCE_DIR}/src/extensions/bridge/extensionruntime.js
+)
+
+qt_add_resources(tst_extensions "user_script_scripts"
+    PREFIX "/scripts"
+    BASE "${CMAKE_SOURCE_DIR}/src/extensions/scripts"
+    FILES
+        ${CMAKE_SOURCE_DIR}/src/extensions/scripts/usergm.js
 )
 
 qt_add_resources(tst_extensions "passwords_script"
@@ -1194,6 +1204,28 @@ target_link_libraries(tst_catalogentry PRIVATE
 )
 
 add_test(NAME tst_catalogentry COMMAND tst_catalogentry)
+
+qt_add_executable(tst_userscriptmetadata
+    extensions/userscripts/tst_userscriptmetadata.cpp
+)
+
+target_compile_definitions(tst_userscriptmetadata PRIVATE
+    KONDOR_TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data"
+)
+
+target_include_directories(tst_userscriptmetadata PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_userscriptmetadata PRIVATE
+    kondor_testlib
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Test
+    KF6::Archive
+)
+
+add_test(NAME tst_userscriptmetadata COMMAND tst_userscriptmetadata)
 
 qt_add_executable(tst_manifestvalidator
     extensions/manifest/tst_manifestvalidator.cpp

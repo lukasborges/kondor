@@ -866,27 +866,27 @@
 <context>
     <name>ExtensionDelegate</name>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="76"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="83"/>
         <source>Update…</source>
         <translation>更新…</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="84"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="91"/>
         <source>Turn off</source>
         <translation>關閉</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="84"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="91"/>
         <source>Turn on</source>
         <translation>開啟</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="89"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="96"/>
         <source>Configure…</source>
         <translation>設定…</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="99"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="106"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
@@ -947,12 +947,12 @@
 <context>
     <name>ExtensionPackage</name>
     <message>
-        <location filename="../src/extensions/install/permissiondescription.cpp" line="76"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="102"/>
         <source>Read and change all websites</source>
         <translation>讀取及變更所有網站</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/extensions/install/permissiondescription.cpp" line="67"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="93"/>
         <source>%1 and %n more</source>
         <extracomment>%1 is a list of sites, %n the number of further sites</extracomment>
         <translation>
@@ -960,7 +960,7 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/extensions/install/permissiondescription.cpp" line="80"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="106"/>
         <source>Read and change pages on %1</source>
         <translation>讀取及變更 %1 上的頁面</translation>
     </message>
@@ -1122,7 +1122,12 @@
         <translation>擴充套件可為 Kondor 增加功能。您可以從 Kondor 擴充套件目錄取得，或安裝 .kondorext 檔案。</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="112"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="102"/>
+        <source>Kondor extensions and user scripts (*.kondorext *.user.js)</source>
+        <translation>Kondor 擴充套件和使用者腳本 (*.kondorext *.user.js)</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="113"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
@@ -1137,22 +1142,22 @@
         <translation>安裝擴充套件</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="102"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="103"/>
         <source>Kondor extensions (*.kondorext)</source>
         <translation>Kondor 擴充套件 (*.kondorext)</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="102"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="103"/>
         <source>All files (*)</source>
         <translation>所有檔案 (*)</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="110"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="111"/>
         <source>Remove Extension</source>
         <translation>移除擴充套件</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="111"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="112"/>
         <source>Remove the extension “%1” and its data?</source>
         <translation>要移除擴充套件「%1」及其資料嗎？</translation>
     </message>
@@ -1517,57 +1522,77 @@
 <context>
     <name>InstallExtensionDialog</name>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="20"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="22"/>
         <source>Install Extension</source>
         <translation>安裝擴充套件</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="28"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="22"/>
+        <source>Install User Script</source>
+        <translation>安裝使用者腳本</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="30"/>
         <source>Replace</source>
         <translation>取代</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="28"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="30"/>
         <source>Install</source>
         <translation>安裝</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="34"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="36"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="34"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="36"/>
         <source>Close</source>
         <translation>關閉</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="48"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="51"/>
+        <source>“%1” is not a valid user script: %2</source>
+        <translation>「%1」不是有效的使用者腳本：%2</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="53"/>
         <source>“%1” is not a valid Kondor extension: %2</source>
         <translation>「%1」不是有效的 Kondor 擴充套件：%2</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="56"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="62"/>
+        <source>This user script does not come from the Kondor extensions catalog. Only install user scripts from people you trust.</source>
+        <translation>此使用者腳本並非來自 Kondor 擴充套件目錄。請只安裝來自可信任者的使用者腳本。</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="63"/>
         <source>This extension does not come from the Kondor extensions catalog. Only install extensions from people you trust.</source>
         <translation>此擴充套件並非來自 Kondor 擴充套件目錄。請僅安裝您信任的人所提供的擴充套件。</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="73"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="70"/>
+        <source>Kondor does not support %1, which this script uses. Parts of it may not work.</source>
+        <translation>Kondor 不支援此腳本使用的 %1。部分功能可能無法運作。</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="88"/>
         <source>“%1” %2 is installed. Replace it with version %3?</source>
         <translation>已安裝「%1」%2。要以 %3 版取代嗎？</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="75"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="90"/>
         <source>Install “%1” %2 by %3?</source>
         <translation>要安裝 %3 提供的「%1」%2 嗎？</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="77"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="92"/>
         <source>an unknown author</source>
         <translation>未知的作者</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="83"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="98"/>
         <source>It will be able to:</source>
         <translation>它將能夠：</translation>
     </message>
@@ -2936,6 +2961,57 @@
         <location filename="../qml/browser/pages/TopSiteMenu.qml" line="29"/>
         <source>Remove from Top Sites</source>
         <translation>從熱門網站中移除</translation>
+    </message>
+</context>
+<context>
+    <name>UserScript</name>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="133"/>
+        <source>The script has no metadata block</source>
+        <translation>腳本沒有中繼資料區塊</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="135"/>
+        <source>The script has no @name</source>
+        <translation>腳本沒有 @name</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="137"/>
+        <source>The script has neither @match nor @include</source>
+        <translation>腳本既沒有 @match 也沒有 @include</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptpackage.cpp" line="161"/>
+        <source>Cannot create the package</source>
+        <translation>無法建立套件</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="56"/>
+        <source>Unsupported address: %1</source>
+        <translation>不支援的位址：%1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="72"/>
+        <source>The script is larger than 5 MiB</source>
+        <translation>腳本大於 5 MiB</translation>
+    </message>
+</context>
+<context>
+    <name>UserScriptBar</name>
+    <message>
+        <location filename="../qml/extensions/UserScriptBar.qml" line="32"/>
+        <source>This page is a user script.</source>
+        <translation>此頁面是一個使用者腳本。</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/UserScriptBar.qml" line="36"/>
+        <source>Install…</source>
+        <translation>安裝…</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/UserScriptBar.qml" line="44"/>
+        <source>Close</source>
+        <translation>關閉</translation>
     </message>
 </context>
 <context>

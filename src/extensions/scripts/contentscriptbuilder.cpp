@@ -65,6 +65,8 @@ QString metadataBlock(const ExtensionContentScript &content)
     QString block = QStringLiteral("// ==UserScript==\n");
     for (const QString &match : content.matches)
         block += QStringLiteral("// @match %1\n").arg(match);
+    for (const QString &glob : content.include)
+        block += QStringLiteral("// @include %1\n").arg(glob);
     for (const QString &exclude : content.exclude)
         block += QStringLiteral("// @exclude %1\n").arg(exclude);
     block += QStringLiteral("// @run-at %1\n").arg(content.runAt);

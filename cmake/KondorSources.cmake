@@ -38,6 +38,17 @@ set(KONDOR_EXTENSION_MANAGER_SOURCES
     ${CMAKE_SOURCE_DIR}/src/extensions/extensionscripts.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/extensioninstall.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/extensionupdate.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/install/extensionuserscripts.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/userscripts/userscriptmetadata.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/userscripts/userscriptmetadata.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/userscripts/userscriptversion.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/userscripts/userscriptversion.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/userscripts/userscriptpackage.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/userscripts/userscriptpackage.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/userscripts/userscriptdownload.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/userscripts/userscriptdownload.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/userscripts/userscriptupdater.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/userscripts/userscriptupdater.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/extensionconfiguration.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/installedextension.h
     ${CMAKE_SOURCE_DIR}/src/extensions/package/packagefile.h

@@ -13,7 +13,9 @@ struct PatternParts {
 };
 
 PatternParts parsePattern(const QString &pattern);
-QVariantList permissionEntries(const QStringList &matches, const QStringList &permissions);
-QStringList permissionLines(const QStringList &matches, const QStringList &permissions);
+QVariantList permissionEntries(const QStringList &matches, const QStringList &permissions,
+                               const QStringList &includes);
+QStringList permissionLines(const QStringList &matches, const QStringList &permissions,
+                            const QStringList &includes);
 
 }

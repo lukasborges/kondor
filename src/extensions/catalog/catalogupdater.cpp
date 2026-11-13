@@ -44,6 +44,7 @@ CatalogUpdater::CatalogUpdater(ExtensionCatalog *catalog, QNetworkAccessManager 
     : QObject(catalog)
     , m_catalog(catalog)
     , m_network(network)
+    , m_userScripts(network, this)
 {
     m_timer.setInterval(kUpdateIntervalMilliseconds);
     connect(&m_timer, &QTimer::timeout, this, &CatalogUpdater::checkForUpdates);
@@ -74,6 +75,7 @@ void CatalogUpdater::checkForUpdates()
 {
     if (!isAutoUpdateOn())
         return m_timer.stop();
+    m_userScripts.checkAll();
     if (hasCatalogInstall(*ExtensionManager::instance()))
         m_catalog->refresh();
     else

@@ -61,6 +61,7 @@ public:
     void startAutoUpdate();
     void checkForUpdates();
     Q_INVOKABLE QUrl contributingUrl() const;
+    QNetworkAccessManager &network() { return m_network; }
 
     bool loadCatalog(const QByteArray &json, QString *error);
 

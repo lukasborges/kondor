@@ -38,6 +38,9 @@ int runTestExtensionsReloadBar(int argc, char *argv[]);
 int runTestExtensionPins(int argc, char *argv[]);
 int runTestExtensionDialogs(int argc, char *argv[]);
 int runTestExtensionPages(int argc, char *argv[]);
+int runTestUserScriptPackage(int argc, char *argv[]);
+int runTestUserScriptUpdate(int argc, char *argv[]);
+int runTestUserScriptPages(int argc, char *argv[]);
 int runTestPasswordsUi(int argc, char *argv[]);
 
 using ManifestEdit = std::function<void(QJsonObject &)>;

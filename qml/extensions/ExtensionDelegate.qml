@@ -27,6 +27,13 @@ ItemDelegate {
         return text === "" || (row.name + " " + row.description).toLowerCase().includes(text)
     }
 
+    function reviewUpdate() {
+        if (row.model.source === "userscript")
+            ExtensionManager.reviewUserScriptUpdate(row.id)
+        else
+            ExtensionCatalog.install(row.id)
+    }
+
     width: ListView.view.width
     visible: row.matchesFilter()
     height: visible ? implicitHeight : 0
@@ -75,7 +82,7 @@ ItemDelegate {
             visible: row.updateNeedsReview
             text: qsTr("Update…")
             icon.name: "update-none"
-            onClicked: ExtensionCatalog.install(row.id)
+            onClicked: row.reviewUpdate()
         }
         Switch {
             checked: row.model.enabled

@@ -99,7 +99,8 @@ ColumnLayout {
         title: qsTr("Install Extension")
         fileMode: FileDialog.OpenFile
         currentFolder: StandardPaths.writableLocation(StandardPaths.DownloadLocation)
-        nameFilters: [qsTr("Kondor extensions (*.kondorext)"), qsTr("All files (*)")]
+        nameFilters: [qsTr("Kondor extensions and user scripts (*.kondorext *.user.js)"),
+                      qsTr("Kondor extensions (*.kondorext)"), qsTr("All files (*)")]
         onAccepted: ExtensionManager.inspectFile(selectedFile.toString())
     }
 

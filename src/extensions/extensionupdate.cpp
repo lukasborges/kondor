@@ -17,7 +17,7 @@ InstallResult ExtensionManager::refusalForWrongId(const StagedPackage &staged,
 InstallResult ExtensionManager::refusalForBroaderAccess(const StagedPackage &staged,
                                                         const QString &id) const
 {
-    const ExtensionAccess update{staged.package.allMatches(), staged.package.permissions()};
+    const ExtensionAccess update = staged.package.access();
     if (!isInstalled(id) || ExtensionCatalog::isSilentUpdate(update, installedAccess(id)))
         return {};
     return {false, true, QCoreApplication::translate(

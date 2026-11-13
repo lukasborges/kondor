@@ -2,6 +2,7 @@
 
 #include <QAbstractListModel>
 #include <QFileInfo>
+#include <QJsonObject>
 #include <QJsonValue>
 #include <QList>
 #include <QUrl>
@@ -19,6 +20,7 @@
 #include "extensions/installresult.h"
 #include "extensions/package/packagefile.h"
 
+struct UserScriptSource;
 class ProfileScripts;
 class QQmlEngine;
 class QJSEngine;
@@ -71,6 +73,11 @@ public:
     void reload();
 
     Q_INVOKABLE void inspectFile(const QString &path);
+    Q_INVOKABLE void inspectUserScript(const QUrl &url);
+    Q_INVOKABLE void reviewUserScriptUpdate(const QString &id);
+    Q_INVOKABLE static bool isUserScriptUrl(const QUrl &url);
+    QStringList userScriptIds() const;
+    QJsonObject userScriptOf(const QString &id) const;
     bool prepareInstall(const PackageFile &file);
     Q_INVOKABLE void confirmInstall();
     Q_INVOKABLE void cancelInstall();
@@ -145,6 +152,7 @@ private:
     void appendRow(const InstalledExtension &entry);
     void replaceRow(int row, const InstalledExtension &entry);
 
+    void stageUserScript(const UserScriptSource &source, const QString &error);
     void discardStaged();
     QVariantMap previewOf(const StagedPackage &staged) const;
     void setPending(const QVariantMap &preview);

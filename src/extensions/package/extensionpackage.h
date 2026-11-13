@@ -8,9 +8,12 @@
 #include <QUrl>
 #include <QVariantList>
 
+#include "extensions/state/extensionaccess.h"
+
 struct ExtensionContentScript
 {
     QStringList matches;
+    QStringList include;
     QStringList exclude;
     QStringList js;
     QStringList css;
@@ -33,8 +36,10 @@ public:
     static bool isValidId(const QString &id);
     static QString localized(const QJsonObject &object, const QString &key,
                              const QString &locale = QString());
-    static QVariantList permissionEntries(const QStringList &matches, const QStringList &permissions);
-    static QStringList permissionLines(const QStringList &matches, const QStringList &permissions);
+    static QVariantList permissionEntries(const QStringList &matches, const QStringList &permissions,
+                                          const QStringList &includes = QStringList());
+    static QStringList permissionLines(const QStringList &matches, const QStringList &permissions,
+                                       const QStringList &includes = QStringList());
     static bool isSubset(const QStringList &candidate, const QStringList &allowed);
 
     bool isValid() const { return m_valid; }
@@ -51,6 +56,9 @@ public:
     bool hasPermission(const QString &permission) const { return m_permissions.contains(permission); }
     const QList<ExtensionContentScript> &contentScripts() const { return m_contentScripts; }
     QStringList allMatches() const;
+    QStringList allIncludes() const;
+    ExtensionAccess access() const { return {allMatches(), m_permissions, allIncludes()}; }
+    QJsonObject userScript() const { return m_manifest.value(QLatin1String("userScript")).toObject(); }
 
     QString iconSource() const { return m_iconSource; }
 

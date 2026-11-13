@@ -5,4 +5,5 @@
 struct ExtensionAccess {
     QStringList matches;
     QStringList permissions;
+    QStringList includes;
 };

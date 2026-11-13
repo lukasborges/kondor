@@ -37,9 +37,12 @@ jobs:
         run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
+        # A healthy build takes about 10 minutes; a stuck runner must fail instead of blocking the merge queue.
+        timeout-minutes: 40
         run: cmake --build build --parallel "$(nproc)"
 
       - name: Test
+        timeout-minutes: 20
         run: ctest --test-dir build --output-on-failure
 
       - name: Check translations

@@ -23,7 +23,9 @@ def check_unique_base_names(qml_root: Path, components: list[Path]) -> None:
         if path.stem in seen:
             first = seen[path.stem].relative_to(qml_root)
             second = path.relative_to(qml_root)
-            raise DuplicateBaseNameError(f"two QML files share the base name {path.stem}: {first} and {second}")
+            raise DuplicateBaseNameError(
+                f"two QML files share the base name {path.stem}: {first} and {second}"
+            )
         seen[path.stem] = path
 
 

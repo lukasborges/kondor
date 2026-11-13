@@ -31,7 +31,7 @@ def uncreatable_reason(entry: QmlType) -> str:
 
 
 def register_singleton(entry: QmlType) -> None:
-    instance = entry.type_class.instance()  # type: ignore[attr-defined]
+    instance = entry.type_class.instance()
     qmlRegisterSingletonInstance(
         entry.type_class, MODULE_URI, VERSION_MAJOR, VERSION_MINOR, entry.name, instance
     )

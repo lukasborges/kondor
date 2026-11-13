@@ -41,11 +41,10 @@ jobs:
           rm -rf "$LIB/site-packages" "$LIB/test"
           mkdir -p "$LIB/site-packages"
 
-          SITE="/usr/lib64/python$PYV/site-packages"
+          SITE="/usr/lib/python$PYV/site-packages"
           cp -r "$SITE/shiboken6" "$LIB/site-packages/"
           mkdir -p "$LIB/site-packages/PySide6"
-          cp "$SITE/PySide6/__init__.py" "$SITE/PySide6/_config.py" "$LIB/site-packages/PySide6/" 2>/dev/null || true
-          cp "$SITE"/PySide6/libpyside6*.so* "$LIB/site-packages/PySide6/"
+          cp "$SITE/PySide6/__init__.py" "$SITE/PySide6/_config.py" "$LIB/site-packages/PySide6/"
           for module in Core Gui Qml Quick QuickControls2 Network Sql DBus WebEngineCore WebEngineQuick WebChannel; do
             cp "$SITE"/PySide6/Qt$module.*.so "$LIB/site-packages/PySide6/"
           done

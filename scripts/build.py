@@ -13,7 +13,7 @@ REPOSITORY = Path(__file__).resolve().parent.parent
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Stage the QML module and resources for the Python app")
+    parser = argparse.ArgumentParser(description="Stage the QML module and resources")
     parser.add_argument("--out", type=Path, default=REPOSITORY / "build" / "python")
     arguments = parser.parse_args()
     try:

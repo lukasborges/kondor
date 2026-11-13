@@ -13,7 +13,8 @@ def parse_group(body: str) -> ResourceGroup:
     base = BASE.search(body)
     files = FILES.search(body)
     assert prefix and files
-    return ResourceGroup(prefix.group(1), base.group(1) if base else "", tuple(files.group(1).split()))
+    base_directory = base.group(1) if base else ""
+    return ResourceGroup(prefix.group(1), base_directory, tuple(files.group(1).split()))
 
 
 def cmake_resource_entries(cmake_text: str) -> list[tuple[str, str]]:

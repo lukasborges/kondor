@@ -1,5 +1,4 @@
 from PySide6.QtDBus import QDBusConnection, QDBusInterface
-
 from results import Results
 
 BUS_NAME = "org.freedesktop.DBus"

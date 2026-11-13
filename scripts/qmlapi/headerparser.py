@@ -45,21 +45,29 @@ def sections_of(body: str) -> list[tuple[str, str]]:
     starts = [(match.group("label"), match.end()) for match in matches]
     ends = [match.start() for match in matches[1:]] + [len(body)]
     first = [("private", body[: matches[0].start()])] if matches else [("private", body)]
-    return first + [(label, body[start:end]) for (label, start), end in zip(starts, ends)]
+    pairs = zip(starts, ends, strict=True)
+    return first + [(label, body[start:end]) for (label, start), end in pairs]
+
+
+IGNORED_STATEMENT = re.compile(r"Q_PROPERTY|Q_ENUM|^\s*using\s")
+
+
+def is_macro_only(name: str, statement: str) -> bool:
+    return name.startswith(("Q_", "QML_")) and "Q_INVOKABLE" not in statement
 
 
 def declared_function(statement: str) -> tuple[str, set[int]] | None:
-    if "Q_PROPERTY" in statement or "Q_ENUM" in statement or statement.lstrip().startswith("using "):
+    if IGNORED_STATEMENT.search(statement):
         return None
     match = FUNCTION_NAME.search(statement)
-    if match is None or match.group(1).startswith(("Q_", "QML_")) and "Q_INVOKABLE" not in statement:
+    if match is None or is_macro_only(match.group(1), statement):
         return None
     return match.group(1), argument_counts(balanced_arguments(statement, match.end() - 1))
 
 
 def add_functions(api: ClassApi, label: str, text: str) -> None:
     is_signal = label in SIGNAL_LABELS
-    is_slot = label.split()[-1] in SLOT_LABELS
+    is_slot = label.rsplit(maxsplit=1)[-1] in SLOT_LABELS
     for statement in text.split(";"):
         function = declared_function(statement)
         invokable = "Q_INVOKABLE" in statement

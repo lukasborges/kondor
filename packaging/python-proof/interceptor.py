@@ -8,8 +8,8 @@ class BlockingInterceptor(QWebEngineUrlRequestInterceptor):
     blocked = Signal(str)
 
     def interceptRequest(self, info: QWebEngineUrlRequestInfo) -> None:
-        url = info.requestUrl().toString()
-        if BLOCKED_HOST not in url:
+        url = info.requestUrl()
+        if url.host() != BLOCKED_HOST:
             return
         info.block(True)
-        self.blocked.emit(url)
+        self.blocked.emit(url.toString())

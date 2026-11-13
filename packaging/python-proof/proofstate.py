@@ -1,9 +1,8 @@
 from typing import ClassVar
 
+from interceptor import BlockingInterceptor
 from PySide6.QtCore import Property, QObject, Signal, Slot
 from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
-
-from interceptor import BlockingInterceptor
 
 
 class ProofState(QObject):

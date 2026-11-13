@@ -28,3 +28,7 @@ python_version = "3.13"
 [tool.pytest.ini_options]
 testpaths = ["pytests"]
 qt_api = "pyside6"
+
+[[tool.mypy.overrides]]
+module = ["PySide6.*", "shiboken6.*"]
+ignore_missing_imports = true

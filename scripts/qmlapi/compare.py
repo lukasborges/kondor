@@ -26,7 +26,10 @@ def property_differences(name: str, cpp: ClassApi, python: ClassApi) -> list[str
     if cpp_property.is_writable != python_property.is_writable:
         problems.append(f"property {name} writability differs")
     if not types_match(cpp_property.type_name, python_property.type_name):
-        problems.append(f"property {name} type differs: {cpp_property.type_name} != {python_property.type_name}")
+        problems.append(
+            f"property {name} type differs: "
+            f"{cpp_property.type_name} != {python_property.type_name}"
+        )
     return problems
 
 

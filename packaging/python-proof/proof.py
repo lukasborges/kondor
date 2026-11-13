@@ -4,14 +4,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from checks import module_failure, record_dbus, style_failure
+from proofstate import ProofState
 from PySide6.QtCore import QCoreApplication, QTimer
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine, QQmlError, qmlRegisterSingletonInstance
 from PySide6.QtQuickControls2 import QQuickStyle
 from PySide6.QtWebEngineQuick import QtWebEngineQuick
-
-from checks import module_failure, record_dbus, style_failure
-from proofstate import ProofState
 from results import CHECKS, TIMEOUT_SECONDS, Results
 
 QML_ROOT = Path(__file__).resolve().parent / "qml"

@@ -1,5 +1,6 @@
 #include "extensions/extensionmanager.h"
 
+#include "extensions/action/actionitemdisplay.h"
 #include "extensions/state/extensionpins.h"
 
 #include <algorithm>
@@ -11,15 +12,23 @@ QString nameOf(const QVariant &entry)
     return entry.toMap().value(QStringLiteral("name")).toString();
 }
 
-QVariantMap actionEntry(const InstalledExtension &entry, bool isPrivate, const QString &locale)
+struct EntryContext
+{
+    QVariantMap settingValues;
+    QString locale;
+    bool isPrivate;
+};
+
+QVariantMap actionEntry(const InstalledExtension &entry, const EntryContext &context)
 {
     const ExtensionPackage &package = entry.package;
     return QVariantMap{
         {QStringLiteral("id"), package.id()},
-        {QStringLiteral("name"), package.name(locale)},
+        {QStringLiteral("name"), package.name(context.locale)},
         {QStringLiteral("iconSource"), package.iconSource()},
-        {QStringLiteral("siteToggle"), package.actionSiteToggle() && !isPrivate},
-        {QStringLiteral("items"), package.actionItems(locale)},
+        {QStringLiteral("siteToggle"), package.actionSiteToggle() && !context.isPrivate},
+        {QStringLiteral("items"),
+         ActionItemDisplay::forDisplay(package.actionItems(context.locale), context.settingValues)},
     };
 }
 
@@ -92,7 +101,7 @@ QVariantList ExtensionManager::actionExtensions(bool isPrivate) const
     QVariantList list;
     for (const InstalledExtension &entry : m_entries) {
         if (hasVisibleAction(entry, isPrivate))
-            list.append(actionEntry(entry, isPrivate, m_locale));
+            list.append(actionEntry(entry, {settingValues(entry.package.id()), m_locale, isPrivate}));
     }
     return sortedByName(list);
 }

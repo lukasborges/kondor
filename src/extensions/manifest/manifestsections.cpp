@@ -65,6 +65,26 @@ QString settingError(const QJsonObject &setting, int index, QSet<QString> &keys)
     return error;
 }
 
+QSet<QString> keysSettingNames(const QJsonValue &settings)
+{
+    QSet<QString> names;
+    for (const QJsonValue &setting : settings.toArray()) {
+        const QJsonObject object = setting.toObject();
+        if (object.value(QLatin1String("type")).toString() == QLatin1String("keys"))
+            names.insert(object.value(QLatin1String("key")).toString());
+    }
+    return names;
+}
+
+QString keysSettingError(const QJsonObject &item, int index, const QSet<QString> &keysNames)
+{
+    const QJsonValue reference = item.value(QLatin1String("keysSetting"));
+    if (reference.isUndefined() || (reference.isString() && keysNames.contains(reference.toString())))
+        return QString();
+    return manifestError(
+        QStringLiteral("action.items[%1].keysSetting: must name a keys setting").arg(index));
+}
+
 QString actionItemError(const QJsonObject &item, int index, QSet<QString> &ids)
 {
     const QString id = item.value(QLatin1String("id")).toString();
@@ -75,6 +95,20 @@ QString actionItemError(const QJsonObject &item, int index, QSet<QString> &ids)
         return QString();
     return manifestError(
         QStringLiteral("action.items[%1]: needs a unique id and a title").arg(index));
+}
+
+QString itemsError(const QJsonArray &items, const QSet<QString> &keysNames)
+{
+    QSet<QString> ids;
+    for (int i = 0; i < items.size(); ++i) {
+        const QJsonObject item = items.at(i).toObject();
+        QString error = actionItemError(item, i, ids);
+        if (error.isEmpty())
+            error = keysSettingError(item, i, keysNames);
+        if (!error.isEmpty())
+            return error;
+    }
+    return QString();
 }
 
 }
@@ -98,16 +132,10 @@ QString settingsError(const QJsonValue &settings)
     return QString();
 }
 
-QString actionError(const QJsonValue &action)
+QString actionError(const QJsonValue &action, const QJsonValue &settings)
 {
     if (!action.isUndefined() && !action.isObject())
         return manifestError(QStringLiteral("action: must be an object"));
     const QJsonArray items = action.toObject().value(QLatin1String("items")).toArray();
-    QSet<QString> ids;
-    for (int i = 0; i < items.size(); ++i) {
-        const QString error = actionItemError(items.at(i).toObject(), i, ids);
-        if (!error.isEmpty())
-            return error;
-    }
-    return QString();
+    return itemsError(items, keysSettingNames(settings));
 }

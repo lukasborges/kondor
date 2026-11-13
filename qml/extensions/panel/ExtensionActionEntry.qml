@@ -14,7 +14,7 @@ Item {
     property int stateRevision: 0
 
     function focusEntry() {
-        holder.item.forceActiveFocus()
+        (holder.item.checkBox ?? holder.item).forceActiveFocus()
     }
 
     Layout.fillWidth: true
@@ -38,11 +38,25 @@ Item {
     Component {
         id: checkRow
 
-        CheckBox {
-            leftPadding: Kirigami.Units.smallSpacing
-            text: root.modelData.title
-            checked: (root.stateRevision, root.tab.extensionItems.isChecked(root.extensionId, root.modelData.id))
-            onToggled: root.tab.extensionItems.trigger(root.extensionId, root.modelData.id, true)
+        RowLayout {
+            property alias checkBox: box
+
+            CheckBox {
+                id: box
+                leftPadding: Kirigami.Units.smallSpacing
+                text: root.modelData.title
+                checked: (root.stateRevision, root.tab.extensionItems.isChecked(root.extensionId, root.modelData.id))
+                Accessible.description: root.modelData.shortcut ?? ""
+                onToggled: root.tab.extensionItems.trigger(root.extensionId, root.modelData.id, true)
+                Layout.fillWidth: true
+            }
+
+            Label {
+                text: root.modelData.shortcut ?? ""
+                color: Kirigami.Theme.disabledTextColor
+                visible: text !== ""
+                Layout.rightMargin: Kirigami.Units.smallSpacing
+            }
         }
     }
 

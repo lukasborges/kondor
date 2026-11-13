@@ -103,7 +103,7 @@ exactly as described here; later issues reuse it. Do not create parallel alterna
 
 | Block | Files | Contract |
 | --- | --- | --- |
-| **Settings** | `src/settings.{h,cpp}` | QML singleton `Settings` (`QML_ELEMENT` + `QML_SINGLETON`, same `instance()`/`create()` pattern as `ProfileManager`) wrapping `QSettings` (organization `KDE`, application `Kondor` → `~/.config/KDE/Kondor.conf`). One `Q_PROPERTY` (READ/WRITE/NOTIFY) per option, written immediately on set, with its default in `Settings::defaultValue()`. Defined in issue #3. **UI**: `qml/SettingsWindow.qml` is a KDE Configure dialog (#57): new options go into an existing sidebar page/tab or a new data-driven page entry, and are applied with OK/Apply. |
+| **Settings** | `src/settings.{h,cpp}` | QML singleton `Settings` (`QML_ELEMENT` + `QML_SINGLETON`, same singleton pattern as `ProfileManager`, see Conventions → C++) wrapping `QSettings` (organization `KDE`, application `Kondor` → `~/.config/KDE/Kondor.conf`). One `Q_PROPERTY` (READ/WRITE/NOTIFY) per option, written immediately on set, with its default in `Settings::defaultValue()`. Defined in issue #3. **UI**: `qml/SettingsWindow.qml` is a KDE Configure dialog (#57): new options go into an existing sidebar page/tab or a new data-driven page entry, and are applied with OK/Apply. |
 | **Database** | `src/database.{h,cpp}` | `Database::instance()` opens one SQLite file at `QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/kondor.sqlite"` with `QSqlDatabase` (driver `QSQLITE`, connection name `kondor`). Schema versioning with `PRAGMA user_version` and a `migrate()` step per version. Add `Sql` to `find_package(Qt6 …)` and `Qt6::Sql` to `target_link_libraries`. Defined in issue #1. |
 | **Notifications** | `src/notifier.{h,cpp}` | QML singleton `Notifier` with `Q_INVOKABLE void notify(const QString &title, const QString &body, const QString &iconName)`, implemented with `QDBusInterface` on `org.freedesktop.Notifications` (`Notify` method, app name `Kondor`, `app_icon` = `kondor`). Add `DBus` to Qt components and `Qt6::DBus`. Defined in issue #4. |
 | **Inline page bar** | `qml/InlineBar.qml` | A bar shown between the toolbar and the page (for find, permission prompts, crash notices): `Kirigami.InlineMessage`-like look, uses `Kirigami.Theme` colors. Defined in issue #5. |
@@ -125,6 +125,9 @@ mention the difference in the PR.
   when a value really changes (see `Tab::setTitle`). Expose classes to QML with `QML_ELEMENT`
   (and `QML_SINGLETON` for singletons); register every new source file in `CMakeLists.txt`
   (`qt_add_qml_module(... SOURCES ...)`).
+- **QML singletons** use `static X *instance()` plus `static X *create(QQmlEngine *, QJSEngine *)`
+  returning `instance()`, and the constructor is **private**. If the class can be built with its
+  default constructor, Qt builds a second, QML-only instance and never calls `create()` (#159).
 - **QML**: new components go in their own file under `qml/<feature>/`, with `import Kondor`, and
   must be added to `QML_FILES` in `CMakeLists.txt`.
 - **Look & feel**: only QQC2 controls with the `org.kde.desktop` style; colors from

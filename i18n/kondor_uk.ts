@@ -749,7 +749,7 @@
 <context>
     <name>ExtensionActions</name>
     <message>
-        <location filename="../qml/extensions/panel/ExtensionActions.qml" line="58"/>
+        <location filename="../qml/extensions/panel/ExtensionActions.qml" line="62"/>
         <source>Back to Extensions</source>
         <translation>Назад до розширень</translation>
     </message>
@@ -1015,12 +1015,12 @@
 <context>
     <name>ExtensionRow</name>
     <message>
-        <location filename="../qml/extensions/panel/ExtensionRow.qml" line="24"/>
+        <location filename="../qml/extensions/panel/ExtensionRow.qml" line="28"/>
         <source>Off on this site</source>
         <translation>Вимкнено на цьому сайті</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/panel/ExtensionRow.qml" line="27"/>
+        <location filename="../qml/extensions/panel/ExtensionRow.qml" line="31"/>
         <source>%1, off on %2</source>
         <extracomment>%1 is the extension name, %2 is the site host</extracomment>
         <translation>%1, вимкнено на %2</translation>
@@ -1071,12 +1071,12 @@
 <context>
     <name>ExtensionSiteSwitch</name>
     <message>
-        <location filename="../qml/extensions/panel/ExtensionSiteSwitch.qml" line="23"/>
+        <location filename="../qml/extensions/panel/ExtensionSiteSwitch.qml" line="27"/>
         <source>Run on %1</source>
         <translation>Запускати на %1</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/panel/ExtensionSiteSwitch.qml" line="32"/>
+        <location filename="../qml/extensions/panel/ExtensionSiteSwitch.qml" line="36"/>
         <source>Run %1 on %2</source>
         <extracomment>%1 is the extension name, %2 is the site host</extracomment>
         <translation>Запускати %1 на %2</translation>
@@ -1162,7 +1162,7 @@
 <context>
     <name>ExtensionsToolButtons</name>
     <message>
-        <location filename="../qml/extensions/panel/ExtensionsToolButtons.qml" line="38"/>
+        <location filename="../qml/extensions/panel/ExtensionsToolButtons.qml" line="42"/>
         <source>Extensions</source>
         <translation>Розширення</translation>
     </message>

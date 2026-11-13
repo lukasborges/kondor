@@ -168,6 +168,7 @@ void ExtensionManager::remove(const QString &id)
         return;
     removeRow(row);
     deleteStoredData(id);
+    setPinned(id, false);
     emit extensionRemoved(id);
     changed();
 }

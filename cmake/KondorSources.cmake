@@ -28,6 +28,8 @@ set(KONDOR_EXTENSION_MANAGER_SOURCES
     ${CMAKE_SOURCE_DIR}/src/extensions/extensionmanager.h
     ${CMAKE_SOURCE_DIR}/src/extensions/extensionmanager.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/extensionqueries.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/state/extensionpins.h
+    ${CMAKE_SOURCE_DIR}/src/extensions/state/extensionpins.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/extensionmodel.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/catalog/extensioncatalogmodel.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/catalog/extensioncatalogactions.cpp

@@ -32,6 +32,8 @@ int runTestExtensionBridgeTabs(int argc, char *argv[]);
 int runTestExtensionCatalog(int argc, char *argv[]);
 int runTestExtensionUpdates(int argc, char *argv[]);
 int runTestExtensionsUi(int argc, char *argv[]);
+int runTestExtensionsPanel(int argc, char *argv[]);
+int runTestExtensionPins(int argc, char *argv[]);
 int runTestExtensionDialogs(int argc, char *argv[]);
 int runTestExtensionPages(int argc, char *argv[]);
 int runTestPasswordsUi(int argc, char *argv[]);
@@ -116,6 +118,26 @@ inline bool installSample(const QString &work, const QString &source = QStringLi
     return result.isInstalled;
 }
 
+inline bool installNamed(const QString &work, const QString &id, const QString &name)
+{
+    const QString zip = packVariant(work, id, [&](QJsonObject &manifest) {
+        manifest.insert(QStringLiteral("id"), id);
+        manifest.insert(QStringLiteral("name"), name);
+    });
+    return ExtensionManager::instance()->installPackage({zip, QStringLiteral("file")}, id).isInstalled;
+}
+
+inline bool installPlain(const QString &work)
+{
+    const QJsonObject item{{QStringLiteral("id"), QStringLiteral("go")}, {QStringLiteral("title"), QStringLiteral("Go Now")}};
+    const QString zip = packVariant(work, QStringLiteral("plain"), [&](QJsonObject &manifest) {
+        manifest.insert(QStringLiteral("id"), QStringLiteral("plain"));
+        manifest.insert(QStringLiteral("name"), QStringLiteral("Plain"));
+        manifest.insert(QStringLiteral("action"), QJsonObject{{QStringLiteral("items"), QJsonArray{item}}});
+    });
+    return ExtensionManager::instance()->installPackage({zip, QStringLiteral("file")}, QStringLiteral("plain")).isInstalled;
+}
+
 inline void applySettings(const QString &id, const QVariantMap &settings)
 {
     ExtensionManager::instance()->applyConfiguration(id, {{QStringLiteral("settings"), settings}});
@@ -133,6 +155,7 @@ inline void removeEveryExtension()
     while (manager->count() > 0)
         manager->remove(manager->data(manager->index(0), ExtensionManager::IdRole).toString());
     manager->setLocale(QStringLiteral("en"));
+    Settings::instance()->setPinnedExtensions({});
 }
 
 inline void registerExtensionTypes()

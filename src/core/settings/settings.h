@@ -56,6 +56,8 @@ class Settings : public QObject
                    NOTIFY offerToSavePasswordsChanged)
     Q_PROPERTY(QStringList passwordNeverSaveSites READ passwordNeverSaveSites
                    WRITE setPasswordNeverSaveSites NOTIFY passwordNeverSaveSitesChanged)
+    Q_PROPERTY(QStringList pinnedExtensions READ pinnedExtensions WRITE setPinnedExtensions
+                   NOTIFY pinnedExtensionsChanged)
     Q_PROPERTY(bool extensionsAutoUpdate READ extensionsAutoUpdate WRITE setExtensionsAutoUpdate
                    NOTIFY extensionsAutoUpdateChanged)
     Q_PROPERTY(QDateTime adBlockLastUpdate READ adBlockLastUpdate WRITE setAdBlockLastUpdate
@@ -91,6 +93,7 @@ public:
     QStringList adBlockAllowList() const { return m_adBlockAllowList; }
     bool offerToSavePasswords() const { return m_offerToSavePasswords; }
     bool extensionsAutoUpdate() const { return m_extensionsAutoUpdate; }
+    QStringList pinnedExtensions() const { return m_pinnedExtensions; }
     QStringList passwordNeverSaveSites() const { return m_passwordNeverSaveSites; }
     QDateTime adBlockLastUpdate() const { return m_adBlockLastUpdate; }
 
@@ -116,6 +119,7 @@ public:
     void setOfferToSavePasswords(bool offerToSavePasswords);
     void setPasswordNeverSaveSites(const QStringList &passwordNeverSaveSites);
     void setExtensionsAutoUpdate(bool extensionsAutoUpdate);
+    void setPinnedExtensions(const QStringList &pinnedExtensions);
 
     Q_INVOKABLE QVariant defaultValue(const QString &name) const;
 
@@ -149,6 +153,7 @@ signals:
     void offerToSavePasswordsChanged();
     void passwordNeverSaveSitesChanged();
     void extensionsAutoUpdateChanged();
+    void pinnedExtensionsChanged();
 
 private:
     explicit Settings(QObject *parent = nullptr);
@@ -179,4 +184,5 @@ private:
     bool m_offerToSavePasswords = true;
     QStringList m_passwordNeverSaveSites;
     bool m_extensionsAutoUpdate = true;
+    QStringList m_pinnedExtensions;
 };

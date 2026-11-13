@@ -172,7 +172,16 @@ qt_add_qml_module(kondor
         qml/extensions/ExtensionSettingControls.qml
         qml/extensions/ExtensionSitesSection.qml
         qml/extensions/ExtensionDelegate.qml
-        qml/extensions/ExtensionsMenu.qml
+        qml/extensions/panel/ExtensionsPanel.qml
+        qml/extensions/panel/ExtensionList.qml
+        qml/extensions/panel/ExtensionRow.qml
+        qml/extensions/panel/ExtensionActions.qml
+        qml/extensions/panel/ExtensionActionEntry.qml
+        qml/extensions/panel/ExtensionActionRow.qml
+        qml/extensions/panel/ExtensionActionsFooter.qml
+        qml/extensions/panel/ExtensionSiteSwitch.qml
+        qml/extensions/panel/ExtensionsToolButtons.qml
+        qml/extensions/panel/PinnedExtensionButton.qml
         qml/extensions/SiteReloadBar.qml
     SOURCES
         src/app/aboutinfo.h

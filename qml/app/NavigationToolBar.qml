@@ -129,25 +129,9 @@ ToolBar {
             }
         }
 
-        ToolButton {
-            id: extensionsButton
-            objectName: "extensionsButton"
-            visible: root.tabs.currentTab !== null
-                     && (ExtensionManager.revision,
-                         ExtensionManager.hasActionExtensions(root.tabs.currentTab.isPrivate))
-            display: AbstractButton.IconOnly
-            icon.name: "plugins"
-            ToolTip.visible: hovered
-            Accessible.name: ToolTip.text
-            ToolTip.text: qsTr("Extensions")
-            ToolTip.delay: 600
-            onClicked: extensionsMenu.popup(extensionsButton, 0, extensionsButton.height)
-
-            ExtensionsMenu {
-                id: extensionsMenu
-                tab: root.tabs.currentTab
-                onManageRequested: root.browserWindow.openSettingsPage("extensions")
-            }
+        ExtensionsToolButtons {
+            tabs: root.tabs
+            browserWindow: root.browserWindow
         }
 
         ToolButton {

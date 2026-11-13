@@ -16,23 +16,6 @@ QVariantMap withValue(const QVariant &item, const QVariantMap &values)
     return setting;
 }
 
-QVariantMap actionEntry(const InstalledExtension &entry, bool isPrivate, const QString &locale)
-{
-    const ExtensionPackage &package = entry.package;
-    return QVariantMap{
-        {QStringLiteral("id"), package.id()},
-        {QStringLiteral("name"), package.name(locale)},
-        {QStringLiteral("iconSource"), package.iconSource()},
-        {QStringLiteral("siteToggle"), package.actionSiteToggle() && !isPrivate},
-        {QStringLiteral("items"), package.actionItems(locale)},
-    };
-}
-
-bool hasVisibleAction(const InstalledExtension &entry, bool isPrivate)
-{
-    return entry.enabled && entry.package.hasAction() && (!isPrivate || entry.privateAllowed);
-}
-
 QStringList withOrigin(QStringList sites, const QString &origin, bool isEnabled)
 {
     if (isEnabled)
@@ -150,21 +133,6 @@ void ExtensionManager::applyConfiguration(const QString &id, const QVariantMap &
         changed();
     if (change.settings)
         emit settingsChanged(id);
-}
-
-QVariantList ExtensionManager::actionExtensions(bool isPrivate) const
-{
-    QVariantList list;
-    for (const InstalledExtension &entry : m_entries) {
-        if (hasVisibleAction(entry, isPrivate))
-            list.append(actionEntry(entry, isPrivate, m_locale));
-    }
-    return list;
-}
-
-bool ExtensionManager::hasActionExtensions(bool isPrivate) const
-{
-    return !actionExtensions(isPrivate).isEmpty();
 }
 
 QString ExtensionManager::originOf(const QUrl &url)

@@ -747,6 +747,32 @@
     </message>
 </context>
 <context>
+    <name>ExtensionActions</name>
+    <message>
+        <location filename="../qml/extensions/panel/ExtensionActions.qml" line="58"/>
+        <source>Back to Extensions</source>
+        <translation>Torna a les extensions</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionActionsFooter</name>
+    <message>
+        <location filename="../qml/extensions/panel/ExtensionActionsFooter.qml" line="21"/>
+        <source>Unpin from Toolbar</source>
+        <translation>Desfixa de la barra d'eines</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/panel/ExtensionActionsFooter.qml" line="21"/>
+        <source>Pin to Toolbar</source>
+        <translation>Fixa a la barra d'eines</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/panel/ExtensionActionsFooter.qml" line="30"/>
+        <source>Settings…</source>
+        <translation>Configuració…</translation>
+    </message>
+</context>
+<context>
     <name>ExtensionCatalog</name>
     <message>
         <location filename="../src/extensions/catalog/catalogentry.cpp" line="81"/>
@@ -866,6 +892,19 @@
     </message>
 </context>
 <context>
+    <name>ExtensionList</name>
+    <message>
+        <location filename="../qml/extensions/panel/ExtensionList.qml" line="37"/>
+        <source>Extensions</source>
+        <translation>Extensions</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/panel/ExtensionList.qml" line="72"/>
+        <source>Manage Extensions…</source>
+        <translation>Gestiona les extensions…</translation>
+    </message>
+</context>
+<context>
     <name>ExtensionManager</name>
     <message>
         <location filename="../src/extensions/install/extensioninstaller.cpp" line="64"/>
@@ -973,6 +1012,20 @@
     </message>
 </context>
 <context>
+    <name>ExtensionRow</name>
+    <message>
+        <location filename="../qml/extensions/panel/ExtensionRow.qml" line="24"/>
+        <source>Off on this site</source>
+        <translation>Desactivada en aquest lloc</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/panel/ExtensionRow.qml" line="27"/>
+        <source>%1, off on %2</source>
+        <extracomment>%1 is the extension name, %2 is the site host</extracomment>
+        <translation>%1, desactivada a %2</translation>
+    </message>
+</context>
+<context>
     <name>ExtensionSettingControls</name>
     <message>
         <location filename="../qml/extensions/ExtensionSettingControls.qml" line="149"/>
@@ -1015,6 +1068,20 @@
     </message>
 </context>
 <context>
+    <name>ExtensionSiteSwitch</name>
+    <message>
+        <location filename="../qml/extensions/panel/ExtensionSiteSwitch.qml" line="23"/>
+        <source>Run on %1</source>
+        <translation>Executa a %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/panel/ExtensionSiteSwitch.qml" line="32"/>
+        <source>Run %1 on %2</source>
+        <extracomment>%1 is the extension name, %2 is the site host</extracomment>
+        <translation>Executa %1 a %2</translation>
+    </message>
+</context>
+<context>
     <name>ExtensionSitesSection</name>
     <message>
         <location filename="../qml/extensions/ExtensionSitesSection.qml" line="17"/>
@@ -1025,24 +1092,6 @@
         <location filename="../qml/extensions/ExtensionSitesSection.qml" line="36"/>
         <source>Remove</source>
         <translation>Elimina</translation>
-    </message>
-</context>
-<context>
-    <name>ExtensionsMenu</name>
-    <message>
-        <location filename="../qml/extensions/ExtensionsMenu.qml" line="45"/>
-        <source>Run on %1</source>
-        <translation>Executa a %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/extensions/ExtensionsMenu.qml" line="46"/>
-        <source>Run %1 on %2</source>
-        <translation>Executa %1 a %2</translation>
-    </message>
-    <message>
-        <location filename="../qml/extensions/ExtensionsMenu.qml" line="91"/>
-        <source>Manage Extensions…</source>
-        <translation>Gestiona les extensions…</translation>
     </message>
 </context>
 <context>
@@ -1107,6 +1156,14 @@
         <location filename="../qml/extensions/ExtensionsPage.qml" line="111"/>
         <source>Remove the extension “%1” and its data?</source>
         <translation>Voleu eliminar l&apos;extensió «%1» i les seves dades?</translation>
+    </message>
+</context>
+<context>
+    <name>ExtensionsToolButtons</name>
+    <message>
+        <location filename="../qml/extensions/panel/ExtensionsToolButtons.qml" line="35"/>
+        <source>Extensions</source>
+        <translation>Extensions</translation>
     </message>
 </context>
 <context>
@@ -1600,11 +1657,6 @@
     </message>
     <message>
         <location filename="../qml/app/NavigationToolBar.qml" line="142"/>
-        <source>Extensions</source>
-        <translation>Extensions</translation>
-    </message>
-    <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="158"/>
         <source>Menu</source>
         <translation>Menú</translation>
     </message>

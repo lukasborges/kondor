@@ -37,4 +37,5 @@ inline const QList<StorageRow> kStorageRows = {
     {"offerToSavePasswords", "Passwords/OfferToSave", QVariant(false)},
     {"passwordNeverSaveSites", "Passwords/NeverSave", kList},
     {"extensionsAutoUpdate", "Extensions/AutoUpdate", QVariant(false)},
+    {"pinnedExtensions", "Extensions/Pinned", kList},
 };

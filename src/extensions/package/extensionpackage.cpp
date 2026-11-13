@@ -69,16 +69,31 @@ QString ExtensionPackage::description(const QString &locale) const
     return localized(m_manifest, QStringLiteral("description"), locale);
 }
 
-QStringList ExtensionPackage::allMatches() const
+namespace {
+
+QStringList uniqueEntries(const QList<ExtensionContentScript> &scripts,
+                          QStringList ExtensionContentScript::*member)
 {
     QStringList result;
-    for (const ExtensionContentScript &script : m_contentScripts) {
-        for (const QString &match : script.matches) {
-            if (!result.contains(match))
-                result.append(match);
+    for (const ExtensionContentScript &script : scripts) {
+        for (const QString &entry : script.*member) {
+            if (!result.contains(entry))
+                result.append(entry);
         }
     }
     return result;
+}
+
+}
+
+QStringList ExtensionPackage::allMatches() const
+{
+    return uniqueEntries(m_contentScripts, &ExtensionContentScript::matches);
+}
+
+QStringList ExtensionPackage::allIncludes() const
+{
+    return uniqueEntries(m_contentScripts, &ExtensionContentScript::include);
 }
 
 bool ExtensionPackage::isSubset(const QStringList &candidate, const QStringList &allowed)
@@ -89,15 +104,17 @@ bool ExtensionPackage::isSubset(const QStringList &candidate, const QStringList 
 }
 
 QVariantList ExtensionPackage::permissionEntries(const QStringList &matches,
-                                                 const QStringList &permissions)
+                                                 const QStringList &permissions,
+                                                 const QStringList &includes)
 {
-    return PermissionDescription::permissionEntries(matches, permissions);
+    return PermissionDescription::permissionEntries(matches, permissions, includes);
 }
 
 QStringList ExtensionPackage::permissionLines(const QStringList &matches,
-                                              const QStringList &permissions)
+                                              const QStringList &permissions,
+                                              const QStringList &includes)
 {
-    return PermissionDescription::permissionLines(matches, permissions);
+    return PermissionDescription::permissionLines(matches, permissions, includes);
 }
 
 bool ExtensionPackage::hasSettings() const

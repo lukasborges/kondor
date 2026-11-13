@@ -69,7 +69,7 @@ ExtensionAccess ExtensionManager::installedAccess(const QString &id) const
     const InstalledExtension *entry = find(id);
     if (!entry)
         return {};
-    return {entry->package.allMatches(), entry->package.permissions()};
+    return entry->package.access();
 }
 
 bool ExtensionManager::checkToken(const QString &id, const QString &token) const

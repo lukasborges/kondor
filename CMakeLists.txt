@@ -183,6 +183,7 @@ qt_add_qml_module(kondor
         qml/extensions/panel/ExtensionsToolButtons.qml
         qml/extensions/panel/PinnedExtensionButton.qml
         qml/extensions/SiteReloadBar.qml
+        qml/extensions/UserScriptBar.qml
     SOURCES
         src/app/aboutinfo.h
         src/app/aboutinfo.cpp
@@ -275,6 +276,13 @@ qt_add_resources(kondor "extension_scripts"
     FILES
         src/extensions/bridge/channel.js
         src/extensions/bridge/extensionruntime.js
+)
+
+qt_add_resources(kondor "user_script_scripts"
+    PREFIX "/scripts"
+    BASE "${CMAKE_SOURCE_DIR}/src/extensions/scripts"
+    FILES
+        src/extensions/scripts/usergm.js
 )
 
 qt_add_resources(kondor "license"

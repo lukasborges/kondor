@@ -10,6 +10,8 @@ Dialog {
     readonly property var info: ExtensionManager.pendingInstall
     readonly property bool hasInfo: root.info.valid !== undefined
     readonly property bool isValid: root.info.valid === true
+    readonly property bool isUserScript: root.info.isUserScript === true
+    readonly property var unsupportedFeatures: root.info.unsupportedFeatures ?? []
     readonly property bool replacing: root.isValid && root.info.installedVersion !== ""
 
     anchors.centerIn: parent
@@ -17,7 +19,7 @@ Dialog {
     modal: true
     dim: true
     closePolicy: Popup.CloseOnEscape
-    title: qsTr("Install Extension")
+    title: root.isUserScript ? qsTr("Install User Script") : qsTr("Install Extension")
     visible: root.hasInfo
 
     onClosed: ExtensionManager.cancelInstall()
@@ -45,15 +47,28 @@ Dialog {
             Layout.fillWidth: true
             visible: root.hasInfo && !root.isValid
             type: Kirigami.MessageType.Error
-            text: qsTr("“%1” is not a valid Kondor extension: %2")
-                      .arg(root.info.fileName ?? "").arg(root.info.error ?? "")
+            text: root.isUserScript
+                  ? qsTr("“%1” is not a valid user script: %2")
+                        .arg(root.info.fileName ?? "").arg(root.info.error ?? "")
+                  : qsTr("“%1” is not a valid Kondor extension: %2")
+                        .arg(root.info.fileName ?? "").arg(root.info.error ?? "")
         }
 
         Kirigami.InlineMessage {
             Layout.fillWidth: true
             visible: root.isValid && root.info.fromFile === true
             type: Kirigami.MessageType.Warning
-            text: qsTr("This extension does not come from the Kondor extensions catalog. Only install extensions from people you trust.")
+            text: root.isUserScript
+                  ? qsTr("This user script does not come from the Kondor extensions catalog. Only install user scripts from people you trust.")
+                  : qsTr("This extension does not come from the Kondor extensions catalog. Only install extensions from people you trust.")
+        }
+
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            visible: root.isValid && root.unsupportedFeatures.length > 0
+            type: Kirigami.MessageType.Information
+            text: qsTr("Kondor does not support %1, which this script uses. Parts of it may not work.")
+                      .arg(root.unsupportedFeatures.join(", "))
         }
 
         RowLayout {

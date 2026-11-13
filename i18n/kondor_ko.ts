@@ -866,27 +866,27 @@
 <context>
     <name>ExtensionDelegate</name>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="76"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="83"/>
         <source>Update…</source>
         <translation>업데이트…</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="84"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="91"/>
         <source>Turn off</source>
         <translation>끄기</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="84"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="91"/>
         <source>Turn on</source>
         <translation>켜기</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="89"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="96"/>
         <source>Configure…</source>
         <translation>설정…</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="99"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="106"/>
         <source>Remove</source>
         <translation>제거</translation>
     </message>
@@ -947,12 +947,12 @@
 <context>
     <name>ExtensionPackage</name>
     <message>
-        <location filename="../src/extensions/install/permissiondescription.cpp" line="76"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="102"/>
         <source>Read and change all websites</source>
         <translation>모든 웹 사이트 읽기 및 변경</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/extensions/install/permissiondescription.cpp" line="67"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="93"/>
         <source>%1 and %n more</source>
         <extracomment>%1 is a list of sites, %n the number of further sites</extracomment>
         <translation>
@@ -960,7 +960,7 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/extensions/install/permissiondescription.cpp" line="80"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="106"/>
         <source>Read and change pages on %1</source>
         <translation>%1의 페이지 읽기 및 변경</translation>
     </message>
@@ -1122,7 +1122,12 @@
         <translation>확장 기능은 Kondor에 기능을 추가합니다. Kondor 확장 기능 카탈로그에서 받거나 .kondorext 파일을 설치하십시오.</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="112"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="102"/>
+        <source>Kondor extensions and user scripts (*.kondorext *.user.js)</source>
+        <translation>Kondor 확장 기능 및 사용자 스크립트 (*.kondorext *.user.js)</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="113"/>
         <source>Remove</source>
         <translation>제거</translation>
     </message>
@@ -1137,22 +1142,22 @@
         <translation>확장 기능 설치</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="102"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="103"/>
         <source>Kondor extensions (*.kondorext)</source>
         <translation>Kondor 확장 기능 (*.kondorext)</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="102"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="103"/>
         <source>All files (*)</source>
         <translation>모든 파일 (*)</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="110"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="111"/>
         <source>Remove Extension</source>
         <translation>확장 기능 제거</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="111"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="112"/>
         <source>Remove the extension “%1” and its data?</source>
         <translation>확장 기능 “%1”과(와) 그 데이터를 제거하시겠습니까?</translation>
     </message>
@@ -1517,57 +1522,77 @@
 <context>
     <name>InstallExtensionDialog</name>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="20"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="22"/>
         <source>Install Extension</source>
         <translation>확장 기능 설치</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="28"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="22"/>
+        <source>Install User Script</source>
+        <translation>사용자 스크립트 설치</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="30"/>
         <source>Replace</source>
         <translation>바꾸기</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="28"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="30"/>
         <source>Install</source>
         <translation>설치</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="34"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="36"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="34"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="36"/>
         <source>Close</source>
         <translation>닫기</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="48"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="51"/>
+        <source>“%1” is not a valid user script: %2</source>
+        <translation>“%1”은(는) 올바른 사용자 스크립트가 아닙니다: %2</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="53"/>
         <source>“%1” is not a valid Kondor extension: %2</source>
         <translation>“%1”은(는) 올바른 Kondor 확장 기능이 아닙니다: %2</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="56"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="62"/>
+        <source>This user script does not come from the Kondor extensions catalog. Only install user scripts from people you trust.</source>
+        <translation>이 사용자 스크립트는 Kondor 확장 기능 카탈로그에서 제공된 것이 아닙니다. 신뢰하는 사람의 사용자 스크립트만 설치하세요.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="63"/>
         <source>This extension does not come from the Kondor extensions catalog. Only install extensions from people you trust.</source>
         <translation>이 확장 기능은 Kondor 확장 기능 카탈로그에서 온 것이 아닙니다. 신뢰할 수 있는 사람의 확장 기능만 설치하십시오.</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="73"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="70"/>
+        <source>Kondor does not support %1, which this script uses. Parts of it may not work.</source>
+        <translation>이 스크립트가 사용하는 %1을(를) Kondor는 지원하지 않습니다. 일부가 작동하지 않을 수 있습니다.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="88"/>
         <source>“%1” %2 is installed. Replace it with version %3?</source>
         <translation>“%1” %2이(가) 설치되어 있습니다. 버전 %3(으)로 바꾸시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="75"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="90"/>
         <source>Install “%1” %2 by %3?</source>
         <translation>제작자 %3의 “%1” %2을(를) 설치하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="77"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="92"/>
         <source>an unknown author</source>
         <translation>알 수 없는 제작자</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="83"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="98"/>
         <source>It will be able to:</source>
         <translation>다음 작업을 할 수 있습니다:</translation>
     </message>
@@ -2936,6 +2961,57 @@
         <location filename="../qml/browser/pages/TopSiteMenu.qml" line="29"/>
         <source>Remove from Top Sites</source>
         <translation>상위 사이트에서 제거</translation>
+    </message>
+</context>
+<context>
+    <name>UserScript</name>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="133"/>
+        <source>The script has no metadata block</source>
+        <translation>스크립트에 메타데이터 블록이 없습니다</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="135"/>
+        <source>The script has no @name</source>
+        <translation>스크립트에 @name이 없습니다</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="137"/>
+        <source>The script has neither @match nor @include</source>
+        <translation>스크립트에 @match와 @include가 모두 없습니다</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptpackage.cpp" line="161"/>
+        <source>Cannot create the package</source>
+        <translation>패키지를 만들 수 없습니다</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="59"/>
+        <source>Unsupported address: %1</source>
+        <translation>지원되지 않는 주소: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="75"/>
+        <source>The script is larger than 5 MiB</source>
+        <translation>스크립트가 5 MiB보다 큽니다</translation>
+    </message>
+</context>
+<context>
+    <name>UserScriptBar</name>
+    <message>
+        <location filename="../qml/extensions/UserScriptBar.qml" line="32"/>
+        <source>This page is a user script.</source>
+        <translation>이 페이지는 사용자 스크립트입니다.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/UserScriptBar.qml" line="36"/>
+        <source>Install…</source>
+        <translation>설치…</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/UserScriptBar.qml" line="44"/>
+        <source>Close</source>
+        <translation>닫기</translation>
     </message>
 </context>
 <context>

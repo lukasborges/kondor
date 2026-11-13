@@ -27,6 +27,11 @@ ColumnLayout {
         Layout.fillWidth: true
     }
 
+    UserScriptBar {
+        tab: root.tabs.currentTab
+        Layout.fillWidth: true
+    }
+
     FindBar {
         id: findBar
         tab: root.tabs.currentTab

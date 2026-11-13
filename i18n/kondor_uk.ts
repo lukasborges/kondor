@@ -866,27 +866,27 @@
 <context>
     <name>ExtensionDelegate</name>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="76"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="83"/>
         <source>Update…</source>
         <translation>Оновити…</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="84"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="91"/>
         <source>Turn off</source>
         <translation>Вимкнути</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="84"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="91"/>
         <source>Turn on</source>
         <translation>Увімкнути</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="89"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="96"/>
         <source>Configure…</source>
         <translation>Налаштувати…</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="99"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="106"/>
         <source>Remove</source>
         <translation>Вилучити</translation>
     </message>
@@ -947,12 +947,12 @@
 <context>
     <name>ExtensionPackage</name>
     <message>
-        <location filename="../src/extensions/install/permissiondescription.cpp" line="76"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="102"/>
         <source>Read and change all websites</source>
         <translation>Читати й змінювати всі вебсайти</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/extensions/install/permissiondescription.cpp" line="67"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="93"/>
         <source>%1 and %n more</source>
         <extracomment>%1 is a list of sites, %n the number of further sites</extracomment>
         <translation>
@@ -962,7 +962,7 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/extensions/install/permissiondescription.cpp" line="80"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="106"/>
         <source>Read and change pages on %1</source>
         <translation>Читати й змінювати сторінки на %1</translation>
     </message>
@@ -1124,7 +1124,12 @@
         <translation>Розширення додають Kondor нові можливості. Отримайте їх із каталогу розширень Kondor або встановіть файл .kondorext.</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="112"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="102"/>
+        <source>Kondor extensions and user scripts (*.kondorext *.user.js)</source>
+        <translation>Розширення та користувацькі скрипти Kondor (*.kondorext *.user.js)</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="113"/>
         <source>Remove</source>
         <translation>Вилучити</translation>
     </message>
@@ -1139,22 +1144,22 @@
         <translation>Встановлення розширення</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="102"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="103"/>
         <source>Kondor extensions (*.kondorext)</source>
         <translation>Розширення Kondor (*.kondorext)</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="102"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="103"/>
         <source>All files (*)</source>
         <translation>Усі файли (*)</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="110"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="111"/>
         <source>Remove Extension</source>
         <translation>Вилучення розширення</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="111"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="112"/>
         <source>Remove the extension “%1” and its data?</source>
         <translation>Вилучити розширення “%1” і його дані?</translation>
     </message>
@@ -1539,57 +1544,77 @@
 <context>
     <name>InstallExtensionDialog</name>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="20"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="22"/>
         <source>Install Extension</source>
         <translation>Встановлення розширення</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="28"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="22"/>
+        <source>Install User Script</source>
+        <translation>Установити користувацький скрипт</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="30"/>
         <source>Replace</source>
         <translation>Замінити</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="28"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="30"/>
         <source>Install</source>
         <translation>Встановити</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="34"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="36"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="34"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="36"/>
         <source>Close</source>
         <translation>Закрити</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="48"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="51"/>
+        <source>“%1” is not a valid user script: %2</source>
+        <translation>«%1» не є дійсним користувацьким скриптом: %2</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="53"/>
         <source>“%1” is not a valid Kondor extension: %2</source>
         <translation>“%1” не є коректним розширенням Kondor: %2</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="56"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="62"/>
+        <source>This user script does not come from the Kondor extensions catalog. Only install user scripts from people you trust.</source>
+        <translation>Цей користувацький скрипт не з каталогу розширень Kondor. Установлюйте користувацькі скрипти лише від людей, яким довіряєте.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="63"/>
         <source>This extension does not come from the Kondor extensions catalog. Only install extensions from people you trust.</source>
         <translation>Це розширення не з каталогу розширень Kondor. Встановлюйте розширення лише від тих, кому довіряєте.</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="73"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="70"/>
+        <source>Kondor does not support %1, which this script uses. Parts of it may not work.</source>
+        <translation>Kondor не підтримує %1, який використовує цей скрипт. Деякі частини можуть не працювати.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="88"/>
         <source>“%1” %2 is installed. Replace it with version %3?</source>
         <translation>“%1” %2 уже встановлено. Замінити його версією %3?</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="75"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="90"/>
         <source>Install “%1” %2 by %3?</source>
         <translation>Встановити “%1” %2 від %3?</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="77"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="92"/>
         <source>an unknown author</source>
         <translation>невідомого автора</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="83"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="98"/>
         <source>It will be able to:</source>
         <translation>Воно зможе:</translation>
     </message>
@@ -2958,6 +2983,57 @@
         <location filename="../qml/browser/pages/TopSiteMenu.qml" line="29"/>
         <source>Remove from Top Sites</source>
         <translation>Вилучити з найчастіших сайтів</translation>
+    </message>
+</context>
+<context>
+    <name>UserScript</name>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="133"/>
+        <source>The script has no metadata block</source>
+        <translation>У скрипті немає блока метаданих</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="135"/>
+        <source>The script has no @name</source>
+        <translation>У скрипті немає @name</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="137"/>
+        <source>The script has neither @match nor @include</source>
+        <translation>У скрипті немає ні @match, ні @include</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptpackage.cpp" line="161"/>
+        <source>Cannot create the package</source>
+        <translation>Не вдалося створити пакет</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="59"/>
+        <source>Unsupported address: %1</source>
+        <translation>Непідтримувана адреса: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="75"/>
+        <source>The script is larger than 5 MiB</source>
+        <translation>Скрипт більший за 5 МіБ</translation>
+    </message>
+</context>
+<context>
+    <name>UserScriptBar</name>
+    <message>
+        <location filename="../qml/extensions/UserScriptBar.qml" line="32"/>
+        <source>This page is a user script.</source>
+        <translation>Ця сторінка є користувацьким скриптом.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/UserScriptBar.qml" line="36"/>
+        <source>Install…</source>
+        <translation>Встановити…</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/UserScriptBar.qml" line="44"/>
+        <source>Close</source>
+        <translation>Закрити</translation>
     </message>
 </context>
 <context>

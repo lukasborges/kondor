@@ -47,6 +47,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 - **Private tabs and windows** that leave no trace
 - **Passwords** saved in KWallet, filled in for you, copied from the address bar, addable by hand, importable from a CSV export
 - **Extensions** from the Kondor catalog or a file, pinnable to the toolbar
+- **User scripts** from `.user.js` pages or files, managed with extensions
 - **Site permissions**: sites ask before using the camera, microphone or location
 - **Security padlock** and warnings for unsafe sites
 
@@ -139,7 +140,9 @@ file holds your passwords unencrypted, so Kondor offers to move it to the trash 
 one from the community catalog (built from
 [`lukasborges/kondor-extensions`](https://github.com/lukasborges/kondor-extensions), where anyone can
 propose an extension by pull request), and **Install from File…** installs a `.kondorext` file from
-your computer; opening one in the file manager does the same. Extensions are off in private windows
+your computer; opening one in the file manager does the same. A `.user.js` page offers to install
+the user script, which is then listed and managed like an extension (`GM.*` values, styles and
+notifications are supported). Extensions are off in private windows
 unless you allow them. Authors: see [`docs/extensions/api.md`](docs/extensions/api.md).
 
 ## Stack

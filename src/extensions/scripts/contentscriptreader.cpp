@@ -34,6 +34,7 @@ std::optional<ExtensionContentScript> ContentScriptReader::read(const QJsonObjec
 bool ContentScriptReader::readLists(const QJsonObject &object, ExtensionContentScript &script)
 {
     return readList(object, QStringLiteral("matches"), script.matches)
+        && readList(object, QStringLiteral("include"), script.include)
         && readList(object, QStringLiteral("exclude"), script.exclude)
         && readList(object, QStringLiteral("js"), script.js)
         && readList(object, QStringLiteral("css"), script.css);
@@ -42,8 +43,7 @@ bool ContentScriptReader::readLists(const QJsonObject &object, ExtensionContentS
 bool ContentScriptReader::readList(const QJsonObject &object, const QString &key,
                                    QStringList &target)
 {
-    const bool isRequired = key == QLatin1String("matches");
-    const auto list = readStringList(object, {key, m_where, isRequired}, m_error);
+    const auto list = readStringList(object, {key, m_where, false}, m_error);
     if (list)
         target = *list;
     return list.has_value();
@@ -51,7 +51,7 @@ bool ContentScriptReader::readList(const QJsonObject &object, const QString &key
 
 bool ContentScriptReader::checkLists(const ExtensionContentScript &script)
 {
-    if (script.matches.isEmpty())
+    if (script.matches.isEmpty() && script.include.isEmpty())
         return fail(QStringLiteral("%1.matches: must not be empty").arg(m_where));
     if (script.js.isEmpty() && script.css.isEmpty())
         return fail(QStringLiteral("%1: needs at least one js or css file").arg(m_where));

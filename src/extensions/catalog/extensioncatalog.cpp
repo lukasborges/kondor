@@ -107,7 +107,8 @@ const CatalogEntry *ExtensionCatalog::find(const QString &id) const
 bool ExtensionCatalog::isSilentUpdate(const ExtensionAccess &update, const ExtensionAccess &installed)
 {
     return ExtensionPackage::isSubset(update.permissions, installed.permissions)
-        && ExtensionPackage::isSubset(update.matches, installed.matches);
+        && ExtensionPackage::isSubset(update.matches, installed.matches)
+        && ExtensionPackage::isSubset(update.includes, installed.includes);
 }
 
 bool ExtensionCatalog::loadCatalog(const QByteArray &json, QString *error)

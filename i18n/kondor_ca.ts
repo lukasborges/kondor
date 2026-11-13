@@ -866,27 +866,27 @@
 <context>
     <name>ExtensionDelegate</name>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="76"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="83"/>
         <source>Update…</source>
         <translation>Actualitza…</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="84"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="91"/>
         <source>Turn off</source>
         <translation>Desactiva</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="84"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="91"/>
         <source>Turn on</source>
         <translation>Activa</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="89"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="96"/>
         <source>Configure…</source>
         <translation>Configura…</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="99"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="106"/>
         <source>Remove</source>
         <translation>Elimina</translation>
     </message>
@@ -947,12 +947,12 @@
 <context>
     <name>ExtensionPackage</name>
     <message>
-        <location filename="../src/extensions/install/permissiondescription.cpp" line="76"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="102"/>
         <source>Read and change all websites</source>
         <translation>Llegeix i canvia tots els llocs web</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/extensions/install/permissiondescription.cpp" line="67"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="93"/>
         <source>%1 and %n more</source>
         <extracomment>%1 is a list of sites, %n the number of further sites</extracomment>
         <translation>
@@ -961,7 +961,7 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/extensions/install/permissiondescription.cpp" line="80"/>
+        <location filename="../src/extensions/install/permissiondescription.cpp" line="106"/>
         <source>Read and change pages on %1</source>
         <translation>Llegeix i canvia les pàgines de %1</translation>
     </message>
@@ -1123,7 +1123,12 @@
         <translation>Les extensions afegeixen funcionalitats al Kondor. Obteniu-les del catàleg d&apos;extensions del Kondor o instal·leu un fitxer .kondorext.</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="112"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="102"/>
+        <source>Kondor extensions and user scripts (*.kondorext *.user.js)</source>
+        <translation>Extensions i scripts d&apos;usuari del Kondor (*.kondorext *.user.js)</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="113"/>
         <source>Remove</source>
         <translation>Elimina</translation>
     </message>
@@ -1138,22 +1143,22 @@
         <translation>Instal·la l&apos;extensió</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="102"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="103"/>
         <source>Kondor extensions (*.kondorext)</source>
         <translation>Extensions del Kondor (*.kondorext)</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="102"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="103"/>
         <source>All files (*)</source>
         <translation>Tots els fitxers (*)</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="110"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="111"/>
         <source>Remove Extension</source>
         <translation>Elimina l&apos;extensió</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsPage.qml" line="111"/>
+        <location filename="../qml/extensions/ExtensionsPage.qml" line="112"/>
         <source>Remove the extension “%1” and its data?</source>
         <translation>Voleu eliminar l&apos;extensió «%1» i les seves dades?</translation>
     </message>
@@ -1528,57 +1533,77 @@
 <context>
     <name>InstallExtensionDialog</name>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="20"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="22"/>
         <source>Install Extension</source>
         <translation>Instal·la l&apos;extensió</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="28"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="22"/>
+        <source>Install User Script</source>
+        <translation>Instal·la l&apos;script d&apos;usuari</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="30"/>
         <source>Replace</source>
         <translation>Reemplaça</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="28"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="30"/>
         <source>Install</source>
         <translation>Instal·la</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="34"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="36"/>
         <source>Cancel</source>
         <translation>Cancel·la</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="34"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="36"/>
         <source>Close</source>
         <translation>Tanca</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="48"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="51"/>
+        <source>“%1” is not a valid user script: %2</source>
+        <translation>«%1» no és un script d&apos;usuari vàlid: %2</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="53"/>
         <source>“%1” is not a valid Kondor extension: %2</source>
         <translation>«%1» no és una extensió vàlida del Kondor: %2</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="56"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="62"/>
+        <source>This user script does not come from the Kondor extensions catalog. Only install user scripts from people you trust.</source>
+        <translation>Aquest script d&apos;usuari no ve del catàleg d&apos;extensions del Kondor. Instal·leu només scripts d&apos;usuari de persones de confiança.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="63"/>
         <source>This extension does not come from the Kondor extensions catalog. Only install extensions from people you trust.</source>
         <translation>Aquesta extensió no prové del catàleg d&apos;extensions del Kondor. Instal·leu només extensions de persones de confiança.</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="73"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="70"/>
+        <source>Kondor does not support %1, which this script uses. Parts of it may not work.</source>
+        <translation>El Kondor no admet %1, que aquest script utilitza. És possible que parts no funcionin.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="88"/>
         <source>“%1” %2 is installed. Replace it with version %3?</source>
         <translation>«%1» %2 ja està instal·lada. Voleu reemplaçar-la per la versió %3?</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="75"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="90"/>
         <source>Install “%1” %2 by %3?</source>
         <translation>Voleu instal·lar «%1» %2 de %3?</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="77"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="92"/>
         <source>an unknown author</source>
         <translation>un autor desconegut</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="83"/>
+        <location filename="../qml/extensions/InstallExtensionDialog.qml" line="98"/>
         <source>It will be able to:</source>
         <translation>Podrà:</translation>
     </message>
@@ -2947,6 +2972,57 @@
         <location filename="../qml/browser/pages/TopSiteMenu.qml" line="29"/>
         <source>Remove from Top Sites</source>
         <translation>Elimina dels llocs principals</translation>
+    </message>
+</context>
+<context>
+    <name>UserScript</name>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="133"/>
+        <source>The script has no metadata block</source>
+        <translation>L&apos;script no té cap bloc de metadades</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="135"/>
+        <source>The script has no @name</source>
+        <translation>L&apos;script no té cap @name</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptmetadata.cpp" line="137"/>
+        <source>The script has neither @match nor @include</source>
+        <translation>L&apos;script no té ni @match ni @include</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptpackage.cpp" line="161"/>
+        <source>Cannot create the package</source>
+        <translation>No es pot crear el paquet</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="59"/>
+        <source>Unsupported address: %1</source>
+        <translation>Adreça no admesa: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/extensions/userscripts/userscriptdownload.cpp" line="75"/>
+        <source>The script is larger than 5 MiB</source>
+        <translation>L&apos;script és més gran de 5 MiB</translation>
+    </message>
+</context>
+<context>
+    <name>UserScriptBar</name>
+    <message>
+        <location filename="../qml/extensions/UserScriptBar.qml" line="32"/>
+        <source>This page is a user script.</source>
+        <translation>Aquesta pàgina és un script d&apos;usuari.</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/UserScriptBar.qml" line="36"/>
+        <source>Install…</source>
+        <translation>Instal·la…</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/UserScriptBar.qml" line="44"/>
+        <source>Close</source>
+        <translation>Tanca</translation>
     </message>
 </context>
 <context>

@@ -1,15 +1,17 @@
 #include "extensions/extensionmanager.h"
 
 #include <QFile>
+#include <QJsonArray>
 
 #include "extensions/package/packagesuffix.h"
 
 namespace {
 
-QVariantMap failedPreview(const QString &label, const QString &error)
+QVariantMap failedPreview(const PackageFile &file, const QString &error)
 {
     return QVariantMap{{QStringLiteral("valid"), false},
-                       {QStringLiteral("fileName"), label},
+                       {QStringLiteral("fileName"), file.label},
+                       {QStringLiteral("isUserScript"), file.source == QLatin1String("userscript")},
                        {QStringLiteral("error"), error}};
 }
 
@@ -22,6 +24,22 @@ QVariantMap identityPreview(const ExtensionPackage &package, const QString &loca
         {QStringLiteral("author"), package.author()},
         {QStringLiteral("iconSource"), package.iconSource()},
     };
+}
+
+QStringList unsupportedFeaturesOf(const ExtensionPackage &package)
+{
+    QStringList features;
+    const QJsonArray array = package.userScript().value(QLatin1String("unsupported")).toArray();
+    for (const QJsonValue &feature : array)
+        features.append(feature.toString());
+    return features;
+}
+
+QVariantMap withUserScriptFields(QVariantMap preview, const StagedPackage &staged)
+{
+    preview.insert(QStringLiteral("isUserScript"), staged.file.source == QLatin1String("userscript"));
+    preview.insert(QStringLiteral("unsupportedFeatures"), unsupportedFeaturesOf(staged.package));
+    return preview;
 }
 
 QString localPathOf(const QString &path)
@@ -51,10 +69,11 @@ QVariantMap ExtensionManager::previewOf(const StagedPackage &staged) const
     preview.insert(QStringLiteral("valid"), true);
     preview.insert(QStringLiteral("fileName"), staged.file.label);
     preview.insert(QStringLiteral("permissions"),
-                   ExtensionPackage::permissionEntries(package.allMatches(), package.permissions()));
+                   ExtensionPackage::permissionEntries(package.allMatches(), package.permissions(),
+                                                       package.allIncludes()));
     preview.insert(QStringLiteral("fromFile"), staged.file.source != QLatin1String("catalog"));
     preview.insert(QStringLiteral("installedVersion"), installedVersion(package.id()));
-    return preview;
+    return withUserScriptFields(preview, staged);
 }
 
 void ExtensionManager::setPending(const QVariantMap &preview)
@@ -66,6 +85,8 @@ void ExtensionManager::setPending(const QVariantMap &preview)
 void ExtensionManager::inspectFile(const QString &path)
 {
     const QString local = localPathOf(path);
+    if (isUserScriptUrl(QUrl::fromLocalFile(local)))
+        return inspectUserScript(QUrl::fromLocalFile(local));
     prepareInstall({local, QStringLiteral("file"), QFileInfo(local).fileName(), false});
 }
 
@@ -73,7 +94,7 @@ void ExtensionManager::refusePackage(const PackageFile &file, const QString &err
 {
     if (file.isTemporary)
         QFile::remove(file.zipPath);
-    setPending(failedPreview(file.label, error));
+    setPending(failedPreview(file, error));
 }
 
 bool ExtensionManager::prepareInstall(const PackageFile &file)
@@ -110,7 +131,7 @@ void ExtensionManager::confirmInstall()
     QString error;
     const bool isInstalled = installStaged(staged, error);
     installer().discard(staged);
-    setPending(isInstalled ? QVariantMap() : failedPreview(staged.file.label, error));
+    setPending(isInstalled ? QVariantMap() : failedPreview(staged.file, error));
 }
 
 bool ExtensionManager::installStaged(const StagedPackage &staged, QString &error)

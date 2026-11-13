@@ -42,7 +42,7 @@ Extensions are proposed by pull request to
 | `version` | `MAJOR.MINOR.PATCH`. |
 | `icon` | An SVG or a PNG of at least 64 px inside the package, or a Breeze icon name. |
 | `permissions` | `tabs` (`kondor.tabs.*`), `downloads` (`kondor.download()`), `notifications` (`kondor.notify()`). Storage and settings need none. |
-| `contentScripts[]` | `matches` (Chrome-style match patterns), optional `exclude`, `js` and `css` (package files), `runAt` (`document-start`, `document-end`, `document-idle`; default `document-idle`), `allFrames` (default false). |
+| `contentScripts[]` | `matches` (Chrome-style match patterns), optional `include` (Greasemonkey-style globs such as `https://*.example.org/*`; a script needs a non-empty `matches` or `include`), optional `exclude`, `js` and `css` (package files), `runAt` (`document-start`, `document-end`, `document-idle`; default `document-idle`), `allFrames` (default false). |
 | `settings[]` | `key`, `type`, `label`, `default`. Types: `bool`, `number` (`min`, `max`, `step`, `suffix`), `string`, `text`, `choice` (`choices: [{value, label}]`), `color`, `keys`. |
 | `action` | Optional. `items[]` (`id`, `title`, optional `checkable`, `icon`) appear in the toolbar Extensions menu; `siteToggle` adds "Run on <site>". |
 

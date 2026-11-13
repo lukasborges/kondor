@@ -93,6 +93,9 @@ public:
 
     Q_INVOKABLE QVariantList actionExtensions(bool isPrivate) const;
     Q_INVOKABLE bool hasActionExtensions(bool isPrivate) const;
+    Q_INVOKABLE QVariantList pinnedActionExtensions(bool isPrivate) const;
+    Q_INVOKABLE bool isPinned(const QString &id) const;
+    Q_INVOKABLE void setPinned(const QString &id, bool pinned);
     Q_INVOKABLE bool siteEnabled(const QString &id, const QUrl &url) const;
     Q_INVOKABLE void setSiteEnabled(const QString &id, const QUrl &url, bool enabled);
     Q_INVOKABLE static QString originOf(const QUrl &url);

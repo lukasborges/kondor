@@ -31,6 +31,7 @@ constexpr Settings::Option kAdBlockLastUpdate{"AdBlock/LastUpdate", "adBlockLast
 constexpr Settings::Option kOfferToSavePasswords{"Passwords/OfferToSave", "offerToSavePasswords", &Settings::offerToSavePasswordsChanged};
 constexpr Settings::Option kPasswordNeverSaveSites{"Passwords/NeverSave", "passwordNeverSaveSites", &Settings::passwordNeverSaveSitesChanged};
 constexpr Settings::Option kExtensionsAutoUpdate{"Extensions/AutoUpdate", "extensionsAutoUpdate", &Settings::extensionsAutoUpdateChanged};
+constexpr Settings::Option kPinnedExtensions{"Extensions/Pinned", "pinnedExtensions", &Settings::pinnedExtensionsChanged};
 
 int clampedReaderFontSize(int size)
 {
@@ -98,6 +99,7 @@ Settings::Settings(QObject *parent)
     , m_offerToSavePasswords(read<bool>(kOfferToSavePasswords))
     , m_passwordNeverSaveSites(read<QStringList>(kPasswordNeverSaveSites))
     , m_extensionsAutoUpdate(read<bool>(kExtensionsAutoUpdate))
+    , m_pinnedExtensions(read<QStringList>(kPinnedExtensions))
 {
 }
 
@@ -158,3 +160,4 @@ void Settings::setAdBlockLastUpdate(const QDateTime &adBlockLastUpdate) { store(
 void Settings::setOfferToSavePasswords(bool offerToSavePasswords) { store(m_offerToSavePasswords, offerToSavePasswords, kOfferToSavePasswords); }
 void Settings::setPasswordNeverSaveSites(const QStringList &passwordNeverSaveSites) { store(m_passwordNeverSaveSites, passwordNeverSaveSites, kPasswordNeverSaveSites); }
 void Settings::setExtensionsAutoUpdate(bool extensionsAutoUpdate) { store(m_extensionsAutoUpdate, extensionsAutoUpdate, kExtensionsAutoUpdate); }
+void Settings::setPinnedExtensions(const QStringList &pinnedExtensions) { store(m_pinnedExtensions, pinnedExtensions, kPinnedExtensions); }

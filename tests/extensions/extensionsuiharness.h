@@ -26,22 +26,6 @@ inline QObject *childObject(QObject *window, const char *name)
     return window->property(name).value<QObject *>();
 }
 
-inline QVariantList rebuiltEntries(QObject *menu)
-{
-    QMetaObject::invokeMethod(menu, "rebuild");
-    return menu->property("entries").toList();
-}
-
-inline QString textOf(const QVariant &entry, const QString &key)
-{
-    return entry.toMap().value(key).toString();
-}
-
-inline bool isChecked(const QVariant &entry)
-{
-    return entry.toMap().value(QStringLiteral("checked")).toBool();
-}
-
 inline QQuickItem *itemWithText(QQuickItem *root, const QString &text)
 {
     if (root->isVisible() && root->property("text").toString() == text)
@@ -66,27 +50,25 @@ inline bool isDialogOpen(QObject *window, const QString &title)
     return false;
 }
 
+inline QQuickItem *findByName(QObject *root, const char *name)
+{
+    return root->findChild<QQuickItem *>(QString::fromLatin1(name));
+}
+
 inline QString settingValue(const QString &name)
 {
     return ExtensionManager::instance()->settingValues(QStringLiteral("sample")).value(name).toString();
 }
 
-constexpr const char *menuWindowQml =
-    "import QtQuick\nimport QtQuick.Controls\nimport Kondor\n"
-    "ApplicationWindow {\n"
-    "    property alias menu: menu\n"
-    "    ExtensionsMenu { id: menu; tab: theTab }\n"
-    "}\n";
-
-constexpr const char *menuAndReloadBarWindowQml =
+constexpr const char *panelWindowQml =
     "import QtQuick\nimport QtQuick.Controls\nimport Kondor\n"
     "ApplicationWindow {\n"
     "    visible: true\n"
-    "    width: 700; height: 200\n"
-    "    property alias menu: menu\n"
+    "    width: 700; height: 600\n"
+    "    property alias panel: panel\n"
     "    property alias bar: bar\n"
-    "    ExtensionsMenu { id: menu; tab: theTab }\n"
-    "    SiteReloadBar { id: bar; tab: theTab; width: parent.width }\n"
+    "    ExtensionsPanel { id: panel; parent: Overlay.overlay; x: 100; y: 50; tab: theTab }\n"
+    "    SiteReloadBar { id: bar; objectName: \"bar\"; tab: theTab; width: parent.width }\n"
     "}\n";
 
 constexpr const char *settingsDialogQml =

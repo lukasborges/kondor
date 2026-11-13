@@ -81,6 +81,8 @@ void TestSettings::addSpellCheckAndPasswordRows()
             << QStringLiteral("offerToSavePasswords") << QVariant(true);
     QTest::newRow("passwordNeverSaveSites")
             << QStringLiteral("passwordNeverSaveSites") << QVariant(QStringList());
+    QTest::newRow("pinnedExtensions")
+            << QStringLiteral("pinnedExtensions") << QVariant(QStringList());
     QTest::newRow("spellCheckLanguages")
             << QStringLiteral("spellCheckLanguages")
             << QVariant(QStringList{QStringLiteral("en-US")});

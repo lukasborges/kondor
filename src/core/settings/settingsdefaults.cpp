@@ -48,6 +48,7 @@ const QHash<QString, DefaultFactory> kFactories = {
     {QStringLiteral("offerToSavePasswords"), [] { return QVariant(true); }},
     {QStringLiteral("passwordNeverSaveSites"), [] { return QVariant(QStringList()); }},
     {QStringLiteral("extensionsAutoUpdate"), [] { return QVariant(true); }},
+    {QStringLiteral("pinnedExtensions"), [] { return QVariant(QStringList()); }},
 };
 
 }

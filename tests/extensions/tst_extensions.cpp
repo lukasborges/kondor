@@ -16,6 +16,7 @@ int runAll(int argc, char *argv[])
         runTestExtensionPackage, runTestExtensionScripts, runTestExtensionInstall,
         runTestExtensionReplace, runTestExtensionBridge, runTestExtensionBridgeTabs,
         runTestExtensionCatalog, runTestExtensionUpdates, runTestExtensionsUi,
+        runTestExtensionsPanel, runTestExtensionsReloadBar, runTestExtensionPins,
         runTestExtensionDialogs, runTestExtensionPages, runTestPasswordsUi,
     };
     int failures = 0;

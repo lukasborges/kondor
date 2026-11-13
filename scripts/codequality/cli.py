@@ -5,6 +5,7 @@ from typing import List, Optional
 
 from . import baseline as bl
 from .files import all_files, changed_files, read_source
+from .folders import all_folders, folder_problems, folders_of
 from .rules import Violation, check_source
 
 DEFAULT_BASELINE = "scripts/code-quality-baseline.json"
@@ -60,10 +61,15 @@ def scope_of(arguments: argparse.Namespace):
     return paths, set(paths)
 
 
+def folders_in_scope(arguments: argparse.Namespace, paths: List[str]) -> List[str]:
+    return all_folders(arguments.root) if arguments.changed is None else folders_of(paths)
+
+
 def check(arguments: argparse.Namespace) -> int:
     paths, scope = scope_of(arguments)
     problems = bl.find_problems(collect_violations(arguments.root, paths),
                                 bl.load_baseline(baseline_path(arguments)), scope)
+    problems += folder_problems(arguments.root, folders_in_scope(arguments, paths))
     print("\n".join(problems))
     return 1 if problems else 0
 

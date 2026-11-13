@@ -299,19 +299,20 @@ history, downloads · 40. #144 Shrink C++: browser · 41. #145 Shrink C++: app, 
 42. #146 Shrink C++: extensions · 43. #139 Shrink QML functions and files ·
 44. #151 Shrink the test files · 45. #156 Sub-feature folders ·
 46. #176 Copy saved user name and password ·
-47. #182 Extension menu item icons and shortcuts ·
-48. #108 Extensions repository · 49. #109 Dark Mode extension ·
-50. #110 Video Speed Controller extension · 51. #111 User Scripts extension ·
-52. #112 Cookie Banner Blocker extension · 53. #113 Skip Sponsors extension ·
-54. #114 YouTube Dislike Counts extension · 55. #115 JSON Viewer extension ·
-56. #116 User Styles extension · 57. #117 Clean Links extension · 58. #118 Mouse Gestures extension ·
-59. #163 Python port 1/12: Toolchain and packaging proof · 60. #164 Python port 2/12: Core ·
-61. #165 Python port 3/12: Ad blocking · 62. #166 Python port 4/12: Downloads and history ·
-63. #167 Python port 5/12: Bookmarks · 64. #168 Python port 6/12: Password store ·
-65. #169 Python port 7/12: Browser profile, address and session · 66. #170 Python port 8/12: Tabs ·
-67. #171 Python port 9/12: Extensions: state, catalog and install ·
-68. #172 Python port 10/12: Extensions: scripts and bridge ·
-69. #173 Python port 11/12: App startup · 70. #174 Python port 12/12: Switch to Python
+47. #183 Extensions panel ·
+48. #182 Extension menu item icons and shortcuts ·
+49. #108 Extensions repository · 50. #109 Dark Mode extension ·
+51. #110 Video Speed Controller extension · 52. #111 User Scripts extension ·
+53. #112 Cookie Banner Blocker extension · 54. #113 Skip Sponsors extension ·
+55. #114 YouTube Dislike Counts extension · 56. #115 JSON Viewer extension ·
+57. #116 User Styles extension · 58. #117 Clean Links extension · 59. #118 Mouse Gestures extension ·
+60. #163 Python port 1/12: Toolchain and packaging proof · 61. #164 Python port 2/12: Core ·
+62. #165 Python port 3/12: Ad blocking · 63. #166 Python port 4/12: Downloads and history ·
+64. #167 Python port 5/12: Bookmarks · 65. #168 Python port 6/12: Password store ·
+66. #169 Python port 7/12: Browser profile, address and session · 67. #170 Python port 8/12: Tabs ·
+68. #171 Python port 9/12: Extensions: state, catalog and install ·
+69. #172 Python port 10/12: Extensions: scripts and bridge ·
+70. #173 Python port 11/12: App startup · 71. #174 Python port 12/12: Switch to Python
 
 The Python port (#163-#174) follows its umbrella spec,
 [`docs/specs/0162-python-backend.md`](docs/specs/0162-python-backend.md). While it runs, `src/` only changes to fix `bug` issues, and a fix to a

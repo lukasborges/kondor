@@ -136,7 +136,7 @@ ToolBar {
                      && (ExtensionManager.revision,
                          ExtensionManager.hasActionExtensions(root.tabs.currentTab.isPrivate))
             display: AbstractButton.IconOnly
-            icon.name: "preferences-plugin"
+            icon.name: "plugins"
             ToolTip.visible: hovered
             Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Extensions")

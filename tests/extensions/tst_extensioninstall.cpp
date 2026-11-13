@@ -9,6 +9,7 @@ private slots:
     void cleanup();
     void inspectFileShowsPreview();
     void confirmInstallInstallsTheExtension();
+    void reloadFindsTheInstall();
     void inspectAgainOffersReplacing();
     void notAZipShowsError();
     void zipWithoutManifestShowsError();
@@ -62,7 +63,7 @@ void TestExtensionInstall::confirmInstallInstallsTheExtension()
     QVERIFY(manager->pendingInstall().isEmpty());
     QVERIFY(manager->isInstalled(QStringLiteral("sample")));
     QCOMPARE(manager->source(QStringLiteral("sample")), QStringLiteral("file"));
-    QCOMPARE(manager->count(), 1);
+    QCOMPARE(ExtensionManager::instance()->count(), 1);
     QVERIFY(QFileInfo(ExtensionManager::extensionsDirectory() + QStringLiteral("/sample/manifest.json")).isFile());
     const QModelIndex row = manager->index(0);
     QCOMPARE(manager->data(row, ExtensionManager::NameRole).toString(), QStringLiteral("Sample Extension"));
@@ -70,6 +71,13 @@ void TestExtensionInstall::confirmInstallInstallsTheExtension()
     QVERIFY(!manager->data(row, ExtensionManager::PrivateAllowedRole).toBool());
     QVERIFY(manager->data(row, ExtensionManager::HasSettingsRole).toBool());
     QVERIFY(manager->data(row, ExtensionManager::HasActionRole).toBool());
+}
+
+void TestExtensionInstall::reloadFindsTheInstall()
+{
+    inspectAndConfirmSample();
+    ExtensionManager::instance()->reload();
+    QCOMPARE(ExtensionManager::instance()->count(), 1);
 }
 
 void TestExtensionInstall::inspectAgainOffersReplacing()

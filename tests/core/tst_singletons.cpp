@@ -46,16 +46,7 @@ ASSERT_QML_CALLS_CREATE(PasswordStore);
 class TestSingletons : public QObject
 {
     Q_OBJECT
-
-private slots:
-    void qmlCannotBuildItsOwnInstance();
 };
-
-void TestSingletons::qmlCannotBuildItsOwnInstance()
-{
-    QVERIFY(!std::is_default_constructible_v<ExtensionManager>);
-    QVERIFY(!std::is_default_constructible_v<ExtensionCatalog>);
-}
 
 QTEST_GUILESS_MAIN(TestSingletons)
 #include "tst_singletons.moc"

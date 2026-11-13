@@ -89,7 +89,7 @@ Menu {
 
     MenuItem {
         text: qsTr("Manage Extensions…")
-        icon.name: "preferences-plugin"
+        icon.name: "configure"
         onTriggered: root.manageRequested()
     }
 }

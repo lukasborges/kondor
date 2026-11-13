@@ -54,6 +54,7 @@ ToolBar {
             icon.name: "go-previous"
             enabled: root.tabs.currentTab ? root.tabs.currentTab.canGoBack : false
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Back")
             ToolTip.delay: 600
             onClicked: root.tabs.currentTab.goBack()
@@ -64,6 +65,7 @@ ToolBar {
             icon.name: "go-next"
             enabled: root.tabs.currentTab ? root.tabs.currentTab.canGoForward : false
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Forward")
             ToolTip.delay: 600
             onClicked: root.tabs.currentTab.goForward()
@@ -74,6 +76,7 @@ ToolBar {
             icon.name: root.isLoading ? "process-stop" : "view-refresh"
             enabled: root.tabs.currentTab ? !root.tabs.currentTab.newTabPage : false
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: root.isLoading ? qsTr("Stop") : qsTr("Reload")
             ToolTip.delay: 600
             onClicked: root.reloadOrStop()
@@ -83,6 +86,7 @@ ToolBar {
             display: AbstractButton.IconOnly
             icon.name: "go-home"
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Home")
             ToolTip.delay: 600
             onClicked: root.goHome()
@@ -100,6 +104,7 @@ ToolBar {
             display: AbstractButton.IconOnly
             icon.name: "download"
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Downloads")
             ToolTip.delay: 600
             onClicked: downloadsList.opened ? downloadsList.close() : downloadsList.open()
@@ -133,6 +138,7 @@ ToolBar {
             display: AbstractButton.IconOnly
             icon.name: "preferences-plugin"
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Extensions")
             ToolTip.delay: 600
             onClicked: extensionsMenu.popup(extensionsButton, 0, extensionsButton.height)
@@ -148,6 +154,7 @@ ToolBar {
             display: AbstractButton.IconOnly
             icon.name: "application-menu"
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Menu")
             ToolTip.delay: 600
             onClicked: mainMenu.open()

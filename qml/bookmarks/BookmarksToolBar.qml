@@ -50,6 +50,7 @@ ToolBar {
             display: AbstractButton.IconOnly
             icon.name: "go-up"
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Move Up")
             ToolTip.delay: 600
             enabled: root.canMove
@@ -60,6 +61,7 @@ ToolBar {
             display: AbstractButton.IconOnly
             icon.name: "go-down"
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Move Down")
             ToolTip.delay: 600
             enabled: root.canMove

@@ -30,6 +30,7 @@ ToolButton {
     flat: true
     implicitHeight: 28
     ToolTip.visible: hovered
+    Accessible.name: ToolTip.text
     ToolTip.text: qsTr("Site Information")
     ToolTip.delay: 600
     onClicked: siteInfoPopup.opened ? siteInfoPopup.close() : siteInfoPopup.open()

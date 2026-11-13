@@ -88,6 +88,8 @@ Rectangle {
                 icon.width: Kirigami.Units.iconSizes.medium
                 icon.height: Kirigami.Units.iconSizes.medium
                 text: root.catalog.pages[modelData].title
+                Accessible.role: Accessible.ListItem
+                Accessible.onPressAction: root.pageRequested(modelData)
                 onClicked: root.pageRequested(modelData)
             }
 

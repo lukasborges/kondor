@@ -379,6 +379,55 @@ set_tests_properties(tst_mainmenu PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
 )
 
+qt_add_executable(tst_toolbaraccessibility
+    app/tst_toolbaraccessibility.cpp
+    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
+    ${KONDOR_BOOKMARK_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
+    ${KONDOR_TAB_SOURCES}
+    ${KONDOR_PASSWORD_STORE_SOURCES}
+    ${KONDOR_TAB_MODEL_SOURCES}
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
+    ${KONDOR_ADBLOCK_SOURCES}
+    ../src/browser/addressresolver.cpp
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ../src/browser/faviconstore.cpp
+    ${KONDOR_SUGGESTION_SOURCES}
+)
+
+target_compile_definitions(tst_toolbaraccessibility PRIVATE
+    KONDOR_TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data"
+    KONDOR_QML_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../qml"
+    KONDOR_QML_IMPORT_DIR="${KONDOR_TEST_QML_IMPORT_DIR}"
+)
+
+target_include_directories(tst_toolbaraccessibility PRIVATE
+    ../src
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+target_link_libraries(tst_toolbaraccessibility PRIVATE
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebEngineQuick
+    KF6::Wallet
+)
+
+add_test(NAME tst_toolbaraccessibility COMMAND tst_toolbaraccessibility)
+set_tests_properties(tst_toolbaraccessibility PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+)
+
 qt_add_executable(tst_topsites
     history/tst_topsites.cpp
     history/tst_historysuggestions.cpp
@@ -559,6 +608,7 @@ qt_add_executable(tst_tabstrip
     browser/tst_tabdrag.cpp
     browser/tst_tabdragscroll.cpp
     browser/tst_tabdragrelease.cpp
+    browser/tst_tabstripaccessibility.cpp
     ${KONDOR_TAB_SOURCES}
     ${KONDOR_PASSWORD_STORE_SOURCES}
     ${KONDOR_TAB_MODEL_SOURCES}
@@ -960,6 +1010,7 @@ target_link_libraries(tst_addresssuggestions PRIVATE Qt6::Concurrent Qt6::Networ
 target_link_libraries(tst_addressbar PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_bookmarkswindow PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_mainmenu PRIVATE Qt6::Concurrent Qt6::Network)
+target_link_libraries(tst_toolbaraccessibility PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_settingswindow PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_tabstrip PRIVATE Qt6::Concurrent Qt6::Network)
 target_link_libraries(tst_tabstripscroll PRIVATE Qt6::Concurrent Qt6::Network)

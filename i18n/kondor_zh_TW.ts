@@ -56,7 +56,7 @@
 <context>
     <name>AdBlockButton</name>
     <message>
-        <location filename="../qml/adblock/AdBlockButton.qml" line="36"/>
+        <location filename="../qml/adblock/AdBlockButton.qml" line="37"/>
         <source>Ad and Tracker Blocking</source>
         <translation>廣告和追蹤器封鎖</translation>
     </message>
@@ -182,7 +182,7 @@
         <translation>維護者</translation>
     </message>
     <message>
-        <location filename="../qml/app/AuthorsTab.qml" line="54"/>
+        <location filename="../qml/app/AuthorsTab.qml" line="55"/>
         <source>Visit Author&apos;s Homepage</source>
         <translation>造訪作者首頁</translation>
     </message>
@@ -190,12 +190,12 @@
 <context>
     <name>BookmarkButton</name>
     <message>
-        <location filename="../qml/bookmarks/BookmarkButton.qml" line="22"/>
+        <location filename="../qml/bookmarks/BookmarkButton.qml" line="23"/>
         <source>Edit This Bookmark</source>
         <translation>編輯此書籤</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarkButton.qml" line="22"/>
+        <location filename="../qml/bookmarks/BookmarkButton.qml" line="23"/>
         <source>Bookmark This Page</source>
         <translation>將此頁加入書籤</translation>
     </message>
@@ -290,27 +290,27 @@
         <translation>刪除</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="53"/>
+        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="54"/>
         <source>Move Up</source>
         <translation>上移</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="63"/>
+        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="65"/>
         <source>Move Down</source>
         <translation>下移</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="72"/>
+        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="74"/>
         <source>Import from HTML…</source>
         <translation>從 HTML 匯入…</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="81"/>
+        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="83"/>
         <source>Search bookmarks…</source>
         <translation>搜尋書籤…</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="94"/>
+        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="96"/>
         <source>Import Bookmarks</source>
         <translation>匯入書籤</translation>
     </message>
@@ -596,32 +596,32 @@
 <context>
     <name>DownloadDelegate</name>
     <message>
-        <location filename="../qml/downloads/DownloadDelegate.qml" line="82"/>
+        <location filename="../qml/downloads/DownloadDelegate.qml" line="83"/>
         <source>Resume</source>
         <translation>繼續</translation>
     </message>
     <message>
-        <location filename="../qml/downloads/DownloadDelegate.qml" line="82"/>
+        <location filename="../qml/downloads/DownloadDelegate.qml" line="83"/>
         <source>Pause</source>
         <translation>暫停</translation>
     </message>
     <message>
-        <location filename="../qml/downloads/DownloadDelegate.qml" line="92"/>
+        <location filename="../qml/downloads/DownloadDelegate.qml" line="94"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../qml/downloads/DownloadDelegate.qml" line="102"/>
+        <location filename="../qml/downloads/DownloadDelegate.qml" line="105"/>
         <source>Open File</source>
         <translation>開啟檔案</translation>
     </message>
     <message>
-        <location filename="../qml/downloads/DownloadDelegate.qml" line="112"/>
+        <location filename="../qml/downloads/DownloadDelegate.qml" line="116"/>
         <source>Show in Folder</source>
         <translation>在資料夾中顯示</translation>
     </message>
     <message>
-        <location filename="../qml/downloads/DownloadDelegate.qml" line="122"/>
+        <location filename="../qml/downloads/DownloadDelegate.qml" line="127"/>
         <source>Remove from List</source>
         <translation>從清單中移除</translation>
     </message>
@@ -860,7 +860,7 @@
         <translation>設定…</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="98"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="99"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
@@ -1034,7 +1034,12 @@
         <translation>在 %1 上執行</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsMenu.qml" line="89"/>
+        <location filename="../qml/extensions/ExtensionsMenu.qml" line="46"/>
+        <source>Run %1 on %2</source>
+        <translation>在 %2 上執行 %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/ExtensionsMenu.qml" line="91"/>
         <source>Manage Extensions…</source>
         <translation>管理擴充套件…</translation>
     </message>
@@ -1111,32 +1116,32 @@
         <translation>在頁面中尋找</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="112"/>
+        <location filename="../qml/browser/FindBar.qml" line="113"/>
         <source>Previous (Shift+F3)</source>
         <translation>上一個 (Shift+F3)</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="122"/>
+        <location filename="../qml/browser/FindBar.qml" line="124"/>
         <source>Next (F3)</source>
         <translation>下一個 (F3)</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="134"/>
+        <location filename="../qml/browser/FindBar.qml" line="136"/>
         <source>No results</source>
         <translation>沒有結果</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="135"/>
+        <location filename="../qml/browser/FindBar.qml" line="137"/>
         <source>%1 of %2</source>
         <translation>%1 / %2</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="144"/>
+        <location filename="../qml/browser/FindBar.qml" line="146"/>
         <source>Match case</source>
         <translation>區分大小寫</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="157"/>
+        <location filename="../qml/browser/FindBar.qml" line="160"/>
         <source>Close (Esc)</source>
         <translation>關閉 (Esc)</translation>
     </message>
@@ -1522,42 +1527,42 @@
 <context>
     <name>NavigationToolBar</name>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="57"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="58"/>
         <source>Back</source>
         <translation>上一頁</translation>
     </message>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="67"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="69"/>
         <source>Forward</source>
         <translation>下一頁</translation>
     </message>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="77"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="80"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="77"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="80"/>
         <source>Reload</source>
         <translation>重新載入</translation>
     </message>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="86"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="90"/>
         <source>Home</source>
         <translation>首頁</translation>
     </message>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="103"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="108"/>
         <source>Downloads</source>
         <translation>下載</translation>
     </message>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="136"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="142"/>
         <source>Extensions</source>
         <translation>擴充套件</translation>
     </message>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="151"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="158"/>
         <source>Menu</source>
         <translation>選單</translation>
     </message>
@@ -1860,7 +1865,7 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <location filename="../qml/passwords/PasswordButton.qml" line="19"/>
+        <location filename="../qml/passwords/PasswordButton.qml" line="20"/>
         <source>Fill Saved Password</source>
         <translation>填入已儲存的密碼</translation>
     </message>
@@ -2101,12 +2106,12 @@
 <context>
     <name>ReaderButton</name>
     <message>
-        <location filename="../qml/browser/ReaderButton.qml" line="22"/>
+        <location filename="../qml/browser/ReaderButton.qml" line="23"/>
         <source>Exit Reader Mode (Ctrl+Alt+R)</source>
         <translation>結束閱讀模式 (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderButton.qml" line="22"/>
+        <location filename="../qml/browser/ReaderButton.qml" line="23"/>
         <source>Reader Mode (Ctrl+Alt+R)</source>
         <translation>閱讀模式 (Ctrl+Alt+R)</translation>
     </message>
@@ -2114,38 +2119,38 @@
 <context>
     <name>ReaderControls</name>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="28"/>
+        <location filename="../qml/browser/ReaderControls.qml" line="29"/>
         <source>Decrease Font Size</source>
         <translation>縮小字型大小</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="34"/>
+        <location filename="../qml/browser/ReaderControls.qml" line="35"/>
         <source>%1 px</source>
         <extracomment>Font size in pixels, %1 is the number</extracomment>
         <translation>%1 px</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="41"/>
+        <location filename="../qml/browser/ReaderControls.qml" line="43"/>
         <source>Increase Font Size</source>
         <translation>放大字型大小</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="46"/>
+        <location filename="../qml/browser/ReaderControls.qml" line="48"/>
         <source>Serif</source>
         <translation>襯線</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="46"/>
+        <location filename="../qml/browser/ReaderControls.qml" line="48"/>
         <source>Sans Serif</source>
         <translation>無襯線</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="51"/>
+        <location filename="../qml/browser/ReaderControls.qml" line="53"/>
         <source>Switch Font Family</source>
         <translation>切換字型家族</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="56"/>
+        <location filename="../qml/browser/ReaderControls.qml" line="58"/>
         <source>Exit Reader Mode</source>
         <translation>結束閱讀模式</translation>
     </message>
@@ -2539,7 +2544,7 @@
         <translation>已封鎖</translation>
     </message>
     <message>
-        <location filename="../qml/site/SiteInfoPopup.qml" line="145"/>
+        <location filename="../qml/site/SiteInfoPopup.qml" line="146"/>
         <source>Revoke</source>
         <translation>撤銷</translation>
     </message>
@@ -2601,7 +2606,7 @@
         <translation>不安全</translation>
     </message>
     <message>
-        <location filename="../qml/site/SiteSecurityButton.qml" line="33"/>
+        <location filename="../qml/site/SiteSecurityButton.qml" line="34"/>
         <source>Site Information</source>
         <translation>網站資訊</translation>
     </message>
@@ -2669,7 +2674,7 @@
         <translation>新增隱私分頁</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabButtonDelegate.qml" line="93"/>
+        <location filename="../qml/browser/TabButtonDelegate.qml" line="94"/>
         <source>Close Tab</source>
         <translation>關閉分頁</translation>
     </message>
@@ -2735,7 +2740,7 @@
         <translation>向右捲動分頁</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabStrip.qml" line="164"/>
+        <location filename="../qml/browser/TabStrip.qml" line="165"/>
         <source>New Tab</source>
         <translation>新增分頁</translation>
     </message>
@@ -2793,27 +2798,27 @@
         <translation>縮放</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="36"/>
+        <location filename="../qml/app/ZoomMenuRow.qml" line="37"/>
         <source>Zoom Out (Ctrl+−)</source>
         <translation>縮小 (Ctrl+−)</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="46"/>
+        <location filename="../qml/app/ZoomMenuRow.qml" line="47"/>
         <source>Reset Zoom (Ctrl+0)</source>
         <translation>重設縮放 (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="56"/>
+        <location filename="../qml/app/ZoomMenuRow.qml" line="58"/>
         <source>Zoom In (Ctrl++)</source>
         <translation>放大 (Ctrl++)</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="69"/>
+        <location filename="../qml/app/ZoomMenuRow.qml" line="72"/>
         <source>Exit Full Screen (F11)</source>
         <translation>結束全螢幕 (F11)</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="70"/>
+        <location filename="../qml/app/ZoomMenuRow.qml" line="73"/>
         <source>Full Screen (F11)</source>
         <translation>全螢幕 (F11)</translation>
     </message>

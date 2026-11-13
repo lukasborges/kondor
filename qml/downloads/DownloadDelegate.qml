@@ -79,6 +79,7 @@ ItemDelegate {
             icon.name: root.isPaused ? "media-playback-start" : "media-playback-pause"
             ToolTip.visible: hovered
             ToolTip.delay: 600
+            Accessible.name: ToolTip.text
             ToolTip.text: root.isPaused ? qsTr("Resume") : qsTr("Pause")
             onClicked: root.togglePause()
         }
@@ -89,6 +90,7 @@ ItemDelegate {
             icon.name: "dialog-cancel"
             ToolTip.visible: hovered
             ToolTip.delay: 600
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Cancel")
             onClicked: DownloadManager.cancel(root.index)
         }
@@ -99,6 +101,7 @@ ItemDelegate {
             icon.name: "document-open"
             ToolTip.visible: hovered
             ToolTip.delay: 600
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Open File")
             onClicked: DownloadManager.openFile(root.index)
         }
@@ -109,6 +112,7 @@ ItemDelegate {
             icon.name: "folder-open"
             ToolTip.visible: hovered
             ToolTip.delay: 600
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Show in Folder")
             onClicked: DownloadManager.showInFolder(root.index)
         }
@@ -119,6 +123,7 @@ ItemDelegate {
             icon.name: "edit-delete"
             ToolTip.visible: hovered
             ToolTip.delay: 600
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Remove from List")
             onClicked: DownloadManager.removeFromList(root.index)
         }

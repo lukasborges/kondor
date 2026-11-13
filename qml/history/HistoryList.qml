@@ -28,6 +28,10 @@ ScrollView {
     function handleClick(entry, mouse) {
         if (mouse.button === Qt.RightButton)
             return entryMenu.popupFor(entry, mouse.x, mouse.y)
+        root.pressEntry(entry)
+    }
+
+    function pressEntry(entry) {
         root.selectEntry(entry.index)
         if (root.isSingleClickActivation())
             root.openRequested(entry.url)
@@ -68,6 +72,8 @@ ScrollView {
 
             width: ListView.view.width
             highlighted: ListView.isCurrentItem
+            Accessible.role: Accessible.ListItem
+            Accessible.onPressAction: root.pressEntry(entry)
 
             contentItem: RowLayout {
                 spacing: Kirigami.Units.largeSpacing

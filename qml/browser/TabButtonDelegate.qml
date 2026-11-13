@@ -90,6 +90,7 @@ TabButton {
             icon.width: 14
             icon.height: 14
             ToolTip.visible: hovered
+            Accessible.name: ToolTip.text
             ToolTip.text: qsTr("Close Tab")
             ToolTip.delay: 600
             onClicked: control.tabStrip.closeWithMouse(control.tab)

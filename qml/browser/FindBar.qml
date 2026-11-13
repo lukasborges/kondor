@@ -109,6 +109,7 @@ InlineBar {
         icon.name: "go-up"
         enabled: searchField.text.length > 0
         ToolTip.visible: hovered
+        Accessible.name: ToolTip.text
         ToolTip.text: qsTr("Previous (Shift+F3)")
         ToolTip.delay: 600
         onClicked: root.findPrevious()
@@ -119,6 +120,7 @@ InlineBar {
         icon.name: "go-down"
         enabled: searchField.text.length > 0
         ToolTip.visible: hovered
+        Accessible.name: ToolTip.text
         ToolTip.text: qsTr("Next (F3)")
         ToolTip.delay: 600
         onClicked: root.findNext()
@@ -154,6 +156,7 @@ InlineBar {
         display: AbstractButton.IconOnly
         icon.name: "window-close"
         ToolTip.visible: hovered
+        Accessible.name: ToolTip.text
         ToolTip.text: qsTr("Close (Esc)")
         ToolTip.delay: 600
         onClicked: root.close()

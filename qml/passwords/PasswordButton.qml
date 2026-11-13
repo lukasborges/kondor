@@ -16,6 +16,7 @@ ToolButton {
     implicitWidth: 28
     implicitHeight: 28
     ToolTip.visible: hovered
+    Accessible.name: ToolTip.text
     ToolTip.text: qsTr("Fill Saved Password")
     ToolTip.delay: 600
     onClicked: passwordMenu.popup(root, 0, root.height)

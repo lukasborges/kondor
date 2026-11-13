@@ -43,6 +43,7 @@ Menu {
         return {
             kind: "site", extension: extension.id,
             title: qsTr("Run on %1").arg(root.host),
+            accessibleName: qsTr("Run %1 on %2").arg(extension.name).arg(root.host),
             checked: ExtensionManager.siteEnabled(extension.id, root.tab.url)
         }
     }
@@ -79,6 +80,7 @@ Menu {
             icon.name: entry.modelData.kind === "header" || entry.modelData.icon
                        ? (entry.modelData.icon ?? "") : ""
             opacity: 1.0
+            Accessible.name: entry.modelData.accessibleName ?? entry.text
             onTriggered: root.trigger(entry.modelData, entry.checked)
         }
     }

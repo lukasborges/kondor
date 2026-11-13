@@ -56,7 +56,7 @@
 <context>
     <name>AdBlockButton</name>
     <message>
-        <location filename="../qml/adblock/AdBlockButton.qml" line="36"/>
+        <location filename="../qml/adblock/AdBlockButton.qml" line="37"/>
         <source>Ad and Tracker Blocking</source>
         <translation>Blokowanie reklam i elementów śledzących</translation>
     </message>
@@ -182,7 +182,7 @@
         <translation>Opiekun</translation>
     </message>
     <message>
-        <location filename="../qml/app/AuthorsTab.qml" line="54"/>
+        <location filename="../qml/app/AuthorsTab.qml" line="55"/>
         <source>Visit Author&apos;s Homepage</source>
         <translation>Odwiedź stronę domową autora</translation>
     </message>
@@ -190,12 +190,12 @@
 <context>
     <name>BookmarkButton</name>
     <message>
-        <location filename="../qml/bookmarks/BookmarkButton.qml" line="22"/>
+        <location filename="../qml/bookmarks/BookmarkButton.qml" line="23"/>
         <source>Edit This Bookmark</source>
         <translation>Edytuj tę zakładkę</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarkButton.qml" line="22"/>
+        <location filename="../qml/bookmarks/BookmarkButton.qml" line="23"/>
         <source>Bookmark This Page</source>
         <translation>Dodaj tę stronę do zakładek</translation>
     </message>
@@ -290,27 +290,27 @@
         <translation>Usuń</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="53"/>
+        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="54"/>
         <source>Move Up</source>
         <translation>Przenieś w górę</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="63"/>
+        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="65"/>
         <source>Move Down</source>
         <translation>Przenieś w dół</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="72"/>
+        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="74"/>
         <source>Import from HTML…</source>
         <translation>Importuj z HTML…</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="81"/>
+        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="83"/>
         <source>Search bookmarks…</source>
         <translation>Szukaj zakładek…</translation>
     </message>
     <message>
-        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="94"/>
+        <location filename="../qml/bookmarks/BookmarksToolBar.qml" line="96"/>
         <source>Import Bookmarks</source>
         <translation>Importuj zakładki</translation>
     </message>
@@ -596,32 +596,32 @@
 <context>
     <name>DownloadDelegate</name>
     <message>
-        <location filename="../qml/downloads/DownloadDelegate.qml" line="82"/>
+        <location filename="../qml/downloads/DownloadDelegate.qml" line="83"/>
         <source>Resume</source>
         <translation>Wznów</translation>
     </message>
     <message>
-        <location filename="../qml/downloads/DownloadDelegate.qml" line="82"/>
+        <location filename="../qml/downloads/DownloadDelegate.qml" line="83"/>
         <source>Pause</source>
         <translation>Wstrzymaj</translation>
     </message>
     <message>
-        <location filename="../qml/downloads/DownloadDelegate.qml" line="92"/>
+        <location filename="../qml/downloads/DownloadDelegate.qml" line="94"/>
         <source>Cancel</source>
         <translation>Anuluj</translation>
     </message>
     <message>
-        <location filename="../qml/downloads/DownloadDelegate.qml" line="102"/>
+        <location filename="../qml/downloads/DownloadDelegate.qml" line="105"/>
         <source>Open File</source>
         <translation>Otwórz plik</translation>
     </message>
     <message>
-        <location filename="../qml/downloads/DownloadDelegate.qml" line="112"/>
+        <location filename="../qml/downloads/DownloadDelegate.qml" line="116"/>
         <source>Show in Folder</source>
         <translation>Pokaż w folderze</translation>
     </message>
     <message>
-        <location filename="../qml/downloads/DownloadDelegate.qml" line="122"/>
+        <location filename="../qml/downloads/DownloadDelegate.qml" line="127"/>
         <source>Remove from List</source>
         <translation>Usuń z listy</translation>
     </message>
@@ -860,7 +860,7 @@
         <translation>Skonfiguruj…</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionDelegate.qml" line="98"/>
+        <location filename="../qml/extensions/ExtensionDelegate.qml" line="99"/>
         <source>Remove</source>
         <translation>Usuń</translation>
     </message>
@@ -1036,7 +1036,12 @@
         <translation>Uruchamiaj na %1</translation>
     </message>
     <message>
-        <location filename="../qml/extensions/ExtensionsMenu.qml" line="89"/>
+        <location filename="../qml/extensions/ExtensionsMenu.qml" line="46"/>
+        <source>Run %1 on %2</source>
+        <translation>Uruchom %1 na %2</translation>
+    </message>
+    <message>
+        <location filename="../qml/extensions/ExtensionsMenu.qml" line="91"/>
         <source>Manage Extensions…</source>
         <translation>Zarządzaj rozszerzeniami…</translation>
     </message>
@@ -1113,32 +1118,32 @@
         <translation>Znajdź na stronie</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="112"/>
+        <location filename="../qml/browser/FindBar.qml" line="113"/>
         <source>Previous (Shift+F3)</source>
         <translation>Poprzednie (Shift+F3)</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="122"/>
+        <location filename="../qml/browser/FindBar.qml" line="124"/>
         <source>Next (F3)</source>
         <translation>Następne (F3)</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="134"/>
+        <location filename="../qml/browser/FindBar.qml" line="136"/>
         <source>No results</source>
         <translation>Brak wyników</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="135"/>
+        <location filename="../qml/browser/FindBar.qml" line="137"/>
         <source>%1 of %2</source>
         <translation>%1 z %2</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="144"/>
+        <location filename="../qml/browser/FindBar.qml" line="146"/>
         <source>Match case</source>
         <translation>Rozróżniaj wielkość liter</translation>
     </message>
     <message>
-        <location filename="../qml/browser/FindBar.qml" line="157"/>
+        <location filename="../qml/browser/FindBar.qml" line="160"/>
         <source>Close (Esc)</source>
         <translation>Zamknij (Esc)</translation>
     </message>
@@ -1542,42 +1547,42 @@
 <context>
     <name>NavigationToolBar</name>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="57"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="58"/>
         <source>Back</source>
         <translation>Wstecz</translation>
     </message>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="67"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="69"/>
         <source>Forward</source>
         <translation>Do przodu</translation>
     </message>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="77"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="80"/>
         <source>Stop</source>
         <translation>Zatrzymaj</translation>
     </message>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="77"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="80"/>
         <source>Reload</source>
         <translation>Wczytaj ponownie</translation>
     </message>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="86"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="90"/>
         <source>Home</source>
         <translation>Strona domowa</translation>
     </message>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="103"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="108"/>
         <source>Downloads</source>
         <translation>Pobrane</translation>
     </message>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="136"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="142"/>
         <source>Extensions</source>
         <translation>Rozszerzenia</translation>
     </message>
     <message>
-        <location filename="../qml/app/NavigationToolBar.qml" line="151"/>
+        <location filename="../qml/app/NavigationToolBar.qml" line="158"/>
         <source>Menu</source>
         <translation>Menu</translation>
     </message>
@@ -1880,7 +1885,7 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <location filename="../qml/passwords/PasswordButton.qml" line="19"/>
+        <location filename="../qml/passwords/PasswordButton.qml" line="20"/>
         <source>Fill Saved Password</source>
         <translation>Wstaw zapisane hasło</translation>
     </message>
@@ -2121,12 +2126,12 @@
 <context>
     <name>ReaderButton</name>
     <message>
-        <location filename="../qml/browser/ReaderButton.qml" line="22"/>
+        <location filename="../qml/browser/ReaderButton.qml" line="23"/>
         <source>Exit Reader Mode (Ctrl+Alt+R)</source>
         <translation>Zakończ tryb czytnika (Ctrl+Alt+R)</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderButton.qml" line="22"/>
+        <location filename="../qml/browser/ReaderButton.qml" line="23"/>
         <source>Reader Mode (Ctrl+Alt+R)</source>
         <translation>Tryb czytnika (Ctrl+Alt+R)</translation>
     </message>
@@ -2134,38 +2139,38 @@
 <context>
     <name>ReaderControls</name>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="28"/>
+        <location filename="../qml/browser/ReaderControls.qml" line="29"/>
         <source>Decrease Font Size</source>
         <translation>Zmniejsz rozmiar czcionki</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="34"/>
+        <location filename="../qml/browser/ReaderControls.qml" line="35"/>
         <source>%1 px</source>
         <extracomment>Font size in pixels, %1 is the number</extracomment>
         <translation>%1 px</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="41"/>
+        <location filename="../qml/browser/ReaderControls.qml" line="43"/>
         <source>Increase Font Size</source>
         <translation>Zwiększ rozmiar czcionki</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="46"/>
+        <location filename="../qml/browser/ReaderControls.qml" line="48"/>
         <source>Serif</source>
         <translation>Szeryfowa</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="46"/>
+        <location filename="../qml/browser/ReaderControls.qml" line="48"/>
         <source>Sans Serif</source>
         <translation>Bezszeryfowa</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="51"/>
+        <location filename="../qml/browser/ReaderControls.qml" line="53"/>
         <source>Switch Font Family</source>
         <translation>Przełącz rodzinę czcionek</translation>
     </message>
     <message>
-        <location filename="../qml/browser/ReaderControls.qml" line="56"/>
+        <location filename="../qml/browser/ReaderControls.qml" line="58"/>
         <source>Exit Reader Mode</source>
         <translation>Zakończ tryb czytnika</translation>
     </message>
@@ -2559,7 +2564,7 @@
         <translation>Zablokowano</translation>
     </message>
     <message>
-        <location filename="../qml/site/SiteInfoPopup.qml" line="145"/>
+        <location filename="../qml/site/SiteInfoPopup.qml" line="146"/>
         <source>Revoke</source>
         <translation>Odwołaj</translation>
     </message>
@@ -2621,7 +2626,7 @@
         <translation>Niezabezpieczona</translation>
     </message>
     <message>
-        <location filename="../qml/site/SiteSecurityButton.qml" line="33"/>
+        <location filename="../qml/site/SiteSecurityButton.qml" line="34"/>
         <source>Site Information</source>
         <translation>Informacje o witrynie</translation>
     </message>
@@ -2689,7 +2694,7 @@
         <translation>Nowa karta prywatna</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabButtonDelegate.qml" line="93"/>
+        <location filename="../qml/browser/TabButtonDelegate.qml" line="94"/>
         <source>Close Tab</source>
         <translation>Zamknij kartę</translation>
     </message>
@@ -2755,7 +2760,7 @@
         <translation>Przewiń karty w prawo</translation>
     </message>
     <message>
-        <location filename="../qml/browser/TabStrip.qml" line="164"/>
+        <location filename="../qml/browser/TabStrip.qml" line="165"/>
         <source>New Tab</source>
         <translation>Nowa karta</translation>
     </message>
@@ -2813,27 +2818,27 @@
         <translation>Powiększenie</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="36"/>
+        <location filename="../qml/app/ZoomMenuRow.qml" line="37"/>
         <source>Zoom Out (Ctrl+−)</source>
         <translation>Pomniejsz (Ctrl+−)</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="46"/>
+        <location filename="../qml/app/ZoomMenuRow.qml" line="47"/>
         <source>Reset Zoom (Ctrl+0)</source>
         <translation>Przywróć powiększenie (Ctrl+0)</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="56"/>
+        <location filename="../qml/app/ZoomMenuRow.qml" line="58"/>
         <source>Zoom In (Ctrl++)</source>
         <translation>Powiększ (Ctrl++)</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="69"/>
+        <location filename="../qml/app/ZoomMenuRow.qml" line="72"/>
         <source>Exit Full Screen (F11)</source>
         <translation>Wyjdź z trybu pełnoekranowego (F11)</translation>
     </message>
     <message>
-        <location filename="../qml/app/ZoomMenuRow.qml" line="70"/>
+        <location filename="../qml/app/ZoomMenuRow.qml" line="73"/>
         <source>Full Screen (F11)</source>
         <translation>Pełny ekran (F11)</translation>
     </message>

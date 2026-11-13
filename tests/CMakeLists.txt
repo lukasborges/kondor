@@ -1026,6 +1026,31 @@ target_link_libraries(tst_passwordstore PRIVATE
 
 add_test(NAME tst_passwordstore COMMAND tst_passwordstore)
 
+qt_add_executable(tst_passwordfill
+    passwords/tst_passwordfill.cpp
+)
+
+qt_add_resources(tst_passwordfill "passwords_scripts_fill"
+    PREFIX "/scripts"
+    BASE "${CMAKE_SOURCE_DIR}/src/passwords"
+    FILES
+        ${CMAKE_SOURCE_DIR}/src/passwords/passwords.js
+        ${CMAKE_SOURCE_DIR}/src/passwords/usernamefield.js
+)
+
+target_link_libraries(tst_passwordfill PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Test
+    Qt6::WebEngineCore
+)
+
+add_test(NAME tst_passwordfill COMMAND tst_passwordfill)
+set_tests_properties(tst_passwordfill PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
+    TIMEOUT 120
+)
+
 qt_add_executable(tst_passwordimport
     passwords/tst_passwordimport.cpp
     ${KONDOR_PASSWORD_STORE_SOURCES}

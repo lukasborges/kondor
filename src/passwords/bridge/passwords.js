@@ -20,6 +20,12 @@
     const passwordFields = (scope) =>
         Array.from(scope.querySelectorAll("input[type=password]")).filter(isVisible);
 
+    const visibleTextFields = () => Array.from(document.querySelectorAll("input")).filter((el) => isTextField(el) && isVisible(el));
+
+    const hasLoginField = () =>
+        passwordFields(document).length > 0
+            || !!window.__kondorPickUsernameField(visibleTextFields());
+
     const inputsBefore = (password) => {
         const scope = password.form || document;
         const inputs = Array.from(scope.querySelectorAll("input"));
@@ -128,15 +134,13 @@
     };
 
     const loadCredentials = () => {
-        if (passwordFields(document).length === 0) {
+        if (!hasLoginField()) {
             credentials = [];
             return;
         }
         requested = true;
         bridge.credentialsFor(origin, applyCredentials);
     };
-
-    const visibleTextFields = () => Array.from(document.querySelectorAll("input")).filter((el) => isTextField(el) && isVisible(el));
 
     const fillUsernameOnly = (username) => {
         const field = window.__kondorPickUsernameField(visibleTextFields());
@@ -154,12 +158,7 @@
             fillUsernameOnly(username);
     };
 
-    const refreshAfterMutation = () => {
-        if (!requested && passwordFields(document).length > 0)
-            loadCredentials();
-        else
-            autofill();
-    };
+    const refreshAfterMutation = () => (requested ? autofill() : loadCredentials());
 
     const runScheduledRefresh = () => {
         refreshTimer = 0;

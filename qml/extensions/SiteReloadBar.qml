@@ -12,6 +12,14 @@ InlineBar {
 
     visible: siteReload !== null && siteReload.isPending
 
+    function message() {
+        if (!siteReload)
+            return ""
+        if (siteReload.willRun)
+            return qsTr("%1 will run on this site after reloading.").arg(siteReload.extensionName)
+        return qsTr("%1 will stop running on this site after reloading.").arg(siteReload.extensionName)
+    }
+
     Kirigami.Icon {
         source: "preferences-plugin"
         Layout.preferredWidth: Kirigami.Units.iconSizes.small
@@ -21,10 +29,7 @@ InlineBar {
     Label {
         Layout.fillWidth: true
         elide: Text.ElideRight
-        text: !root.siteReload ? ""
-              : root.siteReload.willRun
-                ? qsTr("%1 will run on this site after reloading.").arg(root.siteReload.extensionName)
-                : qsTr("%1 will stop running on this site after reloading.").arg(root.siteReload.extensionName)
+        text: root.message()
     }
 
     Button {

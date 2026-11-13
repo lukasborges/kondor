@@ -13,7 +13,8 @@ private slots:
     void siteTurnedOffShowsUnchecked();
     void privateTabListsOnlyAllowedExtensions();
     void siteToggleShowsReloadBarWithoutReloading();
-    void reloadButtonReloadsAndHidesBar();
+    void reloadButtonRequestsReload();
+    void startingToLoadHidesReloadBar();
     void togglingBackHidesReloadBar();
     void extensionsPageListsInstalled();
     void emptyListButtonOpensCatalog();
@@ -115,7 +116,7 @@ void TestExtensionsUi::siteToggleShowsReloadBarWithoutReloading()
                          QStringLiteral("Sample Extension will stop running on this site after reloading.")));
 }
 
-void TestExtensionsUi::reloadButtonReloadsAndHidesBar()
+void TestExtensionsUi::reloadButtonRequestsReload()
 {
     openMenu(menuAndReloadBarWindowQml);
     QSignalSpy reloads(m_tab.get(), &Tab::reloadRequested);
@@ -125,6 +126,13 @@ void TestExtensionsUi::reloadButtonReloadsAndHidesBar()
     QTRY_VERIFY((button = itemWithText(bar, QStringLiteral("Reload"))));
     clickCenterOf(button);
     QCOMPARE(reloads.count(), 1);
+}
+
+void TestExtensionsUi::startingToLoadHidesReloadBar()
+{
+    openMenu(menuAndReloadBarWindowQml);
+    toggleRunOnSite(false);
+    m_tab->setLoading(true);
     QVERIFY(!isReloadBarVisible());
 }
 

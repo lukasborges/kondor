@@ -37,18 +37,12 @@ void Tab::setTitle(const QString &title)
     assignAndNotify(m_title, title, [this] { emit titleChanged(); });
 }
 
-void Tab::denyAndDismissSiteState()
-{
-    m_permissions->denyAll();
-    m_siteReload->dismiss();
-}
-
 void Tab::setUrl(const QUrl &url)
 {
     if (isRealPage(url))
         setNewTabPage(false);
     if (!sameOrigin(m_url, url))
-        denyAndDismissSiteState();
+        m_permissions->denyAll();
     if (m_url == url)
         return;
     m_url = url;
@@ -67,8 +61,15 @@ void Tab::setProgress(qreal progress)
     assignAndNotify(m_progress, progress, [this] { emit progressChanged(); });
 }
 
+void Tab::dismissSiteReloadWhenLoadStarts(bool loading)
+{
+    if (loading)
+        m_siteReload->dismiss();
+}
+
 void Tab::setLoading(bool loading)
 {
+    dismissSiteReloadWhenLoadStarts(loading);
     assignAndNotify(m_loading, loading, [this] { emit loadingChanged(); });
 }
 

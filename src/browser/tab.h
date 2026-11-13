@@ -6,9 +6,9 @@
 
 #include "browser/tabextensionitems.h"
 #include "browser/tabpasswords.h"
-#include "browser/tabsitereload.h"
 #include "browser/tabpermissions.h"
 #include "browser/tabsecurity.h"
+#include "browser/tabsitereload.h"
 
 class QQuickWebEngineProfile;
 
@@ -161,7 +161,7 @@ signals:
     void downloadUrlRequested(const QUrl &url, const QString &fileName);
 
 private:
-    void denyAndDismissSiteState();
+    void dismissSiteReloadWhenLoadStarts(bool loading);
 
     void setNewTabPage(bool newTabPage);
 

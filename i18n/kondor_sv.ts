@@ -2229,43 +2229,43 @@
         <translation>Fyll i %1</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="52"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="53"/>
         <source>Copy Username</source>
         <translation>Kopiera användarnamn</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="53"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="54"/>
         <source>Copied.</source>
         <translation>Kopierat.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="54"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="55"/>
         <source>Username copied</source>
         <translation>Användarnamn kopierat</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="56"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="57"/>
         <source>Copy Username for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>Kopiera användarnamn för %1</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="63"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="65"/>
         <source>Copy Password</source>
         <translation>Kopiera lösenord</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="64"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="66"/>
         <source>Copied. Cleared in 30 seconds.</source>
         <translation>Kopierat. Rensas om 30 sekunder.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="65"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="67"/>
         <source>Password copied, cleared in 30 seconds</source>
         <translation>Lösenord kopierat, rensas om 30 sekunder</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="67"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="69"/>
         <source>Copy Password for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>Kopiera lösenord för %1</translation>
@@ -2320,12 +2320,12 @@
 <context>
     <name>SavedPasswordsPopup</name>
     <message>
-        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="55"/>
+        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="62"/>
         <source>Saved Passwords</source>
         <translation>Sparade lösenord</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="82"/>
+        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="89"/>
         <source>Manage Passwords…</source>
         <translation>Hantera lösenord…</translation>
     </message>

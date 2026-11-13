@@ -2218,43 +2218,43 @@
         <translation>%1 için doldur</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="52"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="53"/>
         <source>Copy Username</source>
         <translation>Kullanıcı adını kopyala</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="53"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="54"/>
         <source>Copied.</source>
         <translation>Kopyalandı.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="54"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="55"/>
         <source>Username copied</source>
         <translation>Kullanıcı adı kopyalandı</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="56"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="57"/>
         <source>Copy Username for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>%1 kullanıcı adını kopyala</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="63"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="65"/>
         <source>Copy Password</source>
         <translation>Parolayı kopyala</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="64"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="66"/>
         <source>Copied. Cleared in 30 seconds.</source>
         <translation>Kopyalandı. 30 saniye içinde temizlenecek.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="65"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="67"/>
         <source>Password copied, cleared in 30 seconds</source>
         <translation>Parola kopyalandı, 30 saniye içinde temizlenecek</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="67"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="69"/>
         <source>Copy Password for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>%1 parolasını kopyala</translation>
@@ -2309,12 +2309,12 @@
 <context>
     <name>SavedPasswordsPopup</name>
     <message>
-        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="55"/>
+        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="62"/>
         <source>Saved Passwords</source>
         <translation>Kayıtlı parolalar</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="82"/>
+        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="89"/>
         <source>Manage Passwords…</source>
         <translation>Parolaları yönet…</translation>
     </message>

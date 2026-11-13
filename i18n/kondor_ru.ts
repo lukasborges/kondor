@@ -2240,43 +2240,43 @@
         <translation>Заполнить для %1</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="52"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="53"/>
         <source>Copy Username</source>
         <translation>Копировать имя пользователя</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="53"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="54"/>
         <source>Copied.</source>
         <translation>Скопировано.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="54"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="55"/>
         <source>Username copied</source>
         <translation>Имя пользователя скопировано</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="56"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="57"/>
         <source>Copy Username for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>Копировать имя пользователя для %1</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="63"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="65"/>
         <source>Copy Password</source>
         <translation>Копировать пароль</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="64"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="66"/>
         <source>Copied. Cleared in 30 seconds.</source>
         <translation>Скопировано. Будет очищено через 30 секунд.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="65"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="67"/>
         <source>Password copied, cleared in 30 seconds</source>
         <translation>Пароль скопирован, будет очищен через 30 секунд</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="67"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="69"/>
         <source>Copy Password for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>Копировать пароль для %1</translation>
@@ -2331,12 +2331,12 @@
 <context>
     <name>SavedPasswordsPopup</name>
     <message>
-        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="55"/>
+        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="62"/>
         <source>Saved Passwords</source>
         <translation>Сохранённые пароли</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="82"/>
+        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="89"/>
         <source>Manage Passwords…</source>
         <translation>Управление паролями…</translation>
     </message>

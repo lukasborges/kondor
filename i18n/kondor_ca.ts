@@ -2229,43 +2229,43 @@
         <translation>Omple %1</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="52"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="53"/>
         <source>Copy Username</source>
-        <translation>Copia el nom d'usuari</translation>
+        <translation>Copia el nom d&apos;usuari</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="53"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="54"/>
         <source>Copied.</source>
         <translation>Copiat.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="54"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="55"/>
         <source>Username copied</source>
-        <translation>Nom d'usuari copiat</translation>
+        <translation>Nom d&apos;usuari copiat</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="56"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="57"/>
         <source>Copy Username for %1</source>
         <extracomment>%1 is the user name</extracomment>
-        <translation>Copia el nom d'usuari de %1</translation>
+        <translation>Copia el nom d&apos;usuari de %1</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="63"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="65"/>
         <source>Copy Password</source>
         <translation>Copia la contrasenya</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="64"/>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="66"/>
         <source>Copied. Cleared in 30 seconds.</source>
-        <translation>Copiat. S'esborrarà en 30 segons.</translation>
-    </message>
-    <message>
-        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="65"/>
-        <source>Password copied, cleared in 30 seconds</source>
-        <translation>Contrasenya copiada, s'esborrarà en 30 segons</translation>
+        <translation>Copiat. S&apos;esborrarà en 30 segons.</translation>
     </message>
     <message>
         <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="67"/>
+        <source>Password copied, cleared in 30 seconds</source>
+        <translation>Contrasenya copiada, s&apos;esborrarà en 30 segons</translation>
+    </message>
+    <message>
+        <location filename="../qml/passwords/bar/SavedAccountRow.qml" line="69"/>
         <source>Copy Password for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>Copia la contrasenya de %1</translation>
@@ -2320,12 +2320,12 @@
 <context>
     <name>SavedPasswordsPopup</name>
     <message>
-        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="55"/>
+        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="62"/>
         <source>Saved Passwords</source>
         <translation>Contrasenyes desades</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="82"/>
+        <location filename="../qml/passwords/bar/SavedPasswordsPopup.qml" line="89"/>
         <source>Manage Passwords…</source>
         <translation>Gestiona les contrasenyes…</translation>
     </message>

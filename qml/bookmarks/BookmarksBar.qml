@@ -58,6 +58,7 @@ ToolBar {
 
                 flat: true
                 padding: Kirigami.Units.smallSpacing
+                Accessible.name: barButton.title
                 ToolTip.visible: hovered
                 ToolTip.text: barButton.isFolder ? barButton.title : barButton.url
                 ToolTip.delay: 600

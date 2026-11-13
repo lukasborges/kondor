@@ -43,17 +43,17 @@ ItemDelegate {
             root.selection.openBookmark(root.url, false)
     }
 
-    function pressRow() {
+    function pressRow(button) {
         root.pickRow()
         if (root.isFolder)
-            root.openFolder(Qt.LeftButton)
+            root.openFolder(button)
         else
-            root.activateBookmark(Qt.LeftButton)
+            root.activateBookmark(button)
     }
 
     width: ListView.view.width
     Accessible.role: Accessible.ListItem
-    Accessible.onPressAction: root.pressRow()
+    Accessible.onPressAction: root.pressRow(Qt.LeftButton)
     highlighted: root.id === root.selection.itemId
                  || root.id === root.drag.dropFolderId
                  || root.id === root.drag.draggedId
@@ -123,13 +123,11 @@ ItemDelegate {
                 root.selection.openCurrentItem()
         }
         onClicked: function(mouse) {
-            root.pickRow()
-            if (mouse.button === Qt.RightButton)
-                root.showContextMenu()
-            else if (root.isFolder)
-                root.openFolder(mouse.button)
-            else
-                root.activateBookmark(mouse.button)
+            if (mouse.button === Qt.RightButton) {
+                root.pickRow()
+                return root.showContextMenu()
+            }
+            root.pressRow(mouse.button)
         }
     }
 }

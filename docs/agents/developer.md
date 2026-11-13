@@ -38,9 +38,10 @@ git -C ../kondor-<N> fetch origin && git -C ../kondor-<N> rebase origin/main   #
 1. Implement exactly the spec; "Out of scope" is binding. Match the prototype visually.
    For any UI state the prototype does not show (errors, empty, long text, keyboard, screen
    reader), load the `kde-ux` skill (`.claude/skills/kde-ux/`) and follow its checklist.
-2. Build (`cmake -S . -B build && cmake --build build --parallel 4`, never a bare `--parallel`), no new warnings; run
-   the offscreen smoke test from `AGENTS.md` (isolated `XDG_*` dirs, never the real profile) without QML errors; do the spec's
-   "Manual test"; run `ctest --test-dir build` once tests exist.
+2. Run the checks from `AGENTS.md` → "Which checks a change needs". When the C++ checks apply:
+   build (`cmake -S . -B build && cmake --build build --parallel 4`, never a bare `--parallel`) with no new warnings, run
+   the offscreen smoke test from `AGENTS.md` (isolated `XDG_*` dirs, never the real profile) without QML errors, and
+   `ctest --test-dir build`. From #163 on, run the Python checks. Always do the spec's "Manual test".
 3. Commit (English, Conventional Commits, **no attribution trailers**), push the branch, open a
    PR whose body follows `.github/pull_request_template.md` (`gh pr create --title "<type>: <summary>" --body-file <filled template>`), including `Closes #<N>`.
 4. Mark it ready (`gh pr ready`) and swap the issue label: `gh issue edit <N> --remove-label to-dev

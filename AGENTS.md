@@ -51,6 +51,24 @@ temporary directory too.
 It must not print QML errors (`ReferenceError`, `TypeError`, `Cannot assign…`, `is not a type`).
 Fedora build dependencies are listed in `README.md` and in `.github/workflows/build.yml`.
 
+### Which checks a change needs
+
+The C++ checks (clean build with no new warnings, `ctest`, offscreen smoke test) take more than
+15 minutes, so they run only when the change can affect the C++ app. Skip them when this prints
+nothing:
+
+```bash
+git diff --name-only origin/main...HEAD |
+  grep -vE '^(kondor|pytests|docs|prototypes|scripts|\.github|packaging/python-proof)/|^pyproject\.toml$|\.md$'
+```
+
+Every other path (`src/`, `qml/`, `tests/`, `i18n/`, `cmake/`, `3rdparty/`, `CMakeLists.txt`,
+the rest of `packaging/`, …) needs them. When they are skipped, the PR body says so. The spec's
+"Manual test" and the checks for the changed files still run. From #163 on, the Python checks
+(`ruff check`, `mypy --strict kondor`, `python3 scripts/build.py`, `QT_QPA_PLATFORM=offscreen pytest pytests`,
+`python3 scripts/check-qml-api.py`) run on every change: they take a few minutes and compare the
+Python port with the C++ code.
+
 ## Architecture
 
 Code is organized by **feature folder**, with the same folder names in `src/` (C++), `qml/` (QML)
@@ -255,8 +273,8 @@ are still tracked here, on the same roadmap, and their spec has the line
 ### Developer delivery checklist
 
 1. Implement exactly the spec ("Out of scope" is binding) and match the prototype.
-2. Build without new warnings in your files; run the offscreen smoke test; do the spec's
-   "Manual test". Follow "Code quality", and from #135 on run
+2. Run the checks the change needs ("Which checks a change needs"): build without new warnings in
+   your files and run the offscreen smoke test when the C++ checks apply; do the spec's "Manual test". Follow "Code quality", and from #135 on run
    `python3 scripts/check-code-quality.py --changed origin/main`.
 3. Update `README.md` when user-visible behavior changes: add or adjust one user-facing bullet in the matching "Features" group: a bold name plus at most about ten words on what the user can do (no implementation details, settings paths or edge cases), and the shortcut table.
 4. Commit messages **in English**, Conventional Commits style (`feat: add find in page`,

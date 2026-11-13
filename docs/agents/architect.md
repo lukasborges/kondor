@@ -98,8 +98,9 @@ screenshot. The developer's implementation must match it visually.
 ## Review checklist (PR)
 
 1. Scope — everything in "Acceptance criteria", nothing from "Out of scope".
-2. Build — clean build in a separate worktree, no new warnings; offscreen smoke test has no QML
-   errors; run the "Manual test"; `ctest` once #26 exists.
+2. Build — the checks from `AGENTS.md` → "Which checks a change needs": when the C++ checks
+   apply, a clean build in a separate worktree with no new warnings, an offscreen smoke test with
+   no QML errors and `ctest`; the Python checks from #163 on; always the "Manual test".
 3. Conventions — `AGENTS.md` (Tab bridge pattern, shared blocks, English, KDE HIG Title Case,
    `qsTr()`, shortcuts table in README, CMake/workflow updates for new deps).
 4. Privacy — nothing from a private tab may ever touch disk.

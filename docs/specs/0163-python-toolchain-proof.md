@@ -9,7 +9,7 @@ Prove that a PySide6 Kondor can be built, checked, tested and packaged before an
 
 - **Toolchain:** the Python project, the QML staging script and the QML API check.
 - **Quality:** `scripts/check-code-quality.py` also checks Python.
-- **CI:** the `build` job runs ruff, mypy, the staging script, pytest and the API check.
+- **CI:** a `python` job, next to `build`, runs ruff, mypy, the staging script, pytest and the API check.
 - **Packaging proof:** a minimal PySide6 app runs from an AppImage and from a Flatpak and prints `PROOF OK`.
 
 This phase is the go/no-go gate of #162. No C++ class is ported here.
@@ -149,8 +149,11 @@ The real `pytests/core/test_singletons.py` (umbrella item 3) comes in phase 2, w
 
 ### 6. CI: `build.yml`
 
-- **Install step:** add `python3-pyside6 pyside6-tools python3-pytest python3-pytest-qt python3-mypy ruff` to the existing dnf list. Keep the retry loop.
-- **New steps after "Test",** before "Check translations", each with `timeout-minutes`:
+- **The existing `build` job does not change.** It keeps building and testing the C++ app.
+- **A new `python` job** in the same workflow, with no `needs:`, so it runs next to `build` and reports in minutes instead of after the C++ build:
+  - the same `fedora:latest` container as `build`;
+  - an install step with the dnf retry loop, installing only `python3 python3-pyside6 pyside6-tools python3-pytest python3-pytest-qt python3-mypy ruff` and the QML runtime the staged module test loads (`kf6-kirigami`, `kf6-qqc2-desktop-style`, `qt6-qtdeclarative`);
+  - checkout, then these steps, each with `timeout-minutes`:
 
   | Step | Command | Timeout |
   | --- | --- | --- |
@@ -160,6 +163,7 @@ The real `pytests/core/test_singletons.py` (umbrella item 3) comes in phase 2, w
   | Pytest | `QT_QPA_PLATFORM=offscreen pytest pytests` | 20 |
   | QML API | `python3 scripts/check-qml-api.py` | 5 |
 
+- The `python` job does not configure or build CMake.
 - **Checks already in CI:** the code quality step needs no change, because it now also covers `kondor/` and `pytests/`, and `scripts/tests` already runs the new unit tests.
 
 ### 7. The proof app: `packaging/python-proof/`
@@ -225,7 +229,7 @@ If the AppImage or the Flatpak job cannot reach `PROOF OK`, the developer does n
 - [ ] `QT_QPA_PLATFORM=offscreen pytest pytests` passes, including `InlineBar` loading from the staged module with no warnings and the #159 singleton check.
 - [ ] `python3 scripts/check-qml-api.py` exits 0 with `0 classes checked, <m> C++ classes not ported yet`, and its unit tests cover every failure kind of item 3.
 - [ ] `scripts/check-code-quality.py` checks `.py` files in `kondor/` and `pytests/` with the item 4 rules. Its C++/QML results on `main` are unchanged (the baseline is untouched), and `python3 -m unittest discover -s scripts/tests` passes with the new tests.
-- [ ] The `build` job runs the five new steps with timeouts and is green. CMake, `ctest` and the translations check still pass.
+- [ ] The new `python` job (no `needs:`, no CMake) runs the five steps with timeouts and is green. The `build` job is unchanged and still passes.
 - [ ] `python3 packaging/python-proof/proof.py` prints five `PASS` lines and `PROOF OK` locally on Fedora 45 (offscreen, under `dbus-run-session`).
 - [ ] The `appimage-run` job prints `PROOF OK` in a container without `python3-pyside6` or `qt6-qtbase`.
 - [ ] The `flatpak` job builds PySide6 6.11.2 from source on `org.kde.Platform` 6.11 and prints `PROOF OK`.
@@ -274,3 +278,4 @@ None: no UI. The proof window is a test fixture, not a Kondor UI.
 | The proof's `interceptor` check: does the `data:` URL itself reach the interceptor? | Not relied on: the `data:` page requests `http://proof.invalid/pixel.png`, which the Python interceptor records and blocks. This proves a Python interceptor sees page requests, with no network, which is what ad blocking needs. |
 | How does the AppImage job prove the bundle is self-contained? | It runs in a second, fresh `fedora:latest` container without `python3-pyside6` or `qt6-qtbase`. The Ubuntu host cannot be used: an AppImage built on Fedora 45 needs a newer glibc than Ubuntu 24.04 has. |
 | The dev host lacks `python3-pyside6`, `pyside6-tools`, `python3-pytest`, `python3-pytest-qt`, `python3-mypy` and `ruff`. Who installs them? | The maintainer, with `sudo dnf install python3-pyside6 pyside6-tools python3-pytest python3-pytest-qt python3-mypy ruff` (all in the Fedora 45 repositories). Agents never install system packages or work around a missing one: no pip, no venv, no container. Meanwhile the developer implements the spec and verifies through the PR's CI jobs, which install the same packages; local checks and the "Manual test" run once the packages are present, before the PR leaves draft. |
+| Python steps in the `build` job or a job of their own? | A separate `python` job without `needs:`. The Python checks do not use the CMake build, so placing them after it delays every Python result by the full C++ build (more than 15 minutes). The same reasoning keeps the C++ checks out of the local and review checks of Python-only PRs (AGENTS.md → "Which checks a change needs"). |

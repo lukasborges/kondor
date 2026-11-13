@@ -8,6 +8,12 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 from codequality.folders import all_folders, folder_problems
 
 
+def make_file(root: str, path: str, content: str = "") -> None:
+    os.makedirs(os.path.dirname(os.path.join(root, path)), exist_ok=True)
+    with open(os.path.join(root, path), "w") as handle:
+        handle.write(content)
+
+
 def make_folder(root: str, folder: str, files: int) -> None:
     os.makedirs(os.path.join(root, folder), exist_ok=True)
     for number in range(files):
@@ -36,6 +42,24 @@ class FolderRulesTest(unittest.TestCase):
     def test_test_data_is_ignored(self):
         make_folder(self.root, "tests/data/extensions", 30)
         self.assertEqual(self.problems(), [])
+
+    def test_pytests_data_is_ignored(self):
+        make_folder(self.root, "pytests/data/extensions", 30)
+        self.assertEqual(self.problems(), [])
+
+    def test_pycache_is_never_in_scope(self):
+        make_folder(self.root, "kondor/core/__pycache__", 30)
+        self.assertEqual(self.problems(), [])
+
+    def test_empty_init_does_not_count(self):
+        make_folder(self.root, "kondor/core", 10)
+        make_file(self.root, "kondor/core/__init__.py")
+        self.assertEqual(self.problems(), [])
+
+    def test_non_empty_init_counts(self):
+        make_folder(self.root, "kondor/core", 10)
+        make_file(self.root, "kondor/core/__init__.py", "VALUE = 1\n")
+        self.assertEqual(self.problems(), ["kondor/core/: folder files: 11 > 10"])
 
     def test_two_levels_pass(self):
         make_folder(self.root, "src/browser/tabs/features", 1)

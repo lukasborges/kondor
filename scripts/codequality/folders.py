@@ -5,12 +5,14 @@ from .files import ROOTS
 
 MAX_FOLDER_FILES = 10
 MAX_FOLDER_DEPTH = 2
-IGNORED_FOLDER = "tests/data"
+IGNORED_FOLDERS = ("tests/data", "pytests/data")
+PYCACHE = "__pycache__"
 
 
 def is_in_scope(folder: str) -> bool:
-    top = folder.split("/")[0]
-    return top in ROOTS and folder != IGNORED_FOLDER and not folder.startswith(IGNORED_FOLDER + "/")
+    parts = folder.split("/")
+    ignored = any(folder == name or folder.startswith(name + "/") for name in IGNORED_FOLDERS)
+    return parts[0] in ROOTS and PYCACHE not in parts and not ignored
 
 
 def folder_depth(folder: str) -> int:
@@ -31,7 +33,13 @@ def folders_of(paths: Iterable[str]) -> List[str]:
 
 def count_files(root: str, folder: str) -> int:
     entries = os.listdir(os.path.join(root, folder))
-    return sum(1 for name in entries if os.path.isfile(os.path.join(root, folder, name)))
+    return sum(1 for name in entries if counts_as_file(os.path.join(root, folder, name)))
+
+
+def counts_as_file(path: str) -> bool:
+    if not os.path.isfile(path):
+        return False
+    return not (os.path.basename(path) == "__init__.py" and os.path.getsize(path) == 0)
 
 
 def folder_problems(root: str, folders: Iterable[str]) -> List[str]:

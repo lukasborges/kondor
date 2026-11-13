@@ -2,6 +2,7 @@ from typing import List, NamedTuple
 
 from .cpp import find_cpp_functions
 from .metrics import Function
+from .python import find_python_functions, python_comment_lines
 from .qml import find_qml_functions
 from .strip import forbidden_comment_lines, strip_source
 
@@ -12,6 +13,7 @@ MAX_NESTING = 2
 MAX_FILE_LINES = 200
 MAX_COMMENT_LINES = 0
 
+TEST_ROOTS = ("tests/", "pytests/")
 FUNCTION_RULES = ("function-length", "parameters", "nesting")
 FILE_RULES = ("file-length", "comments")
 
@@ -29,7 +31,7 @@ def is_qml_family(path: str) -> bool:
 
 
 def length_limit(path: str) -> int:
-    return MAX_TEST_FUNCTION_LINES if path.startswith("tests/") else MAX_FUNCTION_LINES
+    return MAX_TEST_FUNCTION_LINES if path.startswith(TEST_ROOTS) else MAX_FUNCTION_LINES
 
 
 def function_violations(function: Function, path: str) -> List[Violation]:
@@ -54,7 +56,16 @@ def file_violations(path: str, source: str, comment_lines: int) -> List[Violatio
     return [Violation(rule, path, 1, value, limit) for rule, value, limit in checks if value > limit]
 
 
+def check_python_source(path: str, source: str) -> List[Violation]:
+    violations = file_violations(path, source, python_comment_lines(source))
+    for function in find_python_functions(path, source):
+        violations += function_violations(function, path)
+    return violations
+
+
 def check_source(path: str, source: str) -> List[Violation]:
+    if path.endswith(".py"):
+        return check_python_source(path, source)
     text, comments = strip_source(source)
     violations = file_violations(path, source, forbidden_comment_lines(comments))
     for function in find_functions(path, text):

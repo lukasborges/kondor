@@ -1,0 +1,168 @@
+name: Python proof
+
+on:
+  pull_request:
+    paths:
+      - 'packaging/python-proof/**'
+      - '.github/workflows/python-proof.yml'
+  workflow_dispatch:
+
+jobs:
+  appimage-build:
+    runs-on: ubuntu-24.04
+    container: fedora:latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Install dependencies
+        timeout-minutes: 30
+        run: |
+          for attempt in 1 2 3; do
+            timeout 15m dnf -y install git python3 python3-pyside6 file wget fuse-libs \
+                qt6-qtbase qt6-qtdeclarative qt6-qtwebengine qt6-qtwebchannel qt6-qtsvg \
+                kf6-kirigami kf6-qqc2-desktop-style plasma-integration plasma-breeze-qt6 && exit 0
+            echo "::warning::dnf install failed or timed out (attempt $attempt of 3)"
+            sleep 30
+          done
+          exit 1
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare AppDir
+        run: |
+          PYV="$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
+          LIB="AppDir/usr/lib/python$PYV"
+          mkdir -p AppDir/usr/bin "$LIB/site-packages" AppDir/usr/share/kondor-proof \
+                   AppDir/usr/libexec AppDir/usr/plugins AppDir/usr/qml/org/kde AppDir/usr/share/qt6
+
+          cp "$(readlink -f /usr/bin/python3)" AppDir/usr/bin/python3
+          cp -r "/usr/lib64/python$PYV/." "$LIB/"
+          rm -rf "$LIB/site-packages" "$LIB/test"
+          mkdir -p "$LIB/site-packages"
+
+          SITE="/usr/lib64/python$PYV/site-packages"
+          cp -r "$SITE/shiboken6" "$LIB/site-packages/"
+          mkdir -p "$LIB/site-packages/PySide6"
+          cp "$SITE/PySide6/__init__.py" "$SITE/PySide6/_config.py" "$LIB/site-packages/PySide6/" 2>/dev/null || true
+          cp "$SITE"/PySide6/libpyside6*.so* "$LIB/site-packages/PySide6/"
+          for module in Core Gui Qml Quick QuickControls2 Network Sql DBus WebEngineCore WebEngineQuick WebChannel; do
+            cp "$SITE"/PySide6/Qt$module.*.so "$LIB/site-packages/PySide6/"
+          done
+
+          cp -r packaging/python-proof/*.py AppDir/usr/share/kondor-proof/
+          cp -r packaging/python-proof/qml AppDir/usr/share/kondor-proof/
+          cp packaging/python-proof/AppRun AppDir/AppRun
+          chmod +x AppDir/AppRun
+
+          cp /usr/lib64/qt6/libexec/QtWebEngineProcess AppDir/usr/libexec/
+          cp -r /usr/share/qt6/resources AppDir/usr/share/qt6/
+          cp -r /usr/share/qt6/translations AppDir/usr/share/qt6/
+
+          for module in QtQuick QtQml QtWebEngine QtWebChannel QtCore QtQuick.tmp; do
+            [ -d "/usr/lib64/qt6/qml/$module" ] && cp -r "/usr/lib64/qt6/qml/$module" AppDir/usr/qml/
+          done
+          cp -r /usr/lib64/qt6/qml/org/kde/kirigami /usr/lib64/qt6/qml/org/kde/desktop \
+                /usr/lib64/qt6/qml/org/kde/qqc2desktopstyle AppDir/usr/qml/org/kde/
+
+          mkdir -p AppDir/usr/plugins/platforms AppDir/usr/plugins/sqldrivers
+          cp /usr/lib64/qt6/plugins/platforms/libqoffscreen.so /usr/lib64/qt6/plugins/platforms/libqxcb.so \
+             AppDir/usr/plugins/platforms/
+          for p in platformthemes/KDEPlasmaPlatformTheme6.so styles/breeze6.so \
+                   kf6/kirigami/platform/org.kde.desktop.so iconengines/libqsvgicon.so; do
+            mkdir -p "AppDir/usr/plugins/$(dirname "$p")"
+            cp "/usr/lib64/qt6/plugins/$p" "AppDir/usr/plugins/$p"
+          done
+
+          cp packaging/kondor.png AppDir/kondor-proof.png
+          printf '[Desktop Entry]\nType=Application\nName=Kondor Proof\nExec=AppRun\nIcon=kondor-proof\nCategories=Network;\n' \
+            > AppDir/kondor-proof.desktop
+
+      - name: Download AppImage tools
+        run: |
+          wget -q -c "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage" -O linuxdeploy
+          chmod +x linuxdeploy
+
+      - name: Create AppImage
+        env:
+          APPIMAGE_EXTRACT_AND_RUN: "1"
+          NO_STRIP: "1"
+          LDAI_OUTPUT: Kondor-Proof-x86_64.AppImage
+          OUTPUT: Kondor-Proof-x86_64.AppImage
+        run: |
+          PYV="$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
+          ./linuxdeploy --appdir AppDir \
+            --exclude-library "libp11-kit.so*" \
+            --deploy-deps-only "AppDir/usr/lib/python$PYV/site-packages/PySide6" \
+            --deploy-deps-only "AppDir/usr/lib/python$PYV/lib-dynload" \
+            --deploy-deps-only AppDir/usr/plugins/platforms \
+            --deploy-deps-only AppDir/usr/plugins/platformthemes \
+            --deploy-deps-only AppDir/usr/plugins/styles \
+            --deploy-deps-only AppDir/usr/plugins/kf6 \
+            --deploy-deps-only AppDir/usr/plugins/iconengines \
+            --deploy-deps-only AppDir/usr/libexec
+          rm -f AppDir/usr/lib/libp11-kit.so*
+          ./linuxdeploy --appdir AppDir --exclude-library "libp11-kit.so*" --output appimage
+
+      - name: Upload AppImage
+        uses: actions/upload-artifact@v4
+        with:
+          name: Kondor-Proof-x86_64.AppImage
+          path: Kondor-Proof-x86_64.AppImage
+          if-no-files-found: error
+
+  appimage-run:
+    runs-on: ubuntu-24.04
+    needs: appimage-build
+    container: fedora:latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Download AppImage
+        uses: actions/download-artifact@v4
+        with:
+          name: Kondor-Proof-x86_64.AppImage
+
+      - name: Install host libraries only
+        run: dnf -y install dbus-daemon mesa-libGL mesa-libEGL fontconfig libxkbcommon nss
+
+      - name: Check that the bundle is self-contained
+        run: "! rpm -q python3-pyside6 qt6-qtbase"
+
+      - name: Run the proof
+        env:
+          APPIMAGE_EXTRACT_AND_RUN: "1"
+          QT_QPA_PLATFORM: offscreen
+          QTWEBENGINE_DISABLE_SANDBOX: "1"
+        run: |
+          chmod +x Kondor-Proof-x86_64.AppImage
+          dbus-run-session -- ./Kondor-Proof-x86_64.AppImage | tee proof.log
+          grep -qx "PROOF OK" proof.log
+
+  flatpak:
+    runs-on: ubuntu-24.04
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.11
+      options: --privileged
+    timeout-minutes: 180
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Flatpak
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          manifest-path: packaging/python-proof/io.github.lukasborges.KondorProof.yml
+          build-bundle: false
+          upload-artifact: false
+          branch: stable
+          cache-key: flatpak-proof-${{ hashFiles('packaging/python-proof/io.github.lukasborges.KondorProof.yml') }}
+
+      - name: Run the proof
+        run: |
+          flatpak remote-add --user --no-gpg-verify proof-repo repo
+          flatpak install --user --noninteractive proof-repo io.github.lukasborges.KondorProof//stable
+          dbus-run-session -- flatpak run --env=QT_QPA_PLATFORM=offscreen \
+              io.github.lukasborges.KondorProof | tee proof.log
+          grep -qx "PROOF OK" proof.log

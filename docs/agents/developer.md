@@ -81,6 +81,7 @@ scripts/dev-loop.sh --dry-run      # show what would run now
 scripts/dev-loop.sh --install      # install + start the systemd user service
 journalctl --user -u kondor-dev-loop -f            # follow it
 tail -f ~/.local/state/kondor-dev-loop/dev-loop.log   # loop log; run-<N>-*.log per developer run
+scripts/watch-agents.sh            # live: both loops' queue events, agent messages and tool calls
 scripts/dev-loop.sh --resume <N>   # unpause an issue
 systemctl --user stop kondor-dev-loop              # stop (start again with start)
 scripts/dev-loop.sh --uninstall    # remove the service

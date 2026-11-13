@@ -141,6 +141,7 @@ pauses that step and sends a desktop notification.
 scripts/architect-loop.sh --dry-run      # show what would run now
 scripts/architect-loop.sh --install      # install + start the systemd user service
 tail -f ~/.local/state/kondor-architect-loop/architect-loop.log   # loop log; run-*.log per Claude run
+scripts/watch-agents.sh            # live: both loops' queue events, agent messages and tool calls
 scripts/architect-loop.sh --resume <N|promote>                   # unpause a step
 systemctl --user stop kondor-architect-loop
 scripts/architect-loop.sh --uninstall

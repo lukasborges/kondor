@@ -69,7 +69,7 @@ Item {
             }
         }
         MenuSeparator {}
-        Menu { id: toolsRow; title: "More Tools"; icon.name: "applications-development"; popupType: Popup.Item }
+        Menu { id: toolsRow; title: "More Tools"; icon.name: "tools"; popupType: Popup.Item }
         MenuSeparator {}
         MenuItem { text: "Configure Kondor Browser…"; icon.name: "configure"; action: Action { shortcut: "Ctrl+," } }
         Menu { id: helpRow; title: "Help"; icon.name: "help-contents"; popupType: Popup.Item }

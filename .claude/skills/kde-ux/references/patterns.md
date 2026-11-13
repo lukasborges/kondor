@@ -48,5 +48,10 @@ features are therefore **not available**; use the patterns below.
   `find /usr/share/icons/breeze -name '<name>.svg'`.
 - Use distinct icons for distinct actions in the same row (`edit-copy` for the user name,
   `password-copy` for the password).
-- Size: `IconSizes.smallMedium` in toolbars, flat buttons and list items without a subtitle;
-  `IconSizes.small` in menus; `IconSizes.medium` in list items with a subtitle.
+- Size:
+  - **Toolbar buttons:** set `icon.name` or `icon.source` on the `ToolButton` and let the style
+    size it. Never a custom `contentItem` or an explicit size: every toolbar icon must match (#204).
+  - `IconSizes.smallMedium` in list items without a subtitle; `IconSizes.small` in menus;
+    `IconSizes.medium` in list items with a subtitle.
+- Colorful content icons (extensions, favicons) have **no background tile**: a transparent
+  background and a symbol that reads at 16 px on light and dark color schemes (#205).

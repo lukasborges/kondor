@@ -96,7 +96,7 @@ void TestExtensionsPanel::runOnSiteSwitchShowsReloadBar()
 {
     openPanel(QStringLiteral("sample"));
     QSignalSpy reloads(m_tab.get(), &Tab::reloadRequested);
-    clickCenterOf(panelItem("siteSwitch"));
+    toggleRunOnSite();
     QCOMPARE(reloads.count(), 0);
     QVERIFY(!ExtensionManager::instance()->siteEnabled(QStringLiteral("sample"), m_tab->url()));
     QVERIFY(panelItem("bar")->isVisible());

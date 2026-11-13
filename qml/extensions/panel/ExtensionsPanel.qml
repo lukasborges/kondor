@@ -95,10 +95,7 @@ Popup {
             tab: root.tab
             host: root.host
             onExtensionChosen: function(extensionId) { root.showActions(extensionId) }
-            onManageRequested: {
-                root.close()
-                root.manageRequested()
-            }
+            onManageRequested: root.closeAndRequest(root.manageRequested)
         }
 
         ExtensionActions {
@@ -108,10 +105,7 @@ Popup {
             tab: root.tab
             host: root.host
             onBackRequested: root.showList(root.currentId)
-            onSettingsRequested: function(extensionId) {
-                root.close()
-                root.settingsRequested(extensionId)
-            }
+            onSettingsRequested: function(extensionId) { root.closeAndRequest(root.settingsRequested, extensionId) }
         }
     }
 }

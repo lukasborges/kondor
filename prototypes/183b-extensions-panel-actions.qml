@@ -1,4 +1,4 @@
-// #183 Extensions panel — level 2: the actions of one extension, with Back, pin and settings.
+// #183/#182 Extensions panel — level 2: the actions of one extension (icons and page shortcuts from #182), with Back, pin and settings.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -51,7 +51,13 @@ BrowserFrame {
         ActionRow { text: "Slower"; icon.name: "media-seek-backward"; shortcut: "S" }
         ActionRow { text: "Faster"; icon.name: "media-seek-forward"; shortcut: "D" }
         ActionRow { text: "Reset Speed"; icon.name: "edit-undo"; shortcut: "R" }
-        CheckBox { text: "Show speed overlay"; checked: true; Layout.leftMargin: Kirigami.Units.smallSpacing }
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.leftMargin: Kirigami.Units.smallSpacing
+            Layout.rightMargin: Kirigami.Units.smallSpacing
+            CheckBox { text: "Show speed overlay"; checked: true; Layout.fillWidth: true }
+            Label { text: "V"; color: Kirigami.Theme.disabledTextColor }
+        }
         Kirigami.Separator { Layout.fillWidth: true }
         RowLayout {
             Layout.fillWidth: true

@@ -12,7 +12,7 @@ with the fix.
       pattern. If a row click does something, a hint or the heading says so.
 - [ ] Nothing important hides behind hover, a submenu or a keyboard shortcut only.
 - [ ] The design still works with 1 item, many items (10+), very long names, no items, and an
-      error (wallet locked, offline).
+      error (wallet locked, offline). **Prototype the 10+ case**, not only two items (#183).
 
 ## Feedback and status
 

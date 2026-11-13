@@ -43,7 +43,17 @@ ItemDelegate {
             root.selection.openBookmark(root.url, false)
     }
 
+    function pressRow() {
+        root.pickRow()
+        if (root.isFolder)
+            root.openFolder(Qt.LeftButton)
+        else
+            root.activateBookmark(Qt.LeftButton)
+    }
+
     width: ListView.view.width
+    Accessible.role: Accessible.ListItem
+    Accessible.onPressAction: root.pressRow()
     highlighted: root.id === root.selection.itemId
                  || root.id === root.drag.dropFolderId
                  || root.id === root.drag.draggedId

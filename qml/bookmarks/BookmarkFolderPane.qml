@@ -53,6 +53,8 @@ Item {
                 text: folderEntry.modelData.title
                 leftPadding: 10 + folderEntry.modelData.depth * 18
 
+                Accessible.role: Accessible.ListItem
+                Accessible.onPressAction: root.selection.selectFolder(folderEntry.modelData.id)
                 onClicked: root.selection.selectFolder(folderEntry.modelData.id)
             }
         }

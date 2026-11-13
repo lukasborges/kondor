@@ -1,5 +1,6 @@
 #include <QAccessible>
 
+#include "common/accessibilitywalk.h"
 #include "tabstripharness.h"
 
 class TestTabStripAccessibility : public TabStripFixture
@@ -15,29 +16,7 @@ private slots:
     void init() { setUpStrip(); }
     void cleanup() { tearDownStrip(); }
     void everyVisibleButtonHasAName();
-
-private:
-    static bool isUnnamedButton(QQuickItem *item);
-    static QStringList unnamedButtons(QQuickItem *root);
 };
-
-bool TestTabStripAccessibility::isUnnamedButton(QQuickItem *item)
-{
-    if (!item->isVisible() || !item->inherits("QQuickAbstractButton"))
-        return false;
-    QAccessibleInterface *accessible = QAccessible::queryAccessibleInterface(item);
-    return accessible && accessible->text(QAccessible::Name).isEmpty();
-}
-
-QStringList TestTabStripAccessibility::unnamedButtons(QQuickItem *root)
-{
-    QStringList found;
-    if (isUnnamedButton(root))
-        found << QString::fromLatin1(root->metaObject()->className());
-    for (QQuickItem *child : root->childItems())
-        found << unnamedButtons(child);
-    return found;
-}
 
 void TestTabStripAccessibility::everyVisibleButtonHasAName()
 {

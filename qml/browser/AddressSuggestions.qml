@@ -114,6 +114,8 @@ Popup {
                 Layout.fillWidth: true
                 focusPolicy: Qt.NoFocus
                 highlighted: row.index === root.currentIndex
+                Accessible.role: Accessible.ListItem
+                Accessible.onPressAction: root.activate(row.index, false)
                 onClicked: root.activate(row.index, false)
 
                 contentItem: RowLayout {

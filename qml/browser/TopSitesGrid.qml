@@ -80,6 +80,8 @@ GridLayout {
                           : tile.modelData.url
             ToolTip.delay: 600
 
+            Accessible.role: Accessible.ListItem
+            Accessible.onPressAction: root.activate(tile.modelData.url)
             onClicked: root.activate(tile.modelData.url)
 
             MouseArea {

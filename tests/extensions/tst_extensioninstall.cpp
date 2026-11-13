@@ -9,7 +9,6 @@ private slots:
     void cleanup();
     void inspectFileShowsPreview();
     void confirmInstallInstallsTheExtension();
-    void secondManagerSeesTheInstall();
     void inspectAgainOffersReplacing();
     void notAZipShowsError();
     void zipWithoutManifestShowsError();
@@ -71,13 +70,6 @@ void TestExtensionInstall::confirmInstallInstallsTheExtension()
     QVERIFY(!manager->data(row, ExtensionManager::PrivateAllowedRole).toBool());
     QVERIFY(manager->data(row, ExtensionManager::HasSettingsRole).toBool());
     QVERIFY(manager->data(row, ExtensionManager::HasActionRole).toBool());
-}
-
-void TestExtensionInstall::secondManagerSeesTheInstall()
-{
-    inspectAndConfirmSample();
-    ExtensionManager other;
-    QCOMPARE(other.count(), 1);
 }
 
 void TestExtensionInstall::inspectAgainOffersReplacing()

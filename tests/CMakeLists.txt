@@ -462,6 +462,30 @@ set_tests_properties(tst_aboutinfo PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
 )
 
+qt_add_executable(tst_singletons
+    core/tst_singletons.cpp
+)
+
+target_include_directories(tst_singletons PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_singletons PRIVATE
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Network
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::Sql
+    Qt6::Test
+    Qt6::WebEngineQuick
+    KF6::Wallet
+    KF6::Archive
+)
+
+add_test(NAME tst_singletons COMMAND tst_singletons)
+
 qt_add_executable(tst_settings
     core/tst_settings.cpp
     ${KONDOR_SETTINGS_SOURCES}

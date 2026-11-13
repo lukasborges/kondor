@@ -56,7 +56,6 @@ public:
     static ExtensionManager *instance();
     static ExtensionManager *create(QQmlEngine *engine, QJSEngine *jsEngine);
 
-    explicit ExtensionManager(QObject *parent = nullptr);
     ~ExtensionManager() override;
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -117,6 +116,8 @@ signals:
     void extensionRemoved(const QString &id);
 
 private:
+    explicit ExtensionManager(QObject *parent = nullptr);
+
     struct ConfigurationChange {
         bool settings = false;
         bool privacy = false;

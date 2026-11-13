@@ -59,7 +59,7 @@ Menu {
 
     Menu {
         title: qsTr("More Tools")
-        icon.name: "applications-development"
+        icon.name: "tools"
 
         MenuItem { action: root.browserWindow.actions.devToolsAction }
         MenuItem { action: root.browserWindow.actions.saveAsPdfAction }

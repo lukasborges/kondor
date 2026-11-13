@@ -8,9 +8,80 @@ foreach(qml_file IN LISTS KONDOR_QML_SOURCES)
 endforeach()
 file(WRITE "${KONDOR_TEST_QML_IMPORT_DIR}/Kondor/qmldir" "${KONDOR_QMLDIR_CONTENT}")
 
+qt_add_library(kondor_testlib STATIC
+    ${KONDOR_ADBLOCK_SOURCES}
+    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
+    ${KONDOR_BOOKMARK_MODEL_SOURCES}
+    ${KONDOR_DATABASE_SOURCES}
+    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
+    ${KONDOR_EXTENSION_BRIDGE_SOURCES}
+    ${KONDOR_EXTENSION_MANAGER_SOURCES}
+    ${KONDOR_EXTENSION_PACKAGE_SOURCES}
+    ${KONDOR_FILTER_ENGINE_SOURCES}
+    ${KONDOR_HISTORY_MANAGER_SOURCES}
+    ${KONDOR_HISTORY_MODEL_SOURCES}
+    ${KONDOR_NOTIFIER_SOURCES}
+    ${KONDOR_PASSWORD_STORE_SOURCES}
+    ${KONDOR_PROFILE_MANAGER_SOURCES}
+    ${KONDOR_SESSION_SOURCES}
+    ${KONDOR_SETTINGS_SOURCES}
+    ${KONDOR_SUGGESTION_SOURCES}
+    ${KONDOR_TAB_MODEL_SOURCES}
+    ${KONDOR_TAB_SOURCES}
+    ${CMAKE_SOURCE_DIR}/src/app/aboutinfo.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/commandline/extensionpackages.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/commandline/startupurl.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/instance/singleinstance.cpp
+    ${CMAKE_SOURCE_DIR}/src/app/instance/singleinstancemessage.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/address/addressresolver.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/address/suggestionlist.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/favicons/faviconstore.cpp
+    ${CMAKE_SOURCE_DIR}/src/browser/zoommanager.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/filehelper.cpp
+    ${CMAKE_SOURCE_DIR}/src/downloads/transferspeed.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/catalog/catalogentry.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/install/extensionloader.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/package/packagesuffix.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/scripts/contentscriptbuilder.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/state/extensionsettings.cpp
+    ${CMAKE_SOURCE_DIR}/src/extensions/state/extensionstorage.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/csvreader.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/passwordimport.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/passwordimportcolumns.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/passwordimportfile.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/csv/passwordimportplan.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/import/importcommit.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/import/importinfo.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/import/importoutcome.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/import/importpreparation.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/passwordorigin.cpp
+)
+
+set_target_properties(kondor_testlib PROPERTIES AUTOMOC ON)
+
+target_include_directories(kondor_testlib PUBLIC
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+target_link_libraries(kondor_testlib PUBLIC
+    Qt6::Concurrent
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Gui
+    Qt6::Network
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::Sql
+    Qt6::WebChannel
+    Qt6::WebEngineCore
+    Qt6::WebEngineQuick
+    Qt6::Widgets
+    KF6::Wallet
+    KF6::Archive
+)
+
 qt_add_executable(tst_addressresolver
     browser/address/tst_addressresolver.cpp
-    ../src/browser/address/addressresolver.cpp
 )
 
 target_include_directories(tst_addressresolver PRIVATE
@@ -18,6 +89,7 @@ target_include_directories(tst_addressresolver PRIVATE
 )
 
 target_link_libraries(tst_addressresolver PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Test
 )
@@ -26,9 +98,6 @@ add_test(NAME tst_addressresolver COMMAND tst_addressresolver)
 
 qt_add_executable(tst_startupurl
     app/tst_startupurl.cpp
-    ../src/app/commandline/startupurl.cpp
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
 )
 
 target_include_directories(tst_startupurl PRIVATE
@@ -36,6 +105,7 @@ target_include_directories(tst_startupurl PRIVATE
 )
 
 target_link_libraries(tst_startupurl PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Test
 )
@@ -47,19 +117,6 @@ qt_add_executable(tst_tabmodel
     browser/tabs/tst_recentlyclosedtabs.cpp
     browser/tabs/tst_tabnewtabpage.cpp
     browser/tabs/tst_tabpinning.cpp
-    ${KONDOR_TAB_MODEL_SOURCES}
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
 )
 
 target_include_directories(tst_tabmodel PRIVATE
@@ -68,6 +125,7 @@ target_include_directories(tst_tabmodel PRIVATE
 )
 
 target_link_libraries(tst_tabmodel PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -87,19 +145,6 @@ set_tests_properties(tst_tabmodel PROPERTIES
 
 qt_add_executable(tst_tabpasswords
     browser/tabs/tst_tabpasswords.cpp
-    ${KONDOR_TAB_MODEL_SOURCES}
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
 )
 
 target_include_directories(tst_tabpasswords PRIVATE
@@ -107,6 +152,7 @@ target_include_directories(tst_tabpasswords PRIVATE
 )
 
 target_link_libraries(tst_tabpasswords PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -126,19 +172,6 @@ set_tests_properties(tst_tabpasswords PROPERTIES
 
 qt_add_executable(tst_tabsecurity
     browser/tabs/tst_tabsecurity.cpp
-    ${KONDOR_TAB_MODEL_SOURCES}
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
 )
 
 target_include_directories(tst_tabsecurity PRIVATE
@@ -146,6 +179,7 @@ target_include_directories(tst_tabsecurity PRIVATE
 )
 
 target_link_libraries(tst_tabsecurity PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -165,21 +199,6 @@ set_tests_properties(tst_tabsecurity PROPERTIES
 
 qt_add_executable(tst_addresssuggestions
     browser/address/tst_addresssuggestions.cpp
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_TAB_MODEL_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
-    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
-    ${KONDOR_BOOKMARK_MODEL_SOURCES}
 )
 
 target_compile_definitions(tst_addresssuggestions PRIVATE
@@ -193,6 +212,7 @@ target_include_directories(tst_addresssuggestions PRIVATE
 )
 
 target_link_libraries(tst_addresssuggestions PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -213,22 +233,6 @@ set_tests_properties(tst_addresssuggestions PROPERTIES
 
 qt_add_executable(tst_addressbar
     browser/address/tst_addressbar.cpp
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_TAB_MODEL_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
-    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
-    ${KONDOR_BOOKMARK_MODEL_SOURCES}
-    ${KONDOR_SUGGESTION_SOURCES}
 )
 
 target_compile_definitions(tst_addressbar PRIVATE
@@ -243,6 +247,7 @@ target_include_directories(tst_addressbar PRIVATE
 )
 
 target_link_libraries(tst_addressbar PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -266,9 +271,6 @@ qt_add_executable(tst_bookmarks
     bookmarks/tst_defaultbookmarks.cpp
     bookmarks/tst_bookmarktree.cpp
     bookmarks/import/tst_bookmarkimport.cpp
-    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
-    ${KONDOR_BOOKMARK_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
 )
 
 target_include_directories(tst_bookmarks PRIVATE
@@ -277,6 +279,7 @@ target_include_directories(tst_bookmarks PRIVATE
 )
 
 target_link_libraries(tst_bookmarks PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
@@ -292,21 +295,6 @@ set_tests_properties(tst_bookmarks PROPERTIES
 qt_add_executable(tst_bookmarkswindow
     bookmarks/tst_bookmarkswindow.cpp
     bookmarks/tst_bookmarkswindowdrag.cpp
-    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
-    ${KONDOR_BOOKMARK_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_TAB_MODEL_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
 )
 
 target_compile_definitions(tst_bookmarkswindow PRIVATE
@@ -320,6 +308,7 @@ target_include_directories(tst_bookmarkswindow PRIVATE
 )
 
 target_link_libraries(tst_bookmarkswindow PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -340,21 +329,6 @@ set_tests_properties(tst_bookmarkswindow PROPERTIES
 
 qt_add_executable(tst_mainmenu
     app/tst_mainmenu.cpp
-    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
-    ${KONDOR_BOOKMARK_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_TAB_MODEL_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
 )
 
 target_compile_definitions(tst_mainmenu PRIVATE
@@ -368,6 +342,7 @@ target_include_directories(tst_mainmenu PRIVATE
 )
 
 target_link_libraries(tst_mainmenu PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -388,22 +363,6 @@ set_tests_properties(tst_mainmenu PROPERTIES
 
 qt_add_executable(tst_toolbaraccessibility
     app/tst_toolbaraccessibility.cpp
-    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
-    ${KONDOR_BOOKMARK_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_TAB_MODEL_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
-    ${KONDOR_SUGGESTION_SOURCES}
 )
 
 target_compile_definitions(tst_toolbaraccessibility PRIVATE
@@ -418,6 +377,7 @@ target_include_directories(tst_toolbaraccessibility PRIVATE
 )
 
 target_link_libraries(tst_toolbaraccessibility PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -439,11 +399,6 @@ set_tests_properties(tst_toolbaraccessibility PROPERTIES
 qt_add_executable(tst_topsites
     history/tst_topsites.cpp
     history/tst_historysuggestions.cpp
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
-    ${KONDOR_SETTINGS_SOURCES}
 )
 
 target_include_directories(tst_topsites PRIVATE
@@ -452,6 +407,7 @@ target_include_directories(tst_topsites PRIVATE
 )
 
 target_link_libraries(tst_topsites PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
@@ -464,11 +420,6 @@ add_test(NAME tst_topsites COMMAND tst_topsites)
 
 qt_add_executable(tst_faviconstore
     browser/tst_faviconstore.cpp
-    ../src/browser/favicons/faviconstore.cpp
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ${KONDOR_SETTINGS_SOURCES}
 )
 
 target_include_directories(tst_faviconstore PRIVATE
@@ -477,6 +428,7 @@ target_include_directories(tst_faviconstore PRIVATE
 )
 
 target_link_libraries(tst_faviconstore PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
@@ -489,7 +441,6 @@ add_test(NAME tst_faviconstore COMMAND tst_faviconstore)
 
 qt_add_executable(tst_aboutinfo
     app/tst_aboutinfo.cpp
-    ../src/app/aboutinfo.cpp
 )
 
 qt_add_resources(tst_aboutinfo "license"
@@ -507,6 +458,7 @@ target_include_directories(tst_aboutinfo PRIVATE
 )
 
 target_link_libraries(tst_aboutinfo PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
@@ -528,6 +480,7 @@ target_include_directories(tst_singletons PRIVATE
 )
 
 target_link_libraries(tst_singletons PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -545,7 +498,6 @@ add_test(NAME tst_singletons COMMAND tst_singletons)
 
 qt_add_executable(tst_settings
     core/tst_settings.cpp
-    ${KONDOR_SETTINGS_SOURCES}
 )
 
 target_include_directories(tst_settings PRIVATE
@@ -553,6 +505,7 @@ target_include_directories(tst_settings PRIVATE
 )
 
 target_link_libraries(tst_settings PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Test
 )
@@ -563,21 +516,6 @@ qt_add_executable(tst_settingswindow
     settings/tst_settingswindow.cpp
     settings/tst_settingsapply.cpp
     settings/tst_settingsnavigation.cpp
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_TAB_MODEL_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
-    ${KONDOR_EXTENSION_PACKAGE_SOURCES}
-    ${KONDOR_EXTENSION_MANAGER_SOURCES}
 )
 
 target_compile_definitions(tst_settingswindow PRIVATE
@@ -591,6 +529,7 @@ target_include_directories(tst_settingswindow PRIVATE
 )
 
 target_link_libraries(tst_settingswindow PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -618,19 +557,6 @@ qt_add_executable(tst_tabstrip
     browser/tabstrip/tst_tabdragscroll.cpp
     browser/tabstrip/tst_tabdragrelease.cpp
     browser/tabstrip/tst_tabstripaccessibility.cpp
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_TAB_MODEL_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
 )
 
 target_compile_definitions(tst_tabstrip PRIVATE
@@ -644,6 +570,7 @@ target_include_directories(tst_tabstrip PRIVATE
 )
 
 target_link_libraries(tst_tabstrip PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -664,19 +591,6 @@ set_tests_properties(tst_tabstrip PROPERTIES
 
 qt_add_executable(tst_tabstripscroll
     browser/tabstrip/tst_tabstripscroll.cpp
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_TAB_MODEL_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
 )
 
 target_compile_definitions(tst_tabstripscroll PRIVATE
@@ -689,6 +603,7 @@ target_include_directories(tst_tabstripscroll PRIVATE
 )
 
 target_link_libraries(tst_tabstripscroll PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -710,18 +625,6 @@ set_tests_properties(tst_tabstripscroll PROPERTIES
 qt_add_executable(tst_sitepermissions
     site/tst_sitepermissions.cpp
     site/tst_sitepermissionsui.cpp
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
 )
 
 target_compile_definitions(tst_sitepermissions PRIVATE
@@ -735,6 +638,7 @@ target_include_directories(tst_sitepermissions PRIVATE
 )
 
 target_link_libraries(tst_sitepermissions PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -755,19 +659,6 @@ set_tests_properties(tst_sitepermissions PROPERTIES
 
 qt_add_executable(tst_pagecontextmenu
     browser/tst_pagecontextmenu.cpp
-    ${KONDOR_TAB_MODEL_SOURCES}
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
 )
 
 target_compile_definitions(tst_pagecontextmenu PRIVATE
@@ -780,6 +671,7 @@ target_include_directories(tst_pagecontextmenu PRIVATE
 )
 
 target_link_libraries(tst_pagecontextmenu PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -801,18 +693,6 @@ set_tests_properties(tst_pagecontextmenu PROPERTIES
 
 qt_add_executable(tst_permissiontypeinfo
     site/tst_permissiontypeinfo.cpp
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
 )
 
 target_compile_definitions(tst_permissiontypeinfo PRIVATE
@@ -825,6 +705,7 @@ target_include_directories(tst_permissiontypeinfo PRIVATE
 )
 
 target_link_libraries(tst_permissiontypeinfo PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -846,18 +727,6 @@ set_tests_properties(tst_permissiontypeinfo PROPERTIES
 
 qt_add_executable(tst_downloadstatus
     downloads/tst_downloadstatus.cpp
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
 )
 
 target_compile_definitions(tst_downloadstatus PRIVATE
@@ -870,6 +739,7 @@ target_include_directories(tst_downloadstatus PRIVATE
 )
 
 target_link_libraries(tst_downloadstatus PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -891,20 +761,6 @@ set_tests_properties(tst_downloadstatus PROPERTIES
 
 qt_add_executable(tst_sessionmanager
     browser/tst_sessionmanager.cpp
-    ${KONDOR_SESSION_SOURCES}
-    ${KONDOR_TAB_MODEL_SOURCES}
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
 )
 
 target_include_directories(tst_sessionmanager PRIVATE
@@ -913,6 +769,7 @@ target_include_directories(tst_sessionmanager PRIVATE
 )
 
 target_link_libraries(tst_sessionmanager PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
@@ -932,8 +789,6 @@ set_tests_properties(tst_sessionmanager PROPERTIES
 
 qt_add_executable(tst_singleinstance
     app/tst_singleinstance.cpp
-    ../src/app/instance/singleinstance.cpp
-    ../src/app/instance/singleinstancemessage.cpp
 )
 
 target_include_directories(tst_singleinstance PRIVATE
@@ -941,6 +796,7 @@ target_include_directories(tst_singleinstance PRIVATE
 )
 
 target_link_libraries(tst_singleinstance PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Network
     Qt6::Test
@@ -950,8 +806,6 @@ add_test(NAME tst_singleinstance COMMAND tst_singleinstance)
 
 qt_add_executable(tst_extensionpackages
     app/tst_extensionpackages.cpp
-    ../src/app/commandline/extensionpackages.cpp
-    ../src/extensions/package/packagesuffix.cpp
 )
 
 target_include_directories(tst_extensionpackages PRIVATE
@@ -959,6 +813,7 @@ target_include_directories(tst_extensionpackages PRIVATE
 )
 
 target_link_libraries(tst_extensionpackages PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Test
 )
@@ -967,7 +822,6 @@ add_test(NAME tst_extensionpackages COMMAND tst_extensionpackages)
 
 qt_add_executable(tst_filehelper
     core/tst_filehelper.cpp
-    ../src/core/filehelper.cpp
 )
 
 target_include_directories(tst_filehelper PRIVATE
@@ -975,6 +829,7 @@ target_include_directories(tst_filehelper PRIVATE
 )
 
 target_link_libraries(tst_filehelper PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
@@ -985,7 +840,6 @@ add_test(NAME tst_filehelper COMMAND tst_filehelper)
 
 qt_add_executable(tst_suggestionlist
     browser/address/tst_suggestionlist.cpp
-    ../src/browser/address/suggestionlist.cpp
 )
 
 target_include_directories(tst_suggestionlist PRIVATE
@@ -993,6 +847,7 @@ target_include_directories(tst_suggestionlist PRIVATE
 )
 
 target_link_libraries(tst_suggestionlist PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Test
 )
@@ -1001,7 +856,6 @@ add_test(NAME tst_suggestionlist COMMAND tst_suggestionlist)
 
 qt_add_executable(tst_zoommanager
     browser/tst_zoommanager.cpp
-    ../src/browser/zoommanager.cpp
 )
 
 target_include_directories(tst_zoommanager PRIVATE
@@ -1009,6 +863,7 @@ target_include_directories(tst_zoommanager PRIVATE
 )
 
 target_link_libraries(tst_zoommanager PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Test
 )
@@ -1032,7 +887,6 @@ target_link_libraries(tst_sessionmanager PRIVATE Qt6::Concurrent Qt6::Network)
 
 qt_add_executable(tst_filterengine
     adblock/tst_filterengine.cpp
-    ${KONDOR_FILTER_ENGINE_SOURCES}
 )
 
 target_include_directories(tst_filterengine PRIVATE
@@ -1040,6 +894,7 @@ target_include_directories(tst_filterengine PRIVATE
 )
 
 target_link_libraries(tst_filterengine PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Test
 )
@@ -1048,8 +903,6 @@ add_test(NAME tst_filterengine COMMAND tst_filterengine)
 
 qt_add_executable(tst_adblockallowlist
     adblock/tst_adblockallowlist.cpp
-    ${KONDOR_ADBLOCK_SOURCES}
-    ${KONDOR_SETTINGS_SOURCES}
 )
 
 target_include_directories(tst_adblockallowlist PRIVATE
@@ -1057,6 +910,7 @@ target_include_directories(tst_adblockallowlist PRIVATE
 )
 
 target_link_libraries(tst_adblockallowlist PRIVATE
+    kondor_testlib
     Qt6::Concurrent
     Qt6::Core
     Qt6::Gui
@@ -1073,7 +927,6 @@ set_tests_properties(tst_adblockallowlist PROPERTIES
 
 qt_add_executable(tst_passwordstore
     passwords/tst_passwordstore.cpp
-    ${KONDOR_PASSWORD_STORE_SOURCES}
 )
 
 target_include_directories(tst_passwordstore PRIVATE
@@ -1081,6 +934,7 @@ target_include_directories(tst_passwordstore PRIVATE
 )
 
 target_link_libraries(tst_passwordstore PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
@@ -1104,6 +958,7 @@ qt_add_resources(tst_passwordfill "passwords_scripts_fill"
 )
 
 target_link_libraries(tst_passwordfill PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Gui
     Qt6::Test
@@ -1118,7 +973,6 @@ set_tests_properties(tst_passwordfill PROPERTIES
 
 qt_add_executable(tst_passwordimport
     passwords/tst_passwordimport.cpp
-    ${KONDOR_PASSWORD_STORE_SOURCES}
 )
 
 target_include_directories(tst_passwordimport PRIVATE
@@ -1130,6 +984,7 @@ target_compile_definitions(tst_passwordimport PRIVATE
 )
 
 target_link_libraries(tst_passwordimport PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
@@ -1146,7 +1001,6 @@ set_property(TEST ${kondor_all_tests} APPEND PROPERTY ENVIRONMENT "KONDOR_NO_KWA
 
 qt_add_executable(tst_extensionloader
     extensions/install/tst_extensionloader.cpp
-    ../src/extensions/install/extensionloader.cpp
 )
 
 target_include_directories(tst_extensionloader PRIVATE
@@ -1159,6 +1013,7 @@ target_compile_definitions(tst_extensionloader PRIVATE
 )
 
 target_link_libraries(tst_extensionloader PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
@@ -1172,24 +1027,6 @@ target_link_libraries(tst_extensionloader PRIVATE
 add_test(NAME tst_extensionloader COMMAND tst_extensionloader)
 set_tests_properties(tst_extensionloader PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_DISABLE_SANDBOX=1"
-)
-
-set(KONDOR_EXTENSION_BRIDGE_TEST_SOURCES
-    ${KONDOR_EXTENSION_BRIDGE_SOURCES}
-    ${KONDOR_TAB_SOURCES}
-    ${KONDOR_PASSWORD_STORE_SOURCES}
-    ${KONDOR_PROFILE_MANAGER_SOURCES}
-    ${KONDOR_ADBLOCK_SOURCES}
-    ../src/browser/address/addressresolver.cpp
-    ${KONDOR_SETTINGS_SOURCES}
-    ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
-    ${KONDOR_NOTIFIER_SOURCES}
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
-    ${KONDOR_EXTENSION_PACKAGE_SOURCES}
-    ${KONDOR_EXTENSION_MANAGER_SOURCES}
 )
 
 set(KONDOR_EXTENSION_BRIDGE_TEST_LIBRARIES
@@ -1223,7 +1060,6 @@ qt_add_executable(tst_extensions
     extensions/tst_extensiondialogs.cpp
     extensions/bridge/tst_extensionpages.cpp
     passwords/tst_passwordsui.cpp
-    ${KONDOR_EXTENSION_BRIDGE_TEST_SOURCES}
 )
 
 qt_add_resources(tst_extensions "extension_scripts"
@@ -1253,6 +1089,7 @@ target_include_directories(tst_extensions PRIVATE
 )
 
 target_link_libraries(tst_extensions PRIVATE
+    kondor_testlib
     ${KONDOR_EXTENSION_BRIDGE_TEST_LIBRARIES}
 )
 
@@ -1264,7 +1101,6 @@ set_tests_properties(tst_extensions PROPERTIES
 
 qt_add_executable(tst_extensioncall
     extensions/bridge/tst_extensioncall.cpp
-    ${KONDOR_EXTENSION_BRIDGE_TEST_SOURCES}
 )
 
 qt_add_resources(tst_extensioncall "extension_scripts_call"
@@ -1291,6 +1127,7 @@ target_include_directories(tst_extensioncall PRIVATE
 )
 
 target_link_libraries(tst_extensioncall PRIVATE
+    kondor_testlib
     ${KONDOR_EXTENSION_BRIDGE_TEST_LIBRARIES}
 )
 
@@ -1302,7 +1139,6 @@ set_tests_properties(tst_extensioncall PROPERTIES
 
 qt_add_executable(tst_extensionsettings
     extensions/state/tst_extensionsettings.cpp
-    ../src/extensions/state/extensionsettings.cpp
 )
 
 target_include_directories(tst_extensionsettings PRIVATE
@@ -1310,6 +1146,7 @@ target_include_directories(tst_extensionsettings PRIVATE
 )
 
 target_link_libraries(tst_extensionsettings PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Test
 )
@@ -1318,8 +1155,6 @@ add_test(NAME tst_extensionsettings COMMAND tst_extensionsettings)
 
 qt_add_executable(tst_catalogentry
     extensions/catalog/tst_catalogentry.cpp
-    ../src/extensions/catalog/catalogentry.cpp
-    ${KONDOR_EXTENSION_PACKAGE_SOURCES}
 )
 
 target_include_directories(tst_catalogentry PRIVATE
@@ -1327,6 +1162,7 @@ target_include_directories(tst_catalogentry PRIVATE
 )
 
 target_link_libraries(tst_catalogentry PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Gui
     Qt6::Test
@@ -1337,7 +1173,6 @@ add_test(NAME tst_catalogentry COMMAND tst_catalogentry)
 
 qt_add_executable(tst_manifestvalidator
     extensions/manifest/tst_manifestvalidator.cpp
-    ${KONDOR_EXTENSION_PACKAGE_SOURCES}
 )
 
 target_include_directories(tst_manifestvalidator PRIVATE
@@ -1345,6 +1180,7 @@ target_include_directories(tst_manifestvalidator PRIVATE
 )
 
 target_link_libraries(tst_manifestvalidator PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Gui
     Qt6::Test
@@ -1355,8 +1191,6 @@ add_test(NAME tst_manifestvalidator COMMAND tst_manifestvalidator)
 
 qt_add_executable(tst_contentscriptbuilder
     extensions/scripts/tst_contentscriptbuilder.cpp
-    ../src/extensions/scripts/contentscriptbuilder.cpp
-    ${KONDOR_EXTENSION_PACKAGE_SOURCES}
 )
 
 qt_add_resources(tst_contentscriptbuilder "extension_scripts_builder"
@@ -1375,6 +1209,7 @@ target_include_directories(tst_contentscriptbuilder PRIVATE
 )
 
 target_link_libraries(tst_contentscriptbuilder PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Gui
     Qt6::Test
@@ -1386,8 +1221,6 @@ add_test(NAME tst_contentscriptbuilder COMMAND tst_contentscriptbuilder)
 
 qt_add_executable(tst_extensionstorage
     extensions/state/tst_extensionstorage.cpp
-    ../src/extensions/state/extensionstorage.cpp
-    ${KONDOR_DATABASE_SOURCES}
 )
 
 target_include_directories(tst_extensionstorage PRIVATE
@@ -1395,6 +1228,7 @@ target_include_directories(tst_extensionstorage PRIVATE
 )
 
 target_link_libraries(tst_extensionstorage PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Sql
     Qt6::Test
@@ -1404,7 +1238,6 @@ add_test(NAME tst_extensionstorage COMMAND tst_extensionstorage)
 
 qt_add_executable(tst_database
     core/tst_database.cpp
-    ${KONDOR_DATABASE_SOURCES}
 )
 
 target_include_directories(tst_database PRIVATE
@@ -1412,6 +1245,7 @@ target_include_directories(tst_database PRIVATE
 )
 
 target_link_libraries(tst_database PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Sql
     Qt6::Test
@@ -1421,11 +1255,6 @@ add_test(NAME tst_database COMMAND tst_database)
 
 qt_add_executable(tst_historymanager
     history/tst_historymanager.cpp
-    ${KONDOR_HISTORY_MANAGER_SOURCES}
-    ${KONDOR_HISTORY_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
-    ../src/browser/favicons/faviconstore.cpp
-    ${KONDOR_SETTINGS_SOURCES}
 )
 
 target_include_directories(tst_historymanager PRIVATE
@@ -1433,6 +1262,7 @@ target_include_directories(tst_historymanager PRIVATE
 )
 
 target_link_libraries(tst_historymanager PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
@@ -1445,7 +1275,6 @@ add_test(NAME tst_historymanager COMMAND tst_historymanager)
 
 qt_add_executable(tst_transferspeed
     downloads/tst_transferspeed.cpp
-    ../src/downloads/transferspeed.cpp
 )
 
 target_include_directories(tst_transferspeed PRIVATE
@@ -1453,6 +1282,7 @@ target_include_directories(tst_transferspeed PRIVATE
 )
 
 target_link_libraries(tst_transferspeed PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Test
 )
@@ -1461,9 +1291,6 @@ add_test(NAME tst_transferspeed COMMAND tst_transferspeed)
 
 qt_add_executable(tst_bookmarkhtmlparser
     bookmarks/import/tst_bookmarkhtmlparser.cpp
-    ${KONDOR_BOOKMARK_MANAGER_SOURCES}
-    ${KONDOR_BOOKMARK_MODEL_SOURCES}
-    ${KONDOR_DATABASE_SOURCES}
 )
 
 target_include_directories(tst_bookmarkhtmlparser PRIVATE
@@ -1471,6 +1298,7 @@ target_include_directories(tst_bookmarkhtmlparser PRIVATE
 )
 
 target_link_libraries(tst_bookmarkhtmlparser PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
@@ -1485,7 +1313,6 @@ set_tests_properties(tst_bookmarkhtmlparser PROPERTIES
 
 qt_add_executable(tst_passwordimportplan
     passwords/tst_passwordimportplan.cpp
-    ../src/passwords/csv/passwordimportplan.cpp
 )
 
 target_include_directories(tst_passwordimportplan PRIVATE
@@ -1493,6 +1320,7 @@ target_include_directories(tst_passwordimportplan PRIVATE
 )
 
 target_link_libraries(tst_passwordimportplan PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Test
 )
@@ -1501,15 +1329,6 @@ add_test(NAME tst_passwordimportplan COMMAND tst_passwordimportplan)
 
 qt_add_executable(tst_passwordimportasync
     passwords/tst_passwordimportasync.cpp
-    ../src/passwords/import/importcommit.cpp
-    ../src/passwords/import/importinfo.cpp
-    ../src/passwords/import/importpreparation.cpp
-    ../src/passwords/csv/passwordimportfile.cpp
-    ../src/passwords/csv/passwordimportplan.cpp
-    ../src/passwords/csv/passwordimport.cpp
-    ../src/passwords/csv/passwordimportcolumns.cpp
-    ../src/passwords/csv/csvreader.cpp
-    ../src/passwords/passwordorigin.cpp
 )
 
 target_include_directories(tst_passwordimportasync PRIVATE
@@ -1517,6 +1336,7 @@ target_include_directories(tst_passwordimportasync PRIVATE
 )
 
 target_link_libraries(tst_passwordimportasync PRIVATE
+    kondor_testlib
     Qt6::Concurrent
     Qt6::Core
     Qt6::Test
@@ -1526,7 +1346,6 @@ add_test(NAME tst_passwordimportasync COMMAND tst_passwordimportasync)
 
 qt_add_executable(tst_passwordimportoutcome
     passwords/tst_passwordimportoutcome.cpp
-    ../src/passwords/import/importoutcome.cpp
 )
 
 target_include_directories(tst_passwordimportoutcome PRIVATE
@@ -1534,6 +1353,7 @@ target_include_directories(tst_passwordimportoutcome PRIVATE
 )
 
 target_link_libraries(tst_passwordimportoutcome PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Test
 )
@@ -1542,7 +1362,6 @@ add_test(NAME tst_passwordimportoutcome COMMAND tst_passwordimportoutcome)
 
 qt_add_executable(tst_passwordimportfile
     passwords/tst_passwordimportfile.cpp
-    ../src/passwords/csv/passwordimportfile.cpp
 )
 
 target_include_directories(tst_passwordimportfile PRIVATE
@@ -1550,6 +1369,7 @@ target_include_directories(tst_passwordimportfile PRIVATE
 )
 
 target_link_libraries(tst_passwordimportfile PRIVATE
+    kondor_testlib
     Qt6::Core
     Qt6::Test
 )

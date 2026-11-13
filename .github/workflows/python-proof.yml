@@ -123,8 +123,10 @@ jobs:
           name: Kondor-Proof-x86_64.AppImage
 
       - name: Install host libraries only
-        run: dnf -y install dbus-daemon mesa-libGL mesa-libEGL fontconfig libxkbcommon nss \
-            'libpipewire-0.3.so.0()(64bit)' alsa-lib pulseaudio-libs libdrm
+        run: |
+          dnf -y install dbus-daemon mesa-libGL mesa-libEGL fontconfig libxkbcommon nss \
+              alsa-lib pulseaudio-libs libdrm
+          dnf -y install pipewire-libs || { dnf repolist; dnf search pipewire; dnf provides '*libpipewire-0.3.so.0'; exit 1; }
 
       - name: Check that the bundle is self-contained
         run: "! rpm -q python3-pyside6 qt6-qtbase"
@@ -149,6 +151,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Diagnose the runtime update
+        continue-on-error: true
+        run: |
+          df -h /var/lib/flatpak /var/tmp /tmp
+          mount | grep -E "flatpak|/var" || true
+          flatpak update --system --noninteractive -vv org.kde.Sdk//6.11 2>&1 | tail -30
 
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6

@@ -42,6 +42,10 @@ ColumnLayout {
         ]
     }
 
+    ImportPreparingRow { fileName: root.importResult.name }
+
+    ImportProgressMessage { Layout.fillWidth: true }
+
     ImportMessage { result: root.importResult }
 
     CheckBox {
@@ -78,7 +82,7 @@ ColumnLayout {
         Button {
             text: qsTr("Import…")
             icon.name: "document-import"
-            enabled: !root.walletDenied
+            enabled: !root.walletDenied && !PasswordStore.importPreparing && !PasswordStore.importRunning
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Import passwords from a CSV file")
             ToolTip.delay: 600

@@ -1287,143 +1287,174 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportMessage.qml" line="36"/>
+        <location filename="../qml/passwords/ImportMessage.qml" line="42"/>
         <source>Move File to Trash</source>
         <translation>Dosyayı Çöp Kutusuna Taşı</translation>
     </message>
 </context>
 <context>
+    <name>ImportNotifier</name>
+    <message>
+        <location filename="../qml/passwords/ImportNotifier.qml" line="10"/>
+        <source>Passwords Imported</source>
+        <translation>Parolalar İçe Aktarıldı</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/passwords/ImportNotifier.qml" line="11"/>
+        <source>%n password(s) imported from %1</source>
+        <translation>
+            <numerusform>%1 dosyasından %n parola içe aktarıldı</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>ImportPasswordsDialog</name>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="28"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="26"/>
         <source>“%1” is not a password export: it has no website, username and password columns.</source>
         <translation>“%1” bir parola dışa aktarımı değil: web sitesi, kullanıcı adı ve parola sütunları yok.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="30"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="28"/>
         <source>“%1” has no passwords to import.</source>
         <translation>“%1” içinde içe aktarılacak parola yok.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="32"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="30"/>
         <source>“%1” could not be read.</source>
         <translation>“%1” okunamadı.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="34"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="32"/>
         <source>“%1” is too large to be a password export.</source>
         <translation>“%1” bir parola dışa aktarımı olmak için çok büyük.</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="36"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="34"/>
         <source>KWallet is not available, so passwords cannot be imported.</source>
         <translation>KWallet kullanılamıyor, bu yüzden parolalar içe aktarılamıyor.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="44"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="42"/>
         <source>%n without an https:// website</source>
         <translation>
             <numerusform>https:// web sitesi olmayan %n</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="46"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="44"/>
         <source>%n without a username or password</source>
         <translation>
             <numerusform>Kullanıcı adı veya parolası olmayan %n</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="48"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="46"/>
         <source>%n that are not logins</source>
         <translation>
             <numerusform>Oturum açma bilgisi olmayan %n</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="49"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="47"/>
         <source>%n entries: %1</source>
         <translation>
             <numerusform>%n kayıt: %1</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="70"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="66"/>
         <source>Import Passwords</source>
         <translation>Parolaları İçe Aktar</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="81"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="77"/>
         <source>Import %n Password(s)</source>
         <translation>
             <numerusform>%n Parolayı İçe Aktar</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="87"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="83"/>
         <source>Cancel</source>
         <translation>İptal</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="87"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="83"/>
         <source>Close</source>
         <translation>Kapat</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="109"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="105"/>
         <source>File:</source>
         <translation>Dosya:</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="113"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="109"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="118"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="114"/>
         <source>New:</source>
         <translation>Yeni:</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="120"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="116"/>
         <source>%n password(s)</source>
         <translation>
             <numerusform>%n parola</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="124"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="120"/>
         <source>Already saved:</source>
         <translation>Zaten kayıtlı:</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="126"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="122"/>
         <source>%n password(s) are identical and are skipped</source>
         <translation>
             <numerusform>%n parola aynı ve atlanacak</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="130"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="126"/>
         <source>Different:</source>
         <translation>Farklı:</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="132"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="128"/>
         <source>%n site(s) already have a different saved password</source>
         <translation>
             <numerusform>%n sitede zaten farklı bir kayıtlı parola var</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="138"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="134"/>
         <source>Replace them with the imported passwords</source>
         <translation>Bunları içe aktarılan parolalarla değiştir</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="142"/>
+        <location filename="../qml/passwords/ImportPasswordsDialog.qml" line="138"/>
         <source>Not imported:</source>
         <translation>İçe aktarılmayan:</translation>
+    </message>
+</context>
+<context>
+    <name>ImportPreparingRow</name>
+    <message>
+        <location filename="../qml/passwords/ImportPreparingRow.qml" line="20"/>
+        <source>Reading %1…</source>
+        <translation>%1 okunuyor…</translation>
+    </message>
+</context>
+<context>
+    <name>ImportProgressMessage</name>
+    <message>
+        <location filename="../qml/passwords/ImportProgressMessage.qml" line="15"/>
+        <source>Importing passwords… %1 of %2 sites</source>
+        <translation>Parolalar içe aktarılıyor… %1 / %2 site</translation>
     </message>
 </context>
 <context>
@@ -1873,32 +1904,32 @@
 <context>
     <name>PasswordsPage</name>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="57"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="65"/>
         <source>Import Passwords</source>
         <translation>Parolaları İçe Aktar</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="60"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="68"/>
         <source>CSV files (*.csv)</source>
         <translation>CSV dosyaları (*.csv)</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="60"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="68"/>
         <source>All files (*)</source>
         <translation>Tüm dosyalar (*)</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="74"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="87"/>
         <source>Delete Saved Password</source>
         <translation>Kayıtlı parolayı sil</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="75"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="88"/>
         <source>Delete the saved password for %1 on %2?</source>
         <translation>%2 sitesindeki %1 için kayıtlı parola silinsin mi?</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/PasswordsPage.qml" line="77"/>
+        <location filename="../qml/passwords/PasswordsPage.qml" line="90"/>
         <source>Delete</source>
         <translation>Sil</translation>
     </message>
@@ -2232,27 +2263,27 @@
         <translation>Yeniden Dene</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="50"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="54"/>
         <source>Offer to save passwords</source>
         <translation>Parolaları kaydetmeyi öner</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="68"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="72"/>
         <source>Filter by site or username…</source>
         <translation>Siteye veya kullanıcı adına göre süz…</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="72"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="76"/>
         <source>Add Password…</source>
         <translation>Parola ekle…</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="79"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="83"/>
         <source>Import…</source>
         <translation>İçe Aktar…</translation>
     </message>
     <message>
-        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="83"/>
+        <location filename="../qml/passwords/SavedPasswordsTab.qml" line="87"/>
         <source>Import passwords from a CSV file</source>
         <translation>Parolaları bir CSV dosyasından içe aktar</translation>
     </message>

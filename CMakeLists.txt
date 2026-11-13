@@ -128,6 +128,9 @@ qt_add_qml_module(kondor
         qml/passwords/PasswordsFrame.qml
         qml/passwords/ImportMessage.qml
         qml/passwords/ImportResult.qml
+        qml/passwords/ImportProgressMessage.qml
+        qml/passwords/ImportPreparingRow.qml
+        qml/passwords/ImportNotifier.qml
         qml/downloads/DownloadsPopup.qml
         qml/downloads/DownloadDelegate.qml
         qml/downloads/DownloadStatus.qml

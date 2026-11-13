@@ -30,6 +30,19 @@ std::optional<QMap<QString, QString>> WalletFolder::logins(const QString &origin
     return map;
 }
 
+std::optional<SavedLogins> WalletFolder::allLogins() const
+{
+    select();
+    bool isOk = false;
+    const auto map = m_wallet->mapList(&isOk);
+    if (!isOk)
+        return std::nullopt;
+    SavedLogins saved;
+    for (auto it = map.cbegin(); it != map.cend(); ++it)
+        saved.insert(it.key(), it.value());
+    return saved;
+}
+
 bool WalletFolder::writeLogins(const QString &origin, const QMap<QString, QString> &logins) const
 {
     select();

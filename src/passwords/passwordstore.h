@@ -11,6 +11,9 @@
 
 #include <optional>
 
+#include "passwords/import/importcommit.h"
+#include "passwords/import/importoutcome.h"
+#include "passwords/import/importpreparation.h"
 #include "passwords/passwordclipboard.h"
 #include "passwords/passwordimport.h"
 #include "passwords/walletfolder.h"
@@ -30,6 +33,10 @@ class PasswordStore : public QObject
 
     Q_PROPERTY(QString state READ state NOTIFY stateChanged)
     Q_PROPERTY(QVariantList entries READ entries NOTIFY changed)
+    Q_PROPERTY(bool importPreparing READ isImportPreparing NOTIFY importPreparingChanged)
+    Q_PROPERTY(bool importRunning READ isImportRunning NOTIFY importRunningChanged)
+    Q_PROPERTY(int importDone READ importDone NOTIFY importDoneChanged)
+    Q_PROPERTY(int importTotal READ importTotal NOTIFY importTotalChanged)
 
 public:
     static PasswordStore *instance();
@@ -57,9 +64,16 @@ public:
     Q_INVOKABLE void remove(const QString &origin, const QString &username);
     Q_INVOKABLE void copyPassword(const QString &origin, const QString &username);
 
-    Q_INVOKABLE QVariantMap prepareImport(const QUrl &file);
-    Q_INVOKABLE int commitImport(bool replaceConflicts);
+    Q_INVOKABLE void prepareImport(const QUrl &file);
+    Q_INVOKABLE void commitImport(bool replaceConflicts);
     Q_INVOKABLE void cancelImport();
+    Q_INVOKABLE void setImportPageOpen(bool isOpen);
+    Q_INVOKABLE QVariantMap takeImportResult();
+    Q_INVOKABLE QVariantMap claimImportNotification();
+    bool isImportPreparing() const { return m_preparation.isRunning(); }
+    bool isImportRunning() const { return m_commit != nullptr; }
+    int importDone() const { return m_commit ? m_commit->done() : 0; }
+    int importTotal() const { return m_commit ? m_commit->total() : 0; }
     Q_INVOKABLE bool moveImportFileToTrash(const QUrl &file);
 
     bool unavailableNoticeShown() const { return m_noticeShown; }
@@ -68,6 +82,12 @@ public:
 signals:
     void stateChanged();
     void changed();
+    void importPreparingChanged();
+    void importRunningChanged();
+    void importDoneChanged();
+    void importTotalChanged();
+    void importPrepared(const QVariantMap &info);
+    void importFinished(int written);
 
 private:
     enum class State { Closed, Opening, Open, Unavailable };
@@ -81,7 +101,11 @@ private:
     void reloadUsernames();
     void rememberUsernames(const QString &origin, const std::optional<QMap<QString, QString>> &logins);
     void notifyLoginsChanged();
-    QVariantMap describeImport(const WalletFolder &folder, const QUrl &file, PasswordImport::Result &parsed);
+    void startImportCommit(bool replaceConflicts);
+    void finishImportCommit(int written);
+    void emitImportProgressChanged();
+    std::optional<SavedLogins> importSavedLogins() const;
+    bool writeImportedLogins(const QString &origin, const QMap<QString, QString> &logins) const;
     void closeWallet();
     std::optional<WalletFolder> walletFolder() const;
     std::optional<WalletFolder> openFolder() const;
@@ -91,5 +115,8 @@ private:
     QHash<QString, QStringList> m_usernames;
     bool m_noticeShown = false;
     PasswordClipboard m_clipboard;
-    QList<PasswordImport::Login> m_pendingImport;
+    ImportPreparation m_preparation;
+    ImportCommit *m_commit = nullptr;
+    ImportOutcome m_importOutcome;
+    QString m_importFileName;
 };

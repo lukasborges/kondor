@@ -18,6 +18,12 @@ Kirigami.InlineMessage {
         return qsTr("Imported %n password(s) from “%1”. The file holds your passwords unencrypted: delete it when you no longer need it.", "", root.result.count).arg(root.result.name)
     }
 
+    function handleVisibility() {
+        root.resetVisibility()
+        if (visible)
+            root.Accessible.announce(root.text)
+    }
+
     function resetVisibility() {
         if (visible)
             return
@@ -38,5 +44,5 @@ Kirigami.InlineMessage {
             onTriggered: root.result.moveFileToTrash()
         }
     ]
-    onVisibleChanged: root.resetVisibility()
+    onVisibleChanged: root.handleVisibility()
 }

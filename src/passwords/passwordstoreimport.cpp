@@ -1,157 +1,91 @@
 #include "passwords/passwordstore.h"
 
-#include "passwords/passwordimportfile.h"
-#include "passwords/passwordimportplan.h"
+#include "passwords/import/importinfo.h"
 
 #include <QFile>
-#include <QMap>
-#include <QSet>
 
-namespace {
-
-QVariantMap emptyImportInfo(const QUrl &file)
+std::optional<SavedLogins> PasswordStore::importSavedLogins() const
 {
-    QVariantMap info{
-        {QStringLiteral("fileName"), file.fileName()},
-        {QStringLiteral("format"), QString()},
-        {QStringLiteral("error"), QString()},
+    const auto folder = openFolder();
+    if (!folder)
+        return std::nullopt;
+    return folder->allLogins();
+}
+
+bool PasswordStore::writeImportedLogins(const QString &origin, const QMap<QString, QString> &logins) const
+{
+    const auto folder = openFolder();
+    return folder && folder->writeLogins(origin, logins);
+}
+
+void PasswordStore::prepareImport(const QUrl &file)
+{
+    if (isImportRunning())
+        return;
+    m_importFileName = file.fileName();
+    if (openFolder())
+        m_preparation.start(file);
+    else
+        emit importPrepared(importFailure(file, QStringLiteral("walletUnavailable")));
+}
+
+void PasswordStore::commitImport(bool replaceConflicts)
+{
+    if (isImportRunning())
+        return;
+    startImportCommit(replaceConflicts);
+}
+
+void PasswordStore::startImportCommit(bool replaceConflicts)
+{
+    auto write = [this](const QString &origin, const QMap<QString, QString> &logins) {
+        return writeImportedLogins(origin, logins);
     };
-    for (const char *key : {"newCount", "identicalCount", "conflictCount", "conflictSites",
-                            "skippedNoSite", "skippedNoCredentials", "skippedNotLogin"})
-        info.insert(QLatin1String(key), 0);
-    return info;
+    PendingImport pending = m_preparation.takePending();
+    pending.replaceConflicts = replaceConflicts;
+    m_commit = new ImportCommit(std::move(pending), write, this);
+    connect(m_commit, &ImportCommit::progressed, this, &PasswordStore::importDoneChanged);
+    connect(m_commit, &ImportCommit::finished, this, &PasswordStore::finishImportCommit);
+    emitImportProgressChanged();
+    m_commit->start();
 }
 
-QVariantMap importFailure(const QUrl &file, const QString &error)
+void PasswordStore::emitImportProgressChanged()
 {
-    QVariantMap info = emptyImportInfo(file);
-    info.insert(QStringLiteral("error"), error);
-    return info;
+    emit importRunningChanged();
+    emit importDoneChanged();
+    emit importTotalChanged();
 }
 
-QString importErrorName(PasswordImport::Error error)
+void PasswordStore::finishImportCommit(int written)
 {
-    switch (error) {
-    case PasswordImport::Error::NotPasswordExport:
-        return QStringLiteral("notPasswordExport");
-    case PasswordImport::Error::Empty:
-        return QStringLiteral("empty");
-    case PasswordImport::Error::None:
-        break;
-    }
-    return {};
-}
-
-QVariantMap importResult(const QUrl &file, const PasswordImport::Result &parsed,
-                         const ImportSummary &summary)
-{
-    QVariantMap info = emptyImportInfo(file);
-    info.insert(QStringLiteral("format"), PasswordImport::formatName(parsed.format));
-    info.insert(QStringLiteral("newCount"), summary.newCount);
-    info.insert(QStringLiteral("identicalCount"), summary.identicalCount);
-    info.insert(QStringLiteral("conflictCount"), summary.conflictCount);
-    info.insert(QStringLiteral("conflictSites"), summary.conflictSites);
-    info.insert(QStringLiteral("skippedNoSite"), parsed.skippedNoSite);
-    info.insert(QStringLiteral("skippedNoCredentials"), parsed.skippedNoCredentials);
-    info.insert(QStringLiteral("skippedNotLogin"), parsed.skippedNotLogin);
-    return info;
-}
-
-SavedLogins savedLoginsFor(const WalletFolder &folder, const QList<PasswordImport::Login> &logins)
-{
-    SavedLogins saved;
-    for (const PasswordImport::Login &login : logins) {
-        if (!saved.contains(login.origin))
-            saved.insert(login.origin, folder.logins(login.origin).value_or(QMap<QString, QString>()));
-    }
-    return saved;
-}
-
-QMap<QString, QList<PasswordImport::Login>> groupByOrigin(const QList<PasswordImport::Login> &logins)
-{
-    QMap<QString, QList<PasswordImport::Login>> byOrigin;
-    for (const PasswordImport::Login &login : logins)
-        byOrigin[login.origin].append(login);
-    return byOrigin;
-}
-
-class ImportWriter
-{
-public:
-    ImportWriter(const WalletFolder &folder, bool replaceConflicts)
-        : m_folder(folder)
-        , m_replaceConflicts(replaceConflicts)
-    {
-    }
-
-    int writeAll(const QList<PasswordImport::Login> &pending) const
-    {
-        int written = 0;
-        const auto byOrigin = groupByOrigin(pending);
-        for (auto it = byOrigin.cbegin(); it != byOrigin.cend(); ++it) {
-            const int changes = writeOrigin(it.key(), it.value());
-            if (changes < 0)
-                return -1;
-            written += changes;
-        }
-        return written;
-    }
-
-private:
-    int writeOrigin(const QString &origin, const QList<PasswordImport::Login> &logins) const
-    {
-        QMap<QString, QString> saved = m_folder.logins(origin).value_or(QMap<QString, QString>());
-        const int changes = mergeLogins(saved, logins, m_replaceConflicts);
-        if (changes == 0)
-            return 0;
-        return m_folder.writeLogins(origin, saved) ? changes : -1;
-    }
-
-    const WalletFolder &m_folder;
-    bool m_replaceConflicts;
-};
-
-}
-
-QVariantMap PasswordStore::prepareImport(const QUrl &file)
-{
-    m_pendingImport.clear();
-    const auto folder = openFolder();
-    if (!folder)
-        return importFailure(file, QStringLiteral("walletUnavailable"));
-    ImportFile source = readImportFile(file);
-    if (!source.error.isEmpty())
-        return importFailure(file, source.error);
-    PasswordImport::Result parsed = PasswordImport::parse(source.data);
-    source.data.fill('\0');
-    return describeImport(*folder, file, parsed);
-}
-
-QVariantMap PasswordStore::describeImport(const WalletFolder &folder, const QUrl &file,
-                                          PasswordImport::Result &parsed)
-{
-    const QString error = importErrorName(parsed.error);
-    if (!error.isEmpty())
-        return importFailure(file, error);
-    const ImportSummary summary = summarizeImport(parsed.logins, savedLoginsFor(folder, parsed.logins));
-    m_pendingImport = std::move(parsed.logins);
-    return importResult(file, parsed, summary);
-}
-
-int PasswordStore::commitImport(bool replaceConflicts)
-{
-    const QList<PasswordImport::Login> pending = std::exchange(m_pendingImport, {});
-    const auto folder = openFolder();
-    if (!folder)
-        return -1;
-    const int written = ImportWriter(*folder, replaceConflicts).writeAll(pending);
+    m_commit->deleteLater();
+    m_commit = nullptr;
     notifyLoginsChanged();
-    return written;
+    m_importOutcome.record(written, m_importFileName);
+    emitImportProgressChanged();
+    emit importFinished(written);
 }
 
 void PasswordStore::cancelImport()
 {
-    m_pendingImport.clear();
+    m_preparation.cancel();
+    m_preparation.takePending();
+}
+
+void PasswordStore::setImportPageOpen(bool isOpen)
+{
+    m_importOutcome.setPageOpen(isOpen);
+}
+
+QVariantMap PasswordStore::takeImportResult()
+{
+    return m_importOutcome.take();
+}
+
+QVariantMap PasswordStore::claimImportNotification()
+{
+    return m_importOutcome.claimNotification();
 }
 
 bool PasswordStore::moveImportFileToTrash(const QUrl &file)

@@ -93,6 +93,15 @@ set(KONDOR_PASSWORD_STORE_SOURCES
     ${CMAKE_SOURCE_DIR}/src/passwords/passwordstore.cpp
     ${CMAKE_SOURCE_DIR}/src/passwords/passwordstorewallet.cpp
     ${CMAKE_SOURCE_DIR}/src/passwords/passwordstoreimport.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/import/importinfo.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/import/importinfo.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/import/pendingimport.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/import/importpreparation.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/import/importpreparation.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/import/importcommit.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/import/importcommit.cpp
+    ${CMAKE_SOURCE_DIR}/src/passwords/import/importoutcome.h
+    ${CMAKE_SOURCE_DIR}/src/passwords/import/importoutcome.cpp
 )
 
 set(KONDOR_DATABASE_SOURCES

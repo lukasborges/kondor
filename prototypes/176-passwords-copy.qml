@@ -40,15 +40,28 @@ BrowserFrame {
         padding: Kirigami.Units.smallSpacing
         contentItem: RowLayout {
             spacing: Kirigami.Units.smallSpacing
-            Kirigami.Icon { source: "user-identity"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
+            Kirigami.Icon {
+                source: "user-identity"
+                Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+                Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
+            }
             Label { text: row.username; elide: Text.ElideRight; Layout.fillWidth: true }
-            ToolButton { icon.name: "edit-copy"; display: AbstractButton.IconOnly; implicitWidth: 28; implicitHeight: 28 }
+            ToolButton {
+                icon.name: "edit-copy"
+                icon.width: Kirigami.Units.iconSizes.smallMedium
+                icon.height: Kirigami.Units.iconSizes.smallMedium
+                display: AbstractButton.IconOnly
+                ToolTip.text: "Copy Username"
+                Accessible.name: "Copy Username for " + row.username
+            }
             ToolButton {
                 icon.name: row.passwordCopied ? "dialog-ok-apply" : "password-copy"
                 icon.color: row.passwordCopied ? Kirigami.Theme.positiveTextColor : "transparent"
+                icon.width: Kirigami.Units.iconSizes.smallMedium
+                icon.height: Kirigami.Units.iconSizes.smallMedium
                 display: AbstractButton.IconOnly
-                implicitWidth: 28
-                implicitHeight: 28
+                ToolTip.text: row.passwordCopied ? "Copied" : "Copy Password"
+                Accessible.name: "Copy Password for " + row.username
             }
         }
     }
@@ -76,7 +89,7 @@ BrowserFrame {
                 Layout.topMargin: Kirigami.Units.smallSpacing
                 wrapMode: Text.WordWrap
                 color: Kirigami.Theme.disabledTextColor
-                text: "Click an account to fill the page."
+                text: "Click an account to fill the page. Copied passwords are cleared from the clipboard after 30 seconds."
             }
             AccountRow { username: "maria@example.org"; passwordCopied: true }
             AccountRow { username: "maria.work@example.org" }
@@ -89,7 +102,7 @@ BrowserFrame {
     ToolTip {
         popupType: Popup.Item
         x: 990
-        y: 108
+        y: 130
         text: "Copied"
         Component.onCompleted: open()
     }

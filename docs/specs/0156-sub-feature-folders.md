@@ -65,7 +65,7 @@ Paths are relative to `src/`. `x` means `x.h` + `x.cpp`. A folder not listed kee
 | `bookmarks/import/` | `bookmarkhtmlimporter`, `bookmarkhtmlparser`, `bookmarkhtmltext` |
 | `browser/` | `zoommanager` |
 | `browser/tabs/` | `tab.h`, `tab.cpp`, `tabcommands.cpp`, `assignandnotify.h`, `tabmodel`, `tabmodelclosing.cpp`, `closedtabs` |
-| `browser/tabs/features/` | `tabsecurity`, `tabpermissions`, `tabpasswords`, `tabextensionitems` |
+| `browser/tabs/features/` | `tabsecurity`, `tabpermissions`, `tabpasswords`, `tabsitereload`, `tabextensionitems` |
 | `browser/address/` | `addressresolver`, `searchsuggestions`, `suggestionlist` |
 | `browser/profile/` | `profilemanager`, `profilesetup`, `pagescripts`, `certificateoverrides` |
 | `browser/session/` | `sessionmanager`, `sessionformat`, `sessionwindow.h` |

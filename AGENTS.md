@@ -303,7 +303,7 @@ history, downloads · 40. #144 Shrink C++: browser · 41. #145 Shrink C++: app, 
 48. #182 Extension menu item icons and shortcuts ·
 49. #194 Video Speed Controller: action item icons and shortcuts ·
 50. #108 Extensions repository · 51. #109 Dark Mode extension ·
-52. #110 Video Speed Controller extension · 53. #111 User Scripts extension ·
+52. #110 Video Speed Controller extension · 53. #111 User scripts (built into Kondor) ·
 54. #112 Cookie Banner Blocker extension · 55. #113 Skip Sponsors extension ·
 56. #114 YouTube Dislike Counts extension · 57. #115 JSON Viewer extension ·
 58. #116 User Styles extension · 59. #117 Clean Links extension · 60. #118 Mouse Gestures extension ·

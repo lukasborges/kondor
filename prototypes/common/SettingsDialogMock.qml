@@ -25,6 +25,7 @@ Rectangle {
     property bool catalogDialog: false // #107: the "Get New Extensions" dialog is open
     property bool installDialog: false // #107: the install confirmation is open
     property bool installFromFile: false // #107: the confirmation is for a .kondorext file
+    property bool installUserScript: false // #111: the confirmation is for a user script
     property string search: ""
     property bool modified: false // pending changes → Apply enabled
 
@@ -608,7 +609,7 @@ Rectangle {
         modal: true
         dim: true
         visible: root.installDialog
-        title: "Install Extension"
+        title: root.installUserScript ? "Install User Script" : "Install Extension"
         footer: DialogButtonBox {
             Button { text: "Install"; icon.name: "download"; DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole }
             Button { text: "Cancel"; icon.name: "dialog-cancel"; DialogButtonBox.buttonRole: DialogButtonBox.RejectRole }
@@ -618,23 +619,35 @@ Rectangle {
             spacing: Kirigami.Units.largeSpacing
             Kirigami.InlineMessage {
                 Layout.fillWidth: true
-                visible: root.installFromFile
+                visible: root.installFromFile || root.installUserScript
                 type: Kirigami.MessageType.Warning
-                text: "This extension does not come from the Kondor extensions catalog. Only install extensions from people you trust."
+                text: root.installUserScript
+                      ? "This user script does not come from the Kondor extensions catalog. Only install user scripts from people you trust."
+                      : "This extension does not come from the Kondor extensions catalog. Only install extensions from people you trust."
+            }
+            Kirigami.InlineMessage {
+                Layout.fillWidth: true
+                visible: root.installUserScript
+                type: Kirigami.MessageType.Information
+                text: "Kondor does not support GM_xmlhttpRequest, which this script uses. Parts of it may not work."
             }
             RowLayout {
                 spacing: Kirigami.Units.largeSpacing
-                Kirigami.Icon { source: root.installFromFile ? "input-mouse" : "media-skip-forward"; Layout.preferredWidth: Kirigami.Units.iconSizes.large; Layout.preferredHeight: Layout.preferredWidth }
+                Kirigami.Icon { source: root.installUserScript ? "text-x-javascript" : root.installFromFile ? "input-mouse" : "media-skip-forward"; Layout.preferredWidth: Kirigami.Units.iconSizes.large; Layout.preferredHeight: Layout.preferredWidth }
                 Label {
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
-                    text: root.installFromFile ? "Install “Mouse Gestures” 0.3.0 by Maria Example?"
+                    text: root.installUserScript ? "Install “Wide GitHub” 1.4.2 by Jane Example?"
+                          : root.installFromFile ? "Install “Mouse Gestures” 0.3.0 by Maria Example?"
                                                : "Install “Skip Sponsors” 1.0.0 by Kondor contributors?"
                 }
             }
             Label { text: "It will be able to:" }
             Repeater {
-                model: root.installFromFile
+                model: root.installUserScript
+                       ? [ { icon: "internet-services", text: "Read and change pages on github.com, gist.github.com" },
+                           { icon: "notifications", text: "Show notifications" } ]
+                       : root.installFromFile
                        ? [ { icon: "internet-services", text: "Read and change all websites" },
                            { icon: "tab-new", text: "Open, close and navigate your tabs" } ]
                        : [ { icon: "internet-services", text: "Read and change pages on www.youtube.com" } ]

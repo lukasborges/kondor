@@ -22,3 +22,4 @@ Add a row whenever a design is rejected in review or a UX bug is filed.
 | #158 | Two "Run on <host>" items with the same accessible name | `Accessible.name` "Run %1 on %2" (extension, host) | Labels must be distinct within a window |
 | #157 | A `PlaceholderMessage` declared before a `ListView` with `anchors.fill`: its button got no clicks | The placeholder above the list in z-order | An empty state must be actionable |
 | #158 | Icon-only buttons that are `[button] ''` for screen readers | `Accessible.name` on every icon-only button | Screen readers must announce a distinct label |
+| #111 | An install bar "This page is the user script Wide GitHub." that also had to show the sites and grants | "This page is a user script." with **Install…**, which opens the usual install confirmation (name, access, trust warning) | Important words first; the bar flags the page, and the one confirmation dialog shows the details, as for every other install |

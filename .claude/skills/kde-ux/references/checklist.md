@@ -29,7 +29,7 @@ with the fix.
       explanatory tooltips, form labels, checkboxes, placeholders and status text.
 - [ ] An ellipsis only for actions that need more input. It is the `…` character.
 - [ ] Imperative, short, no "you", important words first, no jargon (say "link", not "URL").
-- [ ] No important information only in a tooltip.
+- [ ] Only details go in tooltips. Anything needed to avoid data loss or harm is visible.
 - [ ] Every string is in `qsTr()` and still fits at +50% length.
 
 ## Keyboard, touch and screen reader

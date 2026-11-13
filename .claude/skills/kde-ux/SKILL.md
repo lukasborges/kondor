@@ -57,7 +57,7 @@ Any UI the prototype does not show (states, errors, long text) is reviewed with 
     first.
 - **Icon-only buttons** need a Breeze icon, `ToolTip.text` with `ToolTip.delay: 600`, and
   `Accessible.name` (the same words).
-- **No important text only in a tooltip**: tooltips are invisible on touch and easy to miss.
+- **Tooltips carry details, not essentials.** Tooltips are invisible on touch and easy to miss. A detail the user can live without (for example "Cleared in 30 seconds") may live only in a tooltip and the accessible text. Anything the user must see to avoid losing data or doing harm stays visible.
 - **Keyboard:** everything works without a mouse: a sensible first focus, arrow keys in lists,
   Enter to activate, Esc to close popups, a visible focus ring.
 - **Theme:**

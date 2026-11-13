@@ -34,6 +34,8 @@ BrowserFrame {
 
     component AccountRow: ItemDelegate {
         id: row
+        ToolTip.text: "Fill"
+        ToolTip.delay: 600
         required property string username
         property bool passwordCopied: false
         Layout.fillWidth: true
@@ -60,7 +62,7 @@ BrowserFrame {
                 icon.width: Kirigami.Units.iconSizes.smallMedium
                 icon.height: Kirigami.Units.iconSizes.smallMedium
                 display: AbstractButton.IconOnly
-                ToolTip.text: row.passwordCopied ? "Copied" : "Copy Password"
+                ToolTip.text: row.passwordCopied ? "Copied. Cleared in 30 seconds." : "Copy Password"
                 Accessible.name: "Copy Password for " + row.username
             }
         }
@@ -84,13 +86,6 @@ BrowserFrame {
                     Label { text: "accounts.example.org"; color: Kirigami.Theme.disabledTextColor }
                 }
             }
-            Label {
-                Layout.fillWidth: true
-                Layout.topMargin: Kirigami.Units.smallSpacing
-                wrapMode: Text.WordWrap
-                color: Kirigami.Theme.disabledTextColor
-                text: "Click an account to fill the page. Copied passwords are cleared from the clipboard after 30 seconds."
-            }
             AccountRow { username: "maria@example.org"; passwordCopied: true }
             AccountRow { username: "maria.work@example.org" }
             AccountRow { username: "m.silva@example.org" }
@@ -101,9 +96,9 @@ BrowserFrame {
 
     ToolTip {
         popupType: Popup.Item
-        x: 990
-        y: 130
-        text: "Copied"
+        x: 905
+        y: 86
+        text: "Copied. Cleared in 30 seconds."
         Component.onCompleted: open()
     }
 }

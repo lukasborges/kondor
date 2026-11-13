@@ -123,7 +123,8 @@ jobs:
           name: Kondor-Proof-x86_64.AppImage
 
       - name: Install host libraries only
-        run: dnf -y install dbus-daemon mesa-libGL mesa-libEGL fontconfig libxkbcommon nss
+        run: dnf -y install dbus-daemon mesa-libGL mesa-libEGL fontconfig libxkbcommon nss \
+            pipewire-libs alsa-lib pulseaudio-libs libdrm
 
       - name: Check that the bundle is self-contained
         run: "! rpm -q python3-pyside6 qt6-qtbase"

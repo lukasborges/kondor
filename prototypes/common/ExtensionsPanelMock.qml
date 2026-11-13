@@ -1,4 +1,4 @@
-// The toolbar Extensions panel: one row per extension (switch for this site, drill-down to its actions).
+// The toolbar Extensions panel: one row per extension ("Off on this site" when off), drill-down to its actions.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -22,6 +22,8 @@ Popup {
         required property var modelData
         width: ListView.view.width
         padding: Kirigami.Units.smallSpacing
+        Accessible.name: row.modelData.siteToggle && !row.modelData.on
+                         ? row.modelData.name + ", off on " + root.host : row.modelData.name
         contentItem: RowLayout {
             spacing: Kirigami.Units.smallSpacing
             Kirigami.Icon {
@@ -30,14 +32,10 @@ Popup {
                 Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
             }
             Label { text: row.modelData.name; elide: Text.ElideRight; Layout.fillWidth: true }
-            Switch {
-                visible: row.modelData.siteToggle
-                checked: row.modelData.on
-                Accessible.name: "Run " + row.modelData.name + " on " + root.host
-            }
-            Item {
-                visible: !row.modelData.siteToggle
-                Layout.preferredWidth: Kirigami.Units.gridUnit * 2
+            Label {
+                visible: row.modelData.siteToggle && !row.modelData.on
+                text: "Off on this site"
+                color: Kirigami.Theme.disabledTextColor
             }
             Kirigami.Icon {
                 source: "go-next"
@@ -52,15 +50,10 @@ Popup {
         ColumnLayout {
             visible: root.showList
             spacing: Kirigami.Units.smallSpacing
-            RowLayout {
-                spacing: Kirigami.Units.largeSpacing
-                Kirigami.Heading { level: 4; text: "Extensions"; Layout.fillWidth: true }
-            }
-            Label {
-                Layout.fillWidth: true
-                wrapMode: Text.WordWrap
-                color: Kirigami.Theme.disabledTextColor
-                text: "Switch an extension on or off for " + root.host + "."
+            ColumnLayout {
+                spacing: 0
+                Kirigami.Heading { level: 4; text: "Extensions" }
+                Label { text: root.host; color: Kirigami.Theme.disabledTextColor }
             }
             Kirigami.Separator { Layout.fillWidth: true }
             ScrollView {

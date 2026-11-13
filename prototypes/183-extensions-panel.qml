@@ -1,4 +1,4 @@
-// #183 Extensions panel — level 1 with ten extensions: one row each, switch for this site, drill-down.
+// #183 Extensions panel — level 1 with ten extensions: one row each, "Off on this site" only when off, drill-down.
 import QtQuick
 import QtQuick.Controls
 import "common"

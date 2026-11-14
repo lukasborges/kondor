@@ -204,7 +204,7 @@ Triggers: `pull_request` with `paths: ['packaging/python-proof/**', '.github/wor
   - Install only `dbus-daemon`, plus the host libraries that linuxdeploy's excludelist leaves out (for example `mesa-libGL mesa-libEGL fontconfig libxkbcommon nss`; the developer lists the exact set).
   - Assert `! rpm -q python3-pyside6 qt6-qtbase`, so the run proves the bundle is self-contained.
   - Run `APPIMAGE_EXTRACT_AND_RUN=1 QT_QPA_PLATFORM=offscreen dbus-run-session -- ./Kondor-Proof-x86_64.AppImage | tee proof.log`, then `grep -qx "PROOF OK" proof.log`.
-- **`flatpak`** (`ghcr.io/flathub-infra/flatpak-github-actions:kde-6.11`, `--privileged`, timeout 180):
+- **`flatpak`** (`ghcr.io/flathub-infra/flatpak-github-actions:kde-6.11`, `--privileged`, timeout 180), only on `workflow_dispatch` (`if: github.event_name == 'workflow_dispatch'`), because it builds PySide6 from source:
   - **Manifest** `packaging/python-proof/io.github.lukasborges.KondorProof.yml`: app id `io.github.lukasborges.KondorProof` on `org.kde.Platform`/`org.kde.Sdk` 6.11 with base `io.qt.qtwebengine.BaseApp` 6.11 (as the Kondor manifest).
   - **PySide6 from source:** modules `shiboken6` and `pyside6` from the official `pyside-setup-everywhere-src-6.11.2` tarball on `download.qt.io`, pinned by `sha256`. They are built with CMake against the runtime's Qt, with `MODULES` limited to `Core;Gui;Qml;Quick;QuickControls2;Network;Sql;DBus;WebEngineCore;WebEngineQuick;WebChannel`.
   - **libclang:** shiboken needs it to build. It comes from the freedesktop LLVM SDK extension that matches the runtime's freedesktop base, listed in `sdk-extensions` and used only at build time.
@@ -246,7 +246,7 @@ On Fedora 45 with the packages of "Context" installed, in a clean checkout of th
 4. `python3 scripts/check-code-quality.py`: no output. Add a temporary `kondor/core/bad.py` with an 11-line function and a `# note` comment: the checker reports `function-length` and `comments`. Delete the file.
 5. `QT_QPA_PLATFORM=offscreen dbus-run-session -- python3 packaging/python-proof/proof.py`: five `PASS` lines and `PROOF OK`, exit code 0.
 6. Without `QT_QPA_PLATFORM`, in a Plasma session, the proof window shows a Breeze-styled button (the proof needs no visual check beyond this).
-7. Open the `python-proof` workflow run of the PR: both `appimage-run` and `flatpak` show `PROOF OK`.
+7. Start the Flatpak proof once, when everything else passes: `gh workflow run python-proof.yml --ref feature/163-python-toolchain-proof`. In that run, both `appimage-run` and `flatpak` show `PROOF OK`; link it in the PR body.
 
 ## Out of scope
 
@@ -279,3 +279,4 @@ None: no UI. The proof window is a test fixture, not a Kondor UI.
 | How does the AppImage job prove the bundle is self-contained? | It runs in a second, fresh `fedora:latest` container without `python3-pyside6` or `qt6-qtbase`. The Ubuntu host cannot be used: an AppImage built on Fedora 45 needs a newer glibc than Ubuntu 24.04 has. |
 | The dev host lacks `python3-pyside6`, `pyside6-tools`, `python3-pytest`, `python3-pytest-qt`, `python3-mypy` and `ruff`. Who installs them? | The maintainer, with `sudo dnf install python3-pyside6 pyside6-tools python3-pytest python3-pytest-qt python3-mypy ruff` (all in the Fedora 45 repositories). Agents never install system packages or work around a missing one: no pip, no venv, no container. Meanwhile the developer implements the spec and verifies through the PR's CI jobs, which install the same packages; local checks and the "Manual test" run once the packages are present, before the PR leaves draft. |
 | Python steps in the `build` job or a job of their own? | A separate `python` job without `needs:`. The Python checks do not use the CMake build, so placing them after it delays every Python result by the full C++ build (more than 15 minutes). The same reasoning keeps the C++ checks out of the local and review checks of Python-only PRs (AGENTS.md → "Which checks a change needs"). |
+| Does the `flatpak` proof job run on every push to the PR? | No, only when started by hand (`workflow_dispatch`), once the rest of the PR passes. It builds PySide6 from source and is the slowest job; the maintainer wants Flatpak builds only when they matter. For the same reason `flatpak.yml` no longer runs on pull requests: the release builds the Flatpak. |

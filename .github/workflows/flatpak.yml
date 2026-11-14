@@ -1,15 +1,8 @@
 name: Flatpak
 
+# Building the Flatpak takes long, so pull requests do not run it: the release builds it, and this
+# workflow is started by hand (gh workflow run flatpak.yml --ref <branch>) to check a packaging change.
 on:
-  pull_request:
-    paths:
-      - 'packaging/flatpak/**'
-      - 'packaging/*.metainfo.xml'
-      - 'packaging/kondor.desktop'
-      - 'scripts/flatpak-site.sh'
-      - 'CMakeLists.txt'
-      - '.github/workflows/flatpak.yml'
-      - '.github/workflows/release.yml'
   workflow_dispatch:
 
 jobs:

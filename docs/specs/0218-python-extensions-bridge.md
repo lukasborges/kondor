@@ -18,7 +18,7 @@ Port `src/extensions/bridge/` to Python, and port the extension tests that need 
   - Phase 7 (#169) added `ProfileManager` (`defaultProfile()`, `createPrivateProfile()`, signal `profileCreated`) and `pagescripts.install(profile)`, which puts the `kondor-channel` script (Qt's `qwebchannel.js` + `channel.js`) on every profile. `scripts/build.py` already stages `:/scripts/channel.js`, `:/scripts/extensionruntime.js` and `:/scripts/usergm.js` in `build/python/kondor.rcc`.
   - Phase 8 (#170) added `Tab` (`Tab(profile, parent=None)`, `isPrivate`, the command slots `goBack`, `goForward`, `reload`, `closeTab`, `selectNeighborTab`, `openTab`, `downloadUrl` and their `…Requested` signals), `TabExtensionItems` (`tab.extensionItems`), `TabSiteReload`, `TabModel`, and `PasswordBridge` / `PasswordPageApi` in `kondor/passwords/bridge/`.
   - Phase 9 (#171) added `ExtensionManager` with `check_token`, `is_active`, `has_permission`, `display_name`, `register_profile`, `script_source`, `install_package`, `applyConfiguration`, `setEnabled`, `setSiteEnabled`, `setPinned`, `settingValues`; `state/extensionstorage.py` (the C++ `ExtensionStorage` functions in snake_case, returning `StorageWrite(is_written, error)` on writes); `userscripts/` (`parse_user_script_metadata`, `write_user_script_package`, `user_script_id`, `UserScriptSource`); and the test harness `pytests/extensions/extensionsharness.py`, `pageserver.py`, `conftest.py`.
-  - Phase 10 (#172) added `ExtensionCatalog`, `pytests/extensions/catalog/`, `pytests/extensions/test_extensionsui.py`, and may have extended `pageserver.py`.
+  - Phase 10 (#172) runs at the same time as this phase and adds `ExtensionCatalog`, `pytests/extensions/catalog/`, `pytests/extensions/test_extensionsui.py`, and may have extended `pageserver.py`.
 - **The scope** (about 525 lines with headers and JS):
 
   | C++ / JS file | What it does |
@@ -208,7 +208,7 @@ On Fedora 45 with the packages of the #163 spec, in a clean checkout of the PR b
 
 ## Dependencies
 
-#170 (phase 8: `Tab`, `TabModel`, `TabExtensionItems`, `TabSiteReload`, the `PasswordBridge` pattern) and #172 (phase 10: the rest of `kondor/extensions/`, so every extension type the panel's QML may reach exists, and the last phase 9/10 test harness changes). Umbrella #162. Phase 11 (#173) waits for this phase.
+#170 (phase 8: `Tab`, `TabModel`, `TabExtensionItems`, `TabSiteReload`, the `PasswordBridge` pattern) and #171 (phase 9: `ExtensionManager`, `ExtensionStorage`). The bridge's code includes nothing from #172 (checked 2026-11-14), so this phase runs in parallel with #172. If a UI test of this phase needs a type #172 ports (for example `ExtensionCatalog`), that test moves to #173, as the umbrella's "UI tests" rule says, and the PR lists it. Umbrella #162. Phase 11 (#173) waits for this phase and #172.
 
 ## Prototype
 
@@ -224,3 +224,4 @@ None: no UI.
 | Are the bridge's error texts translated? | No: C++ does not translate them, and the page's extension sees them as `Error` messages, not the user. |
 | Where do the panel, reload bar and pinned tool bar tests go? | `pytests/extensions/panel/`, after `qml/extensions/panel/`, because `pytests/extensions/` would otherwise pass the 10-file limit. They need a `Tab` (phase 8), so they could not go with phase 9. |
 | `storageQuota` and `storageIsPerExtension` test `ExtensionStorage`, not the bridge. | They are ported as they are, in `test_extensionbridge.py`, because they live in `tst_extensionbridge.cpp` (umbrella item 9: every C++ case keeps its file). They overlap phase 9's `test_extensionstorage.py` on purpose. |
+| Does #218 wait for #172? | No (2026-11-14): the bridge includes only #170 and #171 classes. A UI test that needs a #172 type moves to #173. |

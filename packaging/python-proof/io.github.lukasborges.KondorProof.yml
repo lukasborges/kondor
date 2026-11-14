@@ -50,7 +50,7 @@ modules:
       - -DPython_EXECUTABLE=/usr/bin/python3
       - -DPYSIDE_TREAT_QT_INCLUDE_DIRS_AS_NON_SYSTEM=ON
       - -DSHIBOKEN_FORCE_PROCESS_SYSTEM_INCLUDE_PATHS=/app/include
-      - -DMODULES=Core;Gui;Qml;Quick;QuickControls2;Network;Sql;DBus;OpenGL;Widgets;PrintSupport;WebEngineCore;WebEngineQuick;WebChannel
+      - -DMODULES=Core;Gui;Widgets;PrintSupport;Sql;Network;DBus;OpenGL;Qml;Quick;QuickControls2;WebChannel;WebEngineCore;WebEngineQuick
     sources: *pyside-sources
   - name: kondor-proof
     buildsystem: simple

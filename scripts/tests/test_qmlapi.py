@@ -163,6 +163,12 @@ class ComparisonTest(unittest.TestCase):
     def test_qint64_does_not_match_quint64(self):
         self.assertEqual(len(limit_type_problems("qint64", "quint64")), 1)
 
+    def test_value_list_matches_variant_list(self):
+        self.assertEqual(limit_type_problems("QList<QUrl>", "QVariantList"), [])
+
+    def test_value_list_does_not_match_a_string_list(self):
+        self.assertEqual(len(limit_type_problems("QList<QUrl>", "QStringList")), 1)
+
     def test_object_matches_a_class_python_registers(self):
         python = twin(properties={**parsed().properties, "group": Property("QObject*", False)})
         classes = {"Sample": python, "Group": ClassApi("Group")}

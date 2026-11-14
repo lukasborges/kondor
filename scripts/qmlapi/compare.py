@@ -5,6 +5,7 @@ from .model import ClassApi, normalize_type
 ANY_TYPE = "QVariant"
 OBJECT_TYPES = {"QAbstractItemModel", "QObject"}
 QT_OBJECT_TYPES = {"QQuickWebEngineProfile"}
+LIST_TYPE = "QVariantList"
 
 
 @dataclass(frozen=True)
@@ -31,9 +32,15 @@ def is_registered_object(cpp_name: str, python_name: str, registered_names: froz
     return python_name in OBJECT_TYPES and is_known_object
 
 
+def is_list_of_values(cpp_name: str, python_name: str) -> bool:
+    return python_name == LIST_TYPE and cpp_name.startswith("QList<")
+
+
 def types_match(cpp_type: str, python_type: str, registered_names: frozenset[str]) -> bool:
     cpp_name, python_name = normalize_type(cpp_type), normalize_type(python_type)
     if ANY_TYPE in (cpp_name, python_name) or cpp_name == python_name:
+        return True
+    if is_list_of_values(cpp_name, python_name):
         return True
     return is_registered_object(cpp_name, python_name, registered_names)
 

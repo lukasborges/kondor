@@ -178,8 +178,8 @@ One issue per phase, promoted in this order (AGENTS.md "Roadmap order"). A phase
 | 4 | #166 Downloads and history | `src/downloads/`, `src/history/`, `browser/faviconstore` | `tests/downloads/`, `tests/history/` |
 | 5 | #167 Bookmarks | `src/bookmarks/` | `tests/bookmarks/` |
 | 6 | #168 Password store | `src/passwords/` except `passwordbridge` | `tests/passwords/` except the bridge |
-| 7 | #169 Browser profile, address and session | `src/browser/` except `tab*`, `tabmodel*`, `faviconstore` and `session/sessionmanager` | `tests/browser/` for those classes, `tests/site/` |
-| 8 | #170 Tabs | `src/browser/` `tab*`, `tabmodel*` and `session/sessionmanager`, `passwords/passwordbridge` | the rest of `tests/browser/`, the bridge tests |
+| 7 | #169 Browser profile, address and session | `src/browser/` except `tab*`, `tabmodel*`, `faviconstore` and `session/sessionmanager` | `tests/browser/` for those classes, `tests/site/tst_permissiontypeinfo` and the `ProfileManager` case of `tst_sitepermissions` |
+| 8 | #170 Tabs | `src/browser/` `tab*`, `tabmodel*` and `session/sessionmanager`, `passwords/passwordbridge` | the rest of `tests/browser/` and of `tests/site/`, the bridge tests |
 | 9 | #171 Extensions: manifest, package, state, install and manager | `src/extensions/` without `bridge/`: manifest, package, state, install, scripts, userscripts, `extensionmanager` | their tests in `tests/extensions/` |
 | 10 | #172 Extensions: catalog, actions and updates | the rest of `src/extensions/` without `bridge/` | the rest of `tests/extensions/` |
 | 10b | #218 Extensions: bridge | `src/extensions/bridge/` and the extension JS resources | the bridge tests in `tests/extensions/` |

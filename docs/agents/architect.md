@@ -137,6 +137,8 @@ headless (`claude -p --permission-mode auto`) for exactly one step when:
 - no row is yours and fewer than two issues are in flight (`KONDOR_ARCH_MAX_IN_FLIGHT`) → the
   loop picks the issue to promote (the highest-priority open `bug`, or else the next "Roadmap
   order" issue whose "Depends on:" issues are closed) and you promote it to `to-dev`.
+- nothing else needs you → write the spec (and prototype) of the next "Roadmap order" issue that
+  has none yet, without touching its labels, so its later promotion is quick.
 
 `--permission-mode auto` keeps Claude Code's safety classifier in front of every action. Merging
 needs the maintainer's own allow rule `Bash(gh pr merge:*)` in `~/.claude/settings.json`; without it

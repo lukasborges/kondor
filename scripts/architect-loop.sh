@@ -109,6 +109,12 @@ $common
 Step: issue #$n has the question label. Find the developer's "**Question:**" comment (on the PR for #$n if there is one, otherwise on the issue), answer it in that thread, add a | Question | Decision | row to the "Decisions" table of docs/specs/$(printf '%04d' "$n")-*.md (commit and push to main; for a bug issue, which has no spec file, the answer comment is the record), then remove the question label from issue #$n (keep its state label).
 EOF
       ;;
+      prespec) cat <<EOF
+$common
+
+Step: nothing else needs you, so write the spec of issue #$n ahead of time: it is the next issue of AGENTS.md "Roadmap order" without one, and it will be promoted later, when its "Depends on:" issues are closed. Write docs/specs/$(printf '%04d' "$n")-<slug>.md with the template in docs/agents/architect.md, and its prototype under prototypes/ if it has UI (render it with python3 prototypes/render.py). Commit and push to main, then update the issue body to a summary that links the spec, keeping its "**Depends on:**" line. Do not add, remove or change any label, and do not promote it: the loop does that when its dependencies are closed.
+EOF
+      ;;
       to-spec) cat <<EOF
 $common
 
@@ -171,6 +177,25 @@ EOF
     return 0
   }
 
+  # The first issue of AGENTS.md "Roadmap order" that is open, not started, and has no spec file
+  # on main yet, or nothing.
+  next_unspecified() {
+    local issues n
+    issues="$(open_issues)" || return 0
+    while read -r n; do
+      awk -v n="$n" '$1 == n && $2 == "false" { found = 1 } END { exit !found }' <<<"$issues" || continue
+      compgen -G "$control/docs/specs/$(printf '%04d' "$n")-*.md" >/dev/null && continue
+      echo "$n"
+      return 0
+    done < <(roadmap_order)
+  }
+
+  log_idle_once() {
+    [[ -e "$state/idle" ]] && return 0
+    touch "$state/idle"
+    log "queue: nothing for the architect (no review or question, nothing to promote, every upcoming roadmap issue has a spec)"
+  }
+
   # True when issue $1 has the approved label and its PR's build check has not finished yet.
   # The PR may be in the extensions repository (AGENTS.md → "Extensions repository").
   build_pending() {
@@ -200,25 +225,23 @@ EOF
     local dry="$1" next n st key count_file count run_log rc after
     ensure_control || return 0
     next="$(next_architect_step)"
-    if [[ -z "$next" ]]; then
-      log "queue: nothing for the architect"
-      return 0
-    fi
     read -r n st <<<"$next"
     key="$n"
     if [[ "$n" == "promote" ]]; then
       st="promote"
       n="$(next_promotion)"
       next="promote $n"
-    fi
-    if [[ "$st" == "promote" && -z "$n" ]]; then
       # Nothing to promote is not a failure: clear any no-progress pause so the next filed issue
-      # is promoted right away, and log the idle state only once.
-      rm -f "$state/paused-promote" "$state/no-progress-promote"
-      if [[ ! -e "$state/idle" ]]; then
-        touch "$state/idle"
-        log "queue: nothing to promote (backlog empty, or the next issues wait for their \"Depends on:\" issues)"
-      fi
+      # is promoted right away.
+      [[ -n "$n" ]] || rm -f "$state/paused-promote" "$state/no-progress-promote"
+    fi
+    if [[ -z "$n" ]]; then
+      # Idle: write the spec of the next roadmap issue ahead of time, so its promotion is quick.
+      n="$(next_unspecified)"
+      st="prespec"; key="prespec"; next="prespec $n"
+    fi
+    if [[ -z "$n" ]]; then
+      log_idle_once
       return 0
     fi
     rm -f "$state/idle"
@@ -249,7 +272,11 @@ EOF
       return 0
     fi
     ensure_control || return 0
-    if [[ "$st" == "promote" ]]; then after="promote $(next_promotion)"; else after="$(next_architect_step)"; fi
+    case "$st" in
+      promote) after="promote $(next_promotion)" ;;
+      prespec) after="prespec $(next_unspecified)" ;;
+      *)       after="$(next_architect_step)" ;;
+    esac
     count_file="$state/no-progress-$key"
     if [[ "$after" == "$next" ]]; then
       count=$(( $(cat "$count_file" 2>/dev/null || echo 0) + 1 ))

@@ -18,7 +18,7 @@ SECTION = re.compile(
     r"\b(?P<label>(?:public|private|protected)(?:\s+(?:slots|Q_SLOTS))?|signals|Q_SIGNALS)\s*:(?!:)"
 )
 FUNCTION_NAME = re.compile(r"(\w+)\s*\(")
-SLOT_LABELS = ("slots", "Q_SLOTS")
+PUBLIC_SLOT_LABELS = (("public", "slots"), ("public", "Q_SLOTS"))
 SIGNAL_LABELS = ("signals", "Q_SIGNALS")
 
 
@@ -67,7 +67,7 @@ def declared_function(statement: str) -> tuple[str, set[int]] | None:
 
 def add_functions(api: ClassApi, label: str, text: str) -> None:
     is_signal = label in SIGNAL_LABELS
-    is_slot = label.rsplit(maxsplit=1)[-1] in SLOT_LABELS
+    is_slot = tuple(label.split()) in PUBLIC_SLOT_LABELS
     for statement in text.split(";"):
         function = declared_function(statement)
         invokable = "Q_INVOKABLE" in statement

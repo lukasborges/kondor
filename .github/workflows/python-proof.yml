@@ -142,7 +142,6 @@ jobs:
           grep -qx "PROOF OK" proof.log
 
   flatpak:
-    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     container:
       image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.11

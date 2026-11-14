@@ -39,6 +39,12 @@ signals:
 Q_SIGNALS:
     void closed();
 
+private slots:
+    void hidden();
+
+protected Q_SLOTS:
+    void guarded();
+
 private:
     int m_limit = 0;
 };
@@ -82,6 +88,9 @@ class HeaderParserTest(unittest.TestCase):
     def test_slots_sections_are_callables(self):
         self.assertEqual({name: parsed().callables[name] for name in ("reload", "zoom")},
                          {"reload": {0}, "zoom": {1}})
+
+    def test_private_and_protected_slots_are_not_callables(self):
+        self.assertFalse({"hidden", "guarded"} & parsed().callables.keys())
 
     def test_plain_methods_are_not_callables(self):
         self.assertNotIn("ignored", parsed().callables)

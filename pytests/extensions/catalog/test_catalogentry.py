@@ -63,8 +63,12 @@ def test_invalid_json_is_refused() -> None:
 
 @pytest.mark.parametrize(
     "root",
-    [{"version": 2, "extensions": []}, {"version": 1, "extensions": {}}],
-    ids=["version-2", "extensions-object"],
+    [
+        {"version": 2, "extensions": []},
+        {"version": 1, "extensions": {}},
+        {"version": True, "extensions": []},
+    ],
+    ids=["version-2", "extensions-object", "version-true"],
 )
 def test_unsupported_format_is_refused(root: dict[str, Any]) -> None:
     entries, error = parse_catalog(catalog_bytes(root), CATALOG_URL)

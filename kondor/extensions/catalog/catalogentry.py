@@ -66,7 +66,8 @@ def parse_catalog_entry(source: dict[str, Any], catalog_url: QUrl) -> CatalogEnt
 
 def has_supported_format(root: dict[str, Any]) -> bool:
     version = root.get("version")
-    is_supported = isinstance(version, int | float) and version == SUPPORTED_FORMAT_VERSION
+    is_number = isinstance(version, int | float) and not isinstance(version, bool)
+    is_supported = is_number and version == SUPPORTED_FORMAT_VERSION
     return is_supported and isinstance(root.get("extensions"), list)
 
 

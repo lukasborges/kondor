@@ -6,20 +6,48 @@ on:
   pull_request:
 
 jobs:
+  changes:
+    runs-on: ubuntu-24.04
+    outputs:
+      cpp: ${{ steps.cpp.outputs.cpp }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Does the change affect the C++ app?
+        id: cpp
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if [ -z "$BASE" ] || scripts/needs-cpp-checks.sh "$BASE"; then
+            echo "cpp=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "cpp=false" >> "$GITHUB_OUTPUT"
+          fi
+
   build:
+    needs: changes
     runs-on: ubuntu-24.04
     # Ubuntu 24.04 has Qt 6.4 and the project requires 6.8+; we use Fedora (Qt 6.11).
     container: fedora:latest
+    env:
+      CPP_CHECKS: ${{ needs.changes.outputs.cpp }}
 
     steps:
       - name: Install dependencies
         # Fedora mirrors sometimes stall: retry with a time limit instead of hanging the job for hours.
         timeout-minutes: 50
         run: |
-          for attempt in 1 2 3; do
-            timeout 15m dnf -y install cmake ninja-build gcc-c++ make git nodejs python3 \
+          packages="git python3"
+          if [ "$CPP_CHECKS" = true ]; then
+            packages="$packages cmake ninja-build gcc-c++ make nodejs \
                 qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel qt6-qtwebchannel-devel \
-                kf6-kirigami kf6-qqc2-desktop-style kf6-kwallet-devel kf6-karchive-devel hunspell-en-US hunspell-pt-BR && exit 0
+                kf6-kirigami kf6-qqc2-desktop-style kf6-kwallet-devel kf6-karchive-devel hunspell-en-US hunspell-pt-BR"
+          fi
+          for attempt in 1 2 3; do
+            timeout 15m dnf -y install $packages && exit 0
             echo "::warning::dnf install failed or timed out (attempt $attempt of 3)"
             sleep 30
           done
@@ -34,18 +62,22 @@ jobs:
           python3 scripts/check-code-quality.py
 
       - name: Configure
+        if: env.CPP_CHECKS == 'true'
         run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
+        if: env.CPP_CHECKS == 'true'
         # A healthy build takes about 10 minutes; a stuck runner must fail instead of blocking the merge queue.
         timeout-minutes: 40
         run: cmake --build build --parallel "$(nproc)"
 
       - name: Test
+        if: env.CPP_CHECKS == 'true'
         timeout-minutes: 20
         run: ctest --test-dir build --output-on-failure
 
       - name: Check translations
+        if: env.CPP_CHECKS == 'true'
         run: |
           # The container job runs as root on a workspace owned by another user,
           # so git needs the checkout marked as safe before diffing it.
@@ -89,6 +121,7 @@ jobs:
           PY
 
       - name: Upload binary
+        if: env.CPP_CHECKS == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: kondor-linux

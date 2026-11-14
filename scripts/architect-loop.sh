@@ -239,7 +239,7 @@ EOF
     fi
 
     run_log="$state/run-$key-$st-$(date +%Y%m%d-%H%M%S).log"
-    log "running architect: $st on $key (log: $run_log)"
+    log "running architect: $st on #$n (log: $run_log)"
     local args=(-p --permission-mode auto --output-format text)
     [[ -n "$model" ]] && args+=(--model "$model")
     (cd "$control" && "$claude" "${args[@]}" "$(prompt_for "$n" "$st")") >"$run_log" 2>&1

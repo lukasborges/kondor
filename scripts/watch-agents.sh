@@ -13,6 +13,9 @@ set -uo pipefail
 
 readonly POLL_SECONDS=5
 readonly CONTEXT_LINES=40
+# Terminal colors: architect magenta, then one per developer loop (cyan, yellow, green, blue, red).
+readonly ARCHITECT_COLOR=35
+readonly DEV_COLORS=(36 33 32 34 31)
 
 main() {
   require jq
@@ -32,16 +35,16 @@ require() {
 }
 
 watch_architect() {
-  watch_loop architect 35 \
+  watch_loop architect "$ARCHITECT_COLOR" \
     "${KONDOR_ARCH_CONTROL:-$HOME/.local/share/kondor-architect-loop/control}" \
     "${KONDOR_ARCH_STATE:-$HOME/.local/state/kondor-architect-loop}/architect-loop.log"
 }
 
 # watch_dev <developer loop number>
 watch_dev() {
-  local suffix="" name=dev
-  [[ "$1" == 1 ]] || { suffix="-$1"; name="dev$1"; }
-  watch_loop "$name" 36 \
+  local suffix="" color="${DEV_COLORS[($1 - 1) % ${#DEV_COLORS[@]}]}"
+  [[ "$1" == 1 ]] || suffix="-$1"
+  watch_loop "dev$1" "$color" \
     "$HOME/.local/share/kondor-dev-loop/control$suffix" \
     "$HOME/.local/state/kondor-dev-loop$suffix/dev-loop.log"
 }

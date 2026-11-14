@@ -1,0 +1,33 @@
+from typing import NamedTuple, Protocol
+
+from PySide6.QtCore import SignalInstance
+
+
+class WalletEntry(NamedTuple):
+    handle: int
+    folder: str
+    key: str
+
+
+class WalletService(Protocol):
+    @property
+    def opened(self) -> SignalInstance: ...
+
+    @property
+    def closed(self) -> SignalInstance: ...
+
+    def open_network_wallet(self) -> bool: ...
+
+    def has_folder(self, handle: int, folder: str) -> bool: ...
+
+    def create_folder(self, handle: int, folder: str) -> bool: ...
+
+    def read_map(self, entry: WalletEntry) -> bytes | None: ...
+
+    def map_list(self, handle: int, folder: str) -> dict[str, bytes] | None: ...
+
+    def entry_list(self, handle: int, folder: str) -> list[str]: ...
+
+    def write_map(self, entry: WalletEntry, data: bytes) -> bool: ...
+
+    def remove_entry(self, entry: WalletEntry) -> bool: ...

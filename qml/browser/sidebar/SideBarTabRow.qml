@@ -21,6 +21,7 @@ ItemDelegate {
     height: tab.pinned ? 0 : implicitHeight
     z: drag.active ? 10 : 0
     highlighted: isCurrent
+    down: false
     focusPolicy: Qt.NoFocus
     Accessible.name: info.title
     transform: Translate { y: drag.shift }

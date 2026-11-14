@@ -26,7 +26,7 @@
 #   KONDOR_ENGINE        claude (Claude Code, default) or opencode
 #   KONDOR_CLAUDE        claude binary (default: claude in PATH, else ~/.local/bin/claude)
 #   KONDOR_OPENCODE      opencode binary (default: opencode in PATH, else ~/.opencode/bin/opencode)
-#   KONDOR_MODEL         model for the developer (default: opus with claude,
+#   KONDOR_MODEL         model for the developer (default: sonnet with claude,
 #                        deepseek/deepseek-flash with opencode; see `opencode models`)
 #   KONDOR_AGENT_FILES   folder with AGENTS.md and opencode.json, linked into the control checkout
 #                        (default: ~/.config/kondor-agents)
@@ -60,7 +60,7 @@ main() {
   local opencode="${KONDOR_OPENCODE:-$(command -v opencode || echo "$HOME/.opencode/bin/opencode")}"
   local model
   case "$engine" in
-    claude)   model="${KONDOR_MODEL:-opus}" ;;
+    claude)   model="${KONDOR_MODEL:-sonnet}" ;;
     opencode) model="${KONDOR_MODEL:-deepseek/deepseek-flash}" ;;
     *) echo "KONDOR_ENGINE must be claude or opencode, not '$engine'" >&2; exit 2 ;;
   esac

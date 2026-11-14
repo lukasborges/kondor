@@ -18,11 +18,14 @@ from kondor.core.settings.settingsoptions import (
     READER_FONT_SIZE,
     SEARCH_ENGINE,
     STORED_OPTIONS,
+    TAB_STYLE,
     StoredOption,
 )
 
 ORGANIZATION = "KDE"
 APPLICATION = "Kondor"
+TAB_STYLES = ("floating", "below", "classic")
+DEFAULT_TAB_STYLE = "floating"
 MIN_READER_FONT_SIZE = 12
 MAX_READER_FONT_SIZE = 32
 
@@ -31,7 +34,13 @@ def clamped_reader_font_size(size: Any) -> int:
     return max(MIN_READER_FONT_SIZE, min(int(size), MAX_READER_FONT_SIZE))
 
 
+def known_tab_style(style: Any) -> str:
+    return style if style in TAB_STYLES else DEFAULT_TAB_STYLE
+
+
 def normalized(option: StoredOption, value: Any) -> Any:
+    if option is TAB_STYLE:
+        return known_tab_style(value)
     if option is READER_FONT_SIZE:
         return clamped_reader_font_size(value)
     return value

@@ -30,6 +30,9 @@ TabButton {
         return tab.iconUrl.toString().length ? tab.iconUrl.toString() : "text-html"
     }
 
+    readonly property bool isStyled: tabStrip.isStyled
+    readonly property bool showsCloseButton: !isStyled || checked || hovered
+
     width: tab.pinned ? tabStrip.pinnedTabWidth : tabStrip.tabWidth
     text: ""
     Accessible.name: fullTitle
@@ -38,6 +41,29 @@ TabButton {
         Translate { x: control.dragShift },
         Translate { x: control.slideShift }
     ]
+
+    Binding {
+        when: control.isStyled
+        target: control
+        property: "background"
+        value: tabCard
+    }
+
+    Binding {
+        when: control.isStyled
+        target: control
+        property: "height"
+        value: Kirigami.Units.gridUnit * 2
+    }
+
+    TabCard {
+        id: tabCard
+        visible: control.isStyled
+        isBelowAddressBar: control.tabStrip.isBelowAddressBar
+        isActive: control.checked
+        isHovered: control.hovered
+        hasKeyboardFocus: control.visualFocus
+    }
 
     onXChanged: tabSlide.followPosition()
     Component.onDestruction: tabDrag.abortOnDestruction()
@@ -82,6 +108,8 @@ TabButton {
 
         ToolButton {
             visible: !control.tab.pinned
+            enabled: control.showsCloseButton
+            opacity: control.showsCloseButton ? 1 : 0
             Layout.preferredWidth: 20
             Layout.preferredHeight: 20
             flat: true

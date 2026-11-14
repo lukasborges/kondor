@@ -23,6 +23,7 @@ constexpr Settings::Option kBlockThirdPartyCookies{"Privacy/BlockThirdPartyCooki
 constexpr Settings::Option kSearchSuggestions{"Search/Suggestions", "searchSuggestions", &Settings::searchSuggestionsChanged};
 constexpr Settings::Option kSpellCheckEnabled{"SpellCheck/Enabled", "spellCheckEnabled", &Settings::spellCheckEnabledChanged};
 constexpr Settings::Option kSpellCheckLanguages{"SpellCheck/Languages", "spellCheckLanguages", &Settings::spellCheckLanguagesChanged};
+constexpr Settings::Option kTabStyle{"UI/TabStyle", "tabStyle", &Settings::tabStyleChanged};
 constexpr Settings::Option kReaderFontSize{"Reader/FontSize", "readerFontSize", &Settings::readerFontSizeChanged};
 constexpr Settings::Option kReaderSerif{"Reader/Serif", "readerSerif", &Settings::readerSerifChanged};
 constexpr Settings::Option kAdBlockEnabled{"AdBlock/Enabled", "adBlockEnabled", &Settings::adBlockEnabledChanged};
@@ -36,6 +37,12 @@ constexpr Settings::Option kPinnedExtensions{"Extensions/Pinned", "pinnedExtensi
 int clampedReaderFontSize(int size)
 {
     return qBound(12, size, 32);
+}
+
+QString knownTabStyle(const QString &style)
+{
+    static const QStringList known{QStringLiteral("floating"), QStringLiteral("below"), QStringLiteral("classic")};
+    return known.contains(style) ? style : QStringLiteral("floating");
 }
 
 QString downloadLocation()
@@ -91,6 +98,7 @@ Settings::Settings(QObject *parent)
     , m_searchSuggestions(read<bool>(kSearchSuggestions))
     , m_spellCheckEnabled(read<bool>(kSpellCheckEnabled))
     , m_spellCheckLanguages(read<QStringList>(kSpellCheckLanguages))
+    , m_tabStyle(knownTabStyle(read<QString>(kTabStyle)))
     , m_readerFontSize(clampedReaderFontSize(read<int>(kReaderFontSize)))
     , m_readerSerif(read<bool>(kReaderSerif))
     , m_adBlockEnabled(read<bool>(kAdBlockEnabled))
@@ -152,6 +160,7 @@ void Settings::setBlockThirdPartyCookies(bool blockThirdPartyCookies) { store(m_
 void Settings::setSearchSuggestions(bool searchSuggestions) { store(m_searchSuggestions, searchSuggestions, kSearchSuggestions); }
 void Settings::setSpellCheckEnabled(bool spellCheckEnabled) { store(m_spellCheckEnabled, spellCheckEnabled, kSpellCheckEnabled); }
 void Settings::setSpellCheckLanguages(const QStringList &spellCheckLanguages) { store(m_spellCheckLanguages, spellCheckLanguages, kSpellCheckLanguages); }
+void Settings::setTabStyle(const QString &tabStyle) { store(m_tabStyle, knownTabStyle(tabStyle), kTabStyle); }
 void Settings::setReaderFontSize(int readerFontSize) { store(m_readerFontSize, clampedReaderFontSize(readerFontSize), kReaderFontSize); }
 void Settings::setReaderSerif(bool readerSerif) { store(m_readerSerif, readerSerif, kReaderSerif); }
 void Settings::setAdBlockEnabled(bool adBlockEnabled) { store(m_adBlockEnabled, adBlockEnabled, kAdBlockEnabled); }

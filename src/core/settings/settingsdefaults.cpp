@@ -39,6 +39,7 @@ const QHash<QString, DefaultFactory> kFactories = {
     {QStringLiteral("clearDataOnExit"), [] { return QVariant(false); }},
     {QStringLiteral("blockThirdPartyCookies"), [] { return QVariant(false); }},
     {QStringLiteral("searchSuggestions"), [] { return QVariant(false); }},
+    {QStringLiteral("tabStyle"), [] { return QVariant(QStringLiteral("floating")); }},
     {QStringLiteral("readerFontSize"), [] { return QVariant(18); }},
     {QStringLiteral("readerSerif"), [] { return QVariant(true); }},
     {QStringLiteral("spellCheckEnabled"), [] { return QVariant(true); }},

@@ -25,6 +25,7 @@ HOME_PAGE = option("General/HomePage", "homePage", str)
 SEARCH_ENGINE = option("Search/Engine", "searchEngine", str)
 CUSTOM_SEARCH_URL = option("Search/CustomUrl", "customSearchUrl", str)
 DOWNLOAD_DIRECTORY = option("Downloads/Directory", "downloadDirectory", str)
+TAB_STYLE = option("UI/TabStyle", "tabStyle", str)
 READER_FONT_SIZE = option("Reader/FontSize", "readerFontSize", int)
 
 STORED_OPTIONS = (
@@ -42,6 +43,7 @@ STORED_OPTIONS = (
     option("Search/Suggestions", "searchSuggestions", bool),
     option("SpellCheck/Enabled", "spellCheckEnabled", bool),
     string_list_option("SpellCheck/Languages", "spellCheckLanguages"),
+    TAB_STYLE,
     READER_FONT_SIZE,
     option("Reader/Serif", "readerSerif", bool),
     option("AdBlock/Enabled", "adBlockEnabled", bool),

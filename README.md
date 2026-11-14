@@ -34,6 +34,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 
 ### Tabs and windows
 - **Tidy tabs**: drag, pin, and scroll when there are many
+- **Tab styles**: pick floating, below the address bar, or classic tabs
 - **Reopen closed tabs** with Ctrl+Shift+T
 - **Multiple windows**, with your session restored on startup
 

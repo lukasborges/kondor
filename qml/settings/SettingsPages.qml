@@ -9,8 +9,10 @@ QtObject {
             title: qsTr("General"),
             icon: "internet-web-browser",
             keywords: [qsTr("Startup"), qsTr("New Tabs"), qsTr("On startup:"),
-                       qsTr("Home page:"), qsTr("Show top sites")],
-            options: ["startupBehavior", "homePage", "showTopSites"]
+                       qsTr("Home page:"), qsTr("Show top sites"),
+                       qsTr("Appearance"), qsTr("Tabs:"), qsTr("Floating"),
+                       qsTr("Below Address Bar"), qsTr("Classic")],
+            options: ["startupBehavior", "homePage", "showTopSites", "tabStyle"]
         },
         {
             id: "search",

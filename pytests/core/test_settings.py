@@ -107,3 +107,16 @@ def test_search_url_template_uses_custom_url_only_with_placeholder(settings: Set
     assert settings.searchEngineName() == ""
     settings.setProperty("customSearchUrl", "https://x/")
     assert settings.searchUrlTemplate() == "https://duckduckgo.com/?q=%1"
+
+
+def test_unknown_tab_style_reads_as_floating(settings: Settings) -> None:
+    settings.setProperty("tabStyle", "classic")
+    settings.setProperty("tabStyle", "sideways")
+    assert settings.property("tabStyle") == "floating"
+
+
+def test_stored_unknown_tab_style_reads_as_floating(settings_file: Path) -> None:
+    raw = QSettings("KDE", "Kondor")
+    raw.setValue("UI/TabStyle", "sideways")
+    raw.sync()
+    assert Settings().property("tabStyle") == "floating"

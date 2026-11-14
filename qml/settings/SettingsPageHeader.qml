@@ -36,6 +36,7 @@ ColumnLayout {
 
         TabButton { text: qsTr("Startup") }
         TabButton { text: qsTr("New Tabs") }
+        TabButton { text: qsTr("Appearance") }
     }
 
     TabBar {

@@ -138,4 +138,28 @@ StackLayout {
             Item { Layout.fillHeight: true }
         }
     }
+
+    ScrollView {
+        id: appearanceView
+        contentWidth: availableWidth
+        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+
+        ColumnLayout {
+            width: appearanceView.availableWidth
+            spacing: Kirigami.Units.largeSpacing
+
+            Kirigami.FormLayout {
+                Layout.fillWidth: true
+
+                TabStylePicker {
+                    Kirigami.FormData.label: qsTr("Tabs:")
+                    Kirigami.FormData.labelAlignment: Qt.AlignTop
+                    current: root.draft.tabStyle
+                    onChosen: style => root.draft.tabStyle = style
+                }
+            }
+
+            Item { Layout.fillHeight: true }
+        }
+    }
 }

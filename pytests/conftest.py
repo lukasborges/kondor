@@ -2,9 +2,11 @@ from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
-from PySide6.QtCore import QResource
+from PySide6.QtCore import QCoreApplication, QResource, Qt
 from PySide6.QtQml import QQmlEngine
 from PySide6.QtQuickControls2 import QQuickStyle
+from PySide6.QtWebEngineQuick import QtWebEngineQuick
+from PySide6.QtWidgets import QApplication
 
 from pytests.kondortypes import qmltypes_modules
 
@@ -12,6 +14,9 @@ STAGED_BUILD = Path(__file__).resolve().parent.parent / "build" / "python"
 DESKTOP_STYLE = "org.kde.desktop"
 XDG_FOLDERS = {"XDG_CONFIG_HOME": "config", "XDG_DATA_HOME": "data", "XDG_CACHE_HOME": "cache"}
 DICTIONARIES_VARIABLE = "QTWEBENGINE_DICTIONARIES_PATH"
+SANDBOX_VARIABLE = "QTWEBENGINE_DISABLE_SANDBOX"
+CHROMIUM_FLAGS_VARIABLE = "QTWEBENGINE_CHROMIUM_FLAGS"
+NO_GPU_FLAG = "--disable-gpu"
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -21,7 +26,16 @@ def isolated_profile(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Path]
         for variable, folder in XDG_FOLDERS.items():
             patch.setenv(variable, str(profile / folder))
         patch.delenv(DICTIONARIES_VARIABLE, raising=False)
+        patch.setenv(SANDBOX_VARIABLE, "1")
+        patch.setenv(CHROMIUM_FLAGS_VARIABLE, NO_GPU_FLAG)
         yield profile
+
+
+@pytest.fixture(scope="session")
+def qapp_cls(isolated_profile: Path) -> type[QApplication]:
+    QCoreApplication.setAttribute(Qt.ApplicationAttribute.AA_ShareOpenGLContexts)
+    QtWebEngineQuick.initialize()
+    return QApplication
 
 
 @pytest.fixture(scope="session")

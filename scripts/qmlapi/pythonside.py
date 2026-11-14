@@ -39,6 +39,6 @@ def python_classes(repository: Path) -> dict[str, ClassApi]:
     classes = {}
     for path in sorted((repository / "kondor").rglob("qmltypes.py")):
         for entry in load_qml_types(path):
-            api = describe_class(entry.type_class.staticMetaObject())
+            api = describe_class(entry.type_class.staticMetaObject)
             classes[api.name] = api
     return classes

@@ -83,7 +83,7 @@ fix one of them in the same commit.
 ## Prototype
 
 Before designing or changing any UI (a prototype, a spec or bug issue that adds or changes UI, an
-answer to a UX question), load the **`kde-ux` skill** (`.claude/skills/kde-ux/`) and follow its
+answer to a UX question), load the **`kde-ux` skill** (`~/.claude/skills/kde-ux/`) and follow its
 workflow:
 
 1. Draft the prototype and render it.

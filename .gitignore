@@ -32,3 +32,6 @@ docs/QUEUE.md
 # Python
 __pycache__/
 *.pyc
+
+# Claude Code: skills and settings live in ~/.claude, never in the repository
+.claude/

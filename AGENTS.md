@@ -152,7 +152,7 @@ mention the difference in the PR.
   `Kirigami.Theme`/`palette` (never hardcoded colors); icons via `icon.name` with **Breeze icon
   names** (`bookmark-new`, `edit-find`, `document-save`, `security-high`, …); tooltips with
   `ToolTip.delay: 600` like the existing buttons; follow KDE HIG wording (Title Case for menu items). UI work is designed and reviewed with the
-  `kde-ux` skill (`.claude/skills/kde-ux/`).
+  `kde-ux` skill (in `~/.claude/skills/` and `~/.config/opencode/skills/`).
 - **Language: English everywhere.** UI source strings, code comments, docs, commit messages, PR
   descriptions and test names are written in English. Every user-visible string goes in `qsTr()`;
   translations live only in the `i18n/kondor_<lang>.ts` files (issues #19 and #34), never as another
@@ -211,6 +211,7 @@ the limits.
 - **Tests stay readable:** one behavior per test function, named after it
   (`removesFolderAndChildren`).
 
+Skills are installed per user, never committed: `.claude/` is git-ignored.
 Agents on the maintainer's machine also have the `clean-code` skill
 ([wondelai/skills](https://github.com/wondelai/skills/tree/main/clean-code), in `~/.claude/skills/`
 and `~/.config/opencode/skills/`). **Load it every time before writing, changing, reviewing or

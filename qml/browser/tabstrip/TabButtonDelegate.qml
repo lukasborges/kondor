@@ -30,10 +30,9 @@ TabButton {
     ]
 
     Binding {
-        when: control.isStyled
-        target: control
-        property: "background"
-        value: tabCard
+        target: control.background
+        property: "visible"
+        value: !control.isStyled
     }
 
     Binding {
@@ -45,6 +44,8 @@ TabButton {
 
     TabCard {
         id: tabCard
+        anchors.fill: parent
+        z: -1
         visible: control.isStyled
         isBelowAddressBar: control.tabStrip.isBelowAddressBar
         isActive: control.checked

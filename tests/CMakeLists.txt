@@ -559,6 +559,7 @@ qt_add_executable(tst_tabstrip
     browser/tabstrip/tst_tabdragscroll.cpp
     browser/tabstrip/tst_tabdragrelease.cpp
     browser/tabstrip/tst_tabstripaccessibility.cpp
+    browser/tabstrip/tst_tabstripstyle.cpp
 )
 
 target_compile_definitions(tst_tabstrip PRIVATE

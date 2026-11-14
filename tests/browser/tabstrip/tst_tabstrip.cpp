@@ -25,5 +25,6 @@ int main(int argc, char *argv[])
     failures |= runTabDragScroll(argc, argv);
     failures |= runTabDragRelease(argc, argv);
     failures |= runTabStripAccessibility(argc, argv);
+    failures |= runTabStripStyle(argc, argv);
     return failures;
 }

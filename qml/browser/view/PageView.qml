@@ -1,5 +1,6 @@
 import QtQuick
 import QtWebEngine
+import org.kde.kirigami as Kirigami
 import Kondor
 
 WebEngineView {
@@ -17,6 +18,9 @@ WebEngineView {
     profile: root.tab.profile
     webChannelWorld: WebEngineScript.ApplicationWorld
     settings.fullScreenSupportEnabled: true
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
+    backgroundColor: Kirigami.Theme.backgroundColor
 
     function isStarted(status) {
         return status === WebEngineLoadingInfo.LoadStartedStatus

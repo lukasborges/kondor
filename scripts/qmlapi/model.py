@@ -16,7 +16,7 @@ class ClassApi:
     signals: dict[str, set[int]] = field(default_factory=dict)
 
 
-TYPE_ALIASES = {"qreal": "double"}
+TYPE_ALIASES = {"qreal": "double", "qint64": "qlonglong", "quint64": "qulonglong"}
 
 
 def normalize_type(type_name: str) -> str:

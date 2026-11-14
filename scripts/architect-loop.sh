@@ -142,10 +142,11 @@ EOF
   }
 
   # One line per open issue: "<number> <started> <bug> <priority rank> <dependencies, comma-separated>".
+  # An issue labeled blocked (waiting for the maintainer) counts as started, so it is never promoted.
   open_issues() {
     gh issue list --repo lukasborges/kondor --state open --limit 500 --json number,labels,body -q '
       .[] | [.labels[].name] as $l
-      | "\(.number) \($l | any(. == "to-spec" or . == "to-dev" or . == "in-review"))"
+      | "\(.number) \($l | any(. == "to-spec" or . == "to-dev" or . == "in-review" or . == "blocked"))"
         + " \($l | any(. == "bug"))"
         + " \(if ($l | index("priority: high")) then 0 elif ($l | index("priority: medium")) then 1 elif ($l | index("priority: low")) then 2 else 3 end)"
         + " \([.body | split("\n")[] | select(test("^\\W*Depends on\\W"; "i")) | scan("#([0-9]+)")[0]] | join(",") | if . == "" then "-" else . end)"'

@@ -14,6 +14,7 @@ include = [
     "scripts/build.py",
     "scripts/staging/**/*.py",
     "scripts/check-qml-api.py",
+    "scripts/bench-adblock.py",
     "scripts/qmlapi/**/*.py",
 ]
 

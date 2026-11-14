@@ -28,8 +28,9 @@ difference.
   own spec and have "Steps".
 - **Isolation:** AGENTS.md requires temporary `XDG_CONFIG_HOME`, `XDG_DATA_HOME` and
   `XDG_CACHE_HOME` for every run of the app. The maintainer's desktop is never used or captured.
-- **Tools on the host:** `Xvfb`, `xvfb-run` and ImageMagick (`import`) are installed. `xdotool`
-  is not: the maintainer installs it (`sudo dnf install xdotool`) before this issue starts.
+- **Tools on the host:** `Xvfb`, `xvfb-run`, ImageMagick (`import`) and `xdotool` are installed
+  (checked on 2026-11-14: a private 1280×800 display, `xdotool getdisplaygeometry`, and `import`
+  of its root window all work).
 
 ## Design / behavior
 
@@ -124,7 +125,7 @@ Same structure as the other loop scripts (everything inside `main()`, small func
   `~/.local/state/kondor-qa` exists, in its own color (white, 37).
 - `docs/agents/architect.md`: QA's bugs come with `qa`; promote them like any other bug.
 - README: one line in the agents section, if the README has one.
-- The label `qa` is created by the developer with `gh label create qa --color 0e8a16`.
+- The label `qa` exists already (green, "Found by the QA agent").
 
 ## Acceptance criteria
 
@@ -165,7 +166,6 @@ Same structure as the other loop scripts (everything inside `main()`, small func
 ## Dependencies
 
 - #173: the Python app starts with `python3 -m kondor`, so parity mode has two apps to compare.
-- The maintainer installs `xdotool` (`sudo dnf install xdotool`).
 - #174 must wait for this issue (its `**Depends on:**` line lists #217) and for every parity bug
   QA files.
 

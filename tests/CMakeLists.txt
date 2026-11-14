@@ -38,6 +38,7 @@ qt_add_library(kondor_testlib STATIC
     ${CMAKE_SOURCE_DIR}/src/browser/favicons/faviconstore.cpp
     ${CMAKE_SOURCE_DIR}/src/browser/zoommanager.cpp
     ${CMAKE_SOURCE_DIR}/src/core/filehelper.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/installedicons.cpp
     ${CMAKE_SOURCE_DIR}/src/downloads/transferspeed.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/catalog/catalogentry.cpp
     ${CMAKE_SOURCE_DIR}/src/extensions/install/extensionloader.cpp
@@ -839,6 +840,24 @@ target_link_libraries(tst_filehelper PRIVATE
 
 add_test(NAME tst_filehelper COMMAND tst_filehelper)
 
+qt_add_executable(tst_installedicons
+    core/tst_installedicons.cpp
+)
+
+target_include_directories(tst_installedicons PRIVATE
+    ../src
+)
+
+target_link_libraries(tst_installedicons PRIVATE
+    kondor_testlib
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Test
+)
+
+add_test(NAME tst_installedicons COMMAND tst_installedicons)
+
 qt_add_executable(tst_suggestionlist
     browser/address/tst_suggestionlist.cpp
 )
@@ -1088,6 +1107,13 @@ qt_add_executable(tst_extensions
     extensions/userscripts/tst_userscriptupdate.cpp
     extensions/userscripts/tst_userscriptpages.cpp
     passwords/tst_passwordsui.cpp
+)
+
+qt_add_resources(tst_extensions "icons"
+    PREFIX "/icons"
+    BASE "${CMAKE_SOURCE_DIR}/assets/icons/hicolor/scalable/actions"
+    FILES
+        ${CMAKE_SOURCE_DIR}/assets/icons/hicolor/scalable/actions/kondor-extensions-symbolic.svg
 )
 
 qt_add_resources(tst_extensions "extension_scripts"

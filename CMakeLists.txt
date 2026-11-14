@@ -203,6 +203,8 @@ qt_add_qml_module(kondor
         ${KONDOR_DOWNLOAD_MANAGER_SOURCES}
         src/core/filehelper.h
         src/core/filehelper.cpp
+        src/core/installedicons.h
+        src/core/installedicons.cpp
         ${KONDOR_NOTIFIER_SOURCES}
         ${KONDOR_BOOKMARK_MANAGER_SOURCES}
         src/bookmarks/bookmarkrow.h
@@ -283,6 +285,13 @@ qt_add_resources(kondor "user_script_scripts"
     BASE "${CMAKE_SOURCE_DIR}/src/extensions/scripts"
     FILES
         src/extensions/scripts/usergm.js
+)
+
+qt_add_resources(kondor "icons"
+    PREFIX "/icons"
+    BASE "${CMAKE_SOURCE_DIR}/assets/icons/hicolor/scalable/actions"
+    FILES
+        assets/icons/hicolor/scalable/actions/kondor-extensions-symbolic.svg
 )
 
 qt_add_resources(kondor "license"
@@ -381,3 +390,4 @@ install(FILES packaging/io.github.lukasborges.Kondor.metainfo.xml DESTINATION sh
 install(FILES packaging/kondor-extension.xml DESTINATION share/mime/packages)
 install(FILES packaging/kondor.png DESTINATION share/icons/hicolor/256x256/apps)
 install(FILES packaging/kondor.svg DESTINATION share/icons/hicolor/scalable/apps)
+install(FILES assets/icons/hicolor/scalable/actions/kondor-extensions-symbolic.svg DESTINATION share/icons/hicolor/scalable/actions)

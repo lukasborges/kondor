@@ -68,13 +68,20 @@ private slots:
     void unpinRemovesButton();
     void pinnedButtonOpensPanelOnExtension();
     void pinnedFileIconFitsToolBarIconBox();
-    void pinnedThemeIconHasExtensionsButtonIconSize();
+    void pinnedThemeIconButtonHasExtensionsButtonWidth();
+    void pinnedThemeIconFitsToolBarIconBox();
+    void extensionsButtonIconFitsToolBarIconBox();
 
 private:
     QQuickItem *buttonOf(const QString &name) const;
     void showToolBar();
     bool installThemeIconSample();
     bool isPinnedButtonLaidOut() const;
+    void verifyIconFitsBox(QQuickItem *button)
+    {
+        QTRY_VERIFY(!iconSizeOf(button).isEmpty());
+        QVERIFY(iconSizeOf(button).boundedTo(QSize(toolBarIconBoxSize, toolBarIconBoxSize)) == iconSizeOf(button));
+    }
 
     QTemporaryDir m_work;
     QQmlEngine m_engine;
@@ -156,21 +163,32 @@ void TestPinnedToolBar::pinnedFileIconFitsToolBarIconBox()
     showToolBar();
     ExtensionManager::instance()->setPinned(QStringLiteral("sample"), true);
     QTRY_VERIFY(isPinnedButtonLaidOut());
-    const QSize painted = iconSizeOf(buttonOf(QStringLiteral("Sample Extension")));
-    QVERIFY(!painted.isEmpty());
-    QVERIFY(painted.width() <= toolBarIconBoxSize && painted.height() <= toolBarIconBoxSize);
+    verifyIconFitsBox(buttonOf(QStringLiteral("Sample Extension")));
 }
 
-void TestPinnedToolBar::pinnedThemeIconHasExtensionsButtonIconSize()
+void TestPinnedToolBar::pinnedThemeIconButtonHasExtensionsButtonWidth()
 {
     QVERIFY(installThemeIconSample());
     showToolBar();
     ExtensionManager::instance()->setPinned(QStringLiteral("sample"), true);
     QTRY_VERIFY(isPinnedButtonLaidOut());
-    QCOMPARE(iconSizeOf(buttonOf(QStringLiteral("Sample Extension"))),
-             iconSizeOf(findByName(m_window.data(), "extensionsButton")));
     QCOMPARE(buttonOf(QStringLiteral("Sample Extension"))->width(),
              findByName(m_window.data(), "extensionsButton")->width());
+}
+
+void TestPinnedToolBar::pinnedThemeIconFitsToolBarIconBox()
+{
+    QVERIFY(installThemeIconSample());
+    showToolBar();
+    ExtensionManager::instance()->setPinned(QStringLiteral("sample"), true);
+    QTRY_VERIFY(isPinnedButtonLaidOut());
+    verifyIconFitsBox(buttonOf(QStringLiteral("Sample Extension")));
+}
+
+void TestPinnedToolBar::extensionsButtonIconFitsToolBarIconBox()
+{
+    showToolBar();
+    verifyIconFitsBox(findByName(m_window.data(), "extensionsButton"));
 }
 
 int runTestPinnedToolBar(int argc, char *argv[])

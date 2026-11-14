@@ -35,7 +35,8 @@ RowLayout {
         id: extensionsButton
         objectName: "extensionsButton"
         display: AbstractButton.IconOnly
-        icon.name: "plugins"
+        icon.name: InstalledIcons.isInstalled("kondor-extensions-symbolic") ? "kondor-extensions-symbolic" : ""
+        icon.source: "qrc:/icons/kondor-extensions-symbolic.svg"
         checked: panel.opened
         ToolTip.visible: hovered
         Accessible.name: ToolTip.text

@@ -72,6 +72,12 @@ def limit_type_problems(cpp_type: str, python_type: str) -> list:
     return compare_all({"Sample": cpp}, {"Sample": python})
 
 
+def group_type_problems(cpp_type: str, python_type: str) -> list:
+    cpp = twin(properties={**parsed().properties, "group": Property(cpp_type, False)})
+    python = twin(properties={**parsed().properties, "group": Property(python_type, False)})
+    return compare_all({"Sample": cpp}, {"Sample": python})
+
+
 class HeaderParserTest(unittest.TestCase):
     def test_multi_line_property_is_found(self):
         self.assertEqual(parsed().properties["address"], Property("QUrl", False))
@@ -165,6 +171,12 @@ class ComparisonTest(unittest.TestCase):
     def test_object_does_not_match_an_unregistered_class(self):
         python = twin(properties={**parsed().properties, "group": Property("QAbstractItemModel*", False)})
         self.assertEqual(problems_with(python), ["Sample: property group type differs: Group != QAbstractItemModel*"])
+
+    def test_object_matches_a_qt_type_pyside_cannot_declare(self):
+        self.assertEqual(group_type_problems("QQuickWebEngineProfile*", "QObject*"), [])
+
+    def test_object_does_not_match_an_unlisted_qt_type(self):
+        self.assertEqual(len(group_type_problems("QQuickItem*", "QObject*")), 1)
 
     def test_python_class_without_cpp_twin_is_an_error(self):
         self.assertEqual(compare_all({}, {"Lonely": ClassApi("Lonely")}), ["Lonely: no C++ class with this name"])

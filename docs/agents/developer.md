@@ -72,8 +72,8 @@ records the decision in the spec.
 
 `scripts/dev-loop.sh` runs this role without a human in the loop. Every minute it refreshes a
 loop-owned worktree at `origin/main` (`~/.local/share/kondor-dev-loop/control`), regenerates the
-queue and, when there is a `developer` row, runs the developer from that worktree: by default Claude Code with Sonnet
-(`claude -p --permission-mode auto --model sonnet`, attribution trailers turned off), or opencode
+queue and, when there is a `developer` row, runs the developer from that worktree: by default Claude Code with Opus
+(`claude -p --permission-mode auto --model opus --effort medium`, attribution trailers turned off), or opencode
 with DeepSeek when `KONDOR_ENGINE=opencode` (`KONDOR_MODEL` overrides the model of either) with a prompt for that one issue. If a run ends with the issue still in `to-dev` twice in
 a row, the loop pauses that issue and sends a desktop notification.
 

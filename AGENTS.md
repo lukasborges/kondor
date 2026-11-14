@@ -5,7 +5,7 @@ Read this file before working on any issue of the **Kondor Roadmap**
 
 Two agents work on the roadmap: the **architect** (`docs/agents/architect.md` — specs,
 prototypes, answers, reviews, merges) and the **developer** (`docs/agents/developer.md` —
-implementation; Claude Sonnet via Claude Code by default, or DeepSeek via opencode — see
+implementation; Claude Opus (medium effort) via Claude Code by default, or DeepSeek via opencode — see
 `scripts/dev-loop.sh`). They talk
 only through GitHub (labels, issue/PR comments, PR reviews); see "Agent workflow" at the end.
 

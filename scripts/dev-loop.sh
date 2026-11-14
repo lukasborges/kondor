@@ -18,8 +18,9 @@
 #   KONDOR_ENGINE        claude (Claude Code, default) or opencode
 #   KONDOR_CLAUDE        claude binary (default: claude in PATH, else ~/.local/bin/claude)
 #   KONDOR_OPENCODE      opencode binary (default: opencode in PATH, else ~/.opencode/bin/opencode)
-#   KONDOR_MODEL         model for the developer (default: sonnet with claude,
+#   KONDOR_MODEL         model for the developer (default: opus with claude,
 #                        deepseek/deepseek-flash with opencode; see `opencode models`)
+#   KONDOR_EFFORT        Claude Code effort level: low, medium, high, xhigh or max (default: medium)
 #
 # Everything is wrapped in main() so bash parses the whole file before running it: the service
 # runs this script from the control worktree, which is updated to origin/main while it runs.
@@ -39,10 +40,11 @@ main() {
   local opencode="${KONDOR_OPENCODE:-$(command -v opencode || echo "$HOME/.opencode/bin/opencode")}"
   local model
   case "$engine" in
-    claude)   model="${KONDOR_MODEL:-sonnet}" ;;
+    claude)   model="${KONDOR_MODEL:-opus}" ;;
     opencode) model="${KONDOR_MODEL:-deepseek/deepseek-flash}" ;;
     *) echo "KONDOR_ENGINE must be claude or opencode, not '$engine'" >&2; exit 2 ;;
   esac
+  local effort="${KONDOR_EFFORT:-medium}"
   local log="$state/dev-loop.log"
   mkdir -p "$state"
 
@@ -107,7 +109,7 @@ EOF
     else
       # Claude Code does not read opencode.json: pass the role file as system prompt. Its default
       # commit/PR attribution trailers are turned off: the project forbids them (AGENTS.md).
-      "$claude" -p --permission-mode auto --model "$model" --output-format text \
+      "$claude" -p --permission-mode auto --model "$model" --effort "$effort" --output-format text \
         --settings '{"includeCoAuthoredBy": false, "attribution": {"commit": "", "pr": ""}}' \
         --append-system-prompt "$(cat docs/agents/developer.md)" \
         "$(prompt_for "$n")"
@@ -133,7 +135,7 @@ EOF
     fi
 
     local run_log="$state/run-$n-$(date +%Y%m%d-%H%M%S).log"
-    log "running developer on #$n with $engine/$model (log: $run_log)"
+    log "running developer on #$n with $engine/$model, effort $effort (log: $run_log)"
     run_developer "$n" >"$run_log" 2>&1
     local rc=$?
     ensure_control || return 0
@@ -174,6 +176,7 @@ Environment=KONDOR_CONTROL_DIR=$control
 Environment=KONDOR_STATE_DIR=$state
 Environment=KONDOR_ENGINE=$engine
 Environment=KONDOR_MODEL=$model
+Environment=KONDOR_EFFORT=$effort
 ExecStartPre=/usr/bin/git -C $repo fetch -q origin
 ExecStartPre=/usr/bin/git -C $control checkout -q --force --detach origin/main
 ExecStart=/bin/bash $control/scripts/dev-loop.sh
@@ -197,7 +200,7 @@ EOF
     "")
       exec 9>"$state/lock"
       flock -n 9 || { log "another loop is running; exiting"; exit 0; }
-      log "loop started (every ${interval}s, $engine model $model, repo $repo, control $control)"
+      log "loop started (every ${interval}s, $engine model $model, effort $effort, repo $repo, control $control)"
       local self="${BASH_SOURCE[0]}" self_sum
       self_sum="$(sha1sum "$self" | cut -d' ' -f1)"
       while true; do

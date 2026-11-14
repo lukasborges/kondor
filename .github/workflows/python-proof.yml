@@ -147,7 +147,7 @@ jobs:
     container:
       image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.11
       options: --privileged
-    timeout-minutes: 180
+    timeout-minutes: 60
 
     steps:
       - name: Checkout

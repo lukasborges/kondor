@@ -230,9 +230,10 @@ This is the go/no-go gate: no code is ported until the Python app is proven to b
   - `build.yml` drops CMake and the C++ steps.
   - The `kondor` command runs `python3 -m kondor`, through a small launcher script installed to `bin/`.
 - **Spell-check dictionaries:** `scripts/build.py` also converts them with `qwebengine_convert_dict`, as CMake does today.
+- **Phase spec:** [`0174-python-switch.md`](0174-python-switch.md) details this item (installed layout, launcher, AppImage script, translations).
 - **Delete:** `src/`, `tests/` (C++), `CMakeLists.txt`, `cmake/`, `scripts/check-qml-api.py`, `packaging/python-proof/` and the C++ parts of `check-code-quality.py` (and their baseline entries). Then rename `pytests/` to `tests/`.
 - **Docs:**
-  - AGENTS.md: Python instead of C++ in "What Kondor is", "Build and run", "Architecture", "Shared building blocks", "Conventions", "Dependencies" and the delivery checklist (`ruff`, `mypy`, `pytest`).
+  - AGENTS.md: Python instead of C++ in "What Kondor is", "Build and run", "Architecture", "Shared building blocks", "Conventions", "Dependencies" and the delivery checklist (`ruff`, `mypy`, `pytest`). It is not in git, so the architect rewrites it after the phase 12 merge (see [`0174-python-switch.md`](0174-python-switch.md) item 8).
   - README.md: build instructions and Fedora packages.
   - `docs/agents/developer.md` and `docs/agents/architect.md`.
   - `scripts/dev-loop.sh` and `scripts/architect-loop.sh` prompts (build and test commands).

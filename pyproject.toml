@@ -32,3 +32,8 @@ qt_api = "pyside6"
 [[tool.mypy.overrides]]
 module = ["PySide6.*", "shiboken6.*"]
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["kondor.*"]
+disallow_subclassing_any = false
+disallow_untyped_decorators = false

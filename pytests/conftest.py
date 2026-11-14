@@ -6,8 +6,28 @@ from PySide6.QtCore import QResource
 from PySide6.QtQml import QQmlEngine
 from PySide6.QtQuickControls2 import QQuickStyle
 
+from pytests.kondortypes import qmltypes_modules
+
 STAGED_BUILD = Path(__file__).resolve().parent.parent / "build" / "python"
 DESKTOP_STYLE = "org.kde.desktop"
+XDG_FOLDERS = {"XDG_CONFIG_HOME": "config", "XDG_DATA_HOME": "data", "XDG_CACHE_HOME": "cache"}
+DICTIONARIES_VARIABLE = "QTWEBENGINE_DICTIONARIES_PATH"
+
+
+@pytest.fixture(scope="session", autouse=True)
+def isolated_profile(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Path]:
+    profile = tmp_path_factory.mktemp("profile")
+    with pytest.MonkeyPatch.context() as patch:
+        for variable, folder in XDG_FOLDERS.items():
+            patch.setenv(variable, str(profile / folder))
+        patch.delenv(DICTIONARIES_VARIABLE, raising=False)
+        yield profile
+
+
+@pytest.fixture(scope="session")
+def kondor_types(qapp: object, isolated_profile: Path) -> None:
+    for module in qmltypes_modules():
+        module.register_types()
 
 
 @pytest.fixture(scope="session")
@@ -27,9 +47,19 @@ def staged_resources(staged_build: Path, desktop_style: None) -> None:
     assert QResource.registerResource(str(staged_build / "kondor.rcc"))
 
 
-@pytest.fixture
-def qml_engine(qapp: object, staged_build: Path, staged_resources: None) -> Iterator[QQmlEngine]:
+def staged_engine(staged_build: Path) -> QQmlEngine:
     engine = QQmlEngine()
     engine.addImportPath(str(staged_build / "qml"))
+    return engine
+
+
+@pytest.fixture
+def qml_engine(qapp: object, staged_build: Path, staged_resources: None) -> Iterator[QQmlEngine]:
+    engine = staged_engine(staged_build)
     yield engine
     engine.deleteLater()
+
+
+@pytest.fixture(scope="session")
+def kondor_engine(kondor_types: None, staged_build: Path, staged_resources: None) -> QQmlEngine:
+    return staged_engine(staged_build)

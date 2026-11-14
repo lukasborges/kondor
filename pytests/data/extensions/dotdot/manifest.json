@@ -1,0 +1,4 @@
+{
+  "kondor": 1, "id": "dotdot", "name": "Dot Dot", "description": "d", "version": "1.0.0",
+  "contentScripts": [ { "matches": ["https://*/*"], "js": ["../secret.js"] } ]
+}

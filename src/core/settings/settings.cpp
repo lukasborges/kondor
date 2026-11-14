@@ -41,7 +41,8 @@ int clampedReaderFontSize(int size)
 
 QString knownTabStyle(const QString &style)
 {
-    static const QStringList known{QStringLiteral("floating"), QStringLiteral("below"), QStringLiteral("classic")};
+    static const QStringList known{QStringLiteral("floating"), QStringLiteral("below"), QStringLiteral("vertical"),
+                              QStringLiteral("classic")};
     return known.contains(style) ? style : QStringLiteral("floating");
 }
 

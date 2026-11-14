@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
 import Kondor
 
 ApplicationWindow {
@@ -18,6 +19,7 @@ ApplicationWindow {
 
     readonly property alias tabModel: tabs
     readonly property bool tabsBelowAddressBar: Settings.tabStyle === "below"
+    readonly property bool tabsInSideBar: Settings.tabStyle === "vertical"
     property alias windowFullScreen: fullScreenControl.windowFullScreen
     readonly property BrowserActions actions: BrowserActions {
         tabs: window.tabModel
@@ -111,6 +113,7 @@ ApplicationWindow {
         visible: !fullScreenControl.pageFullScreen
 
         TabStrip {
+            visible: !window.tabsInSideBar
             Layout.row: window.tabsBelowAddressBar ? 1 : 0
             Layout.fillWidth: true
             tabModel: window.tabModel
@@ -134,11 +137,33 @@ ApplicationWindow {
         }
     }
 
-    PageArea {
-        id: pageContent
+    RowLayout {
         anchors.fill: parent
-        tabs: window.tabModel
-        browserWindow: window
+        spacing: 0
+        LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+        LayoutMirroring.childrenInherit: true
+
+        TabSideBar {
+            visible: window.tabsInSideBar && !fullScreenControl.pageFullScreen
+            tabModel: window.tabModel
+            targetWindow: window
+            Layout.fillHeight: true
+            Layout.preferredWidth: implicitWidth
+            onNewTabRequested: tabControl.openNewTab(false)
+        }
+
+        Kirigami.Separator {
+            visible: window.tabsInSideBar && !fullScreenControl.pageFullScreen
+            Layout.fillHeight: true
+        }
+
+        PageArea {
+            id: pageContent
+            tabs: window.tabModel
+            browserWindow: window
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
     }
 
     FullScreenHint {

@@ -7,6 +7,7 @@ Rectangle {
     property string tabStyle: "floating"
 
     readonly property bool isBelowAddressBar: tabStyle === "below"
+    readonly property bool isSideBar: tabStyle === "vertical"
 
     width: Kirigami.Units.gridUnit * 8
     height: Kirigami.Units.gridUnit * 5
@@ -36,7 +37,7 @@ Rectangle {
         anchors.margins: 1
 
         Rectangle {
-            visible: !thumbnail.isBelowAddressBar
+            visible: !thumbnail.isBelowAddressBar && !thumbnail.isSideBar
             width: parent.width
             height: 14
             color: headerColors.backgroundColor
@@ -79,6 +80,12 @@ Rectangle {
                 stripColor: windowColors.backgroundColor
                 toolBarColor: windowColors.backgroundColor
             }
+        }
+
+        ThumbnailSideBar {
+            visible: thumbnail.isSideBar
+            height: thumbnail.height - 16
+            color: windowColors.backgroundColor
         }
     }
 }

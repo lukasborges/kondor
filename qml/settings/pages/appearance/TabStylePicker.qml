@@ -13,6 +13,7 @@ Grid {
     readonly property var styles: [
         { id: "floating", name: qsTr("Floating") },
         { id: "below", name: qsTr("Below Address Bar") },
+        { id: "vertical", name: qsTr("Side Bar") },
         { id: "classic", name: qsTr("Classic") }
     ]
 

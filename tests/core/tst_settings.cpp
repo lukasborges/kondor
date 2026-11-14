@@ -29,6 +29,7 @@ private slots:
     void storageKeysStayTheSame();
     void readerFontSizeIsClamped();
     void unknownTabStyleReadsAsFloating();
+    void keepsSideBarTabStyle();
 };
 
 void TestSettings::initTestCase()
@@ -192,6 +193,12 @@ void TestSettings::unknownTabStyleReadsAsFloating()
     Settings::instance()->setTabStyle(QStringLiteral("classic"));
     Settings::instance()->setTabStyle(QStringLiteral("sideways"));
     QCOMPARE(Settings::instance()->tabStyle(), QStringLiteral("floating"));
+}
+
+void TestSettings::keepsSideBarTabStyle()
+{
+    Settings::instance()->setTabStyle(QStringLiteral("vertical"));
+    QCOMPARE(Settings::instance()->tabStyle(), QStringLiteral("vertical"));
 }
 
 QTEST_MAIN(TestSettings)

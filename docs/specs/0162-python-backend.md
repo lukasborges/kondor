@@ -217,7 +217,7 @@ This is the go/no-go gate: no code is ported until the Python app is proven to b
   It prints `PROOF OK` and exits 0 when all five hold.
 - **Packaging proof:** two workflow jobs on pull requests that touch `packaging/python-proof/`, plus `workflow_dispatch`:
   - **AppImage:** bundle Fedora's `python3` and `python3-pyside6` with the Qt libraries and plugins `release.yml` already copies, then run the AppImage with `QT_QPA_PLATFORM=offscreen` and expect `PROOF OK`.
-  - **Flatpak:** on the existing runtime and base (`org.kde.Platform` 6.11, `io.qt.qtwebengine.BaseApp` 6.11), build `shiboken6` and `PySide6` 6.11 from source as manifest modules. Only the modules Kondor needs: Core, Gui, Qml, Quick, QuickControls2, Network, Sql, DBus, WebEngineCore, WebEngineQuick and WebChannel. Then run `flatpak run … --offscreen` and expect `PROOF OK`.
+  - **Flatpak:** on the existing runtime (`org.kde.Platform` 6.11) with base `io.qt.PySide.BaseApp` 6.11, Flathub's PySide6 base app, which already sits on `io.qt.qtwebengine.BaseApp` 6.11 and ships PySide6 built against the runtime's Qt. Nothing is compiled. Then run `flatpak run … --offscreen` and expect `PROOF OK`.
   - **Constraint:** PySide6 must use the same Qt as the `org.kde.desktop` style, so pip wheels, which bundle their own Qt, are not allowed in either package.
 - **Exit:** if either package cannot pass, the developer adds `question` with the failing log. The maintainer then decides whether the port stops (close the phase issues as `wontfix`) or changes course.
 
@@ -225,7 +225,7 @@ This is the go/no-go gate: no code is ported until the Python app is proven to b
 
 - **Packaging and CI:**
   - `release.yml` builds the AppImage of the real app the way the proof did.
-  - `packaging/flatpak/io.github.lukasborges.Kondor.yml` uses the proof's PySide6 modules and installs the app.
+  - `packaging/flatpak/io.github.lukasborges.Kondor.yml` switches its base to `io.qt.PySide.BaseApp` 6.11, as the proof does, and installs the app.
   - `build.yml` drops CMake and the C++ steps.
   - The `kondor` command runs `python3 -m kondor`, through a small launcher script installed to `bin/`.
 - **Spell-check dictionaries:** `scripts/build.py` also converts them with `qwebengine_convert_dict`, as CMake does today.
@@ -303,4 +303,4 @@ None: no UI changes.
 | Ad blocking engine? | Port Kondor's engine 1:1 with a performance budget (item 5). Brave's `adblock` has no Fedora package and would change behavior. |
 | KWallet without KF6Wallet? | `org.kde.KWallet` over QtDBus, byte-compatible maps (item 6), so passwords saved by the C++ app are read by the Python app. |
 | Singleton registration? | `qmlRegisterSingletonInstance` with `instance()`, never `@QmlSingleton` (#159). |
-| pip / wheels? | Not allowed: PySide6 must share the Qt of the KDE style plugin. Fedora packages for development and the AppImage; PySide6 built from source in the Flatpak. |
+| pip / wheels? | Not allowed: PySide6 must share the Qt of the KDE style plugin. Fedora packages for development and the AppImage; in the Flatpak, the `io.qt.PySide.BaseApp` base app, built against the runtime's Qt (changed from "built from source" on 2026-11-14, see #163). |

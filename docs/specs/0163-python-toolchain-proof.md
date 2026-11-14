@@ -194,7 +194,7 @@ Triggers: `pull_request` with `paths: ['packaging/python-proof/**', '.github/wor
   - Install `python3 python3-pyside6` and the Qt/KDE runtime packages `release.yml` installs (`kf6-kirigami kf6-qqc2-desktop-style plasma-integration plasma-breeze-qt6 qt6-qtsvg` and the rest), plus `file wget fuse-libs`.
   - Build `AppDir` with:
     - Fedora's `python3` binary and its standard library;
-    - `site-packages/PySide6` and `site-packages/shiboken6`, only the PySide6 modules of the Flatpak list below;
+    - `site-packages/PySide6` and `site-packages/shiboken6`, only the PySide6 modules Kondor needs: Core, Gui, Qml, Quick, QuickControls2, Network, Sql, DBus, WebEngineCore, WebEngineQuick and WebChannel;
     - `proof.py` and `qml/`;
     - the plugins and QML modules `release.yml` copies in "Prepare AppDir".
   - Run linuxdeploy with `--deploy-deps-only` for the PySide6 extension modules, the Qt plugins and the python3 binary, with `--exclude-library "libp11-kit.so*"` as in `release.yml`.
@@ -204,14 +204,14 @@ Triggers: `pull_request` with `paths: ['packaging/python-proof/**', '.github/wor
   - Install only `dbus-daemon`, plus the host libraries that linuxdeploy's excludelist leaves out (for example `mesa-libGL mesa-libEGL fontconfig libxkbcommon nss`; the developer lists the exact set).
   - Assert `! rpm -q python3-pyside6 qt6-qtbase`, so the run proves the bundle is self-contained.
   - Run `APPIMAGE_EXTRACT_AND_RUN=1 QT_QPA_PLATFORM=offscreen dbus-run-session -- ./Kondor-Proof-x86_64.AppImage | tee proof.log`, then `grep -qx "PROOF OK" proof.log`.
-- **`flatpak`** (`ghcr.io/flathub-infra/flatpak-github-actions:kde-6.11`, `--privileged`, timeout 180), only on `workflow_dispatch` (`if: github.event_name == 'workflow_dispatch'`), because it builds PySide6 from source:
-  - **Manifest** `packaging/python-proof/io.github.lukasborges.KondorProof.yml`: app id `io.github.lukasborges.KondorProof` on `org.kde.Platform`/`org.kde.Sdk` 6.11 with base `io.qt.qtwebengine.BaseApp` 6.11 (as the Kondor manifest).
-  - **PySide6 from source:** modules `shiboken6` and `pyside6` from the official `pyside-setup-everywhere-src-6.11.2` tarball on `download.qt.io`, pinned by `sha256`. They are built with CMake against the runtime's Qt, with `MODULES` limited to `Core;Gui;Qml;Quick;QuickControls2;Network;Sql;DBus;WebEngineCore;WebEngineQuick;WebChannel`.
-  - **libclang:** shiboken needs it to build. It comes from the freedesktop LLVM SDK extension that matches the runtime's freedesktop base, listed in `sdk-extensions` and used only at build time.
+- **`flatpak`** (`ghcr.io/flathub-infra/flatpak-github-actions:kde-6.11`, `--privileged`, timeout 60), only on `workflow_dispatch` (`if: github.event_name == 'workflow_dispatch'`):
+  - **Manifest** `packaging/python-proof/io.github.lukasborges.KondorProof.yml`: app id `io.github.lukasborges.KondorProof` on `org.kde.Platform`/`org.kde.Sdk` 6.11 with base **`io.qt.PySide.BaseApp`**, `base-version: '6.11'`.
+  - **PySide6 comes from the base app.** Flathub's `io.qt.PySide.BaseApp` (branch 6.11, maintained by The Qt Company) is built on `org.kde.Platform` 6.11 and `io.qt.qtwebengine.BaseApp` 6.11, against the runtime's own Qt, and ships PySide6 6.11.3 with QtWebEngine. The manifest builds **no** `shiboken6` or `pyside6` module, needs no tarball and no LLVM SDK extension.
+  - **Cleanup:** `cleanup-commands: ['/app/cleanup-BaseApp.sh']`, as the base app requires. Do not set `BASEAPP_REMOVE_WEBENGINE`: the proof needs QtWebEngine.
   - **The proof module** installs `proof.py` and `qml/` under `/app/share/kondor-proof/`, plus a `/app/bin/kondor-proof` launcher (`exec python3 /app/share/kondor-proof/proof.py "$@"`).
   - **`finish-args`:** `--share=ipc`, `--socket=wayland`, `--socket=fallback-x11`, `--device=dri` and `--env=QTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess`.
   - **Build and run:**
-    - Build with `flatpak/flatpak-github-actions/flatpak-builder@v6` (`build-bundle: false`, `cache-key` derived from the manifest's hash so reruns reuse the PySide6 build).
+    - Build with `flatpak/flatpak-github-actions/flatpak-builder@v6` (`build-bundle: false`).
     - Install the result into a user installation, then run `dbus-run-session -- flatpak run --env=QT_QPA_PLATFORM=offscreen io.github.lukasborges.KondorProof | tee proof.log` and `grep -qx "PROOF OK" proof.log`.
     - If Chromium's sandbox cannot start inside the CI container, the run command, never the manifest, may add `--env=QTWEBENGINE_CHROMIUM_FLAGS=--no-sandbox`. The PR then says why.
 
@@ -232,7 +232,7 @@ If the AppImage or the Flatpak job cannot reach `PROOF OK`, the developer does n
 - [ ] The new `python` job (no `needs:`, no CMake) runs the five steps with timeouts and is green. The `build` job is unchanged and still passes.
 - [ ] `python3 packaging/python-proof/proof.py` prints five `PASS` lines and `PROOF OK` locally on Fedora 45 (offscreen, under `dbus-run-session`).
 - [ ] The `appimage-run` job prints `PROOF OK` in a container without `python3-pyside6` or `qt6-qtbase`.
-- [ ] The `flatpak` job builds PySide6 6.11.2 from source on `org.kde.Platform` 6.11 and prints `PROOF OK`.
+- [ ] The `flatpak` job builds the proof on base `io.qt.PySide.BaseApp` 6.11, without compiling PySide6, and prints `PROOF OK`.
 - [ ] No file in `src/`, `qml/` or `tests/` changes. No pip and no wheels.
 - [ ] The PR body links the green `python-proof` run and pastes the `PROOF OK` lines of both packages.
 
@@ -279,4 +279,5 @@ None: no UI. The proof window is a test fixture, not a Kondor UI.
 | How does the AppImage job prove the bundle is self-contained? | It runs in a second, fresh `fedora:latest` container without `python3-pyside6` or `qt6-qtbase`. The Ubuntu host cannot be used: an AppImage built on Fedora 45 needs a newer glibc than Ubuntu 24.04 has. |
 | The dev host lacks `python3-pyside6`, `pyside6-tools`, `python3-pytest`, `python3-pytest-qt`, `python3-mypy` and `ruff`. Who installs them? | The maintainer, with `sudo dnf install python3-pyside6 pyside6-tools python3-pytest python3-pytest-qt python3-mypy ruff` (all in the Fedora 45 repositories). Agents never install system packages or work around a missing one: no pip, no venv, no container. Meanwhile the developer implements the spec and verifies through the PR's CI jobs, which install the same packages; local checks and the "Manual test" run once the packages are present, before the PR leaves draft. |
 | Python steps in the `build` job or a job of their own? | A separate `python` job without `needs:`. The Python checks do not use the CMake build, so placing them after it delays every Python result by the full C++ build (more than 15 minutes). The same reasoning keeps the C++ checks out of the local and review checks of Python-only PRs (AGENTS.md → "Which checks a change needs"). |
-| Does the `flatpak` proof job run on every push to the PR? | No, only when started by hand (`workflow_dispatch`), once the rest of the PR passes. It builds PySide6 from source and is the slowest job; the maintainer wants Flatpak builds only when they matter. For the same reason `flatpak.yml` no longer runs on pull requests: the release builds the Flatpak. |
+| Does the `flatpak` proof job run on every push to the PR? | No, only when started by hand (`workflow_dispatch`), once the rest of the PR passes. The maintainer wants Flatpak builds only when they matter (it compiled PySide6 when this was decided; with the base app it is fast, and it stays manual). For the same reason `flatpak.yml` no longer runs on pull requests: the release builds the Flatpak. |
+| Build PySide6 from source in the Flatpak, or use `io.qt.PySide.BaseApp`? | The base app (2026-11-14). It is Flathub's official PySide6 base (The Qt Company), on the same runtime and QtWebEngine base as Kondor, built against the runtime's Qt, so it meets the umbrella's "same Qt as the KDE style" rule. Building from source took more than 25 minutes per run (1066 compile steps) and needed a hand-picked LLVM extension. The base app's own use of `pip` to install the wheels it built from source is the base app's business: Kondor's manifest still uses no pip and no PyPI. PySide6 is 6.11.3 there and 6.11.2 in Fedora; the API check and the tests do not depend on the patch version. |

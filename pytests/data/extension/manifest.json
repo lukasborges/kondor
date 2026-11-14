@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Kondor Test Extension",
+  "version": "1.0",
+  "description": "Minimal extension used by tst_extensionloader.",
+  "action": { "default_popup": "popup.html" },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

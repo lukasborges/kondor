@@ -1,0 +1,3 @@
+// ==UserScript==
+// @match *://*/*
+// ==/UserScript==

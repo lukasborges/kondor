@@ -23,10 +23,16 @@ class PasswordBridge(QObject):
     def _set_tab(self, tab: Tab | None) -> None:
         if self._get_tab() is tab:
             return
+        self._stop_watching_tab()
         self._tab = tab
         if tab is not None:
             tab.destroyed.connect(self._forget_tab)
         self.tabChanged.emit()
+
+    def _stop_watching_tab(self) -> None:
+        previous = self._get_tab()
+        if previous is not None:
+            previous.destroyed.disconnect(self._forget_tab)
 
     @Slot()
     def _forget_tab(self) -> None:

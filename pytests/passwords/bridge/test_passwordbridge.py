@@ -123,6 +123,19 @@ def test_destroyed_tab_is_forgotten(wallet_store: PasswordStore, qtbot: QtBot) -
     assert bridge.tab is None
 
 
+def test_replaced_tab_destruction_keeps_the_current_tab(
+    wallet_store: PasswordStore, qtbot: QtBot
+) -> None:
+    first, second = normal_tab(), normal_tab()
+    bridge = bridge_for(first)
+    bridge.tab = second
+    changes: list[int] = []
+    bridge.tabChanged.connect(lambda: changes.append(1))
+    delete(first)
+    assert bridge.tab is second
+    assert changes == []
+
+
 def test_page_api_keeps_the_channel_names(wallet_store: PasswordStore) -> None:
     api = bridge_for(None).pageApi()
     meta = api.metaObject()

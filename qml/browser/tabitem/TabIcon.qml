@@ -8,7 +8,7 @@ Item {
 
     required property Tab tab
 
-    readonly property bool isBusy: tab.loading && !tab.crashed
+    readonly property bool isBusy: !!tab && tab.loading && !tab.crashed
 
     implicitWidth: 16
     implicitHeight: 16

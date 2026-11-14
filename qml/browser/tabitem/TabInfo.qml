@@ -4,10 +4,12 @@ import Kondor
 QtObject {
     required property Tab tab
 
-    readonly property string title: tab.newTabPage
+    readonly property string title: tab?.newTabPage
         ? (tab.isPrivate ? qsTr("New Private Tab") : qsTr("New Tab"))
-        : (tab.title.length ? tab.title : qsTr("New Tab"))
+        : (tab?.title.length ? tab.title : qsTr("New Tab"))
     readonly property string iconSource: {
+        if (!tab)
+            return "text-html"
         if (tab.crashed)
             return "dialog-error"
         if (tab.isPrivate)

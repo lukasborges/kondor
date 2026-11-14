@@ -42,7 +42,9 @@ ListView {
     Keys.onReturnPressed: tabModel.setCurrentIndex(currentIndex)
     Keys.onEnterPressed: tabModel.setCurrentIndex(currentIndex)
     Keys.onDeletePressed: targetWindow.closeTabAt(currentIndex)
-    Component.onCompleted: showCurrentTab()
+    Component.onCompleted: Qt.callLater(showCurrentTab)
+    onHeightChanged: Qt.callLater(showCurrentTab)
+    onCountChanged: Qt.callLater(showCurrentTab)
 
     Connections {
         target: list.tabModel

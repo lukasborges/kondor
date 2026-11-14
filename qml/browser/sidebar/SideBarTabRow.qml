@@ -13,12 +13,13 @@ ItemDelegate {
     required property var targetWindow
     required property ListView list
 
+    readonly property bool isPinned: tab?.pinned ?? false
     readonly property bool isCurrent: index === tabModel.currentIndex
     readonly property bool hasKeyboardFocus: list.activeFocus && index === list.currentIndex
 
-    visible: !tab.pinned
+    visible: !isPinned
     width: ListView.view.width
-    height: tab.pinned ? 0 : implicitHeight
+    height: isPinned ? 0 : implicitHeight
     z: drag.active ? 10 : 0
     highlighted: isCurrent
     down: false

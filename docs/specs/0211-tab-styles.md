@@ -8,7 +8,7 @@
 Give the tab strip a modern look that still follows Breeze, and let the user pick the style:
 
 - **Floating** (new default): the tab strip and the toolbar form one header, and the active tab is a
-  rounded card in the toolbar color.
+  rounded card in the Breeze selection colors.
 - **Below Address Bar:** the tabs sit under the navigation toolbar, and the active tab uses the
   Breeze selection colors.
 - **Classic:** today's Breeze `TabBar`, unchanged.
@@ -72,8 +72,9 @@ not like a browser.
 
 - The strip keeps the `Header` color set. The navigation toolbar is unchanged.
 - Tabs are `gridUnit * 2` tall with 2 px between them, and `smallSpacing` around the row.
-- **Active tab:** a rounded rectangle (`Kirigami.Units.cornerRadius`) filled with the `Window`
-  color set's background (the toolbar color), with a 1 px border in `textColor` at 20 % opacity.
+- **Active tab:** a rounded rectangle (`Kirigami.Units.cornerRadius`) filled with `highlightColor`
+  at 20 % opacity, with a 1 px `highlightColor` border, like a selected item in Dolphin or System
+  Settings (changed by #238).
 - **Hovered inactive tab:** `textColor` at 5 % opacity, same radius. Other inactive tabs have no
   background and no border.
 - **Close button:** shown on the active tab and on the hovered tab only. It keeps its space on the
@@ -88,8 +89,7 @@ not like a browser.
 
 - The tab strip moves under the navigation toolbar, above the bookmarks bar, in the `Window` color
   set.
-- **Active tab:** `highlightColor` at 20 % opacity with a 1 px `highlightColor` border, radius
-  `cornerRadius`, like a selected item in Dolphin or System Settings.
+- **Active tab:** the same card as in Floating.
 - Hover, the close button, focus, pinned tabs and every behavior are the same as in Floating.
 
 ### 5. Classic
@@ -175,7 +175,7 @@ Use a temporary `XDG_CONFIG_HOME`, `XDG_DATA_HOME` and `XDG_CACHE_HOME` (AGENTS.
 | --- | --- |
 | Which style is the default? | Floating, chosen by the maintainer. The others stay available in Settings, Classic included. |
 | A list of radio buttons with the style names? | Rejected. "Floating" or "Classic" mean nothing without seeing them. A thumbnail picker, like the System Settings appearance pages, shows the difference. |
-| Active tab color in Floating: the page color (`View`) or the toolbar color (`Window`)? | The toolbar color. The active tab then reads as part of the toolbar below it, as in current browsers. A white card looked detached from the page, with the toolbar in between. |
+| Active tab color in Floating: the page color (`View`) or the toolbar color (`Window`)? | First the toolbar color. Changed in #238 by the maintainer after using it: the Breeze selection card (`highlightColor` at 20 %, as in Below Address Bar) shows the current tab much better. |
 | Close button on every tab in Floating and Below? | No: only on the active and the hovered tab, to keep the strip calm. Its space stays reserved, so nothing moves on hover. Middle click, Ctrl+W and the context menu close any tab, also on touch. Classic keeps a close button on every tab. |
 | Hover as strong as the active tab? | Rejected after the first render: with 8 % opacity the hovered tab competed with the active one. 5 % for hover. |
 | Style per window? | No. One global setting; per-window styles add state for no clear use. |

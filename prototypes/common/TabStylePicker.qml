@@ -54,8 +54,9 @@ Grid {
                             required property int index
                             width: 26; height: 9
                             radius: style === "classic" ? 0 : 2
-                            color: index === 1 ? windowColors.backgroundColor : (style === "classic" ? Qt.darker(headerColors.backgroundColor, 1.05) : "transparent")
-                            border.color: index === 1 && style !== "classic" ? Qt.alpha(Kirigami.Theme.textColor, 0.3) : "transparent"
+                            color: style === "classic" ? (index === 1 ? windowColors.backgroundColor : Qt.darker(headerColors.backgroundColor, 1.05))
+                                 : (index === 1 ? Qt.alpha(Kirigami.Theme.highlightColor, 0.25) : "transparent")
+                            border.color: index === 1 && style !== "classic" ? Kirigami.Theme.highlightColor : "transparent"
                             Rectangle {
                                 visible: style === "classic" && index === 1
                                 width: parent.width; height: 2

@@ -81,20 +81,13 @@ Rectangle {
         width: modelData.pinned ? 36 : frame.tabWidth
         height: Kirigami.Units.gridUnit * 2
         radius: Kirigami.Units.cornerRadius
-        color: active ? (below ? Qt.alpha(Kirigami.Theme.highlightColor, 0.2) : activeTabColors.backgroundColor)
+        color: active ? Qt.alpha(Kirigami.Theme.highlightColor, 0.2)
              : hovered ? Qt.alpha(Kirigami.Theme.textColor, 0.05) : "transparent"
-        border.color: active ? (below ? Kirigami.Theme.highlightColor : Qt.alpha(Kirigami.Theme.textColor, 0.2))
+        border.color: active ? Kirigami.Theme.highlightColor
                     : "transparent"
 
         Kirigami.Theme.inherit: false
         Kirigami.Theme.colorSet: below ? Kirigami.Theme.Window : Kirigami.Theme.Header
-
-        Item {
-            id: activeTabColors
-            Kirigami.Theme.colorSet: Kirigami.Theme.Window
-            Kirigami.Theme.inherit: false
-            readonly property color backgroundColor: Kirigami.Theme.backgroundColor
-        }
 
         TabContent {
             anchors.fill: parent

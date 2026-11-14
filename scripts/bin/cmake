@@ -4,10 +4,22 @@
 # `make -j` with no limit, which starts dozens of compilers and runs the machine out of memory.
 # This wrapper gives every build a job count, capped at KONDOR_BUILD_JOBS (default 4), and
 # passes every other cmake invocation through unchanged. See AGENTS.md → "Build and run".
+# When ccache is installed, new build directories compile through it, with one cache shared by
+# every worktree (paths relative to $HOME, the working directory left out of the hash).
 set -euo pipefail
+
+use_ccache_when_installed() {
+  command -v ccache >/dev/null || return 0
+  export CMAKE_C_COMPILER_LAUNCHER="${CMAKE_C_COMPILER_LAUNCHER:-ccache}"
+  export CMAKE_CXX_COMPILER_LAUNCHER="${CMAKE_CXX_COMPILER_LAUNCHER:-ccache}"
+  export CCACHE_BASEDIR="${CCACHE_BASEDIR:-$HOME}"
+  export CCACHE_NOHASHDIR="${CCACHE_NOHASHDIR:-true}"
+}
 
 jobs="${KONDOR_BUILD_JOBS:-4}"
 real=/usr/bin/cmake
+
+use_ccache_when_installed
 
 build=0
 for a in "$@"; do

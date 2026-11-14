@@ -34,6 +34,10 @@ jobs:
     container: fedora:latest
     env:
       CPP_CHECKS: ${{ needs.changes.outputs.cpp }}
+      CCACHE_DIR: ${{ github.workspace }}/.ccache
+      CCACHE_BASEDIR: ${{ github.workspace }}
+      CCACHE_NOHASHDIR: 'true'
+      CCACHE_MAXSIZE: 500M
 
     steps:
       - name: Install dependencies
@@ -42,7 +46,7 @@ jobs:
         run: |
           packages="git python3"
           if [ "$CPP_CHECKS" = true ]; then
-            packages="$packages cmake ninja-build gcc-c++ make nodejs \
+            packages="$packages cmake ninja-build gcc-c++ make nodejs ccache tar zstd \
                 qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel qt6-qtwebchannel-devel \
                 kf6-kirigami kf6-qqc2-desktop-style kf6-kwallet-devel kf6-karchive-devel hunspell-en-US hunspell-pt-BR"
           fi
@@ -61,15 +65,35 @@ jobs:
           python3 -m unittest discover -s scripts/tests
           python3 scripts/check-code-quality.py
 
+      - name: Restore the compiler cache
+        if: env.CPP_CHECKS == 'true'
+        uses: actions/cache/restore@v4
+        with:
+          path: .ccache
+          key: ccache-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            ccache-${{ github.ref }}-
+            ccache-refs/heads/main-
+
       - name: Configure
         if: env.CPP_CHECKS == 'true'
-        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
 
       - name: Build
         if: env.CPP_CHECKS == 'true'
         # A healthy build takes about 10 minutes; a stuck runner must fail instead of blocking the merge queue.
         timeout-minutes: 40
-        run: cmake --build build --parallel "$(nproc)"
+        run: |
+          ccache --zero-stats
+          cmake --build build --parallel "$(nproc)"
+          ccache --show-stats
+
+      - name: Save the compiler cache
+        if: env.CPP_CHECKS == 'true' && always()
+        uses: actions/cache/save@v4
+        with:
+          path: .ccache
+          key: ccache-${{ github.ref }}-${{ github.sha }}
 
       - name: Test
         if: env.CPP_CHECKS == 'true'

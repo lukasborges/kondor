@@ -173,5 +173,6 @@ jobs:
           flatpak remote-add --user --no-gpg-verify proof-repo repo
           flatpak install --user --noninteractive proof-repo io.github.lukasborges.KondorProof//stable
           dbus-run-session -- flatpak run --env=QT_QPA_PLATFORM=offscreen \
+              --env=QTWEBENGINE_CHROMIUM_FLAGS=--no-sandbox \
               io.github.lukasborges.KondorProof | tee proof.log
           grep -qx "PROOF OK" proof.log

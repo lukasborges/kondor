@@ -22,6 +22,10 @@
 #                        deepseek/deepseek-flash with opencode; see `opencode models`)
 #   KONDOR_EFFORT        Claude Code effort level: low, medium, high, xhigh or max (default: medium)
 #
+# The service also reads ~/.config/kondor-dev-loop/github.env when it exists (mode 600, one line
+# GH_TOKEN=<token of the developer's bot account>), so the developer's comments, PRs and pushes
+# show the bot as author instead of the maintainer.
+#
 # Everything is wrapped in main() so bash parses the whole file before running it: the service
 # runs this script from the control worktree, which is updated to origin/main while it runs.
 
@@ -177,6 +181,7 @@ Environment=KONDOR_STATE_DIR=$state
 Environment=KONDOR_ENGINE=$engine
 Environment=KONDOR_MODEL=$model
 Environment=KONDOR_EFFORT=$effort
+EnvironmentFile=-%h/.config/kondor-dev-loop/github.env
 ExecStartPre=/usr/bin/git -C $repo fetch -q origin
 ExecStartPre=/usr/bin/git -C $control checkout -q --force --detach origin/main
 ExecStart=/bin/bash $control/scripts/dev-loop.sh

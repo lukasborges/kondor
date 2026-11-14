@@ -1,10 +1,12 @@
 from kondor.core.qmlregistration import QmlKind, QmlType, register
+from kondor.extensions.bridge.extensionbridge import ExtensionBridge
 from kondor.extensions.catalog.extensioncatalog import ExtensionCatalog
 from kondor.extensions.extensionmanager import ExtensionManager
 
 QML_TYPES: tuple[QmlType, ...] = (
     QmlType(ExtensionManager, "ExtensionManager", QmlKind.SINGLETON),
     QmlType(ExtensionCatalog, "ExtensionCatalog", QmlKind.SINGLETON),
+    QmlType(ExtensionBridge, "ExtensionBridge", QmlKind.CREATABLE),
 )
 
 

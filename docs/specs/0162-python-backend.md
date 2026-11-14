@@ -53,8 +53,8 @@ Rewrite all the C++ in `src/` in **Python with PySide6**, keep the UI in `qml/` 
 - **Why not a mixed app:** C++ code cannot call Python. Porting bottom-up inside one process would need throw-away bridges in every phase.
 - **Bottom-up order:** each phase ports one area together with its tests. Python code only imports Python modules that are already ported, so phases follow the dependency table above, bottom-up.
 - **The switch:** the second-to-last phase makes the Python app start and run the whole UI. The last phase switches CI, packaging and docs to Python and deletes the C++.
-- **The freeze:** while the port runs, the only `src/` changes allowed are fixes for `bug` issues. When a bug fix touches a C++ class that is already ported, the same PR fixes the Python port too.
-- **`qml/` does not change in phases 1-11.** If a phase cannot keep a QML file unchanged, the developer asks (`question`) before touching it.
+- **The freeze:** while the port runs, `src/` changes are allowed for `bug` issues and for feature issues whose `src/` changes touch only classes that are already ported (2026-11-14, so UI work can run next to the last, sequential phases). Such a change goes into the C++ class and its Python twin in the same PR, each with its test, so the switch (#174) loses nothing.
+- **`qml/` does not change in phases 1-11.** If a phase cannot keep a QML file unchanged, the developer asks (`question`) before touching it. Bug and feature issues may change `qml/`: both apps load the same QML.
 
 ### 2. Layout
 

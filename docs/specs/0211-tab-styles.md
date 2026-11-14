@@ -22,8 +22,8 @@ not like a browser.
 
 ## Context
 
-- **When:** the Python port (#163-#174) freezes `src/` and `qml/` except for bug fixes. This issue
-  starts after #174 ("Switch to Python"), so `Settings` is the Python class by then. The QML files
+- **When:** during the Python port. **Port twin rule** (umbrella #162, "The freeze"): this issue runs during the port. Every `src/` change goes into the C++ class and its Python twin in `kondor/` in the same PR, with a C++ test and a pytest test, and `check-qml-api.py` must pass. QML is shared by both apps. Here that means
+  `Settings.tabStyle` in `src/core/settings/` and in the Python `Settings` (#164). The QML files
   below are the same in both apps.
 - **Tab strip:** `qml/browser/tabstrip/TabStrip.qml`, a `Rectangle` in the `Header` color set with a
   `RowLayout`: the private window icon, the left scroll button, a `TabBar` (`background: null`),
@@ -146,7 +146,7 @@ Use a temporary `XDG_CONFIG_HOME`, `XDG_DATA_HOME` and `XDG_CACHE_HOME` (AGENTS.
 
 ## Dependencies
 
-- #174 (the Python port is finished, so `src/` and `qml/` are open again).
+- #164 (the Python `Settings`, for the twin rule).
 - #3 Settings page, #12 tab management, #83 tab widths and overflow.
 - #212 builds on this issue.
 

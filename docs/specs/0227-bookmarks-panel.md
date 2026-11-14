@@ -14,8 +14,8 @@ no search), the main menu's Bookmarks submenu, address-bar suggestions, and the 
 
 ## Context
 
-- **When:** `qml/` and `src/` are frozen during the Python port (#162), so this starts after #174.
-  `BookmarkManager` is the Python class by then, with the same QML API.
+- **When:** during the Python port. **Port twin rule** (umbrella #162, "The freeze"): this issue runs during the port. Every `src/` change goes into the C++ class and its Python twin in `kondor/` in the same PR, with a C++ test and a pytest test, and `check-qml-api.py` must pass. QML is shared by both apps. Here that means
+  `BookmarkManager.recentBookmarks()` in C++ and in the Python `BookmarkManager` (#167).
 - **`BookmarkManager` (QML singleton):** `search(text, limit)`, `folderContents(folderId)`,
   `childCount(folderId)`, `toolbarFolderId()`, `otherFolderId()`, `bookmark(id)`, the `revision`
   property and the `bookmarksChanged` signal. Bookmark rows have an increasing `id`, and no date.
@@ -144,7 +144,7 @@ Use a temporary `XDG_CONFIG_HOME`, `XDG_DATA_HOME` and `XDG_CACHE_HOME` (AGENTS.
 
 ## Dependencies
 
-- #174 (the Python port is finished, so `qml/` is open again).
+- #167 (the Python `BookmarkManager`, for the twin rule).
 - #2 Bookmarks, #183 Extensions panel (pattern).
 
 ## Prototype

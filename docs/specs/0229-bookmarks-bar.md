@@ -25,7 +25,7 @@ onto it or moved on it, folders only list their items, and right-click does noth
   `BookmarkDropTargets`, `BookmarkDragPreview`), and the dialogs in `qml/bookmarks/dialogs/`
   (`RenameBookmarkDialog`, `DeleteBookmarkDialog`). Reuse them; do not write a second drag system
   or second dialogs.
-- **When:** after #174 (`qml/` freeze during the Python port).
+- **When:** during the Python port. **Port twin rule** (umbrella #162, "The freeze"): this issue runs during the port. Every `src/` change goes into the C++ class and its Python twin in `kondor/` in the same PR, with a C++ test and a pytest test, and `check-qml-api.py` must pass. QML is shared by both apps.
 
 ## Design / behavior
 
@@ -112,7 +112,7 @@ Use a temporary `XDG_CONFIG_HOME`, `XDG_DATA_HOME` and `XDG_CACHE_HOME` (AGENTS.
 
 ## Dependencies
 
-- #174 (the `qml/` freeze ends).
+- #167 (the Python `BookmarkManager`, for the twin rule).
 - #2 Bookmarks; the drag and drop and dialogs of the Bookmarks window.
 
 ## Prototype

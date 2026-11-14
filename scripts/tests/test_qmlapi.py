@@ -66,6 +66,12 @@ def problems_with(python: ClassApi) -> list:
     return compare_all({"Sample": parsed()}, {"Sample": python})
 
 
+def limit_type_problems(cpp_type: str, python_type: str) -> list:
+    cpp = twin(properties={**parsed().properties, "limit": Property(cpp_type, True)})
+    python = twin(properties={**parsed().properties, "limit": Property(python_type, True)})
+    return compare_all({"Sample": cpp}, {"Sample": python})
+
+
 class HeaderParserTest(unittest.TestCase):
     def test_multi_line_property_is_found(self):
         self.assertEqual(parsed().properties["address"], Property("QUrl", False))
@@ -138,6 +144,18 @@ class ComparisonTest(unittest.TestCase):
         python = twin(properties={**parsed().properties, "limit": Property("double", True)})
         cpp = twin(properties={**parsed().properties, "limit": Property("qreal", True)})
         self.assertEqual(compare_all({"Sample": cpp}, {"Sample": python}), [])
+
+    def test_qint64_matches_qlonglong(self):
+        self.assertEqual(limit_type_problems("qint64", "qlonglong"), [])
+
+    def test_quint64_matches_qulonglong(self):
+        self.assertEqual(limit_type_problems("quint64", "qulonglong"), [])
+
+    def test_qint64_does_not_match_int(self):
+        self.assertEqual(len(limit_type_problems("qint64", "int")), 1)
+
+    def test_qint64_does_not_match_quint64(self):
+        self.assertEqual(len(limit_type_problems("qint64", "quint64")), 1)
 
     def test_object_matches_a_class_python_registers(self):
         python = twin(properties={**parsed().properties, "group": Property("QObject*", False)})

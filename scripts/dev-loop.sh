@@ -98,13 +98,27 @@ main() {
 
   claim_owner() { cat "$claims/$1" 2>/dev/null; }
 
-  # The issue this loop should work on: its own claimed developer row first, else the topmost
-  # developer row nobody has claimed. Prints nothing when there is none.
+  # The issue this loop should work on. A loop keeps one issue at a time: while its claimed issue
+  # is still in the queue (also during review), it works only on that one, when it is the
+  # developer's turn. Otherwise it takes the topmost developer row nobody has claimed.
   next_dev_issue() {
-    local rows n
-    rows="$(queue_issues developer)"
-    for n in $rows; do [[ "$(claim_owner "$n")" == "$dev_id" ]] && { echo "$n"; return; }; done
-    for n in $rows; do [[ -z "$(claim_owner "$n")" ]] && { echo "$n"; return; }; done
+    local own
+    own="$(own_issue)"
+    if [[ -n "$own" ]]; then
+      still_for_developer "$own" && echo "$own"
+      return
+    fi
+    first_unclaimed "$(queue_issues developer)"
+  }
+
+  own_issue() {
+    local n
+    for n in $(queue_issues); do [[ "$(claim_owner "$n")" == "$dev_id" ]] && { echo "$n"; return; }; done
+  }
+
+  first_unclaimed() {
+    local n
+    for n in $1; do [[ -z "$(claim_owner "$n")" ]] && { echo "$n"; return; }; done
   }
 
   # Claims issue $1 for this loop, under a lock so two loops cannot claim it at once, and drops

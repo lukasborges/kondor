@@ -178,10 +178,11 @@ One issue per phase, promoted in this order (AGENTS.md "Roadmap order"). A phase
 | 4 | #166 Downloads and history | `src/downloads/`, `src/history/`, `browser/faviconstore` | `tests/downloads/`, `tests/history/` |
 | 5 | #167 Bookmarks | `src/bookmarks/` | `tests/bookmarks/` |
 | 6 | #168 Password store | `src/passwords/` except `passwordbridge` | `tests/passwords/` except the bridge |
-| 7 | #169 Browser profile, address and session | `src/browser/` except `tab*`, `tabmodel*` and `faviconstore` | `tests/browser/` for those classes, `tests/site/` |
-| 8 | #170 Tabs | `src/browser/` `tab*` and `tabmodel*`, `passwords/passwordbridge` | the rest of `tests/browser/`, the bridge tests |
-| 9 | #171 Extensions: state, catalog and install | `src/extensions/` state, catalog, package, install, manifest | their tests in `tests/extensions/` |
-| 10 | #172 Extensions: scripts and bridge | the rest of `src/extensions/` and its JS resources | the rest of `tests/extensions/` |
+| 7 | #169 Browser profile, address and session | `src/browser/` except `tab*`, `tabmodel*`, `faviconstore` and `session/sessionmanager` | `tests/browser/` for those classes, `tests/site/` |
+| 8 | #170 Tabs | `src/browser/` `tab*`, `tabmodel*` and `session/sessionmanager`, `passwords/passwordbridge` | the rest of `tests/browser/`, the bridge tests |
+| 9 | #171 Extensions: manifest, package, state, install and manager | `src/extensions/` without `bridge/`: manifest, package, state, install, scripts, userscripts, `extensionmanager` | their tests in `tests/extensions/` |
+| 10 | #172 Extensions: catalog, actions and updates | the rest of `src/extensions/` without `bridge/` | the rest of `tests/extensions/` |
+| 10b | #218 Extensions: bridge | `src/extensions/bridge/` and the extension JS resources | the bridge tests in `tests/extensions/` |
 | 11 | #173 App startup: the Python app runs | `src/app/`, `kondor/__main__.py` | `tests/app/`, `tests/settings/` |
 | 12 | #174 Switch to Python | item 11; closes #162 | — |
 
@@ -304,3 +305,4 @@ None: no UI changes.
 | KWallet without KF6Wallet? | `org.kde.KWallet` over QtDBus, byte-compatible maps (item 6), so passwords saved by the C++ app are read by the Python app. |
 | Singleton registration? | `qmlRegisterSingletonInstance` with `instance()`, never `@QmlSingleton` (#159). |
 | pip / wheels? | Not allowed: PySide6 must share the Qt of the KDE style plugin. Fedora packages for development and the AppImage; in the Flatpak, the `io.qt.PySide.BaseApp` base app, built against the runtime's Qt (changed from "built from source" on 2026-11-14, see #163). |
+| Do phases 7, 9 and 10 wait for the phases before them? | No (2026-11-14). The includes show that phase 7 uses no `passwords/` code and only `session/sessionmanager` needs `Tab`/`TabModel` (moved to phase 8), and that only `src/extensions/bridge/` uses `browser/` (split into phase 10b, #218). So #169 waits only for #165 and #166, and #171 only for #164, and two developers can work in parallel. Each issue's `**Depends on:**` line is the source the architect loop follows. |

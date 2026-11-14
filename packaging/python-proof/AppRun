@@ -1,0 +1,14 @@
+#!/bin/sh
+HERE="$(dirname "$(readlink -f "$0")")"
+PYTHON_LIBRARY="$(ls -d "$HERE"/usr/lib/python3.* | head -n 1)"
+
+export PYTHONHOME="$HERE/usr"
+export PYTHONPATH="$PYTHON_LIBRARY:$PYTHON_LIBRARY/lib-dynload:$PYTHON_LIBRARY/site-packages"
+export LD_LIBRARY_PATH="$HERE/usr/lib:$LD_LIBRARY_PATH"
+export QT_PLUGIN_PATH="$HERE/usr/plugins"
+export QML_IMPORT_PATH="$HERE/usr/qml"
+export QTWEBENGINEPROCESS_PATH="$HERE/usr/libexec/QtWebEngineProcess"
+export QTWEBENGINE_RESOURCES_PATH="$HERE/usr/share/qt6/resources"
+export QTWEBENGINE_LOCALES_PATH="$HERE/usr/share/qt6/translations/qtwebengine_locales"
+
+exec "$HERE/usr/bin/python3" "$HERE/usr/share/kondor-proof/proof.py" "$@"

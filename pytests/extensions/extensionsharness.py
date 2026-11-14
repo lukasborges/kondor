@@ -1,3 +1,4 @@
+import hashlib
 import json
 import shutil
 import zipfile
@@ -118,3 +119,7 @@ def remove_every_extension() -> None:
         manager.remove(manager.data(manager.index(0, 0), ExtensionManager.Role.IdRole))
     manager.set_locale("en")
     Settings.instance().setProperty("pinnedExtensions", [])
+
+
+def sha256_of(path: str) -> str:
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()

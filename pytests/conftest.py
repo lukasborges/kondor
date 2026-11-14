@@ -1,3 +1,4 @@
+import os
 from collections.abc import Iterator
 from pathlib import Path
 
@@ -17,6 +18,9 @@ DICTIONARIES_VARIABLE = "QTWEBENGINE_DICTIONARIES_PATH"
 SANDBOX_VARIABLE = "QTWEBENGINE_DISABLE_SANDBOX"
 CHROMIUM_FLAGS_VARIABLE = "QTWEBENGINE_CHROMIUM_FLAGS"
 NO_GPU_FLAG = "--disable-gpu"
+NO_DESKTOP_SERVICES = {"QT_QPA_PLATFORMTHEME": "", "QT_NO_XDG_DESKTOP_PORTAL": "1"}
+
+os.environ.update(NO_DESKTOP_SERVICES)
 
 
 @pytest.fixture(scope="session", autouse=True)

@@ -1,6 +1,16 @@
+from dataclasses import dataclass
+
 from .model import ClassApi, normalize_type
 
 ANY_TYPE = "QVariant"
+OBJECT_TYPES = {"QAbstractItemModel", "QObject"}
+
+
+@dataclass(frozen=True)
+class ClassPair:
+    cpp: ClassApi
+    python: ClassApi
+    registered_names: frozenset[str]
 
 
 def missing_names(kind: str, cpp: dict, python: dict) -> list[str]:
@@ -15,17 +25,23 @@ def missing_counts(kind: str, cpp: dict[str, set[int]], python: dict[str, set[in
     return problems
 
 
-def types_match(cpp_type: str, python_type: str) -> bool:
+def is_registered_object(cpp_name: str, python_name: str, registered_names: frozenset[str]) -> bool:
+    return python_name in OBJECT_TYPES and cpp_name in registered_names
+
+
+def types_match(cpp_type: str, python_type: str, registered_names: frozenset[str]) -> bool:
     cpp_name, python_name = normalize_type(cpp_type), normalize_type(python_type)
-    return ANY_TYPE in (cpp_name, python_name) or cpp_name == python_name
+    if ANY_TYPE in (cpp_name, python_name) or cpp_name == python_name:
+        return True
+    return is_registered_object(cpp_name, python_name, registered_names)
 
 
-def property_differences(name: str, cpp: ClassApi, python: ClassApi) -> list[str]:
-    cpp_property, python_property = cpp.properties[name], python.properties[name]
+def property_differences(name: str, classes: ClassPair) -> list[str]:
+    cpp_property, python_property = classes.cpp.properties[name], classes.python.properties[name]
     problems = []
     if cpp_property.is_writable != python_property.is_writable:
         problems.append(f"property {name} writability differs")
-    if not types_match(cpp_property.type_name, python_property.type_name):
+    if not types_match(cpp_property.type_name, python_property.type_name, classes.registered_names):
         problems.append(
             f"property {name} type differs: "
             f"{cpp_property.type_name} != {python_property.type_name}"
@@ -33,25 +49,28 @@ def property_differences(name: str, cpp: ClassApi, python: ClassApi) -> list[str
     return problems
 
 
-def shared_property_problems(cpp: ClassApi, python: ClassApi) -> list[str]:
-    shared = sorted(cpp.properties.keys() & python.properties.keys())
-    return [problem for name in shared for problem in property_differences(name, cpp, python)]
+def shared_property_problems(classes: ClassPair) -> list[str]:
+    shared = sorted(classes.cpp.properties.keys() & classes.python.properties.keys())
+    return [problem for name in shared for problem in property_differences(name, classes)]
 
 
-def compare_class(cpp: ClassApi, python: ClassApi) -> list[str]:
+def compare_class(classes: ClassPair) -> list[str]:
+    cpp, python = classes.cpp, classes.python
     problems = missing_names("property", cpp.properties, python.properties)
     problems += missing_names("signal", cpp.signals, python.signals)
     problems += missing_names("callable", cpp.callables, python.callables)
     problems += missing_counts("signal", cpp.signals, python.signals)
     problems += missing_counts("callable", cpp.callables, python.callables)
-    return problems + shared_property_problems(cpp, python)
+    return problems + shared_property_problems(classes)
 
 
 def compare_all(cpp: dict[str, ClassApi], python: dict[str, ClassApi]) -> list[str]:
+    registered_names = frozenset(python)
     problems = []
     for name, python_class in sorted(python.items()):
         if name not in cpp:
             problems.append(f"{name}: no C++ class with this name")
             continue
-        problems += [f"{name}: {problem}" for problem in compare_class(cpp[name], python_class)]
+        classes = ClassPair(cpp[name], python_class, registered_names)
+        problems += [f"{name}: {problem}" for problem in compare_class(classes)]
     return problems

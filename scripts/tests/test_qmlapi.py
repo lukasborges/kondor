@@ -134,6 +134,20 @@ class ComparisonTest(unittest.TestCase):
         python = twin(properties={**parsed().properties, "limit": Property("QVariant", True)})
         self.assertEqual(problems_with(python), [])
 
+    def test_qreal_matches_double(self):
+        python = twin(properties={**parsed().properties, "limit": Property("double", True)})
+        cpp = twin(properties={**parsed().properties, "limit": Property("qreal", True)})
+        self.assertEqual(compare_all({"Sample": cpp}, {"Sample": python}), [])
+
+    def test_object_matches_a_class_python_registers(self):
+        python = twin(properties={**parsed().properties, "group": Property("QObject*", False)})
+        classes = {"Sample": python, "Group": ClassApi("Group")}
+        self.assertEqual(compare_all({"Sample": parsed(), "Group": ClassApi("Group")}, classes), [])
+
+    def test_object_does_not_match_an_unregistered_class(self):
+        python = twin(properties={**parsed().properties, "group": Property("QAbstractItemModel*", False)})
+        self.assertEqual(problems_with(python), ["Sample: property group type differs: Group != QAbstractItemModel*"])
+
     def test_python_class_without_cpp_twin_is_an_error(self):
         self.assertEqual(compare_all({}, {"Lonely": ClassApi("Lonely")}), ["Lonely: no C++ class with this name"])
 

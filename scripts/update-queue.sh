@@ -96,7 +96,7 @@ to-spec ──► to-dev ──► in-review ──► closed (merged PR with "C
 ```
 
 `question` is orthogonal to the state: it moves the row to **Waiting** until the architect
-answers and removes it. `approved` (with `in-review`) means the PR is approved and only the merge is left. Only the architect promotes backlog issues to `to-dev`, one at a time.
+answers and removes it. `approved` (with `in-review`) means the PR is approved and only the merge is left. Only the architect promotes backlog issues to `to-dev`: up to two in flight, one per developer loop, each only when the issues on its "Depends on:" line are closed. Each developer loop claims one issue and keeps it through review.
 
 ## Ready (take the topmost row for your role)
 

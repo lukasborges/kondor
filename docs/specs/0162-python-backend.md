@@ -168,7 +168,7 @@ There are no Python bindings for KF6Wallet. Talk to `kwalletd6` directly with `Q
 
 ### 9. Phases
 
-One issue per phase, promoted one at a time in this order (AGENTS.md "Roadmap order"):
+One issue per phase, promoted in this order (AGENTS.md "Roadmap order"). A phase is promoted once the issues on its "Depends on:" line are closed, so phases 3-6 can run in parallel after phase 2:
 
 | # | Issue | Scope | Tests to port |
 | --- | --- | --- | --- |

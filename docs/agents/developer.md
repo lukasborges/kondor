@@ -80,6 +80,11 @@ a row, the loop pauses that issue and sends a desktop notification. The service 
 `~/.config/kondor-dev-loop/github.env` (`GH_TOKEN=…` of the developer's bot account) when it
 exists, so `gh` and `git push` act as the bot and its comments are told apart from the architect's.
 
+Several developer loops can run at once (`KONDOR_DEV_ID=2 scripts/dev-loop.sh --install` adds
+`kondor-dev-loop-2`). Each loop claims the issue it starts (`~/.local/state/kondor-dev-claims/`),
+keeps it through review rounds, and never takes an issue another loop claimed. The `cmake`
+wrapper in `scripts/bin` lets only one build run at a time across all loops.
+
 ```bash
 scripts/dev-loop.sh --dry-run      # show what would run now
 scripts/dev-loop.sh --install      # install + start the systemd user service

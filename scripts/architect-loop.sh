@@ -16,6 +16,9 @@
 #   KONDOR_ARCH_STATE     lock, log, counters and pause flags (default: ~/.local/state/kondor-architect-loop)
 #   KONDOR_ARCH_INTERVAL  seconds between checks (default: 60)
 #   KONDOR_ARCH_MAX_NO_PROGRESS  runs on the same step without progress before pausing (default: 2)
+#   KONDOR_ARCH_MAX_IN_FLIGHT    issues in to-spec, to-dev or in-review at once, one per developer
+#                         loop (default: 2). An issue is promoted only when every issue on its
+#                         "Depends on:" line (issue body) is closed.
 #   KONDOR_ARCH_MODEL     Claude model (default: Claude Code's default)
 #   KONDOR_ARCH_AUTOMERGE 1 = the architect squash-merges approved PRs whose build passed (default, the
 #                         maintainer's decision), 0 = approve, add `approved` and leave the merge to a human
@@ -38,6 +41,7 @@ main() {
   local state="${KONDOR_ARCH_STATE:-$HOME/.local/state/kondor-architect-loop}"
   local interval="${KONDOR_ARCH_INTERVAL:-60}"
   local max_no_progress="${KONDOR_ARCH_MAX_NO_PROGRESS:-2}"
+  local max_in_flight="${KONDOR_ARCH_MAX_IN_FLIGHT:-2}"
   local model="${KONDOR_ARCH_MODEL:-}"
   local merge="${KONDOR_ARCH_AUTOMERGE:-1}"
   local claude="${KONDOR_CLAUDE:-$(command -v claude || echo "$HOME/.local/bin/claude")}"
@@ -68,16 +72,17 @@ main() {
   queue() { (cd "$control" && bash scripts/update-queue.sh --stdout); }
 
   # Prints "<issue> <state>" for the topmost architect row (Ready first, then Waiting),
-  # "promote -" when the queue has no rows at all, or nothing when it is the developer's turn.
+  # "promote -" when no row is the architect's and fewer than max_in_flight issues are in flight,
+  # or nothing when it is the developers' turn.
   next_architect_step() {
-    queue | awk -F'|' '
+    queue | awk -F'|' -v max="$max_in_flight" '
       /^\| #/ { rows++
                 if ($5 ~ /architect/ && !found) {
                   match($2, /#[0-9]+/); n = substr($2, RSTART + 1, RLENGTH - 1)
                   st = $3; gsub(/ /, "", st)
                   if ($4 ~ /Answer the question/) st = "question"
                   print n, st; found = 1 } }
-      END { if (!rows) print "promote -" }'
+      END { if (!found && rows < max) print "promote -" }'
   }
 
   prompt_for() {
@@ -95,7 +100,7 @@ $common
 Step: review the open PR for issue #$n (gh pr list --search "Closes #$n"; if the spec says Repository: lukasborges/kondor-extensions, the PR is in that repository instead: gh pr list --repo lukasborges/kondor-extensions --search "lukasborges/kondor#$n", and you review, check CI and merge it there with --repo lukasborges/kondor-extensions and --body "Closes lukasborges/kondor#$n", as AGENTS.md → "Extensions repository" says). If issue #$n already has the label approved, skip the review and only do the CI check and merge part below. Load the clean-code skill first and check the PR against it and AGENTS.md → "Code quality" (that section wins where they differ). Use the review checklist in docs/agents/architect.md: run the checks AGENTS.md → "Which checks a change needs" asks for (build the PR head in a separate worktree, run the offscreen smoke test and ctest only when the C++ checks apply), the spec's manual test where possible (always with temporary XDG_CONFIG_HOME, XDG_DATA_HOME and XDG_CACHE_HOME as in AGENTS.md, never the maintainer's real profile); check the spec (docs/specs/$(printf '%04d' "$n")-*.md, or the issue body for a bug issue) acceptance criteria and out of scope, AGENTS.md conventions, private-tab privacy and visual parity with the prototype. Post the review as a PR review with concrete file:line comments.
 $merge_rule
 If it does not pass, submit "request changes" (gh pr review --request-changes; or a comment review starting with \"Verdict: REQUEST CHANGES\" if GitHub refuses), remove the approved label if present and switch issue #$n from in-review to to-dev.
-Promotion: if the queue is now empty, add the label to-dev to the open issue labeled bug with the highest priority (priority: high, then priority: medium, then priority: low, then no priority label; oldest first among equals) that has no state label or, if there is none, to the next issue of AGENTS.md "Roadmap order" that is still open and not yet started, with a short issue comment saying it is now the current issue, and run scripts/board.sh <that issue> "In Progress" to update the project board. If that roadmap issue has no spec yet (no docs/specs/<NNNN>-*.md), first write its spec and, if it has UI, its prototype, as for a to-spec issue (commit and push to main, update the issue body to a summary that links the spec), then add to-dev.
+Do not promote another issue: the loop does that in its own step.
 EOF
       ;;
       question) cat <<EOF
@@ -113,28 +118,57 @@ EOF
       promote) cat <<EOF
 $common
 
-Step: nothing is in flight (no issue is to-spec, to-dev or in-review). Promote the open issue labeled bug with the highest priority (priority: high, then priority: medium, then priority: low, then no priority label; oldest first among equals) that has no state label or, if there is none, the next issue of AGENTS.md "Roadmap order" that is still open and has no state label. If that roadmap issue has no spec yet (no docs/specs/<NNNN>-*.md), first write its spec and, if it has UI, its prototype, using the template in docs/agents/architect.md (render prototypes with python3 prototypes/render.py; commit and push to main; update the issue body to a summary that links the spec). Then add the label to-dev, post a short comment on it saying it is now the current issue and linking its spec (a bug issue is its own spec), and run scripts/board.sh <that issue> "In Progress" to update the project board. Do nothing else.
+Step: promote issue #$n, chosen by the loop (an open bug by priority, or the next open issue of AGENTS.md "Roadmap order" whose "Depends on:" issues are all closed; another issue may already be in flight, worked on by another developer loop). If it is a roadmap issue with no spec yet (no docs/specs/<NNNN>-*.md), first write its spec and, if it has UI, its prototype, using the template in docs/agents/architect.md (render prototypes with python3 prototypes/render.py; commit and push to main; update the issue body to a summary that links the spec, keeping its "Depends on:" line). Then add the label to-dev, post a short comment on it saying it is now in development and linking its spec (a bug issue is its own spec), and run scripts/board.sh $n "In Progress" to update the project board. Do nothing else.
 EOF
       ;;
     esac
   }
 
-  # True when the promote step has something to do: an open bug, or an open issue of AGENTS.md
-  # "Roadmap order", that has no state label. When neither exists, running Claude only burns a
-  # run and ends in a no-progress pause.
-  promotable() {
-    local roadmap open
-    roadmap="$(awk '/^### Roadmap order/ {on = 1; next} on && /^#/ {exit} on' "$control/AGENTS.md" \
-      | grep -oE '#[0-9]+' | tr -d '#' | sort -u)"
-    open="$(gh issue list --repo lukasborges/kondor --state open --limit 500 --json number,labels \
-      -q '.[] | select([.labels[].name] | any(. == "to-spec" or . == "to-dev" or . == "in-review") | not)
-             | "\(.number) \([.labels[].name] | any(. == "bug"))"')" || return 0  # unsure: let Claude decide
-    while read -r n bug; do
-      [[ -n "$n" ]] || continue
-      [[ "$bug" == true ]] && return 0
-      grep -qx "$n" <<<"$roadmap" && return 0
-    done <<<"$open"
+  # Prints the issue the promote step should promote, or nothing: the open bug with the highest
+  # priority (oldest first) that has no state label, else the first open issue of AGENTS.md
+  # "Roadmap order" that has no state label and whose "Depends on:" issues are all closed.
+  next_promotion() {
+    local issues
+    issues="$(open_issues)" || return 0
+    first_bug "$issues" || first_roadmap_issue "$issues"
+  }
+
+  # One line per open issue: "<number> <started> <bug> <priority rank> <dependencies, comma-separated>".
+  open_issues() {
+    gh issue list --repo lukasborges/kondor --state open --limit 500 --json number,labels,body -q '
+      .[] | [.labels[].name] as $l
+      | "\(.number) \($l | any(. == "to-spec" or . == "to-dev" or . == "in-review"))"
+        + " \($l | any(. == "bug"))"
+        + " \(if ($l | index("priority: high")) then 0 elif ($l | index("priority: medium")) then 1 elif ($l | index("priority: low")) then 2 else 3 end)"
+        + " \([.body | split("\n")[] | select(test("^\\W*Depends on\\W"; "i")) | scan("#([0-9]+)")[0]] | join(",") | if . == "" then "-" else . end)"'
+  }
+
+  first_bug() {
+    awk '$2 == "false" && $3 == "true"' <<<"$1" | sort -k4,4n -k1,1n | awk '{ print $1; found = 1; exit } END { exit !found }'
+  }
+
+  first_roadmap_issue() {
+    local issues="$1" n deps
+    while read -r n; do
+      deps="$(awk -v n="$n" '$1 == n && $2 == "false" { print $5; found = 1 } END { exit !found }' <<<"$issues")" || continue
+      dependencies_closed "$deps" "$issues" && { echo "$n"; return 0; }
+    done < <(roadmap_order)
     return 1
+  }
+
+  roadmap_order() {
+    awk '/^### Roadmap order/ {on = 1; next} on && /^#/ {exit} on' "$control/AGENTS.md" \
+      | grep -oE '#[0-9]+' | tr -d '#' | awk '!seen[$0]++'
+  }
+
+  # True when none of the comma-separated issues is still open.
+  dependencies_closed() {
+    local dep
+    [[ "$1" == "-" ]] && return 0
+    for dep in ${1//,/ }; do
+      awk -v d="$dep" '$1 == d { found = 1 } END { exit !found }' <<<"$2" && return 1
+    done
+    return 0
   }
 
   # True when issue $1 has the approved label and its PR's build check has not finished yet.
@@ -171,15 +205,19 @@ EOF
       return 0
     fi
     read -r n st <<<"$next"
-    [[ "$n" == "promote" ]] && st="promote"
     key="$n"
-    if [[ "$st" == "promote" ]] && ! promotable; then
-      # An empty backlog is not a failure: clear any no-progress pause so the next filed issue
+    if [[ "$n" == "promote" ]]; then
+      st="promote"
+      n="$(next_promotion)"
+      next="promote $n"
+    fi
+    if [[ "$st" == "promote" && -z "$n" ]]; then
+      # Nothing to promote is not a failure: clear any no-progress pause so the next filed issue
       # is promoted right away, and log the idle state only once.
       rm -f "$state/paused-promote" "$state/no-progress-promote"
       if [[ ! -e "$state/idle" ]]; then
         touch "$state/idle"
-        log "queue: backlog empty, nothing to promote (file a bug or add an issue to AGENTS.md \"Roadmap order\")"
+        log "queue: nothing to promote (backlog empty, or the next issues wait for their \"Depends on:\" issues)"
       fi
       return 0
     fi
@@ -211,7 +249,7 @@ EOF
       return 0
     fi
     ensure_control || return 0
-    after="$(next_architect_step)"
+    if [[ "$st" == "promote" ]]; then after="promote $(next_promotion)"; else after="$(next_architect_step)"; fi
     count_file="$state/no-progress-$key"
     if [[ "$after" == "$next" ]]; then
       count=$(( $(cat "$count_file" 2>/dev/null || echo 0) + 1 ))

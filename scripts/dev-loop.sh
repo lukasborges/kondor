@@ -9,7 +9,15 @@
 #   scripts/dev-loop.sh --install       # create the control worktree + systemd user service, start it
 #   scripts/dev-loop.sh --uninstall     # stop and remove the systemd user service
 #
+# Several developer loops can run at once, one per KONDOR_DEV_ID (1, 2, …). Each one claims the
+# issue it works on, so two loops never take the same issue, and keeps it through review rounds.
+# Loop 1 uses the plain names below; loop N appends "-N" to the service, state and control names:
+#
+#   KONDOR_DEV_ID=2 scripts/dev-loop.sh --install   # kondor-dev-loop-2.service
+#
 # Environment (all optional):
+#   KONDOR_DEV_ID        number of this developer loop (default: 1)
+#   KONDOR_DEV_CLAIMS    folder shared by all developer loops for their claims (default: ~/.local/state/kondor-dev-claims)
 #   KONDOR_REPO          main checkout (default: the repository this script belongs to)
 #   KONDOR_CONTROL_DIR   loop-owned worktree kept at origin/main (default: ~/.local/share/kondor-dev-loop/control)
 #   KONDOR_STATE_DIR     lock, log, counters and pause flags (default: ~/.local/state/kondor-dev-loop)
@@ -26,7 +34,8 @@
 #
 # The service also reads ~/.config/kondor-dev-loop/github.env when it exists (mode 600, one line
 # GH_TOKEN=<token of the developer's bot account>), so the developer's comments, PRs and pushes
-# show the bot as author instead of the maintainer.
+# show the bot as author instead of the maintainer, and ~/.config/kondor-dev-loop/identity.env
+# (GIT_AUTHOR_NAME, GIT_AUTHOR_EMAIL, GIT_COMMITTER_NAME, GIT_COMMITTER_EMAIL of that account).
 #
 # Everything is wrapped in main() so bash parses the whole file before running it: the service
 # runs this script from the control worktree, which is updated to origin/main while it runs.
@@ -37,9 +46,13 @@ main() {
   local script_dir repo
   script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
   repo="${KONDOR_REPO:-$(dirname "$(git -C "$script_dir" rev-parse --path-format=absolute --git-common-dir)")}"
-  local control="${KONDOR_CONTROL_DIR:-$HOME/.local/share/kondor-dev-loop/control}"
+  local dev_id="${KONDOR_DEV_ID:-1}" suffix=""
+  [[ "$dev_id" == 1 ]] || suffix="-$dev_id"
+  local control="${KONDOR_CONTROL_DIR:-$HOME/.local/share/kondor-dev-loop/control$suffix}"
   local agent_files="${KONDOR_AGENT_FILES:-$HOME/.config/kondor-agents}"
-  local state="${KONDOR_STATE_DIR:-$HOME/.local/state/kondor-dev-loop}"
+  local state="${KONDOR_STATE_DIR:-$HOME/.local/state/kondor-dev-loop$suffix}"
+  local claims="${KONDOR_DEV_CLAIMS:-$HOME/.local/state/kondor-dev-claims}"
+  local unit="kondor-dev-loop$suffix.service"
   local interval="${KONDOR_INTERVAL:-60}"
   local max_no_progress="${KONDOR_MAX_NO_PROGRESS:-2}"
   local engine="${KONDOR_ENGINE:-claude}"
@@ -53,10 +66,10 @@ main() {
   esac
   local effort="${KONDOR_EFFORT:-medium}"
   local log="$state/dev-loop.log"
-  mkdir -p "$state"
+  mkdir -p "$state" "$claims"
 
   log() { printf '%s %s\n' "$(date '+%F %T')" "$*" | tee -a "$log"; }
-  notify() { command -v notify-send >/dev/null && notify-send -a "Kondor dev loop" -i kondor "$1" "${2:-}" 2>/dev/null || true; }
+  notify() { command -v notify-send >/dev/null && notify-send -a "Kondor dev loop $dev_id" -i kondor "$1" "${2:-}" 2>/dev/null || true; }
 
   ensure_control() {
     git -C "$repo" fetch -q origin || { log "fetch failed"; return 1; }
@@ -77,17 +90,46 @@ main() {
     done
   }
 
-  # Prints the issue number of the topmost developer row, or nothing.
-  next_dev_issue() {
+  # Issue numbers of the queue rows, in queue order: all rows, or only the developer's (arg "developer").
+  queue_issues() {
     (cd "$control" && bash scripts/update-queue.sh --stdout) |
-      awk -F'|' '$5 ~ /developer/ { if (match($2, /#[0-9]+/)) { print substr($2, RSTART + 1, RLENGTH - 1); exit } }'
+      awk -F'|' -v agent="${1:-}" '/^\| #/ && $5 ~ agent { if (match($2, /#[0-9]+/)) print substr($2, RSTART + 1, RLENGTH - 1) }'
   }
+
+  claim_owner() { cat "$claims/$1" 2>/dev/null; }
+
+  # The issue this loop should work on: its own claimed developer row first, else the topmost
+  # developer row nobody has claimed. Prints nothing when there is none.
+  next_dev_issue() {
+    local rows n
+    rows="$(queue_issues developer)"
+    for n in $rows; do [[ "$(claim_owner "$n")" == "$dev_id" ]] && { echo "$n"; return; }; done
+    for n in $rows; do [[ -z "$(claim_owner "$n")" ]] && { echo "$n"; return; }; done
+  }
+
+  # Claims issue $1 for this loop, under a lock so two loops cannot claim it at once, and drops
+  # the claims of issues that left the queue (merged or closed). Fails when another loop has it.
+  claim_issue() {
+    local n="$1" open f
+    open="$(queue_issues)"
+    (
+      flock 8
+      for f in "$claims"/*; do
+        [[ -e "$f" ]] && ! grep -qx "$(basename "$f")" <<<"$open" && rm -f "$f"
+      done
+      [[ -z "$(claim_owner "$n")" ]] && echo "$dev_id" > "$claims/$n"
+      [[ "$(claim_owner "$n")" == "$dev_id" ]]
+    ) 8>"$claims/.lock"
+  }
+
+  still_for_developer() { queue_issues developer | grep -qx "$1"; }
 
   prompt_for() {
     local n="$1"
     cat <<EOF
 You are the developer agent of this repository. Follow docs/agents/developer.md and AGENTS.md
-(read them from origin/main). The work queue assigns issue #$n to the developer; work only on it.
+(read them from origin/main). The work queue assigns issue #$n to the developer; work only on it. Other developer agents may
+work on other issues at the same time: never touch a branch, worktree or PR of another issue.
 
 1. git fetch origin. Read the spec docs/specs/$(printf '%04d' "$n")-*.md from origin/main and its
    prototype (if issue #$n is labeled bug, its body is the spec instead), and every comment on issue #$n and on its PR (gh issue view $n --comments; gh pr list --search "Closes #$n").
@@ -145,8 +187,12 @@ EOF
       return 0
     fi
     if [[ "$dry" == 1 ]]; then
-      log "dry-run: would run the developer on #$n from $control"
+      log "dry-run: developer $dev_id would run on #$n from $control"
       prompt_for "$n"
+      return 0
+    fi
+    if ! claim_issue "$n"; then
+      log "queue: #$n was just claimed by developer $(claim_owner "$n")"
       return 0
     fi
 
@@ -156,7 +202,7 @@ EOF
     local rc=$?
     ensure_control || return 0
     count_file="$state/no-progress-$n"
-    if [[ "$(next_dev_issue)" == "$n" ]]; then
+    if still_for_developer "$n"; then
       count=$(( $(cat "$count_file" 2>/dev/null || echo 0) + 1 ))
       echo "$count" > "$count_file"
       log "developer run on #$n finished (rc=$rc) but #$n is still to-dev (attempt $count/$max_no_progress)"
@@ -174,11 +220,11 @@ EOF
 
   install_service() {
     ensure_control || exit 1
-    local unit_dir="$HOME/.config/systemd/user" unit="kondor-dev-loop.service"
+    local unit_dir="$HOME/.config/systemd/user"
     mkdir -p "$unit_dir"
     cat > "$unit_dir/$unit" <<EOF
 [Unit]
-Description=Kondor developer agent loop ($engine)
+Description=Kondor developer agent loop $dev_id ($engine)
 After=network-online.target
 
 [Service]
@@ -188,12 +234,14 @@ MemoryHigh=12G
 MemoryMax=16G
 Environment=PATH=$control/scripts/bin:$HOME/.opencode/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin
 Environment=KONDOR_REPO=$repo
+Environment=KONDOR_DEV_ID=$dev_id
 Environment=KONDOR_CONTROL_DIR=$control
 Environment=KONDOR_STATE_DIR=$state
 Environment=KONDOR_ENGINE=$engine
 Environment=KONDOR_MODEL=$model
 Environment=KONDOR_EFFORT=$effort
 EnvironmentFile=-%h/.config/kondor-dev-loop/github.env
+EnvironmentFile=-%h/.config/kondor-dev-loop/identity.env
 ExecStartPre=/usr/bin/git -C $repo fetch -q origin
 ExecStartPre=/usr/bin/git -C $control checkout -q --force --detach origin/main
 ExecStart=/bin/bash $control/scripts/dev-loop.sh
@@ -205,7 +253,7 @@ WantedBy=default.target
 EOF
     systemctl --user daemon-reload
     systemctl --user enable --now "$unit"
-    log "installed and started $unit (journalctl --user -u kondor-dev-loop -f)"
+    log "installed and started $unit (journalctl --user -u ${unit%.service} -f)"
   }
 
   case "${1:-}" in
@@ -213,11 +261,11 @@ EOF
     --dry-run)   step 1 ;;
     --resume)    rm -f "$state/paused-${2:?issue number}" "$state/no-progress-${2}"; log "resumed #$2" ;;
     --install)   install_service ;;
-    --uninstall) systemctl --user disable --now kondor-dev-loop.service; rm -f "$HOME/.config/systemd/user/kondor-dev-loop.service"; systemctl --user daemon-reload; log "service removed" ;;
+    --uninstall) systemctl --user disable --now "$unit"; rm -f "$HOME/.config/systemd/user/$unit"; systemctl --user daemon-reload; log "$unit removed" ;;
     "")
       exec 9>"$state/lock"
       flock -n 9 || { log "another loop is running; exiting"; exit 0; }
-      log "loop started (every ${interval}s, $engine model $model, effort $effort, repo $repo, control $control)"
+      log "developer $dev_id loop started (every ${interval}s, $engine model $model, effort $effort, repo $repo, control $control)"
       local self="${BASH_SOURCE[0]}" self_sum
       self_sum="$(sha1sum "$self" | cut -d' ' -f1)"
       while true; do

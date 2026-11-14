@@ -3,12 +3,12 @@
 # and what the agent writes (💬) and which tools it calls (🔧) in the running Claude session. Moves to
 # each new run by itself. Ctrl+C stops it.
 #
-#   scripts/watch-agents.sh            # both loops
-#   scripts/watch-agents.sh architect  # one loop: architect or dev
+#   scripts/watch-agents.sh            # the architect and every installed developer loop
+#   scripts/watch-agents.sh architect  # one loop: architect, dev (developer 1), dev2, dev3, …
 #
 # The session view reads Claude Code transcripts: a developer loop on opencode shows queue events only.
-# Uses the same KONDOR_ARCH_CONTROL / KONDOR_ARCH_STATE / KONDOR_CONTROL_DIR / KONDOR_STATE_DIR
-# overrides as the loops.
+# Uses the same KONDOR_ARCH_CONTROL / KONDOR_ARCH_STATE overrides as the architect loop; developer
+# loops use their default folders (scripts/dev-loop.sh, KONDOR_DEV_ID).
 set -uo pipefail
 
 readonly POLL_SECONDS=5
@@ -19,9 +19,10 @@ main() {
   trap 'trap - EXIT; kill_children $$; exit' EXIT INT TERM
   case "${1:-all}" in
     architect) watch_architect ;;
-    dev)       watch_dev ;;
-    all)       watch_architect; watch_dev ;;
-    *)         echo "usage: $0 [architect|dev|all]" >&2; exit 2 ;;
+    dev)       watch_dev 1 ;;
+    dev[0-9]*) watch_dev "${1#dev}" ;;
+    all)       watch_architect; watch_all_devs ;;
+    *)         echo "usage: $0 [architect|dev|dev2|…|all]" >&2; exit 2 ;;
   esac
   wait
 }
@@ -36,10 +37,21 @@ watch_architect() {
     "${KONDOR_ARCH_STATE:-$HOME/.local/state/kondor-architect-loop}/architect-loop.log"
 }
 
+# watch_dev <developer loop number>
 watch_dev() {
-  watch_loop dev 36 \
-    "${KONDOR_CONTROL_DIR:-$HOME/.local/share/kondor-dev-loop/control}" \
-    "${KONDOR_STATE_DIR:-$HOME/.local/state/kondor-dev-loop}/dev-loop.log"
+  local suffix="" name=dev
+  [[ "$1" == 1 ]] || { suffix="-$1"; name="dev$1"; }
+  watch_loop "$name" 36 \
+    "$HOME/.local/share/kondor-dev-loop/control$suffix" \
+    "$HOME/.local/state/kondor-dev-loop$suffix/dev-loop.log"
+}
+
+watch_all_devs() {
+  local id
+  watch_dev 1
+  for id in 2 3 4 5 6 7 8 9; do
+    [[ -d "$HOME/.local/state/kondor-dev-loop-$id" ]] && watch_dev "$id"
+  done
 }
 
 # watch_loop <name> <color> <control dir> <loop log>

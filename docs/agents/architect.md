@@ -24,9 +24,11 @@ you what to do next. Work in your own git worktree on `main` (never in the devel
    zero-padded to 4 digits). It is the source of truth; the issue body only summarizes and links it.
 2. **Prototype** — for issues with UI, the static QML mockup under `prototypes/`, rendered to
    `prototypes/screenshots/*.png` (see `prototypes/README.md`).
-3. **Roadmap order** — you promote backlog issues to `to-dev`, **one at a time**: first any open
-   `bug` issue (highest `priority:` label first, oldest first among equals), then the order listed in `AGENTS.md` → "Roadmap order" (adjust it
-   when dependencies change).
+3. **Roadmap order** — you promote backlog issues to `to-dev`, **up to two in flight** (one per
+   developer loop): first any open `bug` issue (highest `priority:` label first, oldest first among
+   equals), then the order listed in `AGENTS.md` → "Roadmap order" (adjust it when dependencies
+   change), skipping an issue until every issue on its `**Depends on:** #A, #B` line (issue body)
+   is closed. Keep that line in the issue body of every roadmap issue that needs another one.
 4. **Defects** — when you find a defect in a delivered feature (or the maintainer reports one),
    file it as a `bug` issue whose body is its spec (see `AGENTS.md` → "Defects"): reproduce it
    first, and write concrete steps, expected and actual behavior, acceptance criteria and the
@@ -128,13 +130,13 @@ headless (`claude -p --permission-mode auto`) for exactly one step when:
 
 - an issue is `in-review` → review the PR; if it passes, approve it, add `approved` and squash-merge
   it once the `build` check is green (the maintainer decided the architect merges;
-  `KONDOR_ARCH_AUTOMERGE=0` leaves the merge to a human), then promote the next issue; otherwise
+  `KONDOR_ARCH_AUTOMERGE=0` leaves the merge to a human); otherwise
   request changes and switch to `to-dev`;
 - an issue has `question` → answer, record the decision in the spec, remove the label;
 - an issue is `to-spec` → write the spec/prototype, switch to `to-dev`;
-- nothing is in flight → promote the highest-priority open `bug` issue (oldest first among
-  equals), or else the next "Roadmap order"
-  issue, to `to-dev`.
+- no row is yours and fewer than two issues are in flight (`KONDOR_ARCH_MAX_IN_FLIGHT`) → the
+  loop picks the issue to promote (the highest-priority open `bug`, or else the next "Roadmap
+  order" issue whose "Depends on:" issues are closed) and you promote it to `to-dev`.
 
 `--permission-mode auto` keeps Claude Code's safety classifier in front of every action. Merging
 needs the maintainer's own allow rule `Bash(gh pr merge:*)` in `~/.claude/settings.json`; without it

@@ -6,7 +6,18 @@
 # passes every other cmake invocation through unchanged. See AGENTS.md → "Build and run".
 # When ccache is installed, new build directories compile through it, with one cache shared by
 # every worktree (paths relative to $HOME, the working directory left out of the hash).
+# Builds run one at a time across all loops (KONDOR_BUILD_LOCK): two C++ builds at once can run
+# the machine out of memory, and several developer loops may build at the same time.
 set -euo pipefail
+
+lock="${KONDOR_BUILD_LOCK:-$HOME/.local/state/kondor-build.lock}"
+
+run_one_build_at_a_time() {
+  mkdir -p "$(dirname "$lock")"
+  exec 7>"$lock"
+  flock -n 7 || { echo "cmake: waiting for another Kondor build to finish…" >&2; flock 7; }
+  exec "$real" "$@"
+}
 
 use_ccache_when_installed() {
   command -v ccache >/dev/null || return 0
@@ -73,4 +84,4 @@ if (( ! seen )); then
   out=("${final[@]}")
 fi
 
-exec "$real" "${out[@]}"
+run_one_build_at_a_time "${out[@]}"

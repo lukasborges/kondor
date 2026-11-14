@@ -192,6 +192,46 @@ EOF
     done < <(roadmap_order)
   }
 
+  # Promotes, without running Claude, every issue that only needs its label: while fewer than
+  # max_in_flight issues are in flight, the next promotion candidate is a bug (its body is its
+  # spec) or a roadmap issue whose spec is on main. A free developer then never waits for a long
+  # review to end. Candidates without a spec still go through the Claude promote step.
+  promote_ready_issues() {
+    local n
+    while (( $(in_flight) < max_in_flight )); do
+      n="$(next_promotion)"
+      [[ -n "$n" ]] && ready_to_promote "$n" || return 0
+      promote_now "$n" || return 0
+    done
+  }
+
+  in_flight() { queue | grep -c '^| #'; }
+
+  ready_to_promote() {
+    is_bug "$1" || compgen -G "$control/docs/specs/$(printf '%04d' "$1")-*.md" >/dev/null
+  }
+
+  is_bug() {
+    gh issue view "$1" --repo lukasborges/kondor --json labels -q '.labels[].name' 2>/dev/null | grep -qx bug
+  }
+
+  promote_now() {
+    local n="$1" spec
+    spec="$(cd "$control" && compgen -G "docs/specs/$(printf '%04d' "$n")-*.md" | head -1)"
+    gh issue edit "$n" --repo lukasborges/kondor --add-label to-dev >/dev/null || return 1
+    gh issue comment "$n" --repo lukasborges/kondor --body "$(promotion_comment "$spec")" >/dev/null
+    (cd "$control" && scripts/board.sh "$n" "In Progress" >/dev/null 2>&1)
+    log "promoted #$n to to-dev (no Claude run needed)"
+  }
+
+  promotion_comment() {
+    if [[ -n "$1" ]]; then
+      echo "This is now in development. Spec: [\`$1\`](https://github.com/lukasborges/kondor/blob/main/$1)."
+    else
+      echo "This is now in development. This bug issue is its own spec."
+    fi
+  }
+
   log_idle_once() {
     [[ -e "$state/idle" ]] && return 0
     touch "$state/idle"
@@ -226,6 +266,7 @@ EOF
   step() {
     local dry="$1" next n st key count_file count run_log rc after
     ensure_control || return 0
+    [[ "$dry" == 1 ]] || promote_ready_issues
     next="$(next_architect_step)"
     read -r n st <<<"$next"
     key="$n"

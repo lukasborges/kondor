@@ -406,22 +406,22 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="30"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="31"/>
         <source>New Tab</source>
         <translation>Nuova scheda</translation>
     </message>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="30"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="31"/>
         <source>New Private Tab</source>
         <translation>Nuova scheda privata</translation>
     </message>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="44"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="45"/>
         <source>Private Browsing</source>
         <translation>Navigazione privata</translation>
     </message>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="142"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="147"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Premi Esc per uscire dallo schermo intero</translation>
@@ -1260,6 +1260,11 @@
         <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="131"/>
         <source>Restore Removed Sites</source>
         <translation>Ripristina i siti rimossi</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="155"/>
+        <source>Tabs:</source>
+        <translation>Schede:</translation>
     </message>
 </context>
 <context>
@@ -2509,12 +2514,17 @@
         <translation>Nuove schede</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPageHeader.qml" line="47"/>
+        <location filename="../qml/settings/SettingsPageHeader.qml" line="39"/>
+        <source>Appearance</source>
+        <translation>Aspetto</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPageHeader.qml" line="48"/>
         <source>Saved Passwords</source>
         <translation>Password salvate</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPageHeader.qml" line="48"/>
+        <location filename="../qml/settings/SettingsPageHeader.qml" line="49"/>
         <source>Never Saved</source>
         <translation>Mai salvate</translation>
     </message>
@@ -2552,147 +2562,172 @@
         <translation>Mostra i siti più visitati</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="17"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="13"/>
+        <source>Appearance</source>
+        <translation>Aspetto</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="13"/>
+        <source>Tabs:</source>
+        <translation>Schede:</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="13"/>
+        <source>Floating</source>
+        <translation>Flottante</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="14"/>
+        <source>Below Address Bar</source>
+        <translation>Sotto la barra degli indirizzi</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="14"/>
+        <source>Classic</source>
+        <translation>Classico</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="19"/>
         <source>Search</source>
         <translation>Ricerca</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="19"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="21"/>
         <source>Search engine:</source>
         <translation>Motore di ricerca:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="19"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="21"/>
         <source>Custom URL:</source>
         <translation>URL personalizzato:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="20"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="22"/>
         <source>Show search suggestions</source>
         <translation>Mostra i suggerimenti di ricerca</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="25"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="27"/>
         <source>Downloads</source>
         <translation>Download</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="27"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="29"/>
         <source>Save files to:</source>
         <translation>Salva i file in:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="27"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="29"/>
         <source>Ask where to save each file</source>
         <translation>Chiedi dove salvare ogni file</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="32"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="34"/>
         <source>Privacy</source>
         <translation>Privacy</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="34"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
         <source>Cookies:</source>
         <translation>Cookie:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="34"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
         <source>On exit:</source>
         <translation>All&apos;uscita:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="35"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="37"/>
         <source>Clear cookies, cache and history</source>
         <translation>Cancella cookie, cache e cronologia</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="38"/>
         <source>Browsing data:</source>
         <translation>Dati di navigazione:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="38"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Cancella cookie e cache ora</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="37"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="39"/>
         <source>Site permissions:</source>
         <translation>Autorizzazioni dei siti:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="37"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="39"/>
         <source>Manage Site Permissions…</source>
         <translation>Gestisci le autorizzazioni dei siti…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="42"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="44"/>
         <source>Passwords</source>
         <translation>Password</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="44"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="46"/>
         <source>Offer to save passwords</source>
         <translation>Proponi di salvare le password</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="44"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="46"/>
         <source>Saved Passwords</source>
         <translation>Password salvate</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="45"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="47"/>
         <source>Never Saved</source>
         <translation>Mai salvate</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="45"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="47"/>
         <source>KWallet</source>
         <translation>KWallet</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="46"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="48"/>
         <source>Filter by site or username…</source>
         <translation>Filtra per sito o nome utente…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="51"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="53"/>
         <source>Extensions</source>
         <translation>Estensioni</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="53"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="55"/>
         <source>Filter extensions…</source>
         <translation>Filtra estensioni…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="53"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="55"/>
         <source>Get New Extensions…</source>
         <translation>Ottieni nuove estensioni…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="54"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="56"/>
         <source>Install from File…</source>
         <translation>Installa da file…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="54"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="56"/>
         <source>Update extensions automatically</source>
         <translation>Aggiorna le estensioni automaticamente</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="59"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="61"/>
         <source>Spelling</source>
         <translation>Ortografia</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="61"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="63"/>
         <source>Check spelling while typing</source>
         <translation>Controlla l&apos;ortografia durante la digitazione</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="61"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="63"/>
         <source>Languages:</source>
         <translation>Lingue:</translation>
     </message>
@@ -2885,7 +2920,7 @@
         <translation>Nuova scheda privata</translation>
     </message>
     <message>
-        <location filename="../qml/browser/tabstrip/TabButtonDelegate.qml" line="94"/>
+        <location filename="../qml/browser/tabstrip/TabButtonDelegate.qml" line="122"/>
         <source>Close Tab</source>
         <translation>Chiudi scheda</translation>
     </message>
@@ -2941,19 +2976,37 @@
 <context>
     <name>TabStrip</name>
     <message>
-        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="141"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="147"/>
         <source>Scroll Tabs Left</source>
         <translation>Scorri le schede a sinistra</translation>
     </message>
     <message>
-        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="150"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="156"/>
         <source>Scroll Tabs Right</source>
         <translation>Scorri le schede a destra</translation>
     </message>
     <message>
-        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="165"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="171"/>
         <source>New Tab</source>
         <translation>Nuova scheda</translation>
+    </message>
+</context>
+<context>
+    <name>TabStylePicker</name>
+    <message>
+        <location filename="../qml/settings/pages/appearance/TabStylePicker.qml" line="14"/>
+        <source>Floating</source>
+        <translation>Flottante</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/pages/appearance/TabStylePicker.qml" line="15"/>
+        <source>Below Address Bar</source>
+        <translation>Sotto la barra degli indirizzi</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/pages/appearance/TabStylePicker.qml" line="16"/>
+        <source>Classic</source>
+        <translation>Classico</translation>
     </message>
 </context>
 <context>

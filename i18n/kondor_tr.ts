@@ -406,22 +406,22 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="30"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="31"/>
         <source>New Tab</source>
         <translation>Yeni sekme</translation>
     </message>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="30"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="31"/>
         <source>New Private Tab</source>
         <translation>Yeni gizli sekme</translation>
     </message>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="44"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="45"/>
         <source>Private Browsing</source>
         <translation>Gizli gezinme</translation>
     </message>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="142"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="147"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Tam ekrandan çıkmak için Esc tuşuna basın</translation>
@@ -1259,6 +1259,11 @@
         <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="131"/>
         <source>Restore Removed Sites</source>
         <translation>Kaldırılan siteleri geri yükle</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="155"/>
+        <source>Tabs:</source>
+        <translation>Sekmeler:</translation>
     </message>
 </context>
 <context>
@@ -2498,12 +2503,17 @@
         <translation>Yeni sekmeler</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPageHeader.qml" line="47"/>
+        <location filename="../qml/settings/SettingsPageHeader.qml" line="39"/>
+        <source>Appearance</source>
+        <translation>Görünüm</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPageHeader.qml" line="48"/>
         <source>Saved Passwords</source>
         <translation>Kayıtlı parolalar</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPageHeader.qml" line="48"/>
+        <location filename="../qml/settings/SettingsPageHeader.qml" line="49"/>
         <source>Never Saved</source>
         <translation>Asla kaydedilmeyenler</translation>
     </message>
@@ -2541,147 +2551,172 @@
         <translation>En çok ziyaret edilenleri göster</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="17"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="13"/>
+        <source>Appearance</source>
+        <translation>Görünüm</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="13"/>
+        <source>Tabs:</source>
+        <translation>Sekmeler:</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="13"/>
+        <source>Floating</source>
+        <translation>Yüzen</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="14"/>
+        <source>Below Address Bar</source>
+        <translation>Adres Çubuğunun Altında</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="14"/>
+        <source>Classic</source>
+        <translation>Klasik</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="19"/>
         <source>Search</source>
         <translation>Arama</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="19"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="21"/>
         <source>Search engine:</source>
         <translation>Arama motoru:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="19"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="21"/>
         <source>Custom URL:</source>
         <translation>Özel URL:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="20"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="22"/>
         <source>Show search suggestions</source>
         <translation>Arama önerilerini göster</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="25"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="27"/>
         <source>Downloads</source>
         <translation>İndirilenler</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="27"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="29"/>
         <source>Save files to:</source>
         <translation>Dosyaları şuraya kaydet:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="27"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="29"/>
         <source>Ask where to save each file</source>
         <translation>Her dosyayı nereye kaydedeceğimi sor</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="32"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="34"/>
         <source>Privacy</source>
         <translation>Gizlilik</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="34"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
         <source>Cookies:</source>
         <translation>Çerezler:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="34"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
         <source>On exit:</source>
         <translation>Çıkışta:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="35"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="37"/>
         <source>Clear cookies, cache and history</source>
         <translation>Çerezleri, önbelleği ve geçmişi temizle</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="38"/>
         <source>Browsing data:</source>
         <translation>Tarama verileri:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="38"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Çerezleri ve önbelleği şimdi temizle</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="37"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="39"/>
         <source>Site permissions:</source>
         <translation>Site izinleri:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="37"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="39"/>
         <source>Manage Site Permissions…</source>
         <translation>Site izinlerini yönet…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="42"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="44"/>
         <source>Passwords</source>
         <translation>Parolalar</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="44"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="46"/>
         <source>Offer to save passwords</source>
         <translation>Parolaları kaydetmeyi öner</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="44"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="46"/>
         <source>Saved Passwords</source>
         <translation>Kayıtlı parolalar</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="45"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="47"/>
         <source>Never Saved</source>
         <translation>Asla kaydedilmeyenler</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="45"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="47"/>
         <source>KWallet</source>
         <translation>KWallet</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="46"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="48"/>
         <source>Filter by site or username…</source>
         <translation>Siteye veya kullanıcı adına göre süz…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="51"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="53"/>
         <source>Extensions</source>
         <translation>Eklentiler</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="53"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="55"/>
         <source>Filter extensions…</source>
         <translation>Eklentileri süz…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="53"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="55"/>
         <source>Get New Extensions…</source>
         <translation>Yeni Eklentiler Al…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="54"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="56"/>
         <source>Install from File…</source>
         <translation>Dosyadan Yükle…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="54"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="56"/>
         <source>Update extensions automatically</source>
         <translation>Eklentileri otomatik güncelle</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="59"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="61"/>
         <source>Spelling</source>
         <translation>Yazım</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="61"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="63"/>
         <source>Check spelling while typing</source>
         <translation>Yazarken yazımı denetle</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="61"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="63"/>
         <source>Languages:</source>
         <translation>Diller:</translation>
     </message>
@@ -2874,7 +2909,7 @@
         <translation>Yeni gizli sekme</translation>
     </message>
     <message>
-        <location filename="../qml/browser/tabstrip/TabButtonDelegate.qml" line="94"/>
+        <location filename="../qml/browser/tabstrip/TabButtonDelegate.qml" line="122"/>
         <source>Close Tab</source>
         <translation>Sekmeyi kapat</translation>
     </message>
@@ -2930,19 +2965,37 @@
 <context>
     <name>TabStrip</name>
     <message>
-        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="141"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="147"/>
         <source>Scroll Tabs Left</source>
         <translation>Sekmeleri sola kaydır</translation>
     </message>
     <message>
-        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="150"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="156"/>
         <source>Scroll Tabs Right</source>
         <translation>Sekmeleri sağa kaydır</translation>
     </message>
     <message>
-        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="165"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="171"/>
         <source>New Tab</source>
         <translation>Yeni sekme</translation>
+    </message>
+</context>
+<context>
+    <name>TabStylePicker</name>
+    <message>
+        <location filename="../qml/settings/pages/appearance/TabStylePicker.qml" line="14"/>
+        <source>Floating</source>
+        <translation>Yüzen</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/pages/appearance/TabStylePicker.qml" line="15"/>
+        <source>Below Address Bar</source>
+        <translation>Adres Çubuğunun Altında</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/pages/appearance/TabStylePicker.qml" line="16"/>
+        <source>Classic</source>
+        <translation>Klasik</translation>
     </message>
 </context>
 <context>

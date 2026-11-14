@@ -11,6 +11,11 @@ Rectangle {
     property var targetWindow: null
     property bool privateWindow: false
     property bool tabDragActive: false
+    property string tabStyle: Settings.tabStyle
+
+    readonly property bool isStyled: tabStyle !== "classic"
+    readonly property bool isBelowAddressBar: tabStyle === "below"
+    readonly property real contentMargin: isStyled ? Kirigami.Units.smallSpacing : 0
 
     signal newTabRequested()
 
@@ -29,7 +34,7 @@ Rectangle {
     readonly property int pinnedCount: tabModel.pinnedCount
     readonly property int unpinnedCount: Math.max(0, tabModel.count - pinnedCount)
 
-    readonly property real baseAreaWidth: Math.max(0, strip.width
+    readonly property real baseAreaWidth: Math.max(0, strip.width - 2 * contentMargin
         - (privateIcon.visible ? privateIcon.Layout.leftMargin + privateIcon.Layout.preferredWidth
                                  + privateIcon.Layout.rightMargin : 0)
         - newTabButton.implicitWidth - newTabButton.Layout.leftMargin)
@@ -41,8 +46,8 @@ Rectangle {
     readonly property real tabWidth: freeze.frozenWidth > 0 ? freeze.frozenWidth
         : computeTabWidth(tabsAreaWidth, unpinnedCount, pinnedCount)
 
-    implicitHeight: tabBar.implicitHeight
-    Kirigami.Theme.colorSet: Kirigami.Theme.Header
+    implicitHeight: tabBar.implicitHeight + 2 * contentMargin
+    Kirigami.Theme.colorSet: isBelowAddressBar ? Kirigami.Theme.Window : Kirigami.Theme.Header
     Kirigami.Theme.inherit: false
     color: Kirigami.Theme.backgroundColor
 
@@ -85,6 +90,7 @@ Rectangle {
 
     RowLayout {
         anchors.fill: parent
+        anchors.margins: strip.contentMargin
         spacing: 0
 
         Kirigami.Icon {

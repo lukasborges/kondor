@@ -17,6 +17,7 @@ ApplicationWindow {
     property int initialCurrentIndex: -1
 
     readonly property alias tabModel: tabs
+    readonly property bool tabsBelowAddressBar: Settings.tabStyle === "below"
     property alias windowFullScreen: fullScreenControl.windowFullScreen
     readonly property BrowserActions actions: BrowserActions {
         tabs: window.tabModel
@@ -104,11 +105,13 @@ ApplicationWindow {
         fullScreen: fullScreenControl
     }
 
-    header: ColumnLayout {
-        spacing: 0
+    header: GridLayout {
+        columns: 1
+        rowSpacing: 0
         visible: !fullScreenControl.pageFullScreen
 
         TabStrip {
+            Layout.row: window.tabsBelowAddressBar ? 1 : 0
             Layout.fillWidth: true
             tabModel: window.tabModel
             targetWindow: window
@@ -118,12 +121,14 @@ ApplicationWindow {
 
         NavigationToolBar {
             id: toolBar
+            Layout.row: window.tabsBelowAddressBar ? 0 : 1
             Layout.fillWidth: true
             tabs: window.tabModel
             browserWindow: window
         }
 
         BookmarksBar {
+            Layout.row: 2
             Layout.fillWidth: true
             tabModel: window.tabModel
         }

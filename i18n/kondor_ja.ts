@@ -406,22 +406,22 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="30"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="31"/>
         <source>New Tab</source>
         <translation>新しいタブ</translation>
     </message>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="30"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="31"/>
         <source>New Private Tab</source>
         <translation>新しいプライベートタブ</translation>
     </message>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="44"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="45"/>
         <source>Private Browsing</source>
         <translation>プライベートブラウジング</translation>
     </message>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="142"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="147"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>全画面表示を終了するには Esc キーを押してください</translation>
@@ -1259,6 +1259,11 @@
         <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="131"/>
         <source>Restore Removed Sites</source>
         <translation>削除したサイトを復元</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="155"/>
+        <source>Tabs:</source>
+        <translation>タブ:</translation>
     </message>
 </context>
 <context>
@@ -2498,12 +2503,17 @@
         <translation>新しいタブ</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPageHeader.qml" line="47"/>
+        <location filename="../qml/settings/SettingsPageHeader.qml" line="39"/>
+        <source>Appearance</source>
+        <translation>外観</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPageHeader.qml" line="48"/>
         <source>Saved Passwords</source>
         <translation>保存済みパスワード</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPageHeader.qml" line="48"/>
+        <location filename="../qml/settings/SettingsPageHeader.qml" line="49"/>
         <source>Never Saved</source>
         <translation>保存しないサイト</translation>
     </message>
@@ -2541,147 +2551,172 @@
         <translation>トップサイトを表示</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="17"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="13"/>
+        <source>Appearance</source>
+        <translation>外観</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="13"/>
+        <source>Tabs:</source>
+        <translation>タブ:</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="13"/>
+        <source>Floating</source>
+        <translation>フローティング</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="14"/>
+        <source>Below Address Bar</source>
+        <translation>アドレスバーの下</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="14"/>
+        <source>Classic</source>
+        <translation>クラシック</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="19"/>
         <source>Search</source>
         <translation>検索</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="19"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="21"/>
         <source>Search engine:</source>
         <translation>検索エンジン:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="19"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="21"/>
         <source>Custom URL:</source>
         <translation>カスタム URL:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="20"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="22"/>
         <source>Show search suggestions</source>
         <translation>検索候補を表示</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="25"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="27"/>
         <source>Downloads</source>
         <translation>ダウンロード</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="27"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="29"/>
         <source>Save files to:</source>
         <translation>ファイルの保存先:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="27"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="29"/>
         <source>Ask where to save each file</source>
         <translation>ファイルごとに保存先を尋ねる</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="32"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="34"/>
         <source>Privacy</source>
         <translation>プライバシー</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="34"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
         <source>Cookies:</source>
         <translation>Cookie:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="34"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
         <source>On exit:</source>
         <translation>終了時:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="35"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="37"/>
         <source>Clear cookies, cache and history</source>
         <translation>Cookie、キャッシュ、履歴を消去</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="38"/>
         <source>Browsing data:</source>
         <translation>閲覧データ:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="38"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>Cookie とキャッシュを今すぐ消去</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="37"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="39"/>
         <source>Site permissions:</source>
         <translation>サイトの権限:</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="37"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="39"/>
         <source>Manage Site Permissions…</source>
         <translation>サイトの権限を管理…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="42"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="44"/>
         <source>Passwords</source>
         <translation>パスワード</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="44"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="46"/>
         <source>Offer to save passwords</source>
         <translation>パスワードの保存を提案する</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="44"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="46"/>
         <source>Saved Passwords</source>
         <translation>保存済みパスワード</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="45"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="47"/>
         <source>Never Saved</source>
         <translation>保存しないサイト</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="45"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="47"/>
         <source>KWallet</source>
         <translation>KWallet</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="46"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="48"/>
         <source>Filter by site or username…</source>
         <translation>サイトまたはユーザー名で絞り込み…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="51"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="53"/>
         <source>Extensions</source>
         <translation>拡張機能</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="53"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="55"/>
         <source>Filter extensions…</source>
         <translation>拡張機能を絞り込み…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="53"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="55"/>
         <source>Get New Extensions…</source>
         <translation>新しい拡張機能を入手…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="54"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="56"/>
         <source>Install from File…</source>
         <translation>ファイルからインストール…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="54"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="56"/>
         <source>Update extensions automatically</source>
         <translation>拡張機能を自動的に更新</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="59"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="61"/>
         <source>Spelling</source>
         <translation>スペルチェック</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="61"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="63"/>
         <source>Check spelling while typing</source>
         <translation>入力中にスペルをチェックする</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="61"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="63"/>
         <source>Languages:</source>
         <translation>言語:</translation>
     </message>
@@ -2874,7 +2909,7 @@
         <translation>新しいプライベートタブ</translation>
     </message>
     <message>
-        <location filename="../qml/browser/tabstrip/TabButtonDelegate.qml" line="94"/>
+        <location filename="../qml/browser/tabstrip/TabButtonDelegate.qml" line="122"/>
         <source>Close Tab</source>
         <translation>タブを閉じる</translation>
     </message>
@@ -2930,19 +2965,37 @@
 <context>
     <name>TabStrip</name>
     <message>
-        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="141"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="147"/>
         <source>Scroll Tabs Left</source>
         <translation>タブを左にスクロール</translation>
     </message>
     <message>
-        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="150"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="156"/>
         <source>Scroll Tabs Right</source>
         <translation>タブを右にスクロール</translation>
     </message>
     <message>
-        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="165"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="171"/>
         <source>New Tab</source>
         <translation>新しいタブ</translation>
+    </message>
+</context>
+<context>
+    <name>TabStylePicker</name>
+    <message>
+        <location filename="../qml/settings/pages/appearance/TabStylePicker.qml" line="14"/>
+        <source>Floating</source>
+        <translation>フローティング</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/pages/appearance/TabStylePicker.qml" line="15"/>
+        <source>Below Address Bar</source>
+        <translation>アドレスバーの下</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/pages/appearance/TabStylePicker.qml" line="16"/>
+        <source>Classic</source>
+        <translation>クラシック</translation>
     </message>
 </context>
 <context>

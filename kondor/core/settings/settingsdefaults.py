@@ -39,6 +39,7 @@ FACTORIES: dict[str, Callable[[], object]] = {
     "clearDataOnExit": constant(False),
     "blockThirdPartyCookies": constant(False),
     "searchSuggestions": constant(False),
+    "tabStyle": constant("floating"),
     "readerFontSize": constant(18),
     "readerSerif": constant(True),
     "spellCheckEnabled": constant(True),

@@ -28,6 +28,7 @@ private slots:
     void storageKeysStayTheSame_data();
     void storageKeysStayTheSame();
     void readerFontSizeIsClamped();
+    void unknownTabStyleReadsAsFloating();
 };
 
 void TestSettings::initTestCase()
@@ -58,6 +59,8 @@ void TestSettings::addStartupAndInterfaceRows()
             << QStringLiteral("startupBehavior") << QVariant(QStringLiteral("homepage"));
     QTest::newRow("showBookmarksBar")
             << QStringLiteral("showBookmarksBar") << QVariant(false);
+    QTest::newRow("tabStyle")
+            << QStringLiteral("tabStyle") << QVariant(QStringLiteral("floating"));
     QTest::newRow("showTopSites") << QStringLiteral("showTopSites") << QVariant(true);
     QTest::newRow("hiddenTopSites")
             << QStringLiteral("hiddenTopSites") << QVariant(QStringList());
@@ -182,6 +185,13 @@ void TestSettings::readerFontSizeIsClamped()
     QCOMPARE(Settings::instance()->readerFontSize(), 32);
     Settings::instance()->setReaderFontSize(1);
     QCOMPARE(Settings::instance()->readerFontSize(), 12);
+}
+
+void TestSettings::unknownTabStyleReadsAsFloating()
+{
+    Settings::instance()->setTabStyle(QStringLiteral("classic"));
+    Settings::instance()->setTabStyle(QStringLiteral("sideways"));
+    QCOMPARE(Settings::instance()->tabStyle(), QStringLiteral("floating"));
 }
 
 QTEST_MAIN(TestSettings)

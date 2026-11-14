@@ -90,6 +90,10 @@ qt_add_qml_module(kondor
         qml/browser/pages/TopSiteMenu.qml
         qml/browser/tabstrip/TabButtonDelegate.qml
         qml/browser/tabstrip/TabContextMenu.qml
+        qml/browser/tabstrip/style/TabCard.qml
+        qml/settings/pages/appearance/TabStylePicker.qml
+        qml/settings/pages/appearance/TabStyleThumbnail.qml
+        qml/settings/pages/appearance/ThumbnailTabs.qml
         qml/common/InlineBar.qml
         qml/common/ConfirmDialog.qml
         qml/browser/view/FindBar.qml

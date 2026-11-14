@@ -11,6 +11,7 @@ QtObject {
     property bool askWhereToSave: false
     property string startupBehavior: ""
     property bool showTopSites: false
+    property string tabStyle: "floating"
     property bool clearDataOnExit: false
     property bool blockThirdPartyCookies: false
     property bool adBlockEnabled: true
@@ -22,7 +23,7 @@ QtObject {
 
     readonly property var optionNames: [
         "homePage", "searchEngine", "customSearchUrl", "downloadDirectory",
-        "askWhereToSave", "startupBehavior", "showTopSites", "clearDataOnExit",
+        "askWhereToSave", "startupBehavior", "showTopSites", "tabStyle", "clearDataOnExit",
         "blockThirdPartyCookies", "adBlockEnabled", "searchSuggestions",
         "spellCheckEnabled", "spellCheckLanguages", "offerToSavePasswords",
         "extensionsAutoUpdate"
@@ -30,7 +31,7 @@ QtObject {
 
     readonly property var values: [homePage, searchEngine, customSearchUrl,
         downloadDirectory, askWhereToSave, startupBehavior, showTopSites,
-        clearDataOnExit, blockThirdPartyCookies, adBlockEnabled, searchSuggestions,
+        tabStyle, clearDataOnExit, blockThirdPartyCookies, adBlockEnabled, searchSuggestions,
         spellCheckEnabled, spellCheckLanguages, offerToSavePasswords, extensionsAutoUpdate]
 
     function read() {

@@ -41,6 +41,7 @@ class Settings : public QObject
                    WRITE setBlockThirdPartyCookies NOTIFY blockThirdPartyCookiesChanged)
     Q_PROPERTY(bool searchSuggestions READ searchSuggestions WRITE setSearchSuggestions
                    NOTIFY searchSuggestionsChanged)
+    Q_PROPERTY(QString tabStyle READ tabStyle WRITE setTabStyle NOTIFY tabStyleChanged)
     Q_PROPERTY(int readerFontSize READ readerFontSize WRITE setReaderFontSize
                    NOTIFY readerFontSizeChanged)
     Q_PROPERTY(bool readerSerif READ readerSerif WRITE setReaderSerif NOTIFY readerSerifChanged)
@@ -86,6 +87,7 @@ public:
     bool blockThirdPartyCookies() const { return m_blockThirdPartyCookies; }
     bool searchSuggestions() const { return m_searchSuggestions; }
     bool spellCheckEnabled() const { return m_spellCheckEnabled; }
+    QString tabStyle() const { return m_tabStyle; }
     int readerFontSize() const { return m_readerFontSize; }
     bool readerSerif() const { return m_readerSerif; }
     QStringList spellCheckLanguages() const { return m_spellCheckLanguages; }
@@ -110,6 +112,7 @@ public:
     void setBlockThirdPartyCookies(bool blockThirdPartyCookies);
     void setSearchSuggestions(bool searchSuggestions);
     void setSpellCheckEnabled(bool spellCheckEnabled);
+    void setTabStyle(const QString &tabStyle);
     void setReaderFontSize(int readerFontSize);
     void setReaderSerif(bool readerSerif);
     void setSpellCheckLanguages(const QStringList &spellCheckLanguages);
@@ -144,6 +147,7 @@ signals:
     void blockThirdPartyCookiesChanged();
     void searchSuggestionsChanged();
     void spellCheckEnabledChanged();
+    void tabStyleChanged();
     void readerFontSizeChanged();
     void readerSerifChanged();
     void spellCheckLanguagesChanged();
@@ -179,6 +183,7 @@ private:
     bool m_adBlockEnabled = true;
     QStringList m_adBlockAllowList;
     QDateTime m_adBlockLastUpdate;
+    QString m_tabStyle;
     int m_readerFontSize = 18;
     bool m_readerSerif = true;
     bool m_offerToSavePasswords = true;

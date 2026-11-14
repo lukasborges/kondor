@@ -406,22 +406,22 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="30"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="31"/>
         <source>New Tab</source>
         <translation>新建标签页</translation>
     </message>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="30"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="31"/>
         <source>New Private Tab</source>
         <translation>新建隐私标签页</translation>
     </message>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="44"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="45"/>
         <source>Private Browsing</source>
         <translation>隐私浏览</translation>
     </message>
     <message>
-        <location filename="../qml/app/BrowserWindow.qml" line="142"/>
+        <location filename="../qml/app/BrowserWindow.qml" line="147"/>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>按 Esc 键退出全屏</translation>
@@ -1259,6 +1259,11 @@
         <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="131"/>
         <source>Restore Removed Sites</source>
         <translation>恢复已移除的网站</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/pages/GeneralSettingsPage.qml" line="155"/>
+        <source>Tabs:</source>
+        <translation>标签页:</translation>
     </message>
 </context>
 <context>
@@ -2498,12 +2503,17 @@
         <translation>新建标签页</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPageHeader.qml" line="47"/>
+        <location filename="../qml/settings/SettingsPageHeader.qml" line="39"/>
+        <source>Appearance</source>
+        <translation>外观</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPageHeader.qml" line="48"/>
         <source>Saved Passwords</source>
         <translation>已保存的密码</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPageHeader.qml" line="48"/>
+        <location filename="../qml/settings/SettingsPageHeader.qml" line="49"/>
         <source>Never Saved</source>
         <translation>从不保存</translation>
     </message>
@@ -2541,147 +2551,172 @@
         <translation>显示常用网站</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="17"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="13"/>
+        <source>Appearance</source>
+        <translation>外观</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="13"/>
+        <source>Tabs:</source>
+        <translation>标签页:</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="13"/>
+        <source>Floating</source>
+        <translation>浮动</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="14"/>
+        <source>Below Address Bar</source>
+        <translation>地址栏下方</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="14"/>
+        <source>Classic</source>
+        <translation>经典</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/SettingsPages.qml" line="19"/>
         <source>Search</source>
         <translation>搜索</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="19"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="21"/>
         <source>Search engine:</source>
         <translation>搜索引擎：</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="19"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="21"/>
         <source>Custom URL:</source>
         <translation>自定义 URL：</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="20"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="22"/>
         <source>Show search suggestions</source>
         <translation>显示搜索建议</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="25"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="27"/>
         <source>Downloads</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="27"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="29"/>
         <source>Save files to:</source>
         <translation>保存文件到：</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="27"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="29"/>
         <source>Ask where to save each file</source>
         <translation>每次保存文件时询问位置</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="32"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="34"/>
         <source>Privacy</source>
         <translation>隐私</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="34"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
         <source>Cookies:</source>
         <translation>Cookie：</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="34"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
         <source>On exit:</source>
         <translation>退出时：</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="35"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="37"/>
         <source>Clear cookies, cache and history</source>
         <translation>清除 Cookie、缓存和历史记录</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="38"/>
         <source>Browsing data:</source>
         <translation>浏览数据：</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="36"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="38"/>
         <source>Clear Cookies and Cache Now</source>
         <translation>立即清除 Cookie 和缓存</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="37"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="39"/>
         <source>Site permissions:</source>
         <translation>网站权限：</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="37"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="39"/>
         <source>Manage Site Permissions…</source>
         <translation>管理网站权限…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="42"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="44"/>
         <source>Passwords</source>
         <translation>密码</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="44"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="46"/>
         <source>Offer to save passwords</source>
         <translation>提示保存密码</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="44"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="46"/>
         <source>Saved Passwords</source>
         <translation>已保存的密码</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="45"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="47"/>
         <source>Never Saved</source>
         <translation>从不保存</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="45"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="47"/>
         <source>KWallet</source>
         <translation>KWallet</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="46"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="48"/>
         <source>Filter by site or username…</source>
         <translation>按网站或用户名筛选…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="51"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="53"/>
         <source>Extensions</source>
         <translation>扩展</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="53"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="55"/>
         <source>Filter extensions…</source>
         <translation>筛选扩展…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="53"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="55"/>
         <source>Get New Extensions…</source>
         <translation>获取新扩展…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="54"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="56"/>
         <source>Install from File…</source>
         <translation>从文件安装…</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="54"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="56"/>
         <source>Update extensions automatically</source>
         <translation>自动更新扩展</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="59"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="61"/>
         <source>Spelling</source>
         <translation>拼写</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="61"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="63"/>
         <source>Check spelling while typing</source>
         <translation>输入时检查拼写</translation>
     </message>
     <message>
-        <location filename="../qml/settings/SettingsPages.qml" line="61"/>
+        <location filename="../qml/settings/SettingsPages.qml" line="63"/>
         <source>Languages:</source>
         <translation>语言：</translation>
     </message>
@@ -2874,7 +2909,7 @@
         <translation>新建隐私标签页</translation>
     </message>
     <message>
-        <location filename="../qml/browser/tabstrip/TabButtonDelegate.qml" line="94"/>
+        <location filename="../qml/browser/tabstrip/TabButtonDelegate.qml" line="122"/>
         <source>Close Tab</source>
         <translation>关闭标签页</translation>
     </message>
@@ -2930,19 +2965,37 @@
 <context>
     <name>TabStrip</name>
     <message>
-        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="141"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="147"/>
         <source>Scroll Tabs Left</source>
         <translation>向左滚动标签页</translation>
     </message>
     <message>
-        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="150"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="156"/>
         <source>Scroll Tabs Right</source>
         <translation>向右滚动标签页</translation>
     </message>
     <message>
-        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="165"/>
+        <location filename="../qml/browser/tabstrip/TabStrip.qml" line="171"/>
         <source>New Tab</source>
         <translation>新建标签页</translation>
+    </message>
+</context>
+<context>
+    <name>TabStylePicker</name>
+    <message>
+        <location filename="../qml/settings/pages/appearance/TabStylePicker.qml" line="14"/>
+        <source>Floating</source>
+        <translation>浮动</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/pages/appearance/TabStylePicker.qml" line="15"/>
+        <source>Below Address Bar</source>
+        <translation>地址栏下方</translation>
+    </message>
+    <message>
+        <location filename="../qml/settings/pages/appearance/TabStylePicker.qml" line="16"/>
+        <source>Classic</source>
+        <translation>经典</translation>
     </message>
 </context>
 <context>

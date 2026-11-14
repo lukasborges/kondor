@@ -20,6 +20,7 @@
 #                         loop (default: 2). An issue is promoted only when every issue on its
 #                         "Depends on:" line (issue body) is closed.
 #   KONDOR_ARCH_MODEL     Claude model (default: opus; empty = Claude Code's default)
+#   KONDOR_ARCH_EFFORT    Claude Code effort level: low, medium, high, xhigh or max (default: medium)
 #   KONDOR_ARCH_AUTOMERGE 1 = the architect squash-merges approved PRs whose build passed (default, the
 #                         maintainer's decision), 0 = approve, add `approved` and leave the merge to a human
 #   KONDOR_AGENT_FILES    folder with AGENTS.md and opencode.json, linked into the control checkout
@@ -43,6 +44,7 @@ main() {
   local max_no_progress="${KONDOR_ARCH_MAX_NO_PROGRESS:-2}"
   local max_in_flight="${KONDOR_ARCH_MAX_IN_FLIGHT:-2}"
   local model="${KONDOR_ARCH_MODEL-opus}"
+  local effort="${KONDOR_ARCH_EFFORT:-medium}"
   local merge="${KONDOR_ARCH_AUTOMERGE:-1}"
   local claude="${KONDOR_CLAUDE:-$(command -v claude || echo "$HOME/.local/bin/claude")}"
   local log="$state/architect-loop.log"
@@ -263,7 +265,7 @@ EOF
 
     run_log="$state/run-$key-$st-$(date +%Y%m%d-%H%M%S).log"
     log "running architect: $st on #$n (log: $run_log)"
-    local args=(-p --permission-mode auto --output-format text)
+    local args=(-p --permission-mode auto --effort "$effort" --output-format text)
     [[ -n "$model" ]] && args+=(--model "$model")
     (cd "$control" && "$claude" "${args[@]}" "$(prompt_for "$n" "$st")") >"$run_log" 2>&1
     rc=$?
@@ -336,7 +338,7 @@ EOF
     "")
       exec 9>"$state/lock"
       flock -n 9 || { log "another loop is running; exiting"; exit 0; }
-      log "loop started (every ${interval}s, model ${model:-default}, merge=$merge, repo $repo, control $control)"
+      log "loop started (every ${interval}s, model ${model:-default}, effort $effort, merge=$merge, repo $repo, control $control)"
       local self="${BASH_SOURCE[0]}" self_sum
       self_sum="$(sha1sum "$self" | cut -d' ' -f1)"
       while true; do

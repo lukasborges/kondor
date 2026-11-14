@@ -29,7 +29,7 @@ inline const QList<StorageRow> kStorageRows = {
     {"searchSuggestions", "Search/Suggestions", QVariant(true)},
     {"spellCheckEnabled", "SpellCheck/Enabled", QVariant(false)},
     {"spellCheckLanguages", "SpellCheck/Languages", kList},
-    {"tabStyle", "UI/TabStyle", QVariant(QStringLiteral("classic"))},
+    {"tabStyle", "UI/TabStyle", QVariant(QStringLiteral("vertical"))},
     {"readerFontSize", "Reader/FontSize", QVariant(24)},
     {"readerSerif", "Reader/Serif", QVariant(false)},
     {"adBlockLastUpdate", "AdBlock/LastUpdate", QVariant(QDateTime::fromSecsSinceEpoch(1000000))},

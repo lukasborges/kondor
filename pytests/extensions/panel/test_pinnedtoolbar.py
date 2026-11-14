@@ -3,7 +3,7 @@ from functools import reduce
 from itertools import product
 
 import pytest
-from PySide6.QtCore import QObject, QRect, QSize, QUrl
+from PySide6.QtCore import QCoreApplication, QEvent, QObject, QRect, QSize, QUrl
 from PySide6.QtGui import QAccessible, QImage
 from PySide6.QtQml import QQmlEngine
 from PySide6.QtQuick import QQuickItem, QQuickWindow
@@ -120,6 +120,8 @@ class ToolBar:
     def close(self) -> None:
         if self.window is not None and isValid(self.window):
             self.window.close()
+            self.window.deleteLater()
+            QCoreApplication.sendPostedEvents(None, QEvent.Type.DeferredDelete)
         ExtensionManager.instance().setPinned(SAMPLE, False)
 
 

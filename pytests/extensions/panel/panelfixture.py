@@ -4,6 +4,8 @@ from dataclasses import dataclass, field
 from PySide6.QtCore import (
     Q_ARG,
     Q_RETURN_ARG,
+    QCoreApplication,
+    QEvent,
     QMetaObject,
     QObject,
     Qt,
@@ -141,6 +143,8 @@ class PanelFixture:
     def reset(self) -> None:
         if self.window is not None and isValid(self.window):
             self.window.close()
+            self.window.deleteLater()
+            QCoreApplication.sendPostedEvents(None, QEvent.Type.DeferredDelete)
         self.window = None
         self.panel = None
         self.tab = None

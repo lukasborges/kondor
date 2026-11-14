@@ -2,7 +2,9 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 
 from PySide6.QtCore import QObject, QtMsgType, QUrl, qInstallMessageHandler
+from PySide6.QtGui import QAccessible
 from PySide6.QtQml import QQmlComponent, QQmlEngine
+from PySide6.QtQuick import QQuickItem
 
 
 @contextmanager
@@ -34,3 +36,17 @@ def create_object(engine: QQmlEngine, source: str) -> QObject:
     created = component.create()
     assert created is not None, error_text(component)
     return created
+
+
+def is_unnamed_button(item: QQuickItem) -> bool:
+    if not item.isVisible() or not item.inherits("QQuickAbstractButton"):
+        return False
+    accessible = QAccessible.queryAccessibleInterface(item)
+    return accessible is not None and not accessible.text(QAccessible.Text.Name)
+
+
+def unnamed_buttons(item: QQuickItem) -> list[str]:
+    found = [item.metaObject().className()] if is_unnamed_button(item) else []
+    for child in item.childItems():
+        found += unnamed_buttons(child)
+    return found

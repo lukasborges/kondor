@@ -165,7 +165,7 @@ work on other issues at the same time: never touch a branch, worktree or PR of a
    question label instead of guessing.
 5. Never edit docs/specs, prototypes, AGENTS.md or docs/agents; never merge; never push to main.
 6. Commit messages and PR bodies never carry Co-Authored-By or any other attribution trailer.
-7. Build with cmake --build <dir> --parallel 4, never a bare --parallel (with Makefiles it means unlimited jobs and runs the machine out of memory).
+7. Run the Python tests only with scripts/run-pytests.sh [args] (it cleans up the private D-Bus session; a bare dbus-run-session -- pytest can hang). Build with cmake --build <dir> --parallel 4, never a bare --parallel (with Makefiles it means unlimited jobs and runs the machine out of memory).
 
 Stop after this one step and print a short report: what changed, test results, PR link, labels.
 EOF

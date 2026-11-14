@@ -48,7 +48,7 @@ modules:
       - -DCMAKE_BUILD_TYPE=Release
       - -DBUILD_TESTS=OFF
       - -DPython_EXECUTABLE=/usr/bin/python3
-      - -DMODULES=Core;Gui;Qml;Quick;QuickControls2;Network;Sql;DBus;WebEngineCore;WebEngineQuick;WebChannel
+      - -DMODULES=Core;Gui;Qml;Quick;QuickControls2;Network;Sql;DBus;OpenGL;Widgets;PrintSupport;WebEngineCore;WebEngineQuick;WebChannel
     sources: *pyside-sources
   - name: kondor-proof
     buildsystem: simple

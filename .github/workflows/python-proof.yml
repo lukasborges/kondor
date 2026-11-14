@@ -45,7 +45,7 @@ jobs:
           cp -r "$SITE/shiboken6" "$LIB/site-packages/"
           mkdir -p "$LIB/site-packages/PySide6"
           cp "$SITE/PySide6/__init__.py" "$SITE/PySide6/_config.py" "$LIB/site-packages/PySide6/"
-          for module in Core Gui Qml Quick QuickControls2 Network Sql DBus WebEngineCore WebEngineQuick WebChannel; do
+          for module in Core Gui Qml Quick QuickControls2 Network Sql DBus OpenGL Widgets PrintSupport WebEngineCore WebEngineQuick WebChannel; do
             cp "$SITE"/PySide6/Qt$module.*.so "$LIB/site-packages/PySide6/"
           done
 
@@ -125,8 +125,7 @@ jobs:
       - name: Install host libraries only
         run: |
           dnf -y install dbus-daemon mesa-libGL mesa-libEGL fontconfig libxkbcommon nss \
-              alsa-lib pulseaudio-libs libdrm
-          dnf -y install pipewire-libs || { dnf repolist; dnf search pipewire; dnf provides '*libpipewire-0.3.so.0'; exit 1; }
+              pipewire-libs alsa-lib pulseaudio-libs libdrm libglvnd-opengl libglvnd-egl libglvnd-glx
 
       - name: Check that the bundle is self-contained
         run: "! rpm -q python3-pyside6 qt6-qtbase"
@@ -152,12 +151,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Diagnose the runtime update
-        continue-on-error: true
-        run: |
-          df -h /var/lib/flatpak /var/tmp /tmp
-          mount | grep -E "flatpak|/var" || true
-          flatpak update --system --noninteractive -vv org.kde.Sdk//6.11 2>&1 | tail -30
+      - name: Update the runtimes
+        run: flatpak update --system --noninteractive
 
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6

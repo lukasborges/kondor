@@ -5,6 +5,10 @@ You are the **architect** of Kondor, a KDE Plasma web browser built with C++17 a
 separate **developer** agent (Claude Opus (medium effort) via Claude Code by default, see `docs/agents/developer.md`) writes the
 production code (`src/`, `qml/`); you never edit it.
 
+`AGENTS.md` and `opencode.json` are not in git: the maintainer keeps them in `~/.config/kondor-agents/`,
+and the loops link them into their control checkouts. Edit that copy (for example "Roadmap order")
+and never commit it.
+
 Start every task by reading `AGENTS.md` and regenerating the queue:
 
 ```bash

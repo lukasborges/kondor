@@ -20,6 +20,8 @@
 #   KONDOR_OPENCODE      opencode binary (default: opencode in PATH, else ~/.opencode/bin/opencode)
 #   KONDOR_MODEL         model for the developer (default: opus with claude,
 #                        deepseek/deepseek-flash with opencode; see `opencode models`)
+#   KONDOR_AGENT_FILES   folder with AGENTS.md and opencode.json, linked into the control checkout
+#                        (default: ~/.config/kondor-agents)
 #   KONDOR_EFFORT        Claude Code effort level: low, medium, high, xhigh or max (default: medium)
 #
 # The service also reads ~/.config/kondor-dev-loop/github.env when it exists (mode 600, one line
@@ -36,6 +38,7 @@ main() {
   script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
   repo="${KONDOR_REPO:-$(dirname "$(git -C "$script_dir" rev-parse --path-format=absolute --git-common-dir)")}"
   local control="${KONDOR_CONTROL_DIR:-$HOME/.local/share/kondor-dev-loop/control}"
+  local agent_files="${KONDOR_AGENT_FILES:-$HOME/.config/kondor-agents}"
   local state="${KONDOR_STATE_DIR:-$HOME/.local/state/kondor-dev-loop}"
   local interval="${KONDOR_INTERVAL:-60}"
   local max_no_progress="${KONDOR_MAX_NO_PROGRESS:-2}"
@@ -62,7 +65,16 @@ main() {
       git -C "$repo" worktree add -q --detach "$control" origin/main || { log "cannot create $control"; return 1; }
     fi
     # Loop-owned checkout: always exactly origin/main.
-    git -C "$control" checkout -q --force --detach origin/main && git -C "$control" clean -fdq
+    git -C "$control" checkout -q --force --detach origin/main && git -C "$control" clean -fdq &&
+      link_agent_files
+  }
+
+  # AGENTS.md and opencode.json are not in git: link the maintainer's copies into the checkout.
+  link_agent_files() {
+    local file
+    for file in AGENTS.md opencode.json; do
+      ln -sfn "$agent_files/$file" "$control/$file"
+    done
   }
 
   # Prints the issue number of the topmost developer row, or nothing.

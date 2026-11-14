@@ -6,8 +6,9 @@ workflows when a dependency requires it). A separate **architect** agent owns th
 prototypes, reviews and merges (`docs/agents/architect.md`).
 
 The developer loop passes this file to the agent as its role: Claude Code (the default engine)
-gets it with `--append-system-prompt`, opencode loads it through `opencode.json` at the
-repository root. Read `AGENTS.md` too.
+gets it with `--append-system-prompt`, opencode loads it through `opencode.json`. Read `AGENTS.md`
+too. Neither `AGENTS.md` nor `opencode.json` is in git: the loop links the maintainer's copies from
+`~/.config/kondor-agents/` into its control checkout.
 
 ## Start of every session
 

@@ -19,6 +19,8 @@
 #   KONDOR_ARCH_MODEL     Claude model (default: Claude Code's default)
 #   KONDOR_ARCH_AUTOMERGE 1 = the architect squash-merges approved PRs whose build passed (default, the
 #                         maintainer's decision), 0 = approve, add `approved` and leave the merge to a human
+#   KONDOR_AGENT_FILES    folder with AGENTS.md and opencode.json, linked into the control checkout
+#                         (default: ~/.config/kondor-agents)
 #   KONDOR_CLAUDE         claude binary (default: claude in PATH, else ~/.local/bin/claude)
 #
 # Permissions: runs with `--permission-mode auto`, so every action still goes through Claude
@@ -32,6 +34,7 @@ main() {
   script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
   repo="${KONDOR_REPO:-$(dirname "$(git -C "$script_dir" rev-parse --path-format=absolute --git-common-dir)")}"
   local control="${KONDOR_ARCH_CONTROL:-$HOME/.local/share/kondor-architect-loop/control}"
+  local agent_files="${KONDOR_AGENT_FILES:-$HOME/.config/kondor-agents}"
   local state="${KONDOR_ARCH_STATE:-$HOME/.local/state/kondor-architect-loop}"
   local interval="${KONDOR_ARCH_INTERVAL:-60}"
   local max_no_progress="${KONDOR_ARCH_MAX_NO_PROGRESS:-2}"
@@ -50,7 +53,16 @@ main() {
       mkdir -p "$(dirname "$control")"
       git -C "$repo" worktree add -q --detach "$control" origin/main || { log "cannot create $control"; return 1; }
     fi
-    git -C "$control" checkout -q --force --detach origin/main && git -C "$control" clean -fdq
+    git -C "$control" checkout -q --force --detach origin/main && git -C "$control" clean -fdq &&
+      link_agent_files
+  }
+
+  # AGENTS.md and opencode.json are not in git: link the maintainer's copies into the checkout.
+  link_agent_files() {
+    local file
+    for file in AGENTS.md opencode.json; do
+      ln -sfn "$agent_files/$file" "$control/$file"
+    done
   }
 
   queue() { (cd "$control" && bash scripts/update-queue.sh --stdout); }
@@ -75,7 +87,7 @@ main() {
     else
       merge_rule="If it passes, approve it (gh pr review --approve; if GitHub refuses because the same account opened the PR, submit a comment review that starts with \"Verdict: APPROVE\"), add the label approved to issue #$n (keep in-review), comment on issue #$n that it is approved and waiting for the maintainer to merge, and stop: a human merges it (the next issue is promoted after the merge)."
     fi
-    common="You are the architect agent of this repository, running unattended. Follow docs/agents/architect.md and AGENTS.md (read them from origin/main) strictly. Never edit src/ or qml/, never push to the developer's branches. For any change to docs/specs, prototypes or other architect-owned files, create your own git worktree from origin/main outside the current directory, commit there (English, Conventional Commits, no attribution trailers) and push to main. The current directory is the loop's read-only control checkout. Record every decision on GitHub (issue/PR comments or reviews). Every issue you create must be put on the project board with scripts/board.sh <N>. Build with cmake --build <dir> --parallel 4, never a bare --parallel (with Makefiles it means unlimited jobs and runs the machine out of memory). Stop after this one step and print a short report."
+    common="You are the architect agent of this repository, running unattended. Follow docs/agents/architect.md (from origin/main) and AGENTS.md (the maintainer's local file, linked into the current directory and not in git) strictly. To change AGENTS.md (for example the roadmap order), edit $agent_files/AGENTS.md and never commit it. Never edit src/ or qml/, never push to the developer's branches. For any change to docs/specs, prototypes or other architect-owned files, create your own git worktree from origin/main outside the current directory, commit there (English, Conventional Commits, no attribution trailers) and push to main. The current directory is the loop's read-only control checkout. Record every decision on GitHub (issue/PR comments or reviews). Every issue you create must be put on the project board with scripts/board.sh <N>. Build with cmake --build <dir> --parallel 4, never a bare --parallel (with Makefiles it means unlimited jobs and runs the machine out of memory). Stop after this one step and print a short report."
     case "$st" in
       in-review) cat <<EOF
 $common

@@ -35,3 +35,7 @@ __pycache__/
 
 # Claude Code: skills and settings live in ~/.claude, never in the repository
 .claude/
+
+# Agent instructions: the maintainer keeps them in ~/.config/kondor-agents; the loops link them in
+AGENTS.md
+opencode.json

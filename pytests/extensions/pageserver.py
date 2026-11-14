@@ -16,8 +16,11 @@ def requested_path(request: bytes) -> str:
 
 
 class PageServer(QObject):
-    def __init__(self, bodies: dict[str, bytes] | None = None) -> None:
+    def __init__(
+        self, bodies: dict[str, bytes] | None = None, default_body: bytes | None = None
+    ) -> None:
         super().__init__()
+        self.default_body = default_body
         self.bodies = bodies if bodies is not None else {"/": DEFAULT_PAGE}
         self.requests: list[str] = []
         self.server = QTcpServer(self)
@@ -38,7 +41,7 @@ class PageServer(QObject):
     def respond(self, socket: QTcpSocket) -> None:
         path = requested_path(bytes(socket.readAll().data()))
         self.requests.append(path)
-        body = self.bodies.get(path)
+        body = self.bodies.get(path, self.default_body)
         socket.write(http_response("200 OK", body) if body is not None else self.missing())
         socket.disconnectFromHost()
 

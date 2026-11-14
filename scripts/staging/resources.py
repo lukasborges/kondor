@@ -34,6 +34,11 @@ RESOURCE_GROUPS = (
         ("src/extensions/bridge/channel.js", "src/extensions/bridge/extensionruntime.js"),
     ),
     ResourceGroup("/scripts", "src/extensions/scripts", ("src/extensions/scripts/usergm.js",)),
+    ResourceGroup(
+        "/icons",
+        "assets/icons/hicolor/scalable/actions",
+        ("assets/icons/hicolor/scalable/actions/kondor-extensions-symbolic.svg",),
+    ),
     ResourceGroup("/", "", ("LICENSE",)),
 )
 

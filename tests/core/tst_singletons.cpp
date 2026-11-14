@@ -12,6 +12,7 @@
 #include "browser/session/sessionmanager.h"
 #include "browser/zoommanager.h"
 #include "core/filehelper.h"
+#include "core/installedicons.h"
 #include "core/notifier.h"
 #include "core/settings/settings.h"
 #include "downloads/downloadmanager.h"
@@ -35,6 +36,7 @@ ASSERT_QML_CALLS_CREATE(SearchSuggestions);
 ASSERT_QML_CALLS_CREATE(SessionManager);
 ASSERT_QML_CALLS_CREATE(ZoomManager);
 ASSERT_QML_CALLS_CREATE(FileHelper);
+ASSERT_QML_CALLS_CREATE(InstalledIcons);
 ASSERT_QML_CALLS_CREATE(Notifier);
 ASSERT_QML_CALLS_CREATE(Settings);
 ASSERT_QML_CALLS_CREATE(DownloadManager);

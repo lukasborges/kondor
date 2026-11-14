@@ -1165,7 +1165,7 @@
 <context>
     <name>ExtensionsToolButtons</name>
     <message>
-        <location filename="../qml/extensions/panel/ExtensionsToolButtons.qml" line="42"/>
+        <location filename="../qml/extensions/panel/ExtensionsToolButtons.qml" line="43"/>
         <source>Extensions</source>
         <translation>Eklentiler</translation>
     </message>

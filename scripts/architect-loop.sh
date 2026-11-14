@@ -19,7 +19,7 @@
 #   KONDOR_ARCH_MAX_IN_FLIGHT    issues in to-spec, to-dev or in-review at once, one per developer
 #                         loop (default: 2). An issue is promoted only when every issue on its
 #                         "Depends on:" line (issue body) is closed.
-#   KONDOR_ARCH_MODEL     Claude model (default: Claude Code's default)
+#   KONDOR_ARCH_MODEL     Claude model (default: fable; empty = Claude Code's default)
 #   KONDOR_ARCH_AUTOMERGE 1 = the architect squash-merges approved PRs whose build passed (default, the
 #                         maintainer's decision), 0 = approve, add `approved` and leave the merge to a human
 #   KONDOR_AGENT_FILES    folder with AGENTS.md and opencode.json, linked into the control checkout
@@ -42,7 +42,7 @@ main() {
   local interval="${KONDOR_ARCH_INTERVAL:-60}"
   local max_no_progress="${KONDOR_ARCH_MAX_NO_PROGRESS:-2}"
   local max_in_flight="${KONDOR_ARCH_MAX_IN_FLIGHT:-2}"
-  local model="${KONDOR_ARCH_MODEL:-}"
+  local model="${KONDOR_ARCH_MODEL-fable}"
   local merge="${KONDOR_ARCH_AUTOMERGE:-1}"
   local claude="${KONDOR_CLAUDE:-$(command -v claude || echo "$HOME/.local/bin/claude")}"
   local log="$state/architect-loop.log"

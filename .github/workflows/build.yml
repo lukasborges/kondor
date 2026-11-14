@@ -151,3 +151,41 @@ jobs:
           name: kondor-linux
           path: build/kondor
           if-no-files-found: error
+
+  python:
+    runs-on: ubuntu-24.04
+    container: fedora:latest
+
+    steps:
+      - name: Install dependencies
+        timeout-minutes: 50
+        run: |
+          for attempt in 1 2 3; do
+            timeout 15m dnf -y install git python3 python3-pyside6 pyside6-tools python3-pytest \
+                python3-pytest-qt python3-mypy ruff kf6-kirigami kf6-qqc2-desktop-style qt6-qtdeclarative && exit 0
+            echo "::warning::dnf install failed or timed out (attempt $attempt of 3)"
+            sleep 30
+          done
+          exit 1
+
+      - uses: actions/checkout@v4
+
+      - name: Ruff
+        timeout-minutes: 5
+        run: ruff check
+
+      - name: Mypy
+        timeout-minutes: 10
+        run: mypy --strict kondor
+
+      - name: Stage Python build
+        timeout-minutes: 10
+        run: python3 scripts/build.py
+
+      - name: Pytest
+        timeout-minutes: 20
+        run: QT_QPA_PLATFORM=offscreen pytest pytests
+
+      - name: QML API
+        timeout-minutes: 5
+        run: python3 scripts/check-qml-api.py

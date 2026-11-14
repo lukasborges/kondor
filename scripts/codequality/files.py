@@ -2,12 +2,14 @@ import os
 import subprocess
 from typing import List, Set
 
-ROOTS = ("src", "qml", "tests")
-SUFFIXES = (".cpp", ".h", ".js", ".qml")
+ROOTS = ("src", "qml", "tests", "kondor", "pytests")
+SUFFIXES = (".cpp", ".h", ".js", ".qml", ".py")
+IGNORED_PREFIXES = ("tests/data/", "pytests/data/")
 
 
 def is_checked(path: str) -> bool:
-    return path.split("/")[0] in ROOTS and path.endswith(SUFFIXES) and not path.startswith("tests/data/")
+    in_scope = path.split("/")[0] in ROOTS and path.endswith(SUFFIXES)
+    return in_scope and "__pycache__" not in path.split("/") and not path.startswith(IGNORED_PREFIXES)
 
 
 def all_files(root: str) -> List[str]:

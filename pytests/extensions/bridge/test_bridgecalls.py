@@ -5,6 +5,7 @@ import pytest
 from PySide6.QtCore import QUrl
 from shiboken6 import delete
 
+from kondor.browser.tabs.tab import Tab
 from kondor.core.notifier import Notifier
 from kondor.extensions.bridge.extensionbridge import ExtensionBridge
 from kondor.extensions.bridge.extensioncall import error_reply, ok_reply
@@ -83,6 +84,14 @@ def test_destroyed_tab_gives_no_tab(fixture: BridgeFixture, qtbot: Any) -> None:
     delete(fixture.tab)
     qtbot.wait(0)
     assert error_of(fixture.client().call("storage.keys")) == "No tab"
+
+
+def test_replaced_tab_destroyed_keeps_current_tab(fixture: BridgeFixture, qtbot: Any) -> None:
+    current = Tab(None)
+    fixture.bridge.tab = current
+    delete(fixture.tab)
+    qtbot.wait(0)
+    assert fixture.bridge.tab is current
 
 
 def test_page_api_keeps_the_channel_name(fixture: BridgeFixture) -> None:

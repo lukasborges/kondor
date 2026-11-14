@@ -54,7 +54,7 @@ ListView {
     delegate: SideBarTabRow {
         tabModel: list.tabModel
         targetWindow: list.targetWindow
-        list: list
+        list: ListView.view
     }
 
     footer: ItemDelegate {

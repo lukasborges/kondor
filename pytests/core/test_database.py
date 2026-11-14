@@ -33,6 +33,7 @@ def database_file(qapp: object) -> Iterator[Path]:
     path.unlink(missing_ok=True)
     yield path
     Database.reset_instance()
+    path.unlink(missing_ok=True)
 
 
 def execute_on_old_connection(path: Path, statements: Sequence[str]) -> None:

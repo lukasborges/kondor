@@ -139,9 +139,9 @@ There are no Python bindings for KF6Wallet. Talk to `kwalletd6` directly with `Q
 - **Interface:** service `org.kde.kwalletd6`, path `/modules/kwalletd6`, interface `org.kde.KWallet` (see `/usr/share/dbus-1/interfaces/kf6_org.kde.KWallet.xml`).
 - **Opening:**
   1. Get the wallet name with `networkWallet()`.
-  2. Open it with `openAsync(wallet, 0, "Kondor", false)`, then wait for `walletAsyncOpened(tId, handle)`.
-  3. Follow `walletClosed(handle)` to forget the handle, as `PasswordStore::forgetClosedWallet` does.
-- **Folder `Kondor`:** use `hasFolder`, `createFolder`, `entryList`, `readMap`, `writeMap` and `removeEntry`, with `appid` `"Kondor"`.
+  2. Open it with `openAsync(wallet, 0, "Kondor", handleSession)`, with the `handleSession` value KF6Wallet sends (see the phase 6 spec, [`0168-python-passwords.md`](0168-python-passwords.md)), then wait for `walletAsyncOpened(tId, handle)`.
+  3. Follow `walletClosedId(handle)` and `applicationDisconnected(wallet, "Kondor")` to forget the handle, as `PasswordStore::forgetClosedWallet` does.
+- **Folder `Kondor`:** use `hasFolder`, `createFolder`, `entryList`, `readMap`, `mapList`, `writeMap` and `removeEntry`, with `appid` `"Kondor"`.
 - **Map bytes** must be byte-compatible with `KWallet::Wallet::readMap/writeMap`: a `QDataStream`-serialized `QMap<QString, QString>`. That is a big-endian `quint32` count, then each key and value as a `QString`, written and read with `QDataStream`. The reader accepts any pair order.
 - **Tests:**
   - Unit tests cover the serializer against fixed bytes, and the store against a fake D-Bus interface object.

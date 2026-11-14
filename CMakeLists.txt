@@ -97,8 +97,8 @@ qt_add_qml_module(kondor
         qml/browser/sidebar/SideBarRowDrag.qml
         qml/browser/sidebar/SideBarPinnedTabs.qml
         qml/browser/sidebar/SideBarPinnedButton.qml
-        qml/browser/sidebar/SideBarTabIcon.qml
-        qml/browser/sidebar/SideBarTabInfo.qml
+        qml/browser/tabitem/TabIcon.qml
+        qml/browser/tabitem/TabInfo.qml
         qml/settings/pages/appearance/ThumbnailSideBar.qml
         qml/settings/pages/appearance/TabStylePicker.qml
         qml/settings/pages/appearance/TabStyleThumbnail.qml

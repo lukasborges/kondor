@@ -17,25 +17,12 @@ TabButton {
     property real dragShift: 0
     property real slideShift: 0
 
-    readonly property string fullTitle: tab.newTabPage
-        ? (tab.isPrivate ? qsTr("New Private Tab") : qsTr("New Tab"))
-        : (tab.title.length ? tab.title : qsTr("New Tab"))
-    readonly property string iconSource: {
-        if (tab.crashed)
-            return "dialog-error"
-        if (tab.isPrivate)
-            return "view-private"
-        if (tab.newTabPage)
-            return "tab-new"
-        return tab.iconUrl.toString().length ? tab.iconUrl.toString() : "text-html"
-    }
-
     readonly property bool isStyled: tabStrip.isStyled
     readonly property bool showsCloseButton: !isStyled || checked || hovered
 
     width: tab.pinned ? tabStrip.pinnedTabWidth : tabStrip.tabWidth
     text: ""
-    Accessible.name: fullTitle
+    Accessible.name: info.title
     z: tabDrag.active || tabSlide.isSettling ? 10 : 0
     transform: [
         Translate { x: control.dragShift },
@@ -65,6 +52,11 @@ TabButton {
         hasKeyboardFocus: control.visualFocus
     }
 
+    TabInfo {
+        id: info
+        tab: control.tab
+    }
+
     onXChanged: tabSlide.followPosition()
     Component.onDestruction: tabDrag.abortOnDestruction()
 
@@ -82,27 +74,16 @@ TabButton {
             Layout.alignment: control.tab.pinned ? Qt.AlignHCenter : Qt.AlignLeft
             Layout.fillWidth: control.tab.pinned
 
-            Kirigami.Icon {
+            TabIcon {
                 anchors.centerIn: parent
-                width: 16
-                height: 16
-                visible: !control.tab.loading || control.tab.crashed
-                source: control.iconSource
-            }
-
-            BusyIndicator {
-                anchors.centerIn: parent
-                width: 16
-                height: 16
-                visible: control.tab.loading && !control.tab.crashed
-                running: visible
+                tab: control.tab
             }
         }
 
         Label {
             visible: !control.tab.pinned
             Layout.fillWidth: true
-            text: control.fullTitle
+            text: info.title
             elide: Text.ElideRight
         }
 

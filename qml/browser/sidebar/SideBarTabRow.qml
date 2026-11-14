@@ -29,7 +29,7 @@ ItemDelegate {
         list.forceActiveFocus()
     }
 
-    SideBarTabInfo {
+    TabInfo {
         id: info
         tab: row.tab
     }
@@ -37,7 +37,7 @@ ItemDelegate {
     contentItem: RowLayout {
         spacing: Kirigami.Units.smallSpacing
 
-        SideBarTabIcon {
+        TabIcon {
             tab: row.tab
             Layout.preferredWidth: 16
             Layout.preferredHeight: 16

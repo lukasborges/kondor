@@ -31,7 +31,7 @@ STORAGE_ROWS = (
     StorageRow("searchSuggestions", "Search/Suggestions", True),
     StorageRow("spellCheckEnabled", "SpellCheck/Enabled", False),
     StorageRow("spellCheckLanguages", "SpellCheck/Languages", LIST),
-    StorageRow("tabStyle", "UI/TabStyle", "classic"),
+    StorageRow("tabStyle", "UI/TabStyle", "vertical"),
     StorageRow("readerFontSize", "Reader/FontSize", 24),
     StorageRow("readerSerif", "Reader/Serif", False),
     StorageRow("adBlockLastUpdate", "AdBlock/LastUpdate", LAST_UPDATE),

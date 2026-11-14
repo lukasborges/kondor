@@ -12,6 +12,7 @@ ListView {
 
     model: tabModel
     clip: true
+    spacing: 2
     interactive: false
     activeFocusOnTab: true
     highlight: null

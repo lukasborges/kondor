@@ -19,12 +19,12 @@ ToolButton {
     ToolTip.delay: 600
     onClicked: tabModel.setCurrentIndex(index)
 
-    SideBarTabInfo {
+    TabInfo {
         id: info
         tab: button.tab
     }
 
-    contentItem: SideBarTabIcon { tab: button.tab }
+    contentItem: TabIcon { tab: button.tab }
 
     TapHandler {
         acceptedButtons: Qt.MiddleButton

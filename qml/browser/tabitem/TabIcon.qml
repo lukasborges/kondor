@@ -13,7 +13,7 @@ Item {
     implicitWidth: 16
     implicitHeight: 16
 
-    SideBarTabInfo {
+    TabInfo {
         id: info
         tab: root.tab
     }

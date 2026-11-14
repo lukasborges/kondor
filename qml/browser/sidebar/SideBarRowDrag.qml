@@ -13,7 +13,7 @@ DragHandler {
     yAxis.enabled: true
 
     function targetIndex() {
-        const slots = Math.round(shift / row.height)
+        const slots = Math.round(shift / (row.height + row.ListView.view.spacing))
         const lowest = tabModel.pinnedCount
         return Math.max(lowest, Math.min(row.index + slots, tabModel.count - 1))
     }

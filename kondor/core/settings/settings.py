@@ -24,7 +24,7 @@ from kondor.core.settings.settingsoptions import (
 
 ORGANIZATION = "KDE"
 APPLICATION = "Kondor"
-TAB_STYLES = ("floating", "below", "classic")
+TAB_STYLES = ("floating", "below", "vertical", "classic")
 DEFAULT_TAB_STYLE = "floating"
 MIN_READER_FONT_SIZE = 12
 MAX_READER_FONT_SIZE = 32

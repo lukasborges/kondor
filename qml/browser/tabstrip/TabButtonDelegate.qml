@@ -52,7 +52,7 @@ TabButton {
     Binding {
         when: control.isStyled
         target: control
-        property: "height"
+        property: "implicitHeight"
         value: Kirigami.Units.gridUnit * 2
     }
 

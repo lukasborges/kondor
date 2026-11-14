@@ -1,0 +1,29 @@
+app-id: io.github.lukasborges.KondorProof
+runtime: org.kde.Platform
+runtime-version: '6.11'
+sdk: org.kde.Sdk
+base: io.qt.PySide.BaseApp
+base-version: '6.11'
+command: kondor-proof
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --env=QTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess
+  - --env=PYTHONPATH=/app/lib/python3.13/site-packages
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
+modules:
+  - name: kondor-proof
+    buildsystem: simple
+    build-commands:
+      - install -d /app/share/kondor-proof/qml/Kondor
+      - install -m 644 *.py /app/share/kondor-proof/
+      - install -m 644 qml/Kondor/* /app/share/kondor-proof/qml/Kondor/
+      - |
+        printf '#!/bin/sh\nexec python3 /app/share/kondor-proof/proof.py "$@"\n' > /app/bin/kondor-proof
+        chmod +x /app/bin/kondor-proof
+    sources:
+      - type: dir
+        path: .

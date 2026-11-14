@@ -18,6 +18,7 @@ DICTIONARIES_VARIABLE = "QTWEBENGINE_DICTIONARIES_PATH"
 SANDBOX_VARIABLE = "QTWEBENGINE_DISABLE_SANDBOX"
 CHROMIUM_FLAGS_VARIABLE = "QTWEBENGINE_CHROMIUM_FLAGS"
 NO_GPU_FLAG = "--disable-gpu"
+NO_KWALLET_VARIABLE = "KONDOR_NO_KWALLET"
 NO_DESKTOP_SERVICES = {"QT_QPA_PLATFORMTHEME": "", "QT_NO_XDG_DESKTOP_PORTAL": "1"}
 
 os.environ.update(NO_DESKTOP_SERVICES)
@@ -31,6 +32,7 @@ def isolated_profile(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Path]
             patch.setenv(variable, str(profile / folder))
         patch.delenv(DICTIONARIES_VARIABLE, raising=False)
         patch.setenv(SANDBOX_VARIABLE, "1")
+        patch.setenv(NO_KWALLET_VARIABLE, "1")
         patch.setenv(CHROMIUM_FLAGS_VARIABLE, NO_GPU_FLAG)
         yield profile
 

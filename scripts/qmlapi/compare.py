@@ -4,6 +4,7 @@ from .model import ClassApi, normalize_type
 
 ANY_TYPE = "QVariant"
 OBJECT_TYPES = {"QAbstractItemModel", "QObject"}
+QT_OBJECT_TYPES = {"QQuickWebEngineProfile"}
 
 
 @dataclass(frozen=True)
@@ -26,7 +27,8 @@ def missing_counts(kind: str, cpp: dict[str, set[int]], python: dict[str, set[in
 
 
 def is_registered_object(cpp_name: str, python_name: str, registered_names: frozenset[str]) -> bool:
-    return python_name in OBJECT_TYPES and cpp_name in registered_names
+    is_known_object = cpp_name in registered_names or cpp_name in QT_OBJECT_TYPES
+    return python_name in OBJECT_TYPES and is_known_object
 
 
 def types_match(cpp_type: str, python_type: str, registered_names: frozenset[str]) -> bool:

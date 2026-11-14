@@ -136,8 +136,8 @@ Use a temporary `XDG_CONFIG_HOME`, `XDG_DATA_HOME` and `XDG_CACHE_HOME` (AGENTS.
 
 ## Out of scope
 
-- Changes to the bookmarks bar itself (overflow menu, drag and drop, icon-only mode): rejected for
-  now, see Decisions.
+- Changes to the bookmarks bar itself: #229 (overflow menu, drag and drop, folder actions). The
+  bar stays off by default.
 - Editing, moving or deleting bookmarks in the panel (the Bookmarks window does that).
 - A "most visited" or history section.
 - A date column in the bookmarks table.
@@ -163,7 +163,7 @@ Use a temporary `XDG_CONFIG_HOME`, `XDG_DATA_HOME` and `XDG_CACHE_HOME` (AGENTS.
 
 | Question | Decision |
 | --- | --- |
-| Rework the bookmarks bar (overflow menu, drag and drop, folder actions) or a compact icon-only strip? | Not now. The maintainer chose the panel alone among three concepts: a smarter bar, an icon-only strip, and the panel. |
+| Panel or bookmarks bar as the default? | The panel, chosen by the maintainer. The bar stays off by default (`Settings.showBookmarksBar` is `false`); its improvements (overflow menu, drag and drop, folder actions) are #229, for those who turn it on. An icon-only strip was rejected. |
 | Same icon for the panel button and the address bar star? | No. In the current Breeze `bookmarks`, `bookmarks-organize` and `bookmark-toolbar` are the same ribbon, so two ribbons side by side would mean two different things. The star becomes `non-starred-symbolic` / `starred-symbolic`, the symbol users know for "bookmark this page", and the ribbon is the panel. |
 | "Manage Bookmarks" icon in the footer? | `configure`, not another ribbon, so the footer does not repeat the toolbar button. |
 | How is "recent" decided without a date column? | By the highest bookmark `id`, which grows with every new bookmark. No schema change. |

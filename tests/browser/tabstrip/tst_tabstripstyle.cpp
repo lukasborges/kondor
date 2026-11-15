@@ -11,6 +11,7 @@ private slots:
     void classicKeepsTheStyleBackgroundVisible();
     void styledHidesTheStyleBackground();
     void classicBackgroundSurvivesSwitchingStyles();
+    void classicBackgroundFollowsTheCurrentTab();
 
 private:
     void useStyle(const QString &style);
@@ -53,6 +54,19 @@ void TestTabStripStyle::classicBackgroundSurvivesSwitchingStyles()
     QCOMPARE(backgroundOf(0), original);
     QVERIFY(original->isVisible());
     QCOMPARE(original->parentItem(), itemAt(0));
+}
+
+void TestTabStripStyle::classicBackgroundFollowsTheCurrentTab()
+{
+    addTabs(3);
+    for (const QString &style : { QStringLiteral("classic"), QStringLiteral("floating"),
+                                  QStringLiteral("classic") })
+        useStyle(style);
+    QVERIFY(backgroundOf(2)->property("selected").toBool());
+    m_tabs->setCurrentIndex(0);
+    QTest::qWait(50);
+    QVERIFY(backgroundOf(0)->property("selected").toBool());
+    QVERIFY(!backgroundOf(2)->property("selected").toBool());
 }
 
 int runTabStripStyle(int argc, char *argv[])

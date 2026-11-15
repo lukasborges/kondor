@@ -22,7 +22,7 @@ Item {
         if (tab.readerActive)
             return reader.exitReader()
         if (certificates.rejectPending())
-            tab.rejectCertificateError()
+            tab.security.rejectCertificateError()
         if (webView.canGoBack)
             webView.goBack()
     }

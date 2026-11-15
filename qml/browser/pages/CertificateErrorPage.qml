@@ -82,7 +82,7 @@ Item {
                     text: qsTr("Back to Safety")
                     icon.name: "go-previous"
                     highlighted: true
-                    onClicked: root.tab.rejectCertificateError()
+                    onClicked: root.tab.security.rejectCertificateError()
                 }
             }
 
@@ -95,7 +95,7 @@ Item {
                     Kirigami.Action {
                         text: qsTr("Continue Anyway (Unsafe)")
                         icon.name: "go-next"
-                        onTriggered: root.tab.acceptCertificateError()
+                        onTriggered: root.tab.security.acceptCertificateError()
                     }
                 ]
             }

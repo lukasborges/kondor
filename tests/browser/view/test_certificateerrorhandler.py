@@ -1,7 +1,7 @@
 from collections.abc import Iterator
 
 import pytest
-from PySide6.QtCore import QMetaObject, QObject, QUrl
+from PySide6.QtCore import Q_RETURN_ARG, QMetaObject, QObject, QUrl
 from PySide6.QtQml import QQmlComponent, QQmlEngine
 
 from kondor.browser.tabs.tab import Tab
@@ -26,6 +26,10 @@ Item {
         certificateHandler.handle(certificateError)
     }
 
+    function outcome() {
+        return certificateError.outcome
+    }
+
     CertificateErrorHandler {
         id: certificateHandler
         tab: testTab
@@ -39,9 +43,10 @@ Item {
         property string description: "The certificate has expired"
         property bool overridable: true
         property bool isMainFrame: true
+        property string outcome: ""
         function defer() {}
-        function rejectCertificate() {}
-        function acceptCertificate() {}
+        function rejectCertificate() { outcome = "rejected" }
+        function acceptCertificate() { outcome = "accepted" }
     }
 }
 """
@@ -68,4 +73,28 @@ def test_main_frame_error_is_reported_to_the_tab_security(
     assert tab.security.certificateErrorPending
     assert tab.security.state == "error"
     assert tab.security.certificateErrorUrl == QUrl("https://expired.example")
+    del component
+
+
+def report_error_then(tab: Tab, scene: QObject, action: str) -> str:
+    QMetaObject.invokeMethod(scene, "reportError")
+    getattr(tab.security, action)()
+    return str(QMetaObject.invokeMethod(scene, "outcome", Q_RETURN_ARG("QVariant")))
+
+
+def test_accepting_the_error_accepts_the_deferred_certificate(
+    model: TabModel, kondor_engine: QQmlEngine
+) -> None:
+    tab = model.addTab()
+    component, scene = load_scene(kondor_engine, tab, model)
+    assert report_error_then(tab, scene, "acceptCertificateError") == "accepted"
+    del component
+
+
+def test_rejecting_the_error_rejects_the_deferred_certificate(
+    model: TabModel, kondor_engine: QQmlEngine
+) -> None:
+    tab = model.addTab()
+    component, scene = load_scene(kondor_engine, tab, model)
+    assert report_error_then(tab, scene, "rejectCertificateError") == "rejected"
     del component

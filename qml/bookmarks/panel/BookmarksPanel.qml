@@ -70,8 +70,10 @@ Popup {
     function focusInitial() {
         if (search.visible)
             search.forceActiveFocus()
-        else
+        else if (list.visible)
             list.focusRow(0)
+        else
+            contentItem.forceActiveFocus()
     }
 
     x: parent ? parent.width - width : 0
@@ -123,6 +125,7 @@ Popup {
             emptyText: content.isSearching ? qsTr("No bookmarks match") : qsTr("Empty folder")
             Layout.fillWidth: true
             onEntryOpened: function(entry, background) { root.openEntry(entry, background) }
+            onBackRequested: root.goBack()
             onTopReached: search.visible ? search.forceActiveFocus() : list.focusRow(0)
         }
 

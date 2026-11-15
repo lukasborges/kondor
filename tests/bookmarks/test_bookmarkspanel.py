@@ -29,7 +29,7 @@ def test_overview_lists_recent_bookmarks_then_the_root_folders(
 ) -> None:
     add_page(manager().otherFolderId(), "Newest", "newest")
     with captured_messages() as messages:
-        component, entries = create_entries(kondor_engine)
+        _component, entries = create_entries(kondor_engine)
     assert messages == []
     assert entries.property("titles").toVariant()[0] == "Newest"
     assert entries.property("titles").toVariant()[-2:] == ["Bookmarks Toolbar", "Other Bookmarks"]

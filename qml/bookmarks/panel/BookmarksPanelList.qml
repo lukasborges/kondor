@@ -11,8 +11,10 @@ ColumnLayout {
 
     signal entryOpened(var entry, bool background)
     signal topReached()
+    signal backRequested()
 
     function focusRow(index) {
+        list.forceLayout()
         const target = Math.max(0, Math.min(index, list.count - 1))
         list.positionViewAtIndex(target, ListView.Contain)
         list.currentIndex = target
@@ -58,6 +60,7 @@ ColumnLayout {
 
             delegate: BookmarksPanelEntry {
                 onOpenRequested: function(background) { root.entryOpened(modelData, background) }
+                onBackRequested: root.backRequested()
                 onStepRequested: function(step) { root.stepFrom(index, step) }
             }
         }

@@ -14,6 +14,7 @@ ItemDelegate {
 
     signal openRequested(bool background)
     signal stepRequested(int step)
+    signal backRequested()
 
     function isBackgroundKey(event) {
         return (event.modifiers & Qt.ControlModifier) !== 0
@@ -22,11 +23,18 @@ ItemDelegate {
     function openFolder() {
         if (modelData.isFolder)
             openRequested(false)
+        return modelData.isFolder
+    }
+
+    function handleHorizontalKey(event, isForward) {
+        if (isForward)
+            event.accepted = openFolder()
+        else
+            backRequested()
     }
 
     width: ListView.view ? ListView.view.width : implicitWidth
     highlighted: ListView.isCurrentItem
-    padding: Kirigami.Units.smallSpacing
     ToolTip.visible: hovered && modelData.url !== ""
     ToolTip.text: modelData.url
     ToolTip.delay: 600
@@ -34,8 +42,8 @@ ItemDelegate {
     onClicked: openRequested(BookmarkManager.ctrlPressed())
     Keys.onReturnPressed: function(event) { openRequested(isBackgroundKey(event)) }
     Keys.onEnterPressed: function(event) { openRequested(isBackgroundKey(event)) }
-    Keys.onRightPressed: if (!isRightToLeft) openFolder()
-    Keys.onLeftPressed: if (isRightToLeft) openFolder()
+    Keys.onRightPressed: function(event) { handleHorizontalKey(event, !isRightToLeft) }
+    Keys.onLeftPressed: function(event) { handleHorizontalKey(event, isRightToLeft) }
     Keys.onDownPressed: stepRequested(1)
     Keys.onUpPressed: stepRequested(-1)
 

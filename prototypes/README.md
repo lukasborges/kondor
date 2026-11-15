@@ -63,6 +63,7 @@ Tips when editing:
 | #106 Import passwords | `106-passwords-import.qml`, `106b-passwords-import-unrecognized.qml`, `106c-passwords-imported.qml`, `102c-passwords-empty.qml` (new explanation) (in `common/SettingsDialogMock.qml`) |
 | #107 Kondor extensions | `107-extensions.qml`, `107b-extensions-empty.qml`, `107c-extensions-catalog.qml`, `107d-extensions-install.qml`, `107e-extensions-install-file.qml` (in `common/SettingsDialogMock.qml`), `107f-extensions-menu.qml` (`common/ExtensionsMenuMock.qml`) |
 | #176 Copy saved user name and password | `176-passwords-copy.qml` |
+| #191 Search saved passwords | `191-passwords-search.qml`, `191b-passwords-search-site.qml`, `191c-passwords-search-empty.qml`, `191d-passwords-search-other-site.qml` (`common/SavedPasswordsPanelMock.qml`, `common/SignInPageMock.qml`) |
 | #111 User scripts | `111-user-script-bar.qml`, `111b-user-script-install.qml` (in `common/SettingsDialogMock.qml`) |
 | #183 Extensions panel, #182 item icons and shortcuts | `183-extensions-panel.qml`, `183b-extensions-panel-actions.qml` (`common/ExtensionsPanelMock.qml`) |
 | #211 Tab styles | `211-tab-style-floating.qml`, `211b-tab-style-floating-many.qml`, `211c-tab-style-below.qml`, `211d-tab-style-classic.qml`, `211e-settings-tab-style.qml` (`common/TabStyleFrame.qml`, `common/TabStylePicker.qml`, in `common/SettingsDialogMock.qml`) |

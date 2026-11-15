@@ -63,6 +63,7 @@ class KWalletService(QObject):
     def __init__(self, parent: QObject | None = None) -> None:
         super().__init__(parent)
         self._interface: QDBusInterface | None = None
+        self._connect_signals()
         self._transaction: int | None = None
         self._handle: int | None = None
         self._wallet = ""
@@ -122,9 +123,8 @@ class KWalletService(QObject):
         return None if interface.lastError().isValid() else value
 
     def _kwallet(self) -> QDBusInterface:
-        if self._interface is None:
+        if self._interface is None or not self._interface.isValid():
             self._interface = QDBusInterface(SERVICE, PATH, INTERFACE, QDBusConnection.sessionBus())
-            self._connect_signals()
         return self._interface
 
     def _connect_signals(self) -> None:

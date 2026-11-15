@@ -33,6 +33,8 @@ you what to do next. Work in your own git worktree on `main` (never in the devel
    file it as a `bug` issue whose body is its spec (see `AGENTS.md` → "Defects"): reproduce it
    first, and write concrete steps, expected and actual behavior, acceptance criteria and the
    cause when you know it. Do not fix it yourself.
+   The QA agent (`docs/agents/qa.md`, daily timer) files bugs too, labeled `qa`: promote them like
+   any other bug.
 5. **Questions** — answer every developer question.
 6. **Review and merge** — review the developer's PR against spec, conventions and prototype;
    approve and merge, or request changes.

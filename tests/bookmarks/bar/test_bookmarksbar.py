@@ -1,6 +1,7 @@
 from pathlib import Path
 
-from PySide6.QtCore import QObject, QUrl
+from PySide6.QtCore import QObject, Qt, QUrl
+from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlEngine
 from PySide6.QtTest import QTest
 
@@ -85,11 +86,81 @@ def test_dropping_a_link_adds_a_bookmark_at_the_drop_position(
     assert manager().bookmarkIdFor(QUrl("https://dropped.example/")) != first
 
 
+MINE = {"First", "Second", "Third"}
+
+
+def toolbar_titles() -> list[str]:
+    entries = manager().folderContents(manager().toolbarFolderId())
+    return [entry["title"] for entry in entries if entry["title"] in MINE]
+
+
+def add_three_bookmarks() -> list[int]:
+    folder = manager().toolbarFolderId()
+    return [add_page(folder, name, name.lower()) for name in ("First", "Second", "Third")]
+
+
 def test_dragging_an_item_to_a_later_position_moves_it_there(
     fresh_bookmarks: Path, kondor_engine: QQmlEngine
 ) -> None:
-    folder = manager().toolbarFolderId()
-    first = add_page(folder, "Moving", "moving")
+    first = add_three_bookmarks()[0]
+    base = toolbar_count() - 3
     harness = create_with(kondor_engine, TARGETS_QML, {})
-    evaluate(harness, kondor_engine, f"moveDragged({first}, 0)")
-    assert manager().folderContents(folder)[0]["title"] == "Moving"
+    evaluate(harness, kondor_engine, f"moveDragged({first}, {base + 2})")
+    assert toolbar_titles() == ["Second", "First", "Third"]
+
+
+def test_dragging_an_item_to_an_earlier_position_moves_it_there(
+    fresh_bookmarks: Path, kondor_engine: QQmlEngine
+) -> None:
+    third = add_three_bookmarks()[2]
+    base = toolbar_count() - 3
+    harness = create_with(kondor_engine, TARGETS_QML, {})
+    evaluate(harness, kondor_engine, f"moveDragged({third}, {base + 1})")
+    assert toolbar_titles() == ["First", "Third", "Second"]
+
+
+def test_dropped_link_takes_its_title_from_the_html_text(
+    fresh_bookmarks: Path, kondor_engine: QQmlEngine
+) -> None:
+    harness = create_with(kondor_engine, TARGETS_QML, {})
+    html = "<a href='https://a.example/'>Fish &amp; <b>Chips</b></a>"
+    script = (
+        "titleOfDrop({ hasText: true, text: 'https://a.example/', hasUrls: true,"
+        f" urls: ['https://a.example/'], hasHtml: true, html: \"{html}\" }})"
+    )
+    assert evaluate(harness, kondor_engine, script) == "Fish & Chips"
+
+
+def test_dropped_plain_url_is_its_own_title(
+    fresh_bookmarks: Path, kondor_engine: QQmlEngine
+) -> None:
+    harness = create_with(kondor_engine, TARGETS_QML, {})
+    script = (
+        "titleOfDrop({ hasText: true, text: 'https://a.example/', hasUrls: false, hasHtml: false })"
+    )
+    assert evaluate(harness, kondor_engine, script) == "https://a.example/"
+
+
+def test_right_to_left_puts_the_overflow_button_before_the_first_item(
+    fresh_bookmarks: Path, kondor_engine: QQmlEngine, tabs: TabModel
+) -> None:
+    fill_toolbar(12)
+    QGuiApplication.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
+    try:
+        bar = create_bar(kondor_engine, tabs, 400)
+        count_visible(bar, kondor_engine)
+        overflow = bar.findChild(QObject, "overflowButton")
+        assert overflow.property("x") < bar.property("width") / 2
+    finally:
+        QGuiApplication.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+
+
+def test_a_private_window_offers_no_add_action(
+    fresh_bookmarks: Path, kondor_engine: QQmlEngine, tabs: TabModel
+) -> None:
+    tabs.addTab(True, QUrl("https://private.example/"))
+    bar = create_bar(kondor_engine, tabs, 400)
+    actions = bar.findChild(QObject, "actions")
+    link_drop = bar.findChild(QObject, "linkDrop")
+    assert actions.property("canAddBookmarks") is False
+    assert link_drop.property("enabled") is False

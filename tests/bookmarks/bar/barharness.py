@@ -34,7 +34,13 @@ import Kondor
 
 Item {
     function moveDragged(id, position) {
-        dropTargets.moveDragged(id, position)
+        controller.draggedId = id
+        controller.dropPosition = position
+        dropTargets.completeMove()
+    }
+
+    function titleOfDrop(drop) {
+        return linkDrop.linkOf(drop).title
     }
 
     function dropLinkAtTheStart() {
@@ -53,6 +59,7 @@ Item {
         items: items
         visibleCount: 0
     }
+    BookmarksBarLinkDrop { id: linkDrop; targets: dropTargets }
 }
 """
 KEPT: list[QQmlComponent] = []
@@ -80,7 +87,9 @@ def create_menu(engine: QQmlEngine, folder_id: int, can_add_page: bool) -> QObje
 
 def evaluate(item: QObject, engine: QQmlEngine, script: str) -> object:
     expression = QQmlExpression(qmlContext(item) or engine.rootContext(), item, script)
-    return expression.evaluate()
+    value = expression.evaluate()
+    assert not expression.hasError(), expression.error().toString()
+    return value[0]
 
 
 def fill_toolbar(count: int) -> None:

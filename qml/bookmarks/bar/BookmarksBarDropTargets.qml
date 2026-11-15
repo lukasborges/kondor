@@ -63,14 +63,8 @@ QtObject {
         if (root.drag.dropFolderId > 0)
             root.folderTree.moveInto(root.drag.draggedId, root.drag.draggedIsFolder, root.drag.dropFolderId)
         else if (root.drag.dropPosition >= 0)
-            root.moveDragged(root.drag.draggedId, root.drag.dropPosition)
+            root.drag.moveDraggedTo(BookmarkManager.toolbarModel, BookmarkManager.toolbarFolderId(), root.drag.dropPosition)
         root.drag.clearDropTarget()
-    }
-
-    function moveDragged(id, position) {
-        const current = BookmarkManager.toolbarModel.rowOf(id)
-        const target = current >= 0 && current < position ? position - 1 : position
-        BookmarkManager.move(id, BookmarkManager.toolbarFolderId(), target)
     }
 
     function completeLinkDrop(link) {

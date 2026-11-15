@@ -67,6 +67,12 @@ QtObject {
         root.clearDropTarget()
     }
 
+    function moveDraggedTo(model, folderId, position) {
+        const current = model.rowOf(root.draggedId)
+        const target = current >= 0 && current < position ? position - 1 : position
+        BookmarkManager.move(root.draggedId, folderId, target)
+    }
+
     function clearDropTarget() {
         root.dropFolderId = -1
         root.dropPosition = -1

@@ -29,7 +29,7 @@ Item {
         if (root.drag.dropFolderId > 0)
             root.folderTree.moveInto(root.drag.draggedId, root.drag.draggedIsFolder, root.drag.dropFolderId)
         else if (root.drag.dropPosition >= 0)
-            root.dropTargets.moveToPosition(root.drag.draggedId, root.drag.dropPosition)
+            root.dropTargets.moveToPosition(root.drag.dropPosition)
         root.drag.endDrag()
     }
 

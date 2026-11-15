@@ -64,6 +64,8 @@ ToolBar {
     }
 
     visible: Settings.showBookmarksBar
+    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+    LayoutMirroring.childrenInherit: true
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
     Kirigami.Theme.inherit: false
     position: ToolBar.Header
@@ -103,6 +105,7 @@ ToolBar {
 
         BookmarksBarOverflow {
             id: overflowButton
+        objectName: "overflowButton"
 
             visible: root.visibleCount < items.count
             skippedCount: root.visibleCount
@@ -125,6 +128,7 @@ ToolBar {
     }
 
     BookmarksBarLinkDrop {
+        objectName: "linkDrop"
         anchors.fill: row
         enabled: actions.canAddBookmarks
         targets: dropTargets
@@ -147,6 +151,7 @@ ToolBar {
 
     BookmarksBarActions {
         id: actions
+        objectName: "actions"
         tabModel: root.tabModel
     }
 

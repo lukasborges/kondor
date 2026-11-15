@@ -94,11 +94,9 @@ QtObject {
         return Math.max(0, Math.min(root.itemList.height - 2, y))
     }
 
-    function moveToPosition(id, position) {
+    function moveToPosition(position) {
         if (position < 0 || !root.itemModel)
             return
-        const current = root.itemModel.rowOf(id)
-        const target = current >= 0 && current < position ? position - 1 : position
-        BookmarkManager.move(id, root.selectedFolderId, target)
+        root.drag.moveDraggedTo(root.itemModel, root.selectedFolderId, position)
     }
 }

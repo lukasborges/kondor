@@ -11,6 +11,7 @@ from kondor.app.commandline.startupargs import StartupArgs
 from kondor.app.instance.singleinstance import SingleInstance, StartResult
 from kondor.app.instance.singleinstancemessage import SingleInstanceMessage
 from kondor.app.startup.appidentity import set_up_language_and_style
+from kondor.app.startup.positioncache import discard_position_cache
 from kondor.app.startup.qmlregistry import register_all_types
 from kondor.app.windows.windowmanager import WindowManager
 from kondor.browser.favicons.faviconimageprovider import FaviconImageProvider
@@ -72,6 +73,7 @@ def forwards_to_running_instance(
 
 
 def start_browser(app: QApplication, command_line: CommandLine) -> None:
+    discard_position_cache()
     publish_startup_arguments(command_line)
     register_all_types()
     set_up_language_and_style(app)

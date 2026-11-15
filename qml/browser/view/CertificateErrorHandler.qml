@@ -32,7 +32,7 @@ Item {
             pendingError.rejectCertificate()
         error.defer()
         pendingError = error
-        tab.setPendingCertificateError(error.url, error.description, error.overridable)
+        tab.security.setPendingCertificateError(error.url, error.description, error.overridable)
     }
 
     function handle(error) {

@@ -13,8 +13,8 @@ Kondor Browser runs the modern web on the same engine as Chrome, and it looks an
 ## Highlights
 
 - **Native on Plasma**: Breeze look, KDE dialogs, your color scheme
-- **Private by default**: blocks ads and trackers, private tabs leave no trace
-- **All built in**: reader mode, downloads, developer tools, no add-ons needed
+- **Private**: blocks ads and trackers out of the box; private tabs leave no trace
+- **All built in**: passwords, reader mode, downloads and developer tools
 
 ## Download
 
@@ -47,8 +47,8 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 ### Privacy and security
 - **Ad and tracker blocking** built in
 - **Private tabs and windows** that leave no trace
-- **Passwords** saved in KWallet, filled in for you, searched and copied from the address bar, addable by hand, importable from a CSV export
-- **Extensions** from the Kondor catalog or a file, pinned from the list, unpinned from the toolbar
+- **Passwords** saved in KWallet, filled in for you, searchable and importable
+- **Extensions** from the Kondor catalog or a file, pinnable to the toolbar
 - **User scripts** from `.user.js` pages or files, managed with extensions
 - **Site permissions**: sites ask before using the camera, microphone or location
 - **Security padlock** and warnings for unsafe sites
@@ -114,11 +114,12 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 
 ## Set as default browser
 
-Install Kondor (or use the AppImage), then open **System Settings → Default Applications → Web
-browser** and choose **Kondor Browser**. From a terminal the same is done with:
+Install Kondor, then open **System Settings → Default Applications → Web browser** and choose
+**Kondor Browser**. From a terminal the same is done with:
 
 ```bash
-xdg-settings set default-web-browser kondor.desktop
+xdg-settings set default-web-browser io.github.lukasborges.Kondor.desktop   # Flatpak
+xdg-settings set default-web-browser kondor.desktop                         # installed from source
 ```
 
 Kondor then opens links clicked in other applications. The desktop entry also provides a
@@ -224,7 +225,7 @@ the translation that matches the system locale at startup (and Qt's own translat
 dialogs and context menus).
 
 - **Update the `.ts` files** after changing strings: `python3 scripts/update-translations.py`.
-  This runs `pyside6-lupdate` over `src/kondor/` and `qml/` with `-no-obsolete` and writes the result to `i18n/`.
+  This runs `pyside6-lupdate` over `src/kondor/` and `qml/` with `-no-obsolete -locations none` (moving a line does not change the files) and writes the result to `i18n/`.
 - **Add a language**: create `i18n/kondor_<lang>.ts` (the script updates every `i18n/kondor_*.ts`)
   and translate the messages with Qt Linguist (`linguist-qt6 i18n/kondor_<lang>.ts`).
 - **Keep them complete**: a PR that adds or changes a user-visible string updates every

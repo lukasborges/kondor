@@ -116,3 +116,10 @@ def test_image_provider_serves_the_host_of_the_page_url(store: FaviconStore) -> 
     image = FaviconImageProvider().requestImage("https://kde.org/a?b", size, QSize())
     assert image.pixelColor(0, 0) == QColor(Qt.GlobalColor.red)
     assert size == QSize(4, 4)
+
+
+def test_has_icon_only_for_hosts_with_a_stored_icon(store: FaviconStore) -> None:
+    store.store_image("kde.org", make_image(Qt.GlobalColor.red))
+    assert store.hasIcon(QUrl("https://kde.org/news"))
+    assert not store.hasIcon(QUrl("https://example.org/"))
+    assert not store.hasIcon(QUrl())

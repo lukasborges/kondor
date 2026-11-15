@@ -8,6 +8,8 @@ Item {
     required property url pageUrl
     property string fallback: "globe"
 
+    readonly property bool hasStoredIcon: FaviconStore.revision >= 0 && FaviconStore.hasIcon(root.pageUrl)
+
     implicitWidth: Kirigami.Units.iconSizes.small
     implicitHeight: Kirigami.Units.iconSizes.small
 
@@ -15,8 +17,9 @@ Item {
         id: image
 
         anchors.fill: parent
-        source: "image://kondor-favicon/" + root.pageUrl.toString()
-                + "#" + FaviconStore.revision
+        source: root.hasStoredIcon
+                ? "image://kondor-favicon/" + root.pageUrl.toString() + "#" + FaviconStore.revision
+                : ""
         cache: false
         sourceSize.width: width
         sourceSize.height: height

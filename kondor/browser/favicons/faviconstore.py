@@ -147,6 +147,10 @@ class FaviconStore(QObject):
     def clear_since(self, msecs_since_epoch: int) -> None:
         self.bump_revision_if_rows_affected(sql.run(DELETE_SINCE, (msecs_since_epoch,)))
 
+    @Slot(QUrl, result=bool)
+    def hasIcon(self, pageUrl: QUrl) -> bool:  # noqa: N802, N803
+        return not self.image_for_host(pageUrl.host()).isNull()
+
     def image_for_host(self, host: str) -> QImage:
         data = stored_bytes(host) if host else None
         image = QImage()

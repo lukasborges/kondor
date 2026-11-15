@@ -1,12 +1,14 @@
 import json
 import subprocess
 import sys
+import threading
 from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
 from PySide6.QtGui import QGuiApplication
 
+from kondor.core import notifier
 from kondor.core.notifier import Notifier, application_icon
 
 FAKE_SERVER = Path(__file__).with_name("fakenotifications.py")
@@ -49,3 +51,17 @@ def test_icon_name_kondor_uses_flatpak_id(monkeypatch: pytest.MonkeyPatch) -> No
     monkeypatch.setenv("FLATPAK_ID", FLATPAK_ID)
     assert application_icon("kondor") == FLATPAK_ID
     assert application_icon("dialog-information") == "dialog-information"
+
+
+def test_notify_returns_without_waiting_for_the_bus(monkeypatch: pytest.MonkeyPatch) -> None:
+    release = threading.Event()
+    started = threading.Event()
+
+    def blocked_send(title: str, body: str, icon: str) -> None:
+        started.set()
+        release.wait(10)
+
+    monkeypatch.setattr(notifier, "send_notification", blocked_send)
+    Notifier.instance().notify("Title", "Body", "")
+    assert started.wait(5)
+    release.set()

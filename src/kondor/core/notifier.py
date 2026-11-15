@@ -1,4 +1,5 @@
 import os
+import threading
 
 from PySide6.QtCore import Q_ARG, QGenericArgumentHolder, QMetaObject, QObject, Qt, Slot
 from PySide6.QtDBus import QDBusConnection, QDBusInterface
@@ -42,6 +43,12 @@ def call_notify(notifications: QDBusInterface, arguments: list[QGenericArgumentH
     QMetaObject.invokeMethod(notifications, NOTIFY_METHOD, connection, *arguments)
 
 
+def send_notification(title: str, body: str, icon: str) -> None:
+    notifications = notifications_interface()
+    if notifications.isValid():
+        call_notify(notifications, notify_arguments(title, body, icon))
+
+
 class Notifier(QObject):
     _instance: "Notifier | None" = None
 
@@ -53,6 +60,5 @@ class Notifier(QObject):
 
     @Slot(str, str, str)
     def notify(self, title: str, body: str, iconName: str) -> None:  # noqa: N803
-        notifications = notifications_interface()
-        if notifications.isValid():
-            call_notify(notifications, notify_arguments(title, body, application_icon(iconName)))
+        icon = application_icon(iconName)
+        threading.Thread(target=send_notification, args=(title, body, icon), daemon=True).start()

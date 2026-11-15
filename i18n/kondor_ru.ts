@@ -286,6 +286,10 @@
 <context>
     <name>BookmarksPanel</name>
     <message>
+        <source>Search bookmarks</source>
+        <translation>Поиск по закладкам</translation>
+    </message>
+    <message>
         <source>No bookmarks match</source>
         <translation>Нет подходящих закладок</translation>
     </message>
@@ -341,13 +345,6 @@
     <message>
         <source>Back</source>
         <translation>Назад</translation>
-    </message>
-</context>
-<context>
-    <name>BookmarksPanelSearchField</name>
-    <message>
-        <source>Search bookmarks</source>
-        <translation>Поиск по закладкам</translation>
     </message>
 </context>
 <context>
@@ -1097,6 +1094,22 @@
     </message>
 </context>
 <context>
+    <name>FillFromOtherSiteDialog</name>
+    <message>
+        <source>Fill Password from Another Site</source>
+        <translation>Подставить пароль с другого сайта</translation>
+    </message>
+    <message>
+        <source>This password was saved for &lt;b&gt;%1&lt;/b&gt;. Fill it on &lt;b&gt;%2&lt;/b&gt;?</source>
+        <extracomment>%1 is the host the password was saved for, %2 the host of the current page</extracomment>
+        <translation>Этот пароль сохранён для &lt;b&gt;%1&lt;/b&gt;. Подставить его на &lt;b&gt;%2&lt;/b&gt;?</translation>
+    </message>
+    <message>
+        <source>Fill</source>
+        <translation>Заполнить</translation>
+    </message>
+</context>
+<context>
     <name>FindBar</name>
     <message>
         <source>Find in page</source>
@@ -1781,8 +1794,8 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <source>Fill Saved Password</source>
-        <translation>Подставить сохранённый пароль</translation>
+        <source>Saved Passwords</source>
+        <translation>Сохранённые пароли</translation>
     </message>
 </context>
 <context>
@@ -2042,6 +2055,9 @@
         <extracomment>%1 is the user name</extracomment>
         <translation>Заполнить для %1</translation>
     </message>
+</context>
+<context>
+    <name>SavedLoginCopyButtons</name>
     <message>
         <source>Copy Username</source>
         <translation>Копировать имя пользователя</translation>
@@ -2075,6 +2091,37 @@
         <source>Copy Password for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>Копировать пароль для %1</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginList</name>
+    <message>
+        <source>Passwords Unavailable</source>
+        <translation>Пароли недоступны</translation>
+    </message>
+    <message>
+        <source>No Matches</source>
+        <translation>Совпадений нет</translation>
+    </message>
+    <message>
+        <source>No Passwords for This Site</source>
+        <translation>Нет паролей для этого сайта</translation>
+    </message>
+    <message>
+        <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
+        <translation>KWallet отключён или доступ к нему запрещён, поэтому пароли нельзя ни сохранять, ни подставлять.</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginResultRow</name>
+    <message>
+        <source>Fill</source>
+        <translation>Заполнить</translation>
+    </message>
+    <message>
+        <source>Fill %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>Заполнить для %1</translation>
     </message>
 </context>
 <context>
@@ -2120,6 +2167,10 @@
     <message>
         <source>Saved Passwords</source>
         <translation>Сохранённые пароли</translation>
+    </message>
+    <message>
+        <source>Search passwords</source>
+        <translation>Поиск паролей</translation>
     </message>
     <message>
         <source>Manage Passwords…</source>

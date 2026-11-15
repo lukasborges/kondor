@@ -10,12 +10,7 @@ Popup {
     required property var tab
 
     signal manageRequested()
-
-    function focusRow(index) {
-        const row = rows.itemAt(Math.max(0, Math.min(index, rows.count - 1)))
-        if (row)
-            row.forceActiveFocus()
-    }
+    signal otherSiteFillRequested(var login)
 
     function closeAndFocusPage() {
         close()
@@ -23,8 +18,27 @@ Popup {
             tab.focusPage()
     }
 
-    function closeIfNoAccounts() {
-        if (!tab || tab.passwords.usernames.length === 0)
+    function handleEscape() {
+        if (search.text === "") {
+            closeAndFocusPage()
+            return
+        }
+        search.clear()
+        search.forceActiveFocus()
+    }
+
+    function fill(login) {
+        tab.passwords.fill(login.origin, login.username)
+        close()
+    }
+
+    function askToFill(login) {
+        close()
+        otherSiteFillRequested(login)
+    }
+
+    function closeIfUnavailable() {
+        if (!tab || !tab.passwords.isAvailable)
             close()
     }
 
@@ -33,17 +47,18 @@ Popup {
     modal: false
     focus: true
     closePolicy: Popup.CloseOnPressOutside
-    onOpened: focusRow(0)
+    onAboutToShow: search.clear()
+    onOpened: search.forceActiveFocus()
     onTabChanged: close()
 
     Connections {
         target: root.tab ? root.tab.passwords : null
-        function onUsernamesChanged() { root.closeIfNoAccounts() }
+        function onAvailabilityChanged() { root.closeIfUnavailable() }
     }
 
     contentItem: ColumnLayout {
         spacing: Kirigami.Units.smallSpacing
-        Keys.onEscapePressed: root.closeAndFocusPage()
+        Keys.onEscapePressed: root.handleEscape()
 
         RowLayout {
             spacing: Kirigami.Units.largeSpacing
@@ -69,18 +84,24 @@ Popup {
             }
         }
 
-        Repeater {
-            id: rows
-            model: root.tab ? root.tab.passwords.usernames : []
+        PanelSearchField {
+            id: search
+            objectName: "passwordSearchField"
+            placeholderText: qsTr("Search passwords")
+            enabled: !(root.tab && root.tab.passwords.isWalletUnavailable)
+            Layout.fillWidth: true
+            onStepDownRequested: list.focusCurrent()
+            onOpenRequested: list.activateCurrent()
+        }
 
-            SavedAccountRow {
-                required property int index
-                required property string modelData
-                username: modelData
-                tab: root.tab
-                onFillRequested: root.close()
-                onStepRequested: function(step) { root.focusRow(index + step) }
-            }
+        SavedLoginList {
+            id: list
+            tab: root.tab
+            searchText: search.text
+            Layout.fillWidth: true
+            onFillRequested: function(login) { root.fill(login) }
+            onOtherSiteRequested: function(login) { root.askToFill(login) }
+            onTopReached: search.forceActiveFocus()
         }
 
         Kirigami.Separator { Layout.fillWidth: true }

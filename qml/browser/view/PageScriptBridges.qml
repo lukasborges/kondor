@@ -49,7 +49,7 @@ Item {
 
     Connections {
         target: root.tab.passwords
-        function onFillRequested(username) { passwordBridge.fill(username) }
+        function onFillRequested(origin, username) { passwordBridge.fill(origin, username) }
     }
 
     Connections {

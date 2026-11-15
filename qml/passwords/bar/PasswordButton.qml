@@ -9,7 +9,12 @@ ToolButton {
 
     signal manageRequested()
 
-    visible: tabs.currentTab ? tabs.currentTab.passwords.usernames.length > 0 : false
+    function openPanel() {
+        tabs.currentTab.passwords.openWallet()
+        popup.open()
+    }
+
+    visible: tabs.currentTab ? tabs.currentTab.passwords.isAvailable : false
     display: AbstractButton.IconOnly
     icon.name: "dialog-password"
     icon.width: 16
@@ -20,9 +25,9 @@ ToolButton {
     implicitHeight: 28
     ToolTip.visible: hovered && !popup.opened
     Accessible.name: ToolTip.text
-    ToolTip.text: qsTr("Fill Saved Password")
+    ToolTip.text: qsTr("Saved Passwords")
     ToolTip.delay: 600
-    onClicked: popup.opened ? popup.close() : popup.open()
+    onClicked: popup.opened ? popup.close() : openPanel()
 
     SavedPasswordsPopup {
         id: popup
@@ -30,5 +35,11 @@ ToolButton {
         y: root.height
         tab: root.tabs.currentTab
         onManageRequested: root.manageRequested()
+        onOtherSiteFillRequested: function(login) { fillDialog.ask(login) }
+    }
+
+    FillFromOtherSiteDialog {
+        id: fillDialog
+        currentTab: root.tabs.currentTab
     }
 }

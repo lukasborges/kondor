@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
+import "../../common/html.js" as Html
 
 InlineBar {
     id: root
@@ -11,11 +12,6 @@ InlineBar {
     readonly property string kind: tab ? tab.passwords.prompt : ""
 
     visible: kind !== ""
-
-    function escapeHtml(text) {
-        return String(text ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-    }
 
     Kirigami.Icon {
         source: root.kind === "walletUnavailable" ? "dialog-warning" : "dialog-password"
@@ -29,8 +25,8 @@ InlineBar {
         textFormat: Text.RichText
         text: root.kind === "save"
               ? qsTr("Save the password for <b>%1</b> on <b>%2</b>?")
-                    .arg(root.escapeHtml(root.tab.passwords.promptUsername))
-                    .arg(root.escapeHtml(root.tab.passwords.promptHost))
+                    .arg(Html.escaped(root.tab.passwords.promptUsername))
+                    .arg(Html.escaped(root.tab.passwords.promptHost))
               : root.kind === "walletUnavailable"
                 ? qsTr("KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.")
                 : ""

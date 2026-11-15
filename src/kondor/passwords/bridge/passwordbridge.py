@@ -85,12 +85,16 @@ class PasswordBridge(QObject):
         store.ensureOpen()
         return store.credentials_for(origin)
 
-    @Slot(str)
-    def fill(self, username: str) -> None:
+    def _saved_password(self, saved_origin: str, username: str) -> str:
+        store = PasswordStore.instance()
+        return store.password(saved_origin, username) if store.is_open() else ""
+
+    @Slot(str, str)
+    def fill(self, saved_origin: str, username: str) -> None:
         tab = self._allowed_tab()
         if tab is None:
             return
-        origin = origin_of(tab.url)
-        store = PasswordStore.instance()
-        if origin and store.is_open():
-            self._api.fillRequested.emit(origin, username, store.password(origin, username))
+        page_origin = origin_of(tab.url)
+        password = self._saved_password(saved_origin, username)
+        if page_origin and password:
+            self._api.fillRequested.emit(page_origin, username, password)

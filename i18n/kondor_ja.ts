@@ -286,6 +286,10 @@
 <context>
     <name>BookmarksPanel</name>
     <message>
+        <source>Search bookmarks</source>
+        <translation>ブックマークを検索</translation>
+    </message>
+    <message>
         <source>No bookmarks match</source>
         <translation>一致するブックマークはありません</translation>
     </message>
@@ -341,13 +345,6 @@
     <message>
         <source>Back</source>
         <translation>戻る</translation>
-    </message>
-</context>
-<context>
-    <name>BookmarksPanelSearchField</name>
-    <message>
-        <source>Search bookmarks</source>
-        <translation>ブックマークを検索</translation>
     </message>
 </context>
 <context>
@@ -1095,6 +1092,22 @@
     </message>
 </context>
 <context>
+    <name>FillFromOtherSiteDialog</name>
+    <message>
+        <source>Fill Password from Another Site</source>
+        <translation>別のサイトのパスワードを入力</translation>
+    </message>
+    <message>
+        <source>This password was saved for &lt;b&gt;%1&lt;/b&gt;. Fill it on &lt;b&gt;%2&lt;/b&gt;?</source>
+        <extracomment>%1 is the host the password was saved for, %2 the host of the current page</extracomment>
+        <translation>このパスワードは &lt;b&gt;%1&lt;/b&gt; 用に保存されています。&lt;b&gt;%2&lt;/b&gt; に入力しますか?</translation>
+    </message>
+    <message>
+        <source>Fill</source>
+        <translation>入力</translation>
+    </message>
+</context>
+<context>
     <name>FindBar</name>
     <message>
         <source>Find in page</source>
@@ -1759,8 +1772,8 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <source>Fill Saved Password</source>
-        <translation>保存したパスワードを入力</translation>
+        <source>Saved Passwords</source>
+        <translation>保存されたパスワード</translation>
     </message>
 </context>
 <context>
@@ -2020,6 +2033,9 @@
         <extracomment>%1 is the user name</extracomment>
         <translation>%1 を入力</translation>
     </message>
+</context>
+<context>
+    <name>SavedLoginCopyButtons</name>
     <message>
         <source>Copy Username</source>
         <translation>ユーザー名をコピー</translation>
@@ -2053,6 +2069,37 @@
         <source>Copy Password for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>%1 のパスワードをコピー</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginList</name>
+    <message>
+        <source>Passwords Unavailable</source>
+        <translation>パスワードを利用できません</translation>
+    </message>
+    <message>
+        <source>No Matches</source>
+        <translation>一致する項目はありません</translation>
+    </message>
+    <message>
+        <source>No Passwords for This Site</source>
+        <translation>このサイトのパスワードはありません</translation>
+    </message>
+    <message>
+        <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
+        <translation>KWallet が無効か、アクセスが拒否されたため、パスワードを保存したり入力したりできません。</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginResultRow</name>
+    <message>
+        <source>Fill</source>
+        <translation>入力</translation>
+    </message>
+    <message>
+        <source>Fill %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>%1 を入力</translation>
     </message>
 </context>
 <context>
@@ -2098,6 +2145,10 @@
     <message>
         <source>Saved Passwords</source>
         <translation>保存されたパスワード</translation>
+    </message>
+    <message>
+        <source>Search passwords</source>
+        <translation>パスワードを検索</translation>
     </message>
     <message>
         <source>Manage Passwords…</source>

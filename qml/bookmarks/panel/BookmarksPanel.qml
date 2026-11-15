@@ -104,8 +104,9 @@ Popup {
             onBackRequested: root.goBack()
         }
 
-        BookmarksPanelSearchField {
+        PanelSearchField {
             id: search
+            placeholderText: qsTr("Search bookmarks")
             visible: !root.isInFolder && content.hasBookmarks
             Layout.fillWidth: true
             Layout.margins: Kirigami.Units.smallSpacing

@@ -286,6 +286,10 @@
 <context>
     <name>BookmarksPanel</name>
     <message>
+        <source>Search bookmarks</source>
+        <translation>搜索书签</translation>
+    </message>
+    <message>
         <source>No bookmarks match</source>
         <translation>没有匹配的书签</translation>
     </message>
@@ -341,13 +345,6 @@
     <message>
         <source>Back</source>
         <translation>后退</translation>
-    </message>
-</context>
-<context>
-    <name>BookmarksPanelSearchField</name>
-    <message>
-        <source>Search bookmarks</source>
-        <translation>搜索书签</translation>
     </message>
 </context>
 <context>
@@ -1095,6 +1092,22 @@
     </message>
 </context>
 <context>
+    <name>FillFromOtherSiteDialog</name>
+    <message>
+        <source>Fill Password from Another Site</source>
+        <translation>填入其他站点的密码</translation>
+    </message>
+    <message>
+        <source>This password was saved for &lt;b&gt;%1&lt;/b&gt;. Fill it on &lt;b&gt;%2&lt;/b&gt;?</source>
+        <extracomment>%1 is the host the password was saved for, %2 the host of the current page</extracomment>
+        <translation>此密码是为 &lt;b&gt;%1&lt;/b&gt; 保存的。要在 &lt;b&gt;%2&lt;/b&gt; 上填入吗?</translation>
+    </message>
+    <message>
+        <source>Fill</source>
+        <translation>填充</translation>
+    </message>
+</context>
+<context>
     <name>FindBar</name>
     <message>
         <source>Find in page</source>
@@ -1759,8 +1772,8 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <source>Fill Saved Password</source>
-        <translation>填充已保存的密码</translation>
+        <source>Saved Passwords</source>
+        <translation>已保存的密码</translation>
     </message>
 </context>
 <context>
@@ -2020,6 +2033,9 @@
         <extracomment>%1 is the user name</extracomment>
         <translation>填充 %1</translation>
     </message>
+</context>
+<context>
+    <name>SavedLoginCopyButtons</name>
     <message>
         <source>Copy Username</source>
         <translation>复制用户名</translation>
@@ -2053,6 +2069,37 @@
         <source>Copy Password for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>复制 %1 的密码</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginList</name>
+    <message>
+        <source>Passwords Unavailable</source>
+        <translation>密码不可用</translation>
+    </message>
+    <message>
+        <source>No Matches</source>
+        <translation>没有匹配项</translation>
+    </message>
+    <message>
+        <source>No Passwords for This Site</source>
+        <translation>此站点没有密码</translation>
+    </message>
+    <message>
+        <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
+        <translation>KWallet 已禁用或访问被拒绝,因此无法保存或填充密码。</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginResultRow</name>
+    <message>
+        <source>Fill</source>
+        <translation>填充</translation>
+    </message>
+    <message>
+        <source>Fill %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>填充 %1</translation>
     </message>
 </context>
 <context>
@@ -2098,6 +2145,10 @@
     <message>
         <source>Saved Passwords</source>
         <translation>已保存的密码</translation>
+    </message>
+    <message>
+        <source>Search passwords</source>
+        <translation>搜索密码</translation>
     </message>
     <message>
         <source>Manage Passwords…</source>

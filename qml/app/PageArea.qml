@@ -48,6 +48,7 @@ ColumnLayout {
 
             delegate: WebViewTab {
                 tabModel: root.tabs
+                browserActions: root.browserWindow.actions
                 anchors.fill: parent
                 visible: root.tabs.currentTab === tab
             }

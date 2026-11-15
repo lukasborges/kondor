@@ -1740,6 +1740,14 @@
         <translation>Wczytaj ponownie</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>Zapisz stronę jako…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>Drukuj…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Pokaż źródło strony</translation>
     </message>

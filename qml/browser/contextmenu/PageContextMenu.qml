@@ -10,6 +10,7 @@ Menu {
     property WebEngineView webView: null
     property Tab tab: null
     property TabModel tabModel: null
+    property var browserActions: null
     property bool endsWithSeparator: true
 
     popupType: Popup.Item
@@ -85,6 +86,7 @@ Menu {
     PageMenuEntries {
         id: entries
         webView: menu.webView
+        browserActions: menu.browserActions
     }
 
     PageMenuActions {
@@ -93,6 +95,7 @@ Menu {
         webView: menu.webView
         tab: menu.tab
         tabModel: menu.tabModel
+        browserActions: menu.browserActions
     }
 
     Component {

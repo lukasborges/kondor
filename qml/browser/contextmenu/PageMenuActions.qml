@@ -9,6 +9,7 @@ QtObject {
     required property WebEngineView webView
     required property Tab tab
     required property TabModel tabModel
+    required property var browserActions
 
     readonly property var webActions: ({
         "copyLink": WebEngineView.CopyLinkToClipboard,
@@ -39,6 +40,8 @@ QtObject {
         "back": root.goBack,
         "forward": root.goForward,
         "reload": root.reload,
+        "savePage": root.savePage,
+        "printPage": root.printPage,
         "inspectElement": root.inspectElement
     })
 
@@ -83,6 +86,14 @@ QtObject {
 
     function reload(data) {
         webView.reload()
+    }
+
+    function savePage(data) {
+        browserActions.savePageAction.trigger()
+    }
+
+    function printPage(data) {
+        browserActions.printAction.trigger()
     }
 
     function inspectElement(data) {

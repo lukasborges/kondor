@@ -1718,6 +1718,14 @@
         <translation>重新加载</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>将页面另存为…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>打印…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>查看页面源代码</translation>
     </message>

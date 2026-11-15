@@ -1729,6 +1729,14 @@
         <translation>Herladen</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>Pagina opslaan als…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>Afdrukken…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Paginabron weergeven</translation>
     </message>

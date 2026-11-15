@@ -1718,6 +1718,14 @@
         <translation>重新載入</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>另存頁面為…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>列印…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>檢視頁面原始碼</translation>
     </message>

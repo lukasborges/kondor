@@ -9,6 +9,7 @@ Item {
 
     required property Tab tab
     required property TabModel tabModel
+    required property var browserActions
 
     property point contextMenuPosition: Qt.point(0, 0)
 
@@ -117,6 +118,7 @@ Item {
         webView: pageView
         tab: root.tab
         tabModel: root.tabModel
+        browserActions: root.browserActions
     }
 
     Shortcut {

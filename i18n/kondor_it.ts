@@ -1729,6 +1729,14 @@
         <translation>Ricarica</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>Salva pagina come…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>Stampa…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Visualizza codice sorgente della pagina</translation>
     </message>

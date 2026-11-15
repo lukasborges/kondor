@@ -1740,6 +1740,14 @@
         <translation>Обновить</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>Сохранить страницу как…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>Печать…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Просмотреть исходный код страницы</translation>
     </message>

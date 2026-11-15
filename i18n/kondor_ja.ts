@@ -1718,6 +1718,14 @@
         <translation>再読み込み</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>名前を付けてページを保存…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>印刷…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>ページのソースを表示</translation>
     </message>

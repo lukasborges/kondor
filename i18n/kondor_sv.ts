@@ -1729,6 +1729,14 @@
         <translation>Läs in igen</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>Spara sida som…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>Skriv ut…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Visa sidkälla</translation>
     </message>

@@ -6,6 +6,7 @@ QtObject {
     id: root
 
     required property WebEngineView webView
+    required property var browserActions
 
     readonly property var linkEntries: [
         { text: qsTr("Open Link in New Tab"), icon: "tab-new", action: "openLinkNewTab" },
@@ -137,6 +138,8 @@ QtObject {
             { text: qsTr("Forward"), icon: "go-next", action: "forward", enabled: webView.canGoForward },
             { text: qsTr("Reload"), icon: "view-refresh", action: "reload" },
             null,
+            { text: qsTr("Save Page As…"), icon: "document-save-as", action: "savePage", enabled: browserActions.savePageAction.enabled },
+            { text: qsTr("Print…"), icon: "document-print", action: "printPage", enabled: browserActions.printAction.enabled },
             { text: qsTr("View Page Source"), icon: "text-html", action: "viewSource" }
         ]
     }

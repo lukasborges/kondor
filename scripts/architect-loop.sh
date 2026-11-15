@@ -43,6 +43,7 @@ main() {
   local interval="${KONDOR_ARCH_INTERVAL:-60}"
   local max_no_progress="${KONDOR_ARCH_MAX_NO_PROGRESS:-2}"
   local max_in_flight="${KONDOR_ARCH_MAX_IN_FLIGHT:-2}"
+  local -r high_rank=0 any_rank=3
   local model="${KONDOR_ARCH_MODEL-opus}"
   local effort="${KONDOR_ARCH_EFFORT:-medium}"
   local merge="${KONDOR_ARCH_AUTOMERGE:-1}"
@@ -135,10 +136,12 @@ EOF
   # Prints the issue the promote step should promote, or nothing: the open bug with the highest
   # priority (oldest first) that has no state label, else the first open issue of AGENTS.md
   # "Roadmap order" that has no state label and whose "Depends on:" issues are all closed.
+  # High-priority work first (bugs, then roadmap issues), then the other bugs, then the roadmap.
   next_promotion() {
     local issues
     issues="$(open_issues)" || return 0
-    first_bug "$issues" || first_roadmap_issue "$issues"
+    first_bug "$issues" "$high_rank" || first_roadmap_issue "$issues" "$high_rank" \
+      || first_bug "$issues" "$any_rank" || first_roadmap_issue "$issues" "$any_rank"
   }
 
   # One line per open issue: "<number> <started> <bug> <priority rank> <dependencies, comma-separated>".
@@ -153,15 +156,21 @@ EOF
   }
 
   first_bug() {
-    awk '$2 == "false" && $3 == "true"' <<<"$1" | sort -k4,4n -k1,1n | awk '{ print $1; found = 1; exit } END { exit !found }'
+    first_ready "$1" "$2" < <(awk '$2 == "false" && $3 == "true"' <<<"$1" | sort -k4,4n -k1,1n | cut -d' ' -f1)
   }
 
   first_roadmap_issue() {
-    local issues="$1" n deps
+    first_ready "$1" "$2" < <(roadmap_order)
+  }
+
+  # Prints the first issue number read from stdin that is not started, has at most the given
+  # priority rank and whose "Depends on:" issues are all closed.
+  first_ready() {
+    local issues="$1" max_rank="$2" n deps
     while read -r n; do
-      deps="$(awk -v n="$n" '$1 == n && $2 == "false" { print $5; found = 1 } END { exit !found }' <<<"$issues")" || continue
+      deps="$(awk -v n="$n" -v r="$max_rank" '$1 == n && $2 == "false" && $4 <= r { print $5; found = 1 } END { exit !found }' <<<"$issues")" || continue
       dependencies_closed "$deps" "$issues" && { echo "$n"; return 0; }
-    done < <(roadmap_order)
+    done
     return 1
   }
 

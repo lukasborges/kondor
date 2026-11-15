@@ -15,7 +15,7 @@ Make the Python app **the** Kondor Browser and delete the C++, closing #162:
 
 ## Context
 
-- **After phase 11** (#173), `python3 scripts/build.py && python3 -m kondor` runs the whole browser from the checkout. Every C++ QML type and every C++ test has a Python twin, and QA (#217) has compared the two apps. Every parity bug it filed is on the `**Depends on:**` line of #174, so this phase starts with no known difference.
+- **After phase 11** (#173), `python3 scripts/build.py && python3 -m kondor` runs the whole browser from the checkout. Every C++ QML type and every C++ test has a Python twin. This phase does not wait for QA (#217): the maintainer chose to finish the port first, and QA tests the Python app after the switch.
 - **Where the app finds its files** (`kondor/app/startup/stagedbuild.py`, phase 11): `staged_build_directory()` is `<checkout>/build/python`. `load_staged_resources()` registers `kondor.rcc` and needs `qml/Kondor/qmldir`. `PROJECT_VERSION = "0.2.0"` is checked by a test against `CMakeLists.txt` and `pyproject.toml`. `prepare_environment()` looks for spell-check dictionaries in `<staged>/../share/kondor/qtwebengine_dictionaries`, then `<staged>/qtwebengine_dictionaries`.
 - **Staging** (`scripts/build.py`, `scripts/staging/`):
   - `stage()` writes `build/python/qml/Kondor/` with its `qmldir`, plus `i18n/*.qm` (from `pyside6-lrelease`) and `kondor.rcc` (from `pyside6-rcc --binary`).
@@ -247,7 +247,6 @@ On Fedora 45, in a clean checkout of the PR branch. Every app run uses one isola
 ## Dependencies
 
 - #173 (phase 11: the Python app runs).
-- #217 (QA parity agent), and every parity bug QA adds to the issue's `**Depends on:**` line.
 
 Phase 12 closes the umbrella #162 (`Closes #174`, and the PR body also says `Closes #162`).
 
@@ -267,3 +266,4 @@ None: no UI changes.
 | Why `rcc` / `lrelease` as a fallback? | The Flatpak SDK may ship Qt's tools without `pyside6-*`. The formats are the same, and Fedora still prefers the PySide6 tools. |
 | Why keep a single `build` job? | The architect loop merges when the `build` check is green. Merging `python` and `changes` into it keeps that rule. Without C++, every change runs every check in a few minutes. |
 | How is a release AppImage tested before tagging? | `release.yml` gets `workflow_dispatch`, which builds it and runs it on a bare host without publishing. The C++ release was never smoke-tested in CI. |
+| Wait for the QA parity run (#217) before switching? | No, chosen by the maintainer: #174 is the last step of the port and goes first. QA runs after the switch, on the Python app. |

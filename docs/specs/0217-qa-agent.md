@@ -166,8 +166,8 @@ Same structure as the other loop scripts (everything inside `main()`, small func
 ## Dependencies
 
 - #173: the Python app starts with `python3 -m kondor`, so parity mode has two apps to compare.
-- #174 must wait for this issue (its `**Depends on:**` line lists #217) and for every parity bug
-  QA files.
+- #174 no longer waits for this issue (maintainer's decision). If #174 has removed the C++ app when
+  this issue starts, parity mode is skipped and QA runs only the daily user tests.
 
 ## Decisions
 
@@ -179,3 +179,4 @@ Same structure as the other loop scripts (everything inside `main()`, small func
 | How do parity bugs block the switch? | QA adds each one to #174's `**Depends on:**` line, which the architect loop already honors when it promotes. |
 | Which GitHub account files the bugs? | The maintainer's (`gh` default, like the architect). The first body line "Found by the QA agent" tells them apart. |
 | Could QA fix small bugs itself? | No. Every fix goes through the developer and the architect's review, so the same rules and checks apply. |
+| Does the switch (#174) wait for QA? | No, chosen by the maintainer to finish the port first. Parity mode runs only while the C++ app still exists. |

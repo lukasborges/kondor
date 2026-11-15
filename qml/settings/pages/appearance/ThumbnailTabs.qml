@@ -9,7 +9,6 @@ Row {
     property color toolBarColor: "transparent"
 
     readonly property bool isClassic: tabStyle === "classic"
-    readonly property bool isBelowAddressBar: tabStyle === "below"
 
     spacing: 2
 
@@ -27,11 +26,10 @@ Row {
             border.color: isActive ? activeBorderColor : "transparent"
 
             readonly property color restColor: tabs.isClassic ? Qt.darker(tabs.stripColor, 1.05) : "transparent"
-            readonly property color activeColor: tabs.isBelowAddressBar
-                ? Qt.alpha(Kirigami.Theme.highlightColor, 0.25) : tabs.toolBarColor
-            readonly property color activeBorderColor: tabs.isBelowAddressBar
-                ? Kirigami.Theme.highlightColor
-                : tabs.isClassic ? "transparent" : Qt.alpha(Kirigami.Theme.textColor, 0.3)
+            readonly property color activeColor: tabs.isClassic
+                ? tabs.toolBarColor : Qt.alpha(Kirigami.Theme.highlightColor, 0.25)
+            readonly property color activeBorderColor: tabs.isClassic
+                ? "transparent" : Kirigami.Theme.highlightColor
 
             Rectangle {
                 visible: tabs.isClassic && parent.isActive

@@ -22,6 +22,8 @@ TabButton {
 
     width: tab.pinned ? tabStrip.pinnedTabWidth : tabStrip.tabWidth
     text: ""
+    leftPadding: isStyled && !tab.pinned ? Kirigami.Units.smallSpacing * 2 : implicitLeftPadding
+    rightPadding: isStyled && !tab.pinned ? Kirigami.Units.smallSpacing : implicitRightPadding
     Accessible.name: info.title
     z: tabDrag.active || tabSlide.isSettling ? 10 : 0
     transform: [
@@ -47,7 +49,6 @@ TabButton {
         anchors.fill: parent
         z: -1
         visible: control.isStyled
-        isBelowAddressBar: control.tabStrip.isBelowAddressBar
         isActive: control.checked
         isHovered: control.hovered
         hasKeyboardFocus: control.visualFocus
@@ -62,10 +63,10 @@ TabButton {
     Component.onDestruction: tabDrag.abortOnDestruction()
 
     contentItem: RowLayout {
-        spacing: 6
+        spacing: control.isStyled ? Kirigami.Units.smallSpacing : 6
 
         Item {
-            visible: !control.tab.pinned
+            visible: !control.tab.pinned && !control.isStyled
             Layout.preferredWidth: 2
         }
 

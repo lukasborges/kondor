@@ -22,7 +22,7 @@ Make the Python app **the** Kondor Browser and delete the C++, closing #162:
   - `resources.py` `RESOURCE_GROUPS` lists the resource files. Five JS files still live in `src/`: `src/passwords/bridge/passwords.js`, `src/passwords/bridge/usernamefield.js`, `src/extensions/bridge/channel.js`, `src/extensions/bridge/extensionruntime.js` and `src/extensions/scripts/usergm.js`.
   - `cmakeresources.py` and `scripts/tests/test_staging.py::test_matches_the_cmake_resource_blocks` check that list against the `qt_add_resources` blocks of `CMakeLists.txt`.
 - **What CMake still does that Python does not:**
-  - `qt_add_translations(… LUPDATE_OPTIONS -no-obsolete)` and the `update_translations` target.
+  - `qt_add_translations(… LUPDATE_OPTIONS -no-obsolete -locations none)` and the `update_translations` target.
   - Spell-check dictionaries: `qwebengine_convert_dict` (Fedora: `/usr/lib64/qt6/libexec/qwebengine_convert_dict`, package `qt6-qtwebengine`) converts `/usr/share/hunspell/<lang>.dic` for `KONDOR_SPELLCHECK_LANGS` = `en_US;pt_BR` into `<lang with "-">.bdic`. Each missing tool or dictionary gives a warning and is skipped, and the result is installed to `share/kondor/qtwebengine_dictionaries`.
   - `install()`: the binary to `bin/`, `packaging/kondor.desktop` to `share/applications`, the metainfo to `share/metainfo`, `kondor-extension.xml` to `share/mime/packages`, and `kondor.png` / `kondor.svg` to `share/icons/hicolor/{256x256,scalable}/apps`.
 - **Translations today:** 542 messages per `.ts` file. Most come from `qml/`, and about 43 from `src/` (`appidentity`, `bookmarkmanager`, `defaultbookmarks`, `downloadmanager`, `historymodel` and many `extensions/` files). The Python twins use `self.tr()` in classes with the C++ class names, or `QCoreApplication.translate("<C++ class>", …)` (umbrella item 8), so the contexts match. There are two translator notes, both `//:` in C++: `appidentity.cpp` and `permissiondescription.cpp`.
@@ -102,7 +102,7 @@ One layout for every package (AppImage `AppDir/usr`, Flatpak `/app`, a plain `/u
 
 ### 3. Translations
 
-- **`scripts/update-translations.py`** replaces the `update_translations` target. It runs `pyside6-lupdate -no-obsolete -locations relative <files> -ts i18n/kondor_*.ts` on a sorted list of every `kondor/**/*.py`, `qml/**/*.qml` and `qml/**/*.js`, with the same `.ts` files `TS_FILES` lists. A new language is added by creating `i18n/kondor_<lang>.ts`; the script takes every `i18n/kondor_*.ts`.
+- **`scripts/update-translations.py`** replaces the `update_translations` target. It runs `pyside6-lupdate -no-obsolete -locations none <files> -ts i18n/kondor_*.ts` on a sorted list of every `kondor/**/*.py`, `qml/**/*.qml` and `qml/**/*.js`, with the same `.ts` files `TS_FILES` lists. A new language is added by creating `i18n/kondor_<lang>.ts`; the script takes every `i18n/kondor_*.ts`.
 - **No message is lost:**
   - After the first run, every `.ts` file still has the same set of `(context, source, comment)` messages with the same `<translation>` text. Only `<location>` lines change.
   - A message that disappears means pyside6-lupdate does not recognize its Python call. Fix the call in `kondor/` (use `self.tr()` in the class with the C++ name, or `QCoreApplication.translate("<context>", "<text>", None, n)`) and keep the context and text. Do not edit the `.ts` by hand.
@@ -267,3 +267,4 @@ None: no UI changes.
 | Why keep a single `build` job? | The architect loop merges when the `build` check is green. Merging `python` and `changes` into it keeps that rule. Without C++, every change runs every check in a few minutes. |
 | How is a release AppImage tested before tagging? | `release.yml` gets `workflow_dispatch`, which builds it and runs it on a bare host without publishing. The C++ release was never smoke-tested in CI. |
 | Wait for the QA parity run (#217) before switching? | No, chosen by the maintainer: #174 is the last step of the port and goes first. QA runs after the switch, on the Python app. |
+| Line numbers in the `.ts` files? | None (`-locations none`), as in the C++ build since this change: with line numbers, any QML edit that moved a string made every `.ts` stale and failed the translations check. |

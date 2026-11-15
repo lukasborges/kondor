@@ -114,6 +114,13 @@ screenshot. The developer's implementation must match it visually.
 6. Branch based on current `main`, Conventional Commits, `Closes #N` in the PR body.
 7. Leave concrete comments (file:line, why, suggested fix) as a PR review; one verdict:
    approve + squash-merge, or request changes (`to-dev`).
+8. **Everything in one round.** The first review lists every blocking problem you can find, after
+   going through items 1 to 5 completely; never keep a problem back for a later round. A
+   re-review checks the requested changes and the new commits only. It may block again only for
+   a problem those commits introduced, or for an acceptance criterion that is still not met;
+   anything else you notice late goes in as a non-blocking note (or a new `bug` issue), not as a
+   new round of changes. Once you approve, a later run never takes the approval back unless the
+   PR head changed and the change broke something.
 
 ## Style
 

@@ -250,7 +250,7 @@ qt_add_translations(kondor
         i18n/kondor_zh_CN.ts
         i18n/kondor_zh_TW.ts
     RESOURCE_PREFIX /i18n
-    LUPDATE_OPTIONS -no-obsolete)
+    LUPDATE_OPTIONS -no-obsolete -locations none)
 
 qt_add_resources(kondor "app_icon"
     PREFIX "/"

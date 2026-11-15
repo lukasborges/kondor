@@ -18,4 +18,4 @@ def test_uses_the_install_folder_when_it_holds_the_resources(package_parent: Pat
 
 
 def test_uses_the_checkout_build_folder_otherwise(package_parent: Path) -> None:
-    assert stagedbuild.staged_build_directory() == package_parent / "build" / "python"
+    assert stagedbuild.staged_build_directory() == package_parent.parent / "build" / "python"

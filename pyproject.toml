@@ -8,7 +8,7 @@ dependencies = []
 target-version = "py313"
 line-length = 100
 include = [
-    "kondor/**/*.py",
+    "src/**/*.py",
     "tests/**/*.py",
     "scripts/build.py",
     "scripts/staging/**/*.py",
@@ -23,10 +23,12 @@ ignore = ["N802", "N815"]
 
 [tool.mypy]
 strict = true
+mypy_path = "src"
 python_version = "3.13"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]
 qt_api = "pyside6"
 
 [[tool.mypy.overrides]]

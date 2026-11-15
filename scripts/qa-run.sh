@@ -60,7 +60,7 @@ main() {
 
   is_unchanged() { [[ "$(cat "$state/last-sha" 2>/dev/null)" == "$1" ]]; }
 
-  has_python_app() { [[ -f "$control/kondor/__main__.py" ]]; }
+  has_python_app() { [[ -f "$control/src/kondor/__main__.py" ]]; }
 
   has_cpp_app() { [[ -f "$control/CMakeLists.txt" ]]; }
 

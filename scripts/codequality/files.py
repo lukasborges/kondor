@@ -2,7 +2,7 @@ import os
 import subprocess
 from typing import List, Set
 
-ROOTS = ("qml", "tests", "kondor")
+ROOTS = ("qml", "tests", "src")
 SUFFIXES = (".js", ".qml", ".py")
 IGNORED_PREFIXES = ("tests/data/",)
 

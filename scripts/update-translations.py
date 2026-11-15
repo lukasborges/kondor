@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 REPOSITORY = Path(__file__).resolve().parent.parent
-SOURCE_PATTERNS = (("kondor", "*.py"), ("qml", "*.qml"), ("qml", "*.js"))
+SOURCE_PATTERNS = (("src/kondor", "*.py"), ("qml", "*.qml"), ("qml", "*.js"))
 
 
 def source_files() -> list[str]:

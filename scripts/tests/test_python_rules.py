@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 from codequality.python import find_python_functions
 from codequality.rules import check_source
 
-PATH = "kondor/a.py"
+PATH = "src/kondor/a.py"
 
 
 def statements(count: int, indent: str = "    ") -> str:
@@ -43,7 +43,7 @@ class FunctionLengthTest(unittest.TestCase):
 
     def test_method_key_is_qualified(self):
         function = only_function("class Foo:\n    def run(self):\n        work()\n")
-        self.assertEqual(function.key, "kondor/a.py::Foo.run")
+        self.assertEqual(function.key, "src/kondor/a.py::Foo.run")
 
 
 class ParametersTest(unittest.TestCase):
@@ -83,7 +83,7 @@ class NestingTest(unittest.TestCase):
         source = "def run():\n    if a:\n        def inner():\n            if b:\n                work()\n"
         functions = find_python_functions(PATH, source)
         self.assertEqual([f.nesting for f in functions], [1, 1])
-        self.assertEqual(functions[1].key, "kondor/a.py::run.inner")
+        self.assertEqual(functions[1].key, "src/kondor/a.py::run.inner")
 
 
 class CommentsTest(unittest.TestCase):

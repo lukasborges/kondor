@@ -12,7 +12,7 @@ def listed_modules() -> set[str]:
 
 
 def imported_modules() -> set[str]:
-    sources = (REPOSITORY / "kondor").rglob("*.py")
+    sources = (REPOSITORY / "src" / "kondor").rglob("*.py")
     return {name for path in sources for name in IMPORT.findall(path.read_text(encoding="utf-8"))}
 
 

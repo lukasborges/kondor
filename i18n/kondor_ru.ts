@@ -2415,6 +2415,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarToggleButton</name>
+    <message>
+        <source>Expand Side Bar</source>
+        <translation>Развернуть боковую панель</translation>
+    </message>
+    <message>
+        <source>Collapse Side Bar</source>
+        <translation>Свернуть боковую панель</translation>
+    </message>
+</context>
+<context>
     <name>SiteInfoPopup</name>
     <message>
         <source>Permissions for this site</source>

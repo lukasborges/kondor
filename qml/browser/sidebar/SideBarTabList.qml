@@ -7,6 +7,7 @@ ListView {
 
     required property TabModel tabModel
     required property var targetWindow
+    property bool collapsed: false
 
     signal newTabRequested()
 
@@ -55,17 +56,23 @@ ListView {
         tabModel: list.tabModel
         targetWindow: list.targetWindow
         list: ListView.view
+        collapsed: list.collapsed
     }
 
     footer: ItemDelegate {
         width: ListView.view.width
+        display: list.collapsed ? AbstractButton.IconOnly : AbstractButton.TextBesideIcon
         icon.name: "tab-new"
         text: qsTr("New Tab")
         focusPolicy: Qt.NoFocus
+        ToolTip.visible: list.collapsed && hovered
+        ToolTip.text: text
+        ToolTip.delay: 600
+        Accessible.name: text
         onClicked: list.newTabRequested()
     }
 
-    ScrollBar.vertical: ScrollBar {}
+    ScrollBar.vertical: ScrollBar { policy: list.collapsed ? ScrollBar.AlwaysOff : ScrollBar.AsNeeded }
 
     WheelHandler {
         onWheel: event => list.scrollBy(-event.angleDelta.y / 2)

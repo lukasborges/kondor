@@ -2393,6 +2393,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarToggleButton</name>
+    <message>
+        <source>Expand Side Bar</source>
+        <translation>展开侧边栏</translation>
+    </message>
+    <message>
+        <source>Collapse Side Bar</source>
+        <translation>折叠侧边栏</translation>
+    </message>
+</context>
+<context>
     <name>SiteInfoPopup</name>
     <message>
         <source>Permissions for this site</source>

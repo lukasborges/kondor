@@ -2404,6 +2404,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarToggleButton</name>
+    <message>
+        <source>Expand Side Bar</source>
+        <translation>Expandir la barra lateral</translation>
+    </message>
+    <message>
+        <source>Collapse Side Bar</source>
+        <translation>Contraer la barra lateral</translation>
+    </message>
+</context>
+<context>
     <name>SiteInfoPopup</name>
     <message>
         <source>Permissions for this site</source>

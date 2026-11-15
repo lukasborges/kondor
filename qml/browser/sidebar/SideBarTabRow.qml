@@ -12,28 +12,19 @@ ItemDelegate {
     required property TabModel tabModel
     required property var targetWindow
     required property ListView list
-    property bool collapsed: false
 
     readonly property bool isPinned: tab?.pinned ?? false
     readonly property bool isCurrent: index === tabModel.currentIndex
     readonly property bool hasKeyboardFocus: list.isFocusRingVisible && index === list.currentIndex
-    readonly property real collapsedInset: Math.max(0, (width - list.squareSize) / 2)
 
     visible: !isPinned
     width: ListView.view.width
-    height: isPinned ? 0 : (collapsed ? list.squareSize : implicitHeight)
-    leftInset: collapsed ? collapsedInset : 0
-    rightInset: leftInset
-    topInset: 0
-    bottomInset: 0
+    height: isPinned ? 0 : implicitHeight
     z: drag.active ? 10 : 0
     highlighted: isCurrent
     down: false
     focusPolicy: Qt.NoFocus
     Accessible.name: info.title
-    ToolTip.visible: collapsed && hovered
-    ToolTip.text: info.title
-    ToolTip.delay: 600
     transform: Translate { y: drag.shift }
     onClicked: {
         tabModel.setCurrentIndex(index)
@@ -53,18 +44,15 @@ ItemDelegate {
             Layout.preferredWidth: 16
             Layout.preferredHeight: 16
             Layout.alignment: Qt.AlignHCenter
-            Layout.fillWidth: row.collapsed
         }
 
         Label {
-            visible: !row.collapsed
             Layout.fillWidth: true
             text: info.title
             elide: Text.ElideRight
         }
 
         ToolButton {
-            visible: !row.collapsed
             enabled: row.isCurrent || row.hovered
             opacity: enabled ? 1 : 0
             Layout.preferredWidth: 20
@@ -82,12 +70,9 @@ ItemDelegate {
         }
     }
 
-    Rectangle {
+    SideBarFocusRing {
         anchors.fill: row.background
         visible: row.hasKeyboardFocus
-        color: "transparent"
-        border.color: Kirigami.Theme.focusColor
-        radius: Kirigami.Units.cornerRadius
     }
 
     TapHandler {

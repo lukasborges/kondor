@@ -9,6 +9,9 @@ ListView {
     required property var targetWindow
     property bool collapsed: false
 
+    property bool isFocusedByPointer: false
+    readonly property bool isFocusRingVisible: activeFocus && !isFocusedByPointer
+
     signal newTabRequested()
 
     model: tabModel
@@ -17,10 +20,6 @@ ListView {
     interactive: false
     activeFocusOnTab: true
     highlight: null
-
-    property bool isFocusedByPointer: false
-    readonly property bool isFocusRingVisible: activeFocus && !isFocusedByPointer
-    readonly property real squareSize: sizeProbe.implicitWidth
 
     function focusWithPointer() {
         forceActiveFocus()
@@ -33,7 +32,12 @@ ListView {
         contentY = Math.max(lowest, Math.min(highest, contentY + delta))
     }
 
+    function useKeyboard() {
+        isFocusedByPointer = false
+    }
+
     function moveFocus(delta) {
+        useKeyboard()
         const target = currentIndex + delta
         currentIndex = Math.max(tabModel.pinnedCount, Math.min(target, tabModel.count - 1))
     }
@@ -47,34 +51,41 @@ ListView {
         return y > contentHeight - contentY
     }
 
-    Keys.onPressed: event => { isFocusedByPointer = false; event.accepted = false }
     onActiveFocusChanged: isFocusedByPointer = false
     Keys.onUpPressed: moveFocus(-1)
     Keys.onDownPressed: moveFocus(1)
-    Keys.onReturnPressed: tabModel.setCurrentIndex(currentIndex)
-    Keys.onEnterPressed: tabModel.setCurrentIndex(currentIndex)
-    Keys.onDeletePressed: targetWindow.closeTabAt(currentIndex)
+    Keys.onReturnPressed: { useKeyboard(); tabModel.setCurrentIndex(currentIndex) }
+    Keys.onEnterPressed: { useKeyboard(); tabModel.setCurrentIndex(currentIndex) }
+    Keys.onDeletePressed: { useKeyboard(); targetWindow.closeTabAt(currentIndex) }
     Component.onCompleted: Qt.callLater(showCurrentTab)
     onHeightChanged: Qt.callLater(showCurrentTab)
     onCountChanged: Qt.callLater(showCurrentTab)
-
-    ToolButton {
-        id: sizeProbe
-        visible: false
-        display: AbstractButton.IconOnly
-        icon.name: "tab-new"
-    }
 
     Connections {
         target: list.tabModel
         function onCurrentIndexChanged() { Qt.callLater(list.showCurrentTab) }
     }
 
-    delegate: SideBarTabRow {
-        tabModel: list.tabModel
-        targetWindow: list.targetWindow
-        list: ListView.view
-        collapsed: list.collapsed
+    delegate: collapsed ? collapsedRow : expandedRow
+
+    Component {
+        id: expandedRow
+
+        SideBarTabRow {
+            tabModel: list.tabModel
+            targetWindow: list.targetWindow
+            list: ListView.view
+        }
+    }
+
+    Component {
+        id: collapsedRow
+
+        SideBarCollapsedTabRow {
+            tabModel: list.tabModel
+            targetWindow: list.targetWindow
+            list: ListView.view
+        }
     }
 
     footer: ItemDelegate {

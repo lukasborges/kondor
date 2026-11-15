@@ -2347,6 +2347,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarToggleButton</name>
+    <message>
+        <source>Expand Side Bar</source>
+        <translation>Expandera sidofältet</translation>
+    </message>
+    <message>
+        <source>Collapse Side Bar</source>
+        <translation>Fäll ihop sidofältet</translation>
+    </message>
+</context>
+<context>
     <name>SiteInfoPopup</name>
     <message>
         <source>Permissions for this site</source>

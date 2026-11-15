@@ -2358,6 +2358,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarToggleButton</name>
+    <message>
+        <source>Expand Side Bar</source>
+        <translation>Rozbalit boční panel</translation>
+    </message>
+    <message>
+        <source>Collapse Side Bar</source>
+        <translation>Sbalit boční panel</translation>
+    </message>
+</context>
+<context>
     <name>SiteInfoPopup</name>
     <message>
         <source>Permissions for this site</source>

@@ -11,7 +11,11 @@ Rectangle {
 
     signal newTabRequested()
 
-    implicitWidth: Kirigami.Units.gridUnit * 14
+    readonly property bool collapsed: Settings.sideBarCollapsed
+
+    implicitWidth: collapsed
+        ? Kirigami.Units.gridUnit * 2 + Kirigami.Units.smallSpacing * 4
+        : Kirigami.Units.gridUnit * 14
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
     Kirigami.Theme.inherit: false
     color: Kirigami.Theme.backgroundColor
@@ -35,10 +39,20 @@ Rectangle {
         SideBarTabList {
             tabModel: sideBar.tabModel
             targetWindow: sideBar.targetWindow
+            collapsed: sideBar.collapsed
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.margins: Kirigami.Units.smallSpacing
             onNewTabRequested: sideBar.newTabRequested()
+        }
+
+        Kirigami.Separator {
+            Layout.fillWidth: true
+        }
+
+        SideBarToggleButton {
+            Layout.margins: Kirigami.Units.smallSpacing
+            Layout.alignment: sideBar.collapsed ? Qt.AlignHCenter : Qt.AlignLeft
         }
     }
 }

@@ -2347,6 +2347,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarToggleButton</name>
+    <message>
+        <source>Expand Side Bar</source>
+        <translation>Développer la barre latérale</translation>
+    </message>
+    <message>
+        <source>Collapse Side Bar</source>
+        <translation>Réduire la barre latérale</translation>
+    </message>
+</context>
+<context>
     <name>SiteInfoPopup</name>
     <message>
         <source>Permissions for this site</source>

@@ -2336,6 +2336,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarToggleButton</name>
+    <message>
+        <source>Expand Side Bar</source>
+        <translation>サイドバーを展開</translation>
+    </message>
+    <message>
+        <source>Collapse Side Bar</source>
+        <translation>サイドバーを折りたたむ</translation>
+    </message>
+</context>
+<context>
     <name>SiteInfoPopup</name>
     <message>
         <source>Permissions for this site</source>

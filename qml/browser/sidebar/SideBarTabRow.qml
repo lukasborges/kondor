@@ -12,6 +12,7 @@ ItemDelegate {
     required property TabModel tabModel
     required property var targetWindow
     required property ListView list
+    property bool collapsed: false
 
     readonly property bool isPinned: tab?.pinned ?? false
     readonly property bool isCurrent: index === tabModel.currentIndex
@@ -25,6 +26,9 @@ ItemDelegate {
     down: false
     focusPolicy: Qt.NoFocus
     Accessible.name: info.title
+    ToolTip.visible: collapsed && hovered
+    ToolTip.text: info.title
+    ToolTip.delay: 600
     transform: Translate { y: drag.shift }
     onClicked: {
         tabModel.setCurrentIndex(index)
@@ -43,15 +47,19 @@ ItemDelegate {
             tab: row.tab
             Layout.preferredWidth: 16
             Layout.preferredHeight: 16
+            Layout.alignment: Qt.AlignHCenter
+            Layout.fillWidth: row.collapsed
         }
 
         Label {
+            visible: !row.collapsed
             Layout.fillWidth: true
             text: info.title
             elide: Text.ElideRight
         }
 
         ToolButton {
+            visible: !row.collapsed
             enabled: row.isCurrent || row.hovered
             opacity: enabled ? 1 : 0
             Layout.preferredWidth: 20

@@ -222,8 +222,65 @@
         <translation>Mostra la barra de marcadors</translation>
     </message>
     <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Obre-ho tot en pestanyes (%1)</translation>
+    </message>
+    <message>
+        <source>Add This Page Here</source>
+        <translation>Afegeix aquesta pàgina aquí</translation>
+    </message>
+    <message>
         <source>(Empty)</source>
         <translation>(Buit)</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarContextMenu</name>
+    <message>
+        <source>Open in New Tab</source>
+        <translation>Obre en una pestanya nova</translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation>Obre en una finestra nova</translation>
+    </message>
+    <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Obre-ho tot en pestanyes (%1)</translation>
+    </message>
+    <message>
+        <source>Rename…</source>
+        <translation>Canvia el nom…</translation>
+    </message>
+    <message>
+        <source>Edit…</source>
+        <translation>Edita…</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Suprimeix</translation>
+    </message>
+    <message>
+        <source>Add This Page</source>
+        <translation>Afegeix aquesta pàgina</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks…</source>
+        <translation>Gestiona els marcadors…</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarItem</name>
+    <message>
+        <source>folder</source>
+        <translation>carpeta</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarOverflow</name>
+    <message>
+        <source>More Bookmarks</source>
+        <translation>Més adreces d&apos;interès</translation>
     </message>
 </context>
 <context>

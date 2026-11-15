@@ -222,8 +222,65 @@
         <translation>Показывать панель закладок</translation>
     </message>
     <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Открыть все во вкладках (%1)</translation>
+    </message>
+    <message>
+        <source>Add This Page Here</source>
+        <translation>Добавить эту страницу сюда</translation>
+    </message>
+    <message>
         <source>(Empty)</source>
         <translation>(Пусто)</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarContextMenu</name>
+    <message>
+        <source>Open in New Tab</source>
+        <translation>Открыть в новой вкладке</translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation>Открыть в новом окне</translation>
+    </message>
+    <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Открыть все во вкладках (%1)</translation>
+    </message>
+    <message>
+        <source>Rename…</source>
+        <translation>Переименовать…</translation>
+    </message>
+    <message>
+        <source>Edit…</source>
+        <translation>Изменить…</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Удалить</translation>
+    </message>
+    <message>
+        <source>Add This Page</source>
+        <translation>Добавить эту страницу</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks…</source>
+        <translation>Управление закладками…</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarItem</name>
+    <message>
+        <source>folder</source>
+        <translation>папка</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarOverflow</name>
+    <message>
+        <source>More Bookmarks</source>
+        <translation>Ещё закладки</translation>
     </message>
 </context>
 <context>

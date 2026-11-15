@@ -222,8 +222,65 @@
         <translation>ブックマークツールバーを表示</translation>
     </message>
     <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>すべてタブで開く (%1)</translation>
+    </message>
+    <message>
+        <source>Add This Page Here</source>
+        <translation>このページをここに追加</translation>
+    </message>
+    <message>
         <source>(Empty)</source>
         <translation>(空)</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarContextMenu</name>
+    <message>
+        <source>Open in New Tab</source>
+        <translation>新しいタブで開く</translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation>新しいウィンドウで開く</translation>
+    </message>
+    <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>すべてタブで開く (%1)</translation>
+    </message>
+    <message>
+        <source>Rename…</source>
+        <translation>名前を変更…</translation>
+    </message>
+    <message>
+        <source>Edit…</source>
+        <translation>編集…</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>削除</translation>
+    </message>
+    <message>
+        <source>Add This Page</source>
+        <translation>このページを追加</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks…</source>
+        <translation>ブックマークを管理…</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarItem</name>
+    <message>
+        <source>folder</source>
+        <translation>フォルダー</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarOverflow</name>
+    <message>
+        <source>More Bookmarks</source>
+        <translation>その他のブックマーク</translation>
     </message>
 </context>
 <context>

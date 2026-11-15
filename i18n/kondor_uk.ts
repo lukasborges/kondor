@@ -222,8 +222,65 @@
         <translation>Показувати панель закладок</translation>
     </message>
     <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Відкрити всі у вкладках (%1)</translation>
+    </message>
+    <message>
+        <source>Add This Page Here</source>
+        <translation>Додати цю сторінку сюди</translation>
+    </message>
+    <message>
         <source>(Empty)</source>
         <translation>(Порожньо)</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarContextMenu</name>
+    <message>
+        <source>Open in New Tab</source>
+        <translation>Відкрити в новій вкладці</translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation>Відкрити в новому вікні</translation>
+    </message>
+    <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Відкрити всі у вкладках (%1)</translation>
+    </message>
+    <message>
+        <source>Rename…</source>
+        <translation>Перейменувати…</translation>
+    </message>
+    <message>
+        <source>Edit…</source>
+        <translation>Змінити…</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Видалити</translation>
+    </message>
+    <message>
+        <source>Add This Page</source>
+        <translation>Додати цю сторінку</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks…</source>
+        <translation>Керувати закладками…</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarItem</name>
+    <message>
+        <source>folder</source>
+        <translation>тека</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarOverflow</name>
+    <message>
+        <source>More Bookmarks</source>
+        <translation>Більше закладок</translation>
     </message>
 </context>
 <context>

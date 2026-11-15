@@ -222,8 +222,65 @@
         <translation>Mostra la barra dei segnalibri</translation>
     </message>
     <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Apri tutto in schede (%1)</translation>
+    </message>
+    <message>
+        <source>Add This Page Here</source>
+        <translation>Aggiungi questa pagina qui</translation>
+    </message>
+    <message>
         <source>(Empty)</source>
         <translation>(Vuoto)</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarContextMenu</name>
+    <message>
+        <source>Open in New Tab</source>
+        <translation>Apri in una nuova scheda</translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation>Apri in una nuova finestra</translation>
+    </message>
+    <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Apri tutto in schede (%1)</translation>
+    </message>
+    <message>
+        <source>Rename…</source>
+        <translation>Rinomina…</translation>
+    </message>
+    <message>
+        <source>Edit…</source>
+        <translation>Modifica…</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Elimina</translation>
+    </message>
+    <message>
+        <source>Add This Page</source>
+        <translation>Aggiungi questa pagina</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks…</source>
+        <translation>Gestisci segnalibri…</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarItem</name>
+    <message>
+        <source>folder</source>
+        <translation>cartella</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarOverflow</name>
+    <message>
+        <source>More Bookmarks</source>
+        <translation>Altri segnalibri</translation>
     </message>
 </context>
 <context>

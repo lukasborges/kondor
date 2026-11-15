@@ -222,8 +222,65 @@
         <translation>북마크 도구 모음 표시</translation>
     </message>
     <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>모두 탭에서 열기 (%1)</translation>
+    </message>
+    <message>
+        <source>Add This Page Here</source>
+        <translation>이 페이지를 여기에 추가</translation>
+    </message>
+    <message>
         <source>(Empty)</source>
         <translation>(비어 있음)</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarContextMenu</name>
+    <message>
+        <source>Open in New Tab</source>
+        <translation>새 탭에서 열기</translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation>새 창에서 열기</translation>
+    </message>
+    <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>모두 탭에서 열기 (%1)</translation>
+    </message>
+    <message>
+        <source>Rename…</source>
+        <translation>이름 바꾸기…</translation>
+    </message>
+    <message>
+        <source>Edit…</source>
+        <translation>편집…</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>삭제</translation>
+    </message>
+    <message>
+        <source>Add This Page</source>
+        <translation>이 페이지 추가</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks…</source>
+        <translation>북마크 관리…</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarItem</name>
+    <message>
+        <source>folder</source>
+        <translation>폴더</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarOverflow</name>
+    <message>
+        <source>More Bookmarks</source>
+        <translation>더 많은 북마크</translation>
     </message>
 </context>
 <context>

@@ -55,6 +55,11 @@ QtObject {
         root.endDrag()
     }
 
+    function cancelDrag() {
+        root.preview.Drag.cancel()
+        root.endDrag()
+    }
+
     function endDrag() {
         root.draggedId = -1
         root.draggedIsFolder = false

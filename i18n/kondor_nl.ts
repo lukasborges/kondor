@@ -222,8 +222,65 @@
         <translation>Bladwijzerwerkbalk tonen</translation>
     </message>
     <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Alles openen in tabbladen (%1)</translation>
+    </message>
+    <message>
+        <source>Add This Page Here</source>
+        <translation>Deze pagina hier toevoegen</translation>
+    </message>
+    <message>
         <source>(Empty)</source>
         <translation>(Leeg)</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarContextMenu</name>
+    <message>
+        <source>Open in New Tab</source>
+        <translation>In nieuw tabblad openen</translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation>Openen in nieuw venster</translation>
+    </message>
+    <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Alles openen in tabbladen (%1)</translation>
+    </message>
+    <message>
+        <source>Rename…</source>
+        <translation>Hernoemen…</translation>
+    </message>
+    <message>
+        <source>Edit…</source>
+        <translation>Bewerken…</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Verwijderen</translation>
+    </message>
+    <message>
+        <source>Add This Page</source>
+        <translation>Deze pagina toevoegen</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks…</source>
+        <translation>Bladwijzers beheren…</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarItem</name>
+    <message>
+        <source>folder</source>
+        <translation>map</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarOverflow</name>
+    <message>
+        <source>More Bookmarks</source>
+        <translation>Meer bladwijzers</translation>
     </message>
 </context>
 <context>

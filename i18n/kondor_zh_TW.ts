@@ -222,8 +222,65 @@
         <translation>顯示書籤工具列</translation>
     </message>
     <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>在分頁中全部開啟 (%1)</translation>
+    </message>
+    <message>
+        <source>Add This Page Here</source>
+        <translation>將此頁面加入此處</translation>
+    </message>
+    <message>
         <source>(Empty)</source>
         <translation>(空)</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarContextMenu</name>
+    <message>
+        <source>Open in New Tab</source>
+        <translation>在新分頁中開啟</translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation>在新視窗中開啟</translation>
+    </message>
+    <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>在分頁中全部開啟 (%1)</translation>
+    </message>
+    <message>
+        <source>Rename…</source>
+        <translation>重新命名…</translation>
+    </message>
+    <message>
+        <source>Edit…</source>
+        <translation>編輯…</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>刪除</translation>
+    </message>
+    <message>
+        <source>Add This Page</source>
+        <translation>加入此頁面</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks…</source>
+        <translation>管理書籤…</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarItem</name>
+    <message>
+        <source>folder</source>
+        <translation>資料夾</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarOverflow</name>
+    <message>
+        <source>More Bookmarks</source>
+        <translation>更多書籤</translation>
     </message>
 </context>
 <context>

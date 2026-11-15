@@ -1,0 +1,89 @@
+from PySide6.QtCore import QObject
+from PySide6.QtQml import QQmlComponent, QQmlEngine, QQmlExpression, qmlContext
+from PySide6.QtTest import QTest
+
+from kondor.browser.tabs.tabmodel import TabModel
+from tests.bookmarks.bookmarkrows import add_page, manager
+from tests.qmlsupport import error_text, load_component
+
+BAR_QML = """
+import QtQml
+import Kondor
+
+BookmarksBar {
+    width: %d
+    height: 36
+}
+"""
+MENU_QML = """
+import QtQml
+import Kondor
+
+BookmarkMenu {
+    property var texts: {
+        const found = []
+        for (let i = staticCount; i < count; ++i)
+            found.push(itemAt(i).text)
+        return found
+    }
+}
+"""
+TARGETS_QML = """
+import QtQuick
+import Kondor
+
+Item {
+    function moveDragged(id, position) {
+        dropTargets.moveDragged(id, position)
+    }
+
+    function dropLinkAtTheStart() {
+        controller.dropPosition = 0
+        dropTargets.completeLinkDrop({ url: "https://dropped.example/", title: "Dropped" })
+    }
+
+    Item { id: previewItem }
+    BookmarkFolderTree { id: tree; folders: BookmarkManager.folders }
+    BookmarkDragController { id: controller; preview: previewItem; folderTree: tree }
+    Repeater { id: items; model: 0 }
+    BookmarksBarDropTargets {
+        id: dropTargets
+        drag: controller
+        folderTree: tree
+        items: items
+        visibleCount: 0
+    }
+}
+"""
+KEPT: list[QQmlComponent] = []
+
+
+def create_with(engine: QQmlEngine, source: str, properties: dict[str, object]) -> QObject:
+    component = load_component(engine, source)
+    KEPT.append(component)
+    created = component.createWithInitialProperties(properties)
+    assert created is not None, error_text(component)
+    return created
+
+
+def create_bar(engine: QQmlEngine, tabs: TabModel, width: int) -> QObject:
+    return create_with(engine, BAR_QML % width, {"tabModel": tabs})
+
+
+def create_menu(engine: QQmlEngine, folder_id: int, can_add_page: bool) -> QObject:
+    return create_with(
+        engine,
+        MENU_QML,
+        {"folderId": folder_id, "showFolderActions": True, "canAddPage": can_add_page},
+    )
+
+
+def evaluate(item: QObject, engine: QQmlEngine, script: str) -> object:
+    expression = QQmlExpression(qmlContext(item) or engine.rootContext(), item, script)
+    return expression.evaluate()
+
+
+def fill_toolbar(count: int) -> None:
+    for number in range(count):
+        add_page(manager().toolbarFolderId(), f"Bookmark number {number}", f"page{number}")
+    QTest.qWait(50)

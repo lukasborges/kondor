@@ -59,7 +59,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 - **Full screen** for videos and windows
 
 ### Library
-- **Bookmarks** with a panel, a toolbar, folders and Firefox/Chrome import
+- **Bookmarks** with a panel, a drag-and-drop toolbar, folders and Firefox/Chrome import
 - **Searchable history** grouped by day
 - **Downloads** with pause, resume and notifications
 

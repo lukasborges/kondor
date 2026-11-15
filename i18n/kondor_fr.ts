@@ -222,8 +222,65 @@
         <translation>Afficher la barre de marque-pages</translation>
     </message>
     <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Tout ouvrir dans des onglets (%1)</translation>
+    </message>
+    <message>
+        <source>Add This Page Here</source>
+        <translation>Ajouter cette page ici</translation>
+    </message>
+    <message>
         <source>(Empty)</source>
         <translation>(Vide)</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarContextMenu</name>
+    <message>
+        <source>Open in New Tab</source>
+        <translation>Ouvrir dans un nouvel onglet</translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation>Ouvrir dans une nouvelle fenêtre</translation>
+    </message>
+    <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Tout ouvrir dans des onglets (%1)</translation>
+    </message>
+    <message>
+        <source>Rename…</source>
+        <translation>Renommer…</translation>
+    </message>
+    <message>
+        <source>Edit…</source>
+        <translation>Modifier…</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Supprimer</translation>
+    </message>
+    <message>
+        <source>Add This Page</source>
+        <translation>Ajouter cette page</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks…</source>
+        <translation>Gérer les marque-pages…</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarItem</name>
+    <message>
+        <source>folder</source>
+        <translation>dossier</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarOverflow</name>
+    <message>
+        <source>More Bookmarks</source>
+        <translation>Plus de marque-pages</translation>
     </message>
 </context>
 <context>

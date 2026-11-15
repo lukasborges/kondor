@@ -1,0 +1,14 @@
+Core
+Gui
+Qml
+Quick
+QuickControls2
+Network
+Sql
+DBus
+OpenGL
+Widgets
+PrintSupport
+WebEngineCore
+WebEngineQuick
+WebChannel

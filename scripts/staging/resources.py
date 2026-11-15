@@ -25,15 +25,17 @@ RESOURCE_GROUPS = (
     ),
     ResourceGroup(
         "/scripts",
-        "src/passwords/bridge",
-        ("src/passwords/bridge/passwords.js", "src/passwords/bridge/usernamefield.js"),
+        "kondor/passwords/bridge",
+        ("kondor/passwords/bridge/passwords.js", "kondor/passwords/bridge/usernamefield.js"),
     ),
     ResourceGroup(
         "/scripts",
-        "src/extensions/bridge",
-        ("src/extensions/bridge/channel.js", "src/extensions/bridge/extensionruntime.js"),
+        "kondor/extensions/bridge",
+        ("kondor/extensions/bridge/channel.js", "kondor/extensions/bridge/extensionruntime.js"),
     ),
-    ResourceGroup("/scripts", "src/extensions/scripts", ("src/extensions/scripts/usergm.js",)),
+    ResourceGroup(
+        "/scripts", "kondor/extensions/scripts", ("kondor/extensions/scripts/usergm.js",)
+    ),
     ResourceGroup(
         "/icons",
         "assets/icons/hicolor/scalable/actions",

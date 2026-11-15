@@ -5,7 +5,7 @@ from .files import ROOTS
 
 MAX_FOLDER_FILES = 10
 MAX_FOLDER_DEPTH = 2
-IGNORED_FOLDERS = ("tests/data", "pytests/data")
+IGNORED_FOLDERS = ("tests/data",)
 PYCACHE = "__pycache__"
 
 
@@ -55,4 +55,8 @@ def describe_folder(root: str, folder: str) -> List[str]:
     depth = folder_depth(folder)
     files = count_files(root, folder)
     checks = (("folder files", files, MAX_FOLDER_FILES), ("folder depth", depth, MAX_FOLDER_DEPTH))
-    return ["%s/: %s: %d > %d" % (folder, rule, value, limit) for rule, value, limit in checks if value > limit]
+    return [
+        "%s/: %s: %d > %d" % (folder, rule, value, limit)
+        for rule, value, limit in checks
+        if value > limit
+    ]

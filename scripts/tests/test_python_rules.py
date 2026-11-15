@@ -38,8 +38,8 @@ class FunctionLengthTest(unittest.TestCase):
 
     def test_pytests_may_use_twenty_lines(self):
         source = "def test_run():\n" + statements(20)
-        self.assertEqual(rules_of(source, "pytests/test_a.py"), set())
-        self.assertEqual(rules_of(source + statements(1), "pytests/test_a.py"), {"function-length"})
+        self.assertEqual(rules_of(source, "tests/test_a.py"), set())
+        self.assertEqual(rules_of(source + statements(1), "tests/test_a.py"), {"function-length"})
 
     def test_method_key_is_qualified(self):
         function = only_function("class Foo:\n    def run(self):\n        work()\n")
@@ -100,7 +100,9 @@ class CommentsTest(unittest.TestCase):
         self.assertEqual(rules_of("#!/usr/bin/env python3\nVALUE = 1\n"), set())
 
     def test_spdx_passes(self):
-        self.assertEqual(rules_of("# SPDX-License-Identifier: GPL-3.0-or-later\nVALUE = 1\n"), set())
+        self.assertEqual(
+            rules_of("# SPDX-License-Identifier: GPL-3.0-or-later\nVALUE = 1\n"), set()
+        )
 
     def test_workaround_link_passes(self):
         source = "# why\n# https://bugreports.qt.io/browse/QTBUG-1\nVALUE = 1\n"

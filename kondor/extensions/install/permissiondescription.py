@@ -1,15 +1,27 @@
 from dataclasses import dataclass, field
 from typing import Any
 
-from PySide6.QtCore import QCoreApplication
+from PySide6.QtCore import QT_TRANSLATE_NOOP, QCoreApplication, QObject
 
 CONTEXT = "ExtensionPackage"
 HOST_LIMIT = 3
+ALL_SITES = QT_TRANSLATE_NOOP("ExtensionPackage", "Read and change all websites")
+SOME_SITES = QT_TRANSLATE_NOOP("ExtensionPackage", "Read and change pages on %1")
 PERMISSION_LINES = (
-    ("tabs", "tab-new", "Open, close and navigate your tabs"),
-    ("downloads", "download", "Download files"),
-    ("notifications", "notifications", "Show notifications"),
+    (
+        "tabs",
+        "tab-new",
+        QT_TRANSLATE_NOOP("ExtensionPackage", "Open, close and navigate your tabs"),
+    ),
+    ("downloads", "download", QT_TRANSLATE_NOOP("ExtensionPackage", "Download files")),
+    ("notifications", "notifications", QT_TRANSLATE_NOOP("ExtensionPackage", "Show notifications")),
 )
+
+
+class ExtensionPackage(QObject):
+    def describe_more_sites(self, listed: str, more: int) -> str:
+        #: %1 is a list of sites, %n the number of further sites
+        return str(self.tr("%1 and %n more", None, more).replace("%1", listed))
 
 
 @dataclass
@@ -87,18 +99,16 @@ def host_list(hosts: list[str]) -> str:
     listed = ", ".join(hosts[:HOST_LIMIT])
     if len(hosts) <= HOST_LIMIT:
         return listed
-    more = len(hosts) - HOST_LIMIT
-    text = str(QCoreApplication.translate(CONTEXT, "%1 and %n more", None, more))
-    return text.replace("%1", listed)
+    return ExtensionPackage().describe_more_sites(listed, len(hosts) - HOST_LIMIT)
 
 
 def site_access_entry(matches: list[str], includes: list[str]) -> dict[str, Any] | None:
     access = summarize_sites(matches, includes)
     if access.is_all:
-        return entry_of("internet-services", translate("Read and change all websites"))
+        return entry_of("internet-services", translate(ALL_SITES))
     if not access.hosts:
         return None
-    text = translate("Read and change pages on %1").replace("%1", host_list(access.hosts))
+    text = translate(SOME_SITES).replace("%1", host_list(access.hosts))
     return entry_of("internet-services", text)
 
 

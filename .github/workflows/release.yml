@@ -4,14 +4,16 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  release:
+  appimage:
     runs-on: ubuntu-24.04
     container: fedora:latest
+    timeout-minutes: 60
 
     steps:
       - name: Install dependencies
@@ -19,10 +21,10 @@ jobs:
         timeout-minutes: 50
         run: |
           for attempt in 1 2 3; do
-            timeout 15m dnf -y install cmake ninja-build gcc-c++ make file wget git nodejs gh \
-                qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel qt6-qtwebchannel-devel \
-                kf6-kirigami kf6-qqc2-desktop-style kf6-kwallet-devel kf6-karchive-devel hunspell-en-US hunspell-pt-BR fuse-libs \
-                plasma-integration plasma-breeze-qt6 qt6-qtsvg && exit 0
+            timeout 15m dnf -y install git python3 python3-pyside6 pyside6-tools file wget gh fuse-libs \
+                qt6-qtbase qt6-qtdeclarative qt6-qtwebengine qt6-qtwebchannel qt6-qtsvg qt6-qtwayland \
+                kf6-kirigami kf6-qqc2-desktop-style kf6-sonnet plasma-union kf6-kitemmodels plasma-integration plasma-breeze-qt6 \
+                hunspell-en-US hunspell-pt-BR && exit 0
             echo "::warning::dnf install failed or timed out (attempt $attempt of 3)"
             sleep 30
           done
@@ -31,63 +33,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure
-        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
-
-      - name: Build
-        run: cmake --build build --parallel "$(nproc)"
-
-      - name: Install into AppDir
-        run: DESTDIR="$PWD/AppDir" cmake --install build
-
       - name: Prepare AppDir
         run: |
-          cp packaging/kondor.desktop AppDir/
-          # Spell checking dictionaries installed by `cmake --install`
+          packaging/appimage/prepare-appdir.sh AppDir
           test -f AppDir/usr/share/kondor/qtwebengine_dictionaries/en-US.bdic
           test -f AppDir/usr/share/kondor/qtwebengine_dictionaries/pt-BR.bdic
-
-          cp packaging/kondor.png AppDir/
-
-          # QtWebEngine (fallback; the Qt plugin usually copies it by itself)
-          mkdir -p AppDir/usr/libexec
-          cp /usr/lib64/qt6/libexec/QtWebEngineProcess AppDir/usr/libexec/ 2>/dev/null || true
-          cp -r /usr/share/qt6/resources AppDir/usr/share/qt6/ 2>/dev/null || true
-          cp -r /usr/share/qt6/translations AppDir/usr/share/qt6/ 2>/dev/null || true
-
-          # KDE QQC2 style (set from C++, so the QML scanner does not pick it up)
-          mkdir -p AppDir/usr/qml/org/kde AppDir/usr/plugins/platforms
-          cp -r /usr/lib64/qt6/qml/org/kde/desktop AppDir/usr/qml/org/kde/
-          cp -r /usr/lib64/qt6/qml/org/kde/qqc2desktopstyle AppDir/usr/qml/org/kde/
-
-          # Wayland support
-          cp /usr/lib64/qt6/plugins/platforms/libqwayland.so AppDir/usr/plugins/platforms/ 2>/dev/null || true
-          cp -r /usr/lib64/qt6/plugins/wayland-* AppDir/usr/plugins/ 2>/dev/null || true
-
-          # SQLite driver (history): the AppImage cannot see the system plugin.
-          mkdir -p AppDir/usr/plugins/sqldrivers
-          cp /usr/lib64/qt6/plugins/sqldrivers/libqsqlite.so AppDir/usr/plugins/sqldrivers/
-
-          # Plasma integration. The AppImage's qt.conf only sees the plugins inside it,
-          # so without these the app starts with the Fusion style and no icons:
-          #  - KDE platform theme (the user's icon theme, colors and fonts)
-          #  - Breeze style (org.kde.desktop draws the controls via QStyle)
-          #  - Kirigami desktop platform and SVG icon engine
-          for p in platformthemes/KDEPlasmaPlatformTheme6.so styles/breeze6.so \
-                   kf6/kirigami/platform/org.kde.desktop.so iconengines/libqsvgicon.so; do
-            mkdir -p "AppDir/usr/plugins/$(dirname "$p")"
-            cp "/usr/lib64/qt6/plugins/$p" "AppDir/usr/plugins/$p"
-          done
 
       - name: Download AppImage tools
         run: |
           wget -q -c "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage" -O linuxdeploy
-          wget -q -c "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage" -O linuxdeploy-plugin-qt
-          chmod +x linuxdeploy linuxdeploy-plugin-qt
+          chmod +x linuxdeploy
 
       - name: Create AppImage
         env:
-          QML_SOURCES_PATHS: "${{ github.workspace }}/qml"
           APPIMAGE_EXTRACT_AND_RUN: "1"
           NO_STRIP: "1"
           # linuxdeploy names the AppImage after the desktop Name ("Kondor Browser"),
@@ -95,32 +53,91 @@ jobs:
           LDAI_OUTPUT: Kondor-x86_64.AppImage
           OUTPUT: Kondor-x86_64.AppImage
         run: |
-          export PATH="/usr/lib64/qt6/bin:$PATH"
-          # --deploy-deps-only: brings the libraries (KF6 etc.) of the hand-copied plugins
+          PYV="$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
+          PLUGIN_ARGS="$(find AppDir/usr/plugins AppDir/usr/qml -name '*.so' -printf '--deploy-deps-only %p ')"
           # libp11-kit stays the system one: NSS loads the system p11-kit-proxy.so (a symlink to
           # libp11-kit), and a second bundled copy crashes in its destructor when the app quits.
-          ./linuxdeploy --appdir AppDir --plugin qt \
+          ./linuxdeploy --appdir AppDir \
             --exclude-library "libp11-kit.so*" \
-            --deploy-deps-only AppDir/usr/plugins/platformthemes \
-            --deploy-deps-only AppDir/usr/plugins/styles \
-            --deploy-deps-only AppDir/usr/plugins/kf6 \
-            --deploy-deps-only AppDir/usr/plugins/iconengines \
-            --deploy-deps-only AppDir/usr/plugins/sqldrivers
-          # The Qt plugin deploys libp11-kit again despite --exclude-library: drop it, then package.
+            --deploy-deps-only "AppDir/usr/lib/python$PYV/site-packages/PySide6" \
+            --deploy-deps-only "AppDir/usr/lib/python$PYV/lib-dynload" \
+            --deploy-deps-only AppDir/usr/libexec \
+            $PLUGIN_ARGS
           rm -f AppDir/usr/lib/libp11-kit.so*
           ./linuxdeploy --appdir AppDir --exclude-library "libp11-kit.so*" --output appimage
           test ! -e AppDir/usr/lib/libp11-kit.so.0
 
+      - name: Upload AppImage
+        uses: actions/upload-artifact@v4
+        with:
+          name: Kondor-x86_64.AppImage
+          path: Kondor-x86_64.AppImage
+          if-no-files-found: error
+
+  appimage-run:
+    runs-on: ubuntu-24.04
+    needs: appimage
+    container: fedora:latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Download AppImage
+        uses: actions/download-artifact@v4
+        with:
+          name: Kondor-x86_64.AppImage
+
+      - name: Install host libraries only
+        run: |
+          dnf -y install dbus-daemon alsa-lib expat fontconfig freetype fribidi gmp harfbuzz \
+              libcom_err libdrm libglvnd libglvnd-egl libglvnd-glx libglvnd-opengl libgpg-error \
+              libICE libSM libstdc++ libuuid libwayland-client libX11 libX11-xcb libxcb \
+              mesa-libEGL mesa-libGL mesa-libgbm pipewire-libs zlib-ng-compat
+
+      - name: Check that the bundle is self-contained
+        run: "! rpm -q python3-pyside6 qt6-qtbase"
+
+      - name: Start the AppImage
+        env:
+          APPIMAGE_EXTRACT_AND_RUN: "1"
+          QT_QPA_PLATFORM: offscreen
+          QTWEBENGINE_DISABLE_SANDBOX: "1"
+        run: |
+          chmod +x Kondor-x86_64.AppImage
+          home="$(mktemp -d)"
+          export XDG_CONFIG_HOME="$home/config" XDG_DATA_HOME="$home/data" XDG_CACHE_HOME="$home/cache"
+          status=0
+          dbus-run-session -- timeout 15 ./Kondor-x86_64.AppImage about:blank > run.log 2>&1 || status=$?
+          cat run.log
+          test "$status" -eq 0 -o "$status" -eq 124
+          ! grep -E 'ReferenceError|TypeError|Cannot assign|is not a type|cannot find the staged build|is not installed|unavailable|cannot load the browser window|No functional TLS backend' run.log
+
+  release:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    needs: appimage-run
+    container: fedora:latest
+
+    steps:
+      - name: Install dependencies
+        timeout-minutes: 20
+        run: dnf -y install git gh
+
+      - name: Download AppImage
+        uses: actions/download-artifact@v4
+        with:
+          name: Kondor-x86_64.AppImage
+
       - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           gh release create "$GITHUB_REF_NAME" Kondor-*.AppImage \
             --title "Kondor Browser $GITHUB_REF_NAME" \
             --generate-notes
 
   flatpak:
+    if: github.event_name == 'push'
     runs-on: ubuntu-24.04
     needs: release
     container:
@@ -191,6 +208,7 @@ jobs:
           path: site
 
   pages:
+    if: github.event_name == 'push'
     runs-on: ubuntu-24.04
     needs: flatpak
     permissions:
@@ -205,6 +223,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
   flatpak-upload:
+    if: github.event_name == 'push'
     runs-on: ubuntu-24.04
     needs: flatpak
     steps:

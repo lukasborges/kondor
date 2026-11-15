@@ -18,6 +18,7 @@ def install_translator(app: QApplication, name: str, directory: str) -> None:
 
 
 def set_display_name() -> None:
+    #: Application display name: translate "Browser", keep "Kondor"
     QGuiApplication.setApplicationDisplayName(
         QCoreApplication.translate("Kondor", "Kondor Browser")
     )

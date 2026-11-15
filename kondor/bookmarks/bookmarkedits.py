@@ -7,8 +7,6 @@ from kondor.bookmarks.bookmarkrow import BookmarkRow, is_supported_bookmark_url
 from kondor.bookmarks.storage import bookmarkchecks, bookmarkfoldertree, bookmarkqueries
 from kondor.core.database import sql
 
-TRANSLATION_CONTEXT = "BookmarkManager"
-
 
 def updates_rows(statement: str, values: Sequence[object]) -> bool:
     query = sql.run(statement, values)
@@ -37,7 +35,7 @@ def new_folder_row(title: str, parent_id: int) -> BookmarkRow | None:
     if parent_id > 0 and not bookmarkchecks.is_folder_id(parent_id):
         return None
     valid_parent_id = max(parent_id, 0)
-    name = title.strip() or QCoreApplication.translate(TRANSLATION_CONTEXT, "New Folder")
+    name = title.strip() or QCoreApplication.translate("BookmarkManager", "New Folder")
     position = bookmarkfoldertree.first_free_position(valid_parent_id)
     return BookmarkRow(True, name, QUrl(), valid_parent_id, position)
 

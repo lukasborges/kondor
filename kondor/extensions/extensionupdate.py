@@ -1,6 +1,6 @@
 import re
 
-from PySide6.QtCore import QCoreApplication
+from PySide6.QtCore import QT_TRANSLATE_NOOP, QCoreApplication
 
 from kondor.extensions.installedextension import ExtensionContext, find
 from kondor.extensions.installresult import InstallResult
@@ -8,8 +8,10 @@ from kondor.extensions.package.packagefile import StagedPackage
 from kondor.extensions.state.extensionaccess import is_silent_update
 
 CONTEXT = "ExtensionManager"
-WRONG_ID = "The package is for “%1”, not “%2”"
-BROADER_ACCESS = "The package asks for more permissions than the installed version"
+WRONG_ID = QT_TRANSLATE_NOOP("ExtensionManager", "The package is for “%1”, not “%2”")
+BROADER_ACCESS = QT_TRANSLATE_NOOP(
+    "ExtensionManager", "The package asks for more permissions than the installed version"
+)
 
 
 def filled(template: str, *values: str) -> str:

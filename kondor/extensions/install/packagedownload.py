@@ -1,4 +1,5 @@
 from PySide6.QtCore import (
+    QT_TRANSLATE_NOOP,
     QCoreApplication,
     QCryptographicHash,
     QDir,
@@ -14,10 +15,12 @@ from kondor.extensions.catalog.catalogentry import CONTEXT, CatalogEntry
 from kondor.extensions.package.packagelimits import MAX_PACKAGE_BYTES
 
 TEMPLATE = "/kondor-extension-XXXXXX.kondorext"
-NO_TEMPORARY_FILE = "Cannot create a temporary file"
-TOO_LARGE = "The package is larger than expected"
-UNREADABLE = "Cannot read the downloaded package"
-BAD_CHECKSUM = "The downloaded package does not match its checksum"
+NO_TEMPORARY_FILE = QT_TRANSLATE_NOOP("ExtensionCatalog", "Cannot create a temporary file")
+TOO_LARGE = QT_TRANSLATE_NOOP("ExtensionCatalog", "The package is larger than expected")
+UNREADABLE = QT_TRANSLATE_NOOP("ExtensionCatalog", "Cannot read the downloaded package")
+BAD_CHECKSUM = QT_TRANSLATE_NOOP(
+    "ExtensionCatalog", "The downloaded package does not match its checksum"
+)
 
 
 def request_for(entry: CatalogEntry) -> QNetworkRequest:

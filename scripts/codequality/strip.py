@@ -14,7 +14,7 @@ TOKEN = re.compile(
 )
 
 ALLOWED_COMMENT = re.compile(
-    r"^//[:~]|SPDX-|bugreports\.qt\.io|bugs\.kde\.org|invent\.kde\.org/\S*/issues|github\.com/\S*/issues"
+    r"^(?://|#)[:~]|SPDX-|bugreports\.qt\.io|bugs\.kde\.org|invent\.kde\.org/\S*/issues|github\.com/\S*/issues"
 )
 
 

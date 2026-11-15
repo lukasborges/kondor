@@ -1,6 +1,5 @@
 from typing import List, NamedTuple
 
-from .cpp import find_cpp_functions
 from .metrics import Function
 from .python import find_python_functions, python_comment_lines
 from .qml import find_qml_functions
@@ -13,7 +12,7 @@ MAX_NESTING = 2
 MAX_FILE_LINES = 200
 MAX_COMMENT_LINES = 0
 
-TEST_ROOTS = ("tests/", "pytests/")
+TEST_ROOTS = ("tests/",)
 FUNCTION_RULES = ("function-length", "parameters", "nesting")
 FILE_RULES = ("file-length", "comments")
 
@@ -26,10 +25,6 @@ class Violation(NamedTuple):
     limit: int
 
 
-def is_qml_family(path: str) -> bool:
-    return path.endswith((".qml", ".js"))
-
-
 def length_limit(path: str) -> int:
     return MAX_TEST_FUNCTION_LINES if path.startswith(TEST_ROOTS) else MAX_FUNCTION_LINES
 
@@ -40,12 +35,11 @@ def function_violations(function: Function, path: str) -> List[Violation]:
         ("parameters", function.parameters, MAX_PARAMETERS),
         ("nesting", function.nesting, MAX_NESTING),
     )
-    return [Violation(rule, function.key, function.line, value, limit)
-            for rule, value, limit in checks if value > limit]
-
-
-def find_functions(path: str, text: str) -> List[Function]:
-    return find_qml_functions(path, text) if is_qml_family(path) else find_cpp_functions(path, text)
+    return [
+        Violation(rule, function.key, function.line, value, limit)
+        for rule, value, limit in checks
+        if value > limit
+    ]
 
 
 def file_violations(path: str, source: str, comment_lines: int) -> List[Violation]:
@@ -53,7 +47,9 @@ def file_violations(path: str, source: str, comment_lines: int) -> List[Violatio
         ("file-length", len(source.splitlines()), MAX_FILE_LINES),
         ("comments", comment_lines, MAX_COMMENT_LINES),
     )
-    return [Violation(rule, path, 1, value, limit) for rule, value, limit in checks if value > limit]
+    return [
+        Violation(rule, path, 1, value, limit) for rule, value, limit in checks if value > limit
+    ]
 
 
 def check_python_source(path: str, source: str) -> List[Violation]:
@@ -68,6 +64,6 @@ def check_source(path: str, source: str) -> List[Violation]:
         return check_python_source(path, source)
     text, comments = strip_source(source)
     violations = file_violations(path, source, forbidden_comment_lines(comments))
-    for function in find_functions(path, text):
+    for function in find_qml_functions(path, text):
         violations += function_violations(function, path)
     return violations

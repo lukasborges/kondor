@@ -17,7 +17,7 @@ def qrc_line(entry: ResourceEntry, repository: Path) -> str:
 
 
 def qrc_text(entries: list[ResourceEntry], repository: Path) -> str:
-    lines = ['<RCC>', '    <qresource prefix="/">']
+    lines = ["<RCC>", '    <qresource prefix="/">']
     lines += [qrc_line(entry, repository) for entry in entries]
     return "\n".join([*lines, "    </qresource>", "</RCC>"]) + "\n"
 

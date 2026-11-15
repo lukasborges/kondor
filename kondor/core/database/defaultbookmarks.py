@@ -50,7 +50,7 @@ DEFAULT_BOOKMARKS = (
     DefaultBookmark("KDE", "https://kde.org/"),
     DefaultBookmark("Planet KDE", "https://planet.kde.org/"),
     DefaultBookmark("Qt Docs", "https://doc.qt.io/"),
-    folder(QT_TRANSLATE_NOOP(CONTEXT, "News"), NEWS),
-    folder(QT_TRANSLATE_NOOP(CONTEXT, "Development"), DEVELOPMENT),
-    folder(QT_TRANSLATE_NOOP(CONTEXT, "Linux"), LINUX),
+    folder(QT_TRANSLATE_NOOP("DefaultBookmarks", "News"), NEWS),
+    folder(QT_TRANSLATE_NOOP("DefaultBookmarks", "Development"), DEVELOPMENT),
+    folder(QT_TRANSLATE_NOOP("DefaultBookmarks", "Linux"), LINUX),
 )

@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from PySide6.QtCore import QCoreApplication, QRegularExpression
+from PySide6.QtCore import QT_TRANSLATE_NOOP, QCoreApplication, QRegularExpression
 
 STRING_FIELDS = {
     "name": "name",
@@ -126,11 +126,13 @@ def metadata_from(lines: list[str]) -> UserScriptMetadata:
 
 def problem_of(lines: list[str], metadata: UserScriptMetadata) -> str:
     if not lines:
-        return translated("The script has no metadata block")
+        return translated(QT_TRANSLATE_NOOP("UserScript", "The script has no metadata block"))
     if not metadata.name:
-        return translated("The script has no @name")
+        return translated(QT_TRANSLATE_NOOP("UserScript", "The script has no @name"))
     if not metadata.matches and not metadata.includes:
-        return translated("The script has neither @match nor @include")
+        return translated(
+            QT_TRANSLATE_NOOP("UserScript", "The script has neither @match nor @include")
+        )
     return ""
 
 

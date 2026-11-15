@@ -183,11 +183,7 @@ Keep the per-step timeouts of today's `python` job. Delete the `changes` and `py
   - "Code quality" names `kondor/`, `qml/` and `tests/`.
 
   Features and shortcuts do not change.
-- **`docs/agents/developer.md`:**
-  - the role line says Python + PySide6;
-  - the checks list (step 2) is `ruff check`, `mypy --strict kondor`, `python3 scripts/build.py`, `scripts/run-pytests.sh`, the offscreen smoke test `QT_QPA_PLATFORM=offscreen timeout 15 python3 -m kondor` with the isolated XDG folders, and the spec's manual test;
-  - the build-wrapper and `--parallel` text goes.
-- **`docs/agents/architect.md`:** the role line and review checklist item 2 say the same checks, with no C++ build or `ctest`.
+- **`docs/agents/`** is not edited in the PR: the developer's rules forbid it, so the architect updates both role files after the merge (item 8).
 - **`.github/pull_request_template.md`:** "How it was tested" lists the Python checks and the offscreen smoke test. "New dependencies added to …" names README, `build.yml`, `release.yml`, `prepare-appdir.sh` / `pyside-modules.txt` and the Flatpak manifest.
 - **Old specs** in `docs/specs/` are history and are not rewritten.
 
@@ -204,6 +200,14 @@ Keep the per-step timeouts of today's `python` job. Delete the `changes` and `py
 - **Conventions:** the umbrella's Python rules from item 3, translations with `scripts/update-translations.py`, and new modules in `pyside-modules.txt`.
 - **Dependencies, the delivery checklist and the freeze rule:** the C++ freeze sentence goes.
 
+It also updates the two agent role files, in one commit to `main` right after the merge:
+
+- **`docs/agents/developer.md`:**
+  - the role line says Python + PySide6;
+  - the checks list (step 2) is `ruff check`, `mypy --strict kondor`, `python3 scripts/build.py`, `scripts/run-pytests.sh`, the offscreen smoke test `QT_QPA_PLATFORM=offscreen timeout 15 python3 -m kondor` with the isolated XDG folders, and the spec's manual test;
+  - the build-wrapper and `--parallel` text goes.
+- **`docs/agents/architect.md`:** the role line and review checklist item 2 say the same checks, with no C++ build or `ctest`.
+
 The architect also updates the specs of open issues that name C++ files (for example #211, #212 and #227), and records it on #174.
 
 ## Acceptance criteria
@@ -216,7 +220,7 @@ The architect also updates the specs of open issues that name C++ files (for exa
 - [ ] A `release.yml` dispatch on the PR branch builds the AppImage, and `appimage-run` passes on a bare host. A `flatpak.yml` dispatch builds the Flatpak and checks its repository. Both run links are in the PR body.
 - [ ] `scripts/local-appimage.sh --now` builds, smoke-tests and installs the Python AppImage (manual test).
 - [ ] `ruff check`, `mypy --strict kondor`, `python3 -m unittest discover -s scripts/tests` and `python3 scripts/check-code-quality.py` pass, and the baseline stays empty.
-- [ ] README, `docs/agents/developer.md`, `docs/agents/architect.md`, the loop scripts and the PR template follow item 7. A search for `cmake`, `ctest`, `CMakeLists` and `needs-cpp-checks` outside `docs/specs/` finds nothing.
+- [ ] README, the loop scripts and the PR template follow item 7. A search for `cmake`, `ctest`, `CMakeLists` and `needs-cpp-checks` outside `docs/specs/` and `docs/agents/` finds nothing.
 - [ ] `qml/` is unchanged. `kondor/` changes only in `stagedbuild.py` (item 1), translation calls (item 3), the moved JS files and the import renames.
 - [ ] Privacy: the ported privacy tests pass, and the umbrella's manual-test private-tab step finds nothing new on disk.
 
@@ -268,3 +272,4 @@ None: no UI changes.
 | How is a release AppImage tested before tagging? | `release.yml` gets `workflow_dispatch`, which builds it and runs it on a bare host without publishing. The C++ release was never smoke-tested in CI. |
 | Wait for the QA parity run (#217) before switching? | No, chosen by the maintainer: #174 is the last step of the port and goes first. QA runs after the switch, on the Python app. |
 | Line numbers in the `.ts` files? | None (`-locations none`), as in the C++ build since this change: with line numbers, any QML edit that moved a string made every `.ts` stale and failed the translations check. |
+| Does the PR edit `docs/agents/developer.md` and `architect.md` (item 7 asked for it)? | No (question on PR #243). The developer's role forbids editing `docs/agents/`, so the architect updates both files on `main` right after the merge, together with `AGENTS.md` (item 8). The PR leaves them unchanged, and the acceptance-criterion search skips `docs/agents/`. |

@@ -67,11 +67,11 @@ main() {
   parity_mode() { has_python_app && has_cpp_app && echo on || echo off; }
 
   closed_issue_numbers() {
-    gh issue list --state closed --limit 1000 --json number --jq '.[].number' 2>/dev/null
+    gh issue list --state closed --limit 1000 --json number --jq '.[].number' || log "gh failed listing closed issues"
   }
 
   closed_bug_numbers() {
-    gh issue list --state closed --label bug --limit 1000 --json number --jq '.[].number' 2>/dev/null
+    gh issue list --state closed --label bug --limit 1000 --json number --jq '.[].number' || log "gh failed listing closed bugs"
   }
 
   spec_number() { basename "$1" | cut -c1-4 | sed 's/^0*//'; }
@@ -97,7 +97,7 @@ main() {
   scenarios_by_age() {
     local key
     while read -r key; do
-      printf '%s\t%s\n' "$(last_tested "$key" | grep . || echo never)" "$key"
+      printf '%s\t%s\n' "$(last_tested "$key" | grep . || echo 0000-00-00)" "$key"
     done < <(all_scenarios) | sort -s -t$'\t' -k1,1 | cut -f2
   }
 
@@ -138,6 +138,11 @@ PROMPT
       "$(prompt_for "$sha" "$scenarios" "$parity")"
   }
 
+  print_dry_run() {
+    log "dry-run: would test $1, parity mode $3"
+    prompt_for "$1" "$2" "$3"
+  }
+
   step() {
     local dry="$1" sha scenarios parity
     ensure_control || return 0
@@ -148,11 +153,8 @@ PROMPT
     fi
     scenarios="$(chosen_scenarios)"
     parity="$(parity_mode)"
-    if [[ "$dry" == 1 ]]; then
-      log "dry-run: would test $sha, parity mode $parity"
-      prompt_for "$sha" "$scenarios" "$parity"
-      return 0
-    fi
+    [[ -n "$scenarios" ]] || { log "no scenarios found (gh failed?), nothing run"; return 1; }
+    [[ "$dry" == 1 ]] && { print_dry_run "$sha" "$scenarios" "$parity"; return 0; }
     execute_run "$sha" "$scenarios" "$parity"
   }
 

@@ -46,6 +46,7 @@ Rectangle {
                 anchors.centerIn: parent
                 width: 16; height: 16
                 visible: !tab.loading
+                opacity: tab.sleeping ? 0.5 : 1
                 source: frame.privateWindow ? "view-private" : (tab.icon || "text-html")
             }
             BusyIndicator {
@@ -58,6 +59,7 @@ Rectangle {
         Label {
             visible: !iconOnly
             Layout.fillWidth: true
+            enabled: !tab.sleeping
             text: tab.title
             elide: Text.ElideRight
         }
@@ -197,7 +199,15 @@ Rectangle {
                     required property int index
                     checked: index === frame.currentTab
                     display: AbstractButton.IconOnly
-                    icon.name: frame.privateWindow ? "view-private" : modelData.icon
+                    contentItem: Item {
+                        implicitWidth: 16; implicitHeight: 16
+                        Kirigami.Icon {
+                            anchors.centerIn: parent
+                            width: 16; height: 16
+                            opacity: modelData.sleeping ? 0.5 : 1
+                            source: frame.privateWindow ? "view-private" : modelData.icon
+                        }
+                    }
                 }
             }
         }

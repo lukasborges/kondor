@@ -74,6 +74,7 @@ Tips when editing:
 | #241 New Tab page icon | `241-new-tab-page-icon.qml` (`common/TabStyleFrame.qml`) |
 | #242 Side bar collapsed | `242-side-bar-collapsed.qml` (`common/TabStyleFrame.qml`, `sideBarCollapsed`) |
 | #256 AI agent control | `256-remote-control-indicator.qml`, `256b-settings-remote-control.qml` (in `common/SettingsDialogMock.qml`, `withRemoteControl`) |
+| #257 Sleeping tabs | `257-sleeping-tabs.qml`, `257b-sleeping-tabs-vertical.qml` (`sleeping` flag in `common/TabStyleFrame.qml`), `257c-settings-sleeping-tabs.qml` (in `common/SettingsDialogMock.qml`, `withPerformance`) |
 
 Issues without UI (#10 default browser, #15 single instance, #19 translations, #25 Flatpak,
 #26 tests) have no prototype.

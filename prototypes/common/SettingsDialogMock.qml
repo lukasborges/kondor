@@ -23,6 +23,7 @@ Rectangle {
     property bool withExtensions: false // #107: show the Extensions page
     property bool withAppearance: false // #211: show the Appearance tab of the General page
     property bool withRemoteControl: false // #256: remote control turned on, restart pending
+    property bool withPerformance: false // #257: show the Performance tab of the General page
     property bool appearanceVertical: false // #212: the Tabs picker also offers Side Bar
     property bool extensionsEmpty: false // #107: no extension installed (placeholder)
     property bool catalogDialog: false // #107: the "Get New Extensions" dialog is open
@@ -128,6 +129,7 @@ Rectangle {
                     TabButton { text: root.page === 4 ? "Saved Passwords" : "Startup" }
                     TabButton { text: root.page === 4 ? "Never Saved" : "New Tabs" }
                     TabButton { text: "Appearance"; visible: root.page === 0 && root.withAppearance; width: visible ? implicitWidth : 0 }
+                    TabButton { text: "Performance"; visible: root.page === 0 && root.withPerformance; width: visible ? implicitWidth : 0 }
                 }
                 Kirigami.Separator { Layout.fillWidth: true; visible: root.page !== 0 && root.page !== 4 }
 
@@ -135,7 +137,8 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.margins: Kirigami.Units.gridUnit
-                    currentIndex: root.page === 0 && root.innerTab === 2 ? 8
+                    currentIndex: root.page === 0 && root.innerTab === 3 ? 9
+                                : root.page === 0 && root.innerTab === 2 ? 8
                                 : root.page === 0 ? root.innerTab
                                 : root.page === 4 ? 5 + root.innerTab
                                 : root.page === 5 ? 7
@@ -438,6 +441,22 @@ Rectangle {
                             Kirigami.FormData.label: "Tabs:"
                             Kirigami.FormData.labelAlignment: Qt.AlignTop
                             withVertical: root.appearanceVertical
+                        }
+                    }
+
+                    // General → Performance (#257)
+                    Kirigami.FormLayout {
+                        CheckBox {
+                            id: sleepCheck
+                            Kirigami.FormData.label: "Memory:"
+                            text: "Put inactive tabs to sleep"
+                            checked: true
+                        }
+                        ComboBox {
+                            Kirigami.FormData.label: "Sleep after:"
+                            enabled: sleepCheck.checked
+                            model: ["15 minutes", "30 minutes", "1 hour", "2 hours", "4 hours"]
+                            currentIndex: 1
                         }
                     }
                 }

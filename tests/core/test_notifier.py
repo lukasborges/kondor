@@ -1,7 +1,6 @@
 import json
 import subprocess
 import sys
-import threading
 from collections.abc import Iterator
 from pathlib import Path
 
@@ -53,15 +52,13 @@ def test_icon_name_kondor_uses_flatpak_id(monkeypatch: pytest.MonkeyPatch) -> No
     assert application_icon("dialog-information") == "dialog-information"
 
 
-def test_notify_returns_without_waiting_for_the_bus(monkeypatch: pytest.MonkeyPatch) -> None:
-    release = threading.Event()
-    started = threading.Event()
-
-    def blocked_send(title: str, body: str, icon: str) -> None:
-        started.set()
-        release.wait(10)
-
-    monkeypatch.setattr(notifier, "send_notification", blocked_send)
+def test_notify_returns_without_waiting_for_the_bus(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, qapp: object
+) -> None:
+    finished = tmp_path / "finished"
+    slow = tmp_path / "slow-gdbus"
+    slow.write_text(f"#!/bin/sh\nsleep 2\ntouch {finished}\n")
+    slow.chmod(0o755)
+    monkeypatch.setattr(notifier, "GDBUS_PROGRAM", str(slow))
     Notifier.instance().notify("Title", "Body", "")
-    assert started.wait(5)
-    release.set()
+    assert not finished.exists()

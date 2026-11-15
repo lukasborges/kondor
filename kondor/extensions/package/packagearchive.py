@@ -2,7 +2,7 @@ import stat
 import zipfile
 from dataclasses import dataclass, field
 
-from PySide6.QtCore import QCoreApplication, QDir, QFileInfo
+from PySide6.QtCore import QT_TRANSLATE_NOOP, QCoreApplication, QDir, QFileInfo
 
 from kondor.extensions.package.packagelimits import PackageSize, package_limit_error
 from kondor.extensions.package.packagepath import is_safe_relative_path
@@ -21,9 +21,9 @@ def translated(text: str) -> str:
 
 def add_entry(info: zipfile.ZipInfo, listing: ArchiveListing) -> None:
     if not is_safe_relative_path(info.filename):
-        listing.error = translated("Unsafe file name in the package: %1").replace(
-            "%1", info.filename
-        )
+        listing.error = translated(
+            QT_TRANSLATE_NOOP("ExtensionPackage", "Unsafe file name in the package: %1")
+        ).replace("%1", info.filename)
         return
     listing.size.bytes += info.file_size
     listing.size.files += 1
@@ -60,7 +60,9 @@ def write_entries(archive: zipfile.ZipFile, listing: ArchiveListing, directory: 
     target = QDir(directory)
     for info in listing.entries:
         if not is_symbolic_link(info) and not write_entry(archive, info, target):
-            return translated("Cannot write %1").replace("%1", info.filename)
+            return translated(QT_TRANSLATE_NOOP("ExtensionPackage", "Cannot write %1")).replace(
+                "%1", info.filename
+            )
     return ""
 
 
@@ -69,7 +71,9 @@ def unpack_archive(archive: zipfile.ZipFile, directory: str) -> str:
     if listing.error:
         return listing.error
     if not QDir().mkpath(directory):
-        return translated("Cannot create %1").replace("%1", directory)
+        return translated(QT_TRANSLATE_NOOP("ExtensionPackage", "Cannot create %1")).replace(
+            "%1", directory
+        )
     return write_entries(archive, listing, directory)
 
 
@@ -78,4 +82,6 @@ def unpack(zip_path: str, directory: str) -> str:
         with zipfile.ZipFile(zip_path) as archive:
             return unpack_archive(archive, directory)
     except (zipfile.BadZipFile, OSError):
-        return translated("The file is not a valid ZIP archive")
+        return translated(
+            QT_TRANSLATE_NOOP("ExtensionPackage", "The file is not a valid ZIP archive")
+        )

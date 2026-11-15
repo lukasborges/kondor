@@ -7,8 +7,13 @@ PROJECT_VERSION = "0.2.0"
 MISSING_BUILD_MESSAGE = "Kondor: cannot find the staged build in {}; run python3 scripts/build.py"
 
 
+def package_parent_directory() -> Path:
+    return Path(__file__).resolve().parents[3]
+
+
 def staged_build_directory() -> Path:
-    return Path(__file__).resolve().parents[3] / "build" / "python"
+    parent = package_parent_directory()
+    return parent if (parent / "kondor.rcc").exists() else parent / "build" / "python"
 
 
 def has_staged_files(directory: Path) -> bool:

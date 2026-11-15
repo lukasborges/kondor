@@ -2,14 +2,16 @@ import os
 import subprocess
 from typing import List, Set
 
-ROOTS = ("src", "qml", "tests", "kondor", "pytests")
-SUFFIXES = (".cpp", ".h", ".js", ".qml", ".py")
-IGNORED_PREFIXES = ("tests/data/", "pytests/data/")
+ROOTS = ("qml", "tests", "kondor")
+SUFFIXES = (".js", ".qml", ".py")
+IGNORED_PREFIXES = ("tests/data/",)
 
 
 def is_checked(path: str) -> bool:
     in_scope = path.split("/")[0] in ROOTS and path.endswith(SUFFIXES)
-    return in_scope and "__pycache__" not in path.split("/") and not path.startswith(IGNORED_PREFIXES)
+    return (
+        in_scope and "__pycache__" not in path.split("/") and not path.startswith(IGNORED_PREFIXES)
+    )
 
 
 def all_files(root: str) -> List[str]:
@@ -21,7 +23,9 @@ def all_files(root: str) -> List[str]:
 
 
 def git_lines(root: str, arguments: List[str]) -> List[str]:
-    result = subprocess.run(["git", "-C", root] + arguments, capture_output=True, text=True, check=True)
+    result = subprocess.run(
+        ["git", "-C", root] + arguments, capture_output=True, text=True, check=True
+    )
     return result.stdout.split()
 
 
@@ -37,4 +41,3 @@ def read_source(root: str, path: str) -> str:
         return ""
     with open(full_path, encoding="utf-8") as handle:
         return handle.read()
-

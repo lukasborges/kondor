@@ -148,55 +148,53 @@ unless you allow them. Authors: see [`docs/extensions/api.md`](docs/extensions/a
 
 ## Stack
 
-- **Qt 6.8+** (tested with **6.11.2**): `Core`, `DBus`, `Gui`, `LinguistTools`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebChannel`, `WebEngineCore`, `WebEngineQuick`, `Widgets`
+- **Python 3.13+** and **PySide6 6.8+** (tested with **6.11.2**), over Qt `Core`, `DBus`, `Gui`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebChannel`, `WebEngineCore`, `WebEngineQuick`, `Widgets`
 - **Qt Quick Controls 2** with the **`org.kde.desktop`** (Breeze) style
 - **Kirigami** for theming (`Kirigami.Theme`)
-- **C++17** + **CMake 3.21+**
-- C++ backend exposed to QML (`QML_ELEMENT` / `QML_SINGLETON`)
 
 ## Requirements
 
-- Qt 6.8+ with the modules above (**including Qt WebEngine**)
+- Python 3.13+ and PySide6 6.8+ (**including Qt WebEngine**)
 - The **`org.kde.desktop`** (QQC2 Desktop Style) and **Kirigami** packages available at runtime
-- A C++17-capable compiler and CMake 3.21+
 
 On **Fedora** (the original development environment):
 
 ```bash
-sudo dnf install cmake gcc-c++ \
-    qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel \
-    qt6-qtwebchannel-devel kf6-qqc2-desktop-style kf6-kirigami kf6-kwallet-devel kf6-karchive-devel hunspell-en-US hunspell-pt-BR
+sudo dnf install python3 python3-pyside6 pyside6-tools kf6-kirigami kf6-qqc2-desktop-style \
+    qt6-qtwebengine hunspell-en-US hunspell-pt-BR
+sudo dnf install python3-pytest python3-pytest-qt python3-mypy ruff dbus-daemon   # development tools
 ```
 
 The Hunspell dictionaries (`/usr/share/hunspell`) are converted to Qt WebEngine's
-`.bdic` format at build time for spell checking; choose the languages with
-`-DKONDOR_SPELLCHECK_LANGS="en_US;pt_BR"`.
+`.bdic` format when the build is staged, for spell checking; choose the languages with
+`--spellcheck-languages en_US,pt_BR`.
 
-> Package names vary across distributions. What matters is having Qt 6 with
+> Package names vary across distributions. What matters is having PySide6 with
 > WebEngine plus KDE's `qqc2-desktop-style`/Kirigami.
 
 ## Build and run
 
 ```bash
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build
-./build/kondor
+python3 scripts/build.py
+python3 -m kondor
 ```
+
+`python3 scripts/build.py --install <prefix>` also installs Kondor under `<prefix>`: the `kondor`
+launcher in `<prefix>/bin`, the Python package and the QML module in `<prefix>/share/kondor`, and
+the desktop file, icons and metadata.
 
 ### Tests
 
-The non-UI logic has Qt Test suites (`tst_addressresolver`, `tst_tabmodel`):
-
 ```bash
-cmake --build build
-ctest --test-dir build --output-on-failure
+scripts/run-pytests.sh
 ```
 
-Pass `-DBUILD_TESTING=OFF` to configure without building them.
+It runs the tests offscreen, on a private D-Bus session and with temporary `XDG_*` folders. The
+checks of the build scripts run with `python3 -m unittest discover -s scripts/tests`.
 
 ### Code quality
 
-The code follows the Clean Code limits in the agents' guide `AGENTS.md` ("Code quality", kept outside the repository): functions of at most 10 lines, files of at most 200 lines, almost no comments, and folders of at most 10 files and two levels below a feature folder. `python3 scripts/check-code-quality.py` enforces them (`--changed origin/main` checks only your changes). The existing offenders are listed in `scripts/code-quality-baseline.json`, which can only shrink.
+The code follows the Clean Code limits in the agents' guide `AGENTS.md` ("Code quality", kept outside the repository): in `kondor/`, `qml/` and `tests/`: functions of at most 10 lines, files of at most 200 lines, almost no comments, and folders of at most 10 files and two levels below a feature folder. `python3 scripts/check-code-quality.py` enforces them (`--changed origin/main` checks only your changes). The existing offenders are listed in `scripts/code-quality-baseline.json`, which can only shrink.
 
 ## Translations
 
@@ -204,23 +202,22 @@ English is the source language; every user-visible string is wrapped in `qsTr()`
 Kondor Browser ships translations for Catalan, Czech, Dutch, French, German, Italian,
 Japanese, Korean, Polish, Portuguese (Brazil and Portugal), Russian, Spanish, Swedish,
 Turkish, Ukrainian, and Chinese (Simplified and Traditional), in `i18n/kondor_<lang>.ts`.
-The compiled `.qm` files are embedded in the binary under `:/i18n`. Kondor Browser loads
+The compiled `.qm` files are embedded in `kondor.rcc` under `:/i18n`. Kondor Browser loads
 the translation that matches the system locale at startup (and Qt's own translations for
 dialogs and context menus).
 
-- **Update the `.ts` files** after changing strings: `cmake --build build --target update_translations`.
-  This runs `lupdate` with `-no-obsolete` and writes the result to `i18n/`.
-- **Add a language**: create `i18n/kondor_<lang>.ts` (the `update_translations` target creates it
-  if it is listed in `TS_FILES`), add it to `TS_FILES` in `CMakeLists.txt`, and translate the
-  messages with Qt Linguist (`linguist-qt6 i18n/kondor_<lang>.ts`).
+- **Update the `.ts` files** after changing strings: `python3 scripts/update-translations.py`.
+  This runs `pyside6-lupdate` over `kondor/` and `qml/` with `-no-obsolete` and writes the result to `i18n/`.
+- **Add a language**: create `i18n/kondor_<lang>.ts` (the script updates every `i18n/kondor_*.ts`)
+  and translate the messages with Qt Linguist (`linguist-qt6 i18n/kondor_<lang>.ts`).
 - **Keep them complete**: a PR that adds or changes a user-visible string updates every
-  `i18n/*.ts` file. The "Check translations" CI step runs `update_translations`, fails when the
+  `i18n/*.ts` file. The "Check translations" CI step runs `scripts/update-translations.py`, fails when the
   result differs from the committed files, and reports any `unfinished`, empty, or
   placeholder-mismatched message.
 
 ## Notes
 
-- The `org.kde.desktop` style is applied in `main.cpp`; if it cannot be found, it falls back to `Fusion`.
+- The `org.kde.desktop` style is applied at startup (`kondor/app/startup`); if it cannot be found, it falls back to `Fusion`.
 - Colors come from the theme, so changing the KDE color scheme will not break the layout.
 
 ## Third-party code

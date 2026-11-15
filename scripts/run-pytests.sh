@@ -4,8 +4,8 @@
 # xdg-desktop-portal-kde) that outlive a plain `dbus-run-session` and keep the output pipe open,
 # so `… | tail` would never return (#222).
 #
-#   scripts/run-pytests.sh                     # all of pytests/
-#   scripts/run-pytests.sh pytests/passwords -x
+#   scripts/run-pytests.sh                     # all of tests/
+#   scripts/run-pytests.sh tests/passwords -x
 set -uo pipefail
 
 main() {
@@ -26,7 +26,7 @@ run_tests() {
   shift 2
   DBUS_SESSION_BUS_ADDRESS="$address" QT_QPA_PLATFORM=offscreen \
     XDG_CONFIG_HOME="$home/config" XDG_DATA_HOME="$home/data" XDG_CACHE_HOME="$home/cache" \
-    python3 -m pytest "${@:-pytests}" </dev/null
+    python3 -m pytest "${@:-tests}" </dev/null
 }
 
 # Stops the processes attached to this private bus, then the bus itself. Processes on any other

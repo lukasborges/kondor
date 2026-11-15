@@ -9,13 +9,12 @@ target-version = "py313"
 line-length = 100
 include = [
     "kondor/**/*.py",
-    "pytests/**/*.py",
-    "packaging/python-proof/**/*.py",
+    "tests/**/*.py",
     "scripts/build.py",
     "scripts/staging/**/*.py",
-    "scripts/check-qml-api.py",
     "scripts/bench-adblock.py",
-    "scripts/qmlapi/**/*.py",
+    "scripts/update-translations.py",
+    "scripts/check-translations.py",
 ]
 
 [tool.ruff.lint]
@@ -27,7 +26,7 @@ strict = true
 python_version = "3.13"
 
 [tool.pytest.ini_options]
-testpaths = ["pytests"]
+testpaths = ["tests"]
 qt_api = "pyside6"
 
 [[tool.mypy.overrides]]

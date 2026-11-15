@@ -1,13 +1,21 @@
 from dataclasses import dataclass
 from typing import Any
 
-from PySide6.QtCore import QCoreApplication, QJsonArray, QJsonDocument, QJsonValue
+from PySide6.QtCore import (
+    QT_TRANSLATE_NOOP,
+    QCoreApplication,
+    QJsonArray,
+    QJsonDocument,
+    QJsonValue,
+)
 
 from kondor.core.database import database, sql
 
 STORAGE_QUOTA = 1024 * 1024
-NOT_AVAILABLE = "Storage is not available"
-STORAGE_FULL = "The extension's storage is full (limit: 1 MiB)"
+NOT_AVAILABLE = QT_TRANSLATE_NOOP("ExtensionManager", "Storage is not available")
+STORAGE_FULL = QT_TRANSLATE_NOOP(
+    "ExtensionManager", "The extension's storage is full (limit: 1 MiB)"
+)
 USED_BYTES = (
     "SELECT COALESCE(SUM(LENGTH(CAST(key AS BLOB)) + LENGTH(CAST(value AS BLOB))), 0) "
     "FROM extension_storage WHERE extension_id = ? AND key != ?"

@@ -1,6 +1,14 @@
 from typing import TYPE_CHECKING
 
-from PySide6.QtCore import QCoreApplication, QDir, QFile, QFileInfo, QIODevice, QUrl
+from PySide6.QtCore import (
+    QT_TRANSLATE_NOOP,
+    QCoreApplication,
+    QDir,
+    QFile,
+    QFileInfo,
+    QIODevice,
+    QUrl,
+)
 from PySide6.QtNetwork import QNetworkReply, QNetworkRequest
 
 from kondor.extensions.catalog.catalogentry import CONTEXT, CatalogEntry
@@ -12,7 +20,7 @@ from kondor.extensions.package.packagefile import PackageFile
 if TYPE_CHECKING:
     from kondor.extensions.catalog.extensioncatalog import ExtensionCatalog
 
-DOWNLOAD_FAILED = "Could not download “%1”: %2"
+DOWNLOAD_FAILED = QT_TRANSLATE_NOOP("ExtensionCatalog", "Could not download “%1”: %2")
 
 
 def catalog_request(url: QUrl) -> QNetworkRequest:

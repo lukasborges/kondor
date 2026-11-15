@@ -12,10 +12,10 @@ Spec: `docs/specs/<NNNN>-<slug>.md`
 
 ## How it was tested
 
-- [ ] Clean build, no new warnings in changed files
-- [ ] Offscreen smoke test (`AGENTS.md`, isolated `XDG_*` dirs) shows no QML errors
+- [ ] `ruff check` and `mypy --strict kondor` pass
+- [ ] `python3 scripts/build.py` and `scripts/run-pytests.sh` pass
+- [ ] Offscreen smoke test (`QT_QPA_PLATFORM=offscreen timeout 15 python3 -m kondor`, isolated `XDG_*` dirs) shows no QML errors
 - [ ] Spec "Manual test" done (describe results below)
-- [ ] `ctest --test-dir build` passes (once tests exist)
 
 ## Checklist
 
@@ -24,5 +24,5 @@ Spec: `docs/specs/<NNNN>-<slug>.md`
 - [ ] Nothing from private tabs touches disk
 - [ ] English strings in `qsTr()`, KDE HIG wording, Breeze icon names, `Kirigami.Theme` colors
 - [ ] README updated (features, shortcuts) when user-visible behavior changed
-- [ ] New dependencies added to CMake, README and both workflows
+- [ ] New dependencies added to README, `build.yml`, `release.yml`, `prepare-appdir.sh` / `pyside-modules.txt` and the Flatpak manifest
 - [ ] Branch rebased on current `main`; Conventional Commits; no attribution trailers

@@ -8,7 +8,7 @@
 #   scripts/local-appimage.sh --uninstall   # remove the timer and service (keeps the installed AppImage)
 #
 # What it does (same packaging as .github/workflows/release.yml):
-#   1. builds origin/main (Release) in a cached build dir and packages it with linuxdeploy;
+#   1. stages origin/main with scripts/build.py and packages it with linuxdeploy;
 #   2. smoke-tests the AppImage offscreen on a throwaway profile (no QML errors allowed);
 #   3. installs it to ~/AppImages/kondor.appimage (previous one kept as kondor.appimage.prev),
 #      plus the desktop entry (Exec pointing at the AppImage) and the icons in ~/.local/share;
@@ -60,8 +60,10 @@ main() {
 
   check_deps() {
     local missing=() p
-    for p in file qt6-qttools-devel qt6-qtwebengine-devel kf6-kirigami kf6-qqc2-desktop-style \
-             plasma-integration plasma-breeze-qt6 qt6-qtsvg fuse-libs; do
+    for p in file git python3 python3-pyside6 pyside6-tools qt6-qtbase qt6-qtdeclarative \
+             qt6-qtwebengine qt6-qtwebchannel qt6-qtsvg qt6-qtwayland kf6-kirigami \
+             kf6-qqc2-desktop-style plasma-integration plasma-breeze-qt6 hunspell-en-US \
+             hunspell-pt-BR fuse-libs; do
       rpm -q "$p" >/dev/null 2>&1 || missing+=("$p")
     done
     if (( ${#missing[@]} )); then
@@ -81,42 +83,26 @@ main() {
     [[ -x "$t/linuxdeploy" ]] || { curl -fsSL -o "$t/linuxdeploy" \
       https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage &&
       chmod +x "$t/linuxdeploy"; } || return 1
-    [[ -x "$t/linuxdeploy-plugin-qt" ]] || { curl -fsSL -o "$t/linuxdeploy-plugin-qt" \
-      https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage &&
-      chmod +x "$t/linuxdeploy-plugin-qt"; } || return 1
   }
 
   # Mirrors the "Prepare AppDir" and "Create AppImage" steps of release.yml.
   package() {
-    local appdir="$cache/AppDir" out="$cache/out" p
+    local appdir="$cache/AppDir" out="$cache/out" python_version plugin_args
     rm -rf "$appdir" "$out"
     mkdir -p "$out"
-    DESTDIR="$appdir" cmake --install "$cache/build" >/dev/null || return 1
-    cp "$control/packaging/kondor.desktop" "$control/packaging/kondor.png" "$appdir/"
-    mkdir -p "$appdir/usr/libexec" "$appdir/usr/share/qt6" "$appdir/usr/qml/org/kde" \
-             "$appdir/usr/plugins/platforms" "$appdir/usr/plugins/sqldrivers"
-    cp /usr/lib64/qt6/libexec/QtWebEngineProcess "$appdir/usr/libexec/" 2>/dev/null || true
-    cp -r /usr/share/qt6/resources /usr/share/qt6/translations "$appdir/usr/share/qt6/" 2>/dev/null || true
-    cp -r /usr/lib64/qt6/qml/org/kde/desktop /usr/lib64/qt6/qml/org/kde/qqc2desktopstyle "$appdir/usr/qml/org/kde/"
-    cp /usr/lib64/qt6/plugins/platforms/libqwayland.so "$appdir/usr/plugins/platforms/" 2>/dev/null || true
-    cp -r /usr/lib64/qt6/plugins/wayland-* "$appdir/usr/plugins/" 2>/dev/null || true
-    cp /usr/lib64/qt6/plugins/sqldrivers/libqsqlite.so "$appdir/usr/plugins/sqldrivers/"
-    for p in platformthemes/KDEPlasmaPlatformTheme6.so styles/breeze6.so \
-             kf6/kirigami/platform/org.kde.desktop.so iconengines/libqsvgicon.so; do
-      mkdir -p "$appdir/usr/plugins/$(dirname "$p")"
-      cp "/usr/lib64/qt6/plugins/$p" "$appdir/usr/plugins/$p" || return 1
-    done
+    "$control/packaging/appimage/prepare-appdir.sh" "$appdir" >/dev/null || return 1
+    python_version="$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
+    mapfile -t plugin_args < <(find "$appdir/usr/plugins" "$appdir/usr/qml" -name '*.so' \
+      -printf '--deploy-deps-only\n%p\n')
     (cd "$out" &&
-      export PATH="$cache/tools:/usr/lib64/qt6/bin:$PATH" QML_SOURCES_PATHS="$control/qml" \
-        APPIMAGE_EXTRACT_AND_RUN=1 NO_STRIP=1 LDAI_OUTPUT=Kondor-x86_64.AppImage OUTPUT=Kondor-x86_64.AppImage &&
-      "$cache/tools/linuxdeploy" --appdir "$appdir" --plugin qt \
+      export PATH="$cache/tools:$PATH" APPIMAGE_EXTRACT_AND_RUN=1 NO_STRIP=1 \
+        LDAI_OUTPUT=Kondor-x86_64.AppImage OUTPUT=Kondor-x86_64.AppImage &&
+      "$cache/tools/linuxdeploy" --appdir "$appdir" \
         --exclude-library "libp11-kit.so*" \
-        --deploy-deps-only "$appdir/usr/plugins/platformthemes" \
-        --deploy-deps-only "$appdir/usr/plugins/styles" \
-        --deploy-deps-only "$appdir/usr/plugins/kf6" \
-        --deploy-deps-only "$appdir/usr/plugins/iconengines" \
-        --deploy-deps-only "$appdir/usr/plugins/sqldrivers" &&
-      # The Qt plugin deploys libp11-kit again despite --exclude-library: drop it, then package.
+        --deploy-deps-only "$appdir/usr/lib/python$python_version/site-packages/PySide6" \
+        --deploy-deps-only "$appdir/usr/lib/python$python_version/lib-dynload" \
+        --deploy-deps-only "$appdir/usr/libexec" \
+        "${plugin_args[@]}" &&
       # NSS loads the system p11-kit-proxy.so (a symlink to libp11-kit); a second, bundled copy
       # crashes in its destructor when the app quits.
       rm -f "$appdir"/usr/lib/libp11-kit.so* &&
@@ -174,9 +160,7 @@ main() {
     build_log="$state/build-$head.log"
     log "building $head ($reason); log: $build_log"
     {
-      cmake -S "$control" -B "$cache/build" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr &&
-        cmake --build "$cache/build" --parallel "$(nproc)" &&
-        tools && package
+      tools && package
     } >"$build_log" 2>&1 || { fail "$head" "build failed: see $build_log"; return 1; }
     smoke || { fail "$head" "smoke test failed: see $state/smoke.log"; return 1; }
     install_files || { log "install of $head failed"; return 1; }

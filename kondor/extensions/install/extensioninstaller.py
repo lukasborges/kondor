@@ -1,7 +1,7 @@
 import os
 import uuid
 
-from PySide6.QtCore import QCoreApplication, QDir, QFile
+from PySide6.QtCore import QT_TRANSLATE_NOOP, QCoreApplication, QDir, QFile
 
 from kondor.extensions.package.extensionpackage import ExtensionPackage
 from kondor.extensions.package.packagearchive import unpack
@@ -54,7 +54,9 @@ class ExtensionInstaller:
 
     def stage(self, file: PackageFile) -> tuple[StagedPackage | None, str]:
         if not QDir().mkpath(self.extensions_directory):
-            return None, failure("Cannot create %1", self.extensions_directory)
+            return None, failure(
+                QT_TRANSLATE_NOOP("ExtensionManager", "Cannot create %1"), self.extensions_directory
+            )
         directory = staging_directory_in(self.extensions_directory)
         package, error = unpack_and_load(file.zip_path, directory)
         if package is None:
@@ -66,13 +68,15 @@ class ExtensionInstaller:
             return ""
         if QDir().rename(final_directory, old_directory_of(final_directory)):
             return ""
-        return failure("Cannot replace %1", final_directory)
+        return failure(QT_TRANSLATE_NOOP("ExtensionManager", "Cannot replace %1"), final_directory)
 
     def move_to_new(self, staged: StagedPackage, final_directory: str) -> str:
         new_directory = new_directory_of(final_directory)
         if QDir().rename(staged.directory, new_directory):
             return ""
-        return failure("Cannot install into %1", new_directory)
+        return failure(
+            QT_TRANSLATE_NOOP("ExtensionManager", "Cannot install into %1"), new_directory
+        )
 
     def move_into_place(self, final_directory: str) -> str:
         error = self.replace_existing(final_directory)
@@ -81,7 +85,9 @@ class ExtensionInstaller:
         old_directory = old_directory_of(final_directory)
         if not error and os.path.lexists(old_directory):
             QDir().rename(old_directory, final_directory)
-        return error or failure("Cannot install into %1", final_directory)
+        return error or failure(
+            QT_TRANSLATE_NOOP("ExtensionManager", "Cannot install into %1"), final_directory
+        )
 
     def commit(self, staged: StagedPackage) -> str:
         final_directory = self.final_directory_of(staged.package.id())

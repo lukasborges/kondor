@@ -1,15 +1,22 @@
 from dataclasses import dataclass, field
 from typing import Any
 
-from PySide6.QtCore import QCoreApplication, QJsonDocument, QJsonParseError, QUrl, QVersionNumber
+from PySide6.QtCore import (
+    QT_TRANSLATE_NOOP,
+    QCoreApplication,
+    QJsonDocument,
+    QJsonParseError,
+    QUrl,
+    QVersionNumber,
+)
 
 from kondor.extensions.manifest.jsonvalue import is_double, to_array, to_object, to_string
 from kondor.extensions.package.extensionpackage import ExtensionPackage
 
 CONTEXT = "ExtensionCatalog"
 DEFAULT_ICON = "preferences-plugin"
-NOT_JSON = "The catalog is not valid JSON"
-UNSUPPORTED_FORMAT = "The catalog has an unsupported format"
+NOT_JSON = QT_TRANSLATE_NOOP("ExtensionCatalog", "The catalog is not valid JSON")
+UNSUPPORTED_FORMAT = QT_TRANSLATE_NOOP("ExtensionCatalog", "The catalog has an unsupported format")
 SUPPORTED_FORMAT_VERSION = 1
 
 

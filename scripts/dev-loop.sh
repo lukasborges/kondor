@@ -157,7 +157,7 @@ work on other issues at the same time: never touch a branch, worktree or PR of a
    (it is the loop's read-only control checkout).
 3. Before writing any code, load the clean-code skill (AGENTS.md → "Code quality"; that section
    wins where they differ). Do exactly the next step: implement the spec or address every open review point, run the checks
-   AGENTS.md → "Which checks a change needs" asks for (C++ build and offscreen smoke test only when the C++ checks apply) and the spec's manual test (always with temporary XDG_CONFIG_HOME,
+   AGENTS.md → "Which checks a change needs" asks for (ruff, mypy, the staging, the Python tests and the offscreen smoke test) and the spec's manual test (always with temporary XDG_CONFIG_HOME,
    XDG_DATA_HOME and XDG_CACHE_HOME as in AGENTS.md, never the real profile), rebase on origin/main, push, open or update
    the PR using .github/pull_request_template.md (Closes #$n), and switch the issue label from
    to-dev to in-review.
@@ -165,7 +165,7 @@ work on other issues at the same time: never touch a branch, worktree or PR of a
    question label instead of guessing.
 5. Never edit docs/specs, prototypes, AGENTS.md or docs/agents; never merge; never push to main.
 6. Commit messages and PR bodies never carry Co-Authored-By or any other attribution trailer.
-7. Run the Python tests only with scripts/run-pytests.sh [args] (it cleans up the private D-Bus session; a bare dbus-run-session -- pytest can hang). Build with cmake --build <dir> --parallel 4, never a bare --parallel (with Makefiles it means unlimited jobs and runs the machine out of memory).
+7. Run the Python tests only with scripts/run-pytests.sh [args] (it cleans up the private D-Bus session; a bare dbus-run-session -- pytest can hang).
 
 Stop after this one step and print a short report: what changed, test results, PR link, labels.
 EOF
@@ -243,10 +243,9 @@ After=network-online.target
 
 [Service]
 Type=simple
-Environment=CMAKE_BUILD_PARALLEL_LEVEL=4
 MemoryHigh=12G
 MemoryMax=16G
-Environment=PATH=$control/scripts/bin:$HOME/.opencode/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin
+Environment=PATH=$HOME/.opencode/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin
 Environment=KONDOR_REPO=$repo
 Environment=KONDOR_DEV_ID=$dev_id
 Environment=KONDOR_CONTROL_DIR=$control

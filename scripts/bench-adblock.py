@@ -13,7 +13,7 @@ sys.path.insert(0, str(ROOT))
 from kondor.adblock.filters.filterengine import FilterEngine, ResourceKind  # noqa: E402
 from kondor.adblock.lists.filterlists import parse_filter_lists  # noqa: E402
 
-DATA = ROOT / "pytests" / "data" / "adblock"
+DATA = ROOT / "tests" / "data" / "adblock"
 LISTS = ("easylist.txt", "easyprivacy.txt")
 ROUNDS = 5
 MEDIAN_BUDGET_US = 50.0

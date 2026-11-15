@@ -8,10 +8,10 @@ from unittest import mock
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
 from staging.bundle import qrc_text
-from staging.cmakeresources import cmake_resource_entries
 from staging.qmlmodule import DuplicateBaseNameError, stage_qml_module
 from staging.resources import ResourceEntry, static_resource_entries
 from staging.stage import stage
+from staging import tools
 from staging.tools import MissingToolError
 
 REPOSITORY = Path(__file__).resolve().parents[2]
@@ -24,15 +24,26 @@ def write(root: Path, relative: str, text: str = "") -> None:
 
 
 class ResourceTableTest(unittest.TestCase):
-    def test_matches_the_cmake_resource_blocks(self):
-        cmake = (REPOSITORY / "CMakeLists.txt").read_text(encoding="utf-8")
-        self.assertEqual(static_resource_entries(), cmake_resource_entries(cmake))
+    def test_every_resource_file_exists(self):
+        missing = [
+            entry.source_path
+            for entry in static_resource_entries()
+            if not (REPOSITORY / entry.source_path).exists()
+        ]
+        self.assertEqual(missing, [])
 
-    def test_keeps_the_cpp_resource_paths(self):
+    def test_keeps_the_resource_paths(self):
         paths = {entry.resource_path for entry in static_resource_entries()}
         self.assertLessEqual(
-            {"/packaging/kondor.png", "/reader/Readability.js", "/scripts/passwords.js",
-             "/scripts/usergm.js", "/LICENSE"}, paths)
+            {
+                "/packaging/kondor.png",
+                "/reader/Readability.js",
+                "/scripts/passwords.js",
+                "/scripts/usergm.js",
+                "/LICENSE",
+            },
+            paths,
+        )
 
     def test_qrc_lists_every_entry_with_its_alias(self):
         text = qrc_text([ResourceEntry("/i18n/kondor_de.qm", "/tmp/kondor_de.qm")], Path("/repo"))
@@ -55,7 +66,9 @@ class QmlModuleTest(unittest.TestCase):
         write(self.qml, "common/helper.js")
         module = stage_qml_module(self.qml, self.out)
         lines = (module / "qmldir").read_text(encoding="utf-8").splitlines()
-        self.assertEqual(lines, ["module Kondor", "Main 1.0 Main.qml", "InlineBar 1.0 common/InlineBar.qml"])
+        self.assertEqual(
+            lines, ["module Kondor", "Main 1.0 Main.qml", "InlineBar 1.0 common/InlineBar.qml"]
+        )
 
     def test_copies_qml_and_js_keeping_the_tree(self):
         write(self.qml, "common/InlineBar.qml")
@@ -75,8 +88,12 @@ class QmlModuleTest(unittest.TestCase):
 
 class MissingToolTest(unittest.TestCase):
     def test_names_the_fedora_package(self):
-        with mock.patch.dict(os.environ, {"PATH": ""}), self.assertRaises(MissingToolError) as raised:
-            stage(REPOSITORY, Path(tempfile.gettempdir()) / "unused-stage")
+        with (
+            mock.patch.dict(os.environ, {"PATH": ""}),
+            mock.patch.object(tools, "LIBEXEC_DIRECTORIES", ()),
+            self.assertRaises(MissingToolError) as raised,
+        ):
+            stage(REPOSITORY, Path(tempfile.gettempdir()) / "unused-stage", ())
         self.assertIn("pyside6-tools", str(raised.exception))
 
 

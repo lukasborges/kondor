@@ -6,158 +6,14 @@ on:
   pull_request:
 
 jobs:
-  changes:
-    runs-on: ubuntu-24.04
-    outputs:
-      cpp: ${{ steps.cpp.outputs.cpp }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Does the change affect the C++ app?
-        id: cpp
-        env:
-          BASE: ${{ github.event.pull_request.base.sha }}
-        run: |
-          if [ -z "$BASE" ] || scripts/needs-cpp-checks.sh "$BASE"; then
-            echo "cpp=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "cpp=false" >> "$GITHUB_OUTPUT"
-          fi
-
   build:
-    needs: changes
     runs-on: ubuntu-24.04
     # Ubuntu 24.04 has Qt 6.4 and the project requires 6.8+; we use Fedora (Qt 6.11).
     container: fedora:latest
-    env:
-      CPP_CHECKS: ${{ needs.changes.outputs.cpp }}
-      CCACHE_DIR: ${{ github.workspace }}/.ccache
-      CCACHE_BASEDIR: ${{ github.workspace }}
-      CCACHE_NOHASHDIR: 'true'
-      CCACHE_MAXSIZE: 500M
 
     steps:
       - name: Install dependencies
         # Fedora mirrors sometimes stall: retry with a time limit instead of hanging the job for hours.
-        timeout-minutes: 50
-        run: |
-          packages="git python3"
-          if [ "$CPP_CHECKS" = true ]; then
-            packages="$packages cmake ninja-build gcc-c++ make nodejs ccache tar zstd \
-                qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtwebengine-devel qt6-qttools-devel qt6-qtwebchannel-devel \
-                kf6-kirigami kf6-qqc2-desktop-style kf6-kwallet-devel kf6-karchive-devel hunspell-en-US hunspell-pt-BR"
-          fi
-          for attempt in 1 2 3; do
-            timeout 15m dnf -y install $packages && exit 0
-            echo "::warning::dnf install failed or timed out (attempt $attempt of 3)"
-            sleep 30
-          done
-          exit 1
-
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Code quality
-        run: |
-          python3 -m unittest discover -s scripts/tests
-          python3 scripts/check-code-quality.py
-
-      - name: Restore the compiler cache
-        if: env.CPP_CHECKS == 'true'
-        uses: actions/cache/restore@v4
-        with:
-          path: .ccache
-          key: ccache-${{ github.ref }}-${{ github.sha }}
-          restore-keys: |
-            ccache-${{ github.ref }}-
-            ccache-refs/heads/main-
-
-      - name: Configure
-        if: env.CPP_CHECKS == 'true'
-        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
-
-      - name: Build
-        if: env.CPP_CHECKS == 'true'
-        # A healthy build takes about 10 minutes; a stuck runner must fail instead of blocking the merge queue.
-        timeout-minutes: 40
-        run: |
-          ccache --zero-stats
-          cmake --build build --parallel "$(nproc)"
-          ccache --show-stats
-
-      - name: Save the compiler cache
-        if: env.CPP_CHECKS == 'true' && always()
-        uses: actions/cache/save@v4
-        with:
-          path: .ccache
-          key: ccache-${{ github.ref }}-${{ github.sha }}
-
-      - name: Test
-        if: env.CPP_CHECKS == 'true'
-        timeout-minutes: 20
-        run: ctest --test-dir build --output-on-failure
-
-      - name: Check translations
-        if: env.CPP_CHECKS == 'true'
-        run: |
-          # The container job runs as root on a workspace owned by another user,
-          # so git needs the checkout marked as safe before diffing it.
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          cmake --build build --target update_translations
-          if ! git diff --exit-code -- i18n/; then
-            echo "::error::i18n/*.ts are stale; run update_translations and commit the result"
-            exit 1
-          fi
-          python3 - <<'PY'
-          import glob
-          import re
-          import sys
-          import xml.etree.ElementTree as ET
-
-          failed = False
-          for path in sorted(glob.glob("i18n/*.ts")):
-              tree = ET.parse(path)
-              for context in tree.getroot():
-                  context_name = context.findtext("name")
-                  for message in context.findall("message"):
-                      source = message.findtext("source") or ""
-                      translation = message.find("translation")
-                      if translation is None:
-                          print(f"::error file={path}::{context_name}: missing translation for {source!r}")
-                          failed = True
-                          continue
-                      forms = (translation.findall("numerusform")
-                               if message.get("numerus") == "yes" else [translation])
-                      texts = [(form.text or "").strip() for form in forms]
-                      if translation.get("type") == "unfinished" or not texts or any(not text for text in texts):
-                          print(f"::error file={path}::{context_name}: unfinished or empty translation for {source!r}")
-                          failed = True
-                          continue
-                      expected = sorted(set(re.findall(r"%\d+|%n", source)))
-                      actual = sorted(set(re.findall(r"%\d+|%n", " ".join(texts))))
-                      if expected != actual:
-                          print(f"::error file={path}::{context_name}: placeholders differ for {source!r}: expected {expected}, got {actual}")
-                          failed = True
-          sys.exit(1 if failed else 0)
-          PY
-
-      - name: Upload binary
-        if: env.CPP_CHECKS == 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: kondor-linux
-          path: build/kondor
-          if-no-files-found: error
-
-  python:
-    runs-on: ubuntu-24.04
-    container: fedora:latest
-
-    steps:
-      - name: Install dependencies
         timeout-minutes: 50
         run: |
           for attempt in 1 2 3; do
@@ -169,7 +25,14 @@ jobs:
           done
           exit 1
 
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Code quality
+        timeout-minutes: 5
+        run: |
+          python3 -m unittest discover -s scripts/tests
+          python3 scripts/check-code-quality.py
 
       - name: Ruff
         timeout-minutes: 5
@@ -179,7 +42,7 @@ jobs:
         timeout-minutes: 10
         run: mypy --strict kondor
 
-      - name: Stage Python build
+      - name: Stage the build
         timeout-minutes: 10
         run: python3 scripts/build.py
 
@@ -187,6 +50,15 @@ jobs:
         timeout-minutes: 20
         run: scripts/run-pytests.sh
 
-      - name: QML API
+      - name: Check translations
         timeout-minutes: 5
-        run: python3 scripts/check-qml-api.py
+        run: |
+          # The container job runs as root on a workspace owned by another user,
+          # so git needs the checkout marked as safe before diffing it.
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          python3 scripts/update-translations.py
+          if ! git diff --exit-code -- i18n/; then
+            echo "::error::i18n/*.ts are stale; run scripts/update-translations.py and commit the result"
+            exit 1
+          fi
+          python3 scripts/check-translations.py

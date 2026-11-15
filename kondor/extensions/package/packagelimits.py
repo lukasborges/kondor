@@ -1,10 +1,12 @@
 from dataclasses import dataclass
 
-from PySide6.QtCore import QCoreApplication, QDir, QDirIterator
+from PySide6.QtCore import QT_TRANSLATE_NOOP, QCoreApplication, QDir, QDirIterator
 
 MAX_PACKAGE_BYTES = 5 * 1024 * 1024
 MAX_PACKAGE_FILES = 200
 BYTES_PER_MIB = 1024 * 1024
+TOO_MANY_FILES = QT_TRANSLATE_NOOP("ExtensionPackage", "The package has more than %1 files")
+TOO_LARGE = QT_TRANSLATE_NOOP("ExtensionPackage", "The package is larger than %1 MiB")
 
 
 @dataclass
@@ -30,9 +32,7 @@ def translated(text: str) -> str:
 
 def package_limit_error(size: PackageSize) -> str:
     if size.files > MAX_PACKAGE_FILES:
-        text = translated("The package has more than %1 files")
-        return text.replace("%1", str(MAX_PACKAGE_FILES))
+        return translated(TOO_MANY_FILES).replace("%1", str(MAX_PACKAGE_FILES))
     if size.bytes > MAX_PACKAGE_BYTES:
-        text = translated("The package is larger than %1 MiB")
-        return text.replace("%1", str(MAX_PACKAGE_BYTES // BYTES_PER_MIB))
+        return translated(TOO_LARGE).replace("%1", str(MAX_PACKAGE_BYTES // BYTES_PER_MIB))
     return ""

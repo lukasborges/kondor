@@ -159,7 +159,7 @@ PROMPT
   }
 
   execute_run() {
-    local run_log="$state/run-$today.log"
+    local run_log="$state/run-$(date +%F-%H%M).log"
     log "testing $1 (parity mode $3, log: $run_log)"
     if run_qa "$1" "$2" "$3" >"$run_log" 2>&1; then
       echo "$1" > "$state/last-sha"

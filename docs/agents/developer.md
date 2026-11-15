@@ -76,7 +76,10 @@ loop-owned worktree at `origin/main` (`~/.local/share/kondor-dev-loop/control`),
 queue and, when there is a `developer` row, runs the developer from that worktree: by default Claude Code with Sonnet
 (`claude -p --permission-mode auto --model sonnet --effort medium`, attribution trailers turned off), or opencode
 with DeepSeek when `KONDOR_ENGINE=opencode` (`KONDOR_MODEL` overrides the model of either) with a prompt for that one issue. If a run ends with the issue still in `to-dev` twice in
-a row, the loop pauses that issue and sends a desktop notification. The service reads
+a row, the loop blocks that issue and moves on: it adds the `blocked` label with a comment, drops
+its claim, moves the board card to **Blocked** and sends a desktop notification. A blocked issue
+leaves the queue, so its slot is free: the architect promotes the next issue and the loop takes it.
+Removing the `blocked` label (or `--resume <N>`) puts the issue back in the queue for any free loop. The service reads
 `~/.config/kondor-dev-loop/github.env` (`GH_TOKEN=…` of the developer's bot account) when it
 exists, so `gh` and `git push` act as the bot and its comments are told apart from the architect's.
 
@@ -91,7 +94,7 @@ scripts/dev-loop.sh --install      # install + start the systemd user service
 journalctl --user -u kondor-dev-loop -f            # follow it
 tail -f ~/.local/state/kondor-dev-loop/dev-loop.log   # loop log; run-<N>-*.log per developer run
 scripts/watch-agents.sh            # live: both loops' queue events, agent messages and tool calls
-scripts/dev-loop.sh --resume <N>   # unpause an issue
+scripts/dev-loop.sh --resume <N>   # unblock an issue (removes `blocked`, card back to In Progress)
 systemctl --user stop kondor-dev-loop              # stop (start again with start)
 scripts/dev-loop.sh --uninstall    # remove the service
 ```

@@ -147,8 +147,10 @@ headless (`claude -p --permission-mode auto`) for exactly one step when:
   loop picks the issue to promote (the highest-priority open `bug`, or else the next "Roadmap
   order" issue whose "Depends on:" issues are closed) and you promote it to `to-dev`.
 - an issue only the maintainer can move on (a reproduction on the real desktop, a decision) →
-  remove its state label and add `blocked` with a comment saying what is needed; the loop never
-  promotes a `blocked` issue. Remove `blocked` once the maintainer answers.
+  add `blocked` with a comment saying what is needed, keep its state label, and run
+  `scripts/board.sh <N> Blocked`. A `blocked` issue leaves the queue and frees its slot, and the
+  loop never promotes it. Remove `blocked` (card back to In Progress) once the maintainer answers.
+  The developer loop does the same by itself when it makes no progress on an issue twice.
 - nothing else needs you → write the spec (and prototype) of the next "Roadmap order" issue that
   has none yet, without touching its labels, so its later promotion is quick.
 

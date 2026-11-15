@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Put an issue on the "Kondor Roadmap" project board and set its Status.
 #
-#   scripts/board.sh <issue-number> [Todo|"In Progress"|Done]   # default: Todo
+#   scripts/board.sh <issue-number> [Todo|"In Progress"|Blocked|Done]   # default: Todo
 #
 # Adding is idempotent (an issue already on the board keeps its item). Closing an issue moves it
 # to Done through the board's built-in workflow, so callers only need Todo and In Progress.
@@ -11,7 +11,7 @@ OWNER="lukasborges"
 REPO="lukasborges/kondor"
 PROJECT=1
 
-n="${1:?usage: scripts/board.sh <issue-number> [Todo|\"In Progress\"|Done]}"
+n="${1:?usage: scripts/board.sh <issue-number> [Todo|\"In Progress\"|Blocked|Done]}"
 status="${2:-Todo}"
 
 project_id="$(gh project view "$PROJECT" --owner "$OWNER" --format json --jq .id)"

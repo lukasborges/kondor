@@ -47,6 +47,8 @@ gh issue list --repo "$repo" --state open --limit 1000 --json number,title,label
 while IFS=$'\t' read -r n title labels; do
   state="$(tr ',' '\n' <<<"$labels" | grep -xE 'to-spec|to-dev|in-review' | head -1 || true)"
   [[ -n "$state" ]] || continue
+  # A blocked issue waits for the maintainer: it leaves the queue and frees its slot.
+  tr ',' '\n' <<<"$labels" | grep -qx 'blocked' && continue
 
   if [[ "$state" == "in-review" ]] && tr ',' '\n' <<<"$labels" | grep -qx 'approved'; then
     ref="$(pr_ref "$n")"

@@ -5,7 +5,7 @@
 #   scripts/dev-loop.sh                 # loop forever (what the systemd service runs)
 #   scripts/dev-loop.sh --once          # one check (and at most one developer run), then exit
 #   scripts/dev-loop.sh --dry-run       # one check, print what would run, run nothing
-#   scripts/dev-loop.sh --resume <N>    # clear the pause flag of issue #N
+#   scripts/dev-loop.sh --resume <N>    # unblock issue #N (same as removing its `blocked` label)
 #   scripts/dev-loop.sh --install       # create the control worktree + systemd user service, start it
 #   scripts/dev-loop.sh --uninstall     # stop and remove the systemd user service
 #
@@ -20,9 +20,9 @@
 #   KONDOR_DEV_CLAIMS    folder shared by all developer loops for their claims (default: ~/.local/state/kondor-dev-claims)
 #   KONDOR_REPO          main checkout (default: the repository this script belongs to)
 #   KONDOR_CONTROL_DIR   loop-owned worktree kept at origin/main (default: ~/.local/share/kondor-dev-loop/control)
-#   KONDOR_STATE_DIR     lock, log, counters and pause flags (default: ~/.local/state/kondor-dev-loop)
+#   KONDOR_STATE_DIR     lock, log and counters (default: ~/.local/state/kondor-dev-loop)
 #   KONDOR_INTERVAL      seconds between checks (default: 60)
-#   KONDOR_MAX_NO_PROGRESS  developer runs on the same issue without leaving `to-dev` before pausing (default: 2)
+#   KONDOR_MAX_NO_PROGRESS  developer runs on the same issue without leaving `to-dev` before blocking it (default: 2)
 #   KONDOR_ENGINE        claude (Claude Code, default) or opencode
 #   KONDOR_CLAUDE        claude binary (default: claude in PATH, else ~/.local/bin/claude)
 #   KONDOR_OPENCODE      opencode binary (default: opencode in PATH, else ~/.opencode/bin/opencode)
@@ -196,10 +196,6 @@ EOF
       log "queue: nothing for the developer"
       return 0
     fi
-    if [[ -e "$state/paused-$n" ]]; then
-      log "queue: #$n is for the developer but paused (scripts/dev-loop.sh --resume $n)"
-      return 0
-    fi
     if [[ "$dry" == 1 ]]; then
       log "dry-run: developer $dev_id would run on #$n from $control"
       prompt_for "$n"
@@ -221,15 +217,44 @@ EOF
       echo "$count" > "$count_file"
       log "developer run on #$n finished (rc=$rc) but #$n is still to-dev (attempt $count/$max_no_progress)"
       if (( count >= max_no_progress )); then
-        touch "$state/paused-$n"
-        log "pausing #$n — check $run_log, then: scripts/dev-loop.sh --resume $n"
-        notify "Developer paused on #$n" "No progress after $count runs. See $run_log"
+        block_issue "$n" "$run_log"
+        log "blocked #$n and moved on — check $run_log, then: scripts/dev-loop.sh --resume $n"
+        notify "Developer blocked on #$n" "No progress after $count runs; it moved on to another issue. See $run_log"
       fi
     else
       rm -f "$count_file"
       log "developer moved #$n forward (rc=$rc)"
       notify "Developer finished a step on #$n" "The issue left to-dev — architect's turn (review or question)."
     fi
+  }
+
+  # Marks issue $1 blocked so this loop can take another one: the `blocked` label takes it out of
+  # the queue (freeing its slot for the architect to promote the next issue), the comment says why,
+  # and the board card moves to Blocked. The issue keeps its `to-dev` label for when it resumes.
+  block_issue() {
+    local n="$1" run_log="$2"
+    gh issue edit "$n" --repo lukasborges/kondor --add-label blocked >/dev/null
+    gh issue comment "$n" --repo lukasborges/kondor --body "$(blocked_comment "$n" "$run_log")" >/dev/null
+    rm -f "$claims/$n" "$state/no-progress-$n"
+    move_card "$n" Blocked
+  }
+
+  blocked_comment() {
+    printf '**Blocked:** developer %s made no progress on this issue after %s runs and moved on to another one. ' \
+      "$dev_id" "$max_no_progress"
+    printf 'The run log is `%s` on the maintainer'"'"'s machine. ' "$2"
+    printf 'Remove the `blocked` label (or run `scripts/dev-loop.sh --resume %s`) once it can continue.' "$1"
+  }
+
+  unblock_issue() {
+    gh issue edit "$1" --repo lukasborges/kondor --remove-label blocked >/dev/null
+    rm -f "$state/no-progress-$1"
+    move_card "$1" "In Progress"
+    log "unblocked #$1"
+  }
+
+  move_card() {
+    (cd "$control" && bash scripts/board.sh "$1" "$2") >/dev/null 2>&1 || log "board: could not move #$1 to $2"
   }
 
   install_service() {
@@ -272,7 +297,7 @@ EOF
   case "${1:-}" in
     --once)      exec 9>"$state/lock"; flock -n 9 || { log "another loop is running"; exit 0; }; step 0 ;;
     --dry-run)   step 1 ;;
-    --resume)    rm -f "$state/paused-${2:?issue number}" "$state/no-progress-${2}"; log "resumed #$2" ;;
+    --resume)    ensure_control && unblock_issue "${2:?issue number}" ;;
     --install)   install_service ;;
     --uninstall) systemctl --user disable --now "$unit"; rm -f "$HOME/.config/systemd/user/$unit"; systemctl --user daemon-reload; log "$unit removed" ;;
     "")

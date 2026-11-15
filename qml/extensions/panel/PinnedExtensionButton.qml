@@ -20,7 +20,7 @@ ToolButton {
     }
 
     function unpinAndRestoreFocus() {
-        focusTarget.forceActiveFocus(Qt.TabFocusReason)
+        focusTarget.forceActiveFocus(Qt.PopupFocusReason)
         ExtensionManager.setPinned(modelData.id, false)
     }
 

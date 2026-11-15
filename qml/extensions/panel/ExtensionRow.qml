@@ -81,6 +81,7 @@ ItemDelegate {
             Accessible.name: root.pinToggleName()
             Keys.onDownPressed: root.stepRequested(1)
             Keys.onUpPressed: root.stepRequested(-1)
+            KeyNavigation.backtab: root
             onToggled: {
                 ExtensionManager.setPinned(root.modelData.id, !root.isPinned)
                 checked = Qt.binding(function() { return root.isPinned })

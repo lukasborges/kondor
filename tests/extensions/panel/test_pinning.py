@@ -64,6 +64,13 @@ def test_row_pin_toggles_pin(panel: PanelFixture) -> None:
     assert not manager().isPinned(SAMPLE)
 
 
+def test_shift_tab_from_row_pin_returns_to_row(panel: PanelFixture) -> None:
+    panel.open_panel()
+    pin = row_pin(panel)
+    press_on(pin, Qt.Key.Key_Backtab, Qt.KeyboardModifier.ShiftModifier)
+    assert panel.row_at(0).property("activeFocus")
+
+
 def test_row_pin_is_checked_when_pinned(panel: PanelFixture) -> None:
     panel.open_panel()
     button = row_pin(panel)

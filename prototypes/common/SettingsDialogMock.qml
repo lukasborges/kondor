@@ -22,6 +22,7 @@ Rectangle {
     property bool importDone: false // #106: an import just finished (message on the page)
     property bool withExtensions: false // #107: show the Extensions page
     property bool withAppearance: false // #211: show the Appearance tab of the General page
+    property bool withRemoteControl: false // #256: remote control turned on, restart pending
     property bool appearanceVertical: false // #212: the Tabs picker also offers Side Bar
     property bool extensionsEmpty: false // #107: no extension installed (placeholder)
     property bool catalogDialog: false // #107: the "Get New Extensions" dialog is open
@@ -194,6 +195,30 @@ Rectangle {
                         CheckBox { Kirigami.FormData.label: "On exit:"; text: "Clear cookies, cache and history" }
                         Item { Kirigami.FormData.isSection: true }
                         Button { Kirigami.FormData.label: "Browsing data:"; text: "Clear Cookies and Cache Now"; icon.name: "edit-clear-history" }
+                        Item { Kirigami.FormData.isSection: true; visible: root.withRemoteControl }
+                        Kirigami.InlineMessage {
+                            Layout.fillWidth: true
+                            visible: root.withRemoteControl
+                            type: Kirigami.MessageType.Information
+                            text: "Restart Kondor to apply the remote control change."
+                        }
+                        CheckBox {
+                            visible: root.withRemoteControl
+                            Kirigami.FormData.label: "Remote control:"
+                            text: "Allow automation tools to control pages"
+                            checked: true
+                        }
+                        Label {
+                            visible: root.withRemoteControl
+                            text: "Private browsing is unavailable while it is on."
+                            color: Kirigami.Theme.disabledTextColor
+                        }
+                        SpinBox {
+                            visible: root.withRemoteControl
+                            Kirigami.FormData.label: "Port:"
+                            from: 1024; to: 65535; value: 9222
+                            textFromValue: function(value) { return String(value) }
+                        }
                     }
 
                     // Passwords → Saved Passwords (#21)

@@ -15,6 +15,7 @@ ItemDelegate {
 
     readonly property bool isPinned: tab?.pinned ?? false
     readonly property bool isCurrent: index === tabModel.currentIndex
+    readonly property color textColor: isCurrent ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
     readonly property bool hasKeyboardFocus: list.isFocusRingVisible && index === list.currentIndex
 
     visible: !isPinned
@@ -49,6 +50,7 @@ ItemDelegate {
         Label {
             Layout.fillWidth: true
             text: info.title
+            color: row.textColor
             elide: Text.ElideRight
         }
 
@@ -60,6 +62,7 @@ ItemDelegate {
             flat: true
             display: AbstractButton.IconOnly
             icon.name: "window-close-symbolic"
+            icon.color: row.textColor
             icon.width: 14
             icon.height: 14
             ToolTip.visible: hovered

@@ -12,8 +12,11 @@ TextField {
     readonly property alias bookmarkEditor: buttons.bookmarkEditor
 
     function syncFromTab() {
-        if (activeFocus)
-            return
+        if (!activeFocus)
+            showCurrentTabAddress()
+    }
+
+    function showCurrentTabAddress() {
         const tab = tabs.currentTab
         text = (tab && !tab.newTabPage) ? tab.url.toString() : ""
     }
@@ -107,7 +110,7 @@ TextField {
         target: root.tabs
         function onCurrentTabChanged() {
             completer.stopTyping()
-            root.syncFromTab()
+            root.showCurrentTabAddress()
         }
     }
 

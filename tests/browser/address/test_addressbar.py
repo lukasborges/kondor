@@ -88,3 +88,13 @@ def test_switching_the_current_tab_shows_its_url(harness: AddressBarHarness, qtb
     qtbot.waitUntil(lambda: harness.text() == "https://example.org/two")
     harness.tabs.setCurrentIndex(0)
     qtbot.waitUntil(lambda: harness.text() == "https://kde.org/one")
+
+
+def test_a_focused_address_bar_follows_the_current_tab(
+    harness: AddressBarHarness, qtbot: QtBot
+) -> None:
+    harness.tabs.addTab(False, QUrl("https://example.com/two"))
+    qtbot.waitUntil(lambda: harness.text() == "https://example.com/two")
+    harness.call("focusBar")
+    harness.tabs.setCurrentIndex(0)
+    assert harness.text() == "https://kde.org/one"

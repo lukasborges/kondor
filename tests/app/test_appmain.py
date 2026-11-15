@@ -38,6 +38,7 @@ def isolated_environment(home: Path) -> dict[str, str]:
             "XDG_DATA_HOME": str(home / "data"),
             "XDG_CACHE_HOME": str(home / "cache"),
             "XDG_STATE_HOME": str(home / "state"),
+            "PYTHONPATH": str(REPOSITORY / "src"),
             "QT_QPA_PLATFORM": "offscreen",
             SANDBOX_VARIABLE: "1",
             CHROMIUM_FLAGS_VARIABLE: NO_GPU_FLAG,

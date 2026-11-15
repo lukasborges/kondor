@@ -13,7 +13,7 @@ def package_parent_directory() -> Path:
 
 def staged_build_directory() -> Path:
     parent = package_parent_directory()
-    return parent if (parent / "kondor.rcc").exists() else parent / "build" / "python"
+    return parent if (parent / "kondor.rcc").exists() else parent.parent / "build" / "python"
 
 
 def has_staged_files(directory: Path) -> bool:

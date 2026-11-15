@@ -16,7 +16,8 @@ def is_in_scope(folder: str) -> bool:
 
 
 def folder_depth(folder: str) -> int:
-    return max(len(folder.split("/")) - 2, 0)
+    levels_above_features = 3 if folder.startswith("src/") else 2
+    return max(len(folder.split("/")) - levels_above_features, 0)
 
 
 def all_folders(root: str) -> List[str]:

@@ -16,11 +16,11 @@ from test_check_code_quality import js_function
 class BaselineTest(unittest.TestCase):
     def setUp(self):
         self.root = tempfile.mkdtemp()
-        os.makedirs(os.path.join(self.root, "kondor"))
+        os.makedirs(os.path.join(self.root, "src", "kondor"))
         self.baseline_file = os.path.join(self.root, "baseline.json")
 
     def write_source(self, name: str, content: str) -> None:
-        with open(os.path.join(self.root, "kondor", name), "w", encoding="utf-8") as handle:
+        with open(os.path.join(self.root, "src", "kondor", name), "w", encoding="utf-8") as handle:
             handle.write(content)
 
     def run_checker(self, *arguments: str):
@@ -60,14 +60,14 @@ class BaselineTest(unittest.TestCase):
         self.write_source("b.js", js_function(12))
         code, output = self.run_checker()
         self.assertEqual(code, 1)
-        self.assertIn("kondor/b.js:1: function-length: 12 > 10", output)
+        self.assertIn("src/kondor/b.js:1: function-length: 12 > 10", output)
 
     def test_update_removes_fixed_and_lowers_values(self):
         self.write_source("a.js", js_function(12) + js_function(12, "function two()"))
         self.run_checker("--init-baseline")
         self.write_source("a.js", js_function(11) + js_function(3, "function two()"))
         self.assertEqual(self.run_checker("--update-baseline")[0], 0)
-        self.assertEqual(self.read_baseline()["function-length"], {"kondor/a.js::run": 11})
+        self.assertEqual(self.read_baseline()["function-length"], {"src/kondor/a.js::run": 11})
 
     def test_update_refuses_to_add_entries(self):
         self.write_source("a.js", js_function(3))
@@ -83,7 +83,7 @@ class BaselineTest(unittest.TestCase):
         self.assertEqual(self.run_checker("--init-baseline")[0], 1)
 
     def test_path_of_key(self):
-        self.assertEqual(bl.path_of("kondor/a.js::run"), "kondor/a.js")
+        self.assertEqual(bl.path_of("src/kondor/a.js::run"), "src/kondor/a.js")
 
 
 if __name__ == "__main__":

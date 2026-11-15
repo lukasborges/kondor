@@ -40,7 +40,7 @@ jobs:
 
       - name: Mypy
         timeout-minutes: 10
-        run: mypy --strict kondor
+        run: mypy --strict src/kondor
 
       - name: Stage the build
         timeout-minutes: 10

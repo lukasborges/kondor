@@ -19,8 +19,8 @@ def install_staged_files(staged: Path, share: Path) -> None:
 
 
 def install_python_package(repository: Path, share: Path) -> None:
-    for source in sorted((repository / "kondor").rglob("*.py")):
-        target = share / source.relative_to(repository)
+    for source in sorted((repository / "src" / "kondor").rglob("*.py")):
+        target = share / source.relative_to(repository / "src")
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
     compileall.compile_dir(share / "kondor", quiet=1)

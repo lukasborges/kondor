@@ -177,7 +177,7 @@ The Hunspell dictionaries (`/usr/share/hunspell`) are converted to Qt WebEngine'
 
 ```bash
 python3 scripts/build.py
-python3 -m kondor
+PYTHONPATH=src python3 -m kondor
 ```
 
 `python3 scripts/build.py --install <prefix>` also installs Kondor under `<prefix>`: the `kondor`
@@ -195,7 +195,7 @@ checks of the build scripts run with `python3 -m unittest discover -s scripts/te
 
 ### Code quality
 
-The code follows the Clean Code limits in the agents' guide `AGENTS.md` ("Code quality", kept outside the repository): in `kondor/`, `qml/` and `tests/`: functions of at most 10 lines, files of at most 200 lines, almost no comments, and folders of at most 10 files and two levels below a feature folder. `python3 scripts/check-code-quality.py` enforces them (`--changed origin/main` checks only your changes). The existing offenders are listed in `scripts/code-quality-baseline.json`, which can only shrink.
+The code follows the Clean Code limits in the agents' guide `AGENTS.md` ("Code quality", kept outside the repository): in `src/kondor/`, `qml/` and `tests/`: functions of at most 10 lines, files of at most 200 lines, almost no comments, and folders of at most 10 files and two levels below a feature folder. `python3 scripts/check-code-quality.py` enforces them (`--changed origin/main` checks only your changes). The existing offenders are listed in `scripts/code-quality-baseline.json`, which can only shrink.
 
 ## Translations
 
@@ -208,7 +208,7 @@ the translation that matches the system locale at startup (and Qt's own translat
 dialogs and context menus).
 
 - **Update the `.ts` files** after changing strings: `python3 scripts/update-translations.py`.
-  This runs `pyside6-lupdate` over `kondor/` and `qml/` with `-no-obsolete` and writes the result to `i18n/`.
+  This runs `pyside6-lupdate` over `src/kondor/` and `qml/` with `-no-obsolete` and writes the result to `i18n/`.
 - **Add a language**: create `i18n/kondor_<lang>.ts` (the script updates every `i18n/kondor_*.ts`)
   and translate the messages with Qt Linguist (`linguist-qt6 i18n/kondor_<lang>.ts`).
 - **Keep them complete**: a PR that adds or changes a user-visible string updates every
@@ -218,7 +218,7 @@ dialogs and context menus).
 
 ## Notes
 
-- The `org.kde.desktop` style is applied at startup (`kondor/app/startup`); if it cannot be found, it falls back to `Fusion`.
+- The `org.kde.desktop` style is applied at startup (`src/kondor/app/startup`); if it cannot be found, it falls back to `Fusion`.
 - Colors come from the theme, so changing the KDE color scheme will not break the layout.
 
 ## Third-party code

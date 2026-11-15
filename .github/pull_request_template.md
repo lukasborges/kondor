@@ -12,9 +12,9 @@ Spec: `docs/specs/<NNNN>-<slug>.md`
 
 ## How it was tested
 
-- [ ] `ruff check` and `mypy --strict kondor` pass
+- [ ] `ruff check` and `mypy --strict src/kondor` pass
 - [ ] `python3 scripts/build.py` and `scripts/run-pytests.sh` pass
-- [ ] Offscreen smoke test (`QT_QPA_PLATFORM=offscreen timeout 15 python3 -m kondor`, isolated `XDG_*` dirs) shows no QML errors
+- [ ] Offscreen smoke test (`QT_QPA_PLATFORM=offscreen timeout 15 env PYTHONPATH=src python3 -m kondor`, isolated `XDG_*` dirs) shows no QML errors
 - [ ] Spec "Manual test" done (describe results below)
 
 ## Checklist

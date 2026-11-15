@@ -308,7 +308,7 @@ Use a temporary `XDG_CONFIG_HOME`, `XDG_DATA_HOME` and `XDG_CACHE_HOME` (AGENTS.
 | Question | Decision |
 | --- | --- |
 | Keep the flat menu, with section headers (#179)? | Rejected. 10 extensions made 40+ rows taller than the screen, and the menu closed after each action. Two levels in one popup instead. |
-| A pin button on every level-1 row? | Rejected: ten identical icons for a rare action. Pin / Unpin is a labeled button on level 2. |
+| A pin button on every level-1 row? | Rejected: ten identical icons for a rare action. Pin / Unpin is a labeled button on level 2. **Reversed by #196** (maintainer): a pin toggle on every row, unpin from the toolbar button's context menu, and no pin button on level 2 ([spec](0196-pin-extensions.md)). |
 | A status icon or a "Running on this site" subtitle on rows? | Rejected. The icon alone was ambiguous, and the subtitle doubled the row height. |
 | A `Switch` on every level-1 row? | Rejected: ten switches made the list noisy. The switch is on level 2. |
 | An "Off on this site" label on rows? | Rejected as noisy (maintainer). The icon and name are dimmed, the row stays enabled, and the state is in the tooltip and `Accessible.name`. |

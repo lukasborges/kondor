@@ -10,6 +10,7 @@ Popup {
     property var extensions: []
     default property alias page: pageSlot.data
     property bool showList: true
+    property bool showPins: false
 
     popupType: Popup.Item
     closePolicy: Popup.NoAutoClose
@@ -39,6 +40,16 @@ Popup {
                 enabled: !row.offHere
                 elide: Text.ElideRight
                 Layout.fillWidth: true
+            }
+            ToolButton {
+                visible: root.showPins
+                display: AbstractButton.IconOnly
+                icon.name: "window-pin"
+                checkable: true
+                checked: row.modelData.pinned
+                ToolTip.text: row.modelData.pinned ? "Unpin from Toolbar" : "Pin to Toolbar"
+                ToolTip.delay: 600
+                Accessible.name: (row.modelData.pinned ? "Unpin %1 from Toolbar" : "Pin %1 to Toolbar").arg(row.modelData.name)
             }
             Kirigami.Icon {
                 source: "go-next"

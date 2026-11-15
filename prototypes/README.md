@@ -66,6 +66,7 @@ Tips when editing:
 | #191 Search saved passwords | `191-passwords-search.qml`, `191b-passwords-search-site.qml`, `191c-passwords-search-empty.qml`, `191d-passwords-search-other-site.qml` (`common/SavedPasswordsPanelMock.qml`, `common/SignInPageMock.qml`) |
 | #111 User scripts | `111-user-script-bar.qml`, `111b-user-script-install.qml` (in `common/SettingsDialogMock.qml`) |
 | #183 Extensions panel, #182 item icons and shortcuts | `183-extensions-panel.qml`, `183b-extensions-panel-actions.qml` (`common/ExtensionsPanelMock.qml`) |
+| #196 Pin extensions | `196-extensions-pin-list.qml`, `196b-pinned-button-menu.qml`, `183b-extensions-panel-actions.qml` (no pin on level 2) (`common/ExtensionsPanelMock.qml`, `showPins`) |
 | #211 Tab styles | `211-tab-style-floating.qml`, `211b-tab-style-floating-many.qml`, `211c-tab-style-below.qml`, `211d-tab-style-classic.qml`, `211e-settings-tab-style.qml` (`common/TabStyleFrame.qml`, `common/TabStylePicker.qml`, in `common/SettingsDialogMock.qml`) |
 | #212 Vertical tabs | `212-vertical-tabs.qml`, `212b-settings-tab-style.qml` |
 | #227 Bookmarks panel | `227-bookmarks-panel.qml`, `227b-bookmarks-panel-folder.qml`, `227c-bookmarks-panel-search.qml`, `227d-bookmarks-panel-empty.qml` (`common/BookmarksPanelMock.qml`) |

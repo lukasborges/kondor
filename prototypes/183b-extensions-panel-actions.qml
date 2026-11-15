@@ -1,4 +1,4 @@
-// #183/#182 Extensions panel — level 2: the actions of one extension (icons and page shortcuts from #182), with Back, pin and settings.
+// #183/#182 Extensions panel — level 2: the actions of one extension (icons and page shortcuts from #182), with Back and settings (pinning moved to level 1 in #196).
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -68,7 +68,6 @@ BrowserFrame {
         Kirigami.Separator { Layout.fillWidth: true }
         RowLayout {
             Layout.fillWidth: true
-            Button { text: "Unpin from Toolbar"; icon.name: "window-unpin"; flat: true }
             Item { Layout.fillWidth: true }
             Button { text: "Settings…"; icon.name: "configure"; flat: true }
         }

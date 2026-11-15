@@ -12,7 +12,6 @@ TextField {
         return (event.modifiers & Qt.ControlModifier) !== 0
     }
 
-    placeholderText: qsTr("Search bookmarks")
     leftPadding: Kirigami.Units.iconSizes.small + Kirigami.Units.largeSpacing
     Accessible.name: placeholderText
     Keys.onDownPressed: stepDownRequested()

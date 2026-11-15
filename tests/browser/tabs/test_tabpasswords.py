@@ -63,7 +63,7 @@ def test_private_tab_does_not_copy(model: TabModel) -> None:
     clipboard = QGuiApplication.clipboard()
     clipboard.setText("before")
     tab.passwords.copyUsername("ann")
-    tab.passwords.copyPassword("ann")
+    tab.passwords.copyPassword(ORIGIN, "ann")
     assert clipboard.text() == "before"
 
 
@@ -71,3 +71,34 @@ def test_host_follows_url(model: TabModel) -> None:
     tab = model.addTab()
     tab.passwords.update_usernames_for(QUrl("https://Example.org/login?x=1"))
     assert tab.passwords.host == "example.org"
+
+
+def test_https_tab_without_logins_is_available(model: TabModel) -> None:
+    tab = model.addTab()
+    tab.passwords.update_usernames_for(QUrl(ORIGIN))
+    assert tab.passwords.isAvailable
+
+
+def test_non_web_tab_is_not_available(model: TabModel) -> None:
+    tab = model.addTab()
+    tab.passwords.update_usernames_for(QUrl("about:blank"))
+    assert not tab.passwords.isAvailable
+
+
+def test_private_tab_is_not_available(model: TabModel) -> None:
+    tab = model.addTab(True)
+    tab.passwords.update_usernames_for(QUrl(ORIGIN))
+    assert not tab.passwords.isAvailable
+
+
+def test_private_tab_has_no_matches(model: TabModel) -> None:
+    tab = model.addTab(True)
+    tab.passwords.update_usernames_for(QUrl(ORIGIN))
+    assert tab.passwords.matches("a") == []
+
+
+def test_fill_emits_the_saved_origin(model: TabModel, qtbot: QtBot) -> None:
+    tab = model.addTab()
+    with qtbot.waitSignal(tab.passwords.fillRequested, timeout=0) as signal:
+        tab.passwords.fill("https://other.example", "ann")
+    assert signal.args == ["https://other.example", "ann"]

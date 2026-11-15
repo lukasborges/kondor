@@ -286,6 +286,10 @@
 <context>
     <name>BookmarksPanel</name>
     <message>
+        <source>Search bookmarks</source>
+        <translation>Hledat v záložkách</translation>
+    </message>
+    <message>
         <source>No bookmarks match</source>
         <translation>Žádné odpovídající záložky</translation>
     </message>
@@ -341,13 +345,6 @@
     <message>
         <source>Back</source>
         <translation>Zpět</translation>
-    </message>
-</context>
-<context>
-    <name>BookmarksPanelSearchField</name>
-    <message>
-        <source>Search bookmarks</source>
-        <translation>Hledat v záložkách</translation>
     </message>
 </context>
 <context>
@@ -1097,6 +1094,22 @@
     </message>
 </context>
 <context>
+    <name>FillFromOtherSiteDialog</name>
+    <message>
+        <source>Fill Password from Another Site</source>
+        <translation>Vyplnit heslo z jiného webu</translation>
+    </message>
+    <message>
+        <source>This password was saved for &lt;b&gt;%1&lt;/b&gt;. Fill it on &lt;b&gt;%2&lt;/b&gt;?</source>
+        <extracomment>%1 is the host the password was saved for, %2 the host of the current page</extracomment>
+        <translation>Toto heslo bylo uloženo pro &lt;b&gt;%1&lt;/b&gt;. Vyplnit ho na &lt;b&gt;%2&lt;/b&gt;?</translation>
+    </message>
+    <message>
+        <source>Fill</source>
+        <translation>Vyplnit</translation>
+    </message>
+</context>
+<context>
     <name>FindBar</name>
     <message>
         <source>Find in page</source>
@@ -1781,8 +1794,8 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <source>Fill Saved Password</source>
-        <translation>Vyplnit uložené heslo</translation>
+        <source>Saved Passwords</source>
+        <translation>Uložená hesla</translation>
     </message>
 </context>
 <context>
@@ -2042,6 +2055,9 @@
         <extracomment>%1 is the user name</extracomment>
         <translation>Vyplnit %1</translation>
     </message>
+</context>
+<context>
+    <name>SavedLoginCopyButtons</name>
     <message>
         <source>Copy Username</source>
         <translation>Kopírovat uživatelské jméno</translation>
@@ -2075,6 +2091,37 @@
         <source>Copy Password for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>Kopírovat heslo pro %1</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginList</name>
+    <message>
+        <source>Passwords Unavailable</source>
+        <translation>Hesla nejsou dostupná</translation>
+    </message>
+    <message>
+        <source>No Matches</source>
+        <translation>Žádné shody</translation>
+    </message>
+    <message>
+        <source>No Passwords for This Site</source>
+        <translation>Žádná hesla pro tento web</translation>
+    </message>
+    <message>
+        <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
+        <translation>KWallet je zakázán nebo byl přístup k němu odepřen, proto nelze hesla ukládat ani vyplňovat.</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginResultRow</name>
+    <message>
+        <source>Fill</source>
+        <translation>Vyplnit</translation>
+    </message>
+    <message>
+        <source>Fill %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>Vyplnit %1</translation>
     </message>
 </context>
 <context>
@@ -2120,6 +2167,10 @@
     <message>
         <source>Saved Passwords</source>
         <translation>Uložená hesla</translation>
+    </message>
+    <message>
+        <source>Search passwords</source>
+        <translation>Hledat hesla</translation>
     </message>
     <message>
         <source>Manage Passwords…</source>

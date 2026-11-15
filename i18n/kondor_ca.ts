@@ -286,6 +286,10 @@
 <context>
     <name>BookmarksPanel</name>
     <message>
+        <source>Search bookmarks</source>
+        <translation>Cerca als marcadors</translation>
+    </message>
+    <message>
         <source>No bookmarks match</source>
         <translation>Cap marcador coincideix</translation>
     </message>
@@ -341,13 +345,6 @@
     <message>
         <source>Back</source>
         <translation>Endarrere</translation>
-    </message>
-</context>
-<context>
-    <name>BookmarksPanelSearchField</name>
-    <message>
-        <source>Search bookmarks</source>
-        <translation>Cerca als marcadors</translation>
     </message>
 </context>
 <context>
@@ -1096,6 +1093,22 @@
     </message>
 </context>
 <context>
+    <name>FillFromOtherSiteDialog</name>
+    <message>
+        <source>Fill Password from Another Site</source>
+        <translation>Omple la contrasenya d&apos;un altre lloc</translation>
+    </message>
+    <message>
+        <source>This password was saved for &lt;b&gt;%1&lt;/b&gt;. Fill it on &lt;b&gt;%2&lt;/b&gt;?</source>
+        <extracomment>%1 is the host the password was saved for, %2 the host of the current page</extracomment>
+        <translation>Aquesta contrasenya es va desar per a &lt;b&gt;%1&lt;/b&gt;. Voleu omplir-la a &lt;b&gt;%2&lt;/b&gt;?</translation>
+    </message>
+    <message>
+        <source>Fill</source>
+        <translation>Omple</translation>
+    </message>
+</context>
+<context>
     <name>FindBar</name>
     <message>
         <source>Find in page</source>
@@ -1770,8 +1783,8 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <source>Fill Saved Password</source>
-        <translation>Omple la contrasenya desada</translation>
+        <source>Saved Passwords</source>
+        <translation>Contrasenyes desades</translation>
     </message>
 </context>
 <context>
@@ -2031,6 +2044,9 @@
         <extracomment>%1 is the user name</extracomment>
         <translation>Omple %1</translation>
     </message>
+</context>
+<context>
+    <name>SavedLoginCopyButtons</name>
     <message>
         <source>Copy Username</source>
         <translation>Copia el nom d&apos;usuari</translation>
@@ -2064,6 +2080,37 @@
         <source>Copy Password for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>Copia la contrasenya de %1</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginList</name>
+    <message>
+        <source>Passwords Unavailable</source>
+        <translation>Contrasenyes no disponibles</translation>
+    </message>
+    <message>
+        <source>No Matches</source>
+        <translation>Cap coincidència</translation>
+    </message>
+    <message>
+        <source>No Passwords for This Site</source>
+        <translation>Cap contrasenya per a aquest lloc</translation>
+    </message>
+    <message>
+        <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
+        <translation>El KWallet està inhabilitat o se n&apos;ha denegat l&apos;accés, de manera que no es poden desar ni omplir contrasenyes.</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginResultRow</name>
+    <message>
+        <source>Fill</source>
+        <translation>Omple</translation>
+    </message>
+    <message>
+        <source>Fill %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>Omple %1</translation>
     </message>
 </context>
 <context>
@@ -2109,6 +2156,10 @@
     <message>
         <source>Saved Passwords</source>
         <translation>Contrasenyes desades</translation>
+    </message>
+    <message>
+        <source>Search passwords</source>
+        <translation>Cerca contrasenyes</translation>
     </message>
     <message>
         <source>Manage Passwords…</source>

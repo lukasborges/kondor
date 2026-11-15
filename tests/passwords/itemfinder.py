@@ -18,6 +18,12 @@ QtObject {
     function popupRows(window) {
         return named(window.popup.contentItem, "savedAccountRow")
     }
+    function popupItems(window, name) {
+        return named(window.popup.contentItem, name)
+    }
+    function popupText(window, text) {
+        return withText(window.popup.contentItem, text)
+    }
     function isPopupOpened(window) {
         return window.popup.opened
     }
@@ -53,6 +59,12 @@ class ItemFinder:
 
     def popup_rows(self, window: QQuickWindow) -> list[QQuickItem]:
         return items_of(self._call("popupRows", window))
+
+    def popup_items(self, window: QQuickWindow, name: str) -> list[QQuickItem]:
+        return items_of(self._call("popupItems", window, name))
+
+    def popup_text(self, window: QQuickWindow, text: str) -> QQuickItem | None:
+        return item_of(self._call("popupText", window, text))
 
     def is_popup_opened(self, window: QQuickWindow) -> bool:
         return bool(self._call("isPopupOpened", window))

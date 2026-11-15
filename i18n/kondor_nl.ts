@@ -286,6 +286,10 @@
 <context>
     <name>BookmarksPanel</name>
     <message>
+        <source>Search bookmarks</source>
+        <translation>Bladwijzers zoeken</translation>
+    </message>
+    <message>
         <source>No bookmarks match</source>
         <translation>Geen overeenkomende bladwijzers</translation>
     </message>
@@ -341,13 +345,6 @@
     <message>
         <source>Back</source>
         <translation>Terug</translation>
-    </message>
-</context>
-<context>
-    <name>BookmarksPanelSearchField</name>
-    <message>
-        <source>Search bookmarks</source>
-        <translation>Bladwijzers zoeken</translation>
     </message>
 </context>
 <context>
@@ -1096,6 +1093,22 @@
     </message>
 </context>
 <context>
+    <name>FillFromOtherSiteDialog</name>
+    <message>
+        <source>Fill Password from Another Site</source>
+        <translation>Wachtwoord van een andere site invullen</translation>
+    </message>
+    <message>
+        <source>This password was saved for &lt;b&gt;%1&lt;/b&gt;. Fill it on &lt;b&gt;%2&lt;/b&gt;?</source>
+        <extracomment>%1 is the host the password was saved for, %2 the host of the current page</extracomment>
+        <translation>Dit wachtwoord is opgeslagen voor &lt;b&gt;%1&lt;/b&gt;. Invullen op &lt;b&gt;%2&lt;/b&gt;?</translation>
+    </message>
+    <message>
+        <source>Fill</source>
+        <translation>Invullen</translation>
+    </message>
+</context>
+<context>
     <name>FindBar</name>
     <message>
         <source>Find in page</source>
@@ -1770,8 +1783,8 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <source>Fill Saved Password</source>
-        <translation>Opgeslagen wachtwoord invullen</translation>
+        <source>Saved Passwords</source>
+        <translation>Opgeslagen wachtwoorden</translation>
     </message>
 </context>
 <context>
@@ -2031,6 +2044,9 @@
         <extracomment>%1 is the user name</extracomment>
         <translation>%1 invullen</translation>
     </message>
+</context>
+<context>
+    <name>SavedLoginCopyButtons</name>
     <message>
         <source>Copy Username</source>
         <translation>Gebruikersnaam kopiëren</translation>
@@ -2064,6 +2080,37 @@
         <source>Copy Password for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>Wachtwoord van %1 kopiëren</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginList</name>
+    <message>
+        <source>Passwords Unavailable</source>
+        <translation>Wachtwoorden niet beschikbaar</translation>
+    </message>
+    <message>
+        <source>No Matches</source>
+        <translation>Geen overeenkomsten</translation>
+    </message>
+    <message>
+        <source>No Passwords for This Site</source>
+        <translation>Geen wachtwoorden voor deze site</translation>
+    </message>
+    <message>
+        <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
+        <translation>KWallet is uitgeschakeld of de toegang is geweigerd, dus wachtwoorden kunnen niet worden opgeslagen of ingevuld.</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginResultRow</name>
+    <message>
+        <source>Fill</source>
+        <translation>Invullen</translation>
+    </message>
+    <message>
+        <source>Fill %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>%1 invullen</translation>
     </message>
 </context>
 <context>
@@ -2109,6 +2156,10 @@
     <message>
         <source>Saved Passwords</source>
         <translation>Opgeslagen wachtwoorden</translation>
+    </message>
+    <message>
+        <source>Search passwords</source>
+        <translation>Wachtwoorden zoeken</translation>
     </message>
     <message>
         <source>Manage Passwords…</source>

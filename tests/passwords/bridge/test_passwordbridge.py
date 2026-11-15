@@ -106,8 +106,30 @@ def test_fill_emits_the_saved_password(wallet_store: PasswordStore, qtbot: QtBot
     tab.setUrl(QUrl(ORIGIN))
     bridge = bridge_for(tab)
     with qtbot.waitSignal(bridge.pageApi().fillRequested, timeout=0) as signal:
-        bridge.fill("ann")
+        bridge.fill(ORIGIN, "ann")
     assert signal.args == [ORIGIN, "ann", "secret"]
+
+
+def test_fills_login_of_another_origin_on_the_page(
+    wallet_store: PasswordStore, qtbot: QtBot
+) -> None:
+    open_store(wallet_store, qtbot)
+    wallet_store.save("https://other.example", "ann", "other-secret")
+    tab = normal_tab()
+    tab.setUrl(QUrl(ORIGIN))
+    bridge = bridge_for(tab)
+    with qtbot.waitSignal(bridge.pageApi().fillRequested, timeout=0) as signal:
+        bridge.fill("https://other.example", "ann")
+    assert signal.args == [ORIGIN, "ann", "other-secret"]
+
+
+def test_unknown_login_fills_nothing(wallet_store: PasswordStore, qtbot: QtBot) -> None:
+    open_store(wallet_store, qtbot)
+    tab = normal_tab()
+    tab.setUrl(QUrl(ORIGIN))
+    bridge = bridge_for(tab)
+    with qtbot.assertNotEmitted(bridge.pageApi().fillRequested):
+        bridge.fill("https://other.example", "nobody")
 
 
 def test_store_change_reaches_the_page(wallet_store: PasswordStore, qtbot: QtBot) -> None:

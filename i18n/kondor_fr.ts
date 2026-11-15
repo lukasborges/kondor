@@ -286,6 +286,10 @@
 <context>
     <name>BookmarksPanel</name>
     <message>
+        <source>Search bookmarks</source>
+        <translation>Rechercher dans les marque-pages</translation>
+    </message>
+    <message>
         <source>No bookmarks match</source>
         <translation>Aucun marque-page ne correspond</translation>
     </message>
@@ -341,13 +345,6 @@
     <message>
         <source>Back</source>
         <translation>Retour</translation>
-    </message>
-</context>
-<context>
-    <name>BookmarksPanelSearchField</name>
-    <message>
-        <source>Search bookmarks</source>
-        <translation>Rechercher dans les marque-pages</translation>
     </message>
 </context>
 <context>
@@ -1096,6 +1093,22 @@
     </message>
 </context>
 <context>
+    <name>FillFromOtherSiteDialog</name>
+    <message>
+        <source>Fill Password from Another Site</source>
+        <translation>Remplir le mot de passe d&apos;un autre site</translation>
+    </message>
+    <message>
+        <source>This password was saved for &lt;b&gt;%1&lt;/b&gt;. Fill it on &lt;b&gt;%2&lt;/b&gt;?</source>
+        <extracomment>%1 is the host the password was saved for, %2 the host of the current page</extracomment>
+        <translation>Ce mot de passe a été enregistré pour &lt;b&gt;%1&lt;/b&gt;. Le renseigner sur &lt;b&gt;%2&lt;/b&gt; ?</translation>
+    </message>
+    <message>
+        <source>Fill</source>
+        <translation>Remplir</translation>
+    </message>
+</context>
+<context>
     <name>FindBar</name>
     <message>
         <source>Find in page</source>
@@ -1770,8 +1783,8 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <source>Fill Saved Password</source>
-        <translation>Remplir avec le mot de passe enregistré</translation>
+        <source>Saved Passwords</source>
+        <translation>Mots de passe enregistrés</translation>
     </message>
 </context>
 <context>
@@ -2031,6 +2044,9 @@
         <extracomment>%1 is the user name</extracomment>
         <translation>Remplir %1</translation>
     </message>
+</context>
+<context>
+    <name>SavedLoginCopyButtons</name>
     <message>
         <source>Copy Username</source>
         <translation>Copier le nom d&apos;utilisateur</translation>
@@ -2064,6 +2080,37 @@
         <source>Copy Password for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>Copier le mot de passe de %1</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginList</name>
+    <message>
+        <source>Passwords Unavailable</source>
+        <translation>Mots de passe indisponibles</translation>
+    </message>
+    <message>
+        <source>No Matches</source>
+        <translation>Aucune correspondance</translation>
+    </message>
+    <message>
+        <source>No Passwords for This Site</source>
+        <translation>Aucun mot de passe pour ce site</translation>
+    </message>
+    <message>
+        <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
+        <translation>KWallet est désactivé ou l&apos;accès a été refusé : les mots de passe ne peuvent être ni enregistrés ni remplis.</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginResultRow</name>
+    <message>
+        <source>Fill</source>
+        <translation>Remplir</translation>
+    </message>
+    <message>
+        <source>Fill %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>Remplir %1</translation>
     </message>
 </context>
 <context>
@@ -2109,6 +2156,10 @@
     <message>
         <source>Saved Passwords</source>
         <translation>Mots de passe enregistrés</translation>
+    </message>
+    <message>
+        <source>Search passwords</source>
+        <translation>Rechercher des mots de passe</translation>
     </message>
     <message>
         <source>Manage Passwords…</source>

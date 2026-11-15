@@ -286,6 +286,10 @@
 <context>
     <name>BookmarksPanel</name>
     <message>
+        <source>Search bookmarks</source>
+        <translation>Pesquisar favoritos</translation>
+    </message>
+    <message>
         <source>No bookmarks match</source>
         <translation>Nenhum favorito corresponde</translation>
     </message>
@@ -341,13 +345,6 @@
     <message>
         <source>Back</source>
         <translation>Voltar</translation>
-    </message>
-</context>
-<context>
-    <name>BookmarksPanelSearchField</name>
-    <message>
-        <source>Search bookmarks</source>
-        <translation>Pesquisar favoritos</translation>
     </message>
 </context>
 <context>
@@ -1096,6 +1093,22 @@
     </message>
 </context>
 <context>
+    <name>FillFromOtherSiteDialog</name>
+    <message>
+        <source>Fill Password from Another Site</source>
+        <translation>Preencher senha de outro site</translation>
+    </message>
+    <message>
+        <source>This password was saved for &lt;b&gt;%1&lt;/b&gt;. Fill it on &lt;b&gt;%2&lt;/b&gt;?</source>
+        <extracomment>%1 is the host the password was saved for, %2 the host of the current page</extracomment>
+        <translation>Esta senha foi salva para &lt;b&gt;%1&lt;/b&gt;. Preencher em &lt;b&gt;%2&lt;/b&gt;?</translation>
+    </message>
+    <message>
+        <source>Fill</source>
+        <translation>Preencher</translation>
+    </message>
+</context>
+<context>
     <name>FindBar</name>
     <message>
         <source>Find in page</source>
@@ -1770,8 +1783,8 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <source>Fill Saved Password</source>
-        <translation>Preencher a senha salva</translation>
+        <source>Saved Passwords</source>
+        <translation>Senhas salvas</translation>
     </message>
 </context>
 <context>
@@ -2031,6 +2044,9 @@
         <extracomment>%1 is the user name</extracomment>
         <translation>Preencher %1</translation>
     </message>
+</context>
+<context>
+    <name>SavedLoginCopyButtons</name>
     <message>
         <source>Copy Username</source>
         <translation>Copiar nome de usuário</translation>
@@ -2064,6 +2080,37 @@
         <source>Copy Password for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>Copiar senha de %1</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginList</name>
+    <message>
+        <source>Passwords Unavailable</source>
+        <translation>Senhas indisponíveis</translation>
+    </message>
+    <message>
+        <source>No Matches</source>
+        <translation>Nenhuma correspondência</translation>
+    </message>
+    <message>
+        <source>No Passwords for This Site</source>
+        <translation>Nenhuma senha para este site</translation>
+    </message>
+    <message>
+        <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
+        <translation>O KWallet está desativado ou o acesso a ele foi negado, portanto as senhas não podem ser salvas nem preenchidas.</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginResultRow</name>
+    <message>
+        <source>Fill</source>
+        <translation>Preencher</translation>
+    </message>
+    <message>
+        <source>Fill %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>Preencher %1</translation>
     </message>
 </context>
 <context>
@@ -2109,6 +2156,10 @@
     <message>
         <source>Saved Passwords</source>
         <translation>Senhas salvas</translation>
+    </message>
+    <message>
+        <source>Search passwords</source>
+        <translation>Pesquisar senhas</translation>
     </message>
     <message>
         <source>Manage Passwords…</source>

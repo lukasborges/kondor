@@ -286,6 +286,10 @@
 <context>
     <name>BookmarksPanel</name>
     <message>
+        <source>Search bookmarks</source>
+        <translation>Yer imlerinde ara</translation>
+    </message>
+    <message>
         <source>No bookmarks match</source>
         <translation>Eşleşen yer imi yok</translation>
     </message>
@@ -341,13 +345,6 @@
     <message>
         <source>Back</source>
         <translation>Geri</translation>
-    </message>
-</context>
-<context>
-    <name>BookmarksPanelSearchField</name>
-    <message>
-        <source>Search bookmarks</source>
-        <translation>Yer imlerinde ara</translation>
     </message>
 </context>
 <context>
@@ -1095,6 +1092,22 @@
     </message>
 </context>
 <context>
+    <name>FillFromOtherSiteDialog</name>
+    <message>
+        <source>Fill Password from Another Site</source>
+        <translation>Başka bir sitenin parolasını doldur</translation>
+    </message>
+    <message>
+        <source>This password was saved for &lt;b&gt;%1&lt;/b&gt;. Fill it on &lt;b&gt;%2&lt;/b&gt;?</source>
+        <extracomment>%1 is the host the password was saved for, %2 the host of the current page</extracomment>
+        <translation>Bu parola &lt;b&gt;%1&lt;/b&gt; için kaydedilmişti. &lt;b&gt;%2&lt;/b&gt; sitesinde doldurulsun mu?</translation>
+    </message>
+    <message>
+        <source>Fill</source>
+        <translation>Doldur</translation>
+    </message>
+</context>
+<context>
     <name>FindBar</name>
     <message>
         <source>Find in page</source>
@@ -1759,8 +1772,8 @@
 <context>
     <name>PasswordButton</name>
     <message>
-        <source>Fill Saved Password</source>
-        <translation>Kayıtlı parolayı doldur</translation>
+        <source>Saved Passwords</source>
+        <translation>Kayıtlı parolalar</translation>
     </message>
 </context>
 <context>
@@ -2020,6 +2033,9 @@
         <extracomment>%1 is the user name</extracomment>
         <translation>%1 için doldur</translation>
     </message>
+</context>
+<context>
+    <name>SavedLoginCopyButtons</name>
     <message>
         <source>Copy Username</source>
         <translation>Kullanıcı adını kopyala</translation>
@@ -2053,6 +2069,37 @@
         <source>Copy Password for %1</source>
         <extracomment>%1 is the user name</extracomment>
         <translation>%1 parolasını kopyala</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginList</name>
+    <message>
+        <source>Passwords Unavailable</source>
+        <translation>Parolalar kullanılamıyor</translation>
+    </message>
+    <message>
+        <source>No Matches</source>
+        <translation>Eşleşme yok</translation>
+    </message>
+    <message>
+        <source>No Passwords for This Site</source>
+        <translation>Bu site için parola yok</translation>
+    </message>
+    <message>
+        <source>KWallet is disabled or access to it was denied, so passwords cannot be saved or filled.</source>
+        <translation>KWallet devre dışı veya erişim reddedildi; bu nedenle parolalar kaydedilemez veya doldurulamaz.</translation>
+    </message>
+</context>
+<context>
+    <name>SavedLoginResultRow</name>
+    <message>
+        <source>Fill</source>
+        <translation>Doldur</translation>
+    </message>
+    <message>
+        <source>Fill %1</source>
+        <extracomment>%1 is the user name</extracomment>
+        <translation>%1 için doldur</translation>
     </message>
 </context>
 <context>
@@ -2098,6 +2145,10 @@
     <message>
         <source>Saved Passwords</source>
         <translation>Kayıtlı parolalar</translation>
+    </message>
+    <message>
+        <source>Search passwords</source>
+        <translation>Parolalarda ara</translation>
     </message>
     <message>
         <source>Manage Passwords…</source>

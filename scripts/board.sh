@@ -3,8 +3,8 @@
 #
 #   scripts/board.sh <issue-number> [Todo|"In Progress"|Blocked|Done]   # default: Todo
 #
-# Adding is idempotent (an issue already on the board keeps its item). Closing an issue moves it
-# to Done through the board's built-in workflow, so callers only need Todo and In Progress.
+# Adding is idempotent (an issue already on the board keeps its item). A closed issue always goes
+# to Done, whatever status is asked, so a late call never moves a finished card back.
 set -euo pipefail
 
 OWNER="lukasborges"
@@ -13,6 +13,7 @@ PROJECT=1
 
 n="${1:?usage: scripts/board.sh <issue-number> [Todo|\"In Progress\"|Blocked|Done]}"
 status="${2:-Todo}"
+[[ "$(gh issue view "$n" --repo "$REPO" --json state --jq .state)" == CLOSED ]] && status=Done
 
 project_id="$(gh project view "$PROJECT" --owner "$OWNER" --format json --jq .id)"
 read -r field_id option_id < <(gh project field-list "$PROJECT" --owner "$OWNER" --format json \

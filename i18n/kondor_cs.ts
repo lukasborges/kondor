@@ -222,8 +222,65 @@
         <translation>Zobrazit panel záložek</translation>
     </message>
     <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Otevřít vše na kartách (%1)</translation>
+    </message>
+    <message>
+        <source>Add This Page Here</source>
+        <translation>Přidat tuto stránku sem</translation>
+    </message>
+    <message>
         <source>(Empty)</source>
         <translation>(Prázdné)</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarContextMenu</name>
+    <message>
+        <source>Open in New Tab</source>
+        <translation>Otevřít na nové kartě</translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation>Otevřít v novém okně</translation>
+    </message>
+    <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Otevřít vše na kartách (%1)</translation>
+    </message>
+    <message>
+        <source>Rename…</source>
+        <translation>Přejmenovat…</translation>
+    </message>
+    <message>
+        <source>Edit…</source>
+        <translation>Upravit…</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Smazat</translation>
+    </message>
+    <message>
+        <source>Add This Page</source>
+        <translation>Přidat tuto stránku</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks…</source>
+        <translation>Spravovat záložky…</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarItem</name>
+    <message>
+        <source>folder</source>
+        <translation>složka</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarOverflow</name>
+    <message>
+        <source>More Bookmarks</source>
+        <translation>Další záložky</translation>
     </message>
 </context>
 <context>

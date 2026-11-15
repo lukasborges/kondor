@@ -134,6 +134,7 @@ ApplicationWindow {
             Layout.row: 2
             Layout.fillWidth: true
             tabModel: window.tabModel
+            onManageBookmarksRequested: window.openBookmarks()
         }
     }
 

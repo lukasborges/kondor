@@ -222,8 +222,65 @@
         <translation>Mostrar barra de favoritos</translation>
     </message>
     <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Abrir tudo em separadores (%1)</translation>
+    </message>
+    <message>
+        <source>Add This Page Here</source>
+        <translation>Adicionar esta página aqui</translation>
+    </message>
+    <message>
         <source>(Empty)</source>
         <translation>(Vazio)</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarContextMenu</name>
+    <message>
+        <source>Open in New Tab</source>
+        <translation>Abrir num novo separador</translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation>Abrir numa nova janela</translation>
+    </message>
+    <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Abrir tudo em separadores (%1)</translation>
+    </message>
+    <message>
+        <source>Rename…</source>
+        <translation>Mudar o nome…</translation>
+    </message>
+    <message>
+        <source>Edit…</source>
+        <translation>Editar…</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Eliminar</translation>
+    </message>
+    <message>
+        <source>Add This Page</source>
+        <translation>Adicionar esta página</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks…</source>
+        <translation>Gerir favoritos…</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarItem</name>
+    <message>
+        <source>folder</source>
+        <translation>pasta</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarOverflow</name>
+    <message>
+        <source>More Bookmarks</source>
+        <translation>Mais marcadores</translation>
     </message>
 </context>
 <context>

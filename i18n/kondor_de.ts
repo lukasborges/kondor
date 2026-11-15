@@ -222,8 +222,65 @@
         <translation>Lesezeichenleiste anzeigen</translation>
     </message>
     <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Alle in Tabs öffnen (%1)</translation>
+    </message>
+    <message>
+        <source>Add This Page Here</source>
+        <translation>Diese Seite hier hinzufügen</translation>
+    </message>
+    <message>
         <source>(Empty)</source>
         <translation>(Leer)</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarContextMenu</name>
+    <message>
+        <source>Open in New Tab</source>
+        <translation>In neuem Tab öffnen</translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation>In neuem Fenster öffnen</translation>
+    </message>
+    <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Alle in Tabs öffnen (%1)</translation>
+    </message>
+    <message>
+        <source>Rename…</source>
+        <translation>Umbenennen…</translation>
+    </message>
+    <message>
+        <source>Edit…</source>
+        <translation>Bearbeiten…</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Löschen</translation>
+    </message>
+    <message>
+        <source>Add This Page</source>
+        <translation>Diese Seite hinzufügen</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks…</source>
+        <translation>Lesezeichen verwalten…</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarItem</name>
+    <message>
+        <source>folder</source>
+        <translation>Ordner</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarOverflow</name>
+    <message>
+        <source>More Bookmarks</source>
+        <translation>Weitere Lesezeichen</translation>
     </message>
 </context>
 <context>

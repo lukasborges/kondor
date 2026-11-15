@@ -222,8 +222,65 @@
         <translation>Yer imi araç çubuğunu göster</translation>
     </message>
     <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Tümünü Sekmelerde Aç (%1)</translation>
+    </message>
+    <message>
+        <source>Add This Page Here</source>
+        <translation>Bu Sayfayı Buraya Ekle</translation>
+    </message>
+    <message>
         <source>(Empty)</source>
         <translation>(Boş)</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarContextMenu</name>
+    <message>
+        <source>Open in New Tab</source>
+        <translation>Yeni sekmede aç</translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation>Yeni Pencerede Aç</translation>
+    </message>
+    <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Tümünü Sekmelerde Aç (%1)</translation>
+    </message>
+    <message>
+        <source>Rename…</source>
+        <translation>Yeniden Adlandır…</translation>
+    </message>
+    <message>
+        <source>Edit…</source>
+        <translation>Düzenle…</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Sil</translation>
+    </message>
+    <message>
+        <source>Add This Page</source>
+        <translation>Bu Sayfayı Ekle</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks…</source>
+        <translation>Yer imlerini yönet…</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarItem</name>
+    <message>
+        <source>folder</source>
+        <translation>klasör</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarOverflow</name>
+    <message>
+        <source>More Bookmarks</source>
+        <translation>Daha Fazla Yer İmi</translation>
     </message>
 </context>
 <context>

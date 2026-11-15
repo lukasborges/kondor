@@ -222,8 +222,65 @@
         <translation>Visa bokmärkesfältet</translation>
     </message>
     <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Öppna alla i flikar (%1)</translation>
+    </message>
+    <message>
+        <source>Add This Page Here</source>
+        <translation>Lägg till den här sidan här</translation>
+    </message>
+    <message>
         <source>(Empty)</source>
         <translation>(Tomt)</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarContextMenu</name>
+    <message>
+        <source>Open in New Tab</source>
+        <translation>Öppna i ny flik</translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation>Öppna i nytt fönster</translation>
+    </message>
+    <message>
+        <source>Open All in Tabs (%1)</source>
+        <translation>Öppna alla i flikar (%1)</translation>
+    </message>
+    <message>
+        <source>Rename…</source>
+        <translation>Byt namn…</translation>
+    </message>
+    <message>
+        <source>Edit…</source>
+        <translation>Redigera…</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Ta bort</translation>
+    </message>
+    <message>
+        <source>Add This Page</source>
+        <translation>Lägg till den här sidan</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks…</source>
+        <translation>Hantera bokmärken…</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarItem</name>
+    <message>
+        <source>folder</source>
+        <translation>mapp</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksBarOverflow</name>
+    <message>
+        <source>More Bookmarks</source>
+        <translation>Fler bokmärken</translation>
     </message>
 </context>
 <context>

@@ -55,11 +55,22 @@ QtObject {
         root.endDrag()
     }
 
+    function cancelDrag() {
+        root.preview.Drag.cancel()
+        root.endDrag()
+    }
+
     function endDrag() {
         root.draggedId = -1
         root.draggedIsFolder = false
         root.draggedRow = root.emptyRow
         root.clearDropTarget()
+    }
+
+    function moveDraggedTo(model, folderId, position) {
+        const current = model.rowOf(root.draggedId)
+        const target = current >= 0 && current < position ? position - 1 : position
+        BookmarkManager.move(root.draggedId, folderId, target)
     }
 
     function clearDropTarget() {

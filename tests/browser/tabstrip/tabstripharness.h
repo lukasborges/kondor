@@ -18,6 +18,7 @@ int runTabDrag(int argc, char *argv[]);
 int runTabDragScroll(int argc, char *argv[]);
 int runTabDragRelease(int argc, char *argv[]);
 int runTabStripAccessibility(int argc, char *argv[]);
+int runTabStripStyle(int argc, char *argv[]);
 
 constexpr int kStripRowY = 18;
 

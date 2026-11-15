@@ -27,6 +27,8 @@ RowLayout {
         model: root.pinnedExtensions(ExtensionManager.revision, Settings.pinnedExtensions)
 
         PinnedExtensionButton {
+            isPrivate: root.isPrivate
+            focusTarget: extensionsButton
             onClicked: panel.openAt(modelData.id)
         }
     }

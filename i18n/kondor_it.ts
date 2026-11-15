@@ -754,14 +754,6 @@
 <context>
     <name>ExtensionActionsFooter</name>
     <message>
-        <source>Unpin from Toolbar</source>
-        <translation>Rimuovi dalla barra degli strumenti</translation>
-    </message>
-    <message>
-        <source>Pin to Toolbar</source>
-        <translation>Fissa alla barra degli strumenti</translation>
-    </message>
-    <message>
         <source>Settings…</source>
         <translation>Impostazioni…</translation>
     </message>
@@ -970,6 +962,24 @@
         <source>%1, off on %2</source>
         <extracomment>%1 is the extension name, %2 is the site host</extracomment>
         <translation>%1, disattivata su %2</translation>
+    </message>
+    <message>
+        <source>Unpin from Toolbar</source>
+        <translation>Rimuovi dalla barra degli strumenti</translation>
+    </message>
+    <message>
+        <source>Pin to Toolbar</source>
+        <translation>Fissa alla barra degli strumenti</translation>
+    </message>
+    <message>
+        <source>Unpin %1 from Toolbar</source>
+        <extracomment>%1 is the extension name</extracomment>
+        <translation>Rimuovi %1 dalla barra degli strumenti</translation>
+    </message>
+    <message>
+        <source>Pin %1 to Toolbar</source>
+        <extracomment>%1 is the extension name</extracomment>
+        <translation>Fissa %1 alla barra degli strumenti</translation>
     </message>
 </context>
 <context>
@@ -1918,6 +1928,13 @@
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; is requesting a &lt;b&gt;permission&lt;/b&gt;.</source>
         <translation>&lt;b&gt;%1&lt;/b&gt; sta richiedendo un&apos;&lt;b&gt;autorizzazione&lt;/b&gt;.</translation>
+    </message>
+</context>
+<context>
+    <name>PinnedExtensionButton</name>
+    <message>
+        <source>Unpin from Toolbar</source>
+        <translation>Rimuovi dalla barra degli strumenti</translation>
     </message>
 </context>
 <context>

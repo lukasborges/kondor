@@ -12,11 +12,24 @@ ItemDelegate {
     required property string host
 
     readonly property bool isRightToLeft: Qt.application.layoutDirection === Qt.RightToLeft
+    readonly property bool isPinned: isExtensionPinned(Settings.pinnedExtensions)
     readonly property bool isOffHere: modelData.siteToggle
                                       && !isSiteEnabled(ExtensionManager.revision)
 
     signal openRequested()
     signal stepRequested(int step)
+
+    function isExtensionPinned(pins) {
+        return ExtensionManager.isPinned(modelData.id)
+    }
+
+    function pinToggleName() {
+        if (isPinned)
+            //: %1 is the extension name
+            return qsTr("Unpin %1 from Toolbar").arg(modelData.name)
+        //: %1 is the extension name
+        return qsTr("Pin %1 to Toolbar").arg(modelData.name)
+    }
 
     function isSiteEnabled(revision) {
         return ExtensionManager.siteEnabled(modelData.id, tab.url)
@@ -52,6 +65,26 @@ ItemDelegate {
             enabled: !root.isOffHere
             elide: Text.ElideRight
             Layout.fillWidth: true
+        }
+
+        ToolButton {
+            id: pinToggle
+            objectName: "rowPinButton"
+            visible: !root.tab.isPrivate
+            display: AbstractButton.IconOnly
+            icon.name: "window-pin"
+            checkable: true
+            checked: root.isPinned
+            ToolTip.visible: hovered
+            ToolTip.text: root.isPinned ? qsTr("Unpin from Toolbar") : qsTr("Pin to Toolbar")
+            ToolTip.delay: 600
+            Accessible.name: root.pinToggleName()
+            Keys.onDownPressed: root.stepRequested(1)
+            Keys.onUpPressed: root.stepRequested(-1)
+            onToggled: {
+                ExtensionManager.setPinned(root.modelData.id, !root.isPinned)
+                checked = Qt.binding(function() { return root.isPinned })
+            }
         }
 
         Kirigami.Icon {

@@ -754,14 +754,6 @@
 <context>
     <name>ExtensionActionsFooter</name>
     <message>
-        <source>Unpin from Toolbar</source>
-        <translation>Von der Werkzeugleiste lösen</translation>
-    </message>
-    <message>
-        <source>Pin to Toolbar</source>
-        <translation>An Werkzeugleiste anheften</translation>
-    </message>
-    <message>
         <source>Settings…</source>
         <translation>Einstellungen …</translation>
     </message>
@@ -970,6 +962,24 @@
         <source>%1, off on %2</source>
         <extracomment>%1 is the extension name, %2 is the site host</extracomment>
         <translation>%1, auf %2 deaktiviert</translation>
+    </message>
+    <message>
+        <source>Unpin from Toolbar</source>
+        <translation>Von der Werkzeugleiste lösen</translation>
+    </message>
+    <message>
+        <source>Pin to Toolbar</source>
+        <translation>An Werkzeugleiste anheften</translation>
+    </message>
+    <message>
+        <source>Unpin %1 from Toolbar</source>
+        <extracomment>%1 is the extension name</extracomment>
+        <translation>%1 von der Werkzeugleiste lösen</translation>
+    </message>
+    <message>
+        <source>Pin %1 to Toolbar</source>
+        <extracomment>%1 is the extension name</extracomment>
+        <translation>%1 an Werkzeugleiste anheften</translation>
     </message>
 </context>
 <context>
@@ -1918,6 +1928,13 @@
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; is requesting a &lt;b&gt;permission&lt;/b&gt;.</source>
         <translation>&lt;b&gt;%1&lt;/b&gt; fordert eine &lt;b&gt;Berechtigung&lt;/b&gt; an.</translation>
+    </message>
+</context>
+<context>
+    <name>PinnedExtensionButton</name>
+    <message>
+        <source>Unpin from Toolbar</source>
+        <translation>Von der Werkzeugleiste lösen</translation>
     </message>
 </context>
 <context>

@@ -754,14 +754,6 @@
 <context>
     <name>ExtensionActionsFooter</name>
     <message>
-        <source>Unpin from Toolbar</source>
-        <translation>도구 모음에서 고정 해제</translation>
-    </message>
-    <message>
-        <source>Pin to Toolbar</source>
-        <translation>도구 모음에 고정</translation>
-    </message>
-    <message>
         <source>Settings…</source>
         <translation>설정…</translation>
     </message>
@@ -969,6 +961,24 @@
         <source>%1, off on %2</source>
         <extracomment>%1 is the extension name, %2 is the site host</extracomment>
         <translation>%1, %2에서 꺼짐</translation>
+    </message>
+    <message>
+        <source>Unpin from Toolbar</source>
+        <translation>도구 모음에서 고정 해제</translation>
+    </message>
+    <message>
+        <source>Pin to Toolbar</source>
+        <translation>도구 모음에 고정</translation>
+    </message>
+    <message>
+        <source>Unpin %1 from Toolbar</source>
+        <extracomment>%1 is the extension name</extracomment>
+        <translation>%1을(를) 도구 모음에서 고정 해제</translation>
+    </message>
+    <message>
+        <source>Pin %1 to Toolbar</source>
+        <extracomment>%1 is the extension name</extracomment>
+        <translation>%1을(를) 도구 모음에 고정</translation>
     </message>
 </context>
 <context>
@@ -1907,6 +1917,13 @@
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; is requesting a &lt;b&gt;permission&lt;/b&gt;.</source>
         <translation>&lt;b&gt;%1&lt;/b&gt;에서 &lt;b&gt;권한&lt;/b&gt;을 요청하고 있습니다.</translation>
+    </message>
+</context>
+<context>
+    <name>PinnedExtensionButton</name>
+    <message>
+        <source>Unpin from Toolbar</source>
+        <translation>도구 모음에서 고정 해제</translation>
     </message>
 </context>
 <context>

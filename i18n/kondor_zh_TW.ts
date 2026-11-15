@@ -754,14 +754,6 @@
 <context>
     <name>ExtensionActionsFooter</name>
     <message>
-        <source>Unpin from Toolbar</source>
-        <translation>從工具列取消固定</translation>
-    </message>
-    <message>
-        <source>Pin to Toolbar</source>
-        <translation>固定到工具列</translation>
-    </message>
-    <message>
         <source>Settings…</source>
         <translation>設定…</translation>
     </message>
@@ -969,6 +961,24 @@
         <source>%1, off on %2</source>
         <extracomment>%1 is the extension name, %2 is the site host</extracomment>
         <translation>%1，在 %2 上已關閉</translation>
+    </message>
+    <message>
+        <source>Unpin from Toolbar</source>
+        <translation>從工具列取消固定</translation>
+    </message>
+    <message>
+        <source>Pin to Toolbar</source>
+        <translation>固定到工具列</translation>
+    </message>
+    <message>
+        <source>Unpin %1 from Toolbar</source>
+        <extracomment>%1 is the extension name</extracomment>
+        <translation>從工具列取消固定 %1</translation>
+    </message>
+    <message>
+        <source>Pin %1 to Toolbar</source>
+        <extracomment>%1 is the extension name</extracomment>
+        <translation>將 %1 固定到工具列</translation>
     </message>
 </context>
 <context>
@@ -1907,6 +1917,13 @@
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; is requesting a &lt;b&gt;permission&lt;/b&gt;.</source>
         <translation>&lt;b&gt;%1&lt;/b&gt; 正在要求&lt;b&gt;權限&lt;/b&gt;。</translation>
+    </message>
+</context>
+<context>
+    <name>PinnedExtensionButton</name>
+    <message>
+        <source>Unpin from Toolbar</source>
+        <translation>從工具列取消固定</translation>
     </message>
 </context>
 <context>

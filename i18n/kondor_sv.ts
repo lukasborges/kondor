@@ -754,14 +754,6 @@
 <context>
     <name>ExtensionActionsFooter</name>
     <message>
-        <source>Unpin from Toolbar</source>
-        <translation>Lossa från verktygsfältet</translation>
-    </message>
-    <message>
-        <source>Pin to Toolbar</source>
-        <translation>Fäst i verktygsfältet</translation>
-    </message>
-    <message>
         <source>Settings…</source>
         <translation>Inställningar…</translation>
     </message>
@@ -970,6 +962,24 @@
         <source>%1, off on %2</source>
         <extracomment>%1 is the extension name, %2 is the site host</extracomment>
         <translation>%1, av på %2</translation>
+    </message>
+    <message>
+        <source>Unpin from Toolbar</source>
+        <translation>Lossa från verktygsfältet</translation>
+    </message>
+    <message>
+        <source>Pin to Toolbar</source>
+        <translation>Fäst i verktygsfältet</translation>
+    </message>
+    <message>
+        <source>Unpin %1 from Toolbar</source>
+        <extracomment>%1 is the extension name</extracomment>
+        <translation>Lossa %1 från verktygsfältet</translation>
+    </message>
+    <message>
+        <source>Pin %1 to Toolbar</source>
+        <extracomment>%1 is the extension name</extracomment>
+        <translation>Fäst %1 i verktygsfältet</translation>
     </message>
 </context>
 <context>
@@ -1918,6 +1928,13 @@
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; is requesting a &lt;b&gt;permission&lt;/b&gt;.</source>
         <translation>&lt;b&gt;%1&lt;/b&gt; begär en &lt;b&gt;behörighet&lt;/b&gt;.</translation>
+    </message>
+</context>
+<context>
+    <name>PinnedExtensionButton</name>
+    <message>
+        <source>Unpin from Toolbar</source>
+        <translation>Lossa från verktygsfältet</translation>
     </message>
 </context>
 <context>

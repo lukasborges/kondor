@@ -754,14 +754,6 @@
 <context>
     <name>ExtensionActionsFooter</name>
     <message>
-        <source>Unpin from Toolbar</source>
-        <translation>Araç Çubuğundan Çöz</translation>
-    </message>
-    <message>
-        <source>Pin to Toolbar</source>
-        <translation>Araç Çubuğuna Sabitle</translation>
-    </message>
-    <message>
         <source>Settings…</source>
         <translation>Ayarlar…</translation>
     </message>
@@ -969,6 +961,24 @@
         <source>%1, off on %2</source>
         <extracomment>%1 is the extension name, %2 is the site host</extracomment>
         <translation>%1, %2 üzerinde kapalı</translation>
+    </message>
+    <message>
+        <source>Unpin from Toolbar</source>
+        <translation>Araç Çubuğundan Çöz</translation>
+    </message>
+    <message>
+        <source>Pin to Toolbar</source>
+        <translation>Araç Çubuğuna Sabitle</translation>
+    </message>
+    <message>
+        <source>Unpin %1 from Toolbar</source>
+        <extracomment>%1 is the extension name</extracomment>
+        <translation>%1 Eklentisini Araç Çubuğundan Çöz</translation>
+    </message>
+    <message>
+        <source>Pin %1 to Toolbar</source>
+        <extracomment>%1 is the extension name</extracomment>
+        <translation>%1 Eklentisini Araç Çubuğuna Sabitle</translation>
     </message>
 </context>
 <context>
@@ -1907,6 +1917,13 @@
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; is requesting a &lt;b&gt;permission&lt;/b&gt;.</source>
         <translation>&lt;b&gt;%1&lt;/b&gt; bir &lt;b&gt;izin&lt;/b&gt; istiyor.</translation>
+    </message>
+</context>
+<context>
+    <name>PinnedExtensionButton</name>
+    <message>
+        <source>Unpin from Toolbar</source>
+        <translation>Araç Çubuğundan Çöz</translation>
     </message>
 </context>
 <context>

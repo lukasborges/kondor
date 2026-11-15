@@ -13,14 +13,9 @@ ColumnLayout {
 
     readonly property bool isRightToLeft: Qt.application.layoutDirection === Qt.RightToLeft
     readonly property bool hasSiteSwitch: extension.siteToggle && ExtensionManager.originOf(tab.url) !== ""
-    readonly property bool isPinned: isExtensionPinned(Settings.pinnedExtensions)
 
     signal backRequested()
     signal settingsRequested(string extensionId)
-
-    function isExtensionPinned(pins) {
-        return ExtensionManager.isPinned(extension.id)
-    }
 
     function focusFirstAction() {
         const target = entries.count > 0 ? entries.itemAt(0) : backButton
@@ -107,8 +102,6 @@ ColumnLayout {
 
     ExtensionActionsFooter {
         extension: root.extension
-        isPinned: root.isPinned
-        isPrivate: root.tab.isPrivate
         onSettingsRequested: function(extensionId) { root.settingsRequested(extensionId) }
     }
 }

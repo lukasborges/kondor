@@ -103,14 +103,13 @@ def test_run_on_site_switch_shows_reload_bar(panel: PanelFixture) -> None:
     assert panel.item_with_text(panel.item("bar"), message)
 
 
-def test_private_tab_has_no_site_switch_and_no_pin(panel: PanelFixture) -> None:
+def test_private_tab_has_no_site_switch(panel: PanelFixture) -> None:
     assert install_sample(panel.work)
     allow_in_private_windows(SAMPLE)
     profile = QQuickWebEngineProfile()
     panel.make_tab(Tab(profile))
     panel.open_panel(SAMPLE)
     assert not panel.item("siteSwitch").isVisible()
-    assert not panel.item("pinButton").isVisible()
 
 
 def test_host_is_hidden_on_non_web_page(panel: PanelFixture) -> None:
@@ -124,15 +123,6 @@ def test_open_at_shows_actions(panel: PanelFixture) -> None:
     panel.open_panel(SAMPLE)
     assert panel.current_id() == SAMPLE
     assert panel.item("backButton").isVisible()
-
-
-def test_pin_button_toggles_pin(panel: PanelFixture) -> None:
-    panel.open_panel(SAMPLE)
-    click_center_of(panel.item("pinButton"))
-    assert manager().isPinned(SAMPLE)
-    assert panel.panel.property("opened")
-    click_center_of(panel.item("pinButton"))
-    assert not manager().isPinned(SAMPLE)
 
 
 def test_action_row_shows_shortcut(panel: PanelFixture) -> None:

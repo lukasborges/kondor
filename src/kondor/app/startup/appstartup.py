@@ -14,6 +14,7 @@ from kondor.app.startup.appidentity import set_up_language_and_style
 from kondor.app.startup.qmlregistry import register_all_types
 from kondor.app.windows.windowmanager import WindowManager
 from kondor.browser.favicons.faviconimageprovider import FaviconImageProvider
+from kondor.browser.favicons.faviconstore import FaviconStore
 from kondor.browser.profile.profilemanager import ProfileManager
 from kondor.extensions.catalog.extensioncatalog import ExtensionCatalog
 from kondor.extensions.extensionmanager import ExtensionManager
@@ -79,8 +80,13 @@ def start_browser(app: QApplication, command_line: CommandLine) -> None:
     load_unpacked_extensions(app, command_line.extension_directories)
 
 
-def open_windows(engine: QQmlApplicationEngine, single_instance: SingleInstance) -> bool:
+def set_up_favicons(engine: QQmlApplicationEngine) -> None:
     engine.addImageProvider(FAVICON_PROVIDER, FaviconImageProvider())
+    FaviconStore.instance().attach_engine(engine)
+
+
+def open_windows(engine: QQmlApplicationEngine, single_instance: SingleInstance) -> bool:
+    set_up_favicons(engine)
     window_manager = WindowManager.instance()
     window_manager.set_engine(engine)
     single_instance.messageReceived.connect(window_manager.handle_single_instance_message)

@@ -13,7 +13,8 @@ Flow {
     Repeater {
         model: root.tabModel
 
-        delegate: SideBarPinnedButton {
+        delegate: SideBarTabButton {
+            visible: tab.pinned
             tabModel: root.tabModel
             targetWindow: root.targetWindow
         }

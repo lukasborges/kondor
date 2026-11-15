@@ -70,9 +70,15 @@ ItemDelegate {
         }
     }
 
+    background: Rectangle {
+        radius: Kirigami.Units.cornerRadius
+        color: row.isCurrent ? Kirigami.Theme.highlightColor : row.hovered ? Qt.alpha(Kirigami.Theme.highlightColor, 0.3) : "transparent"
+    }
+
     SideBarFocusRing {
         anchors.fill: row.background
         visible: row.hasKeyboardFocus
+        radius: Kirigami.Units.cornerRadius
     }
 
     TapHandler {

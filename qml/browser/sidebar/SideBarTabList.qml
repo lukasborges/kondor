@@ -47,6 +47,11 @@ ListView {
         positionViewAtIndex(currentIndex, ListView.Contain)
     }
 
+    function activateKeyboardRow() {
+        useKeyboard()
+        tabModel.setCurrentIndex(currentIndex)
+    }
+
     function isBelowRows(y) {
         return y > contentHeight - contentY
     }
@@ -54,8 +59,8 @@ ListView {
     onActiveFocusChanged: isFocusedByPointer = false
     Keys.onUpPressed: moveFocus(-1)
     Keys.onDownPressed: moveFocus(1)
-    Keys.onReturnPressed: { useKeyboard(); tabModel.setCurrentIndex(currentIndex) }
-    Keys.onEnterPressed: { useKeyboard(); tabModel.setCurrentIndex(currentIndex) }
+    Keys.onReturnPressed: activateKeyboardRow()
+    Keys.onEnterPressed: activateKeyboardRow()
     Keys.onDeletePressed: { useKeyboard(); targetWindow.closeTabAt(currentIndex) }
     Component.onCompleted: Qt.callLater(showCurrentTab)
     onHeightChanged: Qt.callLater(showCurrentTab)

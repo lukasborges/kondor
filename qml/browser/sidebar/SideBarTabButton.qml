@@ -10,7 +10,6 @@ ToolButton {
     required property TabModel tabModel
     required property var targetWindow
 
-    visible: tab.pinned
     checked: index === tabModel.currentIndex
     focusPolicy: Qt.NoFocus
     Accessible.name: info.title

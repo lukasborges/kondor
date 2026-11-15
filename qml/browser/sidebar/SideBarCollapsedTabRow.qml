@@ -1,9 +1,8 @@
 import QtQuick
-import QtQuick.Controls
 import org.kde.kirigami as Kirigami
 import Kondor
 
-ToolButton {
+Item {
     id: row
 
     required property Tab tab
@@ -12,48 +11,28 @@ ToolButton {
     required property var targetWindow
     required property ListView list
 
-    readonly property bool isCurrent: index === tabModel.currentIndex
     readonly property bool hasKeyboardFocus: list.isFocusRingVisible && index === list.currentIndex
 
     visible: !tab.pinned
-    height: tab.pinned ? 0 : implicitHeight
-    x: (ListView.view.width - width) / 2
+    width: ListView.view.width
+    height: tab.pinned ? 0 : button.height
     z: drag.active ? 10 : 0
-    checkable: true
-    checked: isCurrent
-    focusPolicy: Qt.NoFocus
-    Accessible.name: info.title
-    ToolTip.visible: hovered
-    ToolTip.text: info.title
-    ToolTip.delay: 600
     transform: Translate { y: drag.shift }
-    onToggled: checked = Qt.binding(() => row.isCurrent)
-    onClicked: {
-        tabModel.setCurrentIndex(index)
-        list.focusWithPointer()
-    }
 
-    TabInfo {
-        id: info
+    SideBarTabButton {
+        id: button
+        anchors.horizontalCenter: parent.horizontalCenter
         tab: row.tab
+        index: row.index
+        tabModel: row.tabModel
+        targetWindow: row.targetWindow
+        onClicked: row.list.focusWithPointer()
     }
-
-    contentItem: TabIcon { tab: row.tab }
 
     SideBarFocusRing {
-        anchors.fill: parent
+        anchors.fill: button
         visible: row.hasKeyboardFocus
         radius: Kirigami.Units.cornerRadius
-    }
-
-    TapHandler {
-        acceptedButtons: Qt.MiddleButton
-        onTapped: row.targetWindow.closeTabFor(row.tab)
-    }
-
-    TapHandler {
-        acceptedButtons: Qt.RightButton
-        onTapped: eventPoint => row.targetWindow.openTabContextMenu(row.tab, eventPoint.scenePosition)
     }
 
     SideBarRowDrag {

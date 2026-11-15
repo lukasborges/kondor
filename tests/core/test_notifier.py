@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 from PySide6.QtGui import QGuiApplication
 
+from kondor.core import notifier
 from kondor.core.notifier import Notifier, application_icon
 
 FAKE_SERVER = Path(__file__).with_name("fakenotifications.py")
@@ -49,3 +50,15 @@ def test_icon_name_kondor_uses_flatpak_id(monkeypatch: pytest.MonkeyPatch) -> No
     monkeypatch.setenv("FLATPAK_ID", FLATPAK_ID)
     assert application_icon("kondor") == FLATPAK_ID
     assert application_icon("dialog-information") == "dialog-information"
+
+
+def test_notify_returns_without_waiting_for_the_bus(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, qapp: object
+) -> None:
+    finished = tmp_path / "finished"
+    slow = tmp_path / "slow-gdbus"
+    slow.write_text(f"#!/bin/sh\nsleep 2\ntouch {finished}\n")
+    slow.chmod(0o755)
+    monkeypatch.setattr(notifier, "GDBUS_PROGRAM", str(slow))
+    Notifier.instance().notify("Title", "Body", "")
+    assert not finished.exists()

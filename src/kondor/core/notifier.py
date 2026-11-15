@@ -1,16 +1,18 @@
 import os
 
-from PySide6.QtCore import Q_ARG, QGenericArgumentHolder, QMetaObject, QObject, Qt, Slot
-from PySide6.QtDBus import QDBusConnection, QDBusInterface
+from PySide6.QtCore import QObject, QProcess, Slot
 from PySide6.QtGui import QGuiApplication
 
+GDBUS_PROGRAM = "gdbus"
 NOTIFICATIONS_SERVICE = "org.freedesktop.Notifications"
 NOTIFICATIONS_PATH = "/org/freedesktop/Notifications"
-NOTIFY_METHOD = "Notify"
+NOTIFY_METHOD = "org.freedesktop.Notifications.Notify"
 APPLICATION_ICON = "kondor"
 FLATPAK_ID_VARIABLE = "FLATPAK_ID"
-NEW_NOTIFICATION_ID = 0
-EXPIRE_TIMEOUT_MS = 5000
+NEW_NOTIFICATION_ID = "0"
+NO_ACTIONS = "[]"
+NO_HINTS = "{}"
+EXPIRE_TIMEOUT_MS = "5000"
 
 
 def application_icon(icon_name: str) -> str:
@@ -19,27 +21,16 @@ def application_icon(icon_name: str) -> str:
     return app_icon if uses_app_icon else icon_name
 
 
-def notify_arguments(title: str, body: str, icon: str) -> list[QGenericArgumentHolder]:
-    return [
-        Q_ARG(str, QGuiApplication.applicationDisplayName()),
-        Q_ARG("uint", NEW_NOTIFICATION_ID),
-        Q_ARG(str, icon),
-        Q_ARG(str, title),
-        Q_ARG(str, body),
-        Q_ARG("QStringList", []),
-        Q_ARG("QVariantMap", {}),
-        Q_ARG(int, EXPIRE_TIMEOUT_MS),
-    ]
+def gdbus_arguments(title: str, body: str, icon: str) -> list[str]:
+    target = ["call", "--session", "--dest", NOTIFICATIONS_SERVICE]
+    method = ["--object-path", NOTIFICATIONS_PATH, "--method", NOTIFY_METHOD]
+    name = QGuiApplication.applicationDisplayName()
+    notification = [name, NEW_NOTIFICATION_ID, icon, title, body]
+    return target + method + notification + [NO_ACTIONS, NO_HINTS, EXPIRE_TIMEOUT_MS]
 
 
-def notifications_interface() -> QDBusInterface:
-    bus = QDBusConnection.sessionBus()
-    return QDBusInterface(NOTIFICATIONS_SERVICE, NOTIFICATIONS_PATH, NOTIFICATIONS_SERVICE, bus)
-
-
-def call_notify(notifications: QDBusInterface, arguments: list[QGenericArgumentHolder]) -> None:
-    connection = Qt.ConnectionType.DirectConnection
-    QMetaObject.invokeMethod(notifications, NOTIFY_METHOD, connection, *arguments)
+def send_notification(title: str, body: str, icon: str) -> None:
+    QProcess.startDetached(GDBUS_PROGRAM, gdbus_arguments(title, body, icon))
 
 
 class Notifier(QObject):
@@ -53,6 +44,5 @@ class Notifier(QObject):
 
     @Slot(str, str, str)
     def notify(self, title: str, body: str, iconName: str) -> None:  # noqa: N803
-        notifications = notifications_interface()
-        if notifications.isValid():
-            call_notify(notifications, notify_arguments(title, body, application_icon(iconName)))
+        icon = application_icon(iconName)
+        send_notification(title, body, icon)

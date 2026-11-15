@@ -18,6 +18,15 @@ ListView {
     activeFocusOnTab: true
     highlight: null
 
+    property bool isFocusedByPointer: false
+    readonly property bool isFocusRingVisible: activeFocus && !isFocusedByPointer
+    readonly property real squareSize: sizeProbe.implicitWidth
+
+    function focusWithPointer() {
+        forceActiveFocus()
+        isFocusedByPointer = true
+    }
+
     function scrollBy(delta) {
         const lowest = originY
         const highest = Math.max(lowest, originY + contentHeight - height)
@@ -38,6 +47,8 @@ ListView {
         return y > contentHeight - contentY
     }
 
+    Keys.onPressed: event => { isFocusedByPointer = false; event.accepted = false }
+    onActiveFocusChanged: isFocusedByPointer = false
     Keys.onUpPressed: moveFocus(-1)
     Keys.onDownPressed: moveFocus(1)
     Keys.onReturnPressed: tabModel.setCurrentIndex(currentIndex)
@@ -46,6 +57,13 @@ ListView {
     Component.onCompleted: Qt.callLater(showCurrentTab)
     onHeightChanged: Qt.callLater(showCurrentTab)
     onCountChanged: Qt.callLater(showCurrentTab)
+
+    ToolButton {
+        id: sizeProbe
+        visible: false
+        display: AbstractButton.IconOnly
+        icon.name: "tab-new"
+    }
 
     Connections {
         target: list.tabModel

@@ -16,11 +16,16 @@ ItemDelegate {
 
     readonly property bool isPinned: tab?.pinned ?? false
     readonly property bool isCurrent: index === tabModel.currentIndex
-    readonly property bool hasKeyboardFocus: list.activeFocus && index === list.currentIndex
+    readonly property bool hasKeyboardFocus: list.isFocusRingVisible && index === list.currentIndex
+    readonly property real collapsedInset: Math.max(0, (width - list.squareSize) / 2)
 
     visible: !isPinned
     width: ListView.view.width
-    height: isPinned ? 0 : implicitHeight
+    height: isPinned ? 0 : (collapsed ? list.squareSize : implicitHeight)
+    leftInset: collapsed ? collapsedInset : 0
+    rightInset: leftInset
+    topInset: 0
+    bottomInset: 0
     z: drag.active ? 10 : 0
     highlighted: isCurrent
     down: false
@@ -32,7 +37,7 @@ ItemDelegate {
     transform: Translate { y: drag.shift }
     onClicked: {
         tabModel.setCurrentIndex(index)
-        list.forceActiveFocus()
+        list.focusWithPointer()
     }
 
     TabInfo {
@@ -78,7 +83,7 @@ ItemDelegate {
     }
 
     Rectangle {
-        anchors.fill: parent
+        anchors.fill: row.background
         visible: row.hasKeyboardFocus
         color: "transparent"
         border.color: Kirigami.Theme.focusColor

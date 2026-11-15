@@ -15,7 +15,7 @@ QtObject {
         if (tab.isPrivate)
             return "view-private"
         if (tab.newTabPage)
-            return "tab-new"
+            return "go-home"
         return tab.iconUrl.toString().length ? tab.iconUrl.toString() : "text-html"
     }
 }

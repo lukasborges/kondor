@@ -1096,7 +1096,7 @@
     <name>FillFromOtherSiteDialog</name>
     <message>
         <source>Fill Password from Another Site</source>
-        <translation>Remplir le mot de passe d'un autre site</translation>
+        <translation>Remplir le mot de passe d&apos;un autre site</translation>
     </message>
     <message>
         <source>This password was saved for &lt;b&gt;%1&lt;/b&gt;. Fill it on &lt;b&gt;%2&lt;/b&gt;?</source>

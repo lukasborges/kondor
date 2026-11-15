@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Follows the architect and developer loops live in one terminal: queue events from each loop's log,
+# Follows the architect, developer and QA loops live in one terminal: queue events from each loop's log,
 # and what the agent writes (💬) and which tools it calls (🔧) in the running Claude session. Moves to
 # each new run by itself. Ctrl+C stops it.
 #
 #   scripts/watch-agents.sh            # the architect and every installed developer loop
-#   scripts/watch-agents.sh architect  # one loop: architect, dev (developer 1), dev2, dev3, …
+#   scripts/watch-agents.sh architect  # one loop: architect, dev (developer 1), dev2, dev3, …, qa
 #
 # The session view reads Claude Code transcripts: a developer loop on opencode shows queue events only.
 # Uses the same KONDOR_ARCH_CONTROL / KONDOR_ARCH_STATE overrides as the architect loop; developer
@@ -16,6 +16,7 @@ readonly CONTEXT_LINES=40
 # Terminal colors: architect magenta, then one per developer loop (cyan, yellow, green, blue, red).
 readonly ARCHITECT_COLOR=35
 readonly DEV_COLORS=(36 33 32 34 31)
+readonly QA_COLOR=37
 
 main() {
   require jq
@@ -24,8 +25,9 @@ main() {
     architect) watch_architect ;;
     dev)       watch_dev 1 ;;
     dev[0-9]*) watch_dev "${1#dev}" ;;
-    all)       watch_architect; watch_all_devs ;;
-    *)         echo "usage: $0 [architect|dev|dev2|…|all]" >&2; exit 2 ;;
+    qa)        watch_qa ;;
+    all)       watch_architect; watch_all_devs; watch_qa_if_installed ;;
+    *)         echo "usage: $0 [architect|dev|dev2|…|qa|all]" >&2; exit 2 ;;
   esac
   wait
 }
@@ -38,6 +40,16 @@ watch_architect() {
   watch_loop architect "$ARCHITECT_COLOR" \
     "${KONDOR_ARCH_CONTROL:-$HOME/.local/share/kondor-architect-loop/control}" \
     "${KONDOR_ARCH_STATE:-$HOME/.local/state/kondor-architect-loop}/architect-loop.log"
+}
+
+watch_qa() {
+  watch_loop qa "$QA_COLOR" \
+    "${KONDOR_QA_CONTROL:-$HOME/.local/share/kondor-qa/control}" \
+    "${KONDOR_QA_STATE:-$HOME/.local/state/kondor-qa}/qa.log"
+}
+
+watch_qa_if_installed() {
+  [[ -d "${KONDOR_QA_STATE:-$HOME/.local/state/kondor-qa}" ]] && watch_qa
 }
 
 # watch_dev <developer loop number>

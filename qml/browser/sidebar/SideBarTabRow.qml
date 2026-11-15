@@ -12,11 +12,11 @@ ItemDelegate {
     required property TabModel tabModel
     required property var targetWindow
     required property ListView list
-    property bool collapsed: false
 
     readonly property bool isPinned: tab?.pinned ?? false
     readonly property bool isCurrent: index === tabModel.currentIndex
-    readonly property bool hasKeyboardFocus: list.activeFocus && index === list.currentIndex
+    readonly property color textColor: isCurrent ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
+    readonly property bool hasKeyboardFocus: list.isFocusRingVisible && index === list.currentIndex
 
     visible: !isPinned
     width: ListView.view.width
@@ -26,13 +26,10 @@ ItemDelegate {
     down: false
     focusPolicy: Qt.NoFocus
     Accessible.name: info.title
-    ToolTip.visible: collapsed && hovered
-    ToolTip.text: info.title
-    ToolTip.delay: 600
     transform: Translate { y: drag.shift }
     onClicked: {
         tabModel.setCurrentIndex(index)
-        list.forceActiveFocus()
+        list.focusWithPointer()
     }
 
     TabInfo {
@@ -48,18 +45,16 @@ ItemDelegate {
             Layout.preferredWidth: 16
             Layout.preferredHeight: 16
             Layout.alignment: Qt.AlignHCenter
-            Layout.fillWidth: row.collapsed
         }
 
         Label {
-            visible: !row.collapsed
             Layout.fillWidth: true
             text: info.title
+            color: row.textColor
             elide: Text.ElideRight
         }
 
         ToolButton {
-            visible: !row.collapsed
             enabled: row.isCurrent || row.hovered
             opacity: enabled ? 1 : 0
             Layout.preferredWidth: 20
@@ -67,6 +62,7 @@ ItemDelegate {
             flat: true
             display: AbstractButton.IconOnly
             icon.name: "window-close-symbolic"
+            icon.color: row.textColor
             icon.width: 14
             icon.height: 14
             ToolTip.visible: hovered
@@ -77,11 +73,14 @@ ItemDelegate {
         }
     }
 
-    Rectangle {
-        anchors.fill: parent
+    background: Rectangle {
+        radius: Kirigami.Units.cornerRadius
+        color: row.isCurrent ? Kirigami.Theme.highlightColor : row.hovered ? Qt.alpha(Kirigami.Theme.highlightColor, 0.3) : "transparent"
+    }
+
+    SideBarFocusRing {
+        anchors.fill: row.background
         visible: row.hasKeyboardFocus
-        color: "transparent"
-        border.color: Kirigami.Theme.focusColor
         radius: Kirigami.Units.cornerRadius
     }
 

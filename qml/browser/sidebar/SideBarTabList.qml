@@ -9,6 +9,9 @@ ListView {
     required property var targetWindow
     property bool collapsed: false
 
+    property bool isFocusedByPointer: false
+    readonly property bool isFocusRingVisible: activeFocus && !isFocusedByPointer
+
     signal newTabRequested()
 
     model: tabModel
@@ -18,13 +21,23 @@ ListView {
     activeFocusOnTab: true
     highlight: null
 
+    function focusWithPointer() {
+        forceActiveFocus()
+        isFocusedByPointer = true
+    }
+
     function scrollBy(delta) {
         const lowest = originY
         const highest = Math.max(lowest, originY + contentHeight - height)
         contentY = Math.max(lowest, Math.min(highest, contentY + delta))
     }
 
+    function useKeyboard() {
+        isFocusedByPointer = false
+    }
+
     function moveFocus(delta) {
+        useKeyboard()
         const target = currentIndex + delta
         currentIndex = Math.max(tabModel.pinnedCount, Math.min(target, tabModel.count - 1))
     }
@@ -34,15 +47,21 @@ ListView {
         positionViewAtIndex(currentIndex, ListView.Contain)
     }
 
+    function activateKeyboardRow() {
+        useKeyboard()
+        tabModel.setCurrentIndex(currentIndex)
+    }
+
     function isBelowRows(y) {
         return y > contentHeight - contentY
     }
 
+    onActiveFocusChanged: isFocusedByPointer = false
     Keys.onUpPressed: moveFocus(-1)
     Keys.onDownPressed: moveFocus(1)
-    Keys.onReturnPressed: tabModel.setCurrentIndex(currentIndex)
-    Keys.onEnterPressed: tabModel.setCurrentIndex(currentIndex)
-    Keys.onDeletePressed: targetWindow.closeTabAt(currentIndex)
+    Keys.onReturnPressed: activateKeyboardRow()
+    Keys.onEnterPressed: activateKeyboardRow()
+    Keys.onDeletePressed: { useKeyboard(); targetWindow.closeTabAt(currentIndex) }
     Component.onCompleted: Qt.callLater(showCurrentTab)
     onHeightChanged: Qt.callLater(showCurrentTab)
     onCountChanged: Qt.callLater(showCurrentTab)
@@ -52,11 +71,26 @@ ListView {
         function onCurrentIndexChanged() { Qt.callLater(list.showCurrentTab) }
     }
 
-    delegate: SideBarTabRow {
-        tabModel: list.tabModel
-        targetWindow: list.targetWindow
-        list: ListView.view
-        collapsed: list.collapsed
+    delegate: collapsed ? collapsedRow : expandedRow
+
+    Component {
+        id: expandedRow
+
+        SideBarTabRow {
+            tabModel: list.tabModel
+            targetWindow: list.targetWindow
+            list: ListView.view
+        }
+    }
+
+    Component {
+        id: collapsedRow
+
+        SideBarCollapsedTabRow {
+            tabModel: list.tabModel
+            targetWindow: list.targetWindow
+            list: ListView.view
+        }
     }
 
     footer: ItemDelegate {

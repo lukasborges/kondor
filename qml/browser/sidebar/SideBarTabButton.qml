@@ -10,14 +10,17 @@ ToolButton {
     required property TabModel tabModel
     required property var targetWindow
 
-    visible: tab.pinned
-    checked: index === tabModel.currentIndex
+    readonly property bool isCurrent: index === tabModel.currentIndex
+
+    checkable: true
+    checked: isCurrent
     focusPolicy: Qt.NoFocus
     Accessible.name: info.title
     ToolTip.visible: hovered
     ToolTip.text: info.title
     ToolTip.delay: 600
     onClicked: tabModel.setCurrentIndex(index)
+    onToggled: checked = Qt.binding(() => isCurrent)
 
     TabInfo {
         id: info

@@ -113,6 +113,10 @@ screenshot. The developer's implementation must match it visually.
    `qsTr()`, shortcuts table in README, CMake/workflow updates for new deps).
 4. Privacy — nothing from a private tab may ever touch disk.
 5. Visual parity with the prototype, and the `kde-ux` checklist for any UI state the prototype does not show.
+   Run the app and look at every clickable item in its **normal, hover, current/checked and keyboard-focus**
+   states, in every layout the change touches (tab styles, collapsed side bar). The highlight must fit
+   the item's shape, like a Breeze button of the same size, and a focus ring shows only for keyboard focus (#266). Prototypes show the current state
+   too, never only the normal one.
 6. Branch based on current `main`, Conventional Commits, `Closes #N` in the PR body.
 7. Leave concrete comments (file:line, why, suggested fix) as a PR review; one verdict:
    approve + squash-merge, or request changes (`to-dev`).

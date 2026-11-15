@@ -172,7 +172,9 @@ Rectangle {
     component VerticalTab: ItemDelegate {
         required property var modelData
         required property int index
-        width: ListView.view ? ListView.view.width : implicitWidth
+        readonly property real listWidth: ListView.view ? ListView.view.width : implicitWidth
+        width: frame.sideBarCollapsed ? height : listWidth
+        x: frame.sideBarCollapsed ? Math.round((listWidth - width) / 2) : 0
         readonly property int tabIndex: index + frame.pinnedTabs.length
         highlighted: tabIndex === frame.currentTab
         contentItem: TabContent {

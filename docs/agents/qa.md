@@ -50,6 +50,9 @@ run, whether parity mode is on, and the bug limit. Stop after the report.
 - **Check:** the screen against the spec and its prototype screenshot
   (`prototypes/screenshots/`), stderr for QML errors and tracebacks, and the files the app wrote
   (`Kondor.conf`, `kondor.sqlite` read with `sqlite3` or `python3 -c`, downloaded files).
+- **States:** for every screen, hover (`xdotool mousemove`) and select items and take a screenshot
+  of each state. A hover or current highlight that is cut, off-center or a different shape from a
+  Breeze button of the same size, or a focus ring after a mouse click, is a bug (#266).
 - **Privacy:** after every scenario with a private window, compare the XDG folders before and
   after. Anything a private window wrote to disk is a `priority: high` bug.
 

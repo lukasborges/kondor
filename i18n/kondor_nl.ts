@@ -242,7 +242,7 @@
     </message>
     <message>
         <source>Bookmarked pages show up here.</source>
-        <translation>Pagina's met een bladwijzer verschijnen hier.</translation>
+        <translation>Pagina&apos;s met een bladwijzer verschijnen hier.</translation>
     </message>
 </context>
 <context>

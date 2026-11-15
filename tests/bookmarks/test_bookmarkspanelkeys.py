@@ -8,7 +8,7 @@ from PySide6.QtQuick import QQuickWindow
 from pytestqt.qtbot import QtBot
 
 from kondor.browser.favicons.faviconimageprovider import FaviconImageProvider
-from tests.bookmarks.bookmarkrows import add_page, manager
+from tests.bookmarks.bookmarkrows import EXAMPLE_SITE, add_page, manager
 from tests.qmlsupport import error_text, load_component
 
 WINDOW_QML = """import QtQuick
@@ -79,7 +79,7 @@ def test_right_enters_a_folder_and_enter_opens_its_first_bookmark(driver: PanelD
     enter_other_bookmarks(driver)
     driver.qtbot.waitUntil(lambda: driver.folder_depth() == 1)
     driver.press(Qt.Key.Key_Return)
-    assert driver.opened_urls() != []
+    assert driver.opened_urls() == [EXAMPLE_SITE + OTHER_PAGE]
 
 
 def test_left_returns_from_a_folder_to_the_overview(driver: PanelDriver) -> None:

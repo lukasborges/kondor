@@ -1991,6 +1991,22 @@
         <source>Manage Site Permissions…</source>
         <translation>Gérer les autorisations des sites…</translation>
     </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Contrôle à distance :</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Autoriser les outils d&apos;automatisation à contrôler les pages</translation>
+    </message>
+    <message>
+        <source>Private browsing is unavailable while it is on.</source>
+        <translation>La navigation privée est indisponible tant qu&apos;il est activé.</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Port :</translation>
+    </message>
 </context>
 <context>
     <name>ReaderButton</name>
@@ -2033,6 +2049,47 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>Quitter le mode lecture</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlButton</name>
+    <message>
+        <source>Remote control is on</source>
+        <translation>Le contrôle à distance est activé</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlPopup</name>
+    <message>
+        <source>Remote Control Is On</source>
+        <translation>Le contrôle à distance est activé</translation>
+    </message>
+    <message>
+        <source>Copy Address</source>
+        <translation>Copier l&apos;adresse</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Copié</translation>
+    </message>
+    <message>
+        <source>Address copied</source>
+        <translation>Adresse copiée</translation>
+    </message>
+    <message>
+        <source>Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.</source>
+        <translation>Les outils d&apos;automatisation de cet ordinateur peuvent lire et contrôler les pages des fenêtres normales. La navigation privée est indisponible.</translation>
+    </message>
+    <message>
+        <source>Configure…</source>
+        <translation>Configurer…</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlRestartMessage</name>
+    <message>
+        <source>Restart Kondor to apply the remote control change.</source>
+        <translation>Redémarrez Kondor pour appliquer la modification du contrôle à distance.</translation>
     </message>
 </context>
 <context>
@@ -2384,6 +2441,18 @@
     <message>
         <source>Manage Site Permissions…</source>
         <translation>Gérer les autorisations des sites…</translation>
+    </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Contrôle à distance :</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Autoriser les outils d&apos;automatisation à contrôler les pages</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Port :</translation>
     </message>
     <message>
         <source>Passwords</source>

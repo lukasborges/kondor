@@ -51,6 +51,8 @@ FACTORIES: dict[str, Callable[[], object]] = {
     "passwordNeverSaveSites": empty_list,
     "extensionsAutoUpdate": constant(True),
     "pinnedExtensions": empty_list,
+    "remoteControlEnabled": constant(False),
+    "remoteControlPort": constant(9222),
 }
 
 

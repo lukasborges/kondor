@@ -71,6 +71,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 
 ### For developers
 - **Developer tools** (F12) and **view source**
+- **Remote control** for AI agents and automation tools (off by default)
 - **Load unpacked extensions** with `--load-extension <dir>` (experimental, needs `--new-instance`)
 
 ## Keyboard shortcuts
@@ -147,6 +148,20 @@ your computer; opening one in the file manager does the same. A `.user.js` page 
 the user script, which is then listed and managed like an extension (`GM.*` values, styles and
 notifications are supported). Extensions are off in private windows
 unless you allow them. Authors: see [`docs/extensions/api.md`](docs/extensions/api.md).
+
+## Remote control
+
+AI agents and automation tools can read and control the pages of normal windows. Turn it on in
+**Settings → Privacy → Remote control** and restart Kondor, or start it once with
+`kondor --remote-control 9222`. Then connect an agent, for example Claude Code:
+
+```bash
+claude mcp add kondor -- npx chrome-devtools-mcp@latest --browserUrl http://127.0.0.1:9222
+```
+
+Agents navigate the tab that is already open (Kondor cannot open new tabs over the protocol).
+Private browsing is unavailable while remote control is on, and only programs on this computer can
+connect.
 
 ## Stack
 

@@ -2002,6 +2002,22 @@
         <source>Manage Site Permissions…</source>
         <translation>Zarządzaj uprawnieniami witryn…</translation>
     </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Zdalne sterowanie:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Zezwalaj narzędziom automatyzacji na sterowanie stronami</translation>
+    </message>
+    <message>
+        <source>Private browsing is unavailable while it is on.</source>
+        <translation>Przeglądanie prywatne jest niedostępne, gdy ta opcja jest włączona.</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Port:</translation>
+    </message>
 </context>
 <context>
     <name>ReaderButton</name>
@@ -2044,6 +2060,47 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>Zakończ tryb czytnika</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlButton</name>
+    <message>
+        <source>Remote control is on</source>
+        <translation>Zdalne sterowanie jest włączone</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlPopup</name>
+    <message>
+        <source>Remote Control Is On</source>
+        <translation>Zdalne sterowanie jest włączone</translation>
+    </message>
+    <message>
+        <source>Copy Address</source>
+        <translation>Kopiuj adres</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Skopiowano</translation>
+    </message>
+    <message>
+        <source>Address copied</source>
+        <translation>Adres skopiowany</translation>
+    </message>
+    <message>
+        <source>Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.</source>
+        <translation>Narzędzia automatyzacji na tym komputerze mogą odczytywać i sterować stronami w zwykłych oknach. Przeglądanie prywatne jest niedostępne.</translation>
+    </message>
+    <message>
+        <source>Configure…</source>
+        <translation>Skonfiguruj…</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlRestartMessage</name>
+    <message>
+        <source>Restart Kondor to apply the remote control change.</source>
+        <translation>Uruchom ponownie Kondor, aby zastosować zmianę zdalnego sterowania.</translation>
     </message>
 </context>
 <context>
@@ -2395,6 +2452,18 @@
     <message>
         <source>Manage Site Permissions…</source>
         <translation>Zarządzaj uprawnieniami witryn…</translation>
+    </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Zdalne sterowanie:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Zezwalaj narzędziom automatyzacji na sterowanie stronami</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Port:</translation>
     </message>
     <message>
         <source>Passwords</source>

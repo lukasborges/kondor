@@ -25,3 +25,11 @@ def test_new_instance_alone() -> None:
     parsed = parse_arguments(["kondor", "--new-instance"])
 
     assert parsed == CommandLine(new_instance=True)
+
+
+def test_remote_control_port_is_kept_as_typed() -> None:
+    assert parse_arguments(["kondor", "--remote-control", "9333"]).remote_control_port == "9333"
+
+
+def test_remote_control_is_unset_by_default() -> None:
+    assert parse_arguments(["kondor"]).remote_control_port is None

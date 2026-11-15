@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import Kondor
 
 Menu {
     id: root
@@ -22,6 +23,7 @@ Menu {
     MenuItem {
         text: qsTr("Open in New Private Tab")
         icon.name: "view-private"
+        enabled: ProfileManager.privateBrowsingAvailable
         onTriggered: if (root.site) root.openRequested(root.site.url, true)
     }
     MenuSeparator {}

@@ -1980,6 +1980,22 @@
         <source>Manage Site Permissions…</source>
         <translation>サイトの権限を管理…</translation>
     </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>リモートコントロール:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>自動化ツールによるページの操作を許可する</translation>
+    </message>
+    <message>
+        <source>Private browsing is unavailable while it is on.</source>
+        <translation>オンの間はプライベートブラウジングを利用できません。</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>ポート:</translation>
+    </message>
 </context>
 <context>
     <name>ReaderButton</name>
@@ -2022,6 +2038,47 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>リーダーモードを終了</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlButton</name>
+    <message>
+        <source>Remote control is on</source>
+        <translation>リモートコントロールはオンです</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlPopup</name>
+    <message>
+        <source>Remote Control Is On</source>
+        <translation>リモートコントロールはオンです</translation>
+    </message>
+    <message>
+        <source>Copy Address</source>
+        <translation>アドレスをコピー</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>コピーしました</translation>
+    </message>
+    <message>
+        <source>Address copied</source>
+        <translation>アドレスをコピーしました</translation>
+    </message>
+    <message>
+        <source>Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.</source>
+        <translation>このコンピューター上の自動化ツールは、通常のウィンドウのページを読み取って操作できます。プライベートブラウジングは利用できません。</translation>
+    </message>
+    <message>
+        <source>Configure…</source>
+        <translation>設定…</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlRestartMessage</name>
+    <message>
+        <source>Restart Kondor to apply the remote control change.</source>
+        <translation>リモートコントロールの変更を反映するには、Kondor を再起動してください。</translation>
     </message>
 </context>
 <context>
@@ -2373,6 +2430,18 @@
     <message>
         <source>Manage Site Permissions…</source>
         <translation>サイトの権限を管理…</translation>
+    </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>リモートコントロール:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>自動化ツールによるページの操作を許可する</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>ポート:</translation>
     </message>
     <message>
         <source>Passwords</source>

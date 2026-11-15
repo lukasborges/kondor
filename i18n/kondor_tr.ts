@@ -1980,6 +1980,22 @@
         <source>Manage Site Permissions…</source>
         <translation>Site izinlerini yönet…</translation>
     </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Uzaktan denetim:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Otomasyon araçlarının sayfaları denetlemesine izin ver</translation>
+    </message>
+    <message>
+        <source>Private browsing is unavailable while it is on.</source>
+        <translation>Açıkken gizli gezinti kullanılamaz.</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Bağlantı noktası:</translation>
+    </message>
 </context>
 <context>
     <name>ReaderButton</name>
@@ -2022,6 +2038,47 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>Okuyucu kipinden çık</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlButton</name>
+    <message>
+        <source>Remote control is on</source>
+        <translation>Uzaktan denetim açık</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlPopup</name>
+    <message>
+        <source>Remote Control Is On</source>
+        <translation>Uzaktan denetim açık</translation>
+    </message>
+    <message>
+        <source>Copy Address</source>
+        <translation>Adresi kopyala</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Kopyalandı</translation>
+    </message>
+    <message>
+        <source>Address copied</source>
+        <translation>Adres kopyalandı</translation>
+    </message>
+    <message>
+        <source>Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.</source>
+        <translation>Bu bilgisayardaki otomasyon araçları normal pencerelerin sayfalarını okuyabilir ve denetleyebilir. Gizli gezinti kullanılamaz.</translation>
+    </message>
+    <message>
+        <source>Configure…</source>
+        <translation>Yapılandır…</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlRestartMessage</name>
+    <message>
+        <source>Restart Kondor to apply the remote control change.</source>
+        <translation>Uzaktan denetim değişikliğini uygulamak için Kondor&apos;u yeniden başlatın.</translation>
     </message>
 </context>
 <context>
@@ -2373,6 +2430,18 @@
     <message>
         <source>Manage Site Permissions…</source>
         <translation>Site izinlerini yönet…</translation>
+    </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Uzaktan denetim:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Otomasyon araçlarının sayfaları denetlemesine izin ver</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Bağlantı noktası:</translation>
     </message>
     <message>
         <source>Passwords</source>

@@ -1,6 +1,7 @@
 from PySide6.QtCore import Property, QCoreApplication, QObject, QUrl, Signal, Slot
 from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
+from kondor.app.remotecontrol.remotecontrol import RemoteControl
 from kondor.browser.address import addressresolver
 from kondor.browser.profile import pagescripts, profilesetup
 from kondor.browser.profile.certificateoverrides import CertificateOverrides
@@ -55,6 +56,11 @@ class ProfileManager(QObject):
 
     homePage = Property(str, home_page, notify=homePageChanged)
 
+    def is_private_browsing_available(self) -> bool:
+        return not RemoteControl.instance().is_active()
+
+    privateBrowsingAvailable = Property(bool, is_private_browsing_available, constant=True)
+
     @Slot(result=QQuickWebEngineProfile)
     def defaultProfile(self) -> QQuickWebEngineProfile:
         if self._default_profile is None:
@@ -93,9 +99,7 @@ class ProfileManager(QObject):
     ) -> None:
         self._certificate_overrides.mark(profile, host)
 
-    def is_certificate_overridden(
-        self, profile: QQuickWebEngineProfile | None, host: str
-    ) -> bool:
+    def is_certificate_overridden(self, profile: QQuickWebEngineProfile | None, host: str) -> bool:
         return self._certificate_overrides.is_overridden(profile, host)
 
     def profiles(self) -> list[QQuickWebEngineProfile]:

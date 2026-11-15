@@ -10,6 +10,7 @@ from pytestqt.qtbot import QtBot
 from kondor.app.commandline.startupargs import StartupArgs
 from kondor.app.instance.singleinstancemessage import SingleInstanceMessage
 from kondor.app.instance.windowactivation import raise_window
+from kondor.app.remotecontrol.remotecontrol import RemoteControl
 from kondor.app.windows.windowcontents import WindowContents
 from kondor.browser.session.sessionmanager import SessionManager
 from kondor.browser.session.sessionwindow import SessionTab, SessionWindow
@@ -151,3 +152,36 @@ def test_raise_window_exports_the_activation_token(
     raise_window(window, b"token-1")
 
     assert os.environ["XDG_ACTIVATION_TOKEN"] == "token-1"
+
+
+def test_private_window_is_refused_while_remote_control_is_on(
+    manager: StubWindowManager, remote_control: RemoteControl
+) -> None:
+    remote_control.set_port(9333)
+
+    assert manager.newWindow(True) is None
+    assert manager.window_count() == 0
+
+
+def test_private_message_opens_nothing_while_remote_control_is_on(
+    manager: StubWindowManager, remote_control: RemoteControl
+) -> None:
+    remote_control.set_port(9333)
+    normal = manager.create_window(WindowContents())
+
+    manager.handle_single_instance_message(message(urls=[KDE], private_mode=True))
+
+    assert manager.window_count() == 1
+    assert normal is not None
+    assert normal.property("addedUrls").toVariant() == []
+
+
+def test_private_message_creates_a_normal_window_when_none_is_open(
+    manager: StubWindowManager, remote_control: RemoteControl
+) -> None:
+    remote_control.set_port(9333)
+
+    manager.handle_single_instance_message(message(urls=[KDE], private_mode=True))
+
+    assert manager.window_count() == 1
+    assert manager.window_for_request(False) is not None

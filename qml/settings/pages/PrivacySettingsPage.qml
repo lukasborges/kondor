@@ -101,6 +101,47 @@ ScrollView {
                 icon.name: "security-high"
                 onClicked: root.openSitePermissions()
             }
+
+            Item { Kirigami.FormData.isSection: true }
+
+            RemoteControlRestartMessage {
+                Layout.fillWidth: true
+            }
+
+            CheckBox {
+                id: remoteControlCheck
+                Kirigami.FormData.label: qsTr("Remote control:")
+                text: qsTr("Allow automation tools to control pages")
+                onToggled: root.draft.remoteControlEnabled = checked
+            }
+
+            Binding {
+                target: remoteControlCheck
+                property: "checked"
+                value: root.draft.remoteControlEnabled
+            }
+
+            Label {
+                text: qsTr("Private browsing is unavailable while it is on.")
+                color: Kirigami.Theme.disabledTextColor
+            }
+
+            SpinBox {
+                id: remoteControlPortBox
+                Kirigami.FormData.label: qsTr("Port:")
+                from: 1024
+                to: 65535
+                editable: true
+                enabled: root.draft.remoteControlEnabled
+                textFromValue: function(value) { return String(value) }
+                onValueModified: root.draft.remoteControlPort = value
+            }
+
+            Binding {
+                target: remoteControlPortBox
+                property: "value"
+                value: root.draft.remoteControlPort
+            }
         }
 
         Item { Layout.fillHeight: true }

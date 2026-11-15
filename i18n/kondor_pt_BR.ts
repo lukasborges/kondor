@@ -1991,6 +1991,22 @@
         <source>Manage Site Permissions…</source>
         <translation>Gerenciar permissões de sites…</translation>
     </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Controle remoto:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Permitir que ferramentas de automação controlem as páginas</translation>
+    </message>
+    <message>
+        <source>Private browsing is unavailable while it is on.</source>
+        <translation>A navegação privada fica indisponível enquanto estiver ativado.</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Porta:</translation>
+    </message>
 </context>
 <context>
     <name>ReaderButton</name>
@@ -2033,6 +2049,47 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>Sair do modo leitor</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlButton</name>
+    <message>
+        <source>Remote control is on</source>
+        <translation>O controle remoto está ativado</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlPopup</name>
+    <message>
+        <source>Remote Control Is On</source>
+        <translation>O controle remoto está ativado</translation>
+    </message>
+    <message>
+        <source>Copy Address</source>
+        <translation>Copiar endereço</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Copiado</translation>
+    </message>
+    <message>
+        <source>Address copied</source>
+        <translation>Endereço copiado</translation>
+    </message>
+    <message>
+        <source>Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.</source>
+        <translation>Ferramentas de automação neste computador podem ler e controlar as páginas das janelas normais. A navegação privada fica indisponível.</translation>
+    </message>
+    <message>
+        <source>Configure…</source>
+        <translation>Configurar…</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlRestartMessage</name>
+    <message>
+        <source>Restart Kondor to apply the remote control change.</source>
+        <translation>Reinicie o Kondor para aplicar a mudança do controle remoto.</translation>
     </message>
 </context>
 <context>
@@ -2384,6 +2441,18 @@
     <message>
         <source>Manage Site Permissions…</source>
         <translation>Gerenciar permissões de sites…</translation>
+    </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Controle remoto:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Permitir que ferramentas de automação controlem as páginas</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Porta:</translation>
     </message>
     <message>
         <source>Passwords</source>

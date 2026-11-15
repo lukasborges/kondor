@@ -1991,6 +1991,22 @@
         <source>Manage Site Permissions…</source>
         <translation>Hantera webbplatsbehörigheter…</translation>
     </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Fjärrstyrning:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Låt automatiseringsverktyg styra sidor</translation>
+    </message>
+    <message>
+        <source>Private browsing is unavailable while it is on.</source>
+        <translation>Privat surfning är inte tillgänglig medan det är på.</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Port:</translation>
+    </message>
 </context>
 <context>
     <name>ReaderButton</name>
@@ -2033,6 +2049,47 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>Avsluta läsläge</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlButton</name>
+    <message>
+        <source>Remote control is on</source>
+        <translation>Fjärrstyrning är på</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlPopup</name>
+    <message>
+        <source>Remote Control Is On</source>
+        <translation>Fjärrstyrning är på</translation>
+    </message>
+    <message>
+        <source>Copy Address</source>
+        <translation>Kopiera adress</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Kopierad</translation>
+    </message>
+    <message>
+        <source>Address copied</source>
+        <translation>Adress kopierad</translation>
+    </message>
+    <message>
+        <source>Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.</source>
+        <translation>Automatiseringsverktyg på den här datorn kan läsa och styra sidorna i vanliga fönster. Privat surfning är inte tillgänglig.</translation>
+    </message>
+    <message>
+        <source>Configure…</source>
+        <translation>Anpassa…</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlRestartMessage</name>
+    <message>
+        <source>Restart Kondor to apply the remote control change.</source>
+        <translation>Starta om Kondor för att tillämpa ändringen av fjärrstyrningen.</translation>
     </message>
 </context>
 <context>
@@ -2384,6 +2441,18 @@
     <message>
         <source>Manage Site Permissions…</source>
         <translation>Hantera webbplatsbehörigheter…</translation>
+    </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Fjärrstyrning:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Låt automatiseringsverktyg styra sidor</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Port:</translation>
     </message>
     <message>
         <source>Passwords</source>

@@ -155,6 +155,10 @@ ToolBar {
             browserWindow: root.browserWindow
         }
 
+        RemoteControlButton {
+            browserWindow: root.browserWindow
+        }
+
         ToolButton {
             display: AbstractButton.IconOnly
             icon.name: "application-menu"

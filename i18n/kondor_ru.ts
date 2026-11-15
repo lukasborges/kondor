@@ -2002,6 +2002,22 @@
         <source>Manage Site Permissions…</source>
         <translation>Управление разрешениями сайтов…</translation>
     </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Удалённое управление:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Разрешить средствам автоматизации управлять страницами</translation>
+    </message>
+    <message>
+        <source>Private browsing is unavailable while it is on.</source>
+        <translation>Приватный просмотр недоступен, пока параметр включён.</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Порт:</translation>
+    </message>
 </context>
 <context>
     <name>ReaderButton</name>
@@ -2044,6 +2060,47 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>Выйти из режима чтения</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlButton</name>
+    <message>
+        <source>Remote control is on</source>
+        <translation>Удалённое управление включено</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlPopup</name>
+    <message>
+        <source>Remote Control Is On</source>
+        <translation>Удалённое управление включено</translation>
+    </message>
+    <message>
+        <source>Copy Address</source>
+        <translation>Копировать адрес</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Скопировано</translation>
+    </message>
+    <message>
+        <source>Address copied</source>
+        <translation>Адрес скопирован</translation>
+    </message>
+    <message>
+        <source>Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.</source>
+        <translation>Средства автоматизации на этом компьютере могут читать и контролировать страницы обычных окон. Приватный просмотр недоступен.</translation>
+    </message>
+    <message>
+        <source>Configure…</source>
+        <translation>Настроить…</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlRestartMessage</name>
+    <message>
+        <source>Restart Kondor to apply the remote control change.</source>
+        <translation>Перезапустите Kondor, чтобы применить изменение удалённого управления.</translation>
     </message>
 </context>
 <context>
@@ -2395,6 +2452,18 @@
     <message>
         <source>Manage Site Permissions…</source>
         <translation>Управление разрешениями сайтов…</translation>
+    </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Удалённое управление:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Разрешить средствам автоматизации управлять страницами</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Порт:</translation>
     </message>
     <message>
         <source>Passwords</source>

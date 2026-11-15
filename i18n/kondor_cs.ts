@@ -2002,6 +2002,22 @@
         <source>Manage Site Permissions…</source>
         <translation>Spravovat oprávnění stránek…</translation>
     </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Vzdálené ovládání:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Povolit automatizačním nástrojům ovládat stránky</translation>
+    </message>
+    <message>
+        <source>Private browsing is unavailable while it is on.</source>
+        <translation>Soukromé prohlížení není při zapnutí k dispozici.</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Port:</translation>
+    </message>
 </context>
 <context>
     <name>ReaderButton</name>
@@ -2044,6 +2060,47 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>Ukončit režim čtečky</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlButton</name>
+    <message>
+        <source>Remote control is on</source>
+        <translation>Vzdálené ovládání je zapnuto</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlPopup</name>
+    <message>
+        <source>Remote Control Is On</source>
+        <translation>Vzdálené ovládání je zapnuto</translation>
+    </message>
+    <message>
+        <source>Copy Address</source>
+        <translation>Kopírovat adresu</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Zkopírováno</translation>
+    </message>
+    <message>
+        <source>Address copied</source>
+        <translation>Adresa zkopírována</translation>
+    </message>
+    <message>
+        <source>Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.</source>
+        <translation>Automatizační nástroje v tomto počítači mohou číst a ovládat stránky v běžných oknech. Soukromé prohlížení není k dispozici.</translation>
+    </message>
+    <message>
+        <source>Configure…</source>
+        <translation>Nastavit…</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlRestartMessage</name>
+    <message>
+        <source>Restart Kondor to apply the remote control change.</source>
+        <translation>Změnu vzdáleného ovládání použijete restartováním Kondoru.</translation>
     </message>
 </context>
 <context>
@@ -2395,6 +2452,18 @@
     <message>
         <source>Manage Site Permissions…</source>
         <translation>Spravovat oprávnění stránek…</translation>
+    </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Vzdálené ovládání:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Povolit automatizačním nástrojům ovládat stránky</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Port:</translation>
     </message>
     <message>
         <source>Passwords</source>

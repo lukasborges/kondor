@@ -20,19 +20,22 @@ QtObject {
     property var spellCheckLanguages: []
     property bool offerToSavePasswords: true
     property bool extensionsAutoUpdate: true
+    property bool remoteControlEnabled: false
+    property int remoteControlPort: 9222
 
     readonly property var optionNames: [
         "homePage", "searchEngine", "customSearchUrl", "downloadDirectory",
         "askWhereToSave", "startupBehavior", "showTopSites", "tabStyle", "clearDataOnExit",
         "blockThirdPartyCookies", "adBlockEnabled", "searchSuggestions",
         "spellCheckEnabled", "spellCheckLanguages", "offerToSavePasswords",
-        "extensionsAutoUpdate"
+        "extensionsAutoUpdate", "remoteControlEnabled", "remoteControlPort"
     ]
 
     readonly property var values: [homePage, searchEngine, customSearchUrl,
         downloadDirectory, askWhereToSave, startupBehavior, showTopSites,
         tabStyle, clearDataOnExit, blockThirdPartyCookies, adBlockEnabled, searchSuggestions,
-        spellCheckEnabled, spellCheckLanguages, offerToSavePasswords, extensionsAutoUpdate]
+        spellCheckEnabled, spellCheckLanguages, offerToSavePasswords, extensionsAutoUpdate,
+        remoteControlEnabled, remoteControlPort]
 
     function read() {
         optionNames.forEach(name => { draft[name] = Settings[name] })

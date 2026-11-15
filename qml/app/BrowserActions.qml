@@ -23,6 +23,7 @@ QtObject {
         text: qsTr("New Private Tab")
         icon.name: "view-private"
         shortcut: "Ctrl+Shift+N"
+        enabled: ProfileManager.privateBrowsingAvailable
         onTriggered: root.tabController.openNewTab(true)
     }
     readonly property Action newWindowAction: Action {
@@ -35,6 +36,7 @@ QtObject {
         text: qsTr("New Private Window")
         icon.name: "view-private"
         shortcut: "Ctrl+Shift+P"
+        enabled: ProfileManager.privateBrowsingAvailable
         onTriggered: WindowManager.newWindow(true)
     }
     readonly property Action historyAction: Action {

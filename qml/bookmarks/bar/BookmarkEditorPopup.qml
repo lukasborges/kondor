@@ -50,6 +50,11 @@ Popup {
         open()
     }
 
+    function focusName() {
+        titleField.forceActiveFocus()
+        titleField.selectAll()
+    }
+
     function save() {
         if (editingId <= 0)
             return
@@ -83,6 +88,9 @@ Popup {
     y: parent.height
     width: Kirigami.Units.gridUnit * 20
     padding: Kirigami.Units.largeSpacing
+    focus: true
+
+    onOpened: focusName()
 
     contentItem: ColumnLayout {
         spacing: Kirigami.Units.largeSpacing
@@ -99,6 +107,7 @@ Popup {
                 id: titleField
                 Kirigami.FormData.label: qsTr("Name:")
                 Layout.fillWidth: true
+                onAccepted: root.save()
             }
 
             ComboBox {

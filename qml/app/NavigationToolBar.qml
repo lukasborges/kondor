@@ -14,6 +14,10 @@ ToolBar {
     readonly property alias bookmarkEditor: addressBar.bookmarkEditor
     readonly property bool isLoading: tabs.currentTab ? tabs.currentTab.loading : false
 
+    function toggleBookmarksPanel() {
+        bookmarksButton.togglePanel()
+    }
+
     function focusAddressBar() {
         addressBar.focusAndSelectAll()
     }
@@ -141,6 +145,12 @@ ToolBar {
         }
 
         ExtensionsToolButtons {
+            tabs: root.tabs
+            browserWindow: root.browserWindow
+        }
+
+        BookmarksToolButton {
+            id: bookmarksButton
             tabs: root.tabs
             browserWindow: root.browserWindow
         }

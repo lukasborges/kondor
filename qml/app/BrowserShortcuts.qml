@@ -90,6 +90,10 @@ Item {
         onActivated: root.browserWindow.openBookmarkEditor()
     }
     Shortcut {
+        sequence: "Ctrl+B"
+        onActivated: root.navigationBar.toggleBookmarksPanel()
+    }
+    Shortcut {
         sequence: "Ctrl+Shift+B"
         onActivated: Settings.showBookmarksBar = !Settings.showBookmarksBar
     }

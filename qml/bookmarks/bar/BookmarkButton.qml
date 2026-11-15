@@ -12,7 +12,7 @@ ToolButton {
     visible: tabs.currentTab && tabs.currentTab.url.toString().length > 0
     enabled: tabs.currentTab ? !tabs.currentTab.newTabPage : false
     display: AbstractButton.IconOnly
-    icon.name: editor.pageBookmarked ? "bookmarks-bookmarked" : "bookmarks"
+    icon.name: editor.pageBookmarked ? "starred-symbolic" : "non-starred-symbolic"
     icon.width: 16
     icon.height: 16
     flat: true

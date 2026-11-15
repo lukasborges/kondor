@@ -227,6 +227,73 @@
     </message>
 </context>
 <context>
+    <name>BookmarksPanel</name>
+    <message>
+        <source>No bookmarks match</source>
+        <translation>Eşleşen yer imi yok</translation>
+    </message>
+    <message>
+        <source>Empty folder</source>
+        <translation>Boş klasör</translation>
+    </message>
+    <message>
+        <source>No Bookmarks</source>
+        <translation>Yer imi yok</translation>
+    </message>
+    <message>
+        <source>Bookmarked pages show up here.</source>
+        <translation>Yer imi eklenen sayfalar burada görünür.</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelEntries</name>
+    <message>
+        <source>Recently Added</source>
+        <translation>Son eklenenler</translation>
+    </message>
+    <message>
+        <source>Bookmarks Toolbar</source>
+        <translation>Yer İmleri Araç Çubuğu</translation>
+    </message>
+    <message>
+        <source>Other Bookmarks</source>
+        <translation>Diğer Yer İmleri</translation>
+    </message>
+    <message>
+        <source>Folders</source>
+        <translation>Klasörler</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelFooter</name>
+    <message>
+        <source>Open All in Tabs</source>
+        <translation>Tümünü Sekmelerde Aç</translation>
+    </message>
+    <message>
+        <source>Show Bookmarks Bar</source>
+        <translation>Yer İmleri Çubuğunu Göster</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks</source>
+        <translation>Yer imlerini yönet</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelHeader</name>
+    <message>
+        <source>Back</source>
+        <translation>Geri</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelSearchField</name>
+    <message>
+        <source>Search bookmarks</source>
+        <translation>Yer imlerinde ara</translation>
+    </message>
+</context>
+<context>
     <name>BookmarksToolBar</name>
     <message>
         <source>New Folder</source>
@@ -259,6 +326,13 @@
     <message>
         <source>Import Bookmarks</source>
         <translation>Yer imlerini içe aktar</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksToolButton</name>
+    <message>
+        <source>Bookmarks</source>
+        <translation>Yer İmleri</translation>
     </message>
 </context>
 <context>

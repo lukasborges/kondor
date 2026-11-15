@@ -227,6 +227,73 @@
     </message>
 </context>
 <context>
+    <name>BookmarksPanel</name>
+    <message>
+        <source>No bookmarks match</source>
+        <translation>Inga bokmärken matchar</translation>
+    </message>
+    <message>
+        <source>Empty folder</source>
+        <translation>Tom mapp</translation>
+    </message>
+    <message>
+        <source>No Bookmarks</source>
+        <translation>Inga bokmärken</translation>
+    </message>
+    <message>
+        <source>Bookmarked pages show up here.</source>
+        <translation>Bokmärkta sidor visas här.</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelEntries</name>
+    <message>
+        <source>Recently Added</source>
+        <translation>Nyligen tillagda</translation>
+    </message>
+    <message>
+        <source>Bookmarks Toolbar</source>
+        <translation>Bokmärkesverktygsfält</translation>
+    </message>
+    <message>
+        <source>Other Bookmarks</source>
+        <translation>Övriga bokmärken</translation>
+    </message>
+    <message>
+        <source>Folders</source>
+        <translation>Mappar</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelFooter</name>
+    <message>
+        <source>Open All in Tabs</source>
+        <translation>Öppna alla i flikar</translation>
+    </message>
+    <message>
+        <source>Show Bookmarks Bar</source>
+        <translation>Visa bokmärkesfältet</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks</source>
+        <translation>Hantera bokmärken</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelHeader</name>
+    <message>
+        <source>Back</source>
+        <translation>Tillbaka</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelSearchField</name>
+    <message>
+        <source>Search bookmarks</source>
+        <translation>Sök bland bokmärken</translation>
+    </message>
+</context>
+<context>
     <name>BookmarksToolBar</name>
     <message>
         <source>New Folder</source>
@@ -259,6 +326,13 @@
     <message>
         <source>Import Bookmarks</source>
         <translation>Importera bokmärken</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksToolButton</name>
+    <message>
+        <source>Bookmarks</source>
+        <translation>Bokmärken</translation>
     </message>
 </context>
 <context>

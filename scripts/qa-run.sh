@@ -67,11 +67,11 @@ main() {
   parity_mode() { has_python_app && has_cpp_app && echo on || echo off; }
 
   closed_issue_numbers() {
-    gh issue list --state closed --limit 1000 --json number --jq '.[].number' || log "gh failed listing closed issues" >&2
+    gh issue list --repo lukasborges/kondor --state closed --limit 1000 --json number --jq '.[].number' || log "gh failed listing closed issues" >&2
   }
 
   closed_bug_numbers() {
-    gh issue list --state closed --label bug --limit 1000 --json number --jq '.[].number' || log "gh failed listing closed bugs" >&2
+    gh issue list --repo lukasborges/kondor --state closed --label bug --limit 1000 --json number --jq '.[].number' || log "gh failed listing closed bugs" >&2
   }
 
   spec_number() { basename "$1" | cut -c1-4 | sed 's/^0*//'; }
@@ -179,6 +179,7 @@ Description=Kondor QA agent (one daily run)
 After=network-online.target
 
 [Service]
+WorkingDirectory=$control
 Type=oneshot
 MemoryHigh=12G
 MemoryMax=16G

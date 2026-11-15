@@ -43,7 +43,7 @@ copy_qml_modules() {
   for module in QtQuick QtQml QtWebEngine QtWebChannel QtCore; do
     cp -r "$qt_libraries/qml/$module" "$appdir/usr/qml/"
   done
-  cp -r "$qt_libraries"/qml/org/kde/{kirigami,desktop,qqc2desktopstyle} "$appdir/usr/qml/org/kde/"
+  cp -r "$qt_libraries"/qml/org/kde/{kirigami,desktop,qqc2desktopstyle,sonnet,union,kitemmodels} "$appdir/usr/qml/org/kde/"
 }
 
 copy_plugin() {
@@ -53,6 +53,7 @@ copy_plugin() {
 
 copy_plugins() {
   local plugin
+  copy_plugin tls
   for plugin in platforms/libqxcb.so platforms/libqwayland.so platforms/libqoffscreen.so \
       sqldrivers/libqsqlite.so platformthemes/KDEPlasmaPlatformTheme6.so styles/breeze6.so \
       kf6/kirigami/platform/org.kde.desktop.so iconengines/libqsvgicon.so; do

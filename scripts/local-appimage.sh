@@ -62,7 +62,7 @@ main() {
     local missing=() p
     for p in file git python3 python3-pyside6 pyside6-tools qt6-qtbase qt6-qtdeclarative \
              qt6-qtwebengine qt6-qtwebchannel qt6-qtsvg qt6-qtwayland kf6-kirigami \
-             kf6-qqc2-desktop-style plasma-integration plasma-breeze-qt6 hunspell-en-US \
+             kf6-qqc2-desktop-style kf6-sonnet plasma-union kf6-kitemmodels plasma-integration plasma-breeze-qt6 hunspell-en-US \
              hunspell-pt-BR fuse-libs; do
       rpm -q "$p" >/dev/null 2>&1 || missing+=("$p")
     done

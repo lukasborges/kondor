@@ -10,8 +10,6 @@ Item {
     required property WebEngineView webView
     required property bool loadPending
 
-    visible: false
-
     Item {
         id: colors
         Kirigami.Theme.colorSet: Kirigami.Theme.View
@@ -57,5 +55,6 @@ Item {
         function onBackgroundColorChanged() { root.applyReaderStyle() }
         function onTextColorChanged() { root.applyReaderStyle() }
         function onLinkColorChanged() { root.applyReaderStyle() }
+        function onDisabledTextColorChanged() { root.applyReaderStyle() }
     }
 }

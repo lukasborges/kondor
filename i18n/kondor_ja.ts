@@ -227,6 +227,73 @@
     </message>
 </context>
 <context>
+    <name>BookmarksPanel</name>
+    <message>
+        <source>No bookmarks match</source>
+        <translation>一致するブックマークはありません</translation>
+    </message>
+    <message>
+        <source>Empty folder</source>
+        <translation>空のフォルダー</translation>
+    </message>
+    <message>
+        <source>No Bookmarks</source>
+        <translation>ブックマークなし</translation>
+    </message>
+    <message>
+        <source>Bookmarked pages show up here.</source>
+        <translation>ブックマークしたページがここに表示されます。</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelEntries</name>
+    <message>
+        <source>Recently Added</source>
+        <translation>最近追加</translation>
+    </message>
+    <message>
+        <source>Bookmarks Toolbar</source>
+        <translation>ブックマークツールバー</translation>
+    </message>
+    <message>
+        <source>Other Bookmarks</source>
+        <translation>その他のブックマーク</translation>
+    </message>
+    <message>
+        <source>Folders</source>
+        <translation>フォルダー</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelFooter</name>
+    <message>
+        <source>Open All in Tabs</source>
+        <translation>すべてタブで開く</translation>
+    </message>
+    <message>
+        <source>Show Bookmarks Bar</source>
+        <translation>ブックマークバーを表示</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks</source>
+        <translation>ブックマークを管理</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelHeader</name>
+    <message>
+        <source>Back</source>
+        <translation>戻る</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelSearchField</name>
+    <message>
+        <source>Search bookmarks</source>
+        <translation>ブックマークを検索</translation>
+    </message>
+</context>
+<context>
     <name>BookmarksToolBar</name>
     <message>
         <source>New Folder</source>
@@ -259,6 +326,13 @@
     <message>
         <source>Import Bookmarks</source>
         <translation>ブックマークをインポート</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksToolButton</name>
+    <message>
+        <source>Bookmarks</source>
+        <translation>ブックマーク</translation>
     </message>
 </context>
 <context>

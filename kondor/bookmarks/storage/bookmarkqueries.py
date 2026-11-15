@@ -14,6 +14,7 @@ SEARCH_STATEMENT = (
     " WHERE is_folder = 0 AND (url LIKE ? ESCAPE '\\' OR title LIKE ? ESCAPE '\\')"
     " ORDER BY (title LIKE ? ESCAPE '\\') DESC, title COLLATE NOCASE, id LIMIT ?"
 )
+RECENT_STATEMENT = "SELECT url, title FROM bookmarks WHERE is_folder = 0 ORDER BY id DESC LIMIT ?"
 
 
 def read_rows(statement: str, values: Sequence[object], reader: RowReader) -> list[Row]:
@@ -90,6 +91,12 @@ def search(text: str, limit: int) -> list[Row]:
     pattern = like_pattern(needle)
     values = (pattern, pattern, pattern, limit)
     return read_rows(SEARCH_STATEMENT, values, read_search_result)
+
+
+def recent(limit: int) -> list[Row]:
+    if limit <= 0:
+        return []
+    return read_rows(RECENT_STATEMENT, (limit,), read_search_result)
 
 
 def first_id_or_missing(found: list[int]) -> int:

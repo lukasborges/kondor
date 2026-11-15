@@ -227,6 +227,73 @@
     </message>
 </context>
 <context>
+    <name>BookmarksPanel</name>
+    <message>
+        <source>No bookmarks match</source>
+        <translation>Keine passenden Lesezeichen</translation>
+    </message>
+    <message>
+        <source>Empty folder</source>
+        <translation>Leerer Ordner</translation>
+    </message>
+    <message>
+        <source>No Bookmarks</source>
+        <translation>Keine Lesezeichen</translation>
+    </message>
+    <message>
+        <source>Bookmarked pages show up here.</source>
+        <translation>Mit Lesezeichen versehene Seiten werden hier angezeigt.</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelEntries</name>
+    <message>
+        <source>Recently Added</source>
+        <translation>Zuletzt hinzugefügt</translation>
+    </message>
+    <message>
+        <source>Bookmarks Toolbar</source>
+        <translation>Lesezeichen-Symbolleiste</translation>
+    </message>
+    <message>
+        <source>Other Bookmarks</source>
+        <translation>Weitere Lesezeichen</translation>
+    </message>
+    <message>
+        <source>Folders</source>
+        <translation>Ordner</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelFooter</name>
+    <message>
+        <source>Open All in Tabs</source>
+        <translation>Alle in Tabs öffnen</translation>
+    </message>
+    <message>
+        <source>Show Bookmarks Bar</source>
+        <translation>Lesezeichenleiste anzeigen</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks</source>
+        <translation>Lesezeichen verwalten</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelHeader</name>
+    <message>
+        <source>Back</source>
+        <translation>Zurück</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelSearchField</name>
+    <message>
+        <source>Search bookmarks</source>
+        <translation>Lesezeichen durchsuchen</translation>
+    </message>
+</context>
+<context>
     <name>BookmarksToolBar</name>
     <message>
         <source>New Folder</source>
@@ -259,6 +326,13 @@
     <message>
         <source>Import Bookmarks</source>
         <translation>Lesezeichen importieren</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksToolButton</name>
+    <message>
+        <source>Bookmarks</source>
+        <translation>Lesezeichen</translation>
     </message>
 </context>
 <context>

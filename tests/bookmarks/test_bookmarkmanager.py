@@ -87,3 +87,18 @@ def test_ids_from_qml_are_64_bit(fresh_bookmarks: Path, kondor_engine: QQmlEngin
     assert created.property("toolbarChildren") == DEFAULT_TOOLBAR_SIZE
     assert created.property("wideIdChildren") == 0
     assert created.property("kdeMatches") > 0
+
+
+def test_recent_bookmarks_lists_the_newest_first_and_skips_folders(fresh_bookmarks: Path) -> None:
+    other = manager().otherFolderId()
+    add_page(other, "First", "first")
+    add_folder_in_other("Folder")
+    add_page(other, "Second", "second")
+    add_page(other, "Third", "third")
+    titles = [row["title"] for row in manager().recentBookmarks(2)]
+    assert titles == ["Third", "Second"]
+
+
+def test_recent_bookmarks_of_a_non_positive_limit_is_empty(fresh_bookmarks: Path) -> None:
+    add_page(manager().otherFolderId(), "Page", "page")
+    assert manager().recentBookmarks(0) == []

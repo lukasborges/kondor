@@ -53,6 +53,10 @@ class BookmarkManager(QObject):
     def search(self, text: str, limit: int = DEFAULT_SEARCH_LIMIT) -> list[dict[str, Any]]:
         return bookmarkqueries.search(text, limit)
 
+    @Slot(int, result="QVariantList")
+    def recentBookmarks(self, limit: int) -> list[dict[str, Any]]:
+        return bookmarkqueries.recent(limit)
+
     @Slot(QUrl, result="qint64")
     def bookmarkIdFor(self, url: QUrl) -> int:
         return bookmarkqueries.bookmark_id_for(url)

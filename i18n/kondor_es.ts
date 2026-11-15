@@ -227,6 +227,73 @@
     </message>
 </context>
 <context>
+    <name>BookmarksPanel</name>
+    <message>
+        <source>No bookmarks match</source>
+        <translation>Ningún marcador coincide</translation>
+    </message>
+    <message>
+        <source>Empty folder</source>
+        <translation>Carpeta vacía</translation>
+    </message>
+    <message>
+        <source>No Bookmarks</source>
+        <translation>Sin marcadores</translation>
+    </message>
+    <message>
+        <source>Bookmarked pages show up here.</source>
+        <translation>Las páginas marcadas aparecerán aquí.</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelEntries</name>
+    <message>
+        <source>Recently Added</source>
+        <translation>Añadidos recientemente</translation>
+    </message>
+    <message>
+        <source>Bookmarks Toolbar</source>
+        <translation>Barra de marcadores</translation>
+    </message>
+    <message>
+        <source>Other Bookmarks</source>
+        <translation>Otros marcadores</translation>
+    </message>
+    <message>
+        <source>Folders</source>
+        <translation>Carpetas</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelFooter</name>
+    <message>
+        <source>Open All in Tabs</source>
+        <translation>Abrir todo en pestañas</translation>
+    </message>
+    <message>
+        <source>Show Bookmarks Bar</source>
+        <translation>Mostrar la barra de marcadores</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks</source>
+        <translation>Gestionar marcadores</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelHeader</name>
+    <message>
+        <source>Back</source>
+        <translation>Atrás</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelSearchField</name>
+    <message>
+        <source>Search bookmarks</source>
+        <translation>Buscar marcadores</translation>
+    </message>
+</context>
+<context>
     <name>BookmarksToolBar</name>
     <message>
         <source>New Folder</source>
@@ -259,6 +326,13 @@
     <message>
         <source>Import Bookmarks</source>
         <translation>Importar marcadores</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksToolButton</name>
+    <message>
+        <source>Bookmarks</source>
+        <translation>Marcadores</translation>
     </message>
 </context>
 <context>

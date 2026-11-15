@@ -227,6 +227,73 @@
     </message>
 </context>
 <context>
+    <name>BookmarksPanel</name>
+    <message>
+        <source>No bookmarks match</source>
+        <translation>Žádné odpovídající záložky</translation>
+    </message>
+    <message>
+        <source>Empty folder</source>
+        <translation>Prázdná složka</translation>
+    </message>
+    <message>
+        <source>No Bookmarks</source>
+        <translation>Žádné záložky</translation>
+    </message>
+    <message>
+        <source>Bookmarked pages show up here.</source>
+        <translation>Zde se zobrazí stránky přidané do záložek.</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelEntries</name>
+    <message>
+        <source>Recently Added</source>
+        <translation>Nedávno přidané</translation>
+    </message>
+    <message>
+        <source>Bookmarks Toolbar</source>
+        <translation>Panel záložek</translation>
+    </message>
+    <message>
+        <source>Other Bookmarks</source>
+        <translation>Ostatní záložky</translation>
+    </message>
+    <message>
+        <source>Folders</source>
+        <translation>Složky</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelFooter</name>
+    <message>
+        <source>Open All in Tabs</source>
+        <translation>Otevřít vše na kartách</translation>
+    </message>
+    <message>
+        <source>Show Bookmarks Bar</source>
+        <translation>Zobrazit panel záložek</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks</source>
+        <translation>Spravovat záložky</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelHeader</name>
+    <message>
+        <source>Back</source>
+        <translation>Zpět</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelSearchField</name>
+    <message>
+        <source>Search bookmarks</source>
+        <translation>Hledat v záložkách</translation>
+    </message>
+</context>
+<context>
     <name>BookmarksToolBar</name>
     <message>
         <source>New Folder</source>
@@ -259,6 +326,13 @@
     <message>
         <source>Import Bookmarks</source>
         <translation>Importovat záložky</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksToolButton</name>
+    <message>
+        <source>Bookmarks</source>
+        <translation>Záložky</translation>
     </message>
 </context>
 <context>

@@ -227,6 +227,73 @@
     </message>
 </context>
 <context>
+    <name>BookmarksPanel</name>
+    <message>
+        <source>No bookmarks match</source>
+        <translation>Geen overeenkomende bladwijzers</translation>
+    </message>
+    <message>
+        <source>Empty folder</source>
+        <translation>Lege map</translation>
+    </message>
+    <message>
+        <source>No Bookmarks</source>
+        <translation>Geen bladwijzers</translation>
+    </message>
+    <message>
+        <source>Bookmarked pages show up here.</source>
+        <translation>Pagina&apos;s met een bladwijzer verschijnen hier.</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelEntries</name>
+    <message>
+        <source>Recently Added</source>
+        <translation>Onlangs toegevoegd</translation>
+    </message>
+    <message>
+        <source>Bookmarks Toolbar</source>
+        <translation>Bladwijzerwerkbalk</translation>
+    </message>
+    <message>
+        <source>Other Bookmarks</source>
+        <translation>Overige bladwijzers</translation>
+    </message>
+    <message>
+        <source>Folders</source>
+        <translation>Mappen</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelFooter</name>
+    <message>
+        <source>Open All in Tabs</source>
+        <translation>Alles openen in tabbladen</translation>
+    </message>
+    <message>
+        <source>Show Bookmarks Bar</source>
+        <translation>Bladwijzerbalk tonen</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks</source>
+        <translation>Bladwijzers beheren</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelHeader</name>
+    <message>
+        <source>Back</source>
+        <translation>Terug</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelSearchField</name>
+    <message>
+        <source>Search bookmarks</source>
+        <translation>Bladwijzers zoeken</translation>
+    </message>
+</context>
+<context>
     <name>BookmarksToolBar</name>
     <message>
         <source>New Folder</source>
@@ -259,6 +326,13 @@
     <message>
         <source>Import Bookmarks</source>
         <translation>Bladwijzers importeren</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksToolButton</name>
+    <message>
+        <source>Bookmarks</source>
+        <translation>Bladwijzers</translation>
     </message>
 </context>
 <context>

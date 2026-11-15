@@ -227,6 +227,73 @@
     </message>
 </context>
 <context>
+    <name>BookmarksPanel</name>
+    <message>
+        <source>No bookmarks match</source>
+        <translation>沒有符合的書籤</translation>
+    </message>
+    <message>
+        <source>Empty folder</source>
+        <translation>空資料夾</translation>
+    </message>
+    <message>
+        <source>No Bookmarks</source>
+        <translation>沒有書籤</translation>
+    </message>
+    <message>
+        <source>Bookmarked pages show up here.</source>
+        <translation>已加入書籤的頁面會顯示在這裡。</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelEntries</name>
+    <message>
+        <source>Recently Added</source>
+        <translation>最近新增</translation>
+    </message>
+    <message>
+        <source>Bookmarks Toolbar</source>
+        <translation>書籤工具列</translation>
+    </message>
+    <message>
+        <source>Other Bookmarks</source>
+        <translation>其他書籤</translation>
+    </message>
+    <message>
+        <source>Folders</source>
+        <translation>資料夾</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelFooter</name>
+    <message>
+        <source>Open All in Tabs</source>
+        <translation>在分頁中全部開啟</translation>
+    </message>
+    <message>
+        <source>Show Bookmarks Bar</source>
+        <translation>顯示書籤列</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks</source>
+        <translation>管理書籤</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelHeader</name>
+    <message>
+        <source>Back</source>
+        <translation>上一頁</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelSearchField</name>
+    <message>
+        <source>Search bookmarks</source>
+        <translation>搜尋書籤</translation>
+    </message>
+</context>
+<context>
     <name>BookmarksToolBar</name>
     <message>
         <source>New Folder</source>
@@ -259,6 +326,13 @@
     <message>
         <source>Import Bookmarks</source>
         <translation>匯入書籤</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksToolButton</name>
+    <message>
+        <source>Bookmarks</source>
+        <translation>書籤</translation>
     </message>
 </context>
 <context>

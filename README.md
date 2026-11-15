@@ -59,7 +59,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 - **Full screen** for videos and windows
 
 ### Library
-- **Bookmarks** with a toolbar, folders and Firefox/Chrome import
+- **Bookmarks** with a panel, a toolbar, folders and Firefox/Chrome import
 - **Searchable history** grouped by day
 - **Downloads** with pause, resume and notifications
 
@@ -90,6 +90,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 | `Ctrl+Shift+PgUp` / `Ctrl+Shift+PgDown` | Move the current tab left / right |
 | `Ctrl+H` | Browsing history |
 | `Ctrl+D` | Bookmark this page (edit name and folder) |
+| `Ctrl+B` | Show or hide the bookmarks panel |
 | `Ctrl+Shift+B` | Show or hide the bookmarks toolbar |
 | `Ctrl+Shift+O` | Manage bookmarks |
 | `Ctrl+,` / `Ctrl+Shift+,` | Configure Kondor Browser (settings) |

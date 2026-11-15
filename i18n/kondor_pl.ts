@@ -227,6 +227,73 @@
     </message>
 </context>
 <context>
+    <name>BookmarksPanel</name>
+    <message>
+        <source>No bookmarks match</source>
+        <translation>Brak pasujących zakładek</translation>
+    </message>
+    <message>
+        <source>Empty folder</source>
+        <translation>Pusty folder</translation>
+    </message>
+    <message>
+        <source>No Bookmarks</source>
+        <translation>Brak zakładek</translation>
+    </message>
+    <message>
+        <source>Bookmarked pages show up here.</source>
+        <translation>Strony dodane do zakładek pojawią się tutaj.</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelEntries</name>
+    <message>
+        <source>Recently Added</source>
+        <translation>Ostatnio dodane</translation>
+    </message>
+    <message>
+        <source>Bookmarks Toolbar</source>
+        <translation>Pasek zakładek</translation>
+    </message>
+    <message>
+        <source>Other Bookmarks</source>
+        <translation>Inne zakładki</translation>
+    </message>
+    <message>
+        <source>Folders</source>
+        <translation>Foldery</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelFooter</name>
+    <message>
+        <source>Open All in Tabs</source>
+        <translation>Otwórz wszystkie w kartach</translation>
+    </message>
+    <message>
+        <source>Show Bookmarks Bar</source>
+        <translation>Pokaż pasek zakładek</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks</source>
+        <translation>Zarządzaj zakładkami</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelHeader</name>
+    <message>
+        <source>Back</source>
+        <translation>Wstecz</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelSearchField</name>
+    <message>
+        <source>Search bookmarks</source>
+        <translation>Szukaj zakładek</translation>
+    </message>
+</context>
+<context>
     <name>BookmarksToolBar</name>
     <message>
         <source>New Folder</source>
@@ -259,6 +326,13 @@
     <message>
         <source>Import Bookmarks</source>
         <translation>Importuj zakładki</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksToolButton</name>
+    <message>
+        <source>Bookmarks</source>
+        <translation>Zakładki</translation>
     </message>
 </context>
 <context>

@@ -227,6 +227,73 @@
     </message>
 </context>
 <context>
+    <name>BookmarksPanel</name>
+    <message>
+        <source>No bookmarks match</source>
+        <translation>Немає відповідних закладок</translation>
+    </message>
+    <message>
+        <source>Empty folder</source>
+        <translation>Порожня тека</translation>
+    </message>
+    <message>
+        <source>No Bookmarks</source>
+        <translation>Немає закладок</translation>
+    </message>
+    <message>
+        <source>Bookmarked pages show up here.</source>
+        <translation>Сторінки із закладок з’являться тут.</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelEntries</name>
+    <message>
+        <source>Recently Added</source>
+        <translation>Нещодавно додані</translation>
+    </message>
+    <message>
+        <source>Bookmarks Toolbar</source>
+        <translation>Панель закладок</translation>
+    </message>
+    <message>
+        <source>Other Bookmarks</source>
+        <translation>Інші закладки</translation>
+    </message>
+    <message>
+        <source>Folders</source>
+        <translation>Теки</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelFooter</name>
+    <message>
+        <source>Open All in Tabs</source>
+        <translation>Відкрити всі у вкладках</translation>
+    </message>
+    <message>
+        <source>Show Bookmarks Bar</source>
+        <translation>Показувати панель закладок</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks</source>
+        <translation>Керувати закладками</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelHeader</name>
+    <message>
+        <source>Back</source>
+        <translation>Назад</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelSearchField</name>
+    <message>
+        <source>Search bookmarks</source>
+        <translation>Шукати в закладках</translation>
+    </message>
+</context>
+<context>
     <name>BookmarksToolBar</name>
     <message>
         <source>New Folder</source>
@@ -259,6 +326,13 @@
     <message>
         <source>Import Bookmarks</source>
         <translation>Імпортувати закладки</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksToolButton</name>
+    <message>
+        <source>Bookmarks</source>
+        <translation>Закладки</translation>
     </message>
 </context>
 <context>

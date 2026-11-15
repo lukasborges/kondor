@@ -227,6 +227,73 @@
     </message>
 </context>
 <context>
+    <name>BookmarksPanel</name>
+    <message>
+        <source>No bookmarks match</source>
+        <translation>일치하는 북마크 없음</translation>
+    </message>
+    <message>
+        <source>Empty folder</source>
+        <translation>빈 폴더</translation>
+    </message>
+    <message>
+        <source>No Bookmarks</source>
+        <translation>북마크 없음</translation>
+    </message>
+    <message>
+        <source>Bookmarked pages show up here.</source>
+        <translation>북마크한 페이지가 여기에 표시됩니다.</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelEntries</name>
+    <message>
+        <source>Recently Added</source>
+        <translation>최근 추가됨</translation>
+    </message>
+    <message>
+        <source>Bookmarks Toolbar</source>
+        <translation>북마크 도구 모음</translation>
+    </message>
+    <message>
+        <source>Other Bookmarks</source>
+        <translation>기타 북마크</translation>
+    </message>
+    <message>
+        <source>Folders</source>
+        <translation>폴더</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelFooter</name>
+    <message>
+        <source>Open All in Tabs</source>
+        <translation>모두 탭에서 열기</translation>
+    </message>
+    <message>
+        <source>Show Bookmarks Bar</source>
+        <translation>북마크 표시줄 표시</translation>
+    </message>
+    <message>
+        <source>Manage Bookmarks</source>
+        <translation>북마크 관리</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelHeader</name>
+    <message>
+        <source>Back</source>
+        <translation>뒤로</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksPanelSearchField</name>
+    <message>
+        <source>Search bookmarks</source>
+        <translation>북마크 검색</translation>
+    </message>
+</context>
+<context>
     <name>BookmarksToolBar</name>
     <message>
         <source>New Folder</source>
@@ -259,6 +326,13 @@
     <message>
         <source>Import Bookmarks</source>
         <translation>북마크 가져오기</translation>
+    </message>
+</context>
+<context>
+    <name>BookmarksToolButton</name>
+    <message>
+        <source>Bookmarks</source>
+        <translation>북마크</translation>
     </message>
 </context>
 <context>

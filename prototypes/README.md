@@ -69,6 +69,8 @@ Tips when editing:
 | #212 Vertical tabs | `212-vertical-tabs.qml`, `212b-settings-tab-style.qml` |
 | #227 Bookmarks panel | `227-bookmarks-panel.qml`, `227b-bookmarks-panel-folder.qml`, `227c-bookmarks-panel-search.qml`, `227d-bookmarks-panel-empty.qml` (`common/BookmarksPanelMock.qml`) |
 | #229 Bookmarks bar | `229-bookmarks-bar-folder.qml`, `229b-bookmarks-bar-overflow.qml`, `229c-bookmarks-bar-context.qml` (`common/BookmarksBarMock.qml`) |
+| #241 New Tab page icon | `241-new-tab-page-icon.qml` (`common/TabStyleFrame.qml`) |
+| #242 Side bar collapsed | `242-side-bar-collapsed.qml` (`common/TabStyleFrame.qml`, `sideBarCollapsed`) |
 
 Issues without UI (#10 default browser, #15 single instance, #19 translations, #25 Flatpak,
 #26 tests) have no prototype.

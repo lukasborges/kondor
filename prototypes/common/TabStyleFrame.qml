@@ -15,12 +15,16 @@ Rectangle {
     property int currentTab: 0
     property int hoveredTab: -1
     property bool privateWindow: false
+    // #242: the side bar shows icons only.
+    property bool sideBarCollapsed: false
     property int tabWidth: 240
     property bool tabScrollButtons: false
     property real tabScrollX: 0
     property string address: "https://kde.org/"
 
     readonly property bool vertical: tabStyle === "vertical"
+    readonly property real sideBarWidth: sideBarCollapsed
+        ? Kirigami.Units.gridUnit * 2 + Kirigami.Units.smallSpacing * 4 : Kirigami.Units.gridUnit * 14
     readonly property var pinnedTabs: tabs.filter(t => t.pinned)
     readonly property var unpinnedTabs: tabs.filter(t => !t.pinned)
 
@@ -31,12 +35,13 @@ Rectangle {
     component TabContent: RowLayout {
         property var tab
         property bool showClose: false
+        property bool iconOnly: tab.pinned
         spacing: Kirigami.Units.smallSpacing
 
         Item {
             Layout.preferredWidth: 16
             Layout.preferredHeight: 16
-            Layout.fillWidth: tab.pinned
+            Layout.fillWidth: iconOnly
             Kirigami.Icon {
                 anchors.centerIn: parent
                 width: 16; height: 16
@@ -51,13 +56,13 @@ Rectangle {
             }
         }
         Label {
-            visible: !tab.pinned
+            visible: !iconOnly
             Layout.fillWidth: true
             text: tab.title
             elide: Text.ElideRight
         }
         ToolButton {
-            visible: !tab.pinned
+            visible: !iconOnly
             opacity: showClose ? 1 : 0
             Layout.preferredWidth: 20
             Layout.preferredHeight: 20
@@ -170,8 +175,11 @@ Rectangle {
         highlighted: tabIndex === frame.currentTab
         contentItem: TabContent {
             tab: modelData
+            iconOnly: frame.sideBarCollapsed || modelData.pinned
             showClose: parent.highlighted || parent.tabIndex === frame.hoveredTab
         }
+        ToolTip.visible: frame.sideBarCollapsed && tabIndex === frame.hoveredTab
+        ToolTip.text: modelData.title
     }
 
     component SideBar: ColumnLayout {
@@ -204,10 +212,19 @@ Rectangle {
             delegate: VerticalTab {}
             footer: ItemDelegate {
                 width: ListView.view.width
+                display: frame.sideBarCollapsed ? AbstractButton.IconOnly : AbstractButton.TextBesideIcon
                 icon.name: "tab-new"
                 text: "New Tab"
             }
-            ScrollBar.vertical: ScrollBar {}
+            ScrollBar.vertical: ScrollBar { policy: frame.sideBarCollapsed ? ScrollBar.AlwaysOff : ScrollBar.AsNeeded }
+        }
+        Kirigami.Separator { Layout.fillWidth: true }
+        ToolButton {
+            Layout.margins: Kirigami.Units.smallSpacing
+            Layout.alignment: frame.sideBarCollapsed ? Qt.AlignHCenter : Qt.AlignLeft
+            display: AbstractButton.IconOnly
+            icon.name: frame.sideBarCollapsed ? "sidebar-expand-left" : "sidebar-collapse-left"
+            text: frame.sideBarCollapsed ? "Expand Side Bar" : "Collapse Side Bar"
         }
     }
 
@@ -258,8 +275,8 @@ Rectangle {
 
             SideBar {
                 visible: frame.vertical
-                Layout.preferredWidth: Kirigami.Units.gridUnit * 14
-                Layout.maximumWidth: Kirigami.Units.gridUnit * 14
+                Layout.preferredWidth: frame.sideBarWidth
+                Layout.maximumWidth: frame.sideBarWidth
                 Layout.fillHeight: true
             }
             Kirigami.Separator { visible: frame.vertical; Layout.fillHeight: true }

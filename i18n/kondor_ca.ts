@@ -1991,6 +1991,22 @@
         <source>Manage Site Permissions…</source>
         <translation>Gestiona els permisos dels llocs…</translation>
     </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Control remot:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Permet que les eines d&apos;automatització controlin les pàgines</translation>
+    </message>
+    <message>
+        <source>Private browsing is unavailable while it is on.</source>
+        <translation>La navegació privada no està disponible mentre estigui activat.</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Port:</translation>
+    </message>
 </context>
 <context>
     <name>ReaderButton</name>
@@ -2033,6 +2049,47 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>Surt del mode lector</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlButton</name>
+    <message>
+        <source>Remote control is on</source>
+        <translation>El control remot està activat</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlPopup</name>
+    <message>
+        <source>Remote Control Is On</source>
+        <translation>El control remot està activat</translation>
+    </message>
+    <message>
+        <source>Copy Address</source>
+        <translation>Copia l&apos;adreça</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Copiat</translation>
+    </message>
+    <message>
+        <source>Address copied</source>
+        <translation>Adreça copiada</translation>
+    </message>
+    <message>
+        <source>Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.</source>
+        <translation>Les eines d&apos;automatització d&apos;aquest ordinador poden llegir i controlar les pàgines de les finestres normals. La navegació privada no està disponible.</translation>
+    </message>
+    <message>
+        <source>Configure…</source>
+        <translation>Configura…</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlRestartMessage</name>
+    <message>
+        <source>Restart Kondor to apply the remote control change.</source>
+        <translation>Reinicieu el Kondor per aplicar el canvi del control remot.</translation>
     </message>
 </context>
 <context>
@@ -2384,6 +2441,18 @@
     <message>
         <source>Manage Site Permissions…</source>
         <translation>Gestiona els permisos dels llocs…</translation>
+    </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Control remot:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Permet que les eines d&apos;automatització controlin les pàgines</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Port:</translation>
     </message>
     <message>
         <source>Passwords</source>

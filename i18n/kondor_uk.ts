@@ -2002,6 +2002,22 @@
         <source>Manage Site Permissions…</source>
         <translation>Керувати дозволами сайтів…</translation>
     </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Віддалене керування:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Дозволити засобам автоматизації керувати сторінками</translation>
+    </message>
+    <message>
+        <source>Private browsing is unavailable while it is on.</source>
+        <translation>Приватний перегляд недоступний, поки параметр увімкнено.</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Порт:</translation>
+    </message>
 </context>
 <context>
     <name>ReaderButton</name>
@@ -2044,6 +2060,47 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>Вийти з режиму читання</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlButton</name>
+    <message>
+        <source>Remote control is on</source>
+        <translation>Віддалене керування увімкнено</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlPopup</name>
+    <message>
+        <source>Remote Control Is On</source>
+        <translation>Віддалене керування увімкнено</translation>
+    </message>
+    <message>
+        <source>Copy Address</source>
+        <translation>Копіювати адресу</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Скопійовано</translation>
+    </message>
+    <message>
+        <source>Address copied</source>
+        <translation>Адресу скопійовано</translation>
+    </message>
+    <message>
+        <source>Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.</source>
+        <translation>Засоби автоматизації на цьому комп&apos;ютері можуть читати та контролювати сторінки звичайних вікон. Приватний перегляд недоступний.</translation>
+    </message>
+    <message>
+        <source>Configure…</source>
+        <translation>Налаштувати…</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlRestartMessage</name>
+    <message>
+        <source>Restart Kondor to apply the remote control change.</source>
+        <translation>Перезапустіть Kondor, щоб застосувати зміну віддаленого керування.</translation>
     </message>
 </context>
 <context>
@@ -2395,6 +2452,18 @@
     <message>
         <source>Manage Site Permissions…</source>
         <translation>Керувати дозволами сайтів…</translation>
+    </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Віддалене керування:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Дозволити засобам автоматизації керувати сторінками</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Порт:</translation>
     </message>
     <message>
         <source>Passwords</source>

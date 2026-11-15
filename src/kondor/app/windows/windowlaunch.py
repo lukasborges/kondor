@@ -8,7 +8,9 @@ from kondor.app.commandline.extensionpackages import take_extension_packages
 from kondor.app.commandline.startupargs import StartupArgs
 from kondor.app.instance.singleinstancemessage import SingleInstanceMessage
 from kondor.app.instance.windowactivation import raise_window
+from kondor.app.remotecontrol.remotecontrolstartup import warn_private_refused
 from kondor.app.windows.windowcontents import WindowContents
+from kondor.browser.profile.profilemanager import ProfileManager
 from kondor.browser.session.sessionmanager import SessionManager
 from kondor.browser.session.sessionwindow import SessionWindow
 from kondor.core.settings.settings import Settings
@@ -30,7 +32,18 @@ def should_restore_session() -> bool:
     return str(Settings.instance().property("startupBehavior")) == "restore"
 
 
+def refuse_private_request(manager: WindowManager, message: SingleInstanceMessage) -> None:
+    warn_private_refused()
+    window = normal_window(manager)
+    if window is not None:
+        raise_window(window, message.activation_token)
+
+
 def handle_single_instance_message(manager: WindowManager, message: SingleInstanceMessage) -> None:
+    is_available = ProfileManager.instance().is_private_browsing_available()
+    if message.private_mode and not is_available:
+        refuse_private_request(manager, message)
+        return
     urls = list(message.urls)
     packages = take_extension_packages(urls)
     window = show_packages(manager, packages, open_urls_for_launch(manager, message, urls))

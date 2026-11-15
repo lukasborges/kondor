@@ -1980,6 +1980,22 @@
         <source>Manage Site Permissions…</source>
         <translation>사이트 권한 관리…</translation>
     </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>원격 제어:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>자동화 도구가 페이지를 제어하도록 허용</translation>
+    </message>
+    <message>
+        <source>Private browsing is unavailable while it is on.</source>
+        <translation>켜져 있는 동안에는 비공개 브라우징을 사용할 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>포트:</translation>
+    </message>
 </context>
 <context>
     <name>ReaderButton</name>
@@ -2022,6 +2038,47 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>리더 모드 종료</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlButton</name>
+    <message>
+        <source>Remote control is on</source>
+        <translation>원격 제어가 켜져 있음</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlPopup</name>
+    <message>
+        <source>Remote Control Is On</source>
+        <translation>원격 제어가 켜져 있음</translation>
+    </message>
+    <message>
+        <source>Copy Address</source>
+        <translation>주소 복사</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>복사됨</translation>
+    </message>
+    <message>
+        <source>Address copied</source>
+        <translation>주소가 복사됨</translation>
+    </message>
+    <message>
+        <source>Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.</source>
+        <translation>이 컴퓨터의 자동화 도구가 일반 창의 페이지를 읽고 제어할 수 있습니다. 비공개 브라우징은 사용할 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Configure…</source>
+        <translation>설정…</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlRestartMessage</name>
+    <message>
+        <source>Restart Kondor to apply the remote control change.</source>
+        <translation>원격 제어 변경 사항을 적용하려면 Kondor를 다시 시작하세요.</translation>
     </message>
 </context>
 <context>
@@ -2373,6 +2430,18 @@
     <message>
         <source>Manage Site Permissions…</source>
         <translation>사이트 권한 관리…</translation>
+    </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>원격 제어:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>자동화 도구가 페이지를 제어하도록 허용</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>포트:</translation>
     </message>
     <message>
         <source>Passwords</source>

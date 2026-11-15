@@ -1991,6 +1991,22 @@
         <source>Manage Site Permissions…</source>
         <translation>Website-Berechtigungen verwalten…</translation>
     </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Fernsteuerung:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Automatisierungswerkzeugen erlauben, Seiten zu steuern</translation>
+    </message>
+    <message>
+        <source>Private browsing is unavailable while it is on.</source>
+        <translation>Privates Surfen ist nicht verfügbar, solange sie aktiviert ist.</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Port:</translation>
+    </message>
 </context>
 <context>
     <name>ReaderButton</name>
@@ -2033,6 +2049,47 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>Lesemodus beenden</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlButton</name>
+    <message>
+        <source>Remote control is on</source>
+        <translation>Fernsteuerung ist aktiviert</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlPopup</name>
+    <message>
+        <source>Remote Control Is On</source>
+        <translation>Fernsteuerung ist aktiviert</translation>
+    </message>
+    <message>
+        <source>Copy Address</source>
+        <translation>Adresse kopieren</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Kopiert</translation>
+    </message>
+    <message>
+        <source>Address copied</source>
+        <translation>Adresse kopiert</translation>
+    </message>
+    <message>
+        <source>Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.</source>
+        <translation>Automatisierungswerkzeuge auf diesem Computer können die Seiten normaler Fenster lesen und steuern. Privates Surfen ist nicht verfügbar.</translation>
+    </message>
+    <message>
+        <source>Configure…</source>
+        <translation>Einrichten …</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlRestartMessage</name>
+    <message>
+        <source>Restart Kondor to apply the remote control change.</source>
+        <translation>Starten Sie Kondor neu, um die Änderung der Fernsteuerung anzuwenden.</translation>
     </message>
 </context>
 <context>
@@ -2384,6 +2441,18 @@
     <message>
         <source>Manage Site Permissions…</source>
         <translation>Website-Berechtigungen verwalten…</translation>
+    </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Fernsteuerung:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Automatisierungswerkzeugen erlauben, Seiten zu steuern</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Port:</translation>
     </message>
     <message>
         <source>Passwords</source>

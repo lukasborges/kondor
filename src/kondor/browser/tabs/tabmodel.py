@@ -11,9 +11,11 @@ class TabModel(TabModelClosing):
     @Slot(result=Tab)
     @Slot(bool, result=Tab)
     @Slot(bool, QUrl, result=Tab)
-    def addTab(self, is_private: bool = False, initial_url: QUrl | None = None) -> Tab:
+    def addTab(self, is_private: bool = False, initial_url: QUrl | None = None) -> Tab | None:
         profiles = ProfileManager.instance()
         needs_private_profile = is_private or self._private_tabs
+        if needs_private_profile and not profiles.is_private_browsing_available():
+            return None
         profile = profiles.createPrivateProfile() if needs_private_profile else None
         profile = profile or profiles.defaultProfile()
         url = initial_url if initial_url is not None else QUrl()

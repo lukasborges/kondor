@@ -8,6 +8,7 @@ from PySide6.QtQuick import QQuickWindow
 from kondor.app.instance.singleinstancemessage import SingleInstanceMessage
 from kondor.app.windows import windowlaunch
 from kondor.app.windows.windowcontents import WindowContents, initial_properties
+from kondor.browser.profile.profilemanager import ProfileManager
 
 
 def urls_from_script(values: list[object] | None) -> list[QUrl]:
@@ -78,7 +79,7 @@ class WindowManager(QObject):
         return None
 
     def create_window(self, contents: WindowContents) -> QObject | None:
-        component = self.component()
+        component = None if self.is_refused(contents) else self.component()
         if component is None:
             return None
         window = component.createWithInitialProperties(initial_properties(contents))
@@ -87,6 +88,10 @@ class WindowManager(QObject):
             return None
         self.track(window)
         return window
+
+    @staticmethod
+    def is_refused(contents: WindowContents) -> bool:
+        return contents.is_private and not ProfileManager.instance().is_private_browsing_available()
 
     def track(self, window: QObject) -> None:
         QQmlEngine.setObjectOwnership(window, QQmlEngine.ObjectOwnership.CppOwnership)

@@ -1991,6 +1991,22 @@
         <source>Manage Site Permissions…</source>
         <translation>Website-machtigingen beheren…</translation>
     </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Afstandsbediening:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Automatiseringstools toestaan pagina&apos;s te besturen</translation>
+    </message>
+    <message>
+        <source>Private browsing is unavailable while it is on.</source>
+        <translation>Privé browsen is niet beschikbaar zolang dit aan staat.</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Poort:</translation>
+    </message>
 </context>
 <context>
     <name>ReaderButton</name>
@@ -2033,6 +2049,47 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>Leesmodus verlaten</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlButton</name>
+    <message>
+        <source>Remote control is on</source>
+        <translation>Afstandsbediening staat aan</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlPopup</name>
+    <message>
+        <source>Remote Control Is On</source>
+        <translation>Afstandsbediening staat aan</translation>
+    </message>
+    <message>
+        <source>Copy Address</source>
+        <translation>Adres kopiëren</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Gekopieerd</translation>
+    </message>
+    <message>
+        <source>Address copied</source>
+        <translation>Adres gekopieerd</translation>
+    </message>
+    <message>
+        <source>Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.</source>
+        <translation>Automatiseringstools op deze computer kunnen de pagina&apos;s van normale vensters lezen en besturen. Privé browsen is niet beschikbaar.</translation>
+    </message>
+    <message>
+        <source>Configure…</source>
+        <translation>Configureren…</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlRestartMessage</name>
+    <message>
+        <source>Restart Kondor to apply the remote control change.</source>
+        <translation>Herstart Kondor om de wijziging van de afstandsbediening toe te passen.</translation>
     </message>
 </context>
 <context>
@@ -2384,6 +2441,18 @@
     <message>
         <source>Manage Site Permissions…</source>
         <translation>Website-machtigingen beheren…</translation>
+    </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>Afstandsbediening:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>Automatiseringstools toestaan pagina&apos;s te besturen</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Poort:</translation>
     </message>
     <message>
         <source>Passwords</source>

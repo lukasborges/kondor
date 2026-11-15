@@ -64,6 +64,8 @@ DEFAULT_ROWS: tuple[tuple[str, object | Callable[[], object]], ...] = (
     ("offerToSavePasswords", True),
     ("passwordNeverSaveSites", []),
     ("pinnedExtensions", []),
+    ("remoteControlEnabled", False),
+    ("remoteControlPort", 9222),
     ("spellCheckLanguages", ["en-US"]),
 )
 DEFAULT_NAMES = tuple(name for name, _ in DEFAULT_ROWS)

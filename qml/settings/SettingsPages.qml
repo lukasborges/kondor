@@ -36,8 +36,11 @@ QtObject {
             keywords: [qsTr("Cookies:"), qsTr("On exit:"),
                        qsTr("Clear cookies, cache and history"),
                        qsTr("Browsing data:"), qsTr("Clear Cookies and Cache Now"),
-                       qsTr("Site permissions:"), qsTr("Manage Site Permissions…")],
-            options: ["blockThirdPartyCookies", "clearDataOnExit", "adBlockEnabled"]
+                       qsTr("Site permissions:"), qsTr("Manage Site Permissions…"),
+                       qsTr("Remote control:"), qsTr("Allow automation tools to control pages"),
+                       qsTr("Port:")],
+            options: ["blockThirdPartyCookies", "clearDataOnExit", "adBlockEnabled",
+                      "remoteControlEnabled", "remoteControlPort"]
         },
         {
             id: "passwords",

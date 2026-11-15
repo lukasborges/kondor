@@ -1980,6 +1980,22 @@
         <source>Manage Site Permissions…</source>
         <translation>管理网站权限…</translation>
     </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>远程控制:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>允许自动化工具控制页面</translation>
+    </message>
+    <message>
+        <source>Private browsing is unavailable while it is on.</source>
+        <translation>开启期间无法使用隐私浏览。</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>端口:</translation>
+    </message>
 </context>
 <context>
     <name>ReaderButton</name>
@@ -2022,6 +2038,47 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>退出阅读模式</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlButton</name>
+    <message>
+        <source>Remote control is on</source>
+        <translation>远程控制已开启</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlPopup</name>
+    <message>
+        <source>Remote Control Is On</source>
+        <translation>远程控制已开启</translation>
+    </message>
+    <message>
+        <source>Copy Address</source>
+        <translation>复制地址</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>已复制</translation>
+    </message>
+    <message>
+        <source>Address copied</source>
+        <translation>地址已复制</translation>
+    </message>
+    <message>
+        <source>Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.</source>
+        <translation>此计算机上的自动化工具可以读取和控制普通窗口的页面。隐私浏览不可用。</translation>
+    </message>
+    <message>
+        <source>Configure…</source>
+        <translation>配置…</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlRestartMessage</name>
+    <message>
+        <source>Restart Kondor to apply the remote control change.</source>
+        <translation>请重启 Kondor 以应用远程控制的更改。</translation>
     </message>
 </context>
 <context>
@@ -2373,6 +2430,18 @@
     <message>
         <source>Manage Site Permissions…</source>
         <translation>管理网站权限…</translation>
+    </message>
+    <message>
+        <source>Remote control:</source>
+        <translation>远程控制:</translation>
+    </message>
+    <message>
+        <source>Allow automation tools to control pages</source>
+        <translation>允许自动化工具控制页面</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>端口:</translation>
     </message>
     <message>
         <source>Passwords</source>

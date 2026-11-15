@@ -84,6 +84,13 @@ class SingleInstance(QObject):
         wait_until_disconnected(socket)
         return True
 
+    def has_running_instance(self) -> bool:
+        socket = QLocalSocket()
+        socket.connectToServer(self._name)
+        is_connected = socket.waitForConnected(SOCKET_TIMEOUT_MILLISECONDS)
+        wait_until_disconnected(socket)
+        return bool(is_connected)
+
     def start(self, message: SingleInstanceMessage) -> StartResult:
         if self.send_message(message):
             return StartResult.FORWARDED

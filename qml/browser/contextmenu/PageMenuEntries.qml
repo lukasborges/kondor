@@ -9,7 +9,7 @@ QtObject {
 
     readonly property var linkEntries: [
         { text: qsTr("Open Link in New Tab"), icon: "tab-new", action: "openLinkNewTab" },
-        { text: qsTr("Open Link in New Private Tab"), icon: "view-private", action: "openLinkNewPrivateTab" },
+        { text: qsTr("Open Link in New Private Tab"), icon: "view-private", action: "openLinkNewPrivateTab", enabled: ProfileManager.privateBrowsingAvailable },
         null,
         { text: qsTr("Copy Link Address"), icon: "edit-copy", action: "copyLink" },
         { text: qsTr("Save Link As…"), icon: "document-save", action: "saveLink" }

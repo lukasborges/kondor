@@ -49,6 +49,17 @@ ToolBar {
         anchors.rightMargin: 5
         spacing: 2
 
+        Loader {
+            active: !!root.browserWindow.privateWindow && !!root.browserWindow.tabsInSideBar
+            visible: active
+            Layout.preferredWidth: 22
+            Layout.preferredHeight: 22
+            Layout.rightMargin: Kirigami.Units.smallSpacing
+            sourceComponent: Kirigami.Icon {
+                source: "view-private"
+            }
+        }
+
         ToolButton {
             display: AbstractButton.IconOnly
             icon.name: "go-previous"

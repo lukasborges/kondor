@@ -2270,6 +2270,20 @@
     </message>
 </context>
 <context>
+    <name>SideBarTabList</name>
+    <message>
+        <source>New Tab</source>
+        <translation>Nowa karta</translation>
+    </message>
+</context>
+<context>
+    <name>SideBarTabRow</name>
+    <message>
+        <source>Close Tab</source>
+        <translation>Zamknij kartę</translation>
+    </message>
+</context>
+<context>
     <name>SiteInfoPopup</name>
     <message>
         <source>Permissions for this site</source>
@@ -2402,14 +2416,6 @@
 <context>
     <name>TabButtonDelegate</name>
     <message>
-        <source>New Tab</source>
-        <translation>Nowa karta</translation>
-    </message>
-    <message>
-        <source>New Private Tab</source>
-        <translation>Nowa karta prywatna</translation>
-    </message>
-    <message>
         <source>Close Tab</source>
         <translation>Zamknij kartę</translation>
     </message>
@@ -2454,6 +2460,17 @@
     </message>
 </context>
 <context>
+    <name>TabInfo</name>
+    <message>
+        <source>New Private Tab</source>
+        <translation>Nowa karta prywatna</translation>
+    </message>
+    <message>
+        <source>New Tab</source>
+        <translation>Nowa karta</translation>
+    </message>
+</context>
+<context>
     <name>TabStrip</name>
     <message>
         <source>Scroll Tabs Left</source>
@@ -2477,6 +2494,10 @@
     <message>
         <source>Below Address Bar</source>
         <translation>Pod paskiem adresu</translation>
+    </message>
+    <message>
+        <source>Side Bar</source>
+        <translation>Pasek boczny</translation>
     </message>
     <message>
         <source>Classic</source>

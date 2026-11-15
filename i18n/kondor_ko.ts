@@ -2248,6 +2248,20 @@
     </message>
 </context>
 <context>
+    <name>SideBarTabList</name>
+    <message>
+        <source>New Tab</source>
+        <translation>새 탭</translation>
+    </message>
+</context>
+<context>
+    <name>SideBarTabRow</name>
+    <message>
+        <source>Close Tab</source>
+        <translation>탭 닫기</translation>
+    </message>
+</context>
+<context>
     <name>SiteInfoPopup</name>
     <message>
         <source>Permissions for this site</source>
@@ -2380,14 +2394,6 @@
 <context>
     <name>TabButtonDelegate</name>
     <message>
-        <source>New Tab</source>
-        <translation>새 탭</translation>
-    </message>
-    <message>
-        <source>New Private Tab</source>
-        <translation>새 비공개 탭</translation>
-    </message>
-    <message>
         <source>Close Tab</source>
         <translation>탭 닫기</translation>
     </message>
@@ -2432,6 +2438,17 @@
     </message>
 </context>
 <context>
+    <name>TabInfo</name>
+    <message>
+        <source>New Private Tab</source>
+        <translation>새 비공개 탭</translation>
+    </message>
+    <message>
+        <source>New Tab</source>
+        <translation>새 탭</translation>
+    </message>
+</context>
+<context>
     <name>TabStrip</name>
     <message>
         <source>Scroll Tabs Left</source>
@@ -2455,6 +2472,10 @@
     <message>
         <source>Below Address Bar</source>
         <translation>주소 표시줄 아래</translation>
+    </message>
+    <message>
+        <source>Side Bar</source>
+        <translation>사이드바</translation>
     </message>
     <message>
         <source>Classic</source>

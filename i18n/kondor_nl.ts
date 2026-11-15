@@ -2259,6 +2259,20 @@
     </message>
 </context>
 <context>
+    <name>SideBarTabList</name>
+    <message>
+        <source>New Tab</source>
+        <translation>Nieuw tabblad</translation>
+    </message>
+</context>
+<context>
+    <name>SideBarTabRow</name>
+    <message>
+        <source>Close Tab</source>
+        <translation>Tabblad sluiten</translation>
+    </message>
+</context>
+<context>
     <name>SiteInfoPopup</name>
     <message>
         <source>Permissions for this site</source>
@@ -2391,14 +2405,6 @@
 <context>
     <name>TabButtonDelegate</name>
     <message>
-        <source>New Tab</source>
-        <translation>Nieuw tabblad</translation>
-    </message>
-    <message>
-        <source>New Private Tab</source>
-        <translation>Nieuw privétabblad</translation>
-    </message>
-    <message>
         <source>Close Tab</source>
         <translation>Tabblad sluiten</translation>
     </message>
@@ -2443,6 +2449,17 @@
     </message>
 </context>
 <context>
+    <name>TabInfo</name>
+    <message>
+        <source>New Private Tab</source>
+        <translation>Nieuw privétabblad</translation>
+    </message>
+    <message>
+        <source>New Tab</source>
+        <translation>Nieuw tabblad</translation>
+    </message>
+</context>
+<context>
     <name>TabStrip</name>
     <message>
         <source>Scroll Tabs Left</source>
@@ -2466,6 +2483,10 @@
     <message>
         <source>Below Address Bar</source>
         <translation>Onder de adresbalk</translation>
+    </message>
+    <message>
+        <source>Side Bar</source>
+        <translation>Zijbalk</translation>
     </message>
     <message>
         <source>Classic</source>

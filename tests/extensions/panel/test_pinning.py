@@ -133,6 +133,24 @@ def test_pinned_button_menu_opens_with_keys(
     toolbar.qtbot.waitUntil(lambda: menu.property("visible"))
 
 
+def test_pinned_button_menu_from_keyboard_unpins_on_enter(toolbar: ToolBar) -> None:  # noqa: F811
+    button = show_pinned(toolbar)
+    press_on(button, Qt.Key.Key_F10, Qt.KeyboardModifier.ShiftModifier)
+    menu = menu_of(button)
+    toolbar.qtbot.waitUntil(lambda: menu.property("visible"))
+    QTest.keyClick(button.window(), Qt.Key.Key_Return)
+    toolbar.qtbot.waitUntil(lambda: toolbar.button() is None)
+    assert not manager().isPinned(SAMPLE)
+
+
+def test_pinned_button_menu_from_right_click_has_no_current_item(toolbar: ToolBar) -> None:  # noqa: F811
+    button = show_pinned(toolbar)
+    right_click(button)
+    menu = menu_of(button)
+    toolbar.qtbot.waitUntil(lambda: menu.property("visible"))
+    assert menu.property("currentIndex") == -1
+
+
 def test_private_window_pinned_button_has_no_menu(toolbar: ToolBar) -> None:  # noqa: F811
     assert install_sample(toolbar.work)
     allow_in_private_windows(SAMPLE)

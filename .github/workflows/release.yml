@@ -122,6 +122,11 @@ jobs:
         timeout-minutes: 20
         run: dnf -y install git gh
 
+      - name: Check out the release notes
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: docs/releases
+
       - name: Download AppImage
         uses: actions/download-artifact@v4
         with:
@@ -132,9 +137,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
+          notes="docs/releases/$GITHUB_REF_NAME.md"
+          test -f "$notes" || { echo "::error::$notes is missing: write the release notes before tagging"; exit 1; }
           gh release create "$GITHUB_REF_NAME" Kondor-*.AppImage \
             --title "Kondor Browser $GITHUB_REF_NAME" \
-            --generate-notes
+            --notes-file "$notes"
 
   flatpak:
     if: github.event_name == 'push'

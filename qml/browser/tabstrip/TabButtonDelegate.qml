@@ -23,7 +23,7 @@ TabButton {
 
     width: tab.pinned ? tabStrip.pinnedTabWidth : tabStrip.tabWidth
     text: ""
-    Accessible.name: info.title
+    Accessible.name: tab.pinned ? info.iconOnlyName : info.title
     Accessible.description: info.stateDescription
     z: isRaised ? 10 : 0
     transform: [
@@ -95,7 +95,13 @@ TabButton {
             TabIcon {
                 anchors.centerIn: parent
                 tab: control.tab
+                showsEmblem: control.tab.pinned
             }
+        }
+
+        TabSoundButton {
+            visible: !control.tab.pinned && info.hasSoundState
+            tab: control.tab
         }
 
         Label {

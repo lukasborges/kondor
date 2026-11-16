@@ -2950,6 +2950,14 @@
         <translation>Épingler l’onglet</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>Réactiver le son de l’onglet</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Couper le son de l’onglet</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Mettre l’onglet en veille</translation>
     </message>
@@ -2977,8 +2985,27 @@
         <translation>Nouvel onglet</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>son coupé</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>lecture du son</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>En veille</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>Réactiver le son de l’onglet</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Couper le son de l’onglet</translation>
     </message>
 </context>
 <context>

@@ -2950,6 +2950,14 @@
         <translation>Fäst flik</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>Ljud på för fliken</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Ljud av för fliken</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Försätt fliken i viloläge</translation>
     </message>
@@ -2977,8 +2985,27 @@
         <translation>Ny flik</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>ljudet avstängt</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>spelar upp ljud</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>I viloläge</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>Ljud på för fliken</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Ljud av för fliken</translation>
     </message>
 </context>
 <context>

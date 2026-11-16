@@ -131,6 +131,11 @@ Item {
         onActivated: root.tab.toggleReaderMode()
     }
     Shortcut {
+        sequence: "Ctrl+M"
+        enabled: root.tab !== null
+        onActivated: root.tab.audio.toggleMuted()
+    }
+    Shortcut {
         sequence: "Ctrl+Shift+I"
         enabled: root.hasPage
         onActivated: root.tab.toggleDevTools()

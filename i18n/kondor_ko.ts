@@ -2937,6 +2937,14 @@
         <translation>탭 고정</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>탭 음소거 해제</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>탭 음소거</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>탭을 절전 상태로 전환</translation>
     </message>
@@ -2964,8 +2972,27 @@
         <translation>새 탭</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>음소거됨</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>소리 재생 중</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>절전 중</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>탭 음소거 해제</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>탭 음소거</translation>
     </message>
 </context>
 <context>

@@ -2950,6 +2950,14 @@
         <translation>Tabblad vastmaken</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>Tabblad niet meer dempen</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Tabblad dempen</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Tabblad in slaapstand zetten</translation>
     </message>
@@ -2977,8 +2985,27 @@
         <translation>Nieuw tabblad</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>gedempt</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>speelt geluid af</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>In slaapstand</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>Tabblad niet meer dempen</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Tabblad dempen</translation>
     </message>
 </context>
 <context>

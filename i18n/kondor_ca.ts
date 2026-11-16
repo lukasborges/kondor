@@ -2950,6 +2950,14 @@
         <translation>Fixa la pestanya</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>Deixa de silenciar la pestanya</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Silencia la pestanya</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Posa la pestanya en repòs</translation>
     </message>
@@ -2977,8 +2985,27 @@
         <translation>Pestanya nova</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>silenciada</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>reproduint so</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>En repòs</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>Deixa de silenciar la pestanya</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Silencia la pestanya</translation>
     </message>
 </context>
 <context>

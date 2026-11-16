@@ -136,7 +136,9 @@ QtObject {
     function navigateToTypedText(tab) {
         timer.stop()
         suggestions.close()
-        tab.navigateTo(ProfileManager.resolveAddress(field.text))
+        const url = ProfileManager.resolveAddress(field.text)
+        field.text = url.toString()
+        tab.navigateTo(url)
         field.focus = false
     }
 }

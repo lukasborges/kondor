@@ -98,3 +98,12 @@ def test_a_focused_address_bar_follows_the_current_tab(
     harness.call("focusBar")
     harness.tabs.setCurrentIndex(0)
     assert harness.text() == "https://kde.org/one"
+
+
+def test_losing_focus_shows_the_url_changed_while_focused(
+    harness: AddressBarHarness, qtbot: QtBot
+) -> None:
+    harness.type("localhost:8765/ads.html")
+    harness.tabs.currentTab.setUrl(QUrl("http://localhost:8765/ads.html"))
+    assert harness.call("blurBar")
+    assert harness.text() == "http://localhost:8765/ads.html"

@@ -54,7 +54,12 @@ TextField {
         if (activeFocus)
             completer.startTyping()
         else
-            completer.stopTyping()
+            stopEditing()
+    }
+
+    function stopEditing() {
+        completer.stopTyping()
+        showCurrentTabAddress()
     }
 
     AddressCompleter {

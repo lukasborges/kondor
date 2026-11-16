@@ -18,6 +18,7 @@ ApplicationWindow {
     function suggestionsProperty(name) { return suggestions()[name] }
     function suggestionRowCount() { return suggestions().rows.length }
     function suggestionRowText(index) { return suggestions().selectedText(index) }
+    function blurBar() { bar.focus = false; return !bar.activeFocus }
     function focusBar() { bar.forceActiveFocus(); return bar.activeFocus }
 
     AddressBar {

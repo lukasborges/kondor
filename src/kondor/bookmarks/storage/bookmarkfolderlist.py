@@ -2,6 +2,7 @@ from PySide6.QtSql import QSqlQuery
 
 from kondor.bookmarks.storage.bookmarkcolumns import integer_at, text_at
 from kondor.bookmarks.storage.bookmarkqueries import Row, special_folder_id
+from kondor.bookmarks.storage.rootfoldernames import display_title
 from kondor.core.database import sql
 
 SPECIAL_ROOTS = ("toolbar", "other")
@@ -23,7 +24,7 @@ def root_folder_ids() -> list[int]:
 def folder_row(folder: QSqlQuery, depth: int) -> Row:
     return {
         "id": integer_at(folder, 0),
-        "title": text_at(folder, 1),
+        "title": display_title(text_at(folder, 3), text_at(folder, 1)),
         "parentId": integer_at(folder, 2),
         "depth": depth,
     }
@@ -38,7 +39,8 @@ def child_folder_ids(folder_id: int) -> list[int]:
 
 def append_subtree(folder_id: int, depth: int, rows: list[Row]) -> None:
     folder = sql.run(
-        "SELECT id, title, COALESCE(parent_id, 0) FROM bookmarks WHERE id = ? AND is_folder = 1",
+        "SELECT id, title, COALESCE(parent_id, 0), COALESCE(special, '')"
+        " FROM bookmarks WHERE id = ? AND is_folder = 1",
         (folder_id,),
     )
     if folder is None or not folder.next():

@@ -606,7 +606,7 @@
     </message>
     <message>
         <source>History, bookmarks, saved passwords, cookies, extensions and settings of this profile are deleted for good.</source>
-        <translation>L'historial, els adreces d'interès, les contrasenyes desades, les galetes, les extensions i els paràmetres d'aquest perfil se suprimeixen definitivament.</translation>
+        <translation>L&apos;historial, les adreces d&apos;interès, les contrasenyes desades, les galetes, les extensions i els paràmetres d&apos;aquest perfil se suprimeixen definitivament.</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -1551,7 +1551,7 @@
     </message>
     <message>
         <source>Close the windows of this profile first</source>
-        <translation>Tanqueu primer les finestres d'aquest perfil</translation>
+        <translation>Tanqueu primer les finestres d&apos;aquest perfil</translation>
     </message>
     <message>
         <source>Delete…</source>
@@ -1586,7 +1586,7 @@
     </message>
     <message>
         <source>At startup:</source>
-        <translation>A l'inici:</translation>
+        <translation>A l&apos;inici:</translation>
     </message>
 </context>
 <context>

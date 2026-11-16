@@ -1586,7 +1586,7 @@
     </message>
     <message>
         <source>At startup:</source>
-        <translation>All'avvio:</translation>
+        <translation>All&apos;avvio:</translation>
     </message>
 </context>
 <context>

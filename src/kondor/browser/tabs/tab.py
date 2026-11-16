@@ -3,6 +3,7 @@ from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
 from kondor.browser.tabs.assignandnotify import assign_and_notify
 from kondor.browser.tabs.features.tabextensionitems import TabExtensionItems
+from kondor.browser.tabs.features.tabmedia import TabMedia
 from kondor.browser.tabs.features.tabpasswords import TabPasswords
 from kondor.browser.tabs.features.tabpermissions import TabPermissions
 from kondor.browser.tabs.features.tabsecurity import TabSecurity
@@ -48,6 +49,7 @@ class Tab(TabViewState):
         self._site_reload = TabSiteReload(self)
         self._extension_items = TabExtensionItems(self)
         self._sleep = TabSleep(self)
+        self._media = TabMedia(self)
 
     url = Property(QUrl, lambda self: self._url, notify=urlChanged)
     newTabPage = Property(bool, lambda self: self._new_tab_page, notify=newTabPageChanged)
@@ -57,6 +59,7 @@ class Tab(TabViewState):
     permissions = Property(TabPermissions, lambda self: self._permissions, constant=True)
     passwords = Property(TabPasswords, lambda self: self._passwords, constant=True)
     siteReload = Property(TabSiteReload, lambda self: self._site_reload, constant=True)
+    media = Property(TabMedia, lambda self: self._media, constant=True)
     sleep = Property(TabSleep, lambda self: self._sleep, constant=True)
     extensionItems = Property(TabExtensionItems, lambda self: self._extension_items, constant=True)
 

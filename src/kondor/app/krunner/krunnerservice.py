@@ -5,13 +5,17 @@ import shiboken6
 from PySide6.QtCore import QObject
 
 from kondor.app.instance.singleinstancemessage import SingleInstanceMessage
-from kondor.app.instance.windowactivation import raise_window
 from kondor.app.krunner.opentabs import open_tabs
-from kondor.app.krunner.runnerbus import Reply, RunnerBus
 from kondor.app.krunner.runnermatches import RunnerMatch, find_matches
 from kondor.app.krunner.runnerreply import match_reply
 from kondor.app.windows.windowmanager import WindowManager
+from kondor.core.dbus.buscall import BusCall, BusReply
+from kondor.core.dbus.sessionbusservice import SessionBusService
 
+SERVICE_NAME = "io.github.lukasborges.Kondor.KRunner"
+OBJECT_PATH = "/KRunner"
+INTERFACE = "org.kde.krunner1"
+Reply = tuple[str, tuple[Any, ...]]
 NO_REPLY: Reply = ("", ())
 
 
@@ -27,7 +31,7 @@ class KRunnerService(QObject):
 
     def __init__(self) -> None:
         super().__init__()
-        self._bus = RunnerBus(self.handle_call, self)
+        self._bus = SessionBusService(self.handle_call, self)
         self.last_matches: dict[str, RunnerMatch] = {}
         self._token = b""
 
@@ -38,21 +42,28 @@ class KRunnerService(QObject):
         return cls._instance
 
     def start(self) -> bool:
-        return self._bus.start()
+        return self._bus.start(SERVICE_NAME)
 
     def stop(self) -> None:
         self._bus.stop()
 
-    def handle_call(self, member: str, body: tuple[Any, ...]) -> Reply | None:
-        handlers: dict[str, Callable[..., Reply]] = {
+    def handle_call(self, call: BusCall) -> BusReply | None:
+        if call.path != OBJECT_PATH or call.interface != INTERFACE:
+            return None
+        handler = self.member_handlers().get(call.member)
+        if handler is None:
+            return None
+        signature, body = handler(*call.body)
+        return BusReply(signature, body)
+
+    def member_handlers(self) -> dict[str, Callable[..., Reply]]:
+        return {
             "Match": self.match,
             "Run": self.run,
             "Actions": lambda *_: ("a(sss)", ([],)),
             "SetActivationToken": self.remember_token,
             "Teardown": self.teardown,
         }
-        handler = handlers.get(member)
-        return handler(*body) if handler is not None else None
 
     def match(self, query: str) -> Reply:
         windows = WindowManager.instance().windows()
@@ -84,8 +95,5 @@ class KRunnerService(QObject):
         WindowManager.instance().handle_single_instance_message(message)
 
     def switch_to(self, match: RunnerMatch) -> None:
-        tab = match.tab
-        if tab is None:
-            return
-        tab.tab_model.setCurrentIndex(tab.tab_model.indexOfTab(tab.tab))
-        raise_window(tab.window, self._token)
+        if match.tab is not None:
+            WindowManager.instance().show_tab(match.tab.tab, self._token)

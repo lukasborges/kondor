@@ -1,8 +1,10 @@
 from kondor.browser.address.searchsuggestions import SearchSuggestions
 from kondor.browser.favicons.faviconstore import FaviconStore
+from kondor.browser.media.mediabridge import MediaBridge
 from kondor.browser.profile.profilemanager import ProfileManager
 from kondor.browser.session.sessionmanager import SessionManager
 from kondor.browser.tabs.features.tabextensionitems import TabExtensionItems
+from kondor.browser.tabs.features.tabmedia import TabMedia
 from kondor.browser.tabs.features.tabpasswords import TabPasswords
 from kondor.browser.tabs.features.tabpermissions import TabPermissions
 from kondor.browser.tabs.features.tabsecurity import TabSecurity
@@ -14,6 +16,7 @@ from kondor.core.qmlregistration import QmlKind, QmlType, register
 
 QML_TYPES: tuple[QmlType, ...] = (
     QmlType(FaviconStore, "FaviconStore", QmlKind.SINGLETON),
+    QmlType(MediaBridge, "MediaBridge", QmlKind.CREATABLE),
     QmlType(ProfileManager, "ProfileManager", QmlKind.SINGLETON),
     QmlType(SearchSuggestions, "SearchSuggestions", QmlKind.SINGLETON),
     QmlType(SessionManager, "SessionManager", QmlKind.SINGLETON),
@@ -23,6 +26,7 @@ QML_TYPES: tuple[QmlType, ...] = (
     QmlType(TabPasswords, "TabPasswords", QmlKind.UNCREATABLE),
     QmlType(TabSiteReload, "TabSiteReload", QmlKind.UNCREATABLE),
     QmlType(TabExtensionItems, "TabExtensionItems", QmlKind.UNCREATABLE),
+    QmlType(TabMedia, "TabMedia", QmlKind.UNCREATABLE),
     QmlType(TabModel, "TabModel", QmlKind.CREATABLE),
     QmlType(ZoomManager, "ZoomManager", QmlKind.SINGLETON),
 )

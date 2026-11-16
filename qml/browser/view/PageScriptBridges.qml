@@ -25,6 +25,11 @@ Item {
         tab: root.tab
     }
 
+    MediaBridge {
+        id: mediaBridge
+        tab: root.tab
+    }
+
     ExtensionBridge {
         id: extensionBridge
         tab: root.tab
@@ -34,6 +39,7 @@ Item {
         id: pageChannel
         Component.onCompleted: {
             registerObject("kondorExtensions", extensionBridge.pageApi())
+            registerObject("kondorMedia", mediaBridge.pageApi())
             if (!root.tab.isPrivate)
                 registerObject("kondorPasswords", passwordBridge.pageApi())
         }
@@ -50,6 +56,20 @@ Item {
     Connections {
         target: root.tab.passwords
         function onFillRequested(origin, username) { passwordBridge.fill(origin, username) }
+    }
+
+    Connections {
+        target: root.tab.media
+        function onActionRequested(action, seconds) { mediaBridge.perform(action, seconds) }
+    }
+
+    Connections {
+        target: root.webView
+        function onRenderProcessTerminated() { root.tab.media.clear() }
+        function onLifecycleStateChanged(state) {
+            if (state === WebEngineView.LifecycleState.Discarded)
+                root.tab.media.clear()
+        }
     }
 
     Connections {

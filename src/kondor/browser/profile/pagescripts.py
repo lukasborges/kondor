@@ -11,14 +11,21 @@ USERNAME_FIELD_RESOURCE = ":/scripts/usernamefield.js"
 PASSWORDS_RESOURCE = ":/scripts/passwords.js"
 CHANNEL_SCRIPT = "kondor-channel"
 PASSWORDS_SCRIPT = "kondor-passwords"
+MEDIA_SESSION_RESOURCE = ":/scripts/mediasession.js"
+MEDIA_WATCH_RESOURCE = ":/scripts/mediawatch.js"
+MEDIA_SESSION_SCRIPT = "kondor-media-session"
+MEDIA_WATCH_SCRIPT = "kondor-media-watch"
 USER_SCRIPTS_PROPERTY = "userScripts"
 InjectionPoint = QWebEngineScript.InjectionPoint
+ScriptWorldId = QWebEngineScript.ScriptWorldId
 
 
 class ScriptSpec(NamedTuple):
     name: str
     source: str
     injection_point: QWebEngineScript.InjectionPoint
+    world: QWebEngineScript.ScriptWorldId = QWebEngineScript.ScriptWorldId.ApplicationWorld
+    runs_on_sub_frames: bool = True
 
 
 def read_resource(path: str) -> str | None:
@@ -40,8 +47,8 @@ def make_script(spec: ScriptSpec) -> QWebEngineScript:
     script.setName(spec.name)
     script.setSourceCode(spec.source)
     script.setInjectionPoint(spec.injection_point)
-    script.setWorldId(QWebEngineScript.ScriptWorldId.ApplicationWorld.value)
-    script.setRunsOnSubFrames(True)
+    script.setWorldId(spec.world.value)
+    script.setRunsOnSubFrames(spec.runs_on_sub_frames)
     return script
 
 
@@ -72,6 +79,23 @@ def install_passwords_script(collection: QObject | None) -> None:
     insert_script(collection, make_script(spec))
 
 
+def install_media_script(collection: QObject | None, name: str, resource: str) -> None:
+    source = read_resource(resource)
+    if source is None:
+        qWarning(f"Media script resource {resource} not found: media controls are off")
+        return
+    world = (
+        ScriptWorldId.MainWorld if name == MEDIA_SESSION_SCRIPT else ScriptWorldId.ApplicationWorld
+    )
+    spec = ScriptSpec(name, source, InjectionPoint.DocumentCreation, world, False)
+    insert_script(collection, make_script(spec))
+
+
+def install_media_scripts(collection: QObject | None) -> None:
+    install_media_script(collection, MEDIA_SESSION_SCRIPT, MEDIA_SESSION_RESOURCE)
+    install_media_script(collection, MEDIA_WATCH_SCRIPT, MEDIA_WATCH_RESOURCE)
+
+
 def keep_cpp_ownership(target: QObject | None) -> None:
     if target is not None:
         QJSEngine.setObjectOwnership(target, QJSEngine.ObjectOwnership.CppOwnership)
@@ -89,5 +113,6 @@ def install(profile: QQuickWebEngineProfile) -> None:
     collection = user_scripts(profile)
     if not install_channel_script(collection):
         return
+    install_media_scripts(collection)
     if not profile.isOffTheRecord():
         install_passwords_script(collection)

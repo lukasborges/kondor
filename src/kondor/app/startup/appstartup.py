@@ -11,6 +11,7 @@ from kondor.app.commandline.startupargs import StartupArgs
 from kondor.app.instance.singleinstance import SingleInstance, StartResult
 from kondor.app.instance.singleinstancemessage import SingleInstanceMessage
 from kondor.app.krunner.krunnerservice import KRunnerService
+from kondor.app.mpris.mprisservice import MprisService
 from kondor.app.startup.appidentity import set_up_language_and_style
 from kondor.app.startup.positioncache import discard_position_cache
 from kondor.app.startup.qmlregistry import register_all_types
@@ -96,11 +97,13 @@ def open_windows(engine: QQmlApplicationEngine, single_instance: SingleInstance)
     ExtensionManager.instance().manageRequested.connect(window_manager.show_extensions_settings)
     window_manager.open_startup_windows()
     KRunnerService.instance().start()
+    MprisService.instance().start()
     ExtensionCatalog.instance().start_auto_update()
     return window_manager.window_count() > 0
 
 
 def shut_down(engine: QQmlApplicationEngine) -> None:
     KRunnerService.instance().stop()
+    MprisService.instance().stop()
     WindowManager.instance().release_windows()
     shiboken6.delete(engine)

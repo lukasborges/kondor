@@ -28,6 +28,7 @@ ToolButton {
     icon.name: securityIconForState(securityState)
     icon.color: isNotSecure ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
     flat: true
+    focusPolicy: Qt.TabFocus
     implicitHeight: 28
     ToolTip.visible: hovered
     Accessible.name: ToolTip.text

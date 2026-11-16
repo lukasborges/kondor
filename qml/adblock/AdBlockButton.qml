@@ -25,6 +25,7 @@ ToolButton {
 
     visible: host.length > 0 && tabs.currentTab && !tabs.currentTab.newTabPage
     display: AbstractButton.IconOnly
+    focusPolicy: Qt.TabFocus
     icon.name: allowed || !AdBlockManager.enabled ? "security-low" : "security-high"
     icon.width: 16
     icon.height: 16

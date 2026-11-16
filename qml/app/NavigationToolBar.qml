@@ -117,6 +117,7 @@ ToolBar {
             id: downloadsButton
             visible: DownloadManager.model.count > 0
             display: AbstractButton.IconOnly
+            focusPolicy: Qt.TabFocus
             icon.name: "download"
             ToolTip.visible: hovered
             Accessible.name: ToolTip.text

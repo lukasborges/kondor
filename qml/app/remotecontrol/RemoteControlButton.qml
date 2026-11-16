@@ -10,6 +10,7 @@ ToolButton {
 
     visible: RemoteControl.active
     display: AbstractButton.IconOnly
+    focusPolicy: Qt.TabFocus
     icon.name: "automated-tasks"
     icon.color: Kirigami.Theme.neutralTextColor
     checked: popup.opened

@@ -4,16 +4,13 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-Popup {
+ToolbarPopup {
     id: root
 
     required property var browserWindow
 
     width: 360
     padding: Kirigami.Units.largeSpacing
-    modal: false
-    focus: true
-    closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
     function openPrivacySettings() {
         root.close()

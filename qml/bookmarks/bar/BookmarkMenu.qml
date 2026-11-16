@@ -5,6 +5,8 @@ import Kondor
 Menu {
     id: root
 
+    MenuKeyNavigation { menu: root }
+
     property var folderId: -1
     property bool showCommands: false
     property bool showFolderActions: false

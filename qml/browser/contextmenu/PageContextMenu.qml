@@ -6,6 +6,8 @@ import Kondor
 Menu {
     id: menu
 
+    MenuKeyNavigation { menu: menu }
+
     property var request: null
     property WebEngineView webView: null
     property Tab tab: null

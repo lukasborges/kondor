@@ -5,6 +5,8 @@ import Kondor
 Menu {
     id: root
 
+    MenuKeyNavigation { menu: root }
+
     title: qsTr("Spell Check Languages")
     icon.name: "tools-check-spelling"
     popupType: Popup.Item

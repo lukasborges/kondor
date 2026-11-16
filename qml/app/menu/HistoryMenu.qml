@@ -5,6 +5,8 @@ import Kondor
 Menu {
     id: root
 
+    MenuKeyNavigation { menu: root }
+
     required property var browserWindow
 
     readonly property int staticCount: 2

@@ -51,6 +51,10 @@ class InstallLayoutTest(unittest.TestCase):
             ).exists()
         )
 
+    def test_installs_the_extensions_action_icon(self):
+        icon = self.prefix / "share/icons/hicolor/scalable/actions/kondor-extensions-symbolic.svg"
+        self.assertTrue(icon.exists())
+
 
 if __name__ == "__main__":
     unittest.main()

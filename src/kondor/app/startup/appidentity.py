@@ -9,6 +9,7 @@ from kondor.app.startup.stagedbuild import PROJECT_VERSION
 
 DESKTOP_STYLE = "org.kde.desktop"
 FALLBACK_STYLE = "Fusion"
+BUNDLED_ICONS = ":/icons"
 
 
 def install_translator(app: QApplication, name: str, directory: str) -> None:
@@ -34,12 +35,17 @@ def desktop_file_name() -> str:
     return os.environ.get("FLATPAK_ID") or "kondor"
 
 
+def use_bundled_icons() -> None:
+    QIcon.setFallbackSearchPaths([BUNDLED_ICONS, *QIcon.fallbackSearchPaths()])
+
+
 def set_up_identity() -> None:
     QCoreApplication.setOrganizationName("KDE")
     QCoreApplication.setApplicationName("Kondor")
     QCoreApplication.setApplicationVersion(PROJECT_VERSION)
     QGuiApplication.setDesktopFileName(desktop_file_name())
     QGuiApplication.setWindowIcon(QIcon(":/packaging/kondor.png"))
+    use_bundled_icons()
 
 
 def set_up_language_and_style(app: QApplication) -> None:

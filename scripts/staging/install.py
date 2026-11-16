@@ -9,6 +9,7 @@ PACKAGING_FILES = (
     ("kondor.png", "share/icons/hicolor/256x256/apps"),
     ("kondor.svg", "share/icons/hicolor/scalable/apps"),
 )
+ACTION_ICONS = ("kondor-extensions-symbolic.svg",)
 NOT_INSTALLED = ("kondor.qrc", "i18n")
 
 
@@ -40,9 +41,18 @@ def install_packaging_files(repository: Path, prefix: Path) -> None:
         shutil.copyfile(repository / "packaging" / name, target / name)
 
 
+def install_action_icons(repository: Path, prefix: Path) -> None:
+    source = repository / "assets" / "icons" / "hicolor" / "scalable" / "actions"
+    target = prefix / "share" / "icons" / "hicolor" / "scalable" / "actions"
+    target.mkdir(parents=True, exist_ok=True)
+    for name in ACTION_ICONS:
+        shutil.copyfile(source / name, target / name)
+
+
 def install(repository: Path, staged: Path, prefix: Path) -> None:
     share = prefix / "share" / "kondor"
     install_staged_files(staged, share)
     install_python_package(repository, share)
     install_launcher(repository, prefix)
     install_packaging_files(repository, prefix)
+    install_action_icons(repository, prefix)

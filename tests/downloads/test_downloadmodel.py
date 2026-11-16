@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from PySide6.QtCore import QCoreApplication, QEvent, QLocale
 
 from kondor.downloads import downloadroles
@@ -7,6 +9,8 @@ from kondor.downloads.downloadroles import Role
 from tests.downloads.fakedownload import FakeDownload, State
 
 HALF_DONE = 0.5
+SAVED_SIZE = 5000
+REPORTED_SIZE = 700
 
 
 def in_progress(received: int, total: int) -> FakeDownload:
@@ -83,3 +87,28 @@ def test_speed_text_rounds_half_away_from_zero(qapp: object) -> None:
     item.speed.update(5, 2000)
     expected = f"{QLocale().formattedDataSize(3)}/s"
     assert downloadroles.speed_text_of(item) == expected
+
+
+def finished_save_page(directory: str, reported_bytes: int) -> FakeDownload:
+    download = FakeDownload("page.html", is_save_page=True)
+    download.setDownloadDirectory(directory)
+    download.set_bytes(reported_bytes, reported_bytes)
+    download.set_state(State.DownloadCompleted)
+    return download
+
+
+def received_bytes_of(model: DownloadModel) -> object:
+    return model.data(model.index(0), Role.ReceivedBytesRole)
+
+
+def test_finished_save_page_shows_the_saved_file_size(qapp: object, tmp_path: Path) -> None:
+    (tmp_path / "page.html").write_bytes(b"x" * SAVED_SIZE)
+    model = model_with(finished_save_page(str(tmp_path), 28))
+    assert received_bytes_of(model) == SAVED_SIZE
+
+
+def test_finished_normal_download_shows_the_reported_size(qapp: object) -> None:
+    download = FakeDownload("file.bin")
+    download.set_bytes(REPORTED_SIZE, REPORTED_SIZE)
+    download.set_state(State.DownloadCompleted)
+    assert received_bytes_of(model_with(download)) == REPORTED_SIZE

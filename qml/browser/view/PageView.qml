@@ -107,11 +107,29 @@ WebEngineView {
             request.cancel()
     }
 
+    function opensInWindow(request) {
+        return request.destination === WebEngineNewWindowRequest.InNewWindow
+            || request.destination === WebEngineNewWindowRequest.InNewDialog
+    }
+
     function openRequestedWindow(request) {
-        if (request.destination === WebEngineNewWindowRequest.InNewWindow)
-            return WindowManager.newWindow(root.tab.isPrivate, [request.requestedUrl])
+        if (opensInWindow(request))
+            return WindowManager.newWindowForRequest(root.tab.profile, request)
         const background = request.destination === WebEngineNewWindowRequest.InNewBackgroundTab
-        root.tabModel.addTabWithProfile(root.tab.profile, request.requestedUrl, background)
+        root.tabModel.addTabForRequest(root.tab.profile, request, background)
+    }
+
+    function adoptPendingRequest() {
+        const request = root.tab.pendingRequest
+        if (!request)
+            return
+        root.tab.clearPendingRequest()
+        request.openIn(root)
+    }
+
+    function closeOwnTab() {
+        if (Window.window && Window.window.closeTabFor)
+            Window.window.closeTabFor(root.tab)
     }
 
     onTitleChanged: updateTitle()
@@ -150,4 +168,6 @@ WebEngineView {
     onCertificateError: function(error) { root.certificates.handle(error) }
     onDesktopMediaRequested: function(request) { selectFirstScreen(request) }
     onNewWindowRequested: function(request) { openRequestedWindow(request) }
+    onWindowCloseRequested: closeOwnTab()
+    Component.onCompleted: adoptPendingRequest()
 }

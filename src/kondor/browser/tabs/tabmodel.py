@@ -38,6 +38,13 @@ class TabModel(TabModelClosing):
     ) -> Tab:
         return self.insert_tab(NewTab(self._child_tab_row(), profile, url, not background))
 
+    @Slot(QQuickWebEngineProfile, QObject, bool, result=Tab)
+    def addTabForRequest(
+        self, profile: QQuickWebEngineProfile, request: QObject, background: bool
+    ) -> Tab:
+        new_tab = NewTab(self._child_tab_row(), profile, activate=not background, request=request)
+        return self.insert_tab(new_tab)
+
     @Slot(Tab, result=int)
     def indexOfTab(self, tab: Tab) -> int:
         return self._tabs.index(tab) if tab in self._tabs else -1

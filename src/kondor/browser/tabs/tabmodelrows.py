@@ -25,6 +25,7 @@ class NewTab:
     profile: QQuickWebEngineProfile | None
     url: QUrl = field(default_factory=QUrl)
     activate: bool = True
+    request: QObject | None = None
 
 
 class TabModelRows(QAbstractListModel):
@@ -112,6 +113,7 @@ class TabModelRows(QAbstractListModel):
     def insert_tab(self, new_tab: NewTab) -> Tab:
         tab = Tab(self.profile_for(new_tab.profile), self)
         tab.setUrl(new_tab.url)
+        tab.adopt_request(new_tab.request)
         index = max(0, min(new_tab.index, len(self._tabs)))
         self.insert_row(index, tab)
         self.keep_current_when_inserted_before(index)

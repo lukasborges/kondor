@@ -7,7 +7,7 @@ from PySide6.QtCore import Q_ARG, QMetaObject, QObject, QUrl, qWarning
 from kondor.app.commandline.extensionpackages import take_extension_packages
 from kondor.app.commandline.startupargs import StartupArgs
 from kondor.app.instance.singleinstancemessage import SingleInstanceMessage
-from kondor.app.instance.windowactivation import raise_window
+from kondor.app.instance.windowactivation import export_activation_token, raise_window
 from kondor.app.remotecontrol.remotecontrolstartup import warn_private_refused
 from kondor.app.windows.windowcontents import WindowContents
 from kondor.browser.profile.profilemanager import ProfileManager
@@ -39,16 +39,21 @@ def refuse_private_request(manager: WindowManager, message: SingleInstanceMessag
         raise_window(window, message.activation_token)
 
 
+def is_private_request_refused(message: SingleInstanceMessage) -> bool:
+    return message.private_mode and not ProfileManager.instance().is_private_browsing_available()
+
+
 def handle_single_instance_message(manager: WindowManager, message: SingleInstanceMessage) -> None:
-    is_available = ProfileManager.instance().is_private_browsing_available()
-    if message.private_mode and not is_available:
-        refuse_private_request(manager, message)
-        return
+    if is_private_request_refused(message):
+        return refuse_private_request(manager, message)
     urls = list(message.urls)
     packages = take_extension_packages(urls)
-    window = show_packages(manager, packages, open_urls_for_launch(manager, message, urls))
-    if window is not None:
+    export_activation_token(message.activation_token)
+    window = open_urls_for_launch(manager, message, urls)
+    if not packages:
         raise_window(window, message.activation_token)
+        return
+    show_extension_package(normal_window(manager), packages[0])
 
 
 def open_urls_for_launch(
@@ -72,16 +77,6 @@ def normal_window(manager: WindowManager) -> QObject | None:
     return manager.window_for_request(False) or manager.create_window(WindowContents())
 
 
-def show_packages(
-    manager: WindowManager, packages: list[str], window: QObject | None
-) -> QObject | None:
-    if not packages:
-        return window
-    normal = normal_window(manager)
-    show_extension_package(normal, packages[0])
-    return window or normal
-
-
 def show_extension_package(window: QObject | None, path: str) -> None:
     ExtensionManager.instance().inspectFile(path)
     if window is None:
@@ -101,8 +96,7 @@ def show_extensions_settings(manager: WindowManager) -> None:
     window = manager.window_for_request(False) or manager.window_for_request(True)
     if window is None:
         return
-    if open_extensions_page(window):
-        raise_window(window, b"")
+    open_extensions_page(window)
 
 
 def open_startup_windows(manager: WindowManager) -> None:

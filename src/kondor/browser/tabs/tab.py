@@ -59,16 +59,19 @@ class Tab(TabViewState):
 
     @Slot(QUrl)
     def setUrl(self, url: QUrl) -> None:
-        if is_real_page(url):
-            self._set_new_tab_page(False)
-        if not is_same_origin(self._url, url):
-            self._permissions.deny_all()
+        self._leave_previous_page_for(url)
         if self._url == url:
             return
         self._url = url
         self._security.update_for(url)
         self._passwords.update_usernames_for(url)
         self.urlChanged.emit()
+
+    def _leave_previous_page_for(self, url: QUrl) -> None:
+        if is_real_page(url):
+            self._set_new_tab_page(False)
+        if not is_same_origin(self._url, url):
+            self._permissions.deny_all()
 
     @Slot(bool)
     def setLoading(self, loading: bool) -> None:

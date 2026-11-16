@@ -36,6 +36,12 @@ class TabLoadState(TabCommands):
 
     @Slot(QUrl)
     def setIconUrl(self, icon_url: QUrl) -> None:
+        if icon_url.isEmpty():
+            return
+        assign_and_notify((self, "_icon_url"), icon_url, self.iconUrlChanged)
+
+    @Slot(QUrl)
+    def settleIconUrl(self, icon_url: QUrl) -> None:
         assign_and_notify((self, "_icon_url"), icon_url, self.iconUrlChanged)
 
     @Slot(float)

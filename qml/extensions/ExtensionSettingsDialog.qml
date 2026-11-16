@@ -55,6 +55,7 @@ Dialog {
 
     anchors.centerIn: parent
     width: Kirigami.Units.gridUnit * 30
+    height: Math.min(implicitHeight, root.parent.height - Kirigami.Units.gridUnit * 2)
     modal: true
     dim: true
     closePolicy: Popup.CloseOnEscape
@@ -84,52 +85,63 @@ Dialog {
         }
     }
 
-    contentItem: ColumnLayout {
-        spacing: Kirigami.Units.largeSpacing
+    contentItem: ScrollView {
+        id: scroll
+        contentWidth: availableWidth
+        contentHeight: content.implicitHeight + Kirigami.Units.gridUnit * 2
+        implicitHeight: contentHeight
 
-        Kirigami.FormLayout {
-            Layout.fillWidth: true
-            visible: root.schema.length > 0
+        ColumnLayout {
+            id: content
+            x: Kirigami.Units.gridUnit
+            y: Kirigami.Units.gridUnit
+            width: scroll.availableWidth - Kirigami.Units.gridUnit * 2
+            spacing: Kirigami.Units.largeSpacing
 
-            Repeater {
-                model: root.schema
+            Kirigami.FormLayout {
+                Layout.fillWidth: true
+                visible: root.schema.length > 0
 
-                delegate: Loader {
-                    id: field
-                    required property var modelData
-                    Kirigami.FormData.label: field.modelData.label + ":"
-                    Layout.fillWidth: true
-                    sourceComponent: controls.componentFor(field.modelData.type)
+                Repeater {
+                    model: root.schema
+
+                    delegate: Loader {
+                        id: field
+                        required property var modelData
+                        Kirigami.FormData.label: field.modelData.label + ":"
+                        Layout.fillWidth: true
+                        sourceComponent: controls.componentFor(field.modelData.type)
+                    }
                 }
             }
-        }
 
-        Kirigami.FormLayout {
-            Layout.fillWidth: true
+            Kirigami.FormLayout {
+                Layout.fillWidth: true
 
-            Kirigami.Separator {
-                Kirigami.FormData.isSection: true
-                Kirigami.FormData.label: qsTr("Privacy")
+                Kirigami.Separator {
+                    Kirigami.FormData.isSection: true
+                    Kirigami.FormData.label: qsTr("Privacy")
+                }
+
+                CheckBox {
+                    text: qsTr("Allow in private windows")
+                    checked: root.privateAllowed
+                    onToggled: root.privateAllowed = checked
+                }
             }
 
-            CheckBox {
-                text: qsTr("Allow in private windows")
-                checked: root.privateAllowed
-                onToggled: root.privateAllowed = checked
+            ExtensionSitesSection {
+                Layout.fillWidth: true
+                sites: root.sites
+                onSiteRemoved: function(site) { root.removeSite(site) }
             }
-        }
 
-        ExtensionSitesSection {
-            Layout.fillWidth: true
-            sites: root.sites
-            onSiteRemoved: function(site) { root.removeSite(site) }
-        }
-
-        ExtensionSettingControls {
-            id: controls
-            visible: false
-            values: root.values
-            onValueEdited: function(key, value) { root.setValue(key, value) }
+            ExtensionSettingControls {
+                id: controls
+                visible: false
+                values: root.values
+                onValueEdited: function(key, value) { root.setValue(key, value) }
+            }
         }
     }
 }

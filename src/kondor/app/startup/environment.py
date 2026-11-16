@@ -1,9 +1,10 @@
 import os
 
-from PySide6.QtCore import QCoreApplication, QDir, Qt
+from PySide6.QtCore import QCoreApplication, QDir, Qt, qVersion
 from PySide6.QtWebEngineQuick import QtWebEngineQuick
 
 from kondor.app.startup.stagedbuild import staged_build_directory
+from kondor.app.startup.xwaylandplatform import use_xwayland_when_qt_breaks_wayland_popups
 
 DICTIONARIES_VARIABLE = "QTWEBENGINE_DICTIONARIES_PATH"
 PORTAL_VARIABLE = "PLASMA_INTEGRATION_USE_PORTAL"
@@ -47,6 +48,7 @@ def turn_off_chromium_media_player() -> None:
 
 
 def prepare_environment() -> None:
+    use_xwayland_when_qt_breaks_wayland_popups(os.environ, qVersion())
     QCoreApplication.setAttribute(Qt.ApplicationAttribute.AA_ShareOpenGLContexts)
     find_dictionaries(str(staged_build_directory()))
     turn_off_chromium_media_player()

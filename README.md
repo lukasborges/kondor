@@ -28,6 +28,8 @@ Updates arrive in Discover and through `flatpak update`.
 
 **AppImage**: get it from the [latest release](https://github.com/lukasborges/kondor/releases/latest), make it executable and run it.
 
+**Known issue**: while Qt 6.11 is in use, Kondor runs through XWayland on a Wayland session, because `<select>` lists ignore mouse clicks on native Wayland ([QTBUG-147154](https://qt-project.atlassian.net/browse/QTBUG-147154)). Set `QT_QPA_PLATFORM=wayland` to force native Wayland.
+
 See what's coming next on the [Roadmap](https://github.com/users/lukasborges/projects/1).
 
 ## Features

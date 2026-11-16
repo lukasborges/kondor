@@ -12,7 +12,7 @@ finish-args:
   - --share=ipc
   - --share=network
   - --socket=wayland
-  - --socket=fallback-x11
+  - --socket=x11
   - --socket=pulseaudio
   # Cameras (/dev/video*) and security keys (/dev/hidraw*): https://github.com/lukasborges/kondor/issues/364
   - --device=all

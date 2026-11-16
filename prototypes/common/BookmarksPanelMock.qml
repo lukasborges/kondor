@@ -10,6 +10,8 @@ Popup {
 
     // "list" | "folder" | "search" | "empty"
     property string level: "list"
+    // #351: Recently Used plus the Bookmarks Toolbar contents instead of Recently Added and two roots
+    property bool oneRoot: false
     property string query: ""
 
     popupType: Popup.Item
@@ -55,7 +57,7 @@ Popup {
         Kirigami.Separator { Layout.fillWidth: true; visible: panel.level === "folder" }
 
         ColumnLayout {
-            visible: panel.level === "list"
+            visible: panel.level === "list" && !panel.oneRoot
             spacing: 0
             Kirigami.ListSectionHeader { Layout.fillWidth: true; text: "Recently Added" }
             Row { text: "OMG! Ubuntu"; iconName: "globe" }
@@ -64,6 +66,21 @@ Popup {
             Kirigami.ListSectionHeader { Layout.fillWidth: true; text: "Folders" }
             Row { text: "Bookmarks Toolbar"; iconName: "bookmark-toolbar"; folder: true; detail: "6" }
             Row { text: "Other Bookmarks"; iconName: "folder"; folder: true; detail: "24" }
+        }
+
+        ColumnLayout {
+            visible: panel.level === "list" && panel.oneRoot
+            spacing: 0
+            Kirigami.ListSectionHeader { Layout.fillWidth: true; text: "Recently Used" }
+            Row { text: "Kondor Browser"; iconName: "github" }
+            Row { text: "This Week in KDE"; iconName: "kde" }
+            Row { text: "OMG! Ubuntu"; iconName: "globe" }
+            Kirigami.ListSectionHeader { Layout.fillWidth: true; text: "Bookmarks Toolbar" }
+            Row { text: "News"; iconName: "folder"; folder: true; detail: "5" }
+            Row { text: "KDE"; iconName: "folder"; folder: true; detail: "4" }
+            Row { text: "Kondor Browser"; iconName: "github" }
+            Row { text: "OMG! Ubuntu"; iconName: "globe" }
+            Row { text: "KDE Human Interface Guidelines"; iconName: "kde" }
         }
 
         ColumnLayout {

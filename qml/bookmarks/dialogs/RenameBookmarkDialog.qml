@@ -16,6 +16,7 @@ Dialog {
     title: root.targetIsFolder ? qsTr("Rename Folder") : qsTr("Rename Bookmark")
     standardButtons: Dialog.Ok | Dialog.Cancel
     modal: true
+    horizontalPadding: Kirigami.Units.largeSpacing
     anchors.centerIn: parent
 
     onOpened: root.prepareField()
@@ -51,6 +52,7 @@ Dialog {
 
         TextField {
             id: renameField
+            objectName: "nameField"
             Layout.fillWidth: true
             Layout.preferredWidth: Kirigami.Units.gridUnit * 18
             onAccepted: {

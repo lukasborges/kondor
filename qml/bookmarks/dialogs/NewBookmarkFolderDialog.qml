@@ -12,6 +12,7 @@ Dialog {
     title: qsTr("New Folder")
     standardButtons: Dialog.Ok | Dialog.Cancel
     modal: true
+    horizontalPadding: Kirigami.Units.largeSpacing
     anchors.centerIn: parent
 
     onOpened: newFolderField.forceActiveFocus()
@@ -34,6 +35,7 @@ Dialog {
 
         TextField {
             id: newFolderField
+            objectName: "nameField"
             //: Default name of a new bookmark folder
             placeholderText: qsTr("New Folder")
             Layout.fillWidth: true

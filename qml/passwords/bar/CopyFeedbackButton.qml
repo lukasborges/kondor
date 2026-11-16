@@ -12,6 +12,7 @@ ToolButton {
     required property string accessibleName
 
     property bool isCopied: false
+    property bool isOnHighlight: false
 
     signal copyRequested()
 
@@ -22,9 +23,13 @@ ToolButton {
         Accessible.announce(announcement)
     }
 
+    readonly property color checkColor: isOnHighlight
+        ? Kirigami.Theme.highlightedTextColor
+        : Kirigami.Theme.positiveTextColor
+
     display: AbstractButton.IconOnly
     icon.name: isCopied ? "dialog-ok-apply" : iconName
-    icon.color: isCopied ? Kirigami.Theme.positiveTextColor : "transparent"
+    icon.color: isCopied ? checkColor : "transparent"
     icon.width: Kirigami.Units.iconSizes.smallMedium
     icon.height: Kirigami.Units.iconSizes.smallMedium
     ToolTip.visible: hovered

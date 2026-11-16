@@ -8,6 +8,7 @@ RowLayout {
 
     required property var login
     required property var tab
+    property bool isRowHighlighted: false
 
     readonly property bool isAnyHovered: copyUsernameButton.hovered || copyPasswordButton.hovered
 
@@ -15,6 +16,7 @@ RowLayout {
 
     CopyFeedbackButton {
         id: copyUsernameButton
+        isOnHighlight: root.isRowHighlighted
         iconName: "edit-copy"
         tooltipText: qsTr("Copy Username")
         copiedTooltipText: qsTr("Copied.")
@@ -27,6 +29,7 @@ RowLayout {
     CopyFeedbackButton {
         id: copyPasswordButton
         objectName: "copyPasswordButton"
+        isOnHighlight: root.isRowHighlighted
         iconName: "password-copy"
         tooltipText: qsTr("Copy Password")
         copiedTooltipText: qsTr("Copied. Cleared in 30 seconds.")

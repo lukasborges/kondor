@@ -44,6 +44,7 @@ ItemDelegate {
 
         SavedLoginCopyButtons {
             id: copyButtons
+            isRowHighlighted: root.highlighted
             login: root.login
             tab: root.tab
         }

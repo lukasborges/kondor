@@ -58,6 +58,17 @@ def test_copy_button_shows_check_mark_and_stays_open(
     assert finder.is_popup_opened(popup_window)
 
 
+def test_copy_check_mark_uses_highlighted_text_color_on_current_row(
+    popup_window: QQuickWindow, finder: ItemFinder
+) -> None:
+    rows = finder.popup_rows(popup_window)
+    current = finder.named(rows[0], "copyPasswordButton")[0]
+    other = finder.named(rows[1], "copyPasswordButton")[0]
+    assert current.property("isOnHighlight")
+    assert not other.property("isOnHighlight")
+    assert current.property("checkColor") != other.property("checkColor")
+
+
 def test_down_key_moves_to_next_row(
     popup_window: QQuickWindow, finder: ItemFinder, qtbot: QtBot
 ) -> None:

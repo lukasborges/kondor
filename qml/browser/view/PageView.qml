@@ -49,6 +49,11 @@ WebEngineView {
             root.reader.detectReader()
     }
 
+    function settleIconOnSuccess(status) {
+        if (status === WebEngineLoadingInfo.LoadSucceededStatus)
+            root.tab.settleIconUrl(icon)
+    }
+
     function finishNormalLoad() {
         detectReaderOfPage()
         if (root.tab.isPrivate)
@@ -61,6 +66,7 @@ WebEngineView {
         clearCrashOnStart(status)
         root.reader.updateOnLoad(status)
         updateTab(status)
+        settleIconOnSuccess(status)
         if (!root.tab.readerActive && status === WebEngineLoadingInfo.LoadSucceededStatus)
             finishNormalLoad()
     }

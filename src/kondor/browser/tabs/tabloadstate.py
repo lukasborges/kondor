@@ -40,8 +40,9 @@ class TabLoadState(TabCommands):
             return
         assign_and_notify((self, "_icon_url"), icon_url, self.iconUrlChanged)
 
-    def _clear_icon_url(self) -> None:
-        assign_and_notify((self, "_icon_url"), QUrl(), self.iconUrlChanged)
+    @Slot(QUrl)
+    def settleIconUrl(self, icon_url: QUrl) -> None:
+        assign_and_notify((self, "_icon_url"), icon_url, self.iconUrlChanged)
 
     @Slot(float)
     def setProgress(self, progress: float) -> None:

@@ -72,7 +72,6 @@ class Tab(TabViewState):
             self._set_new_tab_page(False)
         if not is_same_origin(self._url, url):
             self._permissions.deny_all()
-            self._clear_icon_url()
 
     @Slot(bool)
     def setLoading(self, loading: bool) -> None:

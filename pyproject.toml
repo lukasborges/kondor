@@ -30,6 +30,7 @@ python_version = "3.13"
 testpaths = ["tests"]
 pythonpath = ["src"]
 qt_api = "pyside6"
+addopts = "--no-qt-log"
 
 [[tool.mypy.overrides]]
 module = ["PySide6.*", "shiboken6.*"]

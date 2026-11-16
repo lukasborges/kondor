@@ -88,11 +88,13 @@ Dialog {
     contentItem: ScrollView {
         id: scroll
         contentWidth: availableWidth
-        implicitHeight: content.implicitHeight
+        implicitHeight: content.implicitHeight + Kirigami.Units.gridUnit * 2
 
         ColumnLayout {
             id: content
-            width: scroll.availableWidth
+            x: Kirigami.Units.gridUnit
+            y: Kirigami.Units.gridUnit
+            width: scroll.availableWidth - Kirigami.Units.gridUnit * 2
             spacing: Kirigami.Units.largeSpacing
 
             Kirigami.FormLayout {

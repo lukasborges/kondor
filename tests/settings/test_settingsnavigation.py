@@ -67,3 +67,13 @@ def test_search_filters_pages(settings_window: SettingsWindowHarness, qtbot: QtB
 
     qtbot.waitUntil(lambda: visible_page_count(settings_window) == ALL_PAGES)
     verify_shown_page(settings_window, PASSWORDS_PAGE, "Passwords")
+
+
+def test_sidebar_is_wide_enough_for_every_page_title(
+    settings_window: SettingsWindowHarness,
+) -> None:
+    assert settings_window.show_exposed()
+    for page in range(ALL_PAGES):
+        entry = settings_window.sidebar_entry(page)
+        assert entry is not None
+        assert entry.property("width") >= entry.property("implicitWidth")

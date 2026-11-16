@@ -13,7 +13,7 @@ Rectangle {
 
     signal pageRequested(int page)
 
-    Layout.preferredWidth: Kirigami.Units.gridUnit * 8
+    Layout.preferredWidth: Math.max(Kirigami.Units.gridUnit * 8, titleMeasure.implicitWidth + Kirigami.Units.gridUnit * 2)
     Layout.fillHeight: true
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
@@ -55,6 +55,16 @@ Rectangle {
         const page = root.visiblePages[index]
         if (page !== undefined && page !== root.currentPage)
             root.pageRequested(page)
+    }
+
+    ColumnLayout {
+        id: titleMeasure
+        opacity: 0
+        height: 0
+        Repeater {
+            model: root.catalog.pages
+            Label { required property var modelData; text: modelData.title }
+        }
     }
 
     ColumnLayout {

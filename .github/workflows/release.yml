@@ -190,6 +190,14 @@ jobs:
               ;;
           esac
 
+      - name: Move the Flatpak installation off the image layer
+        # Updating a runtime that ships in the container image renames directories of the image's
+        # overlayfs layer, which fails with "Invalid cross-device link" whenever Flathub has a
+        # newer SDK than the image. A copy on the runner's disk can be updated.
+        run: |
+          cp -a /var/lib/flatpak "$RUNNER_TEMP/flatpak"
+          echo "FLATPAK_SYSTEM_DIR=$RUNNER_TEMP/flatpak" >> "$GITHUB_ENV"
+
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:

@@ -2,7 +2,7 @@ import math
 from collections.abc import Callable, Sequence
 from enum import IntEnum
 
-from PySide6.QtCore import QByteArray, QLocale, QMimeDatabase, Qt
+from PySide6.QtCore import QByteArray, QFileInfo, QLocale, QMimeDatabase, Qt
 from PySide6.QtWebEngineCore import QWebEngineDownloadRequest
 
 from kondor.downloads.downloaditem import DownloadItem
@@ -45,6 +45,23 @@ def received_fraction_of(download: QWebEngineDownloadRequest) -> float:
     return float(download.receivedBytes()) / float(total)
 
 
+def is_saved_page_on_disk(download: QWebEngineDownloadRequest) -> bool:
+    is_completed = download.state() == State.DownloadCompleted
+    return is_completed and bool(download.isSavePageDownload())
+
+
+def saved_file_size_of(download: QWebEngineDownloadRequest) -> int:
+    path = f"{download.downloadDirectory()}/{download.downloadFileName()}"
+    return int(QFileInfo(path).size())
+
+
+def received_bytes_of(item: DownloadItem) -> int:
+    download = item.download
+    if is_saved_page_on_disk(download):
+        return saved_file_size_of(download)
+    return int(download.receivedBytes())
+
+
 def progress_of(item: DownloadItem) -> float:
     fraction = received_fraction_of(item.download)
     return UNKNOWN_PROGRESS if fraction < 0.0 else min(fraction, 1.0)
@@ -79,7 +96,7 @@ ROLE_READERS: dict[int, tuple[bytes, RoleReader]] = {
     Role.FileNameRole: (b"fileName", lambda item: item.download.downloadFileName()),
     Role.DirectoryRole: (b"directory", lambda item: item.download.downloadDirectory()),
     Role.UrlRole: (b"url", lambda item: item.download.url()),
-    Role.ReceivedBytesRole: (b"receivedBytes", lambda item: item.download.receivedBytes()),
+    Role.ReceivedBytesRole: (b"receivedBytes", received_bytes_of),
     Role.TotalBytesRole: (b"totalBytes", lambda item: item.download.totalBytes()),
     Role.ProgressRole: (b"progress", progress_of),
     Role.StateRole: (b"state", lambda item: int(item.download.state().value)),

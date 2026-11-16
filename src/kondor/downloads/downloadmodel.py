@@ -26,6 +26,7 @@ RECEIVED_ROLES = (
 )
 STATE_ROLES = (
     Role.StateRole,
+    Role.ReceivedBytesRole,
     Role.IsPausedRole,
     Role.ProgressRole,
     Role.SpeedTextRole,

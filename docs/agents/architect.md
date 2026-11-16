@@ -147,7 +147,7 @@ headless (`claude -p --permission-mode auto`) for exactly one step when:
   request changes and switch to `to-dev`;
 - an issue has `question` → answer, record the decision in the spec, remove the label;
 - an issue is `to-spec` → write the spec/prototype, switch to `to-dev`;
-- no row is yours and fewer than two issues are in flight (`KONDOR_ARCH_MAX_IN_FLIGHT`) → the
+- no row is yours and fewer than `KONDOR_ARCH_MAX_IN_FLIGHT` issues (default 1, one per developer loop) are in flight → the
   loop picks the issue to promote (the highest-priority open `bug`, or else the next "Roadmap
   order" issue whose "Depends on:" issues are closed) and you promote it to `to-dev`.
 - an issue only the maintainer can move on (a reproduction on the real desktop, a decision) →

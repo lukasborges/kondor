@@ -16,7 +16,7 @@
 #   KONDOR_ARCH_STATE     lock, log, counters and pause flags (default: ~/.local/state/kondor-architect-loop)
 #   KONDOR_ARCH_INTERVAL  seconds between checks (default: 60)
 #   KONDOR_ARCH_MAX_NO_PROGRESS  runs on the same step without progress before pausing (default: 2)
-#   KONDOR_ARCH_MAX_IN_FLIGHT    issues in to-spec, to-dev or in-review at once, one per developer
+#   KONDOR_ARCH_MAX_IN_FLIGHT    issues in to-spec, to-dev or in-review at once, one per developer (default 1)
 #                         loop (default: 2). An issue is promoted only when every issue on its
 #                         "Depends on:" line (issue body) is closed.
 #   KONDOR_ARCH_MODEL     Claude model (default: opus; empty = Claude Code's default)
@@ -36,13 +36,14 @@ main() {
 
   local script_dir repo
   script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  . "$script_dir/claude-limit.sh"
   repo="${KONDOR_REPO:-$(dirname "$(git -C "$script_dir" rev-parse --path-format=absolute --git-common-dir)")}"
   local control="${KONDOR_ARCH_CONTROL:-$HOME/.local/share/kondor-architect-loop/control}"
   local agent_files="${KONDOR_AGENT_FILES:-$HOME/.config/kondor-agents}"
   local state="${KONDOR_ARCH_STATE:-$HOME/.local/state/kondor-architect-loop}"
   local interval="${KONDOR_ARCH_INTERVAL:-60}"
   local max_no_progress="${KONDOR_ARCH_MAX_NO_PROGRESS:-2}"
-  local max_in_flight="${KONDOR_ARCH_MAX_IN_FLIGHT:-2}"
+  local max_in_flight="${KONDOR_ARCH_MAX_IN_FLIGHT:-1}"
   local -r high_rank=0 any_rank=3
   local model="${KONDOR_ARCH_MODEL-opus}"
   local effort="${KONDOR_ARCH_EFFORT:-medium}"
@@ -308,6 +309,10 @@ EOF
       log "queue: #$n is approved, waiting for the CI build check"
       return 0
     fi
+    if waiting_for_usage_limit "$state"; then
+      log "queue: Claude usage limit reached, waiting until $(usage_limit_until "$state")"
+      return 0
+    fi
     if [[ "$dry" == 1 ]]; then
       log "dry-run: would run the architect: $st on $key"
       prompt_for "$n" "$st"
@@ -320,6 +325,11 @@ EOF
     [[ -n "$model" ]] && args+=(--model "$model")
     (cd "$control" && "$claude" "${args[@]}" "$(prompt_for "$n" "$st")") >"$run_log" 2>&1
     rc=$?
+    if hit_usage_limit "$run_log"; then
+      record_usage_limit "$state" "$run_log"
+      log "architect run ($st on $key) hit the Claude usage limit, waiting until $(usage_limit_until "$state")"
+      return 0
+    fi
     if api_unavailable "$rc" "$run_log"; then
       log "architect run ($st on $key) could not reach the Claude API (rc=$rc), retrying next tick: $(head -c 200 "$run_log")"
       return 0

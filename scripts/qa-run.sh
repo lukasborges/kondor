@@ -25,6 +25,7 @@ main() {
 
   local script_dir repo
   script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  . "$script_dir/claude-limit.sh"
   repo="${KONDOR_REPO:-$(dirname "$(git -C "$script_dir" rev-parse --path-format=absolute --git-common-dir)")}"
   local control="${KONDOR_QA_CONTROL:-$HOME/.local/share/kondor-qa/control}"
   local state="${KONDOR_QA_STATE:-$HOME/.local/state/kondor-qa}"
@@ -159,16 +160,26 @@ PROMPT
   }
 
   execute_run() {
-    local run_log="$state/run-$(date +%F-%H%M).log"
-    log "testing $1 (parity mode $3, log: $run_log)"
-    if run_qa "$1" "$2" "$3" >"$run_log" 2>&1; then
-      echo "$1" > "$state/last-sha"
-      record_tested "$2"
-      log "QA run finished"
-    else
-      log "QA run failed, see $run_log"
-      return 1
-    fi
+    local run_log
+    while true; do
+      run_log="$state/run-$(date +%F-%H%M).log"
+      log "testing $1 (parity mode $3, log: $run_log)"
+      run_qa "$1" "$2" "$3" >"$run_log" 2>&1 && { finish_run "$1" "$2"; return 0; }
+      hit_usage_limit "$run_log" || { log "QA run failed, see $run_log"; return 1; }
+      wait_for_usage_reset "$run_log"
+    done
+  }
+
+  finish_run() {
+    echo "$1" > "$state/last-sha"
+    record_tested "$2"
+    log "QA run finished"
+  }
+
+  wait_for_usage_reset() {
+    record_usage_limit "$state" "$1"
+    log "QA run hit the Claude usage limit, waiting until $(usage_limit_until "$state") to run it again"
+    while waiting_for_usage_limit "$state"; do sleep 60; done
   }
 
   write_units() {

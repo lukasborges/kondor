@@ -45,6 +45,7 @@ main() {
 
   local script_dir repo
   script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  . "$script_dir/claude-limit.sh"
   repo="${KONDOR_REPO:-$(dirname "$(git -C "$script_dir" rev-parse --path-format=absolute --git-common-dir)")}"
   local dev_id="${KONDOR_DEV_ID:-1}" suffix=""
   [[ "$dev_id" == 1 ]] || suffix="-$dev_id"
@@ -201,6 +202,10 @@ EOF
       prompt_for "$n"
       return 0
     fi
+    if waiting_for_usage_limit "$state"; then
+      log "queue: Claude usage limit reached, waiting until $(usage_limit_until "$state")"
+      return 0
+    fi
     if ! claim_issue "$n"; then
       log "queue: #$n was just claimed by developer $(claim_owner "$n")"
       return 0
@@ -210,6 +215,11 @@ EOF
     log "running developer on #$n with $engine/$model, effort $effort (log: $run_log)"
     run_developer "$n" >"$run_log" 2>&1
     local rc=$?
+    if hit_usage_limit "$run_log"; then
+      record_usage_limit "$state" "$run_log"
+      log "developer run on #$n hit the Claude usage limit, waiting until $(usage_limit_until "$state")"
+      return 0
+    fi
     ensure_control || return 0
     count_file="$state/no-progress-$n"
     if still_for_developer "$n"; then

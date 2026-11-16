@@ -21,6 +21,16 @@ TextField {
         text = (tab && !tab.newTabPage) ? tab.url.toString() : ""
     }
 
+    function stopEditing() {
+        completer.stopTyping()
+        if (!isTemporaryFocusLoss())
+            showCurrentTabAddress()
+    }
+
+    function isTemporaryFocusLoss() {
+        return focusReason === Qt.ActiveWindowFocusReason || focusReason === Qt.PopupFocusReason
+    }
+
     function focusAndSelectAll() {
         forceActiveFocus()
         selectAll()
@@ -55,11 +65,6 @@ TextField {
             completer.startTyping()
         else
             stopEditing()
-    }
-
-    function stopEditing() {
-        completer.stopTyping()
-        showCurrentTabAddress()
     }
 
     AddressCompleter {

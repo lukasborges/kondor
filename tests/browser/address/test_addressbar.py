@@ -1,7 +1,8 @@
 from collections.abc import Iterator
 
 import pytest
-from PySide6.QtCore import Qt, QUrl
+from PySide6.QtCore import QCoreApplication, QEvent, Qt, QUrl
+from PySide6.QtGui import QFocusEvent
 from PySide6.QtQml import QQmlEngine
 from PySide6.QtTest import QTest
 from pytestqt.qtbot import QtBot
@@ -107,3 +108,10 @@ def test_losing_focus_shows_the_url_changed_while_focused(
     harness.tabs.currentTab.setUrl(QUrl("http://localhost:8765/ads.html"))
     assert harness.call("blurBar")
     assert harness.text() == "http://localhost:8765/ads.html"
+
+
+def test_switching_windows_keeps_the_typed_text(harness: AddressBarHarness) -> None:
+    harness.type("kde.org/typed")
+    lost = QFocusEvent(QEvent.Type.FocusOut, Qt.FocusReason.ActiveWindowFocusReason)
+    QCoreApplication.sendEvent(harness.window, lost)
+    assert harness.text() == "kde.org/typed"

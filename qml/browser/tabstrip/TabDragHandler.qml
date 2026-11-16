@@ -46,13 +46,17 @@ DragHandler {
         return clamp(pinnedCount + slot, pinnedCount, tabModel.count - 1)
     }
 
+    function moveTab(from, to) {
+        tabModel.moveTab(from, to)
+        tabButton.tabBarItem.contentItem.forceLayout()
+    }
+
     function reorderTo(left) {
         const own = tabModel.indexOfTab(tabButton.tab)
         const target = targetIndex(left + tabButton.width / 2)
         if (target === own)
             return
-        tabModel.moveTab(own, target)
-        tabButton.tabBarItem.contentItem.forceLayout()
+        tabStrip.scroller.keepScrollPosition(() => moveTab(own, target))
     }
 
     function update() {

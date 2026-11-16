@@ -56,6 +56,12 @@ Item {
         view.contentX = view.originX + Math.max(0, Math.min(maxScroll, scrolled + delta))
     }
 
+    function keepScrollPosition(change) {
+        const contentX = view.contentX
+        change()
+        view.contentX = contentX
+    }
+
     function positionToShowCurrent(left, right) {
         const current = scrollTarget()
         if (left < current)

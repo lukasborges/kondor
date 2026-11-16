@@ -1,4 +1,13 @@
-from PySide6.QtCore import QDir, QFile, QIODevice, QObject, QTemporaryDir, QUrl, Slot
+from PySide6.QtCore import (
+    QCoreApplication,
+    QDir,
+    QFile,
+    QIODevice,
+    QObject,
+    QTemporaryDir,
+    QUrl,
+    Slot,
+)
 from PySide6.QtGui import QDesktopServices
 
 FORBIDDEN_CHARACTERS = '/\\:*?"<>|'
@@ -47,6 +56,16 @@ class FileHelper(QObject):
         super().__init__()
         self._temp_dir = QTemporaryDir(QDir.tempPath() + "/kondor-print-XXXXXX")
         self._counter = 0
+        self._remove_temp_dir_when_quitting()
+
+    def _remove_temp_dir_when_quitting(self) -> None:
+        application = QCoreApplication.instance()
+        if application is not None:
+            application.aboutToQuit.connect(self.removeTempDir)
+
+    @Slot()
+    def removeTempDir(self) -> None:
+        self._temp_dir.remove()
 
     @classmethod
     def instance(cls) -> "FileHelper":

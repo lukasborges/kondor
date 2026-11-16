@@ -86,6 +86,23 @@ def test_dropping_a_link_adds_a_bookmark_at_the_drop_position(
     assert manager().bookmarkIdFor(QUrl("https://dropped.example/")) != first
 
 
+HARNESS_ITEM_COUNT = 3
+
+
+def test_a_drop_in_the_gap_between_two_items_lands_between_them(
+    fresh_bookmarks: Path, kondor_engine: QQmlEngine
+) -> None:
+    harness = create_with(kondor_engine, TARGETS_QML, {})
+    assert evaluate(harness, kondor_engine, "dropPositionAt(55)") == 1
+
+
+def test_a_drop_past_the_last_item_lands_at_the_end(
+    fresh_bookmarks: Path, kondor_engine: QQmlEngine
+) -> None:
+    harness = create_with(kondor_engine, TARGETS_QML, {})
+    assert evaluate(harness, kondor_engine, "dropPositionAt(500)") == HARNESS_ITEM_COUNT
+
+
 MINE = {"First", "Second", "Third"}
 
 

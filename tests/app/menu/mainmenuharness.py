@@ -92,6 +92,13 @@ class MainMenuHarness:
         value, _is_undefined = expression.evaluate()
         return value
 
+    def wait_until_opened(self) -> bool:
+        for _ in range(100):
+            if self.evaluate("mainMenu.opened") is True:
+                return True
+            QTest.qWait(20)
+        return False
+
     def rows_of(self, menu_expression: str) -> list[str]:
         return str(self.evaluate(ROW_SCRIPT % menu_expression)).split("|")
 

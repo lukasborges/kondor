@@ -1739,6 +1739,10 @@
         <translation>Hledat „%1“</translation>
     </message>
     <message>
+        <source>Generate Password</source>
+        <translation>Vygenerovat heslo</translation>
+    </message>
+    <message>
         <source>Back</source>
         <translation>Zpět</translation>
     </message>
@@ -2729,6 +2733,21 @@
     <message>
         <source>No spelling dictionaries are installed.</source>
         <translation>Nejsou nainstalovány žádné pravopisné slovníky.</translation>
+    </message>
+</context>
+<context>
+    <name>SuggestedPasswordPopup</name>
+    <message>
+        <source>Password saved</source>
+        <translation>Heslo uloženo</translation>
+    </message>
+    <message>
+        <source>Use Suggested Password</source>
+        <translation>Použít navržené heslo</translation>
+    </message>
+    <message>
+        <source>Fill in a strong password and save it in KWallet when the form is sent</source>
+        <translation>Vyplnit silné heslo a po odeslání formuláře ho uložit do KWallet</translation>
     </message>
 </context>
 <context>

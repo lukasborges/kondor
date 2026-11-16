@@ -119,6 +119,11 @@ Item {
         }
     }
 
+    SuggestedPasswordPopup {
+        tab: root.tab
+        webView: pageView
+    }
+
     PageContextMenu {
         id: contextMenu
         webView: pageView

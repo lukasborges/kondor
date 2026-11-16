@@ -51,8 +51,8 @@ class FillPage:
         with self._qtbot.waitSignal(self.page.loadFinished, timeout=TIMEOUT_MS):
             self.page.setHtml(body, QUrl(ORIGIN))
         self.evaluate(FAKE_BRIDGE)
-        self.evaluate(read_script(":/scripts/usernamefield.js"))
-        self.evaluate(read_script(":/scripts/passwords.js"))
+        for name in ("usernamefield", "fieldvalue", "newpasswordfield", "passwords"):
+            self.evaluate(read_script(f":/scripts/{name}.js"))
         self._qtbot.waitUntil(
             lambda: self.evaluate("typeof window.__fill === 'function'") is True,
             timeout=TIMEOUT_MS,

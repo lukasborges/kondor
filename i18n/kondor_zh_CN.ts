@@ -1713,6 +1713,10 @@
         <translation>搜索“%1”</translation>
     </message>
     <message>
+        <source>Generate Password</source>
+        <translation>生成密码</translation>
+    </message>
+    <message>
         <source>Back</source>
         <translation>后退</translation>
     </message>
@@ -2703,6 +2707,21 @@
     <message>
         <source>No spelling dictionaries are installed.</source>
         <translation>未安装拼写词典。</translation>
+    </message>
+</context>
+<context>
+    <name>SuggestedPasswordPopup</name>
+    <message>
+        <source>Password saved</source>
+        <translation>密码已保存</translation>
+    </message>
+    <message>
+        <source>Use Suggested Password</source>
+        <translation>使用建议的密码</translation>
+    </message>
+    <message>
+        <source>Fill in a strong password and save it in KWallet when the form is sent</source>
+        <translation>填入强密码，并在提交表单时将其保存到 KWallet</translation>
     </message>
 </context>
 <context>

@@ -1,3 +1,4 @@
+from collections.abc import Sequence
 from typing import NamedTuple
 
 from PySide6.QtCore import Q_ARG, QFile, QIODevice, QMetaObject, QObject, qWarning
@@ -7,8 +8,10 @@ from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
 WEB_CHANNEL_RESOURCE = ":/qtwebchannel/qwebchannel.js"
 CHANNEL_RESOURCE = ":/scripts/channel.js"
-USERNAME_FIELD_RESOURCE = ":/scripts/usernamefield.js"
-PASSWORDS_RESOURCE = ":/scripts/passwords.js"
+PASSWORDS_RESOURCES = tuple(
+    f":/scripts/{name}.js"
+    for name in ("usernamefield", "fieldvalue", "newpasswordfield", "passwords", "newpassword")
+)
 CHANNEL_SCRIPT = "kondor-channel"
 PASSWORDS_SCRIPT = "kondor-passwords"
 MEDIA_SESSION_RESOURCE = ":/scripts/mediasession.js"
@@ -35,11 +38,11 @@ def read_resource(path: str) -> str | None:
     return bytes(file.readAll().data()).decode()
 
 
-def joined_resources(first_path: str, second_path: str) -> str | None:
-    first, second = read_resource(first_path), read_resource(second_path)
-    if first is None or second is None:
+def joined_resources(paths: Sequence[str]) -> str | None:
+    sources = [read_resource(path) for path in paths]
+    if any(source is None for source in sources):
         return None
-    return first + "\n" + second
+    return "\n".join(source for source in sources if source is not None)
 
 
 def make_script(spec: ScriptSpec) -> QWebEngineScript:
@@ -62,7 +65,7 @@ def insert_script(collection: QObject | None, script: QWebEngineScript) -> bool:
 
 
 def install_channel_script(collection: QObject | None) -> bool:
-    source = joined_resources(WEB_CHANNEL_RESOURCE, CHANNEL_RESOURCE)
+    source = joined_resources((WEB_CHANNEL_RESOURCE, CHANNEL_RESOURCE))
     if source is None:
         qWarning("Web channel script resources not found: autofill and extensions are off")
         return False
@@ -71,7 +74,7 @@ def install_channel_script(collection: QObject | None) -> bool:
 
 
 def install_passwords_script(collection: QObject | None) -> None:
-    source = joined_resources(USERNAME_FIELD_RESOURCE, PASSWORDS_RESOURCE)
+    source = joined_resources(PASSWORDS_RESOURCES)
     if source is None:
         qWarning("Password script resource not found: autofill is off")
         return

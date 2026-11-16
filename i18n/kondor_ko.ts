@@ -1713,6 +1713,10 @@
         <translation>“%1” 검색</translation>
     </message>
     <message>
+        <source>Generate Password</source>
+        <translation>비밀번호 생성</translation>
+    </message>
+    <message>
         <source>Back</source>
         <translation>뒤로</translation>
     </message>
@@ -2703,6 +2707,21 @@
     <message>
         <source>No spelling dictionaries are installed.</source>
         <translation>설치된 맞춤법 사전이 없습니다.</translation>
+    </message>
+</context>
+<context>
+    <name>SuggestedPasswordPopup</name>
+    <message>
+        <source>Password saved</source>
+        <translation>비밀번호를 저장했습니다</translation>
+    </message>
+    <message>
+        <source>Use Suggested Password</source>
+        <translation>추천 비밀번호 사용</translation>
+    </message>
+    <message>
+        <source>Fill in a strong password and save it in KWallet when the form is sent</source>
+        <translation>강력한 비밀번호를 입력하고 양식을 보낼 때 KWallet에 저장합니다</translation>
     </message>
 </context>
 <context>

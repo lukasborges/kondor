@@ -6,6 +6,7 @@ QtObject {
     id: root
 
     required property WebEngineView webView
+    required property Tab tab
     required property var browserActions
 
     readonly property var linkEntries: [
@@ -122,9 +123,16 @@ QtObject {
     function editingBlock(request) {
         const flags = request.editFlags
         const suggestions = request.misspelledWord !== "" ? suggestionEntries(request) : []
-        return suggestions
+        return generateEntries()
+            .concat(suggestions)
             .concat(historyEditEntries.map(entry => editEntry(entry, flags)), [null])
             .concat(clipboardEditEntries.map(entry => editEntry(entry, flags)), spellCheckEntries())
+    }
+
+    function generateEntries() {
+        if (tab.passwords.suggestion.fieldKind === "")
+            return []
+        return [{ text: qsTr("Generate Password"), icon: "password-generate", action: "generatePassword" }, null]
     }
 
     function spellCheckEntries() {

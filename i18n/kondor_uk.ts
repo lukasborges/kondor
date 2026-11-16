@@ -1739,6 +1739,10 @@
         <translation>Шукати «%1»</translation>
     </message>
     <message>
+        <source>Generate Password</source>
+        <translation>Згенерувати пароль</translation>
+    </message>
+    <message>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
@@ -2729,6 +2733,21 @@
     <message>
         <source>No spelling dictionaries are installed.</source>
         <translation>Словники для перевірки правопису не встановлено.</translation>
+    </message>
+</context>
+<context>
+    <name>SuggestedPasswordPopup</name>
+    <message>
+        <source>Password saved</source>
+        <translation>Пароль збережено</translation>
+    </message>
+    <message>
+        <source>Use Suggested Password</source>
+        <translation>Використати запропонований пароль</translation>
+    </message>
+    <message>
+        <source>Fill in a strong password and save it in KWallet when the form is sent</source>
+        <translation>Ввести надійний пароль і зберегти його в KWallet після надсилання форми</translation>
     </message>
 </context>
 <context>

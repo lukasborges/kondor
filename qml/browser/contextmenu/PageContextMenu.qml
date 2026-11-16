@@ -92,6 +92,7 @@ Menu {
     PageMenuEntries {
         id: entries
         webView: menu.webView
+        tab: menu.tab
         browserActions: menu.browserActions
     }
 

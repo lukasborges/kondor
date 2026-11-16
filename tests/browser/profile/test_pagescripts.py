@@ -13,8 +13,7 @@ pytestmark = pytest.mark.no_qt_log
 RESOURCES = (
     pagescripts.WEB_CHANNEL_RESOURCE,
     pagescripts.CHANNEL_RESOURCE,
-    pagescripts.USERNAME_FIELD_RESOURCE,
-    pagescripts.PASSWORDS_RESOURCE,
+    *pagescripts.PASSWORDS_RESOURCES,
 )
 InjectionPoint = QWebEngineScript.InjectionPoint
 APPLICATION_WORLD = QWebEngineScript.ScriptWorldId.ApplicationWorld.value

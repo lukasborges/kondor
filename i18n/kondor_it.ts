@@ -1726,6 +1726,10 @@
         <translation>Cerca “%1”</translation>
     </message>
     <message>
+        <source>Generate Password</source>
+        <translation>Genera password</translation>
+    </message>
+    <message>
         <source>Back</source>
         <translation>Indietro</translation>
     </message>
@@ -2716,6 +2720,21 @@
     <message>
         <source>No spelling dictionaries are installed.</source>
         <translation>Non è installato alcun dizionario ortografico.</translation>
+    </message>
+</context>
+<context>
+    <name>SuggestedPasswordPopup</name>
+    <message>
+        <source>Password saved</source>
+        <translation>Password salvata</translation>
+    </message>
+    <message>
+        <source>Use Suggested Password</source>
+        <translation>Usa la password suggerita</translation>
+    </message>
+    <message>
+        <source>Fill in a strong password and save it in KWallet when the form is sent</source>
+        <translation>Inserisci una password sicura e salvala in KWallet quando il modulo viene inviato</translation>
     </message>
 </context>
 <context>

@@ -36,22 +36,7 @@
     const usernameField = (password) =>
         inputsBefore(password).find((el) => isTextField(el) && isVisible(el)) || null;
 
-    const nativeValueDescriptor = (el) =>
-        Object.getOwnPropertyDescriptor(Object.getPrototypeOf(el), "value");
-
-    const dispatchValueEvents = (el) => {
-        el.dispatchEvent(new Event("input", { bubbles: true }));
-        el.dispatchEvent(new Event("change", { bubbles: true }));
-    };
-
-    const setValue = (el, value) => {
-        const descriptor = nativeValueDescriptor(el);
-        if (descriptor && descriptor.set)
-            descriptor.set.call(el, value);
-        else
-            el.value = value;
-        dispatchValueEvents(el);
-    };
+    const setValue = window.__kondorSetFieldValue;
 
     const hasOtherUsername = (user, credential) =>
         !!user && user.value !== "" && user.value !== credential.username;
@@ -66,7 +51,9 @@
         filled.add(password);
     };
 
-    const needsAutofill = (password) => !filled.has(password) && password.value === "";
+    const needsAutofill = (password) =>
+        !filled.has(password) && password.value === ""
+            && window.__kondorNewPasswordFields.kindOf(password) !== "new";
 
     const autofill = () => {
         if (credentials.length !== 1)

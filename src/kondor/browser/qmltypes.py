@@ -6,6 +6,7 @@ from kondor.browser.session.sessionmanager import SessionManager
 from kondor.browser.tabs.features.tabextensionitems import TabExtensionItems
 from kondor.browser.tabs.features.tabmedia import TabMedia
 from kondor.browser.tabs.features.tabpasswords import TabPasswords
+from kondor.browser.tabs.features.tabpasswordsuggestion import TabPasswordSuggestion
 from kondor.browser.tabs.features.tabpermissions import TabPermissions
 from kondor.browser.tabs.features.tabsecurity import TabSecurity
 from kondor.browser.tabs.features.tabsitereload import TabSiteReload
@@ -24,6 +25,7 @@ QML_TYPES: tuple[QmlType, ...] = (
     QmlType(TabSecurity, "TabSecurity", QmlKind.UNCREATABLE),
     QmlType(TabPermissions, "TabPermissions", QmlKind.UNCREATABLE),
     QmlType(TabPasswords, "TabPasswords", QmlKind.UNCREATABLE),
+    QmlType(TabPasswordSuggestion, "TabPasswordSuggestion", QmlKind.UNCREATABLE),
     QmlType(TabSiteReload, "TabSiteReload", QmlKind.UNCREATABLE),
     QmlType(TabExtensionItems, "TabExtensionItems", QmlKind.UNCREATABLE),
     QmlType(TabMedia, "TabMedia", QmlKind.UNCREATABLE),

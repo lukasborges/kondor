@@ -49,6 +49,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 - **Ad and tracker blocking** built in
 - **Private tabs and windows** that leave no trace
 - **Passwords** saved in KWallet, filled in for you, searchable and importable
+- **Password generator**: strong passwords suggested on sign-up forms, saved automatically
 - **Extensions** from the Kondor catalog or a file, pinnable to the toolbar
 - **User scripts** from `.user.js` pages or files, managed with extensions
 - **Site permissions**: sites ask before using the camera, microphone or location

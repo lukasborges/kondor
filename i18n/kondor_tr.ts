@@ -464,18 +464,6 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <source>New Tab</source>
-        <translation>Yeni sekme</translation>
-    </message>
-    <message>
-        <source>New Private Tab</source>
-        <translation>Yeni gizli sekme</translation>
-    </message>
-    <message>
-        <source>Private Browsing</source>
-        <translation>Gizli gezinme</translation>
-    </message>
-    <message>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Tam ekrandan çıkmak için Esc tuşuna basın</translation>
@@ -2840,6 +2828,21 @@
     <message>
         <source>Quit</source>
         <translation>Çık</translation>
+    </message>
+</context>
+<context>
+    <name>WindowTitle</name>
+    <message>
+        <source>Private Browsing</source>
+        <translation>Gizli gezinme</translation>
+    </message>
+    <message>
+        <source>New Private Tab</source>
+        <translation>Yeni gizli sekme</translation>
+    </message>
+    <message>
+        <source>New Tab</source>
+        <translation>Yeni sekme</translation>
     </message>
 </context>
 <context>

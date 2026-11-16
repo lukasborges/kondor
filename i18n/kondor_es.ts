@@ -464,18 +464,6 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <source>New Tab</source>
-        <translation>Nueva pestaña</translation>
-    </message>
-    <message>
-        <source>New Private Tab</source>
-        <translation>Nueva pestaña privada</translation>
-    </message>
-    <message>
-        <source>Private Browsing</source>
-        <translation>Navegación privada</translation>
-    </message>
-    <message>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Pulsa Esc para salir de la pantalla completa</translation>
@@ -2851,6 +2839,21 @@
     <message>
         <source>Quit</source>
         <translation>Salir</translation>
+    </message>
+</context>
+<context>
+    <name>WindowTitle</name>
+    <message>
+        <source>Private Browsing</source>
+        <translation>Navegación privada</translation>
+    </message>
+    <message>
+        <source>New Private Tab</source>
+        <translation>Nueva pestaña privada</translation>
+    </message>
+    <message>
+        <source>New Tab</source>
+        <translation>Nueva pestaña</translation>
     </message>
 </context>
 <context>

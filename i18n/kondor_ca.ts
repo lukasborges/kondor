@@ -464,18 +464,6 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <source>New Tab</source>
-        <translation>Pestanya nova</translation>
-    </message>
-    <message>
-        <source>New Private Tab</source>
-        <translation>Pestanya privada nova</translation>
-    </message>
-    <message>
-        <source>Private Browsing</source>
-        <translation>Navegació privada</translation>
-    </message>
-    <message>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Premeu Esc per a sortir de la pantalla completa</translation>
@@ -2851,6 +2839,21 @@
     <message>
         <source>Quit</source>
         <translation>Surt</translation>
+    </message>
+</context>
+<context>
+    <name>WindowTitle</name>
+    <message>
+        <source>Private Browsing</source>
+        <translation>Navegació privada</translation>
+    </message>
+    <message>
+        <source>New Private Tab</source>
+        <translation>Pestanya privada nova</translation>
+    </message>
+    <message>
+        <source>New Tab</source>
+        <translation>Pestanya nova</translation>
     </message>
 </context>
 <context>

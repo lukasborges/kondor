@@ -464,18 +464,6 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <source>New Tab</source>
-        <translation>Nieuw tabblad</translation>
-    </message>
-    <message>
-        <source>New Private Tab</source>
-        <translation>Nieuw privétabblad</translation>
-    </message>
-    <message>
-        <source>Private Browsing</source>
-        <translation>Privénavigatie</translation>
-    </message>
-    <message>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Druk op Esc om volledig scherm te verlaten</translation>
@@ -2851,6 +2839,21 @@
     <message>
         <source>Quit</source>
         <translation>Afsluiten</translation>
+    </message>
+</context>
+<context>
+    <name>WindowTitle</name>
+    <message>
+        <source>Private Browsing</source>
+        <translation>Privénavigatie</translation>
+    </message>
+    <message>
+        <source>New Private Tab</source>
+        <translation>Nieuw privétabblad</translation>
+    </message>
+    <message>
+        <source>New Tab</source>
+        <translation>Nieuw tabblad</translation>
     </message>
 </context>
 <context>

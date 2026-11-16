@@ -464,18 +464,6 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <source>New Tab</source>
-        <translation>새 탭</translation>
-    </message>
-    <message>
-        <source>New Private Tab</source>
-        <translation>새 비공개 탭</translation>
-    </message>
-    <message>
-        <source>Private Browsing</source>
-        <translation>비공개 브라우징</translation>
-    </message>
-    <message>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>전체 화면을 종료하려면 Esc 키를 누르십시오</translation>
@@ -2840,6 +2828,21 @@
     <message>
         <source>Quit</source>
         <translation>끝내기</translation>
+    </message>
+</context>
+<context>
+    <name>WindowTitle</name>
+    <message>
+        <source>Private Browsing</source>
+        <translation>비공개 브라우징</translation>
+    </message>
+    <message>
+        <source>New Private Tab</source>
+        <translation>새 비공개 탭</translation>
+    </message>
+    <message>
+        <source>New Tab</source>
+        <translation>새 탭</translation>
     </message>
 </context>
 <context>

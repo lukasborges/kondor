@@ -2,12 +2,12 @@ from collections.abc import Iterator, Sequence
 from pathlib import Path
 
 import pytest
-from PySide6.QtCore import QStandardPaths
+from PySide6.QtCore import QCoreApplication, QStandardPaths, QTranslator
 from PySide6.QtSql import QSqlDatabase, QSqlQuery
 
 from kondor.core.database import sql
 from kondor.core.database.database import Database
-from kondor.core.database.defaultbookmarks import DEFAULT_BOOKMARKS, DefaultBookmark
+from kondor.core.database.defaultbookmarks import CONTEXT, DEFAULT_BOOKMARKS, DefaultBookmark
 
 OLD_CONNECTION = "old"
 VERSION_ONE_STATEMENTS = (
@@ -93,3 +93,23 @@ def test_unusable_file_leaves_the_database_invalid(database_file: Path) -> None:
     database_file.write_bytes(b"this is not an SQLite database\n" * 64)
     assert not Database.instance().is_valid()
     assert sql.run("SELECT 1") is None
+
+
+class PortugueseFolders(QTranslator):
+    TITLES = {"News": "Notícias", "Development": "Desenvolvimento", "Linux": "Linux"}
+
+    def translate(self, context: str, source_text: str, *_: object) -> str:
+        return self.TITLES.get(source_text, "") if context == CONTEXT else ""
+
+
+def test_default_folders_are_translated_when_a_translator_is_installed(
+    database_file: Path,
+) -> None:
+    translator = PortugueseFolders()
+    QCoreApplication.installTranslator(translator)
+    try:
+        assert Database.instance().is_valid()
+        titles = [title for _, title, *_ in fetch_children(sql.ids(TOOLBAR)[0]) if title]
+    finally:
+        QCoreApplication.removeTranslator(translator)
+    assert {"Notícias", "Desenvolvimento"} <= set(titles)

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
 import Kondor
 
 Dialog {
@@ -8,6 +9,7 @@ Dialog {
     title: qsTr("Clear History")
     standardButtons: Dialog.Ok | Dialog.Cancel
     modal: true
+    horizontalPadding: Kirigami.Units.largeSpacing
     anchors.centerIn: parent
 
     function startOfToday() {
@@ -29,6 +31,7 @@ Dialog {
         spacing: 8
 
         Label {
+            objectName: "rangeLabel"
             text: qsTr("Remove from history:")
         }
 

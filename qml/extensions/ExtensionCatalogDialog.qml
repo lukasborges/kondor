@@ -13,6 +13,7 @@ Dialog {
     width: Kirigami.Units.gridUnit * 40
     height: Kirigami.Units.gridUnit * 30
     modal: true
+    horizontalPadding: Kirigami.Units.largeSpacing
     dim: true
     closePolicy: Popup.CloseOnEscape
     title: qsTr("Get New Extensions")
@@ -33,6 +34,7 @@ Dialog {
 
         TextField {
             id: searchField
+            objectName: "searchField"
             Layout.fillWidth: true
             placeholderText: qsTr("Search extensions…")
         }

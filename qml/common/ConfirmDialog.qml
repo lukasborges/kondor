@@ -30,6 +30,8 @@ Dialog {
             text: root.acceptText
             icon.name: root.acceptIcon
             DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
+            Keys.onReturnPressed: clicked()
+            Keys.onEnterPressed: clicked()
         }
         Button {
             objectName: "cancelButton"
@@ -37,8 +39,10 @@ Dialog {
             icon.name: "dialog-cancel"
             focus: true
             DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
+            Keys.onReturnPressed: clicked()
+            Keys.onEnterPressed: clicked()
         }
     }
 
-    onOpened: footer.contentChildren[1].forceActiveFocus()
+    onOpened: footer.contentChildren[1].forceActiveFocus(Qt.TabFocusReason)
 }

@@ -49,12 +49,31 @@ Rectangle {
                 opacity: tab.sleeping ? 0.5 : 1
                 source: frame.privateWindow ? "view-private" : (tab.icon || "text-html")
             }
+            // #366: icon-only tabs show the sound state as an emblem on the favicon
+            Kirigami.Icon {
+                visible: iconOnly && !!tab.audio
+                width: 10; height: 10
+                anchors.right: parent.right; anchors.bottom: parent.bottom
+                anchors.rightMargin: -3; anchors.bottomMargin: -3
+                source: tab.audio === "muted" ? "audio-volume-muted-symbolic" : "audio-volume-high-symbolic"
+            }
             BusyIndicator {
                 anchors.centerIn: parent
                 width: 18; height: 18
                 visible: !!tab.loading
                 running: visible
             }
+        }
+        // #366: sound indicator, a button that mutes or unmutes the tab
+        ToolButton {
+            visible: !iconOnly && !!tab.audio
+            Layout.preferredWidth: 20
+            Layout.preferredHeight: 20
+            flat: true
+            display: AbstractButton.IconOnly
+            icon.name: tab.audio === "muted" ? "audio-volume-muted-symbolic" : "audio-volume-high-symbolic"
+            icon.width: 16
+            icon.height: 16
         }
         Label {
             visible: !iconOnly

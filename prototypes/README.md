@@ -78,6 +78,7 @@ Tips when editing:
 | #260 Password generator | `260-password-suggestion.qml`, `260b-password-suggestion-hover.qml`, `260c-password-generate-menu.qml` (`common/SignUpPageMock.qml`, `common/SuggestedPasswordPopupMock.qml`) |
 | #349 Multiple profiles | `349-profiles-menu.qml` (`withProfiles` in `common/MainMenuMock.qml`), `349b-manage-profiles.qml`, `349c-new-profile.qml`, `349d-choose-profile.qml`, `349e-profile-button.qml` |
 | #351 Bookmarks: Recently Used and one root | `351-bookmarks-panel-recently-used.qml` (`oneRoot` in `common/BookmarksPanelMock.qml`) |
+| #366 Mute tab | `366-mute-tab.qml`, `366b-mute-tab-vertical.qml` (`audio` in `common/TabStyleFrame.qml`) |
 
 Issues without UI (#10 default browser, #15 single instance, #19 translations, #25 Flatpak,
 #26 tests) have no prototype.

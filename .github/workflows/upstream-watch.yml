@@ -47,5 +47,5 @@ jobs:
           )"
           }
           while read -r key issue; do
-            [[ -n "$key" ]] && check "$key" "$issue"
+            if [[ -n "$key" ]]; then check "$key" "$issue"; fi
           done <<< "$WATCHED"

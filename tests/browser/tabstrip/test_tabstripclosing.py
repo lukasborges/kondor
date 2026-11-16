@@ -51,3 +51,11 @@ def test_width_is_recomputed_when_the_pointer_leaves(strip: TabStripHarness, qtb
     close_while_the_pointer_is_over_the_strip(strip)
     strip.move_mouse(BELOW_STRIP)
     qtbot.waitUntil(lambda: strip.tab_width() > before)
+
+
+def test_closing_a_tab_far_left_of_the_current_keeps_it_current(strip: TabStripHarness) -> None:
+    strip.add_tabs(3)
+    current = strip.tabs.currentTab
+    strip.tabs.closeTab(0)
+    assert strip.tabs.currentTab == current
+    assert strip.tabs.currentIndex == 1

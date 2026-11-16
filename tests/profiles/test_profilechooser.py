@@ -16,12 +16,14 @@ ProfileRegistry().add("Work", "flag")
 QTimer.singleShot(2000, lambda: [w.close() for w in QGuiApplication.topLevelWindows()])
 print("chosen:", ask_for_profile(app))
 """
+REPOSITORY = Path(__file__).resolve().parents[2]
 TIMEOUT_SECONDS = 60
 
 
 def run_chooser_in_fresh_process(home: Path) -> subprocess.CompletedProcess[str]:
     environment = {
         **os.environ,
+        "PYTHONPATH": str(REPOSITORY / "src"),
         "QT_QPA_PLATFORM": "offscreen",
         "XDG_CONFIG_HOME": str(home / "config"),
         "XDG_DATA_HOME": str(home / "data"),

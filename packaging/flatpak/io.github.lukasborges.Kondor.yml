@@ -14,7 +14,8 @@ finish-args:
   - --socket=wayland
   - --socket=fallback-x11
   - --socket=pulseaudio
-  - --device=dri
+  # Cameras (/dev/video*) and security keys (/dev/hidraw*): https://github.com/lukasborges/kondor/issues/364
+  - --device=all
   - --filesystem=xdg-download
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.freedesktop.FileManager1

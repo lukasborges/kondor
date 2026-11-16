@@ -464,18 +464,6 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <source>New Tab</source>
-        <translation>新しいタブ</translation>
-    </message>
-    <message>
-        <source>New Private Tab</source>
-        <translation>新しいプライベートタブ</translation>
-    </message>
-    <message>
-        <source>Private Browsing</source>
-        <translation>プライベートブラウジング</translation>
-    </message>
-    <message>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>全画面表示を終了するには Esc キーを押してください</translation>
@@ -2840,6 +2828,21 @@
     <message>
         <source>Quit</source>
         <translation>終了</translation>
+    </message>
+</context>
+<context>
+    <name>WindowTitle</name>
+    <message>
+        <source>Private Browsing</source>
+        <translation>プライベートブラウジング</translation>
+    </message>
+    <message>
+        <source>New Private Tab</source>
+        <translation>新しいプライベートタブ</translation>
+    </message>
+    <message>
+        <source>New Tab</source>
+        <translation>新しいタブ</translation>
     </message>
 </context>
 <context>

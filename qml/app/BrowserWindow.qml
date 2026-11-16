@@ -30,24 +30,6 @@ ApplicationWindow {
         browserWindow: window
     }
 
-    function newTabTitle(tab) {
-        return tab.isPrivate ? qsTr("New Private Tab") : qsTr("New Tab")
-    }
-
-    function tabTitle(tab) {
-        const application = Qt.application.displayName
-        if (!tab)
-            return application
-        if (tab.newTabPage)
-            return newTabTitle(tab) + " — " + application
-        return tab.title.length ? tab.title + " — " + application : application
-    }
-
-    function windowTitle() {
-        const base = tabTitle(tabs.currentTab)
-        return privateWindow ? base + " — " + qsTr("Private Browsing") : base
-    }
-
     function openUrl(url, background) { tabControl.openUrl(url, background) }
     function openUrlsInNewTabs(urls) { tabControl.openUrlsInNewTabs(urls) }
     function openSettingsPage(pageId) { windowDialogs.openSettingsPage(pageId) }
@@ -57,8 +39,14 @@ ApplicationWindow {
     function closeTabFor(tab) { tabControl.closeTabFor(tab) }
     function openTabContextMenu(tab, position) { tabControl.openTabContextMenu(tab, position) }
 
-    title: windowTitle()
+    title: windowTitle.text
     onClosing: function(close) { closeGuard.handleClosing(close) }
+
+    WindowTitle {
+        id: windowTitle
+        tab: tabs.currentTab
+        isPrivateWindow: window.privateWindow
+    }
 
     TabModel {
         id: tabs

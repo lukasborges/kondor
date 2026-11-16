@@ -464,18 +464,6 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <source>New Tab</source>
-        <translation>Новая вкладка</translation>
-    </message>
-    <message>
-        <source>New Private Tab</source>
-        <translation>Новая приватная вкладка</translation>
-    </message>
-    <message>
-        <source>Private Browsing</source>
-        <translation>Приватный просмотр</translation>
-    </message>
-    <message>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Нажмите Esc, чтобы выйти из полноэкранного режима</translation>
@@ -2862,6 +2850,21 @@
     <message>
         <source>Quit</source>
         <translation>Выйти</translation>
+    </message>
+</context>
+<context>
+    <name>WindowTitle</name>
+    <message>
+        <source>Private Browsing</source>
+        <translation>Приватный просмотр</translation>
+    </message>
+    <message>
+        <source>New Private Tab</source>
+        <translation>Новая приватная вкладка</translation>
+    </message>
+    <message>
+        <source>New Tab</source>
+        <translation>Новая вкладка</translation>
     </message>
 </context>
 <context>

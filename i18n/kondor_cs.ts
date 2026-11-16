@@ -464,18 +464,6 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <source>New Tab</source>
-        <translation>Nová karta</translation>
-    </message>
-    <message>
-        <source>New Private Tab</source>
-        <translation>Nová anonymní karta</translation>
-    </message>
-    <message>
-        <source>Private Browsing</source>
-        <translation>Anonymní prohlížení</translation>
-    </message>
-    <message>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>Stisknutím Esc opustíte režim celé obrazovky</translation>
@@ -2862,6 +2850,21 @@
     <message>
         <source>Quit</source>
         <translation>Ukončit</translation>
+    </message>
+</context>
+<context>
+    <name>WindowTitle</name>
+    <message>
+        <source>Private Browsing</source>
+        <translation>Anonymní prohlížení</translation>
+    </message>
+    <message>
+        <source>New Private Tab</source>
+        <translation>Nová anonymní karta</translation>
+    </message>
+    <message>
+        <source>New Tab</source>
+        <translation>Nová karta</translation>
     </message>
 </context>
 <context>

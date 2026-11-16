@@ -464,18 +464,6 @@
 <context>
     <name>BrowserWindow</name>
     <message>
-        <source>New Tab</source>
-        <translation>新建标签页</translation>
-    </message>
-    <message>
-        <source>New Private Tab</source>
-        <translation>新建隐私标签页</translation>
-    </message>
-    <message>
-        <source>Private Browsing</source>
-        <translation>隐私浏览</translation>
-    </message>
-    <message>
         <source>Press Esc to exit full screen</source>
         <extracomment>Shown for a few seconds when a page enters full screen</extracomment>
         <translation>按 Esc 键退出全屏</translation>
@@ -2840,6 +2828,21 @@
     <message>
         <source>Quit</source>
         <translation>退出</translation>
+    </message>
+</context>
+<context>
+    <name>WindowTitle</name>
+    <message>
+        <source>Private Browsing</source>
+        <translation>隐私浏览</translation>
+    </message>
+    <message>
+        <source>New Private Tab</source>
+        <translation>新建隐私标签页</translation>
+    </message>
+    <message>
+        <source>New Tab</source>
+        <translation>新建标签页</translation>
     </message>
 </context>
 <context>

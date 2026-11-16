@@ -25,7 +25,13 @@ ColumnLayout {
             target.forceActiveFocus()
     }
 
+    function focusContainer() {
+        forceActiveFocus()
+    }
+
     function moveFocus(isForward) {
+        if (Window.window.activeFocusItem === root)
+            return focusFirstAction()
         const next = Window.window.activeFocusItem.nextItemInFocusChain(isForward)
         if (next)
             next.forceActiveFocus(isForward ? Qt.TabFocusReason : Qt.BacktabFocusReason)

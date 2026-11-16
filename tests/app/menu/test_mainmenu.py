@@ -68,3 +68,13 @@ def test_actions_do_not_share_a_sequence_with_a_shortcut() -> None:
     assert shortcuts
     shared = [a for a in actions for s in shortcuts if a in s]
     assert shared == []
+
+
+def test_opening_the_menu_highlights_no_item(menu: MainMenuHarness) -> None:
+    menu.evaluate("mainMenu.open()")
+    assert menu.wait_until_opened()
+
+    assert menu.evaluate("mainMenu.currentIndex") == -1
+
+    QTest.keyClick(menu.window, Qt.Key.Key_Down)
+    assert menu.evaluate("mainMenu.currentIndex") == 0

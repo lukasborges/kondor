@@ -17,6 +17,8 @@ Menu {
         root.browserWindow.windowFullScreen = !root.browserWindow.windowFullScreen
     }
 
+    onOpened: currentIndex = -1
+
     MenuItem { action: root.browserWindow.actions.newTabAction }
     MenuItem { action: root.browserWindow.actions.newPrivateTabAction }
     MenuItem { action: root.browserWindow.actions.newWindowAction }

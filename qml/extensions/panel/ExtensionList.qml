@@ -23,11 +23,18 @@ ColumnLayout {
             row.forceActiveFocus()
     }
 
+    function focusList() {
+        list.currentIndex = -1
+        root.forceActiveFocus()
+    }
+
     function focusExtension(extensionId) {
         focusRow(extensions.findIndex(function(extension) { return extension.id === extensionId }))
     }
 
     spacing: Kirigami.Units.smallSpacing
+    Keys.onDownPressed: focusRow(0)
+    Keys.onUpPressed: focusRow(list.count - 1)
 
     ColumnLayout {
         spacing: 0

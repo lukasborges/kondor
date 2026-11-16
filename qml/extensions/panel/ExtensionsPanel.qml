@@ -72,7 +72,7 @@ Popup {
         currentId = hasExtension(requestedId) ? requestedId : ""
         requestedId = ""
     }
-    onOpened: currentId === "" ? list.focusRow(0) : actions.focusFirstAction()
+    onOpened: currentId === "" ? list.focusList() : actions.focusContainer()
 
     Connections {
         target: ExtensionManager

@@ -104,6 +104,8 @@ main() {
 
   chosen_scenarios() { scenarios_by_age | head -n "$scenario_count"; }
 
+  has_untested_scenarios() { [[ -z "$(last_tested "$(scenarios_by_age | head -n 1)")" ]]; }
+
   record_tested() {
     local key
     for key in $1; do printf '%s\t%s\n' "$key" "$today" >> "$state/tested.tsv"; done
@@ -150,8 +152,8 @@ PROMPT
     local dry="$1" sha scenarios parity
     ensure_control || return 0
     sha="$(commit_under_test)"
-    if is_unchanged "$sha"; then
-      log "main unchanged since the last run ($sha)"
+    if is_unchanged "$sha" && ! has_untested_scenarios; then
+      log "main unchanged since the last run ($sha) and every scenario was tested"
       return 0
     fi
     scenarios="$(chosen_scenarios)"

@@ -6,6 +6,7 @@ PACKAGING_FILES = (
     ("kondor.desktop", "share/applications"),
     ("io.github.lukasborges.Kondor.metainfo.xml", "share/metainfo"),
     ("kondor-extension.xml", "share/mime/packages"),
+    ("io.github.lukasborges.Kondor.krunner.desktop", "share/krunner/dbusplugins"),
     ("kondor.png", "share/icons/hicolor/256x256/apps"),
     ("kondor.svg", "share/icons/hicolor/scalable/apps"),
 )

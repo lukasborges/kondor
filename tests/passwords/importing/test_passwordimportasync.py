@@ -20,8 +20,9 @@ TWO_NEW_LOGINS = 2
 
 
 def two_sites() -> PendingImport:
-    return PendingImport([Login(SITE_A, "ann", "pw1"), Login(SITE_B, "bob", "pw2"),
-                          Login(SITE_B, "cy", "pw3")])
+    return PendingImport(
+        [Login(SITE_A, "ann", "pw1"), Login(SITE_B, "bob", "pw2"), Login(SITE_B, "cy", "pw3")]
+    )
 
 
 def always(is_written: bool) -> ImportCommit:

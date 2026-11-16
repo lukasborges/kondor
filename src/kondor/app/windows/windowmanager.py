@@ -36,6 +36,9 @@ class WindowManager(QObject):
         if engine is not None and self._engine is None:
             self._engine = engine
 
+    def windows(self) -> list[QObject]:
+        return [window for window in self._windows if shiboken6.isValid(window)]
+
     def window_count(self) -> int:
         return len(self._windows)
 

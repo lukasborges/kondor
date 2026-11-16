@@ -11,7 +11,7 @@ def qstring_bytes(text: str) -> bytes:
 
 
 def test_writes_the_qdatastream_bytes() -> None:
-    expected = bytes.fromhex("00000001" "00000006" "0061006e006e" "00000004" "00700077")
+    expected = bytes.fromhex("00000001000000060061006e006e0000000400700077")
     assert map_to_bytes({"ann": "pw"}) == expected
 
 

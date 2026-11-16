@@ -24,10 +24,19 @@ finish-args:
 cleanup-commands:
   - /app/cleanup-BaseApp.sh
 modules:
+  - name: jeepney
+    buildsystem: simple
+    build-commands:
+      - pip3 install --no-index --no-deps --prefix=/app jeepney-0.9.0-py3-none-any.whl
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/b2/a3/e137168c9c44d18eff0376253da9f1e9234d0239e0ee230d2fee6cea8e55/jeepney-0.9.0-py3-none-any.whl
+        sha256: 97e5714520c16fc0a45695e5365a2e11b81ea79bba796e26f9f1d178cb182683
   - name: kondor
     buildsystem: simple
     build-commands:
       - python3 scripts/build.py --out build/python --install /app
+      - sed -i 's/^Icon=kondor$/Icon=io.github.lukasborges.Kondor/' /app/share/krunner/dbusplugins/io.github.lukasborges.Kondor.krunner.desktop
     sources:
       - type: dir
         path: ../..

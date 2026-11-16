@@ -1726,6 +1726,10 @@
         <translation>Sök efter ”%1”</translation>
     </message>
     <message>
+        <source>Generate Password</source>
+        <translation>Generera lösenord</translation>
+    </message>
+    <message>
         <source>Back</source>
         <translation>Tillbaka</translation>
     </message>
@@ -2716,6 +2720,21 @@
     <message>
         <source>No spelling dictionaries are installed.</source>
         <translation>Inga stavningsordlistor är installerade.</translation>
+    </message>
+</context>
+<context>
+    <name>SuggestedPasswordPopup</name>
+    <message>
+        <source>Password saved</source>
+        <translation>Lösenordet sparades</translation>
+    </message>
+    <message>
+        <source>Use Suggested Password</source>
+        <translation>Använd föreslaget lösenord</translation>
+    </message>
+    <message>
+        <source>Fill in a strong password and save it in KWallet when the form is sent</source>
+        <translation>Fyll i ett starkt lösenord och spara det i KWallet när formuläret skickas</translation>
     </message>
 </context>
 <context>

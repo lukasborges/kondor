@@ -27,6 +27,9 @@ RESOURCE_GROUPS = (
         "/scripts",
         "src/kondor/passwords/bridge",
         (
+            "src/kondor/passwords/bridge/fieldvalue.js",
+            "src/kondor/passwords/bridge/newpassword.js",
+            "src/kondor/passwords/bridge/newpasswordfield.js",
             "src/kondor/passwords/bridge/passwords.js",
             "src/kondor/passwords/bridge/usernamefield.js",
         ),

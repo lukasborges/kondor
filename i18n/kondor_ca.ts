@@ -1726,6 +1726,10 @@
         <translation>Cerca “%1”</translation>
     </message>
     <message>
+        <source>Generate Password</source>
+        <translation>Genera una contrasenya</translation>
+    </message>
+    <message>
         <source>Back</source>
         <translation>Endarrere</translation>
     </message>
@@ -2716,6 +2720,21 @@
     <message>
         <source>No spelling dictionaries are installed.</source>
         <translation>No hi ha cap diccionari ortogràfic instal·lat.</translation>
+    </message>
+</context>
+<context>
+    <name>SuggestedPasswordPopup</name>
+    <message>
+        <source>Password saved</source>
+        <translation>Contrasenya desada</translation>
+    </message>
+    <message>
+        <source>Use Suggested Password</source>
+        <translation>Utilitza la contrasenya suggerida</translation>
+    </message>
+    <message>
+        <source>Fill in a strong password and save it in KWallet when the form is sent</source>
+        <translation>Omple una contrasenya forta i desa-la al KWallet quan s'enviï el formulari</translation>
     </message>
 </context>
 <context>

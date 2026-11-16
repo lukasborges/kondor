@@ -59,6 +59,11 @@ Item {
     }
 
     Connections {
+        target: root.tab.passwords.suggestion
+        function onGenerateRequested() { passwordBridge.requestGenerate() }
+    }
+
+    Connections {
         target: root.tab.media
         function onActionRequested(action, seconds) { mediaBridge.perform(action, seconds) }
     }

@@ -2,12 +2,14 @@ from collections.abc import Iterator
 from typing import Any
 
 import pytest
-from PySide6.QtCore import Q_ARG, Q_RETURN_ARG, QMetaObject, QObject, Qt
+from PySide6.QtCore import Q_ARG, Q_RETURN_ARG, QMetaObject, QObject, QRectF, Qt
 from PySide6.QtQml import QQmlEngine
 
+from kondor.browser.tabs.tab import Tab
 from kondor.core.settings.settings import Settings
 from tests.browser.pagecontextmenucases import (
     CASES,
+    MISSPELLED_FIELD,
     SEARCH_PLACEHOLDER,
     SEPARATOR,
     complete_request,
@@ -23,14 +25,16 @@ import QtWebEngine
 import Kondor
 
 Item {
+    id: root
     property var menu: pageMenu
+    property var tab: null
     WebEngineView { id: view }
     QtObject {
         id: browserActions
         property Action savePageAction: Action { enabled: true }
         property Action printAction: Action { enabled: true }
     }
-    PageContextMenu { id: pageMenu; webView: view; browserActions: browserActions }
+    PageContextMenu { id: pageMenu; webView: view; tab: root.tab; browserActions: browserActions }
 
     function itemsFor(request) {
         pageMenu.request = request
@@ -53,7 +57,10 @@ def host(kondor_engine: QQmlEngine) -> Iterator[QObject]:
     component = load_component(kondor_engine, HOST_QML)
     created = component.create()
     assert created is not None, error_text(component)
+    tab = Tab(None)
+    created.setProperty("tab", tab)
     yield created
+    del tab
     created.deleteLater()
 
 
@@ -77,3 +84,13 @@ def test_never_doubles_or_ends_with_a_separator(host: QObject) -> None:
         assert items[0] != SEPARATOR
         assert items[-1] != SEPARATOR
         assert all(not (a == b == SEPARATOR) for a, b in zip(items, items[1:], strict=False))
+
+
+def test_password_field_starts_with_generate_password(host: QObject) -> None:
+    host.property("tab").passwords.suggestion.show_field("password", False, QRectF())
+    items = items_for(host, MISSPELLED_FIELD)
+    assert items[:2] == ["Generate Password", SEPARATOR]
+
+
+def test_other_fields_have_no_generate_password(host: QObject) -> None:
+    assert "Generate Password" not in items_for(host, MISSPELLED_FIELD)

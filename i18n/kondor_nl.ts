@@ -1726,6 +1726,10 @@
         <translation>Zoeken naar ‘%1’</translation>
     </message>
     <message>
+        <source>Generate Password</source>
+        <translation>Wachtwoord genereren</translation>
+    </message>
+    <message>
         <source>Back</source>
         <translation>Terug</translation>
     </message>
@@ -2716,6 +2720,21 @@
     <message>
         <source>No spelling dictionaries are installed.</source>
         <translation>Er zijn geen spellingwoordenboeken geïnstalleerd.</translation>
+    </message>
+</context>
+<context>
+    <name>SuggestedPasswordPopup</name>
+    <message>
+        <source>Password saved</source>
+        <translation>Wachtwoord opgeslagen</translation>
+    </message>
+    <message>
+        <source>Use Suggested Password</source>
+        <translation>Voorgesteld wachtwoord gebruiken</translation>
+    </message>
+    <message>
+        <source>Fill in a strong password and save it in KWallet when the form is sent</source>
+        <translation>Een sterk wachtwoord invullen en opslaan in KWallet wanneer het formulier wordt verzonden</translation>
     </message>
 </context>
 <context>

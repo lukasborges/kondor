@@ -1713,6 +1713,10 @@
         <translation>“%1” ara</translation>
     </message>
     <message>
+        <source>Generate Password</source>
+        <translation>Parola Üret</translation>
+    </message>
+    <message>
         <source>Back</source>
         <translation>Geri</translation>
     </message>
@@ -2703,6 +2707,21 @@
     <message>
         <source>No spelling dictionaries are installed.</source>
         <translation>Yüklü yazım denetimi sözlüğü yok.</translation>
+    </message>
+</context>
+<context>
+    <name>SuggestedPasswordPopup</name>
+    <message>
+        <source>Password saved</source>
+        <translation>Parola kaydedildi</translation>
+    </message>
+    <message>
+        <source>Use Suggested Password</source>
+        <translation>Önerilen Parolayı Kullan</translation>
+    </message>
+    <message>
+        <source>Fill in a strong password and save it in KWallet when the form is sent</source>
+        <translation>Güçlü bir parola gir ve form gönderildiğinde KWallet'a kaydet</translation>
     </message>
 </context>
 <context>

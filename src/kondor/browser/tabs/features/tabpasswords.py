@@ -1,6 +1,7 @@
 from PySide6.QtCore import Property, QObject, QUrl, Signal, Slot
 
 from kondor.browser.tabs.assignandnotify import assign_and_notify
+from kondor.browser.tabs.features.tabpasswordsuggestion import TabPasswordSuggestion
 from kondor.core.settings.settings import Settings
 from kondor.passwords import passwordorigin
 from kondor.passwords.passwordsearch import matching_logins
@@ -24,6 +25,7 @@ class TabPasswords(QObject):
         self._origin = self._username = self._password = ""
         self._usernames: list[str] = []
         self._is_available = False
+        self._suggestion = TabPasswordSuggestion(is_private, self)
         if not is_private:
             self._watch_store()
 
@@ -45,6 +47,7 @@ class TabPasswords(QObject):
     prompt = Property(str, lambda self: self._prompt, notify=promptChanged)
     promptUsername = Property(str, lambda self: self._username, notify=promptChanged)
     promptHost = Property(str, _prompt_host, notify=promptChanged)
+    suggestion = Property(TabPasswordSuggestion, lambda self: self._suggestion, constant=True)
     host = Property(str, _host, notify=usernamesChanged)
     usernames = Property("QStringList", lambda self: self._usernames, notify=usernamesChanged)
 
@@ -56,6 +59,7 @@ class TabPasswords(QObject):
 
     def update_usernames_for(self, url: QUrl) -> None:
         self._url = url
+        self._suggestion.clear_field()
         names: list[str] = []
         if not self._is_private:
             names = PasswordStore.instance().usernames(passwordorigin.origin_of(url))

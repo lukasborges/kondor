@@ -1713,6 +1713,10 @@
         <translation>「%1」を検索</translation>
     </message>
     <message>
+        <source>Generate Password</source>
+        <translation>パスワードを生成</translation>
+    </message>
+    <message>
         <source>Back</source>
         <translation>戻る</translation>
     </message>
@@ -2703,6 +2707,21 @@
     <message>
         <source>No spelling dictionaries are installed.</source>
         <translation>スペルチェック用の辞書がインストールされていません。</translation>
+    </message>
+</context>
+<context>
+    <name>SuggestedPasswordPopup</name>
+    <message>
+        <source>Password saved</source>
+        <translation>パスワードを保存しました</translation>
+    </message>
+    <message>
+        <source>Use Suggested Password</source>
+        <translation>推奨パスワードを使用</translation>
+    </message>
+    <message>
+        <source>Fill in a strong password and save it in KWallet when the form is sent</source>
+        <translation>強力なパスワードを入力し、フォームの送信時に KWallet に保存します</translation>
     </message>
 </context>
 <context>

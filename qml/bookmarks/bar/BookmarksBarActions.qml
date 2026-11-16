@@ -39,7 +39,7 @@ QtObject {
     }
 
     function openAllIn(folderId) {
-        root.bookmarksIn(folderId).forEach(entry => root.openInNewTab(entry.url, true))
+        root.bookmarksIn(folderId).reverse().forEach(entry => root.openInNewTab(entry.url, true))
     }
 
     function isPageIn(folderId) {

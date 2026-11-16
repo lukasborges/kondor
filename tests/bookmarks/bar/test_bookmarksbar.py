@@ -6,6 +6,7 @@ from PySide6.QtQml import QQmlEngine
 from PySide6.QtTest import QTest
 
 from kondor.browser.tabs.tabmodel import TabModel
+from kondor.browser.tabs.tabmodelrows import TAB_ROLE
 from tests.bookmarks.bar.barharness import (
     TARGETS_QML,
     create_bar,
@@ -64,6 +65,21 @@ def test_folder_menu_lists_open_all_and_add_page(
     menu.metaObject().invokeMethod(menu, "rebuild")
     texts = menu.property("texts").toVariant()
     assert texts[-2:] == ["Open All in Tabs (2)", "Add This Page Here"]
+
+
+def test_open_all_in_tabs_keeps_the_folder_order(
+    fresh_bookmarks: Path, kondor_engine: QQmlEngine, tabs: TabModel
+) -> None:
+    folder = add_folder_in_other("Three")
+    for name in ("one", "two", "three"):
+        add_page(folder, name, name)
+    tabs.addTab(False, QUrl("https://current.example/"))
+    bar = create_bar(kondor_engine, tabs, 400)
+    actions = bar.findChild(QObject, "actions")
+    evaluate(actions, kondor_engine, f"openAllIn({folder})")
+    rows = [tabs.index(row, 0) for row in range(tabs.count)]
+    paths = [tabs.data(index, TAB_ROLE).url.path() for index in rows]
+    assert paths == ["/", "/one", "/two", "/three"]
 
 
 def test_empty_folder_menu_has_no_open_all(

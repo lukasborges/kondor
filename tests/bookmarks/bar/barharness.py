@@ -8,6 +8,7 @@ from tests.qmlsupport import error_text, load_component
 
 BAR_QML = """
 import QtQml
+import QtWebEngine
 import Kondor
 
 BookmarksBar {

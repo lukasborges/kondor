@@ -105,6 +105,7 @@ def test_help_lists_the_options(environment: dict[str, str]) -> None:
     result = run_kondor(environment, "--help")
 
     assert result.returncode == 0
+    assert result.stdout.startswith("Usage: kondor [options] [urls...]")
     for option in ("--private", "--new-window", "--new-instance", "--load-extension <dir>"):
         assert option in result.stdout
 

@@ -1729,6 +1729,14 @@
         <translation>Neu laden</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>Seite speichern unter …</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>Drucken …</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Seitenquelltext anzeigen</translation>
     </message>

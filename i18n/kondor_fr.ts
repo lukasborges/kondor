@@ -1729,6 +1729,14 @@
         <translation>Recharger</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>Enregistrer la page sous…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>Imprimer…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Afficher le code source de la page</translation>
     </message>

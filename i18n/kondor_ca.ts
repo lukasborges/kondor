@@ -1729,6 +1729,14 @@
         <translation>Torna a carregar</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>Desa la pàgina com a…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>Imprimeix…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Mostra el codi font de la pàgina</translation>
     </message>

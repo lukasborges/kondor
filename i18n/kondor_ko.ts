@@ -1718,6 +1718,14 @@
         <translation>새로고침</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>다른 이름으로 페이지 저장…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>인쇄…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>페이지 소스 보기</translation>
     </message>

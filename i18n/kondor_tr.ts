@@ -1718,6 +1718,14 @@
         <translation>Yeniden yükle</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>Sayfayı Farklı Kaydet…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>Yazdır…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Sayfa kaynağını görüntüle</translation>
     </message>

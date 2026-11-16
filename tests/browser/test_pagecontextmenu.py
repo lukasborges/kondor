@@ -25,7 +25,12 @@ import Kondor
 Item {
     property var menu: pageMenu
     WebEngineView { id: view }
-    PageContextMenu { id: pageMenu; webView: view }
+    QtObject {
+        id: browserActions
+        property Action savePageAction: Action { enabled: true }
+        property Action printAction: Action { enabled: true }
+    }
+    PageContextMenu { id: pageMenu; webView: view; browserActions: browserActions }
 
     function itemsFor(request) {
         pageMenu.request = request

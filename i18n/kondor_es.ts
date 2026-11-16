@@ -1729,6 +1729,14 @@
         <translation>Volver a cargar</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>Guardar página como…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>Imprimir…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Ver código fuente de la página</translation>
     </message>

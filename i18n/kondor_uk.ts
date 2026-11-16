@@ -1740,6 +1740,14 @@
         <translation>Перезавантажити</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>Зберегти сторінку як…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>Друк…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Переглянути вихідний код сторінки</translation>
     </message>

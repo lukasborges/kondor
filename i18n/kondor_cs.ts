@@ -1740,6 +1740,14 @@
         <translation>Znovu načíst</translation>
     </message>
     <message>
+        <source>Save Page As…</source>
+        <translation>Uložit stránku jako…</translation>
+    </message>
+    <message>
+        <source>Print…</source>
+        <translation>Tisk…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Zobrazit zdrojový kód stránky</translation>
     </message>

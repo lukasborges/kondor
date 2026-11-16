@@ -86,8 +86,23 @@ def show_extension_package(window: QObject | None, path: str) -> None:
     ExtensionManager.instance().inspectFile(path)
     if window is None:
         return
-    if not QMetaObject.invokeMethod(window, "openSettingsPage", Q_ARG("QVariant", "extensions")):
+    open_extensions_page(window)
+
+
+def open_extensions_page(window: QObject) -> bool:
+    page = Q_ARG("QVariant", "extensions")
+    is_opened = bool(QMetaObject.invokeMethod(window, "openSettingsPage", page))
+    if not is_opened:
         qWarning("Kondor: cannot open the extensions settings")
+    return is_opened
+
+
+def show_extensions_settings(manager: WindowManager) -> None:
+    window = manager.window_for_request(False) or manager.window_for_request(True)
+    if window is None:
+        return
+    if open_extensions_page(window):
+        raise_window(window, b"")
 
 
 def open_startup_windows(manager: WindowManager) -> None:

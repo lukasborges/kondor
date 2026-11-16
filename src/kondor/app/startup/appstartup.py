@@ -92,6 +92,7 @@ def open_windows(engine: QQmlApplicationEngine, single_instance: SingleInstance)
     window_manager = WindowManager.instance()
     window_manager.set_engine(engine)
     single_instance.messageReceived.connect(window_manager.handle_single_instance_message)
+    ExtensionManager.instance().manageRequested.connect(window_manager.show_extensions_settings)
     window_manager.open_startup_windows()
     ExtensionCatalog.instance().start_auto_update()
     return window_manager.window_count() > 0

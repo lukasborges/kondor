@@ -136,3 +136,7 @@ class WindowManager(QObject):
 
     def open_startup_windows(self) -> None:
         windowlaunch.open_startup_windows(self)
+
+    @Slot()
+    def show_extensions_settings(self) -> None:
+        windowlaunch.show_extensions_settings(self)

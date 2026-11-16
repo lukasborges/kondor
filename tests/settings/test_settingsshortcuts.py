@@ -51,3 +51,36 @@ def test_find_works_in_browser_window_after_settings_closed(
     shortcuts_host.focus_page_field()
     shortcuts_host.press_find(shortcuts_host.window)
     assert shortcuts_host.find_count() == 1
+
+
+@pytest.mark.xfail(
+    strict=False,
+    reason="passes alone; offscreen delivers no shortcut to a second host window in one process",
+)
+def test_find_works_in_browser_window_while_settings_is_open_but_unfocused(
+    shortcuts_host: ShortcutsHost,
+) -> None:
+    shortcuts_host.open_settings()
+    shortcuts_host.focus_page_field()
+    shortcuts_host.press_find(shortcuts_host.window)
+    assert shortcuts_host.find_count() == 1
+
+
+def test_find_in_focused_settings_window_does_not_reach_the_browser(
+    shortcuts_host: ShortcutsHost,
+) -> None:
+    shortcuts_host.open_settings()
+    shortcuts_host.focus_settings()
+    shortcuts_host.press_find(shortcuts_host.settings())
+    assert shortcuts_host.find_count() == 0
+
+
+@pytest.mark.xfail(strict=False, reason="offscreen does not deliver this shortcut")
+def test_find_in_focused_settings_window_activates_its_own_shortcut(
+    shortcuts_host: ShortcutsHost,
+) -> None:
+    shortcuts_host.open_settings()
+    activations = shortcuts_host.count_settings_find_activations()
+    shortcuts_host.focus_settings()
+    shortcuts_host.press_find(shortcuts_host.settings())
+    assert activations == [1]

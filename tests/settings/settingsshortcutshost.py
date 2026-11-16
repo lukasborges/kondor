@@ -1,5 +1,5 @@
 from PySide6.QtCore import QCoreApplication, QEvent, QMetaObject, QObject, QUrl
-from PySide6.QtGui import QKeySequence
+from PySide6.QtGui import QGuiApplication, QKeySequence, QWindow
 from PySide6.QtQml import QQmlComponent, QQmlEngine
 from PySide6.QtQuick import QQuickWindow
 from PySide6.QtTest import QTest
@@ -38,6 +38,20 @@ ApplicationWindow {
 KEPT_COMPONENTS: list[QQmlComponent] = []
 
 
+def wait_for_focus_window(window: QWindow | None) -> bool:
+    for _ in range(20):
+        if QGuiApplication.focusWindow() is window:
+            return True
+        QTest.qWait(50)
+    return False
+
+
+def is_find_shortcut(shortcut: QObject) -> bool:
+    if not shortcut.metaObject().className().startswith("WindowShortcut"):
+        return False
+    return QKeySequence(QKeySequence.StandardKey.Find) in shortcut.property("sequences")
+
+
 class ShortcutsHost:
     def __init__(self, engine: QQmlEngine) -> None:
         self.tabs = TabModel()
@@ -55,6 +69,7 @@ class ShortcutsHost:
     def focus(self, window: QQuickWindow) -> None:
         window.requestActivate()
         assert QTest.qWaitForWindowActive(window)
+        assert wait_for_focus_window(window)
         QCoreApplication.processEvents()
 
     def focus_page_field(self) -> None:
@@ -78,6 +93,20 @@ class ShortcutsHost:
         QTest.keySequence(window, QKeySequence(QKeySequence.StandardKey.Find))
         QTest.qWait(200)
 
+    def focus_settings(self) -> None:
+        settings = self.settings()
+        self.focus(settings)
+        item = settings.contentItem()
+        item.forceActiveFocus()
+        QCoreApplication.processEvents()
+
+    def count_settings_find_activations(self) -> list[int]:
+        activations: list[int] = []
+        for shortcut in self.settings().findChildren(QObject):
+            if is_find_shortcut(shortcut):
+                shortcut.activated.connect(lambda: activations.append(1))
+        return activations
+
     def find_count(self) -> int:
         return int(self.window.property("findCount"))
 
@@ -88,4 +117,4 @@ class ShortcutsHost:
                 window.deleteLater()
         self.tabs.deleteLater()
         QCoreApplication.sendPostedEvents(None, QEvent.Type.DeferredDelete)
-        QTest.qWait(100)
+        wait_for_focus_window(None)

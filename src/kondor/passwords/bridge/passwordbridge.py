@@ -116,6 +116,8 @@ class PasswordBridge(QObject):
             return
         if PasswordStore.instance().save(*login):
             tab.passwords.suggestion.announce_saved()
+        else:
+            tab.passwords.offer_save(*login)
 
     def _offer_or_save(self, tab: Tab, login: tuple[str, str, str]) -> None:
         if tab.passwords.suggestion.take_generated(login[0], login[2]):

@@ -2734,7 +2734,7 @@
     </message>
     <message>
         <source>Fill in a strong password and save it in KWallet when the form is sent</source>
-        <translation>Saisir un mot de passe robuste et l'enregistrer dans KWallet à l'envoi du formulaire</translation>
+        <translation>Saisir un mot de passe robuste et l&apos;enregistrer dans KWallet à l&apos;envoi du formulaire</translation>
     </message>
 </context>
 <context>

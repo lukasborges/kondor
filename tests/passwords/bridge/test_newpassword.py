@@ -105,3 +105,21 @@ def test_dismissed_field_is_not_offered_again(flow_page: FlowPage) -> None:
     flow_page.focus("a")
     offers = [call[2] for call in flow_page.calls() if call[0] == "focused"]
     assert offers[-1] is False
+
+
+def test_escape_withdraws_the_offer_but_keeps_the_field_current(flow_page: FlowPage) -> None:
+    flow_page.load(SIGN_UP)
+    flow_page.focus("a")
+    escape = "new KeyboardEvent('keydown', {key: 'Escape', bubbles: true})"
+    flow_page.evaluate(f"document.getElementById('a').dispatchEvent({escape}); 0")
+    assert flow_page.calls()[-1] == ["focused", "new", False]
+    flow_page.evaluate("window.__generate(); 0")
+    QTest.qWait(SETTLE_MS)
+    assert flow_page.value_of("a") == flow_page.value_of("b") != ""
+
+
+def test_typing_withdraws_the_offer_without_leaving(flow_page: FlowPage) -> None:
+    flow_page.load(SIGN_UP)
+    flow_page.focus("a")
+    flow_page.evaluate("document.getElementById('a').dispatchEvent(new Event('input')); 0")
+    assert flow_page.calls()[-1] == ["focused", "new", False]

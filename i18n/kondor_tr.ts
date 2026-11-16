@@ -2721,7 +2721,7 @@
     </message>
     <message>
         <source>Fill in a strong password and save it in KWallet when the form is sent</source>
-        <translation>Güçlü bir parola gir ve form gönderildiğinde KWallet'a kaydet</translation>
+        <translation>Güçlü bir parola gir ve form gönderildiğinde KWallet&apos;a kaydet</translation>
     </message>
 </context>
 <context>

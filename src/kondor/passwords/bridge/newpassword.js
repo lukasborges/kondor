@@ -36,13 +36,19 @@
         bridge.passwordFieldFocused(describe(event.target, kind));
     };
 
+    const withdraw = () => {
+        if (!current || !isOffered)
+            return;
+        dismissed.add(current);
+        isOffered = false;
+        bridge.passwordFieldFocused(describe(current, fields.kindOf(current)));
+    };
+
     const leave = () => {
         if (!current)
             return;
-        if (isOffered)
-            dismissed.add(current);
+        withdraw();
         current = null;
-        isOffered = false;
         bridge.passwordFieldLeft();
     };
 
@@ -53,17 +59,17 @@
 
     const onInput = (event) => {
         if (event.target === current)
-            leave();
+            withdraw();
     };
 
     const onKeyDown = (event) => {
         if (event.key === "Escape" && event.target === current)
-            leave();
+            withdraw();
     };
 
     const onMove = () => {
         if (Date.now() - focusedAt > scrollGraceMs)
-            leave();
+            withdraw();
     };
 
     const candidateRules = (field) => {

@@ -37,3 +37,10 @@ def test_last_tab_is_reachable_with_a_pinned_tab(strip: TabStripHarness, qtbot: 
     QTest.qWait(SETTLE_MS)
     strip.scroll_to(100000)
     qtbot.waitUntil(lambda: strip.call("isFullyInView", LAST_TAB))
+
+
+def test_content_width_counts_the_pinned_tab_width(strip: TabStripHarness, qtbot: QtBot) -> None:
+    strip.add_tabs(MANY_TABS)
+    strip.tabs.setPinned(0, True)
+    expected = strip.strip_property("pinnedTabWidth") + (MANY_TABS - 1) * strip.tab_width()
+    qtbot.waitUntil(lambda: strip.view_property("contentWidth") == expected)

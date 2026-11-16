@@ -65,24 +65,11 @@ Item {
         return current
     }
 
-    function isLayoutStale() {
-        return Math.abs(view.contentWidth - stripWidth) > 0.5
-    }
-
-    function repairStaleLayout() {
-        if (!isLayoutStale())
-            return
-        const keptScroll = scrolled
-        view.positionViewAtBeginning()
-        view.contentX = view.originX + Math.max(0, Math.min(maxScroll, keptScroll))
-    }
-
     function ensureCurrentVisible() {
         const index = tabStrip.tabModel.currentIndex
         if (!view || index < 0)
             return
         view.forceLayout()
-        repairStaleLayout()
         scrollTo(positionToShowCurrent(tabX(index), tabX(index + 1)))
     }
 
@@ -97,6 +84,13 @@ Item {
         property: "contentX"
         duration: Kirigami.Units.shortDuration
         easing.type: Easing.OutCubic
+    }
+
+    Binding {
+        target: scroller.view
+        property: "cacheBuffer"
+        value: scroller.stripWidth
+        when: scroller.view !== null && scroller.stripWidth > 0
     }
 
     Connections {

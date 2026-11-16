@@ -17,10 +17,10 @@ VERSION_ONE_STATEMENTS = (
     "PRAGMA user_version = 1",
 )
 CHILDREN = "SELECT id, title, url, position FROM bookmarks WHERE parent_id = ? ORDER BY position"
-TOOLBAR = "SELECT id FROM bookmarks WHERE special = 'toolbar'"
-ROOT_FOLDERS = "SELECT COUNT(*) FROM bookmarks WHERE special IN ('toolbar','other')"
-SCHEMA_VERSION = 5
-ROOT_FOLDER_COUNT = 2
+TOOLBAR = "SELECT id FROM bookmarks WHERE special IS NOT NULL"
+ROOT_FOLDERS = "SELECT COUNT(*) FROM bookmarks WHERE special IS NOT NULL"
+SCHEMA_VERSION = 6
+ROOT_FOLDER_COUNT = 1
 BookmarkRow = tuple[int, str, str | None, int]
 
 

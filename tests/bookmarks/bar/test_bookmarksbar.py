@@ -15,7 +15,7 @@ from tests.bookmarks.bar.barharness import (
     evaluate,
     fill_toolbar,
 )
-from tests.bookmarks.bookmarkrows import add_folder_in_other, add_page, manager
+from tests.bookmarks.bookmarkrows import add_folder_in_toolbar, add_page, manager
 from tests.qmlsupport import captured_messages
 
 
@@ -58,7 +58,7 @@ def test_widening_the_bar_brings_the_items_back(
 def test_folder_menu_lists_open_all_and_add_page(
     fresh_bookmarks: Path, kondor_engine: QQmlEngine
 ) -> None:
-    folder = add_folder_in_other("News")
+    folder = add_folder_in_toolbar("News")
     add_page(folder, "One", "one")
     add_page(folder, "Two", "two")
     menu = create_menu(kondor_engine, folder, True)
@@ -70,7 +70,7 @@ def test_folder_menu_lists_open_all_and_add_page(
 def test_open_all_in_tabs_keeps_the_folder_order(
     fresh_bookmarks: Path, kondor_engine: QQmlEngine, tabs: TabModel
 ) -> None:
-    folder = add_folder_in_other("Three")
+    folder = add_folder_in_toolbar("Three")
     for name in ("one", "two", "three"):
         add_page(folder, name, name)
     tabs.addTab(False, QUrl("https://current.example/"))
@@ -85,7 +85,7 @@ def test_open_all_in_tabs_keeps_the_folder_order(
 def test_empty_folder_menu_has_no_open_all(
     fresh_bookmarks: Path, kondor_engine: QQmlEngine
 ) -> None:
-    folder = add_folder_in_other("Empty")
+    folder = add_folder_in_toolbar("Empty")
     menu = create_menu(kondor_engine, folder, False)
     menu.metaObject().invokeMethod(menu, "rebuild")
     assert menu.property("texts").toVariant() == ["(Empty)"]

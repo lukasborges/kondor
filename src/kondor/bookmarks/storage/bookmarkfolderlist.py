@@ -5,7 +5,7 @@ from kondor.bookmarks.storage.bookmarkqueries import Row, special_folder_id
 from kondor.bookmarks.storage.rootfoldernames import display_title
 from kondor.core.database import sql
 
-SPECIAL_ROOTS = ("toolbar", "other")
+SPECIAL_ROOTS = ("toolbar",)
 
 
 def special_root_ids() -> list[int]:

@@ -30,7 +30,7 @@ ApplicationWindow {
     }
 }
 """
-OTHER_PAGE = "other"
+FOLDER_PAGE = "folder-page"
 
 
 class PanelDriver:
@@ -55,7 +55,8 @@ class PanelDriver:
 
 @pytest.fixture
 def driver(fresh_bookmarks: Path, kondor_engine: QQmlEngine, qtbot: QtBot) -> Iterator[PanelDriver]:
-    add_page(manager().otherFolderId(), "Other page", OTHER_PAGE)
+    folder = manager().addFolder("Folder", manager().toolbarFolderId())
+    add_page(folder, "Folder page", FOLDER_PAGE)
     kondor_engine.addImageProvider("kondor-favicon", FaviconImageProvider())
     component: QQmlComponent = load_component(kondor_engine, WINDOW_QML)
     window = component.create()
@@ -67,7 +68,7 @@ def driver(fresh_bookmarks: Path, kondor_engine: QQmlEngine, qtbot: QtBot) -> It
     QCoreApplication.sendPostedEvents(None, QEvent.Type.DeferredDelete)
 
 
-def enter_other_bookmarks(driver: PanelDriver) -> None:
+def enter_the_folder(driver: PanelDriver) -> None:
     driver.open()
     driver.press(Qt.Key.Key_Down)
     for _ in range(6):
@@ -76,14 +77,14 @@ def enter_other_bookmarks(driver: PanelDriver) -> None:
 
 
 def test_right_enters_a_folder_and_enter_opens_its_first_bookmark(driver: PanelDriver) -> None:
-    enter_other_bookmarks(driver)
+    enter_the_folder(driver)
     driver.qtbot.waitUntil(lambda: driver.folder_depth() == 1)
     driver.press(Qt.Key.Key_Return)
-    assert driver.opened_urls() == [EXAMPLE_SITE + OTHER_PAGE]
+    assert driver.opened_urls() == [EXAMPLE_SITE + FOLDER_PAGE]
 
 
 def test_left_returns_from_a_folder_to_the_overview(driver: PanelDriver) -> None:
-    enter_other_bookmarks(driver)
+    enter_the_folder(driver)
     driver.qtbot.waitUntil(lambda: driver.folder_depth() == 1)
     driver.press(Qt.Key.Key_Left)
     assert driver.folder_depth() == 0

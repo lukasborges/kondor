@@ -309,20 +309,12 @@
 <context>
     <name>BookmarksPanelEntries</name>
     <message>
-        <source>Recently Added</source>
-        <translation>Ajoutés récemment</translation>
+        <source>Recently Used</source>
+        <translation>Utilisés récemment</translation>
     </message>
     <message>
         <source>Bookmarks Toolbar</source>
         <translation>Barre des marque-pages</translation>
-    </message>
-    <message>
-        <source>Other Bookmarks</source>
-        <translation>Autres marque-pages</translation>
-    </message>
-    <message>
-        <source>Folders</source>
-        <translation>Dossiers</translation>
     </message>
 </context>
 <context>

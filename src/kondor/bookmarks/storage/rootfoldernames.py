@@ -6,8 +6,6 @@ CONTEXT = "BookmarksPanelEntries"
 def translated_root_name(special: str) -> str:
     if special == "toolbar":
         return str(QCoreApplication.translate(CONTEXT, "Bookmarks Toolbar"))
-    if special == "other":
-        return str(QCoreApplication.translate(CONTEXT, "Other Bookmarks"))
     return ""
 
 

@@ -21,6 +21,11 @@ Popup {
         search.clear()
     }
 
+    function showFirstLevel() {
+        resetLevel()
+        content.refresh()
+    }
+
     function enterFolder(entry) {
         folderPath = folderPath.concat([{ id: entry.folderId, title: entry.title }])
         list.focusRow(0)
@@ -84,7 +89,7 @@ Popup {
     focus: true
     closePolicy: Popup.CloseOnPressOutsideParent
     onTabChanged: close()
-    onAboutToShow: resetLevel()
+    onAboutToShow: showFirstLevel()
     onOpened: focusInitial()
 
     BookmarksPanelEntries {

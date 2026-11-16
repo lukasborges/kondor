@@ -97,9 +97,7 @@ def create_bookmarks_table() -> bool:
 
 
 def create_root_folders() -> bool:
-    return insert_root_folder("Bookmarks Toolbar", "toolbar") and insert_root_folder(
-        "Other Bookmarks", "other"
-    )
+    return insert_root_folder("Bookmarks Toolbar", "toolbar")
 
 
 def create_favicons_table() -> bool:

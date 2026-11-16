@@ -4,6 +4,7 @@ from PySide6.QtCore import QObject
 from PySide6.QtQml import QQmlComponent, QQmlEngine
 
 from tests.bookmarks.bookmarkrows import add_page, manager
+from tests.bookmarks.recentlyused.test_recentlyused import visit
 from tests.qmlsupport import captured_messages, error_text, load_component
 
 ENTRIES_QML = """
@@ -24,21 +25,23 @@ def create_entries(engine: QQmlEngine) -> tuple[QQmlComponent, QObject]:
     return component, created
 
 
-def test_overview_lists_recent_bookmarks_then_the_root_folders(
+def test_overview_lists_recently_used_then_the_toolbar_contents(
     fresh_bookmarks: Path, kondor_engine: QQmlEngine
 ) -> None:
-    add_page(manager().otherFolderId(), "Newest", "newest")
+    add_page(manager().toolbarFolderId(), "Visited", "visited")
+    visit("visited", 1)
     with captured_messages() as messages:
         _component, entries = create_entries(kondor_engine)
     assert messages == []
-    assert entries.property("titles").toVariant()[0] == "Newest"
-    assert entries.property("titles").toVariant()[-2:] == ["Bookmarks Toolbar", "Other Bookmarks"]
+    assert entries.property("titles").toVariant()[0] == "Visited"
+    assert entries.property("sections").toVariant()[0] == "Recently Used"
+    assert entries.property("sections").toVariant()[-1] == "Bookmarks Toolbar"
 
 
 def test_search_replaces_the_overview_with_matching_bookmarks(
     fresh_bookmarks: Path, kondor_engine: QQmlEngine
 ) -> None:
-    add_page(manager().otherFolderId(), "Needle page", "needle")
+    add_page(manager().toolbarFolderId(), "Needle page", "needle")
     component, entries = create_entries(kondor_engine)
     entries.setProperty("query", "needle")
     assert entries.property("titles").toVariant() == ["Needle page"]

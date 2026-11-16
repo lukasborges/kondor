@@ -61,7 +61,7 @@ def add_plasma_history() -> None:
 
 def add_plasma_bookmark() -> int:
     bookmarks = BookmarkManager.instance()
-    folder = bookmarks.addFolder("Address suggestions test", bookmarks.otherFolderId())
+    folder = bookmarks.addFolder("Address suggestions test", bookmarks.toolbarFolderId())
     bookmark = bookmarks.addBookmark(QUrl("https://kde.org/hig/"), "Plasma HIG", folder)
     assert bookmark > 0, "bookmark was not added"
     return folder

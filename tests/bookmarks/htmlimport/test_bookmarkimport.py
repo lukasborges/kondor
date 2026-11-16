@@ -30,7 +30,7 @@ def sample_import(
     recreate_database()
     path = tmp_path_factory.mktemp("import") / "bookmarks.html"
     write_sample_export(path)
-    other_children = manager().childCount(manager().otherFolderId())
+    other_children = manager().childCount(manager().toolbarFolderId())
     yield SampleImport(manager().importHtml(QUrl.fromLocalFile(str(path))), other_children)
     Database.reset_instance()
 
@@ -44,7 +44,7 @@ def test_rebuilds_the_folder_tree_under_other_bookmarks(sample_import: SampleImp
     assert imported_folder_id() > 0
     assert imported_toolbar_id() > 0
     assert nested_folder_id() > 0
-    assert manager().bookmark(imported_folder_id())["parentId"] == manager().otherFolderId()
+    assert manager().bookmark(imported_folder_id())["parentId"] == manager().toolbarFolderId()
     assert manager().bookmark(nested_folder_id())["parentId"] == imported_toolbar_id()
 
 

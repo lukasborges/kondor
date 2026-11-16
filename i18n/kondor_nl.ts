@@ -309,20 +309,12 @@
 <context>
     <name>BookmarksPanelEntries</name>
     <message>
-        <source>Recently Added</source>
-        <translation>Onlangs toegevoegd</translation>
+        <source>Recently Used</source>
+        <translation>Onlangs gebruikt</translation>
     </message>
     <message>
         <source>Bookmarks Toolbar</source>
         <translation>Bladwijzerwerkbalk</translation>
-    </message>
-    <message>
-        <source>Other Bookmarks</source>
-        <translation>Overige bladwijzers</translation>
-    </message>
-    <message>
-        <source>Folders</source>
-        <translation>Mappen</translation>
     </message>
 </context>
 <context>

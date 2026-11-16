@@ -35,9 +35,9 @@ class TreeInserter:
 
 
 def insert_imported_folder() -> int:
-    other_id = special_folder_id("other")
-    position = first_free_position(other_id)
-    return insert_row(BookmarkRow(True, IMPORTED_FOLDER_TITLE, QUrl(), other_id, position))
+    toolbar_id = special_folder_id("toolbar")
+    position = first_free_position(toolbar_id)
+    return insert_row(BookmarkRow(True, IMPORTED_FOLDER_TITLE, QUrl(), toolbar_id, position))
 
 
 def insert_all(parsed: ParsedBookmarks, inserter: TreeInserter) -> bool:

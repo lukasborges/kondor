@@ -27,7 +27,8 @@ VERSION_TWO_STATEMENTS = (
     "INSERT INTO bookmarks (parent_id, is_folder, title, url, position, created_at, special) VALUES"
     " (NULL, 1, 'Bookmarks Toolbar', NULL, 0, 1, 'toolbar'),"
     " (NULL, 1, 'Other Bookmarks', NULL, 0, 1, 'other'),"
-    " (1, 0, 'Mine', 'https://mine.example/', 0, 1, NULL)",
+    " (1, 0, 'Mine', 'https://mine.example/', 0, 1, NULL),"
+    " (2, 0, 'Was other', 'https://other.example/', 0, 1, NULL)",
     "PRAGMA user_version = 2",
 )
 DELETE_QT_DOCS = "DELETE FROM bookmarks WHERE title = 'Qt Docs' AND url = 'https://doc.qt.io/'"
@@ -52,8 +53,8 @@ def add_page(folder_id: int, title: str, path: str) -> int:
     return manager().addBookmark(QUrl(EXAMPLE_SITE + path), title, folder_id)
 
 
-def add_folder_in_other(title: str) -> int:
-    return manager().addFolder(title, manager().otherFolderId())
+def add_folder_in_toolbar(title: str) -> int:
+    return manager().addFolder(title, manager().toolbarFolderId())
 
 
 def parent_of(row_id: int) -> int:
@@ -61,12 +62,12 @@ def parent_of(row_id: int) -> int:
 
 
 def add_folder_with_page(folder_title: str, page_title: str, path: str) -> FolderWithPage:
-    folder = add_folder_in_other(folder_title)
+    folder = add_folder_in_toolbar(folder_title)
     return FolderWithPage(folder, add_page(folder, page_title, path))
 
 
 def reordered_folder() -> ReorderedFolder:
-    folder = add_folder_in_other("Moved")
+    folder = add_folder_in_toolbar("Moved")
     pushed_down = add_page(folder, "Move me", "move")
     second = add_page(folder, "Second", "second")
     manager().move(second, folder, 0)
@@ -74,7 +75,7 @@ def reordered_folder() -> ReorderedFolder:
 
 
 def add_search_fixture() -> None:
-    folder = add_folder_in_other("Search folder")
+    folder = add_folder_in_toolbar("Search folder")
     assert manager().addBookmark(QUrl("https://searchable.example/"), "Searchable Site", folder) > 0
     assert manager().addBookmark(QUrl("https://other.example/unique-url"), "Other", folder) > 0
 

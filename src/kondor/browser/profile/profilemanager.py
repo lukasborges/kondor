@@ -11,8 +11,8 @@ from kondor.browser.profile.profilecookies import (
 )
 from kondor.core.settings.settings import Settings
 from kondor.history.historymanager import HistoryManager
+from kondor.profiles.activeprofile import ActiveProfile
 
-STORAGE_NAME = "kondor"
 Policy = QQuickWebEngineProfile.PersistentPermissionsPolicy
 Cookies = QQuickWebEngineProfile.PersistentCookiesPolicy
 
@@ -107,7 +107,7 @@ class ProfileManager(QObject):
         return default + self._private_profiles
 
     def create_persistent_profile(self) -> QQuickWebEngineProfile:
-        profile = QQuickWebEngineProfile(STORAGE_NAME, self)
+        profile = QQuickWebEngineProfile(ActiveProfile.storage_name(), self)
         profile.setPersistentCookiesPolicy(Cookies.AllowPersistentCookies)
         profile.setPersistentPermissionsPolicy(Policy.StoreOnDisk)
         self.setup_profile(profile)

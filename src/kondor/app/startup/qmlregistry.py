@@ -7,8 +7,20 @@ from kondor.downloads import qmltypes as downloads
 from kondor.extensions import qmltypes as extensions
 from kondor.history import qmltypes as history
 from kondor.passwords import qmltypes as passwords
+from kondor.profiles import qmltypes as profiles
 
-FEATURE_TYPES = (core, adblock, downloads, history, bookmarks, passwords, browser, extensions, app)
+FEATURE_TYPES = (
+    core,
+    adblock,
+    downloads,
+    history,
+    bookmarks,
+    passwords,
+    profiles,
+    browser,
+    extensions,
+    app,
+)
 
 
 def register_all_types() -> None:

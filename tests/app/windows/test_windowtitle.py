@@ -4,6 +4,7 @@ import pytest
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlComponent, QQmlEngine
 
+from kondor.profiles.userprofiles import UserProfiles
 from tests.qmlsupport import error_text, load_component
 
 WINDOW_QML = """
@@ -55,3 +56,14 @@ def test_normal_new_tab_title_is_unchanged(kondor_engine: QQmlEngine) -> None:
 
 def test_normal_page_title_is_unchanged(kondor_engine: QQmlEngine) -> None:
     assert title_text(kondor_engine, PAGE, False) == "DM test — Kondor Browser"
+
+
+def test_title_names_the_profile_when_there_are_several(kondor_engine: QQmlEngine) -> None:
+    profiles = UserProfiles.instance()
+    work = profiles.createProfile("Work", "flag")
+    try:
+        expected = "DM test — Private Browsing — Default — Kondor Browser"
+        assert title_text(kondor_engine, PAGE, True) == expected
+    finally:
+        profiles.deleteProfile(work)
+        profiles.reload()

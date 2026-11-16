@@ -8,7 +8,6 @@ from PySide6.QtCore import (
     QModelIndex,
     QObject,
     QPersistentModelIndex,
-    QStandardPaths,
     Signal,
 )
 from PySide6.QtWebEngineCore import QWebEngineScript
@@ -29,6 +28,7 @@ from kondor.extensions.package.extensionpackage import ExtensionPackage
 from kondor.extensions.scripts.profilescripts import ProfileScripts
 from kondor.extensions.state.extensionstate import ExtensionState
 from kondor.extensions.state.extensionstorage import remove_extension as remove_storage
+from kondor.profiles.activeprofile import ActiveProfile
 
 
 class ExtensionRows(QAbstractListModel):
@@ -49,8 +49,7 @@ class ExtensionRows(QAbstractListModel):
 
     @staticmethod
     def extensions_directory() -> str:
-        location = QStandardPaths.writableLocation(QStandardPaths.StandardLocation.AppDataLocation)
-        return f"{location}/extensions"
+        return f"{ActiveProfile.data_directory()}/extensions"
 
     def rowCount(self, parent: QModelIndex | QPersistentModelIndex = QModelIndex()) -> int:  # noqa: B008
         return 0 if parent.isValid() else len(self._context.entries)

@@ -10,6 +10,7 @@ EXTENSION_HELP = (
     "Load an unpacked extension (developer option). Repeatable; "
     "not forwarded to a running instance, use with --new-instance"
 )
+PROFILE_HELP = "open a window of the profile with this name"
 REMOTE_CONTROL_HELP = "turn on remote control for this run, on 127.0.0.1:<port>"
 FLAGS = (
     ("private", "open URLs in a private tab"),
@@ -26,6 +27,7 @@ class CommandLine:
     new_instance: bool = False
     extension_directories: list[str] = field(default_factory=list)
     remote_control_port: str | None = None
+    profile: str | None = None
 
 
 def add_flags(parser: QCommandLineParser) -> None:
@@ -41,6 +43,10 @@ def add_remote_control_option(parser: QCommandLineParser) -> None:
     parser.addOption(QCommandLineOption(["remote-control"], REMOTE_CONTROL_HELP, "port"))
 
 
+def add_profile_option(parser: QCommandLineParser) -> None:
+    parser.addOption(QCommandLineOption(["profile"], PROFILE_HELP, "name"))
+
+
 def describe(parser: QCommandLineParser) -> None:
     parser.setApplicationDescription("Kondor web browser")
     parser.addHelpOption()
@@ -48,11 +54,16 @@ def describe(parser: QCommandLineParser) -> None:
     add_flags(parser)
     add_extension_option(parser)
     add_remote_control_option(parser)
+    add_profile_option(parser)
     parser.addPositionalArgument("urls", "URLs or files to open", "[urls...]")
 
 
 def remote_control_value(parser: QCommandLineParser) -> str | None:
     return parser.value("remote-control") if parser.isSet("remote-control") else None
+
+
+def profile_value(parser: QCommandLineParser) -> str | None:
+    return parser.value("profile") if parser.isSet("profile") else None
 
 
 def read(parser: QCommandLineParser) -> CommandLine:
@@ -63,6 +74,7 @@ def read(parser: QCommandLineParser) -> CommandLine:
         new_instance=parser.isSet("new-instance"),
         extension_directories=parser.values("load-extension"),
         remote_control_port=remote_control_value(parser),
+        profile=profile_value(parser),
     )
 
 

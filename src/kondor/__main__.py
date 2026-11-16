@@ -17,6 +17,10 @@ from kondor.app.startup.environment import prepare_environment
 from kondor.app.startup.interrupt import quit_on_interrupt
 from kondor.app.startup.messagehandler import install_message_handler
 from kondor.app.startup.stagedbuild import load_staged_resources, staged_build_directory
+from kondor.profiles.activeprofile import ActiveProfile
+from kondor.profiles.registry.profileregistry import ProfileRegistry
+from kondor.profiles.startup.profilechoice import select_profile
+from kondor.profiles.startup.profilechooser import ask_for_profile
 
 
 def run_browser(app: QApplication, single_instance: SingleInstance) -> int:
@@ -45,17 +49,29 @@ def startup_failure(single_instance: SingleInstance, command_line: CommandLine) 
     return remotecontrolstartup.check_running_instance(command_line, is_running)
 
 
+def remember_profile() -> None:
+    registry = ProfileRegistry()
+    if len(registry.profiles()) > 1:
+        registry.set_last_used_id(ActiveProfile.id())
+
+
+def start_first_instance(app: QApplication, command_line: CommandLine) -> int | None:
+    failure = remotecontrolstartup.start_remote_control(command_line)
+    if failure is not None:
+        return failure
+    remember_profile()
+    start_browser(app, command_line)
+    return None
+
+
 def launch(app: QApplication, single_instance: SingleInstance, command_line: CommandLine) -> int:
     failure = startup_failure(single_instance, command_line)
     if failure is not None:
         return failure
     if forwards_to_running_instance(single_instance, command_line):
         return 0
-    failure = remotecontrolstartup.start_remote_control(command_line)
-    if failure is not None:
-        return failure
-    start_browser(app, command_line)
-    return run_browser(app, single_instance)
+    failure = start_first_instance(app, command_line)
+    return run_browser(app, single_instance) if failure is None else failure
 
 
 def main() -> int:
@@ -63,7 +79,12 @@ def main() -> int:
     app = start_application()
     if app is None:
         return 1
-    return launch(app, SingleInstance(), parse_command_line(app))
+    command_line = parse_command_line(app)
+    arguments = app.arguments()[1:]
+    status = select_profile(command_line, lambda: ask_for_profile(app), arguments)
+    if status is not None:
+        return status
+    return launch(app, SingleInstance(), command_line)
 
 
 if __name__ == "__main__":

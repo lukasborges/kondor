@@ -33,3 +33,11 @@ def test_remote_control_port_is_kept_as_typed() -> None:
 
 def test_remote_control_is_unset_by_default() -> None:
     assert parse_arguments(["kondor"]).remote_control_port is None
+
+
+def test_profile_option_keeps_the_name_as_typed() -> None:
+    assert parse_arguments(["kondor", "--profile", "Work"]).profile == "Work"
+
+
+def test_profile_is_unset_by_default() -> None:
+    assert parse_arguments(["kondor"]).profile is None

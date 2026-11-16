@@ -90,6 +90,9 @@ class KWalletService(QObject):
     def create_folder(self, handle: int, folder: str) -> bool:
         return self._folder_call("createFolder", handle, folder)
 
+    def remove_folder(self, handle: int, folder: str) -> bool:
+        return self._folder_call("removeFolder", handle, folder)
+
     def read_map(self, entry: WalletEntry) -> bytes | None:
         arguments = [*entry_arguments(entry), application_argument()]
         data = self._call("readMap", Q_RETURN_ARG(QByteArray), *arguments)

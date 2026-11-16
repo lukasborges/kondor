@@ -599,6 +599,21 @@
     </message>
 </context>
 <context>
+    <name>DeleteProfileDialog</name>
+    <message>
+        <source>Delete Profile “%1”?</source>
+        <translation>프로필 “%1”을(를) 삭제하시겠습니까?</translation>
+    </message>
+    <message>
+        <source>History, bookmarks, saved passwords, cookies, extensions and settings of this profile are deleted for good.</source>
+        <translation>이 프로필의 기록, 북마크, 저장된 비밀번호, 쿠키, 확장 프로그램, 설정이 영구적으로 삭제됩니다.</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>삭제</translation>
+    </message>
+</context>
+<context>
     <name>DownloadDelegate</name>
     <message>
         <source>Resume</source>
@@ -1516,6 +1531,52 @@
     </message>
 </context>
 <context>
+    <name>ManageProfileRow</name>
+    <message>
+        <source>The Default profile cannot be deleted</source>
+        <translation>기본 프로필은 삭제할 수 없습니다</translation>
+    </message>
+    <message>
+        <source>Close the windows of this profile first</source>
+        <translation>먼저 이 프로필의 창을 닫으십시오</translation>
+    </message>
+    <message>
+        <source>Delete…</source>
+        <translation>삭제…</translation>
+    </message>
+    <message>
+        <source>Edit %1</source>
+        <translation>%1 편집</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>편집</translation>
+    </message>
+    <message>
+        <source>Delete %1</source>
+        <translation>%1 삭제</translation>
+    </message>
+</context>
+<context>
+    <name>ManageProfilesWindow</name>
+    <message>
+        <source>Manage Profiles</source>
+        <translation>프로필 관리</translation>
+    </message>
+    <message>
+        <source>Ask Every Time</source>
+        <translation>매번 묻기</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>새 프로필…</translation>
+    </message>
+    <message>
+        <source>At startup:</source>
+        <translation>시작할 때:</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2014,6 +2075,124 @@
     <message>
         <source>Port:</source>
         <translation>포트:</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileButton</name>
+    <message>
+        <source>Profile: %1</source>
+        <translation>프로필: %1</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileChooserWindow</name>
+    <message>
+        <source>Choose a Profile</source>
+        <translation>프로필 선택</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>끝내기</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileDialog</name>
+    <message>
+        <source>New Profile</source>
+        <translation>새 프로필</translation>
+    </message>
+    <message>
+        <source>Edit Profile</source>
+        <translation>프로필 편집</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>이름:</translation>
+    </message>
+    <message>
+        <source>Icon:</source>
+        <translation>아이콘:</translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation>만들기</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>저장</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>취소</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileIconPicker</name>
+    <message>
+        <source>Person</source>
+        <translation>사람</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>홈</translation>
+    </message>
+    <message>
+        <source>Work</source>
+        <translation>업무</translation>
+    </message>
+    <message>
+        <source>World</source>
+        <translation>세계</translation>
+    </message>
+    <message>
+        <source>Star</source>
+        <translation>별</translation>
+    </message>
+    <message>
+        <source>Games</source>
+        <translation>게임</translation>
+    </message>
+    <message>
+        <source>Development</source>
+        <translation>개발</translation>
+    </message>
+    <message>
+        <source>Flag</source>
+        <translation>깃발</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileRegistry</name>
+    <message>
+        <source>Enter a name.</source>
+        <translation>이름을 입력하십시오.</translation>
+    </message>
+    <message>
+        <source>The name is too long.</source>
+        <translation>이름이 너무 깁니다.</translation>
+    </message>
+    <message>
+        <source>A profile with this name already exists.</source>
+        <translation>이 이름의 프로필이 이미 있습니다.</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>기본</translation>
+    </message>
+</context>
+<context>
+    <name>ProfilesMenu</name>
+    <message>
+        <source>Profiles</source>
+        <translation>프로필</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>새 프로필…</translation>
+    </message>
+    <message>
+        <source>Manage Profiles…</source>
+        <translation>프로필 관리…</translation>
     </message>
 </context>
 <context>

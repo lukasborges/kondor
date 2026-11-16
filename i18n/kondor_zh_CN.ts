@@ -599,6 +599,21 @@
     </message>
 </context>
 <context>
+    <name>DeleteProfileDialog</name>
+    <message>
+        <source>Delete Profile “%1”?</source>
+        <translation>删除配置文件“%1”?</translation>
+    </message>
+    <message>
+        <source>History, bookmarks, saved passwords, cookies, extensions and settings of this profile are deleted for good.</source>
+        <translation>此配置文件的历史记录、书签、已保存的密码、Cookie、扩展和设置将被永久删除。</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>删除</translation>
+    </message>
+</context>
+<context>
     <name>DownloadDelegate</name>
     <message>
         <source>Resume</source>
@@ -1516,6 +1531,52 @@
     </message>
 </context>
 <context>
+    <name>ManageProfileRow</name>
+    <message>
+        <source>The Default profile cannot be deleted</source>
+        <translation>无法删除默认配置文件</translation>
+    </message>
+    <message>
+        <source>Close the windows of this profile first</source>
+        <translation>请先关闭此配置文件的窗口</translation>
+    </message>
+    <message>
+        <source>Delete…</source>
+        <translation>删除…</translation>
+    </message>
+    <message>
+        <source>Edit %1</source>
+        <translation>编辑 %1</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>编辑</translation>
+    </message>
+    <message>
+        <source>Delete %1</source>
+        <translation>删除 %1</translation>
+    </message>
+</context>
+<context>
+    <name>ManageProfilesWindow</name>
+    <message>
+        <source>Manage Profiles</source>
+        <translation>管理配置文件</translation>
+    </message>
+    <message>
+        <source>Ask Every Time</source>
+        <translation>每次询问</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>新建配置文件…</translation>
+    </message>
+    <message>
+        <source>At startup:</source>
+        <translation>启动时:</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2014,6 +2075,124 @@
     <message>
         <source>Port:</source>
         <translation>端口:</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileButton</name>
+    <message>
+        <source>Profile: %1</source>
+        <translation>配置文件:%1</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileChooserWindow</name>
+    <message>
+        <source>Choose a Profile</source>
+        <translation>选择配置文件</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>退出</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileDialog</name>
+    <message>
+        <source>New Profile</source>
+        <translation>新建配置文件</translation>
+    </message>
+    <message>
+        <source>Edit Profile</source>
+        <translation>编辑配置文件</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>名称:</translation>
+    </message>
+    <message>
+        <source>Icon:</source>
+        <translation>图标:</translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation>创建</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileIconPicker</name>
+    <message>
+        <source>Person</source>
+        <translation>个人</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>家</translation>
+    </message>
+    <message>
+        <source>Work</source>
+        <translation>工作</translation>
+    </message>
+    <message>
+        <source>World</source>
+        <translation>世界</translation>
+    </message>
+    <message>
+        <source>Star</source>
+        <translation>星标</translation>
+    </message>
+    <message>
+        <source>Games</source>
+        <translation>游戏</translation>
+    </message>
+    <message>
+        <source>Development</source>
+        <translation>开发</translation>
+    </message>
+    <message>
+        <source>Flag</source>
+        <translation>旗帜</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileRegistry</name>
+    <message>
+        <source>Enter a name.</source>
+        <translation>请输入名称。</translation>
+    </message>
+    <message>
+        <source>The name is too long.</source>
+        <translation>名称过长。</translation>
+    </message>
+    <message>
+        <source>A profile with this name already exists.</source>
+        <translation>已存在同名的配置文件。</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>默认</translation>
+    </message>
+</context>
+<context>
+    <name>ProfilesMenu</name>
+    <message>
+        <source>Profiles</source>
+        <translation>配置文件</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>新建配置文件…</translation>
+    </message>
+    <message>
+        <source>Manage Profiles…</source>
+        <translation>管理配置文件…</translation>
     </message>
 </context>
 <context>

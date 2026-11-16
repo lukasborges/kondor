@@ -5,8 +5,8 @@ from PySide6.QtCore import QUrl
 from pytestqt.qtbot import QtBot
 
 from kondor.passwords.passwordstore import PasswordStore
-from kondor.passwords.wallet.walletfolder import FOLDER
 from kondor.passwords.wallet.walletmap import map_from_bytes
+from kondor.profiles.activeprofile import ActiveProfile
 from tests.passwords.fakewallet import FakeWallet
 
 SITE = "https://example.com"
@@ -25,7 +25,7 @@ def test_opens_through_opening_to_open(
     store.ensureOpen()
     assert store.state == "opening"
     qtbot.waitUntil(lambda: store.state == "open")
-    assert FOLDER in wallet.folders
+    assert ActiveProfile.wallet_folder() in wallet.folders
 
 
 def test_disabled_by_environment_is_unavailable(
@@ -84,7 +84,7 @@ def test_remove_last_login_removes_the_entry(
     open_store(store, qtbot)
     store.save(SITE, "bob", "pw")
     store.remove(SITE, "bob")
-    assert SITE not in wallet.folders[FOLDER]
+    assert SITE not in wallet.folders[ActiveProfile.wallet_folder()]
     assert store.entries == []
 
 
@@ -94,7 +94,10 @@ def test_saved_bytes_are_kwallet_maps(
     open_store(store, qtbot)
     store.save(SITE, "bob", "pw-b")
     store.save(SITE, "ann", "pw-a")
-    assert map_from_bytes(wallet.folders[FOLDER][SITE]) == {"ann": "pw-a", "bob": "pw-b"}
+    assert map_from_bytes(wallet.folders[ActiveProfile.wallet_folder()][SITE]) == {
+        "ann": "pw-a",
+        "bob": "pw-b",
+    }
 
 
 def test_closed_wallet_forgets_the_logins(

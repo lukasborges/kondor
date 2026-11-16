@@ -1,11 +1,11 @@
 from collections.abc import Callable
-from pathlib import Path
 from typing import NamedTuple
 
-from PySide6.QtCore import QStandardPaths, qWarning
+from PySide6.QtCore import qWarning
 from PySide6.QtSql import QSqlDatabase, QSqlQuery
 
 from kondor.core.database import bookmarkrootmerge, databasemigrations, sql
+from kondor.profiles.activeprofile import ActiveProfile
 
 SCHEMA_VERSION = 6
 DRIVER = "QSQLITE"
@@ -30,9 +30,7 @@ MIGRATION_STEPS = (
 
 
 def database_path() -> str:
-    folder = QStandardPaths.writableLocation(QStandardPaths.StandardLocation.AppDataLocation)
-    Path(folder).mkdir(parents=True, exist_ok=True)
-    return f"{folder}/{FILE_NAME}"
+    return str(ActiveProfile.data_directory() / FILE_NAME)
 
 
 def apply_migrations(current_version: int) -> bool:

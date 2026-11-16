@@ -599,6 +599,21 @@
     </message>
 </context>
 <context>
+    <name>DeleteProfileDialog</name>
+    <message>
+        <source>Delete Profile “%1”?</source>
+        <translation>Видалити профіль «%1»?</translation>
+    </message>
+    <message>
+        <source>History, bookmarks, saved passwords, cookies, extensions and settings of this profile are deleted for good.</source>
+        <translation>Історію, закладки, збережені паролі, куки, розширення та налаштування цього профілю буде видалено остаточно.</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Видалити</translation>
+    </message>
+</context>
+<context>
     <name>DownloadDelegate</name>
     <message>
         <source>Resume</source>
@@ -1542,6 +1557,52 @@
     </message>
 </context>
 <context>
+    <name>ManageProfileRow</name>
+    <message>
+        <source>The Default profile cannot be deleted</source>
+        <translation>Типовий профіль не можна видалити</translation>
+    </message>
+    <message>
+        <source>Close the windows of this profile first</source>
+        <translation>Спершу закрийте вікна цього профілю</translation>
+    </message>
+    <message>
+        <source>Delete…</source>
+        <translation>Видалити…</translation>
+    </message>
+    <message>
+        <source>Edit %1</source>
+        <translation>Змінити %1</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Змінити</translation>
+    </message>
+    <message>
+        <source>Delete %1</source>
+        <translation>Видалити %1</translation>
+    </message>
+</context>
+<context>
+    <name>ManageProfilesWindow</name>
+    <message>
+        <source>Manage Profiles</source>
+        <translation>Керування профілями</translation>
+    </message>
+    <message>
+        <source>Ask Every Time</source>
+        <translation>Запитувати щоразу</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>Новий профіль…</translation>
+    </message>
+    <message>
+        <source>At startup:</source>
+        <translation>Під час запуску:</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2040,6 +2101,124 @@
     <message>
         <source>Port:</source>
         <translation>Порт:</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileButton</name>
+    <message>
+        <source>Profile: %1</source>
+        <translation>Профіль: %1</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileChooserWindow</name>
+    <message>
+        <source>Choose a Profile</source>
+        <translation>Вибір профілю</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>Вийти</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileDialog</name>
+    <message>
+        <source>New Profile</source>
+        <translation>Новий профіль</translation>
+    </message>
+    <message>
+        <source>Edit Profile</source>
+        <translation>Зміна профілю</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Назва:</translation>
+    </message>
+    <message>
+        <source>Icon:</source>
+        <translation>Піктограма:</translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation>Створити</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Зберегти</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Скасувати</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileIconPicker</name>
+    <message>
+        <source>Person</source>
+        <translation>Людина</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>Дім</translation>
+    </message>
+    <message>
+        <source>Work</source>
+        <translation>Робота</translation>
+    </message>
+    <message>
+        <source>World</source>
+        <translation>Світ</translation>
+    </message>
+    <message>
+        <source>Star</source>
+        <translation>Зірка</translation>
+    </message>
+    <message>
+        <source>Games</source>
+        <translation>Ігри</translation>
+    </message>
+    <message>
+        <source>Development</source>
+        <translation>Розробка</translation>
+    </message>
+    <message>
+        <source>Flag</source>
+        <translation>Прапор</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileRegistry</name>
+    <message>
+        <source>Enter a name.</source>
+        <translation>Введіть назву.</translation>
+    </message>
+    <message>
+        <source>The name is too long.</source>
+        <translation>Назва задовга.</translation>
+    </message>
+    <message>
+        <source>A profile with this name already exists.</source>
+        <translation>Профіль із такою назвою вже існує.</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>Типовий</translation>
+    </message>
+</context>
+<context>
+    <name>ProfilesMenu</name>
+    <message>
+        <source>Profiles</source>
+        <translation>Профілі</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>Новий профіль…</translation>
+    </message>
+    <message>
+        <source>Manage Profiles…</source>
+        <translation>Керування профілями…</translation>
     </message>
 </context>
 <context>

@@ -13,9 +13,9 @@ from tests.app.menu.mainmenuharness import (
 from tests.qmlsupport import captured_messages
 
 pytestmark = pytest.mark.no_qt_log
-HISTORY = "mainMenu.itemAt(6).subMenu"
+HISTORY = "mainMenu.itemAt(7).subMenu"
 SEPARATOR_COUNT = 5
-ROW_COUNT = 13
+ROW_COUNT = 14
 MINIMUM_ACTIONS = 10
 
 
@@ -25,8 +25,8 @@ def test_rows_and_order(menu: MainMenuHarness) -> None:
     assert rows == expected_top_level_rows()
     assert rows.count("-") == SEPARATOR_COUNT
     assert len(without_separators(rows)) == ROW_COUNT
-    assert menu.rows_of("mainMenu.itemAt(14).subMenu") == expected_more_tools_rows()
-    assert menu.rows_of("mainMenu.itemAt(17).subMenu") == expected_help_rows()
+    assert menu.rows_of("mainMenu.itemAt(15).subMenu") == expected_more_tools_rows()
+    assert menu.rows_of("mainMenu.itemAt(18).subMenu") == expected_help_rows()
 
 
 def test_history_submenu_lists_recently_closed_tabs(menu: MainMenuHarness) -> None:
@@ -84,7 +84,7 @@ def test_down_skips_separators_and_disabled_items(menu: MainMenuHarness) -> None
     menu.evaluate("mainMenu.open()")
     assert menu.wait_until_opened()
 
-    for _ in range(5):
+    for _ in range(6):
         QTest.keyClick(menu.window, Qt.Key.Key_Down)
 
     assert menu.evaluate("mainMenu.itemAt(mainMenu.currentIndex).text") == "Bookmarks"

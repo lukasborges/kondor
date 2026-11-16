@@ -18,6 +18,9 @@ from kondor.app.instance.singleinstancemessage import (
     from_json_line,
     to_json_line,
 )
+from kondor.profiles import profilepaths
+from kondor.profiles.activeprofile import ActiveProfile
+from kondor.profiles.userprofile import DEFAULT_ID
 
 MAX_MESSAGE_SIZE = 1024 * 1024
 SOCKET_TIMEOUT_MILLISECONDS = 500
@@ -29,8 +32,8 @@ class StartResult(Enum):
     FAILED = "failed"
 
 
-def profile_hash() -> str:
-    location = QStandardPaths.writableLocation(QStandardPaths.StandardLocation.AppDataLocation)
+def profile_hash(profile_id: str = DEFAULT_ID) -> str:
+    location = str(profilepaths.data_directory(profile_id))
     digest = QCryptographicHash.hash(
         QByteArray(location.encode("utf-8")), QCryptographicHash.Algorithm.Sha1
     )
@@ -58,6 +61,10 @@ def has_unsent_bytes(socket: QLocalSocket) -> bool:
     return bool(socket.bytesToWrite() > 0)
 
 
+def server_name_for(profile_id: str) -> str:
+    return f"{runtime_directory()}/kondor-{profile_hash(profile_id)}.socket"
+
+
 class SingleInstance(QObject):
     messageReceived = Signal(object)
 
@@ -71,7 +78,7 @@ class SingleInstance(QObject):
 
     @staticmethod
     def server_name() -> str:
-        return f"{runtime_directory()}/kondor-{profile_hash()}.socket"
+        return server_name_for(ActiveProfile.id())
 
     def send_message(self, message: SingleInstanceMessage) -> bool:
         socket = QLocalSocket()

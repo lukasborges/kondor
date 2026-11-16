@@ -599,6 +599,21 @@
     </message>
 </context>
 <context>
+    <name>DeleteProfileDialog</name>
+    <message>
+        <source>Delete Profile “%1”?</source>
+        <translation>Ta bort profilen ”%1”?</translation>
+    </message>
+    <message>
+        <source>History, bookmarks, saved passwords, cookies, extensions and settings of this profile are deleted for good.</source>
+        <translation>Historik, bokmärken, sparade lösenord, kakor, tillägg och inställningar för den här profilen tas bort permanent.</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Ta bort</translation>
+    </message>
+</context>
+<context>
     <name>DownloadDelegate</name>
     <message>
         <source>Resume</source>
@@ -1529,6 +1544,52 @@
     </message>
 </context>
 <context>
+    <name>ManageProfileRow</name>
+    <message>
+        <source>The Default profile cannot be deleted</source>
+        <translation>Standardprofilen kan inte tas bort</translation>
+    </message>
+    <message>
+        <source>Close the windows of this profile first</source>
+        <translation>Stäng först fönstren för den här profilen</translation>
+    </message>
+    <message>
+        <source>Delete…</source>
+        <translation>Ta bort…</translation>
+    </message>
+    <message>
+        <source>Edit %1</source>
+        <translation>Redigera %1</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Redigera</translation>
+    </message>
+    <message>
+        <source>Delete %1</source>
+        <translation>Ta bort %1</translation>
+    </message>
+</context>
+<context>
+    <name>ManageProfilesWindow</name>
+    <message>
+        <source>Manage Profiles</source>
+        <translation>Hantera profiler</translation>
+    </message>
+    <message>
+        <source>Ask Every Time</source>
+        <translation>Fråga varje gång</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>Ny profil…</translation>
+    </message>
+    <message>
+        <source>At startup:</source>
+        <translation>Vid start:</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2027,6 +2088,124 @@
     <message>
         <source>Port:</source>
         <translation>Port:</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileButton</name>
+    <message>
+        <source>Profile: %1</source>
+        <translation>Profil: %1</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileChooserWindow</name>
+    <message>
+        <source>Choose a Profile</source>
+        <translation>Välj en profil</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>Avsluta</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileDialog</name>
+    <message>
+        <source>New Profile</source>
+        <translation>Ny profil</translation>
+    </message>
+    <message>
+        <source>Edit Profile</source>
+        <translation>Redigera profil</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Namn:</translation>
+    </message>
+    <message>
+        <source>Icon:</source>
+        <translation>Ikon:</translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation>Skapa</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Spara</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Avbryt</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileIconPicker</name>
+    <message>
+        <source>Person</source>
+        <translation>Person</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>Hem</translation>
+    </message>
+    <message>
+        <source>Work</source>
+        <translation>Arbete</translation>
+    </message>
+    <message>
+        <source>World</source>
+        <translation>Värld</translation>
+    </message>
+    <message>
+        <source>Star</source>
+        <translation>Stjärna</translation>
+    </message>
+    <message>
+        <source>Games</source>
+        <translation>Spel</translation>
+    </message>
+    <message>
+        <source>Development</source>
+        <translation>Utveckling</translation>
+    </message>
+    <message>
+        <source>Flag</source>
+        <translation>Flagga</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileRegistry</name>
+    <message>
+        <source>Enter a name.</source>
+        <translation>Ange ett namn.</translation>
+    </message>
+    <message>
+        <source>The name is too long.</source>
+        <translation>Namnet är för långt.</translation>
+    </message>
+    <message>
+        <source>A profile with this name already exists.</source>
+        <translation>Det finns redan en profil med det här namnet.</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>Standard</translation>
+    </message>
+</context>
+<context>
+    <name>ProfilesMenu</name>
+    <message>
+        <source>Profiles</source>
+        <translation>Profiler</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>Ny profil…</translation>
+    </message>
+    <message>
+        <source>Manage Profiles…</source>
+        <translation>Hantera profiler…</translation>
     </message>
 </context>
 <context>

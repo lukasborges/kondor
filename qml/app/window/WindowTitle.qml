@@ -13,6 +13,8 @@ QtObject {
         const parts = [pageTitle()]
         if (isPrivateWindow)
             parts.push(qsTr("Private Browsing"))
+        if (UserProfiles.hasSeveralProfiles)
+            parts.push(UserProfiles.currentName)
         parts.push(Qt.application.displayName)
         return parts.filter(part => part.length > 0)
     }

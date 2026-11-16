@@ -599,6 +599,21 @@
     </message>
 </context>
 <context>
+    <name>DeleteProfileDialog</name>
+    <message>
+        <source>Delete Profile “%1”?</source>
+        <translation>Voleu suprimir el perfil «%1»?</translation>
+    </message>
+    <message>
+        <source>History, bookmarks, saved passwords, cookies, extensions and settings of this profile are deleted for good.</source>
+        <translation>L'historial, els adreces d'interès, les contrasenyes desades, les galetes, les extensions i els paràmetres d'aquest perfil se suprimeixen definitivament.</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Suprimeix</translation>
+    </message>
+</context>
+<context>
     <name>DownloadDelegate</name>
     <message>
         <source>Resume</source>
@@ -1529,6 +1544,52 @@
     </message>
 </context>
 <context>
+    <name>ManageProfileRow</name>
+    <message>
+        <source>The Default profile cannot be deleted</source>
+        <translation>El perfil predeterminat no es pot suprimir</translation>
+    </message>
+    <message>
+        <source>Close the windows of this profile first</source>
+        <translation>Tanqueu primer les finestres d'aquest perfil</translation>
+    </message>
+    <message>
+        <source>Delete…</source>
+        <translation>Suprimeix…</translation>
+    </message>
+    <message>
+        <source>Edit %1</source>
+        <translation>Edita %1</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Edita</translation>
+    </message>
+    <message>
+        <source>Delete %1</source>
+        <translation>Suprimeix %1</translation>
+    </message>
+</context>
+<context>
+    <name>ManageProfilesWindow</name>
+    <message>
+        <source>Manage Profiles</source>
+        <translation>Gestiona els perfils</translation>
+    </message>
+    <message>
+        <source>Ask Every Time</source>
+        <translation>Pregunta sempre</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>Perfil nou…</translation>
+    </message>
+    <message>
+        <source>At startup:</source>
+        <translation>A l'inici:</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2027,6 +2088,124 @@
     <message>
         <source>Port:</source>
         <translation>Port:</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileButton</name>
+    <message>
+        <source>Profile: %1</source>
+        <translation>Perfil: %1</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileChooserWindow</name>
+    <message>
+        <source>Choose a Profile</source>
+        <translation>Trieu un perfil</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>Surt</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileDialog</name>
+    <message>
+        <source>New Profile</source>
+        <translation>Perfil nou</translation>
+    </message>
+    <message>
+        <source>Edit Profile</source>
+        <translation>Edita el perfil</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Nom:</translation>
+    </message>
+    <message>
+        <source>Icon:</source>
+        <translation>Icona:</translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation>Crea</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Desa</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancel·la</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileIconPicker</name>
+    <message>
+        <source>Person</source>
+        <translation>Persona</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>Casa</translation>
+    </message>
+    <message>
+        <source>Work</source>
+        <translation>Feina</translation>
+    </message>
+    <message>
+        <source>World</source>
+        <translation>Món</translation>
+    </message>
+    <message>
+        <source>Star</source>
+        <translation>Estrella</translation>
+    </message>
+    <message>
+        <source>Games</source>
+        <translation>Jocs</translation>
+    </message>
+    <message>
+        <source>Development</source>
+        <translation>Desenvolupament</translation>
+    </message>
+    <message>
+        <source>Flag</source>
+        <translation>Bandera</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileRegistry</name>
+    <message>
+        <source>Enter a name.</source>
+        <translation>Introduïu un nom.</translation>
+    </message>
+    <message>
+        <source>The name is too long.</source>
+        <translation>El nom és massa llarg.</translation>
+    </message>
+    <message>
+        <source>A profile with this name already exists.</source>
+        <translation>Ja existeix un perfil amb aquest nom.</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>Predeterminat</translation>
+    </message>
+</context>
+<context>
+    <name>ProfilesMenu</name>
+    <message>
+        <source>Profiles</source>
+        <translation>Perfils</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>Perfil nou…</translation>
+    </message>
+    <message>
+        <source>Manage Profiles…</source>
+        <translation>Gestiona els perfils…</translation>
     </message>
 </context>
 <context>

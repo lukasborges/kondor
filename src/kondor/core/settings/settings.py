@@ -5,7 +5,6 @@ from PySide6.QtCore import (
     Property,
     QFileInfo,
     QObject,
-    QSettings,
     Signal,
     SignalInstance,
     Slot,
@@ -22,9 +21,8 @@ from kondor.core.settings.settingsoptions import (
     TAB_STYLE,
     StoredOption,
 )
+from kondor.profiles.activeprofile import ActiveProfile
 
-ORGANIZATION = "KDE"
-APPLICATION = "Kondor"
 TAB_STYLES = ("floating", "below", "vertical", "classic")
 DEFAULT_TAB_STYLE = "floating"
 TAB_SLEEP_MINUTES = (15, 30, 60, 120, 240)
@@ -90,7 +88,7 @@ class Settings(QObject):
 
     def __init__(self) -> None:
         super().__init__()
-        self._storage = QSettings(ORGANIZATION, APPLICATION)
+        self._storage = ActiveProfile.settings()
         self._values = {option.name: self.read(option) for option in STORED_OPTIONS}
 
     @classmethod

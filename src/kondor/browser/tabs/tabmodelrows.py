@@ -60,6 +60,9 @@ class TabModelRows(QAbstractListModel):
             return None
         return self._tabs[self._current_index]
 
+    def all_tabs(self) -> list[Tab]:
+        return list(self._tabs)
+
     def _pinned_count(self) -> int:
         return sum(1 for tab in self._tabs if tab.pinned)
 

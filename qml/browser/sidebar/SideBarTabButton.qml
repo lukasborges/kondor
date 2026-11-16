@@ -16,6 +16,7 @@ ToolButton {
     checked: isCurrent
     focusPolicy: Qt.NoFocus
     Accessible.name: info.title
+    Accessible.description: info.stateDescription
     ToolTip.visible: hovered
     ToolTip.text: info.title
     ToolTip.delay: 600

@@ -1,13 +1,18 @@
-from PySide6.QtCore import QModelIndex, QUrl, Slot
+from PySide6.QtCore import QModelIndex, QObject, QUrl, Slot
 from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
 from kondor.browser.profile.profilemanager import ProfileManager
 from kondor.browser.tabs.tab import Tab
 from kondor.browser.tabs.tabmodelclosing import TabModelClosing
 from kondor.browser.tabs.tabmodelrows import NewTab
+from kondor.browser.tabs.tabsleepscheduler import TabSleepScheduler
 
 
 class TabModel(TabModelClosing):
+    def __init__(self, parent: QObject | None = None) -> None:
+        super().__init__(parent)
+        self._sleep_scheduler = TabSleepScheduler(self)
+
     @Slot(result=Tab)
     @Slot(bool, result=Tab)
     @Slot(bool, QUrl, result=Tab)

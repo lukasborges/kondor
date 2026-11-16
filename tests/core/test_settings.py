@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 from PySide6.QtCore import QSettings
 
-from kondor.core.settings.settings import Settings
+from kondor.core.settings.settings import DEFAULT_TAB_SLEEP_MINUTES, Settings
 from kondor.core.settings.settingsdefaults import default_download_directory
 from tests.core.settingsrows import (
     DEFAULT_NAMES,
@@ -120,3 +120,8 @@ def test_stored_unknown_tab_style_reads_as_floating(settings_file: Path) -> None
     raw.setValue("UI/TabStyle", "sideways")
     raw.sync()
     assert Settings().property("tabStyle") == "floating"
+
+
+def test_unknown_tab_sleep_minutes_fall_back_to_default(settings: Settings) -> None:
+    settings.setProperty("tabSleepMinutes", 7)
+    assert settings.property("tabSleepMinutes") == DEFAULT_TAB_SLEEP_MINUTES

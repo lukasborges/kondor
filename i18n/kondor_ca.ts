@@ -1130,6 +1130,35 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>Memòria:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Posa les pestanyes inactives en repòs</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Posa en repòs després de:</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n minut</numerusform>
+            <numerusform>%n minuts</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n hora</numerusform>
+            <numerusform>%n hores</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2316,6 +2345,10 @@
         <translation>Aparença</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>Rendiment</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>Contrasenyes desades</translation>
     </message>
@@ -2369,6 +2402,22 @@
     <message>
         <source>Classic</source>
         <translation>Clàssic</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>Rendiment</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>Memòria:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Posa les pestanyes inactives en repòs</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Posa en repòs després de:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2703,6 +2752,10 @@
         <translation>Fixa la pestanya</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>Posa la pestanya en repòs</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>Tanca la pestanya</translation>
     </message>
@@ -2724,6 +2777,10 @@
     <message>
         <source>New Tab</source>
         <translation>Pestanya nova</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>En repòs</translation>
     </message>
 </context>
 <context>

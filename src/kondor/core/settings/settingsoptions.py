@@ -27,6 +27,7 @@ CUSTOM_SEARCH_URL = option("Search/CustomUrl", "customSearchUrl", str)
 DOWNLOAD_DIRECTORY = option("Downloads/Directory", "downloadDirectory", str)
 TAB_STYLE = option("UI/TabStyle", "tabStyle", str)
 READER_FONT_SIZE = option("Reader/FontSize", "readerFontSize", int)
+TAB_SLEEP_MINUTES_OPTION = option("Tabs/SleepAfterMinutes", "tabSleepMinutes", int)
 
 STORED_OPTIONS = (
     HOME_PAGE,
@@ -45,6 +46,8 @@ STORED_OPTIONS = (
     option("SpellCheck/Enabled", "spellCheckEnabled", bool),
     string_list_option("SpellCheck/Languages", "spellCheckLanguages"),
     TAB_STYLE,
+    option("Tabs/SleepEnabled", "tabSleepEnabled", bool),
+    TAB_SLEEP_MINUTES_OPTION,
     READER_FONT_SIZE,
     option("Reader/Serif", "readerSerif", bool),
     option("AdBlock/Enabled", "adBlockEnabled", bool),

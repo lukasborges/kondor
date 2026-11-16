@@ -1129,6 +1129,33 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>Bellek:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Etkin olmayan sekmeleri uyut</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Şu süreden sonra uyut:</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n dakika</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n saat</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2305,6 +2332,10 @@
         <translation>Görünüm</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>Performans</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>Kayıtlı parolalar</translation>
     </message>
@@ -2358,6 +2389,22 @@
     <message>
         <source>Classic</source>
         <translation>Klasik</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>Performans</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>Bellek:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Etkin olmayan sekmeleri uyut</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Şu süreden sonra uyut:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2692,6 +2739,10 @@
         <translation>Sekmeyi sabitle</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>Sekmeyi uyut</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>Sekmeyi kapat</translation>
     </message>
@@ -2713,6 +2764,10 @@
     <message>
         <source>New Tab</source>
         <translation>Yeni sekme</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>Uyuyor</translation>
     </message>
 </context>
 <context>

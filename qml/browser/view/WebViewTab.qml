@@ -45,6 +45,11 @@ Item {
         webView: pageView
     }
 
+    PageSleep {
+        tab: root.tab
+        webView: pageView
+    }
+
     ReaderStyle {
         id: readerStyle
         tab: root.tab

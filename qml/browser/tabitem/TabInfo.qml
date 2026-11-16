@@ -7,6 +7,8 @@ QtObject {
     readonly property string title: tab?.newTabPage
         ? (tab.isPrivate ? qsTr("New Private Tab") : qsTr("New Tab"))
         : (tab?.title.length ? tab.title : qsTr("New Tab"))
+    readonly property bool isSleeping: tab?.sleep.sleeping ?? false
+    readonly property string stateDescription: isSleeping ? qsTr("Sleeping") : ""
     readonly property string iconSource: {
         if (!tab)
             return "text-html"

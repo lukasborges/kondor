@@ -1130,6 +1130,35 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>Mémoire :</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Mettre en veille les onglets inactifs</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Mettre en veille après :</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n minute</numerusform>
+            <numerusform>%n minutes</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n heure</numerusform>
+            <numerusform>%n heures</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2316,6 +2345,10 @@
         <translation>Apparence</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>Performances</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>Mots de passe enregistrés</translation>
     </message>
@@ -2369,6 +2402,22 @@
     <message>
         <source>Classic</source>
         <translation>Classique</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>Performances</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>Mémoire :</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Mettre en veille les onglets inactifs</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Mettre en veille après :</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2703,6 +2752,10 @@
         <translation>Épingler l’onglet</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>Mettre l’onglet en veille</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>Fermer l’onglet</translation>
     </message>
@@ -2724,6 +2777,10 @@
     <message>
         <source>New Tab</source>
         <translation>Nouvel onglet</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>En veille</translation>
     </message>
 </context>
 <context>

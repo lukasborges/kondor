@@ -24,6 +24,7 @@ TabButton {
     width: tab.pinned ? tabStrip.pinnedTabWidth : tabStrip.tabWidth
     text: ""
     Accessible.name: info.title
+    Accessible.description: info.stateDescription
     z: isRaised ? 10 : 0
     transform: [
         Translate { x: control.dragShift },
@@ -101,6 +102,7 @@ TabButton {
             visible: !control.tab.pinned
             Layout.fillWidth: true
             text: info.title
+            enabled: !info.isSleeping
             elide: Text.ElideRight
         }
 

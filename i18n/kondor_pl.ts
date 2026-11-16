@@ -1131,6 +1131,37 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>Pamięć:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Usypiaj nieaktywne karty</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Uśpij po:</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n minuta</numerusform>
+            <numerusform>%n minuty</numerusform>
+            <numerusform>%n minut</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n godzina</numerusform>
+            <numerusform>%n godziny</numerusform>
+            <numerusform>%n godzin</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2327,6 +2358,10 @@
         <translation>Wygląd</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>Wydajność</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>Zapisane hasła</translation>
     </message>
@@ -2380,6 +2415,22 @@
     <message>
         <source>Classic</source>
         <translation>Klasyczne</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>Wydajność</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>Pamięć:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Usypiaj nieaktywne karty</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Uśpij po:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2714,6 +2765,10 @@
         <translation>Przypnij kartę</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>Uśpij kartę</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>Zamknij kartę</translation>
     </message>
@@ -2735,6 +2790,10 @@
     <message>
         <source>New Tab</source>
         <translation>Nowa karta</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>Uśpiona</translation>
     </message>
 </context>
 <context>

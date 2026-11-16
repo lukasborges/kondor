@@ -1131,6 +1131,37 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>Память:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Переводить неактивные вкладки в спящий режим</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Переводить в спящий режим через:</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n минута</numerusform>
+            <numerusform>%n минуты</numerusform>
+            <numerusform>%n минут</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n час</numerusform>
+            <numerusform>%n часа</numerusform>
+            <numerusform>%n часов</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2327,6 +2358,10 @@
         <translation>Внешний вид</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>Производительность</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>Сохранённые пароли</translation>
     </message>
@@ -2380,6 +2415,22 @@
     <message>
         <source>Classic</source>
         <translation>Классические</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>Производительность</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>Память:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Переводить неактивные вкладки в спящий режим</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Переводить в спящий режим через:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2714,6 +2765,10 @@
         <translation>Закрепить вкладку</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>Перевести вкладку в спящий режим</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>Закрыть вкладку</translation>
     </message>
@@ -2735,6 +2790,10 @@
     <message>
         <source>New Tab</source>
         <translation>Новая вкладка</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>Спит</translation>
     </message>
 </context>
 <context>

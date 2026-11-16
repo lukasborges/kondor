@@ -12,6 +12,8 @@ QtObject {
     property string startupBehavior: ""
     property bool showTopSites: false
     property string tabStyle: "floating"
+    property bool tabSleepEnabled: true
+    property int tabSleepMinutes: 30
     property bool clearDataOnExit: false
     property bool blockThirdPartyCookies: false
     property bool adBlockEnabled: true
@@ -25,7 +27,8 @@ QtObject {
 
     readonly property var optionNames: [
         "homePage", "searchEngine", "customSearchUrl", "downloadDirectory",
-        "askWhereToSave", "startupBehavior", "showTopSites", "tabStyle", "clearDataOnExit",
+        "askWhereToSave", "startupBehavior", "showTopSites", "tabStyle", "tabSleepEnabled",
+        "tabSleepMinutes", "clearDataOnExit",
         "blockThirdPartyCookies", "adBlockEnabled", "searchSuggestions",
         "spellCheckEnabled", "spellCheckLanguages", "offerToSavePasswords",
         "extensionsAutoUpdate", "remoteControlEnabled", "remoteControlPort"
@@ -33,7 +36,7 @@ QtObject {
 
     readonly property var values: [homePage, searchEngine, customSearchUrl,
         downloadDirectory, askWhereToSave, startupBehavior, showTopSites,
-        tabStyle, clearDataOnExit, blockThirdPartyCookies, adBlockEnabled, searchSuggestions,
+        tabStyle, tabSleepEnabled, tabSleepMinutes, clearDataOnExit, blockThirdPartyCookies, adBlockEnabled, searchSuggestions,
         spellCheckEnabled, spellCheckLanguages, offerToSavePasswords, extensionsAutoUpdate,
         remoteControlEnabled, remoteControlPort]
 

@@ -1130,6 +1130,35 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>Memória:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Suspender abas inativas</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Suspender após:</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n minuto</numerusform>
+            <numerusform>%n minutos</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n hora</numerusform>
+            <numerusform>%n horas</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2316,6 +2345,10 @@
         <translation>Aparência</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>Desempenho</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>Senhas salvas</translation>
     </message>
@@ -2369,6 +2402,22 @@
     <message>
         <source>Classic</source>
         <translation>Clássico</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>Desempenho</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>Memória:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Suspender abas inativas</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Suspender após:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2703,6 +2752,10 @@
         <translation>Fixar aba</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>Suspender aba</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>Fechar aba</translation>
     </message>
@@ -2724,6 +2777,10 @@
     <message>
         <source>New Tab</source>
         <translation>Nova aba</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>Suspensa</translation>
     </message>
 </context>
 <context>

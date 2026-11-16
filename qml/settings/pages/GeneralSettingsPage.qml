@@ -162,4 +162,8 @@ StackLayout {
             Item { Layout.fillHeight: true }
         }
     }
+
+    GeneralPerformanceTab {
+        draft: root.draft
+    }
 }

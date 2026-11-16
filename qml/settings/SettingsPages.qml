@@ -11,8 +11,11 @@ QtObject {
             keywords: [qsTr("Startup"), qsTr("New Tabs"), qsTr("On startup:"),
                        qsTr("Home page:"), qsTr("Show top sites"),
                        qsTr("Appearance"), qsTr("Tabs:"), qsTr("Floating"),
-                       qsTr("Below Address Bar"), qsTr("Classic")],
-            options: ["startupBehavior", "homePage", "showTopSites", "tabStyle"]
+                       qsTr("Below Address Bar"), qsTr("Classic"),
+                       qsTr("Performance"), qsTr("Memory:"),
+                       qsTr("Put inactive tabs to sleep"), qsTr("Sleep after:")],
+            options: ["startupBehavior", "homePage", "showTopSites", "tabStyle",
+                       "tabSleepEnabled", "tabSleepMinutes"]
         },
         {
             id: "search",

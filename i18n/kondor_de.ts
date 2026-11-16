@@ -1130,6 +1130,35 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>Speicher:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Inaktive Tabs in den Ruhezustand versetzen</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Ruhezustand nach:</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n Minute</numerusform>
+            <numerusform>%n Minuten</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n Stunde</numerusform>
+            <numerusform>%n Stunden</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2316,6 +2345,10 @@
         <translation>Erscheinungsbild</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>Leistung</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>Gespeicherte Passwörter</translation>
     </message>
@@ -2369,6 +2402,22 @@
     <message>
         <source>Classic</source>
         <translation>Klassisch</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>Leistung</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>Speicher:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Inaktive Tabs in den Ruhezustand versetzen</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Ruhezustand nach:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2703,6 +2752,10 @@
         <translation>Tab anheften</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>Tab in den Ruhezustand versetzen</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>Tab schließen</translation>
     </message>
@@ -2724,6 +2777,10 @@
     <message>
         <source>New Tab</source>
         <translation>Neuer Tab</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>Im Ruhezustand</translation>
     </message>
 </context>
 <context>

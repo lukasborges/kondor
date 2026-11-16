@@ -22,6 +22,7 @@ Item {
         anchors.fill: parent
         visible: !root.isBusy
         source: info.iconSource
+        opacity: info.isSleeping ? 0.5 : 1
     }
 
     BusyIndicator {

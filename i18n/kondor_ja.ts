@@ -1129,6 +1129,33 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>メモリ:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>非アクティブなタブをスリープさせる</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>スリープまでの時間:</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n 分</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n 時間</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2305,6 +2332,10 @@
         <translation>外観</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>パフォーマンス</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>保存済みパスワード</translation>
     </message>
@@ -2358,6 +2389,22 @@
     <message>
         <source>Classic</source>
         <translation>クラシック</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>パフォーマンス</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>メモリ:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>非アクティブなタブをスリープさせる</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>スリープまでの時間:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2692,6 +2739,10 @@
         <translation>タブをピン留め</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>タブをスリープさせる</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>タブを閉じる</translation>
     </message>
@@ -2713,6 +2764,10 @@
     <message>
         <source>New Tab</source>
         <translation>新しいタブ</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>スリープ中</translation>
     </message>
 </context>
 <context>

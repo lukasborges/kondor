@@ -20,7 +20,10 @@ playing last; it disappears when no tab has media any more.
   through `org.freedesktop.DBus.Properties` (`Get`, `GetAll`, `Set`, signal `PropertiesChanged`),
   and the signal `Player.Seeked(x)`. Plasma's Media Player applet, the lock screen, the media-key
   shortcuts (Plasma's "Media Controller" global shortcuts) and KDE Connect all read players from
-  the session bus. Qt WebEngine does **not** include Chromium's MPRIS support.
+  the session bus. Qt WebEngine **does** include Chromium's own MPRIS player (found in the review
+  of PR #358 on Qt 6.11.2 / Fedora: `org.mpris.MediaPlayer2.chromium.instance<pid>`, `Identity`
+  "Kondor", `CanRaise` false, and the full title, artist and album of **private** tabs too).
+  Kondor turns it off (4.5) and publishes its own.
 - **D-Bus from Python:** #258 (KRunner) adds `jeepney` and a `RunnerBus` (a jeepney connection
   watched by a `QSocketNotifier`, method calls handed to a handler) because PySide6's `QtDBus`
   cannot marshal nested types such as `a{sv}` with `o` and `x` values inside variants. MPRIS needs
@@ -269,6 +272,16 @@ only (other paths → `None`):
 - On `seeked` of the current `TabMedia`: `Player.Seeked(x position)`.
 - Signals are coalesced: changes within one event-loop turn emit once (`QTimer.singleShot(0)`).
 
+**4.5 Chromium's own player is off**
+
+- `prepare_environment()` (`src/kondor/app/startup/environment.py`), before
+  `QtWebEngineQuick.initialize()`, adds `HardwareMediaKeyHandling` to Chromium's disabled
+  features in `QTWEBENGINE_CHROMIUM_FLAGS`. Chromium keeps only the last `--disable-features=`
+  switch, so when the variable already has one the feature is appended to its comma list;
+  otherwise `--disable-features=HardwareMediaKeyHandling` is appended. Other flags are kept.
+- Result: only `org.mpris.MediaPlayer2.kondor.instance_…` is on the bus (probed: the flag removes
+  the Chromium player and Kondor's player keeps working).
+
 ### 5. Which tab is the player (`MediaTabs`)
 
 `MediaTabs` (QObject singleton, `src/kondor/browser/media/mediatabs.py`) keeps the watched
@@ -338,6 +351,8 @@ only (other paths → `None`):
   `NotSupported`; `Raise` calls `show_tab`; `PropertiesChanged` carries only changed properties and
   never `Position`; `Seeked` emitted; the bus starts when a tab becomes current and stops when none
   is left; the bus name format.
+- `tests/app/startup/`: the Chromium flag is added to an empty variable, merged into an existing
+  `--disable-features=` list, and other flags are kept.
 - `tests/app/windows/`: `show_tab` selects the tab in its window (also a private window) and
   returns without effect for a tab in no window.
 
@@ -356,6 +371,8 @@ only (other paths → `None`):
 - [ ] In a private tab, the controls work but Plasma shows only "Kondor Browser" as title, with no
       artwork, artist or URL.
 - [ ] Two Kondor instances (`--new-instance`) each get their own player name; neither fails.
+- [ ] Chromium's built-in MPRIS player is off: while media plays, the only MPRIS name of Kondor on
+      the bus is `org.mpris.MediaPlayer2.kondor.instance_…` (no `…chromium.instance<pid>`).
 - [ ] `RunnerBus` is gone: KRunner (#258) uses `SessionBusService`, and its tests still pass.
 - [ ] The Flatpak manifest has `--own-name=org.mpris.MediaPlayer2.kondor.*`; README "Made for KDE"
       has the **Media controls** bullet.
@@ -430,4 +447,5 @@ the player from the MPRIS data.
 | Private tabs? | Controls work (they write nothing), but no page data reaches the bus: the title is "Kondor Browser" and there is no artist, album, artwork or URL, because the lock screen and KDE Connect show it to anyone near the screen or the phone (Firefox does the same in private windows). |
 | QtDBus or jeepney? | jeepney, through #258's connection turned into the shared `SessionBusService`: `Metadata` is `a{sv}` with `o`, `x` and `as` inside variants, which PySide6's `QDBusArgument` cannot build, and MPRIS also needs signals (`PropertiesChanged`, `Seeked`). |
 | Position updates? | The page reports the position only on events; `TabMedia.current_position()` extrapolates with the rate while playing. MPRIS clients poll `Position` and listen to `Seeked`, so no periodic reports are needed. |
+| Chromium's built-in MPRIS player? (review of PR #358) | Off, with `--disable-features=HardwareMediaKeyHandling` set in `prepare_environment()`. Qt WebEngine 6.11 ships it (the spec's first probe missed it): it would show a second "Kondor" entry for the same media, cannot Raise, and publishes private tabs' title, artist and album. |
 | Artwork from the page's URL? | Yes for normal tabs: Plasma loads `http(s)` artwork itself. Saving it to a temporary file (Chromium's way) is out of scope. |

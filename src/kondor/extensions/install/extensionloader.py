@@ -1,23 +1,31 @@
 from typing import Any
 
-from PySide6.QtCore import QDir, QLoggingCategory, QObject, Signal, qCInfo, qCWarning
+from PySide6.QtCore import QDir, QMessageLogger, QObject, Signal
 from PySide6.QtWebEngineCore import QWebEngineExtensionInfo, QWebEngineExtensionManager
 from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
-CATEGORY = QLoggingCategory("kondor.extensions")
+CATEGORY_NAME = "kondor.extensions"
+
+
+def logger() -> QMessageLogger:
+    return QMessageLogger("", 0, "", CATEGORY_NAME)
 
 
 def log_info(message: str) -> None:
-    qCInfo(CATEGORY, message)
+    logger().info(message)
+
+
+def log_warning(message: str) -> None:
+    logger().warning(message)
 
 
 def manager_for(profile: QQuickWebEngineProfile | None) -> QWebEngineExtensionManager | None:
     if profile is None or profile.isOffTheRecord():
-        qCWarning(CATEGORY, "Extensions are never loaded into private profiles")
+        log_warning("Extensions are never loaded into private profiles")
         return None
     manager = getattr(profile, "extensionManager", lambda: None)()
     if manager is None:
-        qCWarning(CATEGORY, "Extensions are not supported by this Qt WebEngine build")
+        log_warning("Extensions are not supported by this Qt WebEngine build")
     return manager
 
 

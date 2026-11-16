@@ -1,5 +1,5 @@
 from PySide6.QtCore import QObject
-from PySide6.QtQml import QQmlApplicationEngine, QQmlComponent
+from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtWidgets import QApplication
 
 from kondor.app.startup.appidentity import set_up_language_and_style
@@ -9,8 +9,9 @@ from kondor.profiles.qmltypes import QML_TYPES
 
 
 def create_window(engine: QQmlApplicationEngine) -> QObject | None:
-    component = QQmlComponent(engine, "Kondor", "ProfileChooserWindow")
-    return None if component.isError() else component.create()
+    engine.loadFromModule("Kondor", "ProfileChooserWindow")
+    roots = engine.rootObjects()
+    return roots[0] if roots else None
 
 
 def ask_for_profile(app: QApplication) -> str | None:

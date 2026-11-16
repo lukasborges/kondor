@@ -39,7 +39,7 @@ RowLayout {
         display: AbstractButton.IconOnly
         icon.name: "kondor-extensions-symbolic"
         checked: panel.opened
-        focusPolicy: Qt.NoFocus
+        focusPolicy: Qt.TabFocus
         ToolTip.visible: hovered
         Accessible.name: ToolTip.text
         ToolTip.text: qsTr("Extensions")

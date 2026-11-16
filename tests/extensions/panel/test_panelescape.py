@@ -77,3 +77,12 @@ def test_escape_closes_the_panel_inside_an_extension_page(toolbar: ToolBar) -> N
     toolbar.qtbot.wait(100)
     QTest.keyClick(toolbar.window, Qt.Key.Key_Escape)
     toolbar.qtbot.waitUntil(lambda: not panel.property("opened"))
+
+
+def test_tab_reaches_the_extensions_button_and_space_opens_the_panel(toolbar: ToolBar) -> None:
+    button = toolbar.named("extensionsButton")
+    assert button.property("focusPolicy") == Qt.FocusPolicy.TabFocus
+    button.forceActiveFocus(Qt.FocusReason.TabFocusReason)
+    QTest.keyClick(toolbar.window, Qt.Key.Key_Space)
+    panel = toolbar.window.findChild(QObject, "extensionsPanel")
+    toolbar.qtbot.waitUntil(lambda: bool(panel.property("opened")))

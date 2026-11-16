@@ -27,6 +27,7 @@ ApplicationWindow {
         dialogs: windowDialogs
         fileDialogs: pageFileDialogs
         pageArea: pageContent
+        browserWindow: window
     }
 
     function newTabTitle(tab) {

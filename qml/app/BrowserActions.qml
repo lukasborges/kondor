@@ -10,7 +10,9 @@ QtObject {
     required property var dialogs
     required property var fileDialogs
     required property var pageArea
+    property Window browserWindow: null
 
+    readonly property bool hasWindowFocus: !browserWindow || browserWindow.activeFocusItem !== null
     readonly property bool hasPage: tabs.currentTab ? !tabs.currentTab.newTabPage : false
 
     readonly property Action newTabAction: Action {
@@ -56,7 +58,7 @@ QtObject {
         text: qsTr("Find in Page…")
         icon.name: "edit-find"
         shortcut: StandardKey.Find
-        enabled: root.hasPage
+        enabled: root.hasPage && root.hasWindowFocus
         onTriggered: root.pageArea.findBar.open()
     }
     readonly property Action printAction: Action {

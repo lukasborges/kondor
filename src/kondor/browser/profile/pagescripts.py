@@ -79,21 +79,28 @@ def install_passwords_script(collection: QObject | None) -> None:
     insert_script(collection, make_script(spec))
 
 
-def install_media_script(collection: QObject | None, name: str, resource: str) -> None:
-    source = read_resource(resource)
+class MediaScript(NamedTuple):
+    name: str
+    resource: str
+    world: QWebEngineScript.ScriptWorldId
+
+
+MEDIA_SESSION = MediaScript(MEDIA_SESSION_SCRIPT, MEDIA_SESSION_RESOURCE, ScriptWorldId.MainWorld)
+MEDIA_WATCH = MediaScript(MEDIA_WATCH_SCRIPT, MEDIA_WATCH_RESOURCE, ScriptWorldId.ApplicationWorld)
+
+
+def install_media_script(collection: QObject | None, media: MediaScript) -> None:
+    source = read_resource(media.resource)
     if source is None:
-        qWarning(f"Media script resource {resource} not found: media controls are off")
+        qWarning(f"Media script resource {media.resource} not found: media controls are off")
         return
-    world = (
-        ScriptWorldId.MainWorld if name == MEDIA_SESSION_SCRIPT else ScriptWorldId.ApplicationWorld
-    )
-    spec = ScriptSpec(name, source, InjectionPoint.DocumentCreation, world, False)
+    spec = ScriptSpec(media.name, source, InjectionPoint.DocumentCreation, media.world, False)
     insert_script(collection, make_script(spec))
 
 
 def install_media_scripts(collection: QObject | None) -> None:
-    install_media_script(collection, MEDIA_SESSION_SCRIPT, MEDIA_SESSION_RESOURCE)
-    install_media_script(collection, MEDIA_WATCH_SCRIPT, MEDIA_WATCH_RESOURCE)
+    install_media_script(collection, MEDIA_SESSION)
+    install_media_script(collection, MEDIA_WATCH)
 
 
 def keep_cpp_ownership(target: QObject | None) -> None:

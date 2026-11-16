@@ -73,3 +73,32 @@ def test_portal_keeps_an_already_set_value(monkeypatch: pytest.MonkeyPatch) -> N
     environment.use_portal_inside_app_image()
 
     assert os.environ[PORTAL] == "0"
+
+
+FLAGS = environment.CHROMIUM_FLAGS_VARIABLE
+
+
+def test_disables_the_chromium_media_player_when_no_flags_are_set(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv(FLAGS, raising=False)
+
+    environment.turn_off_chromium_media_player()
+
+    assert os.environ[FLAGS] == "--disable-features=HardwareMediaKeyHandling"
+
+
+def test_appends_to_an_existing_disable_features_list(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv(FLAGS, "--disable-features=Foo")
+
+    environment.turn_off_chromium_media_player()
+
+    assert os.environ[FLAGS] == "--disable-features=Foo,HardwareMediaKeyHandling"
+
+
+def test_keeps_other_chromium_flags(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv(FLAGS, "--foo --bar=1")
+
+    environment.turn_off_chromium_media_player()
+
+    assert os.environ[FLAGS] == "--foo --bar=1 --disable-features=HardwareMediaKeyHandling"

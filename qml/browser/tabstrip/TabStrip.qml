@@ -61,6 +61,10 @@ Rectangle {
     function scrollBy(delta) { scroller.scrollBy(delta) }
     function emptyAt(sceneX, sceneY) { return taps.emptyAt(sceneX, sceneY) }
 
+    property bool isRemovingRows: false
+
+    function finishRemovingRows() { isRemovingRows = false }
+
     function showCurrentTabInBar() {
         if (tabBar.currentIndex !== tabModel.currentIndex)
             tabBar.currentIndex = tabModel.currentIndex
@@ -82,6 +86,8 @@ Rectangle {
             freeze.unfreezeUnlessClosingWithMouse()
             scroller.scheduleEnsureVisible()
         }
+        function onRowsAboutToBeRemoved() { strip.isRemovingRows = true }
+        function onRowsRemoved() { Qt.callLater(strip.finishRemovingRows) }
         function onCurrentIndexChanged() {
             strip.showCurrentTabInBar()
             scroller.scheduleEnsureVisible()
@@ -118,7 +124,7 @@ Rectangle {
             }
 
             onCurrentIndexChanged: {
-                if (strip.tabModel.currentIndex !== currentIndex)
+                if (!strip.isRemovingRows && strip.tabModel.currentIndex !== currentIndex)
                     strip.tabModel.setCurrentIndex(currentIndex)
             }
 

@@ -12,6 +12,7 @@ Popup {
     width: 360
     padding: Kirigami.Units.largeSpacing
     modal: false
+    focus: true
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
     function openPrivacySettings() {

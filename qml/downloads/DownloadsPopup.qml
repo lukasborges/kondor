@@ -12,6 +12,7 @@ Popup {
     width: 440
     padding: 0
     modal: false
+    focus: true
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
     contentItem: ColumnLayout {

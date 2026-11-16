@@ -15,6 +15,7 @@ Popup {
     width: 340
     padding: Kirigami.Units.largeSpacing
     modal: false
+    focus: true
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
     function refresh() {

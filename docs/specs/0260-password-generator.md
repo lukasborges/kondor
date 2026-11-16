@@ -98,11 +98,15 @@ Started like `passwords.js` (usable origin, `window.__kondorChannel.then(...)`, 
   `getBoundingClientRect()` in CSS pixels and `offer` is `kind === "new"`, the field is empty and
   not dismissed. Chromium fires `focusin` on mouse press, before the context menu request, so the
   state is in place when the menu opens.
+- **Withdraw**: an `input` event in the current field, `Escape` in it (`keydown`), and `scroll` /
+  `resize` on `window` → when the field was offered, add it to the dismissed set and call
+  `bridge.passwordFieldFocused(...)` again for it with `offer: false`. The field stays current and
+  its kind stays known, so a later right click on the still-focused field (no new `focusin`) still
+  shows **Generate Password**.
 - **Leave**: `focusout` while `document.hasFocus()` is still true (the window losing focus to the
-  popup does not count), an `input` event in the field, `Escape` in the field (`keydown`), and
-  `scroll` / `resize` on `window` → add the field to the dismissed set when it was offered, forget
-  the current field and call `bridge.passwordFieldLeft()`. `focusout` to another password field is
-  followed by that field's `focusin`.
+  popup or a menu does not count) → withdraw as above, forget the current field and call
+  `bridge.passwordFieldLeft()`. `focusout` to another password field is followed by that field's
+  `focusin`.
 - **Generate** (`bridge.generateRequested` signal): for the current field, ask
   `bridge.generatePassword(rules, callback)` up to three times (first with `rulesOf(field)`, then
   with `useSymbols: false`) until `matchesPattern(field, value)`; fill the field and
@@ -254,8 +258,8 @@ directory) and a test KWallet folder, serve a page on `http://localhost:8000` wi
 3. Reload, focus the field, press Escape → the popup closes and does not come back on refocus.
 4. Right click the password field (or Menu key) → **Generate Password** first; choose it → filled.
    Right click the email field → no entry.
-5. Add `maxlength=12 pattern="[a-z0-9]+"` to both fields, reload, use the popup → 12 characters,
-   lowercase letters and digits only.
+5. Add `maxlength=12 pattern="[A-Za-z0-9]+"` to both fields, reload, use the popup → 12 characters,
+   letters and digits only.
 6. Open the page in a private tab → no popup and no menu entry. Turn off "Offer to save
    passwords" → same in a normal tab.
 
@@ -295,3 +299,5 @@ None. Reuses the password store, `PasswordBridge`, the password page script and 
 | Wording: "Suggest Strong Password" / "Generate Password…" in the menu? | "Generate Password", no ellipsis: it fills at once, without more input. |
 | Offer when saving is impossible (setting off, never-saved site, wallet unavailable)? | No popup and no menu entry: a password that cannot be saved must not be generated. |
 | Generate in the page with `crypto.getRandomValues`? | No: Python `secrets`, unit-testable and in one place. The page script only enforces the field's `maxlength` / `pattern`. |
+| Escape, typing or scrolling: forget the field, or only withdraw the offer? (PR #359 review) | Only withdraw the offer: the field stays current, so right click on the still-focused field keeps **Generate Password** (no new `focusin` fires). Only `focusout` forgets the field. |
+| Manual test pattern `[a-z0-9]+`? (PR #359 review) | Replaced by `[A-Za-z0-9]+`, as in the acceptance criteria: the generator always uses upper and lower case letters, so an all-lowercase pattern cannot be met (out of scope). |

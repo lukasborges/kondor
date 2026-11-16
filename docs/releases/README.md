@@ -10,5 +10,13 @@ Write them for people who use Kondor, not for developers:
 - say what changed for the user in plain words; no issue numbers, file names or refactors;
 - end with the fixes a user would have noticed.
 
-To release: write the notes, bump the version (`pyproject.toml`, `PROJECT_VERSION`, the
-`--version` test, a `<release>` line in the metainfo), push, then tag `v<version>` and push the tag.
+Every merged fix or feature is released (the maintainer's decision): a fix is a patch release, a
+feature a minor one. A release with one change gets one or two sentences.
+
+To release, from a worktree at `origin/main`:
+
+```bash
+scripts/release.sh --next patch     # prints the next version, e.g. 0.3.1
+$EDITOR docs/releases/v0.3.1.md     # write the notes
+scripts/release.sh patch            # bumps the version, commits, pushes, tags and pushes the tag
+```

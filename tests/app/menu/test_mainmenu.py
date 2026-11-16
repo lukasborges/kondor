@@ -78,3 +78,13 @@ def test_opening_the_menu_highlights_no_item(menu: MainMenuHarness) -> None:
 
     QTest.keyClick(menu.window, Qt.Key.Key_Down)
     assert menu.evaluate("mainMenu.currentIndex") == 0
+
+
+def test_down_skips_separators_and_disabled_items(menu: MainMenuHarness) -> None:
+    menu.evaluate("mainMenu.open()")
+    assert menu.wait_until_opened()
+
+    for _ in range(5):
+        QTest.keyClick(menu.window, Qt.Key.Key_Down)
+
+    assert menu.evaluate("mainMenu.itemAt(mainMenu.currentIndex).text") == "Bookmarks"

@@ -19,6 +19,8 @@ Menu {
 
     onOpened: currentIndex = -1
 
+    MenuKeyNavigation { menu: root }
+
     MenuItem { action: root.browserWindow.actions.newTabAction }
     MenuItem { action: root.browserWindow.actions.newPrivateTabAction }
     MenuItem { action: root.browserWindow.actions.newWindowAction }
@@ -60,8 +62,11 @@ Menu {
     MenuSeparator {}
 
     Menu {
+        id: moreToolsMenu
         title: qsTr("More Tools")
         icon.name: "tools"
+
+        MenuKeyNavigation { menu: moreToolsMenu }
 
         MenuItem { action: root.browserWindow.actions.devToolsAction }
         MenuItem { action: root.browserWindow.actions.saveAsPdfAction }
@@ -73,8 +78,11 @@ Menu {
     MenuItem { action: root.browserWindow.actions.settingsAction }
 
     Menu {
+        id: helpMenu
         title: qsTr("Help")
         icon.name: "help-contents"
+
+        MenuKeyNavigation { menu: helpMenu }
 
         MenuItem { action: root.browserWindow.actions.reportBugAction }
         MenuSeparator {}

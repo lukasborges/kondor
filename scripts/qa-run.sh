@@ -133,10 +133,12 @@ PROMPT
     local sha="$1" scenarios="$2" parity="$3"
     cd "$control" || return 1
     unset DISPLAY WAYLAND_DISPLAY
-    "$claude" -p --permission-mode auto --model "$model" --effort "$effort" --output-format text \
+    "$claude" -p --permission-mode auto --model "$model" --effort "$effort" \
+      --output-format stream-json --verbose \
       --settings '{"includeCoAuthoredBy": false, "attribution": {"commit": "", "pr": ""}}' \
       --append-system-prompt "$(cat docs/agents/qa.md)" \
-      "$(prompt_for "$sha" "$scenarios" "$parity")"
+      "$(prompt_for "$sha" "$scenarios" "$parity")" \
+      | jq -rj --unbuffered -f "$script_dir/claude-progress.jq"
   }
 
   print_dry_run() {

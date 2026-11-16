@@ -3,7 +3,7 @@ from pathlib import Path
 
 from PySide6.QtCore import QResource
 
-PROJECT_VERSION = "0.9.3"
+PROJECT_VERSION = "0.9.4"
 MISSING_BUILD_MESSAGE = "Kondor: cannot find the staged build in {}; run python3 scripts/build.py"
 
 

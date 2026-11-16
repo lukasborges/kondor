@@ -82,12 +82,14 @@ ApplicationWindow {
 
     SettingsPages { id: pageCatalog }
 
-    Shortcut {
+    WindowShortcut {
+        window: root
         sequences: [StandardKey.Find]
         onActivated: sidebar.focusSearch()
     }
 
-    Shortcut {
+    WindowShortcut {
+        window: root
         sequences: [StandardKey.Cancel]
         onActivated: root.discardChanges()
     }

@@ -76,7 +76,8 @@ ApplicationWindow {
         Qt.callLater(root.reload)
     }
 
-    Shortcut {
+    WindowShortcut {
+        window: root
         sequences: [StandardKey.Cancel]
         onActivated: root.visible = false
     }

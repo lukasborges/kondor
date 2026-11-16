@@ -40,7 +40,8 @@ ApplicationWindow {
         root.mainWindow.requestActivate()
     }
 
-    Shortcut {
+    WindowShortcut {
+        window: root
         sequences: [StandardKey.Cancel]
         onActivated: root.close()
     }

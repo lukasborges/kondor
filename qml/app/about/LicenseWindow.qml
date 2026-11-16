@@ -10,7 +10,8 @@ Window {
     height: 500
     title: qsTr("License Agreement")
 
-    Shortcut {
+    WindowShortcut {
+        window: root
         sequences: [StandardKey.Cancel]
         onActivated: root.close()
     }

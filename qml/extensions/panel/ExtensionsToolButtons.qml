@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
 import Kondor
 
 RowLayout {
@@ -38,9 +37,7 @@ RowLayout {
         id: extensionsButton
         objectName: "extensionsButton"
         display: AbstractButton.IconOnly
-        icon.name: InstalledIcons.isInstalled("kondor-extensions-symbolic") ? "kondor-extensions-symbolic" : ""
-        icon.source: "qrc:/icons/kondor-extensions-symbolic.svg"
-        icon.color: Kirigami.Theme.textColor
+        icon.name: "kondor-extensions-symbolic"
         checked: panel.opened
         ToolTip.visible: hovered
         Accessible.name: ToolTip.text

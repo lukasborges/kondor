@@ -15,8 +15,10 @@ ToolButton {
     }
 
     function openMenuUnderButton() {
-        if (!isPrivate)
-            unpinMenu.popup(root, 0, root.height)
+        if (isPrivate)
+            return
+        unpinMenu.popup(root, 0, root.height)
+        unpinMenu.currentIndex = 0
     }
 
     function unpinAndRestoreFocus() {

@@ -4,7 +4,7 @@ from PySide6.QtCore import QUrl
 from pytestqt.qtbot import QtBot
 
 from kondor.bookmarks.bookmarkmodel import BookmarkModel
-from tests.bookmarks.bookmarkrows import add_folder_in_other, add_page, manager
+from tests.bookmarks.bookmarkrows import add_folder_in_toolbar, add_page, manager
 
 OUTSIDE_ROWS = (-1, 99)
 UNKNOWN_ID = 999999
@@ -17,7 +17,7 @@ def model_of(folder_id: int) -> BookmarkModel:
 
 
 def test_filter_matches_title_or_url_and_escapes_wildcards(fresh_bookmarks: Path) -> None:
-    folder = add_folder_in_other("Filtered")
+    folder = add_folder_in_toolbar("Filtered")
     linux = add_page(folder, "100% Linux", "linux")
     add_page(folder, "Other", "other")
     model = model_of(folder)
@@ -41,9 +41,9 @@ def test_negative_folder_id_has_no_rows(fresh_bookmarks: Path) -> None:
 
 
 def test_change_refreshes_folder_models(fresh_bookmarks: Path, qtbot: QtBot) -> None:
-    other = manager().otherFolderId()
-    model = manager().modelForFolder(other)
+    folder = manager().addFolder("Folder", manager().toolbarFolderId())
+    model = manager().modelForFolder(folder)
     with qtbot.waitSignal(model.countChanged):
-        manager().addBookmark(QUrl("https://kde.org/"), "KDE", other)
+        manager().addBookmark(QUrl("https://kde.org/"), "KDE", folder)
     assert model.count == 1
     assert model.urlAt(0) == "https://kde.org/"

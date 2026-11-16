@@ -11,7 +11,7 @@ from tests.bookmarks.bookmarkrows import (
     write_version_two_file,
 )
 
-SCHEMA_VERSION = 5
+SCHEMA_VERSION = 6
 VERSION_TWO_ROWS = 3
 TOOLBAR_TITLES = ["KDE", "Planet KDE", "Qt Docs", "News", "Development", "Linux"]
 TOOLBAR_URLS = ["https://kde.org/", "https://planet.kde.org/", "https://doc.qt.io/"]
@@ -46,10 +46,6 @@ def test_default_folders_hold_their_bookmarks(fresh_bookmarks: Path) -> None:
     assert linux[-1]["url"] == "https://discuss.kde.org/"
 
 
-def test_other_bookmarks_stays_empty(fresh_bookmarks: Path) -> None:
-    assert manager().childCount(manager().otherFolderId()) == 0
-
-
 def test_existing_bookmarks_are_not_replaced(fresh_bookmarks: Path) -> None:
     Database.reset_instance()
     fresh_bookmarks.unlink()
@@ -67,3 +63,12 @@ def test_deleted_defaults_stay_deleted(fresh_bookmarks: Path) -> None:
     assert Database.instance().is_valid()
     assert count_titled("Qt Docs") == 0
     assert count_rows(COUNT_ALL) == remaining
+
+
+def test_other_bookmarks_move_to_the_end_of_the_toolbar(fresh_bookmarks: Path) -> None:
+    Database.reset_instance()
+    fresh_bookmarks.unlink()
+    write_version_two_file(fresh_bookmarks)
+    assert Database.instance().is_valid()
+    assert [row["title"] for row in toolbar_rows()] == ["Mine", "Was other"]
+    assert count_rows("SELECT COUNT(*) FROM bookmarks WHERE special = 'other'") == 0

@@ -54,8 +54,8 @@ class BookmarkManager(QObject):
         return bookmarkqueries.search(text, limit)
 
     @Slot(int, result="QVariantList")
-    def recentBookmarks(self, limit: int) -> list[dict[str, Any]]:
-        return bookmarkqueries.recent(limit)
+    def recentlyUsedBookmarks(self, limit: int) -> list[dict[str, Any]]:
+        return bookmarkqueries.recently_used(limit)
 
     @Slot(QUrl, result="qint64")
     def bookmarkIdFor(self, url: QUrl) -> int:
@@ -94,10 +94,6 @@ class BookmarkManager(QObject):
     @Slot(result="qint64")
     def toolbarFolderId(self) -> int:
         return bookmarkqueries.special_folder_id("toolbar")
-
-    @Slot(result="qint64")
-    def otherFolderId(self) -> int:
-        return bookmarkqueries.special_folder_id("other")
 
     @Slot("qint64", result=BookmarkModel)
     def modelForFolder(self, folder_id: int) -> BookmarkModel:

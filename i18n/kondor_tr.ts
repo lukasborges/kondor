@@ -309,20 +309,12 @@
 <context>
     <name>BookmarksPanelEntries</name>
     <message>
-        <source>Recently Added</source>
-        <translation>Son eklenenler</translation>
+        <source>Recently Used</source>
+        <translation>Son Kullanılanlar</translation>
     </message>
     <message>
         <source>Bookmarks Toolbar</source>
         <translation>Yer İmleri Araç Çubuğu</translation>
-    </message>
-    <message>
-        <source>Other Bookmarks</source>
-        <translation>Diğer Yer İmleri</translation>
-    </message>
-    <message>
-        <source>Folders</source>
-        <translation>Klasörler</translation>
     </message>
 </context>
 <context>

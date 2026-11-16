@@ -309,20 +309,12 @@
 <context>
     <name>BookmarksPanelEntries</name>
     <message>
-        <source>Recently Added</source>
-        <translation>Nyligen tillagda</translation>
+        <source>Recently Used</source>
+        <translation>Senast använda</translation>
     </message>
     <message>
         <source>Bookmarks Toolbar</source>
         <translation>Bokmärkesverktygsfält</translation>
-    </message>
-    <message>
-        <source>Other Bookmarks</source>
-        <translation>Övriga bokmärken</translation>
-    </message>
-    <message>
-        <source>Folders</source>
-        <translation>Mappar</translation>
     </message>
 </context>
 <context>

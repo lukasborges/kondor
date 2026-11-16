@@ -5,9 +5,9 @@ from typing import NamedTuple
 from PySide6.QtCore import QStandardPaths, qWarning
 from PySide6.QtSql import QSqlDatabase, QSqlQuery
 
-from kondor.core.database import databasemigrations, sql
+from kondor.core.database import bookmarkrootmerge, databasemigrations, sql
 
-SCHEMA_VERSION = 5
+SCHEMA_VERSION = 6
 DRIVER = "QSQLITE"
 CONNECTION_NAME = "kondor"
 FILE_NAME = "kondor.sqlite"
@@ -25,6 +25,7 @@ MIGRATION_STEPS = (
     MigrationStep(3, databasemigrations.create_favicons_table),
     MigrationStep(4, databasemigrations.seed_default_bookmarks),
     MigrationStep(5, databasemigrations.create_extension_storage_table),
+    MigrationStep(6, bookmarkrootmerge.merge_other_into_toolbar),
 )
 
 

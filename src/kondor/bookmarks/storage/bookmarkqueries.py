@@ -14,7 +14,11 @@ SEARCH_STATEMENT = (
     " WHERE is_folder = 0 AND (url LIKE ? ESCAPE '\\' OR title LIKE ? ESCAPE '\\')"
     " ORDER BY (title LIKE ? ESCAPE '\\') DESC, title COLLATE NOCASE, id LIMIT ?"
 )
-RECENT_STATEMENT = "SELECT url, title FROM bookmarks WHERE is_folder = 0 ORDER BY id DESC LIMIT ?"
+RECENTLY_USED_STATEMENT = (
+    "SELECT bookmarks.url, bookmarks.title, MIN(bookmarks.id) FROM bookmarks"
+    " JOIN history ON history.url = bookmarks.url WHERE bookmarks.is_folder = 0"
+    " GROUP BY bookmarks.url ORDER BY MAX(history.visited_at) DESC, MIN(bookmarks.id) LIMIT ?"
+)
 
 
 def read_rows(statement: str, values: Sequence[object], reader: RowReader) -> list[Row]:
@@ -93,10 +97,10 @@ def search(text: str, limit: int) -> list[Row]:
     return read_rows(SEARCH_STATEMENT, values, read_search_result)
 
 
-def recent(limit: int) -> list[Row]:
+def recently_used(limit: int) -> list[Row]:
     if limit <= 0:
         return []
-    return read_rows(RECENT_STATEMENT, (limit,), read_search_result)
+    return read_rows(RECENTLY_USED_STATEMENT, (limit,), read_search_result)
 
 
 def first_id_or_missing(found: list[int]) -> int:

@@ -8,7 +8,7 @@ QtObject {
     required property var itemModel
     required property string filter
 
-    property var folderId: BookmarkManager.otherFolderId()
+    property var folderId: BookmarkManager.toolbarFolderId()
     property var itemId: -1
 
     signal rowMoved(int row)

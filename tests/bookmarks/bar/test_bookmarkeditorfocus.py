@@ -33,7 +33,7 @@ def window(
     created = component.create()
     assert created is not None, error_text(component)
     QQmlEngine.setObjectOwnership(created, QQmlEngine.ObjectOwnership.CppOwnership)
-    created.setProperty("bookmarkId", add_page(manager().otherFolderId(), "Page", "page"))
+    created.setProperty("bookmarkId", add_page(manager().toolbarFolderId(), "Page", "page"))
     qtbot.waitExposed(created)
     yield created
     created.close()

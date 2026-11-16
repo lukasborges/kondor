@@ -31,16 +31,16 @@ def root_titles() -> list[str]:
 
 
 def test_root_folders_are_listed_with_english_names(fresh_bookmarks: Path) -> None:
-    assert root_titles()[:2] == ["Bookmarks Toolbar", "Other Bookmarks"]
+    assert root_titles()[:1] == ["Bookmarks Toolbar"]
 
 
 def test_root_folders_are_listed_with_translated_names(
     fresh_bookmarks: Path, german_translator: None
 ) -> None:
-    assert root_titles()[:2] == ["Lesezeichen-Symbolleiste", "Weitere Lesezeichen"]
+    assert root_titles()[:1] == ["Lesezeichen-Symbolleiste"]
 
 
 def test_renaming_a_root_folder_is_refused(fresh_bookmarks: Path) -> None:
     bookmarks = manager()
     bookmarks.rename(bookmarks.toolbarFolderId(), "My Bar")
-    assert root_titles()[:2] == ["Bookmarks Toolbar", "Other Bookmarks"]
+    assert root_titles()[:1] == ["Bookmarks Toolbar"]

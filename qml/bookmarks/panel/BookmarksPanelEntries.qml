@@ -7,25 +7,31 @@ QtObject {
     property var folderPath: []
     property string query: ""
 
+    property int openCount: 0
+
     readonly property int recentLimit: 5
     readonly property int searchLimit: 50
     readonly property bool isSearching: query.trim() !== ""
     readonly property int folderId: folderPath.length > 0 ? folderPath[folderPath.length - 1].id : 0
-    readonly property var entries: collect(BookmarkManager.revision)
+    readonly property var entries: collect(BookmarkManager.revision, openCount)
     readonly property bool hasBookmarks: countRootItems(BookmarkManager.revision) > 0
 
-    function collect(revision) {
+    function refresh() {
+        openCount += 1
+    }
+
+    function collect(revision, opens) {
         if (isSearching)
             return entriesOf(BookmarkManager.search(query, searchLimit), "")
         if (folderId > 0)
             return entriesOf(BookmarkManager.folderContents(folderId), "")
-        return entriesOf(BookmarkManager.recentBookmarks(recentLimit), qsTr("Recently Added"))
-                .concat(rootFolders())
+        return entriesOf(BookmarkManager.recentlyUsedBookmarks(recentLimit), qsTr("Recently Used"))
+                .concat(entriesOf(BookmarkManager.folderContents(BookmarkManager.toolbarFolderId()),
+                                  qsTr("Bookmarks Toolbar")))
     }
 
     function countRootItems(revision) {
         return BookmarkManager.childCount(BookmarkManager.toolbarFolderId())
-                + BookmarkManager.childCount(BookmarkManager.otherFolderId())
     }
 
     function entriesOf(rows, section) {
@@ -43,18 +49,5 @@ QtObject {
             iconName: "folder",
             section: section
         }
-    }
-
-    function rootFolders() {
-        return [
-            rootFolder(BookmarkManager.toolbarFolderId(), qsTr("Bookmarks Toolbar"), "bookmark-toolbar"),
-            rootFolder(BookmarkManager.otherFolderId(), qsTr("Other Bookmarks"), "folder")
-        ]
-    }
-
-    function rootFolder(id, title, iconName) {
-        const entry = entryOf({ id: id, title: title, url: "", isFolder: true }, qsTr("Folders"))
-        entry.iconName = iconName
-        return entry
     }
 }

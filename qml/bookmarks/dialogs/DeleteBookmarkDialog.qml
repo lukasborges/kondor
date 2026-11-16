@@ -41,6 +41,6 @@ ConfirmDialog {
         if (!info.isFolder || fromItemList)
             root.selection.itemId = -1
         else
-            root.selection.folderId = info.parentId > 0 ? info.parentId : BookmarkManager.otherFolderId()
+            root.selection.folderId = info.parentId > 0 ? info.parentId : BookmarkManager.toolbarFolderId()
     }
 }

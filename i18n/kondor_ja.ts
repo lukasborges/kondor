@@ -309,20 +309,12 @@
 <context>
     <name>BookmarksPanelEntries</name>
     <message>
-        <source>Recently Added</source>
-        <translation>最近追加</translation>
+        <source>Recently Used</source>
+        <translation>最近使用したもの</translation>
     </message>
     <message>
         <source>Bookmarks Toolbar</source>
         <translation>ブックマークツールバー</translation>
-    </message>
-    <message>
-        <source>Other Bookmarks</source>
-        <translation>その他のブックマーク</translation>
-    </message>
-    <message>
-        <source>Folders</source>
-        <translation>フォルダー</translation>
     </message>
 </context>
 <context>

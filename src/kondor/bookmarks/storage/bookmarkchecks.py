@@ -6,10 +6,10 @@ def is_folder_id(row_id: int) -> bool:
     return bool(bookmarkqueries.bookmark(row_id).get("isFolder", False))
 
 
-def folder_or_other_bookmarks(folder_id: int) -> int:
+def folder_or_toolbar(folder_id: int) -> int:
     if folder_id > 0 and is_folder_id(folder_id):
         return folder_id
-    return bookmarkqueries.special_folder_id("other")
+    return bookmarkqueries.special_folder_id("toolbar")
 
 
 def is_special_row(item: Row) -> bool:

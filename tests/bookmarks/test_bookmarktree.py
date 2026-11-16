@@ -3,7 +3,7 @@ from pathlib import Path
 from PySide6.QtCore import QUrl
 
 from tests.bookmarks.bookmarkrows import (
-    add_folder_in_other,
+    add_folder_in_toolbar,
     add_folder_with_page,
     add_page,
     add_search_fixture,
@@ -18,16 +18,14 @@ REORDERED_SIZE = 2
 
 
 def test_root_folders(fresh_bookmarks: Path) -> None:
-    toolbar, other = manager().toolbarFolderId(), manager().otherFolderId()
+    toolbar = manager().toolbarFolderId()
     assert toolbar > 0
-    assert other > 0
-    assert toolbar != other
     assert manager().toolbar_model().folder_id() == toolbar
 
 
 def test_add_and_find_bookmarks(fresh_bookmarks: Path) -> None:
     assert not manager().isBookmarked(PAGE_URL)
-    other = manager().otherFolderId()
+    other = manager().toolbarFolderId()
     first = manager().addBookmark(PAGE_URL, "Page", other)
     assert first > 0
     assert manager().isBookmarked(PAGE_URL)
@@ -56,9 +54,9 @@ def test_search_bookmarks_finds_titles_and_urls(fresh_bookmarks: Path) -> None:
 
 
 def test_move_between_folders(fresh_bookmarks: Path) -> None:
-    folder = add_folder_in_other("Moved")
+    folder = add_folder_in_toolbar("Moved")
     assert folder > 0
-    row_id = add_page(manager().otherFolderId(), "Move me", "move")
+    row_id = add_page(manager().toolbarFolderId(), "Move me", "move")
     assert row_id > 0
     manager().move(row_id, folder, -1)
     assert parent_of(row_id) == folder
@@ -85,10 +83,10 @@ def test_model_reports_the_moved_row(fresh_bookmarks: Path) -> None:
 
 
 def test_folder_cannot_move_into_itself(fresh_bookmarks: Path) -> None:
-    folder = add_folder_in_other("Self")
+    folder = add_folder_in_toolbar("Self")
     assert folder > 0
     manager().move(folder, folder, 0)
-    assert parent_of(folder) == manager().otherFolderId()
+    assert parent_of(folder) == manager().toolbarFolderId()
 
 
 def test_move_into_another_folder_at_end(fresh_bookmarks: Path) -> None:
@@ -105,14 +103,14 @@ def test_move_into_another_folder_at_end(fresh_bookmarks: Path) -> None:
 
 
 def test_refuse_moving_folder_into_child(fresh_bookmarks: Path) -> None:
-    parent = add_folder_in_other("Cycle parent")
+    parent = add_folder_in_toolbar("Cycle parent")
     assert parent > 0
     child = manager().addFolder("Cycle child", parent)
     assert child > 0
     grandchild = manager().addFolder("Cycle grandchild", child)
     assert grandchild > 0
     manager().move(parent, grandchild, 0)
-    assert parent_of(parent) == manager().otherFolderId()
+    assert parent_of(parent) == manager().toolbarFolderId()
     assert parent_of(child) == parent
     assert parent_of(grandchild) == child
 

@@ -309,20 +309,12 @@
 <context>
     <name>BookmarksPanelEntries</name>
     <message>
-        <source>Recently Added</source>
-        <translation>최근 추가됨</translation>
+        <source>Recently Used</source>
+        <translation>최근 사용</translation>
     </message>
     <message>
         <source>Bookmarks Toolbar</source>
         <translation>북마크 도구 모음</translation>
-    </message>
-    <message>
-        <source>Other Bookmarks</source>
-        <translation>기타 북마크</translation>
-    </message>
-    <message>
-        <source>Folders</source>
-        <translation>폴더</translation>
     </message>
 </context>
 <context>

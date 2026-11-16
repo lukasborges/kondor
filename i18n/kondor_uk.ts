@@ -309,20 +309,12 @@
 <context>
     <name>BookmarksPanelEntries</name>
     <message>
-        <source>Recently Added</source>
-        <translation>Нещодавно додані</translation>
+        <source>Recently Used</source>
+        <translation>Нещодавно використані</translation>
     </message>
     <message>
         <source>Bookmarks Toolbar</source>
         <translation>Панель закладок</translation>
-    </message>
-    <message>
-        <source>Other Bookmarks</source>
-        <translation>Інші закладки</translation>
-    </message>
-    <message>
-        <source>Folders</source>
-        <translation>Теки</translation>
     </message>
 </context>
 <context>

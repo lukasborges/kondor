@@ -23,7 +23,7 @@ def read_utf8_file(file_url: QUrl) -> str:
 def new_bookmark_row(url: QUrl, title: str, folder_id: int) -> BookmarkRow | None:
     if not is_supported_bookmark_url(url):
         return None
-    parent_id = bookmarkchecks.folder_or_other_bookmarks(folder_id)
+    parent_id = bookmarkchecks.folder_or_toolbar(folder_id)
     if parent_id <= 0:
         return None
     name = title.strip() or url.toString()

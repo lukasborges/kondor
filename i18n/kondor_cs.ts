@@ -309,20 +309,12 @@
 <context>
     <name>BookmarksPanelEntries</name>
     <message>
-        <source>Recently Added</source>
-        <translation>Nedávno přidané</translation>
+        <source>Recently Used</source>
+        <translation>Naposledy použité</translation>
     </message>
     <message>
         <source>Bookmarks Toolbar</source>
         <translation>Panel záložek</translation>
-    </message>
-    <message>
-        <source>Other Bookmarks</source>
-        <translation>Ostatní záložky</translation>
-    </message>
-    <message>
-        <source>Folders</source>
-        <translation>Složky</translation>
     </message>
 </context>
 <context>

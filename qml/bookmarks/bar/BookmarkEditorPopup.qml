@@ -35,7 +35,7 @@ Popup {
     }
 
     function addAndEdit(tab) {
-        const id = BookmarkManager.addBookmark(tab.url, tab.title, BookmarkManager.otherFolderId())
+        const id = BookmarkManager.addBookmark(tab.url, tab.title, BookmarkManager.toolbarFolderId())
         if (id > 0)
             edit(id, true)
     }

@@ -599,6 +599,21 @@
     </message>
 </context>
 <context>
+    <name>DeleteProfileDialog</name>
+    <message>
+        <source>Delete Profile “%1”?</source>
+        <translation>Profiel “%1” verwijderen?</translation>
+    </message>
+    <message>
+        <source>History, bookmarks, saved passwords, cookies, extensions and settings of this profile are deleted for good.</source>
+        <translation>Geschiedenis, bladwijzers, opgeslagen wachtwoorden, cookies, extensies en instellingen van dit profiel worden definitief verwijderd.</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Verwijderen</translation>
+    </message>
+</context>
+<context>
     <name>DownloadDelegate</name>
     <message>
         <source>Resume</source>
@@ -1529,6 +1544,52 @@
     </message>
 </context>
 <context>
+    <name>ManageProfileRow</name>
+    <message>
+        <source>The Default profile cannot be deleted</source>
+        <translation>Het standaardprofiel kan niet worden verwijderd</translation>
+    </message>
+    <message>
+        <source>Close the windows of this profile first</source>
+        <translation>Sluit eerst de vensters van dit profiel</translation>
+    </message>
+    <message>
+        <source>Delete…</source>
+        <translation>Verwijderen…</translation>
+    </message>
+    <message>
+        <source>Edit %1</source>
+        <translation>%1 bewerken</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Bewerken</translation>
+    </message>
+    <message>
+        <source>Delete %1</source>
+        <translation>%1 verwijderen</translation>
+    </message>
+</context>
+<context>
+    <name>ManageProfilesWindow</name>
+    <message>
+        <source>Manage Profiles</source>
+        <translation>Profielen beheren</translation>
+    </message>
+    <message>
+        <source>Ask Every Time</source>
+        <translation>Elke keer vragen</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>Nieuw profiel…</translation>
+    </message>
+    <message>
+        <source>At startup:</source>
+        <translation>Bij opstarten:</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2027,6 +2088,124 @@
     <message>
         <source>Port:</source>
         <translation>Poort:</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileButton</name>
+    <message>
+        <source>Profile: %1</source>
+        <translation>Profiel: %1</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileChooserWindow</name>
+    <message>
+        <source>Choose a Profile</source>
+        <translation>Een profiel kiezen</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>Afsluiten</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileDialog</name>
+    <message>
+        <source>New Profile</source>
+        <translation>Nieuw profiel</translation>
+    </message>
+    <message>
+        <source>Edit Profile</source>
+        <translation>Profiel bewerken</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Naam:</translation>
+    </message>
+    <message>
+        <source>Icon:</source>
+        <translation>Pictogram:</translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation>Aanmaken</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Opslaan</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annuleren</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileIconPicker</name>
+    <message>
+        <source>Person</source>
+        <translation>Persoon</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>Thuis</translation>
+    </message>
+    <message>
+        <source>Work</source>
+        <translation>Werk</translation>
+    </message>
+    <message>
+        <source>World</source>
+        <translation>Wereld</translation>
+    </message>
+    <message>
+        <source>Star</source>
+        <translation>Ster</translation>
+    </message>
+    <message>
+        <source>Games</source>
+        <translation>Spellen</translation>
+    </message>
+    <message>
+        <source>Development</source>
+        <translation>Ontwikkeling</translation>
+    </message>
+    <message>
+        <source>Flag</source>
+        <translation>Vlag</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileRegistry</name>
+    <message>
+        <source>Enter a name.</source>
+        <translation>Voer een naam in.</translation>
+    </message>
+    <message>
+        <source>The name is too long.</source>
+        <translation>De naam is te lang.</translation>
+    </message>
+    <message>
+        <source>A profile with this name already exists.</source>
+        <translation>Er bestaat al een profiel met deze naam.</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>Standaard</translation>
+    </message>
+</context>
+<context>
+    <name>ProfilesMenu</name>
+    <message>
+        <source>Profiles</source>
+        <translation>Profielen</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>Nieuw profiel…</translation>
+    </message>
+    <message>
+        <source>Manage Profiles…</source>
+        <translation>Profielen beheren…</translation>
     </message>
 </context>
 <context>

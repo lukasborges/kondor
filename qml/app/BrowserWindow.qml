@@ -34,6 +34,8 @@ ApplicationWindow {
     function openUrlsInNewTabs(urls) { tabControl.openUrlsInNewTabs(urls) }
     function openSettingsPage(pageId) { windowDialogs.openSettingsPage(pageId) }
     function openBookmarks() { windowDialogs.openBookmarks() }
+    function openNewProfile() { windowDialogs.openNewProfile() }
+    function openManageProfiles() { windowDialogs.openManageProfiles() }
     function openBookmarkEditor() { toolBar.bookmarkEditor.openEditor() }
     function closeTabAt(index) { tabControl.closeTabAt(index) }
     function closeTabFor(tab) { tabControl.closeTabFor(tab) }

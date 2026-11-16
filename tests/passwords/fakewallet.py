@@ -35,6 +35,9 @@ class FakeWallet(QObject):
             self.folders[folder] = {}
         return self.can_create_folder
 
+    def remove_folder(self, handle: int, folder: str) -> bool:
+        return self.folders.pop(folder, None) is not None
+
     def read_map(self, entry: WalletEntry) -> bytes | None:
         return self.folders[entry.folder].get(entry.key, b"")
 

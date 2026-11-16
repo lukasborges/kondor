@@ -1,8 +1,7 @@
 from kondor.passwords.csvimport.passwordimportplan import SavedLogins
 from kondor.passwords.wallet.walletmap import map_from_bytes, map_to_bytes
 from kondor.passwords.wallet.walletservice import WalletEntry, WalletService
-
-FOLDER = "Kondor"
+from kondor.profiles.activeprofile import ActiveProfile
 
 
 class WalletFolder:
@@ -12,14 +11,15 @@ class WalletFolder:
 
     @staticmethod
     def ensure_exists(service: WalletService, handle: int) -> bool:
-        return service.has_folder(handle, FOLDER) or service.create_folder(handle, FOLDER)
+        folder = ActiveProfile.wallet_folder()
+        return service.has_folder(handle, folder) or service.create_folder(handle, folder)
 
     def logins(self, origin: str) -> dict[str, str] | None:
         data = self._service.read_map(self._entry(origin))
         return None if data is None else map_from_bytes(data)
 
     def all_logins(self) -> SavedLogins | None:
-        maps = self._service.map_list(self._handle, FOLDER)
+        maps = self._service.map_list(self._handle, ActiveProfile.wallet_folder())
         if maps is None:
             return None
         return {origin: map_from_bytes(data) for origin, data in maps.items()}
@@ -31,7 +31,7 @@ class WalletFolder:
         return self._service.remove_entry(self._entry(origin))
 
     def origins(self) -> list[str]:
-        return self._service.entry_list(self._handle, FOLDER)
+        return self._service.entry_list(self._handle, ActiveProfile.wallet_folder())
 
     def _entry(self, origin: str) -> WalletEntry:
-        return WalletEntry(self._handle, FOLDER, origin)
+        return WalletEntry(self._handle, ActiveProfile.wallet_folder(), origin)

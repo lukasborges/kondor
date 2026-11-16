@@ -39,6 +39,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 - **Sleeping tabs**: idle tabs free their memory and reload when selected
 - **Reopen closed tabs** with Ctrl+Shift+T
 - **Multiple windows**, with your session restored on startup
+- **Profiles**: keep work and personal browsing apart, and start one with `--profile <name>`
 
 ### Search and address bar
 - **One bar** for addresses and searches

@@ -599,6 +599,21 @@
     </message>
 </context>
 <context>
+    <name>DeleteProfileDialog</name>
+    <message>
+        <source>Delete Profile “%1”?</source>
+        <translation>刪除設定檔「%1」?</translation>
+    </message>
+    <message>
+        <source>History, bookmarks, saved passwords, cookies, extensions and settings of this profile are deleted for good.</source>
+        <translation>此設定檔的歷史記錄、書籤、已儲存的密碼、Cookie、擴充套件和設定將被永久刪除。</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>刪除</translation>
+    </message>
+</context>
+<context>
     <name>DownloadDelegate</name>
     <message>
         <source>Resume</source>
@@ -1516,6 +1531,52 @@
     </message>
 </context>
 <context>
+    <name>ManageProfileRow</name>
+    <message>
+        <source>The Default profile cannot be deleted</source>
+        <translation>無法刪除預設設定檔</translation>
+    </message>
+    <message>
+        <source>Close the windows of this profile first</source>
+        <translation>請先關閉此設定檔的視窗</translation>
+    </message>
+    <message>
+        <source>Delete…</source>
+        <translation>刪除…</translation>
+    </message>
+    <message>
+        <source>Edit %1</source>
+        <translation>編輯 %1</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>編輯</translation>
+    </message>
+    <message>
+        <source>Delete %1</source>
+        <translation>刪除 %1</translation>
+    </message>
+</context>
+<context>
+    <name>ManageProfilesWindow</name>
+    <message>
+        <source>Manage Profiles</source>
+        <translation>管理設定檔</translation>
+    </message>
+    <message>
+        <source>Ask Every Time</source>
+        <translation>每次詢問</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>新增設定檔…</translation>
+    </message>
+    <message>
+        <source>At startup:</source>
+        <translation>啟動時:</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2014,6 +2075,124 @@
     <message>
         <source>Port:</source>
         <translation>連接埠:</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileButton</name>
+    <message>
+        <source>Profile: %1</source>
+        <translation>設定檔:%1</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileChooserWindow</name>
+    <message>
+        <source>Choose a Profile</source>
+        <translation>選擇設定檔</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>結束</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileDialog</name>
+    <message>
+        <source>New Profile</source>
+        <translation>新增設定檔</translation>
+    </message>
+    <message>
+        <source>Edit Profile</source>
+        <translation>編輯設定檔</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>名稱:</translation>
+    </message>
+    <message>
+        <source>Icon:</source>
+        <translation>圖示:</translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation>建立</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>儲存</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileIconPicker</name>
+    <message>
+        <source>Person</source>
+        <translation>個人</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>家</translation>
+    </message>
+    <message>
+        <source>Work</source>
+        <translation>工作</translation>
+    </message>
+    <message>
+        <source>World</source>
+        <translation>世界</translation>
+    </message>
+    <message>
+        <source>Star</source>
+        <translation>星號</translation>
+    </message>
+    <message>
+        <source>Games</source>
+        <translation>遊戲</translation>
+    </message>
+    <message>
+        <source>Development</source>
+        <translation>開發</translation>
+    </message>
+    <message>
+        <source>Flag</source>
+        <translation>旗幟</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileRegistry</name>
+    <message>
+        <source>Enter a name.</source>
+        <translation>請輸入名稱。</translation>
+    </message>
+    <message>
+        <source>The name is too long.</source>
+        <translation>名稱過長。</translation>
+    </message>
+    <message>
+        <source>A profile with this name already exists.</source>
+        <translation>已存在同名的設定檔。</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>預設</translation>
+    </message>
+</context>
+<context>
+    <name>ProfilesMenu</name>
+    <message>
+        <source>Profiles</source>
+        <translation>設定檔</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>新增設定檔…</translation>
+    </message>
+    <message>
+        <source>Manage Profiles…</source>
+        <translation>管理設定檔…</translation>
     </message>
 </context>
 <context>

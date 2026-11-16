@@ -26,6 +26,10 @@ Menu {
     MenuItem { action: root.browserWindow.actions.newWindowAction }
     MenuItem { action: root.browserWindow.actions.newPrivateWindowAction }
 
+    ProfilesMenu {
+        browserWindow: root.browserWindow
+    }
+
     MenuSeparator {}
 
     BookmarkMenu {

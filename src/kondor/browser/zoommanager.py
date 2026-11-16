@@ -1,7 +1,7 @@
-from PySide6.QtCore import QObject, QSettings, QUrl, Signal, Slot
+from PySide6.QtCore import QObject, QUrl, Signal, Slot
 
-ORGANIZATION = "KDE"
-APPLICATION = "Kondor"
+from kondor.profiles.activeprofile import ActiveProfile
+
 GROUP = "SiteZoom"
 EPSILON = 0.001
 DEFAULT_ZOOM = 1.0
@@ -39,7 +39,7 @@ class ZoomManager(QObject):
 
     def __init__(self) -> None:
         super().__init__()
-        self._settings = QSettings(ORGANIZATION, APPLICATION)
+        self._settings = ActiveProfile.settings()
 
     @classmethod
     def instance(cls) -> "ZoomManager":

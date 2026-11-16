@@ -1,9 +1,6 @@
 from typing import Any
 
-from PySide6.QtCore import QSettings
-
-ORGANIZATION = "KDE"
-APPLICATION = "Kondor"
+from kondor.profiles.activeprofile import ActiveProfile
 
 
 def key_of(extension_id: str, name: str) -> str:
@@ -16,7 +13,7 @@ def setting_key(extension_id: str, key: str) -> str:
 
 class ExtensionState:
     def __init__(self) -> None:
-        self._settings = QSettings(ORGANIZATION, APPLICATION)
+        self._settings = ActiveProfile.settings()
 
     def is_enabled(self, extension_id: str) -> bool:
         return bool(self._settings.value(key_of(extension_id, "Enabled"), True, type=bool))

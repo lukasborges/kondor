@@ -5,7 +5,6 @@ from PySide6.QtCore import (
     QIODevice,
     QObject,
     QSaveFile,
-    QStandardPaths,
     QTimer,
     QUrl,
     Slot,
@@ -18,6 +17,7 @@ from kondor.browser.session.sessionwindow import SessionTab, SessionWindow
 from kondor.browser.tabs.tab import Tab
 from kondor.browser.tabs.tabmodel import TabModel
 from kondor.browser.tabs.tabmodelrows import TAB_ROLE
+from kondor.profiles.activeprofile import ActiveProfile
 
 AUTOSAVE_DELAY_MS = 2000
 
@@ -44,9 +44,7 @@ def session_window_of(model: TabModel) -> SessionWindow:
 
 
 def session_file_path() -> Path:
-    folder = Path(QStandardPaths.writableLocation(QStandardPaths.StandardLocation.AppDataLocation))
-    folder.mkdir(parents=True, exist_ok=True)
-    return folder / "session.json"
+    return ActiveProfile.data_directory() / "session.json"
 
 
 def write_session_file(content: bytes) -> None:

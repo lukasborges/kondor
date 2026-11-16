@@ -599,6 +599,21 @@
     </message>
 </context>
 <context>
+    <name>DeleteProfileDialog</name>
+    <message>
+        <source>Delete Profile “%1”?</source>
+        <translation>プロファイル「%1」を削除しますか?</translation>
+    </message>
+    <message>
+        <source>History, bookmarks, saved passwords, cookies, extensions and settings of this profile are deleted for good.</source>
+        <translation>このプロファイルの履歴、ブックマーク、保存済みパスワード、Cookie、拡張機能、設定は完全に削除されます。</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>削除</translation>
+    </message>
+</context>
+<context>
     <name>DownloadDelegate</name>
     <message>
         <source>Resume</source>
@@ -1516,6 +1531,52 @@
     </message>
 </context>
 <context>
+    <name>ManageProfileRow</name>
+    <message>
+        <source>The Default profile cannot be deleted</source>
+        <translation>デフォルトのプロファイルは削除できません</translation>
+    </message>
+    <message>
+        <source>Close the windows of this profile first</source>
+        <translation>先にこのプロファイルのウィンドウを閉じてください</translation>
+    </message>
+    <message>
+        <source>Delete…</source>
+        <translation>削除…</translation>
+    </message>
+    <message>
+        <source>Edit %1</source>
+        <translation>%1 を編集</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>編集</translation>
+    </message>
+    <message>
+        <source>Delete %1</source>
+        <translation>%1 を削除</translation>
+    </message>
+</context>
+<context>
+    <name>ManageProfilesWindow</name>
+    <message>
+        <source>Manage Profiles</source>
+        <translation>プロファイルを管理</translation>
+    </message>
+    <message>
+        <source>Ask Every Time</source>
+        <translation>毎回確認する</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>新しいプロファイル…</translation>
+    </message>
+    <message>
+        <source>At startup:</source>
+        <translation>起動時:</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2014,6 +2075,124 @@
     <message>
         <source>Port:</source>
         <translation>ポート:</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileButton</name>
+    <message>
+        <source>Profile: %1</source>
+        <translation>プロファイル: %1</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileChooserWindow</name>
+    <message>
+        <source>Choose a Profile</source>
+        <translation>プロファイルを選択</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>終了</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileDialog</name>
+    <message>
+        <source>New Profile</source>
+        <translation>新しいプロファイル</translation>
+    </message>
+    <message>
+        <source>Edit Profile</source>
+        <translation>プロファイルを編集</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>名前:</translation>
+    </message>
+    <message>
+        <source>Icon:</source>
+        <translation>アイコン:</translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation>作成</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileIconPicker</name>
+    <message>
+        <source>Person</source>
+        <translation>人</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>ホーム</translation>
+    </message>
+    <message>
+        <source>Work</source>
+        <translation>仕事</translation>
+    </message>
+    <message>
+        <source>World</source>
+        <translation>世界</translation>
+    </message>
+    <message>
+        <source>Star</source>
+        <translation>星</translation>
+    </message>
+    <message>
+        <source>Games</source>
+        <translation>ゲーム</translation>
+    </message>
+    <message>
+        <source>Development</source>
+        <translation>開発</translation>
+    </message>
+    <message>
+        <source>Flag</source>
+        <translation>旗</translation>
+    </message>
+</context>
+<context>
+    <name>ProfileRegistry</name>
+    <message>
+        <source>Enter a name.</source>
+        <translation>名前を入力してください。</translation>
+    </message>
+    <message>
+        <source>The name is too long.</source>
+        <translation>名前が長すぎます。</translation>
+    </message>
+    <message>
+        <source>A profile with this name already exists.</source>
+        <translation>この名前のプロファイルはすでに存在します。</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>デフォルト</translation>
+    </message>
+</context>
+<context>
+    <name>ProfilesMenu</name>
+    <message>
+        <source>Profiles</source>
+        <translation>プロファイル</translation>
+    </message>
+    <message>
+        <source>New Profile…</source>
+        <translation>新しいプロファイル…</translation>
+    </message>
+    <message>
+        <source>Manage Profiles…</source>
+        <translation>プロファイルを管理…</translation>
     </message>
 </context>
 <context>

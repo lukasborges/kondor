@@ -26,7 +26,7 @@ KEPT_COMPONENTS: list[QQmlComponent] = []
 
 def expected_top_level_rows() -> list[str]:
     return [
-        *["New Tab", "New Private Tab", "New Window", "New Private Window", "-"],
+        *["New Tab", "New Private Tab", "New Window", "New Private Window", "Profiles", "-"],
         *["Bookmarks", "History", "-", "Find in Page…", "Print…", "Save Page As…", "-"],
         *["[row]", "-", "More Tools", "-", "Configure Kondor Browser…", "Help"],
     ]

@@ -160,6 +160,10 @@ ToolBar {
             browserWindow: root.browserWindow
         }
 
+        ProfileButton {
+            browserWindow: root.browserWindow
+        }
+
         ToolButton {
             display: AbstractButton.IconOnly
             icon.name: "application-menu"

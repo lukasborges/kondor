@@ -44,9 +44,32 @@ Item {
         bookmarksWindow.showWindow()
     }
 
+    function openNewProfile() {
+        newProfileDialog.openForNew()
+    }
+
+    function openManageProfiles() {
+        if (!UserProfiles.manageWindow)
+            UserProfiles.manageWindow = manageProfilesComponent.createObject(browserWindow)
+        UserProfiles.manageWindow.showWindow()
+    }
+
     function openSitePermissions() {
         sitePermissionsWindow = createOnce(sitePermissionsWindow, sitePermissionsComponent)
         sitePermissionsWindow.showWindow()
+    }
+
+    ProfileDialog {
+        id: newProfileDialog
+        onProfileSaved: function(profileId, isNew) {
+            if (isNew)
+                UserProfiles.openWindow(profileId)
+        }
+    }
+
+    Component {
+        id: manageProfilesComponent
+        ManageProfilesWindow {}
     }
 
     Component {

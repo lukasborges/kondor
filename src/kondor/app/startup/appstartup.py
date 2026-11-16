@@ -75,8 +75,8 @@ def forwards_to_running_instance(
 def start_browser(app: QApplication, command_line: CommandLine) -> None:
     discard_position_cache()
     publish_startup_arguments(command_line)
-    register_all_types()
     set_up_language_and_style(app)
+    register_all_types()
     AdBlockManager.instance().start()
     register_profiles_with_extensions()
     load_unpacked_extensions(app, command_line.extension_directories)

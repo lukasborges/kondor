@@ -24,6 +24,7 @@ APPLICATION_ID = "Kondor"
 NO_WINDOW = 0
 HANDLES_SESSION = True
 SUCCESS = 0
+PROBE_METHOD = "networkWallet()"
 SIGNAL_SLOTS = (
     ("walletAsyncOpened", "_on_async_opened(int,int)"),
     ("walletClosedId", "_on_wallet_closed(int)"),
@@ -54,6 +55,11 @@ def open_arguments(wallet: str) -> list[QGenericArgumentHolder]:
         application_argument(),
         Q_ARG(bool, HANDLES_SESSION),
     ]
+
+
+def can_call_wallet(interface: QDBusInterface) -> bool:
+    has_method = interface.metaObject().indexOfMethod(PROBE_METHOD) >= 0
+    return bool(interface.isValid() and has_method)
 
 
 class KWalletService(QObject):
@@ -123,7 +129,7 @@ class KWalletService(QObject):
         return None if interface.lastError().isValid() else value
 
     def _kwallet(self) -> QDBusInterface:
-        if self._interface is None or not self._interface.isValid():
+        if self._interface is None or not can_call_wallet(self._interface):
             self._interface = QDBusInterface(SERVICE, PATH, INTERFACE, QDBusConnection.sessionBus())
         return self._interface
 

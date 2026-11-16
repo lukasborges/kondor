@@ -40,6 +40,7 @@ class Tab(TabViewState):
         self._is_private = profile is not None and profile.isOffTheRecord()
         self._url = QUrl()
         self._new_tab_page = True
+        self._pending_request: QObject | None = None
         self._create_feature_groups(profile)
 
     def _create_feature_groups(self, profile: QQuickWebEngineProfile | None) -> None:
@@ -63,6 +64,12 @@ class Tab(TabViewState):
     sleep = Property(TabSleep, lambda self: self._sleep, constant=True)
     extensionItems = Property(TabExtensionItems, lambda self: self._extension_items, constant=True)
 
+    pendingRequest = Property(QObject, lambda self: self._pending_request, constant=False)
+
+    @Slot()
+    def clearPendingRequest(self) -> None:
+        self._pending_request = None
+
     @Slot(QUrl)
     def setUrl(self, url: QUrl) -> None:
         self._leave_previous_page_for(url)
@@ -78,6 +85,12 @@ class Tab(TabViewState):
             self._set_new_tab_page(False)
         if not is_same_origin(self._url, url):
             self._permissions.deny_all()
+
+    def adopt_request(self, request: QObject | None) -> None:
+        if request is None:
+            return
+        self._pending_request = request
+        self._set_new_tab_page(False)
 
     @Slot(bool)
     def setLoading(self, loading: bool) -> None:

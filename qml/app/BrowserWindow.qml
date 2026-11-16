@@ -16,6 +16,8 @@ ApplicationWindow {
     property var initialUrls: []
     property var initialTitles: []
     property int initialCurrentIndex: -1
+    property var initialProfile: null
+    property var initialRequest: null
 
     readonly property alias tabModel: tabs
     readonly property bool tabsBelowAddressBar: Settings.tabStyle === "below"

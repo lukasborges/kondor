@@ -126,9 +126,15 @@ Item {
         selectInitialTab()
     }
 
+    function openRequestedTab() {
+        tabs.addTabForRequest(browserWindow.initialProfile, browserWindow.initialRequest, false)
+    }
+
     function openInitialTabs() {
         SessionManager.watch(tabs)
-        if (browserWindow.initialUrls.length > 0)
+        if (browserWindow.initialRequest)
+            openRequestedTab()
+        else if (browserWindow.initialUrls.length > 0)
             restoreTabs()
         else
             tabs.addTab(browserWindow.privateWindow, homeUrl())

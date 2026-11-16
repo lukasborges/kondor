@@ -4,6 +4,7 @@ import shiboken6
 from PySide6.QtCore import Property, QObject, QUrl, Signal, Slot, qWarning
 from PySide6.QtQml import QQmlComponent, QQmlEngine
 from PySide6.QtQuick import QQuickWindow
+from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
 from kondor.app.instance.singleinstancemessage import SingleInstanceMessage
 from kondor.app.windows import windowlaunch
@@ -55,6 +56,13 @@ class WindowManager(QObject):
         self, private_window: bool = False, urls: list[object] | None = None
     ) -> QObject | None:
         return self.create_window(WindowContents(private_window, urls_from_script(urls)))
+
+    @Slot(QQuickWebEngineProfile, QObject, result=QObject)
+    def newWindowForRequest(
+        self, profile: QQuickWebEngineProfile, request: QObject
+    ) -> QObject | None:
+        private_window = profile.isOffTheRecord()
+        return self.create_window(WindowContents(private_window, profile=profile, request=request))
 
     @Slot(QObject)
     def closeWindow(self, window: QObject | None) -> None:

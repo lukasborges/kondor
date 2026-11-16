@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 
-from PySide6.QtCore import QUrl
+from PySide6.QtCore import QObject, QUrl
+from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
 
 @dataclass
@@ -9,6 +10,8 @@ class WindowContents:
     urls: list[QUrl] = field(default_factory=list)
     titles: list[str] = field(default_factory=list)
     current_index: int = -1
+    profile: QQuickWebEngineProfile | None = None
+    request: QObject | None = None
 
 
 def initial_properties(contents: WindowContents) -> dict[str, object]:
@@ -17,4 +20,6 @@ def initial_properties(contents: WindowContents) -> dict[str, object]:
         "initialUrls": contents.urls,
         "initialTitles": contents.titles,
         "initialCurrentIndex": contents.current_index,
+        "initialProfile": contents.profile,
+        "initialRequest": contents.request,
     }

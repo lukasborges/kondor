@@ -2937,6 +2937,14 @@
         <translation>固定标签页</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>取消标签页静音</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>将标签页静音</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>让标签页进入休眠</translation>
     </message>
@@ -2964,8 +2972,27 @@
         <translation>新建标签页</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>已静音</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>正在播放声音</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>休眠中</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>取消标签页静音</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>将标签页静音</translation>
     </message>
 </context>
 <context>

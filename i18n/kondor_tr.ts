@@ -2937,6 +2937,14 @@
         <translation>Sekmeyi sabitle</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>Sekmenin Sesini Aç</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Sekmeyi Sessize Al</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Sekmeyi uyut</translation>
     </message>
@@ -2964,8 +2972,27 @@
         <translation>Yeni sekme</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>sessiz</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>ses çalıyor</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>Uyuyor</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>Sekmenin Sesini Aç</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Sekmeyi Sessize Al</translation>
     </message>
 </context>
 <context>

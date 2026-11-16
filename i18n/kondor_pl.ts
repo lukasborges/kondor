@@ -2963,6 +2963,14 @@
         <translation>Przypnij kartę</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>Wyłącz wyciszenie karty</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Wycisz kartę</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Uśpij kartę</translation>
     </message>
@@ -2990,8 +2998,27 @@
         <translation>Nowa karta</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>wyciszona</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>odtwarza dźwięk</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>Uśpiona</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>Wyłącz wyciszenie karty</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Wycisz kartę</translation>
     </message>
 </context>
 <context>

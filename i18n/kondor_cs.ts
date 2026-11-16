@@ -2963,6 +2963,14 @@
         <translation>Připnout kartu</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>Zrušit ztlumení karty</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Ztlumit kartu</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Uspat kartu</translation>
     </message>
@@ -2990,8 +2998,27 @@
         <translation>Nová karta</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>ztlumeno</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>přehrává zvuk</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>Uspaná</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>Zrušit ztlumení karty</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Ztlumit kartu</translation>
     </message>
 </context>
 <context>

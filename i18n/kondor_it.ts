@@ -2950,6 +2950,14 @@
         <translation>Blocca scheda</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>Riattiva audio scheda</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Disattiva audio scheda</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Sospendi scheda</translation>
     </message>
@@ -2977,8 +2985,27 @@
         <translation>Nuova scheda</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>audio disattivato</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>riproduce audio</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>Sospesa</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>Riattiva audio scheda</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Disattiva audio scheda</translation>
     </message>
 </context>
 <context>

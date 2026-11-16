@@ -2950,6 +2950,14 @@
         <translation>Fixar aba</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>Reativar som da aba</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Silenciar aba</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Suspender aba</translation>
     </message>
@@ -2977,8 +2985,27 @@
         <translation>Nova aba</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>silenciada</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>reproduzindo som</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>Suspensa</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>Reativar som da aba</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Silenciar aba</translation>
     </message>
 </context>
 <context>

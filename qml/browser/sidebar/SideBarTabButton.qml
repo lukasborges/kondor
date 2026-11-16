@@ -15,7 +15,7 @@ ToolButton {
     checkable: true
     checked: isCurrent
     focusPolicy: Qt.NoFocus
-    Accessible.name: info.title
+    Accessible.name: info.iconOnlyName
     Accessible.description: info.stateDescription
     ToolTip.visible: hovered
     ToolTip.text: info.title
@@ -28,7 +28,7 @@ ToolButton {
         tab: button.tab
     }
 
-    contentItem: TabIcon { tab: button.tab }
+    contentItem: TabIcon { tab: button.tab; showsEmblem: true }
 
     TapHandler {
         acceptedButtons: Qt.MiddleButton

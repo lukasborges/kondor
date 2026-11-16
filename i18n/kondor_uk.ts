@@ -2963,6 +2963,14 @@
         <translation>Закріпити вкладку</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>Увімкнути звук вкладки</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Вимкнути звук вкладки</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Перевести вкладку в сплячий режим</translation>
     </message>
@@ -2990,8 +2998,27 @@
         <translation>Нова вкладка</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>звук вимкнено</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>відтворює звук</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>Спить</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>Увімкнути звук вкладки</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Вимкнути звук вкладки</translation>
     </message>
 </context>
 <context>

@@ -2937,6 +2937,14 @@
         <translation>タブをピン留め</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>タブのミュートを解除</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>タブをミュート</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>タブをスリープさせる</translation>
     </message>
@@ -2964,8 +2972,27 @@
         <translation>新しいタブ</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>ミュート中</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>音声を再生中</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>スリープ中</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>タブのミュートを解除</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>タブをミュート</translation>
     </message>
 </context>
 <context>

@@ -2950,6 +2950,14 @@
         <translation>Anclar pestaña</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>Dejar de silenciar pestaña</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Silenciar pestaña</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Suspender pestaña</translation>
     </message>
@@ -2977,8 +2985,27 @@
         <translation>Nueva pestaña</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>silenciada</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>reproduciendo sonido</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>Suspendida</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>Dejar de silenciar pestaña</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Silenciar pestaña</translation>
     </message>
 </context>
 <context>

@@ -2950,6 +2950,14 @@
         <translation>Fixar separador</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>Reativar som do separador</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Silenciar separador</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Suspender separador</translation>
     </message>
@@ -2977,8 +2985,27 @@
         <translation>Novo separador</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>silenciado</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>a reproduzir som</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>Suspenso</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>Reativar som do separador</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Silenciar separador</translation>
     </message>
 </context>
 <context>

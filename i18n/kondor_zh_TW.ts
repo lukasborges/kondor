@@ -2937,6 +2937,14 @@
         <translation>釘選分頁</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>取消分頁靜音</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>將分頁靜音</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>讓分頁進入休眠</translation>
     </message>
@@ -2964,8 +2972,27 @@
         <translation>新增分頁</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>已靜音</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>正在播放聲音</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>休眠中</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>取消分頁靜音</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>將分頁靜音</translation>
     </message>
 </context>
 <context>

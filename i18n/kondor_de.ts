@@ -2950,6 +2950,14 @@
         <translation>Tab anheften</translation>
     </message>
     <message>
+        <source>Unmute Tab</source>
+        <translation>Tab-Stummschaltung aufheben</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Tab stummschalten</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Tab in den Ruhezustand versetzen</translation>
     </message>
@@ -2977,8 +2985,27 @@
         <translation>Neuer Tab</translation>
     </message>
     <message>
+        <source>muted</source>
+        <translation>stummgeschaltet</translation>
+    </message>
+    <message>
+        <source>playing sound</source>
+        <translation>spielt Ton ab</translation>
+    </message>
+    <message>
         <source>Sleeping</source>
         <translation>Im Ruhezustand</translation>
+    </message>
+</context>
+<context>
+    <name>TabSoundButton</name>
+    <message>
+        <source>Unmute Tab</source>
+        <translation>Tab-Stummschaltung aufheben</translation>
+    </message>
+    <message>
+        <source>Mute Tab</source>
+        <translation>Tab stummschalten</translation>
     </message>
 </context>
 <context>

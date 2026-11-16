@@ -54,6 +54,13 @@ Menu {
         onTriggered: menu.tabModel.setPinned(menu.tabIndex, !menu.tab.pinned)
     }
     MenuItem {
+        objectName: "muteTabItem"
+        text: menu.tab && menu.tab.audio.isMuted ? qsTr("Unmute Tab") : qsTr("Mute Tab")
+        icon.name: menu.tab && menu.tab.audio.isMuted ? "audio-volume-high" : "audio-volume-muted"
+        enabled: menu.tab !== null
+        onTriggered: menu.tab.audio.toggleMuted()
+    }
+    MenuItem {
         objectName: "putToSleepItem"
         text: qsTr("Put Tab to Sleep")
         icon.name: "system-suspend"

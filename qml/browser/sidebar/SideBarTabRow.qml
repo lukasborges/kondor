@@ -48,6 +48,12 @@ ItemDelegate {
             Layout.alignment: Qt.AlignHCenter
         }
 
+        TabSoundButton {
+            visible: info.hasSoundState
+            tab: row.tab
+            iconColor: row.textColor
+        }
+
         Label {
             Layout.fillWidth: true
             text: info.title

@@ -36,6 +36,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 - **Tidy tabs**: drag, pin, and scroll when there are many
 - **Tab styles**: pick floating, below the address bar, side bar, or classic tabs
 - **Collapsible side bar**: shrink the side bar to tab icons and expand it again
+- **Mute tabs**: see which tab plays sound and silence it with a click or Ctrl+M
 - **Sleeping tabs**: idle tabs free their memory and reload when selected
 - **Reopen closed tabs** with Ctrl+Shift+T
 - **Multiple windows**, with your session restored on startup
@@ -102,6 +103,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 | `Ctrl+Shift+O` | Manage bookmarks |
 | `Ctrl+,` / `Ctrl+Shift+,` | Configure Kondor Browser (settings) |
 | `Ctrl+L` | Focus the address bar |
+| `Ctrl+M` | Mute or unmute the current tab |
 | `Ctrl+F` | Find in page |
 | `Ctrl+P` | Print (opens a PDF in the viewer) |
 | `Ctrl+S` | Save page as… |

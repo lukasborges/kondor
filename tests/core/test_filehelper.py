@@ -1,3 +1,7 @@
+from pathlib import Path
+
+from PySide6.QtCore import QCoreApplication
+
 from kondor.core.filehelper import FileHelper
 
 
@@ -21,3 +25,11 @@ def test_reader_resource_reads_allowed_names_only(staged_resources: None) -> Non
     helper = FileHelper.instance()
     assert helper.readerResource("Readability.js") != ""
     assert helper.readerResource("../LICENSE") == ""
+
+
+def test_removes_temp_folder_with_printed_pdf_when_quitting(qapp: QCoreApplication) -> None:
+    helper = FileHelper()
+    pdf = Path(helper.tempPdfPath())
+    pdf.write_bytes(b"%PDF")
+    qapp.aboutToQuit.emit()
+    assert not pdf.parent.exists()

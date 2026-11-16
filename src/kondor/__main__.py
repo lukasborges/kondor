@@ -1,4 +1,3 @@
-import signal
 import sys
 
 from PySide6.QtQml import QQmlApplicationEngine
@@ -15,6 +14,7 @@ from kondor.app.startup.appstartup import (
     start_browser,
 )
 from kondor.app.startup.environment import prepare_environment
+from kondor.app.startup.interrupt import quit_on_interrupt
 from kondor.app.startup.messagehandler import install_message_handler
 from kondor.app.startup.stagedbuild import load_staged_resources, staged_build_directory
 
@@ -29,8 +29,8 @@ def run_browser(app: QApplication, single_instance: SingleInstance) -> int:
 
 def start_application() -> QApplication | None:
     prepare_environment()
-    signal.signal(signal.SIGINT, signal.SIG_DFL)
     app = QApplication(sys.argv)
+    quit_on_interrupt(app)
     if not load_staged_resources(staged_build_directory()):
         return None
     set_up_identity()

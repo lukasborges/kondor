@@ -14,6 +14,7 @@ AUTO_SCROLL_START_MS = 2000
 AUTO_SCROLL_END_MS = 10000
 AUTO_SCROLLED_PIXELS = 50
 PINNED_SCROLL_LIMIT = 80
+PINNED_TABS = 2
 
 
 def scroll_thirty_tabs_to_the_end(strip: TabStripHarness, qtbot: QtBot) -> None:
@@ -25,22 +26,28 @@ def scroll_thirty_tabs_to_the_end(strip: TabStripHarness, qtbot: QtBot) -> None:
     qtbot.waitUntil(lambda: strip.scrolled() == max_scroll)
 
 
-def press_second_of_thirty_and_reach_the_right_edge(
-    strip: TabStripHarness, qtbot: QtBot, pinned: int = 0
-) -> DragSession:
+def start_with_thirty_tabs_at_the_start(strip: TabStripHarness, qtbot: QtBot) -> None:
+    open_thirty_tabs(strip)
+    strip.scroll_to(0.0)
+    qtbot.waitUntil(lambda: strip.scrolled() == 0.0)
+
+
+def start_with_thirty_tabs_two_pinned(strip: TabStripHarness, qtbot: QtBot) -> None:
+    open_thirty_tabs(strip)
+    for index in range(PINNED_TABS):
+        strip.tabs.setPinned(index, True)
+    strip.tabs.setCurrentIndex(PINNED_TABS)
+    qtbot.waitUntil(lambda: strip.scrolled() <= PINNED_SCROLL_LIMIT)
+
+
+def open_thirty_tabs(strip: TabStripHarness) -> None:
     strip.window.resize(STRIP_WIDTH, WINDOW_HEIGHT)
     strip.resize(STRIP_WIDTH)
     strip.add_tabs(THIRTY_TABS)
-    for index in range(pinned):
-        strip.tabs.setPinned(index, True)
-    QTest.qWait(100)
-    if pinned:
-        strip.tabs.setCurrentIndex(pinned)
-        qtbot.waitUntil(lambda: strip.scrolled() <= PINNED_SCROLL_LIMIT)
-    else:
-        strip.scroll_to(0.0)
-        qtbot.waitUntil(lambda: strip.scrolled() == 0.0)
-    session = strip.press_on_tab(pinned, 30)
+
+
+def drag_tab_to_the_right_edge(strip: TabStripHarness, index: int) -> DragSession:
+    session = strip.press_on_tab(index, 30)
     view_width = int(strip.view_property("width"))
     for x in range(session.press.x(), view_width - 10, 20):
         strip.move_mouse(QPoint(x, STRIP_ROW_Y))
@@ -72,7 +79,8 @@ def test_dragging_in_a_scrolled_strip_goes_the_right_way(
 
 
 def test_dragging_to_the_edge_auto_scrolls(strip: TabStripHarness, qtbot: QtBot) -> None:
-    session = press_second_of_thirty_and_reach_the_right_edge(strip, qtbot)
+    start_with_thirty_tabs_at_the_start(strip, qtbot)
+    session = drag_tab_to_the_right_edge(strip, 0)
     wait_for_auto_scroll_to_the_end(strip, session, qtbot)
     assert abs(strip.dragged_left(session) - strip.left_of(29)) <= 1.0
     strip.release(QPoint(int(strip.view_property("width")) - 10, STRIP_ROW_Y))
@@ -80,7 +88,8 @@ def test_dragging_to_the_edge_auto_scrolls(strip: TabStripHarness, qtbot: QtBot)
 
 
 def test_leaving_the_edge_zone_stops_the_scrolling(strip: TabStripHarness, qtbot: QtBot) -> None:
-    session = press_second_of_thirty_and_reach_the_right_edge(strip, qtbot)
+    start_with_thirty_tabs_at_the_start(strip, qtbot)
+    session = drag_tab_to_the_right_edge(strip, 0)
     wait_for_auto_scroll_to_the_end(strip, session, qtbot)
     middle = QPoint(int(strip.view_property("width")) // 2, STRIP_ROW_Y)
     strip.move_mouse(middle)
@@ -95,7 +104,8 @@ def test_leaving_the_edge_zone_stops_the_scrolling(strip: TabStripHarness, qtbot
 def test_dragging_to_the_edge_auto_scrolls_with_pinned_tabs(
     strip: TabStripHarness, qtbot: QtBot
 ) -> None:
-    session = press_second_of_thirty_and_reach_the_right_edge(strip, qtbot, pinned=2)
+    start_with_thirty_tabs_two_pinned(strip, qtbot)
+    session = drag_tab_to_the_right_edge(strip, PINNED_TABS)
     wait_for_auto_scroll_to_the_end(strip, session, qtbot)
     assert abs(strip.dragged_left(session) - strip.left_of(29)) <= 1.0
     strip.release(QPoint(int(strip.view_property("width")) - 10, STRIP_ROW_Y))

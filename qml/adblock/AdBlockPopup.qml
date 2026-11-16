@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-Popup {
+ToolbarPopup {
     id: root
 
     property Tab tab: null
@@ -14,8 +14,6 @@ Popup {
 
     width: 340
     padding: Kirigami.Units.largeSpacing
-    modal: false
-    closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
     function refresh() {
         blockedCount = AdBlockManager.blockedCount(host)

@@ -6,13 +6,11 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Kondor
 
-Popup {
+ToolbarPopup {
     id: root
 
     width: 440
     padding: 0
-    modal: false
-    closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
     contentItem: ColumnLayout {
         spacing: 0

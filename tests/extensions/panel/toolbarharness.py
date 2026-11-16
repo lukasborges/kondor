@@ -2,7 +2,7 @@ from functools import reduce
 from itertools import product
 
 from PySide6.QtCore import QCoreApplication, QEvent, QRect, QSize, QUrl
-from PySide6.QtGui import QImage
+from PySide6.QtGui import QColor, QGuiApplication, QIcon, QImage, QPalette
 from PySide6.QtQml import QQmlEngine
 from PySide6.QtQuick import QQuickItem, QQuickWindow
 from PySide6.QtTest import QTest
@@ -133,3 +133,25 @@ def has_red_pixel(button: QQuickItem) -> bool:
     points = product(range(image.width()), range(image.height()))
     colors = (image.pixelColor(x, y) for x, y in points)
     return any(color.red() >= STRONG_RED > color.green() for color in colors)
+
+
+def is_strong_red(color: QColor) -> bool:
+    return color.alpha() > 0 and color.red() >= STRONG_RED > color.green()
+
+
+def pixmap_is_red(icon: QIcon) -> bool:
+    image = icon.pixmap(ICON_BOX, ICON_BOX).toImage()
+    points = product(range(image.width()), range(image.height()))
+    return any(is_strong_red(image.pixelColor(x, y)) for x, y in points)
+
+
+def can_recolor_named_icons() -> bool:
+    original = QGuiApplication.palette()
+    red = QPalette(original)
+    red.setColor(QPalette.ColorRole.WindowText, QColor("#ff0000"))
+    red.setColor(QPalette.ColorRole.Text, QColor("#ff0000"))
+    QGuiApplication.setPalette(red)
+    try:
+        return pixmap_is_red(QIcon.fromTheme("kondor-extensions-symbolic"))
+    finally:
+        QGuiApplication.setPalette(original)

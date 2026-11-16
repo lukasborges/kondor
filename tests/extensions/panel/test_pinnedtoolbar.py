@@ -10,7 +10,12 @@ from kondor.extensions.extensionmanager import ExtensionManager
 from tests.extensions.panel.panelitems import (
     click_center_of,
 )
-from tests.extensions.panel.toolbarharness import SAMPLE, ToolBar, has_red_pixel
+from tests.extensions.panel.toolbarharness import (
+    SAMPLE,
+    ToolBar,
+    can_recolor_named_icons,
+    has_red_pixel,
+)
 
 pytestmark = pytest.mark.no_qt_log
 
@@ -80,6 +85,8 @@ def test_extensions_button_icon_fits_tool_bar_icon_box(toolbar: ToolBar) -> None
 
 
 def test_extensions_button_bundled_icon_follows_text_color(toolbar: ToolBar) -> None:
+    if not can_recolor_named_icons():
+        pytest.skip("platform theme does not recolor named icons (no KIconEngine)")
     toolbar.show()
     button = toolbar.named("extensionsButton")
     toolbar.qtbot.waitUntil(lambda: has_red_pixel(button))

@@ -65,6 +65,7 @@ TabButton {
         isActive: control.checked
         isHovered: control.hovered
         isRaised: control.isRaised
+        underlayColor: control.tabStrip.color
         hasKeyboardFocus: control.visualFocus
     }
 

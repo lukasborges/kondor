@@ -8,6 +8,7 @@ Item {
     property bool isHovered: false
     property bool hasKeyboardFocus: false
     property bool isRaised: false
+    property color underlayColor: "transparent"
 
     readonly property color fillColor: isActive ? Qt.alpha(Kirigami.Theme.highlightColor, 0.2)
         : isHovered ? Qt.alpha(Kirigami.Theme.textColor, 0.05) : "transparent"
@@ -18,7 +19,7 @@ Item {
         anchors.fill: parent
         anchors.margins: 1
         radius: Kirigami.Units.cornerRadius
-        color: Kirigami.Theme.backgroundColor
+        color: card.underlayColor
         visible: card.isRaised
     }
 

@@ -65,11 +65,24 @@ Item {
         return current
     }
 
+    function isLayoutStale() {
+        return Math.abs(view.contentWidth - stripWidth) > 0.5
+    }
+
+    function repairStaleLayout() {
+        if (!isLayoutStale())
+            return
+        const keptScroll = scrolled
+        view.positionViewAtBeginning()
+        view.contentX = view.originX + Math.max(0, Math.min(maxScroll, keptScroll))
+    }
+
     function ensureCurrentVisible() {
         const index = tabStrip.tabModel.currentIndex
         if (!view || index < 0)
             return
         view.forceLayout()
+        repairStaleLayout()
         scrollTo(positionToShowCurrent(tabX(index), tabX(index + 1)))
     }
 

@@ -1,0 +1,51 @@
+name: Upstream watch
+
+# Opens an issue when an upstream bug that Kondor works around gets a fix, so the workaround can go.
+# Add a line to WATCHED as "<Qt Jira key> <Kondor issue>" for each workaround.
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+env:
+  WATCHED: |
+    QTBUG-147154 367
+
+jobs:
+  watch:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check the watched upstream bugs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          check() {
+            local key="$1" issue="$2" json status fixes title
+            json="$(curl -sS --retry 3 --retry-all-errors \
+              "https://qt-project.atlassian.net/rest/api/2/issue/$key?fields=status,fixVersions,summary")"
+            status="$(jq -r '.fields.status.name' <<< "$json")"
+            fixes="$(jq -r '[.fields.fixVersions[].name] | join(", ")' <<< "$json")"
+            echo "$key: status '$status', fix versions '${fixes:-none}'"
+            case "$status" in Closed|Resolved|Done|Fixed) ;; *) [[ -n "$fixes" ]] || return 0 ;; esac
+            title="Upstream fixed $key: review the workaround of #$issue"
+            if [[ -n "$(gh issue list --state all --search "\"$title\" in:title" --json number --jq '.[0].number')" ]]; then
+              echo "already reported"; return 0
+            fi
+            gh issue create --title "$title" --label bug --body "$(cat <<EOF
+          [$key](https://qt-project.atlassian.net/browse/$key) changed upstream: status **$status**, fix versions **${fixes:-none}**.
+
+          Kondor works around it in #$issue. Check which Qt releases carry the fix and when the Flatpak runtime, the AppImage build (Fedora's Qt) and the system Qt move to one of them; then narrow or remove the workaround and its version check.
+
+          Opened by the "Upstream watch" workflow.
+          EOF
+          )"
+          }
+          while read -r key issue; do
+            [[ -n "$key" ]] && check "$key" "$issue"
+          done <<< "$WATCHED"

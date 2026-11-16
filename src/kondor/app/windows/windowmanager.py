@@ -8,6 +8,7 @@ from PySide6.QtQuick import QQuickWindow
 from kondor.app.instance.singleinstancemessage import SingleInstanceMessage
 from kondor.app.windows import windowlaunch
 from kondor.app.windows.windowcontents import WindowContents, initial_properties
+from kondor.app.windows.windowtabs import show_tab_in
 from kondor.browser.profile.profilemanager import ProfileManager
 
 
@@ -38,6 +39,9 @@ class WindowManager(QObject):
 
     def windows(self) -> list[QObject]:
         return [window for window in self._windows if shiboken6.isValid(window)]
+
+    def show_tab(self, tab: QObject, token: bytes = b"") -> bool:
+        return show_tab_in(self.windows(), tab, token)
 
     def window_count(self) -> int:
         return len(self._windows)

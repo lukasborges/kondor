@@ -43,6 +43,19 @@ RESOURCE_GROUPS = (
         "/scripts", "src/kondor/extensions/scripts", ("src/kondor/extensions/scripts/usergm.js",)
     ),
     ResourceGroup(
+        "/scripts",
+        "src/kondor/browser/media",
+        (
+            "src/kondor/browser/media/mediasession.js",
+            "src/kondor/browser/media/mediawatch.js",
+        ),
+    ),
+    ResourceGroup(
+        "/mpris",
+        "src/kondor/app/mpris",
+        ("src/kondor/app/mpris/mprisintrospection.xml",),
+    ),
+    ResourceGroup(
         "/icons",
         "assets/icons/hicolor/scalable/actions",
         ("assets/icons/hicolor/scalable/actions/kondor-extensions-symbolic.svg",),

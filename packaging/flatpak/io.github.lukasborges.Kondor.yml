@@ -19,6 +19,7 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.freedesktop.FileManager1
   - --talk-name=org.kde.kwalletd6
+  - --own-name=org.mpris.MediaPlayer2.kondor.*
   - --env=QTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess
   - --env=PYTHONPATH=/app/lib/python3.13/site-packages
 cleanup-commands:

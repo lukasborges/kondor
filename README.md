@@ -69,6 +69,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 - **Breeze look** that follows your color scheme
 - **KDE settings window**, dialogs and notifications
 - **KRunner search**: find open tabs, bookmarks and history with Alt+Space
+- **Media controls**: play, pause and skip from Plasma, the lock screen and the media keys
 - **Available in 19 languages**
 
 ### For developers

@@ -44,7 +44,11 @@ ToolBar {
             tabs.currentTab.navigateTo(ProfileManager.resolveAddress(""))
     }
 
-    Kirigami.Theme.colorSet: Kirigami.Theme.Window
+    readonly property bool isFirstBarUnderTitleBar:
+        root.browserWindow.tabsBelowAddressBar || root.browserWindow.tabsInSideBar
+
+    Kirigami.Theme.colorSet: isFirstBarUnderTitleBar ? Kirigami.Theme.Header : Kirigami.Theme.Window
+    Kirigami.Theme.colorGroup: Window.active ? Kirigami.Theme.Active : Kirigami.Theme.Inactive
     Kirigami.Theme.inherit: false
 
     RowLayout {

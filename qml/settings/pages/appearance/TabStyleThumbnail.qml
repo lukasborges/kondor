@@ -54,7 +54,8 @@ Rectangle {
         Rectangle {
             width: parent.width
             height: 12
-            color: windowColors.backgroundColor
+            color: thumbnail.isBelowAddressBar || thumbnail.isSideBar
+                ? headerColors.backgroundColor : windowColors.backgroundColor
 
             Rectangle {
                 x: 18

@@ -8,7 +8,7 @@ from typing import NamedTuple
 from PySide6.QtCore import QUrl
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "src"))
 
 from kondor.adblock.filters.filterengine import FilterEngine, ResourceKind  # noqa: E402
 from kondor.adblock.lists.filterlists import parse_filter_lists  # noqa: E402

@@ -49,8 +49,13 @@ WebEngineView {
             root.reader.detectReader()
     }
 
-    function settleIconOnSuccess(status) {
-        if (status === WebEngineLoadingInfo.LoadSucceededStatus)
+    function hasLoadEnded(status) {
+        return status === WebEngineLoadingInfo.LoadSucceededStatus
+            || status === WebEngineLoadingInfo.LoadFailedStatus
+    }
+
+    function settleIconWhenLoadEnds(status) {
+        if (hasLoadEnded(status))
             root.tab.settleIconUrl(icon)
     }
 
@@ -66,7 +71,7 @@ WebEngineView {
         clearCrashOnStart(status)
         root.reader.updateOnLoad(status)
         updateTab(status)
-        settleIconOnSuccess(status)
+        settleIconWhenLoadEnds(status)
         if (!root.tab.readerActive && status === WebEngineLoadingInfo.LoadSucceededStatus)
             finishNormalLoad()
     }

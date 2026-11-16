@@ -44,3 +44,11 @@ def test_successful_load_with_an_icon_keeps_it(model: TabModel) -> None:
     tab = tab_with_icon(model)
     tab.settleIconUrl(ICON)
     assert tab.iconUrl == ICON
+
+
+def test_failed_load_without_an_icon_clears_the_icon(model: TabModel) -> None:
+    tab = tab_with_icon(model)
+    tab.setUrl(QUrl("http://127.0.0.1:1/"))
+    tab.setIconUrl(QUrl())
+    tab.settleIconUrl(QUrl())
+    assert tab.iconUrl.isEmpty()

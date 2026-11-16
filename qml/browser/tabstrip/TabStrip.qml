@@ -48,6 +48,7 @@ Rectangle {
 
     implicitHeight: tabBar.implicitHeight + 2 * contentMargin
     Kirigami.Theme.colorSet: isBelowAddressBar ? Kirigami.Theme.Window : Kirigami.Theme.Header
+    Kirigami.Theme.colorGroup: Window.active ? Kirigami.Theme.Active : Kirigami.Theme.Inactive
     Kirigami.Theme.inherit: false
     color: Kirigami.Theme.backgroundColor
 

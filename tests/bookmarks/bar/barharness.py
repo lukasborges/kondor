@@ -48,16 +48,25 @@ Item {
         dropTargets.completeLinkDrop({ url: "https://dropped.example/", title: "Dropped" })
     }
 
+    function dropPositionAt(x) {
+        dropTargets.dropAtPosition(dropTargets.itemUnder(x))
+        return controller.dropPosition
+    }
+
     Item { id: previewItem }
     BookmarkFolderTree { id: tree; folders: BookmarkManager.folders }
     BookmarkDragController { id: controller; preview: previewItem; folderTree: tree }
-    Repeater { id: items; model: 0 }
+    Repeater {
+        id: items
+        model: 3
+        Item { required property int index; x: index * 60; width: 50; height: 20 }
+    }
     BookmarksBarDropTargets {
         id: dropTargets
         drag: controller
         folderTree: tree
         items: items
-        visibleCount: 0
+        visibleCount: 3
     }
     BookmarksBarLinkDrop { id: linkDrop; targets: dropTargets }
 }

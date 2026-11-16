@@ -17,7 +17,20 @@ QtObject {
             if (item && x >= item.x && x < item.x + item.width)
                 return { item: item, ratio: root.leadingRatio(item, x) }
         }
+        return root.itemAfterGap(x)
+    }
+
+    function itemAfterGap(x) {
+        for (let i = 0; i < root.visibleCount; ++i) {
+            const item = root.items.itemAt(i)
+            if (item && root.isBeforeGap(item, x))
+                return { item: item, ratio: 0 }
+        }
         return null
+    }
+
+    function isBeforeGap(item, x) {
+        return root.isRightToLeft ? item.x + item.width <= x : item.x >= x
     }
 
     function leadingRatio(item, x) {

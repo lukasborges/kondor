@@ -9,6 +9,7 @@ from PySide6.QtQuickControls2 import QQuickStyle
 from PySide6.QtWebEngineQuick import QtWebEngineQuick
 from PySide6.QtWidgets import QApplication
 
+from kondor.app.startup.appidentity import use_bundled_icons
 from tests.kondortypes import qmltypes_modules
 
 STAGED_BUILD = Path(__file__).resolve().parent.parent / "build" / "python"
@@ -65,6 +66,7 @@ def desktop_style() -> None:
 @pytest.fixture(scope="session")
 def staged_resources(staged_build: Path, desktop_style: None) -> None:
     assert QResource.registerResource(str(staged_build / "kondor.rcc"))
+    use_bundled_icons()
 
 
 def staged_engine(staged_build: Path) -> QQmlEngine:

@@ -9,7 +9,6 @@ from PySide6.QtTest import QTest
 from pytestqt.qtbot import QtBot
 from shiboken6 import isValid
 
-from kondor.app.startup.appidentity import use_bundled_icons
 from kondor.browser.tabs.tabmodel import TabModel
 from kondor.extensions.extensionmanager import ExtensionManager
 from kondor.extensions.package.packagefile import PackageFile
@@ -86,7 +85,6 @@ class ToolBar:
     def show(self) -> None:
         if ExtensionManager.instance().count == 0:
             assert install_sample(self.work)
-        use_bundled_icons()
         self.tabs.addTab(False, QUrl("https://www.example.com/page"))
         self.engine.rootContext().setContextProperty("theTabs", self.tabs)
         self.component = load_component(self.engine, TOOL_BAR_QML)

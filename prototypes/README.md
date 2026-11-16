@@ -75,6 +75,7 @@ Tips when editing:
 | #242 Side bar collapsed | `242-side-bar-collapsed.qml` (`common/TabStyleFrame.qml`, `sideBarCollapsed`) |
 | #256 AI agent control | `256-remote-control-indicator.qml`, `256b-settings-remote-control.qml` (in `common/SettingsDialogMock.qml`, `withRemoteControl`) |
 | #257 Sleeping tabs | `257-sleeping-tabs.qml`, `257b-sleeping-tabs-vertical.qml` (`sleeping` flag in `common/TabStyleFrame.qml`), `257c-settings-sleeping-tabs.qml` (in `common/SettingsDialogMock.qml`, `withPerformance`) |
+| #260 Password generator | `260-password-suggestion.qml`, `260b-password-suggestion-hover.qml`, `260c-password-generate-menu.qml` (`common/SignUpPageMock.qml`, `common/SuggestedPasswordPopupMock.qml`) |
 
 Issues without UI (#10 default browser, #15 single instance, #19 translations, #25 Flatpak,
 #26 tests) have no prototype.

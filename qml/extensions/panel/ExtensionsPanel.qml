@@ -54,6 +54,11 @@ Popup {
             tab.focusPage()
     }
 
+    function closeWhenFocusLeft() {
+        if (opened && !activeFocus)
+            close()
+    }
+
     function closeAndRequest(requestSignal, extensionId) {
         close()
         requestSignal(extensionId)
@@ -65,7 +70,8 @@ Popup {
     padding: Kirigami.Units.largeSpacing
     modal: false
     focus: true
-    closePolicy: Popup.CloseOnPressOutsideParent
+    closePolicy: Popup.CloseOnEscape
+    onActiveFocusChanged: Qt.callLater(closeWhenFocusLeft)
     onTabChanged: close()
     onAboutToShow: {
         rebuild()

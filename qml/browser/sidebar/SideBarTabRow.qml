@@ -26,6 +26,7 @@ ItemDelegate {
     down: false
     focusPolicy: Qt.NoFocus
     Accessible.name: info.title
+    Accessible.description: info.stateDescription
     transform: Translate { y: drag.shift }
     onClicked: {
         tabModel.setCurrentIndex(index)
@@ -50,7 +51,8 @@ ItemDelegate {
         Label {
             Layout.fillWidth: true
             text: info.title
-            color: row.textColor
+            enabled: !info.isSleeping
+            color: enabled ? row.textColor : Kirigami.Theme.disabledTextColor
             elide: Text.ElideRight
         }
 

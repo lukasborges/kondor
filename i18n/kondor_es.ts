@@ -1130,6 +1130,35 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>Memoria:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Suspender las pestañas inactivas</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Suspender después de:</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n minuto</numerusform>
+            <numerusform>%n minutos</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n hora</numerusform>
+            <numerusform>%n horas</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2316,6 +2345,10 @@
         <translation>Apariencia</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>Rendimiento</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>Contraseñas guardadas</translation>
     </message>
@@ -2369,6 +2402,22 @@
     <message>
         <source>Classic</source>
         <translation>Clásico</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>Rendimiento</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>Memoria:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Suspender las pestañas inactivas</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Suspender después de:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2703,6 +2752,10 @@
         <translation>Anclar pestaña</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>Suspender pestaña</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>Cerrar pestaña</translation>
     </message>
@@ -2724,6 +2777,10 @@
     <message>
         <source>New Tab</source>
         <translation>Nueva pestaña</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>Suspendida</translation>
     </message>
 </context>
 <context>

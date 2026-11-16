@@ -18,6 +18,7 @@ from kondor.core.settings.settingsoptions import (
     READER_FONT_SIZE,
     SEARCH_ENGINE,
     STORED_OPTIONS,
+    TAB_SLEEP_MINUTES_OPTION,
     TAB_STYLE,
     StoredOption,
 )
@@ -26,6 +27,8 @@ ORGANIZATION = "KDE"
 APPLICATION = "Kondor"
 TAB_STYLES = ("floating", "below", "vertical", "classic")
 DEFAULT_TAB_STYLE = "floating"
+TAB_SLEEP_MINUTES = (15, 30, 60, 120, 240)
+DEFAULT_TAB_SLEEP_MINUTES = 30
 MIN_READER_FONT_SIZE = 12
 MAX_READER_FONT_SIZE = 32
 
@@ -38,9 +41,15 @@ def known_tab_style(style: Any) -> str:
     return style if style in TAB_STYLES else DEFAULT_TAB_STYLE
 
 
+def known_tab_sleep_minutes(minutes: Any) -> int:
+    return minutes if minutes in TAB_SLEEP_MINUTES else DEFAULT_TAB_SLEEP_MINUTES
+
+
 def normalized(option: StoredOption, value: Any) -> Any:
     if option is TAB_STYLE:
         return known_tab_style(value)
+    if option is TAB_SLEEP_MINUTES_OPTION:
+        return known_tab_sleep_minutes(value)
     if option is READER_FONT_SIZE:
         return clamped_reader_font_size(value)
     return value

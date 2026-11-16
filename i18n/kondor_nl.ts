@@ -1130,6 +1130,35 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>Geheugen:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Inactieve tabbladen in slaapstand zetten</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Slaapstand na:</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n minuut</numerusform>
+            <numerusform>%n minuten</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n uur</numerusform>
+            <numerusform>%n uur</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2316,6 +2345,10 @@
         <translation>Uiterlijk</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>Prestaties</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>Opgeslagen wachtwoorden</translation>
     </message>
@@ -2369,6 +2402,22 @@
     <message>
         <source>Classic</source>
         <translation>Klassiek</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>Prestaties</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>Geheugen:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Inactieve tabbladen in slaapstand zetten</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Slaapstand na:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2703,6 +2752,10 @@
         <translation>Tabblad vastmaken</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>Tabblad in slaapstand zetten</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>Tabblad sluiten</translation>
     </message>
@@ -2724,6 +2777,10 @@
     <message>
         <source>New Tab</source>
         <translation>Nieuw tabblad</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>In slaapstand</translation>
     </message>
 </context>
 <context>

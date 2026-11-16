@@ -11,7 +11,14 @@ Menu {
     property var targetWindow: null
 
     signal newTabRequested()
+
     signal moveToNewWindowRequested()
+
+    function canPutToSleep() {
+        if (!tab || tab.sleep.sleeping || tab.newTabPage || tab.crashed || tab.devToolsOpen)
+            return false
+        return tab !== tabModel.currentTab
+    }
 
     MenuItem {
         text: qsTr("New Tab")
@@ -45,6 +52,13 @@ Menu {
         icon.name: "window-pin"
         enabled: menu.tab !== null
         onTriggered: menu.tabModel.setPinned(menu.tabIndex, !menu.tab.pinned)
+    }
+    MenuItem {
+        objectName: "putToSleepItem"
+        text: qsTr("Put Tab to Sleep")
+        icon.name: "system-suspend"
+        enabled: menu.canPutToSleep()
+        onTriggered: menu.tab.sleep.putToSleep()
     }
     MenuSeparator {}
     MenuItem {

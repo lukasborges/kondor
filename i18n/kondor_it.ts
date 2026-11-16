@@ -1130,6 +1130,35 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>Memoria:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Sospendi le schede inattive</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Sospendi dopo:</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n minuto</numerusform>
+            <numerusform>%n minuti</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n ora</numerusform>
+            <numerusform>%n ore</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2316,6 +2345,10 @@
         <translation>Aspetto</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>Prestazioni</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>Password salvate</translation>
     </message>
@@ -2369,6 +2402,22 @@
     <message>
         <source>Classic</source>
         <translation>Classico</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>Prestazioni</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>Memoria:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Sospendi le schede inattive</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Sospendi dopo:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2703,6 +2752,10 @@
         <translation>Blocca scheda</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>Sospendi scheda</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>Chiudi scheda</translation>
     </message>
@@ -2724,6 +2777,10 @@
     <message>
         <source>New Tab</source>
         <translation>Nuova scheda</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>Sospesa</translation>
     </message>
 </context>
 <context>

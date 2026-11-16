@@ -36,6 +36,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 - **Tidy tabs**: drag, pin, and scroll when there are many
 - **Tab styles**: pick floating, below the address bar, side bar, or classic tabs
 - **Collapsible side bar**: shrink the side bar to tab icons and expand it again
+- **Sleeping tabs**: idle tabs free their memory and reload when selected
 - **Reopen closed tabs** with Ctrl+Shift+T
 - **Multiple windows**, with your session restored on startup
 

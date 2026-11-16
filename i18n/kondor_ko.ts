@@ -1129,6 +1129,33 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>메모리:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>비활성 탭을 절전 상태로 전환</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>절전 전환 시간:</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n분</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n시간</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2305,6 +2332,10 @@
         <translation>모양</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>성능</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>저장된 암호</translation>
     </message>
@@ -2358,6 +2389,22 @@
     <message>
         <source>Classic</source>
         <translation>클래식</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>성능</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>메모리:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>비활성 탭을 절전 상태로 전환</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>절전 전환 시간:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2692,6 +2739,10 @@
         <translation>탭 고정</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>탭을 절전 상태로 전환</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>탭 닫기</translation>
     </message>
@@ -2713,6 +2764,10 @@
     <message>
         <source>New Tab</source>
         <translation>새 탭</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>절전 중</translation>
     </message>
 </context>
 <context>

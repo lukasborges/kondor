@@ -45,6 +45,11 @@ Item {
         webView: pageView
     }
 
+    PageSleep {
+        tab: root.tab
+        webView: pageView
+    }
+
     ReaderStyle {
         id: readerStyle
         tab: root.tab
@@ -92,6 +97,7 @@ Item {
 
         PageView {
             id: pageView
+            objectName: "pageView"
             SplitView.fillHeight: true
             tab: root.tab
             tabModel: root.tabModel

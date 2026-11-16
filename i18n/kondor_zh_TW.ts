@@ -1129,6 +1129,33 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>記憶體：</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>讓閒置的分頁進入休眠</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>休眠時間：</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n 分鐘</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n 小時</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2305,6 +2332,10 @@
         <translation>外觀</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>效能</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>已儲存的密碼</translation>
     </message>
@@ -2358,6 +2389,22 @@
     <message>
         <source>Classic</source>
         <translation>經典</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>效能</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>記憶體：</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>讓閒置的分頁進入休眠</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>休眠時間：</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2692,6 +2739,10 @@
         <translation>釘選分頁</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>讓分頁進入休眠</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>關閉分頁</translation>
     </message>
@@ -2713,6 +2764,10 @@
     <message>
         <source>New Tab</source>
         <translation>新增分頁</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>休眠中</translation>
     </message>
 </context>
 <context>

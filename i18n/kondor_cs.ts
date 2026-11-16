@@ -1131,6 +1131,37 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>Paměť:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Uspávat neaktivní karty</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Uspat po:</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n minuta</numerusform>
+            <numerusform>%n minuty</numerusform>
+            <numerusform>%n minut</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n hodina</numerusform>
+            <numerusform>%n hodiny</numerusform>
+            <numerusform>%n hodin</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2327,6 +2358,10 @@
         <translation>Vzhled</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>Výkon</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>Uložená hesla</translation>
     </message>
@@ -2380,6 +2415,22 @@
     <message>
         <source>Classic</source>
         <translation>Klasický</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>Výkon</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>Paměť:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Uspávat neaktivní karty</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Uspat po:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2714,6 +2765,10 @@
         <translation>Připnout kartu</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>Uspat kartu</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>Zavřít kartu</translation>
     </message>
@@ -2735,6 +2790,10 @@
     <message>
         <source>New Tab</source>
         <translation>Nová karta</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>Uspaná</translation>
     </message>
 </context>
 <context>

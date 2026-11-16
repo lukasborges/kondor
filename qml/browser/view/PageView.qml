@@ -23,6 +23,8 @@ WebEngineView {
     }
 
     function updateTitle() {
+        if (root.tab.sleep.sleeping)
+            return
         root.tab.setTitle(title)
         if (!root.tab.isPrivate && !root.tab.readerActive)
             HistoryManager.updateTitle(url, title)
@@ -114,6 +116,8 @@ WebEngineView {
 
     onTitleChanged: updateTitle()
     onUrlChanged: {
+        if (root.tab.sleep.sleeping)
+            return
         root.tab.setUrl(url)
         root.zoom.followUrl(url)
     }
@@ -122,6 +126,8 @@ WebEngineView {
         root.zoom.saveZoomOfNormalTab(zoomFactor)
     }
     onIconChanged: {
+        if (root.tab.sleep.sleeping)
+            return
         root.tab.setIconUrl(icon)
         storeFavicon()
     }

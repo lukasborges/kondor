@@ -54,6 +54,13 @@ Item {
             WebEngineScript.ApplicationWorld)
     }
 
+    function reload() {
+        if (webView.lifecycleState === WebEngineView.LifecycleState.Active)
+            webView.reload()
+        else
+            webView.lifecycleState = WebEngineView.LifecycleState.Active
+    }
+
     function stepZoom(direction) {
         webView.zoomFactor = ZoomManager.step(webView.zoomFactor, direction)
     }
@@ -65,7 +72,7 @@ Item {
         function onNewTabPageRequested() { root.navigateTo("about:blank") }
         function onBackRequested() { root.goBack() }
         function onForwardRequested() { if (root.webView.canGoForward) root.webView.goForward() }
-        function onReloadRequested() { root.webView.reload() }
+        function onReloadRequested() { root.reload() }
         function onStopRequested() { root.webView.stop() }
         function onZoomInRequested() { root.stepZoom(1) }
         function onZoomOutRequested() { root.stepZoom(-1) }

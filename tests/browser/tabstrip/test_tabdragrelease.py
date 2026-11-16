@@ -14,6 +14,9 @@ CLOSE_VARIANTS = [0, 1, 2, 3]
 LAST_CLICK_VARIANT = 3
 VISIBLE_EDGE = 40
 SCROLL_POSITION = 253.0
+THREE_TABS = 3
+LAST_TAB = 2
+INSET = 60
 
 
 def click_close_button_of(strip: TabStripHarness, index: int) -> None:
@@ -98,3 +101,21 @@ def test_closing_the_dragged_tab_resets_the_drag_state(strip: TabStripHarness) -
     QTest.qWait(300)
     assert strip.strip_property("tabDragActive") is False
     assert strip.tabs.count == FIVE_TABS - 1
+
+
+def test_right_click_on_a_background_tab_keeps_the_current_tab(strip: TabStripHarness) -> None:
+    strip.add_tabs(THREE_TABS)
+    strip.tabs.setCurrentIndex(LAST_TAB)
+    current = strip.tabs.currentTab
+    point = QPoint(int(strip.left_of(0)) + INSET, STRIP_ROW_Y)
+    strip.click(point, Qt.MouseButton.RightButton)
+    QTest.qWait(50)
+    assert strip.tabs.currentTab is current
+
+
+def test_left_click_on_a_background_tab_still_selects_it(strip: TabStripHarness) -> None:
+    strip.add_tabs(THREE_TABS)
+    strip.tabs.setCurrentIndex(LAST_TAB)
+    strip.click(QPoint(int(strip.left_of(0)) + INSET, STRIP_ROW_Y))
+    QTest.qWait(50)
+    assert strip.tabs.currentIndex == 0

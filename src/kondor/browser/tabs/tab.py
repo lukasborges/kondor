@@ -7,6 +7,7 @@ from kondor.browser.tabs.features.tabpasswords import TabPasswords
 from kondor.browser.tabs.features.tabpermissions import TabPermissions
 from kondor.browser.tabs.features.tabsecurity import TabSecurity
 from kondor.browser.tabs.features.tabsitereload import TabSiteReload
+from kondor.browser.tabs.features.tabsleep import TabSleep
 from kondor.browser.tabs.tabviewstate import TabViewState
 
 BLANK_PAGE = QUrl("about:blank")
@@ -46,6 +47,7 @@ class Tab(TabViewState):
         self._passwords = TabPasswords(self._is_private, self)
         self._site_reload = TabSiteReload(self)
         self._extension_items = TabExtensionItems(self)
+        self._sleep = TabSleep(self)
 
     url = Property(QUrl, lambda self: self._url, notify=urlChanged)
     newTabPage = Property(bool, lambda self: self._new_tab_page, notify=newTabPageChanged)
@@ -55,6 +57,7 @@ class Tab(TabViewState):
     permissions = Property(TabPermissions, lambda self: self._permissions, constant=True)
     passwords = Property(TabPasswords, lambda self: self._passwords, constant=True)
     siteReload = Property(TabSiteReload, lambda self: self._site_reload, constant=True)
+    sleep = Property(TabSleep, lambda self: self._sleep, constant=True)
     extensionItems = Property(TabExtensionItems, lambda self: self._extension_items, constant=True)
 
     @Slot(QUrl)

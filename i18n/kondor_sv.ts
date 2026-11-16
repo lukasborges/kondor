@@ -1130,6 +1130,35 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>Minne:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Försätt inaktiva flikar i viloläge</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Viloläge efter:</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n minut</numerusform>
+            <numerusform>%n minuter</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n timme</numerusform>
+            <numerusform>%n timmar</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2316,6 +2345,10 @@
         <translation>Utseende</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>Prestanda</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>Sparade lösenord</translation>
     </message>
@@ -2369,6 +2402,22 @@
     <message>
         <source>Classic</source>
         <translation>Klassisk</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>Prestanda</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>Minne:</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>Försätt inaktiva flikar i viloläge</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>Viloläge efter:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2703,6 +2752,10 @@
         <translation>Fäst flik</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>Försätt fliken i viloläge</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>Stäng flik</translation>
     </message>
@@ -2724,6 +2777,10 @@
     <message>
         <source>New Tab</source>
         <translation>Ny flik</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>I viloläge</translation>
     </message>
 </context>
 <context>

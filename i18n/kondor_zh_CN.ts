@@ -1129,6 +1129,33 @@
     </message>
 </context>
 <context>
+    <name>GeneralPerformanceTab</name>
+    <message>
+        <source>Memory:</source>
+        <translation>内存：</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>让不活动的标签页进入休眠</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>休眠时间：</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n 分钟</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n 小时</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>GeneralSettingsPage</name>
     <message>
         <source>On startup:</source>
@@ -2305,6 +2332,10 @@
         <translation>外观</translation>
     </message>
     <message>
+        <source>Performance</source>
+        <translation>性能</translation>
+    </message>
+    <message>
         <source>Saved Passwords</source>
         <translation>已保存的密码</translation>
     </message>
@@ -2358,6 +2389,22 @@
     <message>
         <source>Classic</source>
         <translation>经典</translation>
+    </message>
+    <message>
+        <source>Performance</source>
+        <translation>性能</translation>
+    </message>
+    <message>
+        <source>Memory:</source>
+        <translation>内存：</translation>
+    </message>
+    <message>
+        <source>Put inactive tabs to sleep</source>
+        <translation>让不活动的标签页进入休眠</translation>
+    </message>
+    <message>
+        <source>Sleep after:</source>
+        <translation>休眠时间：</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2692,6 +2739,10 @@
         <translation>固定标签页</translation>
     </message>
     <message>
+        <source>Put Tab to Sleep</source>
+        <translation>让标签页进入休眠</translation>
+    </message>
+    <message>
         <source>Close Tab</source>
         <translation>关闭标签页</translation>
     </message>
@@ -2713,6 +2764,10 @@
     <message>
         <source>New Tab</source>
         <translation>新建标签页</translation>
+    </message>
+    <message>
+        <source>Sleeping</source>
+        <translation>休眠中</translation>
     </message>
 </context>
 <context>

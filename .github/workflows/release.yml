@@ -180,7 +180,7 @@ jobs:
               ostree remote add --repo=repo --no-gpg-verify published https://lukasborges.github.io/kondor/repo/
               # GitHub Pages answers 429 when releases mirror the repository often: wait and resume.
               for attempt in 1 2 3 4 5; do
-                ostree pull --repo=repo --mirror --network-retries=5 published && break
+                ostree pull --repo=repo --mirror published && break
                 [ "$attempt" = 5 ] && exit 1
                 echo "::warning::Mirroring the published repository failed (attempt $attempt), retrying in $((attempt * 60)) s"
                 sleep $((attempt * 60))

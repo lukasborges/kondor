@@ -1,9 +1,11 @@
+import sys
 from dataclasses import dataclass, field
 
 from PySide6.QtCore import QCommandLineOption, QCommandLineParser, QCoreApplication, QUrl
 
 from kondor.app.commandline.startupurl import startup_urls_for_arguments
 
+PROGRAM_NAME = "kondor"
 EXTENSION_HELP = (
     "Load an unpacked extension (developer option). Repeatable; "
     "not forwarded to a running instance, use with --new-instance"
@@ -64,12 +66,26 @@ def read(parser: QCommandLineParser) -> CommandLine:
     )
 
 
+def help_text(parser: QCommandLineParser) -> str:
+    _, _, options = parser.helpText().partition(" [options]")
+    return f"Usage: {PROGRAM_NAME} [options]{options}"
+
+
+def show_help_and_exit_when_requested(parser: QCommandLineParser, arguments: list[str]) -> None:
+    parser.parse(arguments)
+    if not parser.isSet("help"):
+        return
+    sys.stdout.write(help_text(parser))
+    sys.exit(0)
+
+
 def parse_arguments(arguments: list[str]) -> CommandLine:
     parser = QCommandLineParser()
     describe(parser)
+    show_help_and_exit_when_requested(parser, arguments)
     parser.process(arguments)
     return read(parser)
 
 
 def parse_command_line(app: QCoreApplication) -> CommandLine:
-    return parse_arguments(app.arguments())
+    return parse_arguments([PROGRAM_NAME, *app.arguments()[1:]])

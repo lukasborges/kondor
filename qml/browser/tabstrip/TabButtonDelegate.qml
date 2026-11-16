@@ -18,12 +18,13 @@ TabButton {
     property real slideShift: 0
 
     readonly property bool isStyled: tabStrip.isStyled
+    readonly property bool isRaised: tabDrag.active || tabSlide.isSettling
     readonly property bool showsCloseButton: !isStyled || checked || hovered
 
     width: tab.pinned ? tabStrip.pinnedTabWidth : tabStrip.tabWidth
     text: ""
     Accessible.name: info.title
-    z: tabDrag.active || tabSlide.isSettling ? 10 : 0
+    z: isRaised ? 10 : 0
     transform: [
         Translate { x: control.dragShift },
         Translate { x: control.slideShift }
@@ -63,6 +64,8 @@ TabButton {
         visible: control.isStyled
         isActive: control.checked
         isHovered: control.hovered
+        isRaised: control.isRaised
+        underlayColor: control.tabStrip.color
         hasKeyboardFocus: control.visualFocus
     }
 

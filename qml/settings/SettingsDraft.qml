@@ -36,7 +36,8 @@ QtObject {
 
     readonly property var values: [homePage, searchEngine, customSearchUrl,
         downloadDirectory, askWhereToSave, startupBehavior, showTopSites,
-        tabStyle, tabSleepEnabled, tabSleepMinutes, clearDataOnExit, blockThirdPartyCookies, adBlockEnabled, searchSuggestions,
+        tabStyle, tabSleepEnabled, tabSleepMinutes, clearDataOnExit, blockThirdPartyCookies,
+        adBlockEnabled, searchSuggestions,
         spellCheckEnabled, spellCheckLanguages, offerToSavePasswords, extensionsAutoUpdate,
         remoteControlEnabled, remoteControlPort]
 

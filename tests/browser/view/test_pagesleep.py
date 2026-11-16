@@ -1,13 +1,14 @@
 from collections.abc import Iterator
 
 import pytest
-from PySide6.QtCore import Q_ARG, QMetaObject, QObject, QUrl
+from PySide6.QtCore import Q_ARG, Q_RETURN_ARG, QMetaObject, QObject, QUrl
 from PySide6.QtQml import QQmlComponent, QQmlEngine
 from PySide6.QtQuick import QQuickWindow
 from pytestqt.qtbot import QtBot
 
 from kondor.browser.profile.profilemanager import ProfileManager
 from kondor.browser.tabs.tab import Tab
+from kondor.browser.tabs.tabmodel import TabModel
 from tests.extensions.pageserver import PageServer
 from tests.qmlsupport import error_text, load_component
 
@@ -38,6 +39,35 @@ Item {
         }
     }
     PageSleep { tab: testTab; webView: view }
+}
+"""
+
+
+TAB_QML = """
+import QtQuick
+import Kondor
+
+Item {
+    id: holder
+    width: 400; height: 300
+    function findPageView(item) {
+        if (item.objectName === "pageView")
+            return item
+        for (const child of item.children) {
+            const found = findPageView(child)
+            if (found)
+                return found
+        }
+        return null
+    }
+    function hidePage() { findPageView(holder).visible = false }
+    function lifecycle() { return findPageView(holder).lifecycleState }
+    WebViewTab {
+        anchors.fill: parent
+        tab: testTab
+        tabModel: testModel
+        browserActions: null
+    }
 }
 """
 
@@ -96,6 +126,33 @@ def test_hidden_idle_page_is_discarded(
     tab.sleep.requestIdleSleep()
     qtbot.waitUntil(lambda: scene.lifecycle() == DISCARDED, timeout=LOAD_TIMEOUT)
     assert tab.sleep.sleeping
+
+
+def lifecycle_of(holder: QObject) -> int:
+    result = QMetaObject.invokeMethod(holder, "lifecycle", Q_RETURN_ARG("QVariant"))
+    return int(result)
+
+
+def test_sleeping_keeps_the_title_and_url_of_the_tab(
+    kondor_engine: QQmlEngine, qtbot: QtBot
+) -> None:
+    server = PageServer({"/": FORM_PAGE})
+    model = TabModel()
+    tab = model.addTab()
+    assert tab is not None
+    kondor_engine.rootContext().setContextProperty("testTab", tab)
+    kondor_engine.rootContext().setContextProperty("testModel", model)
+    component = load_component(kondor_engine, TAB_QML)
+    root = component.create()
+    assert root is not None, error_text(component)
+    tab.navigateTo(QUrl(server.url()))
+    qtbot.waitUntil(lambda: tab.title == "form", timeout=LOAD_TIMEOUT)
+    QMetaObject.invokeMethod(root, "hidePage")
+    tab.sleep.putToSleep()
+    qtbot.waitUntil(lambda: lifecycle_of(root) == DISCARDED, timeout=LOAD_TIMEOUT)
+    assert (tab.title, tab.url.toString()) == ("form", server.url())
+    root.deleteLater()
+    model.deleteLater()
 
 
 def test_page_with_an_edited_field_is_not_discarded(

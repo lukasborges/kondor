@@ -97,6 +97,7 @@ Item {
 
         PageView {
             id: pageView
+            objectName: "pageView"
             SplitView.fillHeight: true
             tab: root.tab
             tabModel: root.tabModel

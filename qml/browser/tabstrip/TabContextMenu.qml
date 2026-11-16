@@ -12,12 +12,13 @@ Menu {
 
     signal newTabRequested()
 
+    signal moveToNewWindowRequested()
+
     function canPutToSleep() {
         if (!tab || tab.sleep.sleeping || tab.newTabPage || tab.crashed || tab.devToolsOpen)
             return false
         return tab !== tabModel.currentTab
     }
-    signal moveToNewWindowRequested()
 
     MenuItem {
         text: qsTr("New Tab")
@@ -53,6 +54,7 @@ Menu {
         onTriggered: menu.tabModel.setPinned(menu.tabIndex, !menu.tab.pinned)
     }
     MenuItem {
+        objectName: "putToSleepItem"
         text: qsTr("Put Tab to Sleep")
         icon.name: "system-suspend"
         enabled: menu.canPutToSleep()

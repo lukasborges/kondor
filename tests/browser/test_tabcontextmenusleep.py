@@ -3,6 +3,7 @@ from collections.abc import Iterator
 import pytest
 from PySide6.QtCore import Q_RETURN_ARG, QMetaObject, QObject
 from PySide6.QtQml import QQmlEngine
+from pytestqt.qtbot import QtBot
 
 from kondor.browser.tabs.tab import Tab
 from kondor.browser.tabs.tabmodel import TabModel
@@ -13,7 +14,18 @@ pytestmark = pytest.mark.no_qt_log
 MENU_QML = """
 import QtQuick
 import Kondor
-TabContextMenu { tab: testTab; tabModel: testModel }
+TabContextMenu {
+    id: menu
+    tab: testTab
+    tabModel: testModel
+    function triggerSleepItem() {
+        for (let i = 0; i < menu.count; i++) {
+            const item = menu.itemAt(i)
+            if (item.objectName === "putToSleepItem")
+                item.triggered()
+        }
+    }
+}
 """
 
 
@@ -59,3 +71,17 @@ def test_sleeping_tab_cannot_be_put_to_sleep(model: TabModel, kondor_engine: QQm
     background.setUrl(background.url.fromUserInput("https://a.example"))
     background.sleep.setSleeping(True)
     assert not can_put_to_sleep(kondor_engine, background, model)
+
+
+def test_menu_item_asks_a_background_tab_to_sleep(
+    model: TabModel, kondor_engine: QQmlEngine, qtbot: QtBot
+) -> None:
+    background, _ = two_tabs(model)
+    background.setUrl(background.url.fromUserInput("https://a.example"))
+    kondor_engine.rootContext().setContextProperty("testTab", background)
+    kondor_engine.rootContext().setContextProperty("testModel", model)
+    component = load_component(kondor_engine, MENU_QML)
+    menu = component.create()
+    assert menu is not None, error_text(component)
+    with qtbot.waitSignal(background.sleep.sleepRequested, timeout=1000):
+        QMetaObject.invokeMethod(menu, "triggerSleepItem")

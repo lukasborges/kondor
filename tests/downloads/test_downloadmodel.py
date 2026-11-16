@@ -112,3 +112,12 @@ def test_finished_normal_download_shows_the_reported_size(qapp: object) -> None:
     download.set_bytes(REPORTED_SIZE, REPORTED_SIZE)
     download.set_state(State.DownloadCompleted)
     assert received_bytes_of(model_with(download)) == REPORTED_SIZE
+
+
+def test_state_change_refreshes_the_received_bytes(qapp: object) -> None:
+    download = in_progress(3, 3)
+    model = model_with(download)
+    changed_roles: list[list[int]] = []
+    model.dataChanged.connect(lambda _top, _bottom, roles: changed_roles.append(list(roles)))
+    download.set_state(State.DownloadCompleted)
+    assert any(Role.ReceivedBytesRole in roles for roles in changed_roles)

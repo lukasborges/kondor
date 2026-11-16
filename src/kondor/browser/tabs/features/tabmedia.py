@@ -45,6 +45,7 @@ class TabMedia(QObject):
         if state.was_seeked:
             self.seeked.emit()
 
+    @Slot()
     def clear(self) -> None:
         self.apply(MediaState())
 

@@ -141,3 +141,18 @@ def test_toggle_pauses_when_playing_and_plays_when_paused(media: TabMedia) -> No
     media.togglePlayback()
 
     assert actions == ["pause", "play"]
+
+
+def test_clear_is_a_slot_callable_from_qml(media: TabMedia) -> None:
+    meta = media.metaObject()
+    signatures = [meta.method(i).methodSignature().data() for i in range(meta.methodCount())]
+
+    assert b"clear()" in signatures
+
+
+def test_clear_resets_media_state(media: TabMedia) -> None:
+    media.apply(PLAYING)
+
+    media.clear()
+
+    assert not media.hasMedia

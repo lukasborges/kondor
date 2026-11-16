@@ -86,6 +86,13 @@ Item {
         easing.type: Easing.OutCubic
     }
 
+    Binding {
+        target: scroller.view
+        property: "cacheBuffer"
+        value: scroller.stripWidth
+        when: scroller.view !== null && scroller.stripWidth > 0
+    }
+
     Connections {
         target: scroller.view
         function onContentWidthChanged() { scroller.scheduleEnsureVisible() }

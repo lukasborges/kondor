@@ -68,6 +68,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 ### Made for KDE
 - **Breeze look** that follows your color scheme
 - **KDE settings window**, dialogs and notifications
+- **KRunner search**: find open tabs, bookmarks and history with Alt+Space
 - **Available in 19 languages**
 
 ### For developers
@@ -174,12 +175,13 @@ connect.
 ## Requirements
 
 - Python 3.13+ and PySide6 6.8+ (**including Qt WebEngine**)
+- **`jeepney`** (pure Python D-Bus library, used to answer KRunner)
 - The **`org.kde.desktop`** (QQC2 Desktop Style) and **Kirigami** packages available at runtime
 
 On **Fedora** (the original development environment):
 
 ```bash
-sudo dnf install python3 python3-pyside6 pyside6-tools kf6-kirigami kf6-qqc2-desktop-style \
+sudo dnf install python3 python3-pyside6 python3-jeepney pyside6-tools kf6-kirigami kf6-qqc2-desktop-style \
     qt6-qtwebengine hunspell-en-US hunspell-pt-BR
 sudo dnf install python3-pytest python3-pytest-qt python3-mypy ruff dbus-daemon   # development tools
 ```

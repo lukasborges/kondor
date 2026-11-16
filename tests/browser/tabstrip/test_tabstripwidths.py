@@ -1,9 +1,11 @@
 import math
 
 import pytest
+from PySide6.QtTest import QTest
 from pytestqt.qtbot import QtBot
 
-from tests.browser.tabstrip.tabstripharness import TabStripHarness
+from tests.browser.tabstrip.tabstripharness import SETTLE_MS, TabStripHarness
+from tests.qmlsupport import captured_messages
 
 pytestmark = pytest.mark.no_qt_log
 
@@ -123,3 +125,13 @@ def test_first_tab_stays_clear_of_the_left_button(strip: TabStripHarness, qtbot:
     assert strip.call("isInsideTabBar", 0)
     assert not strip.call("overlapsButton", 0, "scrollLeftButton")
     assert is_enabled(strip, "scrollRightButton")
+
+
+@pytest.mark.parametrize("style", ["floating", "below", "classic"])
+def test_pinned_and_normal_tabs_print_no_qml_errors(strip: TabStripHarness, style: str) -> None:
+    with captured_messages() as messages:
+        strip.strip.setProperty("tabStyle", style)
+        strip.add_tabs(2)
+        strip.tabs.setPinned(0, True)
+        QTest.qWait(SETTLE_MS)
+    assert messages == []

@@ -23,11 +23,12 @@ def test_manage_request_does_not_raise_the_browser_window(
 ) -> None:
     raised: list[QObject] = []
     monkeypatch.setattr(windowlaunch, "raise_window", lambda window, token: raised.append(window))
-    manager.create_window(WindowContents())
+    window = manager.create_window(WindowContents())
 
     manager.show_extensions_settings()
 
     assert raised == []
+    assert window.property("openedPages").toVariant() == ["extensions"]
 
 
 def test_extension_package_does_not_raise_the_browser_window(
@@ -36,10 +37,11 @@ def test_extension_package_does_not_raise_the_browser_window(
     raised: list[QObject] = []
     monkeypatch.setattr(windowlaunch, "raise_window", lambda window, token: raised.append(window))
     monkeypatch.setattr(ExtensionManager.instance(), "inspectFile", lambda path: None)
-    manager.create_window(WindowContents())
+    window = manager.create_window(WindowContents())
 
     manager.handle_single_instance_message(
         SingleInstanceMessage(urls=[QUrl.fromLocalFile("/tmp/a.kondorext")])
     )
 
     assert raised == []
+    assert window.property("openedPages").toVariant() == ["extensions"]

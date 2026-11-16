@@ -45,7 +45,12 @@ def is_private_request_refused(message: SingleInstanceMessage) -> bool:
 
 def handle_single_instance_message(manager: WindowManager, message: SingleInstanceMessage) -> None:
     if is_private_request_refused(message):
-        return refuse_private_request(manager, message)
+        refuse_private_request(manager, message)
+        return
+    open_requested_urls(manager, message)
+
+
+def open_requested_urls(manager: WindowManager, message: SingleInstanceMessage) -> None:
     urls = list(message.urls)
     packages = take_extension_packages(urls)
     export_activation_token(message.activation_token)

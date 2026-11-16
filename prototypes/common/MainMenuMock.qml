@@ -1,5 +1,6 @@
 // Main (hamburger) menu reorganized in #93: 13 rows grouped by intent.
-// `openSubmenu`: "" (none), "history", "tools" or "help" shows that submenu next to it.
+// `openSubmenu`: "" (none), "history", "tools", "help" or "profiles" shows that submenu next to it.
+// `withProfiles` adds the Profiles submenu of #349 after the New… rows.
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -9,6 +10,7 @@ Item {
     id: root
     anchors.fill: parent
     property string openSubmenu: ""
+    property bool withProfiles: false
 
     // Submenus open to the left of the main menu, level with their row.
     function placeSubmenu(submenu, title) {
@@ -101,6 +103,22 @@ Item {
         MenuItem { text: "Site Permissions…"; icon.name: "security-high" }
     }
 
+    Component {
+        id: profilesRow
+        Menu { title: "Profiles"; icon.name: "im-user"; popupType: Popup.Item }
+    }
+
+    SubmenuMock {
+        id: profilesMenu
+        menuWidth: 250
+        MenuItem { text: "Personal"; icon.name: "im-user" }
+        MenuItem { text: "Work"; icon.name: "view-pim-tasks" }
+        MenuItem { text: "Shopping"; icon.name: "globe" }
+        MenuSeparator {}
+        MenuItem { text: "New Profile…"; icon.name: "list-add" }
+        MenuItem { text: "Manage Profiles…"; icon.name: "configure" }
+    }
+
     SubmenuMock {
         id: helpMenu
         menuWidth: 250
@@ -117,10 +135,13 @@ Item {
             if (root.openSubmenu === "history") root.placeSubmenu(historyMenu, "History")
             else if (root.openSubmenu === "tools") root.placeSubmenu(toolsMenu, "More Tools")
             else if (root.openSubmenu === "help") root.placeSubmenu(helpMenu, "Help")
+            else if (root.openSubmenu === "profiles") root.placeSubmenu(profilesMenu, "Profiles")
         }
     }
 
     Component.onCompleted: {
+        if (root.withProfiles)
+            mainMenu.insertMenu(4, profilesRow.createObject(mainMenu))
         mainMenu.open()
     }
 }

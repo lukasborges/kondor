@@ -22,14 +22,26 @@ TabButton {
 
     width: tab.pinned ? tabStrip.pinnedTabWidth : tabStrip.tabWidth
     text: ""
-    leftPadding: isStyled && !tab.pinned ? Kirigami.Units.smallSpacing * 2 : implicitLeftPadding
-    rightPadding: isStyled && !tab.pinned ? Kirigami.Units.smallSpacing : implicitRightPadding
     Accessible.name: info.title
     z: tabDrag.active || tabSlide.isSettling ? 10 : 0
     transform: [
         Translate { x: control.dragShift },
         Translate { x: control.slideShift }
     ]
+
+    Binding {
+        when: control.isStyled && !control.tab.pinned
+        target: control
+        property: "leftPadding"
+        value: Kirigami.Units.smallSpacing * 2
+    }
+
+    Binding {
+        when: control.isStyled && !control.tab.pinned
+        target: control
+        property: "rightPadding"
+        value: Kirigami.Units.smallSpacing
+    }
 
     Binding {
         target: control.background

@@ -36,7 +36,8 @@ ToolBar {
         ToolButton {
             text: qsTr("Rename")
             icon.name: "edit-rename"
-            enabled: root.selection.hasItemSelection() || root.selection.folderId > 0
+            enabled: root.selection.hasItemSelection()
+                     || (root.selection.folderId > 0 && !root.selection.selectedInfo().special)
             onClicked: root.renameRequested()
         }
         ToolButton {

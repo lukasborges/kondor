@@ -42,8 +42,10 @@ def new_folder_row(title: str, parent_id: int) -> BookmarkRow | None:
 
 def rename_row(row_id: int, title: str) -> bool:
     name = title.strip()
-    statement = "UPDATE bookmarks SET title = ? WHERE id = ?"
-    return bool(name) and updates_rows(statement, (name, row_id))
+    item = bookmarkqueries.bookmark(row_id)
+    if not name or not item or bookmarkchecks.is_special_row(item):
+        return False
+    return updates_rows("UPDATE bookmarks SET title = ? WHERE id = ?", (name, row_id))
 
 
 def set_row_url(row_id: int, url: QUrl) -> bool:

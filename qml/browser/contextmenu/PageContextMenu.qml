@@ -14,6 +14,10 @@ Menu {
     property bool endsWithSeparator: true
 
     popupType: Popup.Item
+    focus: true
+
+    onOpened: forceActiveFocus()
+    onClosed: webView.forceActiveFocus()
 
     function popupAt(point) {
         rebuild()

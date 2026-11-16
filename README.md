@@ -226,7 +226,7 @@ the translation that matches the system locale at startup (and Qt's own translat
 dialogs and context menus).
 
 - **Update the `.ts` files** after changing strings: `python3 scripts/update-translations.py`.
-  This runs `pyside6-lupdate` over `src/kondor/` and `qml/` with `-no-obsolete -locations none` (moving a line does not change the files) and writes the result to `i18n/`.
+  This runs `pyside6-lupdate` over `src/kondor/` and `qml/` with `-no-obsolete -locations none` (moving a line does not change the files) and writes the result to `i18n/`. `i18n/kondor_en.ts` holds only the English plural forms (`-pluralonly`): Qt needs it to show "15 minutes" instead of "15 minute(s)".
 - **Add a language**: create `i18n/kondor_<lang>.ts` (the script updates every `i18n/kondor_*.ts`)
   and translate the messages with Qt Linguist (`linguist-qt6 i18n/kondor_<lang>.ts`).
 - **Keep them complete**: a PR that adds or changes a user-visible string updates every

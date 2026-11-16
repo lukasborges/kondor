@@ -48,7 +48,7 @@ Popup {
     }
 
     function openAllInTabs() {
-        folderBookmarks.forEach(function(entry) { browserWindow.openUrl(entry.url, true) })
+        folderBookmarks.slice().reverse().forEach(function(entry) { browserWindow.openUrl(entry.url, true) })
         close()
     }
 

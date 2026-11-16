@@ -106,6 +106,17 @@ def test_extension_package_opens_the_extensions_page(
     assert window.property("openedPages").toVariant() == ["extensions"]
 
 
+def test_manage_request_opens_the_extensions_page(manager: StubWindowManager) -> None:
+    window = manager.create_window(WindowContents())
+    ExtensionManager.instance().manageRequested.connect(manager.show_extensions_settings)
+
+    ExtensionManager.instance().manageRequested.emit()
+    ExtensionManager.instance().manageRequested.disconnect(manager.show_extensions_settings)
+
+    assert window is not None
+    assert window.property("openedPages").toVariant() == ["extensions"]
+
+
 def test_startup_restores_saved_windows(
     manager: StubWindowManager, startup_args: StartupArgs, monkeypatch: pytest.MonkeyPatch
 ) -> None:

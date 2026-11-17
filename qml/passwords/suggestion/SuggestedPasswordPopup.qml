@@ -33,10 +33,11 @@ Popup {
 
     Connections {
         target: root.suggestion
-        function onGeneratedPasswordSaved() { Accessible.announce(qsTr("Password saved")) }
+        function onGeneratedPasswordSaved() { suggestionItem.Accessible.announce(qsTr("Password saved")) }
     }
 
     contentItem: ItemDelegate {
+        id: suggestionItem
         focusPolicy: Qt.NoFocus
         highlighted: hovered
         text: qsTr("Use Suggested Password")

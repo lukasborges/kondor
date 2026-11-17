@@ -38,6 +38,7 @@ Popup {
 
     contentItem: ItemDelegate {
         focusPolicy: Qt.NoFocus
+        highlighted: hovered
         text: qsTr("Use Suggested Password")
         icon.name: "password-generate"
         ToolTip.visible: hovered

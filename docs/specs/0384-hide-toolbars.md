@@ -1,4 +1,4 @@
-# Hide the toolbars: in full screen (F11) and with a Show Toolbars toggle (#384)
+# Hide the toolbars: in full screen (F11) and with a Hide Toolbars toggle (#384)
 
 > **Issue:** [#384](https://github.com/lukasborges/kondor/issues/384) · **Priority:** P2 (medium) · **State:** see the issue's label (`to-spec` / `to-dev` / `in-review`).
 > Read `AGENTS.md` first. This file is the source of truth for the issue; only the architect edits it.
@@ -9,7 +9,7 @@ The maintainer wants the page to fill the window:
 
 1. **F11 full screen hides the tab strip and the toolbar** (today it keeps them: #8 decided "keep
    it visible in F11 window mode", and that decision is replaced here).
-2. A **Show Toolbars** toggle hides them in a normal window too, leaving only the window decoration
+2. A **Hide Toolbars** toggle hides them in a normal window too, leaving only the window decoration
    (title bar) and the page.
 
 In both cases the toolbars come back on demand: pointer at the top edge, or a shortcut that needs
@@ -30,9 +30,9 @@ them (Ctrl+L).
 
 ### 1. State
 
-- New setting `showToolbars` (bool, default `true`), remembered, global: changing it applies to every
+- New setting `hideToolbars` (bool, default `false`), remembered, global: changing it applies to every
   open window at once. It is a UI preference, so private windows may change it too.
-- A window **hides its toolbars** when `windowFullScreen || !Settings.showToolbars`. Page full
+- A window **hides its toolbars** when `windowFullScreen || Settings.hideToolbars`. Page full
   screen (videos) is unchanged: everything hidden, no reveal.
 - "Toolbars" means: the tab strip, the navigation toolbar, the bookmarks bar and, in the vertical
   tab styles, the side bar. **Not** hidden: InlineBars (permission prompts, crash notice, reload
@@ -55,23 +55,23 @@ them (Ctrl+L).
   suggestions) is open. Esc in the address bar hides them after restoring the URL as today.
 - Hiding never moves the focus out of the page.
 
-### 4. Turning it on and off (`prototypes/384c-show-toolbars-menu.qml`)
+### 4. Turning it on and off (`prototypes/384c-hide-toolbars-menu.qml`)
 
-- Main menu: a checkable **Show Toolbars** (Ctrl+Shift+F) right under the zoom row, checked while
-  the setting is on. In F11 full screen it stays enabled and still shows the setting (the toolbars
+- Main menu: a checkable **Hide Toolbars** (Ctrl+Shift+F) right under the zoom row, unchecked by
+  default and checked while the setting is on. In F11 full screen it stays enabled and still shows the setting (the toolbars
   are hidden by full screen either way).
 - **Ctrl+Shift+F** toggles the setting from anywhere in the window; add it to the README shortcut
   table.
 - Entering F11 full screen shows the existing hint, with "Press F11 to exit full screen", for 3 s;
   page full screen keeps its Esc hint.
-- When the setting is turned off, `Accessible.announce("Toolbars hidden. Move the pointer to the top
+- When the setting is turned on, `Accessible.announce("Toolbars hidden. Move the pointer to the top
   edge or press Ctrl+L to show them.")` once, so screen reader users know how to get back.
 
 ## Acceptance criteria
 
 - [ ] F11 hides tab strip, toolbar, bookmarks bar and side bar; F11 again restores them and the
       previous window state (maximized stays maximized).
-- [ ] Show Toolbars off: same in a normal window, with the title bar kept; on: back as before.
+- [ ] Hide Toolbars on: same in a normal window, with the title bar kept; off: back as before.
       The setting survives a restart and applies to every window.
 - [ ] Pointer at the top edge reveals them over the page without resizing it; they hide 500 ms
       after the pointer leaves, but not while the address bar has focus or one of their popups is
@@ -79,7 +79,7 @@ them (Ctrl+L).
 - [ ] Vertical tab styles: the side bar is hidden and comes back at the left edge.
 - [ ] Find bar and InlineBars still show while the toolbars are hidden.
 - [ ] Page full screen (YouTube) behaves as before.
-- [ ] Matches `384-toolbars-hidden.png`, `384b-toolbars-revealed.png`, `384c-show-toolbars-menu.png`;
+- [ ] Matches `384-toolbars-hidden.png`, `384b-toolbars-revealed.png`, `384c-hide-toolbars-menu.png`;
       Breeze and Breeze Dark.
 - [ ] Strings in `qsTr()`, translations complete; README shortcut table and the "Full screen"
       feature bullet updated.
@@ -95,7 +95,7 @@ Kondor open).
    move away: they slide out. F11: back to normal.
 2. Ctrl+Shift+F: title bar and page only. Ctrl+L: toolbars and focused address bar; type a URL,
    Enter: page loads and the toolbars hide. Open the main menu from the revealed toolbar: they stay
-   while it is open; uncheck Show Toolbars there.
+   while it is open; uncheck Hide Toolbars there.
 3. Restart: the setting is kept. Open a second window: same state.
 4. Vertical tabs: the side bar returns at the left edge.
 5. Ctrl+F with toolbars hidden: the find bar shows.
@@ -117,9 +117,9 @@ Kondor open).
   [screenshot](../../prototypes/screenshots/384-toolbars-hidden.png)
 - [`prototypes/384b-toolbars-revealed.qml`](../../prototypes/384b-toolbars-revealed.qml) →
   [screenshot](../../prototypes/screenshots/384b-toolbars-revealed.png)
-- [`prototypes/384c-show-toolbars-menu.qml`](../../prototypes/384c-show-toolbars-menu.qml) →
-  [screenshot](../../prototypes/screenshots/384c-show-toolbars-menu.png)
-  (`withShowToolbars` in `prototypes/common/MainMenuMock.qml`)
+- [`prototypes/384c-hide-toolbars-menu.qml`](../../prototypes/384c-hide-toolbars-menu.qml) →
+  [screenshot](../../prototypes/screenshots/384c-hide-toolbars-menu.png)
+  (`withHideToolbars` in `prototypes/common/MainMenuMock.qml`)
 
 ## Decisions
 
@@ -129,5 +129,5 @@ Kondor open).
 | Reveal by pushing the page down or over it? | Over it: pushing would reflow the page every time the pointer touches the top. |
 | Reveal right away at the top edge? | After 300 ms resting there, so moving to a tab of another window or to the title bar does not flash the toolbars. |
 | Hide the InlineBars and find bar too? | No: they ask for an answer or show what the user is doing; hiding them would hide a question. |
-| Name and place? | A checkable "Show Toolbars" in the main menu under the zoom row (KDE apps use "Show Toolbar"/"Show Menubar"); Ctrl+Shift+F because Ctrl+M (KDE's "Show Menubar") is Mute Tab in Kondor. |
+| Name and place? | A checkable "Hide Toolbars" in the main menu under the zoom row, unchecked by default: the maintainer's choice over KDE's usual "Show Toolbar" wording (first proposal), because the action is the exception and reads as what it does. Ctrl+Shift+F because Ctrl+M (KDE's "Show Menubar") is Mute Tab in Kondor. |
 | Remember it? | Yes, globally: it is how the maintainer wants to browse; the top-edge reveal and Ctrl+L keep it discoverable. |

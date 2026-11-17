@@ -11,8 +11,8 @@ Item {
     anchors.fill: parent
     property string openSubmenu: ""
     property bool withProfiles: false
-    // #384: the "Show Toolbars" toggle under the zoom row
-    property bool withShowToolbars: false
+    // #384: the "Hide Toolbars" toggle under the zoom row
+    property bool withHideToolbars: false
 
     // Submenus open to the left of the main menu, level with their row.
     function placeSubmenu(submenu, title) {
@@ -73,11 +73,11 @@ Item {
             }
         }
         MenuItem {
-            visible: root.withShowToolbars
+            visible: root.withHideToolbars
             height: visible ? implicitHeight : 0
-            text: "Show Toolbars"
+            text: "Hide Toolbars"
             checkable: true
-            checked: true
+            checked: false
             action: Action { shortcut: "Ctrl+Shift+F" }
         }
         MenuSeparator {}

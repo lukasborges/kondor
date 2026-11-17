@@ -32,7 +32,7 @@ def profile_without_asking(command_line: CommandLine, registry: ProfileRegistry)
     startup = registry.startup_profile_id()
     if startup != ASK_EVERY_TIME:
         return startup
-    return registry.last_used_id() if command_line.urls else None
+    return registry.last_used_id() if command_line.arguments else None
 
 
 def select_named_profile(name: str, registry: ProfileRegistry) -> int | None:

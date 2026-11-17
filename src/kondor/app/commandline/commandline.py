@@ -21,6 +21,7 @@ FLAGS = (
 
 @dataclass
 class CommandLine:
+    arguments: list[str] = field(default_factory=list)
     urls: list[QUrl] = field(default_factory=list)
     is_private: bool = False
     new_window: bool = False
@@ -68,7 +69,7 @@ def profile_value(parser: QCommandLineParser) -> str | None:
 
 def read(parser: QCommandLineParser) -> CommandLine:
     return CommandLine(
-        urls=startup_urls_for_arguments(parser.positionalArguments()),
+        arguments=parser.positionalArguments(),
         is_private=parser.isSet("private"),
         new_window=parser.isSet("new-window"),
         new_instance=parser.isSet("new-instance"),
@@ -101,3 +102,7 @@ def parse_arguments(arguments: list[str]) -> CommandLine:
 
 def parse_command_line(app: QCoreApplication) -> CommandLine:
     return parse_arguments([PROGRAM_NAME, *app.arguments()[1:]])
+
+
+def resolve_urls(command_line: CommandLine) -> None:
+    command_line.urls = startup_urls_for_arguments(command_line.arguments)

@@ -4,10 +4,10 @@ from PySide6.QtCore import QLocale
 from PySide6.QtWebEngineCore import QWebEngineNotification
 from PySide6.QtWebEngineQuick import QQuickWebEngineDownloadRequest, QQuickWebEngineProfile
 
-from kondor.adblock.adblockmanager import AdBlockManager
 from kondor.core.notifier import Notifier
 from kondor.core.settings.settings import Settings
 from kondor.downloads.downloadmanager import DownloadManager
+from kondor.site.identity.profileidentity import ProfileIdentity
 
 QT_WEB_ENGINE_TOKEN = re.compile("QtWebEngine/[^ ]+")
 KONDOR_TOKEN = "Kondor/0.1"
@@ -57,6 +57,6 @@ def apply(profile: QQuickWebEngineProfile) -> None:
     profile.setHttpAcceptLanguage(QLocale().bcp47Name())
     profile.setDownloadPath(str(setting("downloadDirectory")))
     apply_spell_check(profile)
-    AdBlockManager.instance().install(profile)
+    ProfileIdentity(profile).install()
     route_downloads(profile)
     route_notifications(profile)

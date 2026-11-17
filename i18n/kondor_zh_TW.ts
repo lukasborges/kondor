@@ -568,6 +568,21 @@
     </message>
 </context>
 <context>
+    <name>CustomIdentityDialog</name>
+    <message>
+        <source>Custom Browser Identity</source>
+        <translation>自訂瀏覽器識別</translation>
+    </message>
+    <message>
+        <source>Site:</source>
+        <translation>網站：</translation>
+    </message>
+    <message>
+        <source>User agent:</source>
+        <translation>使用者代理程式：</translation>
+    </message>
+</context>
+<context>
     <name>DefaultBookmarks</name>
     <message>
         <source>News</source>
@@ -1282,6 +1297,39 @@
     </message>
 </context>
 <context>
+    <name>IdentityBar</name>
+    <message>
+        <source>Reload the page to use the new browser identity.</source>
+        <translation>重新載入頁面以使用新的瀏覽器識別。</translation>
+    </message>
+</context>
+<context>
+    <name>IdentityChoices</name>
+    <message>
+        <source>Kondor (default)</source>
+        <translation>Kondor（預設）</translation>
+    </message>
+    <message>
+        <source>Firefox</source>
+        <translation>Firefox</translation>
+    </message>
+    <message>
+        <source>Chrome</source>
+        <translation>Chrome</translation>
+    </message>
+    <message>
+        <source>Custom…</source>
+        <translation>自訂…</translation>
+    </message>
+</context>
+<context>
+    <name>IdentityRow</name>
+    <message>
+        <source>Identify as:</source>
+        <translation>識別為：</translation>
+    </message>
+</context>
+<context>
     <name>ImportMessage</name>
     <message>
         <source>Some passwords could not be saved to KWallet.</source>
@@ -1921,6 +1969,11 @@
         <source>Pop-ups</source>
         <translation>彈出視窗</translation>
     </message>
+    <message>
+        <source>Browser identity — %1</source>
+        <extracomment>%1 is the browser the site is told Kondor is, such as Firefox</extracomment>
+        <translation>瀏覽器識別 — %1</translation>
+    </message>
 </context>
 <context>
     <name>PermissionTypeInfo</name>
@@ -2276,6 +2329,17 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>結束閱讀模式</translation>
+    </message>
+</context>
+<context>
+    <name>ReloadOfferBar</name>
+    <message>
+        <source>Reload</source>
+        <translation>重新載入</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>關閉</translation>
     </message>
 </context>
 <context>
@@ -2874,14 +2938,6 @@
     <message>
         <source>%1 will stop running on this site after reloading.</source>
         <translation>重新載入後，%1 將不再於此網站上執行。</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>重新載入</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>關閉</translation>
     </message>
 </context>
 <context>

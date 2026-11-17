@@ -568,6 +568,21 @@
     </message>
 </context>
 <context>
+    <name>CustomIdentityDialog</name>
+    <message>
+        <source>Custom Browser Identity</source>
+        <translation>Identité de navigateur personnalisée</translation>
+    </message>
+    <message>
+        <source>Site:</source>
+        <translation>Site :</translation>
+    </message>
+    <message>
+        <source>User agent:</source>
+        <translation>Agent utilisateur :</translation>
+    </message>
+</context>
+<context>
     <name>DefaultBookmarks</name>
     <message>
         <source>News</source>
@@ -1285,6 +1300,39 @@
     </message>
 </context>
 <context>
+    <name>IdentityBar</name>
+    <message>
+        <source>Reload the page to use the new browser identity.</source>
+        <translation>Rechargez la page pour utiliser la nouvelle identité du navigateur.</translation>
+    </message>
+</context>
+<context>
+    <name>IdentityChoices</name>
+    <message>
+        <source>Kondor (default)</source>
+        <translation>Kondor (par défaut)</translation>
+    </message>
+    <message>
+        <source>Firefox</source>
+        <translation>Firefox</translation>
+    </message>
+    <message>
+        <source>Chrome</source>
+        <translation>Chrome</translation>
+    </message>
+    <message>
+        <source>Custom…</source>
+        <translation>Personnalisée…</translation>
+    </message>
+</context>
+<context>
+    <name>IdentityRow</name>
+    <message>
+        <source>Identify as:</source>
+        <translation>S’identifier comme :</translation>
+    </message>
+</context>
+<context>
     <name>ImportMessage</name>
     <message>
         <source>Some passwords could not be saved to KWallet.</source>
@@ -1934,6 +1982,11 @@
         <source>Pop-ups</source>
         <translation>Fenêtres surgissantes</translation>
     </message>
+    <message>
+        <source>Browser identity — %1</source>
+        <extracomment>%1 is the browser the site is told Kondor is, such as Firefox</extracomment>
+        <translation>Identité du navigateur — %1</translation>
+    </message>
 </context>
 <context>
     <name>PermissionTypeInfo</name>
@@ -2289,6 +2342,17 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>Quitter le mode lecture</translation>
+    </message>
+</context>
+<context>
+    <name>ReloadOfferBar</name>
+    <message>
+        <source>Reload</source>
+        <translation>Recharger</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Fermer</translation>
     </message>
 </context>
 <context>
@@ -2887,14 +2951,6 @@
     <message>
         <source>%1 will stop running on this site after reloading.</source>
         <translation>%1 cessera de s&apos;exécuter sur ce site après le rechargement.</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>Recharger</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Fermer</translation>
     </message>
 </context>
 <context>

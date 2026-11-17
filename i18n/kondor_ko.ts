@@ -568,6 +568,21 @@
     </message>
 </context>
 <context>
+    <name>CustomIdentityDialog</name>
+    <message>
+        <source>Custom Browser Identity</source>
+        <translation>사용자 지정 브라우저 ID</translation>
+    </message>
+    <message>
+        <source>Site:</source>
+        <translation>사이트:</translation>
+    </message>
+    <message>
+        <source>User agent:</source>
+        <translation>사용자 에이전트:</translation>
+    </message>
+</context>
+<context>
     <name>DefaultBookmarks</name>
     <message>
         <source>News</source>
@@ -1282,6 +1297,39 @@
     </message>
 </context>
 <context>
+    <name>IdentityBar</name>
+    <message>
+        <source>Reload the page to use the new browser identity.</source>
+        <translation>새 브라우저 ID를 사용하려면 페이지를 새로 고치세요.</translation>
+    </message>
+</context>
+<context>
+    <name>IdentityChoices</name>
+    <message>
+        <source>Kondor (default)</source>
+        <translation>Kondor(기본값)</translation>
+    </message>
+    <message>
+        <source>Firefox</source>
+        <translation>Firefox</translation>
+    </message>
+    <message>
+        <source>Chrome</source>
+        <translation>Chrome</translation>
+    </message>
+    <message>
+        <source>Custom…</source>
+        <translation>사용자 지정…</translation>
+    </message>
+</context>
+<context>
+    <name>IdentityRow</name>
+    <message>
+        <source>Identify as:</source>
+        <translation>다음으로 식별:</translation>
+    </message>
+</context>
+<context>
     <name>ImportMessage</name>
     <message>
         <source>Some passwords could not be saved to KWallet.</source>
@@ -1921,6 +1969,11 @@
         <source>Pop-ups</source>
         <translation>팝업</translation>
     </message>
+    <message>
+        <source>Browser identity — %1</source>
+        <extracomment>%1 is the browser the site is told Kondor is, such as Firefox</extracomment>
+        <translation>브라우저 ID — %1</translation>
+    </message>
 </context>
 <context>
     <name>PermissionTypeInfo</name>
@@ -2276,6 +2329,17 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>리더 모드 종료</translation>
+    </message>
+</context>
+<context>
+    <name>ReloadOfferBar</name>
+    <message>
+        <source>Reload</source>
+        <translation>새로고침</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>닫기</translation>
     </message>
 </context>
 <context>
@@ -2874,14 +2938,6 @@
     <message>
         <source>%1 will stop running on this site after reloading.</source>
         <translation>다시 불러오면 이 사이트에서 %1 이(가) 더 이상 실행되지 않습니다.</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>새로고침</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>닫기</translation>
     </message>
 </context>
 <context>

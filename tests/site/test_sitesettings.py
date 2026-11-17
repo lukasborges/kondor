@@ -60,3 +60,23 @@ def test_announces_only_real_changes(site_settings: SiteSettings, qtbot: QtBot) 
 def test_ignores_an_empty_host(site_settings: SiteSettings) -> None:
     site_settings.setPopupsAllowed("", True)
     assert row_count() == 0
+
+
+def test_stores_the_user_agent_for_one_host(site_settings: SiteSettings) -> None:
+    site_settings.setUserAgent("KDE.org", "Custom/1")
+    assert site_settings.userAgent("kde.org") == "Custom/1"
+    assert site_settings.userAgent("www.kde.org") == ""
+    assert site_settings.hostsWithUserAgent() == ["kde.org"]
+
+
+def test_clearing_the_user_agent_deletes_the_row(site_settings: SiteSettings) -> None:
+    site_settings.setUserAgent("kde.org", "Custom/1")
+    site_settings.setUserAgent("kde.org", "")
+    assert row_count() == 0
+
+
+def test_clearing_the_user_agent_keeps_the_pop_up_exception(site_settings: SiteSettings) -> None:
+    site_settings.setPopupsAllowed("kde.org", True)
+    site_settings.setUserAgent("kde.org", "Custom/1")
+    site_settings.setUserAgent("kde.org", "")
+    assert site_settings.popupsAllowed("kde.org")

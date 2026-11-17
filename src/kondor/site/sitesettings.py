@@ -8,6 +8,15 @@ UPSERT_ALLOWED = (
     "INSERT INTO site_settings (host, allow_popups) VALUES (?, ?) "
     "ON CONFLICT(host) DO UPDATE SET allow_popups = excluded.allow_popups"
 )
+SELECT_USER_AGENT = "SELECT user_agent FROM site_settings WHERE host = ?"
+SELECT_USER_AGENTS = (
+    "SELECT host, user_agent FROM site_settings WHERE user_agent IS NOT NULL ORDER BY host"
+)
+UPSERT_USER_AGENT = (
+    "INSERT INTO site_settings (host, user_agent) VALUES (?, ?) "
+    "ON CONFLICT(host) DO UPDATE SET user_agent = excluded.user_agent"
+)
+CLEAR_USER_AGENT = "UPDATE site_settings SET user_agent = NULL WHERE host = ?"
 DELETE_EMPTY_ROW = (
     "DELETE FROM site_settings WHERE host = ? AND allow_popups = 0 AND user_agent IS NULL"
 )
@@ -44,3 +53,35 @@ class SiteSettings(QObject):
         while query is not None and query.next():
             hosts.append(str(query.value(0)))
         return hosts
+
+    @Slot(str, result=str)
+    def userAgent(self, host: str) -> str:
+        query = sql.run(SELECT_USER_AGENT, (host.lower(),))
+        return str(query.value(0) or "") if query is not None and query.next() else ""
+
+    @Slot(str, str)
+    def setUserAgent(self, host: str, text: str) -> None:
+        key = host.lower()
+        if not key or self.userAgent(key) == text:
+            return
+        self._store_user_agent(key, text)
+        sql.run(DELETE_EMPTY_ROW, (key,))
+        self.changed.emit(key)
+
+    @staticmethod
+    def _store_user_agent(host: str, text: str) -> None:
+        if text:
+            sql.run(UPSERT_USER_AGENT, (host, text))
+        else:
+            sql.run(CLEAR_USER_AGENT, (host,))
+
+    @Slot(result="QStringList")
+    def hostsWithUserAgent(self) -> list[str]:
+        return list(self.all_user_agents())
+
+    def all_user_agents(self) -> dict[str, str]:
+        query = sql.run(SELECT_USER_AGENTS)
+        agents: dict[str, str] = {}
+        while query is not None and query.next():
+            agents[str(query.value(0))] = str(query.value(1))
+        return agents

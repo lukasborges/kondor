@@ -568,6 +568,21 @@
     </message>
 </context>
 <context>
+    <name>CustomIdentityDialog</name>
+    <message>
+        <source>Custom Browser Identity</source>
+        <translation>Özel Tarayıcı Kimliği</translation>
+    </message>
+    <message>
+        <source>Site:</source>
+        <translation>Site:</translation>
+    </message>
+    <message>
+        <source>User agent:</source>
+        <translation>Kullanıcı aracısı:</translation>
+    </message>
+</context>
+<context>
     <name>DefaultBookmarks</name>
     <message>
         <source>News</source>
@@ -1282,6 +1297,39 @@
     </message>
 </context>
 <context>
+    <name>IdentityBar</name>
+    <message>
+        <source>Reload the page to use the new browser identity.</source>
+        <translation>Yeni tarayıcı kimliğini kullanmak için sayfayı yeniden yükleyin.</translation>
+    </message>
+</context>
+<context>
+    <name>IdentityChoices</name>
+    <message>
+        <source>Kondor (default)</source>
+        <translation>Kondor (varsayılan)</translation>
+    </message>
+    <message>
+        <source>Firefox</source>
+        <translation>Firefox</translation>
+    </message>
+    <message>
+        <source>Chrome</source>
+        <translation>Chrome</translation>
+    </message>
+    <message>
+        <source>Custom…</source>
+        <translation>Özel…</translation>
+    </message>
+</context>
+<context>
+    <name>IdentityRow</name>
+    <message>
+        <source>Identify as:</source>
+        <translation>Şu olarak tanıt:</translation>
+    </message>
+</context>
+<context>
     <name>ImportMessage</name>
     <message>
         <source>Some passwords could not be saved to KWallet.</source>
@@ -1921,6 +1969,11 @@
         <source>Pop-ups</source>
         <translation>Açılır pencereler</translation>
     </message>
+    <message>
+        <source>Browser identity — %1</source>
+        <extracomment>%1 is the browser the site is told Kondor is, such as Firefox</extracomment>
+        <translation>Tarayıcı kimliği — %1</translation>
+    </message>
 </context>
 <context>
     <name>PermissionTypeInfo</name>
@@ -2276,6 +2329,17 @@
     <message>
         <source>Exit Reader Mode</source>
         <translation>Okuyucu kipinden çık</translation>
+    </message>
+</context>
+<context>
+    <name>ReloadOfferBar</name>
+    <message>
+        <source>Reload</source>
+        <translation>Yeniden yükle</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Kapat</translation>
     </message>
 </context>
 <context>
@@ -2874,14 +2938,6 @@
     <message>
         <source>%1 will stop running on this site after reloading.</source>
         <translation>%1, yeniden yüklendikten sonra bu sitede çalışmayı durduracak.</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>Yeniden yükle</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Kapat</translation>
     </message>
 </context>
 <context>

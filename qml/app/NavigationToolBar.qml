@@ -27,11 +27,13 @@ ToolBar {
         addressBar.text = ""
     }
 
-    function reloadOrStop() {
+    function reloadOrStop(bypassCache) {
         if (!tabs.currentTab)
             return
         if (isLoading)
             tabs.currentTab.stop()
+        else if (bypassCache)
+            tabs.currentTab.reloadBypassingCache()
         else
             tabs.currentTab.reload()
     }
@@ -99,7 +101,17 @@ ToolBar {
             Accessible.name: ToolTip.text
             ToolTip.text: root.isLoading ? qsTr("Stop") : qsTr("Reload")
             ToolTip.delay: 600
-            onClicked: root.reloadOrStop()
+            onClicked: root.reloadOrStop(shiftWatcher.isShiftHeld)
+
+            MouseArea {
+                id: shiftWatcher
+                property bool isShiftHeld: false
+                anchors.fill: parent
+                onPressed: mouse => {
+                    isShiftHeld = (mouse.modifiers & Qt.ShiftModifier) !== 0
+                    mouse.accepted = false
+                }
+            }
         }
 
         ToolButton {

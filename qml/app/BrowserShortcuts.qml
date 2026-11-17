@@ -106,6 +106,10 @@ Item {
         onActivated: if (root.hasPage) root.tab.reload()
     }
     Shortcut {
+        sequences: ["Ctrl+Shift+R", "Shift+F5", "Ctrl+F5"]
+        onActivated: if (root.hasPage) root.tab.reloadBypassingCache()
+    }
+    Shortcut {
         sequences: ["Alt+Left"]
         onActivated: if (root.tab) root.tab.goBack()
     }

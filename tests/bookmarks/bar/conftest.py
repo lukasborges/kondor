@@ -4,7 +4,8 @@ import pytest
 from PySide6.QtCore import QCoreApplication, QEvent
 
 from kondor.browser.tabs.tabmodel import TabModel
-from tests.bookmarks.bar.barharness import release_created_objects, release_profiles
+from tests.bookmarks.bar.barharness import release_created_objects
+from tests.qmlsupport import release_profiles
 
 
 @pytest.fixture

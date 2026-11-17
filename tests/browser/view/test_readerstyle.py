@@ -5,7 +5,7 @@ from PySide6.QtCore import Q_RETURN_ARG, QMetaObject, QObject
 from PySide6.QtQml import QQmlComponent, QQmlEngine
 
 from kondor.browser.tabs.tabmodel import TabModel
-from tests.qmlsupport import error_text, load_component
+from tests.qmlsupport import error_text, load_component, release
 
 SCENE_QML = """
 import QtQuick
@@ -69,4 +69,5 @@ def test_builds_css_variables_from_the_view_theme_colors(
     assert set(colors) != {"#000000"}
     for color in colors:
         assert color in variables
-    del component
+    release(scene)
+    release(component)

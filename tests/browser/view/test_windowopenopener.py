@@ -10,7 +10,7 @@ from kondor.browser.tabs.tab import Tab
 from kondor.browser.tabs.tabmodel import TabModel
 from kondor.browser.tabs.tabmodelrows import TAB_ROLE
 from tests.extensions.pageserver import PageServer
-from tests.qmlsupport import error_text, load_component
+from tests.qmlsupport import error_text, load_component, release
 
 LOAD_TIMEOUT = 30000
 TABS_WITH_POPUP = 2
@@ -89,8 +89,10 @@ class Browser:
 
 
 @pytest.fixture
-def browser(model: TabModel, scene: QQuickItem, qtbot: QtBot) -> Browser:
-    return Browser(model, scene, qtbot)
+def browser(model: TabModel, scene: QQuickItem, qtbot: QtBot) -> Iterator[Browser]:
+    browser = Browser(model, scene, qtbot)
+    yield browser
+    release(browser.server)
 
 
 def test_popup_keeps_the_window_opener(browser: Browser) -> None:

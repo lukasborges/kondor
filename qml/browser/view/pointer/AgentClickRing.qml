@@ -4,6 +4,7 @@ import org.kde.kirigami as Kirigami
 Rectangle {
     id: root
 
+    required property color pointerColor
     property point center: Qt.point(0, 0)
 
     function play(point) {
@@ -18,7 +19,7 @@ Rectangle {
     radius: width / 2
     color: "transparent"
     border.width: 3
-    border.color: Kirigami.Theme.neutralTextColor
+    border.color: root.pointerColor
     opacity: 0
 
     ParallelAnimation {

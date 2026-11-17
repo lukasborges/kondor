@@ -8,6 +8,7 @@ Item {
 
     required property AgentPointerBridge bridge
     required property WebEngineView webView
+    required property color pointerColor
 
     property bool isShown: false
     property bool isGliding: false
@@ -35,6 +36,7 @@ Item {
 
     AgentPointerShape {
         id: pointer
+        pointerColor: root.pointerColor
         opacity: root.isShown ? 1 : 0
 
         Behavior on x {
@@ -54,6 +56,7 @@ Item {
 
     AgentClickRing {
         id: ring
+        pointerColor: root.pointerColor
     }
 
     Timer {

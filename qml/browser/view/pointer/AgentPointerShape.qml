@@ -3,6 +3,10 @@ import QtQuick.Shapes
 import org.kde.kirigami as Kirigami
 
 Item {
+    id: root
+
+    required property color pointerColor
+
     Shape {
         width: 22
         height: 30
@@ -12,7 +16,7 @@ Item {
         ShapePath {
             strokeColor: "white"
             strokeWidth: 2
-            fillColor: Kirigami.Theme.neutralTextColor
+            fillColor: root.pointerColor
             joinStyle: ShapePath.RoundJoin
             startX: 0; startY: 0
             PathLine { x: 0; y: 24 }
@@ -31,7 +35,7 @@ Item {
         width: 22
         height: 22
         radius: width / 2
-        color: Kirigami.Theme.neutralTextColor
+        color: root.pointerColor
         border.color: "white"
         border.width: 2
 

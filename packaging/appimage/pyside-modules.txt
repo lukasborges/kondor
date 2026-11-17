@@ -12,3 +12,4 @@ PrintSupport
 WebEngineCore
 WebEngineQuick
 WebChannel
+WebSockets

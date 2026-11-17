@@ -1649,6 +1649,25 @@
     </message>
 </context>
 <context>
+    <name>McpCommandRow</name>
+    <message>
+        <source>MCP server command</source>
+        <translation>Kommando för MCP-servern</translation>
+    </message>
+    <message>
+        <source>Copy Command</source>
+        <translation>Kopiera kommando</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Kopierat</translation>
+    </message>
+    <message>
+        <source>Command copied</source>
+        <translation>Kommandot har kopierats</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2186,6 +2205,14 @@
         <source>Port:</source>
         <translation>Port:</translation>
     </message>
+    <message>
+        <source>MCP server:</source>
+        <translation>MCP-server:</translation>
+    </message>
+    <message>
+        <source>Add it to an AI agent, such as Claude Code, as an MCP server.</source>
+        <translation>Lägg till det i en AI-agent, till exempel Claude Code, som MCP-server.</translation>
+    </message>
 </context>
 <context>
     <name>ProfileButton</name>
@@ -2361,9 +2388,39 @@
 </context>
 <context>
     <name>RemoteControlButton</name>
+    <message numerus="yes">
+        <source>%n agents are controlling Kondor</source>
+        <translation>
+            <numerusform>%n agent styr Kondor</numerusform>
+            <numerusform>%n agenter styr Kondor</numerusform>
+        </translation>
+    </message>
     <message>
-        <source>Remote control is on</source>
-        <translation>Fjärrstyrning är på</translation>
+        <source>An automation tool is controlling Kondor</source>
+        <translation>Ett automatiseringsverktyg styr Kondor</translation>
+    </message>
+    <message>
+        <source>%1 is controlling Kondor</source>
+        <translation>%1 styr Kondor</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlConnectionRow</name>
+    <message>
+        <source>Automation tool</source>
+        <translation>Automatiseringsverktyg</translation>
+    </message>
+    <message>
+        <source>Connected since %1</source>
+        <translation>Ansluten sedan %1</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>Koppla från</translation>
+    </message>
+    <message>
+        <source>Disconnect %1</source>
+        <translation>Koppla från %1</translation>
     </message>
 </context>
 <context>

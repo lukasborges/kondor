@@ -1636,6 +1636,25 @@
     </message>
 </context>
 <context>
+    <name>McpCommandRow</name>
+    <message>
+        <source>MCP server command</source>
+        <translation>MCP サーバーのコマンド</translation>
+    </message>
+    <message>
+        <source>Copy Command</source>
+        <translation>コマンドをコピー</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>コピーしました</translation>
+    </message>
+    <message>
+        <source>Command copied</source>
+        <translation>コマンドをコピーしました</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2173,6 +2192,14 @@
         <source>Port:</source>
         <translation>ポート:</translation>
     </message>
+    <message>
+        <source>MCP server:</source>
+        <translation>MCP サーバー:</translation>
+    </message>
+    <message>
+        <source>Add it to an AI agent, such as Claude Code, as an MCP server.</source>
+        <translation>Claude Code などの AI エージェントに MCP サーバーとして追加してください。</translation>
+    </message>
 </context>
 <context>
     <name>ProfileButton</name>
@@ -2348,9 +2375,38 @@
 </context>
 <context>
     <name>RemoteControlButton</name>
+    <message numerus="yes">
+        <source>%n agents are controlling Kondor</source>
+        <translation>
+            <numerusform>%n 個のエージェントが Kondor を操作しています</numerusform>
+        </translation>
+    </message>
     <message>
-        <source>Remote control is on</source>
-        <translation>リモートコントロールはオンです</translation>
+        <source>An automation tool is controlling Kondor</source>
+        <translation>自動化ツールが Kondor を操作しています</translation>
+    </message>
+    <message>
+        <source>%1 is controlling Kondor</source>
+        <translation>%1 が Kondor を操作しています</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlConnectionRow</name>
+    <message>
+        <source>Automation tool</source>
+        <translation>自動化ツール</translation>
+    </message>
+    <message>
+        <source>Connected since %1</source>
+        <translation>%1 から接続中</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>切断</translation>
+    </message>
+    <message>
+        <source>Disconnect %1</source>
+        <translation>%1 を切断</translation>
     </message>
 </context>
 <context>

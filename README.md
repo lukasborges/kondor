@@ -83,7 +83,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 
 ### For developers
 - **Developer tools** (F12) and **view source**
-- **Remote control** for AI agents and automation tools, with the agent's pointer shown on the page (off by default)
+- **Remote control** lets AI agents control your tabs through a built-in MCP server (off by default)
 - **Load unpacked extensions** with `--load-extension <dir>` (experimental, needs `--new-instance`)
 
 ## Keyboard shortcuts
@@ -166,21 +166,35 @@ unless you allow them. Authors: see [`docs/extensions/api.md`](docs/extensions/a
 
 ## Remote control
 
-AI agents and automation tools can read and control the pages of normal windows. Turn it on in
-**Settings → Privacy → Remote control** and restart Kondor, or start it once with
-`kondor --remote-control 9222`. Then connect an agent, for example Claude Code:
+AI agents and automation tools can read and control the pages of normal windows, with the agent's
+pointer shown on the page. Turn it on in **Settings → Privacy → Remote control** and restart Kondor,
+or start it once with `kondor --remote-control 9222`.
+
+Kondor has a built-in [MCP](https://modelcontextprotocol.io) server, so any MCP client needs no
+extra tools: add the command shown under **MCP server** in the same settings page. For example,
+with Claude Code:
 
 ```bash
-claude mcp add kondor -- npx chrome-devtools-mcp@latest --browserUrl http://127.0.0.1:9222
+claude mcp add kondor -- flatpak run io.github.lukasborges.Kondor --mcp
 ```
 
-Agents navigate the tab that is already open (Kondor cannot open new tabs over the protocol).
+Other clients take the same command in their configuration:
+
+```json
+{ "mcpServers": { "kondor": { "command": "kondor", "args": ["--mcp"] } } }
+```
+
+The agent can list, open and navigate tabs, read a page, click, type, scroll and take screenshots.
+If Kondor is closed, the first call starts it. A toolbar icon shows while an agent is connected,
+and its popup can disconnect it. Any tool that speaks the Chrome DevTools protocol also works, for
+example `npx chrome-devtools-mcp@latest --browserUrl http://127.0.0.1:9222`.
+
 Private browsing is unavailable while remote control is on, and only programs on this computer can
 connect.
 
 ## Stack
 
-- **Python 3.13+** and **PySide6 6.8+** (tested with **6.11.2**), over Qt `Core`, `DBus`, `Gui`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebChannel`, `WebEngineCore`, `WebEngineQuick`, `Widgets`
+- **Python 3.13+** and **PySide6 6.8+** (tested with **6.11.2**), over Qt `Core`, `DBus`, `Gui`, `Qml`, `Quick`, `QuickControls2`, `Sql`, `WebChannel`, `WebEngineCore`, `WebEngineQuick`, `WebSockets`, `Widgets`
 - **Qt Quick Controls 2** with the **`org.kde.desktop`** (Breeze) style
 - **Kirigami** for theming (`Kirigami.Theme`)
 

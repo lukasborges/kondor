@@ -155,6 +155,17 @@ ScrollView {
                 property: "value"
                 value: root.draft.remoteControlPort
             }
+
+            McpCommandRow {
+                enabled: root.draft.remoteControlEnabled
+                Kirigami.FormData.label: qsTr("MCP server:")
+                Layout.fillWidth: true
+            }
+
+            Label {
+                text: qsTr("Add it to an AI agent, such as Claude Code, as an MCP server.")
+                color: Kirigami.Theme.disabledTextColor
+            }
         }
 
         Item { Layout.fillHeight: true }

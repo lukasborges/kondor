@@ -12,6 +12,7 @@ from kondor.app.instance.singleinstance import SingleInstance, StartResult
 from kondor.app.instance.singleinstancemessage import SingleInstanceMessage
 from kondor.app.krunner.krunnerservice import KRunnerService
 from kondor.app.mpris.mprisservice import MprisService
+from kondor.app.remotecontrol.remotecontrol import RemoteControl
 from kondor.app.startup.appidentity import set_up_language_and_style
 from kondor.app.startup.positioncache import discard_position_cache
 from kondor.app.startup.qmlregistry import register_all_types
@@ -89,6 +90,13 @@ def set_up_favicons(engine: QQmlApplicationEngine) -> None:
     FaviconStore.instance().attach_engine(engine)
 
 
+def start_services(single_instance: SingleInstance) -> None:
+    RemoteControl.instance().watch(single_instance)
+    KRunnerService.instance().start()
+    MprisService.instance().start()
+    ExtensionCatalog.instance().start_auto_update()
+
+
 def open_windows(engine: QQmlApplicationEngine, single_instance: SingleInstance) -> bool:
     set_up_favicons(engine)
     window_manager = WindowManager.instance()
@@ -96,9 +104,7 @@ def open_windows(engine: QQmlApplicationEngine, single_instance: SingleInstance)
     single_instance.messageReceived.connect(window_manager.handle_single_instance_message)
     ExtensionManager.instance().manageRequested.connect(window_manager.show_extensions_settings)
     window_manager.open_startup_windows()
-    KRunnerService.instance().start()
-    MprisService.instance().start()
-    ExtensionCatalog.instance().start_auto_update()
+    start_services(single_instance)
     return window_manager.window_count() > 0
 
 

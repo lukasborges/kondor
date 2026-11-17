@@ -1649,6 +1649,25 @@
     </message>
 </context>
 <context>
+    <name>McpCommandRow</name>
+    <message>
+        <source>MCP server command</source>
+        <translation>Opdracht van de MCP-server</translation>
+    </message>
+    <message>
+        <source>Copy Command</source>
+        <translation>Opdracht kopiëren</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Gekopieerd</translation>
+    </message>
+    <message>
+        <source>Command copied</source>
+        <translation>Opdracht gekopieerd</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2186,6 +2205,14 @@
         <source>Port:</source>
         <translation>Poort:</translation>
     </message>
+    <message>
+        <source>MCP server:</source>
+        <translation>MCP-server:</translation>
+    </message>
+    <message>
+        <source>Add it to an AI agent, such as Claude Code, as an MCP server.</source>
+        <translation>Voeg hem toe aan een AI-agent, zoals Claude Code, als MCP-server.</translation>
+    </message>
 </context>
 <context>
     <name>ProfileButton</name>
@@ -2361,9 +2388,39 @@
 </context>
 <context>
     <name>RemoteControlButton</name>
+    <message numerus="yes">
+        <source>%n agents are controlling Kondor</source>
+        <translation>
+            <numerusform>%n agent bestuurt Kondor</numerusform>
+            <numerusform>%n agenten besturen Kondor</numerusform>
+        </translation>
+    </message>
     <message>
-        <source>Remote control is on</source>
-        <translation>Afstandsbediening staat aan</translation>
+        <source>An automation tool is controlling Kondor</source>
+        <translation>Een automatiseringstool bestuurt Kondor</translation>
+    </message>
+    <message>
+        <source>%1 is controlling Kondor</source>
+        <translation>%1 bestuurt Kondor</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlConnectionRow</name>
+    <message>
+        <source>Automation tool</source>
+        <translation>Automatiseringstool</translation>
+    </message>
+    <message>
+        <source>Connected since %1</source>
+        <translation>Verbonden sinds %1</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>Verbinding verbreken</translation>
+    </message>
+    <message>
+        <source>Disconnect %1</source>
+        <translation>Verbinding met %1 verbreken</translation>
     </message>
 </context>
 <context>

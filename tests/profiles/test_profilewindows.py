@@ -15,7 +15,11 @@ ApplicationWindow {
     width: 400
     height: 300
     visible: true
-    ProfileDialog { objectName: "dialog" }
+    property string savedAsNew: ""
+    ProfileDialog {
+        objectName: "dialog"
+        onProfileSaved: (profileId, isNew) => savedAsNew += isNew ? "new;" : "edit;"
+    }
 }
 """
 
@@ -42,6 +46,31 @@ def test_dialog_creates_the_typed_profile(kondor_engine: QQmlEngine) -> None:
     confirm(window)
 
     assert [profile.name for profile in ProfileRegistry().profiles()] == ["Default", "Work"]
+
+
+def test_dialog_reports_a_created_profile_as_new(kondor_engine: QQmlEngine) -> None:
+    window = open_dialog_for_new(kondor_engine)
+    window.findChild(QObject, "nameField").setProperty("text", "Work")
+
+    confirm(window)
+
+    assert window.property("savedAsNew") == "new;"
+
+
+def test_dialog_reports_an_edited_profile_as_not_new(kondor_engine: QQmlEngine) -> None:
+    window = open_dialog_for_new(kondor_engine)
+    dialog = window.findChild(QObject, "dialog")
+    window.findChild(QObject, "nameField").setProperty("text", "Work")
+    confirm(window)
+
+    call(
+        dialog,
+        "openForEdit",
+        Q_ARG("QVariant", {"id": dialog.property("profileId"), "name": "Work", "iconName": "flag"}),
+    )
+    confirm(window)
+
+    assert window.property("savedAsNew") == "new;edit;"
 
 
 def test_dialog_refuses_an_empty_name(kondor_engine: QQmlEngine) -> None:

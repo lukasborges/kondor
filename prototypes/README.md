@@ -81,6 +81,7 @@ Tips when editing:
 | #366 Mute tab | `366-mute-tab.qml`, `366b-mute-tab-vertical.qml` (`audio` in `common/TabStyleFrame.qml`) |
 | #375 Pop-up blocker | `375-popup-blocked.qml`, `375b-popup-allowed-site-info.qml` |
 | #376 Browser identity per site | `376-site-browser-identity.qml`, `376b-custom-browser-identity.qml` |
+| #384 Hide the toolbars | `384-toolbars-hidden.qml`, `384b-toolbars-revealed.qml`, `384c-show-toolbars-menu.qml` (`withShowToolbars` in `common/MainMenuMock.qml`) |
 
 Issues without UI (#10 default browser, #15 single instance, #19 translations, #25 Flatpak,
 #26 tests) have no prototype.

@@ -11,6 +11,8 @@ Item {
     anchors.fill: parent
     property string openSubmenu: ""
     property bool withProfiles: false
+    // #384: the "Show Toolbars" toggle under the zoom row
+    property bool withShowToolbars: false
 
     // Submenus open to the left of the main menu, level with their row.
     function placeSubmenu(submenu, title) {
@@ -69,6 +71,14 @@ Item {
                 Kirigami.Separator { Layout.fillHeight: true; Layout.margins: 6 }
                 ToolButton { icon.name: "view-fullscreen"; display: AbstractButton.IconOnly; flat: true }
             }
+        }
+        MenuItem {
+            visible: root.withShowToolbars
+            height: visible ? implicitHeight : 0
+            text: "Show Toolbars"
+            checkable: true
+            checked: true
+            action: Action { shortcut: "Ctrl+Shift+F" }
         }
         MenuSeparator {}
         Menu { id: toolsRow; title: "More Tools"; icon.name: "tools"; popupType: Popup.Item }

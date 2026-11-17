@@ -2378,16 +2378,16 @@
     <message numerus="yes">
         <source>%n agents are controlling Kondor</source>
         <translation>
-            <numerusform>%n ajan Kondor'u denetliyor</numerusform>
+            <numerusform>%n ajan Kondor&apos;u denetliyor</numerusform>
         </translation>
     </message>
     <message>
         <source>An automation tool is controlling Kondor</source>
-        <translation>Bir otomasyon aracı Kondor'u denetliyor</translation>
+        <translation>Bir otomasyon aracı Kondor&apos;u denetliyor</translation>
     </message>
     <message>
         <source>%1 is controlling Kondor</source>
-        <translation>%1 Kondor'u denetliyor</translation>
+        <translation>%1 Kondor&apos;u denetliyor</translation>
     </message>
 </context>
 <context>

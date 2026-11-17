@@ -1656,15 +1656,15 @@
     </message>
     <message>
         <source>Copy Command</source>
-        <translation>Copia l'ordre</translation>
+        <translation>Copia l&apos;ordre</translation>
     </message>
     <message>
         <source>Copied</source>
-        <translation>S'ha copiat</translation>
+        <translation>S&apos;ha copiat</translation>
     </message>
     <message>
         <source>Command copied</source>
-        <translation>S'ha copiat l'ordre</translation>
+        <translation>S&apos;ha copiat l&apos;ordre</translation>
     </message>
 </context>
 <context>
@@ -2211,7 +2211,7 @@
     </message>
     <message>
         <source>Add it to an AI agent, such as Claude Code, as an MCP server.</source>
-        <translation>Afegiu-la a un agent d'IA, com ara Claude Code, com a servidor MCP.</translation>
+        <translation>Afegiu-la a un agent d&apos;IA, com ara Claude Code, com a servidor MCP.</translation>
     </message>
 </context>
 <context>
@@ -2397,7 +2397,7 @@
     </message>
     <message>
         <source>An automation tool is controlling Kondor</source>
-        <translation>Una eina d'automatització està controlant el Kondor</translation>
+        <translation>Una eina d&apos;automatització està controlant el Kondor</translation>
     </message>
     <message>
         <source>%1 is controlling Kondor</source>
@@ -2408,7 +2408,7 @@
     <name>RemoteControlConnectionRow</name>
     <message>
         <source>Automation tool</source>
-        <translation>Eina d'automatització</translation>
+        <translation>Eina d&apos;automatització</translation>
     </message>
     <message>
         <source>Connected since %1</source>

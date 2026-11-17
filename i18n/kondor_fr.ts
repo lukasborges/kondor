@@ -2211,7 +2211,7 @@
     </message>
     <message>
         <source>Add it to an AI agent, such as Claude Code, as an MCP server.</source>
-        <translation>Ajoutez-la à un agent d'IA, comme Claude Code, en tant que serveur MCP.</translation>
+        <translation>Ajoutez-la à un agent d&apos;IA, comme Claude Code, en tant que serveur MCP.</translation>
     </message>
 </context>
 <context>
@@ -2397,7 +2397,7 @@
     </message>
     <message>
         <source>An automation tool is controlling Kondor</source>
-        <translation>Un outil d'automatisation contrôle Kondor</translation>
+        <translation>Un outil d&apos;automatisation contrôle Kondor</translation>
     </message>
     <message>
         <source>%1 is controlling Kondor</source>
@@ -2408,7 +2408,7 @@
     <name>RemoteControlConnectionRow</name>
     <message>
         <source>Automation tool</source>
-        <translation>Outil d'automatisation</translation>
+        <translation>Outil d&apos;automatisation</translation>
     </message>
     <message>
         <source>Connected since %1</source>

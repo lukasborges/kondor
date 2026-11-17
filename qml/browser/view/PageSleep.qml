@@ -42,6 +42,13 @@ Item {
                               function(hasEditedFields) { root.discardUnlessEdited(hasEditedFields) })
     }
 
+    function updateSleepingIcon() {
+        if (isDiscarded())
+            FaviconStore.markSleeping(webView, webView.icon)
+        else
+            FaviconStore.markAwake(webView)
+    }
+
     function wakeUp() {
         if (webView.lifecycleState !== WebEngineView.LifecycleState.Active)
             webView.lifecycleState = WebEngineView.LifecycleState.Active
@@ -55,7 +62,12 @@ Item {
 
     Connections {
         target: root.webView
-        function onLifecycleStateChanged() { root.tab.sleep.setSleeping(root.isDiscarded()) }
+        function onLifecycleStateChanged() {
+            root.tab.sleep.setSleeping(root.isDiscarded())
+            root.updateSleepingIcon()
+        }
         function onVisibleChanged() { if (root.webView.visible) root.wakeUp() }
     }
+
+    Component.onDestruction: FaviconStore.markAwake(webView)
 }

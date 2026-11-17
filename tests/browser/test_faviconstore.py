@@ -1,7 +1,7 @@
 from collections.abc import Iterator
 
 import pytest
-from PySide6.QtCore import QSize, Qt, QUrl
+from PySide6.QtCore import QObject, QSize, Qt, QUrl
 from PySide6.QtGui import QColor, QImage
 from PySide6.QtQml import QQmlEngine
 from pytestqt.qtbot import QtBot
@@ -123,3 +123,17 @@ def test_has_icon_only_for_hosts_with_a_stored_icon(store: FaviconStore) -> None
     assert store.hasIcon(QUrl("https://kde.org/news"))
     assert not store.hasIcon(QUrl("https://example.org/"))
     assert not store.hasIcon(QUrl())
+
+
+def test_store_skips_an_icon_shown_by_a_sleeping_view(
+    store: FaviconStore, favicon_engine: QQmlEngine, qtbot: QtBot
+) -> None:
+    page, icon = QUrl("https://kde.org/"), QUrl("image://favicon/https://kde.org/icon.png")
+    sleeping_view = QObject()
+    store.markSleeping(sleeping_view, icon)
+    store.store(page, icon)
+    qtbot.wait(50)
+    assert favicon_count() == 0
+    store.markAwake(sleeping_view)
+    with qtbot.waitSignal(store.revisionChanged, timeout=5000):
+        store.store(page, icon)

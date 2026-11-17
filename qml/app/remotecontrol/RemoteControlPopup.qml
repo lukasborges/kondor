@@ -17,6 +17,14 @@ ToolbarPopup {
         root.browserWindow.openSettingsPage("privacy")
     }
 
+    Connections {
+        target: RemoteControl.connections
+        function onCountChanged() {
+            if (RemoteControl.connections.count === 0)
+                root.close()
+        }
+    }
+
     contentItem: ColumnLayout {
         spacing: Kirigami.Units.largeSpacing
 
@@ -64,6 +72,15 @@ ToolbarPopup {
             text: qsTr("Automation tools on this computer can read and control the pages of normal windows. Private browsing is unavailable.")
             wrapMode: Text.WordWrap
             Layout.fillWidth: true
+        }
+
+        Kirigami.Separator { Layout.fillWidth: true }
+
+        Repeater {
+            model: RemoteControl.connections
+            delegate: RemoteControlConnectionRow {
+                Layout.fillWidth: true
+            }
         }
 
         Kirigami.Separator { Layout.fillWidth: true }

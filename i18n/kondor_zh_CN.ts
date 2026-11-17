@@ -1636,6 +1636,25 @@
     </message>
 </context>
 <context>
+    <name>McpCommandRow</name>
+    <message>
+        <source>MCP server command</source>
+        <translation>MCP 服务器命令</translation>
+    </message>
+    <message>
+        <source>Copy Command</source>
+        <translation>复制命令</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>已复制</translation>
+    </message>
+    <message>
+        <source>Command copied</source>
+        <translation>命令已复制</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2173,6 +2192,14 @@
         <source>Port:</source>
         <translation>端口:</translation>
     </message>
+    <message>
+        <source>MCP server:</source>
+        <translation>MCP 服务器：</translation>
+    </message>
+    <message>
+        <source>Add it to an AI agent, such as Claude Code, as an MCP server.</source>
+        <translation>将它作为 MCP 服务器添加到 AI 代理（例如 Claude Code）。</translation>
+    </message>
 </context>
 <context>
     <name>ProfileButton</name>
@@ -2348,9 +2375,38 @@
 </context>
 <context>
     <name>RemoteControlButton</name>
+    <message numerus="yes">
+        <source>%n agents are controlling Kondor</source>
+        <translation>
+            <numerusform>%n 个代理正在控制 Kondor</numerusform>
+        </translation>
+    </message>
     <message>
-        <source>Remote control is on</source>
-        <translation>远程控制已开启</translation>
+        <source>An automation tool is controlling Kondor</source>
+        <translation>自动化工具正在控制 Kondor</translation>
+    </message>
+    <message>
+        <source>%1 is controlling Kondor</source>
+        <translation>%1 正在控制 Kondor</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlConnectionRow</name>
+    <message>
+        <source>Automation tool</source>
+        <translation>自动化工具</translation>
+    </message>
+    <message>
+        <source>Connected since %1</source>
+        <translation>自 %1 起已连接</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>断开连接</translation>
+    </message>
+    <message>
+        <source>Disconnect %1</source>
+        <translation>断开 %1 的连接</translation>
     </message>
 </context>
 <context>

@@ -1636,6 +1636,25 @@
     </message>
 </context>
 <context>
+    <name>McpCommandRow</name>
+    <message>
+        <source>MCP server command</source>
+        <translation>MCP 서버 명령</translation>
+    </message>
+    <message>
+        <source>Copy Command</source>
+        <translation>명령 복사</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>복사됨</translation>
+    </message>
+    <message>
+        <source>Command copied</source>
+        <translation>명령을 복사함</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2173,6 +2192,14 @@
         <source>Port:</source>
         <translation>포트:</translation>
     </message>
+    <message>
+        <source>MCP server:</source>
+        <translation>MCP 서버:</translation>
+    </message>
+    <message>
+        <source>Add it to an AI agent, such as Claude Code, as an MCP server.</source>
+        <translation>Claude Code와 같은 AI 에이전트에 MCP 서버로 추가하세요.</translation>
+    </message>
 </context>
 <context>
     <name>ProfileButton</name>
@@ -2348,9 +2375,38 @@
 </context>
 <context>
     <name>RemoteControlButton</name>
+    <message numerus="yes">
+        <source>%n agents are controlling Kondor</source>
+        <translation>
+            <numerusform>에이전트 %n개가 Kondor를 제어하고 있습니다</numerusform>
+        </translation>
+    </message>
     <message>
-        <source>Remote control is on</source>
-        <translation>원격 제어가 켜져 있음</translation>
+        <source>An automation tool is controlling Kondor</source>
+        <translation>자동화 도구가 Kondor를 제어하고 있습니다</translation>
+    </message>
+    <message>
+        <source>%1 is controlling Kondor</source>
+        <translation>%1이(가) Kondor를 제어하고 있습니다</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlConnectionRow</name>
+    <message>
+        <source>Automation tool</source>
+        <translation>자동화 도구</translation>
+    </message>
+    <message>
+        <source>Connected since %1</source>
+        <translation>%1부터 연결됨</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>연결 끊기</translation>
+    </message>
+    <message>
+        <source>Disconnect %1</source>
+        <translation>%1 연결 끊기</translation>
     </message>
 </context>
 <context>

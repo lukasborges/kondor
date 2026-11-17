@@ -1636,6 +1636,25 @@
     </message>
 </context>
 <context>
+    <name>McpCommandRow</name>
+    <message>
+        <source>MCP server command</source>
+        <translation>MCP sunucusu komutu</translation>
+    </message>
+    <message>
+        <source>Copy Command</source>
+        <translation>Komutu Kopyala</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Kopyalandı</translation>
+    </message>
+    <message>
+        <source>Command copied</source>
+        <translation>Komut kopyalandı</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2173,6 +2192,14 @@
         <source>Port:</source>
         <translation>Bağlantı noktası:</translation>
     </message>
+    <message>
+        <source>MCP server:</source>
+        <translation>MCP sunucusu:</translation>
+    </message>
+    <message>
+        <source>Add it to an AI agent, such as Claude Code, as an MCP server.</source>
+        <translation>Bunu Claude Code gibi bir yapay zekâ ajanına MCP sunucusu olarak ekleyin.</translation>
+    </message>
 </context>
 <context>
     <name>ProfileButton</name>
@@ -2348,9 +2375,38 @@
 </context>
 <context>
     <name>RemoteControlButton</name>
+    <message numerus="yes">
+        <source>%n agents are controlling Kondor</source>
+        <translation>
+            <numerusform>%n ajan Kondor&apos;u denetliyor</numerusform>
+        </translation>
+    </message>
     <message>
-        <source>Remote control is on</source>
-        <translation>Uzaktan denetim açık</translation>
+        <source>An automation tool is controlling Kondor</source>
+        <translation>Bir otomasyon aracı Kondor&apos;u denetliyor</translation>
+    </message>
+    <message>
+        <source>%1 is controlling Kondor</source>
+        <translation>%1 Kondor&apos;u denetliyor</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlConnectionRow</name>
+    <message>
+        <source>Automation tool</source>
+        <translation>Otomasyon aracı</translation>
+    </message>
+    <message>
+        <source>Connected since %1</source>
+        <translation>%1 tarihinden beri bağlı</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>Bağlantıyı Kes</translation>
+    </message>
+    <message>
+        <source>Disconnect %1</source>
+        <translation>%1 bağlantısını kes</translation>
     </message>
 </context>
 <context>

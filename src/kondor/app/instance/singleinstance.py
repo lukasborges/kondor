@@ -13,6 +13,7 @@ from PySide6.QtCore import (
 )
 from PySide6.QtNetwork import QLocalServer, QLocalSocket
 
+from kondor.app.instance.sessionprotocol import is_session_line, parse_object
 from kondor.app.instance.singleinstancemessage import (
     SingleInstanceMessage,
     from_json_line,
@@ -67,6 +68,7 @@ def server_name_for(profile_id: str) -> str:
 
 class SingleInstance(QObject):
     messageReceived = Signal(object)
+    sessionLineReceived = Signal(object, object)
 
     def __init__(self, server_name: str = "", parent: QObject | None = None) -> None:
         super().__init__(parent)
@@ -143,4 +145,10 @@ class SingleInstance(QObject):
         *lines, rest = self._buffers[socket].split(b"\n")
         self._buffers[socket] = rest
         for line in lines:
+            self.dispatch(socket, line)
+
+    def dispatch(self, socket: QLocalSocket, line: bytes) -> None:
+        if is_session_line(line):
+            self.sessionLineReceived.emit(socket, parse_object(line))
+        else:
             self.messageReceived.emit(from_json_line(line))

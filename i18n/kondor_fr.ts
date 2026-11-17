@@ -1649,6 +1649,25 @@
     </message>
 </context>
 <context>
+    <name>McpCommandRow</name>
+    <message>
+        <source>MCP server command</source>
+        <translation>Commande du serveur MCP</translation>
+    </message>
+    <message>
+        <source>Copy Command</source>
+        <translation>Copier la commande</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Copié</translation>
+    </message>
+    <message>
+        <source>Command copied</source>
+        <translation>Commande copiée</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2186,6 +2205,14 @@
         <source>Port:</source>
         <translation>Port :</translation>
     </message>
+    <message>
+        <source>MCP server:</source>
+        <translation>Serveur MCP :</translation>
+    </message>
+    <message>
+        <source>Add it to an AI agent, such as Claude Code, as an MCP server.</source>
+        <translation>Ajoutez-la à un agent d&apos;IA, comme Claude Code, en tant que serveur MCP.</translation>
+    </message>
 </context>
 <context>
     <name>ProfileButton</name>
@@ -2361,9 +2388,39 @@
 </context>
 <context>
     <name>RemoteControlButton</name>
+    <message numerus="yes">
+        <source>%n agents are controlling Kondor</source>
+        <translation>
+            <numerusform>%n agent contrôle Kondor</numerusform>
+            <numerusform>%n agents contrôlent Kondor</numerusform>
+        </translation>
+    </message>
     <message>
-        <source>Remote control is on</source>
-        <translation>Le contrôle à distance est activé</translation>
+        <source>An automation tool is controlling Kondor</source>
+        <translation>Un outil d&apos;automatisation contrôle Kondor</translation>
+    </message>
+    <message>
+        <source>%1 is controlling Kondor</source>
+        <translation>%1 contrôle Kondor</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlConnectionRow</name>
+    <message>
+        <source>Automation tool</source>
+        <translation>Outil d&apos;automatisation</translation>
+    </message>
+    <message>
+        <source>Connected since %1</source>
+        <translation>Connecté depuis %1</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>Déconnecter</translation>
+    </message>
+    <message>
+        <source>Disconnect %1</source>
+        <translation>Déconnecter %1</translation>
     </message>
 </context>
 <context>

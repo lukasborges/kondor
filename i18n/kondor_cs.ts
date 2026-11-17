@@ -1662,6 +1662,25 @@
     </message>
 </context>
 <context>
+    <name>McpCommandRow</name>
+    <message>
+        <source>MCP server command</source>
+        <translation>Příkaz serveru MCP</translation>
+    </message>
+    <message>
+        <source>Copy Command</source>
+        <translation>Kopírovat příkaz</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Zkopírováno</translation>
+    </message>
+    <message>
+        <source>Command copied</source>
+        <translation>Příkaz zkopírován</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2199,6 +2218,14 @@
         <source>Port:</source>
         <translation>Port:</translation>
     </message>
+    <message>
+        <source>MCP server:</source>
+        <translation>Server MCP:</translation>
+    </message>
+    <message>
+        <source>Add it to an AI agent, such as Claude Code, as an MCP server.</source>
+        <translation>Přidejte jej do agenta umělé inteligence, například Claude Code, jako server MCP.</translation>
+    </message>
 </context>
 <context>
     <name>ProfileButton</name>
@@ -2374,9 +2401,40 @@
 </context>
 <context>
     <name>RemoteControlButton</name>
+    <message numerus="yes">
+        <source>%n agents are controlling Kondor</source>
+        <translation>
+            <numerusform>Kondor ovládá %n agent</numerusform>
+            <numerusform>Kondor ovládají %n agenti</numerusform>
+            <numerusform>Kondor ovládá %n agentů</numerusform>
+        </translation>
+    </message>
     <message>
-        <source>Remote control is on</source>
-        <translation>Vzdálené ovládání je zapnuto</translation>
+        <source>An automation tool is controlling Kondor</source>
+        <translation>Kondor ovládá automatizační nástroj</translation>
+    </message>
+    <message>
+        <source>%1 is controlling Kondor</source>
+        <translation>Kondor ovládá %1</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlConnectionRow</name>
+    <message>
+        <source>Automation tool</source>
+        <translation>Automatizační nástroj</translation>
+    </message>
+    <message>
+        <source>Connected since %1</source>
+        <translation>Připojeno od %1</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>Odpojit</translation>
+    </message>
+    <message>
+        <source>Disconnect %1</source>
+        <translation>Odpojit %1</translation>
     </message>
 </context>
 <context>

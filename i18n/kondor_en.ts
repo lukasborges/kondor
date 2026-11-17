@@ -108,4 +108,14 @@
         </translation>
     </message>
 </context>
+<context>
+    <name>RemoteControlButton</name>
+    <message numerus="yes">
+        <source>%n agents are controlling Kondor</source>
+        <translation>
+            <numerusform>%n agent is controlling Kondor</numerusform>
+            <numerusform>%n agents are controlling Kondor</numerusform>
+        </translation>
+    </message>
+</context>
 </TS>

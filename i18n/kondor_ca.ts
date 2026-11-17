@@ -1649,6 +1649,25 @@
     </message>
 </context>
 <context>
+    <name>McpCommandRow</name>
+    <message>
+        <source>MCP server command</source>
+        <translation>Ordre del servidor MCP</translation>
+    </message>
+    <message>
+        <source>Copy Command</source>
+        <translation>Copia l&apos;ordre</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>S&apos;ha copiat</translation>
+    </message>
+    <message>
+        <source>Command copied</source>
+        <translation>S&apos;ha copiat l&apos;ordre</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2186,6 +2205,14 @@
         <source>Port:</source>
         <translation>Port:</translation>
     </message>
+    <message>
+        <source>MCP server:</source>
+        <translation>Servidor MCP:</translation>
+    </message>
+    <message>
+        <source>Add it to an AI agent, such as Claude Code, as an MCP server.</source>
+        <translation>Afegiu-la a un agent d&apos;IA, com ara Claude Code, com a servidor MCP.</translation>
+    </message>
 </context>
 <context>
     <name>ProfileButton</name>
@@ -2361,9 +2388,39 @@
 </context>
 <context>
     <name>RemoteControlButton</name>
+    <message numerus="yes">
+        <source>%n agents are controlling Kondor</source>
+        <translation>
+            <numerusform>%n agent està controlant el Kondor</numerusform>
+            <numerusform>%n agents estan controlant el Kondor</numerusform>
+        </translation>
+    </message>
     <message>
-        <source>Remote control is on</source>
-        <translation>El control remot està activat</translation>
+        <source>An automation tool is controlling Kondor</source>
+        <translation>Una eina d&apos;automatització està controlant el Kondor</translation>
+    </message>
+    <message>
+        <source>%1 is controlling Kondor</source>
+        <translation>%1 està controlant el Kondor</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlConnectionRow</name>
+    <message>
+        <source>Automation tool</source>
+        <translation>Eina d&apos;automatització</translation>
+    </message>
+    <message>
+        <source>Connected since %1</source>
+        <translation>Connectat des de les %1</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>Desconnecta</translation>
+    </message>
+    <message>
+        <source>Disconnect %1</source>
+        <translation>Desconnecta %1</translation>
     </message>
 </context>
 <context>

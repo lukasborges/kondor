@@ -1649,6 +1649,25 @@
     </message>
 </context>
 <context>
+    <name>McpCommandRow</name>
+    <message>
+        <source>MCP server command</source>
+        <translation>MCP-Server-Befehl</translation>
+    </message>
+    <message>
+        <source>Copy Command</source>
+        <translation>Befehl kopieren</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Kopiert</translation>
+    </message>
+    <message>
+        <source>Command copied</source>
+        <translation>Befehl kopiert</translation>
+    </message>
+</context>
+<context>
     <name>NavigationToolBar</name>
     <message>
         <source>Back</source>
@@ -2186,6 +2205,14 @@
         <source>Port:</source>
         <translation>Port:</translation>
     </message>
+    <message>
+        <source>MCP server:</source>
+        <translation>MCP-Server:</translation>
+    </message>
+    <message>
+        <source>Add it to an AI agent, such as Claude Code, as an MCP server.</source>
+        <translation>Fügen Sie ihn einem KI-Agenten wie Claude Code als MCP-Server hinzu.</translation>
+    </message>
 </context>
 <context>
     <name>ProfileButton</name>
@@ -2361,9 +2388,39 @@
 </context>
 <context>
     <name>RemoteControlButton</name>
+    <message numerus="yes">
+        <source>%n agents are controlling Kondor</source>
+        <translation>
+            <numerusform>%n Agent steuert Kondor</numerusform>
+            <numerusform>%n Agenten steuern Kondor</numerusform>
+        </translation>
+    </message>
     <message>
-        <source>Remote control is on</source>
-        <translation>Fernsteuerung ist aktiviert</translation>
+        <source>An automation tool is controlling Kondor</source>
+        <translation>Ein Automatisierungswerkzeug steuert Kondor</translation>
+    </message>
+    <message>
+        <source>%1 is controlling Kondor</source>
+        <translation>%1 steuert Kondor</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlConnectionRow</name>
+    <message>
+        <source>Automation tool</source>
+        <translation>Automatisierungswerkzeug</translation>
+    </message>
+    <message>
+        <source>Connected since %1</source>
+        <translation>Verbunden seit %1</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>Trennen</translation>
+    </message>
+    <message>
+        <source>Disconnect %1</source>
+        <translation>%1 trennen</translation>
     </message>
 </context>
 <context>

@@ -5,6 +5,7 @@ from PySide6.QtWidgets import QApplication
 
 from kondor.app.commandline.commandline import CommandLine, parse_command_line, resolve_urls
 from kondor.app.instance.singleinstance import SingleInstance
+from kondor.app.mcp.server import mcpmain
 from kondor.app.remotecontrol import remotecontrolstartup
 from kondor.app.startup.appidentity import set_up_identity
 from kondor.app.startup.appstartup import (
@@ -85,6 +86,8 @@ def select_profile_and_launch(app: QApplication, single_instance: SingleInstance
 
 
 def main() -> int:
+    if "--mcp" in sys.argv[1:]:
+        return mcpmain.run(sys.argv[1:])
     install_logging_rules()
     app = start_application()
     if app is None:

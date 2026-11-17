@@ -16,6 +16,7 @@ FLAGS = (
     ("private", "open URLs in a private tab"),
     ("new-window", "open the URLs in a new window of the running instance"),
     ("new-instance", "start a separate process instead of reusing the running one"),
+    ("mcp", "serve the Model Context Protocol on stdin and stdout for AI agents"),
 )
 
 

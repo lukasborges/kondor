@@ -7,6 +7,8 @@ from PySide6.QtCore import QSettings
 
 from kondor.core.settings.settings import DEFAULT_TAB_SLEEP_MINUTES, Settings
 from kondor.core.settings.settingsdefaults import default_download_directory
+from kondor.profiles.activeprofile import ActiveProfile
+from kondor.profiles.userprofile import DEFAULT_ID
 from tests.core.settingsrows import (
     DEFAULT_NAMES,
     DEFAULT_ROWS,
@@ -125,3 +127,18 @@ def test_stored_unknown_tab_style_reads_as_floating(settings_file: Path) -> None
 def test_unknown_tab_sleep_minutes_fall_back_to_default(settings: Settings) -> None:
     settings.setProperty("tabSleepMinutes", 7)
     assert settings.property("tabSleepMinutes") == DEFAULT_TAB_SLEEP_MINUTES
+
+
+def test_non_default_profile_writes_to_its_own_file(
+    qapp: object, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(Settings, "_instance", None)
+    ActiveProfile.select("work")
+    try:
+        Settings.instance().setProperty("homePage", "https://kde.org")
+        own = ActiveProfile.settings().value("General/HomePage")
+        default = QSettings("KDE", "Kondor").value("General/HomePage")
+    finally:
+        ActiveProfile.select(DEFAULT_ID)
+    assert own == "https://kde.org"
+    assert default != "https://kde.org"

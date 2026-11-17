@@ -1,5 +1,4 @@
 import pytest
-from PySide6.QtCore import QUrl
 
 from kondor.app.commandline.commandline import CommandLine
 from kondor.profiles.activeprofile import ActiveProfile
@@ -87,7 +86,7 @@ def test_links_go_to_the_last_used_profile_without_asking() -> None:
     registry.set_startup_profile_id(ASK_EVERY_TIME)
     registry.set_last_used_id(work)
     chooser = RecordingChooser(None)
-    command_line = CommandLine(urls=[QUrl("https://kde.org")])
+    command_line = CommandLine(arguments=["https://kde.org"])
 
     assert select_profile(command_line, chooser, []) is None
     assert ActiveProfile.id() == work

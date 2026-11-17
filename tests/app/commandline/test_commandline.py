@@ -1,7 +1,8 @@
 import pytest
 from PySide6.QtCore import QUrl
 
-from kondor.app.commandline.commandline import CommandLine, parse_arguments
+from kondor.app.commandline.commandline import CommandLine, parse_arguments, resolve_urls
+from kondor.core.settings.settings import Settings
 
 pytestmark = pytest.mark.usefixtures("qapp")
 
@@ -12,7 +13,24 @@ def test_flags_and_resolved_url() -> None:
     assert parsed.is_private
     assert parsed.new_window
     assert not parsed.new_instance
+    assert parsed.arguments == ["kde.org"]
+    assert parsed.urls == []
+
+
+def test_urls_are_resolved_on_request() -> None:
+    parsed = parse_arguments(["kondor", "kde.org"])
+
+    resolve_urls(parsed)
+
     assert parsed.urls == [QUrl("https://kde.org")]
+
+
+def test_parsing_does_not_build_the_settings(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(Settings, "_instance", None)
+
+    parse_arguments(["kondor", "kde.org"])
+
+    assert Settings._instance is None
 
 
 def test_load_extension_values_keep_their_order() -> None:

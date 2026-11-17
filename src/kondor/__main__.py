@@ -3,7 +3,7 @@ import sys
 from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtWidgets import QApplication
 
-from kondor.app.commandline.commandline import CommandLine, parse_command_line
+from kondor.app.commandline.commandline import CommandLine, parse_command_line, resolve_urls
 from kondor.app.instance.singleinstance import SingleInstance
 from kondor.app.remotecontrol import remotecontrolstartup
 from kondor.app.startup.appidentity import set_up_identity
@@ -74,17 +74,22 @@ def launch(app: QApplication, single_instance: SingleInstance, command_line: Com
     return run_browser(app, single_instance) if failure is None else failure
 
 
-def main() -> int:
-    install_message_handler()
-    app = start_application()
-    if app is None:
-        return 1
+def select_profile_and_launch(app: QApplication, single_instance: SingleInstance) -> int:
     command_line = parse_command_line(app)
     arguments = app.arguments()[1:]
     status = select_profile(command_line, lambda: ask_for_profile(app), arguments)
     if status is not None:
         return status
-    return launch(app, SingleInstance(), command_line)
+    resolve_urls(command_line)
+    return launch(app, single_instance, command_line)
+
+
+def main() -> int:
+    install_message_handler()
+    app = start_application()
+    if app is None:
+        return 1
+    return select_profile_and_launch(app, SingleInstance())
 
 
 if __name__ == "__main__":

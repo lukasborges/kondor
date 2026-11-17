@@ -72,14 +72,3 @@ def test_f5_still_does_a_normal_reload(shortcuts_window: MainMenuHarness) -> Non
 
     assert shortcuts_window.window.property("normalReloads") == 1
     assert shortcuts_window.window.property("bypassReloads") == 0
-
-
-def test_command_emits_only_its_own_signal(shortcuts_window: MainMenuHarness) -> None:
-    tab = shortcuts_window.tabs.currentTab
-    emitted: list[str] = []
-    tab.reloadBypassingCacheRequested.connect(lambda: emitted.append("bypass"))
-    tab.reloadRequested.connect(lambda: emitted.append("normal"))
-
-    tab.reloadBypassingCache()
-
-    assert emitted == ["bypass"]

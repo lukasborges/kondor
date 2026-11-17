@@ -54,19 +54,16 @@ Item {
             WebEngineScript.ApplicationWorld)
     }
 
-    function reload() {
+    function wakeOrRun(action) {
         if (webView.lifecycleState === WebEngineView.LifecycleState.Active)
-            webView.reload()
+            action()
         else
             webView.lifecycleState = WebEngineView.LifecycleState.Active
     }
 
-    function reloadBypassingCache() {
-        if (webView.lifecycleState === WebEngineView.LifecycleState.Active)
-            webView.reloadAndBypassCache()
-        else
-            webView.lifecycleState = WebEngineView.LifecycleState.Active
-    }
+    function reload() { wakeOrRun(() => webView.reload()) }
+
+    function reloadBypassingCache() { wakeOrRun(() => webView.reloadAndBypassCache()) }
 
     function stepZoom(direction) {
         webView.zoomFactor = ZoomManager.step(webView.zoomFactor, direction)

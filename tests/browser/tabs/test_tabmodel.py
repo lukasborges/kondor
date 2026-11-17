@@ -1,5 +1,6 @@
 import pytest
 from PySide6.QtCore import QUrl
+from pytestqt.qtbot import QtBot
 
 from kondor.browser.profile.profilemanager import ProfileManager
 from kondor.browser.tabs.tabmodel import TabModel
@@ -84,3 +85,12 @@ def test_private_window_keeps_every_tab_private(model: TabModel) -> None:
     assert from_add_tab.isPrivate
     assert from_profile.isPrivate
     assert from_profile.profile.isOffTheRecord()
+
+
+def test_reload_bypassing_cache_emits_only_its_own_signal(model: TabModel, qtbot: QtBot) -> None:
+    tab = model.addTab()
+    with (
+        qtbot.assertNotEmitted(tab.reloadRequested),
+        qtbot.waitSignal(tab.reloadBypassingCacheRequested),
+    ):
+        tab.reloadBypassingCache()

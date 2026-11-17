@@ -20,6 +20,14 @@ def program_words(
 ) -> list[str]:
     if environment.get("FLATPAK_ID"):
         return ["flatpak", "run", environment["FLATPAK_ID"]]
+    return start_words(environment, find_on_path, python)
+
+
+def start_words(
+    environment: Mapping[str, str], find_on_path: FindOnPath, python: str
+) -> list[str]:
+    if environment.get("FLATPAK_ID"):
+        return ["kondor"]
     if environment.get("APPIMAGE"):
         return [environment["APPIMAGE"]]
     if is_this_installation(find_on_path("kondor"), python):
@@ -47,9 +55,10 @@ def active_profile_name() -> str | None:
 
 
 def launch_words(environment: Mapping[str, str]) -> list[str]:
-    words = program_words(environment, shutil.which, sys.executable)
+    words = start_words(environment, shutil.which, sys.executable)
     return [*words, *profile_words(active_profile_name())]
 
 
 def mcp_words(environment: Mapping[str, str]) -> list[str]:
-    return [*launch_words(environment), "--mcp"]
+    words = program_words(environment, shutil.which, sys.executable)
+    return [*words, *profile_words(active_profile_name()), "--mcp"]

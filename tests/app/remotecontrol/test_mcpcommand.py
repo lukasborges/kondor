@@ -38,3 +38,17 @@ def test_ignores_a_kondor_on_the_path_from_another_installation() -> None:
 def test_adds_the_profile_option() -> None:
     assert mcpcommand.profile_words("Work") == ["--profile", "Work"]
     assert mcpcommand.profile_words(None) == []
+
+
+def test_starts_the_in_sandbox_program_for_a_flatpak() -> None:
+    result = mcpcommand.start_words(
+        {"FLATPAK_ID": "io.github.lukasborges.Kondor"}, lambda name: None, PYTHON
+    )
+
+    assert result == ["kondor"]
+
+
+def test_starts_the_appimage_itself() -> None:
+    result = mcpcommand.start_words({"APPIMAGE": "/a/K.AppImage"}, lambda name: None, PYTHON)
+
+    assert result == ["/a/K.AppImage"]

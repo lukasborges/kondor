@@ -60,6 +60,27 @@ def test_reports_the_client_that_initialized() -> None:
     assert seen == [("Claude Code", "2")]
 
 
+def test_reports_the_title_of_the_client_when_it_has_one() -> None:
+    dispatcher = make_dispatcher()
+    seen: list[str] = []
+    dispatcher.on_client_known = lambda name, version: seen.append(name)
+
+    info = {"name": "claude-code", "title": "Claude Code", "version": "2"}
+    dispatcher.handle(request("initialize", {"clientInfo": info}))
+
+    assert seen == ["Claude Code"]
+
+
+def test_reports_the_name_of_the_client_without_a_title() -> None:
+    dispatcher = make_dispatcher()
+    seen: list[str] = []
+    dispatcher.on_client_known = lambda name, version: seen.append(name)
+
+    dispatcher.handle(request("initialize", {"clientInfo": {"name": "tool", "title": ""}}))
+
+    assert seen == ["tool"]
+
+
 def test_answers_ping_with_an_empty_result() -> None:
     assert answer("ping")["result"] == {}
 

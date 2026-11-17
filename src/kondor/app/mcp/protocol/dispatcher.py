@@ -10,6 +10,13 @@ LATEST_VERSION = KNOWN_VERSIONS[0]
 Notify = Callable[[str, str], None]
 
 
+def display_name(info: JsonObject) -> str:
+    title = info.get("title")
+    if isinstance(title, str) and title:
+        return title
+    return str(info.get("name", ""))
+
+
 class Dispatcher:
     def __init__(self, tools: list[Tool], context: object, version: str) -> None:
         self._tools = {tool.name: tool for tool in tools}
@@ -58,7 +65,7 @@ class Dispatcher:
     def remember_client(self, info: object) -> None:
         if not isinstance(info, dict):
             return
-        self.on_client_known(str(info.get("name", "")), str(info.get("version", "")))
+        self.on_client_known(display_name(info), str(info.get("version", "")))
 
     def list_tools(self, params: JsonObject) -> JsonObject:
         return {"tools": [tool.definition() for tool in self._tools.values()]}

@@ -23,6 +23,7 @@ Rectangle {
     property bool withExtensions: false // #107: show the Extensions page
     property bool withAppearance: false // #211: show the Appearance tab of the General page
     property bool withRemoteControl: false // #256: remote control turned on, restart pending
+    property bool withMcpCommand: false // #398: the MCP server command for AI agents
     property bool withPerformance: false // #257: show the Performance tab of the General page
     property bool appearanceVertical: false // #212: the Tabs picker also offers Side Bar
     property bool extensionsEmpty: false // #107: no extension installed (placeholder)
@@ -186,7 +187,7 @@ Rectangle {
                     Kirigami.FormLayout {
                         RowLayout {
                             Kirigami.FormData.label: "Save files to:"
-                            TextField { text: "/home/user/Downloads"; readOnly: true; Layout.preferredWidth: Kirigami.Units.gridUnit * 16 }
+                            TextField { text: "/home/user/Downloads"; readOnly: true; Layout.preferredWidth: Kirigami.Units.gridUnit * 21 }
                             Button { text: "Choose…"; icon.name: "document-open-folder" }
                         }
                         CheckBox { text: "Ask where to save each file" }
@@ -221,6 +222,30 @@ Rectangle {
                             Kirigami.FormData.label: "Port:"
                             from: 1024; to: 65535; value: 9222
                             textFromValue: function(value) { return String(value) }
+                        }
+                        RowLayout {
+                            visible: root.withMcpCommand
+                            Kirigami.FormData.label: "MCP server:"
+                            Layout.fillWidth: true
+                            TextField {
+                                Layout.preferredWidth: Kirigami.Units.gridUnit * 21
+                                readOnly: true
+                                font.family: "monospace"
+                                text: "flatpak run io.github.lukasborges.Kondor --mcp"
+                                Accessible.name: "MCP server command"
+                            }
+                            ToolButton {
+                                icon.name: "edit-copy"
+                                display: AbstractButton.IconOnly
+                                ToolTip.text: "Copy Command"
+                                ToolTip.delay: 600
+                                Accessible.name: "Copy Command"
+                            }
+                        }
+                        Label {
+                            visible: root.withMcpCommand
+                            text: "Add it to an AI agent, such as Claude Code, as an MCP server."
+                            color: Kirigami.Theme.disabledTextColor
                         }
                     }
 

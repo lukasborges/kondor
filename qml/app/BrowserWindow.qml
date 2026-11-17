@@ -32,6 +32,14 @@ ApplicationWindow {
         browserWindow: window
     }
 
+    function showToolbars() {
+        if (windowFullScreen)
+            windowFullScreen = false
+        else
+            Settings.hideToolbars = false
+        toolbarsHint.hide()
+    }
+    function revealToolbars() { toolbarVisibility.reveal() }
     function openUrl(url, background) { tabControl.openUrl(url, background) }
     function openUrlInNewTab(url) { tabControl.openUrlInNewTab(url) }
     function openUrlsInNewTabs(urls) { tabControl.openUrlsInNewTabs(urls) }
@@ -39,7 +47,7 @@ ApplicationWindow {
     function openBookmarks() { windowDialogs.openBookmarks() }
     function openNewProfile() { windowDialogs.openNewProfile() }
     function openManageProfiles() { windowDialogs.openManageProfiles() }
-    function openBookmarkEditor() { toolBar.bookmarkEditor.openEditor() }
+    function openBookmarkEditor() { headerPane.toolBar.bookmarkEditor.openEditor() }
     function closeTabAt(index) { tabControl.closeTabAt(index) }
     function closeTabFor(tab) { tabControl.closeTabFor(tab) }
     function openTabContextMenu(tab, position) { tabControl.openTabContextMenu(tab, position) }
@@ -75,7 +83,7 @@ ApplicationWindow {
         id: tabControl
         tabs: window.tabModel
         browserWindow: window
-        navigationBar: toolBar
+        navigationBar: headerPane.toolBar
     }
 
     WindowDialogs {
@@ -89,47 +97,27 @@ ApplicationWindow {
         tabs: window.tabModel
     }
 
-    DownloadSaveDialog { downloadsPopup: toolBar.downloadsPopup }
+    DownloadSaveDialog { downloadsPopup: headerPane.toolBar.downloadsPopup }
 
     BrowserShortcuts {
         tabs: window.tabModel
         browserWindow: window
         tabController: tabControl
         dialogs: windowDialogs
-        navigationBar: toolBar
+        navigationBar: headerPane.toolBar
         pageArea: pageContent
         fullScreen: fullScreenControl
     }
 
-    header: GridLayout {
-        columns: 1
-        rowSpacing: 0
-        visible: !fullScreenControl.pageFullScreen
-
-        TabStrip {
-            visible: !window.tabsInSideBar
-            Layout.row: window.tabsBelowAddressBar ? 1 : 0
-            Layout.fillWidth: true
-            tabModel: window.tabModel
-            targetWindow: window
-            privateWindow: window.privateWindow
-            onNewTabRequested: tabControl.openNewTab(false)
-        }
-
-        NavigationToolBar {
-            id: toolBar
-            Layout.row: window.tabsBelowAddressBar ? 0 : 1
-            Layout.fillWidth: true
-            tabs: window.tabModel
-            browserWindow: window
-        }
-
-        BookmarksBar {
-            Layout.row: 2
-            Layout.fillWidth: true
-            tabModel: window.tabModel
-            onManageBookmarksRequested: window.openBookmarks()
-        }
+    header: WindowHeader {
+        id: headerPane
+        tabModel: window.tabModel
+        browserWindow: window
+        areToolbarsHidden: toolbarVisibility.areHidden
+        isRevealed: toolbarVisibility.isRevealed
+        isPageFullScreen: fullScreenControl.pageFullScreen
+        onNewTabRequested: tabControl.openNewTab(false)
+        onManageBookmarksRequested: window.openBookmarks()
     }
 
     RowLayout {
@@ -138,18 +126,14 @@ ApplicationWindow {
         LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
         LayoutMirroring.childrenInherit: true
 
-        TabSideBar {
+        WindowSideBar {
+            id: sideBarPane
             visible: window.tabsInSideBar && !fullScreenControl.pageFullScreen
             tabModel: window.tabModel
             targetWindow: window
-            Layout.fillHeight: true
-            Layout.preferredWidth: implicitWidth
+            areToolbarsHidden: toolbarVisibility.areHidden
+            isRevealed: toolbarVisibility.isRevealed
             onNewTabRequested: tabControl.openNewTab(false)
-        }
-
-        Kirigami.Separator {
-            visible: window.tabsInSideBar && !fullScreenControl.pageFullScreen
-            Layout.fillHeight: true
         }
 
         PageArea {
@@ -161,10 +145,41 @@ ApplicationWindow {
         }
     }
 
+    EdgeTrigger {
+        id: topEdgeTrigger
+        enabled: toolbarVisibility.areHidden && !toolbarVisibility.isRevealed
+        width: parent.width
+        height: 4
+    }
+
+    EdgeTrigger {
+        id: leftEdgeTrigger
+        enabled: toolbarVisibility.areHidden && !toolbarVisibility.isRevealed && window.tabsInSideBar
+        width: 4
+        height: parent.height
+    }
+
+    ToolbarVisibility {
+        id: toolbarVisibility
+        targetWindow: window
+        panes: [headerPane, sideBarPane]
+        isPointerAtEdge: topEdgeTrigger.isHovered || leftEdgeTrigger.isHovered
+        isWindowFullScreen: fullScreenControl.windowFullScreen
+        isPageFullScreen: fullScreenControl.pageFullScreen
+        onHiddenHintRequested: toolbarsHint.show()
+    }
+
     FullScreenHint {
         id: fullScreenHint
         //: Shown for a few seconds when a page enters full screen
         text: qsTr("Press Esc to exit full screen")
         anchors.horizontalCenter: parent.horizontalCenter
+    }
+
+    ToolbarsHiddenHint {
+        id: toolbarsHint
+        isWindowFullScreen: window.windowFullScreen
+        anchors.horizontalCenter: parent.horizontalCenter
+        onActionTriggered: window.showToolbars()
     }
 }

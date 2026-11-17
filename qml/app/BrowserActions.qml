@@ -75,6 +75,13 @@ QtObject {
         enabled: root.fileDialogs.canPrintOrSave
         onTriggered: root.fileDialogs.savePageAs()
     }
+    readonly property Action hideToolbarsAction: Action {
+        text: qsTr("Hide Toolbars")
+        shortcut: "Ctrl+Shift+F"
+        checkable: true
+        checked: Settings.hideToolbars
+        onToggled: Settings.hideToolbars = checked
+    }
     readonly property Action devToolsAction: Action {
         text: qsTr("Developer Tools")
         icon.name: "code-context"

@@ -63,6 +63,8 @@ Menu {
         onFullScreenToggled: root.toggleFullScreen()
     }
 
+    MenuItem { action: root.browserWindow.actions.hideToolbarsAction }
+
     MenuSeparator {}
 
     Menu {

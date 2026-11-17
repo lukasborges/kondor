@@ -434,6 +434,10 @@
         <translation>另存頁面為…</translation>
     </message>
     <message>
+        <source>Hide Toolbars</source>
+        <translation>隱藏工具列</translation>
+    </message>
+    <message>
         <source>Developer Tools</source>
         <translation>開發人員工具</translation>
     </message>
@@ -3131,6 +3135,30 @@
     <message>
         <source>Classic</source>
         <translation>經典</translation>
+    </message>
+</context>
+<context>
+    <name>ToolbarsHiddenHint</name>
+    <message>
+        <source>Toolbars hidden</source>
+        <extracomment>Shown for a few seconds after the toolbars get hidden</extracomment>
+        <translation>工具列已隱藏</translation>
+    </message>
+    <message>
+        <source>Show Toolbars</source>
+        <translation>顯示工具列</translation>
+    </message>
+    <message>
+        <source>F11, or move the pointer to the top</source>
+        <translation>F11,或將指標移到頂端</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+F, or move the pointer to the top</source>
+        <translation>Ctrl+Shift+F,或將指標移到頂端</translation>
+    </message>
+    <message>
+        <source>Toolbars hidden. Move the pointer to the top edge or press Ctrl+L to show them.</source>
+        <translation>工具列已隱藏。將指標移到頂端邊緣或按 Ctrl+L 即可顯示。</translation>
     </message>
 </context>
 <context>

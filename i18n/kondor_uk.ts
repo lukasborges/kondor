@@ -434,6 +434,10 @@
         <translation>Зберегти сторінку як…</translation>
     </message>
     <message>
+        <source>Hide Toolbars</source>
+        <translation>Сховати панелі інструментів</translation>
+    </message>
+    <message>
         <source>Developer Tools</source>
         <translation>Засоби розробника</translation>
     </message>
@@ -3157,6 +3161,30 @@
     <message>
         <source>Classic</source>
         <translation>Класичні</translation>
+    </message>
+</context>
+<context>
+    <name>ToolbarsHiddenHint</name>
+    <message>
+        <source>Toolbars hidden</source>
+        <extracomment>Shown for a few seconds after the toolbars get hidden</extracomment>
+        <translation>Панелі інструментів сховано</translation>
+    </message>
+    <message>
+        <source>Show Toolbars</source>
+        <translation>Показати панелі інструментів</translation>
+    </message>
+    <message>
+        <source>F11, or move the pointer to the top</source>
+        <translation>F11 або перемістіть вказівник угору</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+F, or move the pointer to the top</source>
+        <translation>Ctrl+Shift+F або перемістіть вказівник угору</translation>
+    </message>
+    <message>
+        <source>Toolbars hidden. Move the pointer to the top edge or press Ctrl+L to show them.</source>
+        <translation>Панелі інструментів сховано. Перемістіть вказівник до верхнього краю або натисніть Ctrl+L, щоб їх показати.</translation>
     </message>
 </context>
 <context>

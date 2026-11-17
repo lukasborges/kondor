@@ -65,7 +65,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 - **Reader mode** for clutter-free articles
 - **Find in page**, **zoom per site** and **spell checking**
 - **Print**, **save as PDF** or **save the page**
-- **Full screen** for videos and windows
+- **Full screen** for videos and windows, and hide the toolbars to show only the page
 
 ### Library
 - **Bookmarks** with a panel, a drag-and-drop toolbar, folders and Firefox/Chrome import
@@ -117,7 +117,8 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 | `F3` / `Shift+F3` | Next / previous match (find bar open) |
 | `Esc` | Close the find bar; leave page full screen |
 | `Shift+F10` / `Menu` | Open the page context menu |
-| `F11` | Toggle window full screen |
+| `F11` | Toggle window full screen (hides the toolbars) |
+| `Ctrl+Shift+F` | Hide or show the toolbars |
 | `Ctrl+R` / `F5` | Reload |
 | `Alt+←` / `Alt+→` | Back / forward |
 | `Ctrl++` / `Ctrl+-` | Zoom in / out |

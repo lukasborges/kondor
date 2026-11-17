@@ -52,6 +52,11 @@ ApplicationWindow {
             text: "Save Page As…"
             shortcut: StandardKey.Save
         }
+        readonly property Action hideToolbarsAction: Action {
+            text: "Hide Toolbars"
+            shortcut: "Ctrl+Shift+F"
+            checkable: true
+        }
         readonly property Action devToolsAction: Action { text: "Developer Tools"; shortcut: "F12" }
         readonly property Action saveAsPdfAction: Action { text: "Save as PDF…" }
         readonly property Action sitePermissionsAction: Action { text: "Site Permissions…" }
@@ -73,6 +78,7 @@ ApplicationWindow {
 MAIN_MENU_QML = "MainMenu {\n        id: mainMenu\n        browserWindow: window\n    }"
 TOOL_BAR_QML = (
     "function openSettingsPage(pageId) {}\n"
+    "    function revealToolbars() {}\n"
     "    NavigationToolBar { tabs: tabs; browserWindow: window; width: 600 }"
 )
 TOOL_BAR_WINDOW_QML = STUB_WINDOW_QML.replace(MAIN_MENU_QML, TOOL_BAR_QML)

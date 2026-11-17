@@ -19,6 +19,7 @@ ToolBar {
     }
 
     function focusAddressBar() {
+        browserWindow.revealToolbars()
         addressBar.focusAndSelectAll()
     }
 

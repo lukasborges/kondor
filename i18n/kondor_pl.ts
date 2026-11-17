@@ -434,6 +434,10 @@
         <translation>Zapisz stronę jako…</translation>
     </message>
     <message>
+        <source>Hide Toolbars</source>
+        <translation>Ukryj paski narzędzi</translation>
+    </message>
+    <message>
         <source>Developer Tools</source>
         <translation>Narzędzia programistyczne</translation>
     </message>
@@ -3157,6 +3161,30 @@
     <message>
         <source>Classic</source>
         <translation>Klasyczne</translation>
+    </message>
+</context>
+<context>
+    <name>ToolbarsHiddenHint</name>
+    <message>
+        <source>Toolbars hidden</source>
+        <extracomment>Shown for a few seconds after the toolbars get hidden</extracomment>
+        <translation>Paski narzędzi ukryte</translation>
+    </message>
+    <message>
+        <source>Show Toolbars</source>
+        <translation>Pokaż paski narzędzi</translation>
+    </message>
+    <message>
+        <source>F11, or move the pointer to the top</source>
+        <translation>F11 lub przesuń wskaźnik na górę</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+F, or move the pointer to the top</source>
+        <translation>Ctrl+Shift+F lub przesuń wskaźnik na górę</translation>
+    </message>
+    <message>
+        <source>Toolbars hidden. Move the pointer to the top edge or press Ctrl+L to show them.</source>
+        <translation>Paski narzędzi ukryte. Przesuń wskaźnik do górnej krawędzi lub naciśnij Ctrl+L, aby je pokazać.</translation>
     </message>
 </context>
 <context>

@@ -434,6 +434,10 @@
         <translation>名前を付けてページを保存…</translation>
     </message>
     <message>
+        <source>Hide Toolbars</source>
+        <translation>ツールバーを隠す</translation>
+    </message>
+    <message>
         <source>Developer Tools</source>
         <translation>開発者ツール</translation>
     </message>
@@ -3131,6 +3135,30 @@
     <message>
         <source>Classic</source>
         <translation>クラシック</translation>
+    </message>
+</context>
+<context>
+    <name>ToolbarsHiddenHint</name>
+    <message>
+        <source>Toolbars hidden</source>
+        <extracomment>Shown for a few seconds after the toolbars get hidden</extracomment>
+        <translation>ツールバーを非表示にしました</translation>
+    </message>
+    <message>
+        <source>Show Toolbars</source>
+        <translation>ツールバーを表示</translation>
+    </message>
+    <message>
+        <source>F11, or move the pointer to the top</source>
+        <translation>F11、またはポインターを上端に移動</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+F, or move the pointer to the top</source>
+        <translation>Ctrl+Shift+F、またはポインターを上端に移動</translation>
+    </message>
+    <message>
+        <source>Toolbars hidden. Move the pointer to the top edge or press Ctrl+L to show them.</source>
+        <translation>ツールバーを非表示にしました。ポインターを上端に移動するか Ctrl+L を押すと表示されます。</translation>
     </message>
 </context>
 <context>

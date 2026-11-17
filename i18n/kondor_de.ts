@@ -434,6 +434,10 @@
         <translation>Seite speichern unter …</translation>
     </message>
     <message>
+        <source>Hide Toolbars</source>
+        <translation>Werkzeugleisten ausblenden</translation>
+    </message>
+    <message>
         <source>Developer Tools</source>
         <translation>Entwicklerwerkzeuge</translation>
     </message>
@@ -3144,6 +3148,30 @@
     <message>
         <source>Classic</source>
         <translation>Klassisch</translation>
+    </message>
+</context>
+<context>
+    <name>ToolbarsHiddenHint</name>
+    <message>
+        <source>Toolbars hidden</source>
+        <extracomment>Shown for a few seconds after the toolbars get hidden</extracomment>
+        <translation>Werkzeugleisten ausgeblendet</translation>
+    </message>
+    <message>
+        <source>Show Toolbars</source>
+        <translation>Werkzeugleisten anzeigen</translation>
+    </message>
+    <message>
+        <source>F11, or move the pointer to the top</source>
+        <translation>F11 oder den Mauszeiger nach oben bewegen</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+F, or move the pointer to the top</source>
+        <translation>Strg+Umschalt+F oder den Mauszeiger nach oben bewegen</translation>
+    </message>
+    <message>
+        <source>Toolbars hidden. Move the pointer to the top edge or press Ctrl+L to show them.</source>
+        <translation>Werkzeugleisten ausgeblendet. Bewegen Sie den Mauszeiger an den oberen Rand oder drücken Sie Strg+L, um sie anzuzeigen.</translation>
     </message>
 </context>
 <context>

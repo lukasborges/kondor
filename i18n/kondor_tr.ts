@@ -434,6 +434,10 @@
         <translation>Sayfayı Farklı Kaydet…</translation>
     </message>
     <message>
+        <source>Hide Toolbars</source>
+        <translation>Araç Çubuklarını Gizle</translation>
+    </message>
+    <message>
         <source>Developer Tools</source>
         <translation>Geliştirici Araçları</translation>
     </message>
@@ -3131,6 +3135,30 @@
     <message>
         <source>Classic</source>
         <translation>Klasik</translation>
+    </message>
+</context>
+<context>
+    <name>ToolbarsHiddenHint</name>
+    <message>
+        <source>Toolbars hidden</source>
+        <extracomment>Shown for a few seconds after the toolbars get hidden</extracomment>
+        <translation>Araç çubukları gizlendi</translation>
+    </message>
+    <message>
+        <source>Show Toolbars</source>
+        <translation>Araç Çubuklarını Göster</translation>
+    </message>
+    <message>
+        <source>F11, or move the pointer to the top</source>
+        <translation>F11 veya işaretçiyi en üste taşıyın</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+F, or move the pointer to the top</source>
+        <translation>Ctrl+Shift+F veya işaretçiyi en üste taşıyın</translation>
+    </message>
+    <message>
+        <source>Toolbars hidden. Move the pointer to the top edge or press Ctrl+L to show them.</source>
+        <translation>Araç çubukları gizlendi. Göstermek için işaretçiyi üst kenara taşıyın veya Ctrl+L tuşlarına basın.</translation>
     </message>
 </context>
 <context>

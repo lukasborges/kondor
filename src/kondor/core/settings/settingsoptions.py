@@ -38,6 +38,7 @@ STORED_OPTIONS = (
     option("General/Startup", "startupBehavior", str),
     option("UI/ShowBookmarksBar", "showBookmarksBar", bool),
     option("UI/SideBarCollapsed", "sideBarCollapsed", bool),
+    option("UI/HideToolbars", "hideToolbars", bool),
     option("NewTab/ShowTopSites", "showTopSites", bool),
     string_list_option("NewTab/HiddenTopSites", "hiddenTopSites"),
     option("Privacy/ClearOnExit", "clearDataOnExit", bool),

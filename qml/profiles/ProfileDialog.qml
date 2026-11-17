@@ -44,12 +44,17 @@ Dialog {
     function confirm() {
         if (root.isRejectedName)
             return
-        if (root.isNew)
-            root.profileId = UserProfiles.createProfile(nameField.text, iconPicker.iconName)
-        else
-            UserProfiles.editProfile(root.profileId, nameField.text, iconPicker.iconName)
-        root.profileSaved(root.profileId, root.isNew)
+        const wasNew = root.isNew
+        root.profileId = root.saveProfile()
+        root.profileSaved(root.profileId, wasNew)
         root.close()
+    }
+
+    function saveProfile() {
+        if (root.isNew)
+            return UserProfiles.createProfile(nameField.text, iconPicker.iconName)
+        UserProfiles.editProfile(root.profileId, nameField.text, iconPicker.iconName)
+        return root.profileId
     }
 
     onOpened: {

@@ -1,6 +1,7 @@
 from collections.abc import Iterator
 
 import pytest
+from PySide6.QtCore import QCoreApplication, QMetaObject, QObject, QPointF
 from PySide6.QtQml import QQmlEngine
 from PySide6.QtQuick import QQuickItem, QQuickWindow
 
@@ -14,16 +15,22 @@ pytestmark = pytest.mark.no_qt_log
 
 SCENE_QML = """
 import QtQuick
+import QtQuick.Layouts
 import Kondor
 
 Item {
     width: 600
     height: 100
     Item { id: field; objectName: "field"; anchors.fill: parent }
-    PopupBlockedButton {
-        objectName: "button"
-        tabs: testTabs
-        addressField: field
+    RowLayout {
+        anchors.fill: parent
+        Item { Layout.fillWidth: true }
+        PopupBlockedButton {
+            objectName: "button"
+            tabs: testTabs
+            addressField: field
+        }
+        Item { implicitWidth: 120 }
     }
 }
 """
@@ -68,6 +75,16 @@ def scene(tabs: TabModel, kondor_engine: QQmlEngine) -> Iterator[Scene]:
     shown.release()
 
 
+def has_popups_property(item: QObject) -> bool:
+    return item.metaObject().indexOfProperty("popups") >= 0
+
+
+def popups_panel(button: QQuickItem) -> QObject:
+    panels = [child for child in button.children() if has_popups_property(child)]
+    assert len(panels) == 1
+    return panels[0]
+
+
 def open_tab(tabs: TabModel) -> Tab:
     tab = tabs.addTab()
     tab.setUrl(tab.url.fromUserInput(PAGE))
@@ -86,3 +103,17 @@ def test_button_hides_again_after_the_last_pop_up_is_opened(tabs: TabModel, scen
     tab.popups.add_blocked(POPUP)
     tab.popups.openBlocked(POPUP)
     assert not scene.button.isVisible()
+
+
+def test_panel_is_right_aligned_under_its_button(tabs: TabModel, scene: Scene) -> None:
+    tab = open_tab(tabs)
+    tab.popups.add_blocked(POPUP)
+    panel = popups_panel(scene.button)
+    scene.root.setWidth(900)
+    QMetaObject.invokeMethod(panel, "open")
+    QCoreApplication.processEvents()
+    anchor = panel.property("parent")
+    panel_edge = QPointF(panel.property("x") + panel.property("width"), 0)
+    panel_right = anchor.mapToItem(scene.root, panel_edge).x()
+    button_right = scene.button.mapToItem(scene.root, QPointF(scene.button.width(), 0)).x()
+    assert abs(panel_right - button_right) <= 1

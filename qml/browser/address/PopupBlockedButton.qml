@@ -36,10 +36,9 @@ ToolButton {
 
     BlockedPopupsPanel {
         id: panel
-        parent: root.addressField
         popups: root.tabs.currentTab ? root.tabs.currentTab.popups : null
-        x: root.mapToItem(root.addressField, root.width, 0).x - width
-        y: root.addressField.height
+        x: root.width - width
+        y: root.height + (root.addressField.height - root.height) / 2
     }
 
     Connections {

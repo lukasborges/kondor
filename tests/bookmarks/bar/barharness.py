@@ -2,7 +2,6 @@ from PySide6.QtCore import QCoreApplication, QEvent, QObject
 from PySide6.QtQml import QQmlComponent, QQmlEngine, QQmlExpression, qmlContext
 from PySide6.QtTest import QTest
 
-from kondor.browser.profile.profilemanager import ProfileManager
 from kondor.browser.tabs.tabmodel import TabModel
 from tests.bookmarks.bookmarkrows import add_page, manager
 from tests.qmlsupport import error_text, load_component
@@ -117,12 +116,3 @@ def fill_toolbar(count: int) -> None:
     for number in range(count):
         add_page(manager().toolbarFolderId(), f"Bookmark number {number}", f"page{number}")
     QTest.qWait(50)
-
-
-def release_profiles() -> None:
-    profiles = ProfileManager.instance()
-    for profile in [*profiles._private_profiles, profiles._default_profile]:
-        if profile is not None:
-            profile.deleteLater()
-    profiles._default_profile = None
-    QCoreApplication.sendPostedEvents(None, QEvent.Type.DeferredDelete)

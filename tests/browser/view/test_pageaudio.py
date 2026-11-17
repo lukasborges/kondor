@@ -8,7 +8,7 @@ from pytestqt.qtbot import QtBot
 
 from kondor.browser.profile.profilemanager import ProfileManager
 from kondor.browser.tabs.tab import Tab
-from tests.qmlsupport import error_text, load_component
+from tests.qmlsupport import error_text, load_component, release
 
 pytestmark = pytest.mark.no_qt_log
 
@@ -41,14 +41,19 @@ class Scene:
         assert found is not None
         return found
 
+    def release(self, *owned: QObject) -> None:
+        self.window.close()
+        release(self.root)
+        release(self.window, self.component)
+        release(*owned)
+
 
 @pytest.fixture
 def scene_and_tab(kondor_engine: QQmlEngine) -> Iterator[tuple[Scene, Tab]]:
     tab = Tab(ProfileManager.instance().defaultProfile())
     scene = Scene(kondor_engine, tab)
     yield scene, tab
-    scene.root.deleteLater()
-    tab.deleteLater()
+    scene.release(tab)
 
 
 def test_toggle_request_mutes_the_view_and_flows_back(
@@ -77,5 +82,4 @@ def test_new_view_starts_muted_when_the_tab_is_muted(
     tab.audio.setMuted(True)
     scene = Scene(kondor_engine, tab)
     assert scene.view.property("audioMuted") is True
-    scene.root.deleteLater()
-    tab.deleteLater()
+    scene.release(tab)

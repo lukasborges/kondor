@@ -10,7 +10,7 @@ from kondor.browser.profile.profilemanager import ProfileManager
 from kondor.browser.tabs.tab import Tab
 from kondor.browser.tabs.tabmodel import TabModel
 from tests.extensions.pageserver import PageServer
-from tests.qmlsupport import error_text, load_component
+from tests.qmlsupport import error_text, load_component, release
 
 pytestmark = pytest.mark.no_qt_log
 
@@ -102,6 +102,12 @@ class Scene:
     def run(self, code: str) -> None:
         QMetaObject.invokeMethod(self.view, "runJavaScript", Q_ARG(str, code))
 
+    def release(self, *owned: QObject) -> None:
+        self.window.close()
+        release(self.root)
+        release(self.window, self.component)
+        release(*owned)
+
 
 @pytest.fixture
 def loaded_scene(
@@ -113,9 +119,7 @@ def loaded_scene(
     scene.view.setProperty("url", server.url())
     qtbot.waitUntil(lambda: bool(scene.root.property("loaded")), timeout=LOAD_TIMEOUT)
     yield scene, tab, server
-    scene.window.close()
-    scene.root.deleteLater()
-    tab.deleteLater()
+    scene.release(tab, server)
 
 
 def test_hidden_idle_page_is_discarded(
@@ -151,8 +155,8 @@ def test_sleeping_keeps_the_title_and_url_of_the_tab(
     tab.sleep.putToSleep()
     qtbot.waitUntil(lambda: lifecycle_of(root) == DISCARDED, timeout=LOAD_TIMEOUT)
     assert (tab.title, tab.url.toString()) == ("form", server.url())
-    root.deleteLater()
-    model.deleteLater()
+    release(root)
+    release(component, model, server)
 
 
 def test_page_with_an_edited_field_is_not_discarded(

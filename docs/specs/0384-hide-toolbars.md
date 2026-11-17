@@ -62,8 +62,17 @@ them (Ctrl+L).
   are hidden by full screen either way).
 - **Ctrl+Shift+F** toggles the setting from anywhere in the window; add it to the README shortcut
   table.
-- Entering F11 full screen shows the existing hint, with "Press F11 to exit full screen", for 3 s;
-  page full screen keeps its Esc hint.
+- Page full screen (videos) keeps its Esc hint.
+- **Floating hint** (`prototypes/384d-toolbars-hidden-hint.qml`): every time the toolbars get
+  hidden (Hide Toolbars turned on by menu or Ctrl+Shift+F, and on entering F11 instead of the plain
+  F11 hint), a pill at the top center of the page for 5 s, in the page full screen hint's style
+  (`Complementary` colors, 0.95 opacity) plus a 1 px outline in the text color at 30 % so it shows on
+  dark and light pages: the label "Toolbars hidden" and a **Show Toolbars** button (`view-visible`),
+  tooltip "Ctrl+Shift+F, or move the pointer to the top" (in F11: "F11, or move the pointer to the
+  top"). The button turns Hide Toolbars off (in F11 it leaves full screen). The timer pauses while
+  the pointer is over the pill, and it fades out with `Kirigami.Units.shortDuration`. Reuse and
+  extend `qml/browser/view/FullScreenHint.qml` rather than a second hint component. It never takes
+  the keyboard focus.
 - When the setting is turned on, `Accessible.announce("Toolbars hidden. Move the pointer to the top
   edge or press Ctrl+L to show them.")` once, so screen reader users know how to get back.
 
@@ -77,6 +86,8 @@ them (Ctrl+L).
       after the pointer leaves, but not while the address bar has focus or one of their popups is
       open. Ctrl+L reveals them and focuses the address bar.
 - [ ] Vertical tab styles: the side bar is hidden and comes back at the left edge.
+- [ ] Hiding the toolbars shows the floating hint for 5 s (`384d-toolbars-hidden-hint.png`); its
+      Show Toolbars button brings them back; hovering it keeps it up.
 - [ ] Find bar and InlineBars still show while the toolbars are hidden.
 - [ ] Page full screen (YouTube) behaves as before.
 - [ ] Matches `384-toolbars-hidden.png`, `384b-toolbars-revealed.png`, `384c-hide-toolbars-menu.png`;
@@ -120,6 +131,8 @@ Kondor open).
 - [`prototypes/384c-hide-toolbars-menu.qml`](../../prototypes/384c-hide-toolbars-menu.qml) →
   [screenshot](../../prototypes/screenshots/384c-hide-toolbars-menu.png)
   (`withHideToolbars` in `prototypes/common/MainMenuMock.qml`)
+- [`prototypes/384d-toolbars-hidden-hint.qml`](../../prototypes/384d-toolbars-hidden-hint.qml) →
+  [screenshot](../../prototypes/screenshots/384d-toolbars-hidden-hint.png)
 
 ## Decisions
 
@@ -131,3 +144,4 @@ Kondor open).
 | Hide the InlineBars and find bar too? | No: they ask for an answer or show what the user is doing; hiding them would hide a question. |
 | Name and place? | A checkable "Hide Toolbars" in the main menu under the zoom row, unchecked by default: the maintainer's choice over KDE's usual "Show Toolbar" wording (first proposal), because the action is the exception and reads as what it does. Ctrl+Shift+F because Ctrl+M (KDE's "Show Menubar") is Mute Tab in Kondor. |
 | Remember it? | Yes, globally: it is how the maintainer wants to browse; the top-edge reveal and Ctrl+L keep it discoverable. |
+| How does the user get back? (maintainer: "should there be something floating?") | A floating hint for 5 s each time the toolbars hide, with a Show Toolbars button; after that the top edge and the shortcut. A permanent floating button was rejected: it would always cover part of the page in the mode meant to show only the page. |

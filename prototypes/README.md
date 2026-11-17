@@ -82,6 +82,7 @@ Tips when editing:
 | #375 Pop-up blocker | `375-popup-blocked.qml`, `375b-popup-allowed-site-info.qml` |
 | #376 Browser identity per site | `376-site-browser-identity.qml`, `376b-custom-browser-identity.qml` |
 | #384 Hide the toolbars | `384-toolbars-hidden.qml`, `384b-toolbars-revealed.qml`, `384c-hide-toolbars-menu.qml` (`withHideToolbars` in `common/MainMenuMock.qml`), `384d-toolbars-hidden-hint.qml` |
+| #385 Agent pointer | `385-agent-pointer.qml` |
 
 Issues without UI (#10 default browser, #15 single instance, #19 translations, #25 Flatpak,
 #26 tests) have no prototype.

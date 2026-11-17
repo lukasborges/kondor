@@ -14,8 +14,8 @@ QtObject {
     function rowFor(permission) {
         return {
             site: typeInfo.hostFor(permission.origin),
-            perm: typeInfo.labelFor(permission.permissionType),
-            ic: typeInfo.iconFor(permission.permissionType),
+            label: typeInfo.labelFor(permission.permissionType),
+            iconName: typeInfo.iconFor(permission.permissionType),
             granted: permission.state === WebEnginePermission.State.Granted,
             canRevoke: true,
             permission: permission
@@ -25,8 +25,8 @@ QtObject {
     function popupRow(host, canRevoke) {
         return {
             site: host,
-            perm: qsTr("Pop-ups"),
-            ic: "window-duplicate-symbolic",
+            label: qsTr("Pop-ups"),
+            iconName: "window-duplicate-symbolic",
             granted: true,
             canRevoke: canRevoke,
             permission: null

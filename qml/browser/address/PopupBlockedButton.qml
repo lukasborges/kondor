@@ -38,7 +38,7 @@ ToolButton {
         id: panel
         parent: root.addressField
         popups: root.tabs.currentTab ? root.tabs.currentTab.popups : null
-        x: root.addressField.width - width - 96
+        x: root.mapToItem(root.addressField, root.width, 0).x - width
         y: root.addressField.height
     }
 

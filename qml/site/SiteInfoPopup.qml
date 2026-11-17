@@ -116,7 +116,7 @@ ToolbarPopup {
                     spacing: Kirigami.Units.smallSpacing
 
                     Kirigami.Icon {
-                        source: permissionRow.modelData.ic
+                        source: permissionRow.modelData.iconName
                         Layout.preferredWidth: Kirigami.Units.iconSizes.small
                         Layout.preferredHeight: Kirigami.Units.iconSizes.small
                     }
@@ -124,7 +124,7 @@ ToolbarPopup {
                     Label {
                         Layout.fillWidth: true
                         elide: Text.ElideRight
-                        text: permissionRow.modelData.perm
+                        text: permissionRow.modelData.label
                     }
 
                     Label {

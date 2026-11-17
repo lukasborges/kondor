@@ -102,7 +102,7 @@ def test_dialog_lists_decisions(qtbot: QtBot, dialog: QQuickWindow) -> None:
     rows = rows_of(dialog)
     assert len(rows) == 1
     assert rows[0]["site"] == "permissions.example"
-    assert rows[0]["perm"] == "Location"
+    assert rows[0]["label"] == "Location"
     assert rows[0]["granted"] is True
 
 
@@ -113,7 +113,7 @@ def revoke_row(dialog: QQuickWindow, row: dict[str, Any]) -> None:
 
 
 def pop_up_rows(dialog: QQuickWindow) -> list[dict[str, Any]]:
-    return [row for row in rows_of(dialog) if row["perm"] == "Pop-ups"]
+    return [row for row in rows_of(dialog) if row["label"] == "Pop-ups"]
 
 
 def test_dialog_lists_the_pop_up_exception(

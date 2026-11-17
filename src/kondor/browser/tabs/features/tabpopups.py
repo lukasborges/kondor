@@ -32,7 +32,7 @@ class TabPopups(QObject):
         self._blocked: list[str] = []
         self._host = ""
         self._is_allowed = False
-        SiteSettings.instance().changed.connect(self._refresh_allowed)
+        SiteSettings.instance().changed.connect(self._on_site_settings_changed)
 
     blockedUrls = Property("QStringList", lambda self: list(self._blocked), notify=blockedChanged)
     host = Property(str, lambda self: self._host, notify=hostChanged)
@@ -74,7 +74,11 @@ class TabPopups(QObject):
             return
         SiteSettings.instance().setPopupsAllowed(self._host, allowed)
 
-    def _refresh_allowed(self, host: str = "") -> None:
+    @Slot(str)
+    def _on_site_settings_changed(self, _host: str) -> None:
+        self._refresh_allowed()
+
+    def _refresh_allowed(self) -> None:
         allowed = bool(self._host) and SiteSettings.instance().popupsAllowed(self._host)
         if allowed == self._is_allowed:
             return

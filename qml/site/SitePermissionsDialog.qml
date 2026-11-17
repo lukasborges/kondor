@@ -42,7 +42,7 @@ ApplicationWindow {
 
     function compareRows(a, b) {
         if (a.site === b.site)
-            return a.perm.localeCompare(b.perm)
+            return a.label.localeCompare(b.label)
         return a.site.localeCompare(b.site)
     }
 
@@ -128,8 +128,8 @@ ApplicationWindow {
                 delegate: ItemDelegate {
                     id: permissionDelegate
 
-                    required property string perm
-                    required property string ic
+                    required property string label
+                    required property string iconName
                     required property bool granted
                     required property bool canRevoke
                     required property var modelData
@@ -139,12 +139,12 @@ ApplicationWindow {
                         spacing: Kirigami.Units.largeSpacing
 
                         Kirigami.Icon {
-                            source: permissionDelegate.ic
+                            source: permissionDelegate.iconName
                             Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
                             Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
                         }
                         Label {
-                            text: permissionDelegate.perm
+                            text: permissionDelegate.label
                             Layout.fillWidth: true
                         }
                         Label {

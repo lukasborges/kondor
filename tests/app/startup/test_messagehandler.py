@@ -10,6 +10,7 @@ from kondor.app.startup.messagehandler import is_silenced
         pytest.param(QtMsgType.QtDebugMsg, "default", True, id="debug is silenced"),
         pytest.param(QtMsgType.QtInfoMsg, "default", True, id="info is silenced"),
         pytest.param(QtMsgType.QtDebugMsg, "kondor.extensions", False, id="extension debug"),
+        pytest.param(QtMsgType.QtInfoMsg, "kondor.krunner", False, id="krunner info"),
         pytest.param(QtMsgType.QtWarningMsg, "default", False, id="warning is shown"),
         pytest.param(QtMsgType.QtDebugMsg, None, True, id="no category"),
     ],

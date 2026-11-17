@@ -2,12 +2,12 @@ import sys
 
 from PySide6.QtCore import QMessageLogContext, QtMsgType, qInstallMessageHandler
 
-EXTENSIONS_CATEGORY = "kondor.extensions"
+SHOWN_CATEGORIES = ("kondor.extensions", "kondor.krunner")
 CHATTY_TYPES = (QtMsgType.QtDebugMsg, QtMsgType.QtInfoMsg)
 
 
 def is_silenced(message_type: QtMsgType, category: str | None) -> bool:
-    return message_type in CHATTY_TYPES and category != EXTENSIONS_CATEGORY
+    return message_type in CHATTY_TYPES and category not in SHOWN_CATEGORIES
 
 
 def print_to_standard_error(

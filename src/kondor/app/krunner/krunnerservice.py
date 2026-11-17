@@ -2,7 +2,7 @@ from collections.abc import Callable
 from typing import Any, ClassVar
 
 import shiboken6
-from PySide6.QtCore import QObject
+from PySide6.QtCore import QMessageLogger, QObject
 
 from kondor.app.instance.singleinstancemessage import SingleInstanceMessage
 from kondor.app.krunner.opentabs import open_tabs
@@ -15,8 +15,13 @@ from kondor.core.dbus.sessionbusservice import SessionBusService
 SERVICE_NAME = "io.github.lukasborges.Kondor.KRunner"
 OBJECT_PATH = "/KRunner"
 INTERFACE = "org.kde.krunner1"
+LOG_CATEGORY = "kondor.krunner"
 Reply = tuple[str, tuple[Any, ...]]
 NO_REPLY: Reply = ("", ())
+
+
+def log_another_instance_answers() -> None:
+    QMessageLogger("", 0, "", LOG_CATEGORY).info("Kondor: another instance answers KRunner")
 
 
 def is_open_tab_alive(match: RunnerMatch) -> bool:
@@ -42,7 +47,10 @@ class KRunnerService(QObject):
         return cls._instance
 
     def start(self) -> bool:
-        return self._bus.start(SERVICE_NAME)
+        if self._bus.start(SERVICE_NAME):
+            return True
+        log_another_instance_answers()
+        return False
 
     def stop(self) -> None:
         self._bus.stop()

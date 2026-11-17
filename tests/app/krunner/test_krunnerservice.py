@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from PySide6.QtCore import QObject, QUrl
+from PySide6.QtCore import QObject, QUrl, qInstallMessageHandler
 
 from kondor.app.instance.singleinstancemessage import SingleInstanceMessage
 from kondor.app.krunner.krunnerservice import KRunnerService
@@ -136,3 +136,21 @@ def test_unknown_member_returns_none(service: KRunnerService) -> None:
 
 def test_display_string_hides_the_user_info() -> None:
     assert display_string(QUrl("https://user:secret@kde.org:8080/a")) == "https://kde.org:8080/a"
+
+
+def test_second_instance_logs_that_another_answers(qapp: object) -> None:
+    first, second = KRunnerService(), KRunnerService()
+    seen: list[tuple[str | None, str]] = []
+
+    def record(message_type: object, context: object, message: str) -> None:
+        seen.append((getattr(context, "category", None), message))
+
+    previous = qInstallMessageHandler(record)
+    try:
+        started = (first.start(), second.start())
+    finally:
+        qInstallMessageHandler(previous)
+        first.stop()
+        second.stop()
+    assert started == (True, False)
+    assert seen == [("kondor.krunner", "Kondor: another instance answers KRunner")]

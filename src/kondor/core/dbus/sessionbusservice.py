@@ -5,7 +5,7 @@ from jeepney import new_error, new_method_return, new_signal
 from jeepney.bus_messages import message_bus
 from jeepney.io.blocking import DBusConnection, open_dbus_connection
 from jeepney.wrappers import DBusAddress
-from PySide6.QtCore import QObject, QSocketNotifier, qInfo, qWarning
+from PySide6.QtCore import QObject, QSocketNotifier, qWarning
 
 from kondor.core.dbus.buscall import (
     BusCall,
@@ -62,7 +62,6 @@ class SessionBusService(QObject):
             return False
         service_name = resolve_name(name, str(connection.unique_name))
         if not owns_service_name(connection, service_name):
-            qInfo(f"Kondor: the bus name {service_name} is taken")
             connection.close()
             return False
         self._watch(connection)

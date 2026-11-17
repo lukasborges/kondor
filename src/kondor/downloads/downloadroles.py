@@ -99,7 +99,7 @@ ROLE_READERS: dict[int, tuple[bytes, RoleReader]] = {
     Role.ReceivedBytesRole: (b"receivedBytes", received_bytes_of),
     Role.TotalBytesRole: (b"totalBytes", lambda item: item.download.totalBytes()),
     Role.ProgressRole: (b"progress", progress_of),
-    Role.StateRole: (b"state", lambda item: int(item.download.state().value)),
+    Role.StateRole: (b"downloadState", lambda item: int(item.download.state().value)),
     Role.IsPausedRole: (b"isPaused", lambda item: item.download.isPaused()),
     Role.IsPrivateRole: (b"isPrivate", lambda item: item.is_private),
     Role.SpeedTextRole: (b"speedText", speed_text_of),

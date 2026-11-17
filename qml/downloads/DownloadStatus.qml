@@ -13,7 +13,7 @@ QtObject {
     })
 
     function text(download) {
-        const handler = stateHandlers[download.state]
+        const handler = stateHandlers[download.downloadState]
         return handler ? handler(download) : ""
     }
 

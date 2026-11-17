@@ -91,7 +91,7 @@ def expected_text(pattern: str) -> str:
 
 def download_map(case: Case) -> dict[str, object]:
     return {
-        "state": int(case.state),
+        "downloadState": int(case.state),
         "isPaused": case.is_paused,
         "receivedBytes": case.received,
         "totalBytes": case.total,

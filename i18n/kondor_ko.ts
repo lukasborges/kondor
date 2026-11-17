@@ -1302,14 +1302,6 @@
         <source>Reload the page to use the new browser identity.</source>
         <translation>새 브라우저 ID를 사용하려면 페이지를 새로 고치세요.</translation>
     </message>
-    <message>
-        <source>Reload</source>
-        <translation>새로 고침</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>닫기</translation>
-    </message>
 </context>
 <context>
     <name>IdentityChoices</name>
@@ -2340,6 +2332,17 @@
     </message>
 </context>
 <context>
+    <name>ReloadOfferBar</name>
+    <message>
+        <source>Reload</source>
+        <translation>새로고침</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>닫기</translation>
+    </message>
+</context>
+<context>
     <name>RemoteControlButton</name>
     <message>
         <source>Remote control is on</source>
@@ -2935,14 +2938,6 @@
     <message>
         <source>%1 will stop running on this site after reloading.</source>
         <translation>다시 불러오면 이 사이트에서 %1 이(가) 더 이상 실행되지 않습니다.</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>새로고침</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>닫기</translation>
     </message>
 </context>
 <context>

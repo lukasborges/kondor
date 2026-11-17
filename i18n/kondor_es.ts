@@ -1305,14 +1305,6 @@
         <source>Reload the page to use the new browser identity.</source>
         <translation>Vuelva a cargar la página para usar la nueva identidad del navegador.</translation>
     </message>
-    <message>
-        <source>Reload</source>
-        <translation>Recargar</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Cerrar</translation>
-    </message>
 </context>
 <context>
     <name>IdentityChoices</name>
@@ -2353,6 +2345,17 @@
     </message>
 </context>
 <context>
+    <name>ReloadOfferBar</name>
+    <message>
+        <source>Reload</source>
+        <translation>Volver a cargar</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Cerrar</translation>
+    </message>
+</context>
+<context>
     <name>RemoteControlButton</name>
     <message>
         <source>Remote control is on</source>
@@ -2948,14 +2951,6 @@
     <message>
         <source>%1 will stop running on this site after reloading.</source>
         <translation>%1 dejará de ejecutarse en este sitio después de recargar.</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>Volver a cargar</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Cerrar</translation>
     </message>
 </context>
 <context>

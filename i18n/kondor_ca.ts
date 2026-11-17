@@ -579,7 +579,7 @@
     </message>
     <message>
         <source>User agent:</source>
-        <translation>Agent d'usuari:</translation>
+        <translation>Agent d&apos;usuari:</translation>
     </message>
 </context>
 <context>
@@ -1304,14 +1304,6 @@
     <message>
         <source>Reload the page to use the new browser identity.</source>
         <translation>Torneu a carregar la pàgina per utilitzar la nova identitat del navegador.</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>Torna a carregar</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Tanca</translation>
     </message>
 </context>
 <context>
@@ -2353,6 +2345,17 @@
     </message>
 </context>
 <context>
+    <name>ReloadOfferBar</name>
+    <message>
+        <source>Reload</source>
+        <translation>Torna a carregar</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Tanca</translation>
+    </message>
+</context>
+<context>
     <name>RemoteControlButton</name>
     <message>
         <source>Remote control is on</source>
@@ -2948,14 +2951,6 @@
     <message>
         <source>%1 will stop running on this site after reloading.</source>
         <translation>%1 deixarà d&apos;executar-se en aquest lloc després de tornar a carregar.</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>Torna a carregar</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Tanca</translation>
     </message>
 </context>
 <context>

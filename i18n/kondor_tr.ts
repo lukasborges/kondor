@@ -1302,14 +1302,6 @@
         <source>Reload the page to use the new browser identity.</source>
         <translation>Yeni tarayıcı kimliğini kullanmak için sayfayı yeniden yükleyin.</translation>
     </message>
-    <message>
-        <source>Reload</source>
-        <translation>Yeniden yükle</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Kapat</translation>
-    </message>
 </context>
 <context>
     <name>IdentityChoices</name>
@@ -2340,6 +2332,17 @@
     </message>
 </context>
 <context>
+    <name>ReloadOfferBar</name>
+    <message>
+        <source>Reload</source>
+        <translation>Yeniden yükle</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Kapat</translation>
+    </message>
+</context>
+<context>
     <name>RemoteControlButton</name>
     <message>
         <source>Remote control is on</source>
@@ -2935,14 +2938,6 @@
     <message>
         <source>%1 will stop running on this site after reloading.</source>
         <translation>%1, yeniden yüklendikten sonra bu sitede çalışmayı durduracak.</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>Yeniden yükle</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Kapat</translation>
     </message>
 </context>
 <context>

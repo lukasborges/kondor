@@ -1305,14 +1305,6 @@
         <source>Reload the page to use the new browser identity.</source>
         <translation>Läs in sidan igen för att använda den nya webbläsaridentiteten.</translation>
     </message>
-    <message>
-        <source>Reload</source>
-        <translation>Läs in igen</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Stäng</translation>
-    </message>
 </context>
 <context>
     <name>IdentityChoices</name>
@@ -2353,6 +2345,17 @@
     </message>
 </context>
 <context>
+    <name>ReloadOfferBar</name>
+    <message>
+        <source>Reload</source>
+        <translation>Läs in igen</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Stäng</translation>
+    </message>
+</context>
+<context>
     <name>RemoteControlButton</name>
     <message>
         <source>Remote control is on</source>
@@ -2948,14 +2951,6 @@
     <message>
         <source>%1 will stop running on this site after reloading.</source>
         <translation>%1 slutar köras på den här webbplatsen efter omladdning.</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>Läs in igen</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Stäng</translation>
     </message>
 </context>
 <context>

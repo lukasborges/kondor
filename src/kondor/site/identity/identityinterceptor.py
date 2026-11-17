@@ -40,5 +40,10 @@ def apply_agent(info: QWebEngineUrlRequestInfo, agent: str) -> None:
     info.setHttpHeader(USER_AGENT_HEADER, agent.encode())
     if keeps_client_hints(agent):
         return
-    for header in CLIENT_HINT_HEADERS:
+    for header in present_client_hints(info):
         info.setHttpHeader(header, b"")
+
+
+def present_client_hints(info: QWebEngineUrlRequestInfo) -> list[bytes]:
+    present = {bytes(name).lower() for name in info.httpHeaders()}
+    return [header for header in CLIENT_HINT_HEADERS if header.lower() in present]

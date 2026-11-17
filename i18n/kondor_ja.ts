@@ -1302,14 +1302,6 @@
         <source>Reload the page to use the new browser identity.</source>
         <translation>新しいブラウザーIDを使用するには、ページを再読み込みしてください。</translation>
     </message>
-    <message>
-        <source>Reload</source>
-        <translation>再読み込み</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>閉じる</translation>
-    </message>
 </context>
 <context>
     <name>IdentityChoices</name>
@@ -2340,6 +2332,17 @@
     </message>
 </context>
 <context>
+    <name>ReloadOfferBar</name>
+    <message>
+        <source>Reload</source>
+        <translation>再読み込み</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>閉じる</translation>
+    </message>
+</context>
+<context>
     <name>RemoteControlButton</name>
     <message>
         <source>Remote control is on</source>
@@ -2935,14 +2938,6 @@
     <message>
         <source>%1 will stop running on this site after reloading.</source>
         <translation>再読み込み後、このサイトで %1 は実行されなくなります。</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>再読み込み</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>閉じる</translation>
     </message>
 </context>
 <context>

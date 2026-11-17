@@ -1308,14 +1308,6 @@
         <source>Reload the page to use the new browser identity.</source>
         <translation>Перезавантажте сторінку, щоб використовувати нову ідентифікацію браузера.</translation>
     </message>
-    <message>
-        <source>Reload</source>
-        <translation>Перезавантажити</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Закрити</translation>
-    </message>
 </context>
 <context>
     <name>IdentityChoices</name>
@@ -2366,6 +2358,17 @@
     </message>
 </context>
 <context>
+    <name>ReloadOfferBar</name>
+    <message>
+        <source>Reload</source>
+        <translation>Перезавантажити</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Закрити</translation>
+    </message>
+</context>
+<context>
     <name>RemoteControlButton</name>
     <message>
         <source>Remote control is on</source>
@@ -2961,14 +2964,6 @@
     <message>
         <source>%1 will stop running on this site after reloading.</source>
         <translation>Після перезавантаження %1 перестане працювати на цьому сайті.</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>Перезавантажити</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Закрити</translation>
     </message>
 </context>
 <context>

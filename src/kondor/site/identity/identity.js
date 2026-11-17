@@ -1,4 +1,8 @@
-const entry = agents[location.hostname];
+const origins = location.ancestorOrigins;
+const firstPartyHost = origins.length
+    ? new URL(origins[origins.length - 1]).hostname
+    : location.hostname;
+const entry = agents[firstPartyHost];
 if (entry) {
     const define = (name, value) => Object.defineProperty(
         Navigator.prototype, name, { get: () => value, configurable: true });

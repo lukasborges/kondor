@@ -1302,14 +1302,6 @@
         <source>Reload the page to use the new browser identity.</source>
         <translation>重新加载页面以使用新的浏览器标识。</translation>
     </message>
-    <message>
-        <source>Reload</source>
-        <translation>重新加载</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>关闭</translation>
-    </message>
 </context>
 <context>
     <name>IdentityChoices</name>
@@ -2340,6 +2332,17 @@
     </message>
 </context>
 <context>
+    <name>ReloadOfferBar</name>
+    <message>
+        <source>Reload</source>
+        <translation>重新加载</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>关闭</translation>
+    </message>
+</context>
+<context>
     <name>RemoteControlButton</name>
     <message>
         <source>Remote control is on</source>
@@ -2935,14 +2938,6 @@
     <message>
         <source>%1 will stop running on this site after reloading.</source>
         <translation>重新加载后，%1 将不再在此网站上运行。</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>重新加载</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>关闭</translation>
     </message>
 </context>
 <context>

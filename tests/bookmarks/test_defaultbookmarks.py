@@ -11,7 +11,7 @@ from tests.bookmarks.bookmarkrows import (
     write_version_two_file,
 )
 
-SCHEMA_VERSION = 6
+SCHEMA_VERSION = 7
 VERSION_TWO_ROWS = 3
 TOOLBAR_TITLES = ["KDE", "Planet KDE", "Qt Docs", "News", "Development", "Linux"]
 TOOLBAR_URLS = ["https://kde.org/", "https://planet.kde.org/", "https://doc.qt.io/"]

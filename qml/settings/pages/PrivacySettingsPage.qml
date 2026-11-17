@@ -84,6 +84,19 @@ ScrollView {
                 value: root.draft.clearDataOnExit
             }
 
+            CheckBox {
+                id: popupsCheck
+                Kirigami.FormData.label: qsTr("Pop-ups:")
+                text: qsTr("Block pop-ups that open without a click")
+                onToggled: root.draft.blockPopups = checked
+            }
+
+            Binding {
+                target: popupsCheck
+                property: "checked"
+                value: root.draft.blockPopups
+            }
+
             Item { Kirigami.FormData.isSection: true }
 
             Button {

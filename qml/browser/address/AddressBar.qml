@@ -98,6 +98,7 @@ TextField {
         tabs: root.tabs
         addressField: root
         onPasswordsManageRequested: root.browserWindow.openSettingsPage("passwords")
+        onPopupOpenRequested: function(url) { root.browserWindow.openUrlInNewTab(url) }
     }
 
     AddressSuggestions {

@@ -55,6 +55,11 @@ Item {
         webView: pageView
     }
 
+    PagePopups {
+        tab: root.tab
+        webView: pageView
+    }
+
     PageRepaintOnRestore {
         webView: pageView
     }

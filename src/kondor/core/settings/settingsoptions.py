@@ -42,6 +42,7 @@ STORED_OPTIONS = (
     string_list_option("NewTab/HiddenTopSites", "hiddenTopSites"),
     option("Privacy/ClearOnExit", "clearDataOnExit", bool),
     option("Privacy/BlockThirdPartyCookies", "blockThirdPartyCookies", bool),
+    option("Privacy/BlockPopups", "blockPopups", bool),
     option("Search/Suggestions", "searchSuggestions", bool),
     option("SpellCheck/Enabled", "spellCheckEnabled", bool),
     string_list_option("SpellCheck/Languages", "spellCheckLanguages"),

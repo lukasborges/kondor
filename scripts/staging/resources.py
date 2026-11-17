@@ -54,6 +54,14 @@ RESOURCE_GROUPS = (
         ),
     ),
     ResourceGroup(
+        "/scripts",
+        "src/kondor/browser/popups",
+        (
+            "src/kondor/browser/popups/popupguard.js",
+            "src/kondor/browser/popups/popupwatch.js",
+        ),
+    ),
+    ResourceGroup(
         "/mpris",
         "src/kondor/app/mpris",
         ("src/kondor/app/mpris/mprisintrospection.xml",),

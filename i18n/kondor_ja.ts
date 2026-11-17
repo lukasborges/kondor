@@ -156,6 +156,13 @@
     </message>
 </context>
 <context>
+    <name>BlockedPopupsPanel</name>
+    <message>
+        <source>Blocked Pop-ups</source>
+        <translation>ブロックしたポップアップ</translation>
+    </message>
+</context>
+<context>
     <name>BookmarkButton</name>
     <message>
         <source>Edit This Bookmark</source>
@@ -1909,6 +1916,13 @@
     </message>
 </context>
 <context>
+    <name>PermissionRows</name>
+    <message>
+        <source>Pop-ups</source>
+        <translation>ポップアップ</translation>
+    </message>
+</context>
+<context>
     <name>PermissionTypeInfo</name>
     <message>
         <source>Microphone</source>
@@ -2007,6 +2021,24 @@
     </message>
 </context>
 <context>
+    <name>PopupAllowSwitch</name>
+    <message>
+        <source>Allow pop-ups from %1</source>
+        <translation>%1 のポップアップを許可</translation>
+    </message>
+</context>
+<context>
+    <name>PopupBlockedButton</name>
+    <message>
+        <source>Pop-ups blocked</source>
+        <translation>ポップアップをブロックしました</translation>
+    </message>
+    <message>
+        <source>Pop-up blocked</source>
+        <translation>ポップアップをブロックしました</translation>
+    </message>
+</context>
+<context>
     <name>PrivacySettingsPage</name>
     <message>
         <source>Updating lists…</source>
@@ -2043,6 +2075,14 @@
     <message>
         <source>Clear cookies, cache and history</source>
         <translation>Cookie、キャッシュ、履歴を消去</translation>
+    </message>
+    <message>
+        <source>Pop-ups:</source>
+        <translation>ポップアップ:</translation>
+    </message>
+    <message>
+        <source>Block pop-ups that open without a click</source>
+        <translation>クリックなしで開くポップアップをブロック</translation>
     </message>
     <message>
         <source>Browsing data:</source>
@@ -2640,6 +2680,14 @@
     <message>
         <source>Clear Cookies and Cache Now</source>
         <translation>Cookie とキャッシュを今すぐ消去</translation>
+    </message>
+    <message>
+        <source>Pop-ups:</source>
+        <translation>ポップアップ:</translation>
+    </message>
+    <message>
+        <source>Block pop-ups that open without a click</source>
+        <translation>クリックなしで開くポップアップをブロック</translation>
     </message>
     <message>
         <source>Site permissions:</source>

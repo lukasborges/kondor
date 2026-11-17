@@ -156,6 +156,13 @@
     </message>
 </context>
 <context>
+    <name>BlockedPopupsPanel</name>
+    <message>
+        <source>Blocked Pop-ups</source>
+        <translation>Pop-ups bloqueados</translation>
+    </message>
+</context>
+<context>
     <name>BookmarkButton</name>
     <message>
         <source>Edit This Bookmark</source>
@@ -1922,6 +1929,13 @@
     </message>
 </context>
 <context>
+    <name>PermissionRows</name>
+    <message>
+        <source>Pop-ups</source>
+        <translation>Pop-ups</translation>
+    </message>
+</context>
+<context>
     <name>PermissionTypeInfo</name>
     <message>
         <source>Microphone</source>
@@ -2020,6 +2034,24 @@
     </message>
 </context>
 <context>
+    <name>PopupAllowSwitch</name>
+    <message>
+        <source>Allow pop-ups from %1</source>
+        <translation>Permitir pop-ups de %1</translation>
+    </message>
+</context>
+<context>
+    <name>PopupBlockedButton</name>
+    <message>
+        <source>Pop-ups blocked</source>
+        <translation>Pop-ups bloqueados</translation>
+    </message>
+    <message>
+        <source>Pop-up blocked</source>
+        <translation>Pop-up bloqueado</translation>
+    </message>
+</context>
+<context>
     <name>PrivacySettingsPage</name>
     <message>
         <source>Updating lists…</source>
@@ -2056,6 +2088,14 @@
     <message>
         <source>Clear cookies, cache and history</source>
         <translation>Limpar cookies, cache e histórico</translation>
+    </message>
+    <message>
+        <source>Pop-ups:</source>
+        <translation>Pop-ups:</translation>
+    </message>
+    <message>
+        <source>Block pop-ups that open without a click</source>
+        <translation>Bloquear pop-ups que abrem sem um clique</translation>
     </message>
     <message>
         <source>Browsing data:</source>
@@ -2653,6 +2693,14 @@
     <message>
         <source>Clear Cookies and Cache Now</source>
         <translation>Limpar cookies e cache agora</translation>
+    </message>
+    <message>
+        <source>Pop-ups:</source>
+        <translation>Pop-ups:</translation>
+    </message>
+    <message>
+        <source>Block pop-ups that open without a click</source>
+        <translation>Bloquear pop-ups que abrem sem um clique</translation>
     </message>
     <message>
         <source>Site permissions:</source>

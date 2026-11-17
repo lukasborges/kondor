@@ -9,6 +9,7 @@ from pytestqt.qtbot import QtBot
 from kondor.browser.tabs.tab import Tab
 from kondor.browser.tabs.tabmodel import TabModel
 from kondor.browser.tabs.tabmodelrows import TAB_ROLE
+from kondor.core.settings.settings import Settings
 from tests.extensions.pageserver import PageServer
 from tests.qmlsupport import error_text, load_component, release
 
@@ -37,6 +38,13 @@ Item {
 }
 """
 OPEN_POPUP = "window.open('/popup', '_blank');"
+
+
+@pytest.fixture(autouse=True)
+def script_opened_windows_allowed(qapp: object) -> Iterator[None]:
+    Settings.instance().setProperty("blockPopups", False)
+    yield
+    Settings.instance().setProperty("blockPopups", True)
 
 
 @pytest.fixture

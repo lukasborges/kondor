@@ -33,24 +33,11 @@ ApplicationWindow {
         filterField.forceActiveFocus()
     }
 
-    function isDecided(permission) {
-        return permission.isValid
-            && (permission.state === WebEnginePermission.State.Granted
-                || permission.state === WebEnginePermission.State.Denied)
-    }
-
-    function decidedPermissions() {
-        return Array.from(ProfileManager.defaultProfile().listAllPermissions()).filter(isDecided)
-    }
-
-    function rowFor(permission) {
-        return {
-            site: typeInfo.hostFor(permission.origin),
-            perm: typeInfo.labelFor(permission.permissionType),
-            ic: typeInfo.iconFor(permission.permissionType),
-            granted: permission.state === WebEnginePermission.State.Granted,
-            permission: permission
-        }
+    function allRows() {
+        const profile = ProfileManager.defaultProfile()
+        const hosts = SiteSettings.hostsWithPopupsAllowed()
+        const popups = hosts.map(host => permissionRows.popupRow(host, true))
+        return permissionRows.decidedRows(profile.listAllPermissions()).concat(popups)
     }
 
     function compareRows(a, b) {
@@ -65,13 +52,11 @@ ApplicationWindow {
     }
 
     function reload() {
-        root.rows = decidedPermissions().map(rowFor).filter(matchesFilter).sort(compareRows)
+        root.rows = allRows().filter(matchesFilter).sort(compareRows)
     }
 
-    function revoke(permission) {
-        if (!permission || !permission.isValid)
-            return
-        permission.reset()
+    function revoke(row) {
+        permissionRows.revoke(row)
         root.reload()
         Qt.callLater(root.reload)
     }
@@ -82,8 +67,13 @@ ApplicationWindow {
         onActivated: root.visible = false
     }
 
-    PermissionTypeInfo {
-        id: typeInfo
+    PermissionRows {
+        id: permissionRows
+    }
+
+    Connections {
+        target: SiteSettings
+        function onChanged() { root.reload() }
     }
 
     ColumnLayout {
@@ -141,7 +131,8 @@ ApplicationWindow {
                     required property string perm
                     required property string ic
                     required property bool granted
-                    required property var permission
+                    required property bool canRevoke
+                    required property var modelData
                     width: ListView.view.width
 
                     contentItem: RowLayout {
@@ -163,10 +154,11 @@ ApplicationWindow {
                                    : Kirigami.Theme.negativeTextColor
                         }
                         Button {
+                            visible: permissionDelegate.canRevoke
                             text: qsTr("Revoke")
                             icon.name: "edit-undo"
                             flat: true
-                            onClicked: root.revoke(permissionDelegate.permission)
+                            onClicked: root.revoke(permissionDelegate.modelData)
                         }
                     }
                 }

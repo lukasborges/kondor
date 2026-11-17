@@ -8,6 +8,7 @@ Row {
     required property Item addressField
 
     signal passwordsManageRequested()
+    signal popupOpenRequested(string url)
 
     readonly property alias bookmarkEditor: bookmarkButton.editor
 
@@ -24,6 +25,12 @@ Row {
     }
 
     ReaderButton { tabs: root.tabs }
+
+    PopupBlockedButton {
+        tabs: root.tabs
+        addressField: root.addressField
+        onOpenRequested: function(url) { root.popupOpenRequested(url) }
+    }
 
     BookmarkButton {
         id: bookmarkButton

@@ -18,6 +18,10 @@ MEDIA_SESSION_RESOURCE = ":/scripts/mediasession.js"
 MEDIA_WATCH_RESOURCE = ":/scripts/mediawatch.js"
 MEDIA_SESSION_SCRIPT = "kondor-media-session"
 MEDIA_WATCH_SCRIPT = "kondor-media-watch"
+POPUP_GUARD_RESOURCE = ":/scripts/popupguard.js"
+POPUP_WATCH_RESOURCE = ":/scripts/popupwatch.js"
+POPUP_GUARD_SCRIPT = "kondor-popup-guard"
+POPUP_WATCH_SCRIPT = "kondor-popup-watch"
 USER_SCRIPTS_PROPERTY = "userScripts"
 InjectionPoint = QWebEngineScript.InjectionPoint
 ScriptWorldId = QWebEngineScript.ScriptWorldId
@@ -82,28 +86,35 @@ def install_passwords_script(collection: QObject | None) -> None:
     insert_script(collection, make_script(spec))
 
 
-class MediaScript(NamedTuple):
+class PageScript(NamedTuple):
     name: str
     resource: str
     world: QWebEngineScript.ScriptWorldId
 
 
-MEDIA_SESSION = MediaScript(MEDIA_SESSION_SCRIPT, MEDIA_SESSION_RESOURCE, ScriptWorldId.MainWorld)
-MEDIA_WATCH = MediaScript(MEDIA_WATCH_SCRIPT, MEDIA_WATCH_RESOURCE, ScriptWorldId.ApplicationWorld)
+MEDIA_SESSION = PageScript(MEDIA_SESSION_SCRIPT, MEDIA_SESSION_RESOURCE, ScriptWorldId.MainWorld)
+MEDIA_WATCH = PageScript(MEDIA_WATCH_SCRIPT, MEDIA_WATCH_RESOURCE, ScriptWorldId.ApplicationWorld)
+POPUP_GUARD = PageScript(POPUP_GUARD_SCRIPT, POPUP_GUARD_RESOURCE, ScriptWorldId.MainWorld)
+POPUP_WATCH = PageScript(POPUP_WATCH_SCRIPT, POPUP_WATCH_RESOURCE, ScriptWorldId.ApplicationWorld)
 
 
-def install_media_script(collection: QObject | None, media: MediaScript) -> None:
-    source = read_resource(media.resource)
+def install_page_script(collection: QObject | None, script: PageScript, feature: str) -> None:
+    source = read_resource(script.resource)
     if source is None:
-        qWarning(f"Media script resource {media.resource} not found: media controls are off")
+        qWarning(f"Page script resource {script.resource} not found: {feature} is off")
         return
-    spec = ScriptSpec(media.name, source, InjectionPoint.DocumentCreation, media.world, False)
+    spec = ScriptSpec(script.name, source, InjectionPoint.DocumentCreation, script.world, False)
     insert_script(collection, make_script(spec))
 
 
 def install_media_scripts(collection: QObject | None) -> None:
-    install_media_script(collection, MEDIA_SESSION)
-    install_media_script(collection, MEDIA_WATCH)
+    install_page_script(collection, MEDIA_SESSION, "media controls")
+    install_page_script(collection, MEDIA_WATCH, "media controls")
+
+
+def install_popup_scripts(collection: QObject | None) -> None:
+    install_page_script(collection, POPUP_GUARD, "the blocked pop-ups list")
+    install_page_script(collection, POPUP_WATCH, "the blocked pop-ups list")
 
 
 def keep_cpp_ownership(target: QObject | None) -> None:
@@ -124,5 +135,6 @@ def install(profile: QQuickWebEngineProfile) -> None:
     if not install_channel_script(collection):
         return
     install_media_scripts(collection)
+    install_popup_scripts(collection)
     if not profile.isOffTheRecord():
         install_passwords_script(collection)

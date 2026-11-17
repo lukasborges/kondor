@@ -7,7 +7,7 @@ from PySide6.QtSql import QSqlDatabase, QSqlQuery
 from kondor.core.database import bookmarkrootmerge, databasemigrations, sql
 from kondor.profiles.activeprofile import ActiveProfile
 
-SCHEMA_VERSION = 6
+SCHEMA_VERSION = 7
 DRIVER = "QSQLITE"
 CONNECTION_NAME = "kondor"
 FILE_NAME = "kondor.sqlite"
@@ -26,6 +26,7 @@ MIGRATION_STEPS = (
     MigrationStep(4, databasemigrations.seed_default_bookmarks),
     MigrationStep(5, databasemigrations.create_extension_storage_table),
     MigrationStep(6, bookmarkrootmerge.merge_other_into_toolbar),
+    MigrationStep(7, databasemigrations.create_site_settings_table),
 )
 
 

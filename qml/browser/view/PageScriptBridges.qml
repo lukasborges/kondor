@@ -30,6 +30,11 @@ Item {
         tab: root.tab
     }
 
+    PopupBridge {
+        id: popupBridge
+        tab: root.tab
+    }
+
     ExtensionBridge {
         id: extensionBridge
         tab: root.tab
@@ -40,6 +45,7 @@ Item {
         Component.onCompleted: {
             registerObject("kondorExtensions", extensionBridge.pageApi())
             registerObject("kondorMedia", mediaBridge.pageApi())
+            registerObject("kondorPopups", popupBridge.pageApi())
             if (!root.tab.isPrivate)
                 registerObject("kondorPasswords", passwordBridge.pageApi())
         }

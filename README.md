@@ -57,6 +57,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 - **Extensions** from the Kondor catalog or a file, pinnable to the toolbar
 - **User scripts** from `.user.js` pages or files, managed with extensions
 - **Site permissions**: sites ask before using the camera, microphone or location
+- **Pop-up blocker** with per-site exceptions
 - **Security padlock** and warnings for unsafe sites
 
 ### Reading

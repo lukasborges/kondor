@@ -8,6 +8,7 @@ from kondor.extensions import qmltypes as extensions
 from kondor.history import qmltypes as history
 from kondor.passwords import qmltypes as passwords
 from kondor.profiles import qmltypes as profiles
+from kondor.site import qmltypes as site
 
 FEATURE_TYPES = (
     core,
@@ -17,6 +18,7 @@ FEATURE_TYPES = (
     bookmarks,
     passwords,
     profiles,
+    site,
     browser,
     extensions,
     app,

@@ -3,13 +3,15 @@ from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
-from PySide6.QtCore import QCoreApplication, QResource, Qt
+from PySide6.QtCore import QCoreApplication, QResource, QStandardPaths, Qt
 from PySide6.QtQml import QQmlEngine
 from PySide6.QtQuickControls2 import QQuickStyle
 from PySide6.QtWebEngineQuick import QtWebEngineQuick
 from PySide6.QtWidgets import QApplication
 
 from kondor.app.startup.appidentity import use_bundled_icons
+from kondor.core.database.database import Database
+from kondor.site.sitesettings import SiteSettings
 from tests.kondortypes import qmltypes_modules
 
 STAGED_BUILD = Path(__file__).resolve().parent.parent / "build" / "python"
@@ -85,3 +87,13 @@ def qml_engine(qapp: object, staged_build: Path, staged_resources: None) -> Iter
 @pytest.fixture(scope="session")
 def kondor_engine(kondor_types: None, staged_build: Path, staged_resources: None) -> QQmlEngine:
     return staged_engine(staged_build)
+
+
+@pytest.fixture
+def site_settings(qapp: object) -> Iterator[SiteSettings]:
+    Database.reset_instance()
+    folder = Path(QStandardPaths.writableLocation(QStandardPaths.StandardLocation.AppDataLocation))
+    (folder / "kondor.sqlite").unlink(missing_ok=True)
+    yield SiteSettings.instance()
+    Database.reset_instance()
+    (folder / "kondor.sqlite").unlink(missing_ok=True)

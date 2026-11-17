@@ -1,4 +1,5 @@
 from collections.abc import Iterator
+from typing import Any
 
 import pytest
 from PySide6.QtCore import Q_ARG, Q_RETURN_ARG, QMetaObject, QObject, Qt, QUrl
@@ -7,6 +8,7 @@ from PySide6.QtQuick import QQuickItem, QQuickWindow
 from pytestqt.qtbot import QtBot
 
 from kondor.browser.profile.profilemanager import ProfileManager
+from kondor.site.sitesettings import SiteSettings
 from tests.qmlsupport import error_text, load_component
 from tests.site.sitepermissionsharness import (
     PermissionFixture,
@@ -100,19 +102,46 @@ def test_dialog_lists_decisions(qtbot: QtBot, dialog: QQuickWindow) -> None:
     rows = rows_of(dialog)
     assert len(rows) == 1
     assert rows[0]["site"] == "permissions.example"
-    assert rows[0]["perm"] == "Location"
+    assert rows[0]["label"] == "Location"
     assert rows[0]["granted"] is True
+
+
+def revoke_row(dialog: QQuickWindow, row: dict[str, Any]) -> None:
+    QMetaObject.invokeMethod(
+        dialog, "revoke", Qt.ConnectionType.DirectConnection, Q_ARG("QVariant", row)
+    )
+
+
+def pop_up_rows(dialog: QQuickWindow) -> list[dict[str, Any]]:
+    return [row for row in rows_of(dialog) if row["label"] == "Pop-ups"]
+
+
+def test_dialog_lists_the_pop_up_exception(
+    dialog: QQuickWindow, site_settings: SiteSettings
+) -> None:
+    site_settings.setPopupsAllowed("tickets.example.com", True)
+    QMetaObject.invokeMethod(dialog, "reload")
+    row = pop_up_rows(dialog)[0]
+    assert (row["site"], row["granted"]) == ("tickets.example.com", True)
+
+
+def test_dialog_revokes_the_pop_up_exception(
+    dialog: QQuickWindow, site_settings: SiteSettings
+) -> None:
+    site_settings.setPopupsAllowed("tickets.example.com", True)
+    QMetaObject.invokeMethod(dialog, "reload")
+    revoke_row(dialog, pop_up_rows(dialog)[0])
+    assert pop_up_rows(dialog) == []
+    assert not site_settings.popupsAllowed("tickets.example.com")
 
 
 def test_dialog_revokes_decisions(dialog: QQuickWindow) -> None:
     origin = QUrl("https://permissions.example")
     grant_geolocation(origin)
     QMetaObject.invokeMethod(dialog, "reload")
-    permission = rows_of(dialog)[0]["permission"]
-    assert permission.isValid()
-    QMetaObject.invokeMethod(
-        dialog, "revoke", Qt.ConnectionType.DirectConnection, Q_ARG("QVariant", permission)
-    )
+    row = rows_of(dialog)[0]
+    assert row["permission"].isValid()
+    revoke_row(dialog, row)
     assert rows_of(dialog) == []
     profile = ProfileManager.instance().defaultProfile()
     assert (

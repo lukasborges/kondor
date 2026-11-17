@@ -19,7 +19,7 @@ VERSION_ONE_STATEMENTS = (
 CHILDREN = "SELECT id, title, url, position FROM bookmarks WHERE parent_id = ? ORDER BY position"
 TOOLBAR = "SELECT id FROM bookmarks WHERE special IS NOT NULL"
 ROOT_FOLDERS = "SELECT COUNT(*) FROM bookmarks WHERE special IS NOT NULL"
-SCHEMA_VERSION = 6
+SCHEMA_VERSION = 7
 ROOT_FOLDER_COUNT = 1
 BookmarkRow = tuple[int, str, str | None, int]
 
@@ -82,6 +82,20 @@ def test_upgrades_version_one_file_keeping_history(database_file: Path) -> None:
     assert scalar("SELECT COUNT(*) FROM favicons") == 0
     assert scalar("SELECT COUNT(*) FROM extension_storage") == 0
     assert scalar(ROOT_FOLDERS) == ROOT_FOLDER_COUNT
+
+
+def test_upgrades_version_six_file_keeping_every_row(database_file: Path) -> None:
+    assert Database.instance().is_valid()
+    sql.run("INSERT INTO history (url, title, visited_at) VALUES ('https://kde.org/', 'KDE', 1)")
+    sql.run("DROP TABLE site_settings")
+    sql.run("PRAGMA user_version = 6")
+    bookmarks = scalar("SELECT COUNT(*) FROM bookmarks")
+    Database.reset_instance()
+    assert Database.instance().is_valid()
+    assert scalar("SELECT COUNT(*) FROM history") == 1
+    assert scalar("SELECT COUNT(*) FROM bookmarks") == bookmarks
+    assert scalar("SELECT COUNT(*) FROM site_settings") == 0
+    assert scalar("PRAGMA user_version") == SCHEMA_VERSION
 
 
 def test_fresh_file_gets_the_default_bookmarks(database_file: Path) -> None:

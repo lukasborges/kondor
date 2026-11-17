@@ -39,6 +39,12 @@ EXTENSION_STORAGE_TABLE = (
     "  value TEXT NOT NULL,"
     "  PRIMARY KEY (extension_id, key))"
 )
+SITE_SETTINGS_TABLE = (
+    "CREATE TABLE IF NOT EXISTS site_settings ("
+    "  host TEXT PRIMARY KEY,"
+    "  allow_popups INTEGER NOT NULL DEFAULT 0,"
+    "  user_agent TEXT)"
+)
 INSERT_ROOT_FOLDER = (
     "INSERT INTO bookmarks (parent_id, is_folder, title, url, position,"
     " created_at, special) "
@@ -113,3 +119,7 @@ def seed_default_bookmarks() -> bool:
 
 def create_extension_storage_table() -> bool:
     return sql.run(EXTENSION_STORAGE_TABLE) is not None
+
+
+def create_site_settings_table() -> bool:
+    return sql.run(SITE_SETTINGS_TABLE) is not None

@@ -33,6 +33,7 @@ ApplicationWindow {
     }
 
     function openUrl(url, background) { tabControl.openUrl(url, background) }
+    function openUrlInNewTab(url) { tabControl.openUrlInNewTab(url) }
     function openUrlsInNewTabs(urls) { tabControl.openUrlsInNewTabs(urls) }
     function openSettingsPage(pageId) { windowDialogs.openSettingsPage(pageId) }
     function openBookmarks() { windowDialogs.openBookmarks() }

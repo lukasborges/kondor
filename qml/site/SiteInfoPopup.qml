@@ -14,34 +14,24 @@ ToolbarPopup {
     width: 360
     padding: Kirigami.Units.largeSpacing
 
-    function isDecided(permission) {
-        return permission.isValid
-            && (permission.state === WebEnginePermission.State.Granted
-                || permission.state === WebEnginePermission.State.Denied)
+    function popupRows() {
+        if (!tab.popups.isAllowed)
+            return []
+        return [permissionRows.popupRow(tab.popups.host, tab.popups.canChangeAllowed)]
     }
 
-    function rowFor(permission) {
-        return {
-            icon: typeInfo.iconFor(permission.permissionType),
-            label: typeInfo.labelFor(permission.permissionType),
-            granted: permission.state === WebEnginePermission.State.Granted,
-            permission: permission
-        }
-    }
-
-    function decidedPermissions(origin) {
-        return Array.from(tab.profile.listPermissionsForOrigin(origin)).filter(isDecided)
+    function decidedRows(origin) {
+        if (origin.length === 0)
+            return []
+        return permissionRows.decidedRows(tab.profile.listPermissionsForOrigin(origin))
     }
 
     function reload() {
-        const origin = security.originUrl()
-        permissions = origin.length === 0 ? [] : decidedPermissions(origin).map(rowFor)
+        permissions = decidedRows(security.originUrl()).concat(popupRows())
     }
 
-    function revoke(permission) {
-        if (!permission || !permission.isValid)
-            return
-        permission.reset()
+    function revoke(row) {
+        permissionRows.revoke(row)
         reload()
         Qt.callLater(reload)
     }
@@ -57,8 +47,16 @@ ToolbarPopup {
         tab: root.tab
     }
 
-    PermissionTypeInfo {
-        id: typeInfo
+    PermissionRows {
+        id: permissionRows
+    }
+
+    Connections {
+        target: root.tab ? root.tab.popups : null
+        function onAllowedChanged() {
+            if (root.opened)
+                root.reload()
+        }
     }
 
     contentItem: ColumnLayout {
@@ -118,7 +116,7 @@ ToolbarPopup {
                     spacing: Kirigami.Units.smallSpacing
 
                     Kirigami.Icon {
-                        source: permissionRow.modelData.icon
+                        source: permissionRow.modelData.iconName
                         Layout.preferredWidth: Kirigami.Units.iconSizes.small
                         Layout.preferredHeight: Kirigami.Units.iconSizes.small
                     }
@@ -137,13 +135,14 @@ ToolbarPopup {
                     }
 
                     ToolButton {
+                        visible: permissionRow.modelData.canRevoke
                         display: AbstractButton.IconOnly
                         icon.name: "edit-undo"
                         ToolTip.visible: hovered
                         Accessible.name: ToolTip.text
                         ToolTip.text: qsTr("Revoke")
                         ToolTip.delay: 600
-                        onClicked: root.revoke(permissionRow.modelData.permission)
+                        onClicked: root.revoke(permissionRow.modelData)
                     }
                 }
             }

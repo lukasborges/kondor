@@ -92,9 +92,20 @@ Item {
     }
 
     function openBackgroundTab(tab, url) {
-        const profile = tab.isPrivate ? ProfileManager.createPrivateProfile()
-                                      : ProfileManager.defaultProfile()
-        tabs.addTabWithProfile(profile, url, true)
+        tabs.addTabWithProfile(profileLike(tab), url, true)
+    }
+
+    function openUrlInNewTab(url) {
+        const tab = tabs.currentTab
+        if (tab)
+            tabs.addTabWithProfile(profileLike(tab), url, false)
+        else
+            tabs.addTab(false, url)
+    }
+
+    function profileLike(tab) {
+        return tab.isPrivate ? ProfileManager.createPrivateProfile()
+                             : ProfileManager.defaultProfile()
     }
 
     function homeUrl() {

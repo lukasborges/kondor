@@ -81,7 +81,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 
 ### For developers
 - **Developer tools** (F12) and **view source**
-- **Remote control** for AI agents and automation tools (off by default)
+- **Remote control** for AI agents and automation tools, with the agent's pointer shown on the page (off by default)
 - **Load unpacked extensions** with `--load-extension <dir>` (experimental, needs `--new-instance`)
 
 ## Keyboard shortcuts

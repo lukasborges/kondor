@@ -12,6 +12,8 @@ WebEngineView {
     required property PageOutput output
     required property CertificateErrorHandler certificates
 
+    property AgentPointerBridge agentPointer: null
+
     signal pageContextMenuRequested(var request)
 
     profile: root.tab.profile
@@ -170,4 +172,23 @@ WebEngineView {
     onNewWindowRequested: function(request) { openRequestedWindow(request) }
     onWindowCloseRequested: closeOwnTab()
     Component.onCompleted: adoptPendingRequest()
+
+    RealHoverWatch {
+        enabled: RemoteControl.active && root.agentPointer !== null
+        bridge: root.agentPointer
+    }
+
+    RealPointWatch {
+        enabled: RemoteControl.active && root.agentPointer !== null
+        bridge: root.agentPointer
+    }
+
+    Loader {
+        anchors.fill: parent
+        active: RemoteControl.active && root.agentPointer !== null
+        sourceComponent: AgentPointerOverlay {
+            bridge: root.agentPointer
+            webView: root
+        }
+    }
 }

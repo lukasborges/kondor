@@ -10,6 +10,8 @@ Kondor Browser runs the modern web on the same engine as Chrome, and it looks an
 
 ![Kondor Browser screenshot](assets/screenshot.png)
 
+![Kondor Browser with Breeze Dark and tabs in the side bar](assets/screenshot-dark-sidebar.png)
+
 ## Highlights
 
 - **Native on Plasma**: Breeze look, KDE dialogs, your color scheme

@@ -1,7 +1,7 @@
 import pytest
-from PySide6.QtCore import QtMsgType
+from PySide6.QtCore import QLoggingCategory, QtMsgType
 
-from kondor.app.startup.messagehandler import is_silenced
+from kondor.app.startup.messagehandler import install_message_handler, is_silenced
 
 
 @pytest.mark.parametrize(
@@ -17,3 +17,9 @@ from kondor.app.startup.messagehandler import is_silenced
 )
 def test_is_silenced(message_type: QtMsgType, category: str | None, expected: bool) -> None:
     assert is_silenced(message_type, category) is expected
+
+
+def test_silences_property_cache_logging_from_the_loader_thread() -> None:
+    install_message_handler()
+
+    assert not QLoggingCategory("qt.qml.propertyCache").isWarningEnabled()

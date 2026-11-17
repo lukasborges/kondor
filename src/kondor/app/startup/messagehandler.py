@@ -1,8 +1,10 @@
 import sys
 
-from PySide6.QtCore import QMessageLogContext, QtMsgType, qInstallMessageHandler
+from PySide6.QtCore import QLoggingCategory, QMessageLogContext, QtMsgType, qInstallMessageHandler
 
 SHOWN_CATEGORIES = ("kondor.extensions", "kondor.krunner")
+# The QML loader thread logs through this handler and deadlocks on the GIL: https://github.com/lukasborges/kondor/issues/396
+LOADER_THREAD_LOGGING_RULES = "qt.qml.propertyCache*=false"
 CHATTY_TYPES = (QtMsgType.QtDebugMsg, QtMsgType.QtInfoMsg)
 
 
@@ -20,4 +22,5 @@ def print_to_standard_error(
 
 
 def install_message_handler() -> None:
+    QLoggingCategory.setFilterRules(LOADER_THREAD_LOGGING_RULES)
     qInstallMessageHandler(print_to_standard_error)

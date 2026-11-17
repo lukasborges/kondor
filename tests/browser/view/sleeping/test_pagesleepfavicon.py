@@ -38,6 +38,7 @@ Item {
     }
     function hidePage(index) { pageViews(holder)[index].visible = false }
     function lifecycle(index) { return pageViews(holder)[index].lifecycleState }
+    function iconOf(index) { return pageViews(holder)[index].icon.toString() }
     function showPage(index) { pageViews(holder)[index].visible = true }
     function closeView(index) { holder.children[index].destroy() }
     WebViewTab {
@@ -80,6 +81,12 @@ class TwoTabs:
         )
         return int(result)
 
+    def icon(self, index: int) -> str:
+        result = QMetaObject.invokeMethod(
+            self.root, "iconOf", Q_RETURN_ARG("QVariant"), Q_ARG("QVariant", index)
+        )
+        return str(result)
+
     def release(self) -> None:
         release(self.root)
         release(self.component, self.model, self.server)
@@ -118,9 +125,11 @@ def tabs(kondor_engine: QQmlEngine, qtbot: QtBot) -> Iterator[TwoTabs]:
 
 
 def put_first_tab_to_sleep(tabs: TwoTabs, qtbot: QtBot) -> None:
+    qtbot.waitUntil(lambda: tabs.icon(FIRST_VIEW).endswith("/first.png"), timeout=LOAD_TIMEOUT)
     tabs.call("hidePage", FIRST_VIEW)
     tabs.first.sleep.putToSleep()
     qtbot.waitUntil(lambda: tabs.lifecycle(FIRST_VIEW) == DISCARDED, timeout=LOAD_TIMEOUT)
+    qtbot.wait(SETTLE_MILLISECONDS)
     assert sql.run("DELETE FROM favicons") is not None
 
 

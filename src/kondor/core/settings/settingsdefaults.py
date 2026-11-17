@@ -35,6 +35,7 @@ FACTORIES: dict[str, Callable[[], object]] = {
     "startupBehavior": constant("homepage"),
     "showBookmarksBar": constant(False),
     "sideBarCollapsed": constant(False),
+    "hideToolbars": constant(False),
     "showTopSites": constant(True),
     "hiddenTopSites": empty_list,
     "clearDataOnExit": constant(False),

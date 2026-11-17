@@ -434,6 +434,10 @@
         <translation>다른 이름으로 페이지 저장…</translation>
     </message>
     <message>
+        <source>Hide Toolbars</source>
+        <translation>도구 모음 숨기기</translation>
+    </message>
+    <message>
         <source>Developer Tools</source>
         <translation>개발자 도구</translation>
     </message>
@@ -3131,6 +3135,30 @@
     <message>
         <source>Classic</source>
         <translation>클래식</translation>
+    </message>
+</context>
+<context>
+    <name>ToolbarsHiddenHint</name>
+    <message>
+        <source>Toolbars hidden</source>
+        <extracomment>Shown for a few seconds after the toolbars get hidden</extracomment>
+        <translation>도구 모음이 숨겨짐</translation>
+    </message>
+    <message>
+        <source>Show Toolbars</source>
+        <translation>도구 모음 표시</translation>
+    </message>
+    <message>
+        <source>F11, or move the pointer to the top</source>
+        <translation>F11 또는 포인터를 위쪽으로 이동</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+F, or move the pointer to the top</source>
+        <translation>Ctrl+Shift+F 또는 포인터를 위쪽으로 이동</translation>
+    </message>
+    <message>
+        <source>Toolbars hidden. Move the pointer to the top edge or press Ctrl+L to show them.</source>
+        <translation>도구 모음이 숨겨졌습니다. 포인터를 위쪽 가장자리로 이동하거나 Ctrl+L을 눌러 표시하세요.</translation>
     </message>
 </context>
 <context>

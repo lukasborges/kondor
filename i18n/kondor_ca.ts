@@ -434,6 +434,10 @@
         <translation>Desa la pàgina com a…</translation>
     </message>
     <message>
+        <source>Hide Toolbars</source>
+        <translation>Amaga les barres d&apos;eines</translation>
+    </message>
+    <message>
         <source>Developer Tools</source>
         <translation>Eines de desenvolupament</translation>
     </message>
@@ -3144,6 +3148,30 @@
     <message>
         <source>Classic</source>
         <translation>Clàssic</translation>
+    </message>
+</context>
+<context>
+    <name>ToolbarsHiddenHint</name>
+    <message>
+        <source>Toolbars hidden</source>
+        <extracomment>Shown for a few seconds after the toolbars get hidden</extracomment>
+        <translation>Barres d&apos;eines amagades</translation>
+    </message>
+    <message>
+        <source>Show Toolbars</source>
+        <translation>Mostra les barres d&apos;eines</translation>
+    </message>
+    <message>
+        <source>F11, or move the pointer to the top</source>
+        <translation>F11, o mou el punter a la part superior</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+F, or move the pointer to the top</source>
+        <translation>Ctrl+Maj+F, o mou el punter a la part superior</translation>
+    </message>
+    <message>
+        <source>Toolbars hidden. Move the pointer to the top edge or press Ctrl+L to show them.</source>
+        <translation>Barres d&apos;eines amagades. Mou el punter a la vora superior o premeu Ctrl+L per mostrar-les.</translation>
     </message>
 </context>
 <context>

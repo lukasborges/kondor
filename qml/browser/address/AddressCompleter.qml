@@ -113,14 +113,25 @@ QtObject {
         rememberText(field.text)
     }
 
-    function restoreTypedText(event) {
-        timer.stop()
-        event.accepted = suggestions.opened
-        if (!suggestions.opened)
-            return
+    function closeSuggestionsRestoringText() {
         field.text = typedText
         rememberText(typedText)
         suggestions.close()
+    }
+
+    function leaveFieldForPage() {
+        field.syncFromTab()
+        if (tabs.currentTab)
+            tabs.currentTab.focusPage()
+    }
+
+    function restoreTypedText(event) {
+        timer.stop()
+        event.accepted = true
+        if (suggestions.opened)
+            closeSuggestionsRestoringText()
+        else
+            leaveFieldForPage()
     }
 
     function acceptText() {

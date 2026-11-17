@@ -434,6 +434,10 @@
         <translation>Guardar página como…</translation>
     </message>
     <message>
+        <source>Hide Toolbars</source>
+        <translation>Ocultar las barras de herramientas</translation>
+    </message>
+    <message>
         <source>Developer Tools</source>
         <translation>Herramientas de desarrollo</translation>
     </message>
@@ -3144,6 +3148,30 @@
     <message>
         <source>Classic</source>
         <translation>Clásico</translation>
+    </message>
+</context>
+<context>
+    <name>ToolbarsHiddenHint</name>
+    <message>
+        <source>Toolbars hidden</source>
+        <extracomment>Shown for a few seconds after the toolbars get hidden</extracomment>
+        <translation>Barras de herramientas ocultas</translation>
+    </message>
+    <message>
+        <source>Show Toolbars</source>
+        <translation>Mostrar las barras de herramientas</translation>
+    </message>
+    <message>
+        <source>F11, or move the pointer to the top</source>
+        <translation>F11, o mueva el puntero a la parte superior</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+F, or move the pointer to the top</source>
+        <translation>Ctrl+Mayús+F, o mueva el puntero a la parte superior</translation>
+    </message>
+    <message>
+        <source>Toolbars hidden. Move the pointer to the top edge or press Ctrl+L to show them.</source>
+        <translation>Barras de herramientas ocultas. Mueva el puntero al borde superior o pulse Ctrl+L para mostrarlas.</translation>
     </message>
 </context>
 <context>

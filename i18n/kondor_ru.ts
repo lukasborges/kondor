@@ -434,6 +434,10 @@
         <translation>Сохранить страницу как…</translation>
     </message>
     <message>
+        <source>Hide Toolbars</source>
+        <translation>Скрыть панели инструментов</translation>
+    </message>
+    <message>
         <source>Developer Tools</source>
         <translation>Инструменты разработчика</translation>
     </message>
@@ -3157,6 +3161,30 @@
     <message>
         <source>Classic</source>
         <translation>Классические</translation>
+    </message>
+</context>
+<context>
+    <name>ToolbarsHiddenHint</name>
+    <message>
+        <source>Toolbars hidden</source>
+        <extracomment>Shown for a few seconds after the toolbars get hidden</extracomment>
+        <translation>Панели инструментов скрыты</translation>
+    </message>
+    <message>
+        <source>Show Toolbars</source>
+        <translation>Показать панели инструментов</translation>
+    </message>
+    <message>
+        <source>F11, or move the pointer to the top</source>
+        <translation>F11 или переместите указатель вверх</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+F, or move the pointer to the top</source>
+        <translation>Ctrl+Shift+F или переместите указатель вверх</translation>
+    </message>
+    <message>
+        <source>Toolbars hidden. Move the pointer to the top edge or press Ctrl+L to show them.</source>
+        <translation>Панели инструментов скрыты. Переместите указатель к верхнему краю или нажмите Ctrl+L, чтобы показать их.</translation>
     </message>
 </context>
 <context>

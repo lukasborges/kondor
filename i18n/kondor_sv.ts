@@ -434,6 +434,10 @@
         <translation>Spara sida som…</translation>
     </message>
     <message>
+        <source>Hide Toolbars</source>
+        <translation>Dölj verktygsrader</translation>
+    </message>
+    <message>
         <source>Developer Tools</source>
         <translation>Utvecklarverktyg</translation>
     </message>
@@ -3144,6 +3148,30 @@
     <message>
         <source>Classic</source>
         <translation>Klassisk</translation>
+    </message>
+</context>
+<context>
+    <name>ToolbarsHiddenHint</name>
+    <message>
+        <source>Toolbars hidden</source>
+        <extracomment>Shown for a few seconds after the toolbars get hidden</extracomment>
+        <translation>Verktygsrader dolda</translation>
+    </message>
+    <message>
+        <source>Show Toolbars</source>
+        <translation>Visa verktygsrader</translation>
+    </message>
+    <message>
+        <source>F11, or move the pointer to the top</source>
+        <translation>F11, eller flytta pekaren till toppen</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+F, or move the pointer to the top</source>
+        <translation>Ctrl+Skift+F, eller flytta pekaren till toppen</translation>
+    </message>
+    <message>
+        <source>Toolbars hidden. Move the pointer to the top edge or press Ctrl+L to show them.</source>
+        <translation>Verktygsrader dolda. Flytta pekaren till överkanten eller tryck Ctrl+L för att visa dem.</translation>
     </message>
 </context>
 <context>

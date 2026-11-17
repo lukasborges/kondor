@@ -37,7 +37,7 @@ ApplicationWindow {
         const profile = ProfileManager.defaultProfile()
         const hosts = SiteSettings.hostsWithPopupsAllowed()
         const popups = hosts.map(host => permissionRows.popupRow(host, true))
-        return permissionRows.decidedRows(profile.listAllPermissions()).concat(popups)
+        return permissionRows.decidedRows(profile.listAllPermissions()).concat(popups, permissionRows.identityRows())
     }
 
     function compareRows(a, b) {
@@ -132,6 +132,7 @@ ApplicationWindow {
                     required property string iconName
                     required property bool granted
                     required property bool canRevoke
+                    required property bool showsState
                     required property var modelData
                     width: ListView.view.width
 
@@ -148,6 +149,7 @@ ApplicationWindow {
                             Layout.fillWidth: true
                         }
                         Label {
+                            visible: permissionDelegate.showsState
                             text: permissionDelegate.granted ? qsTr("Allowed") : qsTr("Blocked")
                             color: permissionDelegate.granted
                                    ? Kirigami.Theme.positiveTextColor

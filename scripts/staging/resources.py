@@ -62,6 +62,9 @@ RESOURCE_GROUPS = (
         ),
     ),
     ResourceGroup(
+        "/scripts", "src/kondor/site/identity", ("src/kondor/site/identity/identity.js",)
+    ),
+    ResourceGroup(
         "/mpris",
         "src/kondor/app/mpris",
         ("src/kondor/app/mpris/mprisintrospection.xml",),

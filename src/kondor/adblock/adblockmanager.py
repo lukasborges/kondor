@@ -1,5 +1,4 @@
 from PySide6.QtCore import Property, QDateTime, QObject, Signal, Slot
-from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
 from kondor.adblock import adblocksettings
 from kondor.adblock.adblockallowlist import AdBlockAllowList
@@ -60,8 +59,8 @@ class AdBlockManager(QObject):
     updating = Property(bool, is_updating, notify=updatingChanged)
     lastUpdate = Property(QDateTime, last_update, notify=lastUpdateChanged)
 
-    def install(self, profile: QQuickWebEngineProfile) -> None:
-        profile.setUrlRequestInterceptor(self._interceptor)
+    def request_filter(self) -> AdBlockInterceptor:
+        return self._interceptor
 
     def start(self) -> None:
         self._load_cached_lists()

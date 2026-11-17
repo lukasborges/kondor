@@ -14,6 +14,9 @@ ToolbarPopup {
     width: 360
     padding: Kirigami.Units.largeSpacing
 
+    readonly property bool hasSiteSettings: tab !== null && tab.identity.host.length > 0
+    readonly property bool hasSection: permissions.length > 0 || hasSiteSettings
+
     function popupRows() {
         if (!tab.popups.isAllowed)
             return []
@@ -49,6 +52,12 @@ ToolbarPopup {
 
     PermissionRows {
         id: permissionRows
+    }
+
+    CustomIdentityDialog {
+        id: customIdentityDialog
+        identity: root.tab ? root.tab.identity : null
+        onClosed: identityRow.syncChoice()
     }
 
     Connections {
@@ -92,13 +101,13 @@ ToolbarPopup {
 
         Kirigami.Separator {
             Layout.fillWidth: true
-            visible: root.permissions.length > 0
+            visible: root.hasSection
         }
 
         ColumnLayout {
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
-            visible: root.permissions.length > 0
+            visible: root.hasSection
 
             Label {
                 text: qsTr("Permissions for this site")
@@ -128,6 +137,7 @@ ToolbarPopup {
                     }
 
                     Label {
+                        visible: permissionRow.modelData.showsState
                         text: permissionRow.modelData.granted ? qsTr("Allowed") : qsTr("Blocked")
                         color: permissionRow.modelData.granted
                                ? Kirigami.Theme.positiveTextColor
@@ -145,6 +155,14 @@ ToolbarPopup {
                         onClicked: root.revoke(permissionRow.modelData)
                     }
                 }
+            }
+
+            IdentityRow {
+                id: identityRow
+                Layout.fillWidth: true
+                visible: root.hasSiteSettings
+                identity: root.tab ? root.tab.identity : null
+                onCustomRequested: customIdentityDialog.open()
             }
         }
     }

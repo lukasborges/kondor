@@ -58,6 +58,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 - **User scripts** from `.user.js` pages or files, managed with extensions
 - **Site permissions**: sites ask before using the camera, microphone or location
 - **Pop-up blocker** with per-site exceptions
+- **Browser identity per site**: appear as Firefox, Chrome or a custom browser on one site
 - **Security padlock** and warnings for unsafe sites
 
 ### Reading

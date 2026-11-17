@@ -568,6 +568,21 @@
     </message>
 </context>
 <context>
+    <name>CustomIdentityDialog</name>
+    <message>
+        <source>Custom Browser Identity</source>
+        <translation>Identità personalizzata del browser</translation>
+    </message>
+    <message>
+        <source>Site:</source>
+        <translation>Sito:</translation>
+    </message>
+    <message>
+        <source>User agent:</source>
+        <translation>User agent:</translation>
+    </message>
+</context>
+<context>
     <name>DefaultBookmarks</name>
     <message>
         <source>News</source>
@@ -1285,6 +1300,47 @@
     </message>
 </context>
 <context>
+    <name>IdentityBar</name>
+    <message>
+        <source>Reload the page to use the new browser identity.</source>
+        <translation>Ricarica la pagina per usare la nuova identità del browser.</translation>
+    </message>
+    <message>
+        <source>Reload</source>
+        <translation>Ricarica</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Chiudi</translation>
+    </message>
+</context>
+<context>
+    <name>IdentityChoices</name>
+    <message>
+        <source>Kondor (default)</source>
+        <translation>Kondor (predefinita)</translation>
+    </message>
+    <message>
+        <source>Firefox</source>
+        <translation>Firefox</translation>
+    </message>
+    <message>
+        <source>Chrome</source>
+        <translation>Chrome</translation>
+    </message>
+    <message>
+        <source>Custom…</source>
+        <translation>Personalizzata…</translation>
+    </message>
+</context>
+<context>
+    <name>IdentityRow</name>
+    <message>
+        <source>Identify as:</source>
+        <translation>Identifica come:</translation>
+    </message>
+</context>
+<context>
     <name>ImportMessage</name>
     <message>
         <source>Some passwords could not be saved to KWallet.</source>
@@ -1933,6 +1989,11 @@
     <message>
         <source>Pop-ups</source>
         <translation>Popup</translation>
+    </message>
+    <message>
+        <source>Browser identity — %1</source>
+        <extracomment>%1 is the browser the site is told Kondor is, such as Firefox</extracomment>
+        <translation>Identità del browser — %1</translation>
     </message>
 </context>
 <context>

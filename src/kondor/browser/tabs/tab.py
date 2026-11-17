@@ -12,6 +12,7 @@ from kondor.browser.tabs.features.tabsecurity import TabSecurity
 from kondor.browser.tabs.features.tabsitereload import TabSiteReload
 from kondor.browser.tabs.features.tabsleep import TabSleep
 from kondor.browser.tabs.tabviewstate import TabViewState
+from kondor.site.identity.tabidentity import TabIdentity
 
 BLANK_PAGE = QUrl("about:blank")
 
@@ -55,6 +56,7 @@ class Tab(TabViewState):
         self._media = TabMedia(self)
         self._audio = TabAudio(self)
         self._popups = TabPopups(self._is_private, self)
+        self._identity = TabIdentity(profile, self._is_private, self)
 
     url = Property(QUrl, lambda self: self._url, notify=urlChanged)
     newTabPage = Property(bool, lambda self: self._new_tab_page, notify=newTabPageChanged)
@@ -67,6 +69,7 @@ class Tab(TabViewState):
     media = Property(TabMedia, lambda self: self._media, constant=True)
     audio = Property(TabAudio, lambda self: self._audio, constant=True)
     popups = Property(TabPopups, lambda self: self._popups, constant=True)
+    identity = Property(TabIdentity, lambda self: self._identity, constant=True)
     sleep = Property(TabSleep, lambda self: self._sleep, constant=True)
     extensionItems = Property(TabExtensionItems, lambda self: self._extension_items, constant=True)
 
@@ -84,6 +87,7 @@ class Tab(TabViewState):
         self._url = url
         self._security.update_for(url)
         self._popups.update_for(url)
+        self._identity.update_for(url)
         self._passwords.update_usernames_for(url)
         self.urlChanged.emit()
 
@@ -103,6 +107,7 @@ class Tab(TabViewState):
     def setLoading(self, loading: bool) -> None:
         if loading:
             self._site_reload.dismiss()
+            self._identity.dismiss()
         super().setLoading(loading)
 
     def _set_new_tab_page(self, new_tab_page: bool) -> None:

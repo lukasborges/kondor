@@ -16,6 +16,7 @@ from kondor.browser.tabs.tab import Tab
 from kondor.browser.tabs.tabmodel import TabModel
 from kondor.browser.zoommanager import ZoomManager
 from kondor.core.qmlregistration import QmlKind, QmlType, register
+from kondor.site.identity.tabidentity import TabIdentity
 
 QML_TYPES: tuple[QmlType, ...] = (
     QmlType(FaviconStore, "FaviconStore", QmlKind.SINGLETON),
@@ -32,6 +33,7 @@ QML_TYPES: tuple[QmlType, ...] = (
     QmlType(TabSiteReload, "TabSiteReload", QmlKind.UNCREATABLE),
     QmlType(TabExtensionItems, "TabExtensionItems", QmlKind.UNCREATABLE),
     QmlType(TabMedia, "TabMedia", QmlKind.UNCREATABLE),
+    QmlType(TabIdentity, "TabIdentity", QmlKind.UNCREATABLE),
     QmlType(TabPopups, "TabPopups", QmlKind.UNCREATABLE),
     QmlType(TabModel, "TabModel", QmlKind.CREATABLE),
     QmlType(ZoomManager, "ZoomManager", QmlKind.SINGLETON),

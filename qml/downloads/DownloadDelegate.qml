@@ -11,16 +11,16 @@ ItemDelegate {
     required property string fileName
     required property string mimeIconName
     required property real progress
-    required property int state
+    required property int downloadState
     required property bool isPaused
     required property string speedText
     required property string interruptReasonString
     required property real receivedBytes
     required property real totalBytes
 
-    readonly property bool isInProgress: state === DownloadManager.InProgress
-    readonly property bool isFinishedUnsuccessfully: state === DownloadManager.Cancelled
-                                                    || state === DownloadManager.Interrupted
+    readonly property bool isInProgress: downloadState === DownloadManager.InProgress
+    readonly property bool isFinishedUnsuccessfully: downloadState === DownloadManager.Cancelled
+                                                    || downloadState === DownloadManager.Interrupted
 
     width: ListView.view.width
     padding: Kirigami.Units.largeSpacing
@@ -85,7 +85,7 @@ ItemDelegate {
         }
 
         ToolButton {
-            visible: root.state === DownloadManager.Requested || root.isInProgress
+            visible: root.downloadState === DownloadManager.Requested || root.isInProgress
             display: AbstractButton.IconOnly
             icon.name: "dialog-cancel"
             ToolTip.visible: hovered
@@ -96,7 +96,7 @@ ItemDelegate {
         }
 
         ToolButton {
-            visible: root.state === DownloadManager.Completed
+            visible: root.downloadState === DownloadManager.Completed
             display: AbstractButton.IconOnly
             icon.name: "document-open"
             ToolTip.visible: hovered
@@ -107,7 +107,7 @@ ItemDelegate {
         }
 
         ToolButton {
-            visible: root.state === DownloadManager.Completed
+            visible: root.downloadState === DownloadManager.Completed
             display: AbstractButton.IconOnly
             icon.name: "folder-open"
             ToolTip.visible: hovered

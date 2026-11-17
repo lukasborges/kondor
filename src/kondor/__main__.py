@@ -15,7 +15,7 @@ from kondor.app.startup.appstartup import (
 )
 from kondor.app.startup.environment import prepare_environment
 from kondor.app.startup.interrupt import quit_on_interrupt
-from kondor.app.startup.messagehandler import install_message_handler
+from kondor.app.startup.loggingrules import install_logging_rules
 from kondor.app.startup.stagedbuild import load_staged_resources, staged_build_directory
 from kondor.profiles.activeprofile import ActiveProfile
 from kondor.profiles.registry.profileregistry import ProfileRegistry
@@ -85,7 +85,7 @@ def select_profile_and_launch(app: QApplication, single_instance: SingleInstance
 
 
 def main() -> int:
-    install_message_handler()
+    install_logging_rules()
     app = start_application()
     if app is None:
         return 1

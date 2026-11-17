@@ -13,7 +13,7 @@ Item {
     readonly property bool isHovered: hover.hovered
     readonly property real slideOffset: isShown ? 0 : -contentSize
 
-    default property alias data: holder.data
+    default property alias content: holder.data
 
     function containsActiveFocus() {
         let item = Window.window ? Window.window.activeFocusItem : null

@@ -5,6 +5,7 @@ from PySide6.QtCore import QFile, QObject
 from PySide6.QtWebEngineCore import QWebEngineScript
 from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
+from kondor.app.remotecontrol.remotecontrol import RemoteControl
 from kondor.browser.profile import pagescripts
 from tests.browser.profile.profilesupport import scripts_named
 
@@ -62,3 +63,23 @@ def test_private_profile_gets_only_the_channel_script(owner: QObject) -> None:
     channel = scripts_named(profile, pagescripts.CHANNEL_SCRIPT)
     assert_single_script(channel, InjectionPoint.DocumentCreation)
     assert scripts_named(profile, pagescripts.PASSWORDS_SCRIPT) == []
+
+
+@pytest.fixture
+def remote_control_port() -> Iterator[None]:
+    remote_control = RemoteControl.instance()
+    remote_control.set_port(9222)
+    yield
+    remote_control.set_port(None)
+
+
+def test_remote_control_adds_the_agent_pointer_script(
+    owner: QObject, remote_control_port: None
+) -> None:
+    profile = installed_profile(owner, "pagescripts-pointer-test")
+    assert len(scripts_named(profile, pagescripts.AGENT_POINTER_SCRIPT)) == 1
+
+
+def test_agent_pointer_script_is_absent_without_remote_control(owner: QObject) -> None:
+    profile = installed_profile(owner, "pagescripts-no-pointer-test")
+    assert scripts_named(profile, pagescripts.AGENT_POINTER_SCRIPT) == []

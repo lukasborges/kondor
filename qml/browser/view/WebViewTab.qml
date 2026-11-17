@@ -55,6 +55,10 @@ Item {
         webView: pageView
     }
 
+    PageRepaintOnRestore {
+        webView: pageView
+    }
+
     ReaderStyle {
         id: readerStyle
         tab: root.tab

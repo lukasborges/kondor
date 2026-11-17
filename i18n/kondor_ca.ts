@@ -435,7 +435,7 @@
     </message>
     <message>
         <source>Hide Toolbars</source>
-        <translation>Amaga les barres d'eines</translation>
+        <translation>Amaga les barres d&apos;eines</translation>
     </message>
     <message>
         <source>Developer Tools</source>
@@ -3155,11 +3155,11 @@
     <message>
         <source>Toolbars hidden</source>
         <extracomment>Shown for a few seconds after the toolbars get hidden</extracomment>
-        <translation>Barres d'eines amagades</translation>
+        <translation>Barres d&apos;eines amagades</translation>
     </message>
     <message>
         <source>Show Toolbars</source>
-        <translation>Mostra les barres d'eines</translation>
+        <translation>Mostra les barres d&apos;eines</translation>
     </message>
     <message>
         <source>F11, or move the pointer to the top</source>
@@ -3171,7 +3171,7 @@
     </message>
     <message>
         <source>Toolbars hidden. Move the pointer to the top edge or press Ctrl+L to show them.</source>
-        <translation>Barres d'eines amagades. Mou el punter a la vora superior o premeu Ctrl+L per mostrar-les.</translation>
+        <translation>Barres d&apos;eines amagades. Mou el punter a la vora superior o premeu Ctrl+L per mostrar-les.</translation>
     </message>
 </context>
 <context>

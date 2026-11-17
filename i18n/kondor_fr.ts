@@ -435,7 +435,7 @@
     </message>
     <message>
         <source>Hide Toolbars</source>
-        <translation>Masquer les barres d'outils</translation>
+        <translation>Masquer les barres d&apos;outils</translation>
     </message>
     <message>
         <source>Developer Tools</source>
@@ -3155,11 +3155,11 @@
     <message>
         <source>Toolbars hidden</source>
         <extracomment>Shown for a few seconds after the toolbars get hidden</extracomment>
-        <translation>Barres d'outils masquées</translation>
+        <translation>Barres d&apos;outils masquées</translation>
     </message>
     <message>
         <source>Show Toolbars</source>
-        <translation>Afficher les barres d'outils</translation>
+        <translation>Afficher les barres d&apos;outils</translation>
     </message>
     <message>
         <source>F11, or move the pointer to the top</source>
@@ -3171,7 +3171,7 @@
     </message>
     <message>
         <source>Toolbars hidden. Move the pointer to the top edge or press Ctrl+L to show them.</source>
-        <translation>Barres d'outils masquées. Déplacez le pointeur vers le bord supérieur ou appuyez sur Ctrl+L pour les afficher.</translation>
+        <translation>Barres d&apos;outils masquées. Déplacez le pointeur vers le bord supérieur ou appuyez sur Ctrl+L pour les afficher.</translation>
     </message>
 </context>
 <context>

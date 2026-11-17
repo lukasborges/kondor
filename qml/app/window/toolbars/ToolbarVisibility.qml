@@ -18,6 +18,7 @@ QtObject {
     readonly property bool isPointerActive: isPointerAtEdge || panes.some(pane => pane.isHovered)
 
     signal hiddenHintRequested
+    signal hiddenHintCancelled
 
     function reveal() {
         if (areHidden)
@@ -29,7 +30,8 @@ QtObject {
     }
 
     function hasPopupOpen() {
-        const popups = Overlay.overlay ? Overlay.overlay.children : []
+        const overlay = targetWindow.contentItem.Overlay.overlay
+        const popups = overlay ? overlay.children : []
         return Array.from(popups).some(popup => popup.visible)
     }
 
@@ -52,6 +54,8 @@ QtObject {
         isRevealed = false
         if (areHidden)
             requestHint()
+        else
+            hiddenHintCancelled()
     }
 
     onIsWindowFullScreenChanged: if (isWindowFullScreen) requestHint()

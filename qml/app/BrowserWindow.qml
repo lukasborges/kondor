@@ -167,6 +167,7 @@ ApplicationWindow {
         isWindowFullScreen: fullScreenControl.windowFullScreen
         isPageFullScreen: fullScreenControl.pageFullScreen
         onHiddenHintRequested: toolbarsHint.show()
+        onHiddenHintCancelled: toolbarsHint.hide()
     }
 
     FullScreenHint {

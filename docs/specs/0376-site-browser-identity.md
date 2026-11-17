@@ -132,3 +132,5 @@ Kondor open).
 | Reload by itself after a change? | No (#180): the user may have typed something; Reload is offered in the InlineBar. |
 | Presets? | Kondor, Firefox, Chrome and Custom cover what sites check; more presets (Safari, Edge, mobile) were left out to keep the menu short. |
 | Words? | "Identify as:" and "Browser identity", not "user agent", which only the Custom dialog shows for the value itself. |
+| Private windows: per window or per tab? | Per private tab (PR #393 review). Every private tab has its own off-the-record profile, so an identity chosen there lives in that tab's profile and is gone when the tab closes; nothing is written to disk. A window-wide store shared across profiles was not worth it. |
+| How are Client Hints "removed"? | Qt has no API to remove a request header, so clearing one means setting it to an empty value. Only the `Sec-CH-UA*` headers the request already carries are cleared; none is added (PR #393 review). |

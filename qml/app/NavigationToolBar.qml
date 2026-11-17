@@ -32,6 +32,8 @@ ToolBar {
             return
         if (isLoading)
             tabs.currentTab.stop()
+        else if (Qt.application.keyboardModifiers & Qt.ShiftModifier)
+            tabs.currentTab.reloadBypassingCache()
         else
             tabs.currentTab.reload()
     }

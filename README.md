@@ -122,6 +122,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 | `F11` | Toggle window full screen (hides the toolbars) |
 | `Ctrl+Shift+F` | Hide or show the toolbars |
 | `Ctrl+R` / `F5` | Reload |
+| `Ctrl+Shift+R` / `Shift+F5` / `Ctrl+F5` | Reload, bypassing the cache |
 | `Alt+←` / `Alt+→` | Back / forward |
 | `Ctrl++` / `Ctrl+-` | Zoom in / out |
 | `Ctrl+0` | Reset zoom (also by clicking the zoom level in the address bar) |

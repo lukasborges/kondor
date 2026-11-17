@@ -7,6 +7,7 @@ class TabCommands(QObject):
     backRequested = Signal()
     forwardRequested = Signal()
     reloadRequested = Signal()
+    reloadBypassingCacheRequested = Signal()
     stopRequested = Signal()
     zoomInRequested = Signal()
     zoomOutRequested = Signal()
@@ -38,6 +39,10 @@ class TabCommands(QObject):
     @Slot()
     def reload(self) -> None:
         self.reloadRequested.emit()
+
+    @Slot()
+    def reloadBypassingCache(self) -> None:
+        self.reloadBypassingCacheRequested.emit()
 
     @Slot()
     def stop(self) -> None:

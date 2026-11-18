@@ -25,6 +25,7 @@ Rectangle {
     property bool withRemoteControl: false // #256: remote control turned on, restart pending
     property bool withMcpCommand: false // #398: the MCP server command for AI agents
     property bool withHttpsOnly: false // #409: HTTPS-only mode
+    property bool withRestartNow: false // #419: Restart Now in the remote control restart message
     property bool withPerformance: false // #257: show the Performance tab of the General page
     property bool appearanceVertical: false // #212: the Tabs picker also offers Side Bar
     property bool extensionsEmpty: false // #107: no extension installed (placeholder)
@@ -212,6 +213,8 @@ Rectangle {
                             visible: root.withRemoteControl
                             type: Kirigami.MessageType.Information
                             text: "Restart Kondor to apply the remote control change."
+                            actions: root.withRestartNow ? [restartNowAction] : []
+                            Kirigami.Action { id: restartNowAction; text: "Restart Now"; icon.name: "view-refresh" }
                         }
                         CheckBox {
                             visible: root.withRemoteControl

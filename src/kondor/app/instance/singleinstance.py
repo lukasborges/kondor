@@ -93,6 +93,9 @@ class SingleInstance(QObject):
         wait_until_disconnected(socket)
         return True
 
+    def close(self) -> None:
+        self._server.close()
+
     def has_running_instance(self) -> bool:
         socket = QLocalSocket()
         socket.connectToServer(self._name)

@@ -2453,6 +2453,23 @@
         <source>Restart Kondor to apply the remote control change.</source>
         <translation>원격 제어 변경 사항을 적용하려면 Kondor를 다시 시작하세요.</translation>
     </message>
+    <message>
+        <source>Restart Now</source>
+        <translation>지금 다시 시작</translation>
+    </message>
+    <message>
+        <source>Restart %1</source>
+        <extracomment>%1 is the application name</extracomment>
+        <translation>%1 다시 시작</translation>
+    </message>
+    <message>
+        <source>Downloads are still in progress. Restart anyway?</source>
+        <translation>다운로드가 아직 진행 중입니다. 그래도 다시 시작하시겠습니까?</translation>
+    </message>
+    <message>
+        <source>Restart</source>
+        <translation>다시 시작</translation>
+    </message>
 </context>
 <context>
     <name>RenameBookmarkDialog</name>

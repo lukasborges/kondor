@@ -8,6 +8,7 @@ from kondor.app.crash.crashrecorder import start_crash_recording
 from kondor.app.instance.singleinstance import SingleInstance
 from kondor.app.mcp.server import mcpmain
 from kondor.app.remotecontrol import remotecontrolstartup
+from kondor.app.restart.apprestart import AppRestart
 from kondor.app.startup.appidentity import set_up_identity
 from kondor.app.startup.appstartup import (
     forwards_to_running_instance,
@@ -30,6 +31,7 @@ def run_browser(app: QApplication, single_instance: SingleInstance) -> int:
     engine.addImportPath(str(staged_build_directory() / "qml"))
     status = app.exec() if open_windows(engine, single_instance) else 1
     shut_down(engine)
+    AppRestart.instance().start_again_when_pending(single_instance)
     return status
 
 

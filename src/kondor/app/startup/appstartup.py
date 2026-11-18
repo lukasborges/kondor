@@ -49,6 +49,7 @@ def publish_startup_arguments(command_line: CommandLine) -> None:
     startup_args = StartupArgs.instance()
     startup_args.set_startup_urls(command_line.urls)
     startup_args.set_startup_private(command_line.is_private)
+    startup_args.set_restore_session(command_line.restore_session)
 
 
 def register_profiles_with_extensions() -> None:

@@ -30,6 +30,8 @@ def restored_contents(state: SessionWindow) -> WindowContents:
 
 
 def should_restore_session() -> bool:
+    if StartupArgs.instance().restore_session():
+        return True
     return str(Settings.instance().property("startupBehavior")) == "restore"
 
 

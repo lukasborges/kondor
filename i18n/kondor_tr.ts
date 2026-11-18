@@ -2739,7 +2739,7 @@
     </message>
     <message>
         <source>%1 (cut at 16384 px)</source>
-        <translation>%1 (16384 px'te kesildi)</translation>
+        <translation>%1 (16384 px&apos;te kesildi)</translation>
     </message>
 </context>
 <context>

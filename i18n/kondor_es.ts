@@ -1315,6 +1315,25 @@
     </message>
 </context>
 <context>
+    <name>HttpsOnlyPage</name>
+    <message>
+        <source>Secure site not available</source>
+        <translation>Sitio seguro no disponible</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;%1&lt;/b&gt; does not support HTTPS. Anyone on the network could see or change what is sent to it.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; no admite HTTPS. Cualquiera en la red podría ver o cambiar lo que se envía.</translation>
+    </message>
+    <message>
+        <source>Continue to HTTP Site</source>
+        <translation>Continuar al sitio HTTP</translation>
+    </message>
+    <message>
+        <source>Go Back</source>
+        <translation>Atrás</translation>
+    </message>
+</context>
+<context>
     <name>IdentityBar</name>
     <message>
         <source>Reload the page to use the new browser identity.</source>
@@ -2177,6 +2196,14 @@
         <translation>Borrar cookies, caché e historial</translation>
     </message>
     <message>
+        <source>Connections:</source>
+        <translation>Conexiones:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Usar siempre conexiones seguras (HTTPS)</translation>
+    </message>
+    <message>
         <source>Pop-ups:</source>
         <translation>Ventanas emergentes:</translation>
     </message>
@@ -2846,6 +2873,14 @@
     <message>
         <source>Clear Cookies and Cache Now</source>
         <translation>Borrar cookies y caché ahora</translation>
+    </message>
+    <message>
+        <source>Connections:</source>
+        <translation>Conexiones:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Usar siempre conexiones seguras (HTTPS)</translation>
     </message>
     <message>
         <source>Pop-ups:</source>

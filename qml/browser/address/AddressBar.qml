@@ -16,9 +16,13 @@ TextField {
             showCurrentTabAddress()
     }
 
+    function displayedUrlOf(tab) {
+        return tab.security.httpsOnlyWarningPending ? tab.security.upgradedFrom : tab.url
+    }
+
     function showCurrentTabAddress() {
         const tab = tabs.currentTab
-        text = (tab && !tab.newTabPage) ? tab.url.toString() : ""
+        text = (tab && !tab.newTabPage) ? displayedUrlOf(tab).toString() : ""
     }
 
     function stopEditing() {

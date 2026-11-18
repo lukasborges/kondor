@@ -85,6 +85,19 @@ ScrollView {
             }
 
             CheckBox {
+                id: httpsOnlyCheck
+                Kirigami.FormData.label: qsTr("Connections:")
+                text: qsTr("Always use secure connections (HTTPS)")
+                onToggled: root.draft.httpsOnly = checked
+            }
+
+            Binding {
+                target: httpsOnlyCheck
+                property: "checked"
+                value: root.draft.httpsOnly
+            }
+
+            CheckBox {
                 id: popupsCheck
                 Kirigami.FormData.label: qsTr("Pop-ups:")
                 text: qsTr("Block pop-ups that open without a click")

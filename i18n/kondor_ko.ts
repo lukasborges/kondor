@@ -1312,6 +1312,25 @@
     </message>
 </context>
 <context>
+    <name>HttpsOnlyPage</name>
+    <message>
+        <source>Secure site not available</source>
+        <translation>보안 사이트를 사용할 수 없음</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;%1&lt;/b&gt; does not support HTTPS. Anyone on the network could see or change what is sent to it.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt;은(는) HTTPS를 지원하지 않습니다. 네트워크의 누구나 전송되는 내용을 보거나 변경할 수 있습니다.</translation>
+    </message>
+    <message>
+        <source>Continue to HTTP Site</source>
+        <translation>HTTP 사이트로 계속</translation>
+    </message>
+    <message>
+        <source>Go Back</source>
+        <translation>뒤로</translation>
+    </message>
+</context>
+<context>
     <name>IdentityBar</name>
     <message>
         <source>Reload the page to use the new browser identity.</source>
@@ -2164,6 +2183,14 @@
         <translation>쿠키, 캐시 및 기록 지우기</translation>
     </message>
     <message>
+        <source>Connections:</source>
+        <translation>연결:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>항상 보안 연결(HTTPS) 사용</translation>
+    </message>
+    <message>
         <source>Pop-ups:</source>
         <translation>팝업:</translation>
     </message>
@@ -2832,6 +2859,14 @@
     <message>
         <source>Clear Cookies and Cache Now</source>
         <translation>쿠키와 캐시 지금 지우기</translation>
+    </message>
+    <message>
+        <source>Connections:</source>
+        <translation>연결:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>항상 보안 연결(HTTPS) 사용</translation>
     </message>
     <message>
         <source>Pop-ups:</source>

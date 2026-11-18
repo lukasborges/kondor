@@ -1312,6 +1312,25 @@
     </message>
 </context>
 <context>
+    <name>HttpsOnlyPage</name>
+    <message>
+        <source>Secure site not available</source>
+        <translation>Güvenli site kullanılamıyor</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;%1&lt;/b&gt; does not support HTTPS. Anyone on the network could see or change what is sent to it.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; HTTPS'yi desteklemiyor. Ağdaki herkes siteye gönderilenleri görebilir veya değiştirebilir.</translation>
+    </message>
+    <message>
+        <source>Continue to HTTP Site</source>
+        <translation>HTTP sitesine devam et</translation>
+    </message>
+    <message>
+        <source>Go Back</source>
+        <translation>Geri</translation>
+    </message>
+</context>
+<context>
     <name>IdentityBar</name>
     <message>
         <source>Reload the page to use the new browser identity.</source>
@@ -2164,6 +2183,14 @@
         <translation>Çerezleri, önbelleği ve geçmişi temizle</translation>
     </message>
     <message>
+        <source>Connections:</source>
+        <translation>Bağlantılar:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Her zaman güvenli bağlantıları (HTTPS) kullan</translation>
+    </message>
+    <message>
         <source>Pop-ups:</source>
         <translation>Açılır pencereler:</translation>
     </message>
@@ -2832,6 +2859,14 @@
     <message>
         <source>Clear Cookies and Cache Now</source>
         <translation>Çerezleri ve önbelleği şimdi temizle</translation>
+    </message>
+    <message>
+        <source>Connections:</source>
+        <translation>Bağlantılar:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Her zaman güvenli bağlantıları (HTTPS) kullan</translation>
     </message>
     <message>
         <source>Pop-ups:</source>

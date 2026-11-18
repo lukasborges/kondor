@@ -1315,6 +1315,25 @@
     </message>
 </context>
 <context>
+    <name>HttpsOnlyPage</name>
+    <message>
+        <source>Secure site not available</source>
+        <translation>Site sécurisé indisponible</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;%1&lt;/b&gt; does not support HTTPS. Anyone on the network could see or change what is sent to it.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; ne prend pas en charge HTTPS. Toute personne sur le réseau pourrait voir ou modifier ce qui lui est envoyé.</translation>
+    </message>
+    <message>
+        <source>Continue to HTTP Site</source>
+        <translation>Continuer vers le site HTTP</translation>
+    </message>
+    <message>
+        <source>Go Back</source>
+        <translation>Retour</translation>
+    </message>
+</context>
+<context>
     <name>IdentityBar</name>
     <message>
         <source>Reload the page to use the new browser identity.</source>
@@ -2177,6 +2196,14 @@
         <translation>Effacer les cookies, le cache et l’historique</translation>
     </message>
     <message>
+        <source>Connections:</source>
+        <translation>Connexions :</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Toujours utiliser des connexions sécurisées (HTTPS)</translation>
+    </message>
+    <message>
         <source>Pop-ups:</source>
         <translation>Fenêtres surgissantes :</translation>
     </message>
@@ -2846,6 +2873,14 @@
     <message>
         <source>Clear Cookies and Cache Now</source>
         <translation>Effacer les cookies et le cache maintenant</translation>
+    </message>
+    <message>
+        <source>Connections:</source>
+        <translation>Connexions :</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Toujours utiliser des connexions sécurisées (HTTPS)</translation>
     </message>
     <message>
         <source>Pop-ups:</source>

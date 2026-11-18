@@ -62,6 +62,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 - **Pop-up blocker** with per-site exceptions
 - **Browser identity per site**: appear as Firefox, Chrome or a custom browser on one site
 - **Security padlock** and warnings for unsafe sites
+- **HTTPS-only mode**: always try the secure site, warn before plain HTTP
 - **Crash reports**: after a crash, send a prefilled GitHub issue you review first
 
 ### Reading

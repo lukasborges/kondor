@@ -36,7 +36,9 @@ Item {
     }
 
     function handle(error) {
-        if (error.isMainFrame)
+        if (error.isMainFrame && tab.security.failUpgradeOf(error.url))
+            error.rejectCertificate()
+        else if (error.isMainFrame)
             holdMainFrameError(error)
         else
             error.rejectCertificate()

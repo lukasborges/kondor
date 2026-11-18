@@ -23,6 +23,7 @@ Item {
             return reader.exitReader()
         if (certificates.rejectPending())
             tab.security.rejectCertificateError()
+        tab.security.dismissHttpsOnlyWarning()
         if (webView.canGoBack)
             webView.goBack()
     }

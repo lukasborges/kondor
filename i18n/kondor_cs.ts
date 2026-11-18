@@ -1318,6 +1318,25 @@
     </message>
 </context>
 <context>
+    <name>HttpsOnlyPage</name>
+    <message>
+        <source>Secure site not available</source>
+        <translation>Zabezpečený web není k dispozici</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;%1&lt;/b&gt; does not support HTTPS. Anyone on the network could see or change what is sent to it.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; nepodporuje HTTPS. Kdokoli v síti by mohl vidět nebo měnit, co se tam odesílá.</translation>
+    </message>
+    <message>
+        <source>Continue to HTTP Site</source>
+        <translation>Pokračovat na web HTTP</translation>
+    </message>
+    <message>
+        <source>Go Back</source>
+        <translation>Zpět</translation>
+    </message>
+</context>
+<context>
     <name>IdentityBar</name>
     <message>
         <source>Reload the page to use the new browser identity.</source>
@@ -2190,6 +2209,14 @@
         <translation>Vymazat soubory cookie, mezipaměť a historii</translation>
     </message>
     <message>
+        <source>Connections:</source>
+        <translation>Připojení:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Vždy používat zabezpečená připojení (HTTPS)</translation>
+    </message>
+    <message>
         <source>Pop-ups:</source>
         <translation>Vyskakovací okna:</translation>
     </message>
@@ -2860,6 +2887,14 @@
     <message>
         <source>Clear Cookies and Cache Now</source>
         <translation>Vymazat soubory cookie a mezipaměť</translation>
+    </message>
+    <message>
+        <source>Connections:</source>
+        <translation>Připojení:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Vždy používat zabezpečená připojení (HTTPS)</translation>
     </message>
     <message>
         <source>Pop-ups:</source>

@@ -70,7 +70,15 @@ WebEngineView {
         root.zoom.reapplySavedZoomAfterCommit(url)
     }
 
+    function settleUpgrade(status) {
+        if (status === WebEngineLoadingInfo.LoadSucceededStatus)
+            root.tab.security.finishUpgrade()
+        else if (status === WebEngineLoadingInfo.LoadFailedStatus)
+            root.tab.security.failUpgradeOf(url)
+    }
+
     function handleLoading(status) {
+        settleUpgrade(status)
         clearCrashOnStart(status)
         root.reader.updateOnLoad(status)
         updateTab(status)

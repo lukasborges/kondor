@@ -1,5 +1,7 @@
 import QtQuick
 import QtQuick.Controls
+import org.kde.kirigami as Kirigami
+import "groupcolors.js" as GroupColors
 import Kondor
 
 Menu {
@@ -36,13 +38,9 @@ Menu {
 
             text: modelData.name.length > 0 ? modelData.name : qsTr("Unnamed group")
             icon.name: "color-fill"
-            icon.color: tint.value
+            icon.color: GroupColors.of(item.modelData.color, Kirigami.Theme)
             onTriggered: menu.tabModel.addTabToGroup(menu.tabIndex, modelData)
 
-            GroupColor {
-                id: tint
-                name: item.modelData.color
-            }
         }
     }
 }

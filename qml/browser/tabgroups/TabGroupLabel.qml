@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import "groupcolors.js" as GroupColors
 import Kondor
 
 Rectangle {
@@ -18,9 +19,9 @@ Rectangle {
     signal dropped(real sceneX)
 
     radius: Kirigami.Units.cornerRadius
-    color: Qt.alpha(tint.value, hover.hovered ? 0.4 : 0.25)
+    color: Qt.alpha(GroupColors.of(label.group.color, Kirigami.Theme), hover.hovered ? 0.4 : 0.25)
     border.width: activeFocus ? 2 : 1
-    border.color: activeFocus ? Kirigami.Theme.focusColor : tint.value
+    border.color: activeFocus ? Kirigami.Theme.focusColor : GroupColors.of(label.group.color, Kirigami.Theme)
     activeFocusOnTab: true
     z: dragHandler.active ? 10 : 3
     transform: Translate { x: label.dragShift }
@@ -39,10 +40,6 @@ Rectangle {
         targetWindow.openGroupEditor(group, label)
     }
 
-    GroupColor {
-        id: tint
-        name: label.group.color
-    }
 
     RowLayout {
         anchors.fill: parent
@@ -55,7 +52,7 @@ Rectangle {
             Layout.preferredWidth: 12
             Layout.preferredHeight: 12
             radius: 6
-            color: tint.value
+            color: GroupColors.of(label.group.color, Kirigami.Theme)
         }
 
         Label {

@@ -1,5 +1,6 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
+import "groupcolors.js" as GroupColors
 
 Rectangle {
     id: bar
@@ -17,10 +18,6 @@ Rectangle {
     width: isVertical ? 3 : undefined
     height: isVertical ? undefined : 3
     radius: 1.5
-    color: tint.value
+    color: GroupColors.of((bar.group ? bar.group.color : "blue"), Kirigami.Theme)
 
-    GroupColor {
-        id: tint
-        name: bar.group ? bar.group.color : "blue"
-    }
 }

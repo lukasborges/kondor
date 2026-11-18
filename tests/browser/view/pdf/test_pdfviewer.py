@@ -11,6 +11,7 @@ from pytestqt.qtbot import QtBot
 from kondor.browser.profile.profilemanager import ProfileManager
 from kondor.browser.tabs.tab import Tab
 from kondor.browser.tabs.tabmodel import TabModel
+from kondor.core.settings.settings import Settings
 from kondor.downloads.downloadmanager import DownloadManager
 from tests.qmlsupport import error_text, load_component, release
 
@@ -24,8 +25,10 @@ PDF = (
     b"3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 200 200]>>endobj\n"
     b"trailer<</Root 1 0 R>>\n%%EOF\n"
 )
+EMBED_PAGE = b'<html><body><embed src="/x.pdf" type="application/pdf"></body></html>'
 TAB_QML = """
 import QtQuick
+import QtWebEngine
 import Kondor
 
 Item {
@@ -45,7 +48,7 @@ Item {
     function loadInPageView(url) { findPageView(holder).url = url }
     Component.onCompleted: {
         findPageView(holder).loadingChanged.connect((info) => {
-            if (info.status === 2) holder.loadsSucceeded++
+            if (info.status === WebEngineView.LoadSucceededStatus) holder.loadsSucceeded++
         })
     }
     WebViewTab {
@@ -66,8 +69,8 @@ class PdfServer(QObject):
         self.server.listen(QHostAddress.SpecialAddress.LocalHost, 0)
         self.server.newConnection.connect(self.accept)
 
-    def url(self) -> str:
-        return f"http://127.0.0.1:{self.server.serverPort()}/x.pdf"
+    def url(self, path: str = "x.pdf") -> str:
+        return f"http://127.0.0.1:{self.server.serverPort()}/{path}"
 
     def accept(self) -> None:
         while (socket := self.server.nextPendingConnection()) is not None:
@@ -75,11 +78,17 @@ class PdfServer(QObject):
             socket.disconnected.connect(socket.deleteLater)
 
     def respond(self, socket: QTcpSocket) -> None:
-        socket.readAll()
+        request = bytes(socket.readAll().data()).decode(errors="replace")
+        if request.startswith("GET /embed.html"):
+            self.send(socket, "text/html", EMBED_PAGE)
+        else:
+            self.send(socket, "application/pdf", PDF)
+
+    def send(self, socket: QTcpSocket, kind: str, body: bytes) -> None:
         extra = f"Content-Disposition: {self.disposition}\r\n" if self.disposition else ""
-        head = f"HTTP/1.1 200 OK\r\nContent-Type: application/pdf\r\n{extra}"
-        head += f"Content-Length: {len(PDF)}\r\nConnection: close\r\n\r\n"
-        socket.write(head.encode() + PDF)
+        head = f"HTTP/1.1 200 OK\r\nContent-Type: {kind}\r\n{extra}"
+        head += f"Content-Length: {len(body)}\r\nConnection: close\r\n\r\n"
+        socket.write(head.encode() + body)
         socket.disconnectFromHost()
 
 
@@ -122,10 +131,13 @@ class Scene:
 def scene(
     request: pytest.FixtureRequest, kondor_engine: QQmlEngine, tmp_path: Path
 ) -> Iterator[Scene]:
+    settings = Settings.instance()
+    previous = settings.property("downloadDirectory")
+    settings.setProperty("downloadDirectory", str(tmp_path))
     created = Scene(kondor_engine, private=bool(request.param))
-    created.profile.setDownloadPath(str(tmp_path))
     yield created
     created.release()
+    settings.setProperty("downloadDirectory", previous)
 
 
 def test_pdf_opens_in_the_page_view_without_a_download(scene: Scene, qtbot: QtBot) -> None:
@@ -147,4 +159,12 @@ def test_local_pdf_file_opens_in_the_page_view(scene: Scene, qtbot: QtBot, tmp_p
     path.write_bytes(PDF)
     scene.load(QUrl.fromLocalFile(str(path)).toString())
     qtbot.waitUntil(lambda: scene.loads_succeeded() == 1, timeout=LOAD_TIMEOUT)
+    assert scene.started == 0
+
+
+def test_embedded_pdf_opens_in_the_page_view(scene: Scene, qtbot: QtBot) -> None:
+    server = PdfServer(None)
+    scene.load(server.url("embed.html"))
+    qtbot.waitUntil(lambda: scene.loads_succeeded() >= 1, timeout=LOAD_TIMEOUT)
+    qtbot.wait(SETTLE_MILLISECONDS)
     assert scene.started == 0

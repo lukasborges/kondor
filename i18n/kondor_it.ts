@@ -446,6 +446,10 @@
         <translation>Strumenti di sviluppo</translation>
     </message>
     <message>
+        <source>Responsive Design Mode</source>
+        <translation>Modalità design reattivo</translation>
+    </message>
+    <message>
         <source>Save as PDF…</source>
         <translation>Salva come PDF…</translation>
     </message>
@@ -1947,6 +1951,13 @@
     </message>
 </context>
 <context>
+    <name>PageStage</name>
+    <message>
+        <source>%1 %</source>
+        <translation>%1 %</translation>
+    </message>
+</context>
+<context>
     <name>PageView</name>
     <message>
         <source>The page&apos;s process ended unexpectedly.</source>
@@ -2533,6 +2544,41 @@
     <message>
         <source>New name:</source>
         <translation>Nuovo nome:</translation>
+    </message>
+</context>
+<context>
+    <name>ResponsiveToolBar</name>
+    <message>
+        <source>Responsive</source>
+        <translation>Reattivo</translation>
+    </message>
+    <message>
+        <source>Device</source>
+        <translation>Dispositivo</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Larghezza</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation>Altezza</translation>
+    </message>
+    <message>
+        <source>Rotate</source>
+        <translation>Ruota</translation>
+    </message>
+    <message>
+        <source>Zoom to Fit</source>
+        <translation>Adatta alla finestra</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode (Ctrl+Shift+M)</source>
+        <translation>Chiudi la modalità reattiva (Ctrl+Maiusc+M)</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode</source>
+        <translation>Chiudi la modalità reattiva</translation>
     </message>
 </context>
 <context>

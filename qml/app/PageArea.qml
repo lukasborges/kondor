@@ -12,6 +12,12 @@ ColumnLayout {
 
     spacing: 0
 
+    ResponsiveToolBar {
+        tab: root.tabs.currentTab
+        visible: root.tabs.currentTab !== null && root.tabs.currentTab.responsive.isActive
+        Layout.fillWidth: true
+    }
+
     CrashReportBar {
         isEligible: !root.browserWindow.privateWindow
         onReportRequested: function(address) { root.browserWindow.openUrlInNewTab(address) }

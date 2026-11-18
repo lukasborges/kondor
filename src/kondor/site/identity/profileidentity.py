@@ -49,6 +49,14 @@ class ProfileIdentity(QObject):
         self._session = {**self._session, host: agent}
         self.refresh()
 
+    def session_agent(self, host: str) -> str | None:
+        return self._session.get(host)
+
+    def restore_session(self, host: str, previous: str | None) -> None:
+        kept = {name: agent for name, agent in self._session.items() if name != host}
+        self._session = kept if previous is None else {**kept, host: previous}
+        self.refresh()
+
     def refresh(self) -> None:
         merged = {**SiteSettings.instance().all_user_agents(), **self._session}
         agents = {host: agent for host, agent in merged.items() if agent}

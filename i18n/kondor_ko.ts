@@ -446,6 +446,10 @@
         <translation>개발자 도구</translation>
     </message>
     <message>
+        <source>Responsive Design Mode</source>
+        <translation>반응형 디자인 모드</translation>
+    </message>
+    <message>
         <source>Save as PDF…</source>
         <translation>PDF로 저장…</translation>
     </message>
@@ -1934,6 +1938,13 @@
     </message>
 </context>
 <context>
+    <name>PageStage</name>
+    <message>
+        <source>%1 %</source>
+        <translation>%1%</translation>
+    </message>
+</context>
+<context>
     <name>PageView</name>
     <message>
         <source>The page&apos;s process ended unexpectedly.</source>
@@ -2519,6 +2530,41 @@
     <message>
         <source>New name:</source>
         <translation>새 이름:</translation>
+    </message>
+</context>
+<context>
+    <name>ResponsiveToolBar</name>
+    <message>
+        <source>Responsive</source>
+        <translation>반응형</translation>
+    </message>
+    <message>
+        <source>Device</source>
+        <translation>장치</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>너비</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation>높이</translation>
+    </message>
+    <message>
+        <source>Rotate</source>
+        <translation>회전</translation>
+    </message>
+    <message>
+        <source>Zoom to Fit</source>
+        <translation>화면에 맞춤</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode (Ctrl+Shift+M)</source>
+        <translation>반응형 모드 닫기 (Ctrl+Shift+M)</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode</source>
+        <translation>반응형 모드 닫기</translation>
     </message>
 </context>
 <context>

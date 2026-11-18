@@ -6,6 +6,7 @@ from kondor.browser.favicons.faviconstore import FaviconStore
 from kondor.browser.media.mediabridge import MediaBridge
 from kondor.browser.popups.popupbridge import PopupBridge
 from kondor.browser.profile.profilemanager import ProfileManager
+from kondor.browser.responsive.tabresponsive import TabResponsive
 from kondor.browser.session.sessionmanager import SessionManager
 from kondor.browser.tabs.features.tabextensionitems import TabExtensionItems
 from kondor.browser.tabs.features.tabmedia import TabMedia
@@ -42,6 +43,7 @@ QML_TYPES: tuple[QmlType, ...] = (
     QmlType(TabMedia, "TabMedia", QmlKind.UNCREATABLE),
     QmlType(TabIdentity, "TabIdentity", QmlKind.UNCREATABLE),
     QmlType(TabPopups, "TabPopups", QmlKind.UNCREATABLE),
+    QmlType(TabResponsive, "TabResponsive", QmlKind.UNCREATABLE),
     QmlType(TabModel, "TabModel", QmlKind.CREATABLE),
     QmlType(TabStripModel, "TabStripModel", QmlKind.CREATABLE),
     QmlType(ZoomManager, "ZoomManager", QmlKind.SINGLETON),

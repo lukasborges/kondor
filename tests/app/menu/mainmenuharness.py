@@ -33,7 +33,13 @@ def expected_top_level_rows() -> list[str]:
 
 
 def expected_more_tools_rows() -> list[str]:
-    return ["Developer Tools", "Save as PDF…", "Take Screenshot…", "Site Permissions…"]
+    return [
+        "Developer Tools",
+        "Responsive Design Mode",
+        "Save as PDF…",
+        "Take Screenshot…",
+        "Site Permissions…",
+    ]
 
 
 def expected_help_rows() -> list[str]:

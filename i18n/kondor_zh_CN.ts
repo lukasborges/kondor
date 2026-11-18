@@ -446,6 +446,10 @@
         <translation>开发者工具</translation>
     </message>
     <message>
+        <source>Responsive Design Mode</source>
+        <translation>响应式设计模式</translation>
+    </message>
+    <message>
         <source>Save as PDF…</source>
         <translation>另存为 PDF…</translation>
     </message>
@@ -1934,6 +1938,13 @@
     </message>
 </context>
 <context>
+    <name>PageStage</name>
+    <message>
+        <source>%1 %</source>
+        <translation>%1%</translation>
+    </message>
+</context>
+<context>
     <name>PageView</name>
     <message>
         <source>The page&apos;s process ended unexpectedly.</source>
@@ -2519,6 +2530,41 @@
     <message>
         <source>New name:</source>
         <translation>新名称：</translation>
+    </message>
+</context>
+<context>
+    <name>ResponsiveToolBar</name>
+    <message>
+        <source>Responsive</source>
+        <translation>响应式</translation>
+    </message>
+    <message>
+        <source>Device</source>
+        <translation>设备</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>宽度</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation>高度</translation>
+    </message>
+    <message>
+        <source>Rotate</source>
+        <translation>旋转</translation>
+    </message>
+    <message>
+        <source>Zoom to Fit</source>
+        <translation>缩放至适合</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode (Ctrl+Shift+M)</source>
+        <translation>关闭响应式模式 (Ctrl+Shift+M)</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode</source>
+        <translation>关闭响应式模式</translation>
     </message>
 </context>
 <context>

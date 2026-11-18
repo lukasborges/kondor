@@ -446,6 +446,10 @@
         <translation>Geliştirici Araçları</translation>
     </message>
     <message>
+        <source>Responsive Design Mode</source>
+        <translation>Duyarlı Tasarım Kipi</translation>
+    </message>
+    <message>
         <source>Save as PDF…</source>
         <translation>PDF Olarak Kaydet…</translation>
     </message>
@@ -1934,6 +1938,13 @@
     </message>
 </context>
 <context>
+    <name>PageStage</name>
+    <message>
+        <source>%1 %</source>
+        <translation>%1 %</translation>
+    </message>
+</context>
+<context>
     <name>PageView</name>
     <message>
         <source>The page&apos;s process ended unexpectedly.</source>
@@ -2519,6 +2530,41 @@
     <message>
         <source>New name:</source>
         <translation>Yeni ad:</translation>
+    </message>
+</context>
+<context>
+    <name>ResponsiveToolBar</name>
+    <message>
+        <source>Responsive</source>
+        <translation>Duyarlı</translation>
+    </message>
+    <message>
+        <source>Device</source>
+        <translation>Aygıt</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Genişlik</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation>Yükseklik</translation>
+    </message>
+    <message>
+        <source>Rotate</source>
+        <translation>Döndür</translation>
+    </message>
+    <message>
+        <source>Zoom to Fit</source>
+        <translation>Sığacak Şekilde Yakınlaştır</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode (Ctrl+Shift+M)</source>
+        <translation>Duyarlı Kipi Kapat (Ctrl+Shift+M)</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode</source>
+        <translation>Duyarlı Kipi Kapat</translation>
     </message>
 </context>
 <context>

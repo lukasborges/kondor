@@ -41,6 +41,7 @@ class TabModelClosing(TabModelGroupCommands):
         self.remember_closed(index)
         tab = self.remove_row(index)
         self.fix_current_after_removal(index)
+        tab.responsive.release()
         tab.deleteLater()
 
     @Slot(Tab)

@@ -89,6 +89,7 @@ Tips when editing:
 | #408 Tab groups | `408-tab-groups.qml`, `408b-tab-group-edit.qml`, `408c-tab-groups-vertical.qml` (groups in `common/TabStyleFrame.qml`) |
 | #409 HTTPS-only mode | `409-https-only-warning.qml`, `409b-settings-https-only.qml` (in `common/SettingsDialogMock.qml`, `withHttpsOnly`) |
 | #410 Page capture | `410-take-screenshot.qml`, `410b-screenshot-context-menu.qml` |
+| #417 Agent tabs and pointer from kondor --mcp | `417-agent-tab.qml` (in `common/TabStyleFrame.qml`, `agent`) |
 
 Issues without UI (#10 default browser, #15 single instance, #19 translations, #25 Flatpak,
 #26 tests) have no prototype.

@@ -65,6 +65,21 @@ Rectangle {
                 opacity: tab.sleeping ? 0.5 : 1
                 source: frame.privateWindow ? "view-private" : (tab.icon || "text-html")
             }
+            // #417: icon-only tabs show the agent as an emblem on the favicon
+            Rectangle {
+                visible: iconOnly && !!tab.agent
+                width: 12; height: 12; radius: 6
+                anchors.right: parent.right; anchors.bottom: parent.bottom
+                anchors.rightMargin: -4; anchors.bottomMargin: -4
+                color: Kirigami.Theme.neutralTextColor
+                Kirigami.Icon {
+                    anchors.centerIn: parent
+                    width: 8; height: 8
+                    source: "automated-tasks"
+                    color: "white"
+                    isMask: true
+                }
+            }
             // #366: icon-only tabs show the sound state as an emblem on the favicon
             Kirigami.Icon {
                 visible: iconOnly && !!tab.audio
@@ -79,6 +94,14 @@ Rectangle {
                 visible: !!tab.loading
                 running: visible
             }
+        }
+        // #417: the tab an AI agent is working on (kondor --mcp)
+        Kirigami.Icon {
+            visible: !iconOnly && !!tab.agent
+            Layout.preferredWidth: 16
+            Layout.preferredHeight: 16
+            source: "automated-tasks"
+            color: Kirigami.Theme.neutralTextColor
         }
         // #366: sound indicator, a button that mutes or unmutes the tab
         ToolButton {
@@ -130,7 +153,9 @@ Rectangle {
         color: isChip ? Qt.alpha(groupTint, 0.25)
              : active ? Qt.alpha(Kirigami.Theme.highlightColor, 0.2)
              : hovered ? Qt.alpha(Kirigami.Theme.textColor, 0.05) : "transparent"
+        border.width: modelData.agent ? 2 : 1
         border.color: isChip ? groupTint
+                    : modelData.agent ? Kirigami.Theme.neutralTextColor
                     : active ? Kirigami.Theme.highlightColor
                     : "transparent"
 

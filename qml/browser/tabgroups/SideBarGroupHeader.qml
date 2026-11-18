@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import "groupcolors.js" as GroupColors
 import Kondor
 
 Item {
@@ -22,14 +23,10 @@ Item {
     Rectangle {
         anchors.fill: parent
         radius: Kirigami.Units.cornerRadius
-        color: Qt.alpha(tint.value, 0.2)
+        color: Qt.alpha(GroupColors.of(header.group.color, Kirigami.Theme), 0.2)
         visible: headerMouse.containsMouse
     }
 
-    GroupColor {
-        id: tint
-        name: header.group.color
-    }
 
     RowLayout {
         anchors.fill: parent
@@ -43,7 +40,7 @@ Item {
             Layout.preferredWidth: 10
             Layout.preferredHeight: 10
             radius: 5
-            color: tint.value
+            color: GroupColors.of(header.group.color, Kirigami.Theme)
         }
 
         Label {

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import org.kde.kirigami as Kirigami
+import "groupcolors.js" as GroupColors
 
 AbstractButton {
     id: swatch
@@ -16,14 +17,10 @@ AbstractButton {
     ToolTip.delay: 600
     Accessible.name: text
 
-    GroupColor {
-        id: tint
-        name: swatch.colorName
-    }
 
     contentItem: Rectangle {
         radius: width / 2
-        color: tint.value
+        color: GroupColors.of(swatch.colorName, Kirigami.Theme)
         border.width: swatch.visualFocus ? 2 : swatch.checked ? 2 : 0
         border.color: swatch.visualFocus ? Kirigami.Theme.focusColor : Kirigami.Theme.textColor
 

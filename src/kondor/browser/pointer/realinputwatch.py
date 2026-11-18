@@ -2,13 +2,12 @@ from PySide6.QtCore import Property, QEvent, QObject, Signal
 
 from kondor.browser.pointer.realinputclock import CLOCK
 
+REAL_PRESS_EVENTS = frozenset({QEvent.Type.MouseButtonPress, QEvent.Type.TouchBegin})
 REAL_INPUT_EVENTS = frozenset(
     {
-        QEvent.Type.MouseButtonPress,
         QEvent.Type.MouseButtonRelease,
         QEvent.Type.MouseMove,
         QEvent.Type.Wheel,
-        QEvent.Type.TouchBegin,
         QEvent.Type.TouchUpdate,
     }
 )
@@ -59,6 +58,8 @@ class RealInputWatch(QObject):
         self._watched = None
 
     def eventFilter(self, watched: QObject, event: QEvent) -> bool:  # noqa: N802
-        if event.type() in REAL_INPUT_EVENTS:
-            CLOCK.note()
+        if event.type() in REAL_PRESS_EVENTS:
+            CLOCK.note_press()
+        elif event.type() in REAL_INPUT_EVENTS:
+            CLOCK.note_activity()
         return False

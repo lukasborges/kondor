@@ -19,7 +19,13 @@ from kondor.browser.pointer.agentpointerbridge import AgentPointerBridge  # noqa
 from kondor.browser.pointer.realinputwatch import RealInputWatch  # noqa: E402
 
 SOURCE = Path(sys.argv[2])
-HTML = "<html><body><button id='go' style='width:150px;height:60px'>Go</button></body></html>"
+HTML = (
+    "<html><body><div id='top'></div>"
+    "<button id='go' style='width:150px;height:60px'>Go</button>"
+    "<script>document.getElementById('go').addEventListener('click', () => {"
+    " const start = Date.now(); while (Date.now() - start < 300);"
+    " document.getElementById('top').style.height = '20px'; });</script></body></html>"
+)
 MAIN_WORLD = QWebEngineScript.ScriptWorldId.MainWorld
 CHANNEL_SCRIPT = (
     "window.__kondorChannel = new Promise(resolve => new QWebChannel("
@@ -100,6 +106,12 @@ class Scenario:
             self.cdp_mouse(kind)
         self.settle()
 
+    def cdp_move_elsewhere(self) -> None:
+        self.reset()
+        params = {"x": 90, "y": 50, "type": "mouseMoved"}
+        self.cdp.call("Input.dispatchMouseEvent", params)
+        self.settle()
+
     def scripted_click(self) -> None:
         self.reset()
         self.cdp.call("Runtime.evaluate", {"expression": "document.body.click()"})
@@ -119,8 +131,10 @@ def main() -> None:
     results: dict[str, dict[str, int]] = {}
     for name, action in (
         ("real_press", scenario.real_press),
+        ("real_press_shifting_layout", scenario.real_press),
         ("scripted_click", scenario.scripted_click),
         ("cdp_enter", scenario.cdp_enter_key),
+        ("cdp_move", scenario.cdp_move_elsewhere),
         ("cdp_click", scenario.cdp_click),
     ):
         action()

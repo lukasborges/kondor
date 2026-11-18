@@ -36,16 +36,16 @@ def press(window: QWindow) -> None:
 def test_a_press_on_the_window_counts_as_real_input(watch: RealInputWatch, window: QWindow) -> None:
     watch.active = True
     press(window)
-    assert CLOCK.is_recent()
+    assert CLOCK.consume_press()
 
 
 def test_an_inactive_watch_ignores_input(watch: RealInputWatch, window: QWindow) -> None:
     press(window)
-    assert not CLOCK.is_recent()
+    assert not CLOCK.consume_press()
 
 
 def test_a_deactivated_watch_stops_counting(watch: RealInputWatch, window: QWindow) -> None:
     watch.active = True
     watch.active = False
     press(window)
-    assert not CLOCK.is_recent()
+    assert not CLOCK.consume_press()

@@ -16,7 +16,11 @@
         pendingMove = null;
     };
 
+    const hasMovement = (event) => event.movementX !== 0 || event.movementY !== 0;
+
     const queueMove = (event) => {
+        if (!hasMovement(event))
+            return;
         pendingMove = { x: event.clientX, y: event.clientY };
         if (isMoveScheduled)
             return;

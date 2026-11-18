@@ -66,10 +66,7 @@ ApplicationWindow {
         isPrivateWindow: window.privateWindow
     }
 
-    TabModel {
-        id: tabs
-        privateTabs: window.privateWindow
-    }
+    TabModel { id: tabs; privateTabs: window.privateWindow }
 
     FullScreenController {
         id: fullScreenControl
@@ -104,7 +101,16 @@ ApplicationWindow {
 
     DownloadSaveDialog { downloadsPopup: headerPane.toolBar.downloadsPopup }
 
+    WindowTabSearch {
+        id: tabSearch
+        browserWindow: window
+        headerButton: headerPane.tabSearchButton
+        sideBarButton: sideBarPane.tabSearchButton
+        tabsInSideBar: window.tabsInSideBar
+    }
+
     BrowserShortcuts {
+        tabSearch: tabSearch
         tabs: window.tabModel
         browserWindow: window
         tabController: tabControl
@@ -122,6 +128,7 @@ ApplicationWindow {
         isRevealed: toolbarVisibility.isRevealed
         isPageFullScreen: fullScreenControl.pageFullScreen
         onNewTabRequested: tabControl.openNewTab(false)
+        onTabSearchRequested: tabSearch.show()
         onManageBookmarksRequested: window.openBookmarks()
     }
 
@@ -139,6 +146,7 @@ ApplicationWindow {
             areToolbarsHidden: toolbarVisibility.areHidden
             isRevealed: toolbarVisibility.isRevealed
             onNewTabRequested: tabControl.openNewTab(false)
+            onTabSearchRequested: tabSearch.show()
         }
 
         PageArea {

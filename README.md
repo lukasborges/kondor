@@ -37,7 +37,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 ## Features
 
 ### Tabs and windows
-- **Tidy tabs**: drag, pin, and scroll when there are many
+- **Tidy tabs**: drag, pin, scroll, and search them across windows
 - **Tab styles**: pick floating, below the address bar, side bar, or classic tabs
 - **Collapsible side bar**: shrink the side bar to tab icons and expand it again
 - **Mute tabs**: see which tab plays sound and silence it with a click or Ctrl+M
@@ -97,6 +97,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 | `Ctrl+Shift+P` | New private window |
 | `Ctrl+W` | Close tab (closes the window if it is the last one; the app quits when the last window closes) |
 | `Ctrl+Shift+W` | Close window |
+| `Ctrl+Shift+A` | Search tabs |
 | `Ctrl+Shift+T` | Reopen closed tab |
 | `Ctrl+Tab` / `Ctrl+PgDown` | Next tab |
 | `Ctrl+Shift+Tab` / `Ctrl+PgUp` | Previous tab |

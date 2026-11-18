@@ -10,6 +10,9 @@ Rectangle {
     required property var targetWindow
 
     signal newTabRequested()
+    signal tabSearchRequested()
+
+    readonly property alias searchButton: bottomButtons.searchButton
 
     readonly property bool collapsed: Settings.sideBarCollapsed
 
@@ -50,9 +53,12 @@ Rectangle {
             Layout.fillWidth: true
         }
 
-        SideBarToggleButton {
+        SideBarBottomButtons {
+            id: bottomButtons
+            collapsed: sideBar.collapsed
             Layout.margins: Kirigami.Units.smallSpacing
             Layout.alignment: sideBar.collapsed ? Qt.AlignHCenter : Qt.AlignLeft
+            onTabSearchRequested: sideBar.tabSearchRequested()
         }
     }
 }

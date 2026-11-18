@@ -28,6 +28,7 @@ ApplicationWindow {
         navigationBar: null
         pageArea: null
         fullScreen: null
+        tabSearch: QtObject { property bool opened: false; function show() {} }
     }
     Connections {
         target: tabs.currentTab

@@ -1,6 +1,6 @@
 import os
 
-from PySide6.QtCore import QObject
+from PySide6.QtCore import QObject, Qt
 from PySide6.QtQuick import QQuickWindow
 
 ACTIVATION_VARIABLE = "XDG_ACTIVATION_TOKEN"
@@ -15,5 +15,7 @@ def raise_window(window: QObject | None, token: bytes) -> None:
     if not isinstance(window, QQuickWindow):
         return
     export_activation_token(token)
+    if window.windowStates() & Qt.WindowState.WindowMinimized:
+        window.showNormal()
     window.raise_()
     window.requestActivate()

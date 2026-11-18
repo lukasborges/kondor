@@ -18,6 +18,7 @@ Rectangle {
     readonly property real contentMargin: isStyled ? Kirigami.Units.smallSpacing : 0
 
     signal newTabRequested()
+    signal tabSearchRequested()
 
     readonly property int standardTabWidth: 240
     readonly property int minimumTabWidth: 120
@@ -25,6 +26,7 @@ Rectangle {
 
     readonly property alias tabBar: tabBar
     readonly property alias newTabButton: newTabButton
+    readonly property alias searchButton: searchButton
     readonly property alias scrollLeftButton: scrollLeftButton
     readonly property alias scrollRightButton: scrollRightButton
     readonly property alias scroller: scroller
@@ -37,7 +39,7 @@ Rectangle {
     readonly property real baseAreaWidth: Math.max(0, strip.width - 2 * contentMargin
         - (privateIcon.visible ? privateIcon.Layout.leftMargin + privateIcon.Layout.preferredWidth
                                  + privateIcon.Layout.rightMargin : 0)
-        - newTabButton.implicitWidth - newTabButton.Layout.leftMargin)
+        - newTabButton.implicitWidth - newTabButton.Layout.leftMargin - searchButton.implicitWidth)
     readonly property bool overflowing:
         pinnedCount * pinnedTabWidth + unpinnedCount * minimumTabWidth > baseAreaWidth
     readonly property real tabsAreaWidth: Math.max(0, overflowing
@@ -181,5 +183,11 @@ Rectangle {
         }
 
         Item { Layout.fillWidth: true }
+
+        TabSearchButton {
+            id: searchButton
+            Layout.alignment: Qt.AlignVCenter
+            onClicked: strip.tabSearchRequested()
+        }
     }
 }

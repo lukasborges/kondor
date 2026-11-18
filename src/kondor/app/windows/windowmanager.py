@@ -6,6 +6,7 @@ from PySide6.QtQml import QQmlComponent, QQmlEngine
 from PySide6.QtQuick import QQuickWindow
 from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
+from kondor.app.crash.actionlog import ActionLog
 from kondor.app.instance.singleinstancemessage import SingleInstanceMessage
 from kondor.app.windows import windowlaunch
 from kondor.app.windows.windowcontents import WindowContents, initial_properties
@@ -115,6 +116,16 @@ class WindowManager(QObject):
         self.follow_activity(window)
         self.windowCountChanged.emit()
         window.destroyed.connect(self.forget_closed_window)
+        self.log_window_lifetime(window)
+
+    def log_window_lifetime(self, window: QObject) -> None:
+        is_private = self.is_private_window(window)
+        self.log_window("opened", is_private)
+        window.destroyed.connect(lambda *_: self.log_window("closed", is_private))
+
+    @staticmethod
+    def log_window(verb: str, is_private: bool) -> None:
+        ActionLog.instance().record_unless_private(is_private, f"window {verb}")
 
     def follow_activity(self, window: QObject) -> None:
         if isinstance(window, QQuickWindow):

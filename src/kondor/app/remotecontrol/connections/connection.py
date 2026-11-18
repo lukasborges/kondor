@@ -15,3 +15,6 @@ class Connection:
 
     def is_session(self) -> bool:
         return self.socket is not None
+
+    def kind(self) -> str:
+        return "MCP session" if self.is_session() else "Automation tool"

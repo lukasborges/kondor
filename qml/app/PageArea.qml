@@ -12,6 +12,11 @@ ColumnLayout {
 
     spacing: 0
 
+    CrashReportBar {
+        isEligible: !root.browserWindow.privateWindow
+        onReportRequested: function(address) { root.browserWindow.openUrlInNewTab(address) }
+    }
+
     PermissionBar {
         tab: root.tabs.currentTab
         Layout.fillWidth: true

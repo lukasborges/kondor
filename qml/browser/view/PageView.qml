@@ -185,6 +185,8 @@ WebEngineView {
         bridge: root.agentPointer
     }
 
+    PageActionLog { tab: root.tab; webView: root }
+
     Loader {
         anchors.fill: parent
         z: 1

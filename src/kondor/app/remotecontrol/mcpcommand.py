@@ -62,3 +62,9 @@ def launch_words(environment: Mapping[str, str]) -> list[str]:
 def mcp_words(environment: Mapping[str, str]) -> list[str]:
     words = program_words(environment, shutil.which, sys.executable)
     return [*words, *profile_words(active_profile_name()), "--mcp"]
+
+
+def install_type(environment: Mapping[str, str]) -> str:
+    if environment.get("FLATPAK_ID"):
+        return "Flatpak"
+    return "AppImage" if environment.get("APPIMAGE") else "source"

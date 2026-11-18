@@ -57,6 +57,7 @@ def page(qapp: object, staged_resources: None, qtbot: QtBot) -> ScriptPage:
     return scripted
 
 
-def test_reports_a_press_at_once(page: ScriptPage) -> None:
+def test_ignores_untrusted_events(page: ScriptPage) -> None:
     page.evaluate(DISPATCH_CLICK)
-    assert page.reports() == [["pointerdown", 30, 40]]
+    page.evaluate("document.body.click(); 0")
+    assert page.reports() == []

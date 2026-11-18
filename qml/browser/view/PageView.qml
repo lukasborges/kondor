@@ -175,16 +175,6 @@ WebEngineView {
     onWindowCloseRequested: closeOwnTab()
     Component.onCompleted: adoptPendingRequest()
 
-    RealHoverWatch {
-        enabled: RemoteControl.active && root.agentPointer !== null
-        bridge: root.agentPointer
-    }
-
-    RealPointWatch {
-        enabled: RemoteControl.active && root.agentPointer !== null
-        bridge: root.agentPointer
-    }
-
     PageActionLog { tab: root.tab; webView: root }
 
     Loader {

@@ -1,5 +1,5 @@
 {
-    const reportedEvents = ["pointermove", "pointerdown", "pointerup", "click"];
+    const reportedEvents = ["pointermove", "pointerdown"];
     let bridge = null;
     let pendingMove = null;
     let isMoveScheduled = false;
@@ -25,6 +25,8 @@
     };
 
     const onPointerEvent = (event) => {
+        if (!event.isTrusted)
+            return;
         if (event.type === "pointermove")
             queueMove(event);
         else

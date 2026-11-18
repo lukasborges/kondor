@@ -9,6 +9,7 @@ from kondor.browser.pointer.realinputclock import CLOCK
 
 @pytest.fixture
 def bridge(qapp: object) -> AgentPointerBridge:
+    CLOCK.forget()
     return AgentPointerBridge()
 
 

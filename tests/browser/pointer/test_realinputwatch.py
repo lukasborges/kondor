@@ -14,7 +14,7 @@ def window(qapp: object) -> QWindow:
 
 @pytest.fixture
 def watch(window: QWindow) -> RealInputWatch:
-    CLOCK.last_input = float("-inf")
+    CLOCK.forget()
     watching = RealInputWatch()
     watching.window = window
     return watching

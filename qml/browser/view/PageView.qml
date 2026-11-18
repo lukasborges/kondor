@@ -175,11 +175,6 @@ WebEngineView {
     onWindowCloseRequested: closeOwnTab()
     Component.onCompleted: adoptPendingRequest()
 
-    RealInputWatch {
-        window: root.Window.window
-        active: RemoteControl.active && root.agentPointer !== null
-    }
-
     PageActionLog { tab: root.tab; webView: root }
 
     Loader {

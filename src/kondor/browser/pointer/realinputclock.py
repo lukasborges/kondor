@@ -7,6 +7,9 @@ class RealInputClock:
     def __init__(self) -> None:
         self.last_input = float("-inf")
 
+    def forget(self) -> None:
+        self.last_input = float("-inf")
+
     def note(self) -> None:
         self.last_input = time.monotonic()
 

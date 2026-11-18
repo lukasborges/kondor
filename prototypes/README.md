@@ -84,6 +84,7 @@ Tips when editing:
 | #384 Hide the toolbars | `384-toolbars-hidden.qml`, `384b-toolbars-revealed.qml`, `384c-hide-toolbars-menu.qml` (`withHideToolbars` in `common/MainMenuMock.qml`), `384d-toolbars-hidden-hint.qml` |
 | #385 Agent pointer | `385-agent-pointer.qml` |
 | #398 Built-in MCP server | `398-mcp-agent-connected.qml`, `398b-settings-mcp-command.qml` (in `common/SettingsDialogMock.qml`, `withMcpCommand`) |
+| #403 Crash reports | `403-crash-report-bar.qml` |
 
 Issues without UI (#10 default browser, #15 single instance, #19 translations, #25 Flatpak,
 #26 tests) have no prototype.

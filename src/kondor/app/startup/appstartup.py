@@ -19,12 +19,14 @@ from kondor.app.startup.qmlregistry import register_all_types
 from kondor.app.windows.windowmanager import WindowManager
 from kondor.browser.favicons.faviconimageprovider import FaviconImageProvider
 from kondor.browser.favicons.faviconstore import FaviconStore
+from kondor.browser.favicons.tabiconprovider import TabIconProvider
 from kondor.browser.profile.profilemanager import ProfileManager
 from kondor.extensions.catalog.extensioncatalog import ExtensionCatalog
 from kondor.extensions.extensionmanager import ExtensionManager
 from kondor.extensions.install.extensionloader import ExtensionLoader
 
 FAVICON_PROVIDER = "kondor-favicon"
+TAB_ICON_PROVIDER = "kondor-tabicon"
 
 
 def message_for(command_line: CommandLine) -> SingleInstanceMessage:
@@ -87,6 +89,7 @@ def start_browser(app: QApplication, command_line: CommandLine) -> None:
 
 def set_up_favicons(engine: QQmlApplicationEngine) -> None:
     engine.addImageProvider(FAVICON_PROVIDER, FaviconImageProvider())
+    engine.addImageProvider(TAB_ICON_PROVIDER, TabIconProvider())
     FaviconStore.instance().attach_engine(engine)
 
 

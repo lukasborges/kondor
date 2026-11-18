@@ -13,6 +13,13 @@ QtObject {
     readonly property string soundDescription: isMuted ? qsTr("muted") : hasSoundState ? qsTr("playing sound") : ""
     readonly property string iconOnlyName: soundDescription.length ? title + ", " + soundDescription : title
     readonly property string stateDescription: isSleeping ? qsTr("Sleeping") : ""
+    readonly property string providerPrefix: "image://favicon/"
+    readonly property string pageIconUrl: tab?.iconUrl.toString() ?? ""
+    readonly property bool hasPageIcon: !isNamedIcon && pageIconUrl.startsWith(providerPrefix)
+    readonly property string pageIconSource: hasPageIcon
+        ? "image://kondor-tabicon/" + pageIconUrl.substring(providerPrefix.length)
+        : ""
+    readonly property bool isNamedIcon: !tab || tab.crashed || tab.isPrivate || tab.newTabPage
     readonly property string iconSource: {
         if (!tab)
             return "text-html"
@@ -22,6 +29,6 @@ QtObject {
             return "view-private"
         if (tab.newTabPage)
             return "go-home"
-        return tab.iconUrl.toString().length ? tab.iconUrl.toString() : "text-html"
+        return "text-html"
     }
 }

@@ -125,6 +125,11 @@ class FaviconStore(QObject):
     def markAwake(self, view: QObject) -> None:  # noqa: N802
         self._sleeping_icons.pop(shiboken6.getCppPointer(view)[0], None)
 
+    def request_awake_icon(self, icon_id: str) -> QQuickImageResponse | None:
+        if self._engine is None or icon_id in self._sleeping_icons.values():
+            return None
+        return self.request_icon(self._engine, icon_id)
+
     def request_icon(self, engine: QQmlEngine, icon_id: str) -> QQuickImageResponse | None:
         provider = async_provider(engine.imageProvider(PROVIDER_ID))
         if provider is None:

@@ -9,40 +9,32 @@ ItemDelegate {
 
     required property Tab tab
     required property int index
+    required property int tabIndex
     required property TabModel tabModel
     required property var targetWindow
     required property ListView list
 
     readonly property bool isPinned: tab?.pinned ?? false
-    readonly property bool isCurrent: index === tabModel.currentIndex
+    readonly property bool isCurrent: tabIndex === tabModel.currentIndex
     readonly property color textColor: isCurrent ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
     readonly property bool hasKeyboardFocus: list.isFocusRingVisible && index === list.currentIndex
 
-    readonly property bool isGroupStart: tabModel.groupRevision >= 0 && tabModel.isGroupStart(index)
-    readonly property bool isHiddenByGroup: tabModel.groupRevision >= 0 && tabModel.isHiddenByGroup(index)
-    readonly property real headerHeight: isGroupStart ? Kirigami.Units.gridUnit * 1.8 : 0
+    required property bool isHidden
+    readonly property real groupShift: list.groupDrag.shiftOf(tab.group)
 
     visible: height > 0
     width: ListView.view.width
-    height: isPinned ? 0 : isHiddenByGroup ? headerHeight : implicitHeight
-    topInset: headerHeight
+    height: isPinned || isHidden ? 0 : implicitHeight
     z: drag.active ? 10 : 0
     highlighted: isCurrent
     down: false
     focusPolicy: Qt.NoFocus
     Accessible.name: info.title
     Accessible.description: info.stateDescription
-    transform: Translate { y: drag.shift }
+    transform: Translate { y: drag.shift + row.groupShift }
     onClicked: {
-        tabModel.setCurrentIndex(index)
+        tabModel.setCurrentIndex(tabIndex)
         list.focusWithPointer()
-    }
-
-    Binding {
-        when: row.isGroupStart
-        target: row
-        property: "topPadding"
-        value: row.headerHeight + row.verticalPadding
     }
 
     Binding {
@@ -55,19 +47,7 @@ ItemDelegate {
     TabGroupBar {
         isVertical: true
         group: row.tab.group
-        visible: group !== null && !row.isHiddenByGroup
-        anchors.topMargin: row.headerHeight + Kirigami.Units.smallSpacing
-    }
-
-    Loader {
-        active: row.isGroupStart
-        width: row.width
-        height: row.headerHeight
-        sourceComponent: SideBarGroupHeader {
-            group: row.tab.group
-            tabModel: row.tabModel
-            targetWindow: row.targetWindow
-        }
+        anchors.topMargin: Kirigami.Units.smallSpacing
     }
 
     TabInfo {
@@ -80,7 +60,6 @@ ItemDelegate {
     ToolTip.delay: 600
 
     contentItem: RowLayout {
-        visible: !row.isHiddenByGroup
         spacing: Kirigami.Units.smallSpacing
 
         TabIcon {
@@ -128,7 +107,6 @@ ItemDelegate {
     }
 
     background: Rectangle {
-        visible: !row.isHiddenByGroup
         radius: Kirigami.Units.cornerRadius
         color: row.isCurrent ? Kirigami.Theme.highlightColor : row.hovered ? Qt.alpha(Kirigami.Theme.highlightColor, 0.3) : "transparent"
     }

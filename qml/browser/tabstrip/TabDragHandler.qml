@@ -25,12 +25,16 @@ DragHandler {
         return Math.max(low, Math.min(high, value))
     }
 
+    function rowOf(tabIndex) {
+        return tabStrip.stripModel.rowOfTabIndex(tabIndex)
+    }
+
     function groupRange(own) {
         const group = tabModel.groupAt(own)
         const first = tabModel.firstIndexOf(group)
+        const last = first + tabModel.tabCountOf(group) - 1
         const scroller = tabStrip.scroller
-        const bodyStart = scroller.tabX(first) + tabStrip.layout.leadWidth(first)
-        return { start: bodyStart, end: scroller.tabX(first + tabModel.tabCountOf(group)) }
+        return { start: scroller.tabX(rowOf(first)), end: scroller.tabX(rowOf(last) + 1) }
     }
 
     function sectionRange() {
@@ -51,7 +55,7 @@ DragHandler {
 
     function targetIndex(center) {
         const pinnedCount = tabButton.pinnedCount
-        const index = tabStrip.layout.indexAtX(center)
+        const index = tabStrip.stripModel.tabIndexAt(tabStrip.layout.rowAtX(center))
         if (tabButton.tab.pinned)
             return clamp(index, 0, pinnedCount - 1)
         const wanted = clamp(index, pinnedCount, tabModel.count - 1)

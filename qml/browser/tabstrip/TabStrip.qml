@@ -37,6 +37,8 @@ Rectangle {
     readonly property int unpinnedCount: Math.max(0, tabModel.count - pinnedCount)
     readonly property int shownUnpinnedCount: Math.max(0, unpinnedCount - tabModel.collapsedTabCount)
     readonly property alias layout: stripLayout
+    readonly property alias stripModel: stripModel
+    readonly property alias groupDrag: groupDrag
 
     readonly property real baseAreaWidth: Math.max(0, strip.width - 2 * contentMargin
         - (privateIcon.visible ? privateIcon.Layout.leftMargin + privateIcon.Layout.preferredWidth
@@ -65,17 +67,10 @@ Rectangle {
     function closeWithMouse(tab) { freeze.closeWithMouse(tab) }
     function scrollTo(x) { scroller.scrollTo(x) }
     function scrollBy(delta) { scroller.scrollBy(delta) }
-    function moveGroupTo(group, sceneX) { layout.moveGroupTo(group, sceneX) }
+    function shiftOfGroup(group) { return groupDrag.shiftOf(group) }
     function emptyAt(sceneX, sceneY) { return taps.emptyAt(sceneX, sceneY) }
 
-    property bool isRemovingRows: false
-
-    function finishRemovingRows() { isRemovingRows = false }
-
-    function showCurrentTabInBar() {
-        if (tabBar.currentIndex !== tabModel.currentIndex)
-            tabBar.currentIndex = tabModel.currentIndex
-    }
+    function showCurrentTabInBar() { selection.showCurrentTabInBar() }
 
     onTabsAreaWidthChanged: {
         freeze.unfreeze()
@@ -83,6 +78,9 @@ Rectangle {
     }
     onTabWidthChanged: scroller.scheduleEnsureVisible()
 
+    TabStripModel { id: stripModel; source: strip.tabModel }
+    TabGroupDragState { id: groupDrag }
+    TabStripSelection { id: selection; tabStrip: strip }
     TabStripLayout { id: stripLayout; tabStrip: strip }
     TabWidthFreeze { id: freeze; anchors.fill: parent; tabStrip: strip }
     TabStripScroller { id: scroller; tabStrip: strip }
@@ -94,8 +92,6 @@ Rectangle {
             freeze.unfreezeUnlessClosingWithMouse()
             scroller.scheduleEnsureVisible()
         }
-        function onRowsAboutToBeRemoved() { strip.isRemovingRows = true }
-        function onRowsRemoved() { Qt.callLater(strip.finishRemovingRows) }
         function onCurrentIndexChanged() {
             strip.showCurrentTabInBar()
             scroller.scheduleEnsureVisible()
@@ -121,7 +117,7 @@ Rectangle {
             id: tabBar
             Layout.minimumWidth: 0
             Layout.maximumWidth: strip.tabsAreaWidth
-            currentIndex: strip.tabModel.currentIndex
+            currentIndex: selection.currentRow()
             background: null
 
             function configureView() {
@@ -131,24 +127,13 @@ Rectangle {
                 contentItem.spacing = 0
             }
 
-            onCurrentIndexChanged: {
-                if (!strip.isRemovingRows && strip.tabModel.currentIndex !== currentIndex)
-                    strip.tabModel.setCurrentIndex(currentIndex)
-            }
+            onCurrentIndexChanged: selection.selectRow(currentIndex)
 
             Component.onCompleted: if (contentItem) configureView()
 
             Repeater {
-                model: strip.tabModel
-
-                delegate: TabButtonDelegate {
-                    onGroupLabelDropped: (group, sceneX) => strip.moveGroupTo(group, sceneX)
-                    tabModel: strip.tabModel
-                    tabBarItem: tabBar
-                    tabStrip: strip
-                    targetWindow: strip.targetWindow
-                    pinnedCount: strip.pinnedCount
-                }
+                model: strip.stripModel
+                delegate: TabStripDelegateChooser { tabStrip: strip }
             }
 
             TabStripWheel { tabStrip: strip }

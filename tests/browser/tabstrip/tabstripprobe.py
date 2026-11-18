@@ -5,8 +5,8 @@ QtObject {
 
     function bar() { return strip.tabBar }
     function view() { return strip.tabBar.contentItem }
-    function itemOf(tab) { return bar().itemAt(model.indexOfTab(tab)) }
-    function itemAtIndex(index) { return bar().itemAt(index) }
+    function itemOf(tab) { return bar().itemAt(strip.stripModel.rowOfTab(tab)) }
+    function itemAtIndex(index) { return bar().itemAt(strip.stripModel.rowOfTabIndex(index)) }
     function leftOfItem(item) { return item.mapToItem(strip, 0, 0).x }
     function leftOf(index) { return leftOfItem(itemAtIndex(index)) }
     function leftOfTab(tab) { return leftOfItem(itemOf(tab)) }
@@ -47,6 +47,16 @@ QtObject {
         const left = item.mapToItem(view(), 0, 0).x
         return left >= -0.5 && left + item.width <= view().width + 0.5
     }
+    function labelItem(group) { return bar().itemAt(strip.stripModel.rowOfLabel(group)) }
+    function leftOfLabel(group) { return leftOfItem(labelItem(group).label) }
+    function widthOfLabel(group) { return labelItem(group).width }
+    function barsIn(item) {
+        let count = item.isVertical !== undefined && item.visible && item.group ? 1 : 0
+        for (const child of item.children)
+            count += barsIn(child)
+        return count
+    }
+    function visibleBars() { return barsIn(view().contentItem) }
     function closeWithMouse(tab) { strip.closeWithMouse(tab) }
     function scrollTo(position) { strip.scrollTo(position) }
     function emptyAt(x, y) { return strip.emptyAt(x, y) }

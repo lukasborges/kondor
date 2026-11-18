@@ -7,7 +7,7 @@ Item {
     required property var tabStrip
 
     readonly property Item view: tabStrip.tabBar.contentItem
-    readonly property real stripWidth: tabStrip.layout.revision >= 0 ? tabX(tabStrip.tabModel.count) : 0
+    readonly property real stripWidth: tabStrip.layout.revision >= 0 ? tabX(tabStrip.stripModel.count) : 0
     readonly property real viewWidth: view ? Math.min(stripWidth, view.width) : 0
     readonly property real maxScroll: Math.max(0, stripWidth - viewWidth)
     readonly property real origin: view ? view.originX : 0
@@ -69,11 +69,11 @@ Item {
     }
 
     function ensureCurrentVisible() {
-        const index = tabStrip.tabModel.currentIndex
-        if (!view || index < 0)
+        const row = tabStrip.stripModel.rowOfTabIndex(tabStrip.tabModel.currentIndex)
+        if (!view || row < 0)
             return
         view.forceLayout()
-        scrollTo(positionToShowCurrent(tabX(index), tabX(index + 1)))
+        scrollTo(positionToShowCurrent(tabX(row), tabX(row + 1)))
     }
 
     function scheduleEnsureVisible() {

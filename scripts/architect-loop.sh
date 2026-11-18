@@ -243,6 +243,21 @@ EOF
     fi
   }
 
+  # gh reads the maintainer's token from the desktop wallet, which stays locked for a while after
+  # a reboot: every gh call then fails with HTTP 401, so the loop waits instead of running a step
+  # with half its calls failing, and asks once for the wallet to be unlocked.
+  github_ready() {
+    if gh auth token >/dev/null 2>&1; then
+      rm -f "$state/waiting-github"
+      return 0
+    fi
+    [[ -e "$state/waiting-github" ]] && return 1
+    touch "$state/waiting-github"
+    log "waiting for GitHub credentials: gh cannot read its token (desktop wallet locked?)"
+    notify "Architect loop waiting for GitHub" "gh cannot read its token. Unlock the wallet (run gh auth status in a terminal)."
+    return 1
+  }
+
   log_idle_once() {
     [[ -e "$state/idle" ]] && return 0
     touch "$state/idle"
@@ -296,6 +311,7 @@ EOF
   step() {
     local dry="$1" next n st key count_file count run_log rc after
     ensure_control || return 0
+    github_ready || return 0
     [[ "$dry" == 1 ]] || promote_ready_issues
     [[ "$dry" == 1 ]] || sync_blocked_cards
     next="$(next_architect_step)"

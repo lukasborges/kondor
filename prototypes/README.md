@@ -85,6 +85,10 @@ Tips when editing:
 | #385 Agent pointer | `385-agent-pointer.qml` |
 | #398 Built-in MCP server | `398-mcp-agent-connected.qml`, `398b-settings-mcp-command.qml` (in `common/SettingsDialogMock.qml`, `withMcpCommand`) |
 | #403 Crash reports | `403-crash-report-bar.qml` |
+| #407 Tab search | `407-tab-search.qml` (in `common/TabStyleFrame.qml`, `withTabSearch`) |
+| #408 Tab groups | `408-tab-groups.qml`, `408b-tab-group-edit.qml`, `408c-tab-groups-vertical.qml` (groups in `common/TabStyleFrame.qml`) |
+| #409 HTTPS-only mode | `409-https-only-warning.qml`, `409b-settings-https-only.qml` (in `common/SettingsDialogMock.qml`, `withHttpsOnly`) |
+| #410 Page capture | `410-take-screenshot.qml`, `410b-screenshot-context-menu.qml` |
 
 Issues without UI (#10 default browser, #15 single instance, #19 translations, #25 Flatpak,
 #26 tests) have no prototype.

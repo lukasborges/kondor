@@ -300,8 +300,14 @@ EOF
       [[ -e "$marks/$n" ]] || { move_card "$n" Blocked && touch "$marks/$n"; }
     done
     for n in $(ls "$marks"); do
-      grep -qx "$n" <<<"$blocked" || { move_card "$n" "In Progress"; rm -f "$marks/$n"; }
+      grep -qx "$n" <<<"$blocked" || { move_card "$n" "$(unblocked_status "$n")"; rm -f "$marks/$n"; }
     done
+  }
+
+  # Board column of an issue that lost `blocked`: In Progress once promoted, else back to Todo.
+  unblocked_status() {
+    gh issue view "$1" --repo lukasborges/kondor --json labels -q '.labels[].name' 2>/dev/null \
+      | grep -qxE 'to-dev|in-review' && echo "In Progress" || echo Todo
   }
 
   move_card() {

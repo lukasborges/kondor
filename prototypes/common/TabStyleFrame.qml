@@ -21,8 +21,24 @@ Rectangle {
     property bool tabScrollButtons: false
     property real tabScrollX: 0
     property string address: "https://kde.org/"
+    // #407: the Search Tabs button at the end of the tab row.
+    property bool withTabSearch: false
 
     readonly property bool vertical: tabStyle === "vertical"
+
+    // #408: tab group colors come from the color scheme, so they follow light and dark themes.
+    // A tab {group: "<color>"} belongs to a group; an entry {chip: true, title, group, collapsed,
+    // count} is the group's label, drawn before its tabs.
+    function groupColor(name) {
+        return ({
+            blue: Kirigami.Theme.highlightColor,
+            green: Kirigami.Theme.positiveTextColor,
+            orange: Kirigami.Theme.neutralTextColor,
+            red: Kirigami.Theme.negativeTextColor,
+            purple: Kirigami.Theme.visitedLinkColor,
+            gray: Kirigami.Theme.disabledTextColor
+        })[name]
+    }
     readonly property real sideBarWidth: sideBarCollapsed
         ? Kirigami.Units.gridUnit * 2 + Kirigami.Units.smallSpacing * 4 : Kirigami.Units.gridUnit * 14
     readonly property var pinnedTabs: tabs.filter(t => t.pinned)
@@ -104,18 +120,50 @@ Rectangle {
         readonly property bool hovered: index === frame.hoveredTab
         readonly property bool below: frame.tabStyle === "below"
 
-        width: modelData.pinned ? 36 : frame.tabWidth
+        readonly property bool isChip: !!modelData.chip
+        readonly property color groupTint: modelData.group ? frame.groupColor(modelData.group) : "transparent"
+
+        width: isChip ? chipRow.implicitWidth + Kirigami.Units.largeSpacing * 2
+             : modelData.pinned ? 36 : frame.tabWidth
         height: Kirigami.Units.gridUnit * 2
         radius: Kirigami.Units.cornerRadius
-        color: active ? Qt.alpha(Kirigami.Theme.highlightColor, 0.2)
+        color: isChip ? Qt.alpha(groupTint, 0.25)
+             : active ? Qt.alpha(Kirigami.Theme.highlightColor, 0.2)
              : hovered ? Qt.alpha(Kirigami.Theme.textColor, 0.05) : "transparent"
-        border.color: active ? Kirigami.Theme.highlightColor
+        border.color: isChip ? groupTint
+                    : active ? Kirigami.Theme.highlightColor
                     : "transparent"
+
+        RowLayout {
+            id: chipRow
+            visible: htab.isChip
+            anchors.centerIn: parent
+            spacing: Kirigami.Units.smallSpacing
+            Label { text: htab.modelData.title || ""; font.bold: true }
+            Label {
+                visible: !!htab.modelData.collapsed
+                text: htab.modelData.count || ""
+                color: Kirigami.Theme.disabledTextColor
+            }
+        }
+
+        Rectangle {
+            visible: !htab.isChip && !!htab.modelData.group
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.leftMargin: Kirigami.Units.smallSpacing
+            anchors.rightMargin: Kirigami.Units.smallSpacing
+            height: 3
+            radius: 1.5
+            color: htab.groupTint
+        }
 
         Kirigami.Theme.inherit: false
         Kirigami.Theme.colorSet: below ? Kirigami.Theme.Window : Kirigami.Theme.Header
 
         TabContent {
+            visible: !htab.isChip
             anchors.fill: parent
             anchors.leftMargin: htab.modelData.pinned ? 0 : Kirigami.Units.smallSpacing * 2
             anchors.rightMargin: htab.modelData.pinned ? 0 : Kirigami.Units.smallSpacing
@@ -164,6 +212,16 @@ Rectangle {
             icon.name: "tab-new"
         }
         Item { visible: !frame.tabScrollButtons; Layout.fillWidth: true }
+        ToolButton {
+            id: tabSearchButton
+            visible: frame.withTabSearch
+            display: AbstractButton.IconOnly
+            icon.name: "go-down-search"
+            checked: frame.withTabSearch
+            ToolTip.text: "Search Tabs"
+            ToolTip.delay: 600
+            Accessible.name: "Search Tabs"
+        }
     }
 
     component NavigationRow: RowLayout {
@@ -196,10 +254,42 @@ Rectangle {
         x: frame.sideBarCollapsed ? Math.round((listWidth - width) / 2) : 0
         readonly property int tabIndex: index + frame.pinnedTabs.length
         highlighted: tabIndex === frame.currentTab
-        contentItem: TabContent {
-            tab: modelData
-            iconOnly: frame.sideBarCollapsed || modelData.pinned
-            showClose: parent.highlighted || parent.tabIndex === frame.hoveredTab
+        readonly property bool isChip: !!modelData.chip
+        readonly property color groupTint: modelData.group ? frame.groupColor(modelData.group) : "transparent"
+        leftPadding: !isChip && modelData.group ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.smallSpacing * 2
+        contentItem: Item {
+            implicitHeight: Math.max(tabContent.implicitHeight, groupHeader.implicitHeight)
+            TabContent {
+                id: tabContent
+                visible: !isChip
+                anchors.fill: parent
+                tab: modelData
+                iconOnly: frame.sideBarCollapsed || modelData.pinned
+                showClose: highlighted || tabIndex === frame.hoveredTab
+            }
+            RowLayout {
+                id: groupHeader
+                visible: isChip
+                anchors.fill: parent
+                spacing: Kirigami.Units.smallSpacing
+                Rectangle { width: 10; height: 10; radius: 5; color: groupTint }
+                Label { text: modelData.title || ""; font.bold: true; Layout.fillWidth: true; elide: Text.ElideRight }
+                Label { visible: !!modelData.collapsed; text: modelData.count || ""; color: Kirigami.Theme.disabledTextColor }
+                Kirigami.Icon {
+                    source: modelData.collapsed ? "arrow-right" : "arrow-down"
+                    Layout.preferredWidth: 16
+                    Layout.preferredHeight: 16
+                }
+            }
+        }
+        Rectangle {
+            visible: !isChip && !!modelData.group
+            x: Kirigami.Units.smallSpacing * 2
+            y: Kirigami.Units.smallSpacing
+            width: 3
+            height: parent.height - Kirigami.Units.smallSpacing * 2
+            radius: 1.5
+            color: groupTint
         }
         ToolTip.visible: frame.sideBarCollapsed && tabIndex === frame.hoveredTab
         ToolTip.text: modelData.title

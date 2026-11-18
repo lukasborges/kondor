@@ -24,6 +24,7 @@ Rectangle {
     property bool withAppearance: false // #211: show the Appearance tab of the General page
     property bool withRemoteControl: false // #256: remote control turned on, restart pending
     property bool withMcpCommand: false // #398: the MCP server command for AI agents
+    property bool withHttpsOnly: false // #409: HTTPS-only mode
     property bool withPerformance: false // #257: show the Performance tab of the General page
     property bool appearanceVertical: false // #212: the Tabs picker also offers Side Bar
     property bool extensionsEmpty: false // #107: no extension installed (placeholder)
@@ -197,6 +198,12 @@ Rectangle {
                     Kirigami.FormLayout {
                         CheckBox { Kirigami.FormData.label: "Cookies:"; text: "Block third-party cookies"; checked: true }
                         CheckBox { Kirigami.FormData.label: "On exit:"; text: "Clear cookies, cache and history" }
+                        CheckBox {
+                            visible: root.withHttpsOnly
+                            Kirigami.FormData.label: "Connections:"
+                            text: "Always use secure connections (HTTPS)"
+                            checked: true
+                        }
                         Item { Kirigami.FormData.isSection: true }
                         Button { Kirigami.FormData.label: "Browsing data:"; text: "Clear Cookies and Cache Now"; icon.name: "edit-clear-history" }
                         Item { Kirigami.FormData.isSection: true; visible: root.withRemoteControl }

@@ -274,10 +274,30 @@ EOF
     (( $1 != 0 )) && grep -qE 'Failed to authenticate|API Error' "$2"
   }
 
+  # Keeps the board in step with the `blocked` label whoever changes it (the developer loop, whose
+  # account cannot write the board; an agent or the maintainer editing the label): $state/blocked-cards remembers the issues
+  # whose card was already moved, so the board is written only when the label changes.
+  sync_blocked_cards() {
+    local marks="$state/blocked-cards" blocked n
+    mkdir -p "$marks"
+    blocked="$(gh issue list --repo lukasborges/kondor --state open --label blocked --json number --jq '.[].number')" || return 0
+    for n in $blocked; do
+      [[ -e "$marks/$n" ]] || { move_card "$n" Blocked && touch "$marks/$n"; }
+    done
+    for n in $(ls "$marks"); do
+      grep -qx "$n" <<<"$blocked" || { move_card "$n" "In Progress"; rm -f "$marks/$n"; }
+    done
+  }
+
+  move_card() {
+    (cd "$control" && bash scripts/board.sh "$1" "$2") >/dev/null 2>&1 || { log "board: could not move #$1 to $2"; return 1; }
+  }
+
   step() {
     local dry="$1" next n st key count_file count run_log rc after
     ensure_control || return 0
     [[ "$dry" == 1 ]] || promote_ready_issues
+    [[ "$dry" == 1 ]] || sync_blocked_cards
     next="$(next_architect_step)"
     read -r n st <<<"$next"
     key="$n"

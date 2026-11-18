@@ -160,7 +160,9 @@ headless (`claude -p --permission-mode auto`) for exactly one step when:
   add `blocked` with a comment saying what is needed, keep its state label, and run
   `scripts/board.sh <N> Blocked`. A `blocked` issue leaves the queue and frees its slot, and the
   loop never promotes it. Remove `blocked` (card back to In Progress) once the maintainer answers.
-  The developer loop does the same by itself when it makes no progress on an issue twice.
+  The developer loop does the same by itself when it makes no progress on an issue twice. Every
+  check of the architect loop also moves the card of any open issue that got or lost `blocked`
+  (Blocked / In Progress), whoever changed the label.
 - nothing else needs you → write the spec (and prototype) of the next "Roadmap order" issue that
   has none yet, without touching its labels, so its later promotion is quick.
 

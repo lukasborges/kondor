@@ -79,7 +79,7 @@ queue and, when there is a `developer` row, runs the developer from that worktre
 (`claude -p --permission-mode auto --model sonnet --effort medium`, attribution trailers turned off), or opencode
 with DeepSeek when `KONDOR_ENGINE=opencode` (`KONDOR_MODEL` overrides the model of either) with a prompt for that one issue. If a run ends with the issue still in `to-dev` twice in
 a row, the loop blocks that issue and moves on: it adds the `blocked` label with a comment, drops
-its claim, moves the board card to **Blocked** and sends a desktop notification. Every check also moves the card of any issue that got or lost the `blocked` label some other way (an agent or the maintainer editing the label). A blocked issue
+its claim and sends a desktop notification; the architect loop moves the board card to **Blocked** (the developer's account cannot write the board). A blocked issue
 leaves the queue, so its slot is free: the architect promotes the next issue and the loop takes it.
 Removing the `blocked` label (or `--resume <N>`) puts the issue back in the queue for any free loop. The service reads
 `~/.config/kondor-dev-loop/github.env` (`GH_TOKEN=…` of the developer's bot account) when it

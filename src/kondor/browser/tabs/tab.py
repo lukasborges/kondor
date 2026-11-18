@@ -138,6 +138,7 @@ class Tab(TabViewState):
         if url.isEmpty():
             return
         self._security.clear_pending_certificate_error()
+        self._security.dismissHttpsOnlyWarning()
         self._set_new_tab_page(False)
         self.navigationRequested.emit(url)
 
@@ -146,6 +147,7 @@ class Tab(TabViewState):
         if self._new_tab_page:
             return
         self._security.clear_pending_certificate_error()
+        self._security.dismissHttpsOnlyWarning()
         self._set_new_tab_page(True)
         self.newTabPageRequested.emit()
 

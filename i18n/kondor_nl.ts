@@ -1315,6 +1315,25 @@
     </message>
 </context>
 <context>
+    <name>HttpsOnlyPage</name>
+    <message>
+        <source>Secure site not available</source>
+        <translation>Beveiligde site niet beschikbaar</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;%1&lt;/b&gt; does not support HTTPS. Anyone on the network could see or change what is sent to it.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; ondersteunt geen HTTPS. Iedereen op het netwerk kan zien of wijzigen wat ernaartoe wordt gestuurd.</translation>
+    </message>
+    <message>
+        <source>Continue to HTTP Site</source>
+        <translation>Doorgaan naar HTTP-site</translation>
+    </message>
+    <message>
+        <source>Go Back</source>
+        <translation>Terug</translation>
+    </message>
+</context>
+<context>
     <name>IdentityBar</name>
     <message>
         <source>Reload the page to use the new browser identity.</source>
@@ -2177,6 +2196,14 @@
         <translation>Cookies, cache en geschiedenis wissen</translation>
     </message>
     <message>
+        <source>Connections:</source>
+        <translation>Verbindingen:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Altijd beveiligde verbindingen (HTTPS) gebruiken</translation>
+    </message>
+    <message>
         <source>Pop-ups:</source>
         <translation>Pop-ups:</translation>
     </message>
@@ -2846,6 +2873,14 @@
     <message>
         <source>Clear Cookies and Cache Now</source>
         <translation>Cookies en cache nu wissen</translation>
+    </message>
+    <message>
+        <source>Connections:</source>
+        <translation>Verbindingen:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Altijd beveiligde verbindingen (HTTPS) gebruiken</translation>
     </message>
     <message>
         <source>Pop-ups:</source>

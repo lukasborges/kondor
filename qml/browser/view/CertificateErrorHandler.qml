@@ -11,6 +11,13 @@ Item {
 
     property var pendingError: null
 
+    PageLeaver {
+        id: leaver
+        tab: root.tab
+        tabModel: root.tabModel
+        webView: root.webView
+    }
+
     visible: false
 
     function takePendingError() {
@@ -36,19 +43,12 @@ Item {
     }
 
     function handle(error) {
-        if (error.isMainFrame)
+        if (error.isMainFrame && tab.security.failUpgradeOf(error.url))
+            error.rejectCertificate()
+        else if (error.isMainFrame)
             holdMainFrameError(error)
         else
             error.rejectCertificate()
-    }
-
-    function leavePage() {
-        if (webView.canGoBack)
-            webView.goBack()
-        else if (tabModel.count > 1)
-            tabModel.closeTabObject(tab)
-        else
-            tab.showNewTabPage()
     }
 
     Connections {
@@ -62,7 +62,7 @@ Item {
 
         function onRejectCertificateErrorRequested() {
             if (root.rejectPending())
-                root.leavePage()
+                leaver.leave()
         }
     }
 }

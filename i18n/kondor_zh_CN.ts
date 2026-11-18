@@ -1312,6 +1312,25 @@
     </message>
 </context>
 <context>
+    <name>HttpsOnlyPage</name>
+    <message>
+        <source>Secure site not available</source>
+        <translation>安全站点不可用</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;%1&lt;/b&gt; does not support HTTPS. Anyone on the network could see or change what is sent to it.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; 不支持 HTTPS。网络上的任何人都可能看到或更改发送给它的内容。</translation>
+    </message>
+    <message>
+        <source>Continue to HTTP Site</source>
+        <translation>继续访问 HTTP 站点</translation>
+    </message>
+    <message>
+        <source>Go Back</source>
+        <translation>返回</translation>
+    </message>
+</context>
+<context>
     <name>IdentityBar</name>
     <message>
         <source>Reload the page to use the new browser identity.</source>
@@ -2164,6 +2183,14 @@
         <translation>清除 Cookie、缓存和历史记录</translation>
     </message>
     <message>
+        <source>Connections:</source>
+        <translation>连接：</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>始终使用安全连接 (HTTPS)</translation>
+    </message>
+    <message>
         <source>Pop-ups:</source>
         <translation>弹出窗口：</translation>
     </message>
@@ -2832,6 +2859,14 @@
     <message>
         <source>Clear Cookies and Cache Now</source>
         <translation>立即清除 Cookie 和缓存</translation>
+    </message>
+    <message>
+        <source>Connections:</source>
+        <translation>连接：</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>始终使用安全连接 (HTTPS)</translation>
     </message>
     <message>
         <source>Pop-ups:</source>

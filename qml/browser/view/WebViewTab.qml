@@ -45,20 +45,11 @@ Item {
         webView: pageView
     }
 
-    PageSleep {
-        tab: root.tab
-        webView: pageView
-    }
+    PageSleep { tab: root.tab; webView: pageView }
 
-    PageAudio {
-        tab: root.tab
-        webView: pageView
-    }
+    PageAudio { tab: root.tab; webView: pageView }
 
-    PagePopups {
-        tab: root.tab
-        webView: pageView
-    }
+    PagePopups { tab: root.tab; webView: pageView }
 
     PageRepaintOnRestore {
         webView: pageView
@@ -163,6 +154,13 @@ Item {
         anchors.fill: parent
         visible: root.tab.security.certificateErrorPending
         tab: root.tab
+    }
+
+    HttpsOnlyHandler {
+        anchors.fill: parent
+        tab: root.tab
+        tabModel: root.tabModel
+        webView: pageView
     }
 
     ReaderControls {

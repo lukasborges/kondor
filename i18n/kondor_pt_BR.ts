@@ -1315,6 +1315,25 @@
     </message>
 </context>
 <context>
+    <name>HttpsOnlyPage</name>
+    <message>
+        <source>Secure site not available</source>
+        <translation>Site seguro indisponível</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;%1&lt;/b&gt; does not support HTTPS. Anyone on the network could see or change what is sent to it.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; não oferece suporte a HTTPS. Qualquer pessoa na rede poderia ver ou alterar o que é enviado a ele.</translation>
+    </message>
+    <message>
+        <source>Continue to HTTP Site</source>
+        <translation>Continuar para o site HTTP</translation>
+    </message>
+    <message>
+        <source>Go Back</source>
+        <translation>Voltar</translation>
+    </message>
+</context>
+<context>
     <name>IdentityBar</name>
     <message>
         <source>Reload the page to use the new browser identity.</source>
@@ -2177,6 +2196,14 @@
         <translation>Limpar cookies, cache e histórico</translation>
     </message>
     <message>
+        <source>Connections:</source>
+        <translation>Conexões:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Sempre usar conexões seguras (HTTPS)</translation>
+    </message>
+    <message>
         <source>Pop-ups:</source>
         <translation>Pop-ups:</translation>
     </message>
@@ -2846,6 +2873,14 @@
     <message>
         <source>Clear Cookies and Cache Now</source>
         <translation>Limpar cookies e cache agora</translation>
+    </message>
+    <message>
+        <source>Connections:</source>
+        <translation>Conexões:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Sempre usar conexões seguras (HTTPS)</translation>
     </message>
     <message>
         <source>Pop-ups:</source>

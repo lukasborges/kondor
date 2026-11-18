@@ -1315,6 +1315,25 @@
     </message>
 </context>
 <context>
+    <name>HttpsOnlyPage</name>
+    <message>
+        <source>Secure site not available</source>
+        <translation>Lloc segur no disponible</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;%1&lt;/b&gt; does not support HTTPS. Anyone on the network could see or change what is sent to it.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; no admet HTTPS. Qualsevol persona de la xarxa podria veure o canviar el que s&apos;hi envia.</translation>
+    </message>
+    <message>
+        <source>Continue to HTTP Site</source>
+        <translation>Continua al lloc HTTP</translation>
+    </message>
+    <message>
+        <source>Go Back</source>
+        <translation>Enrere</translation>
+    </message>
+</context>
+<context>
     <name>IdentityBar</name>
     <message>
         <source>Reload the page to use the new browser identity.</source>
@@ -2177,6 +2196,14 @@
         <translation>Neteja les galetes, la memòria cau i l&apos;historial</translation>
     </message>
     <message>
+        <source>Connections:</source>
+        <translation>Connexions:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Utilitza sempre connexions segures (HTTPS)</translation>
+    </message>
+    <message>
         <source>Pop-ups:</source>
         <translation>Finestres emergents:</translation>
     </message>
@@ -2846,6 +2873,14 @@
     <message>
         <source>Clear Cookies and Cache Now</source>
         <translation>Neteja les galetes i la memòria cau ara</translation>
+    </message>
+    <message>
+        <source>Connections:</source>
+        <translation>Connexions:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Utilitza sempre connexions segures (HTTPS)</translation>
     </message>
     <message>
         <source>Pop-ups:</source>

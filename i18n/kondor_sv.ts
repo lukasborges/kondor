@@ -1315,6 +1315,25 @@
     </message>
 </context>
 <context>
+    <name>HttpsOnlyPage</name>
+    <message>
+        <source>Secure site not available</source>
+        <translation>Säker webbplats ej tillgänglig</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;%1&lt;/b&gt; does not support HTTPS. Anyone on the network could see or change what is sent to it.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; stöder inte HTTPS. Vem som helst i nätverket kan se eller ändra vad som skickas dit.</translation>
+    </message>
+    <message>
+        <source>Continue to HTTP Site</source>
+        <translation>Fortsätt till HTTP-webbplatsen</translation>
+    </message>
+    <message>
+        <source>Go Back</source>
+        <translation>Tillbaka</translation>
+    </message>
+</context>
+<context>
     <name>IdentityBar</name>
     <message>
         <source>Reload the page to use the new browser identity.</source>
@@ -2177,6 +2196,14 @@
         <translation>Rensa kakor, cache och historik</translation>
     </message>
     <message>
+        <source>Connections:</source>
+        <translation>Anslutningar:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Använd alltid säkra anslutningar (HTTPS)</translation>
+    </message>
+    <message>
         <source>Pop-ups:</source>
         <translation>Popup-fönster:</translation>
     </message>
@@ -2846,6 +2873,14 @@
     <message>
         <source>Clear Cookies and Cache Now</source>
         <translation>Rensa kakor och cache nu</translation>
+    </message>
+    <message>
+        <source>Connections:</source>
+        <translation>Anslutningar:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Använd alltid säkra anslutningar (HTTPS)</translation>
     </message>
     <message>
         <source>Pop-ups:</source>

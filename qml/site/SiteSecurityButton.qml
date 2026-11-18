@@ -18,6 +18,12 @@ ToolButton {
         "error": "security-low"
     })
 
+    function indicatorColor() {
+        if (tab && tab.security.httpsOnlyWarningPending)
+            return Kirigami.Theme.neutralTextColor
+        return isNotSecure ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
+    }
+
     function securityIconForState(state) {
         return iconNames[state] || "text-html"
     }
@@ -26,7 +32,7 @@ ToolButton {
     display: text.length > 0 ? AbstractButton.TextBesideIcon : AbstractButton.IconOnly
     text: isNotSecure && !addressField.activeFocus ? qsTr("Not Secure") : ""
     icon.name: securityIconForState(securityState)
-    icon.color: isNotSecure ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
+    icon.color: indicatorColor()
     flat: true
     focusPolicy: Qt.TabFocus
     implicitHeight: 28

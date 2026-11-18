@@ -1318,6 +1318,25 @@
     </message>
 </context>
 <context>
+    <name>HttpsOnlyPage</name>
+    <message>
+        <source>Secure site not available</source>
+        <translation>Защищённый сайт недоступен</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;%1&lt;/b&gt; does not support HTTPS. Anyone on the network could see or change what is sent to it.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; не поддерживает HTTPS. Любой в сети может увидеть или изменить отправляемые на него данные.</translation>
+    </message>
+    <message>
+        <source>Continue to HTTP Site</source>
+        <translation>Перейти на сайт HTTP</translation>
+    </message>
+    <message>
+        <source>Go Back</source>
+        <translation>Назад</translation>
+    </message>
+</context>
+<context>
     <name>IdentityBar</name>
     <message>
         <source>Reload the page to use the new browser identity.</source>
@@ -2190,6 +2209,14 @@
         <translation>Очищать файлы cookie, кеш и журнал</translation>
     </message>
     <message>
+        <source>Connections:</source>
+        <translation>Подключения:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Всегда использовать защищённые соединения (HTTPS)</translation>
+    </message>
+    <message>
         <source>Pop-ups:</source>
         <translation>Всплывающие окна:</translation>
     </message>
@@ -2860,6 +2887,14 @@
     <message>
         <source>Clear Cookies and Cache Now</source>
         <translation>Очистить файлы cookie и кеш</translation>
+    </message>
+    <message>
+        <source>Connections:</source>
+        <translation>Подключения:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>Всегда использовать защищённые соединения (HTTPS)</translation>
     </message>
     <message>
         <source>Pop-ups:</source>

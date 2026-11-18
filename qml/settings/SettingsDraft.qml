@@ -18,6 +18,7 @@ QtObject {
     property bool blockThirdPartyCookies: false
     property bool adBlockEnabled: true
     property bool blockPopups: true
+    property bool httpsOnly: false
     property bool searchSuggestions: false
     property bool spellCheckEnabled: false
     property var spellCheckLanguages: []
@@ -30,7 +31,7 @@ QtObject {
         "homePage", "searchEngine", "customSearchUrl", "downloadDirectory",
         "askWhereToSave", "startupBehavior", "showTopSites", "tabStyle", "tabSleepEnabled",
         "tabSleepMinutes", "clearDataOnExit",
-        "blockThirdPartyCookies", "adBlockEnabled", "blockPopups", "searchSuggestions",
+        "blockThirdPartyCookies", "adBlockEnabled", "blockPopups", "httpsOnly", "searchSuggestions",
         "spellCheckEnabled", "spellCheckLanguages", "offerToSavePasswords",
         "extensionsAutoUpdate", "remoteControlEnabled", "remoteControlPort"
     ]
@@ -38,7 +39,7 @@ QtObject {
     readonly property var values: [homePage, searchEngine, customSearchUrl,
         downloadDirectory, askWhereToSave, startupBehavior, showTopSites,
         tabStyle, tabSleepEnabled, tabSleepMinutes, clearDataOnExit, blockThirdPartyCookies,
-        adBlockEnabled, blockPopups, searchSuggestions,
+        adBlockEnabled, blockPopups, httpsOnly, searchSuggestions,
         spellCheckEnabled, spellCheckLanguages, offerToSavePasswords, extensionsAutoUpdate,
         remoteControlEnabled, remoteControlPort]
 

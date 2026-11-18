@@ -1312,6 +1312,25 @@
     </message>
 </context>
 <context>
+    <name>HttpsOnlyPage</name>
+    <message>
+        <source>Secure site not available</source>
+        <translation>安全なサイトは利用できません</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;%1&lt;/b&gt; does not support HTTPS. Anyone on the network could see or change what is sent to it.</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; は HTTPS に対応していません。ネットワーク上の誰かが送信内容を見たり変更したりできる可能性があります。</translation>
+    </message>
+    <message>
+        <source>Continue to HTTP Site</source>
+        <translation>HTTP サイトへ進む</translation>
+    </message>
+    <message>
+        <source>Go Back</source>
+        <translation>戻る</translation>
+    </message>
+</context>
+<context>
     <name>IdentityBar</name>
     <message>
         <source>Reload the page to use the new browser identity.</source>
@@ -2164,6 +2183,14 @@
         <translation>Cookie、キャッシュ、履歴を消去</translation>
     </message>
     <message>
+        <source>Connections:</source>
+        <translation>接続:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>常に安全な接続 (HTTPS) を使用する</translation>
+    </message>
+    <message>
         <source>Pop-ups:</source>
         <translation>ポップアップ:</translation>
     </message>
@@ -2832,6 +2859,14 @@
     <message>
         <source>Clear Cookies and Cache Now</source>
         <translation>Cookie とキャッシュを今すぐ消去</translation>
+    </message>
+    <message>
+        <source>Connections:</source>
+        <translation>接続:</translation>
+    </message>
+    <message>
+        <source>Always use secure connections (HTTPS)</source>
+        <translation>常に安全な接続 (HTTPS) を使用する</translation>
     </message>
     <message>
         <source>Pop-ups:</source>

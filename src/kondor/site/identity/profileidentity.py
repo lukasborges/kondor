@@ -4,6 +4,8 @@ from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
 from kondor.adblock.adblockmanager import AdBlockManager
 from kondor.browser.profile import pagescripts
+from kondor.site.httpsonly.httpsonlyinterceptor import HttpsOnlyInterceptor
+from kondor.site.httpsonly.profilehttpsonly import ProfileHttpsOnly
 from kondor.site.identity import identityscript
 from kondor.site.identity.identityinterceptor import IdentityInterceptor
 from kondor.site.sitesettings import SiteSettings
@@ -18,11 +20,17 @@ class ProfileIdentity(QObject):
         self._session: dict[str, str] = {}
         self._agents: dict[str, str] = {}
         self._script: QWebEngineScript | None = None
-        self._interceptor = IdentityInterceptor(
-            self.agents, AdBlockManager.instance().request_filter(), self
-        )
+        self._interceptor = IdentityInterceptor(self.agents, self._https_only_chain(), self)
         SiteSettings.instance().changed.connect(self.refresh)
         self.refresh()
+
+    def _https_only_chain(self) -> HttpsOnlyInterceptor:
+        state = ProfileHttpsOnly(self._profile)
+        return HttpsOnlyInterceptor(
+            state,
+            AdBlockManager.instance().request_filter(),
+            self,
+        )
 
     @staticmethod
     def of(profile: QQuickWebEngineProfile | None) -> "ProfileIdentity | None":

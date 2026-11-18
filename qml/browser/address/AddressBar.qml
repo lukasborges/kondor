@@ -16,9 +16,13 @@ TextField {
             showCurrentTabAddress()
     }
 
+    function displayedUrlOf(tab) {
+        return tab.security.httpsOnlyWarningPending ? tab.security.upgradedFrom : tab.url
+    }
+
     function showCurrentTabAddress() {
         const tab = tabs.currentTab
-        text = (tab && !tab.newTabPage) ? tab.url.toString() : ""
+        text = (tab && !tab.newTabPage) ? displayedUrlOf(tab).toString() : ""
     }
 
     function stopEditing() {
@@ -129,5 +133,10 @@ TextField {
         target: root.tabs.currentTab
         function onUrlChanged() { root.syncFromTab() }
         function onNewTabPageChanged() { root.syncFromTab() }
+    }
+
+    Connections {
+        target: root.tabs.currentTab ? root.tabs.currentTab.security : null
+        function onUpgradeChanged() { root.syncFromTab() }
     }
 }

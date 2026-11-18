@@ -12,6 +12,9 @@ SlidingPane {
     required property bool isRevealed
 
     signal newTabRequested
+    signal tabSearchRequested
+
+    readonly property alias tabSearchButton: tabSideBar.searchButton
 
     z: 1
     edge: Qt.LeftEdge
@@ -27,11 +30,13 @@ SlidingPane {
         spacing: 0
 
         TabSideBar {
+            id: tabSideBar
             tabModel: root.tabModel
             targetWindow: root.targetWindow
             Layout.fillHeight: true
             Layout.preferredWidth: implicitWidth
             onNewTabRequested: root.newTabRequested()
+            onTabSearchRequested: root.tabSearchRequested()
         }
 
         Kirigami.Separator { Layout.fillHeight: true }

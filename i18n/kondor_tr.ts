@@ -3160,6 +3160,42 @@
     </message>
 </context>
 <context>
+    <name>TabSearchButton</name>
+    <message>
+        <source>Search Tabs</source>
+        <translation>Sekmelerde ara</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchPopup</name>
+    <message>
+        <source>Search tabs</source>
+        <translation>Sekmelerde ara</translation>
+    </message>
+    <message>
+        <source>No matching tabs</source>
+        <translation>Eşleşen sekme yok</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchRow</name>
+    <message>
+        <source>Close Tab</source>
+        <translation>Sekmeyi kapat</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchSection</name>
+    <message>
+        <source>This Window</source>
+        <translation>Bu pencere</translation>
+    </message>
+    <message>
+        <source>Window %1</source>
+        <translation>Pencere %1</translation>
+    </message>
+</context>
+<context>
     <name>TabSoundButton</name>
     <message>
         <source>Unmute Tab</source>

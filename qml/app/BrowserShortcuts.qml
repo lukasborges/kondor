@@ -12,6 +12,7 @@ Item {
     required property var navigationBar
     required property var pageArea
     required property var fullScreen
+    required property var tabSearch
 
     readonly property Tab tab: tabs.currentTab
     readonly property bool hasPage: tab !== null && !tab.newTabPage
@@ -23,7 +24,12 @@ Item {
     }
     Shortcut {
         sequence: "Ctrl+W"
+        enabled: !root.tabSearch.opened
         onActivated: root.tabController.closeTabAt(root.tabs.currentIndex)
+    }
+    Shortcut {
+        sequence: "Ctrl+Shift+A"
+        onActivated: root.tabSearch.show()
     }
     Shortcut {
         sequence: "Ctrl+Shift+W"

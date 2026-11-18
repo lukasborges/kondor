@@ -3174,6 +3174,42 @@
     </message>
 </context>
 <context>
+    <name>TabSearchButton</name>
+    <message>
+        <source>Search Tabs</source>
+        <translation>Cerca pestanyes</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchPopup</name>
+    <message>
+        <source>Search tabs</source>
+        <translation>Cerca pestanyes</translation>
+    </message>
+    <message>
+        <source>No matching tabs</source>
+        <translation>No hi ha cap pestanya coincident</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchRow</name>
+    <message>
+        <source>Close Tab</source>
+        <translation>Tanca la pestanya</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchSection</name>
+    <message>
+        <source>This Window</source>
+        <translation>Aquesta finestra</translation>
+    </message>
+    <message>
+        <source>Window %1</source>
+        <translation>Finestra %1</translation>
+    </message>
+</context>
+<context>
     <name>TabSoundButton</name>
     <message>
         <source>Unmute Tab</source>

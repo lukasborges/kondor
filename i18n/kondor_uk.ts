@@ -3188,6 +3188,42 @@
     </message>
 </context>
 <context>
+    <name>TabSearchButton</name>
+    <message>
+        <source>Search Tabs</source>
+        <translation>Пошук вкладок</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchPopup</name>
+    <message>
+        <source>Search tabs</source>
+        <translation>Пошук вкладок</translation>
+    </message>
+    <message>
+        <source>No matching tabs</source>
+        <translation>Немає відповідних вкладок</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchRow</name>
+    <message>
+        <source>Close Tab</source>
+        <translation>Закрити вкладку</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchSection</name>
+    <message>
+        <source>This Window</source>
+        <translation>Це вікно</translation>
+    </message>
+    <message>
+        <source>Window %1</source>
+        <translation>Вікно %1</translation>
+    </message>
+</context>
+<context>
     <name>TabSoundButton</name>
     <message>
         <source>Unmute Tab</source>

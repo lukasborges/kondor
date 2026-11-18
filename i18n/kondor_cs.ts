@@ -3188,6 +3188,42 @@
     </message>
 </context>
 <context>
+    <name>TabSearchButton</name>
+    <message>
+        <source>Search Tabs</source>
+        <translation>Hledat karty</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchPopup</name>
+    <message>
+        <source>Search tabs</source>
+        <translation>Hledat karty</translation>
+    </message>
+    <message>
+        <source>No matching tabs</source>
+        <translation>Žádné odpovídající karty</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchRow</name>
+    <message>
+        <source>Close Tab</source>
+        <translation>Zavřít kartu</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchSection</name>
+    <message>
+        <source>This Window</source>
+        <translation>Toto okno</translation>
+    </message>
+    <message>
+        <source>Window %1</source>
+        <translation>Okno %1</translation>
+    </message>
+</context>
+<context>
     <name>TabSoundButton</name>
     <message>
         <source>Unmute Tab</source>

@@ -12,8 +12,10 @@ SlidingPane {
     required property bool isPageFullScreen
 
     readonly property alias toolBar: toolBar
+    readonly property alias tabSearchButton: tabStrip.searchButton
 
     signal newTabRequested
+    signal tabSearchRequested
     signal manageBookmarksRequested
 
     isShown: (!areToolbarsHidden || isRevealed) && !isPageFullScreen
@@ -27,6 +29,7 @@ SlidingPane {
         rowSpacing: 0
 
         TabStrip {
+            id: tabStrip
             visible: !root.browserWindow.tabsInSideBar
             Layout.row: root.browserWindow.tabsBelowAddressBar ? 1 : 0
             Layout.fillWidth: true
@@ -34,6 +37,7 @@ SlidingPane {
             targetWindow: root.browserWindow
             privateWindow: root.browserWindow.privateWindow
             onNewTabRequested: root.newTabRequested()
+            onTabSearchRequested: root.tabSearchRequested()
         }
 
         NavigationToolBar {

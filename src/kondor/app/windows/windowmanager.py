@@ -8,7 +8,7 @@ from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
 from kondor.app.crash.actionlog import ActionLog
 from kondor.app.instance.singleinstancemessage import SingleInstanceMessage
-from kondor.app.windows import windowlaunch
+from kondor.app.windows import tabsearch, windowlaunch
 from kondor.app.windows.windowcontents import WindowContents, initial_properties
 from kondor.app.windows.windowtabs import show_tab_in
 from kondor.browser.profile.profilemanager import ProfileManager
@@ -44,6 +44,18 @@ class WindowManager(QObject):
 
     def show_tab(self, tab: QObject, token: bytes = b"") -> bool:
         return show_tab_in(self.windows(), tab, token)
+
+    @Slot(QObject, str, result="QVariantList")
+    def searchTabs(self, window: QObject, query: str) -> list[dict[str, object]]:
+        return tabsearch.search(self.windows(), window, query)
+
+    @Slot(QObject)
+    def showSearchedTab(self, tab: QObject) -> None:
+        self.show_tab(tab)
+
+    @Slot(QObject)
+    def closeSearchedTab(self, tab: QObject) -> None:
+        tabsearch.close_tab(self.windows(), tab)
 
     def window_count(self) -> int:
         return len(self._windows)

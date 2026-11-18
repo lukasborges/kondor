@@ -3174,6 +3174,42 @@
     </message>
 </context>
 <context>
+    <name>TabSearchButton</name>
+    <message>
+        <source>Search Tabs</source>
+        <translation>Tabs durchsuchen</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchPopup</name>
+    <message>
+        <source>Search tabs</source>
+        <translation>Tabs durchsuchen</translation>
+    </message>
+    <message>
+        <source>No matching tabs</source>
+        <translation>Keine passenden Tabs</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchRow</name>
+    <message>
+        <source>Close Tab</source>
+        <translation>Tab schließen</translation>
+    </message>
+</context>
+<context>
+    <name>TabSearchSection</name>
+    <message>
+        <source>This Window</source>
+        <translation>Dieses Fenster</translation>
+    </message>
+    <message>
+        <source>Window %1</source>
+        <translation>Fenster %1</translation>
+    </message>
+</context>
+<context>
     <name>TabSoundButton</name>
     <message>
         <source>Unmute Tab</source>

@@ -120,7 +120,6 @@ Item {
             output: pageOutput
             certificates: certificateHandler
             webChannel: scriptBridges.channel
-            agentPointer: scriptBridges.agentPointer
             onPageContextMenuRequested: function(request) { root.showContextMenu(request) }
         }
 

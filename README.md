@@ -169,8 +169,7 @@ unless you allow them. Authors: see [`docs/extensions/api.md`](docs/extensions/a
 
 ## Remote control
 
-AI agents and automation tools can read and control the pages of normal windows, with the agent's
-pointer shown on the page. Turn it on in **Settings → Privacy → Remote control** and restart Kondor,
+AI agents and automation tools can read and control the pages of normal windows. Turn it on in **Settings → Privacy → Remote control** and restart Kondor,
 or start it once with `kondor --remote-control 9222`.
 
 Kondor has a built-in [MCP](https://modelcontextprotocol.io) server, so any MCP client needs no

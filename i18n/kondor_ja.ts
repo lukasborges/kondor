@@ -553,6 +553,17 @@
     </message>
 </context>
 <context>
+    <name>CrashReportBar</name>
+    <message>
+        <source>Kondor closed unexpectedly.</source>
+        <translation>Kondor が予期せず終了しました。</translation>
+    </message>
+    <message>
+        <source>Report Problem…</source>
+        <translation>問題を報告…</translation>
+    </message>
+</context>
+<context>
     <name>CrashedPage</name>
     <message>
         <source>This tab crashed</source>

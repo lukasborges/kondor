@@ -4,6 +4,7 @@ from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtWidgets import QApplication
 
 from kondor.app.commandline.commandline import CommandLine, parse_command_line, resolve_urls
+from kondor.app.crash.crashrecorder import start_crash_recording
 from kondor.app.instance.singleinstance import SingleInstance
 from kondor.app.mcp.server import mcpmain
 from kondor.app.remotecontrol import remotecontrolstartup
@@ -61,6 +62,7 @@ def start_first_instance(app: QApplication, command_line: CommandLine) -> int | 
     if failure is not None:
         return failure
     remember_profile()
+    start_crash_recording()
     start_browser(app, command_line)
     return None
 

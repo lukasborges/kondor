@@ -13,6 +13,7 @@ from PySide6.QtCore import (
 )
 from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
+from kondor.app.crash.actionlog import ActionLog
 from kondor.browser.profile.profilemanager import ProfileManager
 from kondor.browser.tabs.tab import Tab
 
@@ -90,7 +91,11 @@ class TabModelRows(QAbstractListModel):
         if not self.is_valid_index(index) or index == self._current_index:
             return
         self._current_index = index
+        self.log_tab(self._tabs[index], "activated", index)
         self.notify_current_changed()
+
+    def log_tab(self, tab: Tab, verb: str, index: int) -> None:
+        ActionLog.instance().record_tab(tab, f"tab {verb} at {index}, {len(self._tabs)} tabs")
 
     def notify_current_changed(self) -> None:
         self.currentIndexChanged.emit()
@@ -106,6 +111,7 @@ class TabModelRows(QAbstractListModel):
     def insert_row(self, index: int, tab: Tab) -> None:
         self.beginInsertRows(QModelIndex(), index, index)
         self._tabs.insert(index, tab)
+        self.log_tab(tab, "opened", index)
         self.endInsertRows()
         self.countChanged.emit()
         self.pinnedCountChanged.emit()
@@ -131,6 +137,7 @@ class TabModelRows(QAbstractListModel):
         self.beginRemoveRows(QModelIndex(), index, index)
         tab = self._tabs.pop(index)
         self.endRemoveRows()
+        self.log_tab(tab, "closed", index)
         self.countChanged.emit()
         self.pinnedCountChanged.emit()
         return tab

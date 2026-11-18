@@ -12,6 +12,7 @@ from PySide6.QtCore import (
 )
 from PySide6.QtNetwork import QLocalSocket
 
+from kondor.app.crash.actionlog import ActionLog
 from kondor.app.remotecontrol.connections.connection import Connection
 
 NAME_ROLE = Qt.ItemDataRole.UserRole + 1
@@ -54,6 +55,7 @@ class ConnectionModel(QAbstractListModel):
         self.beginInsertRows(QModelIndex(), position, position)
         self._connections.append(connection)
         self.endInsertRows()
+        ActionLog.instance().record(f"remote control client connected: {connection.kind()}")
         self.countChanged.emit()
 
     def remove(self, connection: Connection) -> None:
@@ -63,6 +65,7 @@ class ConnectionModel(QAbstractListModel):
         self.beginRemoveRows(QModelIndex(), position, position)
         del self._connections[position]
         self.endRemoveRows()
+        ActionLog.instance().record(f"remote control client disconnected: {connection.kind()}")
         self.countChanged.emit()
 
     def find_automation(self) -> Connection | None:

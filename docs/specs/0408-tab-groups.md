@@ -123,3 +123,4 @@ Separate instance with isolated XDG folders under `~/kondor-test`, `--new-instan
 | "Ungroup Tabs" icon | `object-ungroup`, not the red `group-delete` trash: the tabs stay open. |
 | Approved | Prototypes approved by the maintainer. |
 | May dragging change a tab's group? | No (maintainer, #426): dragging joined groups by accident and could split a group around its label; only the context menu changes groups. Replaces the first rule "dropping between two tabs of a group joins it". |
+| Draw the label inside the first tab's delegate? | No (#435, maintainer's request to simplify): that made every close, move and drag re-place the label and bar and produced #433, #434 and stray bars. Labels are rows of a `TabStripModel` that the strip and the side bar share; the rules for moves live only in the Python model and QML only renders. |

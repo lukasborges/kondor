@@ -41,12 +41,15 @@ ListView {
         currentIndex = nextShownIndex(currentIndex, delta)
     }
 
+    function isUnpinnedRow(row) {
+        return row >= tabModel.pinnedCount && row < tabModel.count
+    }
+
     function nextShownIndex(from, delta) {
-        const lowest = tabModel.pinnedCount
-        let target = Math.max(lowest, Math.min(from + delta, tabModel.count - 1))
-        while (tabModel.isHiddenByGroup(target) && target > lowest && target < tabModel.count - 1)
+        let target = from + delta
+        while (isUnpinnedRow(target) && tabModel.isHiddenByGroup(target))
             target += delta
-        return target
+        return isUnpinnedRow(target) ? target : from
     }
 
     function showCurrentTab() {

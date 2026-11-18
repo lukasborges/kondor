@@ -12,8 +12,19 @@ QtObject {
     readonly property real countWidth: Kirigami.Units.gridUnit * 1.5
     readonly property real labelsWidth: revision >= 0 ? sumLabelWidths() : 0
 
+    readonly property real labelPadding: Kirigami.Units.smallSpacing * 4
+
+    property TextMetrics nameMetrics: TextMetrics {
+        font.bold: true
+    }
+
+    function nameWidthOf(group) {
+        nameMetrics.text = group.name
+        return Math.min(namedLabelWidth, Math.ceil(nameMetrics.advanceWidth) + labelPadding)
+    }
+
     function labelWidthOf(group) {
-        const base = group.name.length > 0 ? namedLabelWidth : unnamedLabelWidth
+        const base = group.name.length > 0 ? nameWidthOf(group) : unnamedLabelWidth
         return group.collapsed ? base + countWidth : base
     }
 

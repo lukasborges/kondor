@@ -45,12 +45,6 @@ Menu {
         enabled: menu.tab !== null
         onTriggered: menu.tabModel.duplicateTab(menu.tabIndex)
     }
-    MenuItem {
-        text: qsTr("Move Tab to New Window")
-        icon.name: "window-new"
-        enabled: menu.tab !== null
-        onTriggered: menu.moveToNewWindowRequested()
-    }
     TabGroupMenu {
         tab: menu.tab
         tabIndex: menu.tabIndex
@@ -63,6 +57,12 @@ Menu {
         text: qsTr("Remove Tab from Group")
         icon.name: "object-ungroup"
         onTriggered: menu.tabModel.removeTabFromGroup(menu.tabIndex)
+    }
+    MenuItem {
+        text: qsTr("Move Tab to New Window")
+        icon.name: "window-new"
+        enabled: menu.tab !== null
+        onTriggered: menu.moveToNewWindowRequested()
     }
     MenuItem {
         text: menu.tab && menu.tab.pinned ? qsTr("Unpin Tab") : qsTr("Pin Tab")

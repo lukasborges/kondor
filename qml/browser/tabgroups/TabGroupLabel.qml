@@ -18,7 +18,7 @@ Rectangle {
     signal dropped(real sceneX)
 
     radius: Kirigami.Units.cornerRadius
-    color: Qt.alpha(tint.value, 0.25)
+    color: Qt.alpha(tint.value, hover.hovered ? 0.4 : 0.25)
     border.width: activeFocus ? 2 : 1
     border.color: activeFocus ? Kirigami.Theme.focusColor : tint.value
     activeFocusOnTab: true
@@ -90,6 +90,7 @@ Rectangle {
         id: dragHandler
         target: null
         yAxis.enabled: false
+        grabPermissions: PointerHandler.CanTakeOverFromAnything
         onTranslationChanged: label.dragShift = translation.x
         onActiveChanged: {
             if (!active) {

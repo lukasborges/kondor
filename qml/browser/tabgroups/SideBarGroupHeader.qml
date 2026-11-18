@@ -19,6 +19,13 @@ Item {
     Accessible.name: displayName
     Accessible.description: group.collapsed ? qsTr("Collapsed") : ""
 
+    Rectangle {
+        anchors.fill: parent
+        radius: Kirigami.Units.cornerRadius
+        color: Qt.alpha(tint.value, 0.2)
+        visible: headerMouse.containsMouse
+    }
+
     GroupColor {
         id: tint
         name: header.group.color
@@ -64,6 +71,7 @@ Item {
     }
 
     MouseArea {
+        id: headerMouse
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         hoverEnabled: true

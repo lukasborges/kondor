@@ -93,9 +93,10 @@ class PdfServer(QObject):
 
 
 class Scene:
-    def __init__(self, engine: QQmlEngine, private: bool) -> None:
+    def __init__(self, engine: QQmlEngine, private: bool, download_directory: Path) -> None:
         profiles = ProfileManager.instance()
         self.profile = profiles.createPrivateProfile() if private else profiles.defaultProfile()
+        self.profile.setDownloadPath(str(download_directory))
         self.model = TabModel()
         self.tab = Tab(self.profile)
         engine.rootContext().setContextProperty("testTab", self.tab)
@@ -125,6 +126,12 @@ class Scene:
         self.window.close()
         release(self.root)
         release(self.window, self.component, self.tab, self.model)
+        self.clear_downloads()
+
+    def clear_downloads(self) -> None:
+        model = DownloadManager.instance().download_model()
+        while model.rowCount() > 0:
+            model.remove_download(0)
 
 
 @pytest.fixture(params=[False, True], ids=["normal", "private"])
@@ -134,7 +141,7 @@ def scene(
     settings = Settings.instance()
     previous = settings.property("downloadDirectory")
     settings.setProperty("downloadDirectory", str(tmp_path))
-    created = Scene(kondor_engine, private=bool(request.param))
+    created = Scene(kondor_engine, private=bool(request.param), download_directory=tmp_path)
     yield created
     created.release()
     settings.setProperty("downloadDirectory", previous)

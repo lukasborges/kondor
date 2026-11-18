@@ -9,7 +9,7 @@ Item {
     required property Tab tab
     required property WebEngineView webView
 
-    readonly property real maximumHeight: 16384 / Screen.devicePixelRatio
+    readonly property real maximumHeight: Screenshot.maximumHeight / Screen.devicePixelRatio
     readonly property string metricsScript: "[Math.max(document.documentElement.scrollHeight, "
         + "document.body ? document.body.scrollHeight : 0), window.scrollY]"
 

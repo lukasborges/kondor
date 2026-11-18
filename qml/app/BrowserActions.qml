@@ -15,7 +15,13 @@ QtObject {
     readonly property bool hasWindowFocus: !browserWindow || browserWindow.activeFocusItem !== null
     readonly property bool hasPage: tabs.currentTab ? !tabs.currentTab.newTabPage : false
 
+    readonly property bool showsErrorPage: hasPage
+        && (tabs.currentTab.security.certificateErrorPending
+            || tabs.currentTab.security.httpsOnlyWarningPending)
+    readonly property bool hasLoadedPage: hasPage
+        && !["", "about:blank"].includes(String(tabs.currentTab.url))
     readonly property bool canCapture: hasPage && !tabs.currentTab.crashed
+        && !showsErrorPage && hasLoadedPage
 
     readonly property Action newTabAction: Action {
         text: qsTr("New Tab")

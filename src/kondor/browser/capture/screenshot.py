@@ -1,9 +1,10 @@
-from PySide6.QtCore import QDateTime, QDir, QObject, QUrl, Slot
+from PySide6.QtCore import Property, QDateTime, QDir, QObject, QUrl, Slot
 from PySide6.QtGui import QGuiApplication, QImage
 
 from kondor.core.filehelper import sanitized_file_name
 
 TIMESTAMP_FORMAT = "yyyy-MM-dd hh.mm.ss"
+MAXIMUM_HEIGHT = 16384
 
 
 def screenshot_file_name(title: str, moment: QDateTime) -> str:
@@ -18,6 +19,8 @@ class Screenshot(QObject):
         if cls._instance is None:
             cls._instance = cls()
         return cls._instance
+
+    maximumHeight = Property(int, lambda self: MAXIMUM_HEIGHT, constant=True)
 
     @Slot(QImage)
     def copyToClipboard(self, image: QImage) -> None:

@@ -9,7 +9,8 @@ ColumnLayout {
 
     property var grabResult: null
     property bool isCapturing: false
-    readonly property bool isCut: image.sourceSize.height >= 16384
+    readonly property int roundingTolerance: 1
+    readonly property bool isCut: image.sourceSize.height >= Screenshot.maximumHeight - roundingTolerance
     readonly property string sizeText: {
         const size = image.sourceSize
         const text = qsTr("%1 × %2").arg(size.width).arg(size.height)

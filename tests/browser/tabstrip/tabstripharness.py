@@ -113,6 +113,15 @@ class TabStripHarness:
     def left_of_tab(self, tab: Tab) -> float:
         return float(self.call("leftOfTab", tab))
 
+    def label_left(self, group: object) -> float:
+        return float(self.call("leftOfLabel", group))
+
+    def label_width(self, group: object) -> float:
+        return float(self.call("widthOfLabel", group))
+
+    def visible_bars(self) -> int:
+        return int(self.call("visibleBars"))
+
     def width_of(self, index: int) -> float:
         return float(self.call("widthOf", index))
 

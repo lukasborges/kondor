@@ -44,19 +44,6 @@ class TabModelGroups(TabModelRows):
         members = self.members_of(group)
         return members[0] if members else -1
 
-    @Slot(int, result=bool)
-    def isGroupStart(self, index: int) -> bool:
-        if not self.is_valid_index(index) or self._tabs[index].group is None:
-            return False
-        return index == 0 or self._tabs[index - 1].group is not self._tabs[index].group
-
-    @Slot(int, result=bool)
-    def isHiddenByGroup(self, index: int) -> bool:
-        if not self.is_valid_index(index):
-            return False
-        group = self._tabs[index].group
-        return group is not None and group.collapsed
-
     @Slot(int, result=Tab)
     def tabAt(self, index: int) -> Tab | None:
         return self._tabs[index] if self.is_valid_index(index) else None

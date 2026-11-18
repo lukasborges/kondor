@@ -16,14 +16,17 @@ Rectangle {
     readonly property int tabCount: tabModel.groupRevision >= 0 ? tabModel.tabCountOf(group) : 0
     readonly property string displayName: group.name.length > 0 ? group.name : qsTr("Unnamed group")
 
-    signal dropped(real sceneX)
+    readonly property bool isDragging: dragHandler.active
+
+    signal dragStarted()
+    signal dragShifted(real shift)
+    signal dropped(real shift)
 
     radius: Kirigami.Units.cornerRadius
     color: Qt.alpha(GroupColors.of(label.group.color, Kirigami.Theme), hover.hovered ? 0.4 : 0.25)
     border.width: activeFocus ? 2 : 1
     border.color: activeFocus ? Kirigami.Theme.focusColor : GroupColors.of(label.group.color, Kirigami.Theme)
     activeFocusOnTab: true
-    z: dragHandler.active ? 10 : 3
     transform: Translate { x: label.dragShift }
     Accessible.role: Accessible.Button
     Accessible.name: displayName
@@ -40,6 +43,18 @@ Rectangle {
         targetWindow.openGroupEditor(group, label)
     }
 
+    function followDrag(shift) {
+        if (!dragHandler.active)
+            return
+        dragShift = shift
+        dragShifted(shift)
+    }
+
+    function endDrag() {
+        const shift = dragShift
+        dragShift = 0
+        dropped(shift)
+    }
 
     RowLayout {
         anchors.fill: parent
@@ -88,13 +103,8 @@ Rectangle {
         target: null
         yAxis.enabled: false
         grabPermissions: PointerHandler.CanTakeOverFromAnything
-        onTranslationChanged: label.dragShift = translation.x
-        onActiveChanged: {
-            if (!active) {
-                label.dropped(centroid.scenePosition.x)
-                label.dragShift = 0
-            }
-        }
+        onTranslationChanged: label.followDrag(translation.x)
+        onActiveChanged: dragHandler.active ? label.dragStarted() : label.endDrag()
     }
 
     Keys.onMenuPressed: openEditor()

@@ -15,6 +15,7 @@ from kondor.browser.tabs.features.tabpermissions import TabPermissions
 from kondor.browser.tabs.features.tabpopups import TabPopups
 from kondor.browser.tabs.features.tabsecurity import TabSecurity
 from kondor.browser.tabs.features.tabsitereload import TabSiteReload
+from kondor.browser.tabs.strip.tabstripmodel import TabStripModel
 from kondor.browser.tabs.tab import Tab
 from kondor.browser.tabs.tabmodel import TabModel
 from kondor.browser.zoommanager import ZoomManager
@@ -42,6 +43,7 @@ QML_TYPES: tuple[QmlType, ...] = (
     QmlType(TabIdentity, "TabIdentity", QmlKind.UNCREATABLE),
     QmlType(TabPopups, "TabPopups", QmlKind.UNCREATABLE),
     QmlType(TabModel, "TabModel", QmlKind.CREATABLE),
+    QmlType(TabStripModel, "TabStripModel", QmlKind.CREATABLE),
     QmlType(ZoomManager, "ZoomManager", QmlKind.SINGLETON),
 )
 

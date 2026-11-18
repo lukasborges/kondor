@@ -21,22 +21,18 @@ TabButton {
     readonly property bool isStyled: tabStrip.isStyled
     readonly property bool isRaised: tabDrag.active || tabSlide.isSettling
     readonly property bool showsCloseButton: !isStyled || checked || hovered
-    readonly property real leadWidth: tabStrip.layout.leadWidth(index)
-    readonly property bool isHiddenByGroup: tabStrip.layout.revision >= 0
-        && tabModel.isHiddenByGroup(index)
+    readonly property real groupShift: tabStrip.shiftOfGroup(tab.group)
 
-    signal groupLabelDropped(var group, real sceneX)
-
-    width: tabStrip.layout.slotWidth(index)
+    width: tabStrip.layout.rowWidth(index)
     visible: width > 0
-    leftInset: leadWidth
     text: ""
     Accessible.name: tab.pinned ? info.iconOnlyName : info.title
     Accessible.description: info.stateDescription
     z: isRaised ? 10 : 0
     transform: [
         Translate { x: control.dragShift },
-        Translate { x: control.slideShift }
+        Translate { x: control.slideShift },
+        Translate { x: control.groupShift }
     ]
 
     TabStyleBindings { control: control }
@@ -44,9 +40,8 @@ TabButton {
     TabCard {
         id: tabCard
         anchors.fill: parent
-        anchors.leftMargin: control.leadWidth
         z: -1
-        visible: control.isStyled && !control.isHiddenByGroup
+        visible: control.isStyled
         isActive: control.checked
         isHovered: control.hovered
         isRaised: control.isRaised
@@ -60,17 +55,12 @@ TabButton {
     }
 
     AgentTabBorder {
-        visible: info.isAgentTab && !control.isHiddenByGroup
-        anchors.leftMargin: control.leadWidth + 1
+        visible: info.isAgentTab
+        anchors.leftMargin: 1
     }
 
-    TabGroupAdornment {
-        visible: control.tab.group !== null
-        tab: control.tab
-        tabModel: control.tabModel
-        targetWindow: control.targetWindow
-        leadWidth: control.leadWidth
-        onLabelDropped: sceneX => control.groupLabelDropped(control.tab.group, sceneX)
+    TabGroupBar {
+        group: control.tab.group
     }
 
     ToolTip.visible: hovered && info.isAgentTab
@@ -81,13 +71,7 @@ TabButton {
     Component.onDestruction: tabDrag.abortOnDestruction()
 
     contentItem: RowLayout {
-        visible: !control.isHiddenByGroup
         spacing: control.isStyled ? Kirigami.Units.smallSpacing : 6
-
-        Item {
-            visible: control.leadWidth > 0
-            Layout.preferredWidth: control.leadWidth
-        }
 
         Item {
             visible: !control.tab.pinned && !control.isStyled
@@ -150,7 +134,6 @@ TabButton {
 
     MouseArea {
         anchors.fill: parent
-        anchors.leftMargin: control.leadWidth
         z: 1
         acceptedButtons: Qt.RightButton
         onClicked: function(mouse) {

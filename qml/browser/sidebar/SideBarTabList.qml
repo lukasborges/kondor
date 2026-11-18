@@ -12,9 +12,13 @@ ListView {
     property bool isFocusedByPointer: false
     readonly property bool isFocusRingVisible: activeFocus && !isFocusedByPointer
 
+    readonly property alias stripModel: stripModel
+    readonly property alias groupDrag: groupDrag
+
     signal newTabRequested()
 
-    model: tabModel
+    model: stripModel
+    cacheBuffer: 100000
     clip: true
     spacing: 2
     interactive: false
@@ -38,28 +42,53 @@ ListView {
 
     function moveFocus(delta) {
         useKeyboard()
-        currentIndex = nextShownIndex(currentIndex, delta)
+        currentIndex = nextNavigableRow(currentIndex, delta)
     }
 
-    function isUnpinnedRow(row) {
-        return row >= tabModel.pinnedCount && row < tabModel.count
+    function isNavigableRow(row) {
+        if (row < tabModel.pinnedCount || row >= stripModel.count)
+            return false
+        return !stripModel.isLabel(row) && !stripModel.isHidden(row)
     }
 
-    function nextShownIndex(from, delta) {
+    function nextNavigableRow(from, delta) {
         let target = from + delta
-        while (isUnpinnedRow(target) && tabModel.isHiddenByGroup(target))
+        while (target >= 0 && target < stripModel.count && !isNavigableRow(target))
             target += delta
-        return isUnpinnedRow(target) ? target : from
+        return isNavigableRow(target) ? target : from
+    }
+
+    function currentRow() {
+        return stripModel.rowOfTabIndex(tabModel.currentIndex)
     }
 
     function showCurrentTab() {
-        currentIndex = tabModel.currentIndex
+        currentIndex = currentRow()
         positionViewAtIndex(currentIndex, ListView.Contain)
     }
 
     function activateKeyboardRow() {
         useKeyboard()
-        tabModel.setCurrentIndex(currentIndex)
+        tabModel.setCurrentIndex(stripModel.tabIndexAt(currentIndex))
+    }
+
+    function isOtherTabAbove(row, group, top) {
+        const item = itemAtIndex(row)
+        if (!item || stripModel.isLabel(row) || stripModel.groupAt(row) === group)
+            return false
+        return item.y + item.height / 2 < top
+    }
+
+    function otherTabsAbove(group, top) {
+        let count = 0
+        for (let row = 0; row < stripModel.count; ++row)
+            count += isOtherTabAbove(row, group, top) ? 1 : 0
+        return count
+    }
+
+    function moveGroupBy(group, shift) {
+        const header = itemAtIndex(stripModel.rowOfLabel(group))
+        tabModel.moveGroup(group, otherTabsAbove(group, header.y + shift))
     }
 
     function isBelowRows(y) {
@@ -71,7 +100,7 @@ ListView {
     Keys.onDownPressed: moveFocus(1)
     Keys.onReturnPressed: activateKeyboardRow()
     Keys.onEnterPressed: activateKeyboardRow()
-    Keys.onDeletePressed: { useKeyboard(); targetWindow.closeTabAt(currentIndex) }
+    Keys.onDeletePressed: { useKeyboard(); targetWindow.closeTabAt(stripModel.tabIndexAt(currentIndex)) }
     Component.onCompleted: Qt.callLater(showCurrentTab)
     onHeightChanged: Qt.callLater(showCurrentTab)
     onCountChanged: Qt.callLater(showCurrentTab)
@@ -81,27 +110,13 @@ ListView {
         function onCurrentIndexChanged() { Qt.callLater(list.showCurrentTab) }
     }
 
-    delegate: collapsed ? collapsedRow : expandedRow
+    TabStripModel { id: stripModel; source: list.tabModel }
+    TabGroupDragState { id: groupDrag }
 
-    Component {
-        id: expandedRow
+    delegate: collapsed ? collapsedRows : expandedRows
 
-        SideBarTabRow {
-            tabModel: list.tabModel
-            targetWindow: list.targetWindow
-            list: ListView.view
-        }
-    }
-
-    Component {
-        id: collapsedRow
-
-        SideBarCollapsedTabRow {
-            tabModel: list.tabModel
-            targetWindow: list.targetWindow
-            list: ListView.view
-        }
-    }
+    SideBarDelegateChooser { id: expandedRows; list: list }
+    SideBarDelegateChooser { id: collapsedRows; list: list; isIconOnly: true }
 
     footer: ItemDelegate {
         width: ListView.view.width

@@ -15,6 +15,27 @@ Item {
 
     readonly property string displayName: group.name.length > 0 ? group.name : qsTr("Unnamed group")
     readonly property int tabCount: tabModel.groupRevision >= 0 ? tabModel.tabCountOf(group) : 0
+    property real dragShift: 0
+    readonly property bool isDragging: dragHandler.active
+
+    signal dragStarted()
+    signal dragShifted(real shift)
+    signal dropped(real shift)
+
+    transform: Translate { y: header.dragShift }
+
+    function followDrag(shift) {
+        if (!dragHandler.active)
+            return
+        dragShift = shift
+        dragShifted(shift)
+    }
+
+    function endDrag() {
+        const shift = dragShift
+        dragShift = 0
+        dropped(shift)
+    }
 
     Accessible.role: Accessible.Button
     Accessible.name: displayName
@@ -24,7 +45,7 @@ Item {
         anchors.fill: parent
         radius: Kirigami.Units.cornerRadius
         color: Qt.alpha(GroupColors.of(header.group.color, Kirigami.Theme), 0.2)
-        visible: headerMouse.containsMouse
+        visible: hover.hovered
     }
 
 
@@ -67,19 +88,28 @@ Item {
         Item { visible: header.isIconOnly; Layout.fillWidth: true }
     }
 
-    MouseArea {
-        id: headerMouse
-        anchors.fill: parent
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
-        hoverEnabled: true
-        ToolTip.visible: containsMouse
-        ToolTip.text: header.displayName
-        ToolTip.delay: 600
-        onClicked: mouse => {
-            if (mouse.button === Qt.RightButton)
-                header.targetWindow.openGroupEditor(header.group, header)
-            else
-                header.tabModel.setGroupCollapsed(header.group, !header.group.collapsed)
-        }
+    HoverHandler { id: hover }
+
+    TapHandler {
+        acceptedButtons: Qt.LeftButton
+        onTapped: header.tabModel.setGroupCollapsed(header.group, !header.group.collapsed)
     }
+
+    TapHandler {
+        acceptedButtons: Qt.RightButton
+        onTapped: header.targetWindow.openGroupEditor(header.group, header)
+    }
+
+    DragHandler {
+        id: dragHandler
+        target: null
+        xAxis.enabled: false
+        grabPermissions: PointerHandler.CanTakeOverFromAnything
+        onTranslationChanged: header.followDrag(translation.y)
+        onActiveChanged: dragHandler.active ? header.dragStarted() : header.endDrag()
+    }
+
+    ToolTip.visible: hover.hovered
+    ToolTip.text: displayName
+    ToolTip.delay: 600
 }

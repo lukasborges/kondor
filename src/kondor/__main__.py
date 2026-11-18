@@ -9,6 +9,7 @@ from kondor.app.instance.singleinstance import SingleInstance
 from kondor.app.mcp.server import mcpmain
 from kondor.app.remotecontrol import remotecontrolstartup
 from kondor.app.restart.apprestart import AppRestart
+from kondor.app.restart.launchenvironment import remember_launch_environment
 from kondor.app.startup.appidentity import set_up_identity
 from kondor.app.startup.appstartup import (
     forwards_to_running_instance,
@@ -92,6 +93,7 @@ def select_profile_and_launch(app: QApplication, single_instance: SingleInstance
 def main() -> int:
     if "--mcp" in sys.argv[1:]:
         return mcpmain.run(sys.argv[1:])
+    remember_launch_environment()
     install_logging_rules()
     app = start_application()
     if app is None:

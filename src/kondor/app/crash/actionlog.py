@@ -1,4 +1,5 @@
 import time
+import weakref
 from collections import deque
 from collections.abc import Callable
 from pathlib import Path
@@ -23,7 +24,9 @@ class ActionLog(QObject):
         self._clock = clock
         self._path: Path | None = None
         self._entries: deque[str] = deque(maxlen=MAX_ENTRIES)
-        self._previous_urls: dict[QObject, QUrl] = {}
+        self._previous_urls: weakref.WeakKeyDictionary[QObject, QUrl] = (
+            weakref.WeakKeyDictionary()
+        )
 
     @classmethod
     def instance(cls) -> "ActionLog":
@@ -69,9 +72,11 @@ class ActionLog(QObject):
 
     @Slot(QObject, QUrl)
     def navigationStarted(self, tab: QObject, url: QUrl) -> None:
+        if bool(tab.property("isPrivate")):
+            return
         kind = navigation_kind(self._previous_urls.get(tab, QUrl()), url)
         self._previous_urls[tab] = url
-        self.record_tab(tab, f"navigation started {kind}")
+        self.record(f"navigation started {kind}")
 
     @Slot(QObject)
     def navigationFinished(self, tab: QObject) -> None:

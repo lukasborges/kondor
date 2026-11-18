@@ -1,3 +1,5 @@
+import gc
+import weakref
 from pathlib import Path
 
 import pytest
@@ -12,16 +14,19 @@ class FakeTab(QObject):
         self.setProperty("isPrivate", is_private)
 
 
+log_path_of: "weakref.WeakKeyDictionary[ActionLog, Path]" = weakref.WeakKeyDictionary()
+
+
 @pytest.fixture
 def log(tmp_path: Path) -> ActionLog:
     action_log = ActionLog(clock=lambda: "10:00:00")
     action_log.start(tmp_path / "actions.log")
+    log_path_of[action_log] = tmp_path / "actions.log"
     return action_log
 
 
 def written(log: ActionLog) -> list[str]:
-    assert log._path is not None
-    return log._path.read_text().splitlines()
+    return (log_path_of[log]).read_text().splitlines()
 
 
 def test_keepsOnlyTheLastFortyEntries(log: ActionLog) -> None:
@@ -71,3 +76,12 @@ def test_windowEventsSkipPrivateWindows(log: ActionLog) -> None:
     log.record_unless_private(True, "window opened")
     log.record_unless_private(False, "window opened")
     assert len(written(log)) == 1
+
+
+def test_forgetsClosedTabs(log: ActionLog) -> None:
+    tab = FakeTab(False)
+    log.navigationStarted(tab, QUrl("https://example.org/"))
+    reference = weakref.ref(tab)
+    del tab
+    gc.collect()
+    assert reference() is None

@@ -111,8 +111,8 @@ class TabModelRows(QAbstractListModel):
     def insert_row(self, index: int, tab: Tab) -> None:
         self.beginInsertRows(QModelIndex(), index, index)
         self._tabs.insert(index, tab)
-        self.endInsertRows()
         self.log_tab(tab, "opened", index)
+        self.endInsertRows()
         self.countChanged.emit()
         self.pinnedCountChanged.emit()
 

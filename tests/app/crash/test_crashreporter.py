@@ -52,3 +52,9 @@ def test_dismissDeletesFiles(tmp_path: Path) -> None:
     reporter, files = offered(tmp_path)
     reporter.dismiss()
     assert not files.last_actions_log.exists()
+
+
+def test_reportAfterDismissReturnsEmptyAddress(tmp_path: Path) -> None:
+    reporter, _ = offered(tmp_path)
+    reporter.dismiss()
+    assert reporter.report().isEmpty()

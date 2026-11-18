@@ -22,8 +22,9 @@ Kirigami.InlineMessage {
             text: qsTr("Report Problem…")
             icon.name: "tools-report-bug"
             onTriggered: {
+                const address = CrashReporter.report()
                 root.visible = false
-                root.reportRequested(CrashReporter.report())
+                root.reportRequested(address)
             }
         }
     ]

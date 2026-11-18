@@ -34,7 +34,7 @@ class CrashReporter(QObject):
 
     @Slot(result=QUrl)
     def report(self) -> QUrl:
-        if self._files is None:
+        if self._files is None or not self._files.has_previous_crash():
             return QUrl()
         report = self.read_report(self._files)
         if report.is_too_long():

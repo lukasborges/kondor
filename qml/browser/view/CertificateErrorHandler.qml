@@ -11,6 +11,13 @@ Item {
 
     property var pendingError: null
 
+    PageLeaver {
+        id: leaver
+        tab: root.tab
+        tabModel: root.tabModel
+        webView: root.webView
+    }
+
     visible: false
 
     function takePendingError() {
@@ -44,15 +51,6 @@ Item {
             error.rejectCertificate()
     }
 
-    function leavePage() {
-        if (webView.canGoBack)
-            webView.goBack()
-        else if (tabModel.count > 1)
-            tabModel.closeTabObject(tab)
-        else
-            tab.showNewTabPage()
-    }
-
     Connections {
         target: root.tab.security
 
@@ -64,7 +62,7 @@ Item {
 
         function onRejectCertificateErrorRequested() {
             if (root.rejectPending())
-                root.leavePage()
+                leaver.leave()
         }
     }
 }

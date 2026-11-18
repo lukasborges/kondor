@@ -9,7 +9,7 @@ Item {
 
     required property Tab tab
 
-    readonly property string host: tab.security.upgradedFrom.host
+    readonly property string host: tab.security.upgradedHost
 
     Rectangle {
         anchors.fill: parent

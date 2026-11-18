@@ -134,4 +134,9 @@ TextField {
         function onUrlChanged() { root.syncFromTab() }
         function onNewTabPageChanged() { root.syncFromTab() }
     }
+
+    Connections {
+        target: root.tabs.currentTab ? root.tabs.currentTab.security : null
+        function onUpgradeChanged() { root.syncFromTab() }
+    }
 }

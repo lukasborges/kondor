@@ -17,13 +17,11 @@ Item {
             webView.stop()
     }
 
-    function leavePage() {
-        if (webView.canGoBack)
-            webView.goBack()
-        else if (tabModel.count > 1)
-            tabModel.closeTabObject(tab)
-        else
-            tab.showNewTabPage()
+    PageLeaver {
+        id: leaver
+        tab: root.tab
+        tabModel: root.tabModel
+        webView: root.webView
     }
 
     HttpsOnlyPage {
@@ -42,6 +40,6 @@ Item {
         target: root.tab.security
 
         function onContinueToHttpRequested(url) { root.webView.url = url }
-        function onLeaveHttpsOnlyWarningRequested() { root.leavePage() }
+        function onLeaveHttpsOnlyWarningRequested() { leaver.leave() }
     }
 }

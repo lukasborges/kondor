@@ -51,6 +51,7 @@ class TabSecurity(QObject):
     )
 
     upgradedFrom = Property(QUrl, lambda self: self._upgraded_from, notify=upgradeChanged)
+    upgradedHost = Property(str, lambda self: self._upgraded_from.host(), notify=upgradeChanged)
     httpsOnlyWarningPending = Property(
         bool, lambda self: self._is_warning_pending, notify=upgradeChanged
     )

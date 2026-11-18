@@ -34,6 +34,13 @@ def test_tab_remembers_the_original_url(model: TabModel) -> None:
     assert not tab.security.httpsOnlyWarningPending
 
 
+def test_warning_names_the_original_host(model: TabModel) -> None:
+    tab, _ = upgraded_tab(model)
+    tab.security.failUpgradeOf(tab.url)
+    assert tab.security.upgradedHost == ORIGINAL.host()
+    assert tab.security.upgradedHost
+
+
 def test_finished_load_forgets_the_upgrade(model: TabModel) -> None:
     tab, _ = upgraded_tab(model)
     tab.security.finishUpgrade()

@@ -1,4 +1,5 @@
 import pytest
+from PySide6.QtCore import QPoint
 from PySide6.QtTest import QTest
 
 from tests.browser.sidebar.sidebarharness import SETTLE_MS, SideBarHarness
@@ -74,3 +75,13 @@ def test_closing_the_first_tab_of_the_list_leaves_no_stray_bar(side_bar: SideBar
     QTest.qWait(SETTLE_MS)
     assert side_bar.visible_bars() == side_bar.tabs.tabCountOf(group)
     assert side_bar.rows() == side_bar.tabs.count + 1
+
+
+def test_the_label_never_leaves_its_tabs_while_dragging(side_bar: SideBarHarness) -> None:
+    two_groups_around_a_loose_tab(side_bar)
+    gap = side_bar.row_y(1) - side_bar.header_y(0)
+    press = side_bar.centre_of_row(0)
+    side_bar.press(press)
+    side_bar.slide(press, HALF // 2)
+    assert side_bar.row_y(1) - side_bar.header_y(0) == pytest.approx(gap)
+    side_bar.release(press + QPoint(0, HALF // 2))

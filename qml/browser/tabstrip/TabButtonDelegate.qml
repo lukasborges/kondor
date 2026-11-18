@@ -9,7 +9,6 @@ TabButton {
 
     required property Tab tab
     required property int index
-    required property int tabIndex
     required property TabModel tabModel
 
     property var tabBarItem: null

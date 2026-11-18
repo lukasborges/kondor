@@ -6,6 +6,7 @@ from PySide6.QtCore import QModelIndex, Qt
 from kondor.browser.tabs.strip.striprow import LABEL, TAB, StripRole
 from kondor.browser.tabs.strip.tabstripmodel import TabStripModel
 from kondor.browser.tabs.tabmodel import TabModel
+from tests.browser.tabs.strip.signals import Signals
 
 pytestmark = pytest.mark.no_qt_log
 
@@ -64,16 +65,23 @@ def test_collapsing_hides_the_tabs_and_keeps_the_label(
 ) -> None:
     _, group = grouped_pair(model)
     model.setCurrentIndex(0)
+    signals = Signals(strip)
     model.setGroupCollapsed(group, True)
     assert hidden(strip) == [False, False, True, True, False]
+    assert signals.structure_is_untouched()
+    assert {row for first, last in signals.changed for row in range(first, last + 1)} >= {2, 3}
+    assert min(first for first, _ in signals.changed) >= 1
 
 
 def test_closing_the_first_tab_of_the_strip_moves_nothing_else(
     model: TabModel, strip: TabStripModel
 ) -> None:
     grouped_pair(model)
+    signals = Signals(strip)
     model.closeTab(0)
     assert kinds(strip) == [LABEL, TAB, TAB, TAB]
+    assert signals.removed == [(0, 0)]
+    assert not (signals.inserted or signals.moved or signals.resets)
 
 
 def test_closing_the_first_tab_of_a_group_keeps_the_label_first(
@@ -89,16 +97,23 @@ def test_removing_the_last_tab_of_a_group_removes_its_label(
     model: TabModel, strip: TabStripModel
 ) -> None:
     grouped_pair(model)
+    signals = Signals(strip)
     model.closeGroup(model.groupAt(1))
     assert kinds(strip) == [TAB, TAB]
+    assert signals.resets == 0
+    assert (1, 1) in signals.removed
 
 
 def test_moving_a_tab_inside_a_group_keeps_the_label_in_place(
     model: TabModel, strip: TabStripModel
 ) -> None:
     tabs, _ = grouped_pair(model)
+    signals = Signals(strip)
     model.moveTab(2, 1)
     assert kinds(strip) == [TAB, LABEL, TAB, TAB, TAB]
+    assert len(signals.moved) == 1
+    assert 1 not in signals.moved[0][:2]
+    assert not (signals.inserted or signals.removed or signals.resets)
     assert strip.data(strip.index(2, 0), StripRole.TAB) is tabs[2]
 
 
@@ -112,19 +127,19 @@ def test_moving_a_group_emits_row_moves_instead_of_a_reset(
     model: TabModel, strip: TabStripModel
 ) -> None:
     _, group = grouped_pair(model)
-    resets: list[bool] = []
-    strip.modelReset.connect(lambda: resets.append(True))
+    signals = Signals(strip)
     model.moveGroup(group, FOUR_TABS)
-    assert not resets
+    assert signals.moved
+    assert signals.resets == 0
 
 
 def test_renaming_a_group_changes_its_label_row_only(model: TabModel, strip: TabStripModel) -> None:
     _, group = grouped_pair(model)
-    changed: list[int] = []
-    strip.dataChanged.connect(lambda top, _bottom: changed.append(top.row()))
+    signals = Signals(strip)
     group.setName("Work")
     assert strip.rowCount() == FOUR_TABS + 1
-    assert changed == [] or set(changed) <= {1}
+    assert signals.structure_is_untouched()
+    assert signals.changed == []
 
 
 def test_adding_a_group_inserts_one_label_row(model: TabModel, strip: TabStripModel) -> None:

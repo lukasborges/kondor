@@ -32,6 +32,7 @@ QtObject {
     function pointX(index) { return point(index).x }
     function pointY(index) { return point(index).y }
     function rowY(index) { return row(index).mapToItem(null, 0, 0).y }
+    function headerY(index) { return row(index).children[0].mapToItem(null, 0, 0).y }
     function bars() { return countBars(list().contentItem) }
     function countBars(item) {
         let count = item.isVertical !== undefined && item.visible && item.group ? 1 : 0
@@ -87,15 +88,26 @@ class SideBarHarness:
 
     def drag_row(self, row: int, dy: int) -> None:
         press = self.centre_of_row(row)
-        QTest.mousePress(
-            self.window, Qt.MouseButton.LeftButton, Qt.KeyboardModifier.NoModifier, press
-        )
+        self.press(press)
         self.slide(press, dy)
-        release = press + QPoint(0, dy)
+        self.release(press + QPoint(0, dy))
+
+    def press(self, point: QPoint) -> None:
+        QTest.mousePress(
+            self.window, Qt.MouseButton.LeftButton, Qt.KeyboardModifier.NoModifier, point
+        )
+
+    def release(self, point: QPoint) -> None:
         QTest.mouseRelease(
-            self.window, Qt.MouseButton.LeftButton, Qt.KeyboardModifier.NoModifier, release
+            self.window, Qt.MouseButton.LeftButton, Qt.KeyboardModifier.NoModifier, point
         )
         QTest.qWait(SETTLE_MS)
+
+    def row_y(self, row: int) -> float:
+        return float(self.call("rowY", row))
+
+    def header_y(self, row: int) -> float:
+        return float(self.call("headerY", row))
 
     def slide(self, press: QPoint, dy: int) -> None:
         step = 5 if dy > 0 else -5

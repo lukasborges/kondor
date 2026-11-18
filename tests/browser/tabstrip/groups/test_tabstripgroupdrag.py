@@ -7,9 +7,9 @@ from tests.browser.tabstrip.tabstripharness import SETTLE_MS, STRIP_ROW_Y, TabSt
 pytestmark = pytest.mark.no_qt_log
 
 FIVE_TABS = 5
-GROUP_SIZE = 2
 LABEL_CLICK_OFFSET = 10
 FAR = 900
+PAST_LAST_TAB = 150
 
 
 def two_groups_around_a_loose_tab(strip: TabStripHarness):
@@ -54,13 +54,13 @@ def test_dragging_a_grouped_tab_past_its_label_keeps_it_after_the_label(
 def test_dragging_a_label_moves_the_whole_group(strip: TabStripHarness) -> None:
     first, second = two_groups_around_a_loose_tab(strip)
     press = QPoint(int(strip.label_left(first)) + LABEL_CLICK_OFFSET, STRIP_ROW_Y)
+    dx = int(strip.left_of(4)) + PAST_LAST_TAB - press.x()
     strip.press(press)
-    drag_to(strip, press, FAR)
-    strip.release(press + QPoint(FAR, 0))
+    drag_to(strip, press, dx)
+    strip.release(press + QPoint(dx, 0))
     QTest.qWait(SETTLE_MS)
-    assert is_contiguous(members(strip, first))
-    assert is_contiguous(members(strip, second))
-    assert len(members(strip, first)) == GROUP_SIZE
+    assert members(strip, first) == [3, 4]
+    assert members(strip, second) == [1, 2]
 
 
 def test_dragging_a_label_never_puts_the_group_inside_another(strip: TabStripHarness) -> None:

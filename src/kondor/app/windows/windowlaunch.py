@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import asdict
 from typing import TYPE_CHECKING
 
 from PySide6.QtCore import Q_ARG, QMetaObject, QObject, QUrl, qWarning
@@ -26,6 +27,8 @@ def restored_contents(state: SessionWindow) -> WindowContents:
         titles=[tab.title for tab in state.tabs],
         agents=[{"hasAccess": t.has_agent_access, "name": t.agent_name} for t in state.tabs],
         current_index=state.current_index,
+        groups=[asdict(group) for group in state.groups],
+        tab_groups=[tab.group for tab in state.tabs],
     )
 
 

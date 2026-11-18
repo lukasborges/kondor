@@ -18,9 +18,14 @@ ItemDelegate {
     readonly property color textColor: isCurrent ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
     readonly property bool hasKeyboardFocus: list.isFocusRingVisible && index === list.currentIndex
 
-    visible: !isPinned
+    readonly property bool isGroupStart: tabModel.groupRevision >= 0 && tabModel.isGroupStart(index)
+    readonly property bool isHiddenByGroup: tabModel.groupRevision >= 0 && tabModel.isHiddenByGroup(index)
+    readonly property real headerHeight: isGroupStart ? Kirigami.Units.gridUnit * 1.8 : 0
+
+    visible: height > 0
     width: ListView.view.width
-    height: isPinned ? 0 : implicitHeight
+    height: isPinned ? 0 : isHiddenByGroup ? headerHeight : implicitHeight
+    topInset: headerHeight
     z: drag.active ? 10 : 0
     highlighted: isCurrent
     down: false
@@ -33,6 +38,38 @@ ItemDelegate {
         list.focusWithPointer()
     }
 
+    Binding {
+        when: row.isGroupStart
+        target: row
+        property: "topPadding"
+        value: row.headerHeight + row.verticalPadding
+    }
+
+    Binding {
+        when: row.tab.group !== null
+        target: row
+        property: "leftPadding"
+        value: row.horizontalPadding + Kirigami.Units.largeSpacing
+    }
+
+    TabGroupBar {
+        isVertical: true
+        group: row.tab.group
+        visible: group !== null && !row.isHiddenByGroup
+        anchors.topMargin: row.headerHeight + Kirigami.Units.smallSpacing
+    }
+
+    Loader {
+        active: row.isGroupStart
+        width: row.width
+        height: row.headerHeight
+        sourceComponent: SideBarGroupHeader {
+            group: row.tab.group
+            tabModel: row.tabModel
+            targetWindow: row.targetWindow
+        }
+    }
+
     TabInfo {
         id: info
         tab: row.tab
@@ -43,6 +80,7 @@ ItemDelegate {
     ToolTip.delay: 600
 
     contentItem: RowLayout {
+        visible: !row.isHiddenByGroup
         spacing: Kirigami.Units.smallSpacing
 
         TabIcon {
@@ -90,6 +128,7 @@ ItemDelegate {
     }
 
     background: Rectangle {
+        visible: !row.isHiddenByGroup
         radius: Kirigami.Units.cornerRadius
         color: row.isCurrent ? Kirigami.Theme.highlightColor : row.hovered ? Qt.alpha(Kirigami.Theme.highlightColor, 0.3) : "transparent"
     }

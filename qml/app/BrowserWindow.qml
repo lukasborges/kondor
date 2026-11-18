@@ -17,6 +17,8 @@ ApplicationWindow {
     property var initialTitles: []
     property var initialAgents: []
     property int initialCurrentIndex: -1
+    property var initialGroups: []
+    property var initialTabGroups: []
     property var initialProfile: null
     property var initialRequest: null
 
@@ -52,6 +54,7 @@ ApplicationWindow {
     function closeTabAt(index) { tabControl.closeTabAt(index) }
     function closeTabFor(tab) { tabControl.closeTabFor(tab) }
     function openTabContextMenu(tab, position) { tabControl.openTabContextMenu(tab, position) }
+    function openGroupEditor(group, anchor) { tabControl.openGroupEditor(group, anchor) }
 
     title: windowTitle.text
     onClosing: function(close) { closeGuard.handleClosing(close) }

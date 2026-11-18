@@ -2948,6 +2948,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarGroupHeader</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Grup sense nom</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Replegat</translation>
+    </message>
+</context>
+<context>
     <name>SideBarTabList</name>
     <message>
         <source>New Tab</source>
@@ -3135,6 +3146,10 @@
         <translation>Mou la pestanya a una finestra nova</translation>
     </message>
     <message>
+        <source>Remove Tab from Group</source>
+        <translation>Treu la pestanya del grup</translation>
+    </message>
+    <message>
         <source>Unpin Tab</source>
         <translation>Desfixa la pestanya</translation>
     </message>
@@ -3173,6 +3188,91 @@
     <message>
         <source>Close Tabs to the Right</source>
         <translation>Tanca les pestanyes de la dreta</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupEditor</name>
+    <message>
+        <source>Blue</source>
+        <translation>Blau</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Verd</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Taronja</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Vermell</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Porpra</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>Gris</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation>Nom del grup</translation>
+    </message>
+    <message>
+        <source>New Tab in Group</source>
+        <translation>Pestanya nova al grup</translation>
+    </message>
+    <message>
+        <source>Expand Group</source>
+        <translation>Desplega el grup</translation>
+    </message>
+    <message>
+        <source>Collapse Group</source>
+        <translation>Replega el grup</translation>
+    </message>
+    <message>
+        <source>Move Group to New Window</source>
+        <translation>Mou el grup a una finestra nova</translation>
+    </message>
+    <message>
+        <source>Ungroup Tabs</source>
+        <translation>Desagrupa les pestanyes</translation>
+    </message>
+    <message>
+        <source>Close Group</source>
+        <translation>Tanca el grup</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupLabel</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Grup sense nom</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Replegat</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupMenu</name>
+    <message>
+        <source>Move Tab to Group</source>
+        <translation>Mou la pestanya a un grup</translation>
+    </message>
+    <message>
+        <source>Add Tab to Group</source>
+        <translation>Afegeix la pestanya a un grup</translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation>Grup nou</translation>
+    </message>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Grup sense nom</translation>
     </message>
 </context>
 <context>

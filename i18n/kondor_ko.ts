@@ -2934,6 +2934,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarGroupHeader</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>이름 없는 그룹</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>접힘</translation>
+    </message>
+</context>
+<context>
     <name>SideBarTabList</name>
     <message>
         <source>New Tab</source>
@@ -3121,6 +3132,10 @@
         <translation>탭을 새 창으로 이동</translation>
     </message>
     <message>
+        <source>Remove Tab from Group</source>
+        <translation>그룹에서 탭 제거</translation>
+    </message>
+    <message>
         <source>Unpin Tab</source>
         <translation>탭 고정 해제</translation>
     </message>
@@ -3159,6 +3174,91 @@
     <message>
         <source>Close Tabs to the Right</source>
         <translation>오른쪽 탭 닫기</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupEditor</name>
+    <message>
+        <source>Blue</source>
+        <translation>파랑</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>초록</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>주황</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>빨강</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>보라</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>회색</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation>그룹 이름</translation>
+    </message>
+    <message>
+        <source>New Tab in Group</source>
+        <translation>그룹에 새 탭</translation>
+    </message>
+    <message>
+        <source>Expand Group</source>
+        <translation>그룹 펼치기</translation>
+    </message>
+    <message>
+        <source>Collapse Group</source>
+        <translation>그룹 접기</translation>
+    </message>
+    <message>
+        <source>Move Group to New Window</source>
+        <translation>그룹을 새 창으로 이동</translation>
+    </message>
+    <message>
+        <source>Ungroup Tabs</source>
+        <translation>탭 그룹 해제</translation>
+    </message>
+    <message>
+        <source>Close Group</source>
+        <translation>그룹 닫기</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupLabel</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>이름 없는 그룹</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>접힘</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupMenu</name>
+    <message>
+        <source>Move Tab to Group</source>
+        <translation>탭을 그룹으로 이동</translation>
+    </message>
+    <message>
+        <source>Add Tab to Group</source>
+        <translation>탭을 그룹에 추가</translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation>새 그룹</translation>
+    </message>
+    <message>
+        <source>Unnamed group</source>
+        <translation>이름 없는 그룹</translation>
     </message>
 </context>
 <context>

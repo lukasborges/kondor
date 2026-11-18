@@ -2934,6 +2934,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarGroupHeader</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Adsız grup</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Daraltıldı</translation>
+    </message>
+</context>
+<context>
     <name>SideBarTabList</name>
     <message>
         <source>New Tab</source>
@@ -3121,6 +3132,10 @@
         <translation>Sekmeyi yeni pencereye taşı</translation>
     </message>
     <message>
+        <source>Remove Tab from Group</source>
+        <translation>Sekmeyi gruptan çıkar</translation>
+    </message>
+    <message>
         <source>Unpin Tab</source>
         <translation>Sekmenin sabitlemesini kaldır</translation>
     </message>
@@ -3159,6 +3174,91 @@
     <message>
         <source>Close Tabs to the Right</source>
         <translation>Sağdaki sekmeleri kapat</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupEditor</name>
+    <message>
+        <source>Blue</source>
+        <translation>Mavi</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Yeşil</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Turuncu</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Kırmızı</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Mor</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>Gri</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation>Grup adı</translation>
+    </message>
+    <message>
+        <source>New Tab in Group</source>
+        <translation>Grupta yeni sekme</translation>
+    </message>
+    <message>
+        <source>Expand Group</source>
+        <translation>Grubu genişlet</translation>
+    </message>
+    <message>
+        <source>Collapse Group</source>
+        <translation>Grubu daralt</translation>
+    </message>
+    <message>
+        <source>Move Group to New Window</source>
+        <translation>Grubu yeni pencereye taşı</translation>
+    </message>
+    <message>
+        <source>Ungroup Tabs</source>
+        <translation>Sekmeleri gruptan çıkar</translation>
+    </message>
+    <message>
+        <source>Close Group</source>
+        <translation>Grubu kapat</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupLabel</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Adsız grup</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Daraltıldı</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupMenu</name>
+    <message>
+        <source>Move Tab to Group</source>
+        <translation>Sekmeyi gruba taşı</translation>
+    </message>
+    <message>
+        <source>Add Tab to Group</source>
+        <translation>Sekmeyi gruba ekle</translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation>Yeni grup</translation>
+    </message>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Adsız grup</translation>
     </message>
 </context>
 <context>

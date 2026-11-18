@@ -35,18 +35,21 @@ Rectangle {
 
     readonly property int pinnedCount: tabModel.pinnedCount
     readonly property int unpinnedCount: Math.max(0, tabModel.count - pinnedCount)
+    readonly property int shownUnpinnedCount: Math.max(0, unpinnedCount - tabModel.collapsedTabCount)
+    readonly property alias layout: stripLayout
 
     readonly property real baseAreaWidth: Math.max(0, strip.width - 2 * contentMargin
         - (privateIcon.visible ? privateIcon.Layout.leftMargin + privateIcon.Layout.preferredWidth
                                  + privateIcon.Layout.rightMargin : 0)
         - newTabButton.implicitWidth - newTabButton.Layout.leftMargin - searchButton.implicitWidth)
     readonly property bool overflowing:
-        pinnedCount * pinnedTabWidth + unpinnedCount * minimumTabWidth > baseAreaWidth
+        pinnedCount * pinnedTabWidth + shownUnpinnedCount * minimumTabWidth + layout.labelsWidth
+        > baseAreaWidth
     readonly property real tabsAreaWidth: Math.max(0, overflowing
         ? baseAreaWidth - scrollLeftButton.implicitWidth - scrollRightButton.implicitWidth
         : baseAreaWidth)
     readonly property real tabWidth: freeze.frozenWidth > 0 ? freeze.frozenWidth
-        : computeTabWidth(tabsAreaWidth, unpinnedCount, pinnedCount)
+        : computeTabWidth(tabsAreaWidth - layout.labelsWidth, shownUnpinnedCount, pinnedCount)
 
     implicitHeight: tabBar.implicitHeight + 2 * contentMargin
     Kirigami.Theme.colorSet: isBelowAddressBar ? Kirigami.Theme.Window : Kirigami.Theme.Header
@@ -62,6 +65,7 @@ Rectangle {
     function closeWithMouse(tab) { freeze.closeWithMouse(tab) }
     function scrollTo(x) { scroller.scrollTo(x) }
     function scrollBy(delta) { scroller.scrollBy(delta) }
+    function moveGroupTo(group, sceneX) { layout.moveGroupTo(group, sceneX) }
     function emptyAt(sceneX, sceneY) { return taps.emptyAt(sceneX, sceneY) }
 
     property bool isRemovingRows: false
@@ -79,6 +83,7 @@ Rectangle {
     }
     onTabWidthChanged: scroller.scheduleEnsureVisible()
 
+    TabStripLayout { id: stripLayout; tabStrip: strip }
     TabWidthFreeze { id: freeze; anchors.fill: parent; tabStrip: strip }
     TabStripScroller { id: scroller; tabStrip: strip }
     TabStripTaps { id: taps; anchors.fill: parent; tabStrip: strip }
@@ -137,6 +142,7 @@ Rectangle {
                 model: strip.tabModel
 
                 delegate: TabButtonDelegate {
+                    onGroupLabelDropped: (group, sceneX) => strip.moveGroupTo(group, sceneX)
                     tabModel: strip.tabModel
                     tabBarItem: tabBar
                     tabStrip: strip

@@ -2,10 +2,16 @@ from typing import Any
 
 from PySide6.QtCore import QJsonDocument, QJsonParseError, QUrl, qWarning
 
-from kondor.browser.session.sessionwindow import SessionTab, SessionWindow
+from kondor.browser.session.sessionwindow import (
+    NO_GROUP,
+    SessionGroup,
+    SessionTab,
+    SessionWindow,
+)
 
-SESSION_VERSION = 2
+SESSION_VERSION = 3
 FIRST_SESSION_VERSION = 1
+MULTIPLE_WINDOWS_VERSION = 2
 NEW_TAB_PAGE_URL = "about:newtab"
 JsonObject = dict[str, Any]
 
@@ -33,12 +39,19 @@ def tab_to_json(tab: SessionTab) -> JsonObject:
     entry: JsonObject = {"url": url, "title": tab.title}
     if tab.has_agent_access:
         entry.update({"agentAccess": True, "agentName": tab.agent_name})
+    if tab.group != NO_GROUP:
+        entry["group"] = tab.group
     return entry
+
+
+def group_to_json(group: SessionGroup) -> JsonObject:
+    return {"name": group.name, "color": group.color, "collapsed": group.collapsed}
 
 
 def window_to_json(window: SessionWindow) -> JsonObject:
     tabs = [tab_to_json(tab) for tab in window.tabs]
-    return {"currentIndex": window.current_index, "tabs": tabs}
+    groups = [group_to_json(group) for group in window.groups]
+    return {"currentIndex": window.current_index, "tabs": tabs, "groups": groups}
 
 
 def to_json(windows: list[SessionWindow]) -> bytes:
@@ -53,12 +66,23 @@ def tab_from_json(entry: JsonObject) -> SessionTab:
     url = QUrl() if url_text == NEW_TAB_PAGE_URL else QUrl(url_text)
     has_access = entry.get("agentAccess") is True
     name = json_text(entry.get("agentName")) if has_access else ""
-    return SessionTab(url, json_text(entry.get("title")), has_access, name)
+    position = json_int(entry["group"]) if "group" in entry else NO_GROUP
+    return SessionTab(url, json_text(entry.get("title")), has_access, name, position)
+
+
+def group_from_json(entry: JsonObject) -> SessionGroup:
+    return SessionGroup(
+        json_text(entry.get("name")), json_text(entry.get("color")), entry.get("collapsed") is True
+    )
 
 
 def window_from_json(entry: JsonObject) -> SessionWindow:
     tabs = [tab_from_json(json_object(tab)) for tab in json_array(entry.get("tabs"))]
-    return SessionWindow(tabs, json_int(entry.get("currentIndex")))
+    groups = [group_from_json(json_object(group)) for group in json_array(entry.get("groups"))]
+    for tab in tabs:
+        if not 0 <= tab.group < len(groups):
+            tab.group = NO_GROUP
+    return SessionWindow(tabs, json_int(entry.get("currentIndex")), groups)
 
 
 def parse_root(json: bytes) -> JsonObject | None:
@@ -79,7 +103,7 @@ def is_supported_version(root: JsonObject) -> bool:
 
 
 def window_entries(root: JsonObject) -> list[JsonObject]:
-    if json_int(root.get("version")) < SESSION_VERSION:
+    if json_int(root.get("version")) < MULTIPLE_WINDOWS_VERSION:
         return [root]
     return [json_object(entry) for entry in json_array(root.get("windows"))]
 

@@ -2934,6 +2934,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarGroupHeader</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>未命名的群組</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>已摺疊</translation>
+    </message>
+</context>
+<context>
     <name>SideBarTabList</name>
     <message>
         <source>New Tab</source>
@@ -3121,6 +3132,10 @@
         <translation>將分頁移至新視窗</translation>
     </message>
     <message>
+        <source>Remove Tab from Group</source>
+        <translation>從群組中移除分頁</translation>
+    </message>
+    <message>
         <source>Unpin Tab</source>
         <translation>取消釘選分頁</translation>
     </message>
@@ -3159,6 +3174,91 @@
     <message>
         <source>Close Tabs to the Right</source>
         <translation>關閉右側分頁</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupEditor</name>
+    <message>
+        <source>Blue</source>
+        <translation>藍色</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>綠色</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>橙色</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>紅色</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>紫色</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>灰色</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation>群組名稱</translation>
+    </message>
+    <message>
+        <source>New Tab in Group</source>
+        <translation>在群組中新增分頁</translation>
+    </message>
+    <message>
+        <source>Expand Group</source>
+        <translation>展開群組</translation>
+    </message>
+    <message>
+        <source>Collapse Group</source>
+        <translation>摺疊群組</translation>
+    </message>
+    <message>
+        <source>Move Group to New Window</source>
+        <translation>將群組移至新視窗</translation>
+    </message>
+    <message>
+        <source>Ungroup Tabs</source>
+        <translation>取消分頁群組</translation>
+    </message>
+    <message>
+        <source>Close Group</source>
+        <translation>關閉群組</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupLabel</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>未命名的群組</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>已摺疊</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupMenu</name>
+    <message>
+        <source>Move Tab to Group</source>
+        <translation>將分頁移至群組</translation>
+    </message>
+    <message>
+        <source>Add Tab to Group</source>
+        <translation>將分頁加入群組</translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation>新增群組</translation>
+    </message>
+    <message>
+        <source>Unnamed group</source>
+        <translation>未命名的群組</translation>
     </message>
 </context>
 <context>

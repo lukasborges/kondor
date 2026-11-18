@@ -14,6 +14,8 @@ Menu {
 
     signal moveToNewWindowRequested()
 
+    signal newGroupRequested(QtObject group)
+
     readonly property bool hasAgentMenu: RemoteControl.active && tab !== null && !tab.isPrivate
 
     function canPutToSleep() {
@@ -48,6 +50,19 @@ Menu {
         icon.name: "window-new"
         enabled: menu.tab !== null
         onTriggered: menu.moveToNewWindowRequested()
+    }
+    TabGroupMenu {
+        tab: menu.tab
+        tabIndex: menu.tabIndex
+        tabModel: menu.tabModel
+        onNewGroupRequested: group => menu.newGroupRequested(group)
+    }
+    MenuItem {
+        visible: menu.tab !== null && menu.tab.group !== null
+        height: visible ? implicitHeight : 0
+        text: qsTr("Remove Tab from Group")
+        icon.name: "object-ungroup"
+        onTriggered: menu.tabModel.removeTabFromGroup(menu.tabIndex)
     }
     MenuItem {
         text: menu.tab && menu.tab.pinned ? qsTr("Unpin Tab") : qsTr("Pin Tab")

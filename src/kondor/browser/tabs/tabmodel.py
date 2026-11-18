@@ -1,7 +1,8 @@
-from PySide6.QtCore import QModelIndex, QObject, QUrl, Slot
+from PySide6.QtCore import QObject, QUrl, Slot
 from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
 from kondor.browser.profile.profilemanager import ProfileManager
+from kondor.browser.tabs.groups.tabgroup import TabGroup
 from kondor.browser.tabs.tab import Tab
 from kondor.browser.tabs.tabmodelclosing import TabModelClosing
 from kondor.browser.tabs.tabmodelrows import NewTab
@@ -25,6 +26,13 @@ class TabModel(TabModelClosing):
         profile = profile or profiles.defaultProfile()
         url = initial_url if initial_url is not None else QUrl()
         return self.insert_tab(NewTab(len(self._tabs), profile, url))
+
+    @Slot(TabGroup, result=Tab)
+    def newTabInGroup(self, group: TabGroup) -> Tab | None:
+        tab: Tab | None = self.addTab(self._private_tabs)
+        if tab is not None:
+            self.addTabToGroup(self.indexOfTab(tab), group)
+        return tab
 
     def _child_tab_row(self) -> int:
         current = self._current_tab()
@@ -53,12 +61,9 @@ class TabModel(TabModelClosing):
     def moveTab(self, source: int, target: int) -> None:
         if not self.is_valid_index(source) or not self.is_valid_index(target) or source == target:
             return
-        current = self._current_tab()
-        destination = target + 1 if target > source else target
-        self.beginMoveRows(QModelIndex(), source, source, QModelIndex(), destination)
-        self._tabs.insert(target, self._tabs.pop(source))
-        self.endMoveRows()
-        self.follow_current_tab(current)
+        tab = self._tabs[source]
+        self.move_row(source, target)
+        self.join_surrounding_group(tab)
 
     @Slot(int)
     def duplicateTab(self, index: int) -> None:
@@ -66,6 +71,7 @@ class TabModel(TabModelClosing):
             return
         source = self._tabs[index]
         copy = self.insert_tab(NewTab(index + 1, source.profile, source.url))
+        self.assign_group(copy, source.group)
         if source.pinned:
             self.setPinned(self.indexOfTab(copy), True)
 
@@ -73,6 +79,8 @@ class TabModel(TabModelClosing):
     def setPinned(self, index: int, pinned: bool) -> None:
         if not self.is_valid_index(index) or self._tabs[index].pinned == pinned:
             return
+        if pinned:
+            self.leave_group(self._tabs[index])
         self._tabs[index].set_pinned(pinned)
         target = self._pinned_count() - (1 if self._tabs[index].pinned else 0)
         if index != target:

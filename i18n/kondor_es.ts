@@ -2948,6 +2948,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarGroupHeader</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Grupo sin nombre</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Contraído</translation>
+    </message>
+</context>
+<context>
     <name>SideBarTabList</name>
     <message>
         <source>New Tab</source>
@@ -3135,6 +3146,10 @@
         <translation>Mover pestaña a una ventana nueva</translation>
     </message>
     <message>
+        <source>Remove Tab from Group</source>
+        <translation>Quitar pestaña del grupo</translation>
+    </message>
+    <message>
         <source>Unpin Tab</source>
         <translation>Desanclar pestaña</translation>
     </message>
@@ -3173,6 +3188,91 @@
     <message>
         <source>Close Tabs to the Right</source>
         <translation>Cerrar pestañas a la derecha</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupEditor</name>
+    <message>
+        <source>Blue</source>
+        <translation>Azul</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Verde</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Naranja</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Rojo</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Morado</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>Gris</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation>Nombre del grupo</translation>
+    </message>
+    <message>
+        <source>New Tab in Group</source>
+        <translation>Pestaña nueva en el grupo</translation>
+    </message>
+    <message>
+        <source>Expand Group</source>
+        <translation>Expandir grupo</translation>
+    </message>
+    <message>
+        <source>Collapse Group</source>
+        <translation>Contraer grupo</translation>
+    </message>
+    <message>
+        <source>Move Group to New Window</source>
+        <translation>Mover grupo a una ventana nueva</translation>
+    </message>
+    <message>
+        <source>Ungroup Tabs</source>
+        <translation>Desagrupar pestañas</translation>
+    </message>
+    <message>
+        <source>Close Group</source>
+        <translation>Cerrar grupo</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupLabel</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Grupo sin nombre</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Contraído</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupMenu</name>
+    <message>
+        <source>Move Tab to Group</source>
+        <translation>Mover pestaña a un grupo</translation>
+    </message>
+    <message>
+        <source>Add Tab to Group</source>
+        <translation>Añadir pestaña a un grupo</translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation>Grupo nuevo</translation>
+    </message>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Grupo sin nombre</translation>
     </message>
 </context>
 <context>

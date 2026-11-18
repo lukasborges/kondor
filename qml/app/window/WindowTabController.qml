@@ -51,6 +51,8 @@ Item {
             closeTabFor(tab)
     }
 
+    function openGroupEditor(group, anchor) { tabGroups.openGroupEditor(group, anchor) }
+
     function moveCurrentTab(delta) {
         const from = tabs.currentIndex
         const to = from + delta
@@ -141,6 +143,7 @@ Item {
     function restoreTabs() {
         for (let i = 0; i < browserWindow.initialUrls.length; ++i)
             restoreTab(i)
+        tabs.restoreGroups(browserWindow.initialGroups, browserWindow.initialTabGroups)
         selectInitialTab()
     }
 
@@ -166,5 +169,12 @@ Item {
         targetWindow: root.browserWindow
         onNewTabRequested: root.openNewTab(false)
         onMoveToNewWindowRequested: root.moveTabToNewWindow(tabContextMenu.tab)
+        onNewGroupRequested: group => tabGroups.openEditorForNewGroup(group, tabContextMenu)
+    }
+
+    WindowTabGroups {
+        id: tabGroups
+        tabs: root.tabs
+        browserWindow: root.browserWindow
     }
 }

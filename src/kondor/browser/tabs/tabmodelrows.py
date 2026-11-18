@@ -108,6 +108,14 @@ class TabModelRows(QAbstractListModel):
             return profiles.createPrivateProfile()
         return profile
 
+    def move_row(self, source: int, target: int) -> None:
+        current = self._current_tab()
+        destination = target + 1 if target > source else target
+        self.beginMoveRows(QModelIndex(), source, source, QModelIndex(), destination)
+        self._tabs.insert(target, self._tabs.pop(source))
+        self.endMoveRows()
+        self.follow_current_tab(current)
+
     def insert_row(self, index: int, tab: Tab) -> None:
         self.beginInsertRows(QModelIndex(), index, index)
         self._tabs.insert(index, tab)

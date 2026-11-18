@@ -2,11 +2,15 @@ import pytest
 from PySide6.QtCore import QUrl
 
 from kondor.browser.session.sessionformat import from_json, to_json
-from kondor.browser.session.sessionwindow import SessionTab, SessionWindow
+from kondor.browser.session.sessionwindow import SessionGroup, SessionTab, SessionWindow
 from tests.qmlsupport import captured_messages
 
 COMPACT_VERSION_TWO = (
     b'{"version":2,"windows":[{"currentIndex":1,"tabs":['
+    b'{"title":"A","url":"https://a.example/"},{"title":"","url":"about:newtab"}]}]}'
+)
+COMPACT_VERSION_THREE = (
+    b'{"version":3,"windows":[{"currentIndex":1,"groups":[],"tabs":['
     b'{"title":"A","url":"https://a.example/"},{"title":"","url":"about:newtab"}]}]}'
 )
 VERSION_ONE = (
@@ -19,8 +23,23 @@ def sample_window() -> SessionWindow:
     return SessionWindow([SessionTab(QUrl("https://a.example/"), "A"), SessionTab(QUrl(), "")], 1)
 
 
-def test_writes_the_compact_version_two_bytes() -> None:
-    assert to_json([sample_window()]) == COMPACT_VERSION_TWO
+def test_writes_the_compact_version_three_bytes() -> None:
+    assert to_json([sample_window()]) == COMPACT_VERSION_THREE
+
+
+def test_reads_the_version_two_format_without_groups() -> None:
+    assert from_json(COMPACT_VERSION_TWO) == [sample_window()]
+
+
+def test_round_trips_groups() -> None:
+    tabs = [SessionTab(QUrl("https://a.example/"), "A", group=0), SessionTab(QUrl(), "")]
+    window = SessionWindow(tabs, 0, [SessionGroup("Work", "green", True)])
+    assert from_json(to_json([window])) == [window]
+
+
+def test_drops_a_group_index_without_a_group() -> None:
+    json = b'{"version":3,"windows":[{"tabs":[{"url":"https://a.example/","group":4}]}]}'
+    assert from_json(json)[0].tabs[0].group == -1
 
 
 def test_round_trips() -> None:
@@ -38,7 +57,7 @@ def test_reads_the_version_one_format() -> None:
     ("json", "warning"),
     [
         (b"not json", "Kondor: ignoring invalid session file: "),
-        (b'{"version":3,"windows":[]}', "Kondor: ignoring unsupported session file version"),
+        (b'{"version":4,"windows":[]}', "Kondor: ignoring unsupported session file version"),
         (b'{"version":2,"windows":[{"currentIndex":0,"tabs":[]}]}', None),
     ],
     ids=["not json", "future version", "window without tabs"],

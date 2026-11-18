@@ -37,7 +37,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 ## Features
 
 ### Tabs and windows
-- **Tidy tabs**: drag, pin, scroll, and search them across windows
+- **Tidy tabs**: drag, pin, group, scroll, and search them across windows
 - **Tab styles**: pick floating, below the address bar, side bar, or classic tabs
 - **Collapsible side bar**: shrink the side bar to tab icons and expand it again
 - **Mute tabs**: see which tab plays sound and silence it with a click or Ctrl+M

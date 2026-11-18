@@ -44,8 +44,10 @@ room, in every tab style.
   (`object-ungroup`) and the submenu lists the other groups as **Move Tab to Group**.
 - Adding moves the tab to the end of the group. New Group creates a group with the first color
   not yet used in the window and opens the editor with the name field focused.
-- Drag: dropping a tab between two tabs of a group joins it; dropping it outside leaves it.
-  Dragging the label moves the whole group.
+- Drag never changes a tab's group (maintainer's decision, #426): a grouped tab is reordered only
+  among its group's tabs, after the label; an ungrouped tab drops before or after a group, never
+  inside it. Dragging the label moves the whole group. Joining, moving and leaving happen only in
+  the tab context menu.
 
 ### 3. Group editor (`prototypes/408b-tab-group-edit.qml`)
 
@@ -72,7 +74,7 @@ room, in every tab style.
 
 ## Acceptance criteria
 
-- [ ] New Group, Add / Move / Remove Tab from Group, drag in and out, collapse / expand by click,
+- [ ] New Group, Add / Move / Remove Tab from Group, drag within a group (never across), collapse / expand by click,
       the editor actions, in every tab style.
 - [ ] Collapsing the current tab's group switches to the next tab outside it.
 - [ ] Groups survive a restart (normal windows); private windows' groups are never written.
@@ -120,3 +122,4 @@ Separate instance with isolated XDG folders under `~/kondor-test`, `--new-instan
 | What does a click on the label do? | Collapse / expand, the frequent action (one click, KDE HIG); the editor is on right click, like every other context action in the strip. |
 | "Ungroup Tabs" icon | `object-ungroup`, not the red `group-delete` trash: the tabs stay open. |
 | Approved | Prototypes approved by the maintainer. |
+| May dragging change a tab's group? | No (maintainer, #426): dragging joined groups by accident and could split a group around its label; only the context menu changes groups. Replaces the first rule "dropping between two tabs of a group joins it". |

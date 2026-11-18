@@ -6,7 +6,8 @@ from PySide6.QtQuick import (
     QQuickTextureFactory,
 )
 
-from kondor.browser.favicons.faviconstore import FaviconStore, image_of
+from kondor.browser.favicons.faviconstore import FaviconStore
+from kondor.browser.favicons.responsefollower import follow_image
 
 
 class TabIconResponse(QQuickImageResponse):
@@ -29,7 +30,6 @@ class TabIconProvider(QQuickAsyncImageProvider):
     def __init__(self) -> None:
         super().__init__()
         self._images: dict[str, QImage] = {}
-        self._forwarded: set[QQuickImageResponse] = set()
 
     def requestImageResponse(  # noqa: N802
         self,
@@ -54,16 +54,10 @@ class TabIconProvider(QQuickAsyncImageProvider):
     def forward(
         self, qt_response: QQuickImageResponse, target: tuple[str, TabIconResponse]
     ) -> None:
-        self._forwarded.add(qt_response)
-        qt_response.finished.connect(lambda: self.complete(qt_response, target))
+        follow_image(qt_response, lambda image: self.complete(image, target))
 
-    def complete(
-        self, qt_response: QQuickImageResponse, target: tuple[str, TabIconResponse]
-    ) -> None:
+    def complete(self, image: QImage, target: tuple[str, TabIconResponse]) -> None:
         icon_id, response = target
-        image = image_of(qt_response)
         if not image.isNull():
             self._images[icon_id] = image
-        self._forwarded.discard(qt_response)
-        qt_response.deleteLater()
         response.finish_with(image)

@@ -3,11 +3,12 @@ from collections.abc import Iterator
 import pytest
 from PySide6.QtCore import QObject, QSize, Qt, QUrl
 from PySide6.QtGui import QImage
-from PySide6.QtQml import QQmlApplicationEngine
+from PySide6.QtQml import QQmlEngine
 from PySide6.QtQuick import QQuickImageResponse
 from pytestqt.qtbot import QtBot
 
-from kondor.browser.favicons.faviconstore import FaviconStore, image_of
+from kondor.browser.favicons.faviconstore import FaviconStore
+from kondor.browser.favicons.responsefollower import image_of
 from kondor.browser.favicons.tabiconprovider import TabIconProvider
 from tests.browser.fakefaviconprovider import FakeFaviconProvider
 
@@ -17,14 +18,15 @@ SIZE = QSize(16, 16)
 
 
 @pytest.fixture
-def qt_provider(qapp: object) -> Iterator[FakeFaviconProvider]:
-    engine = QQmlApplicationEngine()
+def qt_provider(qapp: object, kondor_engine: QQmlEngine) -> Iterator[FakeFaviconProvider]:
+    engine = kondor_engine
     image = QImage(4, 4, QImage.Format.Format_ARGB32)
     image.fill(Qt.GlobalColor.red)
     provider = FakeFaviconProvider(image)
     engine.addImageProvider("favicon", provider)
     FaviconStore.instance().attach_engine(engine)
     yield provider
+    engine.removeImageProvider("favicon")
     FaviconStore.instance().attach_engine(None)
 
 
@@ -69,3 +71,10 @@ def test_sleeping_icon_is_served_from_memory(
     assert not fetch(provider, qtbot).isNull()
     assert len(qt_provider.requests) == 1
     FaviconStore.instance().markAwake(view)
+
+
+def test_icon_arrives_when_qt_response_wrapper_is_invalidated(
+    qt_provider: FakeFaviconProvider, qtbot: QtBot
+) -> None:
+    qt_provider.invalidate_wrappers = True
+    assert not fetch(TabIconProvider(), qtbot).isNull()

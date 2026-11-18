@@ -67,6 +67,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 
 ### Reading
 - **Reader mode** for clutter-free articles
+- **PDF viewer**: read PDFs, also those embedded in pages
 - **Find in page**, **zoom per site** and **spell checking**
 - **Print**, **save as PDF**, **save the page** or **take a screenshot**
 - **Full screen** for videos and windows, and hide the toolbars to show only the page

@@ -4,6 +4,7 @@ from PySide6.QtWebEngineCore import QWebEngineUrlRequestInfo, QWebEngineUrlReque
 from kondor.adblock.filters.filterengine import FilterEngine, ResourceKind
 
 ResourceType = QWebEngineUrlRequestInfo.ResourceType
+VIEWER_SCHEMES = {"chrome", "chrome-extension"}
 RESOURCE_KINDS = {
     ResourceType.ResourceTypeSubFrame: ResourceKind.SUB_FRAME,
     ResourceType.ResourceTypeStylesheet: ResourceKind.STYLESHEET,
@@ -50,6 +51,8 @@ class AdBlockInterceptor(QWebEngineUrlRequestInterceptor):
         self.blocked.emit(first_party)
 
     def _is_listed(self, info: QWebEngineUrlRequestInfo, first_party_host: str) -> bool:
+        if info.requestUrl().scheme() in VIEWER_SCHEMES:
+            return False
         engine = self._engine_unless_allowed(first_party_host)
         kind = resource_kind_of(info.resourceType())
         return engine is not None and engine.should_block(info.requestUrl(), first_party_host, kind)

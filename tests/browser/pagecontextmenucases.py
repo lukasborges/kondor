@@ -68,7 +68,7 @@ CASES = [
         "nothing",
         {},
         ["Back", "Forward", "Reload", SEPARATOR, "Save Page As…", "Print…"]
-        + ["View Page Source"]
+        + ["Take Screenshot…", "View Page Source"]
         + INSPECT,
     ),
 ]

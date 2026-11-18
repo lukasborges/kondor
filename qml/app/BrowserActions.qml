@@ -15,6 +15,8 @@ QtObject {
     readonly property bool hasWindowFocus: !browserWindow || browserWindow.activeFocusItem !== null
     readonly property bool hasPage: tabs.currentTab ? !tabs.currentTab.newTabPage : false
 
+    readonly property bool canCapture: hasPage && !tabs.currentTab.crashed
+
     readonly property Action newTabAction: Action {
         text: qsTr("New Tab")
         icon.name: "tab-new"
@@ -74,6 +76,13 @@ QtObject {
         shortcut: StandardKey.Save
         enabled: root.fileDialogs.canPrintOrSave
         onTriggered: root.fileDialogs.savePageAs()
+    }
+    readonly property Action screenshotAction: Action {
+        text: qsTr("Take Screenshot…")
+        icon.name: "select-rectangular"
+        shortcut: "Ctrl+Shift+S"
+        enabled: root.canCapture
+        onTriggered: root.dialogs.openScreenshot()
     }
     readonly property Action hideToolbarsAction: Action {
         text: qsTr("Hide Toolbars")

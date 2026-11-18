@@ -434,6 +434,10 @@
         <translation>Uložit stránku jako…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Pořídit snímek obrazovky…</translation>
+    </message>
+    <message>
         <source>Hide Toolbars</source>
         <translation>Skrýt panely nástrojů</translation>
     </message>
@@ -1932,6 +1936,10 @@
         <translation>Tisk…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Pořídit snímek obrazovky…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Zobrazit zdrojový kód stránky</translation>
     </message>
@@ -2703,6 +2711,63 @@
     <message>
         <source>Import passwords from a CSV file</source>
         <translation>Importovat hesla ze souboru CSV</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotDialog</name>
+    <message>
+        <source>Take Screenshot</source>
+        <translation>Pořídit snímek obrazovky</translation>
+    </message>
+    <message>
+        <source>Saving the screenshot failed</source>
+        <translation>Uložení snímku obrazovky selhalo</translation>
+    </message>
+    <message>
+        <source>Save Screenshot</source>
+        <translation>Uložit snímek obrazovky</translation>
+    </message>
+    <message>
+        <source>PNG Image (*.png)</source>
+        <translation>Obrázek PNG (*.png)</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>Kopírovat</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Zkopírováno</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation>Uložit…</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Zavřít</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotModeButtons</name>
+    <message>
+        <source>Visible Area</source>
+        <translation>Viditelná oblast</translation>
+    </message>
+    <message>
+        <source>Full Page</source>
+        <translation>Celá stránka</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotPreview</name>
+    <message>
+        <source>%1 × %2</source>
+        <translation>%1 × %2</translation>
+    </message>
+    <message>
+        <source>%1 (cut at 16384 px)</source>
+        <translation>%1 (oříznuto na 16384 px)</translation>
     </message>
 </context>
 <context>

@@ -434,6 +434,10 @@
         <translation>另存頁面為…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>擷取螢幕畫面…</translation>
+    </message>
+    <message>
         <source>Hide Toolbars</source>
         <translation>隱藏工具列</translation>
     </message>
@@ -1906,6 +1910,10 @@
         <translation>列印…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>擷取螢幕畫面…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>檢視頁面原始碼</translation>
     </message>
@@ -2675,6 +2683,63 @@
     <message>
         <source>Import passwords from a CSV file</source>
         <translation>從 CSV 檔案匯入密碼</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotDialog</name>
+    <message>
+        <source>Take Screenshot</source>
+        <translation>擷取螢幕畫面</translation>
+    </message>
+    <message>
+        <source>Saving the screenshot failed</source>
+        <translation>儲存螢幕畫面失敗</translation>
+    </message>
+    <message>
+        <source>Save Screenshot</source>
+        <translation>儲存螢幕畫面</translation>
+    </message>
+    <message>
+        <source>PNG Image (*.png)</source>
+        <translation>PNG 影像 (*.png)</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>複製</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>已複製</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation>儲存…</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>關閉</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotModeButtons</name>
+    <message>
+        <source>Visible Area</source>
+        <translation>可見區域</translation>
+    </message>
+    <message>
+        <source>Full Page</source>
+        <translation>整個頁面</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotPreview</name>
+    <message>
+        <source>%1 × %2</source>
+        <translation>%1 × %2</translation>
+    </message>
+    <message>
+        <source>%1 (cut at 16384 px)</source>
+        <translation>%1（在 16384 px 處截斷）</translation>
     </message>
 </context>
 <context>

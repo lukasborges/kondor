@@ -434,6 +434,10 @@
         <translation>Sayfayı Farklı Kaydet…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Ekran Görüntüsü Al…</translation>
+    </message>
+    <message>
         <source>Hide Toolbars</source>
         <translation>Araç Çubuklarını Gizle</translation>
     </message>
@@ -1906,6 +1910,10 @@
         <translation>Yazdır…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Ekran Görüntüsü Al…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Sayfa kaynağını görüntüle</translation>
     </message>
@@ -2675,6 +2683,63 @@
     <message>
         <source>Import passwords from a CSV file</source>
         <translation>Parolaları bir CSV dosyasından içe aktar</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotDialog</name>
+    <message>
+        <source>Take Screenshot</source>
+        <translation>Ekran Görüntüsü Al</translation>
+    </message>
+    <message>
+        <source>Saving the screenshot failed</source>
+        <translation>Ekran görüntüsü kaydedilemedi</translation>
+    </message>
+    <message>
+        <source>Save Screenshot</source>
+        <translation>Ekran Görüntüsünü Kaydet</translation>
+    </message>
+    <message>
+        <source>PNG Image (*.png)</source>
+        <translation>PNG Resmi (*.png)</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>Kopyala</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Kopyalandı</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation>Kaydet…</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Kapat</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotModeButtons</name>
+    <message>
+        <source>Visible Area</source>
+        <translation>Görünen Alan</translation>
+    </message>
+    <message>
+        <source>Full Page</source>
+        <translation>Tüm Sayfa</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotPreview</name>
+    <message>
+        <source>%1 × %2</source>
+        <translation>%1 × %2</translation>
+    </message>
+    <message>
+        <source>%1 (cut at 16384 px)</source>
+        <translation>%1 (16384 px'te kesildi)</translation>
     </message>
 </context>
 <context>

@@ -51,6 +51,11 @@ Item {
         printToPdf(path)
     }
 
+    PageCapture {
+        tab: root.tab
+        webView: root.webView
+    }
+
     Connections {
         target: root.tab
         function onPrintToPdfRequested(filePath) { root.printToPdf(filePath) }

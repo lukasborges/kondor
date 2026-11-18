@@ -434,6 +434,10 @@
         <translation>Enregistrer la page sous…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Prendre une capture d’écran…</translation>
+    </message>
+    <message>
         <source>Hide Toolbars</source>
         <translation>Masquer les barres d&apos;outils</translation>
     </message>
@@ -1919,6 +1923,10 @@
         <translation>Imprimer…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Prendre une capture d’écran…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Afficher le code source de la page</translation>
     </message>
@@ -2689,6 +2697,63 @@
     <message>
         <source>Import passwords from a CSV file</source>
         <translation>Importer des mots de passe depuis un fichier CSV</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotDialog</name>
+    <message>
+        <source>Take Screenshot</source>
+        <translation>Prendre une capture d’écran</translation>
+    </message>
+    <message>
+        <source>Saving the screenshot failed</source>
+        <translation>Échec de l’enregistrement de la capture d’écran</translation>
+    </message>
+    <message>
+        <source>Save Screenshot</source>
+        <translation>Enregistrer la capture d’écran</translation>
+    </message>
+    <message>
+        <source>PNG Image (*.png)</source>
+        <translation>Image PNG (*.png)</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>Copier</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Copié</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation>Enregistrer…</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Fermer</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotModeButtons</name>
+    <message>
+        <source>Visible Area</source>
+        <translation>Zone visible</translation>
+    </message>
+    <message>
+        <source>Full Page</source>
+        <translation>Page entière</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotPreview</name>
+    <message>
+        <source>%1 × %2</source>
+        <translation>%1 × %2</translation>
+    </message>
+    <message>
+        <source>%1 (cut at 16384 px)</source>
+        <translation>%1 (coupée à 16384 px)</translation>
     </message>
 </context>
 <context>

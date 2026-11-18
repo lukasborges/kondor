@@ -59,6 +59,7 @@ ApplicationWindow {
         }
         readonly property Action devToolsAction: Action { text: "Developer Tools"; shortcut: "F12" }
         readonly property Action saveAsPdfAction: Action { text: "Save as PDF…" }
+        readonly property Action screenshotAction: Action { text: "Take Screenshot…" }
         readonly property Action sitePermissionsAction: Action { text: "Site Permissions…" }
         readonly property Action settingsAction: Action {
             text: "Configure Kondor Browser…"

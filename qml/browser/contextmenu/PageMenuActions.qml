@@ -42,6 +42,7 @@ QtObject {
         "reload": root.reload,
         "savePage": root.savePage,
         "printPage": root.printPage,
+        "takeScreenshot": root.takeScreenshot,
         "generatePassword": root.generatePassword,
         "inspectElement": root.inspectElement
     })
@@ -95,6 +96,10 @@ QtObject {
 
     function printPage(data) {
         browserActions.printAction.trigger()
+    }
+
+    function takeScreenshot(data) {
+        browserActions.screenshotAction.trigger()
     }
 
     function generatePassword(data) {

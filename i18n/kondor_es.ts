@@ -434,6 +434,10 @@
         <translation>Guardar página como…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Hacer captura de pantalla…</translation>
+    </message>
+    <message>
         <source>Hide Toolbars</source>
         <translation>Ocultar las barras de herramientas</translation>
     </message>
@@ -1919,6 +1923,10 @@
         <translation>Imprimir…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Hacer captura de pantalla…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Ver código fuente de la página</translation>
     </message>
@@ -2689,6 +2697,63 @@
     <message>
         <source>Import passwords from a CSV file</source>
         <translation>Importar contraseñas desde un archivo CSV</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotDialog</name>
+    <message>
+        <source>Take Screenshot</source>
+        <translation>Hacer captura de pantalla</translation>
+    </message>
+    <message>
+        <source>Saving the screenshot failed</source>
+        <translation>Error al guardar la captura de pantalla</translation>
+    </message>
+    <message>
+        <source>Save Screenshot</source>
+        <translation>Guardar captura de pantalla</translation>
+    </message>
+    <message>
+        <source>PNG Image (*.png)</source>
+        <translation>Imagen PNG (*.png)</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>Copiar</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Copiado</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation>Guardar…</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Cerrar</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotModeButtons</name>
+    <message>
+        <source>Visible Area</source>
+        <translation>Área visible</translation>
+    </message>
+    <message>
+        <source>Full Page</source>
+        <translation>Página completa</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotPreview</name>
+    <message>
+        <source>%1 × %2</source>
+        <translation>%1 × %2</translation>
+    </message>
+    <message>
+        <source>%1 (cut at 16384 px)</source>
+        <translation>%1 (recortada a 16384 px)</translation>
     </message>
 </context>
 <context>

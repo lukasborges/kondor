@@ -434,6 +434,10 @@
         <translation>Сохранить страницу как…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Сделать снимок экрана…</translation>
+    </message>
+    <message>
         <source>Hide Toolbars</source>
         <translation>Скрыть панели инструментов</translation>
     </message>
@@ -1932,6 +1936,10 @@
         <translation>Печать…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Сделать снимок экрана…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Просмотреть исходный код страницы</translation>
     </message>
@@ -2703,6 +2711,63 @@
     <message>
         <source>Import passwords from a CSV file</source>
         <translation>Импортировать пароли из файла CSV</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotDialog</name>
+    <message>
+        <source>Take Screenshot</source>
+        <translation>Сделать снимок экрана</translation>
+    </message>
+    <message>
+        <source>Saving the screenshot failed</source>
+        <translation>Не удалось сохранить снимок экрана</translation>
+    </message>
+    <message>
+        <source>Save Screenshot</source>
+        <translation>Сохранить снимок экрана</translation>
+    </message>
+    <message>
+        <source>PNG Image (*.png)</source>
+        <translation>Изображение PNG (*.png)</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>Копировать</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Скопировано</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation>Сохранить…</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Закрыть</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotModeButtons</name>
+    <message>
+        <source>Visible Area</source>
+        <translation>Видимая область</translation>
+    </message>
+    <message>
+        <source>Full Page</source>
+        <translation>Вся страница</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotPreview</name>
+    <message>
+        <source>%1 × %2</source>
+        <translation>%1 × %2</translation>
+    </message>
+    <message>
+        <source>%1 (cut at 16384 px)</source>
+        <translation>%1 (обрезан на 16384 px)</translation>
     </message>
 </context>
 <context>

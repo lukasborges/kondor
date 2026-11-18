@@ -148,6 +148,7 @@ QtObject {
             null,
             { text: qsTr("Save Page As…"), icon: "document-save-as", action: "savePage", enabled: browserActions.savePageAction.enabled },
             { text: qsTr("Print…"), icon: "document-print", action: "printPage", enabled: browserActions.printAction.enabled },
+            { text: qsTr("Take Screenshot…"), icon: "select-rectangular", action: "takeScreenshot", enabled: browserActions.screenshotAction.enabled },
             { text: qsTr("View Page Source"), icon: "text-html", action: "viewSource" }
         ]
     }

@@ -434,6 +434,10 @@
         <translation>Зберегти сторінку як…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Зробити знімок екрана…</translation>
+    </message>
+    <message>
         <source>Hide Toolbars</source>
         <translation>Сховати панелі інструментів</translation>
     </message>
@@ -1932,6 +1936,10 @@
         <translation>Друк…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Зробити знімок екрана…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Переглянути вихідний код сторінки</translation>
     </message>
@@ -2703,6 +2711,63 @@
     <message>
         <source>Import passwords from a CSV file</source>
         <translation>Імпортувати паролі з файлу CSV</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotDialog</name>
+    <message>
+        <source>Take Screenshot</source>
+        <translation>Зробити знімок екрана</translation>
+    </message>
+    <message>
+        <source>Saving the screenshot failed</source>
+        <translation>Не вдалося зберегти знімок екрана</translation>
+    </message>
+    <message>
+        <source>Save Screenshot</source>
+        <translation>Зберегти знімок екрана</translation>
+    </message>
+    <message>
+        <source>PNG Image (*.png)</source>
+        <translation>Зображення PNG (*.png)</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>Копіювати</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Скопійовано</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation>Зберегти…</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Закрити</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotModeButtons</name>
+    <message>
+        <source>Visible Area</source>
+        <translation>Видима область</translation>
+    </message>
+    <message>
+        <source>Full Page</source>
+        <translation>Уся сторінка</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotPreview</name>
+    <message>
+        <source>%1 × %2</source>
+        <translation>%1 × %2</translation>
+    </message>
+    <message>
+        <source>%1 (cut at 16384 px)</source>
+        <translation>%1 (обрізано на 16384 px)</translation>
     </message>
 </context>
 <context>

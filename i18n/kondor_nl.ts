@@ -2948,6 +2948,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarGroupHeader</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Naamloze groep</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Samengevouwen</translation>
+    </message>
+</context>
+<context>
     <name>SideBarTabList</name>
     <message>
         <source>New Tab</source>
@@ -3135,6 +3146,10 @@
         <translation>Tabblad naar nieuw venster verplaatsen</translation>
     </message>
     <message>
+        <source>Remove Tab from Group</source>
+        <translation>Tabblad uit groep verwijderen</translation>
+    </message>
+    <message>
         <source>Unpin Tab</source>
         <translation>Tabblad losmaken</translation>
     </message>
@@ -3173,6 +3188,91 @@
     <message>
         <source>Close Tabs to the Right</source>
         <translation>Tabbladen rechts sluiten</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupEditor</name>
+    <message>
+        <source>Blue</source>
+        <translation>Blauw</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Groen</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Oranje</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Rood</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Paars</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>Grijs</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation>Groepsnaam</translation>
+    </message>
+    <message>
+        <source>New Tab in Group</source>
+        <translation>Nieuw tabblad in groep</translation>
+    </message>
+    <message>
+        <source>Expand Group</source>
+        <translation>Groep uitvouwen</translation>
+    </message>
+    <message>
+        <source>Collapse Group</source>
+        <translation>Groep samenvouwen</translation>
+    </message>
+    <message>
+        <source>Move Group to New Window</source>
+        <translation>Groep naar nieuw venster verplaatsen</translation>
+    </message>
+    <message>
+        <source>Ungroup Tabs</source>
+        <translation>Tabbladen ontgroeperen</translation>
+    </message>
+    <message>
+        <source>Close Group</source>
+        <translation>Groep sluiten</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupLabel</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Naamloze groep</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Samengevouwen</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupMenu</name>
+    <message>
+        <source>Move Tab to Group</source>
+        <translation>Tabblad naar groep verplaatsen</translation>
+    </message>
+    <message>
+        <source>Add Tab to Group</source>
+        <translation>Tabblad aan groep toevoegen</translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation>Nieuwe groep</translation>
+    </message>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Naamloze groep</translation>
     </message>
 </context>
 <context>

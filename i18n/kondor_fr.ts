@@ -2948,6 +2948,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarGroupHeader</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Groupe sans nom</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Réduit</translation>
+    </message>
+</context>
+<context>
     <name>SideBarTabList</name>
     <message>
         <source>New Tab</source>
@@ -3135,6 +3146,10 @@
         <translation>Déplacer l’onglet vers une nouvelle fenêtre</translation>
     </message>
     <message>
+        <source>Remove Tab from Group</source>
+        <translation>Retirer l’onglet du groupe</translation>
+    </message>
+    <message>
         <source>Unpin Tab</source>
         <translation>Désépingler l’onglet</translation>
     </message>
@@ -3173,6 +3188,91 @@
     <message>
         <source>Close Tabs to the Right</source>
         <translation>Fermer les onglets à droite</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupEditor</name>
+    <message>
+        <source>Blue</source>
+        <translation>Bleu</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Vert</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Orange</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Rouge</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Violet</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>Gris</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation>Nom du groupe</translation>
+    </message>
+    <message>
+        <source>New Tab in Group</source>
+        <translation>Nouvel onglet dans le groupe</translation>
+    </message>
+    <message>
+        <source>Expand Group</source>
+        <translation>Développer le groupe</translation>
+    </message>
+    <message>
+        <source>Collapse Group</source>
+        <translation>Réduire le groupe</translation>
+    </message>
+    <message>
+        <source>Move Group to New Window</source>
+        <translation>Déplacer le groupe vers une nouvelle fenêtre</translation>
+    </message>
+    <message>
+        <source>Ungroup Tabs</source>
+        <translation>Dissocier les onglets</translation>
+    </message>
+    <message>
+        <source>Close Group</source>
+        <translation>Fermer le groupe</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupLabel</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Groupe sans nom</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Réduit</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupMenu</name>
+    <message>
+        <source>Move Tab to Group</source>
+        <translation>Déplacer l’onglet vers un groupe</translation>
+    </message>
+    <message>
+        <source>Add Tab to Group</source>
+        <translation>Ajouter l’onglet à un groupe</translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation>Nouveau groupe</translation>
+    </message>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Groupe sans nom</translation>
     </message>
 </context>
 <context>

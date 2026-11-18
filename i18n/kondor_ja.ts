@@ -2934,6 +2934,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarGroupHeader</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>名前のないグループ</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>折りたたみ済み</translation>
+    </message>
+</context>
+<context>
     <name>SideBarTabList</name>
     <message>
         <source>New Tab</source>
@@ -3121,6 +3132,10 @@
         <translation>タブを新しいウィンドウに移動</translation>
     </message>
     <message>
+        <source>Remove Tab from Group</source>
+        <translation>タブをグループから削除</translation>
+    </message>
+    <message>
         <source>Unpin Tab</source>
         <translation>タブのピン留めを解除</translation>
     </message>
@@ -3159,6 +3174,91 @@
     <message>
         <source>Close Tabs to the Right</source>
         <translation>右側のタブを閉じる</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupEditor</name>
+    <message>
+        <source>Blue</source>
+        <translation>青</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>緑</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>オレンジ</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>赤</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>紫</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>グレー</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation>グループ名</translation>
+    </message>
+    <message>
+        <source>New Tab in Group</source>
+        <translation>グループに新しいタブ</translation>
+    </message>
+    <message>
+        <source>Expand Group</source>
+        <translation>グループを展開</translation>
+    </message>
+    <message>
+        <source>Collapse Group</source>
+        <translation>グループを折りたたむ</translation>
+    </message>
+    <message>
+        <source>Move Group to New Window</source>
+        <translation>グループを新しいウィンドウに移動</translation>
+    </message>
+    <message>
+        <source>Ungroup Tabs</source>
+        <translation>タブのグループ化を解除</translation>
+    </message>
+    <message>
+        <source>Close Group</source>
+        <translation>グループを閉じる</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupLabel</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>名前のないグループ</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>折りたたみ済み</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupMenu</name>
+    <message>
+        <source>Move Tab to Group</source>
+        <translation>タブをグループに移動</translation>
+    </message>
+    <message>
+        <source>Add Tab to Group</source>
+        <translation>タブをグループに追加</translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation>新しいグループ</translation>
+    </message>
+    <message>
+        <source>Unnamed group</source>
+        <translation>名前のないグループ</translation>
     </message>
 </context>
 <context>

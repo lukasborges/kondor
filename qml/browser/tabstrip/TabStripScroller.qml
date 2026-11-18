@@ -7,17 +7,14 @@ Item {
     required property var tabStrip
 
     readonly property Item view: tabStrip.tabBar.contentItem
-    readonly property real stripWidth: tabX(tabStrip.tabModel.count)
+    readonly property real stripWidth: tabStrip.layout.revision >= 0 ? tabX(tabStrip.tabModel.count) : 0
     readonly property real viewWidth: view ? Math.min(stripWidth, view.width) : 0
     readonly property real maxScroll: Math.max(0, stripWidth - viewWidth)
     readonly property real origin: view ? view.originX : 0
     readonly property real scrolled: view ? view.contentX - view.originX : 0
 
     function tabX(index) {
-        const pinned = tabStrip.pinnedCount
-        if (index < pinned)
-            return index * tabStrip.pinnedTabWidth
-        return pinned * tabStrip.pinnedTabWidth + (index - pinned) * tabStrip.tabWidth
+        return tabStrip.layout.slotX(index)
     }
 
     function scrollTo(x) {

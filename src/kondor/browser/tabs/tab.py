@@ -13,6 +13,7 @@ from kondor.browser.tabs.features.tabpopups import TabPopups
 from kondor.browser.tabs.features.tabsecurity import TabSecurity
 from kondor.browser.tabs.features.tabsitereload import TabSiteReload
 from kondor.browser.tabs.features.tabsleep import TabSleep
+from kondor.browser.tabs.groups.tabgroup import TabGroup
 from kondor.browser.tabs.tabviewstate import TabViewState
 from kondor.site.identity.tabidentity import TabIdentity
 
@@ -36,6 +37,7 @@ def is_real_page(url: QUrl) -> bool:
 class Tab(TabViewState):
     urlChanged = Signal()
     newTabPageChanged = Signal()
+    groupChanged = Signal()
 
     def __init__(self, profile: QQuickWebEngineProfile | None, parent: QObject | None = None):
         super().__init__(parent)
@@ -43,11 +45,15 @@ class Tab(TabViewState):
         self._init_view_state()
         self._profile = profile
         self._is_private = profile is not None and profile.isOffTheRecord()
-        self._url = QUrl()
-        self._new_tab_page = True
-        self._pending_request: QObject | None = None
+        self._init_page_state()
         self._create_feature_groups(profile)
         self._create_agent_group()
+
+    def _init_page_state(self) -> None:
+        self._url = QUrl()
+        self._new_tab_page = True
+        self._group: TabGroup | None = None
+        self._pending_request: QObject | None = None
 
     def _create_feature_groups(self, profile: QQuickWebEngineProfile | None) -> None:
         self._security = TabSecurity(profile, self)
@@ -80,6 +86,11 @@ class Tab(TabViewState):
     agent = Property(TabAgent, lambda self: self._agent, constant=True)
     sleep = Property(TabSleep, lambda self: self._sleep, constant=True)
     extensionItems = Property(TabExtensionItems, lambda self: self._extension_items, constant=True)
+
+    group = Property(TabGroup, lambda self: self._group, notify=groupChanged)
+
+    def set_group(self, group: TabGroup | None) -> None:
+        assign_and_notify((self, "_group"), group, self.groupChanged)
 
     pendingRequest = Property(QObject, lambda self: self._pending_request, constant=False)
 

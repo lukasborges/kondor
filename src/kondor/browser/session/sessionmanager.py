@@ -13,7 +13,13 @@ from PySide6.QtCore import (
 from shiboken6 import isValid
 
 from kondor.browser.session import sessionformat
-from kondor.browser.session.sessionwindow import SessionTab, SessionWindow
+from kondor.browser.session.sessionwindow import (
+    NO_GROUP,
+    SessionGroup,
+    SessionTab,
+    SessionWindow,
+)
+from kondor.browser.tabs.groups.tabgroup import TabGroup
 from kondor.browser.tabs.tab import Tab
 from kondor.browser.tabs.tabmodel import TabModel
 from kondor.browser.tabs.tabmodelrows import TAB_ROLE
@@ -27,20 +33,35 @@ def tab_at(model: TabModel, row: int) -> Tab | None:
     return tab if isinstance(tab, Tab) else None
 
 
-def session_tab_of(tab: Tab) -> SessionTab:
+def session_tab_of(tab: Tab, group: int = NO_GROUP) -> SessionTab:
     url = QUrl() if tab.newTabPage else tab.url
-    return SessionTab(url, tab.title, tab.agent.hasAccess, tab.agent.name)
+    return SessionTab(url, tab.title, tab.agent.hasAccess, tab.agent.name, group)
+
+
+def session_group_of(group: TabGroup) -> SessionGroup:
+    return SessionGroup(group.name, group.color, group.collapsed)
+
+
+def group_position(window: SessionWindow, tab: Tab, groups: list[TabGroup]) -> int:
+    group = tab.group
+    if group is None:
+        return NO_GROUP
+    if group not in groups:
+        groups.append(group)
+        window.groups.append(session_group_of(group))
+    return groups.index(group)
 
 
 def session_window_of(model: TabModel) -> SessionWindow:
     window = SessionWindow()
+    groups: list[TabGroup] = []
     for row in range(model.count):
         tab = tab_at(model, row)
         if tab is None or tab.isPrivate:
             continue
         if row == model.currentIndex:
             window.current_index = len(window.tabs)
-        window.tabs.append(session_tab_of(tab))
+        window.tabs.append(session_tab_of(tab, group_position(window, tab, groups)))
     return window
 
 
@@ -90,6 +111,7 @@ class SessionManager(QObject):
     def _connect_model(self, model: TabModel) -> None:
         model.countChanged.connect(self._schedule_save)
         model.currentIndexChanged.connect(self._schedule_save)
+        model.groupsChanged.connect(self._schedule_save)
         model.rowsRemoved.connect(self._schedule_save)
         model.destroyed.connect(self._forget_destroyed_model)
         model.rowsInserted.connect(

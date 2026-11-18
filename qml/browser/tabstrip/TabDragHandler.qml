@@ -40,10 +40,10 @@ DragHandler {
 
     function targetIndex(center) {
         const pinnedCount = tabButton.pinnedCount
+        const index = tabStrip.layout.indexAtX(center)
         if (tabButton.tab.pinned)
-            return clamp(Math.floor(center / tabStrip.pinnedTabWidth), 0, pinnedCount - 1)
-        const slot = Math.floor((center - tabStrip.scroller.tabX(pinnedCount)) / tabStrip.tabWidth)
-        return clamp(pinnedCount + slot, pinnedCount, tabModel.count - 1)
+            return clamp(index, 0, pinnedCount - 1)
+        return clamp(index, pinnedCount, tabModel.count - 1)
     }
 
     function moveTab(from, to) {

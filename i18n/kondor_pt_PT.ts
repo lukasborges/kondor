@@ -2948,6 +2948,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarGroupHeader</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Grupo sem nome</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Reduzido</translation>
+    </message>
+</context>
+<context>
     <name>SideBarTabList</name>
     <message>
         <source>New Tab</source>
@@ -3135,6 +3146,10 @@
         <translation>Mover separador para nova janela</translation>
     </message>
     <message>
+        <source>Remove Tab from Group</source>
+        <translation>Remover separador do grupo</translation>
+    </message>
+    <message>
         <source>Unpin Tab</source>
         <translation>Desafixar separador</translation>
     </message>
@@ -3173,6 +3188,91 @@
     <message>
         <source>Close Tabs to the Right</source>
         <translation>Fechar separadores à direita</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupEditor</name>
+    <message>
+        <source>Blue</source>
+        <translation>Azul</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Verde</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Laranja</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Vermelho</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Roxo</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>Cinzento</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation>Nome do grupo</translation>
+    </message>
+    <message>
+        <source>New Tab in Group</source>
+        <translation>Novo separador no grupo</translation>
+    </message>
+    <message>
+        <source>Expand Group</source>
+        <translation>Expandir grupo</translation>
+    </message>
+    <message>
+        <source>Collapse Group</source>
+        <translation>Reduzir grupo</translation>
+    </message>
+    <message>
+        <source>Move Group to New Window</source>
+        <translation>Mover grupo para uma nova janela</translation>
+    </message>
+    <message>
+        <source>Ungroup Tabs</source>
+        <translation>Desagrupar separadores</translation>
+    </message>
+    <message>
+        <source>Close Group</source>
+        <translation>Fechar grupo</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupLabel</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Grupo sem nome</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Reduzido</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupMenu</name>
+    <message>
+        <source>Move Tab to Group</source>
+        <translation>Mover separador para um grupo</translation>
+    </message>
+    <message>
+        <source>Add Tab to Group</source>
+        <translation>Adicionar separador a um grupo</translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation>Novo grupo</translation>
+    </message>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Grupo sem nome</translation>
     </message>
 </context>
 <context>

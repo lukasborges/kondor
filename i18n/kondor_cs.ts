@@ -2962,6 +2962,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarGroupHeader</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Nepojmenovaná skupina</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Sbaleno</translation>
+    </message>
+</context>
+<context>
     <name>SideBarTabList</name>
     <message>
         <source>New Tab</source>
@@ -3149,6 +3160,10 @@
         <translation>Přesunout kartu do nového okna</translation>
     </message>
     <message>
+        <source>Remove Tab from Group</source>
+        <translation>Odebrat kartu ze skupiny</translation>
+    </message>
+    <message>
         <source>Unpin Tab</source>
         <translation>Odepnout kartu</translation>
     </message>
@@ -3187,6 +3202,91 @@
     <message>
         <source>Close Tabs to the Right</source>
         <translation>Zavřít karty vpravo</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupEditor</name>
+    <message>
+        <source>Blue</source>
+        <translation>Modrá</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Zelená</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Oranžová</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Červená</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Fialová</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>Šedá</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation>Název skupiny</translation>
+    </message>
+    <message>
+        <source>New Tab in Group</source>
+        <translation>Nová karta ve skupině</translation>
+    </message>
+    <message>
+        <source>Expand Group</source>
+        <translation>Rozbalit skupinu</translation>
+    </message>
+    <message>
+        <source>Collapse Group</source>
+        <translation>Sbalit skupinu</translation>
+    </message>
+    <message>
+        <source>Move Group to New Window</source>
+        <translation>Přesunout skupinu do nového okna</translation>
+    </message>
+    <message>
+        <source>Ungroup Tabs</source>
+        <translation>Zrušit seskupení karet</translation>
+    </message>
+    <message>
+        <source>Close Group</source>
+        <translation>Zavřít skupinu</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupLabel</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Nepojmenovaná skupina</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Sbaleno</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupMenu</name>
+    <message>
+        <source>Move Tab to Group</source>
+        <translation>Přesunout kartu do skupiny</translation>
+    </message>
+    <message>
+        <source>Add Tab to Group</source>
+        <translation>Přidat kartu do skupiny</translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation>Nová skupina</translation>
+    </message>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Nepojmenovaná skupina</translation>
     </message>
 </context>
 <context>

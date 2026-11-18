@@ -80,7 +80,7 @@ def test_reads_the_version_one_format(session: SessionManager) -> None:
     "content",
     [
         b"not json",
-        b'{"version":3,"windows":[{"currentIndex":0,"tabs":[{"url":"https://a.example/"}]}]}',
+        b'{"version":4,"windows":[{"currentIndex":0,"tabs":[{"url":"https://a.example/"}]}]}',
         b'{"version":2,"windows":[{"currentIndex":0,"tabs":[]}]}',
     ],
     ids=["invalid", "future", "empty-window"],

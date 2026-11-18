@@ -2962,6 +2962,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarGroupHeader</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Grupa bez nazwy</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Zwinięta</translation>
+    </message>
+</context>
+<context>
     <name>SideBarTabList</name>
     <message>
         <source>New Tab</source>
@@ -3149,6 +3160,10 @@
         <translation>Przenieś kartę do nowego okna</translation>
     </message>
     <message>
+        <source>Remove Tab from Group</source>
+        <translation>Usuń kartę z grupy</translation>
+    </message>
+    <message>
         <source>Unpin Tab</source>
         <translation>Odepnij kartę</translation>
     </message>
@@ -3187,6 +3202,91 @@
     <message>
         <source>Close Tabs to the Right</source>
         <translation>Zamknij karty po prawej</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupEditor</name>
+    <message>
+        <source>Blue</source>
+        <translation>Niebieski</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Zielony</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Pomarańczowy</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Czerwony</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Fioletowy</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>Szary</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation>Nazwa grupy</translation>
+    </message>
+    <message>
+        <source>New Tab in Group</source>
+        <translation>Nowa karta w grupie</translation>
+    </message>
+    <message>
+        <source>Expand Group</source>
+        <translation>Rozwiń grupę</translation>
+    </message>
+    <message>
+        <source>Collapse Group</source>
+        <translation>Zwiń grupę</translation>
+    </message>
+    <message>
+        <source>Move Group to New Window</source>
+        <translation>Przenieś grupę do nowego okna</translation>
+    </message>
+    <message>
+        <source>Ungroup Tabs</source>
+        <translation>Rozgrupuj karty</translation>
+    </message>
+    <message>
+        <source>Close Group</source>
+        <translation>Zamknij grupę</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupLabel</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Grupa bez nazwy</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Zwinięta</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupMenu</name>
+    <message>
+        <source>Move Tab to Group</source>
+        <translation>Przenieś kartę do grupy</translation>
+    </message>
+    <message>
+        <source>Add Tab to Group</source>
+        <translation>Dodaj kartę do grupy</translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation>Nowa grupa</translation>
+    </message>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Grupa bez nazwy</translation>
     </message>
 </context>
 <context>

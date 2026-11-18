@@ -38,8 +38,18 @@ ListView {
 
     function moveFocus(delta) {
         useKeyboard()
-        const target = currentIndex + delta
-        currentIndex = Math.max(tabModel.pinnedCount, Math.min(target, tabModel.count - 1))
+        currentIndex = nextShownIndex(currentIndex, delta)
+    }
+
+    function isUnpinnedRow(row) {
+        return row >= tabModel.pinnedCount && row < tabModel.count
+    }
+
+    function nextShownIndex(from, delta) {
+        let target = from + delta
+        while (isUnpinnedRow(target) && tabModel.isHiddenByGroup(target))
+            target += delta
+        return isUnpinnedRow(target) ? target : from
     }
 
     function showCurrentTab() {

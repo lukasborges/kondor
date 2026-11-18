@@ -2948,6 +2948,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarGroupHeader</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Gruppo senza nome</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Compresso</translation>
+    </message>
+</context>
+<context>
     <name>SideBarTabList</name>
     <message>
         <source>New Tab</source>
@@ -3135,6 +3146,10 @@
         <translation>Sposta la scheda in una nuova finestra</translation>
     </message>
     <message>
+        <source>Remove Tab from Group</source>
+        <translation>Rimuovi scheda dal gruppo</translation>
+    </message>
+    <message>
         <source>Unpin Tab</source>
         <translation>Sblocca scheda</translation>
     </message>
@@ -3173,6 +3188,91 @@
     <message>
         <source>Close Tabs to the Right</source>
         <translation>Chiudi schede a destra</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupEditor</name>
+    <message>
+        <source>Blue</source>
+        <translation>Blu</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Verde</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Arancione</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Rosso</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Viola</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>Grigio</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation>Nome del gruppo</translation>
+    </message>
+    <message>
+        <source>New Tab in Group</source>
+        <translation>Nuova scheda nel gruppo</translation>
+    </message>
+    <message>
+        <source>Expand Group</source>
+        <translation>Espandi gruppo</translation>
+    </message>
+    <message>
+        <source>Collapse Group</source>
+        <translation>Comprimi gruppo</translation>
+    </message>
+    <message>
+        <source>Move Group to New Window</source>
+        <translation>Sposta gruppo in una nuova finestra</translation>
+    </message>
+    <message>
+        <source>Ungroup Tabs</source>
+        <translation>Separa le schede</translation>
+    </message>
+    <message>
+        <source>Close Group</source>
+        <translation>Chiudi gruppo</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupLabel</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Gruppo senza nome</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Compresso</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupMenu</name>
+    <message>
+        <source>Move Tab to Group</source>
+        <translation>Sposta scheda in un gruppo</translation>
+    </message>
+    <message>
+        <source>Add Tab to Group</source>
+        <translation>Aggiungi scheda a un gruppo</translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation>Nuovo gruppo</translation>
+    </message>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Gruppo senza nome</translation>
     </message>
 </context>
 <context>

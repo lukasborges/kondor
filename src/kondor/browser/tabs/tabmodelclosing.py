@@ -2,11 +2,12 @@ from PySide6.QtCore import Property, QObject, Signal, Slot
 
 from kondor.browser.profile.profilemanager import ProfileManager
 from kondor.browser.tabs.closedtabs import ClosedTab, ClosedTabs
+from kondor.browser.tabs.groups.tabmodelgroupcommands import TabModelGroupCommands
 from kondor.browser.tabs.tab import Tab
-from kondor.browser.tabs.tabmodelrows import NewTab, TabModelRows
+from kondor.browser.tabs.tabmodelrows import NewTab
 
 
-class TabModelClosing(TabModelRows):
+class TabModelClosing(TabModelGroupCommands):
     canReopenClosedTabChanged = Signal()
     recentlyClosedChanged = Signal()
 

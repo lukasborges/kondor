@@ -2962,6 +2962,17 @@
     </message>
 </context>
 <context>
+    <name>SideBarGroupHeader</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Группа без названия</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Свёрнуто</translation>
+    </message>
+</context>
+<context>
     <name>SideBarTabList</name>
     <message>
         <source>New Tab</source>
@@ -3149,6 +3160,10 @@
         <translation>Переместить вкладку в новое окно</translation>
     </message>
     <message>
+        <source>Remove Tab from Group</source>
+        <translation>Убрать вкладку из группы</translation>
+    </message>
+    <message>
         <source>Unpin Tab</source>
         <translation>Открепить вкладку</translation>
     </message>
@@ -3187,6 +3202,91 @@
     <message>
         <source>Close Tabs to the Right</source>
         <translation>Закрыть вкладки справа</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupEditor</name>
+    <message>
+        <source>Blue</source>
+        <translation>Синий</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Зелёный</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Оранжевый</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Красный</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Фиолетовый</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>Серый</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation>Название группы</translation>
+    </message>
+    <message>
+        <source>New Tab in Group</source>
+        <translation>Новая вкладка в группе</translation>
+    </message>
+    <message>
+        <source>Expand Group</source>
+        <translation>Развернуть группу</translation>
+    </message>
+    <message>
+        <source>Collapse Group</source>
+        <translation>Свернуть группу</translation>
+    </message>
+    <message>
+        <source>Move Group to New Window</source>
+        <translation>Переместить группу в новое окно</translation>
+    </message>
+    <message>
+        <source>Ungroup Tabs</source>
+        <translation>Разгруппировать вкладки</translation>
+    </message>
+    <message>
+        <source>Close Group</source>
+        <translation>Закрыть группу</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupLabel</name>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Группа без названия</translation>
+    </message>
+    <message>
+        <source>Collapsed</source>
+        <translation>Свёрнуто</translation>
+    </message>
+</context>
+<context>
+    <name>TabGroupMenu</name>
+    <message>
+        <source>Move Tab to Group</source>
+        <translation>Переместить вкладку в группу</translation>
+    </message>
+    <message>
+        <source>Add Tab to Group</source>
+        <translation>Добавить вкладку в группу</translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation>Новая группа</translation>
+    </message>
+    <message>
+        <source>Unnamed group</source>
+        <translation>Группа без названия</translation>
     </message>
 </context>
 <context>

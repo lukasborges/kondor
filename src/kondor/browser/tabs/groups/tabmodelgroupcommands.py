@@ -3,11 +3,11 @@ from typing import Any
 from PySide6.QtCore import Slot
 
 from kondor.browser.tabs.groups.tabgroup import TabGroup
-from kondor.browser.tabs.groups.tabmodelgroups import TabModelGroups
+from kondor.browser.tabs.groups.tabmodelgroupmoves import TabModelGroupMoves
 from kondor.browser.tabs.tab import Tab
 
 
-class TabModelGroupCommands(TabModelGroups):
+class TabModelGroupCommands(TabModelGroupMoves):
     @Slot(int, result=TabGroup)
     def newGroupForTab(self, index: int) -> TabGroup | None:
         if not self.can_group(index):
@@ -95,30 +95,15 @@ class TabModelGroupCommands(TabModelGroups):
         for row in ordered:
             self.move_row_unless_there(row, start + row - members[0])
 
-    def move_row_unless_there(self, source: int, target: int) -> None:
-        if source != target:
-            self.move_row(source, target)
+    def gather_group(self, group: TabGroup) -> None:
+        members = self.members_of(group)
+        for offset, row in enumerate(members):
+            self.move_row_unless_there(row, members[0] + offset)
 
     def group_boundary_near(self, group: TabGroup, target: int) -> int:
         others = [tab for tab in self._tabs if tab.group is not group]
         start = max(self._pinned_count(), min(target, len(others)))
         return self.snap_outside_groups(others, start)
-
-    def snap_outside_groups(self, tabs: list[Tab], position: int) -> int:
-        if not 0 < position < len(tabs) or not self.is_inside_group(tabs, position):
-            return position
-        group = tabs[position].group
-        first = position
-        while first > 0 and tabs[first - 1].group is group:
-            first -= 1
-        end = position
-        while end < len(tabs) and tabs[end].group is group:
-            end += 1
-        return first if position - first <= end - position else end
-
-    def is_inside_group(self, tabs: list[Tab], position: int) -> bool:
-        before = tabs[position - 1].group
-        return before is not None and before is tabs[position].group
 
     def notify_current_changed(self) -> None:
         current = self._current_tab()
@@ -134,6 +119,7 @@ class TabModelGroupCommands(TabModelGroups):
                 self.assign_group(self._tabs[row], groups[position])
         for group in groups:
             self._prune_group(group)
+            self.gather_group(group)
 
     def create_group_from(self, spec: Any) -> TabGroup:
         fields = spec if isinstance(spec, dict) else {}

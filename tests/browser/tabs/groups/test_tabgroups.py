@@ -69,23 +69,6 @@ def test_pinned_tabs_cannot_join_groups(model: TabModel) -> None:
     assert model.newGroupForTab(0) is None
 
 
-def test_moving_a_tab_between_group_members_joins_the_group(model: TabModel) -> None:
-    tabs = add_tabs(model, 4)
-    group = model.newGroupForTab(0)
-    model.addTabToGroup(1, group)
-    model.moveTab(3, 1)
-    assert tabs[3].group is group
-
-
-def test_moving_a_tab_out_of_the_group_leaves_it(model: TabModel) -> None:
-    tabs = add_tabs(model, 3)
-    group = model.newGroupForTab(0)
-    model.addTabToGroup(1, group)
-    model.moveTab(0, 2)
-    assert tabs[0].group is None
-    assert tabs[1].group is group
-
-
 def test_collapsing_the_current_group_selects_the_next_tab_outside(model: TabModel) -> None:
     tabs = add_tabs(model, 3)
     group = model.newGroupForTab(0)

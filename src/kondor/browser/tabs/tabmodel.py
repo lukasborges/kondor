@@ -61,9 +61,17 @@ class TabModel(TabModelClosing):
     def moveTab(self, source: int, target: int) -> None:
         if not self.is_valid_index(source) or not self.is_valid_index(target) or source == target:
             return
-        tab = self._tabs[source]
-        self.move_row(source, target)
-        self.join_surrounding_group(tab)
+        self.move_row_unless_there(source, self.clamp_move_target(source, target))
+
+    @Slot(int, int, result=int)
+    def clampedMoveTarget(self, source: int, target: int) -> int:
+        if not self.is_valid_index(source):
+            return target
+        return self.clamp_move_target(source, target)
+
+    @Slot(int, int)
+    def stepTab(self, index: int, delta: int) -> None:
+        self.moveTab(index, self.step_target(index, delta))
 
     @Slot(int)
     def duplicateTab(self, index: int) -> None:

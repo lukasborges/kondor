@@ -77,3 +77,4 @@ Separate instance with isolated XDG folders under `~/kondor-test`, `--new-instan
 | Chromium's viewer in the tab, or Okular? | The viewer in the tab: it is the only way to show PDFs embedded in pages, which the maintainer requires; Okular remains one click away through Open With and the print flow. |
 | Setting to always download PDFs? | No: the viewer has a download button, and a setting would add UI for a rare need. |
 | Make Kondor the default PDF app? | No: only listed in Open With; the user's PDF app stays the default. |
+| QtPdf (Breeze viewer) or PDF.js instead? | Considered and set aside by the maintainer: QtPdf cannot render PDFs embedded in pages, and PDF.js would need to rewrite pages' `<embed>` / `<iframe>` elements and a custom scheme to fetch files. A hybrid (QtPdf for top-level PDFs, Chromium for embedded ones) can come later as its own issue. |

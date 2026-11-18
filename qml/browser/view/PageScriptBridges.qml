@@ -10,7 +10,6 @@ Item {
     required property WebEngineView webView
 
     readonly property WebChannel channel: pageChannel
-    readonly property AgentPointerBridge agentPointer: agentPointerBridge
 
     visible: false
 
@@ -36,10 +35,6 @@ Item {
         tab: root.tab
     }
 
-    AgentPointerBridge {
-        id: agentPointerBridge
-    }
-
     ExtensionBridge {
         id: extensionBridge
         tab: root.tab
@@ -51,8 +46,6 @@ Item {
             registerObject("kondorExtensions", extensionBridge.pageApi())
             registerObject("kondorMedia", mediaBridge.pageApi())
             registerObject("kondorPopups", popupBridge.pageApi())
-            if (RemoteControl.active)
-                registerObject("kondorAgentPointer", agentPointerBridge.pageApi())
             if (!root.tab.isPrivate)
                 registerObject("kondorPasswords", passwordBridge.pageApi())
         }

@@ -1,8 +1,6 @@
 from kondor.browser.address.searchsuggestions import SearchSuggestions
 from kondor.browser.favicons.faviconstore import FaviconStore
 from kondor.browser.media.mediabridge import MediaBridge
-from kondor.browser.pointer.agentpointerbridge import AgentPointerBridge
-from kondor.browser.pointer.realinputwatch import RealInputWatch
 from kondor.browser.popups.popupbridge import PopupBridge
 from kondor.browser.profile.profilemanager import ProfileManager
 from kondor.browser.session.sessionmanager import SessionManager
@@ -21,8 +19,6 @@ from kondor.core.qmlregistration import QmlKind, QmlType, register
 from kondor.site.identity.tabidentity import TabIdentity
 
 QML_TYPES: tuple[QmlType, ...] = (
-    QmlType(AgentPointerBridge, "AgentPointerBridge", QmlKind.CREATABLE),
-    QmlType(RealInputWatch, "RealInputWatch", QmlKind.CREATABLE),
     QmlType(FaviconStore, "FaviconStore", QmlKind.SINGLETON),
     QmlType(MediaBridge, "MediaBridge", QmlKind.CREATABLE),
     QmlType(PopupBridge, "PopupBridge", QmlKind.CREATABLE),

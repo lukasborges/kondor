@@ -6,8 +6,6 @@ from PySide6.QtQml import QJSEngine
 from PySide6.QtWebEngineCore import QWebEngineScript
 from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
-from kondor.app.remotecontrol.remotecontrol import RemoteControl
-
 WEB_CHANNEL_RESOURCE = ":/qtwebchannel/qwebchannel.js"
 CHANNEL_RESOURCE = ":/scripts/channel.js"
 PASSWORDS_RESOURCES = tuple(
@@ -24,8 +22,6 @@ POPUP_GUARD_RESOURCE = ":/scripts/popupguard.js"
 POPUP_WATCH_RESOURCE = ":/scripts/popupwatch.js"
 POPUP_GUARD_SCRIPT = "kondor-popup-guard"
 POPUP_WATCH_SCRIPT = "kondor-popup-watch"
-AGENT_POINTER_RESOURCE = ":/scripts/agentpointer.js"
-AGENT_POINTER_SCRIPT = "kondor-agent-pointer"
 USER_SCRIPTS_PROPERTY = "userScripts"
 InjectionPoint = QWebEngineScript.InjectionPoint
 ScriptWorldId = QWebEngineScript.ScriptWorldId
@@ -100,9 +96,6 @@ MEDIA_SESSION = PageScript(MEDIA_SESSION_SCRIPT, MEDIA_SESSION_RESOURCE, ScriptW
 MEDIA_WATCH = PageScript(MEDIA_WATCH_SCRIPT, MEDIA_WATCH_RESOURCE, ScriptWorldId.ApplicationWorld)
 POPUP_GUARD = PageScript(POPUP_GUARD_SCRIPT, POPUP_GUARD_RESOURCE, ScriptWorldId.MainWorld)
 POPUP_WATCH = PageScript(POPUP_WATCH_SCRIPT, POPUP_WATCH_RESOURCE, ScriptWorldId.ApplicationWorld)
-AGENT_POINTER = PageScript(
-    AGENT_POINTER_SCRIPT, AGENT_POINTER_RESOURCE, ScriptWorldId.ApplicationWorld
-)
 
 
 def install_page_script(collection: QObject | None, script: PageScript, feature: str) -> None:
@@ -143,7 +136,5 @@ def install(profile: QQuickWebEngineProfile) -> None:
         return
     install_media_scripts(collection)
     install_popup_scripts(collection)
-    if RemoteControl.instance().is_active():
-        install_page_script(collection, AGENT_POINTER, "the agent pointer")
     if not profile.isOffTheRecord():
         install_passwords_script(collection)

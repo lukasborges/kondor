@@ -1,6 +1,5 @@
 import QtQuick
 import QtWebEngine
-import org.kde.kirigami as Kirigami
 import Kondor
 
 WebEngineView {
@@ -13,8 +12,6 @@ WebEngineView {
     required property PageOutput output
     required property CertificateErrorHandler certificates
 
-    property AgentPointerBridge agentPointer: null
-    readonly property color agentPointerColor: Kirigami.Theme.neutralTextColor
 
     signal pageContextMenuRequested(var request)
 
@@ -176,15 +173,4 @@ WebEngineView {
     Component.onCompleted: adoptPendingRequest()
 
     PageActionLog { tab: root.tab; webView: root }
-
-    Loader {
-        anchors.fill: parent
-        z: 1
-        active: RemoteControl.active && root.agentPointer !== null
-        sourceComponent: AgentPointerOverlay {
-            bridge: root.agentPointer
-            pointerColor: root.agentPointerColor
-            webView: root
-        }
-    }
 }

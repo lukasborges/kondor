@@ -62,11 +62,6 @@ RESOURCE_GROUPS = (
         ),
     ),
     ResourceGroup(
-        "/scripts",
-        "src/kondor/browser/pointer",
-        ("src/kondor/browser/pointer/agentpointer.js",),
-    ),
-    ResourceGroup(
         "/scripts", "src/kondor/site/identity", ("src/kondor/site/identity/identity.js",)
     ),
     ResourceGroup(

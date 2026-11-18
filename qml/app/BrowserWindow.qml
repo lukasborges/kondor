@@ -55,11 +55,6 @@ ApplicationWindow {
     title: windowTitle.text
     onClosing: function(close) { closeGuard.handleClosing(close) }
 
-    RealInputWatch {
-        window: window
-        active: RemoteControl.active
-    }
-
     WindowTitle {
         id: windowTitle
         tab: tabs.currentTab

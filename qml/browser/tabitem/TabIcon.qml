@@ -29,20 +29,22 @@ Item {
 
     SiteIcon {
         anchors.fill: parent
-        visible: !root.isBusy && info.hasPageIcon
+        visible: !root.isBusy && info.hasPageIcon && pageIcon.status !== Image.Ready
         pageUrl: root.tab?.url ?? ""
         fallback: info.iconSource
         opacity: info.isSleeping ? 0.5 : 1
+    }
 
-        Image {
-            anchors.fill: parent
-            source: info.pageIconSource
-            cache: false
-            sourceSize.width: width
-            sourceSize.height: height
-            fillMode: Image.PreserveAspectFit
-            visible: status === Image.Ready
-        }
+    Image {
+        id: pageIcon
+        anchors.fill: parent
+        visible: !root.isBusy && info.hasPageIcon && status === Image.Ready
+        source: info.pageIconSource
+        cache: false
+        sourceSize.width: width
+        sourceSize.height: height
+        fillMode: Image.PreserveAspectFit
+        opacity: info.isSleeping ? 0.5 : 1
     }
 
     Kirigami.Icon {

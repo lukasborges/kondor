@@ -19,8 +19,13 @@ class AgentPointerBridge(QObject):
         return self._api
 
     def receive_report(self, kind: str, x: float, y: float) -> None:
-        if CLOCK.is_recent():
+        if kind == PRESS:
+            self._receive_press(x, y)
+        elif not CLOCK.is_moving():
+            self.agentMoved.emit(x, y)
+
+    def _receive_press(self, x: float, y: float) -> None:
+        if CLOCK.consume_press():
             return
         self.agentMoved.emit(x, y)
-        if kind == PRESS:
-            self.agentPressed.emit(x, y)
+        self.agentPressed.emit(x, y)

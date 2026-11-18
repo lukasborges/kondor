@@ -47,6 +47,16 @@ def test_a_real_press_after_the_mouse_rested_shows_no_pointer(
     assert counts["real_press"] == {"moves": 0, "presses": 0}
 
 
+def test_a_real_click_on_a_busy_page_that_shifts_the_layout_shows_no_pointer(
+    counts: dict[str, dict[str, int]],
+) -> None:
+    assert counts["real_press_shifting_layout"] == {"moves": 0, "presses": 0}
+
+
+def test_a_cdp_move_to_a_new_point_shows_the_pointer(counts: dict[str, dict[str, int]]) -> None:
+    assert counts["cdp_move"]["moves"] >= 1
+
+
 def test_a_scripted_click_shows_no_pointer(counts: dict[str, dict[str, int]]) -> None:
     assert counts["scripted_click"] == {"moves": 0, "presses": 0}
 

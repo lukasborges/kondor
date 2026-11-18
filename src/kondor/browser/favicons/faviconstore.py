@@ -17,6 +17,7 @@ from PySide6.QtQml import QQmlEngine
 from PySide6.QtQuick import QQuickAsyncImageProvider, QQuickImageProvider, QQuickImageResponse
 from PySide6.QtSql import QSqlQuery
 
+from kondor.browser.favicons.responsefollower import follow_image
 from kondor.core.database import sql
 
 MAX_ICON_SIZE = 32
@@ -66,15 +67,6 @@ def async_provider(provider: QQuickImageProvider | None) -> QQuickAsyncImageProv
     return shiboken6.wrapInstance(pointer, QQuickAsyncImageProvider)
 
 
-def response_at(pointer: int) -> QQuickImageResponse:
-    return shiboken6.wrapInstance(pointer, QQuickImageResponse)
-
-
-def image_of(response: QQuickImageResponse) -> QImage:
-    factory = response.textureFactory()
-    return QImage() if factory is None else factory.image()
-
-
 def has_rows_affected(query: QSqlQuery | None) -> bool:
     return query is not None and query.numRowsAffected() > 0
 
@@ -87,7 +79,6 @@ class FaviconStore(QObject):
         super().__init__()
         self._engine: QQmlEngine | None = None
         self._revision = 0
-        self._pending: dict[int, QQuickImageResponse] = {}
         self._sleeping_icons: dict[int, str] = {}
 
     @classmethod
@@ -125,6 +116,11 @@ class FaviconStore(QObject):
     def markAwake(self, view: QObject) -> None:  # noqa: N802
         self._sleeping_icons.pop(shiboken6.getCppPointer(view)[0], None)
 
+    def request_awake_icon(self, icon_id: str) -> QQuickImageResponse | None:
+        if self._engine is None or icon_id in self._sleeping_icons.values():
+            return None
+        return self.request_icon(self._engine, icon_id)
+
     def request_icon(self, engine: QQmlEngine, icon_id: str) -> QQuickImageResponse | None:
         provider = async_provider(engine.imageProvider(PROVIDER_ID))
         if provider is None:
@@ -132,17 +128,11 @@ class FaviconStore(QObject):
         return provider.requestImageResponse(icon_id, QSize(MAX_ICON_SIZE, MAX_ICON_SIZE))
 
     def follow_response(self, response: QQuickImageResponse, host: str) -> None:
-        pointer = shiboken6.getCppPointer(response)[0]
-        self._pending[pointer] = response
-        response.finished.connect(lambda: self.store_response(pointer, host))
+        follow_image(response, lambda image: self.store_scaled(host, image))
 
-    def store_response(self, pointer: int, host: str) -> None:
-        response = response_at(pointer)
-        image = image_of(response)
+    def store_scaled(self, host: str, image: QImage) -> None:
         if not image.isNull():
             self.store_image(host, scaled_to_icon_size(image))
-        response.deleteLater()
-        del self._pending[pointer]
 
     def store_image(self, host: str, image: QImage) -> None:
         if not host or image.isNull():

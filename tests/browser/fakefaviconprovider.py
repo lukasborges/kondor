@@ -1,3 +1,4 @@
+import shiboken6
 from PySide6.QtCore import QSize, QTimer
 from PySide6.QtGui import QImage
 from PySide6.QtQuick import (
@@ -22,7 +23,11 @@ class FakeFaviconProvider(QQuickAsyncImageProvider):
         super().__init__()
         self._image = image
         self.requests: list[tuple[str, QSize]] = []
+        self.invalidate_wrappers = False
 
     def requestImageResponse(self, id: str, requestedSize: QSize) -> QQuickImageResponse:  # noqa: A002, N803
         self.requests.append((id, requestedSize))
-        return FakeImageResponse(self._image)
+        response = FakeImageResponse(self._image)
+        if self.invalidate_wrappers:
+            response.finished.connect(lambda: shiboken6.invalidate(response))
+        return response

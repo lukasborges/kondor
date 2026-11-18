@@ -2481,6 +2481,23 @@
         <source>Restart Kondor to apply the remote control change.</source>
         <translation>Перезапустите Kondor, чтобы применить изменение удалённого управления.</translation>
     </message>
+    <message>
+        <source>Restart Now</source>
+        <translation>Перезапустить сейчас</translation>
+    </message>
+    <message>
+        <source>Restart %1</source>
+        <extracomment>%1 is the application name</extracomment>
+        <translation>Перезапуск %1</translation>
+    </message>
+    <message>
+        <source>Downloads are still in progress. Restart anyway?</source>
+        <translation>Загрузки ещё выполняются. Всё равно перезапустить?</translation>
+    </message>
+    <message>
+        <source>Restart</source>
+        <translation>Перезапустить</translation>
+    </message>
 </context>
 <context>
     <name>RenameBookmarkDialog</name>

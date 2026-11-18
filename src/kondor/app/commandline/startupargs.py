@@ -10,6 +10,7 @@ class StartupArgs(QObject):
         super().__init__()
         self._startup_urls: list[QUrl] = []
         self._startup_private = False
+        self._restore_session = False
 
     @classmethod
     def instance(cls) -> "StartupArgs":
@@ -22,6 +23,12 @@ class StartupArgs(QObject):
 
     def set_startup_private(self, is_private: bool) -> None:
         self._startup_private = is_private
+
+    def set_restore_session(self, is_requested: bool) -> None:
+        self._restore_session = is_requested
+
+    def restore_session(self) -> bool:
+        return self._restore_session
 
     def startup_urls(self) -> list[QUrl]:
         return self._startup_urls

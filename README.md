@@ -171,7 +171,7 @@ unless you allow them. Authors: see [`docs/extensions/api.md`](docs/extensions/a
 
 AI agents and automation tools can read and control the pages of normal windows, with the agent's
 pointer shown on the page. Agents work only in tabs they open, which are marked, or in tabs you
-hand over with **Allow Agent Access**. Turn it on in **Settings → Privacy → Remote control** and restart Kondor,
+hand over with **Allow Agent Access**. Turn it on in **Settings → Privacy → Remote control** and click **Restart Now**,
 or start it once with `kondor --remote-control 9222`.
 
 Kondor has a built-in [MCP](https://modelcontextprotocol.io) server, so any MCP client needs no

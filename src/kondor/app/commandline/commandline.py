@@ -30,6 +30,7 @@ class CommandLine:
     extension_directories: list[str] = field(default_factory=list)
     remote_control_port: str | None = None
     profile: str | None = None
+    restore_session: bool = False
 
 
 def add_flags(parser: QCommandLineParser) -> None:
@@ -49,6 +50,12 @@ def add_profile_option(parser: QCommandLineParser) -> None:
     parser.addOption(QCommandLineOption(["profile"], PROFILE_HELP, "name"))
 
 
+def add_restore_session_option(parser: QCommandLineParser) -> None:
+    option = QCommandLineOption(["restore-session"], "restore the saved session")
+    option.setFlags(QCommandLineOption.Flag.HiddenFromHelp)
+    parser.addOption(option)
+
+
 def describe(parser: QCommandLineParser) -> None:
     parser.setApplicationDescription("Kondor web browser")
     parser.addHelpOption()
@@ -57,6 +64,7 @@ def describe(parser: QCommandLineParser) -> None:
     add_extension_option(parser)
     add_remote_control_option(parser)
     add_profile_option(parser)
+    add_restore_session_option(parser)
     parser.addPositionalArgument("urls", "URLs or files to open", "[urls...]")
 
 
@@ -77,6 +85,7 @@ def read(parser: QCommandLineParser) -> CommandLine:
         extension_directories=parser.values("load-extension"),
         remote_control_port=remote_control_value(parser),
         profile=profile_value(parser),
+        restore_session=parser.isSet("restore-session"),
     )
 
 

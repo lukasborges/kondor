@@ -59,3 +59,8 @@ def test_profile_option_keeps_the_name_as_typed() -> None:
 
 def test_profile_is_unset_by_default() -> None:
     assert parse_arguments(["kondor"]).profile is None
+
+
+def test_restore_session_flag_is_read() -> None:
+    assert parse_arguments(["kondor", "--restore-session"]).restore_session
+    assert not parse_arguments(["kondor"]).restore_session

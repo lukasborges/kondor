@@ -57,7 +57,7 @@ Item {
         const from = tabs.currentIndex
         const to = from + delta
         if (canMoveTab(from, to))
-            tabs.moveTab(from, to)
+            tabs.stepTab(from, delta)
     }
 
     function canMoveTab(from, to) {

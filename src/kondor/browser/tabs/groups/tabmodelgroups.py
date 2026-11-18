@@ -94,13 +94,11 @@ class TabModelGroups(TabModelRows):
 
     def insert_row(self, index: int, tab: Tab) -> None:
         super().insert_row(index, tab)
-        self.join_surrounding_group(tab)
+        self.join_group_around_inserted(tab)
 
-    def join_surrounding_group(self, tab: Tab) -> None:
+    def join_group_around_inserted(self, tab: Tab) -> None:
         row = self._tabs.index(tab)
         before = self._tabs[row - 1].group if row > 0 else None
         after = self._tabs[row + 1].group if row + 1 < len(self._tabs) else None
         if before is not None and before is after and not tab.pinned:
             self.assign_group(tab, before)
-        elif tab.group is not None and tab.group is not before and tab.group is not after:
-            self.assign_group(tab, None)

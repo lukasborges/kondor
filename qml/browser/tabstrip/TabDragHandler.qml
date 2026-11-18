@@ -25,10 +25,21 @@ DragHandler {
         return Math.max(low, Math.min(high, value))
     }
 
+    function groupRange(own) {
+        const group = tabModel.groupAt(own)
+        const first = tabModel.firstIndexOf(group)
+        const scroller = tabStrip.scroller
+        const bodyStart = scroller.tabX(first) + tabStrip.layout.leadWidth(first)
+        return { start: bodyStart, end: scroller.tabX(first + tabModel.tabCountOf(group)) }
+    }
+
     function sectionRange() {
         const pinnedEnd = tabStrip.scroller.tabX(tabButton.pinnedCount)
         if (tabButton.tab.pinned)
             return { start: 0, end: pinnedEnd }
+        const own = tabModel.indexOfTab(tabButton.tab)
+        if (tabModel.groupAt(own))
+            return groupRange(own)
         return { start: pinnedEnd, end: tabStrip.scroller.stripWidth }
     }
 
@@ -43,7 +54,8 @@ DragHandler {
         const index = tabStrip.layout.indexAtX(center)
         if (tabButton.tab.pinned)
             return clamp(index, 0, pinnedCount - 1)
-        return clamp(index, pinnedCount, tabModel.count - 1)
+        const wanted = clamp(index, pinnedCount, tabModel.count - 1)
+        return tabModel.clampedMoveTarget(tabModel.indexOfTab(tabButton.tab), wanted)
     }
 
     function moveTab(from, to) {

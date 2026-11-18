@@ -3134,6 +3134,14 @@
         <translation>Couper le son de l’onglet</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>Retirer l'accès de l'agent</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>Autoriser l'accès de l'agent</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Mettre l’onglet en veille</translation>
     </message>
@@ -3167,6 +3175,18 @@
     <message>
         <source>playing sound</source>
         <translation>lecture du son</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1 travaille dans cet onglet</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>Ouvert par %1</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>Les agents peuvent utiliser cet onglet</translation>
     </message>
     <message>
         <source>Sleeping</source>

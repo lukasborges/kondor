@@ -53,3 +53,26 @@ def test_ignores_invalid_and_future_files(json: bytes, warning: str | None) -> N
 def test_reads_about_newtab_as_an_empty_url() -> None:
     json = b'{"version":2,"windows":[{"currentIndex":0,"tabs":[{"url":"about:newtab"}]}]}'
     assert from_json(json)[0].tabs[0].url.isEmpty()
+
+
+def test_round_trips_agent_access_of_a_tab() -> None:
+    tabs = [SessionTab(QUrl("https://a.example/"), "A", True, "Claude Code")]
+
+    loaded = from_json(to_json([SessionWindow(tabs, 0)]))
+
+    assert (loaded[0].tabs[0].has_agent_access, loaded[0].tabs[0].agent_name) == (
+        True,
+        "Claude Code",
+    )
+
+
+def test_a_tab_saved_without_agent_keys_has_no_access() -> None:
+    saved = b'{"version":2,"windows":[{"currentIndex":0,"tabs":[{"url":"https://a.example/","title":"A"}]}]}'
+
+    assert from_json(saved)[0].tabs[0].has_agent_access is False
+
+
+def test_does_not_write_agent_keys_for_a_tab_without_access() -> None:
+    saved = to_json([SessionWindow([SessionTab(QUrl("https://a.example/"), "A")], 0)])
+
+    assert b"agent" not in saved

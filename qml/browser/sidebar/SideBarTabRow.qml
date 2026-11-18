@@ -38,6 +38,10 @@ ItemDelegate {
         tab: row.tab
     }
 
+    ToolTip.visible: hovered && info.isAgentTab
+    ToolTip.text: info.agentDescription
+    ToolTip.delay: 600
+
     contentItem: RowLayout {
         spacing: Kirigami.Units.smallSpacing
 
@@ -46,6 +50,10 @@ ItemDelegate {
             Layout.preferredWidth: 16
             Layout.preferredHeight: 16
             Layout.alignment: Qt.AlignHCenter
+        }
+
+        AgentTabIcon {
+            visible: info.isAgentTab
         }
 
         TabSoundButton {

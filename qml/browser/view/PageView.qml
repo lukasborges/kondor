@@ -114,6 +114,7 @@ WebEngineView {
     }
 
     function openRequestedWindow(request) {
+        root.tab.agent.passOnTo(request)
         if (opensInWindow(request))
             return WindowManager.newWindowForRequest(root.tab.profile, request)
         const background = request.destination === WebEngineNewWindowRequest.InNewBackgroundTab
@@ -173,4 +174,6 @@ WebEngineView {
     Component.onCompleted: adoptPendingRequest()
 
     PageActionLog { tab: root.tab; webView: root }
+
+    PageAgent { tab: root.tab; webView: root }
 }

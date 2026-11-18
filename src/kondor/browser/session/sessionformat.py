@@ -30,7 +30,10 @@ def json_array(value: object) -> list[Any]:
 
 def tab_to_json(tab: SessionTab) -> JsonObject:
     url = NEW_TAB_PAGE_URL if tab.url.isEmpty() else tab.url.toString()
-    return {"url": url, "title": tab.title}
+    entry: JsonObject = {"url": url, "title": tab.title}
+    if tab.has_agent_access:
+        entry.update({"agentAccess": True, "agentName": tab.agent_name})
+    return entry
 
 
 def window_to_json(window: SessionWindow) -> JsonObject:
@@ -48,7 +51,9 @@ def to_json(windows: list[SessionWindow]) -> bytes:
 def tab_from_json(entry: JsonObject) -> SessionTab:
     url_text = json_text(entry.get("url"))
     url = QUrl() if url_text == NEW_TAB_PAGE_URL else QUrl(url_text)
-    return SessionTab(url, json_text(entry.get("title")))
+    has_access = entry.get("agentAccess") is True
+    name = json_text(entry.get("agentName")) if has_access else ""
+    return SessionTab(url, json_text(entry.get("title")), has_access, name)
 
 
 def window_from_json(entry: JsonObject) -> SessionWindow:

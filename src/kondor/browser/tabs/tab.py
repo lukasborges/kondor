@@ -1,6 +1,8 @@
 from PySide6.QtCore import Property, QObject, QUrl, Signal, Slot
 from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
+from kondor.browser.agent.agenttabs import AgentTabs
+from kondor.browser.agent.tabagent import TabAgent
 from kondor.browser.tabs.assignandnotify import assign_and_notify
 from kondor.browser.tabs.features.tabaudio import TabAudio
 from kondor.browser.tabs.features.tabextensionitems import TabExtensionItems
@@ -45,6 +47,7 @@ class Tab(TabViewState):
         self._new_tab_page = True
         self._pending_request: QObject | None = None
         self._create_feature_groups(profile)
+        self._create_agent_group()
 
     def _create_feature_groups(self, profile: QQuickWebEngineProfile | None) -> None:
         self._security = TabSecurity(profile, self)
@@ -58,6 +61,10 @@ class Tab(TabViewState):
         self._popups = TabPopups(self._is_private, self)
         self._identity = TabIdentity(profile, self._is_private, self)
 
+    def _create_agent_group(self) -> None:
+        self._agent = TabAgent(self._is_private, self)
+        AgentTabs.instance().watch(self._agent)
+
     url = Property(QUrl, lambda self: self._url, notify=urlChanged)
     newTabPage = Property(bool, lambda self: self._new_tab_page, notify=newTabPageChanged)
     profile = Property(QObject, lambda self: self._profile, constant=True)
@@ -70,6 +77,7 @@ class Tab(TabViewState):
     audio = Property(TabAudio, lambda self: self._audio, constant=True)
     popups = Property(TabPopups, lambda self: self._popups, constant=True)
     identity = Property(TabIdentity, lambda self: self._identity, constant=True)
+    agent = Property(TabAgent, lambda self: self._agent, constant=True)
     sleep = Property(TabSleep, lambda self: self._sleep, constant=True)
     extensionItems = Property(TabExtensionItems, lambda self: self._extension_items, constant=True)
 
@@ -101,6 +109,7 @@ class Tab(TabViewState):
         if request is None:
             return
         self._pending_request = request
+        self._agent.inherit_for(request)
         self._set_new_tab_page(False)
 
     @Slot(bool)

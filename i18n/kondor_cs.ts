@@ -3148,6 +3148,14 @@
         <translation>Ztlumit kartu</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>Odebrat přístup agenta</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>Povolit přístup agenta</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Uspat kartu</translation>
     </message>
@@ -3181,6 +3189,18 @@
     <message>
         <source>playing sound</source>
         <translation>přehrává zvuk</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1 pracuje v tomto panelu</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>Otevřeno agentem %1</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>Agenti mohou tento panel používat</translation>
     </message>
     <message>
         <source>Sleeping</source>

@@ -3120,6 +3120,14 @@
         <translation>Sekmeyi Sessize Al</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>Aracı Erişimini Kaldır</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>Aracı Erişimine İzin Ver</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Sekmeyi uyut</translation>
     </message>
@@ -3153,6 +3161,18 @@
     <message>
         <source>playing sound</source>
         <translation>ses çalıyor</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1 bu sekmede çalışıyor</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>%1 tarafından açıldı</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>Aracılar bu sekmeyi kullanabilir</translation>
     </message>
     <message>
         <source>Sleeping</source>

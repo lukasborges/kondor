@@ -3120,6 +3120,14 @@
         <translation>タブをミュート</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>エージェントのアクセスを削除</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>エージェントのアクセスを許可</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>タブをスリープさせる</translation>
     </message>
@@ -3153,6 +3161,18 @@
     <message>
         <source>playing sound</source>
         <translation>音声を再生中</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1 がこのタブで作業中です</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>%1 が開きました</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>エージェントがこのタブを使用できます</translation>
     </message>
     <message>
         <source>Sleeping</source>

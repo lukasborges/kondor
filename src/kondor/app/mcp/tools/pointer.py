@@ -20,7 +20,12 @@ def viewport_center(session: PageSession) -> tuple[float, float]:
     return float(center["x"]), float(center["y"])
 
 
+ANNOUNCED_KINDS = {"mouseMoved": "move", "mousePressed": "press"}
+
+
 def mouse_event(session: PageSession, kind: str, position: tuple[float, float]) -> None:
+    if kind in ANNOUNCED_KINDS:
+        session.announce_pointer(ANNOUNCED_KINDS[kind], position)
     session.call("Input.dispatchMouseEvent", mouse_parameters(kind, position))
 
 

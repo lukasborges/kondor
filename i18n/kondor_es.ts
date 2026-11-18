@@ -3134,6 +3134,14 @@
         <translation>Silenciar pestaña</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>Quitar acceso del agente</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>Permitir acceso del agente</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Suspender pestaña</translation>
     </message>
@@ -3167,6 +3175,18 @@
     <message>
         <source>playing sound</source>
         <translation>reproduciendo sonido</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1 está trabajando en esta pestaña</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>Abierta por %1</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>Los agentes pueden usar esta pestaña</translation>
     </message>
     <message>
         <source>Sleeping</source>

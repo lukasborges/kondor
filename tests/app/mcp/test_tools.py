@@ -171,3 +171,27 @@ def test_uses_the_requested_page() -> None:
     inspection.screenshot(browser, {"page": "B"})
 
     assert browser.requested_page == "B"
+
+
+def test_announces_the_move_and_press_of_a_click_but_not_the_release() -> None:
+    session = clicking_session()
+
+    interaction.click(FakeBrowser(session), {"uid": "1"})
+
+    assert session.announcements == [("move", (CENTER_X, 50.0)), ("press", (CENTER_X, 50.0))]
+
+
+def test_announces_a_hover_as_a_move() -> None:
+    session = clicking_session()
+
+    interaction.hover(FakeBrowser(session), {"uid": "1"})
+
+    assert session.announcements == [("move", (CENTER_X, 50.0))]
+
+
+def test_does_not_announce_a_scroll() -> None:
+    session = clicking_session()
+
+    interaction.scroll(FakeBrowser(session), {"direction": "down"})
+
+    assert session.announcements == []

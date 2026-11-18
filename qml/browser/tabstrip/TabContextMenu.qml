@@ -14,6 +14,8 @@ Menu {
 
     signal moveToNewWindowRequested()
 
+    readonly property bool hasAgentMenu: RemoteControl.active && tab !== null && !tab.isPrivate
+
     function canPutToSleep() {
         if (!tab || tab.sleep.sleeping || tab.newTabPage || tab.crashed || tab.devToolsOpen)
             return false
@@ -59,6 +61,22 @@ Menu {
         icon.name: menu.tab && menu.tab.audio.isMuted ? "audio-volume-high" : "audio-volume-muted"
         enabled: menu.tab !== null
         onTriggered: menu.tab.audio.toggleMuted()
+    }
+    MenuItem {
+        objectName: "removeAgentAccessItem"
+        visible: menu.hasAgentMenu && menu.tab.agent.hasAccess
+        height: visible ? implicitHeight : 0
+        text: qsTr("Remove Agent Access")
+        icon.name: "automated-tasks"
+        onTriggered: menu.tab.agent.remove()
+    }
+    MenuItem {
+        objectName: "allowAgentAccessItem"
+        visible: menu.hasAgentMenu && !menu.tab.agent.hasAccess
+        height: visible ? implicitHeight : 0
+        text: qsTr("Allow Agent Access")
+        icon.name: "automated-tasks"
+        onTriggered: menu.tab.agent.allow()
     }
     MenuItem {
         objectName: "putToSleepItem"

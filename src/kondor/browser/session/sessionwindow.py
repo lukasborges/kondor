@@ -7,6 +7,8 @@ from PySide6.QtCore import QUrl
 class SessionTab:
     url: QUrl = field(default_factory=QUrl)
     title: str = ""
+    has_agent_access: bool = False
+    agent_name: str = ""
 
 
 @dataclass

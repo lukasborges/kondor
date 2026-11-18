@@ -3134,6 +3134,14 @@
         <translation>Tab stummschalten</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>Agentenzugriff entfernen</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>Agentenzugriff erlauben</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Tab in den Ruhezustand versetzen</translation>
     </message>
@@ -3167,6 +3175,18 @@
     <message>
         <source>playing sound</source>
         <translation>spielt Ton ab</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1 arbeitet in diesem Tab</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>Geöffnet von %1</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>Agenten können diesen Tab verwenden</translation>
     </message>
     <message>
         <source>Sleeping</source>

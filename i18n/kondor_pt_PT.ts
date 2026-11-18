@@ -3134,6 +3134,14 @@
         <translation>Silenciar separador</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>Remover acesso do agente</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>Permitir acesso do agente</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Suspender separador</translation>
     </message>
@@ -3167,6 +3175,18 @@
     <message>
         <source>playing sound</source>
         <translation>a reproduzir som</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1 está a trabalhar neste separador</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>Aberto por %1</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>Os agentes podem usar este separador</translation>
     </message>
     <message>
         <source>Sleeping</source>

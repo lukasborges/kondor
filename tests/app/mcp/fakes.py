@@ -9,7 +9,11 @@ class FakeSession:
         self.isolated_worlds: dict[str, int] = {}
         self.calls: list[tuple[str, CdpParams]] = []
         self.events: list[str] = ["Page.loadEventFired"]
+        self.announcements: list[tuple[str, tuple[float, float]]] = []
         self._replies = replies or {}
+
+    def announce_pointer(self, kind: str, point: tuple[float, float]) -> None:
+        self.announcements.append((kind, point))
 
     def call(self, method: str, params: CdpParams | None = None) -> CdpParams:
         self.calls.append((method, params or {}))

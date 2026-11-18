@@ -3120,6 +3120,14 @@
         <translation>将标签页静音</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>移除代理访问权限</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>允许代理访问</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>让标签页进入休眠</translation>
     </message>
@@ -3153,6 +3161,18 @@
     <message>
         <source>playing sound</source>
         <translation>正在播放声音</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1 正在此标签页中工作</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>由 %1 打开</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>代理可以使用此标签页</translation>
     </message>
     <message>
         <source>Sleeping</source>

@@ -15,6 +15,7 @@ ApplicationWindow {
     property bool privateWindow: false
     property var initialUrls: []
     property var initialTitles: []
+    property var initialAgents: []
     property int initialCurrentIndex: -1
     property var initialProfile: null
     property var initialRequest: null

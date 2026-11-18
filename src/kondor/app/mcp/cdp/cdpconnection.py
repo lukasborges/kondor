@@ -1,4 +1,5 @@
 import json
+from collections.abc import Callable
 from typing import Any
 
 from PySide6.QtCore import QObject, QUrl
@@ -17,9 +18,17 @@ def origin_of(url: str) -> str:
     return f"http://{parsed.host()}:{parsed.port()}"
 
 
+PointerAnnouncer = Callable[[str, tuple[float, float]], None]
+
+
+def ignore_pointer(kind: str, point: tuple[float, float]) -> None:
+    return None
+
+
 class CdpConnection(QObject):
-    def __init__(self, url: str) -> None:
+    def __init__(self, url: str, announcer: PointerAnnouncer = ignore_pointer) -> None:
         super().__init__()
+        self._announcer = announcer
         self._socket = QWebSocket(origin=origin_of(url))
         self._url = url
         self._next_id = 0
@@ -37,6 +46,9 @@ class CdpConnection(QObject):
 
     def local_port(self) -> int:
         return int(self._socket.localPort())
+
+    def announce_pointer(self, kind: str, point: tuple[float, float]) -> None:
+        self._announcer(kind, point)
 
     def close(self) -> None:
         self._socket.close()

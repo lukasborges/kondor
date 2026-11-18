@@ -3148,6 +3148,14 @@
         <translation>Wycisz kartę</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>Usuń dostęp agenta</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>Zezwól na dostęp agenta</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Uśpij kartę</translation>
     </message>
@@ -3181,6 +3189,18 @@
     <message>
         <source>playing sound</source>
         <translation>odtwarza dźwięk</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1 pracuje w tej karcie</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>Otwarta przez %1</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>Agenci mogą używać tej karty</translation>
     </message>
     <message>
         <source>Sleeping</source>

@@ -28,7 +28,8 @@ def tab_at(model: TabModel, row: int) -> Tab | None:
 
 
 def session_tab_of(tab: Tab) -> SessionTab:
-    return SessionTab(QUrl() if tab.newTabPage else tab.url, tab.title)
+    url = QUrl() if tab.newTabPage else tab.url
+    return SessionTab(url, tab.title, tab.agent.hasAccess, tab.agent.name)
 
 
 def session_window_of(model: TabModel) -> SessionWindow:
@@ -108,6 +109,7 @@ class SessionManager(QObject):
             tab = tab_at(model, row)
             if tab is not None:
                 tab.urlChanged.connect(self._schedule_save)
+                tab.agent.accessChanged.connect(self._schedule_save)
 
     def _prune_models(self) -> None:
         self._models = [model for model in self._models if isValid(model)]

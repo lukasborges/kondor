@@ -44,6 +44,10 @@ Item {
         bookmarksWindow.showWindow()
     }
 
+    function openScreenshot() {
+        screenshotDialog.openForTab(tabs.currentTab)
+    }
+
     function openNewProfile() {
         newProfileDialog.openForNew()
     }
@@ -58,6 +62,8 @@ Item {
         sitePermissionsWindow = createOnce(sitePermissionsWindow, sitePermissionsComponent)
         sitePermissionsWindow.showWindow()
     }
+
+    ScreenshotDialog { id: screenshotDialog }
 
     ProfileDialog {
         id: newProfileDialog

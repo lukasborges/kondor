@@ -24,6 +24,7 @@ ApplicationWindow {
         id: browserActions
         property Action savePageAction: Action { enabled: false }
         property Action printAction: Action { enabled: false }
+        property Action screenshotAction: Action { enabled: false }
     }
     PageContextMenu {
         id: pageMenu; objectName: "pageMenu"

@@ -22,6 +22,8 @@ class TabCommands(QObject):
     printRequested = Signal()
     savePageRequested = Signal(str, int)
     pdfFinished = Signal(str, bool)
+    screenshotRequested = Signal(bool)
+    screenshotCaptured = Signal(QObject)
     inspectElementRequested = Signal()
     closeRequested = Signal()
     openTabRequested = Signal(QUrl, bool)
@@ -91,6 +93,14 @@ class TabCommands(QObject):
     @Slot(str, bool)
     def setPdfFinished(self, file_path: str, success: bool) -> None:
         self.pdfFinished.emit(file_path, success)
+
+    @Slot(bool)
+    def captureScreenshot(self, full_page: bool) -> None:
+        self.screenshotRequested.emit(full_page)
+
+    @Slot(QObject)
+    def setScreenshot(self, grab_result: QObject) -> None:
+        self.screenshotCaptured.emit(grab_result)
 
     @Slot()
     def inspectElement(self) -> None:

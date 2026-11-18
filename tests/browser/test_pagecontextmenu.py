@@ -33,6 +33,7 @@ Item {
         id: browserActions
         property Action savePageAction: Action { enabled: true }
         property Action printAction: Action { enabled: true }
+        property Action screenshotAction: Action { enabled: true }
     }
     PageContextMenu { id: pageMenu; webView: view; tab: root.tab; browserActions: browserActions }
 

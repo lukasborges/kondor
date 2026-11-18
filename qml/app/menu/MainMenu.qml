@@ -76,6 +76,7 @@ Menu {
 
         MenuItem { action: root.browserWindow.actions.devToolsAction }
         MenuItem { action: root.browserWindow.actions.saveAsPdfAction }
+        MenuItem { action: root.browserWindow.actions.screenshotAction }
         MenuItem { action: root.browserWindow.actions.sitePermissionsAction }
     }
 

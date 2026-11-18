@@ -434,6 +434,10 @@
         <translation>다른 이름으로 페이지 저장…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>스크린샷 찍기…</translation>
+    </message>
+    <message>
         <source>Hide Toolbars</source>
         <translation>도구 모음 숨기기</translation>
     </message>
@@ -1906,6 +1910,10 @@
         <translation>인쇄…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>스크린샷 찍기…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>페이지 소스 보기</translation>
     </message>
@@ -2675,6 +2683,63 @@
     <message>
         <source>Import passwords from a CSV file</source>
         <translation>CSV 파일에서 비밀번호 가져오기</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotDialog</name>
+    <message>
+        <source>Take Screenshot</source>
+        <translation>스크린샷 찍기</translation>
+    </message>
+    <message>
+        <source>Saving the screenshot failed</source>
+        <translation>스크린샷을 저장하지 못했습니다</translation>
+    </message>
+    <message>
+        <source>Save Screenshot</source>
+        <translation>스크린샷 저장</translation>
+    </message>
+    <message>
+        <source>PNG Image (*.png)</source>
+        <translation>PNG 이미지 (*.png)</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>복사</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>복사됨</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation>저장…</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>닫기</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotModeButtons</name>
+    <message>
+        <source>Visible Area</source>
+        <translation>보이는 영역</translation>
+    </message>
+    <message>
+        <source>Full Page</source>
+        <translation>전체 페이지</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotPreview</name>
+    <message>
+        <source>%1 × %2</source>
+        <translation>%1 × %2</translation>
+    </message>
+    <message>
+        <source>%1 (cut at 16384 px)</source>
+        <translation>%1 (16384 px에서 잘림)</translation>
     </message>
 </context>
 <context>

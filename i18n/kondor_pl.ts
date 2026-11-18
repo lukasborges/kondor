@@ -434,6 +434,10 @@
         <translation>Zapisz stronę jako…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Zrób zrzut ekranu…</translation>
+    </message>
+    <message>
         <source>Hide Toolbars</source>
         <translation>Ukryj paski narzędzi</translation>
     </message>
@@ -1932,6 +1936,10 @@
         <translation>Drukuj…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Zrób zrzut ekranu…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Pokaż źródło strony</translation>
     </message>
@@ -2703,6 +2711,63 @@
     <message>
         <source>Import passwords from a CSV file</source>
         <translation>Importuj hasła z pliku CSV</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotDialog</name>
+    <message>
+        <source>Take Screenshot</source>
+        <translation>Zrób zrzut ekranu</translation>
+    </message>
+    <message>
+        <source>Saving the screenshot failed</source>
+        <translation>Zapisanie zrzutu ekranu nie powiodło się</translation>
+    </message>
+    <message>
+        <source>Save Screenshot</source>
+        <translation>Zapisz zrzut ekranu</translation>
+    </message>
+    <message>
+        <source>PNG Image (*.png)</source>
+        <translation>Obraz PNG (*.png)</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>Kopiuj</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Skopiowano</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation>Zapisz…</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Zamknij</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotModeButtons</name>
+    <message>
+        <source>Visible Area</source>
+        <translation>Widoczny obszar</translation>
+    </message>
+    <message>
+        <source>Full Page</source>
+        <translation>Cała strona</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotPreview</name>
+    <message>
+        <source>%1 × %2</source>
+        <translation>%1 × %2</translation>
+    </message>
+    <message>
+        <source>%1 (cut at 16384 px)</source>
+        <translation>%1 (obcięty na 16384 px)</translation>
     </message>
 </context>
 <context>

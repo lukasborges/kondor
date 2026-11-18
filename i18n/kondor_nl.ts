@@ -434,6 +434,10 @@
         <translation>Pagina opslaan als…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Schermafdruk maken…</translation>
+    </message>
+    <message>
         <source>Hide Toolbars</source>
         <translation>Werkbalken verbergen</translation>
     </message>
@@ -1919,6 +1923,10 @@
         <translation>Afdrukken…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Schermafdruk maken…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Paginabron weergeven</translation>
     </message>
@@ -2689,6 +2697,63 @@
     <message>
         <source>Import passwords from a CSV file</source>
         <translation>Wachtwoorden importeren uit een CSV-bestand</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotDialog</name>
+    <message>
+        <source>Take Screenshot</source>
+        <translation>Schermafdruk maken</translation>
+    </message>
+    <message>
+        <source>Saving the screenshot failed</source>
+        <translation>Opslaan van de schermafdruk mislukt</translation>
+    </message>
+    <message>
+        <source>Save Screenshot</source>
+        <translation>Schermafdruk opslaan</translation>
+    </message>
+    <message>
+        <source>PNG Image (*.png)</source>
+        <translation>PNG-afbeelding (*.png)</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>Kopiëren</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Gekopieerd</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation>Opslaan…</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Sluiten</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotModeButtons</name>
+    <message>
+        <source>Visible Area</source>
+        <translation>Zichtbaar gebied</translation>
+    </message>
+    <message>
+        <source>Full Page</source>
+        <translation>Volledige pagina</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotPreview</name>
+    <message>
+        <source>%1 × %2</source>
+        <translation>%1 × %2</translation>
+    </message>
+    <message>
+        <source>%1 (cut at 16384 px)</source>
+        <translation>%1 (afgekapt bij 16384 px)</translation>
     </message>
 </context>
 <context>

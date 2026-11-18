@@ -68,7 +68,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 ### Reading
 - **Reader mode** for clutter-free articles
 - **Find in page**, **zoom per site** and **spell checking**
-- **Print**, **save as PDF** or **save the page**
+- **Print**, **save as PDF**, **save the page** or **take a screenshot**
 - **Full screen** for videos and windows, and hide the toolbars to show only the page
 
 ### Library
@@ -115,6 +115,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 | `Ctrl+M` | Mute or unmute the current tab |
 | `Ctrl+F` | Find in page |
 | `Ctrl+P` | Print (opens a PDF in the viewer) |
+| `Ctrl+Shift+S` | Take Screenshot (visible area or full page) |
 | `Ctrl+S` | Save page as… |
 | `F12` / `Ctrl+Shift+I` | Toggle developer tools |
 | `Ctrl+Alt+R` | Toggle reader mode (article pages) |

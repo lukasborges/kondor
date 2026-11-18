@@ -434,6 +434,10 @@
         <translation>Spara sida som…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Ta skärmbild…</translation>
+    </message>
+    <message>
         <source>Hide Toolbars</source>
         <translation>Dölj verktygsrader</translation>
     </message>
@@ -1919,6 +1923,10 @@
         <translation>Skriv ut…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>Ta skärmbild…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>Visa sidkälla</translation>
     </message>
@@ -2689,6 +2697,63 @@
     <message>
         <source>Import passwords from a CSV file</source>
         <translation>Importera lösenord från en CSV-fil</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotDialog</name>
+    <message>
+        <source>Take Screenshot</source>
+        <translation>Ta skärmbild</translation>
+    </message>
+    <message>
+        <source>Saving the screenshot failed</source>
+        <translation>Det gick inte att spara skärmbilden</translation>
+    </message>
+    <message>
+        <source>Save Screenshot</source>
+        <translation>Spara skärmbild</translation>
+    </message>
+    <message>
+        <source>PNG Image (*.png)</source>
+        <translation>PNG-bild (*.png)</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>Kopiera</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Kopierad</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation>Spara…</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Stäng</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotModeButtons</name>
+    <message>
+        <source>Visible Area</source>
+        <translation>Synligt område</translation>
+    </message>
+    <message>
+        <source>Full Page</source>
+        <translation>Hela sidan</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotPreview</name>
+    <message>
+        <source>%1 × %2</source>
+        <translation>%1 × %2</translation>
+    </message>
+    <message>
+        <source>%1 (cut at 16384 px)</source>
+        <translation>%1 (beskuren vid 16384 px)</translation>
     </message>
 </context>
 <context>

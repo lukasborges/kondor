@@ -434,6 +434,10 @@
         <translation>名前を付けてページを保存…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>スクリーンショットを撮影…</translation>
+    </message>
+    <message>
         <source>Hide Toolbars</source>
         <translation>ツールバーを隠す</translation>
     </message>
@@ -1906,6 +1910,10 @@
         <translation>印刷…</translation>
     </message>
     <message>
+        <source>Take Screenshot…</source>
+        <translation>スクリーンショットを撮影…</translation>
+    </message>
+    <message>
         <source>View Page Source</source>
         <translation>ページのソースを表示</translation>
     </message>
@@ -2675,6 +2683,63 @@
     <message>
         <source>Import passwords from a CSV file</source>
         <translation>CSV ファイルからパスワードをインポート</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotDialog</name>
+    <message>
+        <source>Take Screenshot</source>
+        <translation>スクリーンショットを撮影</translation>
+    </message>
+    <message>
+        <source>Saving the screenshot failed</source>
+        <translation>スクリーンショットを保存できませんでした</translation>
+    </message>
+    <message>
+        <source>Save Screenshot</source>
+        <translation>スクリーンショットを保存</translation>
+    </message>
+    <message>
+        <source>PNG Image (*.png)</source>
+        <translation>PNG 画像 (*.png)</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>コピー</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>コピーしました</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation>保存…</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>閉じる</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotModeButtons</name>
+    <message>
+        <source>Visible Area</source>
+        <translation>表示領域</translation>
+    </message>
+    <message>
+        <source>Full Page</source>
+        <translation>ページ全体</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotPreview</name>
+    <message>
+        <source>%1 × %2</source>
+        <translation>%1 × %2</translation>
+    </message>
+    <message>
+        <source>%1 (cut at 16384 px)</source>
+        <translation>%1 (16384 px で切り取り)</translation>
     </message>
 </context>
 <context>

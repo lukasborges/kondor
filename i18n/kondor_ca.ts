@@ -1322,7 +1322,7 @@
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; does not support HTTPS. Anyone on the network could see or change what is sent to it.</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt; no admet HTTPS. Qualsevol persona de la xarxa podria veure o canviar el que s'hi envia.</translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt; no admet HTTPS. Qualsevol persona de la xarxa podria veure o canviar el que s&apos;hi envia.</translation>
     </message>
     <message>
         <source>Continue to HTTP Site</source>

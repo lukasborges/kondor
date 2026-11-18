@@ -2210,11 +2210,11 @@
     </message>
     <message>
         <source>Connections:</source>
-        <translation>З'єднання:</translation>
+        <translation>З&apos;єднання:</translation>
     </message>
     <message>
         <source>Always use secure connections (HTTPS)</source>
-        <translation>Завжди використовувати захищені з'єднання (HTTPS)</translation>
+        <translation>Завжди використовувати захищені з&apos;єднання (HTTPS)</translation>
     </message>
     <message>
         <source>Pop-ups:</source>
@@ -2890,11 +2890,11 @@
     </message>
     <message>
         <source>Connections:</source>
-        <translation>З'єднання:</translation>
+        <translation>З&apos;єднання:</translation>
     </message>
     <message>
         <source>Always use secure connections (HTTPS)</source>
-        <translation>Завжди використовувати захищені з'єднання (HTTPS)</translation>
+        <translation>Завжди використовувати захищені з&apos;єднання (HTTPS)</translation>
     </message>
     <message>
         <source>Pop-ups:</source>

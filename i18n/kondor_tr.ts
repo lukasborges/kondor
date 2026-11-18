@@ -1319,7 +1319,7 @@
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; does not support HTTPS. Anyone on the network could see or change what is sent to it.</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt; HTTPS'yi desteklemiyor. Ağdaki herkes siteye gönderilenleri görebilir veya değiştirebilir.</translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt; HTTPS&apos;yi desteklemiyor. Ağdaki herkes siteye gönderilenleri görebilir veya değiştirebilir.</translation>
     </message>
     <message>
         <source>Continue to HTTP Site</source>

@@ -24,6 +24,7 @@ def start_detached(words: list[str], environment: Mapping[str, str]) -> bool:
     process.setProgram(words[0])
     process.setArguments(words[1:])
     process.setProcessEnvironment(process_environment(environment))
+    process.setUnixProcessParameters(QProcess.UnixProcessFlag.CloseFileDescriptors)
     return bool(process.startDetached())
 
 

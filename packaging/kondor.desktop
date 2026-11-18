@@ -63,7 +63,7 @@ Categories=Network;WebBrowser;
 Terminal=false
 StartupNotify=true
 StartupWMClass=kondor
-MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;application/x-kondor-extension;
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;application/x-kondor-extension;application/pdf;
 Keywords=browser;web;internet;
 Actions=new-private-window;
 

@@ -18,6 +18,8 @@ WebEngineView {
     profile: root.tab.profile
     webChannelWorld: WebEngineScript.ApplicationWorld
     settings.fullScreenSupportEnabled: true
+    settings.pluginsEnabled: true
+    settings.pdfViewerEnabled: true
 
     function isStarted(status) {
         return status === WebEngineLoadingInfo.LoadStartedStatus

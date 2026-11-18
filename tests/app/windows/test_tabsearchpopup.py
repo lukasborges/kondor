@@ -1,12 +1,14 @@
 import pytest
 from PySide6.QtCore import QUrl
 from PySide6.QtQml import QQmlEngine
+from PySide6.QtTest import QTest
 
 from tests.app.menu.mainmenuharness import MainMenuHarness
 
 pytestmark = pytest.mark.no_qt_log
 
 OPEN_TABS = 3
+SETTLE_MILLISECONDS = 300
 
 SEARCH_WINDOW_QML = """
 import QtQuick
@@ -32,6 +34,7 @@ def search_window(kondor_engine: QQmlEngine) -> MainMenuHarness:
     harness.tabs.addTab(False, QUrl("https://kde.org/"))
     harness.tabs.addTab(False, QUrl("https://qt.io/"))
     harness.evaluate("open()")
+    QTest.qWait(SETTLE_MILLISECONDS)
     return harness
 
 
@@ -55,3 +58,16 @@ def test_choosing_a_tab_closes_the_popup(
     search_window.evaluate("popup.choose(popup.results[0].tab)")
 
     assert search_window.evaluate("popup.opened") is False
+
+
+def test_stays_open_while_typing(search_window: MainMenuHarness) -> None:
+    search_window.evaluate("popup.contentItem.children[0].text = 'kde'")
+    QTest.qWait(SETTLE_MILLISECONDS)
+
+    assert search_window.evaluate("popup.opened") is True
+
+
+def test_highlights_the_selected_row(search_window: MainMenuHarness) -> None:
+    script = "popup.contentItem.children[1].itemAtIndex(0).children[1].highlighted"
+
+    assert search_window.evaluate(script) is True

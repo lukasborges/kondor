@@ -106,6 +106,7 @@ ApplicationWindow {
         browserWindow: window
         headerButton: headerPane.tabSearchButton
         sideBarButton: sideBarPane.tabSearchButton
+        tabsInSideBar: window.tabsInSideBar
     }
 
     BrowserShortcuts {

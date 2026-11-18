@@ -58,7 +58,7 @@ ListView {
         TabSearchRow {
             width: parent.width
             entry: item.modelData
-            highlighted: ListView.isCurrentItem
+            highlighted: item.ListView.isCurrentItem
             onHoveredChanged: if (hovered) list.currentIndex = item.index
             onClicked: list.tabChosen(item.modelData.tab)
             onCloseRequested: list.tabCloseRequested(item.modelData.tab)

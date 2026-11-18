@@ -64,6 +64,7 @@ ToolbarPopup {
             id: field
             Layout.fillWidth: true
             placeholderText: qsTr("Search tabs")
+            autoAccept: false
             onTextChanged: root.refresh()
             onAccepted: list.chooseSelected()
             Keys.onDownPressed: list.moveSelection(1)

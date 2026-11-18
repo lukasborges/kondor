@@ -39,6 +39,7 @@ ItemDelegate {
                 elide: Text.ElideMiddle
                 font: Kirigami.Theme.smallFont
                 color: row.highlighted ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.disabledTextColor
+                opacity: row.highlighted ? 0.8 : 1
                 Layout.fillWidth: true
             }
         }

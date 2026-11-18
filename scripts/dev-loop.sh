@@ -192,6 +192,7 @@ EOF
   step() {
     local dry="$1" n count_file count
     ensure_control || return 0
+    [[ "$dry" == 1 ]] || sync_blocked_cards
     n="$(next_dev_issue)"
     if [[ -z "$n" ]]; then
       log "queue: nothing for the developer"
@@ -263,8 +264,23 @@ EOF
     log "unblocked #$1"
   }
 
+  # Keeps the board in step with the `blocked` label whoever changes it (an agent that blocks an
+  # issue by hand, the maintainer removing the label): $state/blocked-cards remembers the issues
+  # whose card this loop already moved, so the board is written only when the label changes.
+  sync_blocked_cards() {
+    local marks="$state/blocked-cards" blocked n
+    mkdir -p "$marks"
+    blocked="$(gh issue list --repo lukasborges/kondor --state open --label blocked --json number --jq '.[].number')" || return 0
+    for n in $blocked; do
+      [[ -e "$marks/$n" ]] || { move_card "$n" Blocked && touch "$marks/$n"; }
+    done
+    for n in $(ls "$marks"); do
+      grep -qx "$n" <<<"$blocked" || { move_card "$n" "In Progress"; rm -f "$marks/$n"; }
+    done
+  }
+
   move_card() {
-    (cd "$control" && bash scripts/board.sh "$1" "$2") >/dev/null 2>&1 || log "board: could not move #$1 to $2"
+    (cd "$control" && bash scripts/board.sh "$1" "$2") >/dev/null 2>&1 || { log "board: could not move #$1 to $2"; return 1; }
   }
 
   install_service() {

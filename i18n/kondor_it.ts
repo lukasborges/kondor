@@ -3135,11 +3135,11 @@
     </message>
     <message>
         <source>Remove Agent Access</source>
-        <translation>Rimuovi accesso dell'agente</translation>
+        <translation>Rimuovi accesso dell&apos;agente</translation>
     </message>
     <message>
         <source>Allow Agent Access</source>
-        <translation>Consenti accesso dell'agente</translation>
+        <translation>Consenti accesso dell&apos;agente</translation>
     </message>
     <message>
         <source>Put Tab to Sleep</source>

@@ -84,7 +84,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 
 ### For developers
 - **Developer tools** (F12) and **view source**
-- **Remote control** lets AI agents control your tabs through a built-in MCP server (off by default)
+- **Remote control** lets AI agents work in marked tabs of their own through a built-in MCP server (off by default)
 - **Load unpacked extensions** with `--load-extension <dir>` (experimental, needs `--new-instance`)
 
 ## Keyboard shortcuts
@@ -169,7 +169,9 @@ unless you allow them. Authors: see [`docs/extensions/api.md`](docs/extensions/a
 
 ## Remote control
 
-AI agents and automation tools can read and control the pages of normal windows. Turn it on in **Settings → Privacy → Remote control** and restart Kondor,
+AI agents and automation tools can read and control the pages of normal windows, with the agent's
+pointer shown on the page. Agents work only in tabs they open, which are marked, or in tabs you
+hand over with **Allow Agent Access**. Turn it on in **Settings → Privacy → Remote control** and restart Kondor,
 or start it once with `kondor --remote-control 9222`.
 
 Kondor has a built-in [MCP](https://modelcontextprotocol.io) server, so any MCP client needs no

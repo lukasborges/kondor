@@ -3134,6 +3134,14 @@
         <translation>Silenciar aba</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>Remover acesso do agente</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>Permitir acesso do agente</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Suspender aba</translation>
     </message>
@@ -3167,6 +3175,18 @@
     <message>
         <source>playing sound</source>
         <translation>reproduzindo som</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1 está trabalhando nesta aba</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>Aberta por %1</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>Agentes podem usar esta aba</translation>
     </message>
     <message>
         <source>Sleeping</source>

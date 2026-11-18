@@ -3148,6 +3148,14 @@
         <translation>Отключить звук вкладки</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>Убрать доступ агента</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>Разрешить доступ агента</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Перевести вкладку в спящий режим</translation>
     </message>
@@ -3181,6 +3189,18 @@
     <message>
         <source>playing sound</source>
         <translation>воспроизводит звук</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1 работает в этой вкладке</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>Открыто агентом %1</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>Агенты могут использовать эту вкладку</translation>
     </message>
     <message>
         <source>Sleeping</source>

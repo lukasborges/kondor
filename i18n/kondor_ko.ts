@@ -3120,6 +3120,14 @@
         <translation>탭 음소거</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>에이전트 접근 제거</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>에이전트 접근 허용</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>탭을 절전 상태로 전환</translation>
     </message>
@@ -3153,6 +3161,18 @@
     <message>
         <source>playing sound</source>
         <translation>소리 재생 중</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1이(가) 이 탭에서 작업 중입니다</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>%1이(가) 엶</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>에이전트가 이 탭을 사용할 수 있습니다</translation>
     </message>
     <message>
         <source>Sleeping</source>

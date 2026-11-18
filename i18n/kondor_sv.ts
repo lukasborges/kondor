@@ -3134,6 +3134,14 @@
         <translation>Ljud av för fliken</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>Ta bort agentåtkomst</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>Tillåt agentåtkomst</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Försätt fliken i viloläge</translation>
     </message>
@@ -3167,6 +3175,18 @@
     <message>
         <source>playing sound</source>
         <translation>spelar upp ljud</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1 arbetar i den här fliken</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>Öppnad av %1</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>Agenter kan använda den här fliken</translation>
     </message>
     <message>
         <source>Sleeping</source>

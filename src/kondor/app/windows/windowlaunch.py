@@ -24,6 +24,7 @@ def restored_contents(state: SessionWindow) -> WindowContents:
     return WindowContents(
         urls=[tab.url for tab in state.tabs],
         titles=[tab.title for tab in state.tabs],
+        agents=[{"hasAccess": t.has_agent_access, "name": t.agent_name} for t in state.tabs],
         current_index=state.current_index,
     )
 

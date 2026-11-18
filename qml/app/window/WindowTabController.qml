@@ -118,11 +118,18 @@ Item {
         return index < titles.length ? titles[index] : ""
     }
 
+    function restoreAgentAccess(tab, index) {
+        const agent = browserWindow.initialAgents[index]
+        if (tab && agent && agent.hasAccess)
+            tab.agent.grant(agent.name)
+    }
+
     function restoreTab(index) {
         const tab = tabs.addTab(browserWindow.privateWindow, browserWindow.initialUrls[index])
         const title = initialTitleAt(index)
         if (tab && title.length > 0 && !tab.newTabPage)
             tab.setTitle(title)
+        restoreAgentAccess(tab, index)
     }
 
     function selectInitialTab() {

@@ -56,6 +56,24 @@ Item {
         opacity: info.isSleeping ? 0.5 : 1
     }
 
+    Rectangle {
+        visible: root.showsEmblem && info.isAgentTab
+        width: 12
+        height: 12
+        radius: 6
+        anchors { right: parent.right; bottom: parent.bottom; rightMargin: -4; bottomMargin: -4 }
+        color: Kirigami.Theme.neutralTextColor
+
+        Kirigami.Icon {
+            anchors.centerIn: parent
+            width: 8
+            height: 8
+            source: "automated-tasks"
+            color: "white"
+            isMask: true
+        }
+    }
+
     BusyIndicator {
         anchors.fill: parent
         visible: root.isBusy

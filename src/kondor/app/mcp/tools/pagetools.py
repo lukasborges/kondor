@@ -21,14 +21,17 @@ def new_tab(browser: Browser, arguments: Arguments) -> ToolResult:
 TOOLS = [
     Tool(
         "list_pages",
-        "List the open tabs: id, title, URL and which one is current.",
+        (
+            "List the tabs open to agents (opened with new_tab, or handed over by the user): "
+            "id, title, URL and which one is current."
+        ),
         {},
         (),
         list_pages,
     ),
     Tool(
         "new_tab",
-        "Open a URL in a new tab of Kondor.",
+        "Open a URL in a new tab of Kondor. Agents work only in tabs they open: call this first.",
         {"url": string_property("The URL to open.")},
         ("url",),
         new_tab,

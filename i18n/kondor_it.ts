@@ -3134,6 +3134,14 @@
         <translation>Disattiva audio scheda</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>Rimuovi accesso dell&apos;agente</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>Consenti accesso dell&apos;agente</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>Sospendi scheda</translation>
     </message>
@@ -3167,6 +3175,18 @@
     <message>
         <source>playing sound</source>
         <translation>riproduce audio</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1 sta lavorando in questa scheda</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>Aperta da %1</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>Gli agenti possono usare questa scheda</translation>
     </message>
     <message>
         <source>Sleeping</source>

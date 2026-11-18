@@ -3120,6 +3120,14 @@
         <translation>將分頁靜音</translation>
     </message>
     <message>
+        <source>Remove Agent Access</source>
+        <translation>移除代理程式存取權</translation>
+    </message>
+    <message>
+        <source>Allow Agent Access</source>
+        <translation>允許代理程式存取</translation>
+    </message>
+    <message>
         <source>Put Tab to Sleep</source>
         <translation>讓分頁進入休眠</translation>
     </message>
@@ -3153,6 +3161,18 @@
     <message>
         <source>playing sound</source>
         <translation>正在播放聲音</translation>
+    </message>
+    <message>
+        <source>%1 is working in this tab</source>
+        <translation>%1 正在此分頁中作業</translation>
+    </message>
+    <message>
+        <source>Opened by %1</source>
+        <translation>由 %1 開啟</translation>
+    </message>
+    <message>
+        <source>Agents can use this tab</source>
+        <translation>代理程式可以使用此分頁</translation>
     </message>
     <message>
         <source>Sleeping</source>

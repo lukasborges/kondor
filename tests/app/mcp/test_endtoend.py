@@ -60,14 +60,28 @@ def call(request_id: int, name: str, arguments: dict[str, str]) -> str:
 def test_controls_a_page_of_a_running_browser(tmp_path: Path, browser_port: int) -> None:
     lines = [
         json.dumps({"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}}),
-        call(2, "navigate", {"url": PAGE}),
-        call(3, "snapshot", {}),
-        call(4, "click", {"uid": "0"}),
-        call(5, "evaluate", {"expression": "document.title"}),
+        call(2, "new_tab", {"url": "about:blank"}),
+        call(3, "navigate", {"url": PAGE}),
+        call(4, "snapshot", {}),
+        call(5, "click", {"uid": "0"}),
+        call(6, "evaluate", {"expression": "document.title"}),
     ]
 
     completed = run_mcp([], lines, tmp_path)
 
     responses = [json.loads(line) for line in completed.stdout.splitlines()]
-    assert 'button "Go"' in responses[2]["result"]["content"][0]["text"]
-    assert responses[4]["result"]["content"][0]["text"] == '"clicked"'
+    assert 'button "Go"' in responses[3]["result"]["content"][0]["text"]
+    assert responses[5]["result"]["content"][0]["text"] == '"clicked"'
+
+
+def test_refuses_a_tab_the_agent_did_not_open(tmp_path: Path, browser_port: int) -> None:
+    lines = [
+        json.dumps({"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}}),
+        call(2, "snapshot", {}),
+    ]
+
+    completed = run_mcp([], lines, tmp_path)
+
+    responses = [json.loads(line) for line in completed.stdout.splitlines()]
+    assert responses[1]["result"]["isError"] is True
+    assert "new_tab" in responses[1]["result"]["content"][0]["text"]

@@ -48,5 +48,8 @@ def string_property(description: str) -> dict[str, str]:
     return {"type": "string", "description": description}
 
 
-PAGE_PROPERTY = string_property("Page id from list_pages; defaults to the current tab.")
+PAGE_PROPERTY = string_property(
+    "Page id from list_pages; defaults to the tab you used last. "
+    "Only tabs open to agents work: open one with new_tab first."
+)
 UID_PROPERTY = string_property("Element uid from the latest snapshot.")

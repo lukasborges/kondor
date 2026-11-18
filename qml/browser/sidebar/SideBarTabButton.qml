@@ -18,7 +18,7 @@ ToolButton {
     Accessible.name: info.iconOnlyName
     Accessible.description: info.stateDescription
     ToolTip.visible: hovered
-    ToolTip.text: info.title
+    ToolTip.text: info.isAgentTab ? info.title + "\n" + info.agentDescription : info.title
     ToolTip.delay: 600
     onClicked: tabModel.setCurrentIndex(index)
     onToggled: checked = Qt.binding(() => isCurrent)

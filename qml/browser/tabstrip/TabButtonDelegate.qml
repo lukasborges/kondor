@@ -75,6 +75,12 @@ TabButton {
         tab: control.tab
     }
 
+    AgentTabBorder { visible: info.isAgentTab }
+
+    ToolTip.visible: hovered && info.isAgentTab
+    ToolTip.text: info.agentDescription
+    ToolTip.delay: 600
+
     onXChanged: tabSlide.followPosition()
     Component.onDestruction: tabDrag.abortOnDestruction()
 
@@ -97,6 +103,10 @@ TabButton {
                 tab: control.tab
                 showsEmblem: control.tab.pinned
             }
+        }
+
+        AgentTabIcon {
+            visible: !control.tab.pinned && info.isAgentTab
         }
 
         TabSoundButton {

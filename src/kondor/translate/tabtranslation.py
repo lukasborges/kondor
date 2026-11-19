@@ -134,7 +134,7 @@ class TabTranslation(QObject):
 
     @Slot()
     def cancel(self) -> None:
-        self._tracker.cancel(self._service.active_jobs())
+        self._tracker.cancel()
 
     @Slot()
     def showOriginal(self) -> None:

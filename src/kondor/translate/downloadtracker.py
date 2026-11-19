@@ -11,6 +11,7 @@ class DownloadTracker(QObject):
         super().__init__(parent)
         self._progress = (0, 0)
         self._is_cancelling = False
+        self._job: FilesJob | None = None
 
     @property
     def progress(self) -> tuple[int, int]:
@@ -22,13 +23,14 @@ class DownloadTracker(QObject):
 
     def follow(self, job: FilesJob) -> None:
         self._is_cancelling = False
+        self._job = job
         job.progressed.connect(self._on_progress)
         job.finished.connect(self._on_finished)
 
-    def cancel(self, jobs: list[FilesJob]) -> None:
+    def cancel(self) -> None:
         self._is_cancelling = True
-        for job in jobs:
-            job.cancel()
+        if self._job is not None:
+            self._job.cancel()
 
     def _on_progress(self, done: int, total: int) -> None:
         self._progress = (done, total)

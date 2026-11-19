@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
 import Kondor
 
 RowLayout {
@@ -13,7 +14,7 @@ RowLayout {
     readonly property bool isOffer: translation.state === "idle" || translation.state === "error"
 
     Layout.alignment: Qt.AlignRight
-    spacing: 6
+    spacing: Kirigami.Units.smallSpacing
 
     Button {
         visible: root.isOffer

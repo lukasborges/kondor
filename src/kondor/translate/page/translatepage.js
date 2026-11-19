@@ -95,6 +95,7 @@ const ktStart = (target) => {
 const ktRestore = () => {
     ktState.active = false;
     ktState.queue = [];
+    ktState.requests.clear();
     if (ktState.observer)
         ktState.observer.disconnect();
     ktState.applied.forEach((unit) => unit.restore());

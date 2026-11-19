@@ -3,6 +3,7 @@ const ktSkipTags = new Set(["SCRIPT", "STYLE", "NOSCRIPT", "CODE", "PRE", "TEXTA
 const ktInlineTags = new Set(["A", "ABBR", "B", "BDI", "BDO", "BR", "CITE", "DFN", "EM", "I", "MARK",
     "Q", "S", "SMALL", "SPAN", "STRONG", "SUB", "SUP", "TIME", "U", "WBR"]);
 const ktAttributes = ["title", "alt", "placeholder", "aria-label"];
+const ktAttributeSkipTags = new Set(["SCRIPT", "STYLE", "NOSCRIPT", "TEMPLATE", "SVG", "MATH", "CANVAS"]);
 const ktSkippedSelector = "[translate=no], .notranslate, [contenteditable]:not([contenteditable=false])";
 
 const ktHasText = (node) => /\S/.test(node.nodeValue);
@@ -17,13 +18,47 @@ const ktHasDirectText = (element) => ktChildren(element).some((node) => node.nod
 const ktIsInlineOnly = (element) => Array.from(element.children).every((child) =>
     ktInlineTags.has(ktTag(child)) && !ktIsSkipped(child) && ktIsInlineOnly(child));
 
+const ktTagAttribute = "data-kondor-tid";
+
+const ktTagDescendants = (element) => {
+    const tagged = Array.from(element.querySelectorAll("*"));
+    tagged.forEach((child, index) => child.setAttribute(ktTagAttribute, index));
+    const html = element.innerHTML;
+    tagged.forEach((child) => child.removeAttribute(ktTagAttribute));
+    return { tagged, html };
+};
+
+const ktAdoptOriginal = (copy, tagged, used) => {
+    const original = tagged[copy.getAttribute(ktTagAttribute)];
+    if (!original || used.has(original))
+        return;
+    used.add(original);
+    original.replaceChildren(...ktChildren(copy));
+    copy.replaceWith(original);
+};
+
+const ktRebuild = (element, html, tagged) => {
+    const body = ktParse(html);
+    const used = new Set();
+    Array.from(body.querySelectorAll("[" + ktTagAttribute + "]"))
+        .forEach((copy) => ktAdoptOriginal(copy, tagged, used));
+    element.replaceChildren(...ktChildren(body));
+};
+
+const ktRestoreElement = (element, original, inner) => {
+    element.replaceChildren(...original);
+    inner.forEach(([child, children]) => child.replaceChildren(...children));
+};
+
 const ktElementUnit = (element) => {
     const original = ktChildren(element);
+    const { tagged, html } = ktTagDescendants(element);
+    const inner = tagged.map((child) => [child, ktChildren(child)]);
     return {
         node: element,
-        html: element.innerHTML,
-        apply: (html) => element.replaceChildren(...ktChildren(ktParse(html))),
-        restore: () => element.replaceChildren(...original),
+        html,
+        apply: (translated) => ktRebuild(element, translated, tagged),
+        restore: () => ktRestoreElement(element, original, inner),
     };
 };
 
@@ -67,7 +102,7 @@ const ktCollectAttributes = (root, units) => {
     const selector = ktAttributes.map((name) => "[" + name + "]").join(",");
     const elements = [root, ...root.querySelectorAll(selector)].filter((el) => el.nodeType === 1);
     for (const element of elements) {
-        if (ktIsInsideSkipped(element) || ktSkipTags.has(ktTag(element)))
+        if (ktIsInsideSkipped(element) || ktAttributeSkipTags.has(ktTag(element)))
             continue;
         ktAttributes.filter((name) => /\S/.test(element.getAttribute(name) || ""))
             .forEach((name) => units.push(ktAttributeUnit(element, name)));

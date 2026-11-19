@@ -97,9 +97,6 @@ class TranslationService(QObject):
         steps = [Step(pair[0], pair[1], self._store.pair_files(pair)) for pair in request.route]
         self._engine.translate(EngineJob(steps, request.texts), done, fail)
 
-    def active_jobs(self) -> list[FilesJob]:
-        return list(self._jobs.values())
-
     def installed_pairs(self) -> list[InstalledPair]:
         return self._store.installed_pairs()
 

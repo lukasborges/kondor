@@ -55,6 +55,11 @@ RESOURCE_GROUPS = (
     ),
     ResourceGroup(
         "/scripts",
+        "src/kondor/browser/responsive",
+        ("src/kondor/browser/responsive/devtoolsrouting.js",),
+    ),
+    ResourceGroup(
+        "/scripts",
         "src/kondor/browser/popups",
         (
             "src/kondor/browser/popups/popupguard.js",

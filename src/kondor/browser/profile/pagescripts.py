@@ -20,6 +20,8 @@ MEDIA_SESSION_SCRIPT = "kondor-media-session"
 MEDIA_WATCH_SCRIPT = "kondor-media-watch"
 POPUP_GUARD_RESOURCE = ":/scripts/popupguard.js"
 POPUP_WATCH_RESOURCE = ":/scripts/popupwatch.js"
+DEVTOOLS_ROUTING_RESOURCE = ":/scripts/devtoolsrouting.js"
+DEVTOOLS_ROUTING_SCRIPT = "kondor-devtools-routing"
 POPUP_GUARD_SCRIPT = "kondor-popup-guard"
 POPUP_WATCH_SCRIPT = "kondor-popup-watch"
 USER_SCRIPTS_PROPERTY = "userScripts"
@@ -96,6 +98,9 @@ MEDIA_SESSION = PageScript(MEDIA_SESSION_SCRIPT, MEDIA_SESSION_RESOURCE, ScriptW
 MEDIA_WATCH = PageScript(MEDIA_WATCH_SCRIPT, MEDIA_WATCH_RESOURCE, ScriptWorldId.ApplicationWorld)
 POPUP_GUARD = PageScript(POPUP_GUARD_SCRIPT, POPUP_GUARD_RESOURCE, ScriptWorldId.MainWorld)
 POPUP_WATCH = PageScript(POPUP_WATCH_SCRIPT, POPUP_WATCH_RESOURCE, ScriptWorldId.ApplicationWorld)
+DEVTOOLS_ROUTING = PageScript(
+    DEVTOOLS_ROUTING_SCRIPT, DEVTOOLS_ROUTING_RESOURCE, ScriptWorldId.MainWorld
+)
 
 
 def install_page_script(collection: QObject | None, script: PageScript, feature: str) -> None:
@@ -117,6 +122,10 @@ def install_popup_scripts(collection: QObject | None) -> None:
     install_page_script(collection, POPUP_WATCH, "the blocked pop-ups list")
 
 
+def install_devtools_routing(collection: QObject | None) -> None:
+    install_page_script(collection, DEVTOOLS_ROUTING, "responsive design mode in Developer Tools")
+
+
 def keep_cpp_ownership(target: QObject | None) -> None:
     if target is not None:
         QJSEngine.setObjectOwnership(target, QJSEngine.ObjectOwnership.CppOwnership)
@@ -136,5 +145,6 @@ def install(profile: QQuickWebEngineProfile) -> None:
         return
     install_media_scripts(collection)
     install_popup_scripts(collection)
+    install_devtools_routing(collection)
     if not profile.isOffTheRecord():
         install_passwords_script(collection)

@@ -12,6 +12,7 @@ Rectangle {
     required property TabModel tabModel
     required property var targetWindow
 
+    readonly property alias nameLabel: nameLabel
     property real dragShift: 0
     readonly property int tabCount: tabModel.groupRevision >= 0 ? tabModel.tabCountOf(group) : 0
     readonly property string displayName: group.name.length > 0 ? group.name : qsTr("Unnamed group")
@@ -57,8 +58,8 @@ Rectangle {
     }
 
     RowLayout {
-        anchors.fill: parent
-        anchors.margins: Kirigami.Units.smallSpacing
+        anchors.centerIn: parent
+        width: Math.min(implicitWidth, label.width - Kirigami.Units.smallSpacing * 2)
         spacing: Kirigami.Units.smallSpacing
 
         Rectangle {
@@ -71,6 +72,7 @@ Rectangle {
         }
 
         Label {
+            id: nameLabel
             visible: label.group.name.length > 0
             Layout.fillWidth: true
             text: label.group.name

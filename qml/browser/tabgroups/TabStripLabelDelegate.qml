@@ -22,6 +22,7 @@ TabButton {
 
     TabGroupLabel {
         id: label
+        x: 1
         y: 2
         width: item.width - 2
         height: item.height - 4

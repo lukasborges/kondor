@@ -116,8 +116,15 @@ class TabStripHarness:
     def label_left(self, group: object) -> float:
         return float(self.call("leftOfLabel", group))
 
+    def chip_left(self, group: object) -> float:
+        return float(self.call("leftOfChip", group))
+
     def label_width(self, group: object) -> float:
         return float(self.call("widthOfLabel", group))
+
+    def name_padding(self, group: object) -> tuple[float, float]:
+        left = float(self.call("nameLeftPadding", group))
+        return left, float(self.call("nameRightPadding", group))
 
     def visible_bars(self) -> int:
         return int(self.call("visibleBars"))

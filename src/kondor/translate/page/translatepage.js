@@ -101,6 +101,7 @@ const ktStart = (target) => {
 const ktRestore = () => {
     ktState.active = false;
     ktState.queue = [];
+    clearTimeout(ktState.timer);
     ktState.generation++;
     if (ktState.observer)
         ktState.observer.disconnect();

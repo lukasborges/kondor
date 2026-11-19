@@ -2539,6 +2539,10 @@
         <translation>響應式</translation>
     </message>
     <message>
+        <source>%1×</source>
+        <translation>%1×</translation>
+    </message>
+    <message>
         <source>Device</source>
         <translation>裝置</translation>
     </message>
@@ -2549,6 +2553,10 @@
     <message>
         <source>Height</source>
         <translation>高度</translation>
+    </message>
+    <message>
+        <source>Device pixel ratio</source>
+        <translation>裝置像素比</translation>
     </message>
     <message>
         <source>Rotate</source>

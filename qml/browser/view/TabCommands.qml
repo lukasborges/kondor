@@ -67,7 +67,13 @@ Item {
     function reloadBypassingCache() { wakeOrRun(() => webView.reloadAndBypassCache()) }
 
     function stepZoom(direction) {
-        webView.zoomFactor = ZoomManager.step(webView.zoomFactor, direction)
+        if (!tab.responsive.isActive)
+            webView.zoomFactor = ZoomManager.step(webView.zoomFactor, direction)
+    }
+
+    function resetZoom() {
+        if (!tab.responsive.isActive)
+            webView.zoomFactor = 1.0
     }
 
     Connections {
@@ -82,7 +88,7 @@ Item {
         function onStopRequested() { root.webView.stop() }
         function onZoomInRequested() { root.stepZoom(1) }
         function onZoomOutRequested() { root.stepZoom(-1) }
-        function onResetZoomRequested() { root.webView.zoomFactor = 1.0 }
+        function onResetZoomRequested() { root.resetZoom() }
         function onCloseRequested() { root.tabModel.closeTabObject(root.tab) }
         function onOpenTabRequested(url, background) {
             root.tabModel.addTabWithProfile(root.tab.profile, url, background)

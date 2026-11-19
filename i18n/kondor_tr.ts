@@ -2539,6 +2539,10 @@
         <translation>Duyarlı</translation>
     </message>
     <message>
+        <source>%1×</source>
+        <translation>%1×</translation>
+    </message>
+    <message>
         <source>Device</source>
         <translation>Aygıt</translation>
     </message>
@@ -2549,6 +2553,10 @@
     <message>
         <source>Height</source>
         <translation>Yükseklik</translation>
+    </message>
+    <message>
+        <source>Device pixel ratio</source>
+        <translation>Aygıt piksel oranı</translation>
     </message>
     <message>
         <source>Rotate</source>

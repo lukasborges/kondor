@@ -2553,6 +2553,10 @@
         <translation>Adaptable</translation>
     </message>
     <message>
+        <source>%1×</source>
+        <translation>%1×</translation>
+    </message>
+    <message>
         <source>Device</source>
         <translation>Dispositiu</translation>
     </message>
@@ -2563,6 +2567,10 @@
     <message>
         <source>Height</source>
         <translation>Alçada</translation>
+    </message>
+    <message>
+        <source>Device pixel ratio</source>
+        <translation>Relació de píxels del dispositiu</translation>
     </message>
     <message>
         <source>Rotate</source>

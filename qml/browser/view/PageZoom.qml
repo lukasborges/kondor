@@ -10,6 +10,7 @@ Item {
 
     property string zoomHost: ""
     property bool applyingZoom: false
+    readonly property real modeZoom: tab.responsive.ratio / Screen.devicePixelRatio
 
     visible: false
 
@@ -21,9 +22,17 @@ Item {
         applyingZoom = false
     }
 
+    function savedZoom(host) {
+        return host === "" ? 1.0 : ZoomManager.zoomFor(host)
+    }
+
+    function wantedZoom() {
+        return tab.responsive.isActive ? modeZoom : savedZoom(zoomHost)
+    }
+
     function applySavedZoom(host) {
         zoomHost = host
-        setViewZoom(host === "" ? 1.0 : ZoomManager.zoomFor(host))
+        setViewZoom(wantedZoom())
     }
 
     function followUrl(url) {
@@ -37,16 +46,23 @@ Item {
     }
 
     function saveZoomOfNormalTab(factor) {
-        if (applyingZoom || tab.isPrivate || zoomHost === "")
+        if (applyingZoom || tab.isPrivate || zoomHost === "" || tab.responsive.isActive)
             return
         ZoomManager.setZoomFor(zoomHost, factor)
+    }
+
+    onModeZoomChanged: setViewZoom(wantedZoom())
+
+    Connections {
+        target: root.tab.responsive
+        function onActiveChanged() { root.setViewZoom(root.wantedZoom()) }
     }
 
     Connections {
         target: ZoomManager
         function onZoomChanged(host, factor) {
             if (host === root.zoomHost)
-                root.setViewZoom(factor)
+                root.setViewZoom(root.wantedZoom())
         }
     }
 }

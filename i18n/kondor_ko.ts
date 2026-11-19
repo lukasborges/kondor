@@ -2539,6 +2539,10 @@
         <translation>반응형</translation>
     </message>
     <message>
+        <source>%1×</source>
+        <translation>%1×</translation>
+    </message>
+    <message>
         <source>Device</source>
         <translation>장치</translation>
     </message>
@@ -2549,6 +2553,10 @@
     <message>
         <source>Height</source>
         <translation>높이</translation>
+    </message>
+    <message>
+        <source>Device pixel ratio</source>
+        <translation>기기 픽셀 비율</translation>
     </message>
     <message>
         <source>Rotate</source>

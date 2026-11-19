@@ -14,6 +14,7 @@ Rectangle {
     readonly property bool isResponsive: responsive.isActive
     readonly property real margin: Kirigami.Units.largeSpacing * 2
     readonly property real footer: Kirigami.Units.gridUnit * 2
+    readonly property real pageZoom: isResponsive ? responsive.ratio / Screen.devicePixelRatio : 1
     readonly property real fitScale: isResponsive && responsive.zoomToFit ? scaleToFit() : 1
 
     function scaleToFit() {
@@ -45,9 +46,9 @@ Rectangle {
 
             Item {
                 id: viewport
-                width: root.isResponsive ? root.responsive.width : frame.width
-                height: root.isResponsive ? root.responsive.height : frame.height
-                scale: root.fitScale
+                width: root.isResponsive ? root.responsive.width * root.pageZoom : frame.width
+                height: root.isResponsive ? root.responsive.height * root.pageZoom : frame.height
+                scale: root.fitScale / root.pageZoom
                 transformOrigin: Item.TopLeft
             }
 

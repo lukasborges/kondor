@@ -16,6 +16,7 @@ Item {
 
     readonly property Tab tab: tabs.currentTab
     readonly property bool hasPage: tab !== null && !tab.newTabPage
+    readonly property bool canZoom: hasPage && !tab.responsive.isActive
     readonly property bool canReadInReaderMode: tab !== null && (tab.readerAvailable || tab.readerActive)
 
     Shortcut {
@@ -125,15 +126,15 @@ Item {
     }
     Shortcut {
         sequences: ["Ctrl++", "Ctrl+="]
-        onActivated: if (root.hasPage) root.tab.zoomIn()
+        onActivated: if (root.canZoom) root.tab.zoomIn()
     }
     Shortcut {
         sequences: ["Ctrl+-"]
-        onActivated: if (root.hasPage) root.tab.zoomOut()
+        onActivated: if (root.canZoom) root.tab.zoomOut()
     }
     Shortcut {
         sequence: "Ctrl+0"
-        onActivated: if (root.hasPage) root.tab.resetZoom()
+        onActivated: if (root.canZoom) root.tab.resetZoom()
     }
     Shortcut {
         sequence: "Ctrl+Alt+R"

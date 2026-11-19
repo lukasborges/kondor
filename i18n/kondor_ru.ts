@@ -2567,6 +2567,10 @@
         <translation>Адаптивный</translation>
     </message>
     <message>
+        <source>%1×</source>
+        <translation>%1×</translation>
+    </message>
+    <message>
         <source>Device</source>
         <translation>Устройство</translation>
     </message>
@@ -2577,6 +2581,10 @@
     <message>
         <source>Height</source>
         <translation>Высота</translation>
+    </message>
+    <message>
+        <source>Device pixel ratio</source>
+        <translation>Плотность пикселей устройства</translation>
     </message>
     <message>
         <source>Rotate</source>

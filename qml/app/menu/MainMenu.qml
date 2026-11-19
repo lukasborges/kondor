@@ -10,7 +10,7 @@ Menu {
     required property var browserWindow
 
     readonly property var tab: root.browserWindow.tabModel.currentTab
-    readonly property bool zoomEnabled: tab ? !tab.newTabPage : false
+    readonly property bool zoomEnabled: tab ? !tab.newTabPage && !tab.responsive.isActive : false
 
     function toggleFullScreen() {
         root.close()

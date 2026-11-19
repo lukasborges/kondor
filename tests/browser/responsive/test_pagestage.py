@@ -17,7 +17,8 @@ MAX_FIT = 0.5
 pytestmark = pytest.mark.no_qt_log
 
 PAGE = (
-    "<title>x</title><script>function show() { document.title = innerWidth + 'x' + innerHeight }"
+    "<title>x</title><script>function show() {"
+    " document.title = innerWidth + 'x' + innerHeight + '@' + devicePixelRatio }"
     "; addEventListener('resize', show); show()</script>"
 )
 SCENE_QML = """
@@ -34,6 +35,7 @@ PageStage {
         objectName: "view"
         anchors.fill: parent
         profile: testTab.profile
+        zoomFactor: stage.pageZoom
         url: "data:text/html,PAGE_URL"
     }
 }
@@ -77,14 +79,14 @@ def test_page_fills_the_area_when_the_mode_is_off(
     scene_and_tab: tuple[Scene, Tab], qtbot: QtBot
 ) -> None:
     scene, _ = scene_and_tab
-    qtbot.waitUntil(lambda: scene.view.property("title") == "1100x700", timeout=20000)
+    qtbot.waitUntil(lambda: scene.view.property("title") == "1100x700@1", timeout=20000)
 
 
 def test_page_lays_out_at_the_device_size(scene_and_tab: tuple[Scene, Tab], qtbot: QtBot) -> None:
     scene, tab = scene_and_tab
     tab.responsive.setActive(True)
-    tab.responsive.selectDevice("iphone15")
-    qtbot.waitUntil(lambda: scene.view.property("title") == "393x852", timeout=20000)
+    tab.responsive.selectDevice("iphone-16")
+    qtbot.waitUntil(lambda: scene.view.property("title") == "393x852@3", timeout=20000)
 
 
 def test_large_device_is_scaled_down_to_fit_the_area(
@@ -92,8 +94,8 @@ def test_large_device_is_scaled_down_to_fit_the_area(
 ) -> None:
     scene, tab = scene_and_tab
     tab.responsive.setActive(True)
-    tab.responsive.selectDevice("ipadpro")
-    qtbot.waitUntil(lambda: scene.view.property("title") == "1024x1366", timeout=20000)
+    tab.responsive.selectDevice("ipad-pro-13")
+    qtbot.waitUntil(lambda: scene.view.property("title") == "1032x1376@2", timeout=20000)
     assert MIN_FIT < scene.root.property("fitScale") < MAX_FIT
 
 
@@ -102,6 +104,23 @@ def test_page_keeps_its_size_without_zoom_to_fit(
 ) -> None:
     scene, tab = scene_and_tab
     tab.responsive.setActive(True)
-    tab.responsive.selectDevice("ipadpro")
+    tab.responsive.selectDevice("ipad-pro-13")
     tab.responsive.setZoomToFit(False)
     assert scene.root.property("fitScale") == 1
+
+
+def test_page_sees_the_device_pixel_ratio(scene_and_tab: tuple[Scene, Tab], qtbot: QtBot) -> None:
+    scene, tab = scene_and_tab
+    tab.responsive.setActive(True)
+    tab.responsive.selectDevice("pixel-9")
+    qtbot.waitUntil(lambda: scene.view.property("title") == "412x924@2.625", timeout=20000)
+
+
+def test_lowering_the_ratio_keeps_the_css_size(
+    scene_and_tab: tuple[Scene, Tab], qtbot: QtBot
+) -> None:
+    scene, tab = scene_and_tab
+    tab.responsive.setActive(True)
+    tab.responsive.selectDevice("pixel-9")
+    tab.responsive.setRatio(1)
+    qtbot.waitUntil(lambda: scene.view.property("title") == "412x924@1", timeout=20000)

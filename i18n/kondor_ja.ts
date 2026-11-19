@@ -1628,6 +1628,32 @@
     </message>
 </context>
 <context>
+    <name>ManageLanguageRow</name>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 MB</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>削除</translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation>%1 を削除</translation>
+    </message>
+</context>
+<context>
+    <name>ManageLanguagesDialog</name>
+    <message>
+        <source>Manage Languages</source>
+        <translation>言語を管理</translation>
+    </message>
+    <message>
+        <source>No languages downloaded</source>
+        <translation>ダウンロード済みの言語はありません</translation>
+    </message>
+</context>
+<context>
     <name>ManageProfileRow</name>
     <message>
         <source>The Default profile cannot be deleted</source>
@@ -3568,6 +3594,96 @@
     <message>
         <source>Remove from Top Sites</source>
         <translation>トップサイトから削除</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButton</name>
+    <message>
+        <source>Translate Page</source>
+        <translation>ページを翻訳</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButtons</name>
+    <message>
+        <source>Not Now</source>
+        <translation>後で</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+    <message>
+        <source>Show Original</source>
+        <translation>原文を表示</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation>再試行</translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <translation>翻訳</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateDownloadProgress</name>
+    <message>
+        <source>Downloading %1: %2 of %3 MB</source>
+        <translation>%1 をダウンロード中: %2 / %3 MB</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateLanguageForm</name>
+    <message>
+        <source>%1 (detected)</source>
+        <translation>%1 (検出)</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>翻訳元:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>翻訳先:</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateMenu</name>
+    <message>
+        <source>Always Translate %1</source>
+        <translation>%1 を常に翻訳</translation>
+    </message>
+    <message>
+        <source>Never Translate %1</source>
+        <translation>%1 を翻訳しない</translation>
+    </message>
+    <message>
+        <source>Manage Languages…</source>
+        <translation>言語を管理…</translation>
+    </message>
+</context>
+<context>
+    <name>TranslatePanel</name>
+    <message>
+        <source>Page Translated</source>
+        <translation>ページを翻訳しました</translation>
+    </message>
+    <message>
+        <source>Translate Page</source>
+        <translation>ページを翻訳</translation>
+    </message>
+    <message>
+        <source>More Options</source>
+        <translation>その他のオプション</translation>
+    </message>
+    <message>
+        <source>Could not download the language files.</source>
+        <translation>言語ファイルをダウンロードできませんでした。</translation>
+    </message>
+    <message>
+        <source>Translating…</source>
+        <translation>翻訳中…</translation>
     </message>
 </context>
 <context>

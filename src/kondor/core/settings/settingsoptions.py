@@ -63,6 +63,10 @@ STORED_OPTIONS = (
     option("Responsive/Device", "responsiveDevice", str),
     option("Responsive/Size", "responsiveSize", str),
     option("Responsive/Ratio", "responsiveRatio", float),
+    option("Translate/To", "translateTo", str),
+    string_list_option("Translate/Always", "translateAlways"),
+    string_list_option("Translate/Never", "translateNever"),
+    string_list_option("Translate/NeverHosts", "translateNeverHosts"),
     option("RemoteControl/Enabled", "remoteControlEnabled", bool),
     option("RemoteControl/Port", "remoteControlPort", int),
 )

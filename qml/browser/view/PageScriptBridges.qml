@@ -20,6 +20,12 @@ Item {
             WebEngineScript.ApplicationWorld)
     }
 
+    function callTranslation(action, argument) {
+        webView.runJavaScript(
+            "window.__kondorTranslation && window.__kondorTranslation." + action + "("
+            + JSON.stringify(argument) + ");", WebEngineScript.ApplicationWorld)
+    }
+
     PasswordBridge {
         id: passwordBridge
         tab: root.tab
@@ -35,6 +41,11 @@ Item {
         tab: root.tab
     }
 
+    TranslateBridge {
+        id: translateBridge
+        tab: root.tab
+    }
+
     ExtensionBridge {
         id: extensionBridge
         tab: root.tab
@@ -46,6 +57,7 @@ Item {
             registerObject("kondorExtensions", extensionBridge.pageApi())
             registerObject("kondorMedia", mediaBridge.pageApi())
             registerObject("kondorPopups", popupBridge.pageApi())
+            registerObject("kondorTranslate", translateBridge.pageApi())
             if (!root.tab.isPrivate)
                 registerObject("kondorPasswords", passwordBridge.pageApi())
         }
@@ -80,6 +92,13 @@ Item {
         function onLifecycleStateChanged(state) {
             if (state === WebEngineView.LifecycleState.Discarded)
                 root.tab.media.clear()
+        }
+    }
+
+    Connections {
+        target: root.tab.translation
+        function onActionRequested(action, argument) {
+            root.callTranslation(action, argument)
         }
     }
 

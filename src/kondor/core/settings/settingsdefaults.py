@@ -18,6 +18,10 @@ def default_download_directory() -> str:
     return str(QStandardPaths.writableLocation(QStandardPaths.StandardLocation.DownloadLocation))
 
 
+def default_translate_target() -> str:
+    return QLocale().name().split("_")[0].lower() or "en"
+
+
 def constant(value: object) -> Callable[[], object]:
     return lambda: value
 
@@ -59,6 +63,10 @@ FACTORIES: dict[str, Callable[[], object]] = {
     "responsiveDevice": constant("responsive"),
     "responsiveSize": constant("393x852"),
     "responsiveRatio": constant(1.0),
+    "translateTo": default_translate_target,
+    "translateAlways": empty_list,
+    "translateNever": empty_list,
+    "translateNeverHosts": empty_list,
     "remoteControlEnabled": constant(False),
     "remoteControlPort": constant(9222),
 }

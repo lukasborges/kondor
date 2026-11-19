@@ -33,7 +33,7 @@ qt_api = "pyside6"
 addopts = "--no-qt-log"
 
 [[tool.mypy.overrides]]
-module = ["PySide6.*", "shiboken6.*", "jeepney", "jeepney.*"]
+module = ["PySide6.*", "shiboken6.*", "jeepney", "jeepney.*", "langdetect", "langdetect.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]

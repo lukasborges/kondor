@@ -22,7 +22,7 @@ copy_python() {
 
 copy_pyside() {
   local site="/usr/lib/python$python_version/site-packages" target="$python_library/site-packages"
-  cp -r "$site/shiboken6" "$site/jeepney" "$target/"
+  cp -r "$site/shiboken6" "$site/jeepney" "$site/langdetect" "$site/six.py" "$target/"
   mkdir -p "$target/PySide6"
   cp "$site/PySide6/__init__.py" "$site/PySide6/_config.py" "$target/PySide6/"
   while read -r module; do

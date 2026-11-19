@@ -1628,6 +1628,32 @@
     </message>
 </context>
 <context>
+    <name>ManageLanguageRow</name>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 MB</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>移除</translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation>移除 %1</translation>
+    </message>
+</context>
+<context>
+    <name>ManageLanguagesDialog</name>
+    <message>
+        <source>Manage Languages</source>
+        <translation>管理语言</translation>
+    </message>
+    <message>
+        <source>No languages downloaded</source>
+        <translation>没有已下载的语言</translation>
+    </message>
+</context>
+<context>
     <name>ManageProfileRow</name>
     <message>
         <source>The Default profile cannot be deleted</source>
@@ -3568,6 +3594,96 @@
     <message>
         <source>Remove from Top Sites</source>
         <translation>从常用网站中移除</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButton</name>
+    <message>
+        <source>Translate Page</source>
+        <translation>翻译页面</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButtons</name>
+    <message>
+        <source>Not Now</source>
+        <translation>暂不</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+    <message>
+        <source>Show Original</source>
+        <translation>显示原文</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation>重试</translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <translation>翻译</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateDownloadProgress</name>
+    <message>
+        <source>Downloading %1: %2 of %3 MB</source>
+        <translation>正在下载 %1:%2 / %3 MB</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateLanguageForm</name>
+    <message>
+        <source>%1 (detected)</source>
+        <translation>%1(已检测)</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>从:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>到:</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateMenu</name>
+    <message>
+        <source>Always Translate %1</source>
+        <translation>始终翻译%1</translation>
+    </message>
+    <message>
+        <source>Never Translate %1</source>
+        <translation>从不翻译%1</translation>
+    </message>
+    <message>
+        <source>Manage Languages…</source>
+        <translation>管理语言…</translation>
+    </message>
+</context>
+<context>
+    <name>TranslatePanel</name>
+    <message>
+        <source>Page Translated</source>
+        <translation>页面已翻译</translation>
+    </message>
+    <message>
+        <source>Translate Page</source>
+        <translation>翻译页面</translation>
+    </message>
+    <message>
+        <source>More Options</source>
+        <translation>更多选项</translation>
+    </message>
+    <message>
+        <source>Could not download the language files.</source>
+        <translation>无法下载语言文件。</translation>
+    </message>
+    <message>
+        <source>Translating…</source>
+        <translation>正在翻译…</translation>
     </message>
 </context>
 <context>

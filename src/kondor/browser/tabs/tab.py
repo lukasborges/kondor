@@ -17,6 +17,7 @@ from kondor.browser.tabs.features.tabsleep import TabSleep
 from kondor.browser.tabs.groups.tabgroup import TabGroup
 from kondor.browser.tabs.tabviewstate import TabViewState
 from kondor.site.identity.tabidentity import TabIdentity
+from kondor.translate.tabtranslation import TabTranslation
 
 BLANK_PAGE = QUrl("about:blank")
 
@@ -64,6 +65,7 @@ class Tab(TabViewState):
         self._extension_items = TabExtensionItems(self)
         self._popups = TabPopups(self._is_private, self)
         self._identity = TabIdentity(profile, self._is_private, self)
+        self._translation = TabTranslation(self._is_private, self)
         self._create_playback_groups()
         self._create_responsive_group(profile)
 
@@ -91,6 +93,7 @@ class Tab(TabViewState):
     media = Property(TabMedia, lambda self: self._media, constant=True)
     audio = Property(TabAudio, lambda self: self._audio, constant=True)
     popups = Property(TabPopups, lambda self: self._popups, constant=True)
+    translation = Property(TabTranslation, lambda self: self._translation, constant=True)
     identity = Property(TabIdentity, lambda self: self._identity, constant=True)
     responsive = Property(TabResponsive, lambda self: self._responsive, constant=True)
     agent = Property(TabAgent, lambda self: self._agent, constant=True)
@@ -114,12 +117,16 @@ class Tab(TabViewState):
         if self._url == url:
             return
         self._url = url
+        self._update_feature_groups_for(url)
+        self.urlChanged.emit()
+
+    def _update_feature_groups_for(self, url: QUrl) -> None:
         self._security.update_for(url)
         self._popups.update_for(url)
+        self._translation.update_for(url)
         self._identity.update_for(url)
         self._responsive.update_for(url)
         self._passwords.update_usernames_for(url)
-        self.urlChanged.emit()
 
     def _leave_previous_page_for(self, url: QUrl) -> None:
         if is_real_page(url):
@@ -139,6 +146,7 @@ class Tab(TabViewState):
         if loading:
             self._site_reload.dismiss()
             self._identity.dismiss()
+            self._translation.reset()
         super().setLoading(loading)
 
     def _set_new_tab_page(self, new_tab_page: bool) -> None:

@@ -1654,6 +1654,32 @@
     </message>
 </context>
 <context>
+    <name>ManageLanguageRow</name>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 MB</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Odebrat</translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation>Odebrat %1</translation>
+    </message>
+</context>
+<context>
+    <name>ManageLanguagesDialog</name>
+    <message>
+        <source>Manage Languages</source>
+        <translation>Spravovat jazyky</translation>
+    </message>
+    <message>
+        <source>No languages downloaded</source>
+        <translation>Nejsou stažené žádné jazyky</translation>
+    </message>
+</context>
+<context>
     <name>ManageProfileRow</name>
     <message>
         <source>The Default profile cannot be deleted</source>
@@ -3596,6 +3622,96 @@
     <message>
         <source>Remove from Top Sites</source>
         <translation>Odebrat z nejnavštěvovanějších webů</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButton</name>
+    <message>
+        <source>Translate Page</source>
+        <translation>Přeložit stránku</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButtons</name>
+    <message>
+        <source>Not Now</source>
+        <translation>Teď ne</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Zrušit</translation>
+    </message>
+    <message>
+        <source>Show Original</source>
+        <translation>Zobrazit originál</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation>Zkusit znovu</translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <translation>Přeložit</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateDownloadProgress</name>
+    <message>
+        <source>Downloading %1: %2 of %3 MB</source>
+        <translation>Stahování %1: %2 z %3 MB</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateLanguageForm</name>
+    <message>
+        <source>%1 (detected)</source>
+        <translation>%1 (zjištěno)</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Z:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Do:</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateMenu</name>
+    <message>
+        <source>Always Translate %1</source>
+        <translation>Vždy překládat %1</translation>
+    </message>
+    <message>
+        <source>Never Translate %1</source>
+        <translation>Nikdy nepřekládat %1</translation>
+    </message>
+    <message>
+        <source>Manage Languages…</source>
+        <translation>Spravovat jazyky…</translation>
+    </message>
+</context>
+<context>
+    <name>TranslatePanel</name>
+    <message>
+        <source>Page Translated</source>
+        <translation>Stránka přeložena</translation>
+    </message>
+    <message>
+        <source>Translate Page</source>
+        <translation>Přeložit stránku</translation>
+    </message>
+    <message>
+        <source>More Options</source>
+        <translation>Další možnosti</translation>
+    </message>
+    <message>
+        <source>Could not download the language files.</source>
+        <translation>Jazykové soubory se nepodařilo stáhnout.</translation>
+    </message>
+    <message>
+        <source>Translating…</source>
+        <translation>Překládání…</translation>
     </message>
 </context>
 <context>

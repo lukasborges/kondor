@@ -67,6 +67,27 @@ RESOURCE_GROUPS = (
         ),
     ),
     ResourceGroup(
+        "/scripts",
+        "src/kondor/translate/page",
+        (
+            "src/kondor/translate/page/translatecollect.js",
+            "src/kondor/translate/page/translatepage.js",
+        ),
+    ),
+    ResourceGroup(
+        "/translate",
+        "src/kondor/translate/engine",
+        ("src/kondor/translate/engine/engine.html", "src/kondor/translate/engine/engine.js"),
+    ),
+    ResourceGroup(
+        "/translate",
+        "3rdparty/bergamot",
+        (
+            "3rdparty/bergamot/bergamot-translator.js",
+            "3rdparty/bergamot/translations-engine.worker.js",
+        ),
+    ),
+    ResourceGroup(
         "/scripts", "src/kondor/site/identity", ("src/kondor/site/identity/identity.js",)
     ),
     ResourceGroup(

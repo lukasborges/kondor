@@ -22,6 +22,10 @@ from kondor.browser.tabs.tabmodel import TabModel
 from kondor.browser.zoommanager import ZoomManager
 from kondor.core.qmlregistration import QmlKind, QmlType, register
 from kondor.site.identity.tabidentity import TabIdentity
+from kondor.translate.library import TranslationLibrary
+from kondor.translate.page.translatebridge import TranslateBridge
+from kondor.translate.tablists import TabTranslationLists
+from kondor.translate.tabtranslation import TabTranslation
 
 QML_TYPES: tuple[QmlType, ...] = (
     QmlType(AgentPointer, "AgentPointer", QmlKind.SINGLETON),
@@ -44,6 +48,10 @@ QML_TYPES: tuple[QmlType, ...] = (
     QmlType(TabIdentity, "TabIdentity", QmlKind.UNCREATABLE),
     QmlType(TabPopups, "TabPopups", QmlKind.UNCREATABLE),
     QmlType(TabResponsive, "TabResponsive", QmlKind.UNCREATABLE),
+    QmlType(TabTranslation, "TabTranslation", QmlKind.UNCREATABLE),
+    QmlType(TabTranslationLists, "TabTranslationLists", QmlKind.UNCREATABLE),
+    QmlType(TranslateBridge, "TranslateBridge", QmlKind.CREATABLE),
+    QmlType(TranslationLibrary, "TranslationLibrary", QmlKind.SINGLETON),
     QmlType(TabModel, "TabModel", QmlKind.CREATABLE),
     QmlType(TabStripModel, "TabStripModel", QmlKind.CREATABLE),
     QmlType(ZoomManager, "ZoomManager", QmlKind.SINGLETON),

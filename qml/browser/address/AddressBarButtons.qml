@@ -32,6 +32,11 @@ Row {
         onOpenRequested: function(url) { root.popupOpenRequested(url) }
     }
 
+    TranslateButton {
+        tabs: root.tabs
+        addressField: root.addressField
+    }
+
     BookmarkButton {
         id: bookmarkButton
         tabs: root.tabs

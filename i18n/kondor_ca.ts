@@ -1641,6 +1641,32 @@
     </message>
 </context>
 <context>
+    <name>ManageLanguageRow</name>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 MB</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Elimina</translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation>Elimina %1</translation>
+    </message>
+</context>
+<context>
+    <name>ManageLanguagesDialog</name>
+    <message>
+        <source>Manage Languages</source>
+        <translation>Gestiona els idiomes</translation>
+    </message>
+    <message>
+        <source>No languages downloaded</source>
+        <translation>No s&apos;ha baixat cap idioma</translation>
+    </message>
+</context>
+<context>
     <name>ManageProfileRow</name>
     <message>
         <source>The Default profile cannot be deleted</source>
@@ -3582,6 +3608,96 @@
     <message>
         <source>Remove from Top Sites</source>
         <translation>Elimina dels llocs principals</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButton</name>
+    <message>
+        <source>Translate Page</source>
+        <translation>Tradueix la pàgina</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButtons</name>
+    <message>
+        <source>Not Now</source>
+        <translation>Ara no</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancel·la</translation>
+    </message>
+    <message>
+        <source>Show Original</source>
+        <translation>Mostra l&apos;original</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation>Torna-ho a provar</translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <translation>Tradueix</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateDownloadProgress</name>
+    <message>
+        <source>Downloading %1: %2 of %3 MB</source>
+        <translation>S&apos;està baixant %1: %2 de %3 MB</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateLanguageForm</name>
+    <message>
+        <source>%1 (detected)</source>
+        <translation>%1 (detectat)</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Des de:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>A:</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateMenu</name>
+    <message>
+        <source>Always Translate %1</source>
+        <translation>Tradueix sempre %1</translation>
+    </message>
+    <message>
+        <source>Never Translate %1</source>
+        <translation>No tradueixis mai %1</translation>
+    </message>
+    <message>
+        <source>Manage Languages…</source>
+        <translation>Gestiona els idiomes…</translation>
+    </message>
+</context>
+<context>
+    <name>TranslatePanel</name>
+    <message>
+        <source>Page Translated</source>
+        <translation>Pàgina traduïda</translation>
+    </message>
+    <message>
+        <source>Translate Page</source>
+        <translation>Tradueix la pàgina</translation>
+    </message>
+    <message>
+        <source>More Options</source>
+        <translation>Més opcions</translation>
+    </message>
+    <message>
+        <source>Could not download the language files.</source>
+        <translation>No s&apos;han pogut baixar els fitxers d&apos;idioma.</translation>
+    </message>
+    <message>
+        <source>Translating…</source>
+        <translation>S&apos;està traduint…</translation>
     </message>
 </context>
 <context>

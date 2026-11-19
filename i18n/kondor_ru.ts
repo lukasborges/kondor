@@ -1654,6 +1654,32 @@
     </message>
 </context>
 <context>
+    <name>ManageLanguageRow</name>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 МБ</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Удалить</translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation>Удалить %1</translation>
+    </message>
+</context>
+<context>
+    <name>ManageLanguagesDialog</name>
+    <message>
+        <source>Manage Languages</source>
+        <translation>Управление языками</translation>
+    </message>
+    <message>
+        <source>No languages downloaded</source>
+        <translation>Нет загруженных языков</translation>
+    </message>
+</context>
+<context>
     <name>ManageProfileRow</name>
     <message>
         <source>The Default profile cannot be deleted</source>
@@ -3596,6 +3622,96 @@
     <message>
         <source>Remove from Top Sites</source>
         <translation>Удалить из часто посещаемых</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButton</name>
+    <message>
+        <source>Translate Page</source>
+        <translation>Перевести страницу</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButtons</name>
+    <message>
+        <source>Not Now</source>
+        <translation>Не сейчас</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <source>Show Original</source>
+        <translation>Показать оригинал</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation>Повторить</translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <translation>Перевести</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateDownloadProgress</name>
+    <message>
+        <source>Downloading %1: %2 of %3 MB</source>
+        <translation>Загрузка %1: %2 из %3 МБ</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateLanguageForm</name>
+    <message>
+        <source>%1 (detected)</source>
+        <translation>%1 (определён)</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>С языка:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>На язык:</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateMenu</name>
+    <message>
+        <source>Always Translate %1</source>
+        <translation>Всегда переводить %1</translation>
+    </message>
+    <message>
+        <source>Never Translate %1</source>
+        <translation>Никогда не переводить %1</translation>
+    </message>
+    <message>
+        <source>Manage Languages…</source>
+        <translation>Управление языками…</translation>
+    </message>
+</context>
+<context>
+    <name>TranslatePanel</name>
+    <message>
+        <source>Page Translated</source>
+        <translation>Страница переведена</translation>
+    </message>
+    <message>
+        <source>Translate Page</source>
+        <translation>Перевести страницу</translation>
+    </message>
+    <message>
+        <source>More Options</source>
+        <translation>Дополнительные параметры</translation>
+    </message>
+    <message>
+        <source>Could not download the language files.</source>
+        <translation>Не удалось загрузить языковые файлы.</translation>
+    </message>
+    <message>
+        <source>Translating…</source>
+        <translation>Перевод…</translation>
     </message>
 </context>
 <context>

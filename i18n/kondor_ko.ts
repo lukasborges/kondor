@@ -1628,6 +1628,32 @@
     </message>
 </context>
 <context>
+    <name>ManageLanguageRow</name>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 MB</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>제거</translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation>%1 제거</translation>
+    </message>
+</context>
+<context>
+    <name>ManageLanguagesDialog</name>
+    <message>
+        <source>Manage Languages</source>
+        <translation>언어 관리</translation>
+    </message>
+    <message>
+        <source>No languages downloaded</source>
+        <translation>다운로드한 언어 없음</translation>
+    </message>
+</context>
+<context>
     <name>ManageProfileRow</name>
     <message>
         <source>The Default profile cannot be deleted</source>
@@ -3568,6 +3594,96 @@
     <message>
         <source>Remove from Top Sites</source>
         <translation>상위 사이트에서 제거</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButton</name>
+    <message>
+        <source>Translate Page</source>
+        <translation>페이지 번역</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButtons</name>
+    <message>
+        <source>Not Now</source>
+        <translation>나중에</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>취소</translation>
+    </message>
+    <message>
+        <source>Show Original</source>
+        <translation>원본 보기</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation>다시 시도</translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <translation>번역</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateDownloadProgress</name>
+    <message>
+        <source>Downloading %1: %2 of %3 MB</source>
+        <translation>%1 다운로드 중: %3 MB 중 %2 MB</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateLanguageForm</name>
+    <message>
+        <source>%1 (detected)</source>
+        <translation>%1 (감지됨)</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>원본 언어:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>번역 언어:</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateMenu</name>
+    <message>
+        <source>Always Translate %1</source>
+        <translation>%1 항상 번역</translation>
+    </message>
+    <message>
+        <source>Never Translate %1</source>
+        <translation>%1 번역 안 함</translation>
+    </message>
+    <message>
+        <source>Manage Languages…</source>
+        <translation>언어 관리…</translation>
+    </message>
+</context>
+<context>
+    <name>TranslatePanel</name>
+    <message>
+        <source>Page Translated</source>
+        <translation>페이지 번역됨</translation>
+    </message>
+    <message>
+        <source>Translate Page</source>
+        <translation>페이지 번역</translation>
+    </message>
+    <message>
+        <source>More Options</source>
+        <translation>더 보기</translation>
+    </message>
+    <message>
+        <source>Could not download the language files.</source>
+        <translation>언어 파일을 다운로드할 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Translating…</source>
+        <translation>번역 중…</translation>
     </message>
 </context>
 <context>

@@ -1641,6 +1641,32 @@
     </message>
 </context>
 <context>
+    <name>ManageLanguageRow</name>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 MB</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Quitar</translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation>Quitar %1</translation>
+    </message>
+</context>
+<context>
+    <name>ManageLanguagesDialog</name>
+    <message>
+        <source>Manage Languages</source>
+        <translation>Gestionar idiomas</translation>
+    </message>
+    <message>
+        <source>No languages downloaded</source>
+        <translation>No hay idiomas descargados</translation>
+    </message>
+</context>
+<context>
     <name>ManageProfileRow</name>
     <message>
         <source>The Default profile cannot be deleted</source>
@@ -3582,6 +3608,96 @@
     <message>
         <source>Remove from Top Sites</source>
         <translation>Quitar de los sitios más visitados</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButton</name>
+    <message>
+        <source>Translate Page</source>
+        <translation>Traducir la página</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButtons</name>
+    <message>
+        <source>Not Now</source>
+        <translation>Ahora no</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <source>Show Original</source>
+        <translation>Mostrar original</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation>Reintentar</translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <translation>Traducir</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateDownloadProgress</name>
+    <message>
+        <source>Downloading %1: %2 of %3 MB</source>
+        <translation>Descargando %1: %2 de %3 MB</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateLanguageForm</name>
+    <message>
+        <source>%1 (detected)</source>
+        <translation>%1 (detectado)</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>De:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>A:</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateMenu</name>
+    <message>
+        <source>Always Translate %1</source>
+        <translation>Traducir siempre %1</translation>
+    </message>
+    <message>
+        <source>Never Translate %1</source>
+        <translation>No traducir nunca %1</translation>
+    </message>
+    <message>
+        <source>Manage Languages…</source>
+        <translation>Gestionar idiomas…</translation>
+    </message>
+</context>
+<context>
+    <name>TranslatePanel</name>
+    <message>
+        <source>Page Translated</source>
+        <translation>Página traducida</translation>
+    </message>
+    <message>
+        <source>Translate Page</source>
+        <translation>Traducir la página</translation>
+    </message>
+    <message>
+        <source>More Options</source>
+        <translation>Más opciones</translation>
+    </message>
+    <message>
+        <source>Could not download the language files.</source>
+        <translation>No se pudieron descargar los archivos de idioma.</translation>
+    </message>
+    <message>
+        <source>Translating…</source>
+        <translation>Traduciendo…</translation>
     </message>
 </context>
 <context>

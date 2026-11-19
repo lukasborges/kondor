@@ -33,16 +33,14 @@ ToolBar {
             from: 200; to: 4000; editable: true
             value: root.responsive.width
             Accessible.name: qsTr("Width")
-            onValueModified: root.responsive.setSize(value, root.responsive.height)
-            onEditingFinished: root.responsive.rememberSize()
+            onValueModified: root.responsive.commitSize(value, root.responsive.height)
         }
         Label { text: "×" }
         SpinBox {
             from: 200; to: 4000; editable: true
             value: root.responsive.height
             Accessible.name: qsTr("Height")
-            onValueModified: root.responsive.setSize(root.responsive.width, value)
-            onEditingFinished: root.responsive.rememberSize()
+            onValueModified: root.responsive.commitSize(root.responsive.width, value)
         }
         ToolButton {
             icon.name: "object-rotate-right"

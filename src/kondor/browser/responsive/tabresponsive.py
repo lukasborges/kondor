@@ -61,6 +61,11 @@ class TabResponsive(QObject):
         self._set_size(devices.clamped(width), devices.clamped(height))
         self._set_device(devices.RESPONSIVE)
 
+    @Slot(int, int)
+    def commitSize(self, width: int, height: int) -> None:
+        self.setSize(width, height)
+        self.rememberSize()
+
     @Slot()
     def rememberSize(self) -> None:
         self._memory.remember_size(self._width, self._height)

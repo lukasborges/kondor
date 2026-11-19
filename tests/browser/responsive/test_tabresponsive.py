@@ -99,3 +99,18 @@ def test_dragging_does_not_repeat_the_size_until_it_changes(tab: Tab) -> None:
     tab.responsive.setSize(500, 600)
     tab.responsive.setSize(500, 600)
     assert len(changes) == 1
+
+
+def test_destroying_the_profile_before_the_tab_raises_nothing(
+    qapp: object, isolated_profile: object
+) -> None:
+    profile = ProfileManager.instance().createPrivateProfile()
+    private = Tab(profile)
+    shiboken6.delete(profile)
+    shiboken6.delete(private)
+
+
+def test_committing_a_size_remembers_it(tab: Tab) -> None:
+    tab.responsive.commitSize(555, 666)
+    reopened = Tab(ProfileManager.instance().defaultProfile())
+    assert (reopened.responsive.width, reopened.responsive.height) == (555, 666)  # noqa: PLR2004

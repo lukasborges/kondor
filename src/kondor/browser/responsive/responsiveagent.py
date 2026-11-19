@@ -1,3 +1,4 @@
+import shiboken6
 from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
 from kondor.site.identity.profileidentity import ProfileIdentity
@@ -22,11 +23,16 @@ class ResponsiveAgent:
         return was_applied
 
     def _restore(self) -> bool:
+        if not self._agent or not self._is_profile_alive():
+            return False
         identity = ProfileIdentity.of(self._profile)
-        if not self._agent or identity is None:
+        if identity is None:
             return False
         identity.restore_session(self._host, self._previous)
         return True
+
+    def _is_profile_alive(self) -> bool:
+        return self._profile is not None and shiboken6.isValid(self._profile)
 
     def _claim(self, host: str, agent: str) -> bool:
         identity = ProfileIdentity.of(self._profile)

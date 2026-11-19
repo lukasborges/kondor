@@ -3629,7 +3629,7 @@
     </message>
     <message>
         <source>Show Original</source>
-        <translation>Afficher l'original</translation>
+        <translation>Afficher l&apos;original</translation>
     </message>
     <message>
         <source>Try Again</source>
@@ -3689,7 +3689,7 @@
     </message>
     <message>
         <source>More Options</source>
-        <translation>Plus d'options</translation>
+        <translation>Plus d&apos;options</translation>
     </message>
     <message>
         <source>Could not download the language files.</source>

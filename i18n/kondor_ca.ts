@@ -1663,7 +1663,7 @@
     </message>
     <message>
         <source>No languages downloaded</source>
-        <translation>No s'ha baixat cap idioma</translation>
+        <translation>No s&apos;ha baixat cap idioma</translation>
     </message>
 </context>
 <context>
@@ -3629,7 +3629,7 @@
     </message>
     <message>
         <source>Show Original</source>
-        <translation>Mostra l'original</translation>
+        <translation>Mostra l&apos;original</translation>
     </message>
     <message>
         <source>Try Again</source>
@@ -3644,7 +3644,7 @@
     <name>TranslateDownloadProgress</name>
     <message>
         <source>Downloading %1: %2 of %3 MB</source>
-        <translation>S'està baixant %1: %2 de %3 MB</translation>
+        <translation>S&apos;està baixant %1: %2 de %3 MB</translation>
     </message>
 </context>
 <context>
@@ -3693,11 +3693,11 @@
     </message>
     <message>
         <source>Could not download the language files.</source>
-        <translation>No s'han pogut baixar els fitxers d'idioma.</translation>
+        <translation>No s&apos;han pogut baixar els fitxers d&apos;idioma.</translation>
     </message>
     <message>
         <source>Translating…</source>
-        <translation>S'està traduint…</translation>
+        <translation>S&apos;està traduint…</translation>
     </message>
 </context>
 <context>

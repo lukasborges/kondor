@@ -121,11 +121,16 @@ Item {
 
         WebEngineView {
             id: devTools
+            objectName: "devTools"
             visible: root.tab.devToolsOpen
             SplitView.preferredHeight: root.height * 0.4
             SplitView.minimumHeight: 100
             profile: root.tab.profile
             onWindowCloseRequested: root.setDevToolsOpen(false)
+            onJavaScriptConsoleMessage: function(level, message) {
+                if (message === "kondor:toggle-responsive-mode")
+                    root.tab.responsive.toggle()
+            }
         }
     }
 

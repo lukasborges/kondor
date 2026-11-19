@@ -1,7 +1,7 @@
 const ktMaxBatchCharacters = 3000;
 const ktMaxBatchUnits = 20;
 const ktState = { bridge: null, active: false, applied: [], queue: [], busy: false, requests: new Map(),
-    sequence: 0, observer: null, language: "", timer: 0, announced: false };
+    sequence: 0, generation: 0, observer: null, language: "", timer: 0, announced: false };
 
 const ktSend = (action) => { if (ktState.bridge) action(ktState.bridge); };
 const ktTopOf = (node) => {
@@ -40,14 +40,19 @@ const ktAnnounce = () => {
     ktSend((bridge) => bridge.reportState("translated"));
 };
 
-const ktFinishBatch = (batch, results) => {
+const ktReportResult = (batch, results) => {
+    if (!ktState.active)
+        return;
+    if (!results)
+        return ktSend((bridge) => bridge.reportState("error"));
+    ktApplyBatch(batch, results);
+    ktAnnounce();
+};
+
+const ktFinishBatch = (batch, results, generation) => {
     ktState.busy = false;
-    if (ktState.active && results) {
-        ktApplyBatch(batch, results);
-        ktAnnounce();
-    } else if (ktState.active) {
-        ktSend((bridge) => bridge.reportState("error"));
-    }
+    if (generation === ktState.generation)
+        ktReportResult(batch, results);
     ktPump();
 };
 
@@ -57,7 +62,8 @@ const ktPump = () => {
     ktState.busy = true;
     const batch = ktTakeBatch();
     const id = ++ktState.sequence;
-    ktState.requests.set(id, (results) => ktFinishBatch(batch, results));
+    const generation = ktState.generation;
+    ktState.requests.set(id, (results) => ktFinishBatch(batch, results, generation));
     ktSend((bridge) => bridge.requestBatch(id, JSON.stringify(batch.map((unit) => unit.html))));
 };
 
@@ -95,7 +101,7 @@ const ktStart = (target) => {
 const ktRestore = () => {
     ktState.active = false;
     ktState.queue = [];
-    ktState.requests.clear();
+    ktState.generation++;
     if (ktState.observer)
         ktState.observer.disconnect();
     ktState.applied.forEach((unit) => unit.restore());

@@ -2567,6 +2567,10 @@
         <translation>Responsywny</translation>
     </message>
     <message>
+        <source>%1×</source>
+        <translation>%1×</translation>
+    </message>
+    <message>
         <source>Device</source>
         <translation>Urządzenie</translation>
     </message>
@@ -2577,6 +2581,10 @@
     <message>
         <source>Height</source>
         <translation>Wysokość</translation>
+    </message>
+    <message>
+        <source>Device pixel ratio</source>
+        <translation>Współczynnik pikseli urządzenia</translation>
     </message>
     <message>
         <source>Rotate</source>

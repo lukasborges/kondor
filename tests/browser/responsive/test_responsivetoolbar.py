@@ -32,7 +32,7 @@ def toolbar_and_tab(kondor_engine: QQmlEngine) -> Iterator[tuple[QQuickItem, Tab
     release(window, component, tab)
 
 
-def test_toolbar_lists_responsive_and_the_five_devices(
+def test_toolbar_lists_responsive_and_every_device(
     toolbar_and_tab: tuple[QQuickItem, Tab],
 ) -> None:
     toolbar, _ = toolbar_and_tab

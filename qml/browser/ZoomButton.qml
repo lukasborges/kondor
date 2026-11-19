@@ -9,7 +9,7 @@ ToolButton {
 
     readonly property real factor: tabs.currentTab ? tabs.currentTab.zoomFactor : 1.0
 
-    visible: Math.round(factor * 100) !== 100
+    visible: Math.round(factor * 100) !== 100 && !(tabs.currentTab && tabs.currentTab.responsive.isActive)
     text: Math.round(factor * 100) + "%"
     icon.name: "zoom-in"
     icon.width: 16

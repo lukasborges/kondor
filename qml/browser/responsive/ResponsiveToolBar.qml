@@ -14,6 +14,10 @@ ToolBar {
 
     position: ToolBar.Header
 
+    function ratioLabel(ratio) {
+        return qsTr("%1×").arg(Qt.locale().toString(ratio, "g", 4))
+    }
+
     RowLayout {
         anchors.fill: parent
         anchors.leftMargin: Kirigami.Units.smallSpacing
@@ -41,6 +45,24 @@ ToolBar {
             value: root.responsive.height
             Accessible.name: qsTr("Height")
             onValueModified: root.responsive.commitSize(root.responsive.width, value)
+        }
+        ComboBox {
+            model: root.responsive.ratioList
+            currentIndex: model.indexOf(root.responsive.ratio)
+            implicitContentWidthPolicy: ComboBox.WidestText
+            displayText: root.ratioLabel(root.responsive.ratio)
+            ToolTip.visible: hovered
+            ToolTip.text: qsTr("Device pixel ratio")
+            ToolTip.delay: 600
+            Accessible.name: qsTr("Device pixel ratio")
+            delegate: ItemDelegate {
+                required property real modelData
+                width: ListView.view ? ListView.view.width : implicitWidth
+                text: root.ratioLabel(modelData)
+                enabled: modelData <= root.responsive.maxRatio
+                highlighted: modelData === root.responsive.ratio
+            }
+            onActivated: root.responsive.setRatio(model[currentIndex])
         }
         ToolButton {
             icon.name: "object-rotate-right"

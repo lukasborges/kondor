@@ -2539,6 +2539,10 @@
         <translation>レスポンシブ</translation>
     </message>
     <message>
+        <source>%1×</source>
+        <translation>%1×</translation>
+    </message>
+    <message>
         <source>Device</source>
         <translation>デバイス</translation>
     </message>
@@ -2549,6 +2553,10 @@
     <message>
         <source>Height</source>
         <translation>高さ</translation>
+    </message>
+    <message>
+        <source>Device pixel ratio</source>
+        <translation>デバイスピクセル比</translation>
     </message>
     <message>
         <source>Rotate</source>

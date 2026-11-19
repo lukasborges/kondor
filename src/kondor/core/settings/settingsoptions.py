@@ -62,6 +62,7 @@ STORED_OPTIONS = (
     string_list_option("Extensions/Pinned", "pinnedExtensions"),
     option("Responsive/Device", "responsiveDevice", str),
     option("Responsive/Size", "responsiveSize", str),
+    option("Responsive/Ratio", "responsiveRatio", float),
     option("RemoteControl/Enabled", "remoteControlEnabled", bool),
     option("RemoteControl/Port", "remoteControlPort", int),
 )

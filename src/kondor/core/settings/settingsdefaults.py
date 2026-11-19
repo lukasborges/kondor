@@ -58,6 +58,7 @@ FACTORIES: dict[str, Callable[[], object]] = {
     "pinnedExtensions": empty_list,
     "responsiveDevice": constant("responsive"),
     "responsiveSize": constant("393x852"),
+    "responsiveRatio": constant(1.0),
     "remoteControlEnabled": constant(False),
     "remoteControlPort": constant(9222),
 }

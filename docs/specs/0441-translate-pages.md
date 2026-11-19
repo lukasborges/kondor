@@ -90,11 +90,17 @@ Prototypes: `441-translate-offer`, `441b-translate-menu`, `441c-translate-downlo
   `srcvocab`/`trgvocab` when present), from `https://firefox.settings.services.mozilla.com/v1/
   buckets/main/collections/<name>/records`; attachments from the server's
   `capabilities.attachments.base_url`. Only records with an empty `filter_expression`. Version
-  choice mirrors Firefox's `TranslationsParent.sys.mjs`: the newest engine, and per pair the
-  newest model files whose major version that engine supports. Every file is checked against the
+  choice mirrors Firefox's `TranslationsParent.sys.mjs`: the newest engine record whose major
+  `version` matches the vendored glue's (below), and per pair the newest model files whose major
+  version that engine supports. Every file is checked against the
   record's `hash` (SHA-256) before use.
 - **Storage**: `AppDataLocation/translations/engine/` and `…/models/<from>-<to>/`, plus the
   record metadata used. Never in a profile's web storage. Files are shared by all profiles.
+- **Engine glue**: the JavaScript around the wasm (Emscripten loader and Firefox's
+  `BergamotTranslator`/`TranslationsEngine` worker code, MPL-2.0) is vendored in
+  `3rdparty/bergamot/` like `3rdparty/readability/`, with its `LICENSE` and the Firefox tag and
+  paths it was copied from, pinned to one engine major version. Only the wasm and the models are
+  downloaded. No engine record with that major version → the download error of the panel.
 - **Running**: the Bergamot WASM runs in a hidden Kondor-owned `WebEngineView` (internal page in
   the app's resources, off-the-record profile, no network) with a Web Worker, as Firefox does;
   page text goes page script (isolated world) → Python → engine page and back. No text leaves
@@ -176,3 +182,4 @@ Portuguese.
 | Which engine? | Mozilla's Bergamot (MPL-2.0), the files Firefox uses, from Mozilla's Remote Settings: no vendored binaries, about 25–40 MB per pair, 100+ pairs. |
 | Open the panel automatically? | No: only the address bar button, so pages are not interrupted (KDE HIG); "Always Translate" covers the automatic case. |
 | Language detection? | The page's `lang` first, `langdetect` only when it is missing: small, pure Python, no extra download. |
+| Where does the engine's JavaScript glue come from? (developer, #441) | Vendored in `3rdparty/bergamot/` (MPL-2.0 source, pinned to one engine major version, with its `LICENSE` and origin), as `3rdparty/readability/`; only the wasm and models are downloaded. Rejected: downloading the glue from a GitHub tag (a second source that can disappear) and writing our own worker (more code, untested with Mozilla's models). When newer engine records need a newer glue, Kondor uses the newest engine whose major version matches the vendored glue, as Firefox does; none matching → the panel's download error. |

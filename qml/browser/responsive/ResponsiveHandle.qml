@@ -46,5 +46,6 @@ Rectangle {
             root.pressSize = Qt.size(root.responsive.width, root.responsive.height)
         }
         onPositionChanged: function(mouse) { root.resizeTo(mouse) }
+        onReleased: root.responsive.rememberSize()
     }
 }

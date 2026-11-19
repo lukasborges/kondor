@@ -17,12 +17,16 @@ class ResponsiveAgent:
         return self._claim(host, agent) or released
 
     def release(self) -> bool:
-        identity = ProfileIdentity.of(self._profile)
-        was_applied = bool(self._agent) and identity is not None
-        if was_applied and identity is not None:
-            identity.restore_session(self._host, self._previous)
+        was_applied = self._restore()
         self._host, self._agent, self._previous = "", "", None
         return was_applied
+
+    def _restore(self) -> bool:
+        identity = ProfileIdentity.of(self._profile)
+        if not self._agent or identity is None:
+            return False
+        identity.restore_session(self._host, self._previous)
+        return True
 
     def _claim(self, host: str, agent: str) -> bool:
         identity = ProfileIdentity.of(self._profile)

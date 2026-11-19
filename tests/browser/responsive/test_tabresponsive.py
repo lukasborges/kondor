@@ -1,6 +1,7 @@
 from collections.abc import Iterator
 
 import pytest
+import shiboken6
 from PySide6.QtCore import QUrl
 from pytestqt.qtbot import QtBot
 
@@ -17,14 +18,18 @@ def tab(qapp: object, isolated_profile: object) -> Iterator[Tab]:
     created = Tab(ProfileManager.instance().defaultProfile())
     created.setUrl(PAGE)
     yield created
-    created.responsive.release()
-    created.deleteLater()
+    if shiboken6.isValid(created):
+        shiboken6.delete(created)
 
 
-def agent_of(tab: Tab, host: str) -> str:
+def agent_of_host(host: str) -> str:
     identity = ProfileIdentity.of(ProfileManager.instance().defaultProfile())
     assert identity is not None
     return identity.agent_for(host)
+
+
+def agent_of(tab: Tab, host: str) -> str:
+    return agent_of_host(host)
 
 
 def test_new_tab_is_not_in_responsive_mode(tab: Tab) -> None:
@@ -79,3 +84,18 @@ def test_private_tab_does_not_remember_the_device(qapp: object, isolated_profile
     private.responsive.selectDevice("ipadair")
     assert Tab(None).responsive.device != "ipadair"
     private.deleteLater()
+
+
+def test_destroying_a_tab_in_responsive_mode_restores_the_agent(tab: Tab) -> None:
+    tab.responsive.setActive(True)
+    tab.responsive.selectDevice("iphone15")
+    shiboken6.delete(tab)
+    assert agent_of_host("responsive.example") == ""
+
+
+def test_dragging_does_not_repeat_the_size_until_it_changes(tab: Tab) -> None:
+    changes: list[int] = []
+    tab.responsive.sizeChanged.connect(lambda: changes.append(1))
+    tab.responsive.setSize(500, 600)
+    tab.responsive.setSize(500, 600)
+    assert len(changes) == 1

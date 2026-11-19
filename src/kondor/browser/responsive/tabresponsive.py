@@ -20,6 +20,7 @@ class TabResponsive(QObject):
     ) -> None:
         super().__init__(parent)
         self._agent = ResponsiveAgent(profile)
+        self.destroyed.connect(self._agent.release)
         self._profile = profile
         self._memory = ResponsiveMemory(is_private)
         self._host = ""
@@ -38,6 +39,8 @@ class TabResponsive(QObject):
     def setActive(self, active: bool) -> None:
         assign_and_notify((self, "_is_active"), active, self.activeChanged)
         self._sync_agent()
+        if not active:
+            self.rememberSize()
 
     @Slot()
     def toggle(self) -> None:
@@ -51,6 +54,7 @@ class TabResponsive(QObject):
             return
         self._set_size(device.width, device.height)
         self._set_device(key)
+        self.rememberSize()
 
     @Slot(int, int)
     def setSize(self, width: int, height: int) -> None:
@@ -58,8 +62,13 @@ class TabResponsive(QObject):
         self._set_device(devices.RESPONSIVE)
 
     @Slot()
+    def rememberSize(self) -> None:
+        self._memory.remember_size(self._width, self._height)
+
+    @Slot()
     def rotate(self) -> None:
         self._set_size(self._height, self._width)
+        self.rememberSize()
 
     @Slot(bool)
     def setZoomToFit(self, zoom_to_fit: bool) -> None:
@@ -72,17 +81,15 @@ class TabResponsive(QObject):
         self._host = host
         self._sync_agent()
 
-    def release(self) -> None:
-        self._agent.release()
-
     def _set_device(self, key: str) -> None:
         assign_and_notify((self, "_device"), key, self.deviceChanged)
         self._memory.remember_device(self._device)
         self._sync_agent()
 
     def _set_size(self, width: int, height: int) -> None:
+        if (width, height) == (self._width, self._height):
+            return
         self._width, self._height = width, height
-        self._memory.remember_size(width, height)
         self.sizeChanged.emit()
 
     def _wanted_agent(self) -> str:

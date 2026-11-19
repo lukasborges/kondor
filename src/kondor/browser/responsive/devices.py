@@ -47,7 +47,10 @@ def device_for(key: str) -> Device | None:
 
 
 def device_list() -> list[dict[str, object]]:
-    return [{"key": d.key, "name": d.name, "width": d.width, "height": d.height} for d in DEVICES]
+    return [
+        {"key": device.key, "name": device.name, "width": device.width, "height": device.height}
+        for device in DEVICES
+    ]
 
 
 def chrome_version_of(profile_agent: str) -> str:

@@ -155,5 +155,9 @@ def test_huge_sizes_cap_the_ratio(tab: Tab) -> None:
 
 
 def test_unknown_remembered_device_falls_back_to_iphone_16(tab: Tab) -> None:
-    Settings.instance().setProperty("responsiveDevice", "iphone15")
-    assert Tab(None).responsive.device == "iphone-16"
+    Settings.instance().setProperty("responsiveDevice", "pixel8")
+    Settings.instance().setProperty("responsiveSize", "412x915")
+    restored_tab = Tab(None)
+    restored = restored_tab.responsive
+    assert restored.device == "iphone-16"
+    assert (restored.width, restored.height) == (393, 852)

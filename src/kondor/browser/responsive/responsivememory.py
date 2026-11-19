@@ -13,8 +13,15 @@ class ResponsiveMemory:
     def recall(self) -> tuple[str, tuple[int, int]]:
         settings = Settings.instance()
         key = str(settings.property(DEVICE_SETTING))
+        known = self._known(key)
+        if known != key:
+            return known, self._fallback_size()
         size = devices.parse_size(str(settings.property(SIZE_SETTING)))
-        return self._known(key), (size or devices.DEFAULT_SIZE)
+        return known, (size or devices.DEFAULT_SIZE)
+
+    def _fallback_size(self) -> tuple[int, int]:
+        fallback = devices.device_for(devices.FALLBACK_DEVICE)
+        return (fallback.width, fallback.height) if fallback else devices.DEFAULT_SIZE
 
     def recall_ratio(self) -> float:
         value = float(Settings.instance().property(RATIO_SETTING))

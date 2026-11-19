@@ -1,4 +1,5 @@
 import contextlib
+import os
 from collections.abc import Callable, Iterator
 
 import pytest
@@ -13,7 +14,12 @@ from kondor.browser.tabs.tab import Tab
 from kondor.browser.tabs.tabmodel import TabModel
 from tests.qmlsupport import error_text, load_component
 
-pytestmark = pytest.mark.no_qt_log
+pytestmark = [
+    pytest.mark.no_qt_log,
+    pytest.mark.skipif(
+        bool(os.environ.get("CI")), reason="the DevTools frontend does not respond on CI runners"
+    ),
+]
 LOAD_TIMEOUT = 30000
 SIZE = 900
 PAGE_URL = "data:text/html,<title>page</title>hello"

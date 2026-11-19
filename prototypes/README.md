@@ -93,6 +93,7 @@ Tips when editing:
 | #419 Restart Now | `419-restart-now.qml` (in `common/SettingsDialogMock.qml`, `withRestartNow`) |
 | #430 Responsive design mode | `430-responsive-mode.qml` |
 | #439 Responsive mode: Chrome devices and density | `430b-responsive-devices.qml` |
+| #441 Translate pages on the device | `441-translate-offer.qml`, `441b-translate-menu.qml`, `441c-translate-downloading.qml`, `441d-page-translated.qml`, `441e-manage-languages.qml` |
 
 Issues without UI (#10 default browser, #15 single instance, #19 translations, #25 Flatpak,
 #26 tests) have no prototype.

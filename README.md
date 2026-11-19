@@ -86,6 +86,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 
 ### For developers
 - **Developer tools** (F12) and **view source**
+- **Responsive design mode** previews a page at phone and tablet sizes
 - **Remote control** lets AI agents work in marked tabs of their own through a built-in MCP server (off by default)
 - **Load unpacked extensions** with `--load-extension <dir>` (experimental, needs `--new-instance`)
 
@@ -116,6 +117,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 | `Ctrl+M` | Mute or unmute the current tab |
 | `Ctrl+F` | Find in page |
 | `Ctrl+P` | Print (opens a PDF in the viewer) |
+| `Ctrl+Shift+M` | Toggle responsive design mode |
 | `Ctrl+Shift+S` | Take Screenshot (visible area or full page) |
 | `Ctrl+S` | Save page as… |
 | `F12` / `Ctrl+Shift+I` | Toggle developer tools |

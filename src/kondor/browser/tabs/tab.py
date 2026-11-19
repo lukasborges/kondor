@@ -3,6 +3,7 @@ from PySide6.QtWebEngineQuick import QQuickWebEngineProfile
 
 from kondor.browser.agent.agenttabs import AgentTabs
 from kondor.browser.agent.tabagent import TabAgent
+from kondor.browser.responsive.tabresponsive import TabResponsive
 from kondor.browser.tabs.assignandnotify import assign_and_notify
 from kondor.browser.tabs.features.tabaudio import TabAudio
 from kondor.browser.tabs.features.tabextensionitems import TabExtensionItems
@@ -61,11 +62,19 @@ class Tab(TabViewState):
         self._passwords = TabPasswords(self._is_private, self)
         self._site_reload = TabSiteReload(self)
         self._extension_items = TabExtensionItems(self)
+        self._popups = TabPopups(self._is_private, self)
+        self._identity = TabIdentity(profile, self._is_private, self)
+        self._create_playback_groups()
+        self._create_responsive_group(profile)
+
+    def _create_playback_groups(self) -> None:
         self._sleep = TabSleep(self)
         self._media = TabMedia(self)
         self._audio = TabAudio(self)
-        self._popups = TabPopups(self._is_private, self)
-        self._identity = TabIdentity(profile, self._is_private, self)
+
+    def _create_responsive_group(self, profile: QQuickWebEngineProfile | None) -> None:
+        self._responsive = TabResponsive(profile, self._is_private, self)
+        self._responsive.reloadRequested.connect(self.reload)
 
     def _create_agent_group(self) -> None:
         self._agent = TabAgent(self._is_private, self)
@@ -83,6 +92,7 @@ class Tab(TabViewState):
     audio = Property(TabAudio, lambda self: self._audio, constant=True)
     popups = Property(TabPopups, lambda self: self._popups, constant=True)
     identity = Property(TabIdentity, lambda self: self._identity, constant=True)
+    responsive = Property(TabResponsive, lambda self: self._responsive, constant=True)
     agent = Property(TabAgent, lambda self: self._agent, constant=True)
     sleep = Property(TabSleep, lambda self: self._sleep, constant=True)
     extensionItems = Property(TabExtensionItems, lambda self: self._extension_items, constant=True)
@@ -107,6 +117,7 @@ class Tab(TabViewState):
         self._security.update_for(url)
         self._popups.update_for(url)
         self._identity.update_for(url)
+        self._responsive.update_for(url)
         self._passwords.update_usernames_for(url)
         self.urlChanged.emit()
 

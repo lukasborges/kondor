@@ -60,6 +60,8 @@ STORED_OPTIONS = (
     string_list_option("Passwords/NeverSave", "passwordNeverSaveSites"),
     option("Extensions/AutoUpdate", "extensionsAutoUpdate", bool),
     string_list_option("Extensions/Pinned", "pinnedExtensions"),
+    option("Responsive/Device", "responsiveDevice", str),
+    option("Responsive/Size", "responsiveSize", str),
     option("RemoteControl/Enabled", "remoteControlEnabled", bool),
     option("RemoteControl/Port", "remoteControlPort", int),
 )

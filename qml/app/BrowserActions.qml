@@ -104,6 +104,15 @@ QtObject {
         enabled: root.hasPage
         onTriggered: root.tabs.currentTab.toggleDevTools()
     }
+    readonly property Action responsiveModeAction: Action {
+        text: qsTr("Responsive Design Mode")
+        icon.name: "smartphone"
+        shortcut: "Ctrl+Shift+M"
+        checkable: true
+        checked: root.tabs.currentTab ? root.tabs.currentTab.responsive.isActive : false
+        enabled: root.tabs.currentTab !== null
+        onToggled: root.tabs.currentTab.responsive.setActive(checked)
+    }
     readonly property Action saveAsPdfAction: Action {
         text: qsTr("Save as PDF…")
         icon.name: "document-export"

@@ -446,6 +446,10 @@
         <translation>Ontwikkelhulpmiddelen</translation>
     </message>
     <message>
+        <source>Responsive Design Mode</source>
+        <translation>Responsief ontwerpmodus</translation>
+    </message>
+    <message>
         <source>Save as PDF…</source>
         <translation>Opslaan als pdf…</translation>
     </message>
@@ -1947,6 +1951,13 @@
     </message>
 </context>
 <context>
+    <name>PageStage</name>
+    <message>
+        <source>%1 %</source>
+        <translation>%1 %</translation>
+    </message>
+</context>
+<context>
     <name>PageView</name>
     <message>
         <source>The page&apos;s process ended unexpectedly.</source>
@@ -2533,6 +2544,41 @@
     <message>
         <source>New name:</source>
         <translation>Nieuwe naam:</translation>
+    </message>
+</context>
+<context>
+    <name>ResponsiveToolBar</name>
+    <message>
+        <source>Responsive</source>
+        <translation>Responsief</translation>
+    </message>
+    <message>
+        <source>Device</source>
+        <translation>Apparaat</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Breedte</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation>Hoogte</translation>
+    </message>
+    <message>
+        <source>Rotate</source>
+        <translation>Draaien</translation>
+    </message>
+    <message>
+        <source>Zoom to Fit</source>
+        <translation>Aanpassen aan venster</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode (Ctrl+Shift+M)</source>
+        <translation>Responsieve modus sluiten (Ctrl+Shift+M)</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode</source>
+        <translation>Responsieve modus sluiten</translation>
     </message>
 </context>
 <context>

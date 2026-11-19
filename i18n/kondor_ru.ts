@@ -446,6 +446,10 @@
         <translation>Инструменты разработчика</translation>
     </message>
     <message>
+        <source>Responsive Design Mode</source>
+        <translation>Режим адаптивного дизайна</translation>
+    </message>
+    <message>
         <source>Save as PDF…</source>
         <translation>Сохранить как PDF…</translation>
     </message>
@@ -1960,6 +1964,13 @@
     </message>
 </context>
 <context>
+    <name>PageStage</name>
+    <message>
+        <source>%1 %</source>
+        <translation>%1 %</translation>
+    </message>
+</context>
+<context>
     <name>PageView</name>
     <message>
         <source>The page&apos;s process ended unexpectedly.</source>
@@ -2547,6 +2558,41 @@
     <message>
         <source>New name:</source>
         <translation>Новое имя:</translation>
+    </message>
+</context>
+<context>
+    <name>ResponsiveToolBar</name>
+    <message>
+        <source>Responsive</source>
+        <translation>Адаптивный</translation>
+    </message>
+    <message>
+        <source>Device</source>
+        <translation>Устройство</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Ширина</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation>Высота</translation>
+    </message>
+    <message>
+        <source>Rotate</source>
+        <translation>Повернуть</translation>
+    </message>
+    <message>
+        <source>Zoom to Fit</source>
+        <translation>Вписать в окно</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode (Ctrl+Shift+M)</source>
+        <translation>Закрыть адаптивный режим (Ctrl+Shift+M)</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode</source>
+        <translation>Закрыть адаптивный режим</translation>
     </message>
 </context>
 <context>

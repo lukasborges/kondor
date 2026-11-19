@@ -446,6 +446,10 @@
         <translation>Utvecklarverktyg</translation>
     </message>
     <message>
+        <source>Responsive Design Mode</source>
+        <translation>Responsivt designläge</translation>
+    </message>
+    <message>
         <source>Save as PDF…</source>
         <translation>Spara som PDF…</translation>
     </message>
@@ -1947,6 +1951,13 @@
     </message>
 </context>
 <context>
+    <name>PageStage</name>
+    <message>
+        <source>%1 %</source>
+        <translation>%1 %</translation>
+    </message>
+</context>
+<context>
     <name>PageView</name>
     <message>
         <source>The page&apos;s process ended unexpectedly.</source>
@@ -2533,6 +2544,41 @@
     <message>
         <source>New name:</source>
         <translation>Nytt namn:</translation>
+    </message>
+</context>
+<context>
+    <name>ResponsiveToolBar</name>
+    <message>
+        <source>Responsive</source>
+        <translation>Responsiv</translation>
+    </message>
+    <message>
+        <source>Device</source>
+        <translation>Enhet</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Bredd</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation>Höjd</translation>
+    </message>
+    <message>
+        <source>Rotate</source>
+        <translation>Rotera</translation>
+    </message>
+    <message>
+        <source>Zoom to Fit</source>
+        <translation>Anpassa till fönstret</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode (Ctrl+Shift+M)</source>
+        <translation>Stäng responsivt läge (Ctrl+Skift+M)</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode</source>
+        <translation>Stäng responsivt läge</translation>
     </message>
 </context>
 <context>

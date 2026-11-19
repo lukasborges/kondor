@@ -446,6 +446,10 @@
         <translation>開発者ツール</translation>
     </message>
     <message>
+        <source>Responsive Design Mode</source>
+        <translation>レスポンシブデザインモード</translation>
+    </message>
+    <message>
         <source>Save as PDF…</source>
         <translation>PDF として保存…</translation>
     </message>
@@ -1934,6 +1938,13 @@
     </message>
 </context>
 <context>
+    <name>PageStage</name>
+    <message>
+        <source>%1 %</source>
+        <translation>%1%</translation>
+    </message>
+</context>
+<context>
     <name>PageView</name>
     <message>
         <source>The page&apos;s process ended unexpectedly.</source>
@@ -2519,6 +2530,41 @@
     <message>
         <source>New name:</source>
         <translation>新しい名前:</translation>
+    </message>
+</context>
+<context>
+    <name>ResponsiveToolBar</name>
+    <message>
+        <source>Responsive</source>
+        <translation>レスポンシブ</translation>
+    </message>
+    <message>
+        <source>Device</source>
+        <translation>デバイス</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>幅</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation>高さ</translation>
+    </message>
+    <message>
+        <source>Rotate</source>
+        <translation>回転</translation>
+    </message>
+    <message>
+        <source>Zoom to Fit</source>
+        <translation>画面に合わせる</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode (Ctrl+Shift+M)</source>
+        <translation>レスポンシブモードを閉じる (Ctrl+Shift+M)</translation>
+    </message>
+    <message>
+        <source>Close Responsive Mode</source>
+        <translation>レスポンシブモードを閉じる</translation>
     </message>
 </context>
 <context>

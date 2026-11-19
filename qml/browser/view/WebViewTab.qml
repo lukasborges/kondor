@@ -100,18 +100,23 @@ Item {
         anchors.fill: parent
         orientation: Qt.Vertical
 
-        PageView {
-            id: pageView
-            objectName: "pageView"
+        PageStage {
             SplitView.fillHeight: true
             tab: root.tab
-            tabModel: root.tabModel
-            zoom: pageZoom
-            reader: readerMode
-            output: pageOutput
-            certificates: certificateHandler
-            webChannel: scriptBridges.channel
-            onPageContextMenuRequested: function(request) { root.showContextMenu(request) }
+
+            PageView {
+                id: pageView
+                objectName: "pageView"
+                anchors.fill: parent
+                tab: root.tab
+                tabModel: root.tabModel
+                zoom: pageZoom
+                reader: readerMode
+                output: pageOutput
+                certificates: certificateHandler
+                webChannel: scriptBridges.channel
+                onPageContextMenuRequested: function(request) { root.showContextMenu(request) }
+            }
         }
 
         WebEngineView {
@@ -143,17 +148,10 @@ Item {
         onActivated: root.popupMenuAtLastPosition()
     }
 
-    NewTabPage {
+    PageCovers {
         anchors.fill: parent
-        visible: root.tab.newTabPage
         tab: root.tab
         tabModel: root.tabModel
-    }
-
-    CertificateErrorPage {
-        anchors.fill: parent
-        visible: root.tab.security.certificateErrorPending
-        tab: root.tab
     }
 
     HttpsOnlyHandler {

@@ -98,7 +98,7 @@ def test_version_option_prints_the_version(environment: dict[str, str]) -> None:
     result = run_kondor(environment, "--version")
 
     assert result.returncode == 0
-    assert "Kondor 0.23.4" in result.stdout
+    assert "Kondor 0.24.0" in result.stdout
 
 
 def test_help_lists_the_options(environment: dict[str, str]) -> None:

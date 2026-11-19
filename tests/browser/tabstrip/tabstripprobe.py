@@ -48,7 +48,16 @@ QtObject {
         return left >= -0.5 && left + item.width <= view().width + 0.5
     }
     function labelItem(group) { return bar().itemAt(strip.stripModel.rowOfLabel(group)) }
-    function leftOfLabel(group) { return leftOfItem(labelItem(group).label) }
+    function leftOfLabel(group) { return leftOfItem(labelItem(group)) }
+    function nameLeftPadding(group) {
+        const chip = labelItem(group).label
+        return chip.nameLabel.mapToItem(chip, 0, 0).x
+    }
+    function nameRightPadding(group) {
+        const chip = labelItem(group).label
+        return chip.width - nameLeftPadding(group) - chip.nameLabel.width
+    }
+    function leftOfChip(group) { return leftOfItem(labelItem(group).label) }
     function widthOfLabel(group) { return labelItem(group).width }
     function barsIn(item) {
         let count = item.isVertical !== undefined && item.visible && item.group ? 1 : 0

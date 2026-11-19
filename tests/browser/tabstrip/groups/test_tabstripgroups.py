@@ -53,3 +53,12 @@ def test_closing_the_first_tab_of_the_strip_leaves_no_stray_bar(strip: TabStripH
     QTest.qWait(SETTLE_MS)
     assert strip.label_left(group) == strip.strip_property("contentMargin")
     assert strip.visible_bars() == strip.tabs.tabCountOf(group)
+
+
+def test_group_name_is_centered_in_its_label(strip: TabStripHarness) -> None:
+    group = group_first_two_tabs(strip)
+    group.setName("green")
+    QTest.qWait(SETTLE_MS)
+    left, right = strip.name_padding(group)
+    assert left > 0
+    assert abs(left - right) <= 1

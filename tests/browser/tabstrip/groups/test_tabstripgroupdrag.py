@@ -76,9 +76,9 @@ def test_dragging_a_label_never_puts_the_group_inside_another(strip: TabStripHar
 
 def test_the_label_never_leaves_its_tabs_while_dragging(strip: TabStripHarness) -> None:
     first, _ = two_groups_around_a_loose_tab(strip)
-    gap = strip.left_of(0) - strip.label_left(first)
+    gap = strip.left_of(0) - strip.chip_left(first)
     press = QPoint(int(strip.label_left(first)) + LABEL_CLICK_OFFSET, STRIP_ROW_Y)
     strip.press(press)
     drag_to(strip, press, 120)
-    assert strip.left_of(0) - strip.label_left(first) == pytest.approx(gap)
+    assert strip.left_of(0) - strip.chip_left(first) == pytest.approx(gap)
     strip.release(press + QPoint(120, 0))

@@ -62,3 +62,40 @@ jobs:
             exit 1
           fi
           python3 scripts/check-translations.py
+
+  flatpak:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.11
+      options: --privileged
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check whether the Flatpak is affected
+        id: affected
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          if git diff --name-only "origin/${{ github.base_ref }}...HEAD" | grep -qE '^(packaging/flatpak/|pyproject\.toml$)'; then
+            echo "affected=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Move the Flatpak installation off the image layer
+        if: steps.affected.outputs.affected == 'true'
+        run: |
+          cp -a /var/lib/flatpak "$RUNNER_TEMP/flatpak"
+          echo "FLATPAK_SYSTEM_DIR=$RUNNER_TEMP/flatpak" >> "$GITHUB_ENV"
+
+      - name: Build Flatpak
+        if: steps.affected.outputs.affected == 'true'
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          manifest-path: packaging/flatpak/io.github.lukasborges.Kondor.yml
+          build-bundle: false
+          upload-artifact: false
+          branch: stable
+          cache-key: flatpak-builder-${{ github.sha }}

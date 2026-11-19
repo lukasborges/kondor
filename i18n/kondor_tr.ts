@@ -1628,6 +1628,32 @@
     </message>
 </context>
 <context>
+    <name>ManageLanguageRow</name>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 MB</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Kaldır</translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation>%1 öğesini kaldır</translation>
+    </message>
+</context>
+<context>
+    <name>ManageLanguagesDialog</name>
+    <message>
+        <source>Manage Languages</source>
+        <translation>Dilleri yönet</translation>
+    </message>
+    <message>
+        <source>No languages downloaded</source>
+        <translation>İndirilmiş dil yok</translation>
+    </message>
+</context>
+<context>
     <name>ManageProfileRow</name>
     <message>
         <source>The Default profile cannot be deleted</source>
@@ -3568,6 +3594,96 @@
     <message>
         <source>Remove from Top Sites</source>
         <translation>En çok ziyaret edilenlerden kaldır</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButton</name>
+    <message>
+        <source>Translate Page</source>
+        <translation>Sayfayı çevir</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButtons</name>
+    <message>
+        <source>Not Now</source>
+        <translation>Şimdi değil</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>İptal</translation>
+    </message>
+    <message>
+        <source>Show Original</source>
+        <translation>Aslını göster</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation>Yeniden Dene</translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <translation>Çevir</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateDownloadProgress</name>
+    <message>
+        <source>Downloading %1: %2 of %3 MB</source>
+        <translation>%1 indiriliyor: %2 / %3 MB</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateLanguageForm</name>
+    <message>
+        <source>%1 (detected)</source>
+        <translation>%1 (algılandı)</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Kaynak dil:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Hedef dil:</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateMenu</name>
+    <message>
+        <source>Always Translate %1</source>
+        <translation>%1 dilini her zaman çevir</translation>
+    </message>
+    <message>
+        <source>Never Translate %1</source>
+        <translation>%1 dilini asla çevirme</translation>
+    </message>
+    <message>
+        <source>Manage Languages…</source>
+        <translation>Dilleri yönet…</translation>
+    </message>
+</context>
+<context>
+    <name>TranslatePanel</name>
+    <message>
+        <source>Page Translated</source>
+        <translation>Sayfa çevrildi</translation>
+    </message>
+    <message>
+        <source>Translate Page</source>
+        <translation>Sayfayı çevir</translation>
+    </message>
+    <message>
+        <source>More Options</source>
+        <translation>Diğer seçenekler</translation>
+    </message>
+    <message>
+        <source>Could not download the language files.</source>
+        <translation>Dil dosyaları indirilemedi.</translation>
+    </message>
+    <message>
+        <source>Translating…</source>
+        <translation>Çevriliyor…</translation>
     </message>
 </context>
 <context>

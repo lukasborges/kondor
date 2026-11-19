@@ -83,6 +83,7 @@ See what's coming next on the [Roadmap](https://github.com/users/lukasborges/pro
 - **KRunner search**: find open tabs, bookmarks and history with Alt+Space
 - **Media controls**: play, pause and skip from Plasma, the lock screen and the media keys
 - **Available in 19 languages**
+- **Translate pages** on your computer, offline after a one-time download per language
 
 ### For developers
 - **Developer tools** (F12) and **view source**
@@ -211,12 +212,13 @@ connect.
 
 - Python 3.13+ and PySide6 6.8+ (**including Qt WebEngine**)
 - **`jeepney`** (pure Python D-Bus library, used to answer KRunner)
+- **`langdetect`** (pure Python language detection, used when translating pages without a `lang` attribute)
 - The **`org.kde.desktop`** (QQC2 Desktop Style) and **Kirigami** packages available at runtime
 
 On **Fedora** (the original development environment):
 
 ```bash
-sudo dnf install python3 python3-pyside6 python3-jeepney pyside6-tools kf6-kirigami kf6-qqc2-desktop-style \
+sudo dnf install python3 python3-pyside6 python3-jeepney python3-langdetect pyside6-tools kf6-kirigami kf6-qqc2-desktop-style \
     qt6-qtwebengine hunspell-en-US hunspell-pt-BR
 sudo dnf install python3-pytest python3-pytest-qt python3-mypy ruff dbus-daemon   # development tools
 ```
@@ -279,6 +281,7 @@ dialogs and context menus).
 ## Third-party code
 
 - [Mozilla Readability](https://github.com/mozilla/readability) (Apache-2.0), vendored in `3rdparty/readability/` with its license, powers reader mode.
+- [Mozilla Bergamot](https://github.com/mozilla/firefox-translations) translation engine (MPL-2.0), its glue code vendored in `3rdparty/bergamot/` with its license, and Mozilla's language models translate pages on your computer.
 
 ## License
 

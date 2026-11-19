@@ -21,7 +21,7 @@ jobs:
         timeout-minutes: 50
         run: |
           for attempt in 1 2 3; do
-            timeout 15m dnf -y install git python3 python3-pyside6 python3-jeepney pyside6-tools file wget gh fuse-libs \
+            timeout 15m dnf -y install git python3 python3-pyside6 python3-jeepney python3-langdetect pyside6-tools file wget gh fuse-libs \
                 qt6-qtbase qt6-qtdeclarative qt6-qtwebengine qt6-qtwebchannel qt6-qtwebsockets qt6-qtsvg qt6-qtwayland \
                 kf6-kirigami kf6-qqc2-desktop-style kf6-sonnet plasma-union kf6-kitemmodels plasma-integration plasma-breeze-qt6 \
                 hunspell-en-US hunspell-pt-BR && exit 0

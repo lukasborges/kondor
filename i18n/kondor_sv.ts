@@ -1641,6 +1641,32 @@
     </message>
 </context>
 <context>
+    <name>ManageLanguageRow</name>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 MB</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Ta bort</translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation>Ta bort %1</translation>
+    </message>
+</context>
+<context>
+    <name>ManageLanguagesDialog</name>
+    <message>
+        <source>Manage Languages</source>
+        <translation>Hantera språk</translation>
+    </message>
+    <message>
+        <source>No languages downloaded</source>
+        <translation>Inga språk nedladdade</translation>
+    </message>
+</context>
+<context>
     <name>ManageProfileRow</name>
     <message>
         <source>The Default profile cannot be deleted</source>
@@ -3582,6 +3608,96 @@
     <message>
         <source>Remove from Top Sites</source>
         <translation>Ta bort från mest besökta webbplatser</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButton</name>
+    <message>
+        <source>Translate Page</source>
+        <translation>Översätt sidan</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButtons</name>
+    <message>
+        <source>Not Now</source>
+        <translation>Inte nu</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Avbryt</translation>
+    </message>
+    <message>
+        <source>Show Original</source>
+        <translation>Visa originalet</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation>Försök igen</translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <translation>Översätt</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateDownloadProgress</name>
+    <message>
+        <source>Downloading %1: %2 of %3 MB</source>
+        <translation>Laddar ned %1: %2 av %3 MB</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateLanguageForm</name>
+    <message>
+        <source>%1 (detected)</source>
+        <translation>%1 (identifierat)</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Från:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Till:</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateMenu</name>
+    <message>
+        <source>Always Translate %1</source>
+        <translation>Översätt alltid %1</translation>
+    </message>
+    <message>
+        <source>Never Translate %1</source>
+        <translation>Översätt aldrig %1</translation>
+    </message>
+    <message>
+        <source>Manage Languages…</source>
+        <translation>Hantera språk…</translation>
+    </message>
+</context>
+<context>
+    <name>TranslatePanel</name>
+    <message>
+        <source>Page Translated</source>
+        <translation>Sidan är översatt</translation>
+    </message>
+    <message>
+        <source>Translate Page</source>
+        <translation>Översätt sidan</translation>
+    </message>
+    <message>
+        <source>More Options</source>
+        <translation>Fler alternativ</translation>
+    </message>
+    <message>
+        <source>Could not download the language files.</source>
+        <translation>Det gick inte att ladda ned språkfilerna.</translation>
+    </message>
+    <message>
+        <source>Translating…</source>
+        <translation>Översätter…</translation>
     </message>
 </context>
 <context>

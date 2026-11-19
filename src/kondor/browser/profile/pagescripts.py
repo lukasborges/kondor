@@ -98,6 +98,12 @@ MEDIA_SESSION = PageScript(MEDIA_SESSION_SCRIPT, MEDIA_SESSION_RESOURCE, ScriptW
 MEDIA_WATCH = PageScript(MEDIA_WATCH_SCRIPT, MEDIA_WATCH_RESOURCE, ScriptWorldId.ApplicationWorld)
 POPUP_GUARD = PageScript(POPUP_GUARD_SCRIPT, POPUP_GUARD_RESOURCE, ScriptWorldId.MainWorld)
 POPUP_WATCH = PageScript(POPUP_WATCH_SCRIPT, POPUP_WATCH_RESOURCE, ScriptWorldId.ApplicationWorld)
+TRANSLATE_COLLECT = PageScript(
+    "kondor-translate-collect", ":/scripts/translatecollect.js", ScriptWorldId.ApplicationWorld
+)
+TRANSLATE_PAGE = PageScript(
+    "kondor-translate-page", ":/scripts/translatepage.js", ScriptWorldId.ApplicationWorld
+)
 DEVTOOLS_ROUTING = PageScript(
     DEVTOOLS_ROUTING_SCRIPT, DEVTOOLS_ROUTING_RESOURCE, ScriptWorldId.MainWorld
 )
@@ -120,6 +126,11 @@ def install_media_scripts(collection: QObject | None) -> None:
 def install_popup_scripts(collection: QObject | None) -> None:
     install_page_script(collection, POPUP_GUARD, "the blocked pop-ups list")
     install_page_script(collection, POPUP_WATCH, "the blocked pop-ups list")
+
+
+def install_translate_scripts(collection: QObject | None) -> None:
+    install_page_script(collection, TRANSLATE_COLLECT, "page translation")
+    install_page_script(collection, TRANSLATE_PAGE, "page translation")
 
 
 def install_devtools_routing(collection: QObject | None) -> None:
@@ -145,6 +156,7 @@ def install(profile: QQuickWebEngineProfile) -> None:
         return
     install_media_scripts(collection)
     install_popup_scripts(collection)
+    install_translate_scripts(collection)
     install_devtools_routing(collection)
     if not profile.isOffTheRecord():
         install_passwords_script(collection)

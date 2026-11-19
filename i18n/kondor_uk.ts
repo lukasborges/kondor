@@ -1654,6 +1654,32 @@
     </message>
 </context>
 <context>
+    <name>ManageLanguageRow</name>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 МБ</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Вилучити</translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation>Вилучити %1</translation>
+    </message>
+</context>
+<context>
+    <name>ManageLanguagesDialog</name>
+    <message>
+        <source>Manage Languages</source>
+        <translation>Керування мовами</translation>
+    </message>
+    <message>
+        <source>No languages downloaded</source>
+        <translation>Немає завантажених мов</translation>
+    </message>
+</context>
+<context>
     <name>ManageProfileRow</name>
     <message>
         <source>The Default profile cannot be deleted</source>
@@ -3596,6 +3622,96 @@
     <message>
         <source>Remove from Top Sites</source>
         <translation>Вилучити з найчастіших сайтів</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButton</name>
+    <message>
+        <source>Translate Page</source>
+        <translation>Перекласти сторінку</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButtons</name>
+    <message>
+        <source>Not Now</source>
+        <translation>Не зараз</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Скасувати</translation>
+    </message>
+    <message>
+        <source>Show Original</source>
+        <translation>Показати оригінал</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation>Спробувати ще раз</translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <translation>Перекласти</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateDownloadProgress</name>
+    <message>
+        <source>Downloading %1: %2 of %3 MB</source>
+        <translation>Завантаження %1: %2 з %3 МБ</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateLanguageForm</name>
+    <message>
+        <source>%1 (detected)</source>
+        <translation>%1 (визначено)</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>З мови:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Мовою:</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateMenu</name>
+    <message>
+        <source>Always Translate %1</source>
+        <translation>Завжди перекладати %1</translation>
+    </message>
+    <message>
+        <source>Never Translate %1</source>
+        <translation>Ніколи не перекладати %1</translation>
+    </message>
+    <message>
+        <source>Manage Languages…</source>
+        <translation>Керування мовами…</translation>
+    </message>
+</context>
+<context>
+    <name>TranslatePanel</name>
+    <message>
+        <source>Page Translated</source>
+        <translation>Сторінку перекладено</translation>
+    </message>
+    <message>
+        <source>Translate Page</source>
+        <translation>Перекласти сторінку</translation>
+    </message>
+    <message>
+        <source>More Options</source>
+        <translation>Додаткові параметри</translation>
+    </message>
+    <message>
+        <source>Could not download the language files.</source>
+        <translation>Не вдалося завантажити мовні файли.</translation>
+    </message>
+    <message>
+        <source>Translating…</source>
+        <translation>Переклад…</translation>
     </message>
 </context>
 <context>

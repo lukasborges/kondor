@@ -1641,6 +1641,32 @@
     </message>
 </context>
 <context>
+    <name>ManageLanguageRow</name>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 MB</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Verwijderen</translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation>%1 verwijderen</translation>
+    </message>
+</context>
+<context>
+    <name>ManageLanguagesDialog</name>
+    <message>
+        <source>Manage Languages</source>
+        <translation>Talen beheren</translation>
+    </message>
+    <message>
+        <source>No languages downloaded</source>
+        <translation>Geen talen gedownload</translation>
+    </message>
+</context>
+<context>
     <name>ManageProfileRow</name>
     <message>
         <source>The Default profile cannot be deleted</source>
@@ -3582,6 +3608,96 @@
     <message>
         <source>Remove from Top Sites</source>
         <translation>Verwijderen uit vaakst bezochte sites</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButton</name>
+    <message>
+        <source>Translate Page</source>
+        <translation>Pagina vertalen</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateButtons</name>
+    <message>
+        <source>Not Now</source>
+        <translation>Nu niet</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annuleren</translation>
+    </message>
+    <message>
+        <source>Show Original</source>
+        <translation>Origineel tonen</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation>Opnieuw proberen</translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <translation>Vertalen</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateDownloadProgress</name>
+    <message>
+        <source>Downloading %1: %2 of %3 MB</source>
+        <translation>%1 wordt gedownload: %2 van %3 MB</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateLanguageForm</name>
+    <message>
+        <source>%1 (detected)</source>
+        <translation>%1 (gedetecteerd)</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Van:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Naar:</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateMenu</name>
+    <message>
+        <source>Always Translate %1</source>
+        <translation>%1 altijd vertalen</translation>
+    </message>
+    <message>
+        <source>Never Translate %1</source>
+        <translation>%1 nooit vertalen</translation>
+    </message>
+    <message>
+        <source>Manage Languages…</source>
+        <translation>Talen beheren…</translation>
+    </message>
+</context>
+<context>
+    <name>TranslatePanel</name>
+    <message>
+        <source>Page Translated</source>
+        <translation>Pagina vertaald</translation>
+    </message>
+    <message>
+        <source>Translate Page</source>
+        <translation>Pagina vertalen</translation>
+    </message>
+    <message>
+        <source>More Options</source>
+        <translation>Meer opties</translation>
+    </message>
+    <message>
+        <source>Could not download the language files.</source>
+        <translation>De taalbestanden konden niet worden gedownload.</translation>
+    </message>
+    <message>
+        <source>Translating…</source>
+        <translation>Bezig met vertalen…</translation>
     </message>
 </context>
 <context>

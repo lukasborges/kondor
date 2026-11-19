@@ -34,6 +34,22 @@ modules:
       - type: file
         url: https://files.pythonhosted.org/packages/b2/a3/e137168c9c44d18eff0376253da9f1e9234d0239e0ee230d2fee6cea8e55/jeepney-0.9.0-py3-none-any.whl
         sha256: 97e5714520c16fc0a45695e5365a2e11b81ea79bba796e26f9f1d178cb182683
+  - name: six
+    buildsystem: simple
+    build-commands:
+      - pip3 install --no-index --no-deps --prefix=/app six-1.17.0-py2.py3-none-any.whl
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl
+        sha256: 4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274
+  - name: langdetect
+    buildsystem: simple
+    build-commands:
+      - pip3 install --no-index --no-deps --prefix=/app langdetect-1.0.9-py2-none-any.whl
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/d0/04/31f2f175c475c0274a7fb20552e18c4f5b1ef04b211dd4d7301ca6bf4534/langdetect-1.0.9-py2-none-any.whl
+        sha256: 7cbc0746252f19e76f77c0b1690aadf01963be835ef0cd4b56dddf2a8f1dfc2a
   - name: kondor
     buildsystem: simple
     build-commands:

@@ -107,7 +107,7 @@ class FaviconStore(QObject):
             self.follow_response(response, pageUrl.host())
 
     # Qt's favicon provider can pick a sleeping view of the same icon and crash in
-    # WebContentsAdapter::icon(): https://github.com/lukasborges/kondor/issues/390
+    # WebContentsAdapter::icon(): https://github.com/lukasborges/kondor-browser/issues/390
     @Slot(QObject, QUrl)
     def markSleeping(self, view: QObject, iconSource: QUrl) -> None:  # noqa: N802, N803
         self._sleeping_icons[shiboken6.getCppPointer(view)[0]] = provider_icon_id(iconSource)

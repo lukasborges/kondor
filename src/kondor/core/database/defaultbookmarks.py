@@ -33,7 +33,7 @@ DEVELOPMENT = (
     DefaultBookmark("KDE Invent", "https://invent.kde.org/"),
     DefaultBookmark("freedesktop.org", "https://www.freedesktop.org/"),
     DefaultBookmark("The Linux Kernel Archives", "https://www.kernel.org/"),
-    DefaultBookmark("Kondor Browser on GitHub", "https://github.com/lukasborges/kondor"),
+    DefaultBookmark("Kondor Browser on GitHub", "https://github.com/lukasborges/kondor-browser"),
 )
 
 LINUX = (

@@ -1,6 +1,6 @@
 # Browser extensions: compatibility report
 
-Measured for [#105](https://github.com/lukasborges/kondor/issues/105), the follow-up of the #88
+Measured for [#105](https://github.com/lukasborges/kondor-browser/issues/105), the follow-up of the #88
 spike ([spec](specs/0088-browser-extensions-spike.md)). It records only what was observed.
 
 ## Setup

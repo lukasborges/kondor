@@ -38,7 +38,7 @@ def test_noBarBeforeRecordingStarts() -> None:
 def test_reportBuildsIssueAddressAndDeletesFiles(tmp_path: Path) -> None:
     reporter, files = offered(tmp_path)
     address = reporter.report().toString()
-    assert address.startswith("https://github.com/lukasborges/kondor/issues/new")
+    assert address.startswith("https://github.com/lukasborges/kondor-browser/issues/new")
     assert not files.has_previous_crash()
 
 

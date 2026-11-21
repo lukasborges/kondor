@@ -23,7 +23,7 @@ def test_bodyHasAllSections() -> None:
 
 def test_addressPointsToPrefilledIssue() -> None:
     address = CrashReport(CRASH, "", "0.15.1").address()
-    assert address.startswith("https://github.com/lukasborges/kondor/issues/new?labels=bug")
+    assert address.startswith("https://github.com/lukasborges/kondor-browser/issues/new?labels=bug")
     assert "Fatal Python error" in query_of(address)["body"][0]
 
 

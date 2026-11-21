@@ -174,10 +174,10 @@ jobs:
       - name: Restore the published repository
         run: |
           ostree init --mode=archive-z2 --repo=repo
-          status="$(curl -sS --retry 3 --retry-all-errors -o /dev/null -w '%{http_code}' --head https://lukasborges.github.io/kondor/repo/summary)"
+          status="$(curl -sS --retry 3 --retry-all-errors -o /dev/null -w '%{http_code}' --head https://lukasborges.github.io/kondor-browser/repo/summary)"
           case "$status" in
             200)
-              ostree remote add --repo=repo --no-gpg-verify published https://lukasborges.github.io/kondor/repo/
+              ostree remote add --repo=repo --no-gpg-verify published https://lukasborges.github.io/kondor-browser/repo/
               # GitHub Pages answers 429 when releases mirror the repository often: wait and resume.
               for attempt in 1 2 3 4 5; do
                 ostree pull --repo=repo --mirror published && break

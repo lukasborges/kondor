@@ -20,15 +20,15 @@ Kondor Browser runs the modern web on the same engine as Chrome, and it looks an
 
 ## Download
 
-**Flatpak** (recommended): open the [`.flatpakref`](https://lukasborges.github.io/kondor/io.github.lukasborges.Kondor.flatpakref) link in Discover, or run:
+**Flatpak** (recommended): open the [`.flatpakref`](https://lukasborges.github.io/kondor-browser/io.github.lukasborges.Kondor.flatpakref) link in Discover, or run:
 
 ```bash
-flatpak install --user https://lukasborges.github.io/kondor/io.github.lukasborges.Kondor.flatpakref
+flatpak install --user https://lukasborges.github.io/kondor-browser/io.github.lukasborges.Kondor.flatpakref
 ```
 
 Updates arrive in Discover and through `flatpak update`.
 
-**AppImage**: get it from the [latest release](https://github.com/lukasborges/kondor/releases/latest), make it executable and run it.
+**AppImage**: get it from the [latest release](https://github.com/lukasborges/kondor-browser/releases/latest), make it executable and run it.
 
 **Known issue**: while Qt 6.11 is in use, Kondor runs through XWayland on a Wayland session, because `<select>` lists ignore mouse clicks on native Wayland ([QTBUG-147154](https://qt-project.atlassian.net/browse/QTBUG-147154)). Set `QT_QPA_PLATFORM=wayland` to force native Wayland.
 

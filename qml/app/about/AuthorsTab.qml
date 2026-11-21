@@ -15,7 +15,7 @@ ColumnLayout {
         textFormat: Text.RichText
         linkColor: Kirigami.Theme.linkColor
         text: qsTr("Please use %1 to report bugs.")
-              .arg("<a href=\"https://github.com/lukasborges/kondor/issues\">https://github.com/lukasborges/kondor/issues</a>")
+              .arg("<a href=\"https://github.com/lukasborges/kondor-browser/issues\">https://github.com/lukasborges/kondor-browser/issues</a>")
         onLinkActivated: function(link) {
             root.linkActivated(link)
         }

@@ -21,7 +21,7 @@ ColumnLayout {
         Layout.fillWidth: true
         textFormat: Text.RichText
         linkColor: Kirigami.Theme.linkColor
-        text: "<a href=\"https://github.com/lukasborges/kondor\">https://github.com/lukasborges/kondor</a>"
+        text: "<a href=\"https://github.com/lukasborges/kondor-browser\">https://github.com/lukasborges/kondor-browser</a>"
         onLinkActivated: function(link) {
             root.linkActivated(link)
         }

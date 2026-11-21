@@ -150,8 +150,8 @@ work on other issues at the same time: never touch a branch, worktree or PR of a
    prototype (if issue #$n is labeled bug, its body is the spec instead), and every comment on issue #$n and on its PR (gh issue view $n --comments; gh pr list --search "Closes #$n").
    If the spec says Repository: lukasborges/kondor-extensions, the work happens in that repository:
    follow AGENTS.md → "Extensions repository" for the clone, the worktree, the PR (in that
-   repository, body "Closes lukasborges/kondor#$n") and how to test; its PR is found with
-   gh pr list --repo lukasborges/kondor-extensions --search "lukasborges/kondor#$n".
+   repository, body "Closes lukasborges/kondor-browser#$n") and how to test; its PR is found with
+   gh pr list --repo lukasborges/kondor-extensions --search "lukasborges/kondor-browser#$n".
 2. If a branch for this issue already exists (git branch --list 'feature/$n-*' 'fix/$n-*'; git worktree list),
    continue it in the worktree where it is checked out. Otherwise create a new worktree from
    origin/main as described in docs/agents/developer.md. Never commit in the current directory
@@ -243,8 +243,8 @@ EOF
   # and the board card moves to Blocked. The issue keeps its `to-dev` label for when it resumes.
   block_issue() {
     local n="$1" run_log="$2"
-    gh issue edit "$n" --repo lukasborges/kondor --add-label blocked >/dev/null
-    gh issue comment "$n" --repo lukasborges/kondor --body "$(blocked_comment "$n" "$run_log")" >/dev/null
+    gh issue edit "$n" --repo lukasborges/kondor-browser --add-label blocked >/dev/null
+    gh issue comment "$n" --repo lukasborges/kondor-browser --body "$(blocked_comment "$n" "$run_log")" >/dev/null
     rm -f "$claims/$n" "$state/no-progress-$n"
     move_card "$n" Blocked
   }
@@ -257,7 +257,7 @@ EOF
   }
 
   unblock_issue() {
-    gh issue edit "$1" --repo lukasborges/kondor --remove-label blocked >/dev/null
+    gh issue edit "$1" --repo lukasborges/kondor-browser --remove-label blocked >/dev/null
     rm -f "$state/no-progress-$1"
     move_card "$1" "In Progress"
     log "unblocked #$1"

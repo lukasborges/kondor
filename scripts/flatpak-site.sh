@@ -10,7 +10,7 @@ key_id="$1"
 repo="$2"
 site="$3"
 app_id="io.github.lukasborges.Kondor"
-repo_url="https://lukasborges.github.io/kondor/repo/"
+repo_url="https://lukasborges.github.io/kondor-browser/repo/"
 max_bytes=$((900 * 1024 * 1024))
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
@@ -38,9 +38,9 @@ cat > "$site/index.html" <<'HTML'
 <!DOCTYPE html>
 <meta charset="utf-8">
 <title>Kondor Browser</title>
-<meta http-equiv="refresh" content="0; url=https://github.com/lukasborges/kondor#download">
-<link rel="canonical" href="https://github.com/lukasborges/kondor#download">
-<p><a href="https://github.com/lukasborges/kondor#download">Kondor Browser</a></p>
+<meta http-equiv="refresh" content="0; url=https://github.com/lukasborges/kondor-browser#download">
+<link rel="canonical" href="https://github.com/lukasborges/kondor-browser#download">
+<p><a href="https://github.com/lukasborges/kondor-browser#download">Kondor Browser</a></p>
 HTML
 
 size="$(du -sb "$site" | cut -f1)"

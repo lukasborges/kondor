@@ -31,7 +31,7 @@ main() {
   local state="${KONDOR_APPIMAGE_STATE:-$HOME/.local/state/kondor-appimage}"
   local cache="${KONDOR_APPIMAGE_CACHE:-$HOME/.cache/kondor-appimage}"
   local dest="${KONDOR_APPIMAGE_DEST:-$HOME/AppImages/kondor.appimage}"
-  local gh_repo="lukasborges/kondor"
+  local gh_repo="lukasborges/kondor-browser"
   mkdir -p "$state" "$cache"
 
   log() { printf '%s %s\n' "$(date '+%F %T')" "$*" | tee -a "$state/appimage.log" >&2; }

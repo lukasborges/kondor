@@ -92,7 +92,7 @@ main() {
   prompt_for() {
     local n="$1" st="$2" common merge_rule
     if [[ "$merge" == 1 ]]; then
-      merge_rule="If it passes, approve it (gh pr review --approve; if GitHub refuses because the same account opened the PR, submit a comment review that starts with \"Verdict: APPROVE\") and add the label approved to issue #$n. Then check CI with gh pr checks <PR> --repo lukasborges/kondor: the build check must pass (ignore the queue check). If it passed, merge with exactly: gh pr merge <PR> --repo lukasborges/kondor --squash --body \"Closes #$n\" (the maintainer decided that the architect merges approved PRs; the explicit --body replaces GitHub's default squash message, which appends Co-authored-by trailers, and the maintainer wants no attribution trailers). Then release it (the maintainer wants a release after every merged fix or feature): in your own worktree at the new origin/main, get the version with scripts/release.sh --next <patch for a fix: PR, minor for a feat: PR>, write the user-facing notes in docs/releases/v<version>.md following docs/releases/README.md (one or two short sentences for a single change), then run scripts/release.sh <patch|minor> there; it commits, pushes and tags. If the release is refused or fails, comment on issue #$n with the error and go on. Then promote the next issue of the roadmap order to to-dev (see promotion below). If the build is still running, stop: the next run merges it. If the build failed, request changes instead. If the merge command is refused by a permission check, comment on issue #$n that the PR is approved and needs the maintainer to merge it, and stop."
+      merge_rule="If it passes, approve it (gh pr review --approve; if GitHub refuses because the same account opened the PR, submit a comment review that starts with \"Verdict: APPROVE\") and add the label approved to issue #$n. Then check CI with gh pr checks <PR> --repo lukasborges/kondor-browser: the build check must pass (ignore the queue check). If it passed, merge with exactly: gh pr merge <PR> --repo lukasborges/kondor-browser --squash --body \"Closes #$n\" (the maintainer decided that the architect merges approved PRs; the explicit --body replaces GitHub's default squash message, which appends Co-authored-by trailers, and the maintainer wants no attribution trailers). Then release it (the maintainer wants a release after every merged fix or feature): in your own worktree at the new origin/main, get the version with scripts/release.sh --next <patch for a fix: PR, minor for a feat: PR>, write the user-facing notes in docs/releases/v<version>.md following docs/releases/README.md (one or two short sentences for a single change), then run scripts/release.sh <patch|minor> there; it commits, pushes and tags. If the release is refused or fails, comment on issue #$n with the error and go on. Then promote the next issue of the roadmap order to to-dev (see promotion below). If the build is still running, stop: the next run merges it. If the build failed, request changes instead. If the merge command is refused by a permission check, comment on issue #$n that the PR is approved and needs the maintainer to merge it, and stop."
     else
       merge_rule="If it passes, approve it (gh pr review --approve; if GitHub refuses because the same account opened the PR, submit a comment review that starts with \"Verdict: APPROVE\"), add the label approved to issue #$n (keep in-review), comment on issue #$n that it is approved and waiting for the maintainer to merge, and stop: a human merges it (the next issue is promoted after the merge)."
     fi
@@ -101,7 +101,7 @@ main() {
       in-review) cat <<EOF
 $common
 
-Step: review the open PR for issue #$n (gh pr list --search "Closes #$n"; if the spec says Repository: lukasborges/kondor-extensions, the PR is in that repository instead: gh pr list --repo lukasborges/kondor-extensions --search "lukasborges/kondor#$n", and you review, check CI and merge it there with --repo lukasborges/kondor-extensions and --body "Closes lukasborges/kondor#$n", as AGENTS.md → "Extensions repository" says). If issue #$n already has the label approved, skip the review and only do the CI check and merge part below. Load the clean-code skill first and check the PR against it and AGENTS.md → "Code quality" (that section wins where they differ). Use the review checklist in docs/agents/architect.md: run the checks AGENTS.md → "Which checks a change needs" asks for (in a separate worktree of the PR head: ruff, mypy, the staging, the Python tests and the offscreen smoke test), the spec's manual test where possible (always with temporary XDG_CONFIG_HOME, XDG_DATA_HOME and XDG_CACHE_HOME as in AGENTS.md, never the maintainer's real profile); check the spec (docs/specs/$(printf '%04d' "$n")-*.md, or the issue body for a bug issue) acceptance criteria and out of scope, AGENTS.md conventions, private-tab privacy and visual parity with the prototype. Post the review as a PR review with concrete file:line comments. Report every blocking problem in this one review (docs/agents/architect.md, review checklist item 8): go through the whole checklist before posting, and never keep a problem back for a later round. If you reviewed this PR before, check only your requested changes and the new commits; block again only for a problem those commits introduced or an acceptance criterion still not met, and give anything else as a non-blocking note or a new bug issue. Never withdraw your own approval unless the PR head changed and broke something.
+Step: review the open PR for issue #$n (gh pr list --search "Closes #$n"; if the spec says Repository: lukasborges/kondor-extensions, the PR is in that repository instead: gh pr list --repo lukasborges/kondor-extensions --search "lukasborges/kondor-browser#$n", and you review, check CI and merge it there with --repo lukasborges/kondor-extensions and --body "Closes lukasborges/kondor-browser#$n", as AGENTS.md → "Extensions repository" says). If issue #$n already has the label approved, skip the review and only do the CI check and merge part below. Load the clean-code skill first and check the PR against it and AGENTS.md → "Code quality" (that section wins where they differ). Use the review checklist in docs/agents/architect.md: run the checks AGENTS.md → "Which checks a change needs" asks for (in a separate worktree of the PR head: ruff, mypy, the staging, the Python tests and the offscreen smoke test), the spec's manual test where possible (always with temporary XDG_CONFIG_HOME, XDG_DATA_HOME and XDG_CACHE_HOME as in AGENTS.md, never the maintainer's real profile); check the spec (docs/specs/$(printf '%04d' "$n")-*.md, or the issue body for a bug issue) acceptance criteria and out of scope, AGENTS.md conventions, private-tab privacy and visual parity with the prototype. Post the review as a PR review with concrete file:line comments. Report every blocking problem in this one review (docs/agents/architect.md, review checklist item 8): go through the whole checklist before posting, and never keep a problem back for a later round. If you reviewed this PR before, check only your requested changes and the new commits; block again only for a problem those commits introduced or an acceptance criterion still not met, and give anything else as a non-blocking note or a new bug issue. Never withdraw your own approval unless the PR head changed and broke something.
 $merge_rule
 If it does not pass, submit "request changes" (gh pr review --request-changes; or a comment review starting with \"Verdict: REQUEST CHANGES\" if GitHub refuses), remove the approved label if present and switch issue #$n from in-review to to-dev.
 Do not promote another issue: the loop does that in its own step.
@@ -148,7 +148,7 @@ EOF
   # One line per open issue: "<number> <started> <bug> <priority rank> <dependencies, comma-separated>".
   # An issue labeled blocked (waiting for the maintainer) counts as started, so it is never promoted.
   open_issues() {
-    gh issue list --repo lukasborges/kondor --state open --limit 500 --json number,labels,body -q '
+    gh issue list --repo lukasborges/kondor-browser --state open --limit 500 --json number,labels,body -q '
       .[] | [.labels[].name] as $l
       | "\(.number) \($l | any(. == "to-spec" or . == "to-dev" or . == "in-review" or . == "blocked"))"
         + " \($l | any(. == "bug"))"
@@ -223,21 +223,21 @@ EOF
   }
 
   is_bug() {
-    gh issue view "$1" --repo lukasborges/kondor --json labels -q '.labels[].name' 2>/dev/null | grep -qx bug
+    gh issue view "$1" --repo lukasborges/kondor-browser --json labels -q '.labels[].name' 2>/dev/null | grep -qx bug
   }
 
   promote_now() {
     local n="$1" spec
     spec="$(cd "$control" && compgen -G "docs/specs/$(printf '%04d' "$n")-*.md" | head -1)"
-    gh issue edit "$n" --repo lukasborges/kondor --add-label to-dev >/dev/null || return 1
-    gh issue comment "$n" --repo lukasborges/kondor --body "$(promotion_comment "$spec")" >/dev/null
+    gh issue edit "$n" --repo lukasborges/kondor-browser --add-label to-dev >/dev/null || return 1
+    gh issue comment "$n" --repo lukasborges/kondor-browser --body "$(promotion_comment "$spec")" >/dev/null
     (cd "$control" && scripts/board.sh "$n" "In Progress" >/dev/null 2>&1)
     log "promoted #$n to to-dev (no Claude run needed)"
   }
 
   promotion_comment() {
     if [[ -n "$1" ]]; then
-      echo "This is now in development. Spec: [\`$1\`](https://github.com/lukasborges/kondor/blob/main/$1)."
+      echo "This is now in development. Spec: [\`$1\`](https://github.com/lukasborges/kondor-browser/blob/main/$1)."
     else
       echo "This is now in development. This bug issue is its own spec."
     fi
@@ -267,14 +267,14 @@ EOF
   # True when issue $1 has the approved label and its PR's build check has not finished yet.
   # The PR may be in the extensions repository (AGENTS.md → "Extensions repository").
   build_pending() {
-    local n="$1" pr prrepo=lukasborges/kondor
-    gh issue view "$n" --repo lukasborges/kondor --json labels -q '.labels[].name' 2>/dev/null \
+    local n="$1" pr prrepo=lukasborges/kondor-browser
+    gh issue view "$n" --repo lukasborges/kondor-browser --json labels -q '.labels[].name' 2>/dev/null \
       | grep -qx approved || return 1
-    pr="$(gh pr list --repo lukasborges/kondor --state open --search "Closes #$n" \
+    pr="$(gh pr list --repo lukasborges/kondor-browser --state open --search "Closes #$n" \
       --json number -q '.[0].number' 2>/dev/null)"
     if [[ -z "$pr" ]]; then
       prrepo=lukasborges/kondor-extensions
-      pr="$(gh pr list --repo "$prrepo" --state open --search "lukasborges/kondor#$n" \
+      pr="$(gh pr list --repo "$prrepo" --state open --search "lukasborges/kondor-browser#$n" \
         --json number -q '.[0].number' 2>/dev/null)"
     fi
     [[ -n "$pr" ]] || return 1
@@ -295,7 +295,7 @@ EOF
   sync_blocked_cards() {
     local marks="$state/blocked-cards" blocked n
     mkdir -p "$marks"
-    blocked="$(gh issue list --repo lukasborges/kondor --state open --label blocked --json number --jq '.[].number')" || return 0
+    blocked="$(gh issue list --repo lukasborges/kondor-browser --state open --label blocked --json number --jq '.[].number')" || return 0
     for n in $blocked; do
       [[ -e "$marks/$n" ]] || { move_card "$n" Blocked && touch "$marks/$n"; }
     done
@@ -306,7 +306,7 @@ EOF
 
   # Board column of an issue that lost `blocked`: In Progress once promoted, else back to Todo.
   unblocked_status() {
-    gh issue view "$1" --repo lukasborges/kondor --json labels -q '.labels[].name' 2>/dev/null \
+    gh issue view "$1" --repo lukasborges/kondor-browser --json labels -q '.labels[].name' 2>/dev/null \
       | grep -qxE 'to-dev|in-review' && echo "In Progress" || echo Todo
   }
 

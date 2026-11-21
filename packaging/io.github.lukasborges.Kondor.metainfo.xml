@@ -13,11 +13,11 @@
     <p>It blocks ads and trackers, keeps private tabs off the disk, and has reader mode, a download manager, bookmarks, history, site permissions and developer tools built in.</p>
   </description>
   <launchable type="desktop-id">io.github.lukasborges.Kondor.desktop</launchable>
-  <url type="homepage">https://github.com/lukasborges/kondor</url>
-  <url type="bugtracker">https://github.com/lukasborges/kondor/issues</url>
+  <url type="homepage">https://github.com/lukasborges/kondor-browser</url>
+  <url type="bugtracker">https://github.com/lukasborges/kondor-browser/issues</url>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/lukasborges/kondor/main/assets/screenshot.png</image>
+      <image>https://raw.githubusercontent.com/lukasborges/kondor-browser/main/assets/screenshot.png</image>
       <caption>Kondor Browser on KDE Plasma</caption>
     </screenshot>
   </screenshots>

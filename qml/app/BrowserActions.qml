@@ -134,7 +134,7 @@ QtObject {
     readonly property Action reportBugAction: Action {
         text: qsTr("Report a Bug…")
         icon.name: "tools-report-bug"
-        onTriggered: root.tabController.openUrl("https://github.com/lukasborges/kondor/issues", true)
+        onTriggered: root.tabController.openUrl("https://github.com/lukasborges/kondor-browser/issues", true)
     }
     readonly property Action aboutAction: Action {
         //: %1 is the application name

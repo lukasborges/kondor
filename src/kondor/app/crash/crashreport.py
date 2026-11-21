@@ -4,7 +4,7 @@ from urllib.parse import quote
 
 from kondor.app.crash.crashenvironment import environment_lines
 
-ISSUE_ADDRESS = "https://github.com/lukasborges/kondor/issues/new"
+ISSUE_ADDRESS = "https://github.com/lukasborges/kondor-browser/issues/new"
 MAX_ADDRESS_LENGTH = 8000
 CLIPBOARD_NOTE = "The crash report was copied to the clipboard. Paste it here."
 FAULT_PATTERN = re.compile(r"Fatal Python error: (.+)")

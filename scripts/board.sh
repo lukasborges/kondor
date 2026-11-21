@@ -8,7 +8,7 @@
 set -euo pipefail
 
 OWNER="lukasborges"
-REPO="lukasborges/kondor"
+REPO="lukasborges/kondor-browser"
 PROJECT=1
 
 n="${1:?usage: scripts/board.sh <issue-number> [Todo|\"In Progress\"|Blocked|Done]}"

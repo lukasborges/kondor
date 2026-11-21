@@ -25,7 +25,7 @@ def replace_with_discarding_link(cache: Path) -> None:
 
 
 # Qt Positioning's GeoClue2 plugin has no switch to disable its last-position cache, and a
-# private page must never leave a position on disk: https://github.com/lukasborges/kondor/issues/271
+# private page must never leave a position on disk: https://github.com/lukasborges/kondor-browser/issues/271
 def discard_position_cache() -> None:
     cache = position_cache_path()
     if is_discarding(cache):
